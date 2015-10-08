@@ -170,6 +170,68 @@
 			path = FinancingModel;
 			sourceTree = "<group>";
 		};
+		8D4DE13F1BC64BD900F031D8 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				8D4DE1401BC64BD900F031D8 /* MoreController */,
+				8D4DE1411BC64BD900F031D8 /* MoreModel */,
+				8D4DE1421BC64BD900F031D8 /* MoreView */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		8D4DE1401BC64BD900F031D8 /* MoreController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MoreController;
+			sourceTree = "<group>";
+		};
+		8D4DE1411BC64BD900F031D8 /* MoreModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MoreModel;
+			sourceTree = "<group>";
+		};
+		8D4DE1421BC64BD900F031D8 /* MoreView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MoreView;
+			sourceTree = "<group>";
+		};
+		8D4DE1431BC64BD900F031D8 /* Selection */ = {
+			isa = PBXGroup;
+			children = (
+				8D4DE1441BC64BD900F031D8 /* SelectionController */,
+				8D4DE1451BC64BD900F031D8 /* SelectionModel */,
+				8D4DE1461BC64BD900F031D8 /* SelectionView */,
+			);
+			path = Selection;
+			sourceTree = "<group>";
+		};
+		8D4DE1441BC64BD900F031D8 /* SelectionController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SelectionController;
+			sourceTree = "<group>";
+		};
+		8D4DE1451BC64BD900F031D8 /* SelectionModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SelectionModel;
+			sourceTree = "<group>";
+		};
+		8D4DE1461BC64BD900F031D8 /* SelectionView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SelectionView;
+			sourceTree = "<group>";
+		};
 		8D9356C01BC607C500BC2BFA = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +255,8 @@
 		8D9356CB1BC607C500BC2BFA /* DSLC */ = {
 			isa = PBXGroup;
 			children = (
+				8D4DE13F1BC64BD900F031D8 /* More */,
+				8D4DE1431BC64BD900F031D8 /* Selection */,
 				8D9356CF1BC607C500BC2BFA /* AppDelegate.h */,
 				8D9356D01BC607C500BC2BFA /* AppDelegate.m */,
 				81D8AD941BC640BD00A15E01 /* Mine */,
