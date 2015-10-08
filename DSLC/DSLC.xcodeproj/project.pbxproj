@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8110A4EA1BC649E400E38485 /* ooo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4E91BC649E400E38485 /* ooo.m */; settings = {ASSET_TAGS = (); }; };
+		8110A4F01BC64A0A00E38485 /* ppp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4EF1BC64A0A00E38485 /* ppp.m */; settings = {ASSET_TAGS = (); }; };
 		81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD991BC6427800A15E01 /* MineViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8ADA21BC646D100A15E01 /* FinancingViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D9356CE1BC607C500BC2BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356CD1BC607C500BC2BFA /* main.m */; };
@@ -37,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8110A4E81BC649E400E38485 /* ooo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ooo.h; sourceTree = "<group>"; };
+		8110A4E91BC649E400E38485 /* ooo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ooo.m; sourceTree = "<group>"; };
+		8110A4EE1BC64A0A00E38485 /* ppp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ppp.h; sourceTree = "<group>"; };
+		8110A4EF1BC64A0A00E38485 /* ppp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ppp.m; sourceTree = "<group>"; };
 		81D8AD981BC6427800A15E01 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		81D8AD991BC6427800A15E01 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		81D8ADA11BC646D100A15E01 /* FinancingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingViewController.h; sourceTree = "<group>"; };
@@ -139,6 +145,8 @@
 		81D8AD9F1BC6467100A15E01 /* FinancingView */ = {
 			isa = PBXGroup;
 			children = (
+				8110A4E81BC649E400E38485 /* ooo.h */,
+				8110A4E91BC649E400E38485 /* ooo.m */,
 			);
 			path = FinancingView;
 			sourceTree = "<group>";
@@ -146,6 +154,8 @@
 		81D8ADA01BC646C400A15E01 /* FinancingModel */ = {
 			isa = PBXGroup;
 			children = (
+				8110A4EE1BC64A0A00E38485 /* ppp.h */,
+				8110A4EF1BC64A0A00E38485 /* ppp.m */,
 			);
 			path = FinancingModel;
 			sourceTree = "<group>";
@@ -347,6 +357,8 @@
 				8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */,
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
+				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,
+				8110A4EA1BC649E400E38485 /* ooo.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
 			);
