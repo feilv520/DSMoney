@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD991BC6427800A15E01 /* MineViewController.m */; settings = {ASSET_TAGS = (); }; };
-		81D8AD9D1BC6428800A15E01 /* FinancingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD9C1BC6428800A15E01 /* FinancingViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D9356CE1BC607C500BC2BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356CD1BC607C500BC2BFA /* main.m */; };
 		8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356D01BC607C500BC2BFA /* AppDelegate.m */; };
 		8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356D31BC607C500BC2BFA /* ViewController.m */; };
@@ -39,8 +38,6 @@
 /* Begin PBXFileReference section */
 		81D8AD981BC6427800A15E01 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		81D8AD991BC6427800A15E01 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
-		81D8AD9B1BC6428800A15E01 /* FinancingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingViewController.h; sourceTree = "<group>"; };
-		81D8AD9C1BC6428800A15E01 /* FinancingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingViewController.m; sourceTree = "<group>"; };
 		8D9356C91BC607C500BC2BFA /* DSLC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSLC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9356CD1BC607C500BC2BFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D9356CF1BC607C500BC2BFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -87,37 +84,10 @@
 		81D8AD901BC6403900A15E01 /* Financing */ = {
 			isa = PBXGroup;
 			children = (
-				81D8AD931BC640A900A15E01 /* FinancingModel */,
-				81D8AD921BC6409C00A15E01 /* FinancingView */,
-				81D8AD911BC6404D00A15E01 /* FinancingViewController */,
+				81D8AD9F1BC6467100A15E01 /* FinancingView */,
+				81D8AD9E1BC6465D00A15E01 /* FinancingViewController */,
 			);
 			path = Financing;
-			sourceTree = "<group>";
-		};
-		81D8AD911BC6404D00A15E01 /* FinancingViewController */ = {
-			isa = PBXGroup;
-			children = (
-				81D8AD9B1BC6428800A15E01 /* FinancingViewController.h */,
-				81D8AD9C1BC6428800A15E01 /* FinancingViewController.m */,
-			);
-			name = FinancingViewController;
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		81D8AD921BC6409C00A15E01 /* FinancingView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = FinancingView;
-			path = View;
-			sourceTree = "<group>";
-		};
-		81D8AD931BC640A900A15E01 /* FinancingModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = FinancingModel;
-			path = Model;
 			sourceTree = "<group>";
 		};
 		81D8AD941BC640BD00A15E01 /* Mine */ = {
@@ -151,6 +121,20 @@
 			children = (
 			);
 			path = MineModel;
+			sourceTree = "<group>";
+		};
+		81D8AD9E1BC6465D00A15E01 /* FinancingViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FinancingViewController;
+			sourceTree = "<group>";
+		};
+		81D8AD9F1BC6467100A15E01 /* FinancingView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FinancingView;
 			sourceTree = "<group>";
 		};
 		8D9356C01BC607C500BC2BFA = {
@@ -351,7 +335,6 @@
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
-				81D8AD9D1BC6428800A15E01 /* FinancingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
