@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		819226D11BC6175100E7FE3B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819226D01BC6175100E7FE3B /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C269AA1BC6159000189329 /* hhh.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C269A91BC6159000189329 /* hhh.m */; settings = {ASSET_TAGS = (); }; };
 		8D9356CE1BC607C500BC2BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356CD1BC607C500BC2BFA /* main.m */; };
 		8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356D01BC607C500BC2BFA /* AppDelegate.m */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		819226CF1BC6175100E7FE3B /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		819226D01BC6175100E7FE3B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		81C269A81BC6159000189329 /* hhh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hhh.h; sourceTree = "<group>"; };
 		81C269A91BC6159000189329 /* hhh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hhh.m; sourceTree = "<group>"; };
 		8D9356C91BC607C500BC2BFA /* DSLC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSLC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +113,8 @@
 				8D9356D31BC607C500BC2BFA /* ViewController.m */,
 				81C269A81BC6159000189329 /* hhh.h */,
 				81C269A91BC6159000189329 /* hhh.m */,
+				819226CF1BC6175100E7FE3B /* MainViewController.h */,
+				819226D01BC6175100E7FE3B /* MainViewController.m */,
 				8D9356D51BC607C500BC2BFA /* Main.storyboard */,
 				8D9356D81BC607C500BC2BFA /* Assets.xcassets */,
 				8D9356DA1BC607C500BC2BFA /* LaunchScreen.storyboard */,
@@ -278,6 +283,7 @@
 				81C269AA1BC6159000189329 /* hhh.m in Sources */,
 				8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */,
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
+				819226D11BC6175100E7FE3B /* MainViewController.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
