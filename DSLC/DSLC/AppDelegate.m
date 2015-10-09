@@ -41,8 +41,8 @@
     
     viewControllerArr = @[navigation1, navigation2, navigation3, navigation4];
     
-    butGrayArr = @[@"shouyeqiepian750_25", @"首页qiepian_28", @"首页qiepian_30", @"首页qiepian_32"];
-    butColorArr = @[@"首页qiepian_25", @"shouyeqiepian750_28", @"shouyeqiepian750_30", @"shouyeqiepian750_32"];
+    butGrayArr = @[@"shouyeqiepian750_25", @"1shouyeqiepian750_28", @"1shouyeqiepian750_30", @"1shouyeqiepian750_32"];
+    butColorArr = @[@"1shouyeqiepian750_25", @"shouyeqiepian750_28", @"shouyeqiepian750_30", @"shouyeqiepian750_32"];
     
     buttonArr = [NSMutableArray array];
     for (int i = 0; i < 4; i++) {
