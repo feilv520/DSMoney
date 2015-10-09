@@ -13,6 +13,8 @@
 		8110A4F61BC64A5800E38485 /* poi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4F51BC64A5800E38485 /* poi.m */; settings = {ASSET_TAGS = (); }; };
 		81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD991BC6427800A15E01 /* MineViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8ADA21BC646D100A15E01 /* FinancingViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D878CCF1BC7500F00844575 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CCE1BC7500F00844575 /* MoreViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D878CD21BC7502600844575 /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CD11BC7502600844575 /* SelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D9356CE1BC607C500BC2BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356CD1BC607C500BC2BFA /* main.m */; };
 		8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356D01BC607C500BC2BFA /* AppDelegate.m */; };
 		8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356D31BC607C500BC2BFA /* ViewController.m */; };
@@ -53,6 +55,10 @@
 		81D8AD991BC6427800A15E01 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		81D8ADA11BC646D100A15E01 /* FinancingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingViewController.h; sourceTree = "<group>"; };
 		81D8ADA21BC646D100A15E01 /* FinancingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingViewController.m; sourceTree = "<group>"; };
+		8D878CCD1BC7500F00844575 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		8D878CCE1BC7500F00844575 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		8D878CD01BC7502600844575 /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
+		8D878CD11BC7502600844575 /* SelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewController.m; sourceTree = "<group>"; };
 		8D9356C91BC607C500BC2BFA /* DSLC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSLC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9356CD1BC607C500BC2BFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D9356CF1BC607C500BC2BFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -183,6 +189,8 @@
 		8D4DE1401BC64BD900F031D8 /* MoreController */ = {
 			isa = PBXGroup;
 			children = (
+				8D878CCD1BC7500F00844575 /* MoreViewController.h */,
+				8D878CCE1BC7500F00844575 /* MoreViewController.m */,
 			);
 			path = MoreController;
 			sourceTree = "<group>";
@@ -214,6 +222,8 @@
 		8D4DE1441BC64BD900F031D8 /* SelectionController */ = {
 			isa = PBXGroup;
 			children = (
+				8D878CD01BC7502600844575 /* SelectionViewController.h */,
+				8D878CD11BC7502600844575 /* SelectionViewController.m */,
 			);
 			path = SelectionController;
 			sourceTree = "<group>";
@@ -230,6 +240,24 @@
 			children = (
 			);
 			path = SelectionView;
+			sourceTree = "<group>";
+		};
+		8D878CC91BC74E9700844575 /* appDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				8D9356CF1BC607C500BC2BFA /* AppDelegate.h */,
+				8D9356D01BC607C500BC2BFA /* AppDelegate.m */,
+			);
+			name = appDelegate;
+			sourceTree = "<group>";
+		};
+		8D878CCC1BC74F3200844575 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				8D9356D21BC607C500BC2BFA /* ViewController.h */,
+				8D9356D31BC607C500BC2BFA /* ViewController.m */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		8D9356C01BC607C500BC2BFA = {
@@ -255,18 +283,12 @@
 		8D9356CB1BC607C500BC2BFA /* DSLC */ = {
 			isa = PBXGroup;
 			children = (
+				8D878CCC1BC74F3200844575 /* Other */,
+				8D878CC91BC74E9700844575 /* appDelegate */,
 				8D4DE13F1BC64BD900F031D8 /* More */,
 				8D4DE1431BC64BD900F031D8 /* Selection */,
-				8D9356CF1BC607C500BC2BFA /* AppDelegate.h */,
-				8D9356D01BC607C500BC2BFA /* AppDelegate.m */,
 				81D8AD941BC640BD00A15E01 /* Mine */,
 				81D8AD901BC6403900A15E01 /* Financing */,
-				8D9356D21BC607C500BC2BFA /* ViewController.h */,
-				8D9356D31BC607C500BC2BFA /* ViewController.m */,
-				8D9356D51BC607C500BC2BFA /* Main.storyboard */,
-				8D9356D81BC607C500BC2BFA /* Assets.xcassets */,
-				8D9356DA1BC607C500BC2BFA /* LaunchScreen.storyboard */,
-				8D9356DD1BC607C500BC2BFA /* Info.plist */,
 				8D9356CC1BC607C500BC2BFA /* Supporting Files */,
 			);
 			path = DSLC;
@@ -275,6 +297,10 @@
 		8D9356CC1BC607C500BC2BFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8D9356DD1BC607C500BC2BFA /* Info.plist */,
+				8D9356D51BC607C500BC2BFA /* Main.storyboard */,
+				8D9356D81BC607C500BC2BFA /* Assets.xcassets */,
+				8D9356DA1BC607C500BC2BFA /* LaunchScreen.storyboard */,
 				8D9356CD1BC607C500BC2BFA /* main.m */,
 			);
 			name = "Supporting Files";
@@ -428,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D878CD21BC7502600844575 /* SelectionViewController.m in Sources */,
 				8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */,
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
@@ -437,6 +464,7 @@
 				8110A4F61BC64A5800E38485 /* poi.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
+				8D878CCF1BC7500F00844575 /* MoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
