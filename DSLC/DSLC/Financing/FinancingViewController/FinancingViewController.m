@@ -9,14 +9,16 @@
 #import "FinancingViewController.h"
 #import "CreatView.h"
 #import "FinancingCell.h"
+#import "UIColor+AddColor.h"
 
-@interface FinancingViewController ()
+@interface FinancingViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     NSArray *buttonArr;
     UIButton *butThree;
     UILabel *lableRedLine;
     NSInteger buttonTag;
+    UITableView *_tableView;
 }
 
 @end
@@ -29,7 +31,7 @@
     
     buttonTag = 101;
     
-    self.view.backgroundColor = [UIColor cyanColor];
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor redColor];
@@ -66,7 +68,7 @@
         }
     }
     
-    lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(self.view.frame.size.width/3, 43, self.view.frame.size.width/3, 2) backgroundColor:[UIColor redColor] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter text:@""];
+    lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(self.view.frame.size.width/3, 43, self.view.frame.size.width/3, 2) backgroundColor:[UIColor redColor] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:0] text:@""];
     [self.view addSubview:lableRedLine];
 
 }
@@ -115,7 +117,81 @@
 //TableView展示
 - (void)showTableView
 {
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, self.view.frame.size.height - 45 - 53 - 64 - 15) style:UITableViewStylePlain];
+    [self.view addSubview:_tableView];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 150;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 9;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    FinancingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
+    cell.viewGiPian.layer.cornerRadius = 5;
+    cell.viewGiPian.layer.masksToBounds = YES;
+    
+    cell.labelMonth.text = @"3个月固定投资";
+    cell.labelMonth.font = [UIFont systemFontOfSize:15];
+    
+    cell.viewLine.alpha = 0.7;
+    cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    cell.labelPercentage.textColor = [UIColor redColor];
+    cell.labelPercentage.font = [UIFont systemFontOfSize:22];
+    cell.labelPercentage.text = @"8.02%";
+    cell.labelPercentage.textAlignment = NSTextAlignmentCenter;
+    
+    cell.labelYear.text = @"年化收益率";
+    cell.labelYear.textColor = [UIColor grayColor];
+    cell.labelYear.textAlignment = NSTextAlignmentCenter;
+    cell.labelYear.font = [UIFont systemFontOfSize:12];
+    
+    cell.labelDayNum.textAlignment = NSTextAlignmentCenter;
+    cell.labelDayNum.font = [UIFont systemFontOfSize:22];
+    cell.labelDayNum.text = @"90天";
+    
+    cell.labelMoney.textAlignment = NSTextAlignmentCenter;
+    cell.labelMoney.font = [UIFont systemFontOfSize:22];
+    cell.labelMoney.text = @"1,000元";
+    
+    cell.labelData.text = @"理财期限";
+    cell.labelData.textAlignment = NSTextAlignmentCenter;
+    cell.labelData.textColor = [UIColor grayColor];
+    cell.labelData.font = [UIFont systemFontOfSize:12];
+    
+    cell.labelQiTou.text = @"起投资金";
+    cell.labelQiTou.textAlignment = NSTextAlignmentCenter;
+    cell.labelQiTou.textColor = [UIColor grayColor];
+    cell.labelQiTou.font = [UIFont systemFontOfSize:12];
+    
+    cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", @"24.6万"];
+    cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
+    cell.labelSurplus.textColor = [UIColor grayColor];
+    cell.labelSurplus.font = [UIFont systemFontOfSize:12];
+    cell.labelSurplus.backgroundColor = [UIColor clearColor];
+    
+    cell.viewBottom.backgroundColor = [UIColor qianhuise];
+    
+    cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

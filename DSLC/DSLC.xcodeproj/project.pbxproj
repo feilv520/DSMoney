@@ -14,6 +14,7 @@
 		8110A4F61BC64A5800E38485 /* poi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4F51BC64A5800E38485 /* poi.m */; settings = {ASSET_TAGS = (); }; };
 		811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E001BC7A13800CAD6F5 /* FinancingCell.m */; settings = {ASSET_TAGS = (); }; };
 		811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */; settings = {ASSET_TAGS = (); }; };
+		811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */; settings = {ASSET_TAGS = (); }; };
 		81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAB1BC7563A0007AC48 /* SelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAE1BC756630007AC48 /* MoreViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -72,6 +73,8 @@
 		811F9DFF1BC7A13800CAD6F5 /* FinancingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingCell.h; sourceTree = "<group>"; };
 		811F9E001BC7A13800CAD6F5 /* FinancingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingCell.m; sourceTree = "<group>"; };
 		811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinancingCell.xib; sourceTree = "<group>"; };
+		811F9E051BC7D29900CAD6F5 /* UIColor+AddColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AddColor.h"; sourceTree = "<group>"; };
+		811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AddColor.m"; sourceTree = "<group>"; };
 		81C2DAA71BC755FF0007AC48 /* KKTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKTabBarViewController.h; sourceTree = "<group>"; };
 		81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKTabBarViewController.m; sourceTree = "<group>"; };
 		81C2DAAA1BC7563A0007AC48 /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
@@ -144,10 +147,20 @@
 		810D25241BC7916C00DAF83F /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				811F9E041BC7D29900CAD6F5 /* 颜色处理类目 */,
 				810D25251BC7917B00DAF83F /* CreatView.h */,
 				810D25261BC7917B00DAF83F /* CreatView.m */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		811F9E041BC7D29900CAD6F5 /* 颜色处理类目 */ = {
+			isa = PBXGroup;
+			children = (
+				811F9E051BC7D29900CAD6F5 /* UIColor+AddColor.h */,
+				811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */,
+			);
+			path = "颜色处理类目";
 			sourceTree = "<group>";
 		};
 		81C2DAA51BC755F10007AC48 /* Three */ = {
@@ -562,6 +575,7 @@
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
 				8D878CE11BC754AD00844575 /* e.m in Sources */,
+				811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */,
 				81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */,
 				8110A4F31BC64A4D00E38485 /* iii.m in Sources */,
 				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,

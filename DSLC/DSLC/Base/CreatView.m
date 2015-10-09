@@ -34,7 +34,7 @@
     return button;
 }
 
-+ (UILabel *)creatWithLabelFrame:(CGRect)frame backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor textAlignment:(NSTextAlignment)textAlignment text:(NSString *)text
++ (UILabel *)creatWithLabelFrame:(CGRect)frame backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor textAlignment:(NSTextAlignment)textAlignment textFont:(UIFont *)textFont text:(NSString *)text
 {
     UILabel *lable = [[UILabel alloc] init];
     
@@ -42,6 +42,7 @@
     [lable setBackgroundColor:backgroundColor];
     [lable setTextColor:textColor];
     [lable setTextAlignment:textAlignment];
+    [lable setFont:textFont];
     [lable setText:text];
     
     return lable;
