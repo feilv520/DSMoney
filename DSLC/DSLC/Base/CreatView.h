@@ -14,6 +14,6 @@
 
 + (UIButton *)creatWithButtonType:(UIButtonType *)buttonType frame:(CGRect)frame backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor titleText:(NSString *)titleText;
 
-+ (UILabel *)creatWithLabelFrame:(CGRect)frame backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor textAlignment:(NSTextAlignment)textAlignment text:(NSString *)text;
++ (UILabel *)creatWithLabelFrame:(CGRect)frame backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor textAlignment:(NSTextAlignment)textAlignment textFont:(UIFont *)textFont text:(NSString *)text;
 
 @end
