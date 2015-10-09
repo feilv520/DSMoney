@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		810D25271BC7917B00DAF83F /* CreatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 810D25261BC7917B00DAF83F /* CreatView.m */; settings = {ASSET_TAGS = (); }; };
 		8110A4EA1BC649E400E38485 /* ooo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4E91BC649E400E38485 /* ooo.m */; settings = {ASSET_TAGS = (); }; };
 		8110A4F01BC64A0A00E38485 /* ppp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4EF1BC64A0A00E38485 /* ppp.m */; settings = {ASSET_TAGS = (); }; };
 		8110A4F31BC64A4D00E38485 /* iii.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4F21BC64A4D00E38485 /* iii.m */; settings = {ASSET_TAGS = (); }; };
@@ -56,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		810D25251BC7917B00DAF83F /* CreatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatView.h; sourceTree = "<group>"; };
+		810D25261BC7917B00DAF83F /* CreatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatView.m; sourceTree = "<group>"; };
 		8110A4E81BC649E400E38485 /* ooo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ooo.h; sourceTree = "<group>"; };
 		8110A4E91BC649E400E38485 /* ooo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ooo.m; sourceTree = "<group>"; };
 		8110A4EE1BC64A0A00E38485 /* ppp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ppp.h; sourceTree = "<group>"; };
@@ -133,6 +136,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		810D25241BC7916C00DAF83F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				810D25251BC7917B00DAF83F /* CreatView.h */,
+				810D25261BC7917B00DAF83F /* CreatView.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		81C2DAA51BC755F10007AC48 /* Three */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +366,7 @@
 		8D9356CB1BC607C500BC2BFA /* DSLC */ = {
 			isa = PBXGroup;
 			children = (
+				810D25241BC7916C00DAF83F /* Base */,
 				81C2DAB01BC757A60007AC48 /* Image */,
 				81C2DAA51BC755F10007AC48 /* Three */,
 				8D878CCC1BC74F3200844575 /* Other */,
@@ -535,6 +548,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
 				8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */,
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
