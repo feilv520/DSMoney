@@ -48,11 +48,11 @@
     for (int i = 0; i < 4; i++) {
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        //        button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
+        //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
         button.backgroundColor = [UIColor whiteColor];
         [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butGrayArr objectAtIndex:i]]] forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butColorArr objectAtIndex:i]]] forState:UIControlStateSelected];
-        //        点击保持高亮状态,没有闪动的效果
+        //       点击保持高亮状态,没有闪动的效果
         [button setShowsTouchWhenHighlighted:YES];
         [buttonArr addObject:button];
     }
