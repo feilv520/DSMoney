@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIScrollView *tabScrollView;
 @property (nonatomic, assign) CGFloat pageWidth;
 @property (nonatomic, assign) CGFloat pageHeight;
+@property (nonatomic, strong) UIView *tabbarView;
 
 
 @end
@@ -41,6 +42,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
 	// Do any additional setup after loading the view.
     [self initTabPage];
     [self initTabBar];
@@ -82,7 +86,12 @@
         [_tabScrollView addSubview:tabView];
         
     }
+    
+    self.tabbarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 51, self.view.frame.size.width, 51)];
+    self.tabbarView.backgroundColor = [UIColor whiteColor];
+    
     [self.view addSubview:_tabScrollView];
+    [self.view addSubview:_tabbarView];
     
     _curPage = 0;
     _tabBarHidden = NO;
@@ -90,31 +99,30 @@
 //初始化切换页面的按钮
 - (void)initTabBar
 {
-    CGFloat buttonWidth = _pageWidth / [_controllerArray count];
+//    CGFloat buttonWidth = _pageWidth / [_controllerArray count];
+    CGFloat buttonWidth = 40;
     for (int i = 0 ; i < [_tabButtonArray count]; i ++) {
         CGFloat buttonHeight;
-        CGFloat buttonY;
         
         UIButton *tabButton = [_tabButtonArray objectAtIndex:i];
-        if (tabButton.frame.size.height == 0) {
-            buttonHeight = 50;
-        } else{
-            buttonHeight = tabButton.frame.size.height;
-        }
-        if (_tabBarPosition == kTabBarPositionTop) {
-            buttonY = 0;
-        } else{
-            buttonY = _pageHeight - buttonHeight;
-        }
-        [tabButton setFrame:CGRectMake(buttonWidth * i, buttonY, buttonWidth, buttonHeight)];
-//        NSLog(@"%f height",tabButton.frame.size.height);
+//        if (tabButton.frame.size.height == 0) {
+            buttonHeight = 40;
+//        } else{
+//            buttonHeight = tabButton.frame.size.height;
+//        }
+//        if (_tabBarPosition == kTabBarPositionTop) {
+//            buttonY = 0;
+//        } else{
+//            buttonY = _pageHeight - buttonHeight;
+//        }
+        [tabButton setFrame:CGRectMake(20 + _pageWidth / [_controllerArray count] * i, 5, buttonWidth, buttonHeight)];
         [tabButton setTag:i];
         [tabButton addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchDown];
         [tabButton setHidden:self.tabBarHidden];
         if (tabButton.tag == _curPage) {
             [tabButton setSelected:YES];
         }
-        [self.view addSubview:tabButton];
+        [self.tabbarView addSubview:tabButton];
     }
     
 }
@@ -133,19 +141,19 @@
 {
     _tabBarHeight = tabBarHeight;
 //    NSLog(@"height %f",self.view.frame.size.height);
+    UILabel *labelLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 53, self.view.frame.size.width, 2)];
+    [self.view addSubview:labelLine];
+    labelLine.backgroundColor = [UIColor redColor];
+    
     for (UIButton *button in _tabButtonArray) {
-        
-        UILabel *labelLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
-        [button addSubview:labelLine];
-        labelLine.backgroundColor = [UIColor redColor];
         
         CGRect buttonFrame = button.frame;
         buttonFrame.size.height = _tabBarHeight;
-        if (_tabBarPosition == kTabBarPositionTop) {
-            buttonFrame.origin.y = 0;
-        } else{
-            buttonFrame.origin.y = self.view.frame.size.height - _tabBarHeight;
-        }
+//        if (_tabBarPosition == kTabBarPositionTop) {
+            buttonFrame.origin.y = 5;
+//        } else{
+//            buttonFrame.origin.y = self.view.frame.size.height - _tabBarHeight;
+//        }
         button.frame = buttonFrame;
     }
 }
@@ -154,11 +162,11 @@
     _tabBarPosition = tabBarPosition;
     for (UIButton *button in _tabButtonArray) {
         CGRect buttonFrame = button.frame;
-        if (_tabBarPosition == kTabBarPositionTop) {
+//        if (_tabBarPosition == kTabBarPositionTop) {
             buttonFrame.origin.y = 0;
-        } else{
-            buttonFrame.origin.y = _pageHeight - buttonFrame.size.height;
-        }
+//        } else{
+//            buttonFrame.origin.y = _pageHeight - buttonFrame.size.height;
+//        }
         button.frame = buttonFrame;
         
     }
