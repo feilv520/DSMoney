@@ -8,6 +8,7 @@
 
 #import "FinancingViewController.h"
 #import "CreatView.h"
+#import "FinancingCell.h"
 
 @interface FinancingViewController ()
 
@@ -37,6 +38,7 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     [self showButtonThree];
+    [self showTableView];
 }
 
 //导航栏下面的三个按钮
@@ -69,6 +71,7 @@
 
 }
 
+//导航栏下面的三个按钮的点击方法
 - (void)buttonThreePress:(UIButton *)button
 {
     [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
@@ -107,6 +110,12 @@
     } completion:^(BOOL finished) {
         
     }];
+}
+
+//TableView展示
+- (void)showTableView
+{
+    
 }
 
 - (void)didReceiveMemoryWarning {

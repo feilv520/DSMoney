@@ -12,6 +12,8 @@
 		8110A4F01BC64A0A00E38485 /* ppp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4EF1BC64A0A00E38485 /* ppp.m */; settings = {ASSET_TAGS = (); }; };
 		8110A4F31BC64A4D00E38485 /* iii.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4F21BC64A4D00E38485 /* iii.m */; settings = {ASSET_TAGS = (); }; };
 		8110A4F61BC64A5800E38485 /* poi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4F51BC64A5800E38485 /* poi.m */; settings = {ASSET_TAGS = (); }; };
+		811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E001BC7A13800CAD6F5 /* FinancingCell.m */; settings = {ASSET_TAGS = (); }; };
+		811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAB1BC7563A0007AC48 /* SelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAE1BC756630007AC48 /* MoreViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -67,6 +69,9 @@
 		8110A4F21BC64A4D00E38485 /* iii.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iii.m; sourceTree = "<group>"; };
 		8110A4F41BC64A5800E38485 /* poi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = poi.h; sourceTree = "<group>"; };
 		8110A4F51BC64A5800E38485 /* poi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = poi.m; sourceTree = "<group>"; };
+		811F9DFF1BC7A13800CAD6F5 /* FinancingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingCell.h; sourceTree = "<group>"; };
+		811F9E001BC7A13800CAD6F5 /* FinancingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingCell.m; sourceTree = "<group>"; };
+		811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinancingCell.xib; sourceTree = "<group>"; };
 		81C2DAA71BC755FF0007AC48 /* KKTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKTabBarViewController.h; sourceTree = "<group>"; };
 		81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKTabBarViewController.m; sourceTree = "<group>"; };
 		81C2DAAA1BC7563A0007AC48 /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
@@ -238,6 +243,9 @@
 			children = (
 				8110A4E81BC649E400E38485 /* ooo.h */,
 				8110A4E91BC649E400E38485 /* ooo.m */,
+				811F9DFF1BC7A13800CAD6F5 /* FinancingCell.h */,
+				811F9E001BC7A13800CAD6F5 /* FinancingCell.m */,
+				811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */,
 			);
 			path = FinancingView;
 			sourceTree = "<group>";
@@ -524,6 +532,7 @@
 				8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */,
 				8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */,
 				8D6EFBAC1BC78B02009FE101 /* shouyeqiepian7500_32highlight.png in Resources */,
+				811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +570,7 @@
 				8D878CD81BC7548B00844575 /* b.m in Sources */,
 				8D878CDB1BC7549500844575 /* c.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
+				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
 				81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
 				8D878CDE1BC7549F00844575 /* d.m in Sources */,
