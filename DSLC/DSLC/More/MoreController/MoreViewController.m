@@ -1,24 +1,24 @@
 //
-//  FinancingViewController.m
+//  MoreViewController.m
 //  DSLC
 //
-//  Created by ios on 15/10/8.
+//  Created by ios on 15/10/9.
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import "FinancingViewController.h"
+#import "MoreViewController.h"
 
-@interface FinancingViewController ()
+@interface MoreViewController ()
 
 @end
 
-@implementation FinancingViewController
+@implementation MoreViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor cyanColor];
+    self.view.backgroundColor = [UIColor yellowColor];
 }
 
 - (void)didReceiveMemoryWarning {
