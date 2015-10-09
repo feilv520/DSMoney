@@ -107,7 +107,7 @@
             buttonY = _pageHeight - buttonHeight;
         }
         [tabButton setFrame:CGRectMake(buttonWidth * i, buttonY, buttonWidth, buttonHeight)];
-        NSLog(@"%f height",tabButton.frame.size.height);
+//        NSLog(@"%f height",tabButton.frame.size.height);
         [tabButton setTag:i];
         [tabButton addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchDown];
         [tabButton setHidden:self.tabBarHidden];
