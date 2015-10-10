@@ -34,7 +34,7 @@
                                 <rect key="frame" x="0.0" y="39" width="118" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -66,6 +66,10 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="2Ae-WB-TB7">
+                                        <rect key="frame" x="131" y="18" width="210" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -107,11 +111,12 @@
                 <outlet property="labelQiTou" destination="HaN-qY-8xV" id="oTI-5H-ZGq"/>
                 <outlet property="labelSurplus" destination="FaY-vS-kfR" id="MdO-Nz-vjR"/>
                 <outlet property="labelYear" destination="jRq-yh-bqE" id="aMk-qP-woY"/>
+                <outlet property="progressView" destination="2Ae-WB-TB7" id="LfM-ke-Ewb"/>
                 <outlet property="viewBottom" destination="4zJ-6S-ibK" id="rgh-8B-pGr"/>
                 <outlet property="viewGiPian" destination="Taf-Lh-40H" id="9ui-cj-4oU"/>
                 <outlet property="viewLine" destination="1TV-l6-aez" id="IYF-XL-iSk"/>
             </connections>
-            <point key="canvasLocation" x="-714.5" y="121"/>
+            <point key="canvasLocation" x="-1402.5" y="-82"/>
         </tableViewCell>
     </objects>
 </document>

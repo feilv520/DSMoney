@@ -20,5 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelData;
 @property (weak, nonatomic) IBOutlet UILabel *labelQiTou;
 @property (weak, nonatomic) IBOutlet UILabel *labelSurplus;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
 @end

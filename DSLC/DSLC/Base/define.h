@@ -23,8 +23,8 @@
 
 //颜色
 #define Color_Black [UIColor blackColor]
-#define Color_White  [UIColor whiteColor]
-#define Color_Clear  [UIColor clearColor]
+#define Color_White [UIColor whiteColor]
+#define Color_Clear [UIColor clearColor]
 
 //主要颜色
 #define mainColor [UIColor colorWithRed:239.0 / 255.0 green:241.0 / 255.0 blue:243.0 / 255.0 alpha:1.0];

@@ -42,5 +42,8 @@
 + (UIColor *) miganse;// 蜜柑色
 + (UIColor *) huibai;//灰白
 + (UIColor *) qianhuise;//浅灰色
-
++ (UIColor *) zitihui;//字体灰
++ (UIColor *) daohanglan;//导航栏
++ (UIColor *) progressColor;//进度条进度颜色
++ (UIColor *) progressBackColor;//进度条颜色
 @end

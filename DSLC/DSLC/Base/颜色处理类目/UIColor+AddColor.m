@@ -160,4 +160,19 @@
     return [UIColor colorFromHexCode:@"#f7fafb"];
 }
 
++ (UIColor *) zitihui {
+    return [UIColor colorFromHexCode:@"#75777d"];
+}
+
++ (UIColor *) daohanglan {
+    return [UIColor colorFromHexCode:@"#df4a43"];
+}
+
++ (UIColor *) progressBackColor {
+    return [UIColor colorFromHexCode:@"#e6e9ed"];
+}
+
++ (UIColor *) progressColor {
+    return [UIColor colorFromHexCode:@"#fc6e51"];
+}
 @end
