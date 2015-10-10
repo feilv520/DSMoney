@@ -34,7 +34,7 @@
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.barTintColor = [UIColor redColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
     
     self.navigationItem.title = @"理财产品";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -54,7 +54,7 @@
     
     for (int i = 0; i < 3; i++) {
         
-        butThree = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(self.view.frame.size.width/3 * i, 0, self.view.frame.size.width/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor grayColor] titleText:[NSString stringWithFormat:@"%@", [buttonArr objectAtIndex:i]]];
+        butThree = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(self.view.frame.size.width/3 * i, 0, self.view.frame.size.width/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:[NSString stringWithFormat:@"%@", [buttonArr objectAtIndex:i]]];
         butThree.titleLabel.font = [UIFont systemFontOfSize:14];
         butThree.tag = 100 + i;
         [scrollView addSubview:butThree];
@@ -68,7 +68,7 @@
         }
     }
     
-    lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(self.view.frame.size.width/3, 43, self.view.frame.size.width/3, 2) backgroundColor:[UIColor redColor] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:0] text:@""];
+    lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(self.view.frame.size.width/3, 43, self.view.frame.size.width/3, 2) backgroundColor:[UIColor daohanglan] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:0] text:@""];
     [self.view addSubview:lableRedLine];
 
 }
@@ -140,7 +140,7 @@
 {
     FinancingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    cell.viewGiPian.layer.cornerRadius = 5;
+    cell.viewGiPian.layer.cornerRadius = 4;
     cell.viewGiPian.layer.masksToBounds = YES;
     
     cell.labelMonth.text = @"3个月固定投资";
@@ -149,43 +149,71 @@
     cell.viewLine.alpha = 0.7;
     cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    cell.labelPercentage.textColor = [UIColor redColor];
-    cell.labelPercentage.font = [UIFont systemFontOfSize:22];
-    cell.labelPercentage.text = @"8.02%";
+    cell.labelPercentage.textColor = [UIColor blackColor];
     cell.labelPercentage.textAlignment = NSTextAlignmentCenter;
     
+    NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:@"8.02%"];
+//    ,号前面是指起始位置 ,号后面是指到%这个位置截止的总长度
+    NSRange redRange = NSMakeRange(0, [[textString string] rangeOfString:@"%"].location);
+    [textString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
+    [textString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22] range:redRange];
+//    此句意思是指起始位置 是8.02%这个字符串的总长度减掉1 就是指起始位置是% 长度只有1
+    NSRange symbol = NSMakeRange([[textString string] length] - 1, 1);
+    [textString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:symbol];
+    [cell.labelPercentage setAttributedText:textString];
+    
     cell.labelYear.text = @"年化收益率";
-    cell.labelYear.textColor = [UIColor grayColor];
+    cell.labelYear.textColor = [UIColor zitihui];
     cell.labelYear.textAlignment = NSTextAlignmentCenter;
     cell.labelYear.font = [UIFont systemFontOfSize:12];
     
     cell.labelDayNum.textAlignment = NSTextAlignmentCenter;
     cell.labelDayNum.font = [UIFont systemFontOfSize:22];
-    cell.labelDayNum.text = @"90天";
+    
+    NSMutableAttributedString *textYear = [[NSMutableAttributedString alloc] initWithString:@"90天"];
+    NSRange numText = NSMakeRange(0, [[textYear string] rangeOfString:@"天"].location);
+    [textYear addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22] range:numText];
+    NSRange dayText = NSMakeRange([[textYear string] length] - 1, 1);
+    [textYear addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:dayText];
+    [cell.labelDayNum setAttributedText:textYear];
     
     cell.labelMoney.textAlignment = NSTextAlignmentCenter;
     cell.labelMoney.font = [UIFont systemFontOfSize:22];
-    cell.labelMoney.text = @"1,000元";
+    
+    NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:@"1000元"];
+    NSRange moneyNum = NSMakeRange(0, [[moneyText string] rangeOfString:@"元"].location);
+    [moneyText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22] range:moneyNum];
+    NSRange yuanStr = NSMakeRange([[moneyText string] length] - 1, 1);
+    [moneyText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:yuanStr];
+    [cell.labelMoney setAttributedText:moneyText];
     
     cell.labelData.text = @"理财期限";
     cell.labelData.textAlignment = NSTextAlignmentCenter;
-    cell.labelData.textColor = [UIColor grayColor];
+    cell.labelData.textColor = [UIColor zitihui];
     cell.labelData.font = [UIFont systemFontOfSize:12];
     
     cell.labelQiTou.text = @"起投资金";
     cell.labelQiTou.textAlignment = NSTextAlignmentCenter;
-    cell.labelQiTou.textColor = [UIColor grayColor];
+    cell.labelQiTou.textColor = [UIColor zitihui];
     cell.labelQiTou.font = [UIFont systemFontOfSize:12];
     
     cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", @"24.6万"];
     cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
-    cell.labelSurplus.textColor = [UIColor grayColor];
+    cell.labelSurplus.textColor = [UIColor zitihui];
     cell.labelSurplus.font = [UIFont systemFontOfSize:12];
     cell.labelSurplus.backgroundColor = [UIColor clearColor];
+    
+//    设置进度条的进度值 并动画展示
+    [cell.progressView setProgress:0.7 animated:YES];
+//    设置进度条的颜色
+    cell.progressView.trackTintColor = [UIColor progressBackColor];
+//    设置进度条的进度颜色
+    cell.progressView.progressTintColor = [UIColor progressColor];
     
     cell.viewBottom.backgroundColor = [UIColor qianhuise];
     
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
     return cell;
 }
 
