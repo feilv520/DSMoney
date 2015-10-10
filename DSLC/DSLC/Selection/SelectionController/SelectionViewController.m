@@ -12,12 +12,16 @@
 #import "SelectionV.h"
 #import "define.h"
 
-@interface SelectionViewController (){
+@interface SelectionViewController ()<UIScrollViewDelegate>{
 
     UIScrollView *backgroundScrollView;
     
-    UIScrollView *scrollView;
+    UIScrollView *bannerScrollView;
+    
+    UIPageControl *pageControl;
 
+    NSTimer *timer;
+    
 }
 @end
 
@@ -34,6 +38,33 @@
     [self makeOnlyView];
     [self makePayButton];
     [self makeSafeView];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+
+    // 修改timer的优先级与控件一致
+    // 获取当前的消息循环对象
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    // 更改timer对象的优先级
+    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    
+}
+
+- (void)scrollViewFuction{
+
+    CGPoint offset = [bannerScrollView contentOffset];
+    
+    if (offset.x == WIDTH_CONTROLLER_DEFAULT * 4) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+    } else if (offset.x == 0) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * 3, 0) animated:NO];
+    }
+
+    if (pageControl.currentPage == pageControl.numberOfPages - 1) {
+        pageControl.currentPage = 0;
+    } else {
+        pageControl.currentPage += 1;
+    }
+    [bannerScrollView setContentOffset:CGPointMake((pageControl.currentPage + 1) * WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
 }
 
 // 添加控件
@@ -52,24 +83,41 @@
 
 // 广告滚动控件
 - (void)makeScrollView{
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180)];
-    scrollView.backgroundColor = Color_White;
-    scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * 3,0);
-    scrollView.pagingEnabled = YES;
+    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180)];
+    bannerScrollView.backgroundColor = Color_White;
+    bannerScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * 5,0);
+    bannerScrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
+    bannerScrollView.showsHorizontalScrollIndicator = NO;
+    bannerScrollView.showsVerticalScrollIndicator = NO;
+    bannerScrollView.pagingEnabled = YES;
     
-    [backgroundScrollView addSubview:scrollView];
+    bannerScrollView.delegate = self;
+    
+    [backgroundScrollView addSubview:bannerScrollView];
     
     UIImageView *banner1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyebanner"]];
     UIImageView *banner2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyebanner"]];
     UIImageView *banner3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyebanner"]];
+    UIImageView *banner4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyebanner"]];
+    UIImageView *banner5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyebanner"]];
     
     banner1.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180);
     banner2.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT, 0, WIDTH_CONTROLLER_DEFAULT, 180);
     banner3.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * 2, 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    banner4.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * 3, 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    banner5.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * 4, 0, WIDTH_CONTROLLER_DEFAULT, 180);
     
-    [scrollView addSubview:banner1];
-    [scrollView addSubview:banner2];
-    [scrollView addSubview:banner3];
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 150, WIDTH_CONTROLLER_DEFAULT, 30)];
+    
+    pageControl.numberOfPages = 3;
+    pageControl.currentPage = 0;
+    
+    [bannerScrollView addSubview:banner1];
+    [bannerScrollView addSubview:banner2];
+    [bannerScrollView addSubview:banner3];
+    [bannerScrollView addSubview:banner4];
+    [bannerScrollView addSubview:banner5];
+    [self.view addSubview:pageControl];
     
 }
 
@@ -181,6 +229,46 @@
     selectionSafeView.frame = CGRectMake(92, 570, 182, 17);
     
     [self.view addSubview:selectionSafeView];
+    
+}
+
+#pragma scrollView dalagate
+// 滚动后的执行方法
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    CGPoint offset = [scrollView contentOffset];
+    
+    if (offset.x == WIDTH_CONTROLLER_DEFAULT * 4) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+    } else if (offset.x == 0) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * 3, 0) animated:NO];
+    }
+    
+    //更新UIPageControl的当前页
+    CGRect bounds = scrollView.frame;
+    [pageControl setCurrentPage:offset.x / bounds.size.width];
+
+}
+
+// 准备滚动时候的执行方法
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    [timer invalidate];
+    // 调用invalidate方法后,对象已经无法使用,所以要指向nil.
+    timer = nil;
+    
+}
+
+// 拖住完成的执行方法
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+    
+    // 修改timer的优先级与控件一致
+    // 获取当前的消息循环对象
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    // 更改timer对象的优先级
+    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
     
 }
 
