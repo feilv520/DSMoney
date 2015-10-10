@@ -15,6 +15,15 @@
 		811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E001BC7A13800CAD6F5 /* FinancingCell.m */; settings = {ASSET_TAGS = (); }; };
 		811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */; settings = {ASSET_TAGS = (); }; };
 		811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */; settings = {ASSET_TAGS = (); }; };
+		817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817988271BC93C64007C8C3E /* FDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179882A1BC93DDE007C8C3E /* FixInvestCell.m */; settings = {ASSET_TAGS = (); }; };
+		8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8179882B1BC93DDE007C8C3E /* FixInvestCell.xib */; settings = {ASSET_TAGS = (); }; };
+		817988311BC93FF6007C8C3E /* BasicMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179882F1BC93FF6007C8C3E /* BasicMessageCell.m */; settings = {ASSET_TAGS = (); }; };
+		817988321BC93FF6007C8C3E /* BasicMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817988301BC93FF6007C8C3E /* BasicMessageCell.xib */; settings = {ASSET_TAGS = (); }; };
+		817988361BC94014007C8C3E /* PlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817988341BC94014007C8C3E /* PlanCell.m */; settings = {ASSET_TAGS = (); }; };
+		817988371BC94014007C8C3E /* PlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817988351BC94014007C8C3E /* PlanCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8179883B1BC9403A007C8C3E /* ThreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817988391BC9403A007C8C3E /* ThreeCell.m */; settings = {ASSET_TAGS = (); }; };
+		8179883C1BC9403A007C8C3E /* ThreeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8179883A1BC9403A007C8C3E /* ThreeCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAB1BC7563A0007AC48 /* SelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAE1BC756630007AC48 /* MoreViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -83,6 +92,20 @@
 		811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinancingCell.xib; sourceTree = "<group>"; };
 		811F9E051BC7D29900CAD6F5 /* UIColor+AddColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AddColor.h"; sourceTree = "<group>"; };
 		811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AddColor.m"; sourceTree = "<group>"; };
+		817988261BC93C64007C8C3E /* FDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDetailViewController.h; sourceTree = "<group>"; };
+		817988271BC93C64007C8C3E /* FDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDetailViewController.m; sourceTree = "<group>"; };
+		817988291BC93DDE007C8C3E /* FixInvestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixInvestCell.h; sourceTree = "<group>"; };
+		8179882A1BC93DDE007C8C3E /* FixInvestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixInvestCell.m; sourceTree = "<group>"; };
+		8179882B1BC93DDE007C8C3E /* FixInvestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixInvestCell.xib; sourceTree = "<group>"; };
+		8179882E1BC93FF6007C8C3E /* BasicMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicMessageCell.h; sourceTree = "<group>"; };
+		8179882F1BC93FF6007C8C3E /* BasicMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicMessageCell.m; sourceTree = "<group>"; };
+		817988301BC93FF6007C8C3E /* BasicMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicMessageCell.xib; sourceTree = "<group>"; };
+		817988331BC94014007C8C3E /* PlanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanCell.h; sourceTree = "<group>"; };
+		817988341BC94014007C8C3E /* PlanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanCell.m; sourceTree = "<group>"; };
+		817988351BC94014007C8C3E /* PlanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlanCell.xib; sourceTree = "<group>"; };
+		817988381BC9403A007C8C3E /* ThreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeCell.h; sourceTree = "<group>"; };
+		817988391BC9403A007C8C3E /* ThreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeCell.m; sourceTree = "<group>"; };
+		8179883A1BC9403A007C8C3E /* ThreeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeCell.xib; sourceTree = "<group>"; };
 		81C2DAA71BC755FF0007AC48 /* KKTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKTabBarViewController.h; sourceTree = "<group>"; };
 		81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKTabBarViewController.m; sourceTree = "<group>"; };
 		81C2DAAA1BC7563A0007AC48 /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
@@ -269,6 +292,8 @@
 			children = (
 				81D8ADA11BC646D100A15E01 /* FinancingViewController.h */,
 				81D8ADA21BC646D100A15E01 /* FinancingViewController.m */,
+				817988261BC93C64007C8C3E /* FDetailViewController.h */,
+				817988271BC93C64007C8C3E /* FDetailViewController.m */,
 			);
 			path = FinancingViewController;
 			sourceTree = "<group>";
@@ -281,6 +306,18 @@
 				811F9DFF1BC7A13800CAD6F5 /* FinancingCell.h */,
 				811F9E001BC7A13800CAD6F5 /* FinancingCell.m */,
 				811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */,
+				817988291BC93DDE007C8C3E /* FixInvestCell.h */,
+				8179882A1BC93DDE007C8C3E /* FixInvestCell.m */,
+				8179882B1BC93DDE007C8C3E /* FixInvestCell.xib */,
+				8179882E1BC93FF6007C8C3E /* BasicMessageCell.h */,
+				8179882F1BC93FF6007C8C3E /* BasicMessageCell.m */,
+				817988301BC93FF6007C8C3E /* BasicMessageCell.xib */,
+				817988331BC94014007C8C3E /* PlanCell.h */,
+				817988341BC94014007C8C3E /* PlanCell.m */,
+				817988351BC94014007C8C3E /* PlanCell.xib */,
+				817988381BC9403A007C8C3E /* ThreeCell.h */,
+				817988391BC9403A007C8C3E /* ThreeCell.m */,
+				8179883A1BC9403A007C8C3E /* ThreeCell.xib */,
 			);
 			path = FinancingView;
 			sourceTree = "<group>";
@@ -574,13 +611,17 @@
 				8D9356DC1BC607C500BC2BFA /* LaunchScreen.storyboard in Resources */,
 				8D6EFBA71BC78B02009FE101 /* shouyeqiepian750_30.png in Resources */,
 				8D5AEB3E1BC8DE23004FBDD3 /* SelectionOfThing.xib in Resources */,
+				8179883C1BC9403A007C8C3E /* ThreeCell.xib in Resources */,
 				8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */,
 				8D6EFBA81BC78B02009FE101 /* shouyeqiepian750_32.png in Resources */,
 				8D9356D91BC607C500BC2BFA /* Assets.xcassets in Resources */,
 				8D9356D71BC607C500BC2BFA /* Main.storyboard in Resources */,
 				8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */,
 				8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */,
+				8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */,
 				8D6EFBAC1BC78B02009FE101 /* shouyeqiepian7500_32highlight.png in Resources */,
+				817988371BC94014007C8C3E /* PlanCell.xib in Resources */,
+				817988321BC93FF6007C8C3E /* BasicMessageCell.xib in Resources */,
 				811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */,
 				8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */,
 			);
@@ -609,22 +650,27 @@
 			files = (
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
 				8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */,
+				8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */,
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
 				8D878CE11BC754AD00844575 /* e.m in Sources */,
 				811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */,
 				81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */,
+				8179883B1BC9403A007C8C3E /* ThreeCell.m in Sources */,
 				8110A4F31BC64A4D00E38485 /* iii.m in Sources */,
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
 				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,
+				817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */,
 				8110A4EA1BC649E400E38485 /* ooo.m in Sources */,
 				8110A4F61BC64A5800E38485 /* poi.m in Sources */,
 				8D878CD81BC7548B00844575 /* b.m in Sources */,
 				8D878CDB1BC7549500844575 /* c.m in Sources */,
+				817988361BC94014007C8C3E /* PlanCell.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
 				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,
 				81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */,
+				817988311BC93FF6007C8C3E /* BasicMessageCell.m in Sources */,
 				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
 				8D878CDE1BC7549F00844575 /* d.m in Sources */,

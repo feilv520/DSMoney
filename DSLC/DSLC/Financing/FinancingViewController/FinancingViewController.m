@@ -10,6 +10,8 @@
 #import "CreatView.h"
 #import "FinancingCell.h"
 #import "UIColor+AddColor.h"
+#import "define.h"
+#import "FDetailViewController.h"
 
 @interface FinancingViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -48,13 +50,13 @@
 {
     buttonArr = @[@"新手专享", @"固收理财", @"票据投资"];
     
-    UIScrollView *scrollView = [CreatView creatWithScrollViewFrame:CGRectMake(0, 0, self.view.frame.size.width, 45) backgroundColor:[UIColor whiteColor] contentSize:CGSizeMake(self.view.frame.size.width/3 * buttonArr.count, 0) contentOffSet:CGPointMake(0, 0)];
+    UIScrollView *scrollView = [CreatView creatWithScrollViewFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 45) backgroundColor:[UIColor whiteColor] contentSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT/3 * buttonArr.count, 0) contentOffSet:CGPointMake(0, 0)];
     
     [self.view addSubview:scrollView];
     
     for (int i = 0; i < 3; i++) {
         
-        butThree = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(self.view.frame.size.width/3 * i, 0, self.view.frame.size.width/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:[NSString stringWithFormat:@"%@", [buttonArr objectAtIndex:i]]];
+        butThree = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * i, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:[NSString stringWithFormat:@"%@", [buttonArr objectAtIndex:i]]];
         butThree.titleLabel.font = [UIFont systemFontOfSize:14];
         butThree.tag = 100 + i;
         [scrollView addSubview:butThree];
@@ -68,7 +70,7 @@
         }
     }
     
-    lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(self.view.frame.size.width/3, 43, self.view.frame.size.width/3, 2) backgroundColor:[UIColor daohanglan] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:0] text:@""];
+    lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2) backgroundColor:[UIColor daohanglan] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:0] text:@""];
     [self.view addSubview:lableRedLine];
 
 }
@@ -80,7 +82,7 @@
         
         if (button.tag == 100) {
             
-            lableRedLine.frame = CGRectMake(0, 43, self.view.frame.size.width/3, 2);
+            lableRedLine.frame = CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
             UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
@@ -90,7 +92,7 @@
             
         } else if (button.tag == 101) {
             
-            lableRedLine.frame = CGRectMake(self.view.frame.size.width/3, 43, self.view.frame.size.width/3, 2);
+            lableRedLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
             UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
@@ -100,7 +102,7 @@
             
         } else {
             
-            lableRedLine.frame = CGRectMake(self.view.frame.size.width/3 * 2, 43, self.view.frame.size.width/3, 2);
+            lableRedLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
             UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
@@ -117,11 +119,16 @@
 //TableView展示
 - (void)showTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, self.view.frame.size.height - 45 - 53 - 64 - 15) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 45 - 53 - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    UIView *viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 15)];
+    viewHead.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    _tableView.tableHeaderView = viewHead;
+    
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
@@ -156,10 +163,10 @@
 //    ,号前面是指起始位置 ,号后面是指到%这个位置截止的总长度
     NSRange redRange = NSMakeRange(0, [[textString string] rangeOfString:@"%"].location);
     [textString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
-    [textString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22] range:redRange];
+    [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:redRange];
 //    此句意思是指起始位置 是8.02%这个字符串的总长度减掉1 就是指起始位置是% 长度只有1
     NSRange symbol = NSMakeRange([[textString string] length] - 1, 1);
-    [textString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:symbol];
+    [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:symbol];
     [cell.labelPercentage setAttributedText:textString];
     
     cell.labelYear.text = @"年化收益率";
@@ -172,19 +179,19 @@
     
     NSMutableAttributedString *textYear = [[NSMutableAttributedString alloc] initWithString:@"90天"];
     NSRange numText = NSMakeRange(0, [[textYear string] rangeOfString:@"天"].location);
-    [textYear addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22] range:numText];
+    [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:numText];
     NSRange dayText = NSMakeRange([[textYear string] length] - 1, 1);
-    [textYear addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:dayText];
+    [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:dayText];
     [cell.labelDayNum setAttributedText:textYear];
     
     cell.labelMoney.textAlignment = NSTextAlignmentCenter;
     cell.labelMoney.font = [UIFont systemFontOfSize:22];
     
-    NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:@"1000元"];
+    NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:@"1,000元"];
     NSRange moneyNum = NSMakeRange(0, [[moneyText string] rangeOfString:@"元"].location);
-    [moneyText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22] range:moneyNum];
+    [moneyText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:moneyNum];
     NSRange yuanStr = NSMakeRange([[moneyText string] length] - 1, 1);
-    [moneyText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:yuanStr];
+    [moneyText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:yuanStr];
     [cell.labelMoney setAttributedText:moneyText];
     
     cell.labelData.text = @"理财期限";
@@ -220,6 +227,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    FDetailViewController *fdetailVC = [[FDetailViewController alloc] init];
+    [self.navigationController pushViewController:fdetailVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
