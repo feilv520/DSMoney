@@ -21,6 +21,13 @@
 		81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD991BC6427800A15E01 /* MineViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8ADA21BC646D100A15E01 /* FinancingViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D55DB051BC7BE91004649CE /* shouyebanner.png */; settings = {ASSET_TAGS = (); }; };
+		8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB381BC8D2F3004FBDD3 /* SelectionV.xib */; settings = {ASSET_TAGS = (); }; };
+		8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AEB3B1BC8DAA4004FBDD3 /* SelectionV.m */; settings = {ASSET_TAGS = (); }; };
+		8D5AEB3E1BC8DE23004FBDD3 /* SelectionOfThing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB3D1BC8DE23004FBDD3 /* SelectionOfThing.xib */; settings = {ASSET_TAGS = (); }; };
+		8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AEB401BC8DE41004FBDD3 /* SelectionOfThing.m */; settings = {ASSET_TAGS = (); }; };
+		8D5AEB491BC8F560004FBDD3 /* CenturyGothic.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB481BC8F560004FBDD3 /* CenturyGothic.TTF */; settings = {ASSET_TAGS = (); }; };
+		8D5AEB4B1BC8FCA3004FBDD3 /* SelectionOfSafe.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB4A1BC8FCA3004FBDD3 /* SelectionOfSafe.xib */; settings = {ASSET_TAGS = (); }; };
+		8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AEB4D1BC8FCBC004FBDD3 /* SelectionOfSafe.m */; settings = {ASSET_TAGS = (); }; };
 		8D6EFBA51BC78B02009FE101 /* shouyeqiepian750_25_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFB9D1BC78B02009FE101 /* shouyeqiepian750_25_highlight.png */; settings = {ASSET_TAGS = (); }; };
 		8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */; settings = {ASSET_TAGS = (); }; };
 		8D6EFBA71BC78B02009FE101 /* shouyeqiepian750_30.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFB9F1BC78B02009FE101 /* shouyeqiepian750_30.png */; settings = {ASSET_TAGS = (); }; };
@@ -88,6 +95,16 @@
 		81D8ADA21BC646D100A15E01 /* FinancingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingViewController.m; sourceTree = "<group>"; };
 		8D55DB041BC7B53A004649CE /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
 		8D55DB051BC7BE91004649CE /* shouyebanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyebanner.png; sourceTree = "<group>"; };
+		8D5AEB381BC8D2F3004FBDD3 /* SelectionV.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionV.xib; sourceTree = "<group>"; };
+		8D5AEB3A1BC8DAA4004FBDD3 /* SelectionV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionV.h; sourceTree = "<group>"; };
+		8D5AEB3B1BC8DAA4004FBDD3 /* SelectionV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionV.m; sourceTree = "<group>"; };
+		8D5AEB3D1BC8DE23004FBDD3 /* SelectionOfThing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionOfThing.xib; sourceTree = "<group>"; };
+		8D5AEB3F1BC8DE41004FBDD3 /* SelectionOfThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionOfThing.h; sourceTree = "<group>"; };
+		8D5AEB401BC8DE41004FBDD3 /* SelectionOfThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionOfThing.m; sourceTree = "<group>"; };
+		8D5AEB481BC8F560004FBDD3 /* CenturyGothic.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = CenturyGothic.TTF; sourceTree = "<group>"; };
+		8D5AEB4A1BC8FCA3004FBDD3 /* SelectionOfSafe.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionOfSafe.xib; sourceTree = "<group>"; };
+		8D5AEB4C1BC8FCBC004FBDD3 /* SelectionOfSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionOfSafe.h; sourceTree = "<group>"; };
+		8D5AEB4D1BC8FCBC004FBDD3 /* SelectionOfSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionOfSafe.m; sourceTree = "<group>"; };
 		8D6EFB9D1BC78B02009FE101 /* shouyeqiepian750_25_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian750_25_highlight.png; sourceTree = "<group>"; };
 		8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian750_28.png; sourceTree = "<group>"; };
 		8D6EFB9F1BC78B02009FE101 /* shouyeqiepian750_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian750_30.png; sourceTree = "<group>"; };
@@ -347,6 +364,15 @@
 			children = (
 				8D878CD91BC7549500844575 /* c.h */,
 				8D878CDA1BC7549500844575 /* c.m */,
+				8D5AEB381BC8D2F3004FBDD3 /* SelectionV.xib */,
+				8D5AEB3A1BC8DAA4004FBDD3 /* SelectionV.h */,
+				8D5AEB3B1BC8DAA4004FBDD3 /* SelectionV.m */,
+				8D5AEB3D1BC8DE23004FBDD3 /* SelectionOfThing.xib */,
+				8D5AEB3F1BC8DE41004FBDD3 /* SelectionOfThing.h */,
+				8D5AEB401BC8DE41004FBDD3 /* SelectionOfThing.m */,
+				8D5AEB4A1BC8FCA3004FBDD3 /* SelectionOfSafe.xib */,
+				8D5AEB4C1BC8FCBC004FBDD3 /* SelectionOfSafe.h */,
+				8D5AEB4D1BC8FCBC004FBDD3 /* SelectionOfSafe.m */,
 			);
 			path = SelectionView;
 			sourceTree = "<group>";
@@ -409,6 +435,7 @@
 		8D9356CC1BC607C500BC2BFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8D5AEB481BC8F560004FBDD3 /* CenturyGothic.TTF */,
 				8D9356DD1BC607C500BC2BFA /* Info.plist */,
 				8D9356D51BC607C500BC2BFA /* Main.storyboard */,
 				8D9356D81BC607C500BC2BFA /* Assets.xcassets */,
@@ -542,8 +569,12 @@
 				8D6EFBA51BC78B02009FE101 /* shouyeqiepian750_25_highlight.png in Resources */,
 				8D6EFBAB1BC78B02009FE101 /* shouyeqiepian7500_30highlight.png in Resources */,
 				8D6EFBA91BC78B02009FE101 /* shouyeqiepian7500_25.png in Resources */,
+				8D5AEB491BC8F560004FBDD3 /* CenturyGothic.TTF in Resources */,
+				8D5AEB4B1BC8FCA3004FBDD3 /* SelectionOfSafe.xib in Resources */,
 				8D9356DC1BC607C500BC2BFA /* LaunchScreen.storyboard in Resources */,
 				8D6EFBA71BC78B02009FE101 /* shouyeqiepian750_30.png in Resources */,
+				8D5AEB3E1BC8DE23004FBDD3 /* SelectionOfThing.xib in Resources */,
+				8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */,
 				8D6EFBA81BC78B02009FE101 /* shouyeqiepian750_32.png in Resources */,
 				8D9356D91BC607C500BC2BFA /* Assets.xcassets in Resources */,
 				8D9356D71BC607C500BC2BFA /* Main.storyboard in Resources */,
@@ -584,6 +615,7 @@
 				811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */,
 				81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */,
 				8110A4F31BC64A4D00E38485 /* iii.m in Sources */,
+				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
 				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,
 				8110A4EA1BC649E400E38485 /* ooo.m in Sources */,
 				8110A4F61BC64A5800E38485 /* poi.m in Sources */,
@@ -591,7 +623,9 @@
 				8D878CDB1BC7549500844575 /* c.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
+				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,
 				81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */,
+				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
 				8D878CDE1BC7549F00844575 /* d.m in Sources */,
 				81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */,
