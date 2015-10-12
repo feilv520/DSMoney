@@ -39,7 +39,7 @@
     [self makePayButton];
     [self makeSafeView];
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
 
     // 修改timer的优先级与控件一致
     // 获取当前的消息循环对象
@@ -47,24 +47,6 @@
     // 更改timer对象的优先级
     [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
     
-}
-
-- (void)scrollViewFuction{
-
-    CGPoint offset = [bannerScrollView contentOffset];
-    
-    if (offset.x == WIDTH_CONTROLLER_DEFAULT * 4) {
-        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
-    } else if (offset.x == 0) {
-        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * 3, 0) animated:NO];
-    }
-
-    if (pageControl.currentPage == pageControl.numberOfPages - 1) {
-        pageControl.currentPage = 0;
-    } else {
-        pageControl.currentPage += 1;
-    }
-    [bannerScrollView setContentOffset:CGPointMake((pageControl.currentPage + 1) * WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
 }
 
 // 添加控件
@@ -75,7 +57,7 @@
     
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         backgroundScrollView.scrollEnabled = YES;
-        backgroundScrollView.contentSize = CGSizeMake(0, HEIGHT_CONTROLLER_DEFAULT);
+        backgroundScrollView.contentSize = CGSizeMake(1, 667);
     }
     
     [self.view addSubview:backgroundScrollView];
@@ -117,7 +99,7 @@
     [bannerScrollView addSubview:banner3];
     [bannerScrollView addSubview:banner4];
     [bannerScrollView addSubview:banner5];
-    [self.view addSubview:pageControl];
+    [backgroundScrollView addSubview:pageControl];
     
 }
 
@@ -126,15 +108,14 @@
     UIView *threeView = [[UIView alloc] initWithFrame:CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 90)];
     
     threeView.backgroundColor = mainColor;
-    [self.view addSubview:threeView];
+    [backgroundScrollView addSubview:threeView];
     
     NSArray *nameArray = @[@"安全保障",@"千万风险金",@"新手指南"];
     NSArray *photoArray = @[@"shouyeqiepian_03",@"shouyeqiepian_05",@"shouyeqiepian_07"];
     
-    CGFloat marginX = 25;
-    CGFloat buttonX = 90;
-    CGFloat buttonY = 110;
-    
+    CGFloat marginX = WIDTH_CONTROLLER_DEFAULT * (25 / 375.0);
+    CGFloat buttonX = WIDTH_CONTROLLER_DEFAULT * (90 / 375.0);
+    CGFloat buttonY = WIDTH_CONTROLLER_DEFAULT * (110 / 375.0);
     
     for (NSInteger i = 0; i < nameArray.count; i++) {
         
@@ -147,6 +128,8 @@
         
         [buttonView.selectionButton setImage:[UIImage imageNamed:[photoArray objectAtIndex:i]] forState:UIControlStateNormal];
         buttonView.titleLabel.text = [nameArray objectAtIndex:i];
+        
+        [buttonView.selectionButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [threeView addSubview:buttonView];
     }
@@ -161,9 +144,9 @@
     
     SelectionOfThing *selectionFTView = (SelectionOfThing *)[[rootBundle loadNibNamed:@"SelectionOfThing" owner:nil options:nil] lastObject];
     
-    CGFloat margin_left = 22.5;
+    CGFloat margin_left = (22.5 / 375) * WIDTH_CONTROLLER_DEFAULT;
     
-    selectionFTView.frame = CGRectMake(margin_left, 285, 330, 215);
+    selectionFTView.frame = CGRectMake(margin_left, 285, WIDTH_CONTROLLER_DEFAULT * (330 / 375.0), 215);
     
     selectionFTView.layer.cornerRadius = 4;
     
@@ -186,9 +169,11 @@
     NSRange markRange = NSMakeRange([[numberText string] rangeOfString:@"%"].location, 1);
     
     [numberText addAttribute:NSForegroundColorAttributeName value:Color_Red range:numRange];
-    [numberText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:45.0] range:numRange];
-    [numberText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28.0] range:markRange];
+    [numberText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:(45.0 / 375.0) * WIDTH_CONTROLLER_DEFAULT] range:numRange];
+    [numberText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:(28.0 / 375.0) * WIDTH_CONTROLLER_DEFAULT] range:markRange];
     [selectionFTView.numberLabel setAttributedText:numberText];
+    
+    NSLog(@"--------%f",(45.0 / 375.0) * WIDTH_CONTROLLER_DEFAULT);
     
     NSRange markDayRange = NSMakeRange([[dayText string] rangeOfString:@"天"].location , 1);
     NSRange markWRange = NSMakeRange([[moneyText string] rangeOfString:@"万"].location , 2);
@@ -202,7 +187,7 @@
     [selectionFTView.moneyLabel setAttributedText:moneyText];
     [selectionFTView.firstLabel setAttributedText:firstMoneyText];
     
-    [self.view addSubview:selectionFTView];
+    [backgroundScrollView addSubview:selectionFTView];
     
 }
 
@@ -210,12 +195,12 @@
 - (void)makePayButton{
     UIButton *payButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    payButton.frame = CGRectMake(51, 520, WIDTH_CONTROLLER_DEFAULT - 104, 43);
+    payButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (51 / 375.0), 520, WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), 43);
     
     [payButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
     [payButton setTitle:@"立即抢购" forState:UIControlStateNormal];
     
-    [self.view addSubview:payButton];
+    [backgroundScrollView addSubview:payButton];
     
 }
 
@@ -226,9 +211,14 @@
     
     SelectionOfSafe *selectionSafeView = (SelectionOfSafe *)[[rootBundle loadNibNamed:@"SelectionOfSafe" owner:nil options:nil] lastObject];
     
-    selectionSafeView.frame = CGRectMake(92, 570, 182, 17);
+    CGFloat button_X = WIDTH_CONTROLLER_DEFAULT * (180.0 / 375.0);
+    CGFloat margin_left = ((WIDTH_CONTROLLER_DEFAULT - button_X) / 2 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
     
-    [self.view addSubview:selectionSafeView];
+    NSLog(@"%f",(375.0 - button_X) / 2);
+    
+    selectionSafeView.frame = CGRectMake(margin_left, 570, button_X, 17);
+    
+    [backgroundScrollView addSubview:selectionSafeView];
     
 }
 
@@ -238,15 +228,17 @@
     
     CGPoint offset = [scrollView contentOffset];
     
-    if (offset.x == WIDTH_CONTROLLER_DEFAULT * 4) {
-        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
-    } else if (offset.x == 0) {
-        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * 3, 0) animated:NO];
-    }
-    
     //更新UIPageControl的当前页
     CGRect bounds = scrollView.frame;
-    [pageControl setCurrentPage:offset.x / bounds.size.width];
+    [pageControl setCurrentPage:offset.x / bounds.size.width - 1];
+    
+    if (offset.x == WIDTH_CONTROLLER_DEFAULT * 4) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+        pageControl.currentPage = 0;
+    } else if (offset.x == 0) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * 3, 0) animated:NO];
+        pageControl.currentPage = 2;
+    }
 
 }
 
@@ -262,7 +254,7 @@
 // 拖住完成的执行方法
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
     
     // 修改timer的优先级与控件一致
     // 获取当前的消息循环对象
@@ -272,11 +264,44 @@
     
 }
 
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    CGPoint offset = [scrollView contentOffset];
+    
+    if (offset.x == WIDTH_CONTROLLER_DEFAULT * 4) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+        pageControl.currentPage = 0;
+    } else if (offset.x == 0) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * 3, 0) animated:NO];
+        pageControl.currentPage = 2;
+    }
+}
+
+- (void)scrollViewFuction{
+    
+    [bannerScrollView setContentOffset:CGPointMake((pageControl.currentPage + 2) * WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
+
+    pageControl.currentPage += 1;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (void)buttonAction:(id)sender{
+    
+    UIButton *button = (UIButton *)sender;
+    SelectionV *sView = (SelectionV *)button.superview;
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:sView.titleLabel.text message:sView.titleLabel.text preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
 /*
 #pragma mark - Navigation
 
