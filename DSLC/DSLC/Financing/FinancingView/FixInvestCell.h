@@ -10,4 +10,15 @@
 
 @interface FixInvestCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *labelMonth;
+@property (weak, nonatomic) IBOutlet UILabel *labelBuyNum;
+@property (weak, nonatomic) IBOutlet UIView *viewLine;
+@property (weak, nonatomic) IBOutlet UILabel *labelPercentage;
+@property (weak, nonatomic) IBOutlet UILabel *labelDayNum;
+@property (weak, nonatomic) IBOutlet UILabel *labelIncome;
+@property (weak, nonatomic) IBOutlet UILabel *labelDeadline;
+@property (weak, nonatomic) IBOutlet UIView *viewDiSe;
+@property (weak, nonatomic) IBOutlet UILabel *labelSurplus;
+@property (weak, nonatomic) IBOutlet UILabel *labelLine;
+
 @end
