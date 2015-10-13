@@ -160,6 +160,11 @@
         [year addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:moneyRange];
         [cell.labelSheng setAttributedText:moneyStr];
         
+        NSMutableAttributedString *moneyS = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@", @"剩余总额", @"34.2万元"]];
+        NSRange Range = NSMakeRange(0, [[moneyS string] length]);
+        [year addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:Range];
+        [cell.labelMoney setAttributedText:moneyS];
+        
         return cell;
         
     } else if (indexPath.section == 1) {
