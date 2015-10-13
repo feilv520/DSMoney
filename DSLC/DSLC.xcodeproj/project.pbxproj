@@ -24,6 +24,15 @@
 		817988371BC94014007C8C3E /* PlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817988351BC94014007C8C3E /* PlanCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8179883B1BC9403A007C8C3E /* ThreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817988391BC9403A007C8C3E /* ThreeCell.m */; settings = {ASSET_TAGS = (); }; };
 		8179883C1BC9403A007C8C3E /* ThreeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8179883A1BC9403A007C8C3E /* ThreeCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC361BCC96E1003F440D /* MakeSureViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC391BCCD0FE003F440D /* ContentCell.m */; settings = {ASSET_TAGS = (); }; };
+		8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC3A1BCCD0FE003F440D /* ContentCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8184EC401BCCD113003F440D /* MoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC3E1BCCD113003F440D /* MoneyCell.m */; settings = {ASSET_TAGS = (); }; };
+		8184EC411BCCD113003F440D /* MoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC3F1BCCD113003F440D /* MoneyCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8184EC451BCCD12A003F440D /* RedBagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC431BCCD12A003F440D /* RedBagCell.m */; settings = {ASSET_TAGS = (); }; };
+		8184EC461BCCD12A003F440D /* RedBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC441BCCD12A003F440D /* RedBagCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8184EC4A1BCCD13C003F440D /* CashMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC481BCCD13C003F440D /* CashMoneyCell.m */; settings = {ASSET_TAGS = (); }; };
+		8184EC4B1BCCD13C003F440D /* CashMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC491BCCD13C003F440D /* CashMoneyCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAB1BC7563A0007AC48 /* SelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAE1BC756630007AC48 /* MoreViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -109,6 +118,20 @@
 		817988381BC9403A007C8C3E /* ThreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeCell.h; sourceTree = "<group>"; };
 		817988391BC9403A007C8C3E /* ThreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeCell.m; sourceTree = "<group>"; };
 		8179883A1BC9403A007C8C3E /* ThreeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeCell.xib; sourceTree = "<group>"; };
+		8184EC351BCC96E1003F440D /* MakeSureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeSureViewController.h; sourceTree = "<group>"; };
+		8184EC361BCC96E1003F440D /* MakeSureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeSureViewController.m; sourceTree = "<group>"; };
+		8184EC381BCCD0FE003F440D /* ContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentCell.h; sourceTree = "<group>"; };
+		8184EC391BCCD0FE003F440D /* ContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentCell.m; sourceTree = "<group>"; };
+		8184EC3A1BCCD0FE003F440D /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
+		8184EC3D1BCCD113003F440D /* MoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyCell.h; sourceTree = "<group>"; };
+		8184EC3E1BCCD113003F440D /* MoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyCell.m; sourceTree = "<group>"; };
+		8184EC3F1BCCD113003F440D /* MoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoneyCell.xib; sourceTree = "<group>"; };
+		8184EC421BCCD12A003F440D /* RedBagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBagCell.h; sourceTree = "<group>"; };
+		8184EC431BCCD12A003F440D /* RedBagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedBagCell.m; sourceTree = "<group>"; };
+		8184EC441BCCD12A003F440D /* RedBagCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RedBagCell.xib; sourceTree = "<group>"; };
+		8184EC471BCCD13C003F440D /* CashMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashMoneyCell.h; sourceTree = "<group>"; };
+		8184EC481BCCD13C003F440D /* CashMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashMoneyCell.m; sourceTree = "<group>"; };
+		8184EC491BCCD13C003F440D /* CashMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashMoneyCell.xib; sourceTree = "<group>"; };
 		81C2DAA71BC755FF0007AC48 /* KKTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKTabBarViewController.h; sourceTree = "<group>"; };
 		81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKTabBarViewController.m; sourceTree = "<group>"; };
 		81C2DAAA1BC7563A0007AC48 /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
@@ -306,6 +329,8 @@
 				81D8ADA21BC646D100A15E01 /* FinancingViewController.m */,
 				817988261BC93C64007C8C3E /* FDetailViewController.h */,
 				817988271BC93C64007C8C3E /* FDetailViewController.m */,
+				8184EC351BCC96E1003F440D /* MakeSureViewController.h */,
+				8184EC361BCC96E1003F440D /* MakeSureViewController.m */,
 			);
 			path = FinancingViewController;
 			sourceTree = "<group>";
@@ -328,6 +353,18 @@
 				817988381BC9403A007C8C3E /* ThreeCell.h */,
 				817988391BC9403A007C8C3E /* ThreeCell.m */,
 				8179883A1BC9403A007C8C3E /* ThreeCell.xib */,
+				8184EC381BCCD0FE003F440D /* ContentCell.h */,
+				8184EC391BCCD0FE003F440D /* ContentCell.m */,
+				8184EC3A1BCCD0FE003F440D /* ContentCell.xib */,
+				8184EC3D1BCCD113003F440D /* MoneyCell.h */,
+				8184EC3E1BCCD113003F440D /* MoneyCell.m */,
+				8184EC3F1BCCD113003F440D /* MoneyCell.xib */,
+				8184EC421BCCD12A003F440D /* RedBagCell.h */,
+				8184EC431BCCD12A003F440D /* RedBagCell.m */,
+				8184EC441BCCD12A003F440D /* RedBagCell.xib */,
+				8184EC471BCCD13C003F440D /* CashMoneyCell.h */,
+				8184EC481BCCD13C003F440D /* CashMoneyCell.m */,
+				8184EC491BCCD13C003F440D /* CashMoneyCell.xib */,
 			);
 			path = FinancingView;
 			sourceTree = "<group>";
@@ -615,12 +652,14 @@
 			files = (
 				8D6EFBA51BC78B02009FE101 /* shouyeqiepian750_25_highlight.png in Resources */,
 				8D6EFBAB1BC78B02009FE101 /* shouyeqiepian7500_30highlight.png in Resources */,
+				8184EC411BCCD113003F440D /* MoneyCell.xib in Resources */,
 				8D6EFBA91BC78B02009FE101 /* shouyeqiepian7500_25.png in Resources */,
 				8D5AEB491BC8F560004FBDD3 /* CenturyGothic.TTF in Resources */,
 				8D5AEB4B1BC8FCA3004FBDD3 /* SelectionOfSafe.xib in Resources */,
 				81E90EF41BCB42D7004BA8A5 /* 750产品详111.png in Resources */,
 				8D9356DC1BC607C500BC2BFA /* LaunchScreen.storyboard in Resources */,
 				8D6EFBA71BC78B02009FE101 /* shouyeqiepian750_30.png in Resources */,
+				8184EC4B1BCCD13C003F440D /* CashMoneyCell.xib in Resources */,
 				8D5AEB3E1BC8DE23004FBDD3 /* SelectionOfThing.xib in Resources */,
 				81E90EF61BCB4300004BA8A5 /* 750产品111.png in Resources */,
 				8179883C1BC9403A007C8C3E /* ThreeCell.xib in Resources */,
@@ -630,12 +669,14 @@
 				81334F5E1BCBC3BD000A9B8A /* 7501111.png in Resources */,
 				8D9356D91BC607C500BC2BFA /* Assets.xcassets in Resources */,
 				81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */,
+				8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */,
 				8D9356D71BC607C500BC2BFA /* Main.storyboard in Resources */,
 				8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */,
 				8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */,
 				8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */,
 				8D6EFBAC1BC78B02009FE101 /* shouyeqiepian7500_32highlight.png in Resources */,
 				817988371BC94014007C8C3E /* PlanCell.xib in Resources */,
+				8184EC461BCCD12A003F440D /* RedBagCell.xib in Resources */,
 				817988321BC93FF6007C8C3E /* BasicMessageCell.xib in Resources */,
 				811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */,
 				8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */,
@@ -665,6 +706,7 @@
 			files = (
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
 				8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */,
+				8184EC451BCCD12A003F440D /* RedBagCell.m in Sources */,
 				8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */,
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
@@ -673,17 +715,21 @@
 				81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */,
 				8179883B1BC9403A007C8C3E /* ThreeCell.m in Sources */,
 				8110A4F31BC64A4D00E38485 /* iii.m in Sources */,
+				8184EC4A1BCCD13C003F440D /* CashMoneyCell.m in Sources */,
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
 				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,
 				817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */,
 				8110A4F61BC64A5800E38485 /* poi.m in Sources */,
 				8D878CD81BC7548B00844575 /* b.m in Sources */,
+				8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */,
 				8D878CDB1BC7549500844575 /* c.m in Sources */,
 				817988361BC94014007C8C3E /* PlanCell.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
+				8184EC401BCCD113003F440D /* MoneyCell.m in Sources */,
 				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,
 				81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */,
+				8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */,
 				817988311BC93FF6007C8C3E /* BasicMessageCell.m in Sources */,
 				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,

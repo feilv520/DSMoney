@@ -22,10 +22,15 @@ typedef NS_ENUM(NSInteger, TabBarPosition){
 @property (nonatomic, strong) NSArray *controllerArray;                 //controller的数组
 @property (nonatomic, strong) NSArray *tabButtonArray;                  //底部tabBar的数组，为自定义button
 @property (nonatomic, assign) TabBarPosition tabBarPosition;            //tabBar的位置，可选底部和顶部，默认底部
-
+@property (nonatomic, strong) UILabel *labelLine;
 
 // 带参数的初始化函数
 - (id)initWithControllerArray:(NSArray *)controllerArray;
 // 设置是否隐藏掉切换页面的按钮
 - (void)setTabBarHidden:(BOOL)tabBarHidden;
+
+- (void)setLabelLineHidden:(BOOL)LabelLineHidden;
+
+- (void)setTabbarViewHidden:(BOOL)tabbarViewHidden;
+
 @end

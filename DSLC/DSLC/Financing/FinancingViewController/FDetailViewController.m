@@ -14,30 +14,60 @@
 #import "ThreeCell.h"
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
+#import "MakeSureViewController.h"
 
 @interface FDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 {
     UITableView *_tableView;
     NSArray *titleArr;
+    
 }
+@property (nonatomic, strong) UIControl *viewBotton;
 @end
 
 @implementation FDetailViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:YES];
+    [app.tabBarVC setLabelLineHidden:YES];
+    
+    self.viewBotton = [[UIControl alloc] initWithFrame:CGRectMake(0, app.tabBarVC.view.frame.size.height - 49, WIDTH_CONTROLLER_DEFAULT, app.tabBarVC.view.frame.size.height)];
+    [app.tabBarVC.view addSubview:self.viewBotton];
+    self.viewBotton.backgroundColor = [UIColor greenColor];
+
+    [self showBottonView];
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.view.backgroundColor = [UIColor whiteColor];
 
     titleArr = @[@"产品描述", @"资产安全", @"投资须知"];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationItem.title = @"产品详情";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     [self showNavigationRetuenBack];
     [self showTableView];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
+    
+    [self.viewBotton removeFromSuperview];
+    
 }
 
 //修改导航栏的默认返回按钮
@@ -56,7 +86,7 @@
 //头部分区的tableView展示
 - (void)showTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 49) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -65,7 +95,7 @@
     viewFoot.backgroundColor = [UIColor colorWithRed:247.0 / 255.0 green:247.0 / 255.0 blue:247.0 / 255.0 alpha:1.0];
     
     UIImageView *imageSmallImg = [[UIImageView alloc] initWithFrame:CGRectMake(97, 18, 12, 12)];
-    UIImage *imageSmall = [UIImage imageNamed:@"shouyeqiepian750_21"];
+    UIImage *imageSmall = [UIImage imageNamed:@"shouyeqiepian_21"];
     imageSmallImg.image = imageSmall;
     [viewFoot addSubview:imageSmallImg];
     
@@ -329,6 +359,34 @@
 - (void)returnBackBar:(UIBarButtonItem *)bar
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+//底部计算器+投资视图
+- (void)showBottonView
+{
+    UIView *viewSuan = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT - 285, 49)];
+    [self.viewBotton addSubview:viewSuan];
+    viewSuan.backgroundColor = [UIColor colorWithRed:78/255 green:88/255 blue:97/255 alpha:1.0];
+    
+    UIImageView *imageViewSuan = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 15, viewSuan.frame.size.height/2 - 15, 30, 30)];
+    [viewSuan addSubview:imageViewSuan];
+    UIImage *imageSuan = [UIImage imageNamed:@"750产品详111"];
+    imageViewSuan.image = imageSuan;
+    
+    UIButton *butMakeSure = [UIButton buttonWithType:UIButtonTypeCustom];
+    butMakeSure.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 285, 0, 285, 49);
+    [self.viewBotton addSubview:butMakeSure];
+    [butMakeSure setTitle:@"投资(1,000元起投)" forState:UIControlStateNormal];
+    butMakeSure.titleLabel.font = [UIFont systemFontOfSize:15];
+    butMakeSure.backgroundColor = [UIColor daohanglan];
+    [butMakeSure addTarget:self action:@selector(makeSureButton:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//确认投资按钮
+- (void)makeSureButton:(UIButton *)button
+{
+    MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
+    [self.navigationController pushViewController:makeSureVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
