@@ -126,24 +126,15 @@
     }
     
 }
-//设置是否隐藏掉切换页面的按钮
-- (void)setTabBarHidden:(BOOL)tabBarHidden
-{
-    BOOL ytesz = tabBarHidden;
-//    NSLog(@"%d subView",[[self.view subviews] count]);
-    for (UIButton *tabButton  in _tabButtonArray) {
-        [tabButton setHidden:ytesz];
-//        [tabButton setHidden:NO];
-    }
-}
+
 //设置底部按钮的高度
 - (void)setTabBarHeight:(CGFloat)tabBarHeight
 {
     _tabBarHeight = tabBarHeight;
 //    NSLog(@"height %f",self.view.frame.size.height);
-    UILabel *labelLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 53, self.view.frame.size.width, 2)];
-    [self.view addSubview:labelLine];
-    labelLine.backgroundColor = [UIColor redColor];
+    self.labelLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 53, self.view.frame.size.width, 2)];
+    [self.view addSubview:self.labelLine];
+    self.labelLine.backgroundColor = [UIColor redColor];
     
     for (UIButton *button in _tabButtonArray) {
         
@@ -157,6 +148,7 @@
         button.frame = buttonFrame;
     }
 }
+
 - (void)setTabBarPosition:(TabBarPosition)tabBarPosition
 {
     _tabBarPosition = tabBarPosition;
@@ -214,6 +206,27 @@
             [button setSelected:NO];
         }
     }
+}
+
+//设置是否隐藏掉切换页面的按钮
+- (void)setTabBarHidden:(BOOL)tabBarHidden
+{
+    BOOL ytesz = tabBarHidden;
+    //    NSLog(@"%d subView",[[self.view subviews] count]);
+    for (UIButton *tabButton  in _tabButtonArray) {
+        [tabButton setHidden:ytesz];
+        //        [tabButton setHidden:NO];
+    }
+}
+
+- (void)setLabelLineHidden:(BOOL)LabelLineHidden
+{
+    self.labelLine.hidden = LabelLineHidden;
+}
+
+- (void)setTabbarViewHidden:(BOOL)tabbarViewHidden
+{
+    self.tabbarView.hidden = tabbarViewHidden;
 }
 
 - (void)didReceiveMemoryWarning
