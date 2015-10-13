@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RedBagCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *labelRedBag;
+@property (weak, nonatomic) IBOutlet UIButton *butRecharge;
 @end

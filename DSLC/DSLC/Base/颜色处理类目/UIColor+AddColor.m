@@ -175,4 +175,20 @@
 + (UIColor *) progressColor {
     return [UIColor colorFromHexCode:@"#fc6e51"];
 }
+
++ (UIColor *) shurukuangColor {
+    return [UIColor colorFromHexCode:@"#eaf4fb"];
+}
+
++ (UIColor *) shurukuangBian {
+    return [UIColor colorFromHexCode:@"#bcdee9"];
+}
+
++ (UIColor *) yuanColor {
+    return [UIColor colorFromHexCode:@"#8f9195"];
+}
+
++ (UIColor *) chongzhiColor {
+    return [UIColor colorFromHexCode:@"#1ba7f7"];
+}
 @end
