@@ -214,8 +214,6 @@
     CGFloat button_X = WIDTH_CONTROLLER_DEFAULT * (180.0 / 375.0);
     CGFloat margin_left = ((WIDTH_CONTROLLER_DEFAULT - button_X) / 2 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
     
-    NSLog(@"%f",(375.0 - button_X) / 2);
-    
     selectionSafeView.frame = CGRectMake(margin_left, 570, button_X, 17);
     
     [backgroundScrollView addSubview:selectionSafeView];

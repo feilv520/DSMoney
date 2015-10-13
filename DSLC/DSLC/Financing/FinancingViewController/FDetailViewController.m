@@ -15,12 +15,14 @@
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
 #import "MakeSureViewController.h"
+#import "Calendar.h"
 
 @interface FDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 {
     UITableView *_tableView;
     NSArray *titleArr;
-    
+    Calendar *calendar;
+    UIView *bView;
 }
 @property (nonatomic, strong) UIControl *viewBotton;
 @end
@@ -368,10 +370,12 @@
     [self.viewBotton addSubview:viewSuan];
     viewSuan.backgroundColor = [UIColor colorWithRed:78/255 green:88/255 blue:97/255 alpha:1.0];
     
-    UIImageView *imageViewSuan = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 15, viewSuan.frame.size.height/2 - 15, 30, 30)];
-    [viewSuan addSubview:imageViewSuan];
-    UIImage *imageSuan = [UIImage imageNamed:@"750产品详111"];
-    imageViewSuan.image = imageSuan;
+    UIButton *buttonCal = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonCal.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT - 285, 49);
+    [buttonCal setImage:[UIImage imageNamed:@"750产品详111"] forState:UIControlStateNormal];
+    [buttonCal setImageEdgeInsets:UIEdgeInsetsMake(10, 30, 10, 30)];
+    [buttonCal addTarget:self action:@selector(calendarView) forControlEvents:UIControlEventTouchUpInside];
+    [self.viewBotton addSubview:buttonCal];
     
     UIButton *butMakeSure = [UIButton buttonWithType:UIButtonTypeCustom];
     butMakeSure.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 285, 0, 285, 49);
@@ -387,6 +391,53 @@
 {
     MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
     [self.navigationController pushViewController:makeSureVC animated:YES];
+}
+
+// 计算收益图层
+- (void)calendarView{
+    
+    [bView removeFromSuperview];
+    [calendar removeFromSuperview];
+    
+    bView = nil;
+    calendar = nil;
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    if (bView == nil) {
+        bView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+        
+        bView.backgroundColor = Color_Black;
+        bView.alpha = 0.3;
+        
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        
+        [app.tabBarVC.view addSubview:bView];
+        
+    }
+    
+    if (calendar == nil) {
+        NSBundle *rootBundle = [NSBundle mainBundle];
+        
+        calendar = (Calendar *)[[rootBundle loadNibNamed:@"Calendar" owner:nil options:nil] lastObject];
+        calendar.frame = CGRectMake(38, 182, 301, 301);
+        calendar.layer.masksToBounds = YES;
+        calendar.layer.cornerRadius = 4.0;
+        
+        [calendar.closeButton addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [app.tabBarVC.view addSubview:calendar];
+
+    }
+
+}
+
+- (void)closeButton:(UIButton *)but{
+    [bView removeFromSuperview];
+    [calendar removeFromSuperview];
+    
+    bView = nil;
+    calendar = nil;
 }
 
 - (void)didReceiveMemoryWarning {
