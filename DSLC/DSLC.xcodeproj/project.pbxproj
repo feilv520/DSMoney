@@ -57,10 +57,12 @@
 		8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356D01BC607C500BC2BFA /* AppDelegate.m */; };
 		8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356D31BC607C500BC2BFA /* ViewController.m */; };
 		8D9356D71BC607C500BC2BFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D9356D51BC607C500BC2BFA /* Main.storyboard */; };
-		8D9356D91BC607C500BC2BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D9356D81BC607C500BC2BFA /* Assets.xcassets */; };
 		8D9356DC1BC607C500BC2BFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D9356DA1BC607C500BC2BFA /* LaunchScreen.storyboard */; };
 		8D9356E71BC607C500BC2BFA /* DSLCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356E61BC607C500BC2BFA /* DSLCTests.m */; };
 		8D9356F21BC607C500BC2BFA /* DSLCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356F11BC607C500BC2BFA /* DSLCUITests.m */; };
+		8DEDE1161BCCD97B008086D3 /* BankCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEDE1151BCCD97B008086D3 /* BankCard.m */; settings = {ASSET_TAGS = (); }; };
+		8DEDE1181BCCD987008086D3 /* BankCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1171BCCD987008086D3 /* BankCard.xib */; settings = {ASSET_TAGS = (); }; };
+		8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,7 +160,6 @@
 		8D9356D21BC607C500BC2BFA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8D9356D31BC607C500BC2BFA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8D9356D61BC607C500BC2BFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8D9356D81BC607C500BC2BFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D9356DB1BC607C500BC2BFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D9356DD1BC607C500BC2BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D9356E21BC607C500BC2BFA /* DSLCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DSLCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +168,10 @@
 		8D9356ED1BC607C500BC2BFA /* DSLCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DSLCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9356F11BC607C500BC2BFA /* DSLCUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLCUITests.m; sourceTree = "<group>"; };
 		8D9356F31BC607C500BC2BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DEDE1141BCCD97B008086D3 /* BankCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCard.h; sourceTree = "<group>"; };
+		8DEDE1151BCCD97B008086D3 /* BankCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCard.m; sourceTree = "<group>"; };
+		8DEDE1171BCCD987008086D3 /* BankCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankCard.xib; sourceTree = "<group>"; };
+		8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +333,9 @@
 				817988381BC9403A007C8C3E /* ThreeCell.h */,
 				817988391BC9403A007C8C3E /* ThreeCell.m */,
 				8179883A1BC9403A007C8C3E /* ThreeCell.xib */,
+				8DEDE1141BCCD97B008086D3 /* BankCard.h */,
+				8DEDE1151BCCD97B008086D3 /* BankCard.m */,
+				8DEDE1171BCCD987008086D3 /* BankCard.xib */,
 			);
 			path = FinancingView;
 			sourceTree = "<group>";
@@ -482,10 +490,10 @@
 		8D9356CC1BC607C500BC2BFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */,
 				8D5AEB481BC8F560004FBDD3 /* CenturyGothic.TTF */,
 				8D9356DD1BC607C500BC2BFA /* Info.plist */,
 				8D9356D51BC607C500BC2BFA /* Main.storyboard */,
-				8D9356D81BC607C500BC2BFA /* Assets.xcassets */,
 				8D9356DA1BC607C500BC2BFA /* LaunchScreen.storyboard */,
 				8D9356CD1BC607C500BC2BFA /* main.m */,
 			);
@@ -617,6 +625,7 @@
 				8D6EFBAB1BC78B02009FE101 /* shouyeqiepian7500_30highlight.png in Resources */,
 				8D6EFBA91BC78B02009FE101 /* shouyeqiepian7500_25.png in Resources */,
 				8D5AEB491BC8F560004FBDD3 /* CenturyGothic.TTF in Resources */,
+				8DEDE1181BCCD987008086D3 /* BankCard.xib in Resources */,
 				8D5AEB4B1BC8FCA3004FBDD3 /* SelectionOfSafe.xib in Resources */,
 				81E90EF41BCB42D7004BA8A5 /* 750产品详111.png in Resources */,
 				8D9356DC1BC607C500BC2BFA /* LaunchScreen.storyboard in Resources */,
@@ -628,7 +637,6 @@
 				8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */,
 				8D6EFBA81BC78B02009FE101 /* shouyeqiepian750_32.png in Resources */,
 				81334F5E1BCBC3BD000A9B8A /* 7501111.png in Resources */,
-				8D9356D91BC607C500BC2BFA /* Assets.xcassets in Resources */,
 				81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */,
 				8D9356D71BC607C500BC2BFA /* Main.storyboard in Resources */,
 				8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */,
@@ -638,6 +646,7 @@
 				817988371BC94014007C8C3E /* PlanCell.xib in Resources */,
 				817988321BC93FF6007C8C3E /* BasicMessageCell.xib in Resources */,
 				811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */,
+				8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */,
 				8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -683,6 +692,7 @@
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
 				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,
+				8DEDE1161BCCD97B008086D3 /* BankCard.m in Sources */,
 				81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */,
 				817988311BC93FF6007C8C3E /* BasicMessageCell.m in Sources */,
 				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
