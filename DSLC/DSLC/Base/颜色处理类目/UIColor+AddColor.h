@@ -46,4 +46,8 @@
 + (UIColor *) daohanglan;//导航栏
 + (UIColor *) progressColor;//进度条进度颜色
 + (UIColor *) progressBackColor;//进度条颜色
++ (UIColor *) shurukuangColor;//输入框颜色
++ (UIColor *) shurukuangBian;//输入框边颜色
++ (UIColor *) yuanColor;//元字颜色
++ (UIColor *) chongzhiColor;//充值颜色
 @end
