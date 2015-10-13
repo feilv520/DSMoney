@@ -72,6 +72,8 @@
 		8DEDE1161BCCD97B008086D3 /* BankCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEDE1151BCCD97B008086D3 /* BankCard.m */; settings = {ASSET_TAGS = (); }; };
 		8DEDE1181BCCD987008086D3 /* BankCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1171BCCD987008086D3 /* BankCard.xib */; settings = {ASSET_TAGS = (); }; };
 		8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
+		8DEDE1981BCCFA2C008086D3 /* BankCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEDE1961BCCFA2C008086D3 /* BankCard.m */; settings = {ASSET_TAGS = (); }; };
+		8DEDE1991BCCFA2C008086D3 /* BankCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1971BCCFA2C008086D3 /* BankCard.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,10 +193,12 @@
 		8D9356ED1BC607C500BC2BFA /* DSLCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DSLCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9356F11BC607C500BC2BFA /* DSLCUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLCUITests.m; sourceTree = "<group>"; };
 		8D9356F31BC607C500BC2BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8DEDE1141BCCD97B008086D3 /* BankCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCard.h; sourceTree = "<group>"; };
 		8DEDE1151BCCD97B008086D3 /* BankCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCard.m; sourceTree = "<group>"; };
 		8DEDE1171BCCD987008086D3 /* BankCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankCard.xib; sourceTree = "<group>"; };
 		8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8DEDE1951BCCFA2C008086D3 /* BankCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCard.h; sourceTree = "<group>"; };
+		8DEDE1961BCCFA2C008086D3 /* BankCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCard.m; sourceTree = "<group>"; };
+		8DEDE1971BCCFA2C008086D3 /* BankCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankCard.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -487,6 +491,9 @@
 		8D9356C01BC607C500BC2BFA = {
 			isa = PBXGroup;
 			children = (
+				8DEDE1951BCCFA2C008086D3 /* BankCard.h */,
+				8DEDE1961BCCFA2C008086D3 /* BankCard.m */,
+				8DEDE1971BCCFA2C008086D3 /* BankCard.xib */,
 				8D9356CB1BC607C500BC2BFA /* DSLC */,
 				8D9356E51BC607C500BC2BFA /* DSLCTests */,
 				8D9356F01BC607C500BC2BFA /* DSLCUITests */,
@@ -674,6 +681,7 @@
 				8D6EFBA81BC78B02009FE101 /* shouyeqiepian750_32.png in Resources */,
 				81334F5E1BCBC3BD000A9B8A /* 7501111.png in Resources */,
 				81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */,
+				8DEDE1991BCCFA2C008086D3 /* BankCard.xib in Resources */,
 				8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */,
 				8D9356D71BC607C500BC2BFA /* Main.storyboard in Resources */,
 				8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */,
@@ -742,6 +750,7 @@
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
 				8D878CDE1BC7549F00844575 /* d.m in Sources */,
 				81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */,
+				8DEDE1981BCCFA2C008086D3 /* BankCard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
