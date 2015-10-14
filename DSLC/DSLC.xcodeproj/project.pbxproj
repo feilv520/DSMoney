@@ -62,6 +62,10 @@
 		8D878CDB1BC7549500844575 /* c.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CDA1BC7549500844575 /* c.m */; settings = {ASSET_TAGS = (); }; };
 		8D878CDE1BC7549F00844575 /* d.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CDD1BC7549F00844575 /* d.m */; settings = {ASSET_TAGS = (); }; };
 		8D878CE11BC754AD00844575 /* e.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CE01BC754AD00844575 /* e.m */; settings = {ASSET_TAGS = (); }; };
+		8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D88A4DB1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D88A4DE1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D88A4DC1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D88A4E11BCE087400EE22F5 /* emptyyuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D88A4DF1BCE087400EE22F5 /* emptyyuan@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D88A4E21BCE087400EE22F5 /* emptyyuan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D88A4E01BCE087400EE22F5 /* emptyyuan@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D9356CE1BC607C500BC2BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356CD1BC607C500BC2BFA /* main.m */; };
 		8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356D01BC607C500BC2BFA /* AppDelegate.m */; };
 		8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356D31BC607C500BC2BFA /* ViewController.m */; };
@@ -214,6 +218,11 @@
 		8D878CDD1BC7549F00844575 /* d.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = d.m; sourceTree = "<group>"; };
 		8D878CDF1BC754AD00844575 /* e.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e.h; sourceTree = "<group>"; };
 		8D878CE01BC754AD00844575 /* e.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = e.m; sourceTree = "<group>"; };
+		8D88A4DA1BCDFED400EE22F5 /* FSelectionPayTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSelectionPayTypeViewController.h; sourceTree = "<group>"; };
+		8D88A4DB1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSelectionPayTypeViewController.m; sourceTree = "<group>"; };
+		8D88A4DC1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSelectionPayTypeViewController.xib; sourceTree = "<group>"; };
+		8D88A4DF1BCE087400EE22F5 /* emptyyuan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emptyyuan@2x.png"; sourceTree = "<group>"; };
+		8D88A4E01BCE087400EE22F5 /* emptyyuan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emptyyuan@3x.png"; sourceTree = "<group>"; };
 		8D9356C91BC607C500BC2BFA /* DSLC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSLC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9356CD1BC607C500BC2BFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D9356CF1BC607C500BC2BFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -428,6 +437,9 @@
 				817988271BC93C64007C8C3E /* FDetailViewController.m */,
 				8184EC351BCC96E1003F440D /* MakeSureViewController.h */,
 				8184EC361BCC96E1003F440D /* MakeSureViewController.m */,
+				8D88A4DA1BCDFED400EE22F5 /* FSelectionPayTypeViewController.h */,
+				8D88A4DB1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m */,
+				8D88A4DC1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib */,
 			);
 			path = FinancingViewController;
 			sourceTree = "<group>";
@@ -676,6 +688,8 @@
 				8DEDE1CF1BCCFFA5008086D3 /* blueyuan@3x.png */,
 				8DEDE1E31BCD0040008086D3 /* greenyuan@2x.png */,
 				8DEDE1E41BCD0040008086D3 /* greenyuan@3x.png */,
+				8D88A4DF1BCE087400EE22F5 /* emptyyuan@2x.png */,
+				8D88A4E01BCE087400EE22F5 /* emptyyuan@3x.png */,
 			);
 			name = "公共";
 			sourceTree = "<group>";
@@ -818,6 +832,8 @@
 				8DEDE1B41BCCFEB5008086D3 /* arrow@3x.png in Resources */,
 				8D5AEB491BC8F560004FBDD3 /* CenturyGothic.TTF in Resources */,
 				8D5AEB4B1BC8FCA3004FBDD3 /* SelectionOfSafe.xib in Resources */,
+				8D88A4DE1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib in Resources */,
+				8D88A4E21BCE087400EE22F5 /* emptyyuan@3x.png in Resources */,
 				8DEDE1C91BCCFF21008086D3 /* iconfont_greencuo@3x.png in Resources */,
 				8DEDE1C01BCCFEF8008086D3 /* iocn@2x.png in Resources */,
 				8DEDE1B61BCCFEB5008086D3 /* btn_red@3x.png in Resources */,
@@ -850,6 +866,7 @@
 				8DEDE1D51BCCFFD8008086D3 /* iocn_saft@3x.png in Resources */,
 				8DEDE1C81BCCFF21008086D3 /* iconfont_greencuo@2x.png in Resources */,
 				8D9356D71BC607C500BC2BFA /* Main.storyboard in Resources */,
+				8D88A4E11BCE087400EE22F5 /* emptyyuan@2x.png in Resources */,
 				8DEDE1B51BCCFEB5008086D3 /* btn_red@2x.png in Resources */,
 				8DEDE1E91BCD00B0008086D3 /* btn_gray@2x.png in Resources */,
 				8DEDE1DF1BCD0035008086D3 /* icon_CCB@2x.png in Resources */,
@@ -925,6 +942,7 @@
 				817988311BC93FF6007C8C3E /* BasicMessageCell.m in Sources */,
 				8DEDE1F21BCD05F9008086D3 /* Calendar.m in Sources */,
 				8DEDE19E1BCCFB9D008086D3 /* BankCard.m in Sources */,
+				8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */,
 				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
 				8D878CDE1BC7549F00844575 /* d.m in Sources */,
