@@ -16,4 +16,6 @@
 
 + (UILabel *)creatWithLabelFrame:(CGRect)frame backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor textAlignment:(NSTextAlignment)textAlignment textFont:(UIFont *)textFont text:(NSString *)text;
 
++ (UIImageView *)creatImageViewWithFrame:(CGRect)frame backGroundColor:(UIColor *)backGroundColor setImage:(UIImage *)image;
+
 @end

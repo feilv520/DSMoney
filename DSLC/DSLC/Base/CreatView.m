@@ -48,6 +48,15 @@
     return lable;
 }
 
++ (UIImageView *)creatImageViewWithFrame:(CGRect)frame backGroundColor:(UIColor *)backGroundColor setImage:(UIImage *)image
+{
+    UIImageView *imageView = [[UIImageView alloc] init];
+    [imageView setFrame:frame];
+    [imageView setBackgroundColor:backGroundColor];
+    [imageView setImage:image];
+    return imageView;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
