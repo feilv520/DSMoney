@@ -420,7 +420,16 @@
         NSBundle *rootBundle = [NSBundle mainBundle];
         
         calendar = (Calendar *)[[rootBundle loadNibNamed:@"Calendar" owner:nil options:nil] lastObject];
-        calendar.frame = CGRectMake(38, 182, 301, 301);
+        
+        CGFloat margin_x = (38 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+        CGFloat margin_y = (182 / 667.0) * HEIGHT_CONTROLLER_DEFAULT;
+        CGFloat width = (301 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+            margin_y -= 30;
+        }
+        
+        calendar.frame = CGRectMake(margin_x, margin_y, width, 301);
         calendar.layer.masksToBounds = YES;
         calendar.layer.cornerRadius = 4.0;
         

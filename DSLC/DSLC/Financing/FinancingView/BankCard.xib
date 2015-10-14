@@ -163,6 +163,7 @@
                 <constraint firstItem="3Zu-eH-5cS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="Z6y-3k-ftw"/>
                 <constraint firstItem="krN-dE-aPf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="104" id="Zx5-Df-kJt"/>
                 <constraint firstAttribute="trailing" secondItem="VLm-NL-nN8" secondAttribute="trailing" constant="12" id="aYy-X4-atq"/>
+                <constraint firstAttribute="trailing" secondItem="Ykt-bj-zf9" secondAttribute="trailing" constant="10" id="byE-il-yNk"/>
                 <constraint firstItem="OjG-c8-XSh" firstAttribute="top" secondItem="Ykt-bj-zf9" secondAttribute="bottom" constant="18" id="cjN-vZ-AzJ"/>
                 <constraint firstItem="YRW-0B-5WQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="dY3-6e-zIS"/>
                 <constraint firstItem="WlC-J6-9II" firstAttribute="top" secondItem="Ykt-bj-zf9" secondAttribute="bottom" constant="18" id="hc6-16-oDG"/>
@@ -179,6 +180,18 @@
                 <constraint firstItem="MTW-Ve-rj1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="52" id="vBp-0n-hSo"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="byE-il-yNk"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="line1" destination="Ykt-bj-zf9" id="uSy-QR-ero"/>
+                <outlet property="line2" destination="Eha-zs-FpX" id="puv-wr-HxU"/>
+                <outlet property="line3" destination="FWg-kN-Q6C" id="6jy-m3-xNn"/>
+                <outlet property="line4" destination="4Co-ek-4R2" id="Z92-MU-Wbg"/>
+            </connections>
+            <point key="canvasLocation" x="-211.5" y="459.5"/>
         </view>
     </objects>
     <resources>
