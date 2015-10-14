@@ -15,6 +15,7 @@
 #import "CashMoneyCell.h"
 #import "CreatView.h"
 #import "FConfirmMoney.h"
+#import "FSelectionPayTypeViewController.h"
 
 @interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic) UITableView *tableView;
@@ -60,6 +61,13 @@
     [app.tabBarVC setSuppurtGestureTransition:NO];
     [app.tabBarVC setTabbarViewHidden:NO];
     [app.tabBarVC setLabelLineHidden:NO];
+    
+    [self.controlBlack removeFromSuperview];
+    [self.viewWhite removeFromSuperview];
+    
+    self.controlBlack = nil;
+    self.viewWhite = nil;
+
 }
 
 //导航栏修改返回按钮
@@ -400,7 +408,8 @@
 //确认投资按钮
 - (void)buttonAffirmMoney:(UIButton *)button
 {
-    NSLog(@"确认投资");
+    FSelectionPayTypeViewController *fSelectionPayVC = [[FSelectionPayTypeViewController alloc] init];
+    [self.navigationController pushViewController:fSelectionPayVC animated:YES];
 }
 
 //返回按钮
