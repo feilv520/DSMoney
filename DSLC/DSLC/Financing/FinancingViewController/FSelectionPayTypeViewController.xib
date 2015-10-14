@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -62,7 +62,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g55-ua-pPW">
-                    <rect key="frame" x="0.0" y="100" width="375" height="467"/>
+                    <rect key="frame" x="0.0" y="100" width="375" height="200"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STg-Ju-BYI">
                             <rect key="frame" x="12" y="14" width="68" height="14"/>
@@ -185,7 +185,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWM-gf-OXI">
-                    <rect key="frame" x="51" y="319" width="272" height="43"/>
+                    <rect key="frame" x="51" y="319" width="272" height="44"/>
                     <state key="normal" title="下一步" backgroundImage="btn_red.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -198,7 +198,7 @@
                 <constraint firstItem="QWM-gf-OXI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8NQ-a8-buw"/>
                 <constraint firstItem="g55-ua-pPW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DA5-2H-dNh"/>
                 <constraint firstItem="g55-ua-pPW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="FHj-8m-5qM"/>
-                <constraint firstItem="g55-ua-pPW" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="JIL-c7-UyP"/>
+                <constraint firstAttribute="top" secondItem="g55-ua-pPW" secondAttribute="bottom" constant="-300" id="JIL-c7-UyP"/>
                 <constraint firstItem="WEd-zN-faD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TwN-MA-k1C"/>
                 <constraint firstItem="QWM-gf-OXI" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="7" id="bHw-OX-Dwl"/>
                 <constraint firstItem="g55-ua-pPW" firstAttribute="top" secondItem="WEd-zN-faD" secondAttribute="bottom" constant="8" id="iMu-0P-63O"/>
@@ -207,6 +207,11 @@
                 <constraint firstItem="WEd-zN-faD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rSI-eG-l5M"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="bHw-OX-Dwl"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="323.5" y="432.5"/>
         </view>
     </objects>
