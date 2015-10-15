@@ -7,6 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FQuickPayViewController">
             <connections>
+                <outlet property="failView" destination="EJL-19-F9N" id="A5c-mG-6Pb"/>
+                <outlet property="forgetPassword" destination="sQQ-qk-3Nr" id="HVm-Ut-N3b"/>
+                <outlet property="inputCode" destination="746-Nt-SMB" id="85v-uE-Ylx"/>
+                <outlet property="inputPassword" destination="MbP-eE-dfQ" id="vuV-pM-w8N"/>
+                <outlet property="payButton" destination="G17-aN-wPR" id="LIu-Cj-Cx1"/>
+                <outlet property="sendYanZhengCode" destination="6IW-FL-Fj6" id="5Ok-rh-qzq"/>
+                <outlet property="successView" destination="lc4-OG-nNJ" id="jke-TH-1sl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
