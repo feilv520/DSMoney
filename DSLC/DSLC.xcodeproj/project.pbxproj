@@ -15,6 +15,8 @@
 		811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */; settings = {ASSET_TAGS = (); }; };
 		811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */; settings = {ASSET_TAGS = (); }; };
 		81334F5E1BCBC3BD000A9B8A /* 7501111.png in Resources */ = {isa = PBXBuildFile; fileRef = 81334F5D1BCBC3BD000A9B8A /* 7501111.png */; settings = {ASSET_TAGS = (); }; };
+		813FD4FF1BCE71110050E884 /* FBalancePaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 813FD4FD1BCE71110050E884 /* FBalancePaymentViewController.m */; settings = {ASSET_TAGS = (); }; };
+		813FD5001BCE71110050E884 /* FBalancePaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 813FD4FE1BCE71110050E884 /* FBalancePaymentViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817988271BC93C64007C8C3E /* FDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179882A1BC93DDE007C8C3E /* FixInvestCell.m */; settings = {ASSET_TAGS = (); }; };
 		8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8179882B1BC93DDE007C8C3E /* FixInvestCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -150,6 +152,9 @@
 		811F9E051BC7D29900CAD6F5 /* UIColor+AddColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AddColor.h"; sourceTree = "<group>"; };
 		811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AddColor.m"; sourceTree = "<group>"; };
 		81334F5D1BCBC3BD000A9B8A /* 7501111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7501111.png; sourceTree = "<group>"; };
+		813FD4FC1BCE71110050E884 /* FBalancePaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBalancePaymentViewController.h; sourceTree = "<group>"; };
+		813FD4FD1BCE71110050E884 /* FBalancePaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBalancePaymentViewController.m; sourceTree = "<group>"; };
+		813FD4FE1BCE71110050E884 /* FBalancePaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBalancePaymentViewController.xib; sourceTree = "<group>"; };
 		817988261BC93C64007C8C3E /* FDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDetailViewController.h; sourceTree = "<group>"; };
 		817988271BC93C64007C8C3E /* FDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDetailViewController.m; sourceTree = "<group>"; };
 		817988291BC93DDE007C8C3E /* FixInvestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixInvestCell.h; sourceTree = "<group>"; };
@@ -445,6 +450,9 @@
 				8D88A4DA1BCDFED400EE22F5 /* FSelectionPayTypeViewController.h */,
 				8D88A4DB1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m */,
 				8D88A4DC1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib */,
+				813FD4FC1BCE71110050E884 /* FBalancePaymentViewController.h */,
+				813FD4FD1BCE71110050E884 /* FBalancePaymentViewController.m */,
+				813FD4FE1BCE71110050E884 /* FBalancePaymentViewController.xib */,
 			);
 			path = FinancingViewController;
 			sourceTree = "<group>";
@@ -793,6 +801,7 @@
 				TargetAttributes = {
 					8D9356C81BC607C500BC2BFA = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 85T9N5H2LW;
 					};
 					8D9356E11BC607C500BC2BFA = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -847,6 +856,7 @@
 				8DEDE1B61BCCFEB5008086D3 /* btn_red@3x.png in Resources */,
 				8DEDE1E01BCD0035008086D3 /* icon_CCb@3x.png in Resources */,
 				81E90EF41BCB42D7004BA8A5 /* 750产品详111.png in Resources */,
+				813FD5001BCE71110050E884 /* FBalancePaymentViewController.xib in Resources */,
 				8DEDE1DE1BCD0035008086D3 /* icon_CB@3x.png in Resources */,
 				818DEDFE1BCDF15B00454A0E /* FConfirmMoney.xib in Resources */,
 				8DEDE1E61BCD0040008086D3 /* greenyuan@3x.png in Resources */,
@@ -932,6 +942,7 @@
 				8110A4F31BC64A4D00E38485 /* iii.m in Sources */,
 				8184EC4A1BCCD13C003F440D /* CashMoneyCell.m in Sources */,
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
+				813FD4FF1BCE71110050E884 /* FBalancePaymentViewController.m in Sources */,
 				8DEDE26D1BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,
 				817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */,
@@ -1095,7 +1106,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DSLC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GCCF.DSLC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1106,7 +1119,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DSLC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GCCF.DSLC;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FSelectionPayTypeViewController">
             <connections>
+                <outlet property="buttonNext" destination="QWM-gf-OXI" id="Hjg-Ak-Ahj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -184,7 +185,7 @@
                         <constraint firstItem="4Nk-xL-j7W" firstAttribute="top" secondItem="MoL-p5-jpv" secondAttribute="bottom" constant="10" id="wAd-jp-vNe"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWM-gf-OXI">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWM-gf-OXI">
                     <rect key="frame" x="51" y="319" width="272" height="43"/>
                     <state key="normal" title="下一步" backgroundImage="btn_red.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -201,12 +202,19 @@
                 <constraint firstItem="g55-ua-pPW" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="JIL-c7-UyP"/>
                 <constraint firstItem="WEd-zN-faD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TwN-MA-k1C"/>
                 <constraint firstItem="QWM-gf-OXI" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="7" id="bHw-OX-Dwl"/>
+                <constraint firstAttribute="trailing" secondItem="QWM-gf-OXI" secondAttribute="trailing" constant="52" id="fMV-HK-M59"/>
                 <constraint firstItem="g55-ua-pPW" firstAttribute="top" secondItem="WEd-zN-faD" secondAttribute="bottom" constant="8" id="iMu-0P-63O"/>
                 <constraint firstItem="WEd-zN-faD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nhX-11-B2e"/>
                 <constraint firstAttribute="top" secondItem="WEd-zN-faD" secondAttribute="bottom" constant="-92" id="pg2-3A-pBa"/>
                 <constraint firstItem="WEd-zN-faD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rSI-eG-l5M"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="8NQ-a8-buw"/>
+                    <exclude reference="bHw-OX-Dwl"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="323.5" y="432.5"/>
         </view>
     </objects>

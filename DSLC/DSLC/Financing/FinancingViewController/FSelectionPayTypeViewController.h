@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FSelectionPayTypeViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *buttonNext;
 
 @end
