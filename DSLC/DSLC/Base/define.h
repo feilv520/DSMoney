@@ -28,6 +28,12 @@
 #define Color_Red [UIColor redColor]
 
 //主要颜色
-#define mainColor [UIColor colorWithRed:239.0 / 255.0 green:241.0 / 255.0 blue:243.0 / 255.0 alpha:1.0];
+#define mainColor [UIColor colorWithRed:239.0 / 255.0 green:241.0 / 255.0 blue:243.0 / 255.0 alpha:1.0]
+#define buttonBorderColor [UIColor colorWithRed:226.0 / 255.0 green:226.0 / 255.0 blue:226.0 / 255.0 alpha:1]
+
+//导航栏方法
+
+#define pushVC [self.navigationController pushViewController:<#ViewControllerName#> animated:YES]
+#define popVC [self.navigationController popViewControllerAnimated:YES]
 
 #endif /* Header_h */

@@ -9,6 +9,7 @@
 #import "FBalancePaymentViewController.h"
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
+#import "define.h"
 
 @interface FBalancePaymentViewController () <UITextFieldDelegate>
 
@@ -56,10 +57,11 @@
     self.lableThounand.textAlignment = NSTextAlignmentCenter;
     
     self.textFieldSecret.placeholder = @"请输入交易密码";
+    self.textFieldSecret.secureTextEntry = YES;
     self.textFieldSecret.font = [UIFont systemFontOfSize:14];
     self.textFieldSecret.tintColor = [UIColor zitihui];
     self.textFieldSecret.delegate = self;
-//    [self.textFieldSecret addTarget:self action:@selector(addTextField:) forControlEvents:UIControlEventValueChanged];
+    [self.textFieldSecret addTarget:self action:@selector(textLengthChange:) forControlEvents:UIControlEventEditingChanged];
     
     [self.butPayment setImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     self.butPayment.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -95,25 +97,17 @@
     NSLog(@"忘记密码?");
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    NSLog(@"llllllllll");
-    if (textField.text.length >= 4) {
+#pragma textFieldDalagate
+#pragma --------------------------
 
-        [self.butPayment addTarget:self action:@selector(paymentMoney:) forControlEvents:UIControlEventTouchUpInside];
-        [self.butPayment setImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        NSLog(@"ttttt");
-    }
-}
-
-- (void)addTextField:(UITextField *)textField
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSLog(@"llllllllll");
-    if (textField.text.length >= 4) {
-        
-        [self.butPayment addTarget:self action:@selector(paymentMoney:) forControlEvents:UIControlEventTouchUpInside];
-        [self.butPayment setImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        NSLog(@"ttttt");
+    
+    if (range.location >= 6){
+        NSLog(@"超出范围");
+        return  NO;
+    } else {
+        return YES;
     }
 }
 
@@ -127,6 +121,17 @@
 - (void)returnBackLeftButton:(UIBarButtonItem *)bar
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+// 判断字符串长度
+- (void)textLengthChange:(UITextField *)textField{
+    if (self.textFieldSecret.text.length >= 6) {
+        self.butPayment.userInteractionEnabled = YES;
+        [self.butPayment setImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+    } else {
+        self.butPayment.userInteractionEnabled = NO;
+        [self.butPayment setImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
