@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *sendYanZhengCode;
 @property (weak, nonatomic) IBOutlet UIButton *forgetPassword;
 
+
+
 @property (weak, nonatomic) IBOutlet UITextField *inputCode;
 @property (weak, nonatomic) IBOutlet UITextField *inputPassword;
 
