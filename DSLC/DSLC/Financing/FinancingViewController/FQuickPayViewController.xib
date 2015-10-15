@@ -112,7 +112,7 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G17-aN-wPR">
                     <rect key="frame" x="51" y="190" width="272" height="43"/>
-                    <state key="normal" title="支付" backgroundImage="btn_gray.png">
+                    <state key="normal" title="支 付" backgroundImage="btn_gray.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="highlighted" title="支付" backgroundImage="btn_red.png"/>
