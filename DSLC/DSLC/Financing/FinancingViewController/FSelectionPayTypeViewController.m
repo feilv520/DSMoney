@@ -9,8 +9,13 @@
 #import "FSelectionPayTypeViewController.h"
 #import "CreatView.h"
 #import "FBalancePaymentViewController.h"
+#import "FQuickPayViewController.h"
 
 @interface FSelectionPayTypeViewController ()
+
+@property (weak, nonatomic) IBOutlet UIButton *yueButton;
+@property (weak, nonatomic) IBOutlet UIButton *quickButton;
+@property (weak, nonatomic) IBOutlet UIButton *netButton;
 
 @end
 
@@ -22,8 +27,6 @@
     
     self.navigationItem.title = @"选择支付";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
-    [self.buttonNext addTarget:self action:@selector(nextButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [self showNavigationReturn];
 }
@@ -39,17 +42,44 @@
     [imageReturn addGestureRecognizer:tap];
 }
 
-//下一步按钮出发事件
-- (void)nextButton:(UIButton *)button
-{
-    FBalancePaymentViewController *balancePayment = [[FBalancePaymentViewController alloc] init];
-    [self.navigationController pushViewController:balancePayment animated:YES];
-}
-
 //导航返回按钮
 - (void)returnBack:(UIBarButtonItem *)bar
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+// 余额支付方法
+- (IBAction)yueButtonAction:(id)sender {
+    [self.yueButton setSelected:YES];
+    [self.quickButton setSelected:NO];
+    [self.netButton setSelected:NO];
+}
+
+// 快捷支付方法
+- (IBAction)quickButtonAction:(id)sender {
+    [self.yueButton setSelected:NO];
+    [self.quickButton setSelected:YES];
+    [self.netButton setSelected:NO];
+}
+
+// 网银支付方法
+- (IBAction)netButtonAction:(id)sender {
+    [self.yueButton setSelected:NO];
+    [self.quickButton setSelected:NO];
+    [self.netButton setSelected:YES];
+}
+
+// 下一步方法
+- (IBAction)nextButtonAction:(id)sender {
+    if (self.yueButton.selected) {
+        FBalancePaymentViewController *balancePaymentVC = [[FBalancePaymentViewController alloc] init];
+        [self.navigationController pushViewController:balancePaymentVC animated:YES];
+    } else if(self.quickButton.selected) {
+        FQuickPayViewController *quickpayVC = [[FQuickPayViewController alloc] init];
+        [self.navigationController pushViewController:quickpayVC animated:YES];
+    } else if(self.netButton.selected) {
+        NSLog(@"%@",sender);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
