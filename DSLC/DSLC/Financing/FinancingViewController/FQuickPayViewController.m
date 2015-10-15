@@ -109,7 +109,7 @@
 - (IBAction)payButtonAction:(id)sender {
     NSInteger i = arc4random() % 2;
     
-    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
     
     CGPoint originPoint = self.payButton.frame.origin;
     CGSize sizeButton = self.payButton.frame.size;
