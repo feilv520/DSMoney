@@ -129,7 +129,7 @@
     viewHead.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _tableView.tableHeaderView = viewHead;
     
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [_tableView setSeparatorColor:[UIColor colorWithRed:246 / 255.0 green:247 / 255.0 blue:249 / 255.0 alpha:1.0]];
     [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
 
