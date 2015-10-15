@@ -8,6 +8,7 @@
 
 #import "FSelectionPayTypeViewController.h"
 #import "CreatView.h"
+#import "FBalancePaymentViewController.h"
 
 @interface FSelectionPayTypeViewController ()
 
@@ -22,6 +23,8 @@
     self.navigationItem.title = @"选择支付";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
+    [self.buttonNext addTarget:self action:@selector(nextButton:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self showNavigationReturn];
 }
 
@@ -34,6 +37,13 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageReturn];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnBack:)];
     [imageReturn addGestureRecognizer:tap];
+}
+
+//下一步按钮出发事件
+- (void)nextButton:(UIButton *)button
+{
+    FBalancePaymentViewController *balancePayment = [[FBalancePaymentViewController alloc] init];
+    [self.navigationController pushViewController:balancePayment animated:YES];
 }
 
 //导航返回按钮
