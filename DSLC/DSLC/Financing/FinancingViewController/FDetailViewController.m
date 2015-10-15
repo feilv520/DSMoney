@@ -94,7 +94,7 @@
     _tableView.delegate = self;
     UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 53)];
     _tableView.tableFooterView = viewFoot;
-    viewFoot.backgroundColor = [UIColor colorWithRed:247.0 / 255.0 green:247.0 / 255.0 blue:247.0 / 255.0 alpha:1.0];
+    viewFoot.backgroundColor = [UIColor huibai];
     
     UIImageView *imageSmallImg = [[UIImageView alloc] initWithFrame:CGRectMake(97, 18, 12, 12)];
     UIImage *imageSmall = [UIImage imageNamed:@"shouyeqiepian_21"];

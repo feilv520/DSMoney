@@ -92,7 +92,7 @@
     self.tableView.delegate = self;
     
     UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 200)];
-    viewFoot.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    viewFoot.backgroundColor = [UIColor huibai];
     self.tableView.tableFooterView = viewFoot;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ContentCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];

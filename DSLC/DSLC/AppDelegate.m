@@ -34,12 +34,11 @@
     UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:financingVC];
     
     MineViewController *mineVC = [[MineViewController alloc] init];
-    UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
     
     MoreViewController *moreVC = [[MoreViewController alloc] init];
     UINavigationController *navigation4 = [[UINavigationController alloc] initWithRootViewController:moreVC];
     
-    viewControllerArr = @[selectionVC, navigation2, navigation3, navigation4];
+    viewControllerArr = @[selectionVC, navigation2, mineVC, navigation4];
     
     butGrayArr = @[@"shouyeqiepian7500_25", @"shouyeqiepian750_28", @"shouyeqiepian750_30", @"shouyeqiepian750_32"];
     butColorArr = @[@"shouyeqiepian750_25_highlight", @"shouyeqiepian7500_28highlight", @"shouyeqiepian7500_30highlight", @"shouyeqiepian7500_32highlight"];
