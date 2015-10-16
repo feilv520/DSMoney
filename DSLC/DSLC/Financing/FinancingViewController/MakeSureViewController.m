@@ -67,7 +67,6 @@
     
     self.controlBlack = nil;
     self.viewWhite = nil;
-
 }
 
 //导航栏修改返回按钮

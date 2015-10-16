@@ -28,6 +28,8 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
+    self.window.backgroundColor = [UIColor whiteColor];
+    
     SelectionViewController *selectionVC = [[SelectionViewController alloc] init];
     
     FinancingViewController *financingVC = [[FinancingViewController alloc] init];
