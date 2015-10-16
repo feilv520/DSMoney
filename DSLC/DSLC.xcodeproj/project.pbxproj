@@ -88,6 +88,14 @@
 		8D5AEB491BC8F560004FBDD3 /* CenturyGothic.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB481BC8F560004FBDD3 /* CenturyGothic.TTF */; settings = {ASSET_TAGS = (); }; };
 		8D5AEB4B1BC8FCA3004FBDD3 /* SelectionOfSafe.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB4A1BC8FCA3004FBDD3 /* SelectionOfSafe.xib */; settings = {ASSET_TAGS = (); }; };
 		8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AEB4D1BC8FCBC004FBDD3 /* SelectionOfSafe.m */; settings = {ASSET_TAGS = (); }; };
+		8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6692741BD0D02E00CD2CAF /* MyHandViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D6692771BD0D02E00CD2CAF /* MyHandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6692751BD0D02E00CD2CAF /* MyHandViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D66927B1BD0D27D00CD2CAF /* gesture_node_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6692791BD0D27D00CD2CAF /* gesture_node_normal.png */; settings = {ASSET_TAGS = (); }; };
+		8D66927C1BD0D27D00CD2CAF /* gesture_node_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D66927A1BD0D27D00CD2CAF /* gesture_node_normal@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D6692801BD0D82100CD2CAF /* Home_refresh_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D66927F1BD0D82100CD2CAF /* Home_refresh_bg.png */; settings = {ASSET_TAGS = (); }; };
+		8D6692831BD0D8A600CD2CAF /* MyHandButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6692821BD0D8A600CD2CAF /* MyHandButton.m */; settings = {ASSET_TAGS = (); }; };
+		8D6692851BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6692841BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D6692871BD0E53000CD2CAF /* gesture_node_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6692861BD0E53000CD2CAF /* gesture_node_highlighted@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D6EFBA51BC78B02009FE101 /* shouyeqiepian750_25_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFB9D1BC78B02009FE101 /* shouyeqiepian750_25_highlight.png */; settings = {ASSET_TAGS = (); }; };
 		8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */; settings = {ASSET_TAGS = (); }; };
 		8D6EFBA71BC78B02009FE101 /* shouyeqiepian750_30.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFB9F1BC78B02009FE101 /* shouyeqiepian750_30.png */; settings = {ASSET_TAGS = (); }; };
@@ -284,6 +292,16 @@
 		8D5AEB4A1BC8FCA3004FBDD3 /* SelectionOfSafe.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionOfSafe.xib; sourceTree = "<group>"; };
 		8D5AEB4C1BC8FCBC004FBDD3 /* SelectionOfSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionOfSafe.h; sourceTree = "<group>"; };
 		8D5AEB4D1BC8FCBC004FBDD3 /* SelectionOfSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionOfSafe.m; sourceTree = "<group>"; };
+		8D6692731BD0D02E00CD2CAF /* MyHandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHandViewController.h; sourceTree = "<group>"; };
+		8D6692741BD0D02E00CD2CAF /* MyHandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHandViewController.m; sourceTree = "<group>"; };
+		8D6692751BD0D02E00CD2CAF /* MyHandViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyHandViewController.xib; sourceTree = "<group>"; };
+		8D6692791BD0D27D00CD2CAF /* gesture_node_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gesture_node_normal.png; sourceTree = "<group>"; };
+		8D66927A1BD0D27D00CD2CAF /* gesture_node_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture_node_normal@2x.png"; sourceTree = "<group>"; };
+		8D66927F1BD0D82100CD2CAF /* Home_refresh_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home_refresh_bg.png; sourceTree = "<group>"; };
+		8D6692811BD0D8A600CD2CAF /* MyHandButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHandButton.h; sourceTree = "<group>"; };
+		8D6692821BD0D8A600CD2CAF /* MyHandButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHandButton.m; sourceTree = "<group>"; };
+		8D6692841BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture_node_highlighted@3x.png"; sourceTree = "<group>"; };
+		8D6692861BD0E53000CD2CAF /* gesture_node_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture_node_highlighted@2x.png"; sourceTree = "<group>"; };
 		8D6EFB9D1BC78B02009FE101 /* shouyeqiepian750_25_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian750_25_highlight.png; sourceTree = "<group>"; };
 		8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian750_28.png; sourceTree = "<group>"; };
 		8D6EFB9F1BC78B02009FE101 /* shouyeqiepian750_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian750_30.png; sourceTree = "<group>"; };
@@ -482,6 +500,7 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8D6692781BD0D26C00CD2CAF /* 手势密码 */,
 				817DD4711BCF546700042B09 /* 我的 */,
 				8DEDE1D61BCD0026008086D3 /* 银行图标 */,
 				8DEDE1B91BCCFEE7008086D3 /* 收益计算 */,
@@ -531,6 +550,9 @@
 				81D8AD991BC6427800A15E01 /* MineViewController.m */,
 				81ED02C31BD08CFD005F4B02 /* MyInformationViewController.h */,
 				81ED02C41BD08CFD005F4B02 /* MyInformationViewController.m */,
+				8D6692731BD0D02E00CD2CAF /* MyHandViewController.h */,
+				8D6692741BD0D02E00CD2CAF /* MyHandViewController.m */,
+				8D6692751BD0D02E00CD2CAF /* MyHandViewController.xib */,
 			);
 			path = MineViewController;
 			sourceTree = "<group>";
@@ -544,6 +566,8 @@
 				817DD4AE1BCF5B2400042B09 /* MiddleView.h */,
 				817DD4AF1BCF5B2400042B09 /* MiddleView.m */,
 				817DD4B11BCF5B3900042B09 /* MiddleView.xib */,
+				8D6692811BD0D8A600CD2CAF /* MyHandButton.h */,
+				8D6692821BD0D8A600CD2CAF /* MyHandButton.m */,
 			);
 			path = MineView;
 			sourceTree = "<group>";
@@ -712,6 +736,18 @@
 				8D5AEB4D1BC8FCBC004FBDD3 /* SelectionOfSafe.m */,
 			);
 			path = SelectionView;
+			sourceTree = "<group>";
+		};
+		8D6692781BD0D26C00CD2CAF /* 手势密码 */ = {
+			isa = PBXGroup;
+			children = (
+				8D6692861BD0E53000CD2CAF /* gesture_node_highlighted@2x.png */,
+				8D6692841BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png */,
+				8D6692791BD0D27D00CD2CAF /* gesture_node_normal.png */,
+				8D66927A1BD0D27D00CD2CAF /* gesture_node_normal@2x.png */,
+				8D66927F1BD0D82100CD2CAF /* Home_refresh_bg.png */,
+			);
+			name = "手势密码";
 			sourceTree = "<group>";
 		};
 		8D878CC91BC74E9700844575 /* appDelegate */ = {
@@ -978,6 +1014,7 @@
 				8D5AEB491BC8F560004FBDD3 /* CenturyGothic.TTF in Resources */,
 				8D5AEB4B1BC8FCA3004FBDD3 /* SelectionOfSafe.xib in Resources */,
 				8D88A4DE1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib in Resources */,
+				8D66927C1BD0D27D00CD2CAF /* gesture_node_normal@2x.png in Resources */,
 				8D88A4E21BCE087400EE22F5 /* emptyyuan@3x.png in Resources */,
 				817DD4931BCF547E00042B09 /* bei@3x.png in Resources */,
 				8DEDE1C91BCCFF21008086D3 /* iconfont_greencuo@3x.png in Resources */,
@@ -1016,6 +1053,7 @@
 				817DD4A11BCF547E00042B09 /* quebao@3x.png in Resources */,
 				81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */,
 				8DEDE1C51BCCFF01008086D3 /* iconfont_graycuo@3x.png in Resources */,
+				8D6692801BD0D82100CD2CAF /* Home_refresh_bg.png in Resources */,
 				8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */,
 				8DEDE1B31BCCFEB5008086D3 /* arrow@2x.png in Resources */,
 				817DD4901BCF547E00042B09 /* anniu@2x.png in Resources */,
@@ -1028,7 +1066,9 @@
 				8D88A4E11BCE087400EE22F5 /* emptyyuan@2x.png in Resources */,
 				8DEDE1B51BCCFEB5008086D3 /* btn_red@2x.png in Resources */,
 				8DEDE1E91BCD00B0008086D3 /* btn_gray@2x.png in Resources */,
+				8D66927B1BD0D27D00CD2CAF /* gesture_node_normal.png in Resources */,
 				8DEDE1DF1BCD0035008086D3 /* icon_CCB@2x.png in Resources */,
+				8D6692851BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png in Resources */,
 				8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */,
 				817DD4991BCF547E00042B09 /* haoyou@3x.png in Resources */,
 				817DD4A01BCF547E00042B09 /* quebao@2x.png in Resources */,
@@ -1048,6 +1088,7 @@
 				817988371BC94014007C8C3E /* PlanCell.xib in Resources */,
 				817DD4A31BCF547E00042B09 /* shape-29@3x.png in Resources */,
 				8184EC461BCCD12A003F440D /* RedBagCell.xib in Resources */,
+				8D6692771BD0D02E00CD2CAF /* MyHandViewController.xib in Resources */,
 				817988321BC93FF6007C8C3E /* BasicMessageCell.xib in Resources */,
 				817DD4B21BCF5B3900042B09 /* MiddleView.xib in Resources */,
 				817DD4971BCF547E00042B09 /* dae@3x.png in Resources */,
@@ -1060,6 +1101,7 @@
 				817DD4981BCF547E00042B09 /* haoyou@2x.png in Resources */,
 				8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */,
 				8DEDE1EA1BCD00B0008086D3 /* btn_gray@3x.png in Resources */,
+				8D6692871BD0E53000CD2CAF /* gesture_node_highlighted@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1099,6 +1141,7 @@
 				8DFA5C941BCE64D900AED2B2 /* FQuickPayViewController.m in Sources */,
 				817DD4B01BCF5B2400042B09 /* MiddleView.m in Sources */,
 				813FD4FF1BCE71110050E884 /* FBalancePaymentViewController.m in Sources */,
+				8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */,
 				8DEDE26D1BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,
 				817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */,
@@ -1109,6 +1152,7 @@
 				8D878CDB1BC7549500844575 /* c.m in Sources */,
 				817988361BC94014007C8C3E /* PlanCell.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
+				8D6692831BD0D8A600CD2CAF /* MyHandButton.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
 				817DD46F1BCF501100042B09 /* MineCell.m in Sources */,
 				8184EC401BCCD113003F440D /* MoneyCell.m in Sources */,

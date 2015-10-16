@@ -11,6 +11,7 @@
 #import "SelectionOfSafe.h"
 #import "SelectionV.h"
 #import "define.h"
+#import "MyHandViewController.h"
 
 @interface SelectionViewController ()<UIScrollViewDelegate>{
 
@@ -200,6 +201,8 @@
     [payButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
     [payButton setTitle:@"立即抢购" forState:UIControlStateNormal];
     
+    [payButton addTarget:self action:@selector(payButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     [backgroundScrollView addSubview:payButton];
     
 }
@@ -218,6 +221,13 @@
     
     [backgroundScrollView addSubview:selectionSafeView];
     
+}
+
+- (void)payButtonAction:(id)sender{
+    MyHandViewController *myhandVC = [[MyHandViewController alloc] init];
+    [self presentViewController:myhandVC animated:YES completion:^{
+        
+    }];
 }
 
 #pragma scrollView dalagate
