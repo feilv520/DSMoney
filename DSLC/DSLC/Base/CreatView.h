@@ -18,4 +18,6 @@
 
 + (UIImageView *)creatImageViewWithFrame:(CGRect)frame backGroundColor:(UIColor *)backGroundColor setImage:(UIImage *)image;
 
++ (UIView *)creatViewWithFrame:(CGRect)frame backgroundColor:(UIColor *)backgroundColor;
+
 @end

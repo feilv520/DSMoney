@@ -1,5 +1,5 @@
 //
-//  MyInformationViewController.h
+//  AddBankViewController.h
 //  DSLC
 //
 //  Created by ios on 15/10/16.
@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
 
-@interface MyInformationViewController : UIViewController
+@interface AddBankViewController : UIViewController
 
 @end

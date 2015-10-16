@@ -28,21 +28,15 @@
 
 @implementation MineViewController
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [super viewDidAppear:NO];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -58,7 +52,7 @@
 
 - (void)showTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 52 - 20) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 52) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -204,7 +198,6 @@
         
         MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
         [self.navigationController pushViewController:myInformationVC animated:YES];
-        NSLog(@"111111");
     }
     
 }

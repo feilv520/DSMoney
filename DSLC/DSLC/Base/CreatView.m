@@ -54,7 +54,17 @@
     [imageView setFrame:frame];
     [imageView setBackgroundColor:backGroundColor];
     [imageView setImage:image];
+    
     return imageView;
+}
+
++ (UIView *)creatViewWithFrame:(CGRect)frame backgroundColor:(UIColor *)backgroundColor
+{
+    UIView *view = [[UIView alloc] init];
+    [view setFrame:frame];
+    [view setBackgroundColor:backgroundColor];
+    
+    return view;
 }
 
 /*
