@@ -79,6 +79,7 @@
 		81E90EF61BCB4300004BA8A5 /* 750产品111.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E90EF51BCB4300004BA8A5 /* 750产品111.png */; settings = {ASSET_TAGS = (); }; };
 		81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E90EF71BCB430B004BA8A5 /* 750chanpin.png */; settings = {ASSET_TAGS = (); }; };
 		81E90EFA1BCB4312004BA8A5 /* 750产品详情.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E90EF91BCB4312004BA8A5 /* 750产品详情.png */; settings = {ASSET_TAGS = (); }; };
+		81ED02C51BD08CFD005F4B02 /* MyInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81ED02C41BD08CFD005F4B02 /* MyInformationViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D55DB051BC7BE91004649CE /* shouyebanner.png */; settings = {ASSET_TAGS = (); }; };
 		8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB381BC8D2F3004FBDD3 /* SelectionV.xib */; settings = {ASSET_TAGS = (); }; };
 		8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AEB3B1BC8DAA4004FBDD3 /* SelectionV.m */; settings = {ASSET_TAGS = (); }; };
@@ -269,6 +270,8 @@
 		81E90EF51BCB4300004BA8A5 /* 750产品111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "750产品111.png"; sourceTree = "<group>"; };
 		81E90EF71BCB430B004BA8A5 /* 750chanpin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 750chanpin.png; sourceTree = "<group>"; };
 		81E90EF91BCB4312004BA8A5 /* 750产品详情.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "750产品详情.png"; sourceTree = "<group>"; };
+		81ED02C31BD08CFD005F4B02 /* MyInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformationViewController.h; sourceTree = "<group>"; };
+		81ED02C41BD08CFD005F4B02 /* MyInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationViewController.m; sourceTree = "<group>"; };
 		8D55DB041BC7B53A004649CE /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
 		8D55DB051BC7BE91004649CE /* shouyebanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyebanner.png; sourceTree = "<group>"; };
 		8D5AEB381BC8D2F3004FBDD3 /* SelectionV.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionV.xib; sourceTree = "<group>"; };
@@ -526,6 +529,8 @@
 			children = (
 				81D8AD981BC6427800A15E01 /* MineViewController.h */,
 				81D8AD991BC6427800A15E01 /* MineViewController.m */,
+				81ED02C31BD08CFD005F4B02 /* MyInformationViewController.h */,
+				81ED02C41BD08CFD005F4B02 /* MyInformationViewController.m */,
 			);
 			path = MineViewController;
 			sourceTree = "<group>";
@@ -1114,6 +1119,7 @@
 				817988311BC93FF6007C8C3E /* BasicMessageCell.m in Sources */,
 				8DEDE1F21BCD05F9008086D3 /* Calendar.m in Sources */,
 				8DEDE19E1BCCFB9D008086D3 /* BankCard.m in Sources */,
+				81ED02C51BD08CFD005F4B02 /* MyInformationViewController.m in Sources */,
 				8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */,
 				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
 				818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */,

@@ -12,6 +12,7 @@
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
 #import "MiddleView.h"
+#import "MyInformationViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -27,9 +28,21 @@
 
 @implementation MineViewController
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -186,6 +199,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 1) {
+        
+        MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
+        [self.navigationController pushViewController:myInformationVC animated:YES];
+        NSLog(@"111111");
+    }
+    
 }
 
 //头像按钮
