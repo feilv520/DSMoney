@@ -11,6 +11,9 @@
 #import "CastUpTableViewCell.h"
 #import "CastDownTableViewCell.h"
 #import "CastDetailTableViewCell.h"
+#import "CreatView.h"
+#import "UIColor+AddColor.h"
+#import "CheckViewController.h"
 
 @interface CastProduceViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -19,6 +22,17 @@
 @end
 
 @implementation CastProduceViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:YES];
+    [app.tabBarVC setLabelLineHidden:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,8 +53,24 @@
     [self.view addSubview:self.mainTableView];
     
     [self setXYButton];
-    
+    [self naviagationShow];
 }
+
+//导航内容
+- (void)naviagationShow
+{
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
+    
+    self.navigationItem.title = @"在投产品";
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    UIImageView *imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageReturn];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonReturn:)];
+    [imageReturn addGestureRecognizer:tap];
+}
+
 
 //查看协议
 - (void)setXYButton{
@@ -67,8 +97,16 @@
     
 }
 
+//导航返回按钮
+- (void)buttonReturn:(UIBarButtonItem *)bar
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)xyButtonAction:(UIButton *)btn{
-    NSLog(@"1");
+    
+    CheckViewController *checkVC = [[CheckViewController alloc] init];
+    [self.navigationController pushViewController:checkVC animated:YES];
 }
 
 #pragma mark tableview delegate and dataSource
@@ -105,7 +143,9 @@
             CastDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"castDetail"];
             return cell;
         }
+        
     }
+    
     return nil;
 }
 
@@ -119,6 +159,15 @@
             return 89;
         }
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {

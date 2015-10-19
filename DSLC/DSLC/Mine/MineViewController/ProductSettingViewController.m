@@ -14,6 +14,8 @@
 #import "SettingPieTableViewCell.h"
 #import "XYPieChart.h"
 #import "UIColor+AddColor.h"
+#import "CreatView.h"
+#import "CastProduceViewController.h"
 
 @interface ProductSettingViewController () <UITableViewDataSource, UITableViewDelegate, XYPieChartDataSource, XYPieChartDelegate>
 
@@ -26,6 +28,18 @@
 @end
 
 @implementation ProductSettingViewController
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:YES];
+    [app.tabBarVC setLabelLineHidden:YES];
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -81,7 +95,31 @@
     [self.pieChartLeft setUserInteractionEnabled:NO];
     [self.pieChartLeft setLabelShadowColor:[UIColor blackColor]];
     
+    [self naviagationShow];
+    
 }
+
+//导航内容
+- (void)naviagationShow
+{
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
+    
+    self.navigationItem.title = @"账户资产";
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    UIImageView *imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageReturn];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonReturn:)];
+    [imageReturn addGestureRecognizer:tap];
+}
+
+//导航返回按钮
+- (void)buttonReturn:(UIBarButtonItem *)bar
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark tableView delegate and dataSource
 #pragma mark --------------------------------
@@ -173,6 +211,20 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 2) {
+        
+        if (indexPath.row == 1) {
+            
+            CastProduceViewController *castPVC = [[CastProduceViewController alloc] init];
+            [self.navigationController pushViewController:castPVC animated:YES];
+        }
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -213,6 +265,15 @@
 - (void)pieChart:(XYPieChart *)pieChart didSelectSliceAtIndex:(NSUInteger)index
 {
     NSLog(@"did select slice at index %ld",index);
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
 }
 
 @end

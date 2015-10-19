@@ -238,10 +238,10 @@
 //
 //    }];
     // 资产配置
-    ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
-    [self.view.window.rootViewController presentViewController:pSettringVC animated:YES completion:^{
+    
+//    [self.view.window.rootViewController presentViewController:pSettringVC animated:YES completion:^{
 
-    }];
+//    }];
 }
 
 #pragma scrollView dalagate

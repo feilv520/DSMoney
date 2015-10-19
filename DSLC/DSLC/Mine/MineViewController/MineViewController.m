@@ -14,6 +14,8 @@
 #import "MiddleView.h"
 #import "MyInformationViewController.h"
 #import "MyRedBagViewController.h"
+#import "ProductSettingViewController.h"
+#import "MyNewsViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -204,6 +206,17 @@
         
         MyRedBagViewController *myRedBagVC = [[MyRedBagViewController alloc] init];
         [self.navigationController pushViewController:myRedBagVC animated:YES];
+        
+    } else if (indexPath.row == 0) {
+        
+        ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
+        [self.navigationController pushViewController:pSettringVC animated:YES];
+        
+    } else if (indexPath.row == 5) {
+        
+        MyNewsViewController *myNewsVC = [[MyNewsViewController alloc] init];
+        [self.navigationController pushViewController:myNewsVC animated:YES];
+        
     }
     
 }
