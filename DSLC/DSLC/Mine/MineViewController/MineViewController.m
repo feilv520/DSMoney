@@ -13,6 +13,7 @@
 #import "CreatView.h"
 #import "MiddleView.h"
 #import "MyInformationViewController.h"
+#import "MyRedBagViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -198,6 +199,11 @@
         
         MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
         [self.navigationController pushViewController:myInformationVC animated:YES];
+        
+    } else if (indexPath.row == 2) {
+        
+        MyRedBagViewController *myRedBagVC = [[MyRedBagViewController alloc] init];
+        [self.navigationController pushViewController:myRedBagVC animated:YES];
     }
     
 }
