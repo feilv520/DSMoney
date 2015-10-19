@@ -12,6 +12,8 @@
 #import "SelectionV.h"
 #import "define.h"
 #import "MyHandViewController.h"
+#import "CastProduceViewController.h"
+#import "ProductSettingViewController.h"
 
 @interface SelectionViewController ()<UIScrollViewDelegate>{
 
@@ -224,9 +226,21 @@
 }
 
 - (void)payButtonAction:(id)sender{
-    MyHandViewController *myhandVC = [[MyHandViewController alloc] init];
-    [self presentViewController:myhandVC animated:YES completion:^{
-        
+    // 手势VC
+//    MyHandViewController *myhandVC = [[MyHandViewController alloc] init];
+//    [self presentViewController:myhandVC animated:YES completion:^{
+//        
+//    }];
+    
+    // 在投资金
+//    CastProduceViewController *castPVC = [[CastProduceViewController alloc] init];
+//    [self.view.window.rootViewController presentViewController:castPVC animated:YES completion:^{
+//
+//    }];
+    // 资产配置
+    ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
+    [self.view.window.rootViewController presentViewController:pSettringVC animated:YES completion:^{
+
     }];
 }
 

@@ -156,7 +156,7 @@ NSInteger const columnCount = 3;
     UIBezierPath *path = [UIBezierPath bezierPath];
     path.lineWidth = 8;
     path.lineJoinStyle = kCGLineJoinRound;
-    [[UIColor colorWithRed:32 / 255.0 green:210 / 255.0 blue:254 / 255.0 alpha:0.5] set];
+    [[UIColor colorWithRed:211 / 255.0 green:75 / 255.0 blue:72 / 255.0 alpha:0.5] set];
     for (NSInteger i = 0; i < self.selectBtns.count; i++) {
         UIButton *button = self.selectBtns[i];
         if (i == 0) {
