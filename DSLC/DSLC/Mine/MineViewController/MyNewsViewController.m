@@ -103,6 +103,14 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+#pragma mark buttonAction other
+#pragma mark --------------------------------
+
 //导航返回按钮
 - (void)buttonReturn:(UIBarButtonItem *)bar
 {
