@@ -43,6 +43,11 @@
     }
     
 }
+- (IBAction)buttonAction:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
