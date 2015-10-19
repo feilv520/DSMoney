@@ -112,6 +112,9 @@
 		8D121FE51BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D121FE31BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		8D121FE61BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D121FE41BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8D1921CD1BD4E2060038195E /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1921CC1BD4E2060038195E /* XYPieChart.m */; settings = {ASSET_TAGS = (); }; };
+		8D1921D11BD4FC840038195E /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1921CF1BD4FC840038195E /* MessageDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D1921D21BD4FC840038195E /* MessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1921D01BD4FC840038195E /* MessageDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D1921D41BD4FD7F0038195E /* banner01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1921D31BD4FD7F0038195E /* banner01@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D55DB051BC7BE91004649CE /* shouyebanner.png */; settings = {ASSET_TAGS = (); }; };
 		8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB381BC8D2F3004FBDD3 /* SelectionV.xib */; settings = {ASSET_TAGS = (); }; };
 		8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AEB3B1BC8DAA4004FBDD3 /* SelectionV.m */; settings = {ASSET_TAGS = (); }; };
@@ -366,6 +369,10 @@
 		8D121FE41BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingGetDetailTableViewCell.xib; sourceTree = "<group>"; };
 		8D1921CB1BD4E2060038195E /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
 		8D1921CC1BD4E2060038195E /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
+		8D1921CE1BD4FC840038195E /* MessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailViewController.h; sourceTree = "<group>"; };
+		8D1921CF1BD4FC840038195E /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
+		8D1921D01BD4FC840038195E /* MessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageDetailViewController.xib; sourceTree = "<group>"; };
+		8D1921D31BD4FD7F0038195E /* banner01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner01@2x.png"; sourceTree = "<group>"; };
 		8D55DB041BC7B53A004649CE /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
 		8D55DB051BC7BE91004649CE /* shouyebanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyebanner.png; sourceTree = "<group>"; };
 		8D5AEB381BC8D2F3004FBDD3 /* SelectionV.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionV.xib; sourceTree = "<group>"; };
@@ -607,6 +614,7 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8D1921D31BD4FD7F0038195E /* banner01@2x.png */,
 				81BA1BFF1BD4E1ED00DBA5BE /* computerImage */,
 				8D6692781BD0D26C00CD2CAF /* 手势密码 */,
 				81ED03151BD0D421005F4B02 /* 我的银行卡 */,
@@ -676,6 +684,9 @@
 				8D121FBA1BD4D0CB00B3C1FE /* ProductSettingViewController.h */,
 				8D121FBB1BD4D0CB00B3C1FE /* ProductSettingViewController.m */,
 				8D121FBC1BD4D0CB00B3C1FE /* ProductSettingViewController.xib */,
+				8D1921CE1BD4FC840038195E /* MessageDetailViewController.h */,
+				8D1921CF1BD4FC840038195E /* MessageDetailViewController.m */,
+				8D1921D01BD4FC840038195E /* MessageDetailViewController.xib */,
 			);
 			path = MineViewController;
 			sourceTree = "<group>";
@@ -730,7 +741,6 @@
 				81BA1BFA1BD4DE7000DBA5BE /* MoreActivityCell.h */,
 				81BA1BFB1BD4DE7000DBA5BE /* MoreActivityCell.m */,
 				81BA1BFC1BD4DE7000DBA5BE /* MoreActivityCell.xib */,
-
 			);
 			path = MineView;
 			sourceTree = "<group>";
@@ -1194,6 +1204,7 @@
 				8DEDE1E01BCD0035008086D3 /* icon_CCb@3x.png in Resources */,
 				8D5DBB851BD4838200F556B9 /* CastUpTableViewCell.xib in Resources */,
 				81E90EF41BCB42D7004BA8A5 /* 750产品详111.png in Resources */,
+				8D1921D21BD4FC840038195E /* MessageDetailViewController.xib in Resources */,
 				813FD5001BCE71110050E884 /* FBalancePaymentViewController.xib in Resources */,
 				8D5DBB8A1BD4839B00F556B9 /* CastDownTableViewCell.xib in Resources */,
 				817DD4A71BCF547E00042B09 /* touxiang@3x.png in Resources */,
@@ -1240,6 +1251,7 @@
 				8DEDE1C81BCCFF21008086D3 /* iconfont_greencuo@2x.png in Resources */,
 				8D9356D71BC607C500BC2BFA /* Main.storyboard in Resources */,
 				8D88A4E11BCE087400EE22F5 /* emptyyuan@2x.png in Resources */,
+				8D1921D41BD4FD7F0038195E /* banner01@2x.png in Resources */,
 				8DEDE1B51BCCFEB5008086D3 /* btn_red@2x.png in Resources */,
 				81BA1BF91BD4DBAA00DBA5BE /* WinAPrizeCell.xib in Resources */,
 				8DEDE1E91BCD00B0008086D3 /* btn_gray@2x.png in Resources */,
@@ -1329,6 +1341,7 @@
 				81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */,
 				81ED03141BD0C877005F4B02 /* MyBankViewController.m in Sources */,
 				81BA1BF81BD4DBAA00DBA5BE /* WinAPrizeCell.m in Sources */,
+				8D1921D11BD4FC840038195E /* MessageDetailViewController.m in Sources */,
 				8179883B1BC9403A007C8C3E /* ThreeCell.m in Sources */,
 				8184EC4A1BCCD13C003F440D /* CashMoneyCell.m in Sources */,
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
@@ -1517,7 +1530,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DSLC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GCCF.DSLC;
@@ -1531,7 +1543,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DSLC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GCCF.DSLC;

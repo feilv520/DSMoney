@@ -14,6 +14,7 @@
 #import "MyHandViewController.h"
 #import "CastProduceViewController.h"
 #import "ProductSettingViewController.h"
+#import "MessageDetailViewController.h"
 
 @interface SelectionViewController ()<UIScrollViewDelegate>{
 
@@ -238,9 +239,15 @@
 //
 //    }];
     // 资产配置
-    ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
-    [self.view.window.rootViewController presentViewController:pSettringVC animated:YES completion:^{
-
+//    ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
+//    [self.view.window.rootViewController presentViewController:pSettringVC animated:YES completion:^{
+//
+//    }];
+    MessageDetailViewController *messageDetailVC = [[MessageDetailViewController alloc] init];
+    
+    [self.view.window.rootViewController presentViewController:messageDetailVC animated:YES completion:^{
+        messageDetailVC.textLabel.text = @"为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．";
+        messageDetailVC.textLabel.textAlignment = UIControlContentVerticalAlignmentTop;
     }];
 }
 
