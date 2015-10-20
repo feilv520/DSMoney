@@ -50,11 +50,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = buttonBorderColor;
+    self.view.backgroundColor = TabelVie_Color_Gray;
     
     self.mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
     
-    self.mainTableView.backgroundColor = buttonBorderColor;
+    self.mainTableView.backgroundColor = TabelVie_Color_Gray;
     
     self.mainTableView.dataSource = self;
     self.mainTableView.delegate = self;
@@ -252,19 +252,19 @@
 #pragma mark --------------------------------
 - (void)pieChart:(XYPieChart *)pieChart willSelectSliceAtIndex:(NSUInteger)index
 {
-    NSLog(@"will select slice at index %ld",index);
+    NSLog(@"will select slice at index %ld",(unsigned long)index);
 }
 - (void)pieChart:(XYPieChart *)pieChart willDeselectSliceAtIndex:(NSUInteger)index
 {
-    NSLog(@"will deselect slice at index %ld",index);
+    NSLog(@"will deselect slice at index %ld",(unsigned long)index);
 }
 - (void)pieChart:(XYPieChart *)pieChart didDeselectSliceAtIndex:(NSUInteger)index
 {
-    NSLog(@"did deselect slice at index %ld",index);
+    NSLog(@"did deselect slice at index %ld",(unsigned long)index);
 }
 - (void)pieChart:(XYPieChart *)pieChart didSelectSliceAtIndex:(NSUInteger)index
 {
-    NSLog(@"did select slice at index %ld",index);
+    NSLog(@"did select slice at index %ld",(unsigned long)index);
 }
 
 - (void)viewWillDisappear:(BOOL)animated

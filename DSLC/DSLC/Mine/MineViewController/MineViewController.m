@@ -16,6 +16,7 @@
 #import "MyRedBagViewController.h"
 #import "ProductSettingViewController.h"
 #import "MyNewsViewController.h"
+#import "TransactionViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -216,6 +217,11 @@
         
         MyNewsViewController *myNewsVC = [[MyNewsViewController alloc] init];
         [self.navigationController pushViewController:myNewsVC animated:YES];
+        
+    } else if (indexPath.row == 4) {
+        
+        TransactionViewController *transactionVC = [[TransactionViewController alloc] init];
+        [self.navigationController pushViewController:transactionVC animated:YES];
         
     }
     

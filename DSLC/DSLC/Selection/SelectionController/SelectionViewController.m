@@ -14,6 +14,7 @@
 #import "MyHandViewController.h"
 #import "CastProduceViewController.h"
 #import "ProductSettingViewController.h"
+#import "MessageDetailViewController.h"
 
 @interface SelectionViewController ()<UIScrollViewDelegate>{
 
@@ -118,7 +119,7 @@
     
     CGFloat marginX = WIDTH_CONTROLLER_DEFAULT * (25 / 375.0);
     CGFloat buttonX = WIDTH_CONTROLLER_DEFAULT * (90 / 375.0);
-    CGFloat buttonY = WIDTH_CONTROLLER_DEFAULT * (110 / 375.0);
+    CGFloat buttonY = HEIGHT_CONTROLLER_DEFAULT * (110 / 667.0);
     
     for (NSInteger i = 0; i < nameArray.count; i++) {
         
@@ -175,8 +176,6 @@
     [numberText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:(45.0 / 375.0) * WIDTH_CONTROLLER_DEFAULT] range:numRange];
     [numberText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:(28.0 / 375.0) * WIDTH_CONTROLLER_DEFAULT] range:markRange];
     [selectionFTView.numberLabel setAttributedText:numberText];
-    
-    NSLog(@"--------%f",(45.0 / 375.0) * WIDTH_CONTROLLER_DEFAULT);
     
     NSRange markDayRange = NSMakeRange([[dayText string] rangeOfString:@"天"].location , 1);
     NSRange markWRange = NSMakeRange([[moneyText string] rangeOfString:@"万"].location , 2);
@@ -241,6 +240,10 @@
     
 //    [self.view.window.rootViewController presentViewController:pSettringVC animated:YES completion:^{
 
+//    }];
+//    ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
+//    [self.view.window.rootViewController presentViewController:pSettringVC animated:YES completion:^{
+//
 //    }];
 }
 

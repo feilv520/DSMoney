@@ -11,6 +11,7 @@
 #import "CreatView.h"
 #import "define.h"
 #import "MyNewsCell.h"
+#import "MessageDetailViewController.h"
 
 @interface MyNewsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -105,6 +106,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    MessageDetailViewController *messageDetailVC = [[MessageDetailViewController alloc] init];
+    messageDetailVC.textLabel.text = @"为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．";
+    messageDetailVC.textLabel.textAlignment = UIControlContentVerticalAlignmentTop;
+    [self.navigationController pushViewController:messageDetailVC animated:YES];
     
 }
 

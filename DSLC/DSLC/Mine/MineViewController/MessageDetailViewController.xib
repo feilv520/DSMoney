@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="CenturyGothic.TTF">
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessageDetailViewController">
+            <connections>
+                <outlet property="textLabel" destination="hRn-oc-xD7" id="TFf-yu-p6F"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="大圣理财年终福利大派送" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M8q-Jc-wxG">
+                    <rect key="frame" x="10" y="13" width="187" height="21"/>
+                    <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2015.09.09" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEU-Cc-rk7">
+                    <rect key="frame" x="10" y="42" width="87" height="21"/>
+                    <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="banner01.png" translatesAutoresizingMaskIntoConstraints="NO" id="v2J-hc-Se8">
+                    <rect key="frame" x="10" y="71" width="357" height="126"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRn-oc-xD7">
+                    <rect key="frame" x="10" y="225" width="357" height="312"/>
+                    <string key="text">为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．</string>
+                    <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
+                    <color key="textColor" red="0.45882352939999999" green="0.46666666670000001" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="291.5" y="396.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="banner01.png" width="357" height="120"/>
+    </resources>
+</document>

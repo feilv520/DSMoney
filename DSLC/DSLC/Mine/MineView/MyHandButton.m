@@ -123,7 +123,7 @@ NSInteger const columnCount = 3;
         NSLog(@"123");
         NSMutableString *path = [NSMutableString string];
         for (UIButton *btn in self.selectBtns) {
-            [path appendFormat:@"%ld",btn.tag];
+            [path appendFormat:@"%ld",(long)btn.tag];
         }
         [self.delegate lockView:self didFinishPath:path];
     }

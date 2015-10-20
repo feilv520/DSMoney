@@ -31,6 +31,8 @@
 #define mainColor [UIColor colorWithRed:239.0 / 255.0 green:241.0 / 255.0 blue:243.0 / 255.0 alpha:1.0]
 #define mainRedColor [UIColor colorWithRed:221.0 / 255.0 green:75.0 / 255.0 blue:72.0 / 255.0 alpha:1.0]
 #define buttonBorderColor [UIColor colorWithRed:226.0 / 255.0 green:226.0 / 255.0 blue:226.0 / 255.0 alpha:1]
+#define Color_Gray [UIColor colorWithRed:235 / 255.0 green:237 / 255.0 blue:240 / 255.0 alpha:1.0]
+#define TabelVie_Color_Gray [UIColor colorWithRed:225 / 255.0 green:225 / 255.0 blue:226 / 255.0 alpha:1.0]
 
 //导航栏方法
 
