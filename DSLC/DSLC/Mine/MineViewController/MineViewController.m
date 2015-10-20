@@ -16,6 +16,8 @@
 #import "MyRedBagViewController.h"
 #import "ProductSettingViewController.h"
 #import "MyNewsViewController.h"
+#import "MyInvitationViewController.h"
+#import "PayMoneyViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -94,7 +96,7 @@
     [butHeadPic addTarget:self action:@selector(headPictureButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    邀请按钮
-    UIButton *butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60, 31, 50, 25) backgroundColor:nil textColor:[UIColor whiteColor] titleText:@"邀请"];
+    UIButton *butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 85, 31, 75, 25) backgroundColor:nil textColor:[UIColor whiteColor] titleText:@"我的理财师"];
     [imageRedBG addSubview:butInvitate];
     [butInvitate setBackgroundImage:[UIImage imageNamed:@"anniu"] forState:UIControlStateNormal];
     butInvitate.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -217,6 +219,11 @@
         MyNewsViewController *myNewsVC = [[MyNewsViewController alloc] init];
         [self.navigationController pushViewController:myNewsVC animated:YES];
         
+    } else if (indexPath.row == 3) {
+        
+        MyInvitationViewController *myInvitationVC = [[MyInvitationViewController alloc] init];
+        [self.navigationController pushViewController:myInvitationVC animated:YES];
+        
     }
     
 }
@@ -230,13 +237,14 @@
 //邀请按钮
 - (void)inviteButton:(UIButton *)button
 {
-    NSLog(@"邀请");
+    NSLog(@"我的理财师");
 }
 
 //充值按钮
 - (void)rechargeMoney:(UIButton *)button
 {
-    NSLog(@"充值");
+    PayMoneyViewController *payMoneyVC = [[PayMoneyViewController alloc] init];
+    [self.navigationController pushViewController:payMoneyVC animated:YES];
 }
 
 //提现按钮

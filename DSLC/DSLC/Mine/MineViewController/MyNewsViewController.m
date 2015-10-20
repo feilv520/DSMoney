@@ -68,7 +68,7 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
-    _tableView.backgroundColor = [UIColor huibai];
+    _tableView.backgroundColor = [UIColor huibai ];
     [_tableView registerNib:[UINib nibWithNibName:@"MyNewsCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
 

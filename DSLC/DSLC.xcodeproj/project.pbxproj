@@ -59,6 +59,16 @@
 		817DD4AD1BCF547E00042B09 /* ziliao@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 817DD48F1BCF547E00042B09 /* ziliao@3x.png */; settings = {ASSET_TAGS = (); }; };
 		817DD4B01BCF5B2400042B09 /* MiddleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 817DD4AF1BCF5B2400042B09 /* MiddleView.m */; settings = {ASSET_TAGS = (); }; };
 		817DD4B21BCF5B3900042B09 /* MiddleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817DD4B11BCF5B3900042B09 /* MiddleView.xib */; settings = {ASSET_TAGS = (); }; };
+		818063971BD5D3C700E83492 /* MyInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818063961BD5D3C700E83492 /* MyInvitationViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8180639B1BD5D7E500E83492 /* MyInviteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 818063991BD5D7E500E83492 /* MyInviteCell.m */; settings = {ASSET_TAGS = (); }; };
+		8180639C1BD5D7E500E83492 /* MyInviteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8180639A1BD5D7E500E83492 /* MyInviteCell.xib */; settings = {ASSET_TAGS = (); }; };
+		818063A01BD5D87100E83492 /* InviteNumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8180639E1BD5D87100E83492 /* InviteNumCell.m */; settings = {ASSET_TAGS = (); }; };
+		818063A11BD5D87100E83492 /* InviteNumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8180639F1BD5D87100E83492 /* InviteNumCell.xib */; settings = {ASSET_TAGS = (); }; };
+		818063A51BD5D89000E83492 /* InviteNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 818063A31BD5D89000E83492 /* InviteNameCell.m */; settings = {ASSET_TAGS = (); }; };
+		818063A61BD5D89000E83492 /* InviteNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818063A41BD5D89000E83492 /* InviteNameCell.xib */; settings = {ASSET_TAGS = (); }; };
+		818063A81BD5E3CA00E83492 /* picture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818063A71BD5E3CA00E83492 /* picture@2x.png */; settings = {ASSET_TAGS = (); }; };
+		818063AB1BD61A7E00E83492 /* VerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818063AA1BD61A7E00E83492 /* VerifyViewController.m */; settings = {ASSET_TAGS = (); }; };
+		818063AE1BD6437D00E83492 /* PayMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818063AD1BD6437D00E83492 /* PayMoneyViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC361BCC96E1003F440D /* MakeSureViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC391BCCD0FE003F440D /* ContentCell.m */; settings = {ASSET_TAGS = (); }; };
 		8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC3A1BCCD0FE003F440D /* ContentCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -291,6 +301,22 @@
 		817DD4AE1BCF5B2400042B09 /* MiddleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiddleView.h; sourceTree = "<group>"; };
 		817DD4AF1BCF5B2400042B09 /* MiddleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiddleView.m; sourceTree = "<group>"; };
 		817DD4B11BCF5B3900042B09 /* MiddleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleView.xib; sourceTree = "<group>"; };
+		818063951BD5D3C700E83492 /* MyInvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInvitationViewController.h; sourceTree = "<group>"; };
+		818063961BD5D3C700E83492 /* MyInvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInvitationViewController.m; sourceTree = "<group>"; };
+		818063981BD5D7E500E83492 /* MyInviteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInviteCell.h; sourceTree = "<group>"; };
+		818063991BD5D7E500E83492 /* MyInviteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInviteCell.m; sourceTree = "<group>"; };
+		8180639A1BD5D7E500E83492 /* MyInviteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInviteCell.xib; sourceTree = "<group>"; };
+		8180639D1BD5D87100E83492 /* InviteNumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteNumCell.h; sourceTree = "<group>"; };
+		8180639E1BD5D87100E83492 /* InviteNumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteNumCell.m; sourceTree = "<group>"; };
+		8180639F1BD5D87100E83492 /* InviteNumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteNumCell.xib; sourceTree = "<group>"; };
+		818063A21BD5D89000E83492 /* InviteNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteNameCell.h; sourceTree = "<group>"; };
+		818063A31BD5D89000E83492 /* InviteNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteNameCell.m; sourceTree = "<group>"; };
+		818063A41BD5D89000E83492 /* InviteNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteNameCell.xib; sourceTree = "<group>"; };
+		818063A71BD5E3CA00E83492 /* picture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "picture@2x.png"; sourceTree = "<group>"; };
+		818063A91BD61A7E00E83492 /* VerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyViewController.h; sourceTree = "<group>"; };
+		818063AA1BD61A7E00E83492 /* VerifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyViewController.m; sourceTree = "<group>"; };
+		818063AC1BD6437D00E83492 /* PayMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayMoneyViewController.h; sourceTree = "<group>"; };
+		818063AD1BD6437D00E83492 /* PayMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMoneyViewController.m; sourceTree = "<group>"; };
 		8184EC351BCC96E1003F440D /* MakeSureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeSureViewController.h; sourceTree = "<group>"; };
 		8184EC361BCC96E1003F440D /* MakeSureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeSureViewController.m; sourceTree = "<group>"; };
 		8184EC381BCCD0FE003F440D /* ContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentCell.h; sourceTree = "<group>"; };
@@ -672,6 +698,8 @@
 			children = (
 				81D8AD981BC6427800A15E01 /* MineViewController.h */,
 				81D8AD991BC6427800A15E01 /* MineViewController.m */,
+				818063AC1BD6437D00E83492 /* PayMoneyViewController.h */,
+				818063AD1BD6437D00E83492 /* PayMoneyViewController.m */,
 				819C3AB41BD47E57008D2CFD /* MyRedBagViewController.h */,
 				819C3AB51BD47E57008D2CFD /* MyRedBagViewController.m */,
 				81BA1BF21BD4CB4300DBA5BE /* WinAPrizeViewController.h */,
@@ -685,6 +713,8 @@
 				81ED03131BD0C877005F4B02 /* MyBankViewController.m */,
 				81ED031A1BD0DA35005F4B02 /* AddBankViewController.h */,
 				81ED031B1BD0DA35005F4B02 /* AddBankViewController.m */,
+				818063A91BD61A7E00E83492 /* VerifyViewController.h */,
+				818063AA1BD61A7E00E83492 /* VerifyViewController.m */,
 				8D5DBB7C1BD4819C00F556B9 /* CastProduceViewController.h */,
 				8D5DBB7D1BD4819C00F556B9 /* CastProduceViewController.m */,
 				8D5DBB7E1BD4819C00F556B9 /* CastProduceViewController.xib */,
@@ -695,6 +725,8 @@
 				81BA1C071BD4F4AB00DBA5BE /* CheckViewController.m */,
 				81BA1C091BD4FCB100DBA5BE /* MyNewsViewController.h */,
 				81BA1C0A1BD4FCB100DBA5BE /* MyNewsViewController.m */,
+				818063951BD5D3C700E83492 /* MyInvitationViewController.h */,
+				818063961BD5D3C700E83492 /* MyInvitationViewController.m */,
 			);
 			path = MineViewController;
 			sourceTree = "<group>";
@@ -752,6 +784,15 @@
 				81BA1C0C1BD4FE2600DBA5BE /* MyNewsCell.h */,
 				81BA1C0D1BD4FE2600DBA5BE /* MyNewsCell.m */,
 				81BA1C0E1BD4FE2600DBA5BE /* MyNewsCell.xib */,
+				818063981BD5D7E500E83492 /* MyInviteCell.h */,
+				818063991BD5D7E500E83492 /* MyInviteCell.m */,
+				8180639A1BD5D7E500E83492 /* MyInviteCell.xib */,
+				8180639D1BD5D87100E83492 /* InviteNumCell.h */,
+				8180639E1BD5D87100E83492 /* InviteNumCell.m */,
+				8180639F1BD5D87100E83492 /* InviteNumCell.xib */,
+				818063A21BD5D89000E83492 /* InviteNameCell.h */,
+				818063A31BD5D89000E83492 /* InviteNameCell.m */,
+				818063A41BD5D89000E83492 /* InviteNameCell.xib */,
 			);
 			path = MineView;
 			sourceTree = "<group>";
@@ -1032,6 +1073,7 @@
 		8DEDE1AC1BCCFEA2008086D3 /* 公共 */ = {
 			isa = PBXGroup;
 			children = (
+				818063A71BD5E3CA00E83492 /* picture@2x.png */,
 				81BA1C111BD5000700DBA5BE /* icon04@2x.png */,
 				81BA1C121BD5000700DBA5BE /* icon05@2x.png */,
 				8DEDE1D21BCCFFD8008086D3 /* iocn_saft@2x.png */,
@@ -1227,9 +1269,11 @@
 				817DD49A1BCF547E00042B09 /* hongbao@2x.png in Resources */,
 				817DD49D1BCF547E00042B09 /* jiantou@3x.png in Resources */,
 				817DD4961BCF547E00042B09 /* dae@2x.png in Resources */,
+				818063A11BD5D87100E83492 /* InviteNumCell.xib in Resources */,
 				817DD4AA1BCF547E00042B09 /* zhanghu@2x.png in Resources */,
 				81BA1C031BD4E1ED00DBA5BE /* 0.png in Resources */,
 				817DD4A41BCF547E00042B09 /* tixian@2x.png in Resources */,
+				8180639C1BD5D7E500E83492 /* MyInviteCell.xib in Resources */,
 				8D9356DC1BC607C500BC2BFA /* LaunchScreen.storyboard in Resources */,
 				8D6EFBA71BC78B02009FE101 /* shouyeqiepian750_30.png in Resources */,
 				81BA1BFE1BD4DE7000DBA5BE /* MoreActivityCell.xib in Resources */,
@@ -1263,6 +1307,7 @@
 				8DEDE1D51BCCFFD8008086D3 /* iocn_saft@3x.png in Resources */,
 				8DEDE1C81BCCFF21008086D3 /* iconfont_greencuo@2x.png in Resources */,
 				8D9356D71BC607C500BC2BFA /* Main.storyboard in Resources */,
+				818063A61BD5D89000E83492 /* InviteNameCell.xib in Resources */,
 				8D88A4E11BCE087400EE22F5 /* emptyyuan@2x.png in Resources */,
 				8DEDE1B51BCCFEB5008086D3 /* btn_red@2x.png in Resources */,
 				81BA1BF91BD4DBAA00DBA5BE /* WinAPrizeCell.xib in Resources */,
@@ -1280,6 +1325,7 @@
 				8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */,
 				817DD4911BCF547E00042B09 /* anniu@3x.png in Resources */,
 				817DD4A21BCF547E00042B09 /* shape-29@2x.png in Resources */,
+				818063A81BD5E3CA00E83492 /* picture@2x.png in Resources */,
 				8DFA5C951BCE64D900AED2B2 /* FQuickPayViewController.xib in Resources */,
 				81BA1C131BD5000700DBA5BE /* icon04@2x.png in Resources */,
 				817DD4AD1BCF547E00042B09 /* ziliao@3x.png in Resources */,
@@ -1344,12 +1390,14 @@
 				8D5DBB891BD4839B00F556B9 /* CastDownTableViewCell.m in Sources */,
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
 				8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */,
+				818063A01BD5D87100E83492 /* InviteNumCell.m in Sources */,
 				8184EC451BCCD12A003F440D /* RedBagCell.m in Sources */,
 				819C3AC71BD49862008D2CFD /* GrabBagCell.m in Sources */,
 				8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */,
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
 				81BA1BF41BD4CB4300DBA5BE /* WinAPrizeViewController.m in Sources */,
+				818063A51BD5D89000E83492 /* InviteNameCell.m in Sources */,
 				8D878CE11BC754AD00844575 /* e.m in Sources */,
 				811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */,
 				81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */,
@@ -1359,11 +1407,13 @@
 				8179883B1BC9403A007C8C3E /* ThreeCell.m in Sources */,
 				8184EC4A1BCCD13C003F440D /* CashMoneyCell.m in Sources */,
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
+				818063AB1BD61A7E00E83492 /* VerifyViewController.m in Sources */,
 				8DFA5C941BCE64D900AED2B2 /* FQuickPayViewController.m in Sources */,
 				81BA1C0B1BD4FCB100DBA5BE /* MyNewsViewController.m in Sources */,
 				817DD4B01BCF5B2400042B09 /* MiddleView.m in Sources */,
 				813FD4FF1BCE71110050E884 /* FBalancePaymentViewController.m in Sources */,
 				8D5DBB841BD4838200F556B9 /* CastUpTableViewCell.m in Sources */,
+				818063971BD5D3C700E83492 /* MyInvitationViewController.m in Sources */,
 				8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */,
 				8DEDE26D1BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,
@@ -1380,6 +1430,7 @@
 				817988361BC94014007C8C3E /* PlanCell.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
 				8D1921CD1BD4E2060038195E /* XYPieChart.m in Sources */,
+				818063AE1BD6437D00E83492 /* PayMoneyViewController.m in Sources */,
 				8D6692831BD0D8A600CD2CAF /* MyHandButton.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
 				817DD46F1BCF501100042B09 /* MineCell.m in Sources */,
@@ -1393,6 +1444,7 @@
 				817988311BC93FF6007C8C3E /* BasicMessageCell.m in Sources */,
 				81BA1BFD1BD4DE7000DBA5BE /* MoreActivityCell.m in Sources */,
 				81BA1C0F1BD4FE2600DBA5BE /* MyNewsCell.m in Sources */,
+				8180639B1BD5D7E500E83492 /* MyInviteCell.m in Sources */,
 				8DEDE1F21BCD05F9008086D3 /* Calendar.m in Sources */,
 				8D121FDB1BD4D83600B3C1FE /* SettingGetMoneyTableViewCell.m in Sources */,
 				81ED03201BD0DDAD005F4B02 /* AddBankCell.m in Sources */,

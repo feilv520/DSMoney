@@ -11,6 +11,7 @@
 #import "CreatView.h"
 #import "define.h"
 #import "AddBankCell.h"
+#import "VerifyViewController.h"
 
 @interface AddBankViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -58,7 +59,7 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    UIView *view = [UIView new];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (90.0 / 667.0))];
     _tableView.tableFooterView = view;
     _tableView.backgroundColor = [UIColor huibai];
     
@@ -71,6 +72,15 @@
     UIButton *buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0))/2, HEIGHT_CONTROLLER_DEFAULT * (47.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (43.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
     [view addSubview:buttonNext];
     [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+    [buttonNext addTarget:self action:@selector(nextButton:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//下一步按钮
+- (void)nextButton:(UIButton *)button
+{
+    NSLog(@"1111111111111");
+    VerifyViewController *verifyVC = [[VerifyViewController alloc] init];
+    [self.navigationController pushViewController:verifyVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
