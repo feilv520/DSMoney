@@ -20,4 +20,6 @@
 
 + (UIView *)creatViewWithFrame:(CGRect)frame backgroundColor:(UIColor *)backgroundColor;
 
++ (UITextField *)creatWithfFrame:(CGRect)frame setPlaceholder:(NSString *)placeholder setTintColor:(UIColor *)tintColor;
+
 @end

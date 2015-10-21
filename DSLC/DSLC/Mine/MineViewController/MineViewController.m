@@ -20,6 +20,9 @@
 #import "MyInvitationViewController.h"
 #import "PayMoneyViewController.h"
 #import "GetMoneyViewController.h"
+#import "MyPlannerViewController.h"
+#import "MeViewController.h"
+#import "BigMoneyViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -238,13 +241,15 @@
 //头像按钮
 - (void)headPictureButton:(UIButton *)button
 {
-    NSLog(@"我是头像");
+    MeViewController *meVC = [[MeViewController alloc] init];
+    [self.navigationController pushViewController:meVC animated:YES];
 }
 
 //邀请按钮
 - (void)inviteButton:(UIButton *)button
 {
-    NSLog(@"我的理财师");
+    MyPlannerViewController *myPlannerVC = [[MyPlannerViewController alloc] init];
+    [self.navigationController pushViewController:myPlannerVC animated:YES];
 }
 
 //充值按钮
@@ -264,7 +269,8 @@
 //大额充值
 - (void)bigMoneyRecharge:(UIButton *)button
 {
-    NSLog(@"大额充值");
+    BigMoneyViewController *bigMoneyVC = [[BigMoneyViewController alloc] init];
+    [self.navigationController pushViewController:bigMoneyVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -10,4 +10,6 @@
 
 @interface BaseViewController : UIViewController
 
+- (void)setTitleString:(NSString *)titleString;
+
 @end
