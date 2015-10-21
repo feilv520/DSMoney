@@ -67,6 +67,16 @@
     return view;
 }
 
++ (UITextField *)creatWithfFrame:(CGRect)frame setPlaceholder:(NSString *)placeholder setTintColor:(UIColor *)tintColor
+{
+    UITextField *textField = [[UITextField alloc] init];
+    [textField setFrame:frame];
+    [textField setPlaceholder:placeholder];
+    [textField setTintColor:tintColor];
+    
+    return textField;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

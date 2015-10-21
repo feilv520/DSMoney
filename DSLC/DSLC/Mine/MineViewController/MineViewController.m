@@ -19,6 +19,8 @@
 #import "TransactionViewController.h"
 #import "MyInvitationViewController.h"
 #import "PayMoneyViewController.h"
+#import "MyPlannerViewController.h"
+#import "MeViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -237,13 +239,15 @@
 //头像按钮
 - (void)headPictureButton:(UIButton *)button
 {
-    NSLog(@"我是头像");
+    MeViewController *meVC = [[MeViewController alloc] init];
+    [self.navigationController pushViewController:meVC animated:YES];
 }
 
 //邀请按钮
 - (void)inviteButton:(UIButton *)button
 {
-    NSLog(@"我的理财师");
+    MyPlannerViewController *myPlannerVC = [[MyPlannerViewController alloc] init];
+    [self.navigationController pushViewController:myPlannerVC animated:YES];
 }
 
 //充值按钮
