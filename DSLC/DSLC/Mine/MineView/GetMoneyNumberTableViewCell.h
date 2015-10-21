@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface GetMoneyNumberTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UITextField *textfield;
 
 @end

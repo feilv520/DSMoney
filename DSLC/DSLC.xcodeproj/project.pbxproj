@@ -134,6 +134,8 @@
 		8D3125DE1BD763F900143B71 /* GetMoneyVerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125DC1BD763F900143B71 /* GetMoneyVerifyViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D3125DF1BD763F900143B71 /* GetMoneyVerifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3125DD1BD763F900143B71 /* GetMoneyVerifyViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		8D3125E61BD7689200143B71 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125E51BD7689200143B71 /* BaseViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D3125EA1BD7798000143B71 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125E81BD7798000143B71 /* ForgetPasswordViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D3125EB1BD7798000143B71 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3125E91BD7798000143B71 /* ForgetPasswordViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D55DB051BC7BE91004649CE /* shouyebanner.png */; settings = {ASSET_TAGS = (); }; };
 		8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB381BC8D2F3004FBDD3 /* SelectionV.xib */; settings = {ASSET_TAGS = (); }; };
 		8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AEB3B1BC8DAA4004FBDD3 /* SelectionV.m */; settings = {ASSET_TAGS = (); }; };
@@ -463,6 +465,9 @@
 		8D3125DD1BD763F900143B71 /* GetMoneyVerifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetMoneyVerifyViewController.xib; sourceTree = "<group>"; };
 		8D3125E41BD7689200143B71 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		8D3125E51BD7689200143B71 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		8D3125E71BD7798000143B71 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
+		8D3125E81BD7798000143B71 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
+		8D3125E91BD7798000143B71 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
 		8D55DB041BC7B53A004649CE /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
 		8D55DB051BC7BE91004649CE /* shouyebanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyebanner.png; sourceTree = "<group>"; };
 		8D5AEB381BC8D2F3004FBDD3 /* SelectionV.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionV.xib; sourceTree = "<group>"; };
@@ -1144,6 +1149,9 @@
 		8D3125E01BD7669000143B71 /* baseViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8D3125E71BD7798000143B71 /* ForgetPasswordViewController.h */,
+				8D3125E81BD7798000143B71 /* ForgetPasswordViewController.m */,
+				8D3125E91BD7798000143B71 /* ForgetPasswordViewController.xib */,
 			);
 			name = baseViewController;
 			sourceTree = "<group>";
@@ -1613,6 +1621,7 @@
 				8D9011AA1BD6337C00E5D62A /* 1@3x.png in Resources */,
 				8D9011AD1BD6337C00E5D62A /* 3@2x.png in Resources */,
 				817DD4A11BCF547E00042B09 /* quebao@3x.png in Resources */,
+				8D3125EB1BD7798000143B71 /* ForgetPasswordViewController.xib in Resources */,
 				81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */,
 				8DEDE1C51BCCFF01008086D3 /* iconfont_graycuo@3x.png in Resources */,
 				8D6692801BD0D82100CD2CAF /* Home_refresh_bg.png in Resources */,
@@ -1724,6 +1733,7 @@
 				8D5DBB891BD4839B00F556B9 /* CastDownTableViewCell.m in Sources */,
 				8DD1809D1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m in Sources */,
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
+				8D3125EA1BD7798000143B71 /* ForgetPasswordViewController.m in Sources */,
 				8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */,
 				818063A01BD5D87100E83492 /* InviteNumCell.m in Sources */,
 				8184EC451BCCD12A003F440D /* RedBagCell.m in Sources */,

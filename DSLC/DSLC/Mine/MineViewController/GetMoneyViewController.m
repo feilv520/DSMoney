@@ -15,10 +15,14 @@
 #import "AppDelegate.h"
 #import "CreatView.h"
 #import "SelectionOfSafe.h"
+#import "GetMoneyVerifyViewController.h"
 
-@interface GetMoneyViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface GetMoneyViewController ()<UITableViewDataSource, UITableViewDelegate>{
+    NSString *moneyString;
+}
 
 @property (nonatomic, strong) UITableView *mainTableView;
+
 
 @end
 
@@ -95,22 +99,26 @@
 }
 
 - (void)nextButtonAction:(UIButton *)btn{
-    
+    GetMoneyVerifyViewController *verify = [[GetMoneyVerifyViewController alloc] init];
+    verify.moneyString = moneyString;
+    [self.navigationController pushViewController:verify animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return 45;
     } else {
-        return 360;
+        return 370;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == 0) {
         return 10;
+    } else {
+        return 120;
     }
-    return 0.5;
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -128,12 +136,18 @@
             return cell;
         } else {
             GetMoneyNumberTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"getMoneyN"];
+            [cell.textfield addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
             return cell;
         }
     } else {
         GetMoneyTipTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"getMoneyT"];
         return cell;
     }
+}
+
+- (void)textFieldWithText:(UITextField *)textField
+{
+    moneyString = textField.text;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

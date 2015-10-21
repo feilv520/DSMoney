@@ -7,10 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "AppDelegate.h"
-#import "UIColor+AddColor.h"
-#import "define.h"
-#import "CreatView.h"
 
 @interface BaseViewController ()
 

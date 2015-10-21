@@ -8,21 +8,31 @@
 
 #import "GetMoneyVerifyViewController.h"
 #import "define.h"
+#import "ForgetPasswordViewController.h"
 
 @interface GetMoneyVerifyViewController ()
+@property (weak, nonatomic) IBOutlet UIView *successView;
+@property (weak, nonatomic) IBOutlet UIView *yueView;
+@property (weak, nonatomic) IBOutlet UIView *passwordView;
+@property (weak, nonatomic) IBOutlet UILabel *moneyNumber;
 
 @end
 
 @implementation GetMoneyVerifyViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self setTXMoney:self.moneyString];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
+    [self setQRButton];
 }
 - (IBAction)forgetButtonAction:(id)sender {
-    
+    ForgetPasswordViewController *forgetPVC = [[ForgetPasswordViewController alloc] init];
+    [self.navigationController pushViewController:forgetPVC animated:YES];
 }
 
 - (void)setQRButton{
@@ -39,7 +49,21 @@
 }
 
 - (void)sureButtonAction:(UIButton *)btn{
-    
+    if ([btn.titleLabel.text isEqualToString:@"确定"]){
+        self.yueView.hidden = YES;
+        self.passwordView.hidden = YES;
+        self.successView.hidden = NO;
+        [btn setTitle:@"去赚钱" forState:UIControlStateNormal];
+    } else if ([btn.titleLabel.text isEqualToString:@"去赚钱"]){
+        self.yueView.hidden = NO;
+        self.passwordView.hidden = NO;
+        self.successView.hidden = YES;
+        [btn setTitle:@"确定" forState:UIControlStateNormal];
+    }
+}
+
+- (void)setTXMoney:(NSString *)moneyNumber{
+    self.moneyNumber.text = moneyNumber;
 }
 
 - (void)didReceiveMemoryWarning {

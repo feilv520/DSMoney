@@ -11,4 +11,6 @@
 
 @interface GetMoneyVerifyViewController : BaseViewController
 
+@property (nonatomic, strong) NSString *moneyString;
+
 @end
