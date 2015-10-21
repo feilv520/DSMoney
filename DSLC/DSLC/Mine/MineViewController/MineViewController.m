@@ -19,6 +19,7 @@
 #import "TransactionViewController.h"
 #import "MyInvitationViewController.h"
 #import "PayMoneyViewController.h"
+#import "GetMoneyViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -256,7 +257,8 @@
 //提现按钮
 - (void)withdrawMoney:(UIButton *)button
 {
-    NSLog(@"提现");
+    GetMoneyViewController *getMoneyVC = [[GetMoneyViewController alloc] init];
+    [self.navigationController pushViewController:getMoneyVC animated:YES];
 }
 
 //大额充值

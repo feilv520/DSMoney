@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface GetMoneyViewController : UIViewController
+@interface GetMoneyViewController : BaseViewController
 
 @end

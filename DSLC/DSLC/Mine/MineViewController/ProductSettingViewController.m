@@ -125,6 +125,9 @@
 #pragma mark --------------------------------
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 2) {
+        return 0.5;
+    }
     return 10;
 }
 

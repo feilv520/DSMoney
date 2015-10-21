@@ -46,7 +46,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"MoreActivityCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"WinAPrizeCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     
-    picArr = @[@[@"0"], @[@"1"], @[@"1"], @[@"3"]];
+    picArr = @[@[@"computer0"], @[@"computer1"], @[@"computer1"], @[@"computer3"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
