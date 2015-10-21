@@ -32,13 +32,18 @@
     [app.tabBarVC setTabbarViewHidden:NO];
     [app.tabBarVC setLabelLineHidden:NO];
 }
+
+- (void)setTitleString:(NSString *)titleString
+{
+    self.navigationItem.title = titleString;
+}
+
 //导航内容
 - (void)naviagationShow
 {
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
     
-    self.navigationItem.title = @"交易记录";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
