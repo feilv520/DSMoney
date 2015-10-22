@@ -115,6 +115,7 @@
     [self.view addSubview:_textField];
     _textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     _textField.delegate = self;
+    _textField.keyboardType = UIKeyboardTypeNumberPad;
     [_textField addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     
     UIImageView *imageSafe = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (97.5 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (330.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (18.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (18.0 / 667.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"iocn_saft"]];
@@ -149,6 +150,11 @@
         [self.navigationController pushViewController:chooseStyleVC animated:YES];
     }
     
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [_textField resignFirstResponder];
 }
 
 //导航返回按钮

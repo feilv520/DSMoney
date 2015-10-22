@@ -13,6 +13,9 @@
 		811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E001BC7A13800CAD6F5 /* FinancingCell.m */; settings = {ASSET_TAGS = (); }; };
 		811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */; settings = {ASSET_TAGS = (); }; };
 		811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */; settings = {ASSET_TAGS = (); }; };
+		812F6BE81BD8DDE10000D8E9 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BE71BD8DDE10000D8E9 /* BindingPhoneViewController.m */; settings = {ASSET_TAGS = (); }; };
+		812F6BEB1BD8ED240000D8E9 /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BEA1BD8ED240000D8E9 /* PhoneViewController.m */; settings = {ASSET_TAGS = (); }; };
+		812F6BEE1BD8ED310000D8E9 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BED1BD8ED310000D8E9 /* MessageViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81334F5E1BCBC3BD000A9B8A /* 7501111.png in Resources */ = {isa = PBXBuildFile; fileRef = 81334F5D1BCBC3BD000A9B8A /* 7501111.png */; settings = {ASSET_TAGS = (); }; };
 		813FD4FF1BCE71110050E884 /* FBalancePaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 813FD4FD1BCE71110050E884 /* FBalancePaymentViewController.m */; settings = {ASSET_TAGS = (); }; };
 		813FD5001BCE71110050E884 /* FBalancePaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 813FD4FE1BCE71110050E884 /* FBalancePaymentViewController.xib */; settings = {ASSET_TAGS = (); }; };
@@ -106,6 +109,9 @@
 		8184EC4B1BCCD13C003F440D /* CashMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC491BCCD13C003F440D /* CashMoneyCell.xib */; settings = {ASSET_TAGS = (); }; };
 		818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 818DEDFB1BCDF13500454A0E /* FConfirmMoney.m */; settings = {ASSET_TAGS = (); }; };
 		818DEDFE1BCDF15B00454A0E /* FConfirmMoney.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818DEDFD1BCDF15B00454A0E /* FConfirmMoney.xib */; settings = {ASSET_TAGS = (); }; };
+		8190A3051BD876EB002B53F5 /* AddCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8190A3041BD876EB002B53F5 /* AddCardViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8190A3091BD87D3E002B53F5 /* AddCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8190A3071BD87D3E002B53F5 /* AddCardCell.m */; settings = {ASSET_TAGS = (); }; };
+		8190A30A1BD87D3E002B53F5 /* AddCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8190A3081BD87D3E002B53F5 /* AddCardCell.xib */; settings = {ASSET_TAGS = (); }; };
 		819C3AB61BD47E57008D2CFD /* MyRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C3AB51BD47E57008D2CFD /* MyRedBagViewController.m */; settings = {ASSET_TAGS = (); }; };
 		819C3ABA1BD483C4008D2CFD /* MyRedBagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C3AB81BD483C4008D2CFD /* MyRedBagCell.m */; settings = {ASSET_TAGS = (); }; };
 		819C3ABB1BD483C4008D2CFD /* MyRedBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819C3AB91BD483C4008D2CFD /* MyRedBagCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -322,6 +328,12 @@
 		811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinancingCell.xib; sourceTree = "<group>"; };
 		811F9E051BC7D29900CAD6F5 /* UIColor+AddColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AddColor.h"; sourceTree = "<group>"; };
 		811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AddColor.m"; sourceTree = "<group>"; };
+		812F6BE61BD8DDE10000D8E9 /* BindingPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingPhoneViewController.h; sourceTree = "<group>"; };
+		812F6BE71BD8DDE10000D8E9 /* BindingPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingPhoneViewController.m; sourceTree = "<group>"; };
+		812F6BE91BD8ED240000D8E9 /* PhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneViewController.h; sourceTree = "<group>"; };
+		812F6BEA1BD8ED240000D8E9 /* PhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneViewController.m; sourceTree = "<group>"; };
+		812F6BEC1BD8ED310000D8E9 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		812F6BED1BD8ED310000D8E9 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		81334F5D1BCBC3BD000A9B8A /* 7501111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7501111.png; sourceTree = "<group>"; };
 		813FD4FC1BCE71110050E884 /* FBalancePaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBalancePaymentViewController.h; sourceTree = "<group>"; };
 		813FD4FD1BCE71110050E884 /* FBalancePaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBalancePaymentViewController.m; sourceTree = "<group>"; };
@@ -443,6 +455,11 @@
 		818DEDFA1BCDF13500454A0E /* FConfirmMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FConfirmMoney.h; sourceTree = "<group>"; };
 		818DEDFB1BCDF13500454A0E /* FConfirmMoney.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FConfirmMoney.m; sourceTree = "<group>"; };
 		818DEDFD1BCDF15B00454A0E /* FConfirmMoney.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FConfirmMoney.xib; sourceTree = "<group>"; };
+		8190A3031BD876EA002B53F5 /* AddCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCardViewController.h; sourceTree = "<group>"; };
+		8190A3041BD876EB002B53F5 /* AddCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCardViewController.m; sourceTree = "<group>"; };
+		8190A3061BD87D3E002B53F5 /* AddCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCardCell.h; sourceTree = "<group>"; };
+		8190A3071BD87D3E002B53F5 /* AddCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCardCell.m; sourceTree = "<group>"; };
+		8190A3081BD87D3E002B53F5 /* AddCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCardCell.xib; sourceTree = "<group>"; };
 		819C3AB41BD47E57008D2CFD /* MyRedBagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRedBagViewController.h; sourceTree = "<group>"; };
 		819C3AB51BD47E57008D2CFD /* MyRedBagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRedBagViewController.m; sourceTree = "<group>"; };
 		819C3AB71BD483C4008D2CFD /* MyRedBagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRedBagCell.h; sourceTree = "<group>"; };
@@ -744,6 +761,26 @@
 			path = "颜色处理类目";
 			sourceTree = "<group>";
 		};
+		812F6BE41BD8DD800000D8E9 /* 绑定手机 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "绑定手机";
+			sourceTree = "<group>";
+		};
+		812F6BE51BD8DDAC0000D8E9 /* 绑定手机 */ = {
+			isa = PBXGroup;
+			children = (
+				812F6BE61BD8DDE10000D8E9 /* BindingPhoneViewController.h */,
+				812F6BE71BD8DDE10000D8E9 /* BindingPhoneViewController.m */,
+				812F6BE91BD8ED240000D8E9 /* PhoneViewController.h */,
+				812F6BEA1BD8ED240000D8E9 /* PhoneViewController.m */,
+				812F6BEC1BD8ED310000D8E9 /* MessageViewController.h */,
+				812F6BED1BD8ED310000D8E9 /* MessageViewController.m */,
+			);
+			name = "绑定手机";
+			sourceTree = "<group>";
+		};
 		817DD4711BCF546700042B09 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
@@ -790,6 +827,9 @@
 				817E33A41BD7840000D05103 /* ChooseCell.h */,
 				817E33A51BD7840000D05103 /* ChooseCell.m */,
 				817E33A61BD7840000D05103 /* ChooseCell.xib */,
+				8190A3061BD87D3E002B53F5 /* AddCardCell.h */,
+				8190A3071BD87D3E002B53F5 /* AddCardCell.m */,
+				8190A3081BD87D3E002B53F5 /* AddCardCell.xib */,
 			);
 			name = "充值Cell";
 			sourceTree = "<group>";
@@ -906,6 +946,7 @@
 		81D8AD951BC640DA00A15E01 /* MineViewController */ = {
 			isa = PBXGroup;
 			children = (
+				812F6BE51BD8DDAC0000D8E9 /* 绑定手机 */,
 				8D3125E01BD7669000143B71 /* baseViewController */,
 				8D3125D01BD7447500143B71 /* 提现 */,
 				8D3125CF1BD7429900143B71 /* 消息中心 */,
@@ -925,6 +966,8 @@
 				818063AD1BD6437D00E83492 /* PayMoneyViewController.m */,
 				817E33991BD77A8800D05103 /* ChooseStyleViewController.h */,
 				817E339A1BD77A8800D05103 /* ChooseStyleViewController.m */,
+				8190A3031BD876EA002B53F5 /* AddCardViewController.h */,
+				8190A3041BD876EB002B53F5 /* AddCardViewController.m */,
 				817E33961BD772A700D05103 /* BigMoneyViewController.h */,
 				817E33971BD772A700D05103 /* BigMoneyViewController.m */,
 				819C3AB41BD47E57008D2CFD /* MyRedBagViewController.h */,
@@ -943,6 +986,7 @@
 		81D8AD961BC640E900A15E01 /* MineView */ = {
 			isa = PBXGroup;
 			children = (
+				812F6BE41BD8DD800000D8E9 /* 绑定手机 */,
 				817E33A31BD7830E00D05103 /* 我的理财师 */,
 				817E33A21BD7819300D05103 /* 充值Cell */,
 				8D3125D71BD745EC00143B71 /* 提现 */,
@@ -1783,6 +1827,7 @@
 				817DD49B1BCF547E00042B09 /* hongbao@3x.png in Resources */,
 				8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */,
 				8D9011B71BD6337C00E5D62A /* 8@2x.png in Resources */,
+				8190A30A1BD87D3E002B53F5 /* AddCardCell.xib in Resources */,
 				817DD4911BCF547E00042B09 /* anniu@3x.png in Resources */,
 				817DD4A21BCF547E00042B09 /* shape-29@2x.png in Resources */,
 				817E33951BD7576600D05103 /* MeCell.xib in Resources */,
@@ -1876,6 +1921,7 @@
 				8D878CE11BC754AD00844575 /* e.m in Sources */,
 				811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */,
 				81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */,
+				812F6BE81BD8DDE10000D8E9 /* BindingPhoneViewController.m in Sources */,
 				81BA1C081BD4F4AB00DBA5BE /* CheckViewController.m in Sources */,
 				81ED03141BD0C877005F4B02 /* MyBankViewController.m in Sources */,
 				81BA1BF81BD4DBAA00DBA5BE /* WinAPrizeCell.m in Sources */,
@@ -1885,6 +1931,7 @@
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
 				8D90117F1BD61B3400E5D62A /* TranctionTableViewCell.m in Sources */,
 				818063AB1BD61A7E00E83492 /* VerifyViewController.m in Sources */,
+				812F6BEB1BD8ED240000D8E9 /* PhoneViewController.m in Sources */,
 				8DFA5C941BCE64D900AED2B2 /* FQuickPayViewController.m in Sources */,
 				81BA1C0B1BD4FCB100DBA5BE /* MyNewsViewController.m in Sources */,
 				8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */,
@@ -1909,6 +1956,7 @@
 				8110A4F61BC64A5800E38485 /* poi.m in Sources */,
 				819C3ABA1BD483C4008D2CFD /* MyRedBagCell.m in Sources */,
 				8D878CD81BC7548B00844575 /* b.m in Sources */,
+				812F6BEE1BD8ED310000D8E9 /* MessageViewController.m in Sources */,
 				8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */,
 				8D878CDB1BC7549500844575 /* c.m in Sources */,
 				817988361BC94014007C8C3E /* PlanCell.m in Sources */,
@@ -1921,6 +1969,7 @@
 				817E33941BD7576600D05103 /* MeCell.m in Sources */,
 				817DD46F1BCF501100042B09 /* MineCell.m in Sources */,
 				8D121FBD1BD4D0CB00B3C1FE /* ProductSettingViewController.m in Sources */,
+				8190A3091BD87D3E002B53F5 /* AddCardCell.m in Sources */,
 				819C3AB61BD47E57008D2CFD /* MyRedBagViewController.m in Sources */,
 				8184EC401BCCD113003F440D /* MoneyCell.m in Sources */,
 				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,
@@ -1941,6 +1990,7 @@
 				8D5DBB7F1BD4819C00F556B9 /* CastProduceViewController.m in Sources */,
 				8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */,
 				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
+				8190A3051BD876EB002B53F5 /* AddCardViewController.m in Sources */,
 				818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
 				8D878CDE1BC7549F00844575 /* d.m in Sources */,
@@ -2092,7 +2142,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GCCF.DSLC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos9.0;
 			};
 			name = Debug;
 		};
@@ -2106,7 +2156,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GCCF.DSLC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos9.0;
 			};
 			name = Release;
 		};

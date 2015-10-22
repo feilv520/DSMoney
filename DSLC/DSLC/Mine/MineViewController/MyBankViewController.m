@@ -88,7 +88,7 @@
     UILabel *labelBankCard = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (35.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (12.0 / 667.0), 150, HEIGHT_CONTROLLER_DEFAULT * (26.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont systemFontOfSize:15] text:@"中国工商银行(储蓄卡)"];
     [viewBottom addSubview:labelBankCard];
     
-    UILabel *labelTailNum = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - WIDTH_CONTROLLER_DEFAULT * (80.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (12.0 / 667.0), 70, HEIGHT_CONTROLLER_DEFAULT * (26.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentRight textFont:[UIFont systemFontOfSize:15] text:@"尾号8888"];
+    UILabel *labelTailNum = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 83, 12, 70, 26) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentRight textFont:[UIFont systemFontOfSize:15] text:@"尾号8888"];
     [viewBottom addSubview:labelTailNum];
 }
 

@@ -12,6 +12,7 @@
 #import "define.h"
 #import "MyInformationCell.h"
 #import "MyBankViewController.h"
+#import "BindingPhoneViewController.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -67,12 +68,12 @@
                  @[@"绑定手机", @"绑定邮箱", @"实名认证"],
                  @[@"登录密码", @"交易密码", @"手势密码", @"修改手势密码"]];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor huibai];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 1)];
     _tableView.tableFooterView = view;
     view.backgroundColor = [UIColor huibai];
     [_tableView registerNib:[UINib nibWithNibName:@"MyInformationCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
@@ -89,13 +90,13 @@
         
     } else {
         
-        return HEIGHT_CONTROLLER_DEFAULT * (11.0 / 667.0);
+        return 11;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return HEIGHT_CONTROLLER_DEFAULT * (50.0 / 667.0);
+    return 50;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -156,6 +157,14 @@
         
         MyBankViewController *myBankVC = [[MyBankViewController alloc] init];
         [self.navigationController pushViewController:myBankVC animated:YES];
+        
+    } else if (indexPath.section == 1) {
+        
+        if (indexPath.row == 0) {
+            
+            BindingPhoneViewController *bindindVC = [[BindingPhoneViewController alloc] init];
+            [self.navigationController pushViewController:bindindVC animated:YES];
+        }
     }
 }
 

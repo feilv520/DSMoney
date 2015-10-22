@@ -104,11 +104,16 @@
     [viewFoot addSubview:makeSure];
     [makeSure addTarget:self action:@selector(makeSureMoney:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageView *imageGou = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (97.5 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (80.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (18.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (18.0 / 667.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"iocn_saft"]];
-    [viewFoot addSubview:imageGou];
+    UIView *viewSafe = [CreatView creatViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 190)/2, 70, 190, 20) backgroundColor:[UIColor clearColor]];
+    [viewFoot addSubview:viewSafe];
     
-    UILabel *moneySafe = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (115.5 / 375), HEIGHT_CONTROLLER_DEFAULT * (80.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (170 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (18.0/ 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont systemFontOfSize:11] text:@"由中国银行保障您的账户资金安全"];
-    [viewFoot addSubview:moneySafe];
+    UIImageView *imageSmallImg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 4, 12, 12)];
+    UIImage *imageSmall = [UIImage imageNamed:@"shouyeqiepian_21"];
+    imageSmallImg.image = imageSmall;
+    [viewSafe addSubview:imageSmallImg];
+    
+    UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(20, 0, 179, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont systemFontOfSize:11] text:@"由中国银行保障您的账户资金安全"];
+    [viewSafe addSubview:labelName];
     
     self.qianShu = [[UILabel alloc] init];
     self.qianShu.font = [UIFont systemFontOfSize:15];

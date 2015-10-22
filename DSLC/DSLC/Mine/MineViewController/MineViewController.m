@@ -84,6 +84,11 @@
     viewFoot.backgroundColor = [UIColor huibai];
     
     [self makeSafeView];
+    UIImageView *imageSafe = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (87.5 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (15.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (18.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (18.0 / 667.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"iocn_saft"]];
+    [viewFoot addSubview:imageSafe];
+    
+    UILabel *lableSafe = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (105.5 / 375), HEIGHT_CONTROLLER_DEFAULT * (15.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (252.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (18.0/ 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont systemFontOfSize:12] text:@"由中国银行保障您的账户资金安全"];
+    [viewFoot addSubview:lableSafe];
     
     [_tableView registerNib:[UINib nibWithNibName:@"MineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
@@ -106,7 +111,7 @@
 
 - (void)viewHeadContent
 {
-    UIImageView *imageRedBG = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (156.0 / 667.0)) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"bei"]];
+    UIImageView *imageRedBG = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 156) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"bei"]];
     [viewHead addSubview:imageRedBG];
     imageRedBG.userInteractionEnabled = YES;
     
@@ -120,6 +125,7 @@
     
 //    邀请按钮
     UIButton *butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - (85 / 375.0) * WIDTH_CONTROLLER_DEFAULT, 31, (75 / 375.0) * WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (25 / 667.0)) backgroundColor:nil textColor:[UIColor whiteColor] titleText:@"我的理财师"];
+//    我的理财师按钮
     [imageRedBG addSubview:butInvitate];
     [butInvitate setBackgroundImage:[UIImage imageNamed:@"anniu"] forState:UIControlStateNormal];
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
@@ -131,7 +137,6 @@
 
 //    昨日收益钱数
     UILabel *labelNum = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT)/2, HEIGHT_CONTROLLER_DEFAULT * (63.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (200.0 / 375.0), 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
-    [imageRedBG addSubview:labelNum];
     
     NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17元"];
     NSRange numString = NSMakeRange(0, [[redStringM string] rangeOfString:@"元"].location);
@@ -207,7 +212,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return HEIGHT_CONTROLLER_DEFAULT * (50.0 / 667.0);
+    return 50;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -80,15 +80,15 @@
 {
     if (indexPath.section == 0) {
         
-        return HEIGHT_CONTROLLER_DEFAULT * (99.0 / 667.0);
+        return 99;
         
     } else if (indexPath.section == 1) {
         
-        return HEIGHT_CONTROLLER_DEFAULT * (102.0 / 667.0);
+        return 102;
         
     } else {
         
-        return HEIGHT_CONTROLLER_DEFAULT * (49.0 / 667.0);
+        return 49;
     }
 }
 
@@ -184,6 +184,8 @@
         [peopleNum addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:REN];
         [cell.labelPeople setAttributedText:peopleNum];
         cell.labelPeople.textAlignment = NSTextAlignmentCenter;
+        
+        cell.labelLine.frame = CGRectMake((cell.viewBottom.frame.size.width - 1)/2, 15, 1, 35);
         
         NSMutableAttributedString *moneyNumStr = [[NSMutableAttributedString alloc] initWithString:@"累计佣金 : 2091元"];
         NSRange total = NSMakeRange(0, [[moneyNumStr string] rangeOfString:@":"].location);

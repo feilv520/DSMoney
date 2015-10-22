@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,19 +15,39 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OPo-oz-ScW">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OPo-oz-ScW">
                         <rect key="frame" x="10" y="5" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="RRB-ms-WAW"/>
+                            <constraint firstAttribute="height" constant="40" id="TO3-KG-miw"/>
+                        </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XIw-3C-C2e">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XIw-3C-C2e">
                         <rect key="frame" x="349" y="17" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="qaa-Iy-sJi"/>
+                            <constraint firstAttribute="width" constant="16" id="sdZ-Ah-Aeh"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATk-hq-u6g">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATk-hq-u6g">
                         <rect key="frame" x="60" y="10" width="257" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="2z6-ow-dph"/>
+                            <constraint firstAttribute="width" constant="257" id="7un-GK-0RG"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="OPo-oz-ScW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-3" id="93x-QO-Wlm"/>
+                    <constraint firstItem="ATk-hq-u6g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="ApF-KQ-5m9"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="XIw-3C-C2e" secondAttribute="trailing" constant="2" id="ZY0-zN-9hy"/>
+                    <constraint firstItem="ATk-hq-u6g" firstAttribute="leading" secondItem="OPo-oz-ScW" secondAttribute="trailing" constant="10" id="dBD-RN-3wl"/>
+                    <constraint firstItem="OPo-oz-ScW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="gg9-H8-zRB"/>
+                    <constraint firstItem="XIw-3C-C2e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="9" id="yOI-ne-SqD"/>
+                </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>
@@ -34,7 +55,7 @@
                 <outlet property="imageRight" destination="XIw-3C-C2e" id="gMs-hw-4Rs"/>
                 <outlet property="labelName" destination="ATk-hq-u6g" id="26T-aM-Ryf"/>
             </connections>
-            <point key="canvasLocation" x="552.5" y="284"/>
+            <point key="canvasLocation" x="272.5" y="145"/>
         </tableViewCell>
     </objects>
 </document>
