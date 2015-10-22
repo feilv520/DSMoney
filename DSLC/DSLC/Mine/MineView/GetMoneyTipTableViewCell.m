@@ -7,6 +7,7 @@
 //
 
 #import "GetMoneyTipTableViewCell.h"
+#import "define.h"
 
 @implementation GetMoneyTipTableViewCell
 

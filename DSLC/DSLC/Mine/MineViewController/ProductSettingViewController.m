@@ -52,7 +52,7 @@
     
     self.view.backgroundColor = TabelVie_Color_Gray;
     
-    self.mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
+    self.mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 84) style:UITableViewStylePlain];
     
     self.mainTableView.backgroundColor = TabelVie_Color_Gray;
     
@@ -81,7 +81,7 @@
                        [UIColor colorWithRed:129/255.0 green:195/255.0 blue:29/255.0 alpha:1],
                        [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:1],nil];
     
-    self.pieChartLeft = [[XYPieChart alloc] initWithFrame:CGRectMake(175, 0, 200, 200)];
+    self.pieChartLeft = [[XYPieChart alloc] initWithFrame:CGRectMake((150 / 375.0) * WIDTH_CONTROLLER_DEFAULT , 0, (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT, (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT)];
     
     [self.pieChartLeft setDelegate:self];
     [self.pieChartLeft setDataSource:self];

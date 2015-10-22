@@ -6,9 +6,12 @@
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface MessageDetailViewController : UIViewController
+@interface MessageDetailViewController : BaseViewController
+
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
+
+@property (nonatomic, strong) NSString *textString;
 
 @end

@@ -26,13 +26,21 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCR-J3-MRU">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCR-J3-MRU">
                         <rect key="frame" x="253" y="50" width="114" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="114" id="mw1-dN-LYw"/>
+                            <constraint firstAttribute="height" constant="21" id="sMX-K8-FxZ"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="PCR-J3-MRU" secondAttribute="trailing" constant="8" id="J3B-5F-wfj"/>
+                    <constraint firstItem="PCR-J3-MRU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="50" id="JJA-Fw-XJg"/>
+                </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
         </tableViewCell>

@@ -20,7 +20,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqN-N2-Cvd">
+                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqN-N2-Cvd">
                         <rect key="frame" x="10" y="45" width="355" height="1"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -36,13 +36,21 @@
                         <color key="textColor" red="0.62352941179999999" green="0.63137254899999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GA9-02-iF3">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="0.00元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GA9-02-iF3">
                         <rect key="frame" x="299" y="95" width="68" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="1dJ-hw-7Oe"/>
+                            <constraint firstAttribute="width" constant="68" id="it0-T0-8ua"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="GA9-02-iF3" secondAttribute="trailing" constant="8" id="5Xr-2G-fmR"/>
+                    <constraint firstItem="GA9-02-iF3" firstAttribute="top" secondItem="qqN-N2-Cvd" secondAttribute="bottom" constant="49" id="hh8-ci-Vn1"/>
+                </constraints>
             </tableViewCellContentView>
         </tableViewCell>
     </objects>

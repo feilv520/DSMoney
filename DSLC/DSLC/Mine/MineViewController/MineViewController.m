@@ -23,6 +23,7 @@
 #import "MyPlannerViewController.h"
 #import "MeViewController.h"
 #import "BigMoneyViewController.h"
+#import "SelectionOfSafe.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -31,6 +32,7 @@
     NSArray *pictureArr;
     UITableView *_tableView;
     UIView *viewHead;
+    UIView *viewFoot;
     MiddleView *middleView;
 }
 
@@ -68,22 +70,38 @@
     _tableView.delegate = self;
     _tableView.showsVerticalScrollIndicator = NO;
     
-    viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (291.0 / 667.0))];
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (320.0 / 667.0))];
+    } else {
+        viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (291.0 / 667.0))];
+    }
     _tableView.tableHeaderView = viewHead;
     viewHead.backgroundColor = [UIColor huibai];
     [self viewHeadContent];
     
-    UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (47.0 / 667.0))];
+    viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (47.0 / 667.0))];
     _tableView.tableFooterView = viewFoot;
     viewFoot.backgroundColor = [UIColor huibai];
     
-    UIImageView *imageSafe = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (87.5 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (15.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (18.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (18.0 / 667.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"iocn_saft"]];
-    [viewFoot addSubview:imageSafe];
-    
-    UILabel *lableSafe = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (105.5 / 375), HEIGHT_CONTROLLER_DEFAULT * (15.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (180.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (18.0/ 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont systemFontOfSize:12] text:@"由中国银行保障您的账户资金安全"];
-    [viewFoot addSubview:lableSafe];
+    [self makeSafeView];
     
     [_tableView registerNib:[UINib nibWithNibName:@"MineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+}
+
+// 保障
+- (void)makeSafeView{
+    
+    NSBundle *rootBundle = [NSBundle mainBundle];
+    
+    SelectionOfSafe *selectionSafeView = (SelectionOfSafe *)[[rootBundle loadNibNamed:@"SelectionOfSafe" owner:nil options:nil] lastObject];
+    
+    CGFloat button_X = WIDTH_CONTROLLER_DEFAULT * (180.0 / 375.0);
+    CGFloat margin_left = ((WIDTH_CONTROLLER_DEFAULT - button_X) / 2 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+    
+    selectionSafeView.frame = CGRectMake(margin_left, HEIGHT_CONTROLLER_DEFAULT * (10.0 / 667.0), button_X, 17);
+    
+    [viewFoot addSubview:selectionSafeView];
+    
 }
 
 - (void)viewHeadContent
@@ -93,7 +111,7 @@
     imageRedBG.userInteractionEnabled = YES;
     
 //    头像按钮
-    UIButton *butHeadPic = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, 22, 50, 50) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    UIButton *butHeadPic = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, 22,WIDTH_CONTROLLER_DEFAULT * (50 / 375.0), WIDTH_CONTROLLER_DEFAULT * (50 / 375.0)) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [imageRedBG addSubview:butHeadPic];
     [butHeadPic setBackgroundImage:[UIImage imageNamed:@"shape-29"] forState:UIControlStateNormal];
     butHeadPic.layer.cornerRadius = 25;
@@ -101,25 +119,39 @@
     [butHeadPic addTarget:self action:@selector(headPictureButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    邀请按钮
-    UIButton *butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 85, 31, 75, 25) backgroundColor:nil textColor:[UIColor whiteColor] titleText:@"我的理财师"];
+    UIButton *butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - (85 / 375.0) * WIDTH_CONTROLLER_DEFAULT, 31, (75 / 375.0) * WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (25 / 667.0)) backgroundColor:nil textColor:[UIColor whiteColor] titleText:@"我的理财师"];
     [imageRedBG addSubview:butInvitate];
     [butInvitate setBackgroundImage:[UIImage imageNamed:@"anniu"] forState:UIControlStateNormal];
-    butInvitate.titleLabel.font = [UIFont systemFontOfSize:13];
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        butInvitate.titleLabel.font = [UIFont systemFontOfSize:11];
+    } else {
+        butInvitate.titleLabel.font = [UIFont systemFontOfSize:13];
+    }
     [butInvitate addTarget:self action:@selector(inviteButton:) forControlEvents:UIControlEventTouchUpInside];
-    
+
 //    昨日收益钱数
-    UILabel *labelNum = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 200)/2, HEIGHT_CONTROLLER_DEFAULT * (63.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (200.0 / 375.0), 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    UILabel *labelNum = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT)/2, HEIGHT_CONTROLLER_DEFAULT * (63.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (200.0 / 375.0), 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     [imageRedBG addSubview:labelNum];
     
     NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17元"];
     NSRange numString = NSMakeRange(0, [[redStringM string] rangeOfString:@"元"].location);
-    [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:35] range:numString];
-    NSRange oneString = NSMakeRange([[redStringM string] length] - 1, 1);
-    [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:oneString];
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:32] range:numString];
+        NSRange oneString = NSMakeRange([[redStringM string] length] - 1, 1);
+        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:oneString];
+
+    } else {
+        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:35] range:numString];
+        NSRange oneString = NSMakeRange([[redStringM string] length] - 1, 1);
+        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:oneString];
+    }
     [labelNum setAttributedText:redStringM];
     
 //    昨日收益文字
-    UILabel *labelZi = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 70)/2, HEIGHT_CONTROLLER_DEFAULT * (110.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (70.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (15.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"昨日收益"];
+    UILabel *labelZi = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - (70 / 375.0) * WIDTH_CONTROLLER_DEFAULT)/2, HEIGHT_CONTROLLER_DEFAULT * (110.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (70.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (15.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"昨日收益"];
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        labelZi.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    }
     [imageRedBG addSubview:labelZi];
     
 //    中间部分xib
@@ -166,8 +198,6 @@
     middleView.butCashMoney.backgroundColor = [UIColor colorWithRed:221.0 / 255.0 green:75.0 / 255.0 blue:72.0 / 255.0 alpha:1.0];
     middleView.butWithdrawal.backgroundColor = [UIColor colorWithRed:41.0 / 255.0 green:168.0 / 255.0 blue:244.0 / 255.0 alpha:1.0];
     middleView.butBigMoney.backgroundColor = [UIColor colorWithRed:138.0 / 255.0 green:206.0 / 255.0 blue:154.0 / 255.0 alpha:1.0];
-    
-//    middleView.butCashMoney.frame.size.width = (WIDTH_CONTROLLER_DEFAULT - 36)/3;
     
     [middleView.butCashMoney addTarget:self action:@selector(rechargeMoney:) forControlEvents:UIControlEventTouchUpInside];
     [middleView.butWithdrawal addTarget:self action:@selector(withdrawMoney:) forControlEvents:UIControlEventTouchUpInside];

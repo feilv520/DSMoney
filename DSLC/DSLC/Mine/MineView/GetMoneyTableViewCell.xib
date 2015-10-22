@@ -20,19 +20,34 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="账户余额(元)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="45" translatesAutoresizingMaskIntoConstraints="NO" id="eht-CB-wqb">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账户余额(元)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="45" translatesAutoresizingMaskIntoConstraints="NO" id="eht-CB-wqb">
                         <rect key="frame" x="8" y="0.0" width="104" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="104" id="CYh-bo-8Ed"/>
+                            <constraint firstAttribute="height" constant="44" id="DEX-JJ-lHu"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="9.93" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwD-64-2aF">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.93" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwD-64-2aF">
                         <rect key="frame" x="120" y="12" width="247" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="3Rq-fD-M0y"/>
+                            <constraint firstAttribute="width" constant="247" id="oif-fe-tzT"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="eht-CB-wqb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="GY3-pf-ruf"/>
+                    <constraint firstItem="gwD-64-2aF" firstAttribute="leading" secondItem="eht-CB-wqb" secondAttribute="trailing" constant="8" id="Xxy-Jx-bKv"/>
+                    <constraint firstAttribute="trailing" secondItem="gwD-64-2aF" secondAttribute="trailing" constant="8" id="kP9-lI-cH5"/>
+                    <constraint firstItem="gwD-64-2aF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="m3r-oe-1Ww"/>
+                    <constraint firstItem="eht-CB-wqb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nNk-TC-uUi"/>
+                </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <point key="canvasLocation" x="368.5" y="415.5"/>

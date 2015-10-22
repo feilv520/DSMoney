@@ -20,18 +20,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="提现金额(元)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="45" translatesAutoresizingMaskIntoConstraints="NO" id="Xst-zu-g5O">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提现金额(元)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="45" translatesAutoresizingMaskIntoConstraints="NO" id="Xst-zu-g5O">
                         <rect key="frame" x="8" y="0.0" width="104" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="104" id="P5n-vp-8gV"/>
+                            <constraint firstAttribute="height" constant="44" id="uaP-84-6vl"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入提现金额" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="LfB-XC-hMg">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入提现金额" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="LfB-XC-hMg">
                         <rect key="frame" x="120" y="0.0" width="255" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="lb6-Cw-kZX"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="Xst-zu-g5O" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="R3s-Yq-eOZ"/>
+                    <constraint firstItem="LfB-XC-hMg" firstAttribute="leading" secondItem="Xst-zu-g5O" secondAttribute="trailing" constant="8" id="TF8-qG-jpi"/>
+                    <constraint firstAttribute="trailing" secondItem="LfB-XC-hMg" secondAttribute="trailing" id="fLf-k6-ZEq"/>
+                    <constraint firstItem="LfB-XC-hMg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="is2-Cq-zYb"/>
+                    <constraint firstItem="Xst-zu-g5O" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="qg5-vt-YXO"/>
+                </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>

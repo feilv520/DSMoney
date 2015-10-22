@@ -10,4 +10,6 @@
 
 @interface GetMoneyTipTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *numberfour;
+
 @end

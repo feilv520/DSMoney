@@ -52,6 +52,34 @@
     [self.mainTableView registerNib:[UINib nibWithNibName:@"GetMoneyNumberTableViewCell" bundle:nil] forCellReuseIdentifier:@"getMoneyN"];
     [self.mainTableView registerNib:[UINib nibWithNibName:@"GetMoneyTipTableViewCell" bundle:nil] forCellReuseIdentifier:@"getMoneyT"];
     
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 260)];
+    
+    footView.backgroundColor = Color_Clear;
+    
+    UIButton *payButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    payButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (51 / 375.0), 40, WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), 43);
+    
+    [payButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
+    [payButton setTitle:@"下一步" forState:UIControlStateNormal];
+    
+    [payButton addTarget:self action:@selector(nextButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [footView addSubview:payButton];
+    
+    NSBundle *rootBundle = [NSBundle mainBundle];
+    
+    SelectionOfSafe *selectionSafeView = (SelectionOfSafe *)[[rootBundle loadNibNamed:@"SelectionOfSafe" owner:nil options:nil] lastObject];
+    
+    CGFloat button_X = WIDTH_CONTROLLER_DEFAULT * (180.0 / 375.0);
+    CGFloat margin_left = ((WIDTH_CONTROLLER_DEFAULT - button_X) / 2 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+    
+    selectionSafeView.frame = CGRectMake(margin_left, 90, button_X, 17);
+    
+    [footView addSubview:selectionSafeView];
+    
+    self.mainTableView.tableFooterView = footView;
+    
     [self.view addSubview:self.mainTableView];
     
 }
@@ -65,34 +93,8 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     if (section == 1) {
-        UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 260)];
-        
-        footView.backgroundColor = Color_Clear;
-        
-        UIButton *payButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        payButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (51 / 375.0), 40, WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), 43);
-        
-        [payButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
-        [payButton setTitle:@"下一步" forState:UIControlStateNormal];
-        
-        [payButton addTarget:self action:@selector(nextButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [footView addSubview:payButton];
-        
-        NSBundle *rootBundle = [NSBundle mainBundle];
-        
-        SelectionOfSafe *selectionSafeView = (SelectionOfSafe *)[[rootBundle loadNibNamed:@"SelectionOfSafe" owner:nil options:nil] lastObject];
-        
-        CGFloat button_X = WIDTH_CONTROLLER_DEFAULT * (180.0 / 375.0);
-        CGFloat margin_left = ((WIDTH_CONTROLLER_DEFAULT - button_X) / 2 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
-        
-        selectionSafeView.frame = CGRectMake(margin_left, 90, button_X, 17);
-        
-        [footView addSubview:selectionSafeView];
-        
-        return footView;
-        
+
+        return nil;
     } else {
         return nil;
     }
@@ -108,7 +110,11 @@
     if (indexPath.section == 0) {
         return 45;
     } else {
-        return 370;
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            return 365;
+        } else {
+            return 345;
+        }
     }
 }
 
@@ -116,7 +122,7 @@
     if (section == 0) {
         return 10;
     } else {
-        return 120;
+        return 0.5;
     }
 
 }
