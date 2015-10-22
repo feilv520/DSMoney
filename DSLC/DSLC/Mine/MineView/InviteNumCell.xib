@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,7 +15,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="101"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKW-U4-lPo">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zKW-U4-lPo">
                         <rect key="frame" x="10" y="0.0" width="355" height="103"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8DZ-g0-POY">
@@ -36,14 +37,30 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPj-xr-P75">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPj-xr-P75">
                                 <rect key="frame" x="53" y="62" width="249" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="249" id="BMZ-bP-6DG"/>
+                                    <constraint firstAttribute="height" constant="27" id="Xrq-ha-ate"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="QPj-xr-P75" secondAttribute="bottom" constant="14" id="7zu-Nm-oAR"/>
+                            <constraint firstAttribute="height" constant="103" id="8dk-OH-QMJ"/>
+                            <constraint firstAttribute="width" constant="355" id="Jiq-0g-cCB"/>
+                            <constraint firstItem="QPj-xr-P75" firstAttribute="leading" secondItem="zKW-U4-lPo" secondAttribute="leading" constant="53" id="WwU-Kz-1Ji"/>
+                            <constraint firstAttribute="trailing" secondItem="QPj-xr-P75" secondAttribute="trailing" constant="53" id="wHI-su-xDx"/>
+                        </constraints>
                     </view>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="zKW-U4-lPo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="8p5-jO-MLr"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="zKW-U4-lPo" secondAttribute="trailing" constant="2" id="w8B-TI-Umd"/>
+                    <constraint firstItem="zKW-U4-lPo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="xjY-R4-dbD"/>
+                </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>

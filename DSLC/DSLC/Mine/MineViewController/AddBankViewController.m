@@ -78,14 +78,13 @@
 //下一步按钮
 - (void)nextButton:(UIButton *)button
 {
-    NSLog(@"1111111111111");
     VerifyViewController *verifyVC = [[VerifyViewController alloc] init];
     [self.navigationController pushViewController:verifyVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return HEIGHT_CONTROLLER_DEFAULT * (50.0 / 667.0);
+    return 50;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

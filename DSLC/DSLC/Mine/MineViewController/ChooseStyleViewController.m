@@ -12,8 +12,9 @@
 #import "UIColor+AddColor.h"
 #import "ChooseCell.h"
 #import "CreatView.h"
+#import "AddCardViewController.h"
 
-@interface ChooseStyleViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ChooseStyleViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 {
     UITableView *_tableView;
@@ -56,6 +57,8 @@
     [_tableView registerNib:[UINib nibWithNibName:@"ChooseStyleCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     _textField = [CreatView creatWithfFrame:CGRectMake(120, 10, WIDTH_CONTROLLER_DEFAULT - 130, 30) setPlaceholder:@"充值金额最小为1元" setTintColor:[UIColor grayColor]];
+    _textField.delegate = self;
+    _textField.keyboardType = UIKeyboardTypeNumberPad;
     _textField.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [_textField addTarget:self action:@selector(textFiledEdit:) forControlEvents:UIControlEventEditingChanged];
     
@@ -73,13 +76,30 @@
         
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [_textField resignFirstResponder];
 }
 
 //下一步按钮
 - (void)buttonNext:(UIButton *)button
 {
-    NSLog(@"下一步");
+    if ([_textField.text length] == 0) {
+        
+        
+    } else {
+        
+        AddCardViewController *addCardVC = [[AddCardViewController alloc] init];
+        [self.navigationController pushViewController:addCardVC animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -158,6 +178,10 @@
             
             [cell.butChoose setBackgroundImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
             button2 = cell.butChoose;
+            
+        } else {
+            
+            [cell.butChoose setTintColor:[UIColor whiteColor]];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

@@ -96,13 +96,16 @@
     _tableView.tableFooterView = viewFoot;
     viewFoot.backgroundColor = [UIColor huibai];
     
-    UIImageView *imageSmallImg = [[UIImageView alloc] initWithFrame:CGRectMake(97, 18, 12, 12)];
+    UIView *viewSafe = [CreatView creatViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 190)/2, 15, 190, 20) backgroundColor:[UIColor clearColor]];
+    [viewFoot addSubview:viewSafe];
+    
+    UIImageView *imageSmallImg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 4, 12, 12)];
     UIImage *imageSmall = [UIImage imageNamed:@"shouyeqiepian_21"];
     imageSmallImg.image = imageSmall;
-    [viewFoot addSubview:imageSmallImg];
+    [viewSafe addSubview:imageSmallImg];
     
-    UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(113, 14, 179, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont systemFontOfSize:11] text:@"由中国银行保障您的账户资金安全"];
-    [viewFoot addSubview:labelName];
+    UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(20, 0, 179, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont systemFontOfSize:11] text:@"由中国银行保障您的账户资金安全"];
+    [viewSafe addSubview:labelName];
     
     [_tableView registerNib:[UINib nibWithNibName:@"FixInvestCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     [_tableView registerNib:[UINib nibWithNibName:@"BasicMessageCell" bundle:nil] forCellReuseIdentifier:@"reuse2"];
@@ -190,7 +193,7 @@
         NSRange tianRange = NSMakeRange([[dayString string] length] - 1, 1);
         [dayString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:tianRange];
         [cell.labelDayNum setAttributedText:dayString];
-        cell.labelDayNum.textAlignment = NSTextAlignmentRight;
+        cell.labelDayNum.textAlignment = NSTextAlignmentCenter;
         
         cell.viewDiSe.backgroundColor = [UIColor qianhuise];
         
@@ -201,7 +204,7 @@
         cell.labelDeadline.text = @"理财期限";
         cell.labelDeadline.textColor = [UIColor zitihui];
         cell.labelDeadline.font = [UIFont systemFontOfSize:12];
-        cell.labelDeadline.textAlignment = NSTextAlignmentRight;
+        cell.labelDeadline.textAlignment = NSTextAlignmentCenter;
         
         cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", @"24.6万"];
         cell.labelSurplus.textColor = [UIColor zitihui];
@@ -366,19 +369,20 @@
 //底部计算器+投资视图
 - (void)showBottonView
 {
-    UIView *viewSuan = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT - 285, 49)];
+    UIView *viewSuan = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/4, 49)];
     [self.viewBotton addSubview:viewSuan];
     viewSuan.backgroundColor = [UIColor colorWithRed:78/255 green:88/255 blue:97/255 alpha:1.0];
     
     UIButton *buttonCal = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonCal.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT - 285, 49);
+    buttonCal.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/4, 49);
     [buttonCal setImage:[UIImage imageNamed:@"750产品详111"] forState:UIControlStateNormal];
     [buttonCal setImageEdgeInsets:UIEdgeInsetsMake(10, 30, 10, 30)];
+    buttonCal.backgroundColor = [UIColor colorWithRed:78/255 green:88/255 blue:97/255 alpha:1.0];
     [buttonCal addTarget:self action:@selector(calendarView) forControlEvents:UIControlEventTouchUpInside];
     [self.viewBotton addSubview:buttonCal];
     
     UIButton *butMakeSure = [UIButton buttonWithType:UIButtonTypeCustom];
-    butMakeSure.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 285, 0, 285, 49);
+    butMakeSure.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/4, 0, WIDTH_CONTROLLER_DEFAULT/4*3, 49);
     [self.viewBotton addSubview:butMakeSure];
     [butMakeSure setTitle:@"投资(1,000元起投)" forState:UIControlStateNormal];
     butMakeSure.titleLabel.font = [UIFont systemFontOfSize:15];

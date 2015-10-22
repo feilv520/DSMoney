@@ -76,7 +76,7 @@
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor huibai];
     
-    viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (215.0 / 667.0))];
+    viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 215)];
     _tableView.tableHeaderView = viewHead;
     viewHead.backgroundColor = [UIColor whiteColor];
     [self viewHeadShow];
@@ -90,14 +90,14 @@
 //tableViewHead内容
 - (void)viewHeadShow
 {
-    imageBottom = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (215.0 / 667.0)) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝"]];
+    imageBottom = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 215) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝"]];
     [viewHead addSubview:imageBottom];
     imageBottom.userInteractionEnabled = YES;
     height = imageBottom.frame.size.height;
 //    让子类自动布局
     imageBottom.autoresizesSubviews = YES;
     
-    imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (144.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (29.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (87.0 / 375.0), WIDTH_CONTROLLER_DEFAULT * (87.0 / 375.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658"]];
+    imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (144.0 / 375.0), 29, WIDTH_CONTROLLER_DEFAULT * (87.0 / 375.0), WIDTH_CONTROLLER_DEFAULT * (87.0 / 375.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658"]];
     [imageBottom addSubview:imageHead];
     imageHead.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
@@ -105,7 +105,7 @@
     [imageHead addSubview:imageCrown];
     imageCrown.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
-    UIButton *buttonAsk = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (26.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (156.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (136.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (37.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"咨询"];
+    UIButton *buttonAsk = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (26.0 / 375.0), 156, WIDTH_CONTROLLER_DEFAULT * (136.0 / 375.0), 37) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"咨询"];
     [imageBottom addSubview:buttonAsk];
     buttonAsk.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     buttonAsk.layer.cornerRadius = 4;
@@ -114,7 +114,7 @@
     buttonAsk.layer.borderColor = [[UIColor whiteColor] CGColor];
     [buttonAsk addTarget:self action:@selector(askQuestionButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butAlready = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (213.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (156.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (136.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (37.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"已申请服务"];
+    UIButton *butAlready = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (213.0 / 375.0), 156, WIDTH_CONTROLLER_DEFAULT * (136.0 / 375.0), 37) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"已申请服务"];
     [imageBottom addSubview:butAlready];
     [butAlready setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
     butAlready.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
@@ -139,7 +139,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return HEIGHT_CONTROLLER_DEFAULT * (50.0 / 667.0);
+    return 50;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -180,6 +180,9 @@
     
     cell.labelLine.backgroundColor = [UIColor grayColor];
     cell.labelLine.alpha = 0.2;
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 
