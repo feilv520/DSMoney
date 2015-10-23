@@ -7,8 +7,15 @@
 //
 
 #import "MoreViewController.h"
+#import "CreatView.h"
+#import "define.h"
+#import "UIColor+AddColor.h"
 
-@interface MoreViewController ()
+@interface MoreViewController () <UITableViewDataSource, UITableViewDelegate>
+
+{
+    UITableView *_tableView;
+}
 
 @end
 
@@ -18,8 +25,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor yellowColor];
+    self.view.backgroundColor = [UIColor huibai];
+    
+    [self naviagationShow];
 }
+
+//导航内容
+- (void)naviagationShow
+{
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
+    self.navigationItem.title = @"更多";
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

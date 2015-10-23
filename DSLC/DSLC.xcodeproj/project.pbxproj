@@ -149,6 +149,8 @@
 		81ED031C1BD0DA35005F4B02 /* AddBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81ED031B1BD0DA35005F4B02 /* AddBankViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81ED03201BD0DDAD005F4B02 /* AddBankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81ED031E1BD0DDAD005F4B02 /* AddBankCell.m */; settings = {ASSET_TAGS = (); }; };
 		81ED03211BD0DDAD005F4B02 /* AddBankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81ED031F1BD0DDAD005F4B02 /* AddBankCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81F5FA0A1BD9E1FE008C38BF /* ChangeNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA091BD9E1FE008C38BF /* ChangeNumViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81F5FA0D1BDA0D2E008C38BF /* RealNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA0C1BDA0D2E008C38BF /* RealNameViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D121FBD1BD4D0CB00B3C1FE /* ProductSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D121FBB1BD4D0CB00B3C1FE /* ProductSettingViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D121FBE1BD4D0CB00B3C1FE /* ProductSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D121FBC1BD4D0CB00B3C1FE /* ProductSettingViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		8D121FD61BD4D4CE00B3C1FE /* SettingTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D121FD41BD4D4CE00B3C1FE /* SettingTitleTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -517,6 +519,10 @@
 		81ED031D1BD0DDAD005F4B02 /* AddBankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBankCell.h; sourceTree = "<group>"; };
 		81ED031E1BD0DDAD005F4B02 /* AddBankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBankCell.m; sourceTree = "<group>"; };
 		81ED031F1BD0DDAD005F4B02 /* AddBankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddBankCell.xib; sourceTree = "<group>"; };
+		81F5FA081BD9E1FE008C38BF /* ChangeNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNumViewController.h; sourceTree = "<group>"; };
+		81F5FA091BD9E1FE008C38BF /* ChangeNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNumViewController.m; sourceTree = "<group>"; };
+		81F5FA0B1BDA0D2E008C38BF /* RealNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameViewController.h; sourceTree = "<group>"; };
+		81F5FA0C1BDA0D2E008C38BF /* RealNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealNameViewController.m; sourceTree = "<group>"; };
 		8D121FBA1BD4D0CB00B3C1FE /* ProductSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductSettingViewController.h; sourceTree = "<group>"; };
 		8D121FBB1BD4D0CB00B3C1FE /* ProductSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductSettingViewController.m; sourceTree = "<group>"; };
 		8D121FBC1BD4D0CB00B3C1FE /* ProductSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductSettingViewController.xib; sourceTree = "<group>"; };
@@ -763,13 +769,6 @@
 			path = "颜色处理类目";
 			sourceTree = "<group>";
 		};
-		812F6BE41BD8DD800000D8E9 /* 绑定手机 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "绑定手机";
-			sourceTree = "<group>";
-		};
 		812F6BE51BD8DDAC0000D8E9 /* 绑定手机 */ = {
 			isa = PBXGroup;
 			children = (
@@ -779,6 +778,8 @@
 				812F6BEA1BD8ED240000D8E9 /* PhoneViewController.m */,
 				812F6BEC1BD8ED310000D8E9 /* MessageViewController.h */,
 				812F6BED1BD8ED310000D8E9 /* MessageViewController.m */,
+				81F5FA081BD9E1FE008C38BF /* ChangeNumViewController.h */,
+				81F5FA091BD9E1FE008C38BF /* ChangeNumViewController.m */,
 			);
 			name = "绑定手机";
 			sourceTree = "<group>";
@@ -978,6 +979,8 @@
 				81BA1BF31BD4CB4300DBA5BE /* WinAPrizeViewController.m */,
 				81ED02C31BD08CFD005F4B02 /* MyInformationViewController.h */,
 				81ED02C41BD08CFD005F4B02 /* MyInformationViewController.m */,
+				81F5FA0B1BDA0D2E008C38BF /* RealNameViewController.h */,
+				81F5FA0C1BDA0D2E008C38BF /* RealNameViewController.m */,
 				8D6692731BD0D02E00CD2CAF /* MyHandViewController.h */,
 				8D6692741BD0D02E00CD2CAF /* MyHandViewController.m */,
 				8D6692751BD0D02E00CD2CAF /* MyHandViewController.xib */,
@@ -988,7 +991,6 @@
 		81D8AD961BC640E900A15E01 /* MineView */ = {
 			isa = PBXGroup;
 			children = (
-				812F6BE41BD8DD800000D8E9 /* 绑定手机 */,
 				817E33A31BD7830E00D05103 /* 我的理财师 */,
 				817E33A21BD7819300D05103 /* 充值Cell */,
 				8D3125D71BD745EC00143B71 /* 提现 */,
@@ -1955,6 +1957,7 @@
 				8DEDE26E1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m in Sources */,
 				8D9011831BD62AFA00E5D62A /* MSelectionView.m in Sources */,
 				817E339F1BD77F6D00D05103 /* ChooseStyleCell.m in Sources */,
+				81F5FA0D1BDA0D2E008C38BF /* RealNameViewController.m in Sources */,
 				8D121FD61BD4D4CE00B3C1FE /* SettingTitleTableViewCell.m in Sources */,
 				8D5DBB8E1BD48F1900F556B9 /* CastDetailTableViewCell.m in Sources */,
 				8110A4F61BC64A5800E38485 /* poi.m in Sources */,
@@ -1962,6 +1965,7 @@
 				8D878CD81BC7548B00844575 /* b.m in Sources */,
 				812F6BEE1BD8ED310000D8E9 /* MessageViewController.m in Sources */,
 				8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */,
+				81F5FA0A1BD9E1FE008C38BF /* ChangeNumViewController.m in Sources */,
 				8D878CDB1BC7549500844575 /* c.m in Sources */,
 				817988361BC94014007C8C3E /* PlanCell.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
