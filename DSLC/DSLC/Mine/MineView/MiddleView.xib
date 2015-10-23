@@ -10,7 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MiddleView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eb7-Ob-6tG">
@@ -46,7 +46,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayT-gk-NKG">
-                    <rect key="frame" x="0.0" y="65" width="375" height="70"/>
+                    <rect key="frame" x="0.0" y="65" width="375" height="62"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EpF-69-Ede">
                             <rect key="frame" x="9" y="9" width="113" height="52"/>
@@ -77,17 +77,17 @@
                     <constraints>
                         <constraint firstItem="8Cb-L6-Anr" firstAttribute="top" secondItem="ayT-gk-NKG" secondAttribute="top" constant="9" id="5mZ-eT-w40"/>
                         <constraint firstAttribute="width" constant="375" id="DN4-AP-wK5"/>
+                        <constraint firstAttribute="width" constant="375" id="FaS-dS-Xi9"/>
                         <constraint firstItem="Zzk-1f-hoX" firstAttribute="width" secondItem="EpF-69-Ede" secondAttribute="width" id="IJ3-V5-V6F"/>
                         <constraint firstItem="EpF-69-Ede" firstAttribute="top" secondItem="ayT-gk-NKG" secondAttribute="top" constant="9" id="Jdq-ss-4sn"/>
                         <constraint firstItem="Zzk-1f-hoX" firstAttribute="top" secondItem="ayT-gk-NKG" secondAttribute="top" constant="9" id="Tff-hf-IDw"/>
                         <constraint firstItem="8Cb-L6-Anr" firstAttribute="leading" secondItem="EpF-69-Ede" secondAttribute="trailing" constant="9" id="djf-Ap-ewJ"/>
-                        <constraint firstAttribute="width" secondItem="ayT-gk-NKG" secondAttribute="height" multiplier="75:14" id="f1M-Qz-8gE"/>
+                        <constraint firstAttribute="width" secondItem="ayT-gk-NKG" secondAttribute="height" multiplier="75:14" constant="42.85714285714289" id="f1M-Qz-8gE"/>
                         <constraint firstItem="EpF-69-Ede" firstAttribute="leading" secondItem="ayT-gk-NKG" secondAttribute="leading" constant="9" id="gMw-xb-m7U"/>
                         <constraint firstItem="8Cb-L6-Anr" firstAttribute="width" secondItem="EpF-69-Ede" secondAttribute="width" id="hZ6-L4-0CW"/>
+                        <constraint firstAttribute="height" constant="62" id="jhM-Gg-0gV"/>
                         <constraint firstAttribute="trailing" secondItem="Zzk-1f-hoX" secondAttribute="trailing" constant="9" id="v37-im-N72"/>
                         <constraint firstItem="Zzk-1f-hoX" firstAttribute="leading" secondItem="8Cb-L6-Anr" secondAttribute="trailing" constant="9" id="xSj-ux-Vv9"/>
-                        <constraint firstAttribute="width" constant="375" id="FaS-dS-Xi9"/>
-                        <constraint firstAttribute="height" constant="70" id="jhM-Gg-0gV"/>
                     </constraints>
                 </view>
             </subviews>
@@ -133,7 +133,7 @@
                 <outlet property="viewDiBu" destination="ayT-gk-NKG" id="fuh-pz-Nx3"/>
                 <outlet property="viewLine" destination="eb7-Ob-6tG" id="IHq-ln-6nv"/>
             </connections>
-            <point key="canvasLocation" x="-581.5" y="126.5"/>
+            <point key="canvasLocation" x="-581.5" y="122.5"/>
         </view>
     </objects>
     <resources>

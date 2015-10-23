@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="CenturyGothic.TTF">
@@ -51,10 +50,9 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRn-oc-xD7">
-                    <rect key="frame" x="10" y="225" width="357" height="312"/>
+                    <rect key="frame" x="10" y="225" width="357" height="15"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="312" id="HTk-YB-fnk"/>
-                        <constraint firstAttribute="width" secondItem="hRn-oc-xD7" secondAttribute="height" multiplier="119:104" id="IaT-DQ-2bs"/>
+                        <constraint firstAttribute="width" constant="357" id="Y0H-wg-5hw"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
                     <color key="textColor" red="0.45882352939999999" green="0.46666666670000001" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -65,23 +63,14 @@
             <constraints>
                 <constraint firstItem="v2J-hc-Se8" firstAttribute="leading" secondItem="QEU-Cc-rk7" secondAttribute="leading" id="MkD-rf-Zqe"/>
                 <constraint firstItem="M8q-Jc-wxG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="13" id="QW9-R2-Dqn"/>
-                <constraint firstAttribute="trailing" secondItem="v2J-hc-Se8" secondAttribute="trailing" constant="10" id="SDN-Fz-81l"/>
                 <constraint firstItem="M8q-Jc-wxG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="UI6-dd-F66"/>
+                <constraint firstItem="hRn-oc-xD7" firstAttribute="top" secondItem="v2J-hc-Se8" secondAttribute="bottom" constant="28" id="XYr-ZJ-mgb"/>
+                <constraint firstItem="hRn-oc-xD7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="fuI-pw-DXO"/>
                 <constraint firstItem="v2J-hc-Se8" firstAttribute="top" secondItem="QEU-Cc-rk7" secondAttribute="bottom" constant="8" symbolic="YES" id="gN6-7z-pIM"/>
-                <constraint firstItem="v2J-hc-Se8" firstAttribute="trailing" secondItem="hRn-oc-xD7" secondAttribute="trailing" id="kP3-f8-vjS"/>
-                <constraint firstItem="hRn-oc-xD7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="keV-qy-P8R"/>
                 <constraint firstItem="QEU-Cc-rk7" firstAttribute="top" secondItem="M8q-Jc-wxG" secondAttribute="bottom" constant="8" id="lYV-ca-Nnq"/>
                 <constraint firstItem="QEU-Cc-rk7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="uhm-O2-yH6"/>
-                <constraint firstAttribute="trailing" secondItem="hRn-oc-xD7" secondAttribute="trailing" constant="10" id="wCB-Nn-MQi"/>
-                <constraint firstItem="hRn-oc-xD7" firstAttribute="top" secondItem="v2J-hc-Se8" secondAttribute="bottom" constant="28" id="ywj-GD-zT2"/>
-                <constraint firstAttribute="top" secondItem="v2J-hc-Se8" secondAttribute="bottom" id="zzV-7R-T61"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="zzV-7R-T61"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="291.5" y="396.5"/>
         </view>
     </objects>

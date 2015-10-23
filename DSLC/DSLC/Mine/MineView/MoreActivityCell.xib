@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,16 +15,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2z-0v-cA0">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2z-0v-cA0">
                         <rect key="frame" x="8" y="12" width="246" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="246" id="26V-aL-EUi"/>
+                            <constraint firstAttribute="width" secondItem="Q2z-0v-cA0" secondAttribute="height" multiplier="246:25" id="YtR-z3-v0U"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AMC-JT-GH5">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AMC-JT-GH5">
                         <rect key="frame" x="351" y="17" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="RGZ-XT-vcw"/>
+                            <constraint firstAttribute="height" constant="16" id="uVL-F3-HPK"/>
+                        </constraints>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="AMC-JT-GH5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="XVL-mk-Dfq"/>
+                    <constraint firstAttribute="trailing" secondItem="AMC-JT-GH5" secondAttribute="trailing" constant="8" id="aQ0-ZR-ITQ"/>
+                    <constraint firstAttribute="bottom" secondItem="Q2z-0v-cA0" secondAttribute="bottom" constant="12" id="qE6-Oc-wh1"/>
+                    <constraint firstItem="Q2z-0v-cA0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="vkv-b2-4oU"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="imageRight" destination="AMC-JT-GH5" id="1rb-W1-BSE"/>

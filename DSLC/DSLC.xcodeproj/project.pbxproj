@@ -204,6 +204,7 @@
 		8D878CDB1BC7549500844575 /* c.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CDA1BC7549500844575 /* c.m */; settings = {ASSET_TAGS = (); }; };
 		8D878CDE1BC7549F00844575 /* d.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CDD1BC7549F00844575 /* d.m */; settings = {ASSET_TAGS = (); }; };
 		8D878CE11BC754AD00844575 /* e.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CE01BC754AD00844575 /* e.m */; settings = {ASSET_TAGS = (); }; };
+		8D87AE3E1BD9E29400F1D761 /* Flag.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D87AE3D1BD9E29400F1D761 /* Flag.plist */; settings = {ASSET_TAGS = (); }; };
 		8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D88A4DB1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D88A4DE1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D88A4DC1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		8D88A4E11BCE087400EE22F5 /* emptyyuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D88A4DF1BCE087400EE22F5 /* emptyyuan@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -595,6 +596,7 @@
 		8D878CDD1BC7549F00844575 /* d.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = d.m; sourceTree = "<group>"; };
 		8D878CDF1BC754AD00844575 /* e.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e.h; sourceTree = "<group>"; };
 		8D878CE01BC754AD00844575 /* e.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = e.m; sourceTree = "<group>"; };
+		8D87AE3D1BD9E29400F1D761 /* Flag.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Flag.plist; path = Base/Flag.plist; sourceTree = "<group>"; };
 		8D88A4DA1BCDFED400EE22F5 /* FSelectionPayTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSelectionPayTypeViewController.h; sourceTree = "<group>"; };
 		8D88A4DB1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSelectionPayTypeViewController.m; sourceTree = "<group>"; };
 		8D88A4DC1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSelectionPayTypeViewController.xib; sourceTree = "<group>"; };
@@ -1501,6 +1503,7 @@
 		8D9356CC1BC607C500BC2BFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8D87AE3D1BD9E29400F1D761 /* Flag.plist */,
 				8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */,
 				8D5AEB481BC8F560004FBDD3 /* CenturyGothic.TTF */,
 				8D9356DD1BC607C500BC2BFA /* Info.plist */,
@@ -1652,7 +1655,7 @@
 				TargetAttributes = {
 					8D9356C81BC607C500BC2BFA = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 85T9N5H2LW;
+						DevelopmentTeam = Z7J5CQFNQ3;
 					};
 					8D9356E11BC607C500BC2BFA = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -1841,6 +1844,7 @@
 				8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */,
 				8DEDE1E11BCD0035008086D3 /* icon_ICBC@2x.png in Resources */,
 				81ED03211BD0DDAD005F4B02 /* AddBankCell.xib in Resources */,
+				8D87AE3E1BD9E29400F1D761 /* Flag.plist in Resources */,
 				8D6EFBAC1BC78B02009FE101 /* shouyeqiepian7500_32highlight.png in Resources */,
 				817DD49C1BCF547E00042B09 /* jiantou@2x.png in Resources */,
 				8D9011BC1BD6337C00E5D62A /* anniuS@3x.png in Resources */,
@@ -2136,13 +2140,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				INFOPLIST_FILE = DSLC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = GCCF.DSLC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos9.0;
+				PROVISIONING_PROFILE = "c1eb9888-e179-4081-9619-99a79d60ff75";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -2150,13 +2156,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				INFOPLIST_FILE = DSLC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = GCCF.DSLC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos9.0;
+				PROVISIONING_PROFILE = "c1eb9888-e179-4081-9619-99a79d60ff75";
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

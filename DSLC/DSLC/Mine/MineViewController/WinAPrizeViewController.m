@@ -58,11 +58,11 @@
 {
     if (indexPath.section == 0) {
         
-        return HEIGHT_CONTROLLER_DEFAULT * (50.0 / 667.0);
+        return 50;
         
     } else {
         
-        return HEIGHT_CONTROLLER_DEFAULT * (72.0 / 667.0);
+        return 72;
     }
 }
 

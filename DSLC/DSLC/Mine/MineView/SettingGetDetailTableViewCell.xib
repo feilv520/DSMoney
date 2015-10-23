@@ -19,8 +19,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="7501111.png" translatesAutoresizingMaskIntoConstraints="NO" id="xKr-xw-1XA">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="7501111.png" translatesAutoresizingMaskIntoConstraints="NO" id="xKr-xw-1XA">
                         <rect key="frame" x="347" y="15" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="361-ec-nL9"/>
+                            <constraint firstAttribute="height" constant="20" id="tae-xd-Jdt"/>
+                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="国丞创投基金wt9101" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddB-ZR-1SM">
                         <rect key="frame" x="8" y="17" width="157" height="15"/>
@@ -29,6 +33,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="xKr-xw-1XA" secondAttribute="trailing" constant="8" id="5Bc-rQ-OfY"/>
+                    <constraint firstItem="xKr-xw-1XA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="zZ8-C8-LkH"/>
+                </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
         </tableViewCell>

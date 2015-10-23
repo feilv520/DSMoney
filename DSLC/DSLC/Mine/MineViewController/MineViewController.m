@@ -84,11 +84,6 @@
     viewFoot.backgroundColor = [UIColor huibai];
     
     [self makeSafeView];
-    UIImageView *imageSafe = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (87.5 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (15.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (18.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (18.0 / 667.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"iocn_saft"]];
-    [viewFoot addSubview:imageSafe];
-    
-    UILabel *lableSafe = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (105.5 / 375), HEIGHT_CONTROLLER_DEFAULT * (15.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (252.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (18.0/ 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont systemFontOfSize:12] text:@"由中国银行保障您的账户资金安全"];
-    [viewFoot addSubview:lableSafe];
     
     [_tableView registerNib:[UINib nibWithNibName:@"MineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
@@ -151,6 +146,7 @@
         [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:oneString];
     }
     [labelNum setAttributedText:redStringM];
+    [imageRedBG addSubview:labelNum];
     
 //    昨日收益文字
     UILabel *labelZi = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - (70 / 375.0) * WIDTH_CONTROLLER_DEFAULT)/2, HEIGHT_CONTROLLER_DEFAULT * (110.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (70.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (15.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"昨日收益"];
@@ -164,7 +160,7 @@
     middleView = (MiddleView *)[[root loadNibNamed:@"MiddleView" owner:nil options:nil] lastObject];
     
     [viewHead addSubview:middleView];
-    middleView.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (156.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (135.0 / 667.0));
+    middleView.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (156.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (127 / 667.0));
     middleView.backgroundColor = [UIColor whiteColor];
     
     middleView.viewLine.backgroundColor = [UIColor grayColor];
