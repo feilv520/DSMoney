@@ -54,6 +54,7 @@
     [imageReturn addGestureRecognizer:tap];
     
 }
+
 //导航返回按钮
 - (void)buttonReturn:(UIBarButtonItem *)bar
 {

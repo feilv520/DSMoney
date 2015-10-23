@@ -13,6 +13,7 @@
 #import "MyInformationCell.h"
 #import "MyBankViewController.h"
 #import "BindingPhoneViewController.h"
+#import "RealNameViewController.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -164,6 +165,11 @@
             
             BindingPhoneViewController *bindindVC = [[BindingPhoneViewController alloc] init];
             [self.navigationController pushViewController:bindindVC animated:YES];
+            
+        } else if (indexPath.row == 2) {
+            
+            RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
+            [self.navigationController pushViewController:realNameVC animated:YES];
         }
     }
 }
