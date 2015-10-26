@@ -11,11 +11,15 @@
 #import "define.h"
 #import "UIColor+AddColor.h"
 #import "MoreCell.h"
+#import "HelpViewController.h"
+#import "ServiceViewController.h"
 
 @interface MoreViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tableView;
+    NSArray *imageArr;
+    NSArray *titleArr;
 }
 
 @end
@@ -48,12 +52,30 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.backgroundColor = [UIColor huibai];
+    
+    UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
+    _tableView.tableFooterView = viewFoot;
+    [_tableView registerNib:[UINib nibWithNibName:@"MoreCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 
+    imageArr = @[@"bangzhu", @"lianxikefu", @"yijianfankui", @"guanyu"];
+    titleArr = @[@"帮助中心", @"联系客服", @"意见反馈", @"关于大圣理财"];
+    
+    UIButton *butExit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"退出登录"];
+    [viewFoot addSubview:butExit];
+    [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+    [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+    [butExit addTarget:self action:@selector(buttonExit:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return titleArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -65,7 +87,34 @@
         cell = [[MoreCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
     }
     
+    cell.imageViewHead.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageArr objectAtIndex:indexPath.row]]];
+    cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+    
+    cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
+    cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0) {
+        
+        HelpViewController *helpVC = [[HelpViewController alloc] init];
+        [self.navigationController pushViewController:helpVC animated:YES];
+        
+    } else if (indexPath.row == 1) {
+        
+        ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
+        [self.navigationController pushViewController:serviceVC animated:YES];
+    }
+}
+
+- (void)buttonExit:(UIButton *)button
+{
+    NSLog(@"666666");
 }
 
 - (void)didReceiveMemoryWarning {

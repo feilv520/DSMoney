@@ -1,5 +1,5 @@
 //
-//  MoreCell.h
+//  HelpCell.h
 //  DSLC
 //
 //  Created by ios on 15/10/23.
@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MoreCell : UITableViewCell
+@interface HelpCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewHead;
-@property (weak, nonatomic) IBOutlet UIImageView *imageRight;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewRight;
 
 @end
