@@ -190,11 +190,14 @@
         NSMutableAttributedString *moneyNumStr = [[NSMutableAttributedString alloc] initWithString:@"累计佣金 : 2091元"];
         NSRange total = NSMakeRange(0, [[moneyNumStr string] rangeOfString:@":"].location);
         [moneyNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:total];
+        
         NSRange num = NSMakeRange(6, [[moneyNumStr string] rangeOfString:@"元"].location - 6);
         [moneyNumStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:num];
         [moneyNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:num];
+        
         NSRange yuan = NSMakeRange([[moneyNumStr string] length] - 1, 1);
         [moneyNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:yuan];
+        
         [cell.labelMoney setAttributedText:moneyNumStr];
         cell.labelMoney.textAlignment = NSTextAlignmentCenter;
         

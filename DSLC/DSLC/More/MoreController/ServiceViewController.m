@@ -141,7 +141,14 @@
     UILabel *labelCallOut = [CreatView creatWithLabelFrame:CGRectMake(0, 40, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor greenColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     [viewWhite addSubview:labelCallOut];
     NSMutableAttributedString *callOutStr = [[NSMutableAttributedString alloc] initWithString:@"拨打客服电话 : 400-254-569?"];
-//    NSRange *numString = NSMakeRange(<#NSUInteger loc#>, <#NSUInteger len#>)
+    NSRange callString = NSMakeRange(0, [[callOutStr string] rangeOfString:@":"].location);
+    [callOutStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:callString];
+    
+//    NSRange numString
+    
+    [labelCallOut setAttributedText:callOutStr];
+    labelCallOut.textAlignment = NSTextAlignmentCenter;
+    
 }
 
 //黑色遮罩层消失
