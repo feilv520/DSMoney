@@ -503,6 +503,10 @@
 		8191E2271BDDF5F0000A6E8C /* zaixiankefu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zaixiankefu@3x.png"; sourceTree = "<group>"; };
 		8191E22C1BDE00DC000A6E8C /* cuo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cuo@2x.png"; sourceTree = "<group>"; };
 		8191E22D1BDE00DC000A6E8C /* cuo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cuo@3x.png"; sourceTree = "<group>"; };
+		8191E2301BDE0BE1000A6E8C /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		8191E2311BDE0BE1000A6E8C /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		8191E2331BDE0E7C000A6E8C /* SuggestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestionViewController.h; sourceTree = "<group>"; };
+		8191E2341BDE0E7C000A6E8C /* SuggestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestionViewController.m; sourceTree = "<group>"; };
 		819C3AB41BD47E57008D2CFD /* MyRedBagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRedBagViewController.h; sourceTree = "<group>"; };
 		819C3AB51BD47E57008D2CFD /* MyRedBagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRedBagViewController.m; sourceTree = "<group>"; };
 		819C3AB71BD483C4008D2CFD /* MyRedBagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRedBagCell.h; sourceTree = "<group>"; };
@@ -1411,6 +1415,10 @@
 				8191E2101BDDB9DE000A6E8C /* NewHandViewController.m */,
 				8191E21C1BDDF03D000A6E8C /* ServiceViewController.h */,
 				8191E21D1BDDF03D000A6E8C /* ServiceViewController.m */,
+				8191E2331BDE0E7C000A6E8C /* SuggestionViewController.h */,
+				8191E2341BDE0E7C000A6E8C /* SuggestionViewController.m */,
+				8191E2301BDE0BE1000A6E8C /* AboutViewController.h */,
+				8191E2311BDE0BE1000A6E8C /* AboutViewController.m */,
 			);
 			path = MoreController;
 			sourceTree = "<group>";
@@ -2084,6 +2092,7 @@
 				81F5FA0A1BD9E1FE008C38BF /* ChangeNumViewController.m in Sources */,
 				8D878CDB1BC7549500844575 /* c.m in Sources */,
 				817988361BC94014007C8C3E /* PlanCell.m in Sources */,
+				8191E2321BDE0BE1000A6E8C /* AboutViewController.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
 				8D1921CD1BD4E2060038195E /* XYPieChart.m in Sources */,
 				818063AE1BD6437D00E83492 /* PayMoneyViewController.m in Sources */,
@@ -2119,6 +2128,7 @@
 				818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
 				81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */,
+				8191E2351BDE0E7C000A6E8C /* SuggestionViewController.m in Sources */,
 				8D121FE01BD4D92600B3C1FE /* SettingPieTableViewCell.m in Sources */,
 				8D3125E61BD7689200143B71 /* BaseViewController.m in Sources */,
 				817E338C1BD7558700D05103 /* MeViewController.m in Sources */,

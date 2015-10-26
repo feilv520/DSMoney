@@ -13,6 +13,8 @@
 #import "MoreCell.h"
 #import "HelpViewController.h"
 #import "ServiceViewController.h"
+#import "AboutViewController.h"
+#import "SuggestionViewController.h"
 
 @interface MoreViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -109,6 +111,16 @@
         
         ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
         [self.navigationController pushViewController:serviceVC animated:YES];
+        
+    } else if (indexPath.row == 2) {
+        
+        SuggestionViewController *suggestVC = [[SuggestionViewController alloc] init];
+        [self.navigationController pushViewController:suggestVC animated:YES];
+        
+    } else {
+        
+        AboutViewController *aboutVC = [[AboutViewController alloc] init];
+        [self.navigationController pushViewController:aboutVC animated:YES];
     }
 }
 
