@@ -283,6 +283,8 @@
 		8DD1809E1BD730E100F71CEA /* GetMoneyNumberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD1809C1BD730E100F71CEA /* GetMoneyNumberTableViewCell.xib */; };
 		8DD180A21BD731E000F71CEA /* GetMoneyTipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD180A01BD731E000F71CEA /* GetMoneyTipTableViewCell.m */; };
 		8DD180A31BD731E000F71CEA /* GetMoneyTipTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD180A11BD731E000F71CEA /* GetMoneyTipTableViewCell.xib */; };
+		8DD4C2471BDE1BE600C4C58C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8191E2311BDE0BE1000A6E8C /* AboutViewController.m */; };
+		8DD4C2481BDE1BFA00C4C58C /* SuggestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8191E2341BDE0E7C000A6E8C /* SuggestionViewController.m */; };
 		8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */; };
 		8DEDE1B31BCCFEB5008086D3 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1AD1BCCFEB5008086D3 /* arrow@2x.png */; };
 		8DEDE1B41BCCFEB5008086D3 /* arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1AE1BCCFEB5008086D3 /* arrow@3x.png */; };
@@ -2026,6 +2028,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DD4C2481BDE1BFA00C4C58C /* SuggestionViewController.m in Sources */,
+				8DD4C2471BDE1BE600C4C58C /* AboutViewController.m in Sources */,
 				81ED030B1BD09BC8005F4B02 /* MyInformationCell.m in Sources */,
 				8D5DBB891BD4839B00F556B9 /* CastDownTableViewCell.m in Sources */,
 				8DD1809D1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m in Sources */,
