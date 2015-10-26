@@ -116,18 +116,25 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    buttonBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC.view addSubview:buttonBlack];
-    buttonBlack.alpha = 0.3;
-    [buttonBlack addTarget:self action:@selector(buttonDisappearFromView:) forControlEvents:UIControlEventTouchUpInside];
-    
-    viewWhite = [CreatView creatViewWithFrame:CGRectMake(50, HEIGHT_CONTROLLER_DEFAULT/2 - 100, WIDTH_CONTROLLER_DEFAULT - 100, HEIGHT_CONTROLLER_DEFAULT/4 - 20) backgroundColor:[UIColor whiteColor]];
-    [app.tabBarVC.view addSubview:viewWhite];
-    viewWhite.layer.cornerRadius = 3;
-    viewWhite.layer.masksToBounds = YES;
-    
-    [self viewWhiteShow];
+    if (indexPath.section == 1) {
+        
+        buttonBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [app.tabBarVC.view addSubview:buttonBlack];
+        buttonBlack.alpha = 0.3;
+        [buttonBlack addTarget:self action:@selector(buttonDisappearFromView:) forControlEvents:UIControlEventTouchUpInside];
+        
+        viewWhite = [CreatView creatViewWithFrame:CGRectMake(50, HEIGHT_CONTROLLER_DEFAULT/2 - 100, WIDTH_CONTROLLER_DEFAULT - 100, HEIGHT_CONTROLLER_DEFAULT/4 - 20) backgroundColor:[UIColor whiteColor]];
+        [app.tabBarVC.view addSubview:viewWhite];
+        viewWhite.layer.cornerRadius = 3;
+        viewWhite.layer.masksToBounds = YES;
+        
+        [self viewWhiteShow];
+        
+    } else {
+        
+        NSLog(@"在线客服");
+    }
 }
 
 //白色弹框
@@ -138,17 +145,28 @@
     [viewWhite addSubview:butCancle];
     [butCancle addTarget:self action:@selector(buttonCanclePress:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *labelCallOut = [CreatView creatWithLabelFrame:CGRectMake(0, 40, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor greenColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    UILabel *labelCallOut = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, viewWhite.frame.size.width, 30)];
     [viewWhite addSubview:labelCallOut];
+    
     NSMutableAttributedString *callOutStr = [[NSMutableAttributedString alloc] initWithString:@"拨打客服电话 : 400-254-569?"];
     NSRange callString = NSMakeRange(0, [[callOutStr string] rangeOfString:@":"].location);
     [callOutStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:callString];
     
-//    NSRange numString
+    NSRange numString = NSMakeRange(8, [[callOutStr string] rangeOfString:@"?"].location - 8);
+    [callOutStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:numString];
+    [callOutStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:numString];
+    
+    NSRange yuan = NSMakeRange([[callOutStr string] length] - 1, 1);
+    [callOutStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:yuan];
     
     [labelCallOut setAttributedText:callOutStr];
     labelCallOut.textAlignment = NSTextAlignmentCenter;
     
+    UIButton *butMakeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, 90, viewWhite.frame.size.width - 40, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"呼叫"];
+    [viewWhite addSubview:butMakeSure];
+    [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+    [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+    [butMakeSure addTarget:self action:@selector(callMakeSureButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 //黑色遮罩层消失
@@ -169,6 +187,11 @@
     
     button = nil;
     viewWhite = nil;
+}
+
+- (void)callMakeSureButton:(UIButton *)button
+{
+    NSLog(@"呼叫");
 }
 
 - (void)didReceiveMemoryWarning {
