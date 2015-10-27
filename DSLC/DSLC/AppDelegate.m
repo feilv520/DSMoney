@@ -12,6 +12,7 @@
 #import "MineViewController.h"
 #import "MoreViewController.h"
 #import "MyHandViewController.h"
+#import "FileOfManage.h"
 
 @interface AppDelegate ()
 {
@@ -19,26 +20,29 @@
     NSArray *butGrayArr;
     NSArray *butColorArr;
     NSMutableArray *buttonArr;
-    
 }
-@property (nonatomic, strong) NSArray *flagArr;
+@property (nonatomic, strong) NSDictionary *flagDic;
 @end
 
 @implementation AppDelegate
 
-- (NSArray *)flagArr{
-    if (_flagArr == nil) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"Flag.plist" ofType:nil];
-        NSArray *array = [NSArray arrayWithContentsOfFile:path];
-        _flagArr = array;
+- (NSDictionary *)flagDic{
+    if (_flagDic == nil) {
+
+        if (![FileOfManage ExistOfFile]) {
+            [FileOfManage createWithFile];
+        }
+        
+        NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile]];
+        _flagDic = dics;
     }
-    return _flagArr;
+    return _flagDic;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    NSDictionary *dic = [self.flagArr firstObject];
+    NSDictionary *dic = self.flagDic;
     
     NSString *flag = [dic objectForKey:@"FlagWithVC"];
     

@@ -7,6 +7,7 @@
 //
 
 #import "MyHandButton.h"
+#import "define.h"
 
 @interface MyHandButton ()
 
@@ -16,9 +17,9 @@
 @end
 
 // 只读的变量名,在其他的类中不能生成相同的变量名
+CGFloat btnW = 74;
+CGFloat btnH = 74;
 CGFloat const btnCount = 9;
-CGFloat const btnW = 74;
-CGFloat const btnH = 74;
 CGFloat const viewY = 300;
 NSInteger const columnCount = 3;
 #define viewW [UIScreen mainScreen].bounds.size.width
@@ -52,6 +53,8 @@ NSInteger const columnCount = 3;
 // 布局按钮
 - (void)AddButton{
     CGFloat height = 0;
+    btnW = (btnW / 375) * WIDTH_CONTROLLER_DEFAULT;
+    btnH = (btnH / 375) * WIDTH_CONTROLLER_DEFAULT;
     for (NSInteger i = 0; i < btnCount; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         
@@ -63,10 +66,21 @@ NSInteger const columnCount = 3;
         
         NSInteger row = i / columnCount;//第几行
         NSInteger column = i % columnCount;//第几列
+        
+        CGFloat btnX;
+        CGFloat btnY;
+        
         // 边距
-        CGFloat margin = (self.frame.size.width - columnCount *btnW) / (columnCount + 1);
-        CGFloat btnX = margin + column * (btnW + margin);
-        CGFloat btnY = row * (btnW + margin);
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            CGFloat margin = 30;
+            btnX = margin + column * (btnW + margin);
+            btnY = row * (btnW + margin);
+        } else {
+            CGFloat margin = (self.frame.size.width - columnCount * btnW) / (columnCount + 1);
+            btnX = margin + column * (btnW + margin);
+            btnY = row * (btnW + margin);
+        }
+        
         
         button.frame = CGRectMake(btnX, btnY, btnW, btnH);
         height = btnH + btnY;
