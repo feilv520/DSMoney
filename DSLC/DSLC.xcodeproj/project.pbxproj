@@ -232,7 +232,6 @@
 		8D878CD81BC7548B00844575 /* b.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CD71BC7548B00844575 /* b.m */; };
 		8D878CDB1BC7549500844575 /* c.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CDA1BC7549500844575 /* c.m */; };
 		8D878CE11BC754AD00844575 /* e.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CE01BC754AD00844575 /* e.m */; };
-		8D87AE3E1BD9E29400F1D761 /* Flag.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D87AE3D1BD9E29400F1D761 /* Flag.plist */; };
 		8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D88A4DB1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m */; };
 		8D88A4DE1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D88A4DC1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib */; };
 		8D88A4E11BCE087400EE22F5 /* emptyyuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D88A4DF1BCE087400EE22F5 /* emptyyuan@2x.png */; };
@@ -287,6 +286,8 @@
 		8DD180A31BD731E000F71CEA /* GetMoneyTipTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD180A11BD731E000F71CEA /* GetMoneyTipTableViewCell.xib */; };
 		8DD4C2471BDE1BE600C4C58C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8191E2311BDE0BE1000A6E8C /* AboutViewController.m */; };
 		8DD4C2481BDE1BFA00C4C58C /* SuggestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8191E2341BDE0E7C000A6E8C /* SuggestionViewController.m */; };
+		8DE61D9B1BDF20D70031A5CE /* FileOfManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE61D9A1BDF20D70031A5CE /* FileOfManage.m */; settings = {ASSET_TAGS = (); }; };
+		8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE61D9E1BDF284E0031A5CE /* ProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
 		8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */; };
 		8DEDE1B31BCCFEB5008086D3 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1AD1BCCFEB5008086D3 /* arrow@2x.png */; };
 		8DEDE1B41BCCFEB5008086D3 /* arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1AE1BCCFEB5008086D3 /* arrow@3x.png */; };
@@ -668,7 +669,6 @@
 		8D878CDA1BC7549500844575 /* c.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = c.m; sourceTree = "<group>"; };
 		8D878CDF1BC754AD00844575 /* e.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e.h; sourceTree = "<group>"; };
 		8D878CE01BC754AD00844575 /* e.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = e.m; sourceTree = "<group>"; };
-		8D87AE3D1BD9E29400F1D761 /* Flag.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Flag.plist; path = Base/Flag.plist; sourceTree = "<group>"; };
 		8D88A4DA1BCDFED400EE22F5 /* FSelectionPayTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSelectionPayTypeViewController.h; sourceTree = "<group>"; };
 		8D88A4DB1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSelectionPayTypeViewController.m; sourceTree = "<group>"; };
 		8D88A4DC1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSelectionPayTypeViewController.xib; sourceTree = "<group>"; };
@@ -737,6 +737,10 @@
 		8DD1809F1BD731E000F71CEA /* GetMoneyTipTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyTipTableViewCell.h; sourceTree = "<group>"; };
 		8DD180A01BD731E000F71CEA /* GetMoneyTipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyTipTableViewCell.m; sourceTree = "<group>"; };
 		8DD180A11BD731E000F71CEA /* GetMoneyTipTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetMoneyTipTableViewCell.xib; sourceTree = "<group>"; };
+		8DE61D991BDF20D70031A5CE /* FileOfManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileOfManage.h; sourceTree = "<group>"; };
+		8DE61D9A1BDF20D70031A5CE /* FileOfManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileOfManage.m; sourceTree = "<group>"; };
+		8DE61D9D1BDF284E0031A5CE /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
+		8DE61D9E1BDF284E0031A5CE /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DEDE1AD1BCCFEB5008086D3 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
 		8DEDE1AE1BCCFEB5008086D3 /* arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@3x.png"; sourceTree = "<group>"; };
@@ -824,6 +828,8 @@
 				810D25251BC7917B00DAF83F /* CreatView.h */,
 				810D25261BC7917B00DAF83F /* CreatView.m */,
 				8D55DB041BC7B53A004649CE /* define.h */,
+				8DE61D991BDF20D70031A5CE /* FileOfManage.h */,
+				8DE61D9A1BDF20D70031A5CE /* FileOfManage.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -938,6 +944,7 @@
 		81C2DAA51BC755F10007AC48 /* Three */ = {
 			isa = PBXGroup;
 			children = (
+				8DE61D9C1BDF284E0031A5CE /* TIPProgressHUD */,
 				8D1921CB1BD4E2060038195E /* XYPieChart.h */,
 				8D1921CC1BD4E2060038195E /* XYPieChart.m */,
 				8DEDE2671BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.h */,
@@ -1625,7 +1632,6 @@
 		8D9356CC1BC607C500BC2BFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8D87AE3D1BD9E29400F1D761 /* Flag.plist */,
 				8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */,
 				8D5AEB481BC8F560004FBDD3 /* CenturyGothic.TTF */,
 				8D9356DD1BC607C500BC2BFA /* Info.plist */,
@@ -1652,6 +1658,15 @@
 				8D9356F31BC607C500BC2BFA /* Info.plist */,
 			);
 			path = DSLCUITests;
+			sourceTree = "<group>";
+		};
+		8DE61D9C1BDF284E0031A5CE /* TIPProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				8DE61D9D1BDF284E0031A5CE /* ProgressHUD.h */,
+				8DE61D9E1BDF284E0031A5CE /* ProgressHUD.m */,
+			);
+			path = TIPProgressHUD;
 			sourceTree = "<group>";
 		};
 		8DEDE1AC1BCCFEA2008086D3 /* 公共 */ = {
@@ -1980,7 +1995,6 @@
 				8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */,
 				8DEDE1E11BCD0035008086D3 /* icon_ICBC@2x.png in Resources */,
 				81ED03211BD0DDAD005F4B02 /* AddBankCell.xib in Resources */,
-				8D87AE3E1BD9E29400F1D761 /* Flag.plist in Resources */,
 				8D6EFBAC1BC78B02009FE101 /* shouyeqiepian7500_32highlight.png in Resources */,
 				817DD49C1BCF547E00042B09 /* jiantou@2x.png in Resources */,
 				8D9011BC1BD6337C00E5D62A /* anniuS@3x.png in Resources */,
@@ -2089,6 +2103,7 @@
 				817E33741BD72D6800D05103 /* MyPlannerViewController.m in Sources */,
 				813FD4FF1BCE71110050E884 /* FBalancePaymentViewController.m in Sources */,
 				81C8BBCF1BDA3535005B9DFF /* HelpCell.m in Sources */,
+				8DE61D9B1BDF20D70031A5CE /* FileOfManage.m in Sources */,
 				8D5DBB841BD4838200F556B9 /* CastUpTableViewCell.m in Sources */,
 				818063971BD5D3C700E83492 /* MyInvitationViewController.m in Sources */,
 				8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */,
@@ -2137,6 +2152,7 @@
 				81BA1BFD1BD4DE7000DBA5BE /* MoreActivityCell.m in Sources */,
 				81BA1C0F1BD4FE2600DBA5BE /* MyNewsCell.m in Sources */,
 				8DD180981BD72E5900F71CEA /* GetMoneyTableViewCell.m in Sources */,
+				8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */,
 				81F5FA111BDA1C2E008C38BF /* MoreCell.m in Sources */,
 				8180639B1BD5D7E500E83492 /* MyInviteCell.m in Sources */,
 				8DEDE1F21BCD05F9008086D3 /* Calendar.m in Sources */,
