@@ -191,7 +191,8 @@
 
 - (void)callMakeSureButton:(UIButton *)button
 {
-    NSLog(@"呼叫");
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%lld", 13354288036]];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (void)didReceiveMemoryWarning {
