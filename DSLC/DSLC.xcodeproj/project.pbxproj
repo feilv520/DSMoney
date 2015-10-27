@@ -145,6 +145,12 @@
 		81BA1C131BD5000700DBA5BE /* icon04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BA1C111BD5000700DBA5BE /* icon04@2x.png */; };
 		81BA1C141BD5000700DBA5BE /* icon05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BA1C121BD5000700DBA5BE /* icon05@2x.png */; };
 		81C138121BDF61F30088E792 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C138111BDF61F30088E792 /* LoginViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81C138171BDF64D80088E792 /* LoginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C138151BDF64D80088E792 /* LoginCell.m */; settings = {ASSET_TAGS = (); }; };
+		81C138181BDF64D80088E792 /* LoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C138161BDF64D80088E792 /* LoginCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81C1381E1BDF6D5E0088E792 /* iconfont-mima@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C1381A1BDF6D5E0088E792 /* iconfont-mima@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C1381F1BDF6D5E0088E792 /* iconfont-mima@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C1381B1BDF6D5E0088E792 /* iconfont-mima@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C138201BDF6D5E0088E792 /* iconfont-phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C1381C1BDF6D5E0088E792 /* iconfont-phone@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C138211BDF6D5E0088E792 /* iconfont-phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C1381D1BDF6D5E0088E792 /* iconfont-phone@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */; };
 		81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAB1BC7563A0007AC48 /* SelectionViewController.m */; };
 		81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAE1BC756630007AC48 /* MoreViewController.m */; };
@@ -544,6 +550,13 @@
 		81BA1C121BD5000700DBA5BE /* icon05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon05@2x.png"; sourceTree = "<group>"; };
 		81C138101BDF61F30088E792 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		81C138111BDF61F30088E792 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		81C138141BDF64D80088E792 /* LoginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginCell.h; sourceTree = "<group>"; };
+		81C138151BDF64D80088E792 /* LoginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginCell.m; sourceTree = "<group>"; };
+		81C138161BDF64D80088E792 /* LoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginCell.xib; sourceTree = "<group>"; };
+		81C1381A1BDF6D5E0088E792 /* iconfont-mima@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-mima@2x.png"; sourceTree = "<group>"; };
+		81C1381B1BDF6D5E0088E792 /* iconfont-mima@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-mima@3x.png"; sourceTree = "<group>"; };
+		81C1381C1BDF6D5E0088E792 /* iconfont-phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-phone@2x.png"; sourceTree = "<group>"; };
+		81C1381D1BDF6D5E0088E792 /* iconfont-phone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-phone@3x.png"; sourceTree = "<group>"; };
 		81C2DAA71BC755FF0007AC48 /* KKTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKTabBarViewController.h; sourceTree = "<group>"; };
 		81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKTabBarViewController.m; sourceTree = "<group>"; };
 		81C2DAAA1BC7563A0007AC48 /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
@@ -935,10 +948,32 @@
 		81C1380F1BDF61F30088E792 /* 登录 */ = {
 			isa = PBXGroup;
 			children = (
+				81C138131BDF64B20088E792 /* 自定义cell */,
 				81C138101BDF61F30088E792 /* LoginViewController.h */,
 				81C138111BDF61F30088E792 /* LoginViewController.m */,
 			);
 			path = "登录";
+			sourceTree = "<group>";
+		};
+		81C138131BDF64B20088E792 /* 自定义cell */ = {
+			isa = PBXGroup;
+			children = (
+				81C138141BDF64D80088E792 /* LoginCell.h */,
+				81C138151BDF64D80088E792 /* LoginCell.m */,
+				81C138161BDF64D80088E792 /* LoginCell.xib */,
+			);
+			path = "自定义cell";
+			sourceTree = "<group>";
+		};
+		81C138191BDF6D5E0088E792 /* 图图 */ = {
+			isa = PBXGroup;
+			children = (
+				81C1381A1BDF6D5E0088E792 /* iconfont-mima@2x.png */,
+				81C1381B1BDF6D5E0088E792 /* iconfont-mima@3x.png */,
+				81C1381C1BDF6D5E0088E792 /* iconfont-phone@2x.png */,
+				81C1381D1BDF6D5E0088E792 /* iconfont-phone@3x.png */,
+			);
+			path = "图图";
 			sourceTree = "<group>";
 		};
 		81C2DAA51BC755F10007AC48 /* Three */ = {
@@ -970,6 +1005,7 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				81C138191BDF6D5E0088E792 /* 图图 */,
 				8191E2241BDDF5F0000A6E8C /* lianxikefu@2x.png */,
 				8191E2251BDDF5F0000A6E8C /* lianxikefu@3x.png */,
 				8191E2261BDDF5F0000A6E8C /* zaixiankefu@2x.png */,
@@ -1882,6 +1918,7 @@
 				8D5DBB8A1BD4839B00F556B9 /* CastDownTableViewCell.xib in Resources */,
 				817E33831BD733D100D05103 /* 9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝@3x.png in Resources */,
 				817DD4A71BCF547E00042B09 /* touxiang@3x.png in Resources */,
+				81C138201BDF6D5E0088E792 /* iconfont-phone@2x.png in Resources */,
 				8DEDE1DE1BCD0035008086D3 /* icon_CB@3x.png in Resources */,
 				818DEDFE1BCDF15B00454A0E /* FConfirmMoney.xib in Resources */,
 				8DEDE1E61BCD0040008086D3 /* greenyuan@3x.png in Resources */,
@@ -1900,6 +1937,7 @@
 				81C8BBCB1BDA2F8D005B9DFF /* yijianfankui@3x.png in Resources */,
 				817E33871BD733D100D05103 /* duigou@3x.png in Resources */,
 				817E338F1BD756B700D05103 /* 组-4-拷贝@2x.png in Resources */,
+				81C138181BDF64D80088E792 /* LoginCell.xib in Resources */,
 				8D6EFBA71BC78B02009FE101 /* shouyeqiepian750_30.png in Resources */,
 				81BA1BFE1BD4DE7000DBA5BE /* MoreActivityCell.xib in Resources */,
 				8184EC4B1BCCD13C003F440D /* CashMoneyCell.xib in Resources */,
@@ -1917,6 +1955,7 @@
 				8191E22E1BDE00DC000A6E8C /* cuo@2x.png in Resources */,
 				8DEDE1D01BCCFFA5008086D3 /* blueyuan@2x.png in Resources */,
 				817E33AD1BD78ED500D05103 /* iconfont@2x.png in Resources */,
+				81C138211BDF6D5E0088E792 /* iconfont-phone@3x.png in Resources */,
 				8D9011B61BD6337C00E5D62A /* 7@3x.png in Resources */,
 				8DD180A31BD731E000F71CEA /* GetMoneyTipTableViewCell.xib in Resources */,
 				8D121FBE1BD4D0CB00B3C1FE /* ProductSettingViewController.xib in Resources */,
@@ -1984,6 +2023,7 @@
 				817DD4911BCF547E00042B09 /* anniu@3x.png in Resources */,
 				817DD4A21BCF547E00042B09 /* shape-29@2x.png in Resources */,
 				817E33951BD7576600D05103 /* MeCell.xib in Resources */,
+				81C1381E1BDF6D5E0088E792 /* iconfont-mima@2x.png in Resources */,
 				818063A81BD5E3CA00E83492 /* picture@2x.png in Resources */,
 				8DFA5C951BCE64D900AED2B2 /* FQuickPayViewController.xib in Resources */,
 				81BA1C131BD5000700DBA5BE /* icon04@2x.png in Resources */,
@@ -2034,6 +2074,7 @@
 				8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */,
 				8D9011A31BD6337C00E5D62A /* 10@2x.png in Resources */,
 				817E33AF1BD78ED500D05103 /* yuan@2x.png in Resources */,
+				81C1381F1BDF6D5E0088E792 /* iconfont-mima@3x.png in Resources */,
 				8DEDE1EA1BCD00B0008086D3 /* btn_gray@3x.png in Resources */,
 				8D6692871BD0E53000CD2CAF /* gesture_node_highlighted@2x.png in Resources */,
 			);
@@ -2066,6 +2107,7 @@
 				8D5DBB891BD4839B00F556B9 /* CastDownTableViewCell.m in Sources */,
 				8DD1809D1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m in Sources */,
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
+				81C138171BDF64D80088E792 /* LoginCell.m in Sources */,
 				8D3125EA1BD7798000143B71 /* ForgetPasswordViewController.m in Sources */,
 				8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */,
 				818063A01BD5D87100E83492 /* InviteNumCell.m in Sources */,
