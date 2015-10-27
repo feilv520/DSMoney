@@ -33,42 +33,16 @@
 
 @implementation MyRedBagViewController
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:NO];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:YES];
-    [app.tabBarVC setLabelLineHidden:YES];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self naviagationShow];
+    [self.navigationItem setTitle:@"红包活动"];
     [self tableViewShow];
     
     consult = YES;
-}
-
-//导航内容
-- (void)naviagationShow
-{
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
-    
-    self.navigationItem.title = @"红包活动";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
-    UIImageView *imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageReturn];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonReturn:)];
-    [imageReturn addGestureRecognizer:tap];
 }
 
 //内容展示
@@ -317,25 +291,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-//导航返回按钮
-- (void)buttonReturn:(UIBarButtonItem *)bar
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:NO];
-    [app.tabBarVC setLabelLineHidden:NO];
-}
 
 /*
 #pragma mark - Navigation

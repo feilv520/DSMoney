@@ -6,9 +6,9 @@
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 #import "AppDelegate.h"
 
-@interface FDetailViewController : UIViewController
+@interface FDetailViewController : BaseViewController
 
 @end

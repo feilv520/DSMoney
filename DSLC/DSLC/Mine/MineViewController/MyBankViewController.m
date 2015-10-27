@@ -34,20 +34,8 @@
     
     self.view.backgroundColor = [UIColor huibai];
     
-    [self navigationContent];
+    [self.navigationItem setTitle:@"我的银行卡"];
     [self showViewControllerContent];
-}
-
-//navigation
-- (void)navigationContent
-{
-    self.navigationItem.title = @"我的银行卡";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
-    UIImageView *imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageReturn];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonReturn:)];
-    [imageReturn addGestureRecognizer:tap];
 }
 
 //视图内容
@@ -104,12 +92,6 @@
 {
     AddBankViewController *addBankVC = [[AddBankViewController alloc] init];
     [self.navigationController pushViewController:addBankVC animated:YES];
-}
-
-//导航返回按钮
-- (void)buttonReturn:(UIBarButtonItem *)bar
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

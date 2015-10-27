@@ -6,9 +6,10 @@
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "AppDelegate.h"
 
-@interface MyRedBagViewController : UIViewController
+#import "AppDelegate.h"
+#import "BaseViewController.h"
+
+@interface MyRedBagViewController : BaseViewController
 
 @end

@@ -35,6 +35,7 @@
     
     [self showTableView];
     
+    [self.navigationItem setTitle:@"提现"];
 }
 
 // 创建TableView

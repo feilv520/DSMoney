@@ -25,27 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.navigationItem.title = @"选择支付";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
-    [self showNavigationReturn];
-}
-
-//修改导航栏的默认返回按钮
-- (void)showNavigationReturn
-{
-    UIImageView *imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"750产品111"]];
-    imageReturn.userInteractionEnabled = YES;
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageReturn];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnBack:)];
-    [imageReturn addGestureRecognizer:tap];
-}
-
-//导航返回按钮
-- (void)returnBack:(UIBarButtonItem *)bar
-{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationItem setTitle:@"选择支付"];
 }
 
 // 余额支付方法

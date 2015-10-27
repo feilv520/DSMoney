@@ -42,7 +42,7 @@
 - (void)naviagationShow
 {
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
+    self.navigationController.navigationBar.barTintColor = [UIColor greenColor];
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     

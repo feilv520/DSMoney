@@ -107,6 +107,7 @@
 		8184EC461BCCD12A003F440D /* RedBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC441BCCD12A003F440D /* RedBagCell.xib */; };
 		8184EC4A1BCCD13C003F440D /* CashMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC481BCCD13C003F440D /* CashMoneyCell.m */; };
 		8184EC4B1BCCD13C003F440D /* CashMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC491BCCD13C003F440D /* CashMoneyCell.xib */; };
+		81898B781BDF180600DD4E44 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81898B771BDF180600DD4E44 /* UIPlaceHolderTextView.m */; settings = {ASSET_TAGS = (); }; };
 		818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 818DEDFB1BCDF13500454A0E /* FConfirmMoney.m */; };
 		818DEDFE1BCDF15B00454A0E /* FConfirmMoney.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818DEDFD1BCDF15B00454A0E /* FConfirmMoney.xib */; };
 		8190A3051BD876EB002B53F5 /* AddCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8190A3041BD876EB002B53F5 /* AddCardViewController.m */; };
@@ -129,6 +130,7 @@
 		819C3ABB1BD483C4008D2CFD /* MyRedBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819C3AB91BD483C4008D2CFD /* MyRedBagCell.xib */; };
 		819C3AC71BD49862008D2CFD /* GrabBagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C3AC51BD49862008D2CFD /* GrabBagCell.m */; };
 		819C3AC81BD49862008D2CFD /* GrabBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819C3AC61BD49862008D2CFD /* GrabBagCell.xib */; };
+		81B2A2581BDF4F220004B6E0 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B2A2571BDF4F220004B6E0 /* LoginViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81BA1BF41BD4CB4300DBA5BE /* WinAPrizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BA1BF31BD4CB4300DBA5BE /* WinAPrizeViewController.m */; };
 		81BA1BF81BD4DBAA00DBA5BE /* WinAPrizeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BA1BF61BD4DBAA00DBA5BE /* WinAPrizeCell.m */; };
 		81BA1BF91BD4DBAA00DBA5BE /* WinAPrizeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81BA1BF71BD4DBAA00DBA5BE /* WinAPrizeCell.xib */; };
@@ -481,6 +483,8 @@
 		8184EC471BCCD13C003F440D /* CashMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashMoneyCell.h; sourceTree = "<group>"; };
 		8184EC481BCCD13C003F440D /* CashMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashMoneyCell.m; sourceTree = "<group>"; };
 		8184EC491BCCD13C003F440D /* CashMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashMoneyCell.xib; sourceTree = "<group>"; };
+		81898B761BDF180600DD4E44 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		81898B771BDF180600DD4E44 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		818DEDFA1BCDF13500454A0E /* FConfirmMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FConfirmMoney.h; sourceTree = "<group>"; };
 		818DEDFB1BCDF13500454A0E /* FConfirmMoney.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FConfirmMoney.m; sourceTree = "<group>"; };
 		818DEDFD1BCDF15B00454A0E /* FConfirmMoney.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FConfirmMoney.xib; sourceTree = "<group>"; };
@@ -517,6 +521,8 @@
 		819C3AC41BD49862008D2CFD /* GrabBagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabBagCell.h; sourceTree = "<group>"; };
 		819C3AC51BD49862008D2CFD /* GrabBagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabBagCell.m; sourceTree = "<group>"; };
 		819C3AC61BD49862008D2CFD /* GrabBagCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GrabBagCell.xib; sourceTree = "<group>"; };
+		81B2A2561BDF4F220004B6E0 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		81B2A2571BDF4F220004B6E0 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		81BA1BF21BD4CB4300DBA5BE /* WinAPrizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinAPrizeViewController.h; sourceTree = "<group>"; };
 		81BA1BF31BD4CB4300DBA5BE /* WinAPrizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinAPrizeViewController.m; sourceTree = "<group>"; };
 		81BA1BF51BD4DBAA00DBA5BE /* WinAPrizeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinAPrizeCell.h; sourceTree = "<group>"; };
@@ -812,6 +818,8 @@
 			children = (
 				8D3125E41BD7689200143B71 /* BaseViewController.h */,
 				8D3125E51BD7689200143B71 /* BaseViewController.m */,
+				81898B761BDF180600DD4E44 /* UIPlaceHolderTextView.h */,
+				81898B771BDF180600DD4E44 /* UIPlaceHolderTextView.m */,
 				811F9E041BC7D29900CAD6F5 /* 颜色处理类目 */,
 				810D25251BC7917B00DAF83F /* CreatView.h */,
 				810D25261BC7917B00DAF83F /* CreatView.m */,
@@ -905,6 +913,15 @@
 				817E33771BD7303200D05103 /* MyPlannerCell.xib */,
 			);
 			name = "我的理财师";
+			sourceTree = "<group>";
+		};
+		81B2A2551BDF4F090004B6E0 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				81B2A2561BDF4F220004B6E0 /* LoginViewController.h */,
+				81B2A2571BDF4F220004B6E0 /* LoginViewController.m */,
+			);
+			path = "登录";
 			sourceTree = "<group>";
 		};
 		81BA1BFF1BD4E1ED00DBA5BE /* computerImage */ = {
@@ -1590,6 +1607,7 @@
 		8D9356CB1BC607C500BC2BFA /* DSLC */ = {
 			isa = PBXGroup;
 			children = (
+				81B2A2551BDF4F090004B6E0 /* 登录 */,
 				810D25241BC7916C00DAF83F /* Base */,
 				81C2DAB01BC757A60007AC48 /* Image */,
 				81C2DAA51BC755F10007AC48 /* Three */,
@@ -2060,6 +2078,7 @@
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
 				8D90117F1BD61B3400E5D62A /* TranctionTableViewCell.m in Sources */,
 				818063AB1BD61A7E00E83492 /* VerifyViewController.m in Sources */,
+				81B2A2581BDF4F220004B6E0 /* LoginViewController.m in Sources */,
 				812F6BEB1BD8ED240000D8E9 /* PhoneViewController.m in Sources */,
 				8DFA5C941BCE64D900AED2B2 /* FQuickPayViewController.m in Sources */,
 				81BA1C0B1BD4FCB100DBA5BE /* MyNewsViewController.m in Sources */,
@@ -2087,6 +2106,7 @@
 				8D121FD61BD4D4CE00B3C1FE /* SettingTitleTableViewCell.m in Sources */,
 				8D5DBB8E1BD48F1900F556B9 /* CastDetailTableViewCell.m in Sources */,
 				8191E2111BDDB9DE000A6E8C /* NewHandViewController.m in Sources */,
+				81898B781BDF180600DD4E44 /* UIPlaceHolderTextView.m in Sources */,
 				8110A4F61BC64A5800E38485 /* poi.m in Sources */,
 				819C3ABA1BD483C4008D2CFD /* MyRedBagCell.m in Sources */,
 				8D878CD81BC7548B00844575 /* b.m in Sources */,

@@ -1,13 +1,13 @@
 //
-//  MyBankViewController.h
+//  LoginViewController.h
 //  DSLC
 //
-//  Created by ios on 15/10/16.
+//  Created by ios on 15/10/27.
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
 #import "BaseViewController.h"
 
-@interface MyBankViewController : BaseViewController
+@interface LoginViewController : BaseViewController
 
 @end

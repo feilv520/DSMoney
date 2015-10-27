@@ -1,33 +1,27 @@
 //
-//  MessageDetailViewController.m
+//  LoginViewController.m
 //  DSLC
 //
-//  Created by 马成铭 on 15/10/19.
+//  Created by ios on 15/10/27.
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import "MessageDetailViewController.h"
+#import "LoginViewController.h"
 
-@interface MessageDetailViewController ()
+@interface LoginViewController ()
 
 @end
 
-@implementation MessageDetailViewController
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    self.textLabel.text = self.textString;
-    
-    [self.navigationItem setTitle:@"消息详情"];
-}
+@implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor huibai];
+    
+    [self.navigationItem setTitle:@"登录大圣理财"];
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
