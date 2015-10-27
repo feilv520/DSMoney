@@ -52,6 +52,7 @@
     
     if ([flag isEqualToString:@"NO"]) {
         SelectionViewController *selectionVC = [[SelectionViewController alloc] init];
+        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
         
         FinancingViewController *financingVC = [[FinancingViewController alloc] init];
         UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:financingVC];
@@ -62,7 +63,7 @@
         MoreViewController *moreVC = [[MoreViewController alloc] init];
         UINavigationController *navigation4 = [[UINavigationController alloc] initWithRootViewController:moreVC];
         
-        viewControllerArr = @[selectionVC, navigation2, navigation3, navigation4];
+        viewControllerArr = @[navigation1, navigation2, navigation3, navigation4];
         
         butGrayArr = @[@"shouyeqiepian7500_25", @"shouyeqiepian750_28", @"shouyeqiepian750_30", @"shouyeqiepian750_32"];
         butColorArr = @[@"shouyeqiepian750_25_highlight", @"shouyeqiepian7500_28highlight", @"shouyeqiepian7500_30highlight", @"shouyeqiepian7500_32highlight"];

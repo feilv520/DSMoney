@@ -15,6 +15,7 @@
 #import "CastProduceViewController.h"
 #import "ProductSettingViewController.h"
 #import "MessageDetailViewController.h"
+#import "NewHandViewController.h"
 
 @interface SelectionViewController ()<UIScrollViewDelegate>{
 
@@ -30,6 +31,12 @@
 @end
 
 @implementation SelectionViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewDidAppear:NO];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,7 +62,7 @@
 
 // 添加控件
 - (void)makeBackgroundView{
-    backgroundScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+    backgroundScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
     backgroundScrollView.backgroundColor = mainColor;
     backgroundScrollView.scrollEnabled = NO;
     
@@ -131,6 +138,7 @@
         buttonView.frame = CGRectMake(bVX, 0, buttonX, buttonY);
         
         [buttonView.selectionButton setImage:[UIImage imageNamed:[photoArray objectAtIndex:i]] forState:UIControlStateNormal];
+        buttonView.selectionButton.tag = i;
         buttonView.titleLabel.text = [nameArray objectAtIndex:i];
         
         [buttonView.selectionButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -318,13 +326,18 @@
     UIButton *button = (UIButton *)sender;
     SelectionV *sView = (SelectionV *)button.superview;
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:sView.titleLabel.text message:sView.titleLabel.text preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
-    [alertController addAction:cancelAction];
-    [alertController addAction:okAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+    if (button.tag == 2) {
+        NewHandViewController *newHandVC = [[NewHandViewController alloc] init];
+        [self.navigationController pushViewController:newHandVC animated:YES];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:sView.titleLabel.text message:sView.titleLabel.text preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:cancelAction];
+        [alertController addAction:okAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
     
 }
 /*
