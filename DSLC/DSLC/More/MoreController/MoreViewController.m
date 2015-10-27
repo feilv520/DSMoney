@@ -15,6 +15,7 @@
 #import "ServiceViewController.h"
 #import "AboutViewController.h"
 #import "SuggestionViewController.h"
+#import "LoginViewController.h"
 
 @interface MoreViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -95,6 +96,8 @@
     cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
     cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 
@@ -126,7 +129,8 @@
 
 - (void)buttonExit:(UIButton *)button
 {
-    NSLog(@"666666");
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:loginVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

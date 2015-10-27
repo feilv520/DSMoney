@@ -6,9 +6,9 @@
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface FBalancePaymentViewController : UIViewController
+@interface FBalancePaymentViewController : BaseViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *labelMonth1;
 @property (weak, nonatomic) IBOutlet UILabel *labelLine1;

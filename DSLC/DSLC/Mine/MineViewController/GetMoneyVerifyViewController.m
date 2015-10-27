@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.navigationItem setTitle:@"提现验证"];
     [self setQRButton];
 }
 - (IBAction)forgetButtonAction:(id)sender {

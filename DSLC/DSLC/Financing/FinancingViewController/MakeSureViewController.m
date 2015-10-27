@@ -29,26 +29,13 @@
 
 @implementation MakeSureViewController
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:YES];
-    [app.tabBarVC setLabelLineHidden:YES];
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationItem.title = @"确认投资";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
-
-    [self showNavigation];
+    [self.navigationItem setTitle:@"确认投资"];
     [self showTableView];
     
     self.titleArr = @[@"账户余额", @"我的红包"];
@@ -57,29 +44,12 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:NO];
-    [app.tabBarVC setLabelLineHidden:NO];
     
     [self.controlBlack removeFromSuperview];
     [self.viewWhite removeFromSuperview];
     
     self.controlBlack = nil;
     self.viewWhite = nil;
-}
-
-//导航栏修改返回按钮
-- (void)showNavigation
-{
-    UIImageView *imageViewBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    UIImage *imageBack = [UIImage imageNamed:@"750产品111"];
-    imageViewBack.image = imageBack;
-    imageViewBack.userInteractionEnabled = YES;
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageViewBack];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnBack:)];
-    [imageViewBack addGestureRecognizer:tap];
 }
 
 //TableView展示
@@ -414,12 +384,6 @@
 {
     FSelectionPayTypeViewController *fSelectionPayVC = [[FSelectionPayTypeViewController alloc] init];
     [self.navigationController pushViewController:fSelectionPayVC animated:YES];
-}
-
-//返回按钮
-- (void)returnBack:(UIBarButtonItem *)bar
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

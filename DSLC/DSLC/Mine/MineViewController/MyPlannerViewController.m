@@ -46,23 +46,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self naviagationShow];
+    [self.navigationItem setTitle:@"我的理财师"];
     [self tableViewShow];
-}
-
-//导航内容
-- (void)naviagationShow
-{
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
-    
-    self.navigationItem.title = @"我的理财师";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
-    UIImageView *imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageReturn];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonReturn:)];
-    [imageReturn addGestureRecognizer:tap];
 }
 
 - (void)tableViewShow

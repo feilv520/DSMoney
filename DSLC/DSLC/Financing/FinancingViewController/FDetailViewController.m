@@ -33,9 +33,6 @@
 {
     [super viewWillAppear:animated];
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:YES];
-    [app.tabBarVC setLabelLineHidden:YES];
     
     self.viewBotton = [[UIControl alloc] initWithFrame:CGRectMake(0, app.tabBarVC.view.frame.size.height - 49, WIDTH_CONTROLLER_DEFAULT, app.tabBarVC.view.frame.size.height)];
     [app.tabBarVC.view addSubview:self.viewBotton];
@@ -53,36 +50,9 @@
 
     titleArr = @[@"产品描述", @"资产安全", @"投资须知"];
     
-    self.navigationItem.title = @"产品详情";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self.navigationItem setTitle:@"产品详情"];
     
-    [self showNavigationRetuenBack];
     [self showTableView];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:NO];
-    [app.tabBarVC setLabelLineHidden:NO];
-    
-    [self.viewBotton removeFromSuperview];
-    
-}
-
-//修改导航栏的默认返回按钮
-- (void)showNavigationRetuenBack
-{
-    UIImageView *imageViewBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    UIImage *imageBack = [UIImage imageNamed:@"750产品111"];
-    imageViewBack.image = imageBack;
-    imageViewBack.userInteractionEnabled = YES;
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageViewBack];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnBackBar:)];
-    [imageViewBack addGestureRecognizer:tap];
 }
 
 //头部分区的tableView展示

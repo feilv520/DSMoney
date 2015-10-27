@@ -30,55 +30,15 @@
 
 @implementation MyInformationViewController
 
-- (NSDictionary *)flagDic{
-    if (_flagDic == nil) {
-        
-        if (![FileOfManage ExistOfFile]) {
-            [FileOfManage createWithFile];
-        }
-        
-        NSLog(@"%@",[FileOfManage PathOfFile]);
-        
-        NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile]];
-        _flagDic = dics;
-    }
-    return _flagDic;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:YES];
-    [app.tabBarVC setLabelLineHidden:YES];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
-    self.navigationController.navigationBar.translucent = NO;
     
-    [self navigationContent];
+    [self.navigationItem setTitle:@"我的资料"];
+    
     [self tableViewShow];
-}
-
-//navigation
-- (void)navigationContent
-{
-    self.navigationItem.title = @"我的资料";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
-    UIImageView *imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageReturn];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonReturn:)];
-    [imageReturn addGestureRecognizer:tap];
 }
 
 //tableView展示
@@ -210,22 +170,6 @@
     [usersDic writeToFile:[FileOfManage PathOfFile] atomically:YES];
     
 }
-
-//导航返回按钮
-- (void)buttonReturn:(UIBarButtonItem *)bar
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:NO];
-    [app.tabBarVC setLabelLineHidden:NO];
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
