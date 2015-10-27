@@ -8,7 +8,11 @@
 
 #import "SuggestionViewController.h"
 
-@interface SuggestionViewController ()
+@interface SuggestionViewController () <UITextViewDelegate>
+
+{
+    UITextView *_textView;
+}
 
 @end
 
@@ -41,13 +45,23 @@
     [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [butMakeSure addTarget:self action:@selector(buttonMakeSureSubmit:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *labelStat = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 50, HEIGHT_CONTROLLER_DEFAULT - 20, 40, 20) backgroundColor:[UIColor greenColor] textColor:nil textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"138/500"];
+    UILabel *labelStat = [CreatView creatWithLabelFrame:CGRectMake(viewWhite.frame.size.width - 65, viewWhite.frame.size.height - 20, 55, 15) backgroundColor:[UIColor whiteColor] textColor:nil textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"138/500"];
     [viewWhite addSubview:labelStat];
+    
+    _textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, viewWhite.frame.size.width - 20, viewWhite.frame.size.height - 20 - 15)];
+    [viewWhite addSubview:_textView];
+    _textView.delegate = self;
+    _textView.layer.cornerRadius = 3;
+    _textView.layer.masksToBounds = YES;
+    _textView.layer.borderWidth = 0.5;
+    _textView.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+    
 }
 
+//提交按钮
 - (void)buttonMakeSureSubmit:(UIButton *)button
 {
-    
+    NSLog(@"提交");
 }
 
 - (void)didReceiveMemoryWarning {
