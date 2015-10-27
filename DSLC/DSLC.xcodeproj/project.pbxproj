@@ -130,7 +130,6 @@
 		819C3ABB1BD483C4008D2CFD /* MyRedBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819C3AB91BD483C4008D2CFD /* MyRedBagCell.xib */; };
 		819C3AC71BD49862008D2CFD /* GrabBagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C3AC51BD49862008D2CFD /* GrabBagCell.m */; };
 		819C3AC81BD49862008D2CFD /* GrabBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819C3AC61BD49862008D2CFD /* GrabBagCell.xib */; };
-		81B2A2581BDF4F220004B6E0 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B2A2571BDF4F220004B6E0 /* LoginViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81BA1BF41BD4CB4300DBA5BE /* WinAPrizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BA1BF31BD4CB4300DBA5BE /* WinAPrizeViewController.m */; };
 		81BA1BF81BD4DBAA00DBA5BE /* WinAPrizeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BA1BF61BD4DBAA00DBA5BE /* WinAPrizeCell.m */; };
 		81BA1BF91BD4DBAA00DBA5BE /* WinAPrizeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81BA1BF71BD4DBAA00DBA5BE /* WinAPrizeCell.xib */; };
@@ -145,6 +144,7 @@
 		81BA1C101BD4FE2600DBA5BE /* MyNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81BA1C0E1BD4FE2600DBA5BE /* MyNewsCell.xib */; };
 		81BA1C131BD5000700DBA5BE /* icon04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BA1C111BD5000700DBA5BE /* icon04@2x.png */; };
 		81BA1C141BD5000700DBA5BE /* icon05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81BA1C121BD5000700DBA5BE /* icon05@2x.png */; };
+		81C138121BDF61F30088E792 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C138111BDF61F30088E792 /* LoginViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */; };
 		81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAB1BC7563A0007AC48 /* SelectionViewController.m */; };
 		81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAE1BC756630007AC48 /* MoreViewController.m */; };
@@ -522,8 +522,6 @@
 		819C3AC41BD49862008D2CFD /* GrabBagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabBagCell.h; sourceTree = "<group>"; };
 		819C3AC51BD49862008D2CFD /* GrabBagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabBagCell.m; sourceTree = "<group>"; };
 		819C3AC61BD49862008D2CFD /* GrabBagCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GrabBagCell.xib; sourceTree = "<group>"; };
-		81B2A2561BDF4F220004B6E0 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		81B2A2571BDF4F220004B6E0 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		81BA1BF21BD4CB4300DBA5BE /* WinAPrizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinAPrizeViewController.h; sourceTree = "<group>"; };
 		81BA1BF31BD4CB4300DBA5BE /* WinAPrizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinAPrizeViewController.m; sourceTree = "<group>"; };
 		81BA1BF51BD4DBAA00DBA5BE /* WinAPrizeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinAPrizeCell.h; sourceTree = "<group>"; };
@@ -544,6 +542,8 @@
 		81BA1C0E1BD4FE2600DBA5BE /* MyNewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyNewsCell.xib; sourceTree = "<group>"; };
 		81BA1C111BD5000700DBA5BE /* icon04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon04@2x.png"; sourceTree = "<group>"; };
 		81BA1C121BD5000700DBA5BE /* icon05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon05@2x.png"; sourceTree = "<group>"; };
+		81C138101BDF61F30088E792 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		81C138111BDF61F30088E792 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		81C2DAA71BC755FF0007AC48 /* KKTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKTabBarViewController.h; sourceTree = "<group>"; };
 		81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKTabBarViewController.m; sourceTree = "<group>"; };
 		81C2DAAA1BC7563A0007AC48 /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
@@ -921,15 +921,6 @@
 			name = "我的理财师";
 			sourceTree = "<group>";
 		};
-		81B2A2551BDF4F090004B6E0 /* 登录 */ = {
-			isa = PBXGroup;
-			children = (
-				81B2A2561BDF4F220004B6E0 /* LoginViewController.h */,
-				81B2A2571BDF4F220004B6E0 /* LoginViewController.m */,
-			);
-			path = "登录";
-			sourceTree = "<group>";
-		};
 		81BA1BFF1BD4E1ED00DBA5BE /* computerImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -939,6 +930,15 @@
 				81BA1C021BD4E1ED00DBA5BE /* computer3.png */,
 			);
 			path = computerImage;
+			sourceTree = "<group>";
+		};
+		81C1380F1BDF61F30088E792 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				81C138101BDF61F30088E792 /* LoginViewController.h */,
+				81C138111BDF61F30088E792 /* LoginViewController.m */,
+			);
+			path = "登录";
 			sourceTree = "<group>";
 		};
 		81C2DAA51BC755F10007AC48 /* Three */ = {
@@ -1614,7 +1614,7 @@
 		8D9356CB1BC607C500BC2BFA /* DSLC */ = {
 			isa = PBXGroup;
 			children = (
-				81B2A2551BDF4F090004B6E0 /* 登录 */,
+				81C1380F1BDF61F30088E792 /* 登录 */,
 				810D25241BC7916C00DAF83F /* Base */,
 				81C2DAB01BC757A60007AC48 /* Image */,
 				81C2DAA51BC755F10007AC48 /* Three */,
@@ -2092,7 +2092,6 @@
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
 				8D90117F1BD61B3400E5D62A /* TranctionTableViewCell.m in Sources */,
 				818063AB1BD61A7E00E83492 /* VerifyViewController.m in Sources */,
-				81B2A2581BDF4F220004B6E0 /* LoginViewController.m in Sources */,
 				812F6BEB1BD8ED240000D8E9 /* PhoneViewController.m in Sources */,
 				8DFA5C941BCE64D900AED2B2 /* FQuickPayViewController.m in Sources */,
 				81BA1C0B1BD4FCB100DBA5BE /* MyNewsViewController.m in Sources */,
@@ -2134,6 +2133,7 @@
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
 				8D1921CD1BD4E2060038195E /* XYPieChart.m in Sources */,
 				818063AE1BD6437D00E83492 /* PayMoneyViewController.m in Sources */,
+				81C138121BDF61F30088E792 /* LoginViewController.m in Sources */,
 				817E339B1BD77A8800D05103 /* ChooseStyleViewController.m in Sources */,
 				8D6692831BD0D8A600CD2CAF /* MyHandButton.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,

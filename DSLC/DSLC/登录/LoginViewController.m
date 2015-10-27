@@ -20,6 +20,7 @@
     
     self.view.backgroundColor = [UIColor huibai];
     
+    
     [self.navigationItem setTitle:@"登录大圣理财"];
 }
 
