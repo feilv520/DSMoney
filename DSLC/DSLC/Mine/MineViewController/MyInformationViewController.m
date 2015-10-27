@@ -21,18 +21,37 @@
     UITableView *_tableView;
     NSArray *titleArr;
     UISwitch *switchLeft;
+    NSString *path;
 }
+
+@property (nonatomic, strong) NSDictionary *flagDic;
 
 @end
 
 @implementation MyInformationViewController
 
+- (NSDictionary *)flagDic{
+    if (_flagDic == nil) {
+        
+        if (![FileOfManage ExistOfFile]) {
+            [FileOfManage createWithFile];
+        }
+        
+        NSLog(@"%@",[FileOfManage PathOfFile]);
+        
+        NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile]];
+        _flagDic = dics;
+    }
+    return _flagDic;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:NO];
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
     [app.tabBarVC setSuppurtGestureTransition:NO];
     [app.tabBarVC setTabbarViewHidden:YES];
     [app.tabBarVC setLabelLineHidden:YES];
@@ -80,7 +99,13 @@
     [_tableView registerNib:[UINib nibWithNibName:@"MyInformationCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     switchLeft = [[UISwitch alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - WIDTH_CONTROLLER_DEFAULT * (64.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (10.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (50.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (30.0 / 667.0))];
-    [switchLeft addTarget:self action:@selector(showSwitchGetOnOrOff:) forControlEvents:UIControlEventEditingChanged];
+    
+    NSDictionary *dic = self.flagDic;
+    
+    NSString *flag = [dic objectForKey:@"FlagWithVC"];
+    
+    [switchLeft setOn:[flag boolValue]];
+    [switchLeft addTarget:self action:@selector(showSwitchGetOnOrOff:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -177,7 +202,13 @@
 //手势密码开关
 - (void)showSwitchGetOnOrOff:(UISwitch *)switchOn
 {
-    NSLog(@"手势密码");
+    
+    NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile]];
+    //设置属性值,没有的数据就新建，已有的数据就修改。
+    [usersDic setObject:[NSString stringWithFormat:@"%@",switchOn.on?@"YES":@"NO"] forKey:@"FlagWithVC"];
+    //写入文件
+    [usersDic writeToFile:[FileOfManage PathOfFile] atomically:YES];
+    
 }
 
 //导航返回按钮

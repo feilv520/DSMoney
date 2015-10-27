@@ -39,4 +39,7 @@
 #define pushVC [self.navigationController pushViewController:<#ViewControllerName#> animated:YES]
 #define popVC [self.navigationController popViewControllerAnimated:YES]
 
+#import "FileOfManage.h"
+#import "ProgressHUD.h"
+
 #endif /* Header_h */
