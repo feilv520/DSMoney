@@ -14,6 +14,7 @@
 #import "MyBankViewController.h"
 #import "BindingPhoneViewController.h"
 #import "RealNameViewController.h"
+#import "MeCell.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -22,6 +23,8 @@
     NSArray *titleArr;
     UISwitch *switchLeft;
     NSString *path;
+    UIButton *butBlack;
+    UIView *viewDown;
 }
 
 @property (nonatomic, strong) NSDictionary *flagDic;
@@ -57,6 +60,7 @@
     _tableView.tableFooterView = view;
     view.backgroundColor = [UIColor huibai];
     [_tableView registerNib:[UINib nibWithNibName:@"MyInformationCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [_tableView registerNib:[UINib nibWithNibName:@"MeCell" bundle:nil] forCellReuseIdentifier:@"reuseMe"];
     
     switchLeft = [[UISwitch alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - WIDTH_CONTROLLER_DEFAULT * (64.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (10.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (50.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (30.0 / 667.0))];
     
@@ -87,7 +91,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -97,6 +101,10 @@
         return 1;
         
     } else if (section == 1) {
+        
+        return 1;
+        
+    } else if (section == 2) {
         
         return 3;
         
@@ -108,6 +116,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+        
+        MeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMe"];
+        
+        if (cell == nil) {
+            
+            cell = [[MeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuseMe"];
+        }
+        
+        cell.imageHeadPic.image = [UIImage imageNamed:@"组-4-拷贝"];
+        cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+        
+        cell.labelName.text = @"郑晓东";
+        cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    } else {
+    
     MyInformationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
     if (cell == nil) {
@@ -115,13 +143,13 @@
         cell = [[MyInformationCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
     }
     
-    NSArray *rowArr = [titleArr objectAtIndex:indexPath.section];
+    NSArray *rowArr = [titleArr objectAtIndex:indexPath.section - 1];
     cell.labelTitle.text = [rowArr objectAtIndex:indexPath.row];
     cell.labelTitle.font = [UIFont systemFontOfSize:15];
     
     cell.imageRight.image = [UIImage imageNamed:@"arrow"];
     
-    if (indexPath.section == 2) {
+    if (indexPath.section == 3) {
         
         if (indexPath.row == 2) {
             
@@ -130,21 +158,25 @@
             [cell addSubview:switchLeft];
         }
         
+     }
+    
+        return cell;
+        
     }
     
-    return cell;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 1) {
         
         MyBankViewController *myBankVC = [[MyBankViewController alloc] init];
         [self.navigationController pushViewController:myBankVC animated:YES];
         
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == 2) {
         
         if (indexPath.row == 0) {
             
@@ -156,7 +188,83 @@
             RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
             [self.navigationController pushViewController:realNameVC animated:YES];
         }
+        
+    } else if (indexPath.section == 0) {
+        
+        butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [app.tabBarVC.view addSubview:butBlack];
+        butBlack.alpha = 0.3;
+        [butBlack addTarget:self action:@selector(buttonBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+        
+        viewDown = [CreatView creatViewWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 180, WIDTH_CONTROLLER_DEFAULT, 160) backgroundColor:[UIColor huibai]];
+        [app.tabBarVC.view addSubview:viewDown];
+        
+        [self viewDownShow];
     }
+}
+
+//弹出框
+- (void)viewDownShow
+{
+    UIButton *butCamera = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"拍照"];
+    [viewDown addSubview:butCamera];
+    butCamera.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [butCamera addTarget:self action:@selector(takeCamera:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *labelLine1 = [CreatView creatWithLabelFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [butCamera addSubview:labelLine1];
+    labelLine1.alpha = 0.2;
+    
+    UIButton *butPicture = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 50, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"从手机相册选择"];
+    [viewDown addSubview:butPicture];
+    butPicture.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [butPicture addTarget:self action:@selector(chooseFromPicture:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 110, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] titleText:@"取消"];
+    [viewDown addSubview:butCancle];
+    butCancle.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [butCancle addTarget:self action:@selector(buttonCancle:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *labelLine2 = [CreatView creatWithLabelFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [butPicture addSubview:labelLine2];
+    labelLine2.alpha = 0.3;
+    
+    UILabel *labelLine3 = [CreatView creatWithLabelFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [butCancle addSubview:labelLine3];
+    labelLine3.alpha = 0.3;
+}
+
+//拍照
+- (void)takeCamera:(UIButton *)button
+{
+    NSLog(@"拍照");
+}
+
+//从相册选择
+- (void)chooseFromPicture:(UIButton *)button
+{
+    NSLog(@"从相册选择");
+}
+
+//取消按钮
+- (void)buttonCancle:(UIButton *)button
+{
+    [butBlack removeFromSuperview];
+    [viewDown removeFromSuperview];
+    
+    butBlack = nil;
+    viewDown = nil;
+}
+
+//黑色遮罩层消失
+- (void)buttonBlackDisappear:(UIButton *)button
+{
+    [button removeFromSuperview];
+    [viewDown removeFromSuperview];
+    
+    viewDown = nil;
+    button = nil;
 }
 
 //手势密码开关

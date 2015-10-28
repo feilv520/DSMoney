@@ -86,7 +86,7 @@
         AppDelegate *app = [[UIApplication sharedApplication] delegate];
         app.tabBarVC = self.tabBarVC;
         app.window.rootViewController = self.tabBarVC;
-        NSLog(@"%@",app.window.rootViewController.class);
+
     } else {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"密码错误" message:nil preferredStyle:UIAlertControllerStyleAlert];
         
