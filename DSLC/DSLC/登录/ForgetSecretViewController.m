@@ -1,0 +1,181 @@
+//
+//  ForgetSecretViewController.m
+//  DSLC
+//
+//  Created by ios on 15/10/28.
+//  Copyright © 2015年 马成铭. All rights reserved.
+//
+
+#import "ForgetSecretViewController.h"
+#import "ForgetSecretCell.h"
+#import "ForgetSecret2Cell.h"
+
+@interface ForgetSecretViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+
+{
+    UITableView *_tableView;
+    UILabel *labelPhoneNum;
+    NSArray *titleArr;
+    NSArray *textFieldArr;
+    UIButton *butEnsure;
+}
+
+@end
+
+@implementation ForgetSecretViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationItem setTitle:@"找回登录密码"];
+    
+    [self tableViewShowTime];
+    
+}
+
+- (void)tableViewShowTime
+{
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 200) style:UITableViewStylePlain];
+    [self.view addSubview:_tableView];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    _tableView.backgroundColor = [UIColor qianhuise];
+    _tableView.scrollEnabled = NO;
+    [_tableView registerNib:[UINib nibWithNibName:@"ForgetSecretCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [_tableView registerNib:[UINib nibWithNibName:@"ForgetSecret2Cell" bundle:nil] forCellReuseIdentifier:@"reuse2"];
+    
+    titleArr = @[@"设置新登录密码", @"确认新登录密码"];
+    textFieldArr = @[@"请输入新登录密码", @"请再次输入新登录密码"];
+    
+    labelPhoneNum = [CreatView creatWithLabelFrame:CGRectMake(130, 10, WIDTH_CONTROLLER_DEFAULT - 130 - 10, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"150222458945"];
+    
+    butEnsure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 260, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    [self.view addSubview:butEnsure];
+    [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+    [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    [butEnsure addTarget:self action:@selector(ensureButton:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1) {
+        
+        ForgetSecret2Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse2"];
+        
+        if (cell == nil) {
+            
+            cell = [[ForgetSecret2Cell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse2"];
+        }
+        
+        cell.labelTitle.text = @"验证码";
+        cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        
+        cell.textField.placeholder = @"请输入验证码";
+        cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.textField.tintColor = [UIColor grayColor];
+        [cell.textField addTarget:self action:@selector(textFieldEditing:) forControlEvents:UIControlEventEditingChanged];
+        
+        [cell.butGet setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [cell.butGet setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+        cell.butGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.butGet.layer.cornerRadius = 3;
+        cell.butGet.layer.masksToBounds = YES;
+        cell.butGet.layer.borderWidth = 0.5;
+        cell.butGet.layer.borderColor = [[UIColor daohanglan] CGColor];
+        [cell.butGet addTarget:self action:@selector(getNumButton:) forControlEvents:UIControlEventTouchUpInside];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    } else {
+        
+        ForgetSecretCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        
+        if (cell == nil) {
+            
+            cell = [[ForgetSecretCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
+        }
+        
+        if (indexPath.row == 0) {
+            
+            cell.labelTitle.text = @"绑定手机号";
+            cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+            cell.textField.hidden = YES;
+            [cell addSubview:labelPhoneNum];
+            
+        } else {
+            
+            cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row - 2];
+            cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+            
+            cell.textField.placeholder = [textFieldArr objectAtIndex:indexPath.row - 2];
+            cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            cell.textField.tintColor = [UIColor grayColor];
+            [cell.textField addTarget:self action:@selector(textFieldEditing:) forControlEvents:UIControlEventEditingChanged];
+        }
+        
+        if (indexPath.row == 3) {
+            
+            cell.labelLine.backgroundColor = [UIColor grayColor];
+            cell.labelLine.alpha = 0.2;
+            
+        } else {
+            
+            cell.labelLine.hidden = YES;
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    }
+    
+}
+
+- (void)textFieldEditing:(UITextField *)textField
+{
+    if (textField.text.length > 0) {
+        
+        
+    }
+}
+
+//获取验证码
+- (void)getNumButton:(UIButton *)button
+{
+    NSLog(@"获取验证码");
+}
+
+//确定按钮
+- (void)ensureButton:(UIButton *)button
+{
+    NSLog(@"1");
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

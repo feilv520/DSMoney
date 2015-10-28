@@ -21,7 +21,6 @@
 #import "PayMoneyViewController.h"
 #import "GetMoneyViewController.h"
 #import "MyPlannerViewController.h"
-#import "MeViewController.h"
 #import "BigMoneyViewController.h"
 #import "SelectionOfSafe.h"
 
@@ -272,8 +271,8 @@
 //头像按钮
 - (void)headPictureButton:(UIButton *)button
 {
-    MeViewController *meVC = [[MeViewController alloc] init];
-    [self.navigationController pushViewController:meVC animated:YES];
+    MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
+    [self.navigationController pushViewController:myInformationVC animated:YES];
 }
 
 //邀请按钮

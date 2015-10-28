@@ -12,6 +12,8 @@
 #import "UIColor+AddColor.h"
 #import "define.h"
 #import "CreatView.h"
+#import "RegisterViewController.h"
+#import "ForgetSecretViewController.h"
 
 @interface LoginViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -33,10 +35,26 @@
     self.view.backgroundColor = [UIColor qianhuise];
     
     [self tableviewShow];
+    [self navigationControllerShow];
+}
+
+- (void)navigationControllerShow
+{
     [self.navigationItem setTitle:@"登录大圣理财"];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+//    注册按钮修改颜色 大小
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItem:)];
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+}
+
+//注册按钮点击事件
+- (void)leftBarButtonItem:(UIBarButtonItem *)bar
+{
+    RegisterViewController *registerVC = [[RegisterViewController alloc] init];
+    [self.navigationController pushViewController:registerVC animated:YES];
 }
 
 - (void)tableviewShow
@@ -60,6 +78,7 @@
     UIButton *butForget = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 67, 105, 60, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor chongzhiColor] titleText:@"忘记密码?"];
     [self.view addSubview:butForget];
     butForget.titleLabel.font = [UIFont systemFontOfSize:12];
+    [butForget addTarget:self action:@selector(forgetSecretButton:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *butLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 160, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor qianhuise] textColor:[UIColor whiteColor] titleText:@"登录"];
     [self.view addSubview:butLogin];
@@ -105,6 +124,13 @@
 {
     MineViewController *mineVC = [[MineViewController alloc] init];
     [self.navigationController pushViewController:mineVC animated:YES];
+}
+
+//忘记密码
+- (void)forgetSecretButton:(UIButton *)button
+{
+    ForgetSecretViewController *forgetSecretVC = [[ForgetSecretViewController alloc] init];
+    [self.navigationController pushViewController:forgetSecretVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

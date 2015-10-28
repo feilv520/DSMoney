@@ -73,7 +73,6 @@
 		817E33871BD733D100D05103 /* duigou@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 817E337F1BD733D100D05103 /* duigou@3x.png */; };
 		817E33881BD733D100D05103 /* huangguan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 817E33801BD733D100D05103 /* huangguan@2x.png */; };
 		817E33891BD733D100D05103 /* huangguan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 817E33811BD733D100D05103 /* huangguan@3x.png */; };
-		817E338C1BD7558700D05103 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817E338B1BD7558700D05103 /* MeViewController.m */; };
 		817E338F1BD756B700D05103 /* 组-4-拷贝@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 817E338D1BD756B700D05103 /* 组-4-拷贝@2x.png */; };
 		817E33901BD756B700D05103 /* 组-4-拷贝@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 817E338E1BD756B700D05103 /* 组-4-拷贝@3x.png */; };
 		817E33941BD7576600D05103 /* MeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817E33921BD7576600D05103 /* MeCell.m */; };
@@ -165,6 +164,12 @@
 		81C8BBCF1BDA3535005B9DFF /* HelpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C8BBCD1BDA3535005B9DFF /* HelpCell.m */; };
 		81C8BBD01BDA3535005B9DFF /* HelpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C8BBCE1BDA3535005B9DFF /* HelpCell.xib */; };
 		81C8BBD31BDA3544005B9DFF /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C8BBD21BDA3544005B9DFF /* HelpViewController.m */; };
+		81D703F01BE06AAB0074DF30 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703EF1BE06AAB0074DF30 /* RegisterViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81D703F31BE06BD60074DF30 /* ForgetSecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703F21BE06BD60074DF30 /* ForgetSecretViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81D703F71BE06D1F0074DF30 /* ForgetSecretCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703F51BE06D1F0074DF30 /* ForgetSecretCell.m */; settings = {ASSET_TAGS = (); }; };
+		81D703F81BE06D1F0074DF30 /* ForgetSecretCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D703F61BE06D1F0074DF30 /* ForgetSecretCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81D703FC1BE073730074DF30 /* ForgetSecret2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703FA1BE073730074DF30 /* ForgetSecret2Cell.m */; settings = {ASSET_TAGS = (); }; };
+		81D703FD1BE073730074DF30 /* ForgetSecret2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D703FB1BE073730074DF30 /* ForgetSecret2Cell.xib */; settings = {ASSET_TAGS = (); }; };
 		81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD991BC6427800A15E01 /* MineViewController.m */; };
 		81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8ADA21BC646D100A15E01 /* FinancingViewController.m */; };
 		81E90EF41BCB42D7004BA8A5 /* 750产品详111.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E90EF31BCB42D7004BA8A5 /* 750产品详111.png */; };
@@ -439,8 +444,6 @@
 		817E337F1BD733D100D05103 /* duigou@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "duigou@3x.png"; sourceTree = "<group>"; };
 		817E33801BD733D100D05103 /* huangguan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "huangguan@2x.png"; sourceTree = "<group>"; };
 		817E33811BD733D100D05103 /* huangguan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "huangguan@3x.png"; sourceTree = "<group>"; };
-		817E338A1BD7558700D05103 /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
-		817E338B1BD7558700D05103 /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
 		817E338D1BD756B700D05103 /* 组-4-拷贝@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-4-拷贝@2x.png"; sourceTree = "<group>"; };
 		817E338E1BD756B700D05103 /* 组-4-拷贝@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-4-拷贝@3x.png"; sourceTree = "<group>"; };
 		817E33911BD7576600D05103 /* MeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeCell.h; sourceTree = "<group>"; };
@@ -576,6 +579,16 @@
 		81C8BBCE1BDA3535005B9DFF /* HelpCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpCell.xib; sourceTree = "<group>"; };
 		81C8BBD11BDA3544005B9DFF /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		81C8BBD21BDA3544005B9DFF /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		81D703EE1BE06AAB0074DF30 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		81D703EF1BE06AAB0074DF30 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		81D703F11BE06BD60074DF30 /* ForgetSecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetSecretViewController.h; sourceTree = "<group>"; };
+		81D703F21BE06BD60074DF30 /* ForgetSecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetSecretViewController.m; sourceTree = "<group>"; };
+		81D703F41BE06D1F0074DF30 /* ForgetSecretCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetSecretCell.h; sourceTree = "<group>"; };
+		81D703F51BE06D1F0074DF30 /* ForgetSecretCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetSecretCell.m; sourceTree = "<group>"; };
+		81D703F61BE06D1F0074DF30 /* ForgetSecretCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetSecretCell.xib; sourceTree = "<group>"; };
+		81D703F91BE073730074DF30 /* ForgetSecret2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetSecret2Cell.h; sourceTree = "<group>"; };
+		81D703FA1BE073730074DF30 /* ForgetSecret2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetSecret2Cell.m; sourceTree = "<group>"; };
+		81D703FB1BE073730074DF30 /* ForgetSecret2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetSecret2Cell.xib; sourceTree = "<group>"; };
 		81D8AD981BC6427800A15E01 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		81D8AD991BC6427800A15E01 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		81D8ADA11BC646D100A15E01 /* FinancingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingViewController.h; sourceTree = "<group>"; };
@@ -951,6 +964,10 @@
 				81C138131BDF64B20088E792 /* 自定义cell */,
 				81C138101BDF61F30088E792 /* LoginViewController.h */,
 				81C138111BDF61F30088E792 /* LoginViewController.m */,
+				81D703EE1BE06AAB0074DF30 /* RegisterViewController.h */,
+				81D703EF1BE06AAB0074DF30 /* RegisterViewController.m */,
+				81D703F11BE06BD60074DF30 /* ForgetSecretViewController.h */,
+				81D703F21BE06BD60074DF30 /* ForgetSecretViewController.m */,
 			);
 			path = "登录";
 			sourceTree = "<group>";
@@ -961,6 +978,12 @@
 				81C138141BDF64D80088E792 /* LoginCell.h */,
 				81C138151BDF64D80088E792 /* LoginCell.m */,
 				81C138161BDF64D80088E792 /* LoginCell.xib */,
+				81D703F41BE06D1F0074DF30 /* ForgetSecretCell.h */,
+				81D703F51BE06D1F0074DF30 /* ForgetSecretCell.m */,
+				81D703F61BE06D1F0074DF30 /* ForgetSecretCell.xib */,
+				81D703F91BE073730074DF30 /* ForgetSecret2Cell.h */,
+				81D703FA1BE073730074DF30 /* ForgetSecret2Cell.m */,
+				81D703FB1BE073730074DF30 /* ForgetSecret2Cell.xib */,
 			);
 			path = "自定义cell";
 			sourceTree = "<group>";
@@ -1105,8 +1128,6 @@
 				81D8AD991BC6427800A15E01 /* MineViewController.m */,
 				817E33721BD72D6800D05103 /* MyPlannerViewController.h */,
 				817E33731BD72D6800D05103 /* MyPlannerViewController.m */,
-				817E338A1BD7558700D05103 /* MeViewController.h */,
-				817E338B1BD7558700D05103 /* MeViewController.m */,
 				818063AC1BD6437D00E83492 /* PayMoneyViewController.h */,
 				818063AD1BD6437D00E83492 /* PayMoneyViewController.m */,
 				817E33991BD77A8800D05103 /* ChooseStyleViewController.h */,
@@ -1880,6 +1901,7 @@
 				8184EC411BCCD113003F440D /* MoneyCell.xib in Resources */,
 				817DD4A61BCF547E00042B09 /* touxiang@2x.png in Resources */,
 				81C8BBC51BDA2F8D005B9DFF /* bangzhu@3x.png in Resources */,
+				81D703FD1BE073730074DF30 /* ForgetSecret2Cell.xib in Resources */,
 				8D6EFBA91BC78B02009FE101 /* shouyeqiepian7500_25.png in Resources */,
 				817DD4701BCF501100042B09 /* MineCell.xib in Resources */,
 				8DD180991BD72E5900F71CEA /* GetMoneyTableViewCell.xib in Resources */,
@@ -1956,6 +1978,7 @@
 				8DEDE1D01BCCFFA5008086D3 /* blueyuan@2x.png in Resources */,
 				817E33AD1BD78ED500D05103 /* iconfont@2x.png in Resources */,
 				81C138211BDF6D5E0088E792 /* iconfont-phone@3x.png in Resources */,
+				81D703F81BE06D1F0074DF30 /* ForgetSecretCell.xib in Resources */,
 				8D9011B61BD6337C00E5D62A /* 7@3x.png in Resources */,
 				8DD180A31BD731E000F71CEA /* GetMoneyTipTableViewCell.xib in Resources */,
 				8D121FBE1BD4D0CB00B3C1FE /* ProductSettingViewController.xib in Resources */,
@@ -2120,6 +2143,7 @@
 				81BA1BF41BD4CB4300DBA5BE /* WinAPrizeViewController.m in Sources */,
 				818063A51BD5D89000E83492 /* InviteNameCell.m in Sources */,
 				81C8BBD31BDA3544005B9DFF /* HelpViewController.m in Sources */,
+				81D703F31BE06BD60074DF30 /* ForgetSecretViewController.m in Sources */,
 				817E33981BD772A700D05103 /* BigMoneyViewController.m in Sources */,
 				8D878CE11BC754AD00844575 /* e.m in Sources */,
 				811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */,
@@ -2131,6 +2155,7 @@
 				8D1921D11BD4FC840038195E /* MessageDetailViewController.m in Sources */,
 				8179883B1BC9403A007C8C3E /* ThreeCell.m in Sources */,
 				8184EC4A1BCCD13C003F440D /* CashMoneyCell.m in Sources */,
+				81D703FC1BE073730074DF30 /* ForgetSecret2Cell.m in Sources */,
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
 				8D90117F1BD61B3400E5D62A /* TranctionTableViewCell.m in Sources */,
 				818063AB1BD61A7E00E83492 /* VerifyViewController.m in Sources */,
@@ -2149,6 +2174,7 @@
 				818063971BD5D3C700E83492 /* MyInvitationViewController.m in Sources */,
 				8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */,
 				8DEDE26D1BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				81D703F71BE06D1F0074DF30 /* ForgetSecretCell.m in Sources */,
 				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,
 				817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */,
 				8D3125DE1BD763F900143B71 /* GetMoneyVerifyViewController.m in Sources */,
@@ -2177,6 +2203,7 @@
 				818063AE1BD6437D00E83492 /* PayMoneyViewController.m in Sources */,
 				81C138121BDF61F30088E792 /* LoginViewController.m in Sources */,
 				817E339B1BD77A8800D05103 /* ChooseStyleViewController.m in Sources */,
+				81D703F01BE06AAB0074DF30 /* RegisterViewController.m in Sources */,
 				8D6692831BD0D8A600CD2CAF /* MyHandButton.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
 				817E33941BD7576600D05103 /* MeCell.m in Sources */,
@@ -2211,7 +2238,6 @@
 				81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */,
 				8D121FE01BD4D92600B3C1FE /* SettingPieTableViewCell.m in Sources */,
 				8D3125E61BD7689200143B71 /* BaseViewController.m in Sources */,
-				817E338C1BD7558700D05103 /* MeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

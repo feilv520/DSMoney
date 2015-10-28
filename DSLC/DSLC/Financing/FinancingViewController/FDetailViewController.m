@@ -23,6 +23,7 @@
     NSArray *titleArr;
     Calendar *calendar;
     UIView *bView;
+    UIView *viewSuan;
 }
 @property (nonatomic, strong) UIControl *viewBotton;
 @end
@@ -339,7 +340,7 @@
 //底部计算器+投资视图
 - (void)showBottonView
 {
-    UIView *viewSuan = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/4, 49)];
+    viewSuan = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/4, 49)];
     [self.viewBotton addSubview:viewSuan];
     viewSuan.backgroundColor = [UIColor colorWithRed:78/255 green:88/255 blue:97/255 alpha:1.0];
     
@@ -421,6 +422,12 @@
     
     bView = nil;
     calendar = nil;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [_viewBotton removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning {
