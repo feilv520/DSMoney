@@ -22,6 +22,9 @@
     NSArray *titleArr;
     NSArray *ImageArr;
     NSArray *placeholderArr;
+    UIButton *butLogin;
+    UITextField *textField1;
+    UITextField *textField2;
 }
 
 @end
@@ -63,6 +66,7 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.scrollEnabled = NO;
     _tableView.tableFooterView = [UIView new];
     [_tableView registerNib:[UINib nibWithNibName:@"LoginCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
@@ -80,7 +84,7 @@
     butForget.titleLabel.font = [UIFont systemFontOfSize:12];
     [butForget addTarget:self action:@selector(forgetSecretButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 160, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor qianhuise] textColor:[UIColor whiteColor] titleText:@"登录"];
+    butLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 160, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor qianhuise] textColor:[UIColor whiteColor] titleText:@"登录"];
     [self.view addSubview:butLogin];
     [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
@@ -112,6 +116,9 @@
     cell.textField.placeholder = [placeholderArr objectAtIndex:indexPath.row];
     cell.textField.font = [UIFont fontWithName:@"placeholder" size:14];
     cell.textField.tintColor = [UIColor grayColor];
+    cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+    cell.textField.tag = 1000 + indexPath.row;
+    [cell.textField addTarget:self action:@selector(editContent:) forControlEvents:UIControlEventEditingChanged];
     
     cell.imageLeft.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [ImageArr objectAtIndex:indexPath.row]]];
     
@@ -119,11 +126,38 @@
     return cell;
 }
 
+- (void)editContent:(UITextField *)textField
+{
+    textField1 = (UITextField *)[self.view viewWithTag:1000];
+    textField2 = (UITextField *)[self.view viewWithTag:1001];
+    
+    if (textField1.text.length > 0 && textField2.text.length > 0) {
+        
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    }
+}
+
 //登录按钮
 - (void)loginButton:(UIButton *)button
 {
-    MineViewController *mineVC = [[MineViewController alloc] init];
-    [self.navigationController pushViewController:mineVC animated:YES];
+    textField1 = (UITextField *)[self.view viewWithTag:1000];
+    textField2 = (UITextField *)[self.view viewWithTag:1001];
+    
+    if (textField1.text.length > 0 && textField2.text.length > 0) {
+        
+        NSLog(@"登录");
+        
+    } else {
+        
+        
+    }
+    
 }
 
 //忘记密码

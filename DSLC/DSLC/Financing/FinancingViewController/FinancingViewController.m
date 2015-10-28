@@ -38,10 +38,10 @@
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
     
-    self.navigationItem.title = @"理财产品";
+    self.navigationItem.title = @"票据投资";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
-    [self showButtonThree];
+//    [self showButtonThree];
     [self showTableView];
 }
 
@@ -61,65 +61,65 @@
         butThree.tag = 100 + i;
         [scrollView addSubview:butThree];
         
-        [butThree addTarget:self action:@selector(buttonThreePress:) forControlEvents:UIControlEventTouchUpInside];
+//        [butThree addTarget:self action:@selector(buttonThreePress:) forControlEvents:UIControlEventTouchUpInside];
         
-        if (i == 1) {
+        if (i == 2) {
             
             [butThree setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
         }
     }
     
-    lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2) backgroundColor:[UIColor daohanglan] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:0] text:@""];
-    [self.view addSubview:lableRedLine];
+//    lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2) backgroundColor:[UIColor daohanglan] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:0] text:@""];
+//    [self.view addSubview:lableRedLine];
 
 }
 
 //导航栏下面的三个按钮的点击方法
 - (void)buttonThreePress:(UIButton *)button
 {
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        
-        if (button.tag == 100) {
-            
-            lableRedLine.frame = CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
-            UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
-            [beforeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-            
-            buttonTag = button.tag;
-            
-        } else if (button.tag == 101) {
-            
-            lableRedLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
-            UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
-            [beforeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-            
-            buttonTag = button.tag;
-            
-        } else {
-            
-            lableRedLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
-            UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
-            [beforeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-            
-            buttonTag = button.tag;
-        }
-        
-    } completion:^(BOOL finished) {
-        
-    }];
+//    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+//        
+//        if (button.tag == 100) {
+//            
+//            lableRedLine.frame = CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
+//            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//            
+//            UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
+//            [beforeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//            
+//            buttonTag = button.tag;
+//            
+//        } else if (button.tag == 101) {
+//            
+//            lableRedLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
+//            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//            
+//            UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
+//            [beforeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//            
+//            buttonTag = button.tag;
+//            
+//        } else {
+//            
+//            lableRedLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
+//            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//            
+//            UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
+//            [beforeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//            
+//            buttonTag = button.tag;
+//        }
+//        
+//    } completion:^(BOOL finished) {
+//        
+//    }];
 }
 
 //TableView展示
 - (void)showTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 45 - 53 - 64 - 20) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 53 - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;

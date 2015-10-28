@@ -18,6 +18,9 @@
     NSArray *titleArr;
     NSArray *textFieldArr;
     UIButton *butEnsure;
+    UITextField *textField1;
+    UITextField *textField2;
+    UITextField *textField3;
 }
 
 @end
@@ -28,7 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"找回登录密码"];
     
     [self tableViewShowTime];
@@ -85,6 +88,9 @@
         cell.textField.placeholder = @"请输入验证码";
         cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textField.tintColor = [UIColor grayColor];
+        cell.textField.tag = 500;
+        cell.textField.delegate = self;
+        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         [cell.textField addTarget:self action:@selector(textFieldEditing:) forControlEvents:UIControlEventEditingChanged];
         
         [cell.butGet setTitle:@"获取验证码" forState:UIControlStateNormal];
@@ -123,6 +129,9 @@
             cell.textField.placeholder = [textFieldArr objectAtIndex:indexPath.row - 2];
             cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
             cell.textField.tintColor = [UIColor grayColor];
+            cell.textField.tag = 900 + indexPath.row;
+            cell.textField.delegate = self;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             [cell.textField addTarget:self action:@selector(textFieldEditing:) forControlEvents:UIControlEventEditingChanged];
         }
         
@@ -145,10 +154,30 @@
 
 - (void)textFieldEditing:(UITextField *)textField
 {
-    if (textField.text.length > 0) {
+    textField1 = (UITextField *)[self.view viewWithTag:500];
+    textField2 = (UITextField *)[self.view viewWithTag:902];
+    textField3 = (UITextField *)[self.view viewWithTag:903];
+    
+    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField2.text == textField3.text) {
         
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
         
     }
+    
+    if (![textField3.text isEqualToString:textField2.text]) {
+        
+        [self.view endEditing:YES];
+        NSLog(@"kk");
+        [ProgressHUD showMessage:@"输入的密码与再次确认的密码不匹配" Width:80 High:80];
+        
+    }
+    
 }
 
 //获取验证码
@@ -160,7 +189,29 @@
 //确定按钮
 - (void)ensureButton:(UIButton *)button
 {
-    NSLog(@"1");
+    textField1 = (UITextField *)[self.view viewWithTag:500];
+    textField2 = (UITextField *)[self.view viewWithTag:902];
+    textField3 = (UITextField *)[self.view viewWithTag:903];
+    
+    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField2.text == textField3.text) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } else {
+        
+        
+    }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    textField1 = (UITextField *)[self.view viewWithTag:500];
+    textField2 = (UITextField *)[self.view viewWithTag:902];
+    textField3 = (UITextField *)[self.view viewWithTag:903];
+    
+    [textField1 resignFirstResponder];
+    [textField2 resignFirstResponder];
+    [textField3 resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

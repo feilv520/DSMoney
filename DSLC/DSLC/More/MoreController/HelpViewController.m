@@ -9,7 +9,6 @@
 #import "HelpViewController.h"
 #import "HelpCell.h"
 #import "NewHandViewController.h"
-#import "LoginViewController.h"
 
 @interface HelpViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -86,8 +85,7 @@
         
     } else {
         
-        LoginViewController *loginVC = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:loginVC animated:YES];
+        
     }
 }
 

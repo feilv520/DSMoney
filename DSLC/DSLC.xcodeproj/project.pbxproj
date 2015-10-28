@@ -170,6 +170,8 @@
 		81D703F81BE06D1F0074DF30 /* ForgetSecretCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D703F61BE06D1F0074DF30 /* ForgetSecretCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81D703FC1BE073730074DF30 /* ForgetSecret2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703FA1BE073730074DF30 /* ForgetSecret2Cell.m */; settings = {ASSET_TAGS = (); }; };
 		81D703FD1BE073730074DF30 /* ForgetSecret2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D703FB1BE073730074DF30 /* ForgetSecret2Cell.xib */; settings = {ASSET_TAGS = (); }; };
+		81D704001BE0B2AF0074DF30 /* BillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703FF1BE0B2AF0074DF30 /* BillViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81D704031BE0D0D40074DF30 /* NewbieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D704021BE0D0D40074DF30 /* NewbieViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD991BC6427800A15E01 /* MineViewController.m */; };
 		81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8ADA21BC646D100A15E01 /* FinancingViewController.m */; };
 		81E90EF41BCB42D7004BA8A5 /* 750产品详111.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E90EF31BCB42D7004BA8A5 /* 750产品详111.png */; };
@@ -589,6 +591,10 @@
 		81D703F91BE073730074DF30 /* ForgetSecret2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetSecret2Cell.h; sourceTree = "<group>"; };
 		81D703FA1BE073730074DF30 /* ForgetSecret2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetSecret2Cell.m; sourceTree = "<group>"; };
 		81D703FB1BE073730074DF30 /* ForgetSecret2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetSecret2Cell.xib; sourceTree = "<group>"; };
+		81D703FE1BE0B2AF0074DF30 /* BillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillViewController.h; sourceTree = "<group>"; };
+		81D703FF1BE0B2AF0074DF30 /* BillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillViewController.m; sourceTree = "<group>"; };
+		81D704011BE0D0D40074DF30 /* NewbieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewbieViewController.h; sourceTree = "<group>"; };
+		81D704021BE0D0D40074DF30 /* NewbieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewbieViewController.m; sourceTree = "<group>"; };
 		81D8AD981BC6427800A15E01 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		81D8AD991BC6427800A15E01 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		81D8ADA11BC646D100A15E01 /* FinancingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingViewController.h; sourceTree = "<group>"; };
@@ -1220,6 +1226,10 @@
 				813FD4FC1BCE71110050E884 /* FBalancePaymentViewController.h */,
 				813FD4FD1BCE71110050E884 /* FBalancePaymentViewController.m */,
 				813FD4FE1BCE71110050E884 /* FBalancePaymentViewController.xib */,
+				81D703FE1BE0B2AF0074DF30 /* BillViewController.h */,
+				81D703FF1BE0B2AF0074DF30 /* BillViewController.m */,
+				81D704011BE0D0D40074DF30 /* NewbieViewController.h */,
+				81D704021BE0D0D40074DF30 /* NewbieViewController.m */,
 			);
 			path = FinancingViewController;
 			sourceTree = "<group>";
@@ -2222,6 +2232,7 @@
 				81BA1C0F1BD4FE2600DBA5BE /* MyNewsCell.m in Sources */,
 				8DD180981BD72E5900F71CEA /* GetMoneyTableViewCell.m in Sources */,
 				8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */,
+				81D704031BE0D0D40074DF30 /* NewbieViewController.m in Sources */,
 				81F5FA111BDA1C2E008C38BF /* MoreCell.m in Sources */,
 				8180639B1BD5D7E500E83492 /* MyInviteCell.m in Sources */,
 				8DEDE1F21BCD05F9008086D3 /* Calendar.m in Sources */,
@@ -2234,6 +2245,7 @@
 				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
 				8190A3051BD876EB002B53F5 /* AddCardViewController.m in Sources */,
 				818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */,
+				81D704001BE0B2AF0074DF30 /* BillViewController.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
 				81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */,
 				8D121FE01BD4D92600B3C1FE /* SettingPieTableViewCell.m in Sources */,
