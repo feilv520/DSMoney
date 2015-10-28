@@ -41,5 +41,8 @@
 
 #import "FileOfManage.h"
 #import "ProgressHUD.h"
+#import "UIColor+AddColor.h"
+#import "CreatView.h"
+#import "TPKeyboardAvoidingScrollView.h"
 
 #endif /* Header_h */
