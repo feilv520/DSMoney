@@ -30,6 +30,19 @@
 
 @implementation MyInformationViewController
 
+- (NSDictionary *)flagDic{
+    if (_flagDic == nil) {
+        
+        if (![FileOfManage ExistOfFile]) {
+            [FileOfManage createWithFile];
+        }
+        
+        NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile]];
+        _flagDic = dics;
+    }
+    return _flagDic;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -64,7 +77,8 @@
     
     NSString *flag = [dic objectForKey:@"FlagWithVC"];
     
-    [switchLeft setOn:[flag boolValue]];
+    [switchLeft setOn:[flag isEqualToString:@"YES"]?YES:NO];
+
     [switchLeft addTarget:self action:@selector(showSwitchGetOnOrOff:) forControlEvents:UIControlEventValueChanged];
 }
 

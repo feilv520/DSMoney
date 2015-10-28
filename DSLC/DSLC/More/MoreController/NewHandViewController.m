@@ -16,6 +16,11 @@
     NSArray *contentArr;
     CGRect rect;
     BOOL sunShine;
+    
+    UIView *viewGraySectionZero;
+    UIView *viewGraySectionOne;
+    UIView *viewGraySectionTwo;
+    UIView *viewGraySectionThree;
 }
 
 @end
@@ -29,7 +34,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self.navigationItem setTitle:@"新手指南"];
-    
+    [self setWithAllView];
     [self contentShow];
 }
 
@@ -47,22 +52,114 @@
     contentArr = @[@"1、大圣理财是什么?", @"2、大圣理财提供的投资理财项目?", @"3、大圣理财平台上的资金安全保障?", @"4、大圣理财平台的收益保障?"];
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UIView *viewGray = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 145)];
-//    viewGray.backgroundColor = [UIColor huibai];
-//    
-//    UILabel *labelContent = [CreatView creatWithLabelFrame:CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, 10) backgroundColor:[UIColor huibai] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。\n新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。"];
-//    [viewGray addSubview:labelContent];
-//    
-//    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:14], NSFontAttributeName, nil];
-//    rect = [labelContent.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 20, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
-//    labelContent.numberOfLines = 0;
-//    
-//    labelContent.frame = CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, rect.size.height);
-//    
-//    return viewGray;
-//}
+- (void)setWithAllView{
+    viewGraySectionZero = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 145)];
+    viewGraySectionZero.backgroundColor = [UIColor huibai];
+    
+    viewGraySectionZero.hidden = YES;
+    viewGraySectionOne = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 145)];
+    viewGraySectionOne.backgroundColor = [UIColor huibai];
+    
+    viewGraySectionOne.hidden = YES;
+    viewGraySectionTwo = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 145)];
+    viewGraySectionTwo.backgroundColor = [UIColor huibai];
+    
+    viewGraySectionTwo.hidden = YES;
+    viewGraySectionThree = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 145)];
+    viewGraySectionThree.backgroundColor = [UIColor huibai];
+    
+    viewGraySectionThree.hidden = YES;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        
+        
+        UILabel *labelContent = [CreatView creatWithLabelFrame:CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, 10) backgroundColor:[UIColor huibai] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。\n新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。"];
+        [viewGraySectionZero addSubview:labelContent];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:14], NSFontAttributeName, nil];
+        rect = [labelContent.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 20, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        labelContent.numberOfLines = 0;
+        
+        labelContent.frame = CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, rect.size.height);
+        
+        return viewGraySectionZero;
+    } else if (section == 1) {
+        
+        
+        UILabel *labelContent = [CreatView creatWithLabelFrame:CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, 10) backgroundColor:[UIColor huibai] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。\n新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。"];
+        [viewGraySectionOne addSubview:labelContent];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:14], NSFontAttributeName, nil];
+        rect = [labelContent.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 20, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        labelContent.numberOfLines = 0;
+        
+        labelContent.frame = CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, rect.size.height);
+        
+        return viewGraySectionOne;
+    } else if (section == 2) {
+        
+        
+        UILabel *labelContent = [CreatView creatWithLabelFrame:CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, 10) backgroundColor:[UIColor huibai] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。\n新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。"];
+        [viewGraySectionTwo addSubview:labelContent];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:14], NSFontAttributeName, nil];
+        rect = [labelContent.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 20, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        labelContent.numberOfLines = 0;
+        
+        labelContent.frame = CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, rect.size.height);
+        
+        return viewGraySectionTwo;
+    } else {
+        
+        
+        UILabel *labelContent = [CreatView creatWithLabelFrame:CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, 10) backgroundColor:[UIColor huibai] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。\n新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。"];
+        [viewGraySectionThree addSubview:labelContent];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:14], NSFontAttributeName, nil];
+        rect = [labelContent.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 20, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        labelContent.numberOfLines = 0;
+        
+        labelContent.frame = CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, rect.size.height);
+        
+        return viewGraySectionThree;
+    }
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 0) {
+        if (viewGraySectionZero.hidden) {
+            return 0.5;
+        } else {
+            return 145;
+        }
+    } else if (section == 1) {
+        if (viewGraySectionOne.hidden) {
+            return 0.5;
+        } else {
+            return 145;
+        }
+    } else if (section == 2) {
+        if (viewGraySectionTwo.hidden) {
+            return 0.5;
+        } else {
+            return 145;
+        }
+    } else {
+        if (viewGraySectionThree.hidden) {
+            return 0.5;
+        } else {
+            return 145;
+        }
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 4;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -71,7 +168,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -83,7 +180,7 @@
         cell = [[NewHandCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
     }
     
-    cell.labelQuestion.text = [contentArr objectAtIndex:indexPath.row];
+    cell.labelQuestion.text = [contentArr objectAtIndex:indexPath.section];
     cell.labelQuestion.font = [UIFont systemFontOfSize:15];
     
     return cell;
@@ -93,6 +190,36 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (indexPath.section == 0) {
+        viewGraySectionZero.hidden = NO;
+        viewGraySectionOne.hidden = YES;
+        viewGraySectionTwo.hidden = YES;
+        viewGraySectionThree.hidden = YES;
+        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:0];
+        
+        [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else if (indexPath.section == 1) {
+        viewGraySectionZero.hidden = YES;
+        viewGraySectionOne.hidden = NO;
+        viewGraySectionTwo.hidden = YES;
+        viewGraySectionThree.hidden = YES;
+        NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] initWithIndex:1];
+        [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else if (indexPath.section == 2) {
+        viewGraySectionZero.hidden = YES;
+        viewGraySectionOne.hidden = YES;
+        viewGraySectionTwo.hidden = NO;
+        viewGraySectionThree.hidden = YES;
+        NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] initWithIndex:2];
+        [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else {
+        viewGraySectionZero.hidden = YES;
+        viewGraySectionOne.hidden = YES;
+        viewGraySectionTwo.hidden = YES;
+        viewGraySectionThree.hidden = NO;
+        NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] initWithIndex:3];
+        [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
     
 }
 
