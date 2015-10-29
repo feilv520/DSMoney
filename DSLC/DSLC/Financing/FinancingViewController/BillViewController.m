@@ -144,8 +144,6 @@
     button2 = (UIButton *)[self.view viewWithTag:201];
     button3 = (UIButton *)[self.view viewWithTag:202];
     
-    
-    
     if (butThree.tag == 202) {
         
         make = 0;
