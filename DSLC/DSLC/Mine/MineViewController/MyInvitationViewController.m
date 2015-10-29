@@ -61,7 +61,7 @@
         
     } else {
         
-        return HEIGHT_CONTROLLER_DEFAULT * (15.0 / 667.0);
+        return HEIGHT_CONTROLLER_DEFAULT * (10.0 / 667.0);
     }
 }
 
@@ -103,11 +103,6 @@
     if (indexPath.section == 0) {
         
         MyInviteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-        
-        if (cell == nil) {
-            
-            cell = [[MyInviteCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
-        }
         
         cell.imageHead.image = [UIImage imageNamed:@"picture"];
         
@@ -155,46 +150,48 @@
         
         InviteNumCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse1"];
         
-        if (cell == nil) {
-            
-            cell = [[InviteNumCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse1"];
-        }
-        
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        NSMutableAttributedString *peopleNum = [[NSMutableAttributedString alloc] initWithString:@"邀请人数 : 6人"];
-        NSRange invite = NSMakeRange(0, [[peopleNum string] rangeOfString:@":"].location);
-        [peopleNum addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:invite];
-        NSRange NUM = NSMakeRange(6, [peopleNum length] - 6 - 1);
-        [peopleNum addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:NUM];
-        [peopleNum addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:NUM];
-        NSRange REN = NSMakeRange([[peopleNum string] length] - 1, 1);
-        [peopleNum addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:REN];
+        NSMutableAttributedString *peopleNum = [[NSMutableAttributedString alloc] initWithString:@"6人\n邀请人数"];
+        [peopleNum addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:NSMakeRange(0, [peopleNum length])];
+        
+        NSRange invite = NSMakeRange(0, [[peopleNum string] rangeOfString:@"人"].location);
+        [peopleNum addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:invite];
+        NSRange REN = NSMakeRange(1, 1);
+        [peopleNum addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:REN];
+        NSRange NUM = NSMakeRange(3, 4);
+        [peopleNum addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:NUM];
+        
         [cell.labelPeople setAttributedText:peopleNum];
-        cell.labelPeople.textAlignment = NSTextAlignmentCenter;
         
-        cell.labelLine.frame = CGRectMake((cell.viewBottom.frame.size.width - 1)/2, 15, 1, 35);
+        NSMutableAttributedString *redNumStr = [[NSMutableAttributedString alloc] initWithString:@"1,234元\n累计打开邀请红包"];
+        [redNumStr addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:NSMakeRange(0, [redNumStr length])];
         
-        NSMutableAttributedString *moneyNumStr = [[NSMutableAttributedString alloc] initWithString:@"累计佣金 : 2091元"];
-        NSRange total = NSMakeRange(0, [[moneyNumStr string] rangeOfString:@":"].location);
-        [moneyNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:total];
+        NSRange totalRed = NSMakeRange(0, [[redNumStr string] rangeOfString:@"元"].location);
+        [redNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:totalRed];
+        [redNumStr addAttribute:NSForegroundColorAttributeName value:Color_Red range:totalRed];
+        NSRange yuanRed = NSMakeRange([[redNumStr string] rangeOfString:@"元"].location, 1);
+        [redNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:yuanRed];
+        NSRange numRed = NSMakeRange([[redNumStr string] rangeOfString:@"元"].location + 2, 8);
+        [redNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:numRed];
         
-        NSRange num = NSMakeRange(6, [[moneyNumStr string] rangeOfString:@"元"].location - 6);
-        [moneyNumStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:num];
-        [moneyNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:num];
+        [cell.redBag setAttributedText:redNumStr];
         
-        NSRange yuan = NSMakeRange([[moneyNumStr string] length] - 1, 1);
-        [moneyNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:yuan];
+        NSMutableAttributedString *moneyNumStr = [[NSMutableAttributedString alloc] initWithString:@"1,234元\n累计佣金"];
+        [moneyNumStr addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:NSMakeRange(0, [moneyNumStr length])];
+
+        NSRange total = NSMakeRange(0, [[moneyNumStr string] rangeOfString:@"元"].location);
+        [moneyNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:total];
+        NSRange yuan = NSMakeRange([[moneyNumStr string] rangeOfString:@"元"].location, 1);
+        [moneyNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:yuan];
+        NSRange num = NSMakeRange([[moneyNumStr string] rangeOfString:@"元"].location + 2, 4);
+        [moneyNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:num];
         
         [cell.labelMoney setAttributedText:moneyNumStr];
-        cell.labelMoney.textAlignment = NSTextAlignmentCenter;
         
         cell.viewBottom.layer.cornerRadius = 3;
         cell.viewBottom.layer.masksToBounds = YES;
-        
-        cell.labelLine.backgroundColor = [UIColor grayColor];
-        cell.labelLine.alpha = 0.2;
         
         [cell.butInvite setTitle:@"邀请" forState:UIControlStateNormal];
         [cell.butInvite setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -211,11 +208,6 @@
     } else {
         
         InviteNameCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse3"];
-        
-        if (cell == nil) {
-            
-            cell = [[InviteNameCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse3"];
-        }
         
         if (indexPath.row == 0) {
             
