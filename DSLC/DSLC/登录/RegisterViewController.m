@@ -11,11 +11,19 @@
 #import "RegisterProcess.h"
 #import "CreatView.h"
 #import "RegisterOfView.h"
+#import "RegisterOfResult.h"
+#import "RegisterOfPassButton.h"
 
 @interface RegisterViewController (){
-    UILabel *lableRedLine;
+    NSInteger number;
     NSInteger buttonTag;
+    UIButton *payButton;
+    UILabel *lableRedLine;
+    UIView *buttonWithView;
     RegisterOfView *registerV;
+    RegisterProcess *registerP;
+    RegisterOfResult *registerR;
+    RegisterOfPassButton *registerB;
 }
 
 @end
@@ -30,17 +38,20 @@
     
     [self.navigationItem setTitle:@"注册大圣理财"];
     
+    number = 0;
+    
     [self RegisterProcessPhoto];
     [self RegisterNav];
     [self RegisterMessage];
     [self RegisterSureButton];
+    
 }
 
 // 注册流程图一
 - (void)RegisterProcessPhoto{
     NSBundle *rootBundle = [NSBundle mainBundle];
     NSArray *rootArray = [rootBundle loadNibNamed:@"RegisterProcess" owner:nil options:nil];
-    RegisterProcess *registerP = [rootArray lastObject];
+    registerP = [rootArray lastObject];
     
     registerP.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 103);
     
@@ -51,7 +62,7 @@
 // 注册导航 (用户注册/理财师注册)
 - (void)RegisterNav{
     
-    UIView *buttonWithView = [[UIView alloc] initWithFrame:CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 50)];
+    buttonWithView = [[UIView alloc] initWithFrame:CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 50)];
     
     buttonWithView.backgroundColor = Color_White;
     
@@ -87,6 +98,7 @@
     [self.view addSubview:buttonWithView];
 }
 
+// 导航按钮执行方法
 - (void)buttonAction:(UIButton *)btn{
     [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         if (btn.tag == 1000) {
@@ -132,7 +144,7 @@
     
     NSBundle *rootBundle = [NSBundle mainBundle];
     NSArray *rootArray = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
-    registerV = [rootArray lastObject];
+    registerV = [rootArray firstObject];
     
     registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, 292);
     
@@ -141,7 +153,7 @@
 
 // 立即抢购
 - (void)RegisterSureButton{
-    UIButton *payButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    payButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     payButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (51 / 375.0), 420, WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), 43);
     
@@ -154,8 +166,87 @@
     
 }
 
+// 确认按钮执行方法 (第二步 : 实名验证)
 - (void)sureButtonAction:(UIButton *)btn{
-    [ProgressHUD showMessage:@"确认" Width:100 High:20];
+    
+    [buttonWithView removeFromSuperview];
+    [payButton removeFromSuperview];
+    [registerV removeFromSuperview];
+    registerV = nil;
+    
+    registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
+    
+    NSBundle *rootBundle = [NSBundle mainBundle];
+    NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
+    NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
+    NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
+    
+    registerR = [rootArrayOfResult lastObject];
+    
+    registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+    
+    registerV = [rootArrayOfView objectAtIndex:1];
+    
+    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
+    
+    registerB = [rootArrayOfPButton lastObject];
+    
+    registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
+    
+    [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:registerV];
+    [self.view addSubview:registerR];
+    [self.view addSubview:registerB];
+    
+}
+
+- (void)sureButtonActionFinish:(UIButton *)btn{
+    [registerB removeFromSuperview];
+    [registerR removeFromSuperview];
+    [registerV removeFromSuperview];
+    registerB = nil;
+    registerR = nil;
+    registerV = nil;
+    
+    registerP.photoImageView.image = [UIImage imageNamed:@"register-3"];
+
+    NSBundle *rootBundle = [NSBundle mainBundle];
+    NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
+    NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
+    NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
+    
+    registerR = [rootArrayOfResult lastObject];
+    
+    registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+    
+    registerR.titleSuccess.text = @"验证成功";
+    registerR.passTitle.text = @"您可以绑定银行卡，也可以选择跳过．";
+    
+    registerV = [rootArrayOfView lastObject];
+    
+    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 313);
+    
+    registerB = [rootArrayOfPButton lastObject];
+    
+    registerB.frame = CGRectMake(0, CGRectGetMaxY(registerV.frame), WIDTH_CONTROLLER_DEFAULT, 100);
+    
+    [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [registerB.sureButton addTarget:self action:@selector(sureButtonActionPass:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:registerV];
+    [self.view addSubview:registerR];
+    [self.view addSubview:registerB];
+    
+}
+
+- (void)sureButtonActionPass:(UIButton *)btn{
+    [ProgressHUD showMessage:@"完成" Width:100 High:100];
+}
+
+- (void)passButtonAction:(UIButton *)btn{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

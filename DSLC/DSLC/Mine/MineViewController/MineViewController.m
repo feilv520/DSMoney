@@ -23,6 +23,7 @@
 #import "MyPlannerViewController.h"
 #import "BigMoneyViewController.h"
 #import "SelectionOfSafe.h"
+#import "YesterdayViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -153,6 +154,12 @@
         labelZi.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     }
     [imageRedBG addSubview:labelZi];
+    
+    UIButton *yesterdayButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 25, HEIGHT_CONTROLLER_DEFAULT * (128.0 / 667.0), 20, 20) backgroundColor:nil textColor:nil titleText:nil];
+    [yesterdayButton setImage:[UIImage imageNamed:@"zuorishouyi-678"] forState:UIControlStateNormal];
+    [yesterdayButton addTarget:self action:@selector(yesterdayButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [imageRedBG addSubview:yesterdayButton];
     
 //    中间部分xib
     NSBundle *root = [NSBundle mainBundle];
@@ -301,6 +308,12 @@
 {
     BigMoneyViewController *bigMoneyVC = [[BigMoneyViewController alloc] init];
     [self.navigationController pushViewController:bigMoneyVC animated:YES];
+}
+
+//昨日收益
+- (void)yesterdayButtonAction:(UIButton *)button{
+    YesterdayViewController *yesterdayVC = [[YesterdayViewController alloc] init];
+    [self.navigationController pushViewController:yesterdayVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
