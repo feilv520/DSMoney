@@ -46,38 +46,38 @@
 }
 
 //导航栏下面的三个按钮
-- (void)showButtonThree
-{
-    buttonArr = @[@"新手专享", @"固收理财", @"票据投资"];
-    
-    UIScrollView *scrollView = [CreatView creatWithScrollViewFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 45) backgroundColor:[UIColor whiteColor] contentSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT/3 * buttonArr.count, 0) contentOffSet:CGPointMake(0, 0)];
-    
-    [self.view addSubview:scrollView];
-    
-    for (int i = 0; i < 3; i++) {
-        
-        butThree = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * i, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:[NSString stringWithFormat:@"%@", [buttonArr objectAtIndex:i]]];
-        butThree.titleLabel.font = [UIFont systemFontOfSize:14];
-        butThree.tag = 100 + i;
-        [scrollView addSubview:butThree];
-        
-//        [butThree addTarget:self action:@selector(buttonThreePress:) forControlEvents:UIControlEventTouchUpInside];
-        
-        if (i == 2) {
-            
-            [butThree setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
-        }
-    }
-    
-//    lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2) backgroundColor:[UIColor daohanglan] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:0] text:@""];
-//    [self.view addSubview:lableRedLine];
-
-}
+//- (void)showButtonThree
+//{
+//    buttonArr = @[@"新手专享", @"固收理财", @"票据投资"];
+//    
+//    UIScrollView *scrollView = [CreatView creatWithScrollViewFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 45) backgroundColor:[UIColor whiteColor] contentSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT/3 * buttonArr.count, 0) contentOffSet:CGPointMake(0, 0)];
+//    
+//    [self.view addSubview:scrollView];
+//    
+//    for (int i = 0; i < 3; i++) {
+//        
+//        butThree = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * i, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:[NSString stringWithFormat:@"%@", [buttonArr objectAtIndex:i]]];
+//        butThree.titleLabel.font = [UIFont systemFontOfSize:14];
+//        butThree.tag = 100 + i;
+//        [scrollView addSubview:butThree];
+//        
+////        [butThree addTarget:self action:@selector(buttonThreePress:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        if (i == 2) {
+//            
+//            [butThree setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//            
+//        }
+//    }
+//    
+////    lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2) backgroundColor:[UIColor daohanglan] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:0] text:@""];
+////    [self.view addSubview:lableRedLine];
+//
+//}
 
 //导航栏下面的三个按钮的点击方法
-- (void)buttonThreePress:(UIButton *)button
-{
+//- (void)buttonThreePress:(UIButton *)button
+//{
 //    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
 //        
 //        if (button.tag == 100) {
@@ -114,7 +114,7 @@
 //    } completion:^(BOOL finished) {
 //        
 //    }];
-}
+//}
 
 //TableView展示
 - (void)showTableView

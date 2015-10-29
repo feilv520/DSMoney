@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="castDown" id="KGk-i7-Jjw" customClass="CastDownTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="castDown" id="KGk-i7-Jjw" customClass="CastDownTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="375" height="133"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="投向" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OgY-7t-AAl">
-                        <rect key="frame" x="10" y="16" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投向" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OgY-7t-AAl">
+                        <rect key="frame" x="10" y="19" width="30" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqN-N2-Cvd">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqN-N2-Cvd">
                         <rect key="frame" x="10" y="45" width="355" height="1"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="东方资产沪港通资产" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1q-Ut-FTw">
-                        <rect key="frame" x="10" y="66" width="153" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东方资产沪港通资产" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1q-Ut-FTw">
+                        <rect key="frame" x="10" y="66" width="135" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="投资金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8D-tb-CVu">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投资金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8D-tb-CVu">
                         <rect key="frame" x="10" y="95" width="68" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="68" id="Y5g-aW-R04"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.62352941179999999" green="0.63137254899999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="0.00元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GA9-02-iF3">
-                        <rect key="frame" x="299" y="95" width="68" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GA9-02-iF3">
+                        <rect key="frame" x="77" y="95" width="68" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="1dJ-hw-7Oe"/>
                             <constraint firstAttribute="width" constant="68" id="it0-T0-8ua"/>
@@ -46,12 +51,30 @@
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="7501111.png" translatesAutoresizingMaskIntoConstraints="NO" id="JyT-HO-QtF">
+                        <rect key="frame" x="347" y="81" width="20" height="20"/>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="GA9-02-iF3" secondAttribute="trailing" constant="8" id="5Xr-2G-fmR"/>
+                    <constraint firstAttribute="trailing" secondItem="GA9-02-iF3" secondAttribute="trailing" constant="230" id="5Xr-2G-fmR"/>
+                    <constraint firstItem="v1q-Ut-FTw" firstAttribute="top" secondItem="qqN-N2-Cvd" secondAttribute="bottom" constant="20" id="EaI-zP-iF8"/>
+                    <constraint firstItem="C8D-tb-CVu" firstAttribute="baseline" secondItem="GA9-02-iF3" secondAttribute="baseline" id="MnX-iW-5v4"/>
+                    <constraint firstItem="C8D-tb-CVu" firstAttribute="top" secondItem="v1q-Ut-FTw" secondAttribute="bottom" constant="8" symbolic="YES" id="TsE-ju-Fo8"/>
+                    <constraint firstAttribute="bottom" secondItem="qqN-N2-Cvd" secondAttribute="bottom" constant="86" id="TwK-B9-ab2"/>
+                    <constraint firstItem="qqN-N2-Cvd" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Vlf-Mo-e8U"/>
+                    <constraint firstItem="qqN-N2-Cvd" firstAttribute="leading" secondItem="C8D-tb-CVu" secondAttribute="leading" id="Zrh-RQ-0uk"/>
+                    <constraint firstItem="C8D-tb-CVu" firstAttribute="firstBaseline" secondItem="GA9-02-iF3" secondAttribute="firstBaseline" id="chO-Io-dEo"/>
+                    <constraint firstItem="qqN-N2-Cvd" firstAttribute="leading" secondItem="v1q-Ut-FTw" secondAttribute="leading" id="gRK-wa-VZh"/>
+                    <constraint firstItem="qqN-N2-Cvd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="45" id="hJb-WH-Fip"/>
                     <constraint firstItem="GA9-02-iF3" firstAttribute="top" secondItem="qqN-N2-Cvd" secondAttribute="bottom" constant="49" id="hh8-ci-Vn1"/>
+                    <constraint firstItem="qqN-N2-Cvd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="i5e-br-qc7"/>
+                    <constraint firstItem="qqN-N2-Cvd" firstAttribute="top" secondItem="OgY-7t-AAl" secondAttribute="bottom" constant="8" symbolic="YES" id="jCa-Sb-6Yi"/>
+                    <constraint firstItem="qqN-N2-Cvd" firstAttribute="leading" secondItem="OgY-7t-AAl" secondAttribute="leading" id="qQr-M4-2RP"/>
                 </constraints>
             </tableViewCellContentView>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="7501111.png" width="26" height="26"/>
+    </resources>
 </document>

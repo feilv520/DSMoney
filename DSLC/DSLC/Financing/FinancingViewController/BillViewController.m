@@ -85,6 +85,8 @@
     button2 = (UIButton *)[self.view viewWithTag:201];
     button3 = (UIButton *)[self.view viewWithTag:202];
     
+    
+    
     if (butThree.tag == 202) {
         
         make = 0;
@@ -107,11 +109,12 @@
         [button1 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
         [button2 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
         
-    } else if (butThree.tag == 201) {
+    } else if (button2.tag == 201) {
         
         [financingVC.view removeFromSuperview];
         [financingVC removeFromParentViewController];
         
+        NSLog(@"111");
         [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             
             labelLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);

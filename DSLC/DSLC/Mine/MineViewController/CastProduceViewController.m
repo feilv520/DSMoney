@@ -14,6 +14,7 @@
 #import "CreatView.h"
 #import "UIColor+AddColor.h"
 #import "CheckViewController.h"
+#import "MoneyDetailViewController.h"
 
 @interface CastProduceViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -126,6 +127,18 @@
         } else {
             return 89;
         }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 1) {
+        
+        MoneyDetailViewController *moneyDetail = [[MoneyDetailViewController alloc] init];
+        [self.navigationController pushViewController:moneyDetail animated:YES];
+        
     }
 }
 

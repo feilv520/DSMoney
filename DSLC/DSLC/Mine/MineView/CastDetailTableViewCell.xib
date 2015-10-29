@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="castDetail" rowHeight="89" id="KGk-i7-Jjw" customClass="CastDetailTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="castDetail" rowHeight="89" id="KGk-i7-Jjw" customClass="CastDetailTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -27,7 +27,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCR-J3-MRU">
-                        <rect key="frame" x="253" y="50" width="114" height="21"/>
+                        <rect key="frame" x="29" y="50" width="114" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="114" id="mw1-dN-LYw"/>
                             <constraint firstAttribute="height" constant="21" id="sMX-K8-FxZ"/>
@@ -36,13 +36,19 @@
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="7501111.png" translatesAutoresizingMaskIntoConstraints="NO" id="BMc-yN-uPz">
+                        <rect key="frame" x="347" y="34" width="20" height="20"/>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="PCR-J3-MRU" secondAttribute="trailing" constant="8" id="J3B-5F-wfj"/>
+                    <constraint firstAttribute="trailing" secondItem="PCR-J3-MRU" secondAttribute="trailing" constant="232" id="J3B-5F-wfj"/>
                     <constraint firstItem="PCR-J3-MRU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="50" id="JJA-Fw-XJg"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="7501111.png" width="26" height="26"/>
+    </resources>
 </document>
