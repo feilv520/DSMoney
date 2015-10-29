@@ -61,22 +61,81 @@
     scrollView = [CreatView creatWithScrollViewFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 45) backgroundColor:[UIColor whiteColor] contentSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT/3, 0) contentOffSet:CGPointMake(0, 0)];
     [self.view addSubview:scrollView];
     
-    for (int i = 0; i < 3; i++) {
-        
-        butThree = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * i, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:[NSString stringWithFormat:@"%@", [butThrArr objectAtIndex:i]]];
-        [scrollView addSubview:butThree];
-        butThree.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-        butThree.tag = 200 + i;
-        [butThree addTarget:self action:@selector(buttonChooseWHichOne:) forControlEvents:UIControlEventTouchUpInside];
-        
-        if (i == 1) {
-            
-            [butThree setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        }
-    }
+    button1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"新手专享"];
+    [scrollView addSubview:button1];
+    button1.tag = 101;
+    button1.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [button1 addTarget:self action:@selector(button1Press:) forControlEvents:UIControlEventTouchUpInside];
+    
+    button2 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:@"固收理财"];
+    [scrollView addSubview:button2];
+    button2.tag = 201;
+    button2.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [button2 addTarget:self action:@selector(button2Press:) forControlEvents:UIControlEventTouchUpInside];
+    
+    button3 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"票据投资"];
+    [scrollView addSubview:button3];
+    button3.tag = 301;
+    button3.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [button3 addTarget:self action:@selector(button3Press:) forControlEvents:UIControlEventTouchUpInside];
     
     labelLine = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2) backgroundColor:[UIColor daohanglan] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     [self.view addSubview:labelLine];
+}
+
+- (void)button1Press:(UIButton *)button
+{
+    NSLog(@"1");
+    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        
+        labelLine.frame = CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [button1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button3 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+    [button2 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+}
+
+- (void)button2Press:(UIButton *)button
+{
+    NSLog(@"2");
+    
+    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        
+        labelLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [button2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button1 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+    [button3 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+}
+
+- (void)button3Press:(UIButton *)button
+{
+    NSLog(@"3");
+    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        
+        labelLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    financingVC = [[FinancingViewController alloc] init];
+    [self addChildViewController:financingVC];
+    [self.view addSubview:financingVC.view];
+    
+    financingVC.view.frame = CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53);
+    
+    [button3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button1 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+    [button2 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
 }
 
 - (void)buttonChooseWHichOne:(UIButton *)button
