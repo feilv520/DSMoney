@@ -54,11 +54,6 @@
 {
     HelpCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    if (cell == nil) {
-        
-        cell = [[HelpCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
-    }
-    
     cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
     cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
