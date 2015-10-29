@@ -21,6 +21,8 @@
     UIView *viewGraySectionOne;
     UIView *viewGraySectionTwo;
     UIView *viewGraySectionThree;
+    
+    NSInteger sectionOfNumber;
 }
 
 @end
@@ -30,6 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    sectionOfNumber = 1000;
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -175,10 +179,7 @@
 {
     NewHandCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    if (cell == nil) {
-        
-        cell = [[NewHandCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
-    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.labelQuestion.text = [contentArr objectAtIndex:indexPath.section];
     cell.labelQuestion.font = [UIFont systemFontOfSize:15];
@@ -190,7 +191,17 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0) {
+    if (sectionOfNumber == indexPath.section) {
+        viewGraySectionZero.hidden = YES;
+        viewGraySectionOne.hidden = YES;
+        viewGraySectionTwo.hidden = YES;
+        viewGraySectionThree.hidden = YES;
+        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:indexPath.section];
+        [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        sectionOfNumber = 1000;
+        
+    } else if (indexPath.section == 0) {
         viewGraySectionZero.hidden = NO;
         viewGraySectionOne.hidden = YES;
         viewGraySectionTwo.hidden = YES;
@@ -198,6 +209,9 @@
         NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:0];
         
         [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        sectionOfNumber = indexPath.section;
+        
     } else if (indexPath.section == 1) {
         viewGraySectionZero.hidden = YES;
         viewGraySectionOne.hidden = NO;
@@ -205,6 +219,9 @@
         viewGraySectionThree.hidden = YES;
         NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] initWithIndex:1];
         [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        sectionOfNumber = indexPath.section;
+        
     } else if (indexPath.section == 2) {
         viewGraySectionZero.hidden = YES;
         viewGraySectionOne.hidden = YES;
@@ -212,6 +229,9 @@
         viewGraySectionThree.hidden = YES;
         NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] initWithIndex:2];
         [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        sectionOfNumber = indexPath.section;
+        
     } else {
         viewGraySectionZero.hidden = YES;
         viewGraySectionOne.hidden = YES;
@@ -219,8 +239,10 @@
         viewGraySectionThree.hidden = NO;
         NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] initWithIndex:3];
         [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        sectionOfNumber = indexPath.section;
+        
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {

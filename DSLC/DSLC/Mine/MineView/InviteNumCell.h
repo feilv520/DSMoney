@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelPeople;
 @property (weak, nonatomic) IBOutlet UILabel *labelMoney;
 @property (weak, nonatomic) IBOutlet UIButton *butInvite;
+@property (weak, nonatomic) IBOutlet UILabel *redBag;
 
 @end

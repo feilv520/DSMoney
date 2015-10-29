@@ -130,8 +130,6 @@
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
     
-    [self.mainTableView setSeparatorColor:Color_Gray];
-    
     [self.mainTableView registerNib:[UINib nibWithNibName:@"TranctionTableViewCell" bundle:nil] forCellReuseIdentifier:@"tranction"];
     
     [self.view addSubview:self.mainTableView];
@@ -150,14 +148,14 @@
     
     UIButton *labelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [labelButton setFrame:CGRectMake(20, 0, 45, 45)];
+    [labelButton setFrame:CGRectMake(10, -7, 60, 60)];
     if (section == 0) {
         [labelButton setImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
     } else {
         [labelButton setImage:[UIImage imageNamed:@"8"] forState:UIControlStateNormal];
     }
     
-    [labelButton setTitle:@"月" forState:UIControlStateNormal];
+    [labelButton setTitle:@" 月" forState:UIControlStateNormal];
     [labelButton.titleLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:14]];
     [labelButton setTitleColor:Color_Red forState:UIControlStateNormal];
     
