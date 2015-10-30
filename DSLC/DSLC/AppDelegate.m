@@ -8,12 +8,11 @@
 
 #import "AppDelegate.h"
 #import "SelectionViewController.h"
-#import "FinancingViewController.h"
 #import "MineViewController.h"
 #import "MoreViewController.h"
 #import "MyHandViewController.h"
 #import "FileOfManage.h"
-#import "BillViewController.h"
+#import "ThreeViewController.h"
 
 @interface AppDelegate ()
 {
@@ -55,8 +54,8 @@
         SelectionViewController *selectionVC = [[SelectionViewController alloc] init];
         UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
         
-        BillViewController *billVC = [[BillViewController alloc] init];
-        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:billVC];
+        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
+        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
         
         MineViewController *mineVC = [[MineViewController alloc] init];
         UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];

@@ -15,6 +15,7 @@
 #import "BindingPhoneViewController.h"
 #import "RealNameViewController.h"
 #import "MeCell.h"
+#import "MendLoginViewController.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -215,6 +216,14 @@
         [app.tabBarVC.view addSubview:viewDown];
         
         [self viewDownShow];
+        
+    } else if (indexPath.section == 3) {
+        
+        if (indexPath.row == 0) {
+            
+            MendLoginViewController *mendLoginVC = [[MendLoginViewController alloc] init];
+            [self.navigationController pushViewController:mendLoginVC animated:YES];
+        }
     }
 }
 

@@ -23,7 +23,6 @@
     UIButton * butRecord;
     UILabel *labelLine;
     NSArray *twoArr;
-    UIImageView *imageRight;
     WinAPrizeViewController *winPrizeVC;
     MyRedBagViewController *redVC;
     BOOL consult;
@@ -57,97 +56,21 @@
     _tableView.tableFooterView = viewFoot;
     viewFoot.backgroundColor = [UIColor huibai];
     
-    viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (44.0 / 667.0))];
-    _tableView.tableHeaderView = viewHead;
-    viewHead.backgroundColor = [UIColor whiteColor];
-    [self viewHeadShow];
-    
     [_tableView registerNib:[UINib nibWithNibName:@"GrabBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"MyRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     
-    twoArr = @[@"红包为我带来的收益", @"抢红包"];
-    
-    imageRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 26, HEIGHT_CONTROLLER_DEFAULT * (17.0 / 667.0), 16, 16) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"arrow"]];
-    
-}
-
-//tableView头部
-- (void)viewHeadShow
-{
-    butMyRedBag = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/2, HEIGHT_CONTROLLER_DEFAULT * (44.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] titleText:@"我的红包"];
-    butMyRedBag.titleLabel.font = [UIFont systemFontOfSize:15];
-    [viewHead addSubview:butMyRedBag];
-    [butMyRedBag addTarget:self action:@selector(butMyRedBag:) forControlEvents:UIControlEventTouchUpInside];
-    
-    butRecord = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT / 2, 0, WIDTH_CONTROLLER_DEFAULT / 2, HEIGHT_CONTROLLER_DEFAULT * (44.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:@"中奖纪录"];
-    butRecord.titleLabel.font = [UIFont systemFontOfSize:15];
-    [viewHead addSubview:butRecord];
-    [butRecord addTarget:self action:@selector(butRecord:) forControlEvents:UIControlEventTouchUpInside];
-    
-    labelLine = [CreatView creatWithLabelFrame:CGRectMake(30, HEIGHT_CONTROLLER_DEFAULT * (42.0 / 667.0), butMyRedBag.frame.size.width - 60, 2) backgroundColor:[UIColor daohanglan] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
-    [viewHead addSubview:labelLine];
-}
-
-//我的红包按钮
-- (void)butMyRedBag:(UIButton *)button
-{
-    if (consult == YES) {
-        
-        [winPrizeVC removeFromParentViewController];
-        
-        redVC = [[MyRedBagViewController alloc] init];
-        [self addChildViewController:redVC];
-        [self.view addSubview:redVC.view];
-        
-        [butMyRedBag setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
-        [butRecord setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
-        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            
-            labelLine.frame = CGRectMake(30, HEIGHT_CONTROLLER_DEFAULT * (42.0 / 667.0), butMyRedBag.frame.size.width - 60, 2);
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-    }
-    
-    consult = NO;
-}
-
-//中奖纪录
-- (void)butRecord:(UIButton *)button
-{
-    consult = NO;
-    
-    if (consult == YES) {
-        
-    } else {
-        
-        [redVC removeFromParentViewController];
-        
-        [butRecord setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
-        [butMyRedBag setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    
-        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        
-        labelLine.frame = CGRectMake(butMyRedBag.frame.size.width + 30, HEIGHT_CONTROLLER_DEFAULT * (42.0 / 667.0), butRecord.frame.size.width - 60, 2);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-        winPrizeVC = [[WinAPrizeViewController alloc] init];
-        [self addChildViewController:winPrizeVC];
-        [self.view addSubview:winPrizeVC.view];
-        winPrizeVC.view.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (44.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT);
-    }
-    
-    consult = YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return HEIGHT_CONTROLLER_DEFAULT * (11.0 / 667.0);
+    if (section == 0) {
+        
+        return 0;
+        
+    } else {
+        
+        return HEIGHT_CONTROLLER_DEFAULT * (11.0 / 667.0);
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -172,7 +95,7 @@
 {
     if (section == 0) {
         
-        return 2;
+        return 1;
         
     } else {
         
@@ -192,7 +115,7 @@
             cell = [[GrabBagCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
         }
         
-        cell.labelGrab.text = [twoArr objectAtIndex:indexPath.row];
+        cell.labelGrab.text = @"红包为我带来的收益";
         cell.labelGrab.font = [UIFont systemFontOfSize:15];
         
         cell.labelQianShu.text = @"999元";
@@ -201,13 +124,6 @@
         cell.labelQianShu.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        if (indexPath.row == 1) {
-            
-            cell.labelQianShu.hidden = YES;
-            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-            [cell addSubview:imageRight];
-        }
         
         return cell;
         

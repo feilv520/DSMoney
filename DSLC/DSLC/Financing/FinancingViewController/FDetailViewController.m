@@ -49,7 +49,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
 
-    titleArr = @[@"产品描述", @"资产安全", @"投资须知"];
+    titleArr = @[@"产品描述", @"投资须知", @"投资记录"];
     
     [self.navigationItem setTitle:@"产品详情"];
     

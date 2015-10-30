@@ -191,7 +191,7 @@
 
 - (void)callMakeSureButton:(UIButton *)button
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%lld", 13354288036]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%ld", 13354288036]];
     [[UIApplication sharedApplication] openURL:url];
 }
 
