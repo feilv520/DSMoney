@@ -44,5 +44,7 @@
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
 #import "TPKeyboardAvoidingScrollView.h"
+#import "AFNetworking.h"
+#import "AFHTTPSessionManager.h"
 
 #endif /* Header_h */
