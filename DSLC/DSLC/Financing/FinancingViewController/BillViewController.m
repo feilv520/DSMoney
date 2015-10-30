@@ -12,8 +12,9 @@
 #import "CreatView.h"
 #import "FinancingViewController.h"
 #import "NewbieViewController.h"
+#import "BillCell.h"
 
-@interface BillViewController ()
+@interface BillViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UIScrollView *scrollView;
@@ -28,7 +29,10 @@
     FinancingViewController *financingVC;
     NewbieViewController *newbieVC;
     
-    NSInteger make;
+    UITableView *_tableView;
+    NSArray *butRedArray;
+    
+    UIImageView *imageView;
 }
 
 @end
@@ -40,158 +44,119 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [self showNavigationBar];
-    [self threeScrollViewButton];
+    [self tableViewShow];
 }
 
-- (void)showNavigationBar
+- (void)tableViewShow
 {
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
+    [self.view addSubview:_tableView];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
+    _tableView.tableFooterView.backgroundColor = [UIColor huibai];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [_tableView registerNib:[UINib nibWithNibName:@"BillCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    self.navigationItem.title = @"理财产品";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    butRedArray = @[@"3", @"6", @"9", @"12", @"7", @"9", @"1", @"5", @"6", @"8"];
+    
+    imageView = [CreatView creatImageViewWithFrame:CGRectMake(275, 65, 49, 49) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"已售罄"]];
 }
 
-//三个按钮
-- (void)threeScrollViewButton
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    butThrArr = @[@"新手专享", @"固收理财", @"票据投资"];
-    
-    scrollView = [CreatView creatWithScrollViewFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 45) backgroundColor:[UIColor whiteColor] contentSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT/3, 0) contentOffSet:CGPointMake(0, 0)];
-    [self.view addSubview:scrollView];
-    
-    button1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"新手专享"];
-    [scrollView addSubview:button1];
-    button1.tag = 101;
-    button1.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [button1 addTarget:self action:@selector(button1Press:) forControlEvents:UIControlEventTouchUpInside];
-    
-    button2 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:@"固收理财"];
-    [scrollView addSubview:button2];
-    button2.tag = 201;
-    button2.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [button2 addTarget:self action:@selector(button2Press:) forControlEvents:UIControlEventTouchUpInside];
-    
-    button3 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"票据投资"];
-    [scrollView addSubview:button3];
-    button3.tag = 301;
-    button3.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [button3 addTarget:self action:@selector(button3Press:) forControlEvents:UIControlEventTouchUpInside];
-    
-    labelLine = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2) backgroundColor:[UIColor daohanglan] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
-    [self.view addSubview:labelLine];
+    return 126;
 }
 
-- (void)button1Press:(UIButton *)button
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"1");
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        
-        labelLine.frame = CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [button1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button3 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-    [button2 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+    return 10;
 }
 
-- (void)button2Press:(UIButton *)button
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"2");
+    BillCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        
-        labelLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
+    cell.backgroundColor = [UIColor huibai];
     
-    [button2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button1 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-    [button3 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-}
-
-- (void)button3Press:(UIButton *)button
-{
-    NSLog(@"3");
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        
-        labelLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
+    [cell.buttonRed setBackgroundImage:[UIImage imageNamed:@"圆角矩形-2"] forState:UIControlStateNormal];
+    [cell.buttonRed setTitle:[NSString stringWithFormat:@"%@", [butRedArray objectAtIndex:indexPath.row]] forState:UIControlStateNormal];
+    cell.buttonRed.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    financingVC = [[FinancingViewController alloc] init];
-    [self addChildViewController:financingVC];
-    [self.view addSubview:financingVC.view];
+    cell.labelMonth.text = @"个月固定投资";
+    cell.labelMonth.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
-    financingVC.view.frame = CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53);
+    cell.labelQiTou.text = @"1,000起投";
+    cell.labelQiTou.textColor = [UIColor zitihui];
+    cell.labelQiTou.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+    cell.labelQiTou.textAlignment = NSTextAlignmentRight;
     
-    [button3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button1 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-    [button2 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-}
-
-- (void)buttonChooseWHichOne:(UIButton *)button
-{
-    button1 = (UIButton *)[self.view viewWithTag:200];
-    button2 = (UIButton *)[self.view viewWithTag:201];
-    button3 = (UIButton *)[self.view viewWithTag:202];
+    cell.viewLine1.backgroundColor = [UIColor grayColor];
+    cell.viewLine1.alpha = 0.2;
     
-    if (butThree.tag == 202) {
+    NSMutableAttributedString *leftString = [[NSMutableAttributedString alloc] initWithString:@"8.02%"];
+    NSRange left = NSMakeRange(0, [[leftString string] rangeOfString:@"%"].location);
+    [leftString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:left];
+    [leftString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:left];
+    NSRange right = NSMakeRange([[leftString string] length] - 1, 1);
+    [leftString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:right];
+    [leftString addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:right];
+    [cell.labelLeftUp setAttributedText:leftString];
+    
+    NSMutableAttributedString *midString = [[NSMutableAttributedString alloc] initWithString:@"90天"];
+    NSRange leftMid = NSMakeRange(0, [[midString string] rangeOfString:@"天"].location);
+    [midString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:leftMid];
+    NSRange rightMid = NSMakeRange([[midString string] length] - 1, 1);
+    [midString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:rightMid];
+    [midString addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:rightMid];
+    [cell.labelMidUp setAttributedText:midString];
+    
+    [cell.butRightUp setImage:[UIImage imageNamed:@"组-14"] forState:UIControlStateNormal];
+    NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:@"24.3万元"];
+    NSRange rightLeft = NSMakeRange(0, [[rightString string] rangeOfString:@"万"].location);
+    [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:rightLeft];
+    NSRange rightR = NSMakeRange([[rightString string] length] - 2, 2);
+    [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:rightR];
+    [rightString addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:rightR];
+    [cell.butRightUp setAttributedTitle:rightString forState:UIControlStateNormal];
+    
+    cell.labelLeftDown.text = @"年化收益率";
+    cell.labelLeftDown.textColor = [UIColor zitihui];
+    cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    
+    cell.labelMidDown.text = @"理财期限";
+    cell.labelMidDown.textColor = [UIColor zitihui];
+    cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    
+    cell.labelRightDown.text = @"剩余总额";
+    cell.labelRightDown.textColor = [UIColor zitihui];
+    cell.labelRightDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    
+    if (indexPath.row == 3) {
         
-        make = 0;
+        cell.labelRightDown.hidden = YES;
+        cell.butRightUp.hidden = YES;
         
-        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            
-            labelLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-        
-        financingVC = [[FinancingViewController alloc] init];
-        [self addChildViewController:financingVC];
-        [self.view addSubview:financingVC.view];
-        
-        financingVC.view.frame = CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53);
-        
-        [button3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [button1 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-        [button2 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-        
-    } else if (button2.tag == 201) {
-        
-        [financingVC.view removeFromSuperview];
-        [financingVC removeFromParentViewController];
-        
-        NSLog(@"111");
-        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            
-            labelLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-        
-        BillViewController *billVC = [[BillViewController alloc] init];
-        [self addChildViewController:billVC];
-        [self.view addSubview:billVC.view];
-        
-        [button2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [button1 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-        [button3 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-        
-    } else {
-        
+        [cell addSubview:imageView];
         
     }
+//    else if (indexPath.row == 3) {
+//        
+//        cell.labelRightDown.hidden = YES;
+//        cell.butRightUp.hidden = YES;
+//        
+//        [cell addSubview:imageView];
+//
+//    } else if (indexPath.row == 6) {
+//        
+//        cell.labelRightDown.hidden = YES;
+//        cell.butRightUp.hidden = YES;
+//        
+//        [cell addSubview:imageView];
+//
+//    }
+    
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning {

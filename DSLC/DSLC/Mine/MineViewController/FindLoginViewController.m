@@ -1,24 +1,26 @@
 //
-//  NewbieViewController.m
+//  FindLoginViewController.m
 //  DSLC
 //
-//  Created by ios on 15/10/28.
+//  Created by ios on 15/10/30.
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import "NewbieViewController.h"
+#import "FindLoginViewController.h"
 
-@interface NewbieViewController ()
+@interface FindLoginViewController ()
 
 @end
 
-@implementation NewbieViewController
+@implementation FindLoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor yellowColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self.navigationItem setTitle:@"找回登录密码"];
 }
 
 - (void)didReceiveMemoryWarning {
