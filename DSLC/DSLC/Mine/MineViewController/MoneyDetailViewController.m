@@ -54,7 +54,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"OtherProjectCell" bundle:nil] forCellReuseIdentifier:@"reuse3"];
     [_tableView registerNib:[UINib nibWithNibName:@"DownFourCell" bundle:nil] forCellReuseIdentifier:@"reuse4"];
     
-    titleArray = @[@"项目简述", @"项目详情", @"风险揭示", @"风险控制"];
+    titleArray = @[@"项目简述", @"项目详情", @"风控条件", @"管理团队简介", @"风险揭示"];
     otherArray = @[@"其他包含此资产的产品", @"3个月固收理财", @"6个月固收理财", @"9个月固收理财"];
     leftArray = @[@"产品名称", @"产品类型", @"资产总额", @"预计到期日", @"起息日", @"结息日", @"预计到帐日", @"收益分配方式", @"融资方名称", @"项目资金用途", @"还款来源", @"开售时间"];
     rightArray = @[@"蓝光12期项目", @"债权转让", @"1,500万元", @"2016-04-22", @"2015-10-22", @"2016-04-22", @"2016-04-23", @"到期一次兑付本金收益", @"蓝光", @"用于蓝光和骏下属各项目开发建设", @"蓝光和骏经营收入", @"2015-10-19"];
@@ -128,7 +128,7 @@
         
     } else {
         
-        return 4;
+        return 5;
     }
     
 }

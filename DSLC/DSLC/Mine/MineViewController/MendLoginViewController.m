@@ -7,14 +7,19 @@
 //
 
 #import "MendLoginViewController.h"
-#import "FindLoginViewController.h"
 #import "MendLoginCell.h"
-#import "FindLoginCell.h"
+#import "ForgetSecretViewController.h"
 
 @interface MendLoginViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tableView;
+    NSArray *leftArr;
+    NSArray *textArr;
+    UIButton *butMake;
+    UITextField *textField1;
+    UITextField *textField2;
+    UITextField *textField3;
 }
 
 @end
@@ -37,13 +42,23 @@
 
 - (void)contentShow
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 150) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.scrollEnabled = NO;
     _tableView.tableFooterView = [UIView new];
     _tableView.backgroundColor = [UIColor huibai];
     [_tableView registerNib:[UINib nibWithNibName:@"MendLoginCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    
+    leftArr = @[@"原登录密码", @"新登录密码", @"确认登录密码"];
+    textArr = @[@"请输入原登录密码", @"请输入新登录密码", @"请再次输入新登录密码"];
+    
+    butMake = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 210, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    [self.view addSubview:butMake];
+    [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+    [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    [butMake addTarget:self action:@selector(buttonReally:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,12 +75,58 @@
 {
     MendLoginCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
+    cell.labelLeft.text = [leftArr objectAtIndex:indexPath.row];
+    cell.labelLeft.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    
+    cell.textFieldRight.placeholder = [textArr objectAtIndex:indexPath.row];
+    cell.textFieldRight.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+    cell.textFieldRight.tintColor = [UIColor grayColor];
+    cell.textFieldRight.tag = indexPath.row + 300;
+    cell.textFieldRight.keyboardType = UIKeyboardTypeNumberPad;
+    [cell.textFieldRight addTarget:self action:@selector(editTextField:) forControlEvents:UIControlEventEditingChanged];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)editTextField:(UITextField *)textField
+{
+    textField1 = (UITextField *)[self.view viewWithTag:300];
+    textField2 = (UITextField *)[self.view viewWithTag:301];
+    textField3 = (UITextField *)[self.view viewWithTag:302];
+    
+    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0) {
+        
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    }
+}
+
+//确定按钮
+- (void)buttonReally:(UIButton *)button
+{
+    textField1 = (UITextField *)[self.view viewWithTag:300];
+    textField2 = (UITextField *)[self.view viewWithTag:301];
+    textField3 = (UITextField *)[self.view viewWithTag:302];
+
+    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0) {
+        
+        NSLog(@"确定");
+        
+    } else {
+        
+        NSLog(@"111111");
+    }
 }
 
 - (void)rightBarItem:(UIBarButtonItem *)bar
 {
-    FindLoginViewController *findVC = [[FindLoginViewController alloc] init];
+    ForgetSecretViewController *findVC = [[ForgetSecretViewController alloc] init];
     [self.navigationController pushViewController:findVC animated:YES];
 }
 

@@ -16,6 +16,8 @@
 #import "RealNameViewController.h"
 #import "MeCell.h"
 #import "MendLoginViewController.h"
+#import "MendDealViewController.h"
+#import "EmailViewController.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -174,12 +176,11 @@
         }
         
      }
-    
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     }
-    
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -202,6 +203,11 @@
             
             RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
             [self.navigationController pushViewController:realNameVC animated:YES];
+            
+        } else if (indexPath.row == 1) {
+            
+            EmailViewController *emailVC = [[EmailViewController alloc] init];
+            [self.navigationController pushViewController:emailVC animated:YES];
         }
         
     } else if (indexPath.section == 0) {
@@ -223,7 +229,14 @@
             
             MendLoginViewController *mendLoginVC = [[MendLoginViewController alloc] init];
             [self.navigationController pushViewController:mendLoginVC animated:YES];
+            
+        } else if (indexPath.row == 1) {
+            
+            MendDealViewController *mendDeal = [[MendDealViewController alloc] init];
+            [self.navigationController pushViewController:mendDeal animated:YES];
+            
         }
+        
     }
 }
 
