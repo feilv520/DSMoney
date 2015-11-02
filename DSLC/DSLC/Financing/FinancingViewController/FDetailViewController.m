@@ -16,6 +16,7 @@
 #import "CreatView.h"
 #import "MakeSureViewController.h"
 #import "Calendar.h"
+#import "FDescriptionViewController.h"
 
 @interface FDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -330,6 +331,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 3) {
+        if (indexPath.row == 0) {
+            FDescriptionViewController *fDes = [[FDescriptionViewController alloc] init];
+            [self.navigationController pushViewController:fDes animated:YES];
+        }
+    }
 }
 
 - (void)returnBackBar:(UIBarButtonItem *)bar

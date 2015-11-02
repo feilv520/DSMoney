@@ -16,6 +16,7 @@
 #import "ProductSettingViewController.h"
 #import "MessageDetailViewController.h"
 #import "NewHandViewController.h"
+#import "MyAfHTTPClient.h"
 
 
 @interface SelectionViewController ()<UIScrollViewDelegate>{
@@ -255,28 +256,33 @@
 //
 //    }];
     
-    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    session.requestSerializer = [AFJSONRequestSerializer serializer];
-    session.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSDictionary *parameter = @{@"phone":@"15955444599",@"password":@"123"};
-    [session POST:@"http://192.168.0.161:8080/zhongxin/admin/p2p/app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        NSData *doubi = responseObject;
-        NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
-        
-        NSString *character = nil;
-        for (int i = 0; i < responseString.length; i ++) {
-            character = [responseString substringWithRange:NSMakeRange(i, 1)];
-            if ([character isEqualToString:@"\\"])
-                [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
-        }
-        responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
-        NSDictionary *dic = [SelectionViewController parseJSONStringToNSDictionary:responseString];
-        
-        NSLog(@"%@",[dic objectForKey:@"resultMsg"]);
+//    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+//    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSDictionary *parameter = @{@"phone":@"15955454588",@"password":@"123"};
+//    [session POST:@"http://192.168.0.161:8080/zhongxin/admin/p2p/app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+//        NSData *doubi = responseObject;
+//        NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
+//        
+//        NSString *character = nil;
+//        for (int i = 0; i < responseString.length; i ++) {
+//            character = [responseString substringWithRange:NSMakeRange(i, 1)];
+//            if ([character isEqualToString:@"\\"])
+//                [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
+//        }
+//        responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
+//        NSDictionary *dic = [SelectionViewController parseJSONStringToNSDictionary:responseString];
+//        
+//        NSLog(@"%@",[dic objectForKey:@"User"]);
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"%@",error);
+//    }];
+
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
-    
 }
 
 #pragma scrollView dalagate

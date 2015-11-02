@@ -230,6 +230,17 @@
 		8D0AE8061BE0AC0600D9D50C /* RegisterOfView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0AE8051BE0AC0600D9D50C /* RegisterOfView.xib */; settings = {ASSET_TAGS = (); }; };
 		8D0AE80C1BE0C1A700D9D50C /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0AE80A1BE0C1A700D9D50C /* RegisterViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D0AE80D1BE0C1A700D9D50C /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0AE80B1BE0C1A700D9D50C /* RegisterViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D0CB4891BE75C860039D826 /* SimpleDescriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CB4871BE75C860039D826 /* SimpleDescriptionsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D0CB48A1BE75C860039D826 /* SimpleDescriptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0CB4881BE75C860039D826 /* SimpleDescriptionsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D0CB48E1BE75DB20039D826 /* SimpleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CB48C1BE75DB20039D826 /* SimpleDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D0CB48F1BE75DB20039D826 /* SimpleDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0CB48D1BE75DB20039D826 /* SimpleDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D0CB4931BE75E370039D826 /* RiskConditionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CB4911BE75E370039D826 /* RiskConditionsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D0CB4941BE75E370039D826 /* RiskConditionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0CB4921BE75E370039D826 /* RiskConditionsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D0CB4981BE760C00039D826 /* RiskDisclosureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CB4961BE760C00039D826 /* RiskDisclosureViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D0CB4991BE760C00039D826 /* RiskDisclosureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0CB4971BE760C00039D826 /* RiskDisclosureViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D0CB4A01BE761C80039D826 /* TeamDescriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CB49E1BE761C80039D826 /* TeamDescriptionsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D0CB4A11BE761C80039D826 /* TeamDescriptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0CB49F1BE761C80039D826 /* TeamDescriptionsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D0CB4A41BE7806D0039D826 /* MyAfHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CB4A31BE7806D0039D826 /* MyAfHTTPClient.m */; settings = {ASSET_TAGS = (); }; };
 		8D121FBD1BD4D0CB00B3C1FE /* ProductSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D121FBB1BD4D0CB00B3C1FE /* ProductSettingViewController.m */; };
 		8D121FBE1BD4D0CB00B3C1FE /* ProductSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D121FBC1BD4D0CB00B3C1FE /* ProductSettingViewController.xib */; };
 		8D121FD61BD4D4CE00B3C1FE /* SettingTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D121FD41BD4D4CE00B3C1FE /* SettingTitleTableViewCell.m */; };
@@ -249,6 +260,14 @@
 		8D3125E61BD7689200143B71 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125E51BD7689200143B71 /* BaseViewController.m */; };
 		8D3125EA1BD7798000143B71 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125E81BD7798000143B71 /* ForgetPasswordViewController.m */; };
 		8D3125EB1BD7798000143B71 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3125E91BD7798000143B71 /* ForgetPasswordViewController.xib */; };
+		8D3A2FD11BE70F5500913DEC /* lianggeren@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3A2FCF1BE70F5500913DEC /* lianggeren@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D3A2FD21BE70F5500913DEC /* lianggeren@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3A2FD01BE70F5500913DEC /* lianggeren@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D3A2FD91BE70FBF00913DEC /* PhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A2FD41BE70FBF00913DEC /* PhotoTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		8D3A2FDA1BE70FBF00913DEC /* PhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3A2FD51BE70FBF00913DEC /* PhotoTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8D3A2FDB1BE70FBF00913DEC /* TextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A2FD71BE70FBF00913DEC /* TextTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		8D3A2FDC1BE70FBF00913DEC /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3A2FD81BE70FBF00913DEC /* TextTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8D3A2FE01BE7100000913DEC /* FDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A2FDE1BE7100000913DEC /* FDescriptionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D3A2FE11BE7100000913DEC /* FDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3A2FDF1BE7100000913DEC /* FDescriptionViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		8D3F95D01BE1C27E00013A8E /* RegisterOfResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F95CF1BE1C27E00013A8E /* RegisterOfResult.m */; settings = {ASSET_TAGS = (); }; };
 		8D3F95D21BE1C28A00013A8E /* RegisterOfResult.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3F95D11BE1C28A00013A8E /* RegisterOfResult.xib */; settings = {ASSET_TAGS = (); }; };
 		8D3F95D51BE1C8FC00013A8E /* RegisterOfPassButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F95D41BE1C8FC00013A8E /* RegisterOfPassButton.m */; settings = {ASSET_TAGS = (); }; };
@@ -747,6 +766,23 @@
 		8D0AE8091BE0C1A700D9D50C /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		8D0AE80A1BE0C1A700D9D50C /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		8D0AE80B1BE0C1A700D9D50C /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		8D0CB4861BE75C860039D826 /* SimpleDescriptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleDescriptionsViewController.h; sourceTree = "<group>"; };
+		8D0CB4871BE75C860039D826 /* SimpleDescriptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleDescriptionsViewController.m; sourceTree = "<group>"; };
+		8D0CB4881BE75C860039D826 /* SimpleDescriptionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleDescriptionsViewController.xib; sourceTree = "<group>"; };
+		8D0CB48B1BE75DB20039D826 /* SimpleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleDetailViewController.h; sourceTree = "<group>"; };
+		8D0CB48C1BE75DB20039D826 /* SimpleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleDetailViewController.m; sourceTree = "<group>"; };
+		8D0CB48D1BE75DB20039D826 /* SimpleDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleDetailViewController.xib; sourceTree = "<group>"; };
+		8D0CB4901BE75E370039D826 /* RiskConditionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskConditionsViewController.h; sourceTree = "<group>"; };
+		8D0CB4911BE75E370039D826 /* RiskConditionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiskConditionsViewController.m; sourceTree = "<group>"; };
+		8D0CB4921BE75E370039D826 /* RiskConditionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RiskConditionsViewController.xib; sourceTree = "<group>"; };
+		8D0CB4951BE760C00039D826 /* RiskDisclosureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskDisclosureViewController.h; sourceTree = "<group>"; };
+		8D0CB4961BE760C00039D826 /* RiskDisclosureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiskDisclosureViewController.m; sourceTree = "<group>"; };
+		8D0CB4971BE760C00039D826 /* RiskDisclosureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RiskDisclosureViewController.xib; sourceTree = "<group>"; };
+		8D0CB49D1BE761C80039D826 /* TeamDescriptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamDescriptionsViewController.h; sourceTree = "<group>"; };
+		8D0CB49E1BE761C80039D826 /* TeamDescriptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamDescriptionsViewController.m; sourceTree = "<group>"; };
+		8D0CB49F1BE761C80039D826 /* TeamDescriptionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamDescriptionsViewController.xib; sourceTree = "<group>"; };
+		8D0CB4A21BE7806D0039D826 /* MyAfHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAfHTTPClient.h; sourceTree = "<group>"; };
+		8D0CB4A31BE7806D0039D826 /* MyAfHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAfHTTPClient.m; sourceTree = "<group>"; };
 		8D121FBA1BD4D0CB00B3C1FE /* ProductSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductSettingViewController.h; sourceTree = "<group>"; };
 		8D121FBB1BD4D0CB00B3C1FE /* ProductSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductSettingViewController.m; sourceTree = "<group>"; };
 		8D121FBC1BD4D0CB00B3C1FE /* ProductSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductSettingViewController.xib; sourceTree = "<group>"; };
@@ -776,6 +812,17 @@
 		8D3125E71BD7798000143B71 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
 		8D3125E81BD7798000143B71 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
 		8D3125E91BD7798000143B71 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
+		8D3A2FCF1BE70F5500913DEC /* lianggeren@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lianggeren@2x.png"; sourceTree = "<group>"; };
+		8D3A2FD01BE70F5500913DEC /* lianggeren@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lianggeren@3x.png"; sourceTree = "<group>"; };
+		8D3A2FD31BE70FBF00913DEC /* PhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTableViewCell.h; sourceTree = "<group>"; };
+		8D3A2FD41BE70FBF00913DEC /* PhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTableViewCell.m; sourceTree = "<group>"; };
+		8D3A2FD51BE70FBF00913DEC /* PhotoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoTableViewCell.xib; sourceTree = "<group>"; };
+		8D3A2FD61BE70FBF00913DEC /* TextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextTableViewCell.h; sourceTree = "<group>"; };
+		8D3A2FD71BE70FBF00913DEC /* TextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextTableViewCell.m; sourceTree = "<group>"; };
+		8D3A2FD81BE70FBF00913DEC /* TextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextTableViewCell.xib; sourceTree = "<group>"; };
+		8D3A2FDD1BE7100000913DEC /* FDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDescriptionViewController.h; sourceTree = "<group>"; };
+		8D3A2FDE1BE7100000913DEC /* FDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDescriptionViewController.m; sourceTree = "<group>"; };
+		8D3A2FDF1BE7100000913DEC /* FDescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FDescriptionViewController.xib; sourceTree = "<group>"; };
 		8D3F95CE1BE1C27E00013A8E /* RegisterOfResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterOfResult.h; sourceTree = "<group>"; };
 		8D3F95CF1BE1C27E00013A8E /* RegisterOfResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterOfResult.m; sourceTree = "<group>"; };
 		8D3F95D11BE1C28A00013A8E /* RegisterOfResult.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterOfResult.xib; sourceTree = "<group>"; };
@@ -1249,6 +1296,8 @@
 				817E337F1BD733D100D05103 /* duigou@3x.png */,
 				817E33801BD733D100D05103 /* huangguan@2x.png */,
 				817E33811BD733D100D05103 /* huangguan@3x.png */,
+				8D3A2FCF1BE70F5500913DEC /* lianggeren@2x.png */,
+				8D3A2FD01BE70F5500913DEC /* lianggeren@3x.png */,
 				8D3F95E11BE2188500013A8E /* 昨日收益 */,
 				8D0AE7EB1BE09CE500D9D50C /* 注册 */,
 				81C138191BDF6D5E0088E792 /* 图图 */,
@@ -1425,6 +1474,9 @@
 				81D8ADA21BC646D100A15E01 /* FinancingViewController.m */,
 				817988261BC93C64007C8C3E /* FDetailViewController.h */,
 				817988271BC93C64007C8C3E /* FDetailViewController.m */,
+				8D3A2FDD1BE7100000913DEC /* FDescriptionViewController.h */,
+				8D3A2FDE1BE7100000913DEC /* FDescriptionViewController.m */,
+				8D3A2FDF1BE7100000913DEC /* FDescriptionViewController.xib */,
 				8184EC351BCC96E1003F440D /* MakeSureViewController.h */,
 				8184EC361BCC96E1003F440D /* MakeSureViewController.m */,
 				8D88A4DA1BCDFED400EE22F5 /* FSelectionPayTypeViewController.h */,
@@ -1485,6 +1537,12 @@
 				818523AB1BE3125D002FC653 /* BillCell.h */,
 				818523AC1BE3125D002FC653 /* BillCell.m */,
 				818523AD1BE3125D002FC653 /* BillCell.xib */,
+				8D3A2FD31BE70FBF00913DEC /* PhotoTableViewCell.h */,
+				8D3A2FD41BE70FBF00913DEC /* PhotoTableViewCell.m */,
+				8D3A2FD51BE70FBF00913DEC /* PhotoTableViewCell.xib */,
+				8D3A2FD61BE70FBF00913DEC /* TextTableViewCell.h */,
+				8D3A2FD71BE70FBF00913DEC /* TextTableViewCell.m */,
+				8D3A2FD81BE70FBF00913DEC /* TextTableViewCell.xib */,
 			);
 			path = FinancingView;
 			sourceTree = "<group>";
@@ -1581,6 +1639,21 @@
 				81BA1C071BD4F4AB00DBA5BE /* CheckViewController.m */,
 				8162D1121BE1B47B00CACAB6 /* MoneyDetailViewController.h */,
 				8162D1131BE1B47B00CACAB6 /* MoneyDetailViewController.m */,
+				8D0CB4861BE75C860039D826 /* SimpleDescriptionsViewController.h */,
+				8D0CB4871BE75C860039D826 /* SimpleDescriptionsViewController.m */,
+				8D0CB4881BE75C860039D826 /* SimpleDescriptionsViewController.xib */,
+				8D0CB48B1BE75DB20039D826 /* SimpleDetailViewController.h */,
+				8D0CB48C1BE75DB20039D826 /* SimpleDetailViewController.m */,
+				8D0CB48D1BE75DB20039D826 /* SimpleDetailViewController.xib */,
+				8D0CB4901BE75E370039D826 /* RiskConditionsViewController.h */,
+				8D0CB4911BE75E370039D826 /* RiskConditionsViewController.m */,
+				8D0CB4921BE75E370039D826 /* RiskConditionsViewController.xib */,
+				8D0CB4951BE760C00039D826 /* RiskDisclosureViewController.h */,
+				8D0CB4961BE760C00039D826 /* RiskDisclosureViewController.m */,
+				8D0CB4971BE760C00039D826 /* RiskDisclosureViewController.xib */,
+				8D0CB49D1BE761C80039D826 /* TeamDescriptionsViewController.h */,
+				8D0CB49E1BE761C80039D826 /* TeamDescriptionsViewController.m */,
+				8D0CB49F1BE761C80039D826 /* TeamDescriptionsViewController.xib */,
 			);
 			name = "账户资产";
 			sourceTree = "<group>";
@@ -1944,6 +2017,8 @@
 			children = (
 				8D9356D21BC607C500BC2BFA /* ViewController.h */,
 				8D9356D31BC607C500BC2BFA /* ViewController.m */,
+				8D0CB4A21BE7806D0039D826 /* MyAfHTTPClient.h */,
+				8D0CB4A31BE7806D0039D826 /* MyAfHTTPClient.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -2259,6 +2334,7 @@
 				8D9011A71BD6337C00E5D62A /* 12@2x.png in Resources */,
 				81BA1C101BD4FE2600DBA5BE /* MyNewsCell.xib in Resources */,
 				8D9011A41BD6337C00E5D62A /* 10@3x.png in Resources */,
+				8D3A2FE11BE7100000913DEC /* FDescriptionViewController.xib in Resources */,
 				8D3F95EA1BE2188500013A8E /* yueyuesheng@2x.png in Resources */,
 				81C8BBC81BDA2F8D005B9DFF /* lianxikefu@2x.png in Resources */,
 				8D66927C1BD0D27D00CD2CAF /* gesture_node_normal@2x.png in Resources */,
@@ -2270,6 +2346,7 @@
 				8162D11E1BE1BCC900CACAB6 /* XinXiCell.xib in Resources */,
 				817DD4AC1BCF547E00042B09 /* ziliao@2x.png in Resources */,
 				8DEDE1B61BCCFEB5008086D3 /* btn_red@3x.png in Resources */,
+				8D3A2FDC1BE70FBF00913DEC /* TextTableViewCell.xib in Resources */,
 				817E33B01BD78ED500D05103 /* yuan@3x.png in Resources */,
 				817E33A81BD7840000D05103 /* ChooseCell.xib in Resources */,
 				817E33881BD733D100D05103 /* huangguan@2x.png in Resources */,
@@ -2281,6 +2358,7 @@
 				81E90EF41BCB42D7004BA8A5 /* 750产品详111.png in Resources */,
 				8D1921D21BD4FC840038195E /* MessageDetailViewController.xib in Resources */,
 				813FD5001BCE71110050E884 /* FBalancePaymentViewController.xib in Resources */,
+				8D3A2FDA1BE70FBF00913DEC /* PhotoTableViewCell.xib in Resources */,
 				8D5DBB8A1BD4839B00F556B9 /* CastDownTableViewCell.xib in Resources */,
 				817E33831BD733D100D05103 /* 9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝@3x.png in Resources */,
 				817DD4A71BCF547E00042B09 /* touxiang@3x.png in Resources */,
@@ -2293,14 +2371,17 @@
 				8D3F95EB1BE2188500013A8E /* yueyuesheng@3x.png in Resources */,
 				8D3F95DA1BE20C1A00013A8E /* zuorishouyi-678@2x.png in Resources */,
 				817DD49D1BCF547E00042B09 /* jiantou@3x.png in Resources */,
+				8D0CB48F1BE75DB20039D826 /* SimpleDetailViewController.xib in Resources */,
 				8D9011B21BD6337C00E5D62A /* 5@3x.png in Resources */,
 				8D3125DF1BD763F900143B71 /* GetMoneyVerifyViewController.xib in Resources */,
 				8D9011801BD61B3400E5D62A /* TranctionTableViewCell.xib in Resources */,
+				8D0CB4A11BE761C80039D826 /* TeamDescriptionsViewController.xib in Resources */,
 				817DD4961BCF547E00042B09 /* dae@2x.png in Resources */,
 				818063A11BD5D87100E83492 /* InviteNumCell.xib in Resources */,
 				817DD4AA1BCF547E00042B09 /* zhanghu@2x.png in Resources */,
 				81BA1C031BD4E1ED00DBA5BE /* computer0.png in Resources */,
 				8D3F95DB1BE20C1A00013A8E /* zuorishouyi-678@3x.png in Resources */,
+				8D0CB4991BE760C00039D826 /* RiskDisclosureViewController.xib in Resources */,
 				817DD4A41BCF547E00042B09 /* tixian@2x.png in Resources */,
 				8180639C1BD5D7E500E83492 /* MyInviteCell.xib in Resources */,
 				818523BC1BE31B80002FC653 /* 组-14@3x.png in Resources */,
@@ -2334,12 +2415,14 @@
 				817E33AD1BD78ED500D05103 /* iconfont@2x.png in Resources */,
 				81C138211BDF6D5E0088E792 /* iconfont-phone@3x.png in Resources */,
 				8162D1191BE1BC2500CACAB6 /* ProjectNameCell.xib in Resources */,
+				8D0CB4941BE75E370039D826 /* RiskConditionsViewController.xib in Resources */,
 				81D703F81BE06D1F0074DF30 /* ForgetSecretCell.xib in Resources */,
 				8D9011B61BD6337C00E5D62A /* 7@3x.png in Resources */,
 				8DD180A31BD731E000F71CEA /* GetMoneyTipTableViewCell.xib in Resources */,
 				8D121FBE1BD4D0CB00B3C1FE /* ProductSettingViewController.xib in Resources */,
 				8D9011BD1BD6337C00E5D62A /* 矩形-10@2x.png in Resources */,
 				81E90EFA1BCB4312004BA8A5 /* 750产品详情.png in Resources */,
+				8D3A2FD21BE70F5500913DEC /* lianggeren@3x.png in Resources */,
 				8D9011A51BD6337C00E5D62A /* 11@2x.png in Resources */,
 				8D9011A91BD6337C00E5D62A /* 1@2x.png in Resources */,
 				8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */,
@@ -2417,6 +2500,7 @@
 				818063A81BD5E3CA00E83492 /* picture@2x.png in Resources */,
 				8DFA5C951BCE64D900AED2B2 /* FQuickPayViewController.xib in Resources */,
 				815D27A51BE21040005410C6 /* UpCell.xib in Resources */,
+				8D0CB48A1BE75C860039D826 /* SimpleDescriptionsViewController.xib in Resources */,
 				8D0AE7F91BE09CE500D9D50C /* register-2@3x.png in Resources */,
 				81BA1C131BD5000700DBA5BE /* icon04@2x.png in Resources */,
 				8D9011BA1BD6337C00E5D62A /* 9@3x.png in Resources */,
@@ -2475,6 +2559,7 @@
 				817E33AF1BD78ED500D05103 /* yuan@2x.png in Resources */,
 				81C1381F1BDF6D5E0088E792 /* iconfont-mima@3x.png in Resources */,
 				8DEDE1EA1BCD00B0008086D3 /* btn_gray@3x.png in Resources */,
+				8D3A2FD11BE70F5500913DEC /* lianggeren@2x.png in Resources */,
 				8D6692871BD0E53000CD2CAF /* gesture_node_highlighted@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2509,6 +2594,7 @@
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
 				8D4FF5E21BE339A200BAE25F /* UIImageView+AFNetworking.m in Sources */,
 				81C138171BDF64D80088E792 /* LoginCell.m in Sources */,
+				8D3A2FE01BE7100000913DEC /* FDescriptionViewController.m in Sources */,
 				8D3125EA1BD7798000143B71 /* ForgetPasswordViewController.m in Sources */,
 				8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */,
 				818063A01BD5D87100E83492 /* InviteNumCell.m in Sources */,
@@ -2546,6 +2632,7 @@
 				8184EC4A1BCCD13C003F440D /* CashMoneyCell.m in Sources */,
 				81D703FC1BE073730074DF30 /* ForgetSecret2Cell.m in Sources */,
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
+				8D0CB4A41BE7806D0039D826 /* MyAfHTTPClient.m in Sources */,
 				8D90117F1BD61B3400E5D62A /* TranctionTableViewCell.m in Sources */,
 				818063AB1BD61A7E00E83492 /* VerifyViewController.m in Sources */,
 				812F6BEB1BD8ED240000D8E9 /* PhoneViewController.m in Sources */,
@@ -2570,15 +2657,18 @@
 				8162D1181BE1BC2500CACAB6 /* ProjectNameCell.m in Sources */,
 				8DEDE26D1BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				81D703F71BE06D1F0074DF30 /* ForgetSecretCell.m in Sources */,
+				8D0CB4981BE760C00039D826 /* RiskDisclosureViewController.m in Sources */,
 				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,
 				817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */,
 				8D3125DE1BD763F900143B71 /* GetMoneyVerifyViewController.m in Sources */,
 				817E33781BD7303200D05103 /* MyPlannerCell.m in Sources */,
+				8D0CB4931BE75E370039D826 /* RiskConditionsViewController.m in Sources */,
 				81ED031C1BD0DA35005F4B02 /* AddBankViewController.m in Sources */,
 				8DEDE26E1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m in Sources */,
 				8191E21A1BDDC8BE000A6E8C /* NewHandCell.m in Sources */,
 				8D9011831BD62AFA00E5D62A /* MSelectionView.m in Sources */,
 				817E339F1BD77F6D00D05103 /* ChooseStyleCell.m in Sources */,
+				8D3A2FD91BE70FBF00913DEC /* PhotoTableViewCell.m in Sources */,
 				81F5FA0D1BDA0D2E008C38BF /* RealNameViewController.m in Sources */,
 				8D4FF5DB1BE339A200BAE25F /* AFURLResponseSerialization.m in Sources */,
 				8D121FD61BD4D4CE00B3C1FE /* SettingTitleTableViewCell.m in Sources */,
@@ -2587,11 +2677,13 @@
 				81898B781BDF180600DD4E44 /* UIPlaceHolderTextView.m in Sources */,
 				8110A4F61BC64A5800E38485 /* poi.m in Sources */,
 				819C3ABA1BD483C4008D2CFD /* MyRedBagCell.m in Sources */,
+				8D0CB4891BE75C860039D826 /* SimpleDescriptionsViewController.m in Sources */,
 				8D878CD81BC7548B00844575 /* b.m in Sources */,
 				818523C21BE35BDB002FC653 /* MendLoginViewController.m in Sources */,
 				812F6BEE1BD8ED310000D8E9 /* MessageViewController.m in Sources */,
 				8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */,
 				8162D1221BE1BD3300CACAB6 /* OtherProjectCell.m in Sources */,
+				8D0CB48E1BE75DB20039D826 /* SimpleDetailViewController.m in Sources */,
 				8D4FF5E31BE339A200BAE25F /* UIProgressView+AFNetworking.m in Sources */,
 				8191E21E1BDDF03D000A6E8C /* ServiceViewController.m in Sources */,
 				81F5FA0A1BD9E1FE008C38BF /* ChangeNumViewController.m in Sources */,
@@ -2641,6 +2733,8 @@
 				8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */,
 				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
 				8190A3051BD876EB002B53F5 /* AddCardViewController.m in Sources */,
+				8D3A2FDB1BE70FBF00913DEC /* TextTableViewCell.m in Sources */,
+				8D0CB4A01BE761C80039D826 /* TeamDescriptionsViewController.m in Sources */,
 				818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */,
 				81D704001BE0B2AF0074DF30 /* BillViewController.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,

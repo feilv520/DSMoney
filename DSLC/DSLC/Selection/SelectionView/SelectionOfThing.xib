@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -24,6 +24,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shouyeqiepian_13" translatesAutoresizingMaskIntoConstraints="NO" id="rJE-WJ-FVG">
                     <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="RVz-dX-Pc7"/>
                         <constraint firstAttribute="width" constant="45" id="e4Y-xI-vXB"/>
@@ -31,6 +32,7 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预期年化收益率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKg-AT-hnQ">
                     <rect key="frame" x="41" y="8" width="119" height="21"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="kmn-76-sxk"/>
                         <constraint firstAttribute="width" constant="119" id="nja-ds-5qa"/>
@@ -41,6 +43,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.02%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6i-Aa-kCg">
                     <rect key="frame" x="0.0" y="28" width="330" height="67"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="330" id="SSy-jj-3ib"/>
                         <constraint firstAttribute="height" constant="67" id="vrq-qM-G5o"/>
@@ -51,6 +54,7 @@
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCp-jS-kLZ">
                     <rect key="frame" x="8" y="95" width="314" height="1"/>
+                    <animations/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="cRT-4p-mer"/>
@@ -59,6 +63,7 @@
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shouyeqiepian_17-1" translatesAutoresizingMaskIntoConstraints="NO" id="YDQ-DG-1J2">
                     <rect key="frame" x="116" y="114" width="16" height="16"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="sx8-1C-qnD"/>
                         <constraint firstAttribute="width" constant="16" id="xMw-69-qn2"/>
@@ -66,6 +71,7 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新手专享" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jil-3U-5ut">
                     <rect key="frame" x="140" y="112" width="182" height="21"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="boA-Q7-3HP"/>
                         <constraint firstAttribute="width" constant="182" id="nwj-mV-10X"/>
@@ -76,6 +82,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YbP-Xa-XHH">
                     <rect key="frame" x="29" y="150" width="65" height="28"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="65" id="tFe-i9-GCx"/>
                         <constraint firstAttribute="height" constant="28" id="x3K-Gd-nf8"/>
@@ -86,6 +93,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="1,000元" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WK-fU-RIo">
                     <rect key="frame" x="235" y="150" width="79" height="28"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="79" id="Duf-Dd-O0P"/>
                         <constraint firstAttribute="height" constant="28" id="INy-xe-w93"/>
@@ -96,6 +104,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="理财期限" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xQ-YY-aeP">
                     <rect key="frame" x="27" y="176" width="68" height="24"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="Jkb-c9-gs6"/>
                     </constraints>
@@ -105,6 +114,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="剩余总额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Oj-Fm-uLV">
                     <rect key="frame" x="131" y="176" width="68" height="24"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="jiz-bw-S3q"/>
                     </constraints>
@@ -114,12 +124,14 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="起投资金" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5R-db-0kI">
                     <rect key="frame" x="235" y="176" width="68" height="24"/>
+                    <animations/>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
                     <color key="textColor" red="0.45882352941176469" green="0.46666666666666667" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zu4-MZ-vPc">
                     <rect key="frame" x="262" y="8" width="55" height="20"/>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
                     <constraints>
@@ -132,6 +144,7 @@
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24.3万元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaC-db-Zvt">
                     <rect key="frame" x="128" y="150" width="194" height="28"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="194" id="6vT-cN-UDm"/>
                         <constraint firstAttribute="height" constant="28" id="e1U-Sv-Ra1"/>
@@ -141,6 +154,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="s5R-db-0kI" firstAttribute="width" secondItem="5xQ-YY-aeP" secondAttribute="width" id="0kO-8Y-rF7"/>
@@ -159,7 +173,6 @@
                 <constraint firstItem="Jil-3U-5ut" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="15" id="Rfl-jV-ICb"/>
                 <constraint firstItem="YbP-Xa-XHH" firstAttribute="centerX" secondItem="5xQ-YY-aeP" secondAttribute="centerX" id="TYC-cr-zO0"/>
                 <constraint firstItem="rJE-WJ-FVG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ale-7L-3Px"/>
-                <constraint firstItem="uaC-db-Zvt" firstAttribute="width" secondItem="YbP-Xa-XHH" secondAttribute="width" id="bTv-gQ-Y7j"/>
                 <constraint firstItem="1Oj-Fm-uLV" firstAttribute="leading" secondItem="5xQ-YY-aeP" secondAttribute="trailing" constant="36" id="cNQ-aQ-1MD"/>
                 <constraint firstItem="0WK-fU-RIo" firstAttribute="top" secondItem="lCp-jS-kLZ" secondAttribute="bottom" constant="54" id="fFs-9I-ZCY"/>
                 <constraint firstItem="YbP-Xa-XHH" firstAttribute="top" secondItem="lCp-jS-kLZ" secondAttribute="bottom" constant="54" id="gc3-cU-WbE"/>
@@ -178,21 +191,8 @@
                 <constraint firstItem="GKg-AT-hnQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="41" id="vZ9-Ud-bWY"/>
                 <constraint firstItem="lCp-jS-kLZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="vfn-QV-d8c"/>
                 <constraint firstItem="1Oj-Fm-uLV" firstAttribute="height" secondItem="5xQ-YY-aeP" secondAttribute="height" id="wI8-gl-h8D"/>
-                <constraint firstItem="0WK-fU-RIo" firstAttribute="width" secondItem="YbP-Xa-XHH" secondAttribute="width" id="x3y-2r-Nrd"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="vJB-ak-Anp"/>
-                    <exclude reference="bTv-gQ-Y7j"/>
-                    <exclude reference="x3y-2r-Nrd"/>
-                </mask>
-            </variation>
-            <variation key="widthClass=compact">
-                <mask key="constraints">
-                    <include reference="vJB-ak-Anp"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="dayLabel" destination="YbP-Xa-XHH" id="PJf-6c-Js7"/>
                 <outlet property="firstLabel" destination="0WK-fU-RIo" id="2Ei-fl-gzv"/>
