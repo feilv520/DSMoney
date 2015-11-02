@@ -56,12 +56,10 @@
 //三个按钮
 - (void)threeScrollViewButton
 {
-    butThrArr = @[@"新手专享", @"固收理财", @"票据投资"];
-    
     scrollView = [CreatView creatWithScrollViewFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 45) backgroundColor:[UIColor whiteColor] contentSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT/3, 0) contentOffSet:CGPointMake(0, 0)];
     [self.view addSubview:scrollView];
     
-    button1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"新手专享"];
+    button1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"活动专区"];
     [scrollView addSubview:button1];
     button1.tag = 101;
     button1.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];

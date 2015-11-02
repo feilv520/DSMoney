@@ -1,14 +1,14 @@
 //
-//  FindLoginCell.m
+//  NewBieCell.m
 //  DSLC
 //
-//  Created by ios on 15/10/30.
+//  Created by ios on 15/11/2.
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import "FindLoginCell.h"
+#import "NewBieCell.h"
 
-@implementation FindLoginCell
+@implementation NewBieCell
 
 - (void)awakeFromNib {
     // Initialization code

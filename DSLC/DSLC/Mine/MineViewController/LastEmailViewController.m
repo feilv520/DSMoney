@@ -1,26 +1,25 @@
 //
-//  FindLoginViewController.m
+//  LastEmailViewController.m
 //  DSLC
 //
-//  Created by ios on 15/10/30.
+//  Created by ios on 15/11/2.
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import "FindLoginViewController.h"
+#import "LastEmailViewController.h"
 
-@interface FindLoginViewController ()
+@interface LastEmailViewController ()
 
 @end
 
-@implementation FindLoginViewController
+@implementation LastEmailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self.navigationItem setTitle:@"找回登录密码"];
+    [self.navigationItem setTitle:@"绑定邮箱"];
 }
 
 - (void)didReceiveMemoryWarning {
