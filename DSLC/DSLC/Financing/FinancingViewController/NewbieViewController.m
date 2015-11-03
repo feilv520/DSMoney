@@ -10,6 +10,7 @@
 #import "define.h"
 #import "FinancingCell.h"
 #import "NewBieCell.h"
+#import "FDetailViewController.h"
 
 @interface NewbieViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -26,7 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor yellowColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [self tableViewShow];
 }
@@ -206,6 +207,15 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    FDetailViewController *detailVC = [[FDetailViewController alloc] init];
+    detailVC.estimate = NO;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

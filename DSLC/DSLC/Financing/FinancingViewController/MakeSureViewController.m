@@ -16,6 +16,7 @@
 #import "CreatView.h"
 #import "FConfirmMoney.h"
 #import "FSelectionPayTypeViewController.h"
+#import "NewMakeSureCell.h"
 
 @interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic) UITableView *tableView;
@@ -33,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor huibai];
     
     [self.navigationItem setTitle:@"确认投资"];
     [self showTableView];
@@ -59,8 +60,19 @@
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.backgroundColor = [UIColor huibai];
     
-    UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 200)];
+    UIView *viewFoot = [[UIView alloc] init];
+    
+    if (self.decide == NO) {
+        
+        viewFoot.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 130);
+        
+    } else {
+        
+        viewFoot.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 250);
+    }
+    
     viewFoot.backgroundColor = [UIColor huibai];
     self.tableView.tableFooterView = viewFoot;
     
@@ -68,22 +80,17 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"MoneyCell" bundle:nil] forCellReuseIdentifier:@"reuse2"];
     [self.tableView registerNib:[UINib nibWithNibName:@"RedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse3"];
     [self.tableView registerNib:[UINib nibWithNibName:@"CashMoneyCell" bundle:nil] forCellReuseIdentifier:@"reuse4"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"NewMakeSureCell" bundle:nil] forCellReuseIdentifier:@"reuseNew"];
     
-    UIButton *makeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (44.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (23.0 / 667.0), (WIDTH_CONTROLLER_DEFAULT - 80), HEIGHT_CONTROLLER_DEFAULT * (44.0 / 667.0)) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"确认投资"];
+    UIButton *makeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (44.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (60.0 / 667.0), (WIDTH_CONTROLLER_DEFAULT - 80), HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"确认投资"];
     makeSure.titleLabel.font = [UIFont systemFontOfSize:15];
     [viewFoot addSubview:makeSure];
     [makeSure addTarget:self action:@selector(makeSureMoney:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIView *viewSafe = [CreatView creatViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 190)/2, 70, 190, 20) backgroundColor:[UIColor clearColor]];
-    [viewFoot addSubview:viewSafe];
-    
-    UIImageView *imageSmallImg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 4, 12, 12)];
-    UIImage *imageSmall = [UIImage imageNamed:@"shouyeqiepian_21"];
-    imageSmallImg.image = imageSmall;
-    [viewSafe addSubview:imageSmallImg];
-    
-    UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(20, 0, 179, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont systemFontOfSize:11] text:@"由中国银行保障您的账户资金安全"];
-    [viewSafe addSubview:labelName];
+    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 110, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"由中国银行保障您的账户资金安全"];
+    [viewFoot addSubview:buttonSafe];
+    buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+    [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
     
     self.qianShu = [[UILabel alloc] init];
     self.qianShu.font = [UIFont systemFontOfSize:15];
@@ -129,19 +136,36 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    if (self.decide == NO) {
+        
+        return 3;
+        
+    } else {
+        
+        return 4;
+        
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 2) {
+    if (self.decide == NO) {
         
-        return 2;
+        return 1;
         
     } else {
         
-        return 1;
+        if (section == 2) {
+            
+            return 2;
+            
+        } else {
+            
+            return 1;
+        }
+        
     }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -154,7 +178,16 @@
             cell = [[ContentCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse1"];
         }
         
-        cell.labelMonth.text = @"3个月固定投资";
+        if (self.decide == NO) {
+            
+            cell.labelMonth.text = @"新手专享";
+            
+        } else {
+            
+            cell.labelMonth.text = @"3个月固定投资";
+            
+        }
+        
         cell.labelMonth.font = [UIFont systemFontOfSize:15];
         cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.viewLine.alpha = 0.7;
@@ -189,15 +222,26 @@
         }
         
         cell.labelMoney.text = @"投资金额";
-        cell.labelMoney.font = [UIFont systemFontOfSize:15];
+        cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
         cell.textField.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 53)];
         cell.textField.leftView.backgroundColor = [UIColor shurukuangColor];
         cell.textField.leftViewMode = UITextFieldViewModeAlways;
         cell.textField.tintColor = [UIColor yuanColor];
         
-        cell.textField.placeholder = @"请输入投资金额";
+        if (self.decide == NO) {
+            
+            cell.textField.text = @"10,000";
+            cell.textField.enabled = NO;
+            
+        } else {
+            
+            cell.textField.placeholder = @"请输入投资金额";
+            
+        }
+        
         cell.textField.font = [UIFont systemFontOfSize:14];
+        cell.textField.textColor = [UIColor zitihui];
         cell.textField.layer.cornerRadius = 4;
         cell.textField.backgroundColor = [UIColor shurukuangColor];
         cell.textField.layer.borderWidth = 0.5;
@@ -205,13 +249,22 @@
         
         cell.labelOneZi.text = @"元";
         cell.labelOneZi.font = [UIFont systemFontOfSize:14];
-        cell.labelOneZi.textColor = [UIColor yuanColor];
+        cell.labelOneZi.textColor = [UIColor zitihui];
         cell.labelOneZi.backgroundColor = [UIColor clearColor];
         
         cell.labelShouRu.text = @"预计到期收益";
         cell.labelShouRu.font = [UIFont systemFontOfSize:15];
         
-        cell.labelYuan.text = @"0.00元";
+        if (self.decide == NO) {
+            
+            cell.labelYuan.text = @"5.00元";
+            
+        } else {
+            
+            cell.labelYuan.text = @"0.00元";
+            
+        }
+        
         cell.labelYuan.font = [UIFont systemFontOfSize:15];
         cell.labelYuan.textColor = [UIColor daohanglan];
         
@@ -223,43 +276,63 @@
         
     } else if (indexPath.section == 2) {
         
-        RedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse3"];
-        if (cell == nil) {
+        if (self.decide == NO) {
             
-            cell = [[RedBagCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse3"];
-        }
-        
-        if (indexPath.row == 0) {
+            NewMakeSureCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNew"];
             
-            [cell.butRecharge setTitle:@"充值" forState:UIControlStateNormal];
-            cell.butRecharge.titleLabel.font = [UIFont systemFontOfSize:12];
-            [cell.butRecharge setTitleColor:[UIColor chongzhiColor] forState:UIControlStateNormal];
-            [cell.butRecharge addTarget:self action:@selector(cashMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.buttonLeft setTitle:@"新手体验金" forState:UIControlStateNormal];
+            [cell.buttonLeft setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [cell.buttonLeft setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
+            cell.buttonLeft.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+            cell.buttonLeft.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            cell.buttonLeft.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
             
-            self.qianShu.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 12 - 60, 0, 60, 48);
-            self.qianShu.text = @"56.02元";
-            self.qianShu.textColor = [UIColor daohanglan];
-            self.qianShu.textAlignment = NSTextAlignmentRight;
-            [cell addSubview:self.qianShu];
+            cell.labelRight.text = @"10,000元";
+            cell.labelRight.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+            cell.labelRight.textColor = [UIColor daohanglan];
+            cell.labelRight.textAlignment = NSTextAlignmentRight;
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
             
         } else {
             
-            self.labelJiGe.text = @"2个";
-            self.labelJiGe.textAlignment = NSTextAlignmentCenter;
-            self.labelJiGe.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 16 - 30, 0, 30, 48);
-            [cell addSubview:self.labelJiGe];
+            RedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse3"];
             
-            self.imageViewRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 16, 16, 16, 16);
-            self.imageViewRight.image = [UIImage imageNamed:@"7501111"];
-            [cell addSubview:self.imageViewRight];
+            if (indexPath.row == 0) {
+                
+                [cell.butRecharge setTitle:@"充值" forState:UIControlStateNormal];
+                cell.butRecharge.titleLabel.font = [UIFont systemFontOfSize:12];
+                [cell.butRecharge setTitleColor:[UIColor chongzhiColor] forState:UIControlStateNormal];
+                [cell.butRecharge addTarget:self action:@selector(cashMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+                
+                self.qianShu.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 12 - 60, 0, 60, 48);
+                self.qianShu.text = @"56.02元";
+                self.qianShu.textColor = [UIColor daohanglan];
+                self.qianShu.textAlignment = NSTextAlignmentRight;
+                [cell addSubview:self.qianShu];
+                
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+            } else {
+                
+                self.labelJiGe.text = @"2个";
+                self.labelJiGe.textAlignment = NSTextAlignmentCenter;
+                self.labelJiGe.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 16 - 30, 0, 30, 48);
+                [cell addSubview:self.labelJiGe];
+                
+                self.imageViewRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 16, 16, 16, 16);
+                self.imageViewRight.image = [UIImage imageNamed:@"7501111"];
+                [cell addSubview:self.imageViewRight];
+            }
+            
+            cell.labelRedBag.text = [self.titleArr objectAtIndex:indexPath.row];
+            cell.labelRedBag.font = [UIFont systemFontOfSize:15];
+            
+            return cell;
+            
         }
         
-        cell.labelRedBag.text = [self.titleArr objectAtIndex:indexPath.row];
-        cell.labelRedBag.font = [UIFont systemFontOfSize:15];
-        
-        return cell;
         
     } else {
         
