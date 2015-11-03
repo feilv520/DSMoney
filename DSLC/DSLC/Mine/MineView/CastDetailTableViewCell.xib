@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,37 +15,57 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="投资金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20w-SX-Osb">
-                        <rect key="frame" x="10" y="50" width="68" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投资金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20w-SX-Osb">
+                        <rect key="frame" x="10" y="50" width="60" height="18"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.62352941179999999" green="0.63137254899999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="东方资产沪港通资产" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Zh-km-APb">
-                        <rect key="frame" x="10" y="21" width="153" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东方资产沪港通资产" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Zh-km-APb">
+                        <rect key="frame" x="10" y="21" width="152" height="21"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="7so-co-jyj"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCR-J3-MRU">
-                        <rect key="frame" x="29" y="50" width="114" height="21"/>
+                        <rect key="frame" x="72" y="50" width="70" height="21"/>
+                        <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="114" id="mw1-dN-LYw"/>
-                            <constraint firstAttribute="height" constant="21" id="sMX-K8-FxZ"/>
+                            <constraint firstAttribute="height" constant="21" id="MYb-Ae-MSh"/>
+                            <constraint firstAttribute="width" constant="70" id="yvk-Uf-y37"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="7501111.png" translatesAutoresizingMaskIntoConstraints="NO" id="BMc-yN-uPz">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="7501111.png" translatesAutoresizingMaskIntoConstraints="NO" id="BMc-yN-uPz">
                         <rect key="frame" x="347" y="34" width="20" height="20"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="Rb7-bE-S0C"/>
+                            <constraint firstAttribute="height" constant="20" id="ai7-F9-wTs"/>
+                        </constraints>
                     </imageView>
                 </subviews>
+                <animations/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="PCR-J3-MRU" secondAttribute="trailing" constant="232" id="J3B-5F-wfj"/>
-                    <constraint firstItem="PCR-J3-MRU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="50" id="JJA-Fw-XJg"/>
+                    <constraint firstAttribute="trailing" secondItem="BMc-yN-uPz" secondAttribute="trailing" constant="8" id="3AR-Lb-iiJ"/>
+                    <constraint firstItem="2Zh-km-APb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="13" id="CEa-jE-5Qq"/>
+                    <constraint firstItem="2Zh-km-APb" firstAttribute="leading" secondItem="20w-SX-Osb" secondAttribute="leading" id="KMd-Mj-rtN"/>
+                    <constraint firstItem="PCR-J3-MRU" firstAttribute="top" secondItem="2Zh-km-APb" secondAttribute="bottom" constant="8" id="joM-sf-jNd"/>
+                    <constraint firstItem="2Zh-km-APb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="oO2-db-6Mz"/>
+                    <constraint firstItem="PCR-J3-MRU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="72" id="pLH-Gp-Smn"/>
+                    <constraint firstItem="BMc-yN-uPz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="34" id="rA4-de-Th6"/>
+                    <constraint firstItem="2Zh-km-APb" firstAttribute="centerX" secondItem="PCR-J3-MRU" secondAttribute="centerX" constant="-21" id="vWM-hg-DY3"/>
+                    <constraint firstItem="20w-SX-Osb" firstAttribute="top" secondItem="2Zh-km-APb" secondAttribute="bottom" constant="8" symbolic="YES" id="wVj-zd-bUH"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
         </tableViewCell>
     </objects>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -22,6 +22,7 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在投总资金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDp-2a-f4t">
                         <rect key="frame" x="10" y="16" width="75" height="15"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="9q8-hn-8R6"/>
                             <constraint firstAttribute="width" constant="75" id="QRn-ub-GRp"/>
@@ -32,6 +33,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="234万元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8r-wR-fj1">
                         <rect key="frame" x="187" y="16" width="180" height="15"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="180" id="mFV-GN-jP4"/>
                             <constraint firstAttribute="height" constant="15" id="zJI-qD-W3T"/>
@@ -41,6 +43,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="Y8r-wR-fj1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Lit-uy-d5U"/>
                     <constraint firstItem="gDp-2a-f4t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="QKT-h3-1Vx"/>
@@ -48,6 +51,7 @@
                     <constraint firstAttribute="trailing" secondItem="Y8r-wR-fj1" secondAttribute="trailing" constant="8" id="xKH-KC-c0S"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>
                 <outlet property="AllMoney" destination="Y8r-wR-fj1" id="idO-ir-fG0"/>

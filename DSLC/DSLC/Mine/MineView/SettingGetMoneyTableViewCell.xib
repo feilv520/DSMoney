@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -24,6 +24,7 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.0元" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDw-2h-nte">
                         <rect key="frame" x="33" y="16" width="140" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="hGQ-it-WTD"/>
                             <constraint firstAttribute="width" constant="140" id="q3p-vE-6Kh"/>
@@ -34,6 +35,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="昨日收益" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDE-ol-TGd">
                         <rect key="frame" x="69" y="45" width="68" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="R80-83-VD8"/>
                             <constraint firstAttribute="width" constant="68" id="WLD-cd-2KF"/>
@@ -44,6 +46,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总收益" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTg-ia-21y">
                         <rect key="frame" x="251" y="45" width="68" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="68" id="0if-Ti-9vs"/>
                             <constraint firstAttribute="height" constant="21" id="cfk-QU-dPv"/>
@@ -54,6 +57,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="190天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0E7-c4-nhn">
                         <rect key="frame" x="203" y="16" width="164" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="164" id="qOE-zi-6cz"/>
                             <constraint firstAttribute="height" constant="21" id="yFA-rJ-Tdg"/>
@@ -64,6 +68,7 @@
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TVm-v7-eKK">
                         <rect key="frame" x="187" y="24" width="1" height="35"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="a0q-r3-A2r"/>
@@ -71,6 +76,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="0E7-c4-nhn" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="97" id="9aJ-0Q-Qyh"/>
                     <constraint firstItem="uTg-ia-21y" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="14" id="HHA-Ok-VLZ"/>
@@ -84,6 +90,7 @@
                     <constraint firstItem="TVm-v7-eKK" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="sZC-L8-t1P"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>
                 <outlet property="allDay" destination="0E7-c4-nhn" id="a7R-qq-3Th"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -30,6 +30,7 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="国承创投基金wt9101期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABi-yg-Lq3">
                         <rect key="frame" x="10" y="16" width="357" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Ot9-pj-SCX"/>
                             <constraint firstAttribute="width" constant="357" id="qSm-p2-8iX"/>
@@ -40,6 +41,7 @@
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qW5-40-nxY">
                         <rect key="frame" x="10" y="45" width="355" height="1"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="355" id="7Vy-uY-vOG"/>
@@ -48,6 +50,7 @@
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="产品类型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNw-Ff-FhD">
                         <rect key="frame" x="10" y="61" width="68" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="68" id="62j-0L-3nh"/>
                             <constraint firstAttribute="height" constant="21" id="oLG-ZE-pMQ"/>
@@ -58,6 +61,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年化收益率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caY-k0-ikV">
                         <rect key="frame" x="8" y="94" width="70" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="8eV-zi-cNg"/>
                             <constraint firstAttribute="height" constant="21" id="SyC-xz-AGj"/>
@@ -68,6 +72,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投资金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hab-QL-daP">
                         <rect key="frame" x="10" y="127" width="68" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="68" id="Cww-Nc-NWa"/>
                             <constraint firstAttribute="height" constant="21" id="Qcb-BF-Y9d"/>
@@ -78,6 +83,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预计到期收益" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAT-My-kWQ">
                         <rect key="frame" x="10" y="160" width="84" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="84" id="4IW-Nk-b72"/>
                             <constraint firstAttribute="height" constant="21" id="Ggg-so-ocS"/>
@@ -88,6 +94,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到期日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NU-qp-ID4">
                         <rect key="frame" x="10" y="193" width="68" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="oUj-2N-yR0"/>
                             <constraint firstAttribute="width" constant="68" id="rRw-F9-eSg"/>
@@ -98,6 +105,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.0%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVe-rv-rwr">
                         <rect key="frame" x="121" y="93" width="246" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="vYU-lX-reg"/>
                             <constraint firstAttribute="width" constant="246" id="y4Q-b6-GyC"/>
@@ -108,6 +116,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10,000元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSy-Gy-cjI">
                         <rect key="frame" x="121" y="126" width="246" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="HV6-OB-xMF"/>
                             <constraint firstAttribute="width" constant="246" id="N5f-u8-iqI"/>
@@ -118,6 +127,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10,90元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ibQ-Tz-MrG">
                         <rect key="frame" x="121" y="159" width="246" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="DVw-dc-1Ii"/>
                             <constraint firstAttribute="width" constant="246" id="dvQ-LK-6PZ"/>
@@ -128,6 +138,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-09-09" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8y-4f-FNe">
                         <rect key="frame" x="121" y="192" width="246" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="246" id="QTl-fG-Bqj"/>
                             <constraint firstAttribute="height" constant="21" id="m9y-4v-Xk3"/>
@@ -138,6 +149,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="固收理财" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ox1-el-0h2">
                         <rect key="frame" x="121" y="61" width="246" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="28o-j0-Qpu"/>
                             <constraint firstAttribute="width" constant="246" id="xZ5-fb-UKq"/>
@@ -147,6 +159,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="hab-QL-daP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="7Xp-xD-6bw"/>
                     <constraint firstAttribute="trailing" secondItem="ibQ-Tz-MrG" secondAttribute="trailing" constant="8" id="F0V-kg-PXF"/>
@@ -175,6 +188,7 @@
                     <constraint firstItem="kNw-Ff-FhD" firstAttribute="top" secondItem="qW5-40-nxY" secondAttribute="bottom" constant="15" id="zdk-cJ-1Gc"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <point key="canvasLocation" x="313.5" y="335"/>
         </tableViewCell>
     </objects>

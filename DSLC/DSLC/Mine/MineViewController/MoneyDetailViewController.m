@@ -50,7 +50,7 @@
     _tableView.delegate = self;
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 30)];
     _tableView.tableFooterView.backgroundColor = [UIColor huibai];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [_tableView setSeparatorColor:[UIColor colorWithRed:246 / 255.0 green:247 / 255.0 blue:249 / 255.0 alpha:1.0]];
     [_tableView registerNib:[UINib nibWithNibName:@"ProjectNameCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"UpCell" bundle:nil] forCellReuseIdentifier:@"reuseUp"];
     [_tableView registerNib:[UINib nibWithNibName:@"XinXiCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];

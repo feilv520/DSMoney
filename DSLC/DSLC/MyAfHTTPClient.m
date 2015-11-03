@@ -14,8 +14,8 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/admin/
 
 + (_Nullable instancetype)sharedClient {
     static MyAfHTTPClient *_sharedClient = nil;
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
     if (_sharedClient == nil) {
         _sharedClient = [[MyAfHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:MYAFHTTP_BASEURL]];
         _sharedClient.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
@@ -25,7 +25,7 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/admin/
         // 设置返回格式
         _sharedClient.responseSerializer = [AFHTTPResponseSerializer serializer];
     }
-//    });
+    });
     return _sharedClient;
 }
 
