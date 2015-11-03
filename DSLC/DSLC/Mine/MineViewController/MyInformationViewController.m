@@ -18,8 +18,10 @@
 #import "MendLoginViewController.h"
 #import "MendDealViewController.h"
 #import "EmailViewController.h"
+#import "MyAfHTTPClient.h"
+#import "MyInformation.h"
 
-@interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 {
     UITableView *_tableView;
@@ -28,7 +30,12 @@
     NSString *path;
     UIButton *butBlack;
     UIView *viewDown;
+    NSMutableArray *dataArr;
+    
+    UIImage *imageChange;
 }
+
+@property (nonatomic) UIImagePickerController *imagePicker;
 
 @property (nonatomic, strong) NSDictionary *flagDic;
 
@@ -58,6 +65,7 @@
     [self.navigationItem setTitle:@"我的资料"];
     
     [self tableViewShow];
+    [self getData];
 }
 
 //tableView展示
@@ -87,6 +95,27 @@
     [switchLeft setOn:[flag isEqualToString:@"YES"]?YES:NO];
 
     [switchLeft addTarget:self action:@selector(showSwitchGetOnOrOff:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)getData
+{
+    NSDictionary *parameter = @{@"userId":@"8993"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSDictionary *dataDic = [responseObject objectForKey:@"User"];
+        
+        MyInformation *information = [[MyInformation alloc] init];
+        [information setValuesForKeysWithDictionary:dataDic];
+        
+        dataArr = [NSMutableArray array];
+        [dataArr addObject:information];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -280,7 +309,31 @@
 //从相册选择
 - (void)chooseFromPicture:(UIButton *)button
 {
-    NSLog(@"从相册选择");
+//    NSLog(@"从相册选择");
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        
+        _imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        _imagePicker.delegate = self;
+        _imagePicker.allowsEditing = YES;
+        [self presentViewController:_imagePicker animated:YES completion:nil];
+    }
+    
+    [butBlack removeFromSuperview];
+    [viewDown removeFromSuperview];
+    
+    butBlack = nil;
+    viewDown = nil;
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    if (picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
+        
+        UIImage *editImage = [info objectForKey:UIImagePickerControllerEditedImage];
+        imageChange = editImage;
+        [_imagePicker dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 //取消按钮

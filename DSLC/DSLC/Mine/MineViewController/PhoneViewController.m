@@ -8,6 +8,7 @@
 
 #import "PhoneViewController.h"
 #import "ChangeNumViewController.h"
+#import "MyAfHTTPClient.h"
 
 @interface PhoneViewController ()
 
@@ -82,7 +83,17 @@
 //获取验证码
 - (void)getNumButton:(UIButton *)button
 {
-    NSLog(@"获取验证码");
+    NSDictionary *parameter = @{@"phone":@"13354288036"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"ooooooo%@", responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"fffffffff%@", error);
+        
+    }];
 }
 
 - (void)textFieldEdit:(UITextField *)textField

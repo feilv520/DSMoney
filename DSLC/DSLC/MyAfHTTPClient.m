@@ -54,14 +54,15 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/admin/
                        success:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject))success
                        failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error))failure{
     
-    MYAFHTTP_BASEURL = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,URLString];
+    NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,URLString];
     
-    NSLog(@"----------%@",MYAFHTTP_BASEURL);
+    NSLog(@"----------%@",URLPostString);
     
-    [self POST:MYAFHTTP_BASEURL parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nonnull responseObject) {
+    [self POST:URLPostString parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nonnull responseObject) {
+        
         NSData *doubi = responseObject;
         NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
-        
+        NSLog(@"%@",responseString);
         NSString *character = nil;
         for (int i = 0; i < responseString.length; i ++) {
             character = [responseString substringWithRange:NSMakeRange(i, 1)];
