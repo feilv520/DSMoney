@@ -26,9 +26,16 @@
     RegisterOfPassButton *registerB;
 }
 
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
+
 @end
 
 @implementation RegisterViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.scrollView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,6 +46,8 @@
     [self.navigationItem setTitle:@"注册大圣理财"];
     
     number = 0;
+    
+    self.scrollView.contentSize = CGSizeMake(1, 730);
     
     [self RegisterProcessPhoto];
     [self RegisterNav];
@@ -53,9 +62,9 @@
     NSArray *rootArray = [rootBundle loadNibNamed:@"RegisterProcess" owner:nil options:nil];
     registerP = [rootArray lastObject];
     
-    registerP.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 103);
+    registerP.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, (103 / 375.0) * HEIGHT_CONTROLLER_DEFAULT);
     
-    [self.view addSubview:registerP];
+    [self.scrollView addSubview:registerP];
     
 }
 
@@ -95,7 +104,7 @@
     lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(0, 48, WIDTH_CONTROLLER_DEFAULT / 2.0, 2) backgroundColor:[UIColor daohanglan] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:0] text:@""];
     [buttonWithView addSubview:lableRedLine];
     
-    [self.view addSubview:buttonWithView];
+    [self.scrollView addSubview:buttonWithView];
 }
 
 // 导航按钮执行方法
@@ -146,9 +155,9 @@
     NSArray *rootArray = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
     registerV = [rootArray firstObject];
     
-    registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, 292);
+    registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, (170 / 375.0) * HEIGHT_CONTROLLER_DEFAULT);
     
-    [self.view addSubview:registerV];
+    [self.scrollView addSubview:registerV];
 }
 
 // 立即抢购
@@ -162,12 +171,14 @@
     
     [payButton addTarget:self action:@selector(sureButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:payButton];
+    [self.scrollView addSubview:payButton];
     
 }
 
 // 确认按钮执行方法 (第二步 : 实名验证)
 - (void)sureButtonAction:(UIButton *)btn{
+    
+    [self RegisterButtonAction];
     
     [buttonWithView removeFromSuperview];
     [payButton removeFromSuperview];
@@ -196,9 +207,9 @@
     [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:registerV];
-    [self.view addSubview:registerR];
-    [self.view addSubview:registerB];
+    [self.scrollView addSubview:registerV];
+    [self.scrollView addSubview:registerR];
+    [self.scrollView addSubview:registerB];
     
 }
 
@@ -235,9 +246,9 @@
     [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [registerB.sureButton addTarget:self action:@selector(sureButtonActionPass:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:registerV];
-    [self.view addSubview:registerR];
-    [self.view addSubview:registerB];
+    [self.scrollView addSubview:registerV];
+    [self.scrollView addSubview:registerR];
+    [self.scrollView addSubview:registerB];
     
 }
 
@@ -251,6 +262,17 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+
+- (void)RegisterButtonAction{
+    NSDictionary *parameters = @{@"phone":@"15955454588",@"smsCode":@"123456",@"password":@"123456",@"invitationCode":@"321123",@"finaCard":@""};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

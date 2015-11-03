@@ -46,5 +46,6 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import "AFNetworking.h"
 #import "AFHTTPSessionManager.h"
+#import "MyAfHTTPClient.h"
 
 #endif /* Header_h */

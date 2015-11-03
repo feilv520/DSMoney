@@ -96,7 +96,7 @@
     if (section == 0) {
         return 1;
     } else {
-        return 2;
+        return 3;
     }
 }
 
@@ -123,7 +123,7 @@
         return 222;
     } else {
         if (indexPath.row == 0) {
-            return 133;
+            return 50;
         } else {
             return 89;
         }

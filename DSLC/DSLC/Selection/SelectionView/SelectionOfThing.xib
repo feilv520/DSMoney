@@ -3,7 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="CenturyGothic.TTF">
@@ -152,8 +152,8 @@
                     <rect key="frame" x="12" y="150" width="100" height="28"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="CUt-fh-T8T"/>
-                        <constraint firstAttribute="height" constant="28" id="xxN-5R-z0r"/>
+                        <constraint firstAttribute="width" secondItem="YbP-Xa-XHH" secondAttribute="height" multiplier="25:7" id="FAJ-ka-9EC"/>
+                        <constraint firstAttribute="height" constant="28" id="Feh-bT-w2f"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="22"/>
                     <color key="textColor" red="0.25098039215686274" green="0.25490196078431371" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
@@ -164,13 +164,14 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="5xQ-YY-aeP" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="80" id="0vV-EL-ssj"/>
+                <constraint firstItem="YbP-Xa-XHH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-103" id="2ag-bQ-JCk"/>
                 <constraint firstItem="0WK-fU-RIo" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="56" id="2gy-iw-VHI"/>
                 <constraint firstItem="M6i-Aa-kCg" firstAttribute="top" secondItem="Zu4-MZ-vPc" secondAttribute="bottom" id="7c7-pz-FH3"/>
                 <constraint firstItem="5xQ-YY-aeP" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-104" id="7gF-va-G3N"/>
+                <constraint firstItem="YbP-Xa-XHH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="56" id="AaN-zh-d0L"/>
                 <constraint firstItem="M6i-Aa-kCg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IR6-jj-QcN"/>
                 <constraint firstItem="s5R-db-0kI" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="80" id="Jku-iA-eXQ"/>
                 <constraint firstAttribute="trailing" secondItem="lCp-jS-kLZ" secondAttribute="trailing" constant="8" id="KfA-Dt-GWg"/>
-                <constraint firstItem="YbP-Xa-XHH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-103" id="NCQ-3H-SP1"/>
                 <constraint firstItem="uaC-db-Zvt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OO1-GK-P0G"/>
                 <constraint firstItem="lCp-jS-kLZ" firstAttribute="top" secondItem="M6i-Aa-kCg" secondAttribute="bottom" id="Phg-dT-EJv"/>
                 <constraint firstItem="uaC-db-Zvt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="56" id="SU2-a6-Ncz"/>
@@ -178,7 +179,6 @@
                 <constraint firstItem="Jil-3U-5ut" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="15" id="VQ1-d4-BmZ"/>
                 <constraint firstItem="1Oj-Fm-uLV" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="80" id="YSa-Cb-emn"/>
                 <constraint firstItem="rJE-WJ-FVG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ale-7L-3Px"/>
-                <constraint firstItem="uaC-db-Zvt" firstAttribute="width" secondItem="YbP-Xa-XHH" secondAttribute="width" id="bTv-gQ-Y7j"/>
                 <constraint firstItem="s5R-db-0kI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="104" id="cJu-PK-fcP"/>
                 <constraint firstItem="1Oj-Fm-uLV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cZt-YB-ah1"/>
                 <constraint firstItem="Jil-3U-5ut" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="20" id="gn9-PI-sQb"/>
@@ -189,25 +189,10 @@
                 <constraint firstAttribute="trailing" secondItem="Zu4-MZ-vPc" secondAttribute="trailing" constant="13" id="qGd-rU-nIP"/>
                 <constraint firstItem="YDQ-DG-1J2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-41" id="uVE-Nk-7gc"/>
                 <constraint firstItem="Zu4-MZ-vPc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="ucH-Dc-G8Z"/>
-                <constraint firstItem="YbP-Xa-XHH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" constant="21" id="vJB-ak-Anp"/>
                 <constraint firstItem="GKg-AT-hnQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="41" id="vZ9-Ud-bWY"/>
                 <constraint firstItem="lCp-jS-kLZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="vfn-QV-d8c"/>
-                <constraint firstItem="0WK-fU-RIo" firstAttribute="width" secondItem="YbP-Xa-XHH" secondAttribute="width" id="x3y-2r-Nrd"/>
-                <constraint firstItem="YbP-Xa-XHH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="56" id="xDK-fk-h1Y"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="vJB-ak-Anp"/>
-                    <exclude reference="bTv-gQ-Y7j"/>
-                    <exclude reference="x3y-2r-Nrd"/>
-                </mask>
-            </variation>
-            <variation key="widthClass=compact">
-                <mask key="constraints">
-                    <include reference="vJB-ak-Anp"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="dayLabel" destination="YbP-Xa-XHH" id="PJf-6c-Js7"/>
                 <outlet property="firstLabel" destination="0WK-fU-RIo" id="2Ei-fl-gzv"/>
