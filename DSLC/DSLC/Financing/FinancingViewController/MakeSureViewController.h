@@ -11,4 +11,6 @@
 
 @interface MakeSureViewController : BaseViewController
 
+@property (nonatomic) BOOL decide;
+
 @end

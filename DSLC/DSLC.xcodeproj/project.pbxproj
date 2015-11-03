@@ -227,6 +227,8 @@
 		81ED031C1BD0DA35005F4B02 /* AddBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81ED031B1BD0DA35005F4B02 /* AddBankViewController.m */; };
 		81ED03201BD0DDAD005F4B02 /* AddBankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81ED031E1BD0DDAD005F4B02 /* AddBankCell.m */; };
 		81ED03211BD0DDAD005F4B02 /* AddBankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81ED031F1BD0DDAD005F4B02 /* AddBankCell.xib */; };
+		81F237711BE8568B009D7A67 /* NewMakeSureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F2376F1BE8568B009D7A67 /* NewMakeSureCell.m */; settings = {ASSET_TAGS = (); }; };
+		81F237721BE8568B009D7A67 /* NewMakeSureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F237701BE8568B009D7A67 /* NewMakeSureCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81F5FA0A1BD9E1FE008C38BF /* ChangeNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA091BD9E1FE008C38BF /* ChangeNumViewController.m */; };
 		81F5FA0D1BDA0D2E008C38BF /* RealNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA0C1BDA0D2E008C38BF /* RealNameViewController.m */; };
 		81F5FA111BDA1C2E008C38BF /* MoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA0F1BDA1C2E008C38BF /* MoreCell.m */; };
@@ -777,6 +779,9 @@
 		81ED031D1BD0DDAD005F4B02 /* AddBankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBankCell.h; sourceTree = "<group>"; };
 		81ED031E1BD0DDAD005F4B02 /* AddBankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBankCell.m; sourceTree = "<group>"; };
 		81ED031F1BD0DDAD005F4B02 /* AddBankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddBankCell.xib; sourceTree = "<group>"; };
+		81F2376E1BE8568B009D7A67 /* NewMakeSureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMakeSureCell.h; sourceTree = "<group>"; };
+		81F2376F1BE8568B009D7A67 /* NewMakeSureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMakeSureCell.m; sourceTree = "<group>"; };
+		81F237701BE8568B009D7A67 /* NewMakeSureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewMakeSureCell.xib; sourceTree = "<group>"; };
 		81F5FA081BD9E1FE008C38BF /* ChangeNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNumViewController.h; sourceTree = "<group>"; };
 		81F5FA091BD9E1FE008C38BF /* ChangeNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNumViewController.m; sourceTree = "<group>"; };
 		81F5FA0B1BDA0D2E008C38BF /* RealNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameViewController.h; sourceTree = "<group>"; };
@@ -1597,6 +1602,9 @@
 				81A6EB0E1BE784BD00F9FDD1 /* NewBieCell.h */,
 				81A6EB0F1BE784BD00F9FDD1 /* NewBieCell.m */,
 				81A6EB101BE784BD00F9FDD1 /* NewBieCell.xib */,
+				81F2376E1BE8568B009D7A67 /* NewMakeSureCell.h */,
+				81F2376F1BE8568B009D7A67 /* NewMakeSureCell.m */,
+				81F237701BE8568B009D7A67 /* NewMakeSureCell.xib */,
 			);
 			path = FinancingView;
 			sourceTree = "<group>";
@@ -2570,6 +2578,7 @@
 				8D0AE80D1BE0C1A700D9D50C /* RegisterViewController.xib in Resources */,
 				817DD4A81BCF547E00042B09 /* xiaoxi@2x.png in Resources */,
 				8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */,
+				81F237721BE8568B009D7A67 /* NewMakeSureCell.xib in Resources */,
 				8DEDE1E11BCD0035008086D3 /* icon_ICBC@2x.png in Resources */,
 				8D0AE7F51BE09CE500D9D50C /* iconfont-register-gantanhao001@3x.png in Resources */,
 				81ED03211BD0DDAD005F4B02 /* AddBankCell.xib in Resources */,
@@ -2714,6 +2723,7 @@
 				818523C91BE35E75002FC653 /* MendLoginCell.m in Sources */,
 				818063971BD5D3C700E83492 /* MyInvitationViewController.m in Sources */,
 				8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */,
+				81F237711BE8568B009D7A67 /* NewMakeSureCell.m in Sources */,
 				8D4FF5D81BE339A200BAE25F /* AFNetworkReachabilityManager.m in Sources */,
 				81A6EB111BE784BD00F9FDD1 /* NewBieCell.m in Sources */,
 				8162D1181BE1BC2500CACAB6 /* ProjectNameCell.m in Sources */,

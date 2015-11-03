@@ -158,6 +158,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     FDetailViewController *fdetailVC = [[FDetailViewController alloc] init];
+    fdetailVC.estimate = YES;
     [self.navigationController pushViewController:fdetailVC animated:YES];
 }
 

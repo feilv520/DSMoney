@@ -11,4 +11,6 @@
 
 @interface FDetailViewController : BaseViewController
 
+@property (nonatomic) BOOL estimate;
+
 @end
