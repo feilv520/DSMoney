@@ -41,91 +41,19 @@
     self.navigationItem.title = @"票据投资";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
-//    [self showButtonThree];
     [self showTableView];
 }
-
-//导航栏下面的三个按钮
-//- (void)showButtonThree
-//{
-//    buttonArr = @[@"新手专享", @"固收理财", @"票据投资"];
-//    
-//    UIScrollView *scrollView = [CreatView creatWithScrollViewFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 45) backgroundColor:[UIColor whiteColor] contentSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT/3 * buttonArr.count, 0) contentOffSet:CGPointMake(0, 0)];
-//    
-//    [self.view addSubview:scrollView];
-//    
-//    for (int i = 0; i < 3; i++) {
-//        
-//        butThree = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * i, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:[NSString stringWithFormat:@"%@", [buttonArr objectAtIndex:i]]];
-//        butThree.titleLabel.font = [UIFont systemFontOfSize:14];
-//        butThree.tag = 100 + i;
-//        [scrollView addSubview:butThree];
-//        
-////        [butThree addTarget:self action:@selector(buttonThreePress:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        if (i == 2) {
-//            
-//            [butThree setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//            
-//        }
-//    }
-//    
-////    lableRedLine = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2) backgroundColor:[UIColor daohanglan] textColor:[UIColor clearColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:0] text:@""];
-////    [self.view addSubview:lableRedLine];
-//
-//}
-
-//导航栏下面的三个按钮的点击方法
-//- (void)buttonThreePress:(UIButton *)button
-//{
-//    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-//        
-//        if (button.tag == 100) {
-//            
-//            lableRedLine.frame = CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-//            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//            
-//            UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
-//            [beforeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//            
-//            buttonTag = button.tag;
-//            
-//        } else if (button.tag == 101) {
-//            
-//            lableRedLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-//            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//            
-//            UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
-//            [beforeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//            
-//            buttonTag = button.tag;
-//            
-//        } else {
-//            
-//            lableRedLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-//            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//            
-//            UIButton *beforeButton = (UIButton *)[self.view viewWithTag:buttonTag];
-//            [beforeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//            
-//            buttonTag = button.tag;
-//        }
-//        
-//    } completion:^(BOOL finished) {
-//        
-//    }];
-//}
 
 //TableView展示
 - (void)showTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 53 - 64 - 20) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 53 - 64 - 20 - 45) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    UIView *viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 15)];
+    UIView *viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     viewHead.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _tableView.tableHeaderView = viewHead;
     
@@ -135,7 +63,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 150;
+    return 145;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -221,6 +149,7 @@
     
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

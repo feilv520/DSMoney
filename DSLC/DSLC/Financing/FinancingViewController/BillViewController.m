@@ -13,6 +13,7 @@
 #import "FinancingViewController.h"
 #import "NewbieViewController.h"
 #import "BillCell.h"
+#import "FDetailViewController.h"
 
 @interface BillViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -49,7 +50,7 @@
 
 - (void)tableViewShow
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 45 - 53) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -140,23 +141,17 @@
         [cell addSubview:imageView];
         
     }
-//    else if (indexPath.row == 3) {
-//        
-//        cell.labelRightDown.hidden = YES;
-//        cell.butRightUp.hidden = YES;
-//        
-//        [cell addSubview:imageView];
-//
-//    } else if (indexPath.row == 6) {
-//        
-//        cell.labelRightDown.hidden = YES;
-//        cell.butRightUp.hidden = YES;
-//        
-//        [cell addSubview:imageView];
-//
-//    }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    FDetailViewController *detailVC = [[FDetailViewController alloc] init];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
