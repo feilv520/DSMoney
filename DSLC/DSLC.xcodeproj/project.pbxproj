@@ -2954,7 +2954,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4c53cf56-9e98-49bb-b711-254f9d3e1311";
+				PROVISIONING_PROFILE = "7b5ac45f-a565-47da-bfb8-bef19d5d8a09";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2971,7 +2971,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4c53cf56-9e98-49bb-b711-254f9d3e1311";
+				PROVISIONING_PROFILE = "7b5ac45f-a565-47da-bfb8-bef19d5d8a09";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

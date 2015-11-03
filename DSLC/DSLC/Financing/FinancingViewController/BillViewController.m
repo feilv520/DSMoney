@@ -56,7 +56,7 @@
     _tableView.delegate = self;
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     _tableView.tableFooterView.backgroundColor = [UIColor huibai];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [_tableView setSeparatorColor:[UIColor colorWithRed:246 / 255.0 green:247 / 255.0 blue:249 / 255.0 alpha:1.0]];
     [_tableView registerNib:[UINib nibWithNibName:@"BillCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     butRedArray = @[@"3", @"6", @"9", @"12", @"7", @"9", @"1", @"5", @"6", @"8"];
