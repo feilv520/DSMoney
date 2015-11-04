@@ -17,12 +17,12 @@
     UITableView *_tableView;
     NSArray *nameArray;
     NSArray *textArray;
-    UILabel *labelNum;
     UIButton *buttonMake;
     
     UITextField *textField1;
     UITextField *textField2;
     UITextField *textField3;
+    UITextField *textField4;
     UITextField *textField5;
 }
 
@@ -60,9 +60,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"MendDeal2Cell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     
     nameArray = @[@"原交易密码", @"新交易密码", @"确认新交易密码", @"您的手机号", @"验证码"];
-    textArray = @[@"请输入原交易密码", @"请输入新交易密码", @"请再次输入新交易密码", @"", @""];
-    
-    labelNum = [CreatView creatWithLabelFrame:CGRectMake(130, 10, WIDTH_CONTROLLER_DEFAULT - 140, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"15089762780"];
+    textArray = @[@"请输入原交易密码", @"请输入新交易密码", @"请再次输入新交易密码", @"请输入手机号", @""];
     
     buttonMake = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 310, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [self.view addSubview:buttonMake];
@@ -105,6 +103,7 @@
         cell.buttonGet.layer.masksToBounds = YES;
         cell.buttonGet.layer.borderColor = [[UIColor daohanglan] CGColor];
         cell.buttonGet.layer.borderWidth = 0.5;
+        [cell.buttonGet addTarget:self action:@selector(getCodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -123,13 +122,6 @@
         cell.textField.delegate = self;
         [cell.textField addTarget:self action:@selector(mendDealTextField:) forControlEvents:UIControlEventEditingChanged];
         
-        if (indexPath.row == 3) {
-            
-            cell.textField.hidden = YES;
-            
-            [cell addSubview:labelNum];
-        }
-        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -140,9 +132,10 @@
     textField1 = (UITextField *)[self.view viewWithTag:700];
     textField2 = (UITextField *)[self.view viewWithTag:701];
     textField3 = (UITextField *)[self.view viewWithTag:702];
+    textField4 = (UITextField *)[self.view viewWithTag:703];
     textField5 = (UITextField *)[self.view viewWithTag:704];
     
-    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField5.text.length > 0) {
+    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField4.text.length > 0 && textField5.text.length > 0) {
         
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -159,6 +152,7 @@
     textField1 = (UITextField *)[self.view viewWithTag:700];
     textField2 = (UITextField *)[self.view viewWithTag:701];
     textField3 = (UITextField *)[self.view viewWithTag:702];
+    textField4 = (UITextField *)[self.view viewWithTag:703];
     textField5 = (UITextField *)[self.view viewWithTag:704];
     
     [textField1 resignFirstResponder];
@@ -173,12 +167,24 @@
     textField1 = (UITextField *)[self.view viewWithTag:700];
     textField2 = (UITextField *)[self.view viewWithTag:701];
     textField3 = (UITextField *)[self.view viewWithTag:702];
+    textField4 = (UITextField *)[self.view viewWithTag:703];
     textField5 = (UITextField *)[self.view viewWithTag:704];
     
-    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField5.text.length > 0) {
+    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField4.text.length > 0 && textField5.text.length > 0) {
         
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        
+        NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"],@"optType":@1,@"oldPayPwd":textField1.text,@"newPwd":textField2.text,@"smsCode":@""};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
         
     } else {
         
@@ -186,6 +192,25 @@
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     }
 
+}
+
+// 获得验证码
+- (void)getCodeButtonAction:(UIButton *)btn{
+    [self.view endEditing:YES];
+    
+    textField5 = (UITextField *)[self.view viewWithTag:704];
+    
+    if (textField5.text.length == 0) {
+        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+    } else {
+        NSDictionary *parameters = @{@"phone":textField5.text};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            NSLog(@"%@",responseObject);
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

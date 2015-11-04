@@ -14,10 +14,11 @@
 
 {
     UITableView *_tableView;
-    UILabel *labelPhoneNum;
+    UITextField *textFieldPhoneNum;
     NSArray *titleArr;
     NSArray *textFieldArr;
     UIButton *butEnsure;
+    UITextField *textField0;
     UITextField *textField1;
     UITextField *textField2;
     UITextField *textField3;
@@ -52,7 +53,9 @@
     titleArr = @[@"设置新登录密码", @"确认新登录密码"];
     textFieldArr = @[@"请输入新登录密码", @"请再次输入新登录密码"];
     
-    labelPhoneNum = [CreatView creatWithLabelFrame:CGRectMake(130, 10, WIDTH_CONTROLLER_DEFAULT - 130 - 10, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"150222458945"];
+    textFieldPhoneNum = [CreatView creatWithfFrame:CGRectMake(130, 10, WIDTH_CONTROLLER_DEFAULT - 130 - 10, 30) setPlaceholder:@"请输入手机号" setTintColor:[UIColor grayColor]];
+    
+    textFieldPhoneNum.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     butEnsure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 260, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [self.view addSubview:butEnsure];
@@ -100,7 +103,7 @@
         cell.butGet.layer.masksToBounds = YES;
         cell.butGet.layer.borderWidth = 0.5;
         cell.butGet.layer.borderColor = [[UIColor daohanglan] CGColor];
-        [cell.butGet addTarget:self action:@selector(getNumButton:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.butGet addTarget:self action:@selector(getCodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -109,18 +112,13 @@
         
         ForgetSecretCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
-        if (cell == nil) {
-            
-            cell = [[ForgetSecretCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
-        }
-        
         if (indexPath.row == 0) {
             
             cell.labelTitle.text = @"绑定手机号";
             cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
             cell.textField.hidden = YES;
-            [cell addSubview:labelPhoneNum];
-            
+            [cell addSubview:textFieldPhoneNum];
+            textFieldPhoneNum.tag = 1000;
         } else {
             
             cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row - 2];
@@ -158,7 +156,7 @@
     textField2 = (UITextField *)[self.view viewWithTag:902];
     textField3 = (UITextField *)[self.view viewWithTag:903];
     
-    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField2.text == textField3.text) {
+    if (textFieldPhoneNum.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField2.text == textField3.text) {
         
         [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -181,9 +179,19 @@
 }
 
 //获取验证码
-- (void)getNumButton:(UIButton *)button
-{
-    NSLog(@"获取验证码");
+- (void)getCodeButtonAction:(UIButton *)btn{
+    [self.view endEditing:YES];
+    if (textFieldPhoneNum.text.length == 0) {
+        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+    } else {
+        NSDictionary *parameters = @{@"phone":textFieldPhoneNum.text};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            NSLog(@"%@",responseObject);
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+    }
 }
 
 //确定按钮
@@ -193,9 +201,21 @@
     textField2 = (UITextField *)[self.view viewWithTag:902];
     textField3 = (UITextField *)[self.view viewWithTag:903];
     
-    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField2.text == textField3.text) {
+    if (textFieldPhoneNum.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField2.text == textField3.text) {
         
-        [self.navigationController popViewControllerAnimated:YES];
+        NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"],@"optType":@2,@"oldPwd":@"",@"newPwd":textField2.text,@"smsCode":textField1.text};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+                NSArray *array = self.navigationController.viewControllers;
+                [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+        
+        
         
     } else {
         
@@ -205,13 +225,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    textField1 = (UITextField *)[self.view viewWithTag:500];
-    textField2 = (UITextField *)[self.view viewWithTag:902];
-    textField3 = (UITextField *)[self.view viewWithTag:903];
-    
-    [textField1 resignFirstResponder];
-    [textField2 resignFirstResponder];
-    [textField3 resignFirstResponder];
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

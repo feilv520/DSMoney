@@ -141,10 +141,10 @@
                     <state key="normal" image="iconfont-register-gantanhao001.png"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QqS-Mt-zKW">
-                    <rect key="frame" x="292" y="54" width="75" height="30"/>
+                    <rect key="frame" x="287" y="54" width="80" height="30"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="75" id="LfL-vb-wNt"/>
+                        <constraint firstAttribute="width" constant="80" id="LfL-vb-wNt"/>
                         <constraint firstAttribute="height" constant="30" id="No0-Ig-dAJ"/>
                     </constraints>
                     <state key="normal" title="获取验证码">
@@ -175,9 +175,13 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="getCode" destination="QqS-Mt-zKW" id="Zlg-HS-mCQ"/>
-                <outlet property="inviteNumber" destination="bMF-a8-WzD" id="F81-TM-b5D"/>
+                <outlet property="inviteNumber" destination="bMF-a8-WzD" id="FRC-ja-gGE"/>
+                <outlet property="loginPassword" destination="ux9-eN-Ise" id="c6d-Vk-RG5"/>
+                <outlet property="phoneNumber" destination="e9S-m7-tZs" id="7uy-xj-phr"/>
                 <outlet property="problemButton" destination="jsQ-5E-7st" id="E6v-AH-Yyk"/>
                 <outlet property="sandMyselfIDCard" destination="CnR-T4-QMA" id="98S-3p-O1r"/>
+                <outlet property="smsCode" destination="asa-kf-49G" id="UcN-98-Aaw"/>
+                <outlet property="sureLoginPassword" destination="dOp-AM-vQ1" id="NJl-YG-Xob"/>
             </connections>
             <point key="canvasLocation" x="-447.5" y="326.5"/>
         </view>

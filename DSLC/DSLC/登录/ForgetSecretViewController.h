@@ -10,4 +10,6 @@
 
 @interface ForgetSecretViewController : BaseViewController
 
+@property (nonatomic, strong) NSString *typeString;
+
 @end

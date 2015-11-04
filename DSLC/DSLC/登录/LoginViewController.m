@@ -118,6 +118,9 @@
     cell.textField.tintColor = [UIColor grayColor];
     cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     cell.textField.tag = 1000 + indexPath.row;
+    if (indexPath.row == 1) {
+        cell.textField.secureTextEntry = YES;
+    }
     [cell.textField addTarget:self action:@selector(editContent:) forControlEvents:UIControlEventEditingChanged];
     
     cell.imageLeft.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [ImageArr objectAtIndex:indexPath.row]]];
@@ -151,7 +154,28 @@
     
     if (textField1.text.length > 0 && textField2.text.length > 0) {
         
-        NSLog(@"登录");
+//        NSDictionary *parameter = @{@"phone":@"15955454588",@"password":@"123"};
+        NSDictionary *parameter = @{@"phone":textField1.text,@"password":textField2.text};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+                    [FileOfManage createWithFile:@"Member.plist"];
+                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                         textField2.text,@"password",
+                                         [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                         [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                         [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                         [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                         [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",nil];
+                    [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                }
+                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
         
     } else {
         

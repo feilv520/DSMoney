@@ -10,10 +10,11 @@
 #import "ChangeNumViewController.h"
 #import "MyAfHTTPClient.h"
 
-@interface PhoneViewController ()
+@interface PhoneViewController () <UITextFieldDelegate>
 
 {
-    UITextField *_textField1;
+    UITextField *textFieldPhoneNumber;
+    UITextField *textFieldSmsCode;
     UIButton *butNext;
 }
 
@@ -41,7 +42,15 @@
     [self.view addSubview:labelLine1];
     [self labelLineShow:labelLine1];
     
-    UILabel *labelNew = [CreatView creatWithLabelFrame:CGRectMake(10, 0.5, WIDTH_CONTROLLER_DEFAULT - 20, 49.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"%@ %@", @"原手机号", @"15908987482"]];
+    UILabel *labelNew = [CreatView creatWithLabelFrame:CGRectMake(10, 0.5, 60, 49.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"%@", @"原手机号"]];
+    
+    textFieldPhoneNumber = [CreatView creatWithfFrame:CGRectMake(CGRectGetMaxX(labelNew.frame)+ 10, 1, WIDTH_CONTROLLER_DEFAULT - 100, 49.5) setPlaceholder:@"请输入原来的手机号" setTintColor:[UIColor grayColor]];
+    textFieldPhoneNumber.font = [UIFont systemFontOfSize:15];
+    textFieldPhoneNumber.keyboardType = UIKeyboardTypeNumberPad;
+    [textFieldPhoneNumber addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    [textFieldPhoneNumber addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    [viewTop addSubview:textFieldPhoneNumber];
     [viewTop addSubview:labelNew];
     
     UIView *viewDown = [CreatView creatViewWithFrame:CGRectMake(0, 60, WIDTH_CONTROLLER_DEFAULT, 50)backgroundColor:[UIColor whiteColor]];
@@ -50,10 +59,11 @@
     UILabel *labelVerify = [CreatView creatWithLabelFrame:CGRectMake(10, 0.5, 50, 49.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"验证码"];
     [viewDown addSubview:labelVerify];
     
-    _textField1 = [CreatView creatWithfFrame:CGRectMake(70, 10, 180, 30) setPlaceholder:@"请输入验证码" setTintColor:[UIColor grayColor]];
-    [viewDown addSubview:_textField1];
-    _textField1.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [_textField1 addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    textFieldSmsCode = [CreatView creatWithfFrame:CGRectMake(CGRectGetMaxX(labelNew.frame)+ 10, 10, 180, 30) setPlaceholder:@"请输入验证码" setTintColor:[UIColor grayColor]];
+    [viewDown addSubview:textFieldSmsCode];
+    textFieldSmsCode.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [textFieldSmsCode addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    [textFieldSmsCode addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     UIButton *butGet = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 100, 10, 90, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] titleText:@"获取验证码"];
     [viewDown addSubview:butGet];
@@ -87,6 +97,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         NSLog(@"ooooooo%@", responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -96,10 +107,12 @@
     }];
 }
 
+#pragma mark textField delegate
+#pragma mark --------------------------------
+
 - (void)textFieldEdit:(UITextField *)textField
 {
-    if ([_textField1.text length] > 0) {
-        
+    if ([textFieldSmsCode.text length] > 0 && [textFieldPhoneNumber.text length] > 0) {
         [butNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         
@@ -110,14 +123,44 @@
     }
 }
 
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if (textField == textFieldSmsCode) {
+        if (textField.text.length > 6) {
+            textField.text = [textField.text substringToIndex:6];
+        }
+    } else if (textField == textFieldPhoneNumber) {
+        if (textField.text.length > 11) {
+            textField.text = [textField.text substringToIndex:11];
+        }
+    }
+}
+
 //下一步按钮
 - (void)nextButton:(UIButton *)button
 {
-    if ([_textField1.text length] > 0) {
+    if ([textFieldSmsCode.text length] > 0 && [textFieldPhoneNumber.text length] > 0) {
         
+        NSDictionary *parameter = @{@"smsCode":textFieldSmsCode.text};
+        
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/checkSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            NSLog(@"ooooooo%@", responseObject);
+            if ([[responseObject objectForKey:@"result"] isEqualToString:@"200"]) {
+                
+//                ChangeNumViewController *changeNumVC = [[ChangeNumViewController alloc] init];
+//                [self.navigationController pushViewController:changeNumVC animated:YES];
+                
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"fffffffff%@", error);
+            
+        }];
         ChangeNumViewController *changeNumVC = [[ChangeNumViewController alloc] init];
         [self.navigationController pushViewController:changeNumVC animated:YES];
-        
     } else {
         
     }

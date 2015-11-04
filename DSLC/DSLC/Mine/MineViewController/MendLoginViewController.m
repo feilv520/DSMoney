@@ -115,8 +115,16 @@
     textField3 = (UITextField *)[self.view viewWithTag:302];
 
     if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0) {
-        
-        NSLog(@"确定");
+        NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"],@"optType":@1,@"oldPwd":textField1.text,@"newPwd":textField2.text,@"smsCode":@""};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
         
     } else {
         
@@ -127,6 +135,7 @@
 - (void)rightBarItem:(UIBarButtonItem *)bar
 {
     ForgetSecretViewController *findVC = [[ForgetSecretViewController alloc] init];
+    findVC.typeString = @"login";
     [self.navigationController pushViewController:findVC animated:YES];
 }
 

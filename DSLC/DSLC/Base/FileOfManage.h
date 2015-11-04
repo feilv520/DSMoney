@@ -11,12 +11,12 @@
 @interface FileOfManage : NSObject
 
 // 文件路径
-+ (NSString *)PathOfFile;
++ (NSString *)PathOfFile:(NSString *)fileName;
 
 // 创建plist文件
-+ (void)createWithFile;
++ (void)createWithFile:(NSString *)fileName;
 
 // 是否存在plist文件
-+ (BOOL)ExistOfFile;
++ (BOOL)ExistOfFile:(NSString *)fileName;
 
 @end

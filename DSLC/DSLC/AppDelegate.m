@@ -29,11 +29,13 @@
 - (NSDictionary *)flagDic{
     if (_flagDic == nil) {
 
-        if (![FileOfManage ExistOfFile]) {
-            [FileOfManage createWithFile];
+        if (![FileOfManage ExistOfFile:@"Flag.plist"]) {
+            [FileOfManage createWithFile:@"Flag.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"FlagWithVC",@"YES",@"FristOpen",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"Flag.plist"] atomically:YES];
         }
         
-        NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile]];
+        NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Flag.plist"]];
         _flagDic = dics;
     }
     return _flagDic;

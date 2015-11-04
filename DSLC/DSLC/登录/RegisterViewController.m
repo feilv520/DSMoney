@@ -14,7 +14,7 @@
 #import "RegisterOfResult.h"
 #import "RegisterOfPassButton.h"
 
-@interface RegisterViewController (){
+@interface RegisterViewController ()<UITextFieldDelegate>{
     NSInteger number;
     NSInteger buttonTag;
     UIButton *payButton;
@@ -157,11 +157,54 @@
     
     registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, (170 / 375.0) * HEIGHT_CONTROLLER_DEFAULT);
     
+    [registerV.sandMyselfIDCard addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    [registerV.smsCode addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    [registerV.phoneNumber addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    [registerV.loginPassword addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    [registerV.sureLoginPassword addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    
+    registerV.getCode.layer.masksToBounds = YES;
+    registerV.getCode.layer.borderWidth = 1.f;
+    registerV.getCode.layer.borderColor = [UIColor redColor].CGColor;
+    
+    [registerV.getCode addTarget:self action:@selector(getCodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.scrollView addSubview:registerV];
 }
 
-// 立即抢购
+// 确认按钮
 - (void)RegisterSureButton{
+    
+    UIButton *tapButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    tapButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (95 / 375.0), 400, WIDTH_CONTROLLER_DEFAULT * (100 / 375.0), 15);
+    
+    [tapButton setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
+
+    [tapButton setTitleColor:Color_Black forState:UIControlStateNormal];
+    
+    [tapButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
+
+    [tapButton addTarget:self action:@selector(bookButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [tapButton setTitle:@"平台服务条款" forState:UIControlStateNormal];
+    
+    [self.scrollView addSubview:tapButton];
+    
+    UIButton *bookButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    bookButton.frame = CGRectMake(CGRectGetMaxX(tapButton.frame) - 10, 400, WIDTH_CONTROLLER_DEFAULT * (100 / 375.0), 15);
+    
+    [bookButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    
+    [bookButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    
+    [bookButton addTarget:self action:@selector(bookButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [bookButton setTitle:@"<<风险提示书>>" forState:UIControlStateNormal];
+    
+    [self.scrollView addSubview:bookButton];
+    
     payButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     payButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (51 / 375.0), 420, WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), 43);
@@ -171,6 +214,9 @@
     
     [payButton addTarget:self action:@selector(sureButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+    [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    
     [self.scrollView addSubview:payButton];
     
 }
@@ -178,38 +224,7 @@
 // 确认按钮执行方法 (第二步 : 实名验证)
 - (void)sureButtonAction:(UIButton *)btn{
     
-    [self RegisterButtonAction];
-    
-    [buttonWithView removeFromSuperview];
-    [payButton removeFromSuperview];
-    [registerV removeFromSuperview];
-    registerV = nil;
-    
-    registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
-    
-    NSBundle *rootBundle = [NSBundle mainBundle];
-    NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
-    NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
-    NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
-    
-    registerR = [rootArrayOfResult lastObject];
-    
-    registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
-    
-    registerV = [rootArrayOfView objectAtIndex:1];
-    
-    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
-    
-    registerB = [rootArrayOfPButton lastObject];
-    
-    registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
-    
-    [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.scrollView addSubview:registerV];
-    [self.scrollView addSubview:registerR];
-    [self.scrollView addSubview:registerB];
+    [self checkSmsCode];
     
 }
 
@@ -264,15 +279,92 @@
     [self.view endEditing:YES];
 }
 
+- (void)checkSmsCode{
+    NSDictionary *parameters = @{@"smsCode":registerV.smsCode.text};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/checkSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        if ([[responseObject objectForKey:@"result"] isEqualToString:@"200"]) {
+            [self RegisterButtonAction];
+        }
+        [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+// 注册按钮执行的方法
 - (void)RegisterButtonAction{
-    NSDictionary *parameters = @{@"phone":@"15955454588",@"smsCode":@"123456",@"password":@"123456",@"invitationCode":@"321123",@"finaCard":@""};
+    NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":registerV.sureLoginPassword.text,@"finaCard":registerV.sandMyselfIDCard.text};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@",responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToString:@"200"]) {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+//            [buttonWithView removeFromSuperview];
+//            [payButton removeFromSuperview];
+//            [registerV removeFromSuperview];
+//            registerV = nil;
+//        
+//            registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
+//        
+//            NSBundle *rootBundle = [NSBundle mainBundle];
+//            NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
+//            NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
+//            NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
+//        
+//            registerR = [rootArrayOfResult lastObject];
+//        
+//            registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+//        
+//            registerV = [rootArrayOfView objectAtIndex:1];
+//        
+//            registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
+//        
+//            registerB = [rootArrayOfPButton lastObject];
+//        
+//            registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
+//        
+//            [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//            [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
+//            
+//            [self.scrollView addSubview:registerV];
+//            [self.scrollView addSubview:registerR];
+//            [self.scrollView addSubview:registerB];
+            
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
+}
+
+// 风险提示书
+- (void)bookButtonAction:(UIButton *)btn{
+    NSLog(@"<<风险提示书>>");
+}
+
+// 获得验证码
+- (void)getCodeButtonAction:(UIButton *)btn{
+    [self.view endEditing:YES];
+    NSDictionary *parameters = @{@"phone":@"13354288036"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+// 按钮变颜色
+- (void)textFieldEdit:(UITextField *)textField{
+    if ([registerV.sandMyselfIDCard.text length] > 0 && [registerV.smsCode.text length] > 0 && [registerV.phoneNumber.text length] > 0 && [registerV.loginPassword.text length] > 0 && [registerV.sureLoginPassword.text length] > 0) {
+        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -56,7 +56,9 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/admin/
     
     NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,URLString];
     
-    NSLog(@"----------%@",URLPostString);
+    NSLog(@"%@",URLPostString);
+    
+    NSLog(@"parameters = %@",parameters);
     
     [self POST:URLPostString parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nonnull responseObject) {
         

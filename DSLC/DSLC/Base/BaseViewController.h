@@ -14,6 +14,8 @@
 
 @interface BaseViewController : UIViewController
 
+@property (nonatomic, strong) NSDictionary *flagDic;
+
 - (void)setTitleString:(NSString *)titleString;
 
 @end

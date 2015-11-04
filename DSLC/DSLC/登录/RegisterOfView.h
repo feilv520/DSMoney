@@ -13,5 +13,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *problemButton;
 @property (weak, nonatomic) IBOutlet UITextField *sandMyselfIDCard;
 @property (weak, nonatomic) IBOutlet UILabel *inviteNumber;
+@property (weak, nonatomic) IBOutlet UITextField *smsCode;
+
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumber;
+@property (weak, nonatomic) IBOutlet UITextField *loginPassword;
+@property (weak, nonatomic) IBOutlet UITextField *sureLoginPassword;
 
 @end

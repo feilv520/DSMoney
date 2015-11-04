@@ -16,9 +16,9 @@
     UITableView *_tableView;
     NSArray *leftArray;
     NSArray *textArray;
-    UILabel *labelPhone;
     UIButton *butReally;
     
+    UITextField *textField0;
     UITextField *textField1;
     UITextField *textField2;
     UITextField *textField3;
@@ -49,9 +49,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"MendDeal2Cell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     
     leftArray = @[@"绑定手机号", @"", @"设置新交易密码", @"确认新交易密码"];
-    textArray = @[@"", @"", @"请输入新交易密码", @"请再次输入新交易密码"];
-    
-    labelPhone = [CreatView creatWithLabelFrame:CGRectMake(130, 10, WIDTH_CONTROLLER_DEFAULT - 140, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"15908271390"];
+    textArray = @[@"请输入手机号", @"", @"请输入新交易密码", @"请再次输入新交易密码"];
     
     butReally = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 260, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [self.view addSubview:butReally];
@@ -84,7 +82,7 @@
         cell.buttonGet.layer.masksToBounds = YES;
         cell.buttonGet.layer.borderWidth = 0.5;
         cell.buttonGet.layer.borderColor = [[UIColor daohanglan] CGColor];
-        [cell.buttonGet addTarget:self action:@selector(getNumButton:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.buttonGet addTarget:self action:@selector(getCodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.labelLeft.text = @"验证码";
         cell.labelLeft.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -101,13 +99,6 @@
     } else {
         
         MendDealCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-        
-        if (indexPath.row == 0) {
-            
-            cell.textField.hidden = YES;
-            [cell addSubview:labelPhone];
-            
-        }
         
         cell.labelLeft.text = [leftArray objectAtIndex:indexPath.row];
         cell.labelLeft.font = [UIFont fontWithName:@"CenturyGothic" size:14];
@@ -144,11 +135,12 @@
 //确定按钮
 - (void)findSecretMakeSure:(UIButton *)button
 {
+    textField0 = (UITextField *)[self.view viewWithTag:700];
     textField1 = (UITextField *)[self.view viewWithTag:701];
     textField2 = (UITextField *)[self.view viewWithTag:702];
     textField3 = (UITextField *)[self.view viewWithTag:703];
     
-    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0) {
+    if (textField0.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0) {
         
         NSLog(@"对了");
         
@@ -158,10 +150,23 @@
 
 }
 
-//获取验证码
-- (void)getNumButton:(UIButton *)button
-{
-    NSLog(@"获取验证码");
+// 获得验证码
+- (void)getCodeButtonAction:(UIButton *)btn{
+    [self.view endEditing:YES];
+    
+    textField0 = (UITextField *)[self.view viewWithTag:700];
+    
+    if (textField0.text.length == 0) {
+        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+    } else {
+        NSDictionary *parameters = @{@"phone":textField0.text};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            NSLog(@"%@",responseObject);
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

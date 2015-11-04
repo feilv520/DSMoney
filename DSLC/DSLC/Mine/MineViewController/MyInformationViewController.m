@@ -37,24 +37,26 @@
 
 @property (nonatomic) UIImagePickerController *imagePicker;
 
-@property (nonatomic, strong) NSDictionary *flagDic;
+//@property (nonatomic, strong) NSDictionary *flagDic;
 
 @end
 
 @implementation MyInformationViewController
 
-- (NSDictionary *)flagDic{
-    if (_flagDic == nil) {
-        
-        if (![FileOfManage ExistOfFile]) {
-            [FileOfManage createWithFile];
-        }
-        
-        NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile]];
-        _flagDic = dics;
-    }
-    return _flagDic;
-}
+//- (NSDictionary *)flagDic{
+//    if (_flagDic == nil) {
+//        
+//        if (![FileOfManage ExistOfFile:@"Flag.plist"]) {
+//            [FileOfManage createWithFile:@"Flag.plist"];
+//            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"FlagWithVC",@"YES",@"FristOpen",nil];
+//            [dic writeToFile:[FileOfManage PathOfFile:@"Flag.plist"] atomically:YES];
+//        }
+//        
+//        NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Flag.plist"]];
+//        _flagDic = dics;
+//    }
+//    return _flagDic;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -102,6 +104,8 @@
     NSDictionary *parameter = @{@"userId":@"8993"};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
         
         NSDictionary *dataDic = [responseObject objectForKey:@"User"];
         
@@ -156,7 +160,7 @@
         
     } else {
         
-        return 4;
+        return 2;
     }
 }
 
@@ -195,16 +199,16 @@
     
     cell.imageRight.image = [UIImage imageNamed:@"arrow"];
     
-    if (indexPath.section == 3) {
-        
-        if (indexPath.row == 2) {
-            
-            cell.imageRight.hidden = YES;
-            
-            [cell addSubview:switchLeft];
-        }
-        
-     }
+//    if (indexPath.section == 3) {
+//        
+//        if (indexPath.row == 2) {
+//            
+//            cell.imageRight.hidden = YES;
+//            
+//            [cell addSubview:switchLeft];
+//        }
+//        
+//     }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -359,13 +363,11 @@
 //手势密码开关
 - (void)showSwitchGetOnOrOff:(UISwitch *)switchOn
 {
-    
-    NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile]];
+    NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"Flag.plist"]];
     //设置属性值,没有的数据就新建，已有的数据就修改。
     [usersDic setObject:[NSString stringWithFormat:@"%@",switchOn.on?@"YES":@"NO"] forKey:@"FlagWithVC"];
     //写入文件
-    [usersDic writeToFile:[FileOfManage PathOfFile] atomically:YES];
-    
+    [usersDic writeToFile:[FileOfManage PathOfFile:@"Flag.plist"] atomically:YES];
 }
 
 - (void)didReceiveMemoryWarning {

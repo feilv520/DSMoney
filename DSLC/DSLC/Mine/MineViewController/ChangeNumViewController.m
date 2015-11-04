@@ -100,7 +100,18 @@
 //获取验证码
 - (void)getNumButton:(UIButton *)button
 {
-    NSLog(@"获取验证码");
+    NSDictionary *parameter = @{@"phone":@"13354288036"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        NSLog(@"ooooooo%@", responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"fffffffff%@", error);
+        
+    }];
 }
 
 //确定按钮
@@ -108,7 +119,22 @@
 {
     if ([_textField1.text length] > 0 && [_textField2.text length] > 0) {
         
-        NSLog(@"确定");
+        NSDictionary *parameter = @{@"phone":_textField1.text,@"smsCode":_textField2.text};
+        
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPhone" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            NSLog(@"ooooooo%@", responseObject);
+            NSArray *viewControllers = [self.navigationController viewControllers];
+            if ([[responseObject objectForKey:@"result"] isEqualToString:@"200"]) {
+                [self.navigationController popToViewController:[viewControllers objectAtIndex:1] animated:YES];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"fffffffff%@", error);
+            
+        }];
         
     } else {
         

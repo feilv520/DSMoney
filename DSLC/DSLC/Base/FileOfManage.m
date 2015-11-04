@@ -11,25 +11,23 @@
 @implementation FileOfManage
 
 // 文件路径
-+ (NSString *)PathOfFile{
-    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-    NSString *path=[paths    objectAtIndex:0];
-    NSString *filename=[path stringByAppendingPathComponent:@"Flag.plist"];
++ (NSString *)PathOfFile:(NSString *)fileName{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *filename = [path stringByAppendingPathComponent:fileName];
+    NSLog(@"00000%@",filename);
     return filename;
 }
 
 // 创建plist文件
-+ (void)createWithFile{
++ (void)createWithFile:(NSString *)fileName{
     NSFileManager* fm = [NSFileManager defaultManager];
-    [fm createFileAtPath:[self PathOfFile] contents:nil attributes:nil];
-    
-    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"FlagWithVC",nil];
-    [dic writeToFile:[self PathOfFile] atomically:YES];
+    [fm createFileAtPath:[self PathOfFile:fileName] contents:nil attributes:nil];
 }
 
-+ (BOOL)ExistOfFile{
++ (BOOL)ExistOfFile:(NSString *)fileName{
     NSFileManager* fm = [NSFileManager defaultManager];
-    BOOL isDirExist = [fm fileExistsAtPath:[self PathOfFile] isDirectory:FALSE];
+    BOOL isDirExist = [fm fileExistsAtPath:[self PathOfFile:fileName] isDirectory:FALSE];
     return isDirExist;
 }
 

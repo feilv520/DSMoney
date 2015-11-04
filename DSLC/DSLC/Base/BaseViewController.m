@@ -14,6 +14,18 @@
 
 @implementation BaseViewController
 
+- (NSDictionary *)flagDic{
+    if (_flagDic == nil) {
+        
+        if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+            [FileOfManage createWithFile:@"Member.plist"];
+        }
+        NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        _flagDic = dics;
+    }
+    return _flagDic;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:NO];
