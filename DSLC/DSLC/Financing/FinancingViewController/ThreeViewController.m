@@ -59,7 +59,7 @@
     scrollView = [CreatView creatWithScrollViewFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 45) backgroundColor:[UIColor whiteColor] contentSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT/3, 0) contentOffSet:CGPointMake(0, 0)];
     [self.view addSubview:scrollView];
     
-    button1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"活动专区"];
+    button1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"火爆专区"];
     [scrollView addSubview:button1];
     button1.tag = 101;
     button1.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -71,7 +71,7 @@
     button2.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [button2 addTarget:self action:@selector(button2Press:) forControlEvents:UIControlEventTouchUpInside];
     
-    button3 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"票据投资"];
+    button3 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"银行票据"];
     [scrollView addSubview:button3];
     button3.tag = 301;
     button3.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
