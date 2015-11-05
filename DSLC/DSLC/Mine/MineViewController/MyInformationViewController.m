@@ -313,21 +313,21 @@
 //从相册选择
 - (void)chooseFromPicture:(UIButton *)button
 {
-//    NSLog(@"从相册选择");
+    NSLog(@"从相册选择");
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        
-        _imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        _imagePicker.delegate = self;
-        _imagePicker.allowsEditing = YES;
-        [self presentViewController:_imagePicker animated:YES completion:nil];
-    }
-    
-    [butBlack removeFromSuperview];
-    [viewDown removeFromSuperview];
-    
-    butBlack = nil;
-    viewDown = nil;
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+//        
+//        _imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+//        _imagePicker.delegate = self;
+//        _imagePicker.allowsEditing = YES;
+//        [self presentViewController:_imagePicker animated:YES completion:nil];
+//    }
+//
+//    [butBlack removeFromSuperview];
+//    [viewDown removeFromSuperview];
+//    
+//    butBlack = nil;
+//    viewDown = nil;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info

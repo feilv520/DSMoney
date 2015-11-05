@@ -21,6 +21,9 @@
     UILabel *lableRedLine;
     NSInteger buttonTag;
     UITableView *_tableView;
+    
+    NSArray *nameArray;
+    UIButton *butLastTime;
 }
 
 @end
@@ -59,6 +62,8 @@
     
     [_tableView setSeparatorColor:[UIColor colorWithRed:246 / 255.0 green:247 / 255.0 blue:249 / 255.0 alpha:1.0]];
     [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    
+    nameArray = @[@"小银票001", @"小银票002", @"小银票003", @"小银票004", @"小银票005", @"小银票006", @"小银票007", @"小银票008", @"小银票009", @"小银票010"];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -68,7 +73,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 9;
+    return nameArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -78,7 +83,7 @@
     cell.viewGiPian.layer.cornerRadius = 4;
     cell.viewGiPian.layer.masksToBounds = YES;
     
-    cell.labelMonth.text = @"3个月固定投资";
+    cell.labelMonth.text = [nameArray objectAtIndex:indexPath.row];
     cell.labelMonth.font = [UIFont systemFontOfSize:15];
     
     cell.viewLine.alpha = 0.7;
@@ -138,12 +143,26 @@
     cell.labelSurplus.font = [UIFont systemFontOfSize:12];
     cell.labelSurplus.backgroundColor = [UIColor clearColor];
     
-//    设置进度条的进度值 并动画展示
-    [cell.progressView setProgress:0.7 animated:YES];
-//    设置进度条的颜色
-    cell.progressView.trackTintColor = [UIColor progressBackColor];
-//    设置进度条的进度颜色
-    cell.progressView.progressTintColor = [UIColor progressColor];
+    if (indexPath.row == 0) {
+        
+        cell.progressView.hidden = YES;
+        
+        butLastTime = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(131, 9, 210, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 倒计时 12:12:65"];
+        [cell.viewBottom addSubview:butLastTime];
+        butLastTime.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        butLastTime.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [butLastTime setImage:[UIImage imageNamed:@"61-拷贝"] forState:UIControlStateNormal];
+        
+    } else {
+        
+        //    设置进度条的进度值 并动画展示
+        [cell.progressView setProgress:0.7 animated:YES];
+        //    设置进度条的颜色
+        cell.progressView.trackTintColor = [UIColor progressBackColor];
+        //    设置进度条的进度颜色
+        cell.progressView.progressTintColor = [UIColor progressColor];
+        
+    }
     
     cell.viewBottom.backgroundColor = [UIColor qianhuise];
     

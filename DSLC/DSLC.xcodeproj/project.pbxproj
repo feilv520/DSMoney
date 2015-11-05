@@ -35,6 +35,47 @@
 		81701C101BE703F200B45BAA /* MendDeal2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81701C0E1BE703F200B45BAA /* MendDeal2Cell.m */; settings = {ASSET_TAGS = (); }; };
 		81701C111BE703F200B45BAA /* MendDeal2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81701C0F1BE703F200B45BAA /* MendDeal2Cell.xib */; settings = {ASSET_TAGS = (); }; };
 		81701C141BE7114E00B45BAA /* FindDealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81701C131BE7114E00B45BAA /* FindDealViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8175BE781BE9A2490044026E /* 61-拷贝@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE761BE9A2490044026E /* 61-拷贝@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BE791BE9A2490044026E /* 61-拷贝@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE771BE9A2490044026E /* 61-拷贝@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BE7C1BE9B4250044026E /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8175BE7B1BE9B4250044026E /* RecordViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8175BE801BE9B50D0044026E /* RecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8175BE7E1BE9B50D0044026E /* RecordCell.m */; settings = {ASSET_TAGS = (); }; };
+		8175BE811BE9B50D0044026E /* RecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE7F1BE9B50D0044026E /* RecordCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8175BE841BE9CE850044026E /* InvestNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8175BE831BE9CE850044026E /* InvestNoticeViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8175BE881BE9D1020044026E /* InvestNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8175BE861BE9D1020044026E /* InvestNoticeCell.m */; settings = {ASSET_TAGS = (); }; };
+		8175BE891BE9D1020044026E /* InvestNoticeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE871BE9D1020044026E /* InvestNoticeCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8175BE8C1BE9E2430044026E /* ChooseRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8175BE8B1BE9E2430044026E /* ChooseRedBagViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8175BE901BE9E3730044026E /* ChooseRedBagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8175BE8E1BE9E3730044026E /* ChooseRedBagCell.m */; settings = {ASSET_TAGS = (); }; };
+		8175BE911BE9E3730044026E /* ChooseRedBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE8F1BE9E3730044026E /* ChooseRedBagCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8175BE981BE9E5760044026E /* 组-21-拷贝-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE921BE9E5760044026E /* 组-21-拷贝-2@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BE991BE9E5760044026E /* 组-21-拷贝-2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE931BE9E5760044026E /* 组-21-拷贝-2@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BE9A1BE9E5760044026E /* 组-21-拷贝-13@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE941BE9E5760044026E /* 组-21-拷贝-13@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BE9B1BE9E5760044026E /* 组-21-拷贝-13@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE951BE9E5760044026E /* 组-21-拷贝-13@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BE9C1BE9E5760044026E /* 组-21-拷贝-14@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE961BE9E5760044026E /* 组-21-拷贝-14@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BE9D1BE9E5760044026E /* 组-21-拷贝-14@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE971BE9E5760044026E /* 组-21-拷贝-14@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEAA1BE9F2F50044026E /* 新浪微博@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE9E1BE9F2F50044026E /* 新浪微博@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEAB1BE9F2F50044026E /* 新浪微博@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BE9F1BE9F2F50044026E /* 新浪微博@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEAC1BE9F2F50044026E /* 微信@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEA01BE9F2F50044026E /* 微信@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEAD1BE9F2F50044026E /* 微信@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEA11BE9F2F50044026E /* 微信@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEAE1BE9F2F50044026E /* 腾讯微博@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEA21BE9F2F50044026E /* 腾讯微博@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEAF1BE9F2F50044026E /* 腾讯微博@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEA31BE9F2F50044026E /* 腾讯微博@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEB01BE9F2F50044026E /* QQ空间@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEA41BE9F2F50044026E /* QQ空间@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEB11BE9F2F50044026E /* QQ空间@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEA51BE9F2F50044026E /* QQ空间@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEB21BE9F2F50044026E /* 人人网@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEA61BE9F2F50044026E /* 人人网@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEB31BE9F2F50044026E /* 人人网@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEA71BE9F2F50044026E /* 人人网@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEB41BE9F2F50044026E /* 朋友圈@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEA81BE9F2F50044026E /* 朋友圈@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEB51BE9F2F50044026E /* 朋友圈@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEA91BE9F2F50044026E /* 朋友圈@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEB91BE9F7160044026E /* ShareEveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8175BEB71BE9F7160044026E /* ShareEveryCell.m */; settings = {ASSET_TAGS = (); }; };
+		8175BEBA1BE9F7160044026E /* ShareEveryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEB81BE9F7160044026E /* ShareEveryCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8175BEBD1BEA02270044026E /* ShareFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8175BEBC1BEA02270044026E /* ShareFinishViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8175BEC21BEA052E0044026E /* 拆红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEBE1BEA052E0044026E /* 拆红包@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEC31BEA052E0044026E /* 拆红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEBF1BEA052E0044026E /* 拆红包@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEC41BEA052E0044026E /* 分享成功@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEC01BEA052E0044026E /* 分享成功@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEC51BEA052E0044026E /* 分享成功@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEC11BEA052E0044026E /* 分享成功@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEC81BEA0D530044026E /* 打开红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEC61BEA0D530044026E /* 打开红包@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BEC91BEA0D530044026E /* 打开红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEC71BEA0D530044026E /* 打开红包@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BECC1BEA14440044026E /* ShareFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8175BECB1BEA14440044026E /* ShareFailureViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8175BECF1BEA1B290044026E /* 分享失败@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BECD1BEA1B290044026E /* 分享失败@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8175BED01BEA1B290044026E /* 分享失败@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BECE1BEA1B290044026E /* 分享失败@3x.png */; settings = {ASSET_TAGS = (); }; };
 		817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817988271BC93C64007C8C3E /* FDetailViewController.m */; };
 		8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179882A1BC93DDE007C8C3E /* FixInvestCell.m */; };
 		8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8179882B1BC93DDE007C8C3E /* FixInvestCell.xib */; };
@@ -514,6 +555,56 @@
 		81701C0F1BE703F200B45BAA /* MendDeal2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MendDeal2Cell.xib; sourceTree = "<group>"; };
 		81701C121BE7114E00B45BAA /* FindDealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindDealViewController.h; sourceTree = "<group>"; };
 		81701C131BE7114E00B45BAA /* FindDealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindDealViewController.m; sourceTree = "<group>"; };
+		8175BE761BE9A2490044026E /* 61-拷贝@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "61-拷贝@2x.png"; sourceTree = "<group>"; };
+		8175BE771BE9A2490044026E /* 61-拷贝@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "61-拷贝@3x.png"; sourceTree = "<group>"; };
+		8175BE7A1BE9B4250044026E /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
+		8175BE7B1BE9B4250044026E /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
+		8175BE7D1BE9B50D0044026E /* RecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordCell.h; sourceTree = "<group>"; };
+		8175BE7E1BE9B50D0044026E /* RecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordCell.m; sourceTree = "<group>"; };
+		8175BE7F1BE9B50D0044026E /* RecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordCell.xib; sourceTree = "<group>"; };
+		8175BE821BE9CE850044026E /* InvestNoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestNoticeViewController.h; sourceTree = "<group>"; };
+		8175BE831BE9CE850044026E /* InvestNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvestNoticeViewController.m; sourceTree = "<group>"; };
+		8175BE851BE9D1020044026E /* InvestNoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestNoticeCell.h; sourceTree = "<group>"; };
+		8175BE861BE9D1020044026E /* InvestNoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvestNoticeCell.m; sourceTree = "<group>"; };
+		8175BE871BE9D1020044026E /* InvestNoticeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvestNoticeCell.xib; sourceTree = "<group>"; };
+		8175BE8A1BE9E2430044026E /* ChooseRedBagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseRedBagViewController.h; sourceTree = "<group>"; };
+		8175BE8B1BE9E2430044026E /* ChooseRedBagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseRedBagViewController.m; sourceTree = "<group>"; };
+		8175BE8D1BE9E3730044026E /* ChooseRedBagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseRedBagCell.h; sourceTree = "<group>"; };
+		8175BE8E1BE9E3730044026E /* ChooseRedBagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseRedBagCell.m; sourceTree = "<group>"; };
+		8175BE8F1BE9E3730044026E /* ChooseRedBagCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseRedBagCell.xib; sourceTree = "<group>"; };
+		8175BE921BE9E5760044026E /* 组-21-拷贝-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-21-拷贝-2@2x.png"; sourceTree = "<group>"; };
+		8175BE931BE9E5760044026E /* 组-21-拷贝-2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-21-拷贝-2@3x.png"; sourceTree = "<group>"; };
+		8175BE941BE9E5760044026E /* 组-21-拷贝-13@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-21-拷贝-13@2x.png"; sourceTree = "<group>"; };
+		8175BE951BE9E5760044026E /* 组-21-拷贝-13@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-21-拷贝-13@3x.png"; sourceTree = "<group>"; };
+		8175BE961BE9E5760044026E /* 组-21-拷贝-14@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-21-拷贝-14@2x.png"; sourceTree = "<group>"; };
+		8175BE971BE9E5760044026E /* 组-21-拷贝-14@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-21-拷贝-14@3x.png"; sourceTree = "<group>"; };
+		8175BE9E1BE9F2F50044026E /* 新浪微博@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新浪微博@2x.png"; sourceTree = "<group>"; };
+		8175BE9F1BE9F2F50044026E /* 新浪微博@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新浪微博@3x.png"; sourceTree = "<group>"; };
+		8175BEA01BE9F2F50044026E /* 微信@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "微信@2x.png"; sourceTree = "<group>"; };
+		8175BEA11BE9F2F50044026E /* 微信@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "微信@3x.png"; sourceTree = "<group>"; };
+		8175BEA21BE9F2F50044026E /* 腾讯微博@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "腾讯微博@2x.png"; sourceTree = "<group>"; };
+		8175BEA31BE9F2F50044026E /* 腾讯微博@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "腾讯微博@3x.png"; sourceTree = "<group>"; };
+		8175BEA41BE9F2F50044026E /* QQ空间@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QQ空间@2x.png"; sourceTree = "<group>"; };
+		8175BEA51BE9F2F50044026E /* QQ空间@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QQ空间@3x.png"; sourceTree = "<group>"; };
+		8175BEA61BE9F2F50044026E /* 人人网@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "人人网@2x.png"; sourceTree = "<group>"; };
+		8175BEA71BE9F2F50044026E /* 人人网@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "人人网@3x.png"; sourceTree = "<group>"; };
+		8175BEA81BE9F2F50044026E /* 朋友圈@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "朋友圈@2x.png"; sourceTree = "<group>"; };
+		8175BEA91BE9F2F50044026E /* 朋友圈@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "朋友圈@3x.png"; sourceTree = "<group>"; };
+		8175BEB61BE9F7160044026E /* ShareEveryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareEveryCell.h; sourceTree = "<group>"; };
+		8175BEB71BE9F7160044026E /* ShareEveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareEveryCell.m; sourceTree = "<group>"; };
+		8175BEB81BE9F7160044026E /* ShareEveryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareEveryCell.xib; sourceTree = "<group>"; };
+		8175BEBB1BEA02270044026E /* ShareFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareFinishViewController.h; sourceTree = "<group>"; };
+		8175BEBC1BEA02270044026E /* ShareFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareFinishViewController.m; sourceTree = "<group>"; };
+		8175BEBE1BEA052E0044026E /* 拆红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "拆红包@2x.png"; sourceTree = "<group>"; };
+		8175BEBF1BEA052E0044026E /* 拆红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "拆红包@3x.png"; sourceTree = "<group>"; };
+		8175BEC01BEA052E0044026E /* 分享成功@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享成功@2x.png"; sourceTree = "<group>"; };
+		8175BEC11BEA052E0044026E /* 分享成功@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享成功@3x.png"; sourceTree = "<group>"; };
+		8175BEC61BEA0D530044026E /* 打开红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "打开红包@2x.png"; sourceTree = "<group>"; };
+		8175BEC71BEA0D530044026E /* 打开红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "打开红包@3x.png"; sourceTree = "<group>"; };
+		8175BECA1BEA14440044026E /* ShareFailureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareFailureViewController.h; sourceTree = "<group>"; };
+		8175BECB1BEA14440044026E /* ShareFailureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareFailureViewController.m; sourceTree = "<group>"; };
+		8175BECD1BEA1B290044026E /* 分享失败@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享失败@2x.png"; sourceTree = "<group>"; };
+		8175BECE1BEA1B290044026E /* 分享失败@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享失败@3x.png"; sourceTree = "<group>"; };
 		817988261BC93C64007C8C3E /* FDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDetailViewController.h; sourceTree = "<group>"; };
 		817988271BC93C64007C8C3E /* FDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDetailViewController.m; sourceTree = "<group>"; };
 		817988291BC93DDE007C8C3E /* FixInvestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixInvestCell.h; sourceTree = "<group>"; };
@@ -1316,6 +1407,34 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8175BECD1BEA1B290044026E /* 分享失败@2x.png */,
+				8175BECE1BEA1B290044026E /* 分享失败@3x.png */,
+				8175BEC61BEA0D530044026E /* 打开红包@2x.png */,
+				8175BEC71BEA0D530044026E /* 打开红包@3x.png */,
+				8175BEBE1BEA052E0044026E /* 拆红包@2x.png */,
+				8175BEBF1BEA052E0044026E /* 拆红包@3x.png */,
+				8175BEC01BEA052E0044026E /* 分享成功@2x.png */,
+				8175BEC11BEA052E0044026E /* 分享成功@3x.png */,
+				8175BE9E1BE9F2F50044026E /* 新浪微博@2x.png */,
+				8175BE9F1BE9F2F50044026E /* 新浪微博@3x.png */,
+				8175BEA01BE9F2F50044026E /* 微信@2x.png */,
+				8175BEA11BE9F2F50044026E /* 微信@3x.png */,
+				8175BEA21BE9F2F50044026E /* 腾讯微博@2x.png */,
+				8175BEA31BE9F2F50044026E /* 腾讯微博@3x.png */,
+				8175BEA41BE9F2F50044026E /* QQ空间@2x.png */,
+				8175BEA51BE9F2F50044026E /* QQ空间@3x.png */,
+				8175BEA61BE9F2F50044026E /* 人人网@2x.png */,
+				8175BEA71BE9F2F50044026E /* 人人网@3x.png */,
+				8175BEA81BE9F2F50044026E /* 朋友圈@2x.png */,
+				8175BEA91BE9F2F50044026E /* 朋友圈@3x.png */,
+				8175BE921BE9E5760044026E /* 组-21-拷贝-2@2x.png */,
+				8175BE931BE9E5760044026E /* 组-21-拷贝-2@3x.png */,
+				8175BE941BE9E5760044026E /* 组-21-拷贝-13@2x.png */,
+				8175BE951BE9E5760044026E /* 组-21-拷贝-13@3x.png */,
+				8175BE961BE9E5760044026E /* 组-21-拷贝-14@2x.png */,
+				8175BE971BE9E5760044026E /* 组-21-拷贝-14@3x.png */,
+				8175BE761BE9A2490044026E /* 61-拷贝@2x.png */,
+				8175BE771BE9A2490044026E /* 61-拷贝@3x.png */,
 				81B18E0F1BE7387A00D448FA /* bar-full@2x.png */,
 				81B18E101BE7387A00D448FA /* bar-full@3x.png */,
 				81B18E111BE7387A00D448FA /* iconfont-liwu@2x.png */,
@@ -1538,8 +1657,18 @@
 				8D3A2FDF1BE7100000913DEC /* FDescriptionViewController.xib */,
 				8184EC351BCC96E1003F440D /* MakeSureViewController.h */,
 				8184EC361BCC96E1003F440D /* MakeSureViewController.m */,
+				8175BE8A1BE9E2430044026E /* ChooseRedBagViewController.h */,
+				8175BE8B1BE9E2430044026E /* ChooseRedBagViewController.m */,
 				81F237731BE86031009D7A67 /* CashFinishViewController.h */,
 				81F237741BE86031009D7A67 /* CashFinishViewController.m */,
+				8175BEBB1BEA02270044026E /* ShareFinishViewController.h */,
+				8175BEBC1BEA02270044026E /* ShareFinishViewController.m */,
+				8175BECA1BEA14440044026E /* ShareFailureViewController.h */,
+				8175BECB1BEA14440044026E /* ShareFailureViewController.m */,
+				8175BE821BE9CE850044026E /* InvestNoticeViewController.h */,
+				8175BE831BE9CE850044026E /* InvestNoticeViewController.m */,
+				8175BE7A1BE9B4250044026E /* RecordViewController.h */,
+				8175BE7B1BE9B4250044026E /* RecordViewController.m */,
 				8D88A4DA1BCDFED400EE22F5 /* FSelectionPayTypeViewController.h */,
 				8D88A4DB1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m */,
 				8D88A4DC1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib */,
@@ -1610,6 +1739,18 @@
 				81F2376E1BE8568B009D7A67 /* NewMakeSureCell.h */,
 				81F2376F1BE8568B009D7A67 /* NewMakeSureCell.m */,
 				81F237701BE8568B009D7A67 /* NewMakeSureCell.xib */,
+				8175BE851BE9D1020044026E /* InvestNoticeCell.h */,
+				8175BE861BE9D1020044026E /* InvestNoticeCell.m */,
+				8175BE871BE9D1020044026E /* InvestNoticeCell.xib */,
+				8175BE7D1BE9B50D0044026E /* RecordCell.h */,
+				8175BE7E1BE9B50D0044026E /* RecordCell.m */,
+				8175BE7F1BE9B50D0044026E /* RecordCell.xib */,
+				8175BE8D1BE9E3730044026E /* ChooseRedBagCell.h */,
+				8175BE8E1BE9E3730044026E /* ChooseRedBagCell.m */,
+				8175BE8F1BE9E3730044026E /* ChooseRedBagCell.xib */,
+				8175BEB61BE9F7160044026E /* ShareEveryCell.h */,
+				8175BEB71BE9F7160044026E /* ShareEveryCell.m */,
+				8175BEB81BE9F7160044026E /* ShareEveryCell.xib */,
 			);
 			path = FinancingView;
 			sourceTree = "<group>";
@@ -2375,14 +2516,18 @@
 				8DEDE1C11BCCFEF8008086D3 /* iocn@3x.png in Resources */,
 				8191E2231BDDF202000A6E8C /* ServiceCell.xib in Resources */,
 				81C8BBC61BDA2F8D005B9DFF /* guanyu@2x.png in Resources */,
+				8175BEB11BE9F2F50044026E /* QQ空间@3x.png in Resources */,
 				8191E22A1BDDF5F0000A6E8C /* zaixiankefu@2x.png in Resources */,
 				8D6EFBA51BC78B02009FE101 /* shouyeqiepian750_25_highlight.png in Resources */,
+				8175BEC81BEA0D530044026E /* 打开红包@2x.png in Resources */,
 				8D6EFBAB1BC78B02009FE101 /* shouyeqiepian7500_30highlight.png in Resources */,
 				8184EC411BCCD113003F440D /* MoneyCell.xib in Resources */,
 				817DD4A61BCF547E00042B09 /* touxiang@2x.png in Resources */,
 				81C8BBC51BDA2F8D005B9DFF /* bangzhu@3x.png in Resources */,
 				81D703FD1BE073730074DF30 /* ForgetSecret2Cell.xib in Resources */,
 				8D6EFBA91BC78B02009FE101 /* shouyeqiepian7500_25.png in Resources */,
+				8175BEAC1BE9F2F50044026E /* 微信@2x.png in Resources */,
+				8175BE811BE9B50D0044026E /* RecordCell.xib in Resources */,
 				817DD4701BCF501100042B09 /* MineCell.xib in Resources */,
 				8DD180991BD72E5900F71CEA /* GetMoneyTableViewCell.xib in Resources */,
 				8DEDE1CC1BCCFF44008086D3 /* iconfont_complete@2x.png in Resources */,
@@ -2413,6 +2558,7 @@
 				817DD4AC1BCF547E00042B09 /* ziliao@2x.png in Resources */,
 				8DEDE1B61BCCFEB5008086D3 /* btn_red@3x.png in Resources */,
 				8D3A2FDC1BE70FBF00913DEC /* TextTableViewCell.xib in Resources */,
+				8175BEC91BEA0D530044026E /* 打开红包@3x.png in Resources */,
 				817E33B01BD78ED500D05103 /* yuan@3x.png in Resources */,
 				817E33A81BD7840000D05103 /* ChooseCell.xib in Resources */,
 				817E33881BD733D100D05103 /* huangguan@2x.png in Resources */,
@@ -2461,11 +2607,15 @@
 				8D6EFBA71BC78B02009FE101 /* shouyeqiepian750_30.png in Resources */,
 				81BA1BFE1BD4DE7000DBA5BE /* MoreActivityCell.xib in Resources */,
 				8184EC4B1BCCD13C003F440D /* CashMoneyCell.xib in Resources */,
+				8175BE911BE9E3730044026E /* ChooseRedBagCell.xib in Resources */,
 				8D5AEB3E1BC8DE23004FBDD3 /* SelectionOfThing.xib in Resources */,
 				81E90EF61BCB4300004BA8A5 /* 750产品111.png in Resources */,
+				8175BE9C1BE9E5760044026E /* 组-21-拷贝-14@2x.png in Resources */,
 				8D9011AB1BD6337C00E5D62A /* 2@2x.png in Resources */,
 				8D3F95E01BE20EF200013A8E /* YesterdayViewController.xib in Resources */,
+				8175BEB41BE9F2F50044026E /* 朋友圈@2x.png in Resources */,
 				8D0AE7FA1BE09CE500D9D50C /* register-3@2x.png in Resources */,
+				8175BEAD1BE9F2F50044026E /* 微信@3x.png in Resources */,
 				817DD49F1BCF547E00042B09 /* jiaoyi@3x.png in Resources */,
 				8DEDE1EC1BCD05C7008086D3 /* Calendar.xib in Resources */,
 				8191E22F1BDE00DC000A6E8C /* cuo@3x.png in Resources */,
@@ -2473,17 +2623,21 @@
 				8191E2281BDDF5F0000A6E8C /* lianxikefu@2x.png in Resources */,
 				8DEDE1D41BCCFFD8008086D3 /* iocn_saft@2x.png in Resources */,
 				817DD4921BCF547E00042B09 /* bei@2x.png in Resources */,
+				8175BEB31BE9F2F50044026E /* 人人网@3x.png in Resources */,
 				8162D1231BE1BD3300CACAB6 /* OtherProjectCell.xib in Resources */,
 				818523BA1BE31B80002FC653 /* 已售罄@3x.png in Resources */,
 				8D9011B81BD6337C00E5D62A /* 8@3x.png in Resources */,
 				8D0AE7F81BE09CE500D9D50C /* register-2@2x.png in Resources */,
 				8191E22E1BDE00DC000A6E8C /* cuo@2x.png in Resources */,
 				8DEDE1D01BCCFFA5008086D3 /* blueyuan@2x.png in Resources */,
+				8175BEB01BE9F2F50044026E /* QQ空间@2x.png in Resources */,
 				8D0AE7FB1BE09CE500D9D50C /* register-3@3x.png in Resources */,
 				817E33AD1BD78ED500D05103 /* iconfont@2x.png in Resources */,
 				81C138211BDF6D5E0088E792 /* iconfont-phone@3x.png in Resources */,
 				8162D1191BE1BC2500CACAB6 /* ProjectNameCell.xib in Resources */,
+				8175BEC51BEA052E0044026E /* 分享成功@3x.png in Resources */,
 				8D0CB4941BE75E370039D826 /* RiskConditionsViewController.xib in Resources */,
+				8175BEBA1BE9F7160044026E /* ShareEveryCell.xib in Resources */,
 				81D703F81BE06D1F0074DF30 /* ForgetSecretCell.xib in Resources */,
 				8D9011B61BD6337C00E5D62A /* 7@3x.png in Resources */,
 				8DD180A31BD731E000F71CEA /* GetMoneyTipTableViewCell.xib in Resources */,
@@ -2492,16 +2646,19 @@
 				81E90EFA1BCB4312004BA8A5 /* 750产品详情.png in Resources */,
 				8D3A2FD21BE70F5500913DEC /* lianggeren@3x.png in Resources */,
 				8D9011A51BD6337C00E5D62A /* 11@2x.png in Resources */,
+				8175BE791BE9A2490044026E /* 61-拷贝@3x.png in Resources */,
 				8D9011A91BD6337C00E5D62A /* 1@2x.png in Resources */,
 				8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */,
 				8D6EFBA81BC78B02009FE101 /* shouyeqiepian750_32.png in Resources */,
 				8DEDE1CD1BCCFF44008086D3 /* iconfont_complete@3x.png in Resources */,
 				8DEDE1E51BCD0040008086D3 /* greenyuan@2x.png in Resources */,
 				81C8BBC41BDA2F8D005B9DFF /* bangzhu@2x.png in Resources */,
+				8175BEC41BEA052E0044026E /* 分享成功@2x.png in Resources */,
 				8D0AE7F61BE09CE500D9D50C /* register-1@2x.png in Resources */,
 				81334F5E1BCBC3BD000A9B8A /* 7501111.png in Resources */,
 				8D9011AC1BD6337C00E5D62A /* 2@3x.png in Resources */,
 				81ED03191BD0D429005F4B02 /* 2013123115540975@3x.png in Resources */,
+				8175BEAA1BE9F2F50044026E /* 新浪微博@2x.png in Resources */,
 				817E33791BD7303200D05103 /* MyPlannerCell.xib in Resources */,
 				818523AF1BE3125D002FC653 /* BillCell.xib in Resources */,
 				8D9011AA1BD6337C00E5D62A /* 1@3x.png in Resources */,
@@ -2510,21 +2667,27 @@
 				8D3F95EC1BE2188500013A8E /* moneymoney@2x.png in Resources */,
 				8D3F95EF1BE2188500013A8E /* filefile@3x.png in Resources */,
 				817DD4A11BCF547E00042B09 /* quebao@3x.png in Resources */,
+				8175BEAE1BE9F2F50044026E /* 腾讯微博@2x.png in Resources */,
 				8D3125EB1BD7798000143B71 /* ForgetPasswordViewController.xib in Resources */,
 				81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */,
 				8DEDE1C51BCCFF01008086D3 /* iconfont_graycuo@3x.png in Resources */,
 				8D6692801BD0D82100CD2CAF /* Home_refresh_bg.png in Resources */,
 				8D3F95D21BE1C28A00013A8E /* RegisterOfResult.xib in Resources */,
+				8175BEAF1BE9F2F50044026E /* 腾讯微博@3x.png in Resources */,
 				8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */,
 				8DEDE1B31BCCFEB5008086D3 /* arrow@2x.png in Resources */,
 				817E33821BD733D100D05103 /* 9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝@2x.png in Resources */,
 				817DD4901BCF547E00042B09 /* anniu@2x.png in Resources */,
 				81B18E251BE77EA700D448FA /* EmailCell.xib in Resources */,
 				8DEDE1DD1BCD0035008086D3 /* icon_CB@2x.png in Resources */,
+				8175BEC31BEA052E0044026E /* 拆红包@3x.png in Resources */,
+				8175BEAB1BE9F2F50044026E /* 新浪微博@3x.png in Resources */,
 				8DEDE1BE1BCCFEF8008086D3 /* calendar@2x.png in Resources */,
 				8DEDE1BF1BCCFEF8008086D3 /* calendar@3x.png in Resources */,
 				8D3F95F01BE2188500013A8E /* shouyi@2x.png in Resources */,
 				8DEDE1D51BCCFFD8008086D3 /* iocn_saft@3x.png in Resources */,
+				8175BE9A1BE9E5760044026E /* 组-21-拷贝-13@2x.png in Resources */,
+				8175BED01BEA1B290044026E /* 分享失败@3x.png in Resources */,
 				8DEDE1C81BCCFF21008086D3 /* iconfont_greencuo@2x.png in Resources */,
 				81B18E161BE7387A00D448FA /* bar-full@3x.png in Resources */,
 				817E33861BD733D100D05103 /* duigou@2x.png in Resources */,
@@ -2549,6 +2712,7 @@
 				8D6692851BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png in Resources */,
 				8D9011B11BD6337C00E5D62A /* 5@2x.png in Resources */,
 				8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */,
+				8175BECF1BEA1B290044026E /* 分享失败@2x.png in Resources */,
 				8DD1809E1BD730E100F71CEA /* GetMoneyNumberTableViewCell.xib in Resources */,
 				81701C111BE703F200B45BAA /* MendDeal2Cell.xib in Resources */,
 				8D9011AE1BD6337C00E5D62A /* 3@3x.png in Resources */,
@@ -2564,23 +2728,28 @@
 				8D9011B71BD6337C00E5D62A /* 8@2x.png in Resources */,
 				8191E2291BDDF5F0000A6E8C /* lianxikefu@3x.png in Resources */,
 				818523B91BE31B80002FC653 /* 已售罄@2x.png in Resources */,
+				8175BEC21BEA052E0044026E /* 拆红包@2x.png in Resources */,
 				8190A30A1BD87D3E002B53F5 /* AddCardCell.xib in Resources */,
 				817DD4911BCF547E00042B09 /* anniu@3x.png in Resources */,
 				817DD4A21BCF547E00042B09 /* shape-29@2x.png in Resources */,
 				81B18E171BE7387A00D448FA /* iconfont-liwu@2x.png in Resources */,
 				817E33951BD7576600D05103 /* MeCell.xib in Resources */,
+				8175BE781BE9A2490044026E /* 61-拷贝@2x.png in Resources */,
 				81C1381E1BDF6D5E0088E792 /* iconfont-mima@2x.png in Resources */,
 				818063A81BD5E3CA00E83492 /* picture@2x.png in Resources */,
 				8DFA5C951BCE64D900AED2B2 /* FQuickPayViewController.xib in Resources */,
 				815D27A51BE21040005410C6 /* UpCell.xib in Resources */,
 				8D0CB48A1BE75C860039D826 /* SimpleDescriptionsViewController.xib in Resources */,
+				8175BEB51BE9F2F50044026E /* 朋友圈@3x.png in Resources */,
 				8D0AE7F91BE09CE500D9D50C /* register-2@3x.png in Resources */,
 				81BA1C131BD5000700DBA5BE /* icon04@2x.png in Resources */,
+				8175BE9B1BE9E5760044026E /* 组-21-拷贝-13@3x.png in Resources */,
 				8D9011BA1BD6337C00E5D62A /* 9@3x.png in Resources */,
 				817DD4AD1BCF547E00042B09 /* ziliao@3x.png in Resources */,
 				8191E21B1BDDC8BE000A6E8C /* NewHandCell.xib in Resources */,
 				8DEDE1B81BCCFEB5008086D3 /* fan@3x.png in Resources */,
 				8D0AE80D1BE0C1A700D9D50C /* RegisterViewController.xib in Resources */,
+				8175BE891BE9D1020044026E /* InvestNoticeCell.xib in Resources */,
 				817DD4A81BCF547E00042B09 /* xiaoxi@2x.png in Resources */,
 				8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */,
 				81F237721BE8568B009D7A67 /* NewMakeSureCell.xib in Resources */,
@@ -2598,10 +2767,13 @@
 				81ED03181BD0D429005F4B02 /* 2013123115540975@2x.png in Resources */,
 				817DD4A31BCF547E00042B09 /* shape-29@3x.png in Resources */,
 				81C8BBC71BDA2F8D005B9DFF /* guanyu@3x.png in Resources */,
+				8175BE991BE9E5760044026E /* 组-21-拷贝-2@3x.png in Resources */,
 				8191E22B1BDDF5F0000A6E8C /* zaixiankefu@3x.png in Resources */,
 				818523BB1BE31B80002FC653 /* 组-14@2x.png in Resources */,
 				8184EC461BCCD12A003F440D /* RedBagCell.xib in Resources */,
 				8D0AE8061BE0AC0600D9D50C /* RegisterOfView.xib in Resources */,
+				8175BE981BE9E5760044026E /* 组-21-拷贝-2@2x.png in Resources */,
+				8175BEB21BE9F2F50044026E /* 人人网@2x.png in Resources */,
 				817E33AE1BD78ED500D05103 /* iconfont@3x.png in Resources */,
 				8D6692771BD0D02E00CD2CAF /* MyHandViewController.xib in Resources */,
 				817988321BC93FF6007C8C3E /* BasicMessageCell.xib in Resources */,
@@ -2621,6 +2793,7 @@
 				817DD4A91BCF547E00042B09 /* xiaoxi@3x.png in Resources */,
 				81BA1C041BD4E1ED00DBA5BE /* computer1.png in Resources */,
 				81B18E1A1BE7387A00D448FA /* iconfont-zhuanxiangeps@3x.png in Resources */,
+				8175BE9D1BE9E5760044026E /* 组-21-拷贝-14@3x.png in Resources */,
 				81C8BBCA1BDA2F8D005B9DFF /* yijianfankui@2x.png in Resources */,
 				81BA1C141BD5000700DBA5BE /* icon05@2x.png in Resources */,
 				8DEDE1C41BCCFF01008086D3 /* iconfont_graycuo@2x.png in Resources */,
@@ -2665,9 +2838,11 @@
 				8D4FF5DE1BE339A200BAE25F /* AFImageDownloader.m in Sources */,
 				81ED030B1BD09BC8005F4B02 /* MyInformationCell.m in Sources */,
 				8D5DBB891BD4839B00F556B9 /* CastDownTableViewCell.m in Sources */,
+				8175BE901BE9E3730044026E /* ChooseRedBagCell.m in Sources */,
 				8DD1809D1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m in Sources */,
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
 				8D4FF5E21BE339A200BAE25F /* UIImageView+AFNetworking.m in Sources */,
+				8175BEBD1BEA02270044026E /* ShareFinishViewController.m in Sources */,
 				81C138171BDF64D80088E792 /* LoginCell.m in Sources */,
 				8D3A2FE01BE7100000913DEC /* FDescriptionViewController.m in Sources */,
 				8D3125EA1BD7798000143B71 /* ForgetPasswordViewController.m in Sources */,
@@ -2676,6 +2851,7 @@
 				8D4FF5DC1BE339A200BAE25F /* AFURLSessionManager.m in Sources */,
 				8162D1141BE1B47B00CACAB6 /* MoneyDetailViewController.m in Sources */,
 				8184EC451BCCD12A003F440D /* RedBagCell.m in Sources */,
+				8175BE881BE9D1020044026E /* InvestNoticeCell.m in Sources */,
 				8D0AE80C1BE0C1A700D9D50C /* RegisterViewController.m in Sources */,
 				819C3AC71BD49862008D2CFD /* GrabBagCell.m in Sources */,
 				8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */,
@@ -2730,6 +2906,7 @@
 				818063971BD5D3C700E83492 /* MyInvitationViewController.m in Sources */,
 				8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */,
 				81F237711BE8568B009D7A67 /* NewMakeSureCell.m in Sources */,
+				8175BE801BE9B50D0044026E /* RecordCell.m in Sources */,
 				8D4FF5D81BE339A200BAE25F /* AFNetworkReachabilityManager.m in Sources */,
 				81A6EB111BE784BD00F9FDD1 /* NewBieCell.m in Sources */,
 				8162D1181BE1BC2500CACAB6 /* ProjectNameCell.m in Sources */,
@@ -2738,12 +2915,15 @@
 				81D703F71BE06D1F0074DF30 /* ForgetSecretCell.m in Sources */,
 				8D0CB4981BE760C00039D826 /* RiskDisclosureViewController.m in Sources */,
 				81F237751BE86031009D7A67 /* CashFinishViewController.m in Sources */,
+				8175BE841BE9CE850044026E /* InvestNoticeViewController.m in Sources */,
 				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,
 				817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */,
+				8175BE8C1BE9E2430044026E /* ChooseRedBagViewController.m in Sources */,
 				8D3125DE1BD763F900143B71 /* GetMoneyVerifyViewController.m in Sources */,
 				817E33781BD7303200D05103 /* MyPlannerCell.m in Sources */,
 				8D0CB4931BE75E370039D826 /* RiskConditionsViewController.m in Sources */,
 				81ED031C1BD0DA35005F4B02 /* AddBankViewController.m in Sources */,
+				8175BE7C1BE9B4250044026E /* RecordViewController.m in Sources */,
 				81B18E1D1BE756F300D448FA /* EmailViewController.m in Sources */,
 				8DEDE26E1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m in Sources */,
 				8191E21A1BDDC8BE000A6E8C /* NewHandCell.m in Sources */,
@@ -2751,6 +2931,7 @@
 				817E339F1BD77F6D00D05103 /* ChooseStyleCell.m in Sources */,
 				8D3A2FD91BE70FBF00913DEC /* PhotoTableViewCell.m in Sources */,
 				81F5FA0D1BDA0D2E008C38BF /* RealNameViewController.m in Sources */,
+				8175BECC1BEA14440044026E /* ShareFailureViewController.m in Sources */,
 				8D4FF5DB1BE339A200BAE25F /* AFURLResponseSerialization.m in Sources */,
 				8D121FD61BD4D4CE00B3C1FE /* SettingTitleTableViewCell.m in Sources */,
 				8D5DBB8E1BD48F1900F556B9 /* CastDetailTableViewCell.m in Sources */,
@@ -2808,6 +2989,7 @@
 				8D4FF5E11BE339A200BAE25F /* UIButton+AFNetworking.m in Sources */,
 				8D121FDB1BD4D83600B3C1FE /* SettingGetMoneyTableViewCell.m in Sources */,
 				81ED03201BD0DDAD005F4B02 /* AddBankCell.m in Sources */,
+				8175BEB91BE9F7160044026E /* ShareEveryCell.m in Sources */,
 				8D121FE51BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.m in Sources */,
 				81ED02C51BD08CFD005F4B02 /* MyInformationViewController.m in Sources */,
 				81701C071BE6FEA300B45BAA /* MendDealViewController.m in Sources */,

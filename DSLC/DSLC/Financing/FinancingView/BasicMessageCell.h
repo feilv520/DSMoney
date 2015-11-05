@@ -21,5 +21,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelIntraday;
 @property (weak, nonatomic) IBOutlet UILabel *labelStyle;
 @property (weak, nonatomic) IBOutlet UILabel *labelIncome;
+@property (weak, nonatomic) IBOutlet UILabel *labelComeTime;
+@property (weak, nonatomic) IBOutlet UILabel *ComeTime;
+@property (weak, nonatomic) IBOutlet UILabel *labelEarnings;
+@property (weak, nonatomic) IBOutlet UILabel *labelLast;
+
 
 @end

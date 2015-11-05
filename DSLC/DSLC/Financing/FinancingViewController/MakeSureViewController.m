@@ -18,6 +18,7 @@
 #import "FSelectionPayTypeViewController.h"
 #import "NewMakeSureCell.h"
 #import "CashFinishViewController.h"
+#import "ChooseRedBagViewController.h"
 
 @interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic) UITableView *tableView;
@@ -108,11 +109,34 @@
         
         return 0;
         
+    } else if (section == 3) {
+        
+        return 30;
+        
     } else {
         
         return 11;
         
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 3) {
+        
+        UIView *view = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor huibai]];
+        
+        UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(8, 0, WIDTH_CONTROLLER_DEFAULT - 20, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"提示:购买产品成功后,可拆开选择的红包"];
+        [view addSubview:label];
+        
+        return view;
+        
+    } else {
+        
+        UIView *view = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10) backgroundColor:[UIColor huibai]];
+        return view;
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -360,6 +384,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 2) {
+        
+        if (indexPath.row == 1) {
+            
+            ChooseRedBagViewController *chooseVC = [[ChooseRedBagViewController alloc] init];
+            [self.navigationController pushViewController:chooseVC animated:YES];
+        }
+    }
 }
 
 //充值按钮

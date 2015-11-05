@@ -8,11 +8,22 @@
 
 #import "CashFinishViewController.h"
 #import "FinancingViewController.h"
+#import "ShareEveryCell.h"
+#import "ShareFinishViewController.h"
+#import "ShareFailureViewController.h"
 
-@interface CashFinishViewController ()
+@interface CashFinishViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 {
     NSArray *titleArr;
+    UIButton *butBlack;
+    UIView *viewTanKuang;
+    UICollectionView *collection;
+    
+    NSArray *imageArray;
+    NSArray *nameArray;
+    
+    UIButton *butCancle;
 }
 
 @end
@@ -81,7 +92,82 @@
 //分享拿红包按钮
 - (void)shareGiveRedBag:(UIButton *)button
 {
-    NSLog(@"分享拿红包");
+    butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC.view addSubview:butBlack];
+    butBlack.alpha = 0.3;
+    [butBlack addTarget:self action:@selector(makeButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    viewTanKuang = [CreatView creatViewWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 330, WIDTH_CONTROLLER_DEFAULT, 330) backgroundColor:[UIColor whiteColor]];
+    [app.tabBarVC.view addSubview:viewTanKuang];
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.itemSize = CGSizeMake(viewTanKuang.frame.size.width/3, (viewTanKuang.frame.size.height - 80)/2);
+    flowLayout.minimumInteritemSpacing = 0;
+    flowLayout.minimumLineSpacing = 0;
+    collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, viewTanKuang.frame.size.height - 59) collectionViewLayout:flowLayout];
+    [viewTanKuang addSubview:collection];
+    collection.dataSource = self;
+    collection.delegate = self;
+    collection.backgroundColor = [UIColor whiteColor];
+    [collection registerNib:[UINib nibWithNibName:@"ShareEveryCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
+    
+    nameArray = @[@"微信好友", @"新浪微博", @"朋友圈", @"人人网", @"QQ空间", @"腾讯微博"];
+    imageArray = @[@"微信", @"新浪微博", @"朋友圈", @"人人网", @"QQ空间", @"腾讯微博"];
+    
+    butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, viewTanKuang.frame.size.height - 79, viewTanKuang.frame.size.width, 59) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:@"取消"];
+    [viewTanKuang addSubview:butCancle];
+    butCancle.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+    [butCancle addTarget:self action:@selector(buttonCanclePress:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [butCancle addSubview:labelLine];
+    labelLine.alpha = 0.3;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 6;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ShareEveryCell *cell = [collection dequeueReusableCellWithReuseIdentifier:@"reuse" forIndexPath:indexPath];
+    
+    cell.labelName.text = [nameArray objectAtIndex:indexPath.item];
+    cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    
+    cell.imagePIc.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageArray objectAtIndex:indexPath.item]]];
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+//    ShareFinishViewController *shareVC = [[ShareFinishViewController alloc] init];
+//    [self.navigationController pushViewController:shareVC animated:YES];
+    ShareFailureViewController *failureVC = [[ShareFailureViewController alloc] init];
+    [self.navigationController pushViewController:failureVC animated:YES];
+}
+
+//黑色遮罩层
+- (void)makeButtonDisappear:(UIButton *)button
+{
+    [button removeFromSuperview];
+    [viewTanKuang removeFromSuperview];
+    
+    button = nil;
+    viewTanKuang = nil;
+}
+
+//取消按钮
+- (void)buttonCanclePress:(UIButton *)button
+{
+    [butBlack removeFromSuperview];
+    [viewTanKuang removeFromSuperview];
+    
+    butBlack = nil;
+    viewTanKuang = nil;
 }
 
 //导航完成按钮
@@ -89,6 +175,15 @@
 {
     NSArray *array = self.navigationController.viewControllers;
     [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [butBlack removeFromSuperview];
+    [viewTanKuang removeFromSuperview];
+    
+    butBlack = nil;
+    viewTanKuang = nil;
 }
 
 - (void)didReceiveMemoryWarning {
