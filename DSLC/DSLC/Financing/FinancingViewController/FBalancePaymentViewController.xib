@@ -13,7 +13,6 @@
                 <outlet property="labelLine3" destination="TuC-ee-Fap" id="tsu-XQ-hoz"/>
                 <outlet property="labelLine4" destination="UFA-lI-DLg" id="ooS-yJ-rW9"/>
                 <outlet property="labelMonth1" destination="IKw-m1-NTs" id="Ao3-Wd-4Su"/>
-                <outlet property="labelPayment" destination="QOf-aV-3uz" id="YaA-sV-epu"/>
                 <outlet property="labelSecret" destination="iFN-MI-6z5" id="GZT-rk-LQD"/>
                 <outlet property="lableLine2" destination="D7W-YP-exv" id="kqs-hz-pGu"/>
                 <outlet property="lableThounand" destination="eTQ-h7-LLz" id="3v8-6Z-sJ4"/>
@@ -78,16 +77,11 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EA2-wY-gmm">
-                            <rect key="frame" x="295" y="12" width="70" height="21"/>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Button"/>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6v-Q8-zeJ">
-                    <rect key="frame" x="52" y="185" width="272" height="44"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6v-Q8-zeJ">
+                    <rect key="frame" x="52" y="270" width="272" height="44"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" backgroundImage="btn_gray.png"/>
                 </button>
@@ -98,16 +92,15 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOf-aV-3uz">
-                    <rect key="frame" x="52" y="185" width="272" height="44"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EA2-wY-gmm">
+                    <rect key="frame" x="297" y="163" width="70" height="21"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Button"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="204.5" y="321.5"/>
+            <point key="canvasLocation" x="-134.5" y="275.5"/>
         </view>
     </objects>
     <resources>

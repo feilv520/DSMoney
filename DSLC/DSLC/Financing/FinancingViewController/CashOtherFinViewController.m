@@ -1,18 +1,20 @@
 //
-//  ShareFailureViewController.m
+//  CashOtherFinViewController.m
 //  DSLC
 //
-//  Created by ios on 15/11/4.
+//  Created by ios on 15/11/5.
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import "ShareFailureViewController.h"
+#import "CashOtherFinViewController.h"
 #import "ShareEveryCell.h"
-#import "ShareFinishViewController.h"
+#import "ShareFailureViewController.h"
 
-@interface ShareFailureViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface CashOtherFinViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 {
+    NSArray *contentArr;
+    
     UIButton *butBlack;
     UIView *viewTanKuang;
     UICollectionView *collection;
@@ -25,51 +27,67 @@
 
 @end
 
-@implementation ShareFailureViewController
+@implementation CashOtherFinViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationItem setTitle:@"分享"];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(button:)];
+    [self.navigationItem setTitle:@"支付完成"];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(buttonFinish:)];
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:15], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(buttonNull:)];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishBarPress:)];
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
     [self contentShow];
 }
 
 - (void)contentShow
 {
-    UIButton *buttonFail = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 52, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:@"分享失败"];
-    [self.view addSubview:buttonFail];
-    buttonFail.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [buttonFail setImage:[UIImage imageNamed:@"分享失败"] forState:UIControlStateNormal];
+    contentArr = @[@"投资金额:10,000元", @"预期到期收益:200元", @"兑付日期:2015-02-03"];
     
-    UILabel *labelTwo = [CreatView creatWithLabelFrame:CGRectMake(0, 80, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"有一个红包与你擦肩而过\n您可以继续分享或者去投资"];
-    [self.view addSubview:labelTwo];
-    labelTwo.numberOfLines = 2;
+    UIButton *butonDo = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 60, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"恭喜你投资成功"];
+    [butonDo setImage:[UIImage imageNamed:@"iconfont_complete"] forState:UIControlStateNormal];
+    [self.view addSubview:butonDo];
+    butonDo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    UIButton *butGoOn = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 200, (WIDTH_CONTROLLER_DEFAULT - 90)/2, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] titleText:@"继续投资"];
-    [self.view addSubview:butGoOn];
-    butGoOn.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    butGoOn.layer.cornerRadius = 3;
-    butGoOn.layer.masksToBounds = YES;
-    butGoOn.layer.borderColor = [[UIColor daohanglan] CGColor];
-    butGoOn.layer.borderWidth = 0.5;
+    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(40, 120, WIDTH_CONTROLLER_DEFAULT - 80, 140) backgroundColor:[UIColor shurukuangColor]];
+    [self.view addSubview:viewBottom];
+    viewBottom.layer.cornerRadius = 5;
+    viewBottom.layer.masksToBounds = YES;
+    viewBottom.layer.borderColor = [[UIColor shurukuangBian] CGColor];
+    viewBottom.layer.borderWidth = 0.5;
     
-    UIButton *butShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 90)/2 + 50, 200, (WIDTH_CONTROLLER_DEFAULT - 90)/2, 40) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"分享拿红包"];
-    [self.view addSubview:butShare];
-    butShare.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    butShare.layer.cornerRadius = 3;
-    butShare.layer.masksToBounds = YES;
-    [butShare addTarget:self action:@selector(buttonFailedPress:) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(0, 15, WIDTH_CONTROLLER_DEFAULT - 80, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"3个月固定投资"];
+    [viewBottom addSubview:labelName];
+    
+    for (int i = 0; i < 3; i++) {
+        
+        UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(0, 45 + 20 * i + 10 * i, WIDTH_CONTROLLER_DEFAULT - 80, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:[contentArr objectAtIndex:i]];
+        [viewBottom addSubview:label];
+    }
+    
+    UIButton *buttonGoOn = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 300, (WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] titleText:@"继续投资"];
+    [self.view addSubview:buttonGoOn];
+    buttonGoOn.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    buttonGoOn.layer.cornerRadius = 3;
+    buttonGoOn.layer.masksToBounds = YES;
+    buttonGoOn.layer.borderColor = [[UIColor daohanglan] CGColor];
+    buttonGoOn.layer.borderWidth = 0.5;
+    [buttonGoOn addTarget:self action:@selector(finishBarPress:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *buttonShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2 + 50, 300, (WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2, 40) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"分享拿红包"];
+    [self.view addSubview:buttonShare];
+    buttonShare.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    buttonShare.layer.cornerRadius = 3;
+    buttonShare.layer.masksToBounds = YES;
+    [buttonShare addTarget:self action:@selector(shareGetRedBag:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 //分享拿红包
-- (void)buttonFailedPress:(UIButton *)button
+- (void)shareGetRedBag:(UIButton *)button
 {
     butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
@@ -123,16 +141,18 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    ShareFinishViewController *shareVC = [[ShareFinishViewController alloc] init];
-//    [self.navigationController pushViewController:shareVC animated:YES];
-//    ShareFailureViewController *failureVC = [[ShareFailureViewController alloc] init];
-//    [self.navigationController pushViewController:failureVC animated:YES];
+    ShareFailureViewController *shareFailure = [[ShareFailureViewController alloc] init];
+    [self.navigationController pushViewController:shareFailure animated:YES];
+}
+
+- (void)finishBarPress:(UIBarButtonItem *)bar
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)buttonNull:(UIBarButtonItem *)button
+{
     
-    [butBlack removeFromSuperview];
-    [viewTanKuang removeFromSuperview];
-    
-    butBlack = nil;
-    viewTanKuang = nil;
 }
 
 //黑色遮罩层
@@ -153,16 +173,6 @@
     
     butBlack = nil;
     viewTanKuang = nil;
-}
-
-- (void)buttonFinish:(UIBarButtonItem *)bar
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-- (void)button:(UIBarButtonItem *)bar
-{
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated

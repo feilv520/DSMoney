@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		810D25271BC7917B00DAF83F /* CreatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 810D25261BC7917B00DAF83F /* CreatView.m */; };
 		8110A4F01BC64A0A00E38485 /* ppp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4EF1BC64A0A00E38485 /* ppp.m */; };
+		8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8118D7AE1BEB5C560084292B /* 钻石红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7AC1BEB5C560084292B /* 钻石红包@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8118D7AF1BEB5C560084292B /* 钻石红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7AD1BEB5C560084292B /* 钻石红包@3x.png */; settings = {ASSET_TAGS = (); }; };
 		811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E001BC7A13800CAD6F5 /* FinancingCell.m */; };
 		811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */; };
 		811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */; };
@@ -16,8 +20,19 @@
 		812F6BEB1BD8ED240000D8E9 /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BEA1BD8ED240000D8E9 /* PhoneViewController.m */; };
 		812F6BEE1BD8ED310000D8E9 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BED1BD8ED310000D8E9 /* MessageViewController.m */; };
 		81334F5E1BCBC3BD000A9B8A /* 7501111.png in Resources */ = {isa = PBXBuildFile; fileRef = 81334F5D1BCBC3BD000A9B8A /* 7501111.png */; };
+		81379F191BEAF56F002CDB16 /* 成长@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81379F151BEAF56F002CDB16 /* 成长@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81379F1A1BEAF56F002CDB16 /* 成长@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81379F161BEAF56F002CDB16 /* 成长@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81379F1B1BEAF56F002CDB16 /* 使用@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81379F171BEAF56F002CDB16 /* 使用@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81379F1C1BEAF56F002CDB16 /* 使用@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81379F181BEAF56F002CDB16 /* 使用@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81379F251BEB01CA002CDB16 /* NewRedBagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81379F231BEB01CA002CDB16 /* NewRedBagCell.m */; settings = {ASSET_TAGS = (); }; };
+		81379F261BEB01CA002CDB16 /* NewRedBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81379F241BEB01CA002CDB16 /* NewRedBagCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81379F291BEB0272002CDB16 /* NewRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81379F281BEB0272002CDB16 /* NewRedBagViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81379F2C1BEB48AA002CDB16 /* CashOtherFinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81379F2B1BEB48AA002CDB16 /* CashOtherFinViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81379F2F1BEB51E0002CDB16 /* ShareHaveRedBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 81379F2E1BEB51E0002CDB16 /* ShareHaveRedBag.m */; settings = {ASSET_TAGS = (); }; };
 		813FD4FF1BCE71110050E884 /* FBalancePaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 813FD4FD1BCE71110050E884 /* FBalancePaymentViewController.m */; };
 		813FD5001BCE71110050E884 /* FBalancePaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 813FD4FE1BCE71110050E884 /* FBalancePaymentViewController.xib */; };
+		815A6FCF1BEB7EFF003059A5 /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815A6FCE1BEB7EFF003059A5 /* RechargeViewController.m */; settings = {ASSET_TAGS = (); }; };
+		815A6FD21BEB89A2003059A5 /* BindingBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815A6FD11BEB89A2003059A5 /* BindingBankCardViewController.m */; settings = {ASSET_TAGS = (); }; };
 		815D27A41BE21040005410C6 /* UpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 815D27A21BE21040005410C6 /* UpCell.m */; settings = {ASSET_TAGS = (); }; };
 		815D27A51BE21040005410C6 /* UpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 815D27A31BE21040005410C6 /* UpCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8162D1141BE1B47B00CACAB6 /* MoneyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8162D1131BE1B47B00CACAB6 /* MoneyDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -71,8 +86,6 @@
 		8175BEC31BEA052E0044026E /* 拆红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEBF1BEA052E0044026E /* 拆红包@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8175BEC41BEA052E0044026E /* 分享成功@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEC01BEA052E0044026E /* 分享成功@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8175BEC51BEA052E0044026E /* 分享成功@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEC11BEA052E0044026E /* 分享成功@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8175BEC81BEA0D530044026E /* 打开红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEC61BEA0D530044026E /* 打开红包@2x.png */; settings = {ASSET_TAGS = (); }; };
-		8175BEC91BEA0D530044026E /* 打开红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BEC71BEA0D530044026E /* 打开红包@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8175BECC1BEA14440044026E /* ShareFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8175BECB1BEA14440044026E /* ShareFailureViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8175BECF1BEA1B290044026E /* 分享失败@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BECD1BEA1B290044026E /* 分享失败@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8175BED01BEA1B290044026E /* 分享失败@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8175BECE1BEA1B290044026E /* 分享失败@3x.png */; settings = {ASSET_TAGS = (); }; };
@@ -513,6 +526,10 @@
 		810D25261BC7917B00DAF83F /* CreatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatView.m; sourceTree = "<group>"; };
 		8110A4EE1BC64A0A00E38485 /* ppp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ppp.h; sourceTree = "<group>"; };
 		8110A4EF1BC64A0A00E38485 /* ppp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ppp.m; sourceTree = "<group>"; };
+		8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@2x.png"; sourceTree = "<group>"; };
+		8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@3x.png"; sourceTree = "<group>"; };
+		8118D7AC1BEB5C560084292B /* 钻石红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钻石红包@2x.png"; sourceTree = "<group>"; };
+		8118D7AD1BEB5C560084292B /* 钻石红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钻石红包@3x.png"; sourceTree = "<group>"; };
 		811F9DFF1BC7A13800CAD6F5 /* FinancingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingCell.h; sourceTree = "<group>"; };
 		811F9E001BC7A13800CAD6F5 /* FinancingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingCell.m; sourceTree = "<group>"; };
 		811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinancingCell.xib; sourceTree = "<group>"; };
@@ -525,9 +542,26 @@
 		812F6BEC1BD8ED310000D8E9 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		812F6BED1BD8ED310000D8E9 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		81334F5D1BCBC3BD000A9B8A /* 7501111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7501111.png; sourceTree = "<group>"; };
+		81379F151BEAF56F002CDB16 /* 成长@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "成长@2x.png"; sourceTree = "<group>"; };
+		81379F161BEAF56F002CDB16 /* 成长@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "成长@3x.png"; sourceTree = "<group>"; };
+		81379F171BEAF56F002CDB16 /* 使用@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "使用@2x.png"; sourceTree = "<group>"; };
+		81379F181BEAF56F002CDB16 /* 使用@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "使用@3x.png"; sourceTree = "<group>"; };
+		81379F221BEB01CA002CDB16 /* NewRedBagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRedBagCell.h; sourceTree = "<group>"; };
+		81379F231BEB01CA002CDB16 /* NewRedBagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRedBagCell.m; sourceTree = "<group>"; };
+		81379F241BEB01CA002CDB16 /* NewRedBagCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewRedBagCell.xib; sourceTree = "<group>"; };
+		81379F271BEB0272002CDB16 /* NewRedBagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRedBagViewController.h; sourceTree = "<group>"; };
+		81379F281BEB0272002CDB16 /* NewRedBagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRedBagViewController.m; sourceTree = "<group>"; };
+		81379F2A1BEB48AA002CDB16 /* CashOtherFinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashOtherFinViewController.h; sourceTree = "<group>"; };
+		81379F2B1BEB48AA002CDB16 /* CashOtherFinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashOtherFinViewController.m; sourceTree = "<group>"; };
+		81379F2D1BEB51E0002CDB16 /* ShareHaveRedBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareHaveRedBag.h; sourceTree = "<group>"; };
+		81379F2E1BEB51E0002CDB16 /* ShareHaveRedBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareHaveRedBag.m; sourceTree = "<group>"; };
 		813FD4FC1BCE71110050E884 /* FBalancePaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBalancePaymentViewController.h; sourceTree = "<group>"; };
 		813FD4FD1BCE71110050E884 /* FBalancePaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBalancePaymentViewController.m; sourceTree = "<group>"; };
 		813FD4FE1BCE71110050E884 /* FBalancePaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBalancePaymentViewController.xib; sourceTree = "<group>"; };
+		815A6FCD1BEB7EFF003059A5 /* RechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeViewController.h; sourceTree = "<group>"; };
+		815A6FCE1BEB7EFF003059A5 /* RechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeViewController.m; sourceTree = "<group>"; };
+		815A6FD01BEB89A2003059A5 /* BindingBankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingBankCardViewController.h; sourceTree = "<group>"; };
+		815A6FD11BEB89A2003059A5 /* BindingBankCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingBankCardViewController.m; sourceTree = "<group>"; };
 		815D27A11BE21040005410C6 /* UpCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpCell.h; sourceTree = "<group>"; };
 		815D27A21BE21040005410C6 /* UpCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpCell.m; sourceTree = "<group>"; };
 		815D27A31BE21040005410C6 /* UpCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpCell.xib; sourceTree = "<group>"; };
@@ -599,8 +633,6 @@
 		8175BEBF1BEA052E0044026E /* 拆红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "拆红包@3x.png"; sourceTree = "<group>"; };
 		8175BEC01BEA052E0044026E /* 分享成功@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享成功@2x.png"; sourceTree = "<group>"; };
 		8175BEC11BEA052E0044026E /* 分享成功@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享成功@3x.png"; sourceTree = "<group>"; };
-		8175BEC61BEA0D530044026E /* 打开红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "打开红包@2x.png"; sourceTree = "<group>"; };
-		8175BEC71BEA0D530044026E /* 打开红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "打开红包@3x.png"; sourceTree = "<group>"; };
 		8175BECA1BEA14440044026E /* ShareFailureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareFailureViewController.h; sourceTree = "<group>"; };
 		8175BECB1BEA14440044026E /* ShareFailureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareFailureViewController.m; sourceTree = "<group>"; };
 		8175BECD1BEA1B290044026E /* 分享失败@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享失败@2x.png"; sourceTree = "<group>"; };
@@ -1407,10 +1439,16 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */,
+				8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */,
+				8118D7AC1BEB5C560084292B /* 钻石红包@2x.png */,
+				8118D7AD1BEB5C560084292B /* 钻石红包@3x.png */,
+				81379F151BEAF56F002CDB16 /* 成长@2x.png */,
+				81379F161BEAF56F002CDB16 /* 成长@3x.png */,
+				81379F171BEAF56F002CDB16 /* 使用@2x.png */,
+				81379F181BEAF56F002CDB16 /* 使用@3x.png */,
 				8175BECD1BEA1B290044026E /* 分享失败@2x.png */,
 				8175BECE1BEA1B290044026E /* 分享失败@3x.png */,
-				8175BEC61BEA0D530044026E /* 打开红包@2x.png */,
-				8175BEC71BEA0D530044026E /* 打开红包@3x.png */,
 				8175BEBE1BEA052E0044026E /* 拆红包@2x.png */,
 				8175BEBF1BEA052E0044026E /* 拆红包@3x.png */,
 				8175BEC01BEA052E0044026E /* 分享成功@2x.png */,
@@ -1554,6 +1592,8 @@
 				8190A3041BD876EB002B53F5 /* AddCardViewController.m */,
 				817E33961BD772A700D05103 /* BigMoneyViewController.h */,
 				817E33971BD772A700D05103 /* BigMoneyViewController.m */,
+				81379F271BEB0272002CDB16 /* NewRedBagViewController.h */,
+				81379F281BEB0272002CDB16 /* NewRedBagViewController.m */,
 				819C3AB41BD47E57008D2CFD /* MyRedBagViewController.h */,
 				819C3AB51BD47E57008D2CFD /* MyRedBagViewController.m */,
 				81BA1BF21BD4CB4300DBA5BE /* WinAPrizeViewController.h */,
@@ -1657,10 +1697,18 @@
 				8D3A2FDF1BE7100000913DEC /* FDescriptionViewController.xib */,
 				8184EC351BCC96E1003F440D /* MakeSureViewController.h */,
 				8184EC361BCC96E1003F440D /* MakeSureViewController.m */,
+				815A6FCD1BEB7EFF003059A5 /* RechargeViewController.h */,
+				815A6FCE1BEB7EFF003059A5 /* RechargeViewController.m */,
+				815A6FD01BEB89A2003059A5 /* BindingBankCardViewController.h */,
+				815A6FD11BEB89A2003059A5 /* BindingBankCardViewController.m */,
 				8175BE8A1BE9E2430044026E /* ChooseRedBagViewController.h */,
 				8175BE8B1BE9E2430044026E /* ChooseRedBagViewController.m */,
 				81F237731BE86031009D7A67 /* CashFinishViewController.h */,
 				81F237741BE86031009D7A67 /* CashFinishViewController.m */,
+				81379F2A1BEB48AA002CDB16 /* CashOtherFinViewController.h */,
+				81379F2B1BEB48AA002CDB16 /* CashOtherFinViewController.m */,
+				81379F2D1BEB51E0002CDB16 /* ShareHaveRedBag.h */,
+				81379F2E1BEB51E0002CDB16 /* ShareHaveRedBag.m */,
 				8175BEBB1BEA02270044026E /* ShareFinishViewController.h */,
 				8175BEBC1BEA02270044026E /* ShareFinishViewController.m */,
 				8175BECA1BEA14440044026E /* ShareFailureViewController.h */,
@@ -1974,6 +2022,9 @@
 				81BA1BF51BD4DBAA00DBA5BE /* WinAPrizeCell.h */,
 				81BA1BF61BD4DBAA00DBA5BE /* WinAPrizeCell.m */,
 				81BA1BF71BD4DBAA00DBA5BE /* WinAPrizeCell.xib */,
+				81379F221BEB01CA002CDB16 /* NewRedBagCell.h */,
+				81379F231BEB01CA002CDB16 /* NewRedBagCell.m */,
+				81379F241BEB01CA002CDB16 /* NewRedBagCell.xib */,
 			);
 			name = "红包活动";
 			sourceTree = "<group>";
@@ -2510,6 +2561,7 @@
 				8D0AE8011BE09F6800D9D50C /* RegisterProcess.xib in Resources */,
 				81701C0C1BE701C300B45BAA /* MendDealCell.xib in Resources */,
 				8D90117B1BD5D8FA00E5D62A /* TransactionViewController.xib in Resources */,
+				81379F261BEB01CA002CDB16 /* NewRedBagCell.xib in Resources */,
 				8DEDE1B71BCCFEB5008086D3 /* fan@2x.png in Resources */,
 				8D9011BE1BD6337C00E5D62A /* 矩形-10@3x.png in Resources */,
 				817DD4A51BCF547E00042B09 /* tixian@3x.png in Resources */,
@@ -2519,7 +2571,6 @@
 				8175BEB11BE9F2F50044026E /* QQ空间@3x.png in Resources */,
 				8191E22A1BDDF5F0000A6E8C /* zaixiankefu@2x.png in Resources */,
 				8D6EFBA51BC78B02009FE101 /* shouyeqiepian750_25_highlight.png in Resources */,
-				8175BEC81BEA0D530044026E /* 打开红包@2x.png in Resources */,
 				8D6EFBAB1BC78B02009FE101 /* shouyeqiepian7500_30highlight.png in Resources */,
 				8184EC411BCCD113003F440D /* MoneyCell.xib in Resources */,
 				817DD4A61BCF547E00042B09 /* touxiang@2x.png in Resources */,
@@ -2558,7 +2609,6 @@
 				817DD4AC1BCF547E00042B09 /* ziliao@2x.png in Resources */,
 				8DEDE1B61BCCFEB5008086D3 /* btn_red@3x.png in Resources */,
 				8D3A2FDC1BE70FBF00913DEC /* TextTableViewCell.xib in Resources */,
-				8175BEC91BEA0D530044026E /* 打开红包@3x.png in Resources */,
 				817E33B01BD78ED500D05103 /* yuan@3x.png in Resources */,
 				817E33A81BD7840000D05103 /* ChooseCell.xib in Resources */,
 				817E33881BD733D100D05103 /* huangguan@2x.png in Resources */,
@@ -2575,6 +2625,8 @@
 				817E33831BD733D100D05103 /* 9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝@3x.png in Resources */,
 				817DD4A71BCF547E00042B09 /* touxiang@3x.png in Resources */,
 				81C138201BDF6D5E0088E792 /* iconfont-phone@2x.png in Resources */,
+				8118D7AF1BEB5C560084292B /* 钻石红包@3x.png in Resources */,
+				8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */,
 				8DEDE1DE1BCD0035008086D3 /* icon_CB@3x.png in Resources */,
 				818DEDFE1BCDF15B00454A0E /* FConfirmMoney.xib in Resources */,
 				8DEDE1E61BCD0040008086D3 /* greenyuan@3x.png in Resources */,
@@ -2643,6 +2695,7 @@
 				8DD180A31BD731E000F71CEA /* GetMoneyTipTableViewCell.xib in Resources */,
 				8D121FBE1BD4D0CB00B3C1FE /* ProductSettingViewController.xib in Resources */,
 				8D9011BD1BD6337C00E5D62A /* 矩形-10@2x.png in Resources */,
+				81379F1C1BEAF56F002CDB16 /* 使用@3x.png in Resources */,
 				81E90EFA1BCB4312004BA8A5 /* 750产品详情.png in Resources */,
 				8D3A2FD21BE70F5500913DEC /* lianggeren@3x.png in Resources */,
 				8D9011A51BD6337C00E5D62A /* 11@2x.png in Resources */,
@@ -2679,6 +2732,7 @@
 				817E33821BD733D100D05103 /* 9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝@2x.png in Resources */,
 				817DD4901BCF547E00042B09 /* anniu@2x.png in Resources */,
 				81B18E251BE77EA700D448FA /* EmailCell.xib in Resources */,
+				8118D7AE1BEB5C560084292B /* 钻石红包@2x.png in Resources */,
 				8DEDE1DD1BCD0035008086D3 /* icon_CB@2x.png in Resources */,
 				8175BEC31BEA052E0044026E /* 拆红包@3x.png in Resources */,
 				8175BEAB1BE9F2F50044026E /* 新浪微博@3x.png in Resources */,
@@ -2747,6 +2801,7 @@
 				8D9011BA1BD6337C00E5D62A /* 9@3x.png in Resources */,
 				817DD4AD1BCF547E00042B09 /* ziliao@3x.png in Resources */,
 				8191E21B1BDDC8BE000A6E8C /* NewHandCell.xib in Resources */,
+				81379F191BEAF56F002CDB16 /* 成长@2x.png in Resources */,
 				8DEDE1B81BCCFEB5008086D3 /* fan@3x.png in Resources */,
 				8D0AE80D1BE0C1A700D9D50C /* RegisterViewController.xib in Resources */,
 				8175BE891BE9D1020044026E /* InvestNoticeCell.xib in Resources */,
@@ -2783,11 +2838,13 @@
 				8D121FDC1BD4D83600B3C1FE /* SettingGetMoneyTableViewCell.xib in Resources */,
 				8D9011851BD62B0600E5D62A /* MSelectionView.xib in Resources */,
 				8DEDE1E21BCD0035008086D3 /* icon_ICBC@3x.png in Resources */,
+				81379F1B1BEAF56F002CDB16 /* 使用@2x.png in Resources */,
 				8DEDE1D11BCCFFA5008086D3 /* blueyuan@3x.png in Resources */,
 				8D5DBB8F1BD48F1900F556B9 /* CastDetailTableViewCell.xib in Resources */,
 				819C3AC81BD49862008D2CFD /* GrabBagCell.xib in Resources */,
 				817E33901BD756B700D05103 /* 组-4-拷贝@3x.png in Resources */,
 				8D3F95F11BE2188500013A8E /* shouyi@3x.png in Resources */,
+				81379F1A1BEAF56F002CDB16 /* 成长@3x.png in Resources */,
 				811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */,
 				8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */,
 				817DD4A91BCF547E00042B09 /* xiaoxi@3x.png in Resources */,
@@ -2795,6 +2852,7 @@
 				81B18E1A1BE7387A00D448FA /* iconfont-zhuanxiangeps@3x.png in Resources */,
 				8175BE9D1BE9E5760044026E /* 组-21-拷贝-14@3x.png in Resources */,
 				81C8BBCA1BDA2F8D005B9DFF /* yijianfankui@2x.png in Resources */,
+				8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */,
 				81BA1C141BD5000700DBA5BE /* icon05@2x.png in Resources */,
 				8DEDE1C41BCCFF01008086D3 /* iconfont_graycuo@2x.png in Resources */,
 				8D121FE11BD4D92600B3C1FE /* SettingPieTableViewCell.xib in Resources */,
@@ -2837,6 +2895,7 @@
 				8DD4C2471BDE1BE600C4C58C /* AboutViewController.m in Sources */,
 				8D4FF5DE1BE339A200BAE25F /* AFImageDownloader.m in Sources */,
 				81ED030B1BD09BC8005F4B02 /* MyInformationCell.m in Sources */,
+				81379F2C1BEB48AA002CDB16 /* CashOtherFinViewController.m in Sources */,
 				8D5DBB891BD4839B00F556B9 /* CastDownTableViewCell.m in Sources */,
 				8175BE901BE9E3730044026E /* ChooseRedBagCell.m in Sources */,
 				8DD1809D1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m in Sources */,
@@ -2851,6 +2910,7 @@
 				8D4FF5DC1BE339A200BAE25F /* AFURLSessionManager.m in Sources */,
 				8162D1141BE1B47B00CACAB6 /* MoneyDetailViewController.m in Sources */,
 				8184EC451BCCD12A003F440D /* RedBagCell.m in Sources */,
+				815A6FCF1BEB7EFF003059A5 /* RechargeViewController.m in Sources */,
 				8175BE881BE9D1020044026E /* InvestNoticeCell.m in Sources */,
 				8D0AE80C1BE0C1A700D9D50C /* RegisterViewController.m in Sources */,
 				819C3AC71BD49862008D2CFD /* GrabBagCell.m in Sources */,
@@ -2893,6 +2953,7 @@
 				8DFA5C941BCE64D900AED2B2 /* FQuickPayViewController.m in Sources */,
 				81BA1C0B1BD4FCB100DBA5BE /* MyNewsViewController.m in Sources */,
 				8191E2221BDDF202000A6E8C /* ServiceCell.m in Sources */,
+				815A6FD21BEB89A2003059A5 /* BindingBankCardViewController.m in Sources */,
 				8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */,
 				817DD4B01BCF5B2400042B09 /* MiddleView.m in Sources */,
 				8D90117A1BD5D8FA00E5D62A /* TransactionViewController.m in Sources */,
@@ -2922,6 +2983,7 @@
 				8D3125DE1BD763F900143B71 /* GetMoneyVerifyViewController.m in Sources */,
 				817E33781BD7303200D05103 /* MyPlannerCell.m in Sources */,
 				8D0CB4931BE75E370039D826 /* RiskConditionsViewController.m in Sources */,
+				81379F251BEB01CA002CDB16 /* NewRedBagCell.m in Sources */,
 				81ED031C1BD0DA35005F4B02 /* AddBankViewController.m in Sources */,
 				8175BE7C1BE9B4250044026E /* RecordViewController.m in Sources */,
 				81B18E1D1BE756F300D448FA /* EmailViewController.m in Sources */,
@@ -2977,6 +3039,7 @@
 				817988311BC93FF6007C8C3E /* BasicMessageCell.m in Sources */,
 				81BA1BFD1BD4DE7000DBA5BE /* MoreActivityCell.m in Sources */,
 				81BA1C0F1BD4FE2600DBA5BE /* MyNewsCell.m in Sources */,
+				81379F2F1BEB51E0002CDB16 /* ShareHaveRedBag.m in Sources */,
 				81B18E241BE77EA700D448FA /* EmailCell.m in Sources */,
 				8DD180981BD72E5900F71CEA /* GetMoneyTableViewCell.m in Sources */,
 				8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */,
@@ -2997,6 +3060,7 @@
 				8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */,
 				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
 				8190A3051BD876EB002B53F5 /* AddCardViewController.m in Sources */,
+				81379F291BEB0272002CDB16 /* NewRedBagViewController.m in Sources */,
 				8D3A2FDB1BE70FBF00913DEC /* TextTableViewCell.m in Sources */,
 				8D0CB4A01BE761C80039D826 /* TeamDescriptionsViewController.m in Sources */,
 				818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */,

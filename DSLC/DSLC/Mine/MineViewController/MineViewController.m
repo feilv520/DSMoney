@@ -24,6 +24,7 @@
 #import "BigMoneyViewController.h"
 #import "SelectionOfSafe.h"
 #import "YesterdayViewController.h"
+#import "NewRedBagViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -248,7 +249,7 @@
         
     } else if (indexPath.row == 2) {
         
-        MyRedBagViewController *myRedBagVC = [[MyRedBagViewController alloc] init];
+        NewRedBagViewController *myRedBagVC = [[NewRedBagViewController alloc] init];
         [self.navigationController pushViewController:myRedBagVC animated:YES];
         
     } else if (indexPath.row == 0) {

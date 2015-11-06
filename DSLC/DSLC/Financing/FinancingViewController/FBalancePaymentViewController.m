@@ -10,6 +10,8 @@
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
 #import "define.h"
+#import "CashOtherFinViewController.h"
+#import "ShareHaveRedBag.h"
 
 @interface FBalancePaymentViewController () <UITextFieldDelegate>
 
@@ -59,27 +61,25 @@
     self.textFieldSecret.placeholder = @"请输入交易密码";
     self.textFieldSecret.secureTextEntry = YES;
     self.textFieldSecret.font = [UIFont systemFontOfSize:14];
-    self.textFieldSecret.tintColor = [UIColor zitihui];
+    self.textFieldSecret.keyboardType = UIKeyboardTypeNumberPad;
+    self.textFieldSecret.tintColor = [UIColor grayColor];
     self.textFieldSecret.delegate = self;
     [self.textFieldSecret addTarget:self action:@selector(textLengthChange:) forControlEvents:UIControlEventEditingChanged];
     
-    [self.butPayment setImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-    self.butPayment.titleLabel.font = [UIFont systemFontOfSize:15];
-    self.butPayment.layer.cornerRadius = 4;
-    self.butPayment.layer.masksToBounds = YES;
-    
-    self.labelPayment.text = @"支付";
-    self.labelPayment.textColor = [UIColor whiteColor];
-    self.labelPayment.textAlignment = NSTextAlignmentCenter;
-    self.labelPayment.font = [UIFont systemFontOfSize:15];
-    
+    [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+    [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    [self.butPayment setTitle:@"支付" forState:UIControlStateNormal];
+    self.butPayment.titleLabel.font  = [UIFont systemFontOfSize:15];
+    [self.butPayment addTarget:self action:@selector(cashMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+        
     self.labelSecret.text = @"支付密码";
     self.labelSecret.font = [UIFont systemFontOfSize:15];
     
     [self.butForget setTitle:@"忘记密码?" forState:UIControlStateNormal];
     [self.butForget setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.butForget.titleLabel.font = [UIFont systemFontOfSize:15];
-    [self.butForget addTarget:self action:@selector(buttonForgetSecret:) forControlEvents:UIControlEventTouchUpInside];
+    self.butForget.backgroundColor = [UIColor clearColor];
+    [self.butForget addTarget:self action:@selector(ForgetSecretButton:) forControlEvents:UIControlEventTouchUpInside];
     
     self.lableLine2.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.lableLine2.alpha = 0.7;
@@ -92,7 +92,7 @@
 }
 
 //忘记密码?按钮
-- (void)buttonForgetSecret:(UIButton *)button
+- (void)ForgetSecretButton:(UIButton *)button
 {
     NSLog(@"忘记密码?");
 }
@@ -103,18 +103,35 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
-    if (range.location >= 6){
-        NSLog(@"超出范围");
+    if (range.location == 6){
+
         return  NO;
+        
     } else {
+        
         return YES;
     }
 }
 
 //最终的支付按钮
-- (void)paymentMoney:(UIButton *)button
+- (void)cashMoneyButton:(UIButton *)button
 {
-    NSLog(@"支付");
+    [self.textFieldSecret resignFirstResponder];
+    
+    if (self.textFieldSecret.text.length == 6) {
+        
+//        支付没有红包
+//        CashOtherFinViewController *cashOther = [[CashOtherFinViewController alloc] init];
+//        [self.navigationController pushViewController:cashOther animated:YES];
+        
+//        支付有红包
+        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
+        [self.navigationController pushViewController:shareHave animated:YES];
+        
+    } else {
+        
+        
+    }
 }
 
 //返回按钮
@@ -124,14 +141,23 @@
 }
 
 // 判断字符串长度
-- (void)textLengthChange:(UITextField *)textField{
-    if (self.textFieldSecret.text.length >= 6) {
-        self.butPayment.userInteractionEnabled = YES;
-        [self.butPayment setImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+- (void)textLengthChange:(UITextField *)textField
+{
+    if ( self.textFieldSecret.text.length == 6) {
+        
+        [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        
     } else {
-        self.butPayment.userInteractionEnabled = NO;
-        [self.butPayment setImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        
+        [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

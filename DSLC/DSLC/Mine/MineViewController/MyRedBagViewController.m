@@ -13,6 +13,7 @@
 #import "MyRedBagCell.h"
 #import "GrabBagCell.h"
 #import "WinAPrizeViewController.h"
+#import "NewRedBagCell.h"
 
 @interface MyRedBagViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -38,7 +39,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self.navigationItem setTitle:@"红包活动"];
+    [self.navigationItem setTitle:@"我的红包"];
     [self tableViewShow];
     
     consult = YES;
@@ -115,7 +116,7 @@
             cell = [[GrabBagCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
         }
         
-        cell.labelGrab.text = @"红包为我带来的收益";
+        cell.labelGrab.text = @"累计获得红包收益";
         cell.labelGrab.font = [UIFont systemFontOfSize:15];
         
         cell.labelQianShu.text = @"999元";

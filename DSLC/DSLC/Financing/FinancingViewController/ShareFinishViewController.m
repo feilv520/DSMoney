@@ -31,6 +31,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"分享"];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(button:)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(rightNowButton:)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:15], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
@@ -93,6 +94,11 @@
 - (void)rightNowButton:(UIButton *)button
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)button:(UIBarButtonItem *)bar
+{
+    
 }
 
 - (void)didReceiveMemoryWarning {
