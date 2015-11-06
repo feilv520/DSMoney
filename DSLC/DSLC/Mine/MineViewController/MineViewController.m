@@ -38,6 +38,8 @@
     MiddleView *middleView;
 }
 
+@property (nonatomic, strong) NSDictionary *myAccountInfo;
+
 @end
 
 
@@ -47,6 +49,10 @@
 {
     [super viewDidAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
 }
 
 - (void)viewDidLoad {
@@ -55,8 +61,8 @@
     
     self.view.backgroundColor = [UIColor huibai];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
-    
+    [self MyAccountInfo];
+
     [self showPictureAndTitle];
     [self showTableView];
 }
@@ -88,7 +94,6 @@
     }
     _tableView.tableHeaderView = viewHead;
     viewHead.backgroundColor = [UIColor huibai];
-    [self viewHeadContent];
     
     viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (47.0 / 667.0))];
     _tableView.tableFooterView = viewFoot;
@@ -118,6 +123,9 @@
 - (void)viewHeadContent
 {
     UIImageView *imageRedBG = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 156) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"bei"]];
+    UITapGestureRecognizer *singleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(yesterdayButtonAction:)];
+    singleRecognizer.numberOfTapsRequired = 1;
+    [imageRedBG addGestureRecognizer:singleRecognizer];
     [viewHead addSubview:imageRedBG];
     imageRedBG.userInteractionEnabled = YES;
     
@@ -146,6 +154,8 @@
     UILabel *labelNum = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT)/2, HEIGHT_CONTROLLER_DEFAULT * (63.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (200.0 / 375.0), 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     
     NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17元"];
+//    - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str;
+    [redStringM replaceCharactersInRange:NSMakeRange(0, [[redStringM string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%@ ",[self.myAccountInfo objectForKey:@"yeMoney"]]];
     NSRange numString = NSMakeRange(0, [[redStringM string] rangeOfString:@"元"].location);
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:32] range:numString];
@@ -187,17 +197,17 @@
     middleView.viewLLine.backgroundColor = [UIColor grayColor];
     middleView.viewLLine.alpha = 0.3;
     
-    middleView.labelYuan.text = @"230,373.41";
+    middleView.labelYuan.text = [self.myAccountInfo objectForKey:@"totalMoney"];
     middleView.labelYuan.textColor = Color_Black;
     middleView.labelYuan.alpha = 0.7;
     middleView.labelYuan.textAlignment = NSTextAlignmentCenter;
     
-    middleView.labelWanYuan.text = @"119,324.56";
+    middleView.labelWanYuan.text = [self.myAccountInfo objectForKey:@"accBalance"];
     middleView.labelWanYuan.textColor = Color_Black;
     middleView.labelWanYuan.alpha = 0.7;
     middleView.labelWanYuan.textAlignment = NSTextAlignmentCenter;
     
-    middleView.labelAllMoney.text = @"146,134.56";
+    middleView.labelAllMoney.text = [self.myAccountInfo objectForKey:@"totalProfit"];
     middleView.labelAllMoney.textColor = Color_Black;
     middleView.labelAllMoney.alpha = 0.7;
     middleView.labelAllMoney.textAlignment = NSTextAlignmentCenter;
@@ -328,9 +338,32 @@
 }
 
 //昨日收益
-- (void)yesterdayButtonAction:(UIButton *)button{
+- (void)yesterdayButtonAction:(id)sender{
     YesterdayViewController *yesterdayVC = [[YesterdayViewController alloc] init];
     [self.navigationController pushViewController:yesterdayVC animated:YES];
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)MyAccountInfo{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        self.myAccountInfo = responseObject;
+        
+        [self viewHeadContent];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

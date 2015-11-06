@@ -46,6 +46,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self getMyFinPlanner];
+    
     [self.navigationItem setTitle:@"我的理财师"];
     [self tableViewShow];
 }
@@ -210,6 +212,25 @@
     [app.tabBarVC setSuppurtGestureTransition:NO];
     [app.tabBarVC setTabbarViewHidden:NO];
     [app.tabBarVC setLabelLineHidden:NO];
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getMyFinPlanner{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"invitationCode":@"dIWCQa",@"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyFinPlanner" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

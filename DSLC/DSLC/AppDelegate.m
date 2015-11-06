@@ -24,10 +24,12 @@
 }
 @property (nonatomic, strong) NSDictionary *flagDic;
 @property (nonatomic, strong) NSDictionary *flagLogin;
+@property (nonatomic, strong) NSDictionary *flagUserInfo;
 @end
 
 @implementation AppDelegate
 
+// 手势标识文件
 - (NSDictionary *)flagDic{
     if (_flagDic == nil) {
 
@@ -43,8 +45,14 @@
     return _flagDic;
 }
 
+// 登录标识文件
 - (NSDictionary *)flagLogin{
     if (_flagLogin == nil) {
+        if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+            [FileOfManage createWithFile:@"isLogin.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+        }
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
         self.flagLogin = dic;
     }
@@ -71,21 +79,30 @@
         ThreeViewController *threeVC = [[ThreeViewController alloc] init];
         UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
         
-        MineViewController *mineVC = [[MineViewController alloc] init];
-        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
+//        MineViewController *mineVC = [[MineViewController alloc] init];
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:loginVC];
         
         MoreViewController *moreVC = [[MoreViewController alloc] init];
         UINavigationController *navigation4 = [[UINavigationController alloc] initWithRootViewController:moreVC];
         
         self.viewControllerArr = @[navigation1, navigation2, navigation3, navigation4];
         
-        if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-            LoginViewController *loginVC = [[LoginViewController alloc] init];
-            UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:loginVC];
-            NSMutableArray *muTabButtonArray = [NSMutableArray arrayWithArray:self.viewControllerArr];
-            [muTabButtonArray replaceObjectAtIndex:2 withObject:navigation3];
-            self.viewControllerArr = [muTabButtonArray copy];
-        }
+//        if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+//            LoginViewController *loginVC = [[LoginViewController alloc] init];
+//            UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//            NSMutableArray *muTabButtonArray = [NSMutableArray arrayWithArray:self.viewControllerArr];
+//            [muTabButtonArray replaceObjectAtIndex:2 withObject:navigation3];
+//            self.viewControllerArr = [muTabButtonArray copy];
+//        } else {
+//            NSDictionary *parameter = @{@"phone":[self.flagUserInfo objectForKey:@"userPhone"],@"password":[self.flagUserInfo objectForKey:@"password"]};
+//            [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+//                
+//            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//                NSLog(@"%@",error);
+//            }];
+//
+//        }
         
         butGrayArr = @[@"shouyeqiepian7500_25", @"shouyeqiepian750_28", @"shouyeqiepian750_30", @"shouyeqiepian750_32"];
         butColorArr = @[@"shouyeqiepian750_25_highlight", @"shouyeqiepian7500_28highlight", @"shouyeqiepian7500_30highlight", @"shouyeqiepian7500_32highlight"];

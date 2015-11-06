@@ -38,6 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self getMyAssetInfo];
+    
     self.view.backgroundColor = TabelVie_Color_Gray;
     
     self.mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 84) style:UITableViewStylePlain];
@@ -234,6 +236,23 @@
 - (void)pieChart:(XYPieChart *)pieChart didSelectSliceAtIndex:(NSUInteger)index
 {
     NSLog(@"did select slice at index %ld",(unsigned long)index);
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getMyAssetInfo{
+    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAssetInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 @end

@@ -12,6 +12,7 @@
 
 @interface KKTabBarViewController (){
     UIButton *indexButton;
+    UIButton *firstButton;
 }
 
 @property (nonatomic, assign) CGFloat pageWidth;
@@ -124,6 +125,7 @@
         }
         if (i == 0) {
             indexButton = tabButton;
+            firstButton = tabButton;
         }
         [self.tabbarView addSubview:tabButton];
     }
@@ -179,7 +181,6 @@
     } else {
         indexButton = button;
     }
-    
     
     [_tabScrollView setContentOffset:CGPointMake(button.tag * _pageWidth, 0) animated:_transitionAnimated];
     for (UIButton *tempButton in _tabButtonArray) {
