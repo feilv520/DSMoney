@@ -28,6 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self getMyInviteInfo];
+    
     self.view.backgroundColor = [UIColor huibai];
     
     [self.navigationItem setTitle:@"我的邀请"];
@@ -256,6 +258,23 @@
 - (void)buttonInvite:(UIButton *)button
 {
     NSLog(@"邀请");
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getMyInviteInfo{
+    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"invitationMyCode":@"dIWCQa"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyInviteInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

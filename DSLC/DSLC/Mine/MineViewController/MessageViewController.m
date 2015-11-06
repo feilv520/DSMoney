@@ -73,15 +73,34 @@
     if ([_textField.text length] == 0) {
         
     } else {
-        
-        ChangeNumViewController *changeNumVC = [[ChangeNumViewController alloc] init];
-        [self.navigationController pushViewController:changeNumVC animated:YES];
+        [self checkUserInfo];
     }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [_textField resignFirstResponder];
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)checkUserInfo{
+    NSDictionary *parameter = @{@"password":_textField.text,@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/checkUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        if ([[responseObject objectForKey:@"result"]isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            ChangeNumViewController *changeNumVC = [[ChangeNumViewController alloc] init];
+            [self.navigationController pushViewController:changeNumVC animated:YES];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -18,6 +18,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.navigationItem setTitle:@"昨日收益"];
+    
+    [self getMyProfit];
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getMyProfit{
+    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyProfit" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {

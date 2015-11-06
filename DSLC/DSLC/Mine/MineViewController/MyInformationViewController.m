@@ -35,6 +35,8 @@
     NSMutableArray *dataArr;
     
     UIImage *imageChange;
+    
+    UIButton *indexButton;
 }
 
 @property (nonatomic) UIImagePickerController *imagePicker;
@@ -112,7 +114,7 @@
 
 - (void)getData
 {
-    NSDictionary *parameter = @{@"userId":@"8993"};
+    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -411,6 +413,7 @@
     [usersDic writeToFile:[FileOfManage PathOfFile:@"Flag.plist"] atomically:YES];
 }
 
+// 退出按钮的动作
 - (void)buttonExit:(UIButton *)button
 {
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
@@ -419,24 +422,25 @@
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(0, 0) animated:NO];
     
-    UIButton *buttonA = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonA.tag = 0;
-    [buttonA setFrame:CGRectMake(20 , 5, 40, 40)];
-//    [buttonA addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchDown];
-    [buttonA setSelected:YES];
+    indexButton = app.tabBarVC.tabButtonArray[0];
     
-    if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-        NSLog(@"---%@",[self.flagLogin objectForKey:@"loginFlag"]);
-        LoginViewController *loginVC = [[LoginViewController alloc] init];
-        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:loginVC];
-        NSMutableArray *muTabButtonArray = [NSMutableArray arrayWithArray:app.viewControllerArr];
-        [muTabButtonArray replaceObjectAtIndex:2 withObject:navigation3];
-        app.viewControllerArr = [muTabButtonArray copy];
+    for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+        
+        if (indexButton.tag != tempButton.tag) {
+            NSLog(@"%ld",tempButton.tag);
+            [tempButton setSelected:NO];
+        }
     }
     
+    [indexButton setSelected:YES];
+
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
+    
     [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:NO];
-    [app.tabBarVC setLabelLineHidden:NO];
+    [app.tabBarVC setTabbarViewHidden:YES];
+    [app.tabBarVC setLabelLineHidden:YES];
     
 }
 

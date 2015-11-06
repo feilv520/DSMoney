@@ -20,7 +20,6 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/admin/
         _sharedClient = [[MyAfHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:MYAFHTTP_BASEURL]];
         _sharedClient.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
         // 设置请求格式
-        NSLog(@"123123123123123");
         _sharedClient.requestSerializer = [AFHTTPRequestSerializer serializer];
         // 设置返回格式
         _sharedClient.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -64,7 +63,6 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/admin/
         
         NSData *doubi = responseObject;
         NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
-        NSLog(@"%@",responseString);
         NSString *character = nil;
         for (int i = 0; i < responseString.length; i ++) {
             character = [responseString substringWithRange:NSMakeRange(i, 1)];
