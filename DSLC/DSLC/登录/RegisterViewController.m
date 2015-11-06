@@ -224,7 +224,7 @@
 // 确认按钮执行方法 (第二步 : 实名验证)
 - (void)sureButtonAction:(UIButton *)btn{
     
-    [self checkSmsCode];
+    [self RegisterButtonAction];
     
 }
 
@@ -279,6 +279,7 @@
     [self.view endEditing:YES];
 }
 
+// 检测验证码
 - (void)checkSmsCode{
     NSDictionary *parameters = @{@"smsCode":registerV.smsCode.text};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/checkSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -297,7 +298,7 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@",responseObject);
-        if ([[responseObject objectForKey:@"result"] isEqualToString:@"200"]) {
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
 //            [buttonWithView removeFromSuperview];
 //            [payButton removeFromSuperview];
@@ -329,7 +330,7 @@
 //            [self.scrollView addSubview:registerV];
 //            [self.scrollView addSubview:registerR];
 //            [self.scrollView addSubview:registerB];
-            
+            [self.navigationController popViewControllerAnimated:YES];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -345,18 +346,23 @@
 // 获得验证码
 - (void)getCodeButtonAction:(UIButton *)btn{
     [self.view endEditing:YES];
-    NSDictionary *parameters = @{@"phone":@"13354288036"};
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
-        [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
+    
+    if (registerV.phoneNumber.text.length == 0) {
+        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+    } else {
+        NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            NSLog(@"%@",responseObject);
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+    }
 }
 
 // 按钮变颜色
 - (void)textFieldEdit:(UITextField *)textField{
-    if ([registerV.sandMyselfIDCard.text length] > 0 && [registerV.smsCode.text length] > 0 && [registerV.phoneNumber.text length] > 0 && [registerV.loginPassword.text length] > 0 && [registerV.sureLoginPassword.text length] > 0) {
+    if ([registerV.smsCode.text length] > 0 && [registerV.phoneNumber.text length] > 0 && [registerV.loginPassword.text length] > 0 && [registerV.sureLoginPassword.text length] > 0) {
         [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         

@@ -14,6 +14,7 @@
 #import "CreatView.h"
 #import "RegisterViewController.h"
 #import "ForgetSecretViewController.h"
+#import "SelectionViewController.h"
 
 @interface LoginViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -25,20 +26,74 @@
     UIButton *butLogin;
     UITextField *textField1;
     UITextField *textField2;
+    
+    UIButton *indexButton;
 }
+
+@property (nonatomic, strong) NSDictionary *flagLogin;
 
 @end
 
 @implementation LoginViewController
+
+- (NSDictionary *)flagLogin{
+    if (_flagLogin == nil) {
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+        self.flagLogin = dic;
+    }
+    return _flagLogin;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
+}
+
+//导航返回按钮
+- (void)buttonReturn:(UIBarButtonItem *)bar
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(indexButton.tag * WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+    
+    for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+        
+        if (indexButton.tag != tempButton.tag) {
+            NSLog(@"%ld",tempButton.tag);
+            [tempButton setSelected:NO];
+        }
+    }
+    
+    [indexButton setSelected:YES];
+    
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor qianhuise];
-    
     [self tableviewShow];
     [self navigationControllerShow];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideWithTabbarView:) name:@"hideWithTabbarView" object:nil];
+    
+}
+
+- (void)hideWithTabbarView:(NSNotification *)not{
+    
+    indexButton = [not object];
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:YES];
+    [app.tabBarVC setLabelLineHidden:YES];
 }
 
 - (void)navigationControllerShow
@@ -149,6 +204,7 @@
 //登录按钮
 - (void)loginButton:(UIButton *)button
 {
+    [self.view endEditing:YES];
     textField1 = (UITextField *)[self.view viewWithTag:1000];
     textField2 = (UITextField *)[self.view viewWithTag:1001];
     
@@ -170,7 +226,16 @@
                                          [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",nil];
                     [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                 }
+                if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                    [FileOfManage createWithFile:@"isLogin.plist"];NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                    [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                } else {
+                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                    [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                }
                 [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+                MineViewController *mineVC = [[MineViewController alloc] init];
+                [self.navigationController pushViewController:mineVC animated:NO];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -188,7 +253,12 @@
 - (void)forgetSecretButton:(UIButton *)button
 {
     ForgetSecretViewController *forgetSecretVC = [[ForgetSecretViewController alloc] init];
+    forgetSecretVC.typeString = @"login";
     [self.navigationController pushViewController:forgetSecretVC animated:YES];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

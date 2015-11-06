@@ -20,6 +20,7 @@
 #import "EmailViewController.h"
 #import "MyAfHTTPClient.h"
 #import "MyInformation.h"
+#import "LoginViewController.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -37,11 +38,20 @@
 
 @property (nonatomic) UIImagePickerController *imagePicker;
 
+@property (nonatomic, strong) NSDictionary *flagLogin;
 //@property (nonatomic, strong) NSDictionary *flagDic;
 
 @end
 
 @implementation MyInformationViewController
+
+- (NSDictionary *)flagLogin{
+    if (_flagLogin == nil) {
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+        self.flagLogin = dic;
+    }
+    return _flagLogin;
+}
 
 //- (NSDictionary *)flagDic{
 //    if (_flagDic == nil) {
@@ -134,6 +144,14 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 3) {
+        return 80;
+    } else {
+        return 0.5;
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
@@ -161,6 +179,23 @@
     } else {
         
         return 2;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    if (section == 3) {
+        
+        UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (50.0 / 667.0))];
+        viewFoot.backgroundColor = [UIColor huibai];
+        
+        UIButton *butExit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 15, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"退出登录"];
+        [viewFoot addSubview:butExit];
+        [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        [butExit addTarget:self action:@selector(buttonExit:) forControlEvents:UIControlEventTouchUpInside];
+        return viewFoot;
+    } else {
+        return nil;
     }
 }
 
@@ -368,6 +403,35 @@
     [usersDic setObject:[NSString stringWithFormat:@"%@",switchOn.on?@"YES":@"NO"] forKey:@"FlagWithVC"];
     //写入文件
     [usersDic writeToFile:[FileOfManage PathOfFile:@"Flag.plist"] atomically:YES];
+}
+
+- (void)buttonExit:(UIButton *)button
+{
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+    [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+    
+    UIButton *buttonA = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonA.tag = 0;
+    [buttonA setFrame:CGRectMake(20 , 5, 40, 40)];
+//    [buttonA addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchDown];
+    [buttonA setSelected:YES];
+    
+    if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        NSLog(@"---%@",[self.flagLogin objectForKey:@"loginFlag"]);
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        NSMutableArray *muTabButtonArray = [NSMutableArray arrayWithArray:app.viewControllerArr];
+        [muTabButtonArray replaceObjectAtIndex:2 withObject:navigation3];
+        app.viewControllerArr = [muTabButtonArray copy];
+    }
+    
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
+    
 }
 
 - (void)didReceiveMemoryWarning {

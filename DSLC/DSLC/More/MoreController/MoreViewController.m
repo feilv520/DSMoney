@@ -64,11 +64,6 @@
     imageArr = @[@"bangzhu", @"lianxikefu", @"yijianfankui", @"guanyu"];
     titleArr = @[@"帮助中心", @"联系客服", @"意见反馈", @"关于大圣理财"];
     
-    UIButton *butExit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"退出登录"];
-    [viewFoot addSubview:butExit];
-    [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-    [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-    [butExit addTarget:self action:@selector(buttonExit:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -125,12 +120,6 @@
         AboutViewController *aboutVC = [[AboutViewController alloc] init];
         [self.navigationController pushViewController:aboutVC animated:YES];
     }
-}
-
-- (void)buttonExit:(UIButton *)button
-{
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
-    [self.navigationController pushViewController:loginVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

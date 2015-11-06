@@ -13,15 +13,17 @@
 #import "MyHandViewController.h"
 #import "FileOfManage.h"
 #import "ThreeViewController.h"
+#import "define.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 {
-    NSArray *viewControllerArr;
     NSArray *butGrayArr;
     NSArray *butColorArr;
     NSMutableArray *buttonArr;
 }
 @property (nonatomic, strong) NSDictionary *flagDic;
+@property (nonatomic, strong) NSDictionary *flagLogin;
 @end
 
 @implementation AppDelegate
@@ -41,8 +43,18 @@
     return _flagDic;
 }
 
+- (NSDictionary *)flagLogin{
+    if (_flagLogin == nil) {
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+        self.flagLogin = dic;
+    }
+    return _flagLogin;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self exitNetwork];
     
     NSDictionary *dic = self.flagDic;
     
@@ -65,7 +77,15 @@
         MoreViewController *moreVC = [[MoreViewController alloc] init];
         UINavigationController *navigation4 = [[UINavigationController alloc] initWithRootViewController:moreVC];
         
-        viewControllerArr = @[navigation1, navigation2, navigation3, navigation4];
+        self.viewControllerArr = @[navigation1, navigation2, navigation3, navigation4];
+        
+        if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+            LoginViewController *loginVC = [[LoginViewController alloc] init];
+            UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:loginVC];
+            NSMutableArray *muTabButtonArray = [NSMutableArray arrayWithArray:self.viewControllerArr];
+            [muTabButtonArray replaceObjectAtIndex:2 withObject:navigation3];
+            self.viewControllerArr = [muTabButtonArray copy];
+        }
         
         butGrayArr = @[@"shouyeqiepian7500_25", @"shouyeqiepian750_28", @"shouyeqiepian750_30", @"shouyeqiepian750_32"];
         butColorArr = @[@"shouyeqiepian750_25_highlight", @"shouyeqiepian7500_28highlight", @"shouyeqiepian7500_30highlight", @"shouyeqiepian7500_32highlight"];
@@ -85,7 +105,7 @@
         
         self.tabBarVC = [[KKTabBarViewController alloc] init];
         //    存放试图控制器
-        [self.tabBarVC setControllerArray:viewControllerArr];
+        [self.tabBarVC setControllerArray:self.viewControllerArr];
         //    存放tabBar上的按钮
         [self.tabBarVC setTabButtonArray:buttonArr];
         //    设置tabBar的高度 默认为50
@@ -103,6 +123,51 @@
     
     
     return YES;
+}
+
+- (void)exitNetwork{
+    
+    // 如果要检测网络状态的变化,必须用检测管理器的单例的startMonitoring
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    __block   BOOL network =  network ;  //
+    __block   BOOL change =  change ;  //
+    change = NO;
+    network = NO;
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status)
+     {
+         switch (status) {
+             case AFNetworkReachabilityStatusNotReachable:
+             {
+                 NSLog(@"无网络");
+                 [ProgressHUD showMessage:@"无网络" Width:100 High:20];
+                 network = NO;
+                 change = YES;
+                 break;
+             }
+                 
+             case AFNetworkReachabilityStatusReachableViaWiFi:
+             {
+                 NSLog(@"WiFi网络");
+                 [ProgressHUD showMessage:@"WiFi网络" Width:100 High:20];
+                 network = YES;
+                 change = YES;
+                 break;
+             }
+                 
+             case AFNetworkReachabilityStatusReachableViaWWAN:
+             {
+                 NSLog(@"无线网络");
+                 [ProgressHUD showMessage:@"无线网络" Width:100 High:20];
+                 network = YES;
+                 change = YES;
+                 break;
+             }
+                 
+             default:
+                 break;
+         }
+     }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -56,6 +56,7 @@
     textFieldPhoneNum = [CreatView creatWithfFrame:CGRectMake(130, 10, WIDTH_CONTROLLER_DEFAULT - 130 - 10, 30) setPlaceholder:@"请输入手机号" setTintColor:[UIColor grayColor]];
     
     textFieldPhoneNum.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    textFieldPhoneNum.keyboardType = UIKeyboardTypeNumberPad;
     
     butEnsure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 260, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [self.view addSubview:butEnsure];
@@ -79,11 +80,6 @@
     if (indexPath.row == 1) {
         
         ForgetSecret2Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse2"];
-        
-        if (cell == nil) {
-            
-            cell = [[ForgetSecret2Cell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse2"];
-        }
         
         cell.labelTitle.text = @"验证码";
         cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
