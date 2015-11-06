@@ -25,6 +25,7 @@
 #import "SelectionOfSafe.h"
 #import "YesterdayViewController.h"
 #import "NewRedBagViewController.h"
+#import "LoginViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -39,11 +40,12 @@
 
 @end
 
+
 @implementation MineViewController
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:NO];
+    [super viewDidAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
@@ -51,10 +53,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor huibai];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
     
     [self showPictureAndTitle];
     [self showTableView];
+}
+
+- (void)pushWithViewController{
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:loginVC animated:NO];
 }
 
 - (void)showPictureAndTitle
@@ -67,6 +76,7 @@
 {
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 52) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
+    _tableView.backgroundColor = [UIColor huibai];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.showsVerticalScrollIndicator = NO;
@@ -121,6 +131,7 @@
     
 //    邀请按钮
     UIButton *butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - (85 / 375.0) * WIDTH_CONTROLLER_DEFAULT, 31, (75 / 375.0) * WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (25 / 667.0)) backgroundColor:nil textColor:[UIColor whiteColor] titleText:@"我的理财师"];
+    
 //    我的理财师按钮
     [imageRedBG addSubview:butInvitate];
     [butInvitate setBackgroundImage:[UIImage imageNamed:@"anniu"] forState:UIControlStateNormal];
@@ -173,33 +184,38 @@
     middleView.viewLine.backgroundColor = [UIColor grayColor];
     middleView.viewLine.alpha = 0.3;
     
-    NSMutableAttributedString *redString = [[NSMutableAttributedString alloc] initWithString:@"13,234.56元"];
-    NSRange redShuZi = NSMakeRange(0, [[redString string] rangeOfString:@"元"].location);
-    [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:redShuZi];
+    middleView.viewLLine.backgroundColor = [UIColor grayColor];
+    middleView.viewLLine.alpha = 0.3;
     
-    NSRange YUANString = NSMakeRange([[redString string] length] - 1, 1);
-    [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:YUANString];
-    [middleView.labelYuan setAttributedText:redString];
-    middleView.labelYuan.textColor = [UIColor daohanglan];
+    middleView.labelYuan.text = @"230,373.41";
+    middleView.labelYuan.textColor = Color_Black;
+    middleView.labelYuan.alpha = 0.7;
     middleView.labelYuan.textAlignment = NSTextAlignmentCenter;
     
-    NSMutableAttributedString *wanYuanStr = [[NSMutableAttributedString alloc] initWithString:@"23.05万元"];
-    NSRange shuziStr = NSMakeRange(0, [[wanYuanStr string] rangeOfString:@"万"].location);
-    [wanYuanStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:shuziStr];
-    NSRange wanZiStr = NSMakeRange([[wanYuanStr string] length] - 2, 2);
-    [wanYuanStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:wanZiStr];
-    [middleView.labelWanYuan setAttributedText:wanYuanStr];
+    middleView.labelWanYuan.text = @"119,324.56";
+    middleView.labelWanYuan.textColor = Color_Black;
+    middleView.labelWanYuan.alpha = 0.7;
     middleView.labelWanYuan.textAlignment = NSTextAlignmentCenter;
     
-    middleView.labelMyMoney.text = @"我的资产";
+    middleView.labelAllMoney.text = @"146,134.56";
+    middleView.labelAllMoney.textColor = Color_Black;
+    middleView.labelAllMoney.alpha = 0.7;
+    middleView.labelAllMoney.textAlignment = NSTextAlignmentCenter;
+    
+    middleView.labelMyMoney.text = @"在投金额";
     middleView.labelMyMoney.textColor = [UIColor zitihui];
     middleView.labelMyMoney.textAlignment = NSTextAlignmentCenter;
     middleView.labelMyMoney.font = [UIFont systemFontOfSize:12];
     
-    middleView.labelData.text = @"理财期限";
+    middleView.labelData.text = @"账户余额";
     middleView.labelData.textColor = [UIColor zitihui];
     middleView.labelData.textAlignment = NSTextAlignmentCenter;
     middleView.labelData.font = [UIFont systemFontOfSize:12];
+    
+    middleView.labelTAllMoney.text = @"累计收益";
+    middleView.labelTAllMoney.textColor = [UIColor zitihui];
+    middleView.labelTAllMoney.textAlignment = NSTextAlignmentCenter;
+    middleView.labelTAllMoney.font = [UIFont systemFontOfSize:12];
     
     middleView.viewDiBu.backgroundColor = [UIColor huibai];
         

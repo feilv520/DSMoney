@@ -24,6 +24,8 @@ typedef NS_ENUM(NSInteger, TabBarPosition){
 @property (nonatomic, assign) TabBarPosition tabBarPosition;            //tabBar的位置，可选底部和顶部，默认底部
 @property (nonatomic, strong) UILabel *labelLine;
 
+@property (nonatomic, strong) UIScrollView *tabScrollView;
+
 // 带参数的初始化函数
 - (id)initWithControllerArray:(NSArray *)controllerArray;
 // 设置是否隐藏掉切换页面的按钮

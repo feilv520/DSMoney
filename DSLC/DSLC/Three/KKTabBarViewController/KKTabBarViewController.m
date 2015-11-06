@@ -7,14 +7,16 @@
 //
 
 #import "KKTabBarViewController.h"
+#import "define.h"
+#import "LoginViewController.h"
 
-@interface KKTabBarViewController ()
+@interface KKTabBarViewController (){
+    UIButton *indexButton;
+}
 
-@property (nonatomic, strong) UIScrollView *tabScrollView;
 @property (nonatomic, assign) CGFloat pageWidth;
 @property (nonatomic, assign) CGFloat pageHeight;
 @property (nonatomic, strong) UIView *tabbarView;
-
 
 @end
 
@@ -42,8 +44,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
     
 	// Do any additional setup after loading the view.
     [self initTabPage];
@@ -122,6 +122,9 @@
         if (tabButton.tag == _curPage) {
             [tabButton setSelected:YES];
         }
+        if (i == 0) {
+            indexButton = tabButton;
+        }
         [self.tabbarView addSubview:tabButton];
     }
     
@@ -171,12 +174,20 @@
 //切换页面按钮点击事件
 - (void)tabAction:(UIButton *)button
 {
+    if (button.tag == 2) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbarView" object:indexButton];
+    } else {
+        indexButton = button;
+    }
+    
+    
     [_tabScrollView setContentOffset:CGPointMake(button.tag * _pageWidth, 0) animated:_transitionAnimated];
     for (UIButton *tempButton in _tabButtonArray) {
         if (button.tag != tempButton.tag) {
             [tempButton setSelected:NO];
         }
     }
+    
     [button setSelected:YES];
     
 }

@@ -36,7 +36,7 @@
 
 //导航栏方法
 
-#define pushVC [self.navigationController pushViewController:<#ViewControllerName#> animated:YES]
+#define pushVC(viewController) [self.navigationController pushViewController:viewController animated:YES]
 #define popVC [self.navigationController popViewControllerAnimated:YES]
 
 #import "FileOfManage.h"
