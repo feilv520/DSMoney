@@ -20,6 +20,7 @@
 #import "ChooseRedBagViewController.h"
 #import "FBalancePaymentViewController.h"
 #import "RechargeViewController.h"
+#import "RechargeAlreadyBinding.h"
 
 @interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (nonatomic) UITableView *tableView;
@@ -32,6 +33,7 @@
 @property (nonatomic) UIView *viewBottom;
 @property (nonatomic) FConfirmMoney *viewWhite;
 @property (nonatomic) UITextField *textFieldC;
+@property (nonatomic) UIButton *makeSure;
 @end
 
 @implementation MakeSureViewController
@@ -88,23 +90,23 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"CashMoneyCell" bundle:nil] forCellReuseIdentifier:@"reuse4"];
     [self.tableView registerNib:[UINib nibWithNibName:@"NewMakeSureCell" bundle:nil] forCellReuseIdentifier:@"reuseNew"];
     
-    UIButton *makeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (44.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (60.0 / 667.0), (WIDTH_CONTROLLER_DEFAULT - 80), HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"确认投资"];
+    _makeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (44.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (60.0 / 667.0), (WIDTH_CONTROLLER_DEFAULT - 80), HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"确认投资"];
     
     if (self.decide == NO) {
         
-        [makeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [makeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         
     } else {
         
-        [makeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-        [makeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
         
     }
     
-    makeSure.titleLabel.font = [UIFont systemFontOfSize:15];
-    [viewFoot addSubview:makeSure];
-    [makeSure addTarget:self action:@selector(makeSureMoney:) forControlEvents:UIControlEventTouchUpInside];
+    _makeSure.titleLabel.font = [UIFont systemFontOfSize:15];
+    [viewFoot addSubview:_makeSure];
+    [_makeSure addTarget:self action:@selector(makeSureMoney:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 110, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"由中国银行保障您的账户资金安全"];
     [viewFoot addSubview:buttonSafe];
@@ -271,6 +273,7 @@
         cell.textField.leftViewMode = UITextFieldViewModeAlways;
         cell.textField.tintColor = [UIColor yuanColor];
         cell.textField.tag = 199;
+        [cell.textField addTarget:self action:@selector(textFieldEditShow:) forControlEvents:UIControlEventEditingChanged];
         
         if (self.decide == NO) {
             
@@ -415,16 +418,43 @@
     }
 }
 
+- (void)textFieldEditShow:(UITextField *)textField
+{
+    self.textFieldC = (UITextField *)[self.view viewWithTag:199];
+    
+    if (self.textFieldC.text.length > 0) {
+        
+        [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        
+    } else if ([self.textFieldC.text isEqualToString:@"0"]) {
+        
+        [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    }
+}
+
 //充值按钮
 - (void)cashMoneyButton:(UIButton *)button
 {
+//    *********未绑定银行卡的充值页面*************
     RechargeViewController *rechargeVC = [[RechargeViewController alloc] init];
     [self.navigationController pushViewController:rechargeVC animated:YES];
+    
+//    *********已经绑定银行卡的充值页面**************
+//    RechargeAlreadyBinding *already = [[RechargeAlreadyBinding alloc] init];
+//    [self.navigationController pushViewController:already animated:YES];
 }
 
 //确认投资按钮
 - (void)makeSureMoney:(UIButton *)button
 {
+//    判断新手还是固收或银行票据
     if (self.decide == NO) {
         
         CashFinishViewController *cashFinishVC = [[CashFinishViewController alloc] init];
@@ -438,8 +468,9 @@
         CGFloat numberInt = self.qianShu.text.intValue;
         CGFloat shuRuInt = self.textFieldC.text.intValue;
         
-        if (shuRuInt > numberInt) {
-            
+//        当输入的值大于余额值 提示余额不足 是否充值
+        if (shuRuInt > numberInt && shuRuInt != 0) {
+        
             self.buttBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
             [app.tabBarVC.view addSubview:self.buttBlack];
             self.buttBlack.alpha = 0.3;
@@ -468,79 +499,64 @@
             butDecide.layer.cornerRadius = 3;
             butDecide.layer.masksToBounds = YES;
             [butDecide addTarget:self action:@selector(decideCashMoney:) forControlEvents:UIControlEventTouchUpInside];
+
+//            当输入的值小于余额时 可以投资
+        } else if (shuRuInt < numberInt && shuRuInt != 0) {
+
+            self.controlBlack = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+            [app.tabBarVC.view addSubview:self.controlBlack];
+            self.controlBlack.backgroundColor = [UIColor blackColor];
+            self.controlBlack.alpha = 0.3;
+            [self.controlBlack addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
             
-        } else {
+            NSBundle *rootBundle = [NSBundle mainBundle];
+            self.viewWhite = (FConfirmMoney *)[[rootBundle loadNibNamed:@"FConfirmMoney" owner:nil options:nil] lastObject];
             
-            [self.controlBlack removeFromSuperview];
-            [self.viewWhite removeFromSuperview];
+            CGFloat viewX = WIDTH_CONTROLLER_DEFAULT * (38 / 375.0);
+            CGFloat viewH = WIDTH_CONTROLLER_DEFAULT * (158 / 375.0);
+            CGFloat viewWeith = WIDTH_CONTROLLER_DEFAULT * (301 / 375.0);
+            CGFloat viewHejght = HEIGHT_CONTROLLER_DEFAULT * (301 / 667.0);
             
-            self.controlBlack = nil;
-            self.viewWhite = nil;
+            self.viewWhite.frame = CGRectMake(viewX, viewH, viewWeith, viewHejght);
+            self.viewWhite.layer.masksToBounds = YES;
+            self.viewWhite.layer.cornerRadius = 4;
+            [app.tabBarVC.view addSubview:self.viewWhite];
             
-            if (self.controlBlack == nil) {
-                
-                self.controlBlack = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
-                [app.tabBarVC.view addSubview:self.controlBlack];
-                self.controlBlack.backgroundColor = [UIColor blackColor];
-                self.controlBlack.alpha = 0.3;
-                [self.controlBlack addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
-                
-            }
+            self.viewWhite.labelName.text = @"尊敬的黄经理";
+            self.viewWhite.labelName.font = [UIFont systemFontOfSize:15];
             
-            if (self.viewWhite == nil) {
-                
-                NSBundle *rootBundle = [NSBundle mainBundle];
-                self.viewWhite = (FConfirmMoney *)[[rootBundle loadNibNamed:@"FConfirmMoney" owner:nil options:nil] lastObject];
-                
-                CGFloat viewX = WIDTH_CONTROLLER_DEFAULT * (38 / 375.0);
-                CGFloat viewH = WIDTH_CONTROLLER_DEFAULT * (158 / 375.0);
-                CGFloat viewWeith = WIDTH_CONTROLLER_DEFAULT * (301 / 375.0);
-                CGFloat viewHejght = HEIGHT_CONTROLLER_DEFAULT * (301 / 667.0);
-                
-                self.viewWhite.frame = CGRectMake(viewX, viewH, viewWeith, viewHejght);
-                self.viewWhite.layer.masksToBounds = YES;
-                self.viewWhite.layer.cornerRadius = 4;
-                [app.tabBarVC.view addSubview:self.viewWhite];
-                
-                self.viewWhite.labelName.text = @"尊敬的黄经理";
-                self.viewWhite.labelName.font = [UIFont systemFontOfSize:15];
-                
-                [self.viewWhite.buttonClose setImage:[UIImage imageNamed:@"iconfont_graycuo"] forState:UIControlStateNormal];
-                [self.viewWhite.buttonClose addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
-                
-                self.viewWhite.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
-                self.viewWhite.labelLine.alpha = 0.7;
-                
-                self.viewWhite.labelSign.text = @"在购买<<新手专享>>前请您确认:";
-                self.viewWhite.labelSign.font = [UIFont systemFontOfSize:15];
-                self.viewWhite.labelSign.textColor = [UIColor zitihui];
-                
-                self.viewWhite.labelKnow.text = @"本人已清除知悉该收益权产品的基础信息,并已充分了解其产品特性";
-                self.viewWhite.labelKnow.textColor = [UIColor zitihui];
-                self.viewWhite.labelKnow.font = [UIFont systemFontOfSize:15];
-                self.viewWhite.labelKnow.numberOfLines = 0;
-                
-                self.viewWhite.labelBook.text = @"本人已仔细阅读/理解该收益权产品<<风险提示书>>全文,并愿意自行承担投资风险";
-                self.viewWhite.labelBook.textColor = [UIColor zitihui];
-                self.viewWhite.labelBook.font = [UIFont systemFontOfSize:15];
-                self.viewWhite.labelBook.numberOfLines = 0;
-                
-                self.viewWhite.imageBlueOne.image = [UIImage imageNamed:@"blueyuan"];
-                self.viewWhite.imageBlueTwo.image = [UIImage imageNamed:@"blueyuan"];
-                
-                [self.viewWhite.buttonAffirm setTitle:@"确认" forState:UIControlStateNormal];
-                self.viewWhite.buttonAffirm.titleLabel.font = [UIFont systemFontOfSize:15];
-                self.viewWhite.buttonAffirm.layer.cornerRadius = 4;
-                self.viewWhite.buttonAffirm.layer.masksToBounds = YES;
-                self.viewWhite.buttonAffirm.backgroundColor = [UIColor daohanglan];
-                [self.viewWhite.buttonAffirm addTarget:self action:@selector(buttonAffirmMoney:) forControlEvents:UIControlEventTouchUpInside];
-                
-            }
+            [self.viewWhite.buttonClose setImage:[UIImage imageNamed:@"iconfont_graycuo"] forState:UIControlStateNormal];
+            [self.viewWhite.buttonClose addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
             
+            self.viewWhite.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
+            self.viewWhite.labelLine.alpha = 0.7;
+            
+            self.viewWhite.labelSign.text = @"在购买<<新手专享>>前请您确认:";
+            self.viewWhite.labelSign.font = [UIFont systemFontOfSize:15];
+            self.viewWhite.labelSign.textColor = [UIColor zitihui];
+            
+            self.viewWhite.labelKnow.text = @"本人已清除知悉该收益权产品的基础信息,并已充分了解其产品特性";
+            self.viewWhite.labelKnow.textColor = [UIColor zitihui];
+            self.viewWhite.labelKnow.font = [UIFont systemFontOfSize:15];
+            self.viewWhite.labelKnow.numberOfLines = 0;
+            
+            self.viewWhite.labelBook.text = @"本人已仔细阅读/理解该收益权产品<<风险提示书>>全文,并愿意自行承担投资风险";
+            self.viewWhite.labelBook.textColor = [UIColor zitihui];
+            self.viewWhite.labelBook.font = [UIFont systemFontOfSize:15];
+            self.viewWhite.labelBook.numberOfLines = 0;
+            
+            self.viewWhite.imageBlueOne.image = [UIImage imageNamed:@"blueyuan"];
+            self.viewWhite.imageBlueTwo.image = [UIImage imageNamed:@"blueyuan"];
+            
+            [self.viewWhite.buttonAffirm setTitle:@"确认" forState:UIControlStateNormal];
+            self.viewWhite.buttonAffirm.titleLabel.font = [UIFont systemFontOfSize:15];
+            self.viewWhite.buttonAffirm.layer.cornerRadius = 4;
+            self.viewWhite.buttonAffirm.layer.masksToBounds = YES;
+            self.viewWhite.buttonAffirm.backgroundColor = [UIColor daohanglan];
+            [self.viewWhite.buttonAffirm addTarget:self action:@selector(buttonAffirmMoney:) forControlEvents:UIControlEventTouchUpInside];
+
         }
-        
     }
-    
 }
 
 //余额足的情况下--黑色遮罩层&关闭按钮的触发事件

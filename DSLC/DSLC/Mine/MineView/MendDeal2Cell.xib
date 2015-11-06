@@ -33,6 +33,7 @@
                     </button>
                 </subviews>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>
                 <outlet property="buttonGet" destination="Fbh-yA-oWl" id="a1j-bu-bah"/>
                 <outlet property="labelLeft" destination="L2c-DJ-kEO" id="1pC-40-5sl"/>

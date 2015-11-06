@@ -62,7 +62,8 @@
     UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 200, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@"由中国银行保障您的账户资金安全"];
     [self.view addSubview:buttonSafe];
     buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
-    [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];}
+    [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
+}
 
 - (void)textFieldBeginEdit:(UITextField *)textField
 {

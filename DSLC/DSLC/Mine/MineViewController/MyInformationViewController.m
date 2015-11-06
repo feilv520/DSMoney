@@ -21,6 +21,7 @@
 #import "MyAfHTTPClient.h"
 #import "MyInformation.h"
 #import "LoginViewController.h"
+#import "SetDealSecret.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -300,8 +301,13 @@
             
         } else if (indexPath.row == 1) {
             
-            MendDealViewController *mendDeal = [[MendDealViewController alloc] init];
-            [self.navigationController pushViewController:mendDeal animated:YES];
+//            如果已经设置交易密码 跳转的是修改交易密码
+//            MendDealViewController *mendDeal = [[MendDealViewController alloc] init];
+//            [self.navigationController pushViewController:mendDeal animated:YES];
+            
+//            如果没有设置交易密码 需要设置交易密码
+            SetDealSecret *setDeal = [[SetDealSecret alloc] init];
+            [self.navigationController pushViewController:setDeal animated:YES];
             
         }
         

@@ -129,13 +129,10 @@
 
 - (void)mendDealTextField:(UITextField *)textField
 {
-    textField1 = (UITextField *)[self.view viewWithTag:700];
-    textField2 = (UITextField *)[self.view viewWithTag:701];
-    textField3 = (UITextField *)[self.view viewWithTag:702];
-    textField4 = (UITextField *)[self.view viewWithTag:703];
-    textField5 = (UITextField *)[self.view viewWithTag:704];
+    textField4 = (UITextField *)[self.view viewWithTag:603];
+    textField5 = (UITextField *)[self.view viewWithTag:604];
     
-    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField4.text.length > 0 && textField5.text.length > 0) {
+    if (textField3.text.length > 0 && textField4.text.length > 0 && textField5.text.length > 0) {
         
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
