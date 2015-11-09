@@ -13,4 +13,6 @@
 
 @property (nonatomic) BOOL estimate;
 
+@property (nonatomic, strong) NSString *idString;
+
 @end

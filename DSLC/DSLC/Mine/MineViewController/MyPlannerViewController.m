@@ -200,7 +200,7 @@
 - (void)getMyFinPlanner{
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"invitationCode":@"dIWCQa",@"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyFinPlanner" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

@@ -12,6 +12,7 @@
 #import "UIColor+AddColor.h"
 #import "define.h"
 #import "FDetailViewController.h"
+#import "ProductListModel.h"
 
 @interface FinancingViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -26,6 +27,8 @@
     UIButton *butLastTime;
 }
 
+@property (nonatomic, strong) NSMutableArray *productListArray;
+
 @end
 
 @implementation FinancingViewController
@@ -33,6 +36,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self getProductList];
+    
+    self.productListArray = [NSMutableArray array];
     
     buttonTag = 101;
     
@@ -44,7 +51,6 @@
     self.navigationItem.title = @"票据投资";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
-    [self showTableView];
 }
 
 //TableView展示
@@ -73,7 +79,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return nameArray.count;
+    return self.productListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -92,7 +98,7 @@
     cell.labelPercentage.textColor = [UIColor blackColor];
     cell.labelPercentage.textAlignment = NSTextAlignmentCenter;
     
-    NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:@"8.02%"];
+    NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[[self.productListArray objectAtIndex:indexPath.row] productAnnualYield]]];
 //    ,号前面是指起始位置 ,号后面是指到%这个位置截止的总长度
     NSRange redRange = NSMakeRange(0, [[textString string] rangeOfString:@"%"].location);
     [textString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
@@ -110,7 +116,7 @@
     cell.labelDayNum.textAlignment = NSTextAlignmentCenter;
     cell.labelDayNum.font = [UIFont systemFontOfSize:22];
     
-    NSMutableAttributedString *textYear = [[NSMutableAttributedString alloc] initWithString:@"90天"];
+    NSMutableAttributedString *textYear = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[[self.productListArray objectAtIndex:indexPath.row] productPeriod]]];
     NSRange numText = NSMakeRange(0, [[textYear string] rangeOfString:@"天"].location);
     [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:numText];
     NSRange dayText = NSMakeRange([[textYear string] length] - 1, 1);
@@ -120,7 +126,7 @@
     cell.labelMoney.textAlignment = NSTextAlignmentCenter;
     cell.labelMoney.font = [UIFont systemFontOfSize:22];
     
-    NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:@"1,000元"];
+    NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]]];
     NSRange moneyNum = NSMakeRange(0, [[moneyText string] rangeOfString:@"元"].location);
     [moneyText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:moneyNum];
     NSRange yuanStr = NSMakeRange([[moneyText string] length] - 1, 1);
@@ -137,7 +143,7 @@
     cell.labelQiTou.textColor = [UIColor zitihui];
     cell.labelQiTou.font = [UIFont systemFontOfSize:12];
     
-    cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", @"24.6万"];
+    cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%@万元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
     cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
     cell.labelSurplus.textColor = [UIColor zitihui];
     cell.labelSurplus.font = [UIFont systemFontOfSize:12];
@@ -178,7 +184,35 @@
     
     FDetailViewController *fdetailVC = [[FDetailViewController alloc] init];
     fdetailVC.estimate = YES;
+    fdetailVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
     [self.navigationController pushViewController:fdetailVC animated:YES];
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getProductList{
+    
+    NSDictionary *parameter = @{@"productType":@2,@"curPage":@1};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        NSArray *array = [responseObject objectForKey:@"Product"];
+        for (NSDictionary *dic in array) {
+            ProductListModel *productM = [[ProductListModel alloc] init];
+            [productM setValuesForKeysWithDictionary:dic];
+            [self.productListArray addObject:productM];
+        }
+        
+        [self showTableView];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
