@@ -76,6 +76,7 @@
     if (indexPath.row == 0) {
         
         NewHandViewController *newHandVC = [[NewHandViewController alloc] init];
+        newHandVC.signStr = NO;
         [self.navigationController pushViewController:newHandVC animated:YES];
         
     } else {

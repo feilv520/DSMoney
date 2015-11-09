@@ -17,6 +17,7 @@
 #import "SimpleDetailViewController.h"
 #import "RiskConditionsViewController.h"
 #import "RiskDisclosureViewController.h"
+#import "TeamDescriptionsViewController.h"
 
 @interface MoneyDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -323,24 +324,40 @@
         cell.labelLine.backgroundColor = [UIColor grayColor];
         cell.labelLine.alpha = 0.2;
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     if (indexPath.section == 4) {
+        
         if (indexPath.row == 0) {
+            
             SimpleDescriptionsViewController *simpleDesVC = [[SimpleDescriptionsViewController alloc] init];
             [self.navigationController pushViewController:simpleDesVC animated:YES];
+            
         } else if (indexPath.row == 1) {
+            
             SimpleDetailViewController *simpleDetailVC = [[SimpleDetailViewController alloc] init];
             [self.navigationController pushViewController:simpleDetailVC animated:YES];
+            
         } else if (indexPath.row == 2) {
+            
             RiskConditionsViewController *riskConVC = [[RiskConditionsViewController alloc] init];
             [self.navigationController pushViewController:riskConVC animated:YES];
+            
+        } else if (indexPath.row == 4) {
+            
+            RiskDisclosureViewController *riskDisVC = [[RiskDisclosureViewController alloc] init];
+            [self.navigationController pushViewController:riskDisVC animated:YES];
+            
         } else if (indexPath.row == 3) {
-            RiskDisclosureViewController *riskDis = [[RiskDisclosureViewController alloc] init];
-            [self.navigationController pushViewController:riskDis animated:YES];
+            
+            TeamDescriptionsViewController *teamVC = [[TeamDescriptionsViewController alloc] init];
+            [self.navigationController pushViewController:teamVC animated:YES];
+            
         }
 //        } else {
 //            

@@ -34,7 +34,7 @@
 
 - (void)contentShow
 {
-    UIView *viewWhite = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 150) backgroundColor:[UIColor whiteColor]];
+    UIView *viewWhite = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewWhite];
     viewWhite.backgroundColor = [UIColor whiteColor];
     
@@ -45,36 +45,27 @@
     [viewWhite addSubview:labelLine1];
     [self labelLineShow:labelLine1];
     
-    UILabel *documentStyle = [CreatView creatWithLabelFrame:CGRectMake(10, 50, 60, 49.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"证件类型"];
+    UILabel *documentStyle = [CreatView creatWithLabelFrame:CGRectMake(10, 50, 60, 49.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"身份证号"];
     [viewWhite addSubview:documentStyle];
     
     UILabel *labelLine2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 99.5, WIDTH_CONTROLLER_DEFAULT - 20, 0.5)];
     [viewWhite addSubview:labelLine2];
     [self labelLineShow:labelLine2];
     
-    UILabel *documentNum = [CreatView creatWithLabelFrame:CGRectMake(10, 100, 60, 49.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"证件号码"];
-    [viewWhite addSubview:documentNum];
-    
-    UILabel *labelLine3 = [[UILabel alloc] initWithFrame:CGRectMake(10, 149.5, WIDTH_CONTROLLER_DEFAULT - 20, 0.5)];
-    [viewWhite addSubview:labelLine3];
-    [self labelLineShow:labelLine3];
-    
     _textField1 = [CreatView creatWithfFrame:CGRectMake(90, 10, WIDTH_CONTROLLER_DEFAULT - 100, 30) setPlaceholder:@"真实姓名" setTintColor:[UIColor grayColor]];
     [viewWhite addSubview:_textField1];
+    _textField1.textColor = [UIColor zitihui];
     _textField1.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [_textField1 addTarget:self action:@selector(textFieldCanEdit:) forControlEvents:UIControlEventEditingChanged];
     
-    _textField2 = [CreatView creatWithfFrame:CGRectMake(90, 60, WIDTH_CONTROLLER_DEFAULT - 100, 30) setPlaceholder:@"请选择证件类型" setTintColor:[UIColor grayColor]];
+    _textField2 = [CreatView creatWithfFrame:CGRectMake(90, 60, WIDTH_CONTROLLER_DEFAULT - 100, 30) setPlaceholder:@"请输入身份证号" setTintColor:[UIColor grayColor]];
     [viewWhite addSubview:_textField2];
+    _textField2.textColor = [UIColor zitihui];
+    _textField2.keyboardType = UIKeyboardTypeNumberPad;
     _textField2.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [_textField2 addTarget:self action:@selector(textFieldCanEdit:) forControlEvents:UIControlEventEditingChanged];
     
-    _textField3 = [CreatView creatWithfFrame:CGRectMake(90, 110, WIDTH_CONTROLLER_DEFAULT - 100, 30) setPlaceholder:@"请输入身份证号码" setTintColor:[UIColor grayColor]];
-    [viewWhite addSubview:_textField3];
-    _textField3.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-    [_textField3 addTarget:self action:@selector(textFieldCanEdit:) forControlEvents:UIControlEventEditingChanged];
-    
-    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT * (210.0 / 667.0), WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"认证"];
+    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT * (150.0 / 667.0), WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"认证"];
     [self.view addSubview:buttonNext];
     buttonNext.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
@@ -83,7 +74,7 @@
 
 - (void)textFieldCanEdit:(UITextField *)textField
 {
-    if ([_textField1.text length] > 0 && [_textField2.text length] > 0 && [_textField3.text length] > 0) {
+    if ([_textField1.text length] > 0 && [_textField2.text length] > 0) {
         
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -113,6 +104,11 @@
 {
     label.alpha = 0.2;
     label.backgroundColor = [UIColor grayColor];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

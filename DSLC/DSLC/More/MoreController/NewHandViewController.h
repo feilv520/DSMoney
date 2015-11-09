@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface NewHandViewController : BaseViewController
-
+@property (nonatomic) BOOL signStr;
 @end

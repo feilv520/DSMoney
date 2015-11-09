@@ -26,6 +26,8 @@
 #import "YesterdayViewController.h"
 #import "NewRedBagViewController.h"
 #import "LoginViewController.h"
+#import "MyChoosePlanner.h"
+#import "MyAlreadyBindingBank.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -312,8 +314,13 @@
 //邀请按钮
 - (void)inviteButton:(UIButton *)button
 {
-    MyPlannerViewController *myPlannerVC = [[MyPlannerViewController alloc] init];
-    [self.navigationController pushViewController:myPlannerVC animated:YES];
+//    如果已经有字的理财师直接跳转到我的理财师
+//    MyPlannerViewController *myPlannerVC = [[MyPlannerViewController alloc] init];
+//    [self.navigationController pushViewController:myPlannerVC animated:YES];
+    
+//    如果还没有自己的理财师 跳转到可选理财师的页面
+    MyChoosePlanner *myChoose = [[MyChoosePlanner alloc] init];
+    [self.navigationController pushViewController:myChoose animated:YES];
 }
 
 //充值按钮

@@ -8,8 +8,26 @@
 
 #import "BigMoneyViewController.h"
 #import "BaseViewController.h"
+#import "MendDealCell.h"
+#import "HistoryMemoryViewController.h"
+#import "ApplyScheduleViewController.h"
 
-@interface BigMoneyViewController ()
+@interface BigMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+
+{
+    UITableView *_tableView;
+    
+    NSArray *nameArray;
+    NSArray *textArray;
+    
+    UIButton *buttonApply;
+    
+    UITextField *fileldName;
+    UITextField *fieldBank;
+    UITextField *fieldBankCard;
+    UITextField *fieldPhoneNum;
+    UITextField *fieldMoney;
+}
 
 @end
 
@@ -23,6 +41,143 @@
 
     [self setTitleString:@"大额充值申请"];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"历史记录" style:UIBarButtonItemStylePlain target:self action:@selector(rightBar:)];
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:15], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+    
+    [self tableViewShow];
+}
+
+- (void)tableViewShow
+{
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
+    [self.view addSubview:_tableView];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    _tableView.backgroundColor = [UIColor huibai];
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
+    [_tableView registerNib:[UINib nibWithNibName:@"MendDealCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    
+    nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"转账金额"];
+    textArray = @[@"请输入真实姓名", @"选择发卡银行", @"银行卡号", @"预留银行开户手机号", @"转账额度"];
+    
+    buttonApply = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"申请"];
+    [_tableView.tableFooterView addSubview:buttonApply];
+    buttonApply.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+    [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    [buttonApply addTarget:self action:@selector(applyBigMoney:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 5;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MendDealCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    
+    cell.labelLeft.text = [nameArray objectAtIndex:indexPath.row];
+    cell.labelLeft.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    
+    cell.textField.placeholder = [textArray objectAtIndex:indexPath.row];
+    cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+    cell.textField.textColor = [UIColor zitihui];
+    cell.textField.tintColor = [UIColor grayColor];
+    cell.textField.delegate = self;
+    cell.textField.tag = indexPath.row + 600;
+    [cell.textField addTarget:self action:@selector(bigMoneyCashMoney:) forControlEvents:UIControlEventEditingChanged];
+    
+    if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
+        
+        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 602) {
+
+        if (range.location == 19) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+        
+    } else if (textField.tag == 603) {
+
+        if (range.location == 11) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+        
+    } else {
+        
+        return YES;
+    }
+}
+
+//编辑绑定判断
+- (void)bigMoneyCashMoney:(UITextField *)textField
+{
+    fileldName = (UITextField *)[self.view viewWithTag:600];
+    fieldBank = (UITextField *)[self.view viewWithTag:601];
+    fieldBankCard = (UITextField *)[self.view viewWithTag:602];
+    fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
+    fieldMoney = (UITextField *)[self.view viewWithTag:604];
+    
+    if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 19 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0) {
+        
+        [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    }
+}
+
+//申请按钮
+- (void)applyBigMoney:(UIButton *)button
+{
+    if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 19 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0) {
+        
+        ApplyScheduleViewController *scheduleVC = [[ApplyScheduleViewController alloc] init];
+        [self.view endEditing:YES];
+        [self.navigationController pushViewController:scheduleVC animated:YES];
+    }
+}
+
+//历史记录
+- (void)rightBar:(UIBarButtonItem *)bar
+{
+    HistoryMemoryViewController *historyVC = [[HistoryMemoryViewController alloc] init];
+    [self.navigationController pushViewController:historyVC animated:YES];
+}
+
+//回收键盘
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > 0) {
+        
+        [self.view endEditing:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

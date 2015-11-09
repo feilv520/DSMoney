@@ -13,6 +13,7 @@
 #import "MyInviteCell.h"
 #import "InviteNumCell.h"
 #import "InviteNameCell.h"
+#import "InviteNameViewController.h"
 
 @interface MyInvitationViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -257,7 +258,8 @@
 //邀请按钮
 - (void)buttonInvite:(UIButton *)button
 {
-    NSLog(@"邀请");
+    InviteNameViewController *inviteName = [[InviteNameViewController alloc] init];
+    [self.navigationController pushViewController:inviteName animated:YES];
 }
 
 #pragma mark 网络请求方法

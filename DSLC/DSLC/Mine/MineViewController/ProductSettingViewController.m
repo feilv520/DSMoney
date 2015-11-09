@@ -128,12 +128,16 @@
             [wanYuanStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:wanZiStr];
             [cell.allDay setAttributedText:wanYuanStr];
             cell.allDay.textAlignment = NSTextAlignmentCenter;
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
     } else if (indexPath.section == 1) {
+        
         if (indexPath.row == 0) {
             SettingTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"title"];
             cell.AllMoney.hidden = YES;
+            
             return cell;
         } else {
             SettingPieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pie"];
@@ -149,6 +153,8 @@
             return cell;
         } else {
             SettingGetDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"getDetail"];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
     }

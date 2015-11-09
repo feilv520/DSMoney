@@ -23,6 +23,7 @@
     UIImageView *imageHead;
     UIImageView *imageCrown;
     CGFloat height;
+    UILabel *labelName;
 }
 
 @end
@@ -54,8 +55,8 @@
 
 - (void)tableViewShow
 {
-    titleArr = @[@[@"共为客户赚取金额"], @[@"以服务客户人数"]];
-    monAndPeoArr = @[@[@"3,803.00元"], @[@"237,438人"]];
+    titleArr = @[@"邀请码", @"共为客户赚取金额", @"以服务客户人数", @"累计投资总额"];
+    monAndPeoArr = @[@"867543", @"3,803.00元", @"237,438人", @"237,438元"];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
@@ -68,8 +69,12 @@
     viewHead.backgroundColor = [UIColor whiteColor];
     [self viewHeadShow];
     
-    UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
+    UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 50)];
     _tableView.tableFooterView = viewFoot;
+    
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(20, 10, WIDTH_CONTROLLER_DEFAULT - 40, 40) backgroundColor:[UIColor huibai] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"26年专职理财顾问,私人银行级的资产配置,为客户提供中立客观的真诚服务。"];
+    [viewFoot addSubview:labelAlert];
+    labelAlert.numberOfLines = 2;
     
     [_tableView registerNib:[UINib nibWithNibName:@"MyPlannerCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
@@ -84,13 +89,17 @@
 //    让子类自动布局
     imageBottom.autoresizesSubviews = YES;
     
-    imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (144.0 / 375.0), 29, WIDTH_CONTROLLER_DEFAULT * (87.0 / 375.0), WIDTH_CONTROLLER_DEFAULT * (87.0 / 375.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658"]];
+    imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 40, 25, 80, 80) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658"]];
     [imageBottom addSubview:imageHead];
     imageHead.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
-    imageCrown = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (65.0 / 375.0), 0, WIDTH_CONTROLLER_DEFAULT * (20.0 / 375.0), WIDTH_CONTROLLER_DEFAULT * (15.0 / 375.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"huangguan"]];
+    imageCrown = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (60.0 / 375.0), 0, WIDTH_CONTROLLER_DEFAULT * (20.0 / 375.0), WIDTH_CONTROLLER_DEFAULT * (15.0 / 375.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"huangguan"]];
     [imageHead addSubview:imageCrown];
     imageCrown.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    
+    labelName = [CreatView creatWithLabelFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (115.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"林海峰"];
+    [imageBottom addSubview:labelName];
+    labelName.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
     UIButton *buttonAsk = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (26.0 / 375.0), 156, WIDTH_CONTROLLER_DEFAULT * (136.0 / 375.0), 37) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"咨询"];
     [imageBottom addSubview:buttonAsk];
@@ -112,61 +121,32 @@
     [butAlready addTarget:self action:@selector(alreadyApplyForButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        
-        return 0;
-        
-    } else {
-        
-        return HEIGHT_CONTROLLER_DEFAULT * (7.0 / 667.0);
-    }
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 2;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MyPlannerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    if (cell == nil) {
-        
-        cell = [[MyPlannerCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
-    }
-    
-    cell.labelTitle.text = [[titleArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
     cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    cell.moneyAndPeople.text = [[monAndPeoArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    cell.moneyAndPeople.text = [monAndPeoArr objectAtIndex:indexPath.row];
     cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.moneyAndPeople.textAlignment = NSTextAlignmentRight;
     
-    if (indexPath.section == 0) {
+    if (indexPath.row == 1) {
         
         cell.moneyAndPeople.textColor = [UIColor daohanglan];
         
-    } else {
-        
-        cell.moneyAndPeople.textColor = [UIColor zitihui];
-        cell.labelLine.hidden = YES;
     }
-    
-    cell.labelLine.backgroundColor = [UIColor grayColor];
-    cell.labelLine.alpha = 0.2;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

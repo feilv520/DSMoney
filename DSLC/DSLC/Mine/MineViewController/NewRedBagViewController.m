@@ -8,6 +8,7 @@
 
 #import "NewRedBagViewController.h"
 #import "NewRedBagCell.h"
+#import "NewHandViewController.h"
 
 @interface NewRedBagViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -17,6 +18,9 @@
     NSArray *titleArr;
     NSArray *imagePic;
     NSArray *styleArr;
+    
+    UIButton *butBlack;
+    UILabel *labelGet;
 }
 
 @end
@@ -49,8 +53,8 @@
     _tableView.separatorColor = [UIColor clearColor];
     [_tableView registerNib:[UINib nibWithNibName:@"NewRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    UILabel *labelGet = [CreatView creatWithLabelFrame:CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"累计获得红包金额"];
-    [viewHead addSubview:labelGet];
+    UILabel *labelget = [CreatView creatWithLabelFrame:CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"累计获得红包金额"];
+    [viewHead addSubview:labelget];
     
     labelMoney = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 + 10, 10, WIDTH_CONTROLLER_DEFAULT/2 - 20, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"999元"];
     [viewHead addSubview:labelMoney];
@@ -97,9 +101,42 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC.view addSubview:butBlack];
+    [butBlack setBackgroundImage:[UIImage imageNamed:@"钻石红包"] forState:UIControlStateNormal];
+    [butBlack addTarget:self action:@selector(openFinish:) forControlEvents:UIControlEventTouchUpInside];
+    
+    labelGet = [[UILabel alloc] initWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/3 + 40, butBlack.frame.size.width, 70)];
+    [butBlack addSubview:labelGet];
+    labelGet.textAlignment = NSTextAlignmentCenter;
+    labelGet.backgroundColor = [UIColor clearColor];
+    NSMutableAttributedString *frontStr = [[NSMutableAttributedString alloc] initWithString:@"恭喜您获得100元现金红包\n\n已转入账户余额"];
+    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[@"恭喜您获得100元现金红包\n\n已转入账户余额" rangeOfString:@"恭喜您获得"]];
+    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[@"恭喜您获得100元现金红包\n\n已转入账户余额" rangeOfString:@"元现金红包"]];
+    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:[@"恭喜您获得100元现金红包\n\n已转入账户余额" rangeOfString:@"已转入账户余额"]];
+    //    取到恭~0的长度 减掉5 就剩100
+    NSRange shuZi = NSMakeRange(5, [[frontStr string] rangeOfString:@"元"].location - 5);
+    [frontStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
+    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:25] range:shuZi];
+    [labelGet setAttributedText:frontStr];
+    labelGet.numberOfLines = 3;
+
+}
+
+- (void)openFinish:(UIButton *)button
+{
+    [button removeFromSuperview];
+    button = nil;
+}
+
 - (void)redBagExplain:(UIBarButtonItem *)bar
 {
-    
+    NewHandViewController *newHandVC = [[NewHandViewController alloc] init];
+    newHandVC.signStr = YES;
+    [self.navigationController pushViewController:newHandVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

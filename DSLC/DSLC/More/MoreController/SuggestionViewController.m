@@ -15,6 +15,9 @@
     UIPlaceHolderTextView *_textView;
     UIButton *butMakeSure;
     UILabel *labelStat;
+    
+    UIButton *buttonBlack;
+    UIView *viewMakeSure;
 }
 
 @end
@@ -120,12 +123,59 @@
 {
     if (_textView.text.length > 0 && _textView.text.length <= 500) {
         
-        [self.navigationController popViewControllerAnimated:YES];
+        buttonBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [app.tabBarVC.view addSubview:buttonBlack];
+        buttonBlack.alpha = 0.3;
+        [buttonBlack addTarget:self action:@selector(suggestionButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
+        
+        viewMakeSure = [CreatView creatViewWithFrame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 - 80, WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT/4 - 20) backgroundColor:[UIColor whiteColor]];
+        [app.tabBarVC.view addSubview:viewMakeSure];
+        viewMakeSure.layer.cornerRadius = 3;
+        viewMakeSure.layer.masksToBounds = YES;
+        
+        [_textView resignFirstResponder];
+        
+        CGFloat viewWidth = viewMakeSure.frame.size.width;
+        
+        UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 25, viewWidth, 50) backgroundColor:[UIColor whiteColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+        [viewMakeSure addSubview:labelAlert];
+        labelAlert.numberOfLines = 2;
+        
+        NSMutableAttributedString *alertStr = [[NSMutableAttributedString alloc] initWithString:@"反馈已发送!\n感谢您的宝贵意见"];
+        [alertStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:[@"反馈已发送!\n感谢您的宝贵意见" rangeOfString:@"反馈已发送!"]];
+        [alertStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:[@"反馈已发送!\n感谢您的宝贵意见" rangeOfString:@"感谢您的宝贵意见"]];
+        [labelAlert setAttributedText:alertStr];
+        
+        UIButton *buttonDing = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, 90, viewWidth - 40, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"好的"];
+        [viewMakeSure addSubview:buttonDing];
+        buttonDing.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [buttonDing setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [buttonDing setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        [buttonDing addTarget:self action:@selector(suggestionButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewWidth - 25, 5, 20, 20) backgroundColor:[UIColor whiteColor] textColor:nil titleText:nil];
+        [viewMakeSure addSubview:butCancle];
+        [butCancle setBackgroundImage:[UIImage imageNamed:@"cuo"] forState:UIControlStateNormal];
+        [butCancle setBackgroundImage:[UIImage imageNamed:@"cuo"] forState:UIControlStateHighlighted];
+        [butCancle addTarget:self action:@selector(suggestionButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
         
     } else {
         
         
     }
+}
+
+//点击黑色遮罩 弹框消失
+- (void)suggestionButtonDisappear:(UIButton *)button
+{
+    [buttonBlack removeFromSuperview];
+    [viewMakeSure removeFromSuperview];
+    
+    buttonBlack = nil;
+    viewMakeSure = nil;
+    
+    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

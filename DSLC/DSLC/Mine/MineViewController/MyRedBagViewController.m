@@ -14,6 +14,7 @@
 #import "GrabBagCell.h"
 #import "WinAPrizeViewController.h"
 #import "NewRedBagCell.h"
+#import "NewHandViewController.h"
 
 @interface MyRedBagViewController () <UITableViewDataSource, UITableViewDelegate>
 

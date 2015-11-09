@@ -232,6 +232,21 @@
 		81B18E201BE761B600D448FA /* LastEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B18E1F1BE761B600D448FA /* LastEmailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81B18E241BE77EA700D448FA /* EmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B18E221BE77EA700D448FA /* EmailCell.m */; settings = {ASSET_TAGS = (); }; };
 		81B18E251BE77EA700D448FA /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B18E231BE77EA700D448FA /* EmailCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81B674011BF0873B007CEF51 /* InviteNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B674001BF0873B007CEF51 /* InviteNameViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81B674041BF0A608007CEF51 /* HistoryMemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B674031BF0A608007CEF51 /* HistoryMemoryViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81B674091BF0A780007CEF51 /* HistoryMemoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B674071BF0A780007CEF51 /* HistoryMemoryCell.m */; settings = {ASSET_TAGS = (); }; };
+		81B6740A1BF0A780007CEF51 /* HistoryMemoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B674081BF0A780007CEF51 /* HistoryMemoryCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81B6740D1BF0AE26007CEF51 /* ApplyScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B6740C1BF0AE26007CEF51 /* ApplyScheduleViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81B674191BF0AFEB007CEF51 /* 蓝框@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B6740F1BF0AFEB007CEF51 /* 蓝框@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81B6741A1BF0AFEB007CEF51 /* 蓝框@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674101BF0AFEB007CEF51 /* 蓝框@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81B6741B1BF0AFEB007CEF51 /* 红框@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674111BF0AFEB007CEF51 /* 红框@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81B6741C1BF0AFEB007CEF51 /* 红框@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674121BF0AFEB007CEF51 /* 红框@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81B6741D1BF0AFEB007CEF51 /* 流程@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674131BF0AFEB007CEF51 /* 流程@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81B6741E1BF0AFEB007CEF51 /* 流程@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674141BF0AFEB007CEF51 /* 流程@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81B6741F1BF0AFEB007CEF51 /* 蓝色完成@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674151BF0AFEB007CEF51 /* 蓝色完成@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81B674201BF0AFEB007CEF51 /* 蓝色完成@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674161BF0AFEB007CEF51 /* 蓝色完成@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81B674211BF0AFEB007CEF51 /* yuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674171BF0AFEB007CEF51 /* yuan@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81B674221BF0AFEB007CEF51 /* yuan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674181BF0AFEB007CEF51 /* yuan@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81BA1BF41BD4CB4300DBA5BE /* WinAPrizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BA1BF31BD4CB4300DBA5BE /* WinAPrizeViewController.m */; };
 		81BA1BF81BD4DBAA00DBA5BE /* WinAPrizeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BA1BF61BD4DBAA00DBA5BE /* WinAPrizeCell.m */; };
 		81BA1BF91BD4DBAA00DBA5BE /* WinAPrizeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81BA1BF71BD4DBAA00DBA5BE /* WinAPrizeCell.xib */; };
@@ -276,6 +291,12 @@
 		81D704031BE0D0D40074DF30 /* NewbieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D704021BE0D0D40074DF30 /* NewbieViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD991BC6427800A15E01 /* MineViewController.m */; };
 		81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8ADA21BC646D100A15E01 /* FinancingViewController.m */; };
+		81E831061BF0469F00127EE8 /* MyChoosePlanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E831051BF0469F00127EE8 /* MyChoosePlanner.m */; settings = {ASSET_TAGS = (); }; };
+		81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */; settings = {ASSET_TAGS = (); }; };
+		81E8310B1BF0488400127EE8 /* MyChoosePlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81E8310E1BF0695400127EE8 /* MyAlreadyBindingBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E8310D1BF0695400127EE8 /* MyAlreadyBindingBank.m */; settings = {ASSET_TAGS = (); }; };
+		81E831121BF06AFB00127EE8 /* MyAlreadyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E831101BF06AFB00127EE8 /* MyAlreadyCell.m */; settings = {ASSET_TAGS = (); }; };
+		81E831131BF06AFB00127EE8 /* MyAlreadyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E831111BF06AFB00127EE8 /* MyAlreadyCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81E90EF41BCB42D7004BA8A5 /* 750产品详111.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E90EF31BCB42D7004BA8A5 /* 750产品详111.png */; };
 		81E90EF61BCB4300004BA8A5 /* 750产品111.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E90EF51BCB4300004BA8A5 /* 750产品111.png */; };
 		81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E90EF71BCB430B004BA8A5 /* 750chanpin.png */; };
@@ -843,6 +864,25 @@
 		81B18E211BE77EA700D448FA /* EmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailCell.h; sourceTree = "<group>"; };
 		81B18E221BE77EA700D448FA /* EmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailCell.m; sourceTree = "<group>"; };
 		81B18E231BE77EA700D448FA /* EmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailCell.xib; sourceTree = "<group>"; };
+		81B673FF1BF0873B007CEF51 /* InviteNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteNameViewController.h; sourceTree = "<group>"; };
+		81B674001BF0873B007CEF51 /* InviteNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteNameViewController.m; sourceTree = "<group>"; };
+		81B674021BF0A608007CEF51 /* HistoryMemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryMemoryViewController.h; sourceTree = "<group>"; };
+		81B674031BF0A608007CEF51 /* HistoryMemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryMemoryViewController.m; sourceTree = "<group>"; };
+		81B674061BF0A780007CEF51 /* HistoryMemoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryMemoryCell.h; sourceTree = "<group>"; };
+		81B674071BF0A780007CEF51 /* HistoryMemoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryMemoryCell.m; sourceTree = "<group>"; };
+		81B674081BF0A780007CEF51 /* HistoryMemoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryMemoryCell.xib; sourceTree = "<group>"; };
+		81B6740B1BF0AE26007CEF51 /* ApplyScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyScheduleViewController.h; sourceTree = "<group>"; };
+		81B6740C1BF0AE26007CEF51 /* ApplyScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyScheduleViewController.m; sourceTree = "<group>"; };
+		81B6740F1BF0AFEB007CEF51 /* 蓝框@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝框@2x.png"; sourceTree = "<group>"; };
+		81B674101BF0AFEB007CEF51 /* 蓝框@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝框@3x.png"; sourceTree = "<group>"; };
+		81B674111BF0AFEB007CEF51 /* 红框@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "红框@2x.png"; sourceTree = "<group>"; };
+		81B674121BF0AFEB007CEF51 /* 红框@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "红框@3x.png"; sourceTree = "<group>"; };
+		81B674131BF0AFEB007CEF51 /* 流程@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "流程@2x.png"; sourceTree = "<group>"; };
+		81B674141BF0AFEB007CEF51 /* 流程@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "流程@3x.png"; sourceTree = "<group>"; };
+		81B674151BF0AFEB007CEF51 /* 蓝色完成@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝色完成@2x.png"; sourceTree = "<group>"; };
+		81B674161BF0AFEB007CEF51 /* 蓝色完成@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝色完成@3x.png"; sourceTree = "<group>"; };
+		81B674171BF0AFEB007CEF51 /* yuan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yuan@2x.png"; sourceTree = "<group>"; };
+		81B674181BF0AFEB007CEF51 /* yuan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yuan@3x.png"; sourceTree = "<group>"; };
 		81BA1BF21BD4CB4300DBA5BE /* WinAPrizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinAPrizeViewController.h; sourceTree = "<group>"; };
 		81BA1BF31BD4CB4300DBA5BE /* WinAPrizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinAPrizeViewController.m; sourceTree = "<group>"; };
 		81BA1BF51BD4DBAA00DBA5BE /* WinAPrizeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinAPrizeCell.h; sourceTree = "<group>"; };
@@ -907,6 +947,16 @@
 		81D8AD991BC6427800A15E01 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		81D8ADA11BC646D100A15E01 /* FinancingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingViewController.h; sourceTree = "<group>"; };
 		81D8ADA21BC646D100A15E01 /* FinancingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingViewController.m; sourceTree = "<group>"; };
+		81E831041BF0469F00127EE8 /* MyChoosePlanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChoosePlanner.h; sourceTree = "<group>"; };
+		81E831051BF0469F00127EE8 /* MyChoosePlanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyChoosePlanner.m; sourceTree = "<group>"; };
+		81E831071BF0488400127EE8 /* MyChoosePlannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChoosePlannerCell.h; sourceTree = "<group>"; };
+		81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyChoosePlannerCell.m; sourceTree = "<group>"; };
+		81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyChoosePlannerCell.xib; sourceTree = "<group>"; };
+		81E8310C1BF0695400127EE8 /* MyAlreadyBindingBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlreadyBindingBank.h; sourceTree = "<group>"; };
+		81E8310D1BF0695400127EE8 /* MyAlreadyBindingBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlreadyBindingBank.m; sourceTree = "<group>"; };
+		81E8310F1BF06AFB00127EE8 /* MyAlreadyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlreadyCell.h; sourceTree = "<group>"; };
+		81E831101BF06AFB00127EE8 /* MyAlreadyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlreadyCell.m; sourceTree = "<group>"; };
+		81E831111BF06AFB00127EE8 /* MyAlreadyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyAlreadyCell.xib; sourceTree = "<group>"; };
 		81E90EF31BCB42D7004BA8A5 /* 750产品详111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "750产品详111.png"; sourceTree = "<group>"; };
 		81E90EF51BCB4300004BA8A5 /* 750产品111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "750产品111.png"; sourceTree = "<group>"; };
 		81E90EF71BCB430B004BA8A5 /* 750chanpin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 750chanpin.png; sourceTree = "<group>"; };
@@ -1363,6 +1413,9 @@
 				817E33751BD7303200D05103 /* MyPlannerCell.h */,
 				817E33761BD7303200D05103 /* MyPlannerCell.m */,
 				817E33771BD7303200D05103 /* MyPlannerCell.xib */,
+				81E831071BF0488400127EE8 /* MyChoosePlannerCell.h */,
+				81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */,
+				81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */,
 			);
 			name = "我的理财师";
 			sourceTree = "<group>";
@@ -1378,6 +1431,33 @@
 				818523B61BE31B80002FC653 /* 组-14@3x.png */,
 			);
 			path = "产品";
+			sourceTree = "<group>";
+		};
+		81B674051BF0A75E007CEF51 /* 大额充值 */ = {
+			isa = PBXGroup;
+			children = (
+				81B674061BF0A780007CEF51 /* HistoryMemoryCell.h */,
+				81B674071BF0A780007CEF51 /* HistoryMemoryCell.m */,
+				81B674081BF0A780007CEF51 /* HistoryMemoryCell.xib */,
+			);
+			path = "大额充值";
+			sourceTree = "<group>";
+		};
+		81B6740E1BF0AFEB007CEF51 /* 申请进度 */ = {
+			isa = PBXGroup;
+			children = (
+				81B6740F1BF0AFEB007CEF51 /* 蓝框@2x.png */,
+				81B674101BF0AFEB007CEF51 /* 蓝框@3x.png */,
+				81B674111BF0AFEB007CEF51 /* 红框@2x.png */,
+				81B674121BF0AFEB007CEF51 /* 红框@3x.png */,
+				81B674131BF0AFEB007CEF51 /* 流程@2x.png */,
+				81B674141BF0AFEB007CEF51 /* 流程@3x.png */,
+				81B674151BF0AFEB007CEF51 /* 蓝色完成@2x.png */,
+				81B674161BF0AFEB007CEF51 /* 蓝色完成@3x.png */,
+				81B674171BF0AFEB007CEF51 /* yuan@2x.png */,
+				81B674181BF0AFEB007CEF51 /* yuan@3x.png */,
+			);
+			path = "申请进度";
 			sourceTree = "<group>";
 		};
 		81BA1BFF1BD4E1ED00DBA5BE /* computerImage */ = {
@@ -1465,6 +1545,7 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				81B6740E1BF0AFEB007CEF51 /* 申请进度 */,
 				81AC90B91BEC7F9900232404 /* 提示@2x.png */,
 				81AC90BA1BEC7F9900232404 /* 提示@3x.png */,
 				8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */,
@@ -1610,6 +1691,8 @@
 				8D3125C91BD740D400143B71 /* 充值 */,
 				81D8AD981BC6427800A15E01 /* MineViewController.h */,
 				81D8AD991BC6427800A15E01 /* MineViewController.m */,
+				81E831041BF0469F00127EE8 /* MyChoosePlanner.h */,
+				81E831051BF0469F00127EE8 /* MyChoosePlanner.m */,
 				817E33721BD72D6800D05103 /* MyPlannerViewController.h */,
 				817E33731BD72D6800D05103 /* MyPlannerViewController.m */,
 				818063AC1BD6437D00E83492 /* PayMoneyViewController.h */,
@@ -1620,6 +1703,10 @@
 				8190A3041BD876EB002B53F5 /* AddCardViewController.m */,
 				817E33961BD772A700D05103 /* BigMoneyViewController.h */,
 				817E33971BD772A700D05103 /* BigMoneyViewController.m */,
+				81B6740B1BF0AE26007CEF51 /* ApplyScheduleViewController.h */,
+				81B6740C1BF0AE26007CEF51 /* ApplyScheduleViewController.m */,
+				81B674021BF0A608007CEF51 /* HistoryMemoryViewController.h */,
+				81B674031BF0A608007CEF51 /* HistoryMemoryViewController.m */,
 				81379F271BEB0272002CDB16 /* NewRedBagViewController.h */,
 				81379F281BEB0272002CDB16 /* NewRedBagViewController.m */,
 				819C3AB41BD47E57008D2CFD /* MyRedBagViewController.h */,
@@ -1655,6 +1742,7 @@
 		81D8AD961BC640E900A15E01 /* MineView */ = {
 			isa = PBXGroup;
 			children = (
+				81B674051BF0A75E007CEF51 /* 大额充值 */,
 				817E33A31BD7830E00D05103 /* 我的理财师 */,
 				817E33A21BD7819300D05103 /* 充值Cell */,
 				8D3125D71BD745EC00143B71 /* 提现 */,
@@ -1916,6 +2004,8 @@
 			children = (
 				81ED03121BD0C877005F4B02 /* MyBankViewController.h */,
 				81ED03131BD0C877005F4B02 /* MyBankViewController.m */,
+				81E8310C1BF0695400127EE8 /* MyAlreadyBindingBank.h */,
+				81E8310D1BF0695400127EE8 /* MyAlreadyBindingBank.m */,
 				81ED031A1BD0DA35005F4B02 /* AddBankViewController.h */,
 				81ED031B1BD0DA35005F4B02 /* AddBankViewController.m */,
 				818063A91BD61A7E00E83492 /* VerifyViewController.h */,
@@ -1961,6 +2051,8 @@
 			children = (
 				818063951BD5D3C700E83492 /* MyInvitationViewController.h */,
 				818063961BD5D3C700E83492 /* MyInvitationViewController.m */,
+				81B673FF1BF0873B007CEF51 /* InviteNameViewController.h */,
+				81B674001BF0873B007CEF51 /* InviteNameViewController.m */,
 			);
 			name = "好友邀请";
 			sourceTree = "<group>";
@@ -2051,6 +2143,9 @@
 				81ED03081BD09BC8005F4B02 /* MyInformationCell.h */,
 				81ED03091BD09BC8005F4B02 /* MyInformationCell.m */,
 				81ED030A1BD09BC8005F4B02 /* MyInformationCell.xib */,
+				81E8310F1BF06AFB00127EE8 /* MyAlreadyCell.h */,
+				81E831101BF06AFB00127EE8 /* MyAlreadyCell.m */,
+				81E831111BF06AFB00127EE8 /* MyAlreadyCell.xib */,
 			);
 			name = "我的资料";
 			sourceTree = "<group>";
@@ -2600,6 +2695,7 @@
 			files = (
 				8D9011B01BD6337C00E5D62A /* 4@3x.png in Resources */,
 				817DD4AB1BCF547E00042B09 /* zhanghu@3x.png in Resources */,
+				81B6741B1BF0AFEB007CEF51 /* 红框@2x.png in Resources */,
 				8D0AE8011BE09F6800D9D50C /* RegisterProcess.xib in Resources */,
 				81701C0C1BE701C300B45BAA /* MendDealCell.xib in Resources */,
 				8D90117B1BD5D8FA00E5D62A /* TransactionViewController.xib in Resources */,
@@ -2633,11 +2729,13 @@
 				817DD4941BCF547E00042B09 /* chongzhi@2x.png in Resources */,
 				817DD49E1BCF547E00042B09 /* jiaoyi@2x.png in Resources */,
 				8D5AEB491BC8F560004FBDD3 /* CenturyGothic.TTF in Resources */,
+				81B6740A1BF0A780007CEF51 /* HistoryMemoryCell.xib in Resources */,
 				8D5AEB4B1BC8FCA3004FBDD3 /* SelectionOfSafe.xib in Resources */,
 				8D88A4DE1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib in Resources */,
 				8D9011A71BD6337C00E5D62A /* 12@2x.png in Resources */,
 				81BA1C101BD4FE2600DBA5BE /* MyNewsCell.xib in Resources */,
 				8D9011A41BD6337C00E5D62A /* 10@3x.png in Resources */,
+				81B674191BF0AFEB007CEF51 /* 蓝框@2x.png in Resources */,
 				8D3A2FE11BE7100000913DEC /* FDescriptionViewController.xib in Resources */,
 				8D3F95EA1BE2188500013A8E /* yueyuesheng@2x.png in Resources */,
 				81C8BBC81BDA2F8D005B9DFF /* lianxikefu@2x.png in Resources */,
@@ -2704,6 +2802,7 @@
 				8175BE911BE9E3730044026E /* ChooseRedBagCell.xib in Resources */,
 				8D5AEB3E1BC8DE23004FBDD3 /* SelectionOfThing.xib in Resources */,
 				81E90EF61BCB4300004BA8A5 /* 750产品111.png in Resources */,
+				81B6741A1BF0AFEB007CEF51 /* 蓝框@3x.png in Resources */,
 				8175BE9C1BE9E5760044026E /* 组-21-拷贝-14@2x.png in Resources */,
 				8D9011AB1BD6337C00E5D62A /* 2@2x.png in Resources */,
 				8D3F95E01BE20EF200013A8E /* YesterdayViewController.xib in Resources */,
@@ -2721,15 +2820,19 @@
 				8162D1231BE1BD3300CACAB6 /* OtherProjectCell.xib in Resources */,
 				818523BA1BE31B80002FC653 /* 已售罄@3x.png in Resources */,
 				8D9011B81BD6337C00E5D62A /* 8@3x.png in Resources */,
+				81E8310B1BF0488400127EE8 /* MyChoosePlannerCell.xib in Resources */,
 				8D0AE7F81BE09CE500D9D50C /* register-2@2x.png in Resources */,
+				81B6741F1BF0AFEB007CEF51 /* 蓝色完成@2x.png in Resources */,
 				8191E22E1BDE00DC000A6E8C /* cuo@2x.png in Resources */,
 				8DEDE1D01BCCFFA5008086D3 /* blueyuan@2x.png in Resources */,
 				8175BEB01BE9F2F50044026E /* QQ空间@2x.png in Resources */,
 				8D0AE7FB1BE09CE500D9D50C /* register-3@3x.png in Resources */,
+				81B674221BF0AFEB007CEF51 /* yuan@3x.png in Resources */,
 				817E33AD1BD78ED500D05103 /* iconfont@2x.png in Resources */,
 				81C138211BDF6D5E0088E792 /* iconfont-phone@3x.png in Resources */,
 				8162D1191BE1BC2500CACAB6 /* ProjectNameCell.xib in Resources */,
 				8175BEC51BEA052E0044026E /* 分享成功@3x.png in Resources */,
+				81B674211BF0AFEB007CEF51 /* yuan@2x.png in Resources */,
 				8D0CB4941BE75E370039D826 /* RiskConditionsViewController.xib in Resources */,
 				8175BEBA1BE9F7160044026E /* ShareEveryCell.xib in Resources */,
 				81D703F81BE06D1F0074DF30 /* ForgetSecretCell.xib in Resources */,
@@ -2756,7 +2859,9 @@
 				81ED03191BD0D429005F4B02 /* 2013123115540975@3x.png in Resources */,
 				8175BEAA1BE9F2F50044026E /* 新浪微博@2x.png in Resources */,
 				817E33791BD7303200D05103 /* MyPlannerCell.xib in Resources */,
+				81B674201BF0AFEB007CEF51 /* 蓝色完成@3x.png in Resources */,
 				818523AF1BE3125D002FC653 /* BillCell.xib in Resources */,
+				81E831131BF06AFB00127EE8 /* MyAlreadyCell.xib in Resources */,
 				8D9011AA1BD6337C00E5D62A /* 1@3x.png in Resources */,
 				8D9011AD1BD6337C00E5D62A /* 3@2x.png in Resources */,
 				81C8BBC91BDA2F8D005B9DFF /* lianxikefu@3x.png in Resources */,
@@ -2768,6 +2873,7 @@
 				8D3125EB1BD7798000143B71 /* ForgetPasswordViewController.xib in Resources */,
 				81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */,
 				81AC90CA1BEC8C6600232404 /* BankWhichCell.xib in Resources */,
+				81B6741E1BF0AFEB007CEF51 /* 流程@3x.png in Resources */,
 				8DEDE1C51BCCFF01008086D3 /* iconfont_graycuo@3x.png in Resources */,
 				8D6692801BD0D82100CD2CAF /* Home_refresh_bg.png in Resources */,
 				8D3F95D21BE1C28A00013A8E /* RegisterOfResult.xib in Resources */,
@@ -2875,6 +2981,8 @@
 				8D0AE8061BE0AC0600D9D50C /* RegisterOfView.xib in Resources */,
 				8175BE981BE9E5760044026E /* 组-21-拷贝-2@2x.png in Resources */,
 				8175BEB21BE9F2F50044026E /* 人人网@2x.png in Resources */,
+				81B6741D1BF0AFEB007CEF51 /* 流程@2x.png in Resources */,
+				81B6741C1BF0AFEB007CEF51 /* 红框@3x.png in Resources */,
 				817E33AE1BD78ED500D05103 /* iconfont@3x.png in Resources */,
 				8D6692771BD0D02E00CD2CAF /* MyHandViewController.xib in Resources */,
 				817988321BC93FF6007C8C3E /* BasicMessageCell.xib in Resources */,
@@ -2962,6 +3070,7 @@
 				81AC90CD1BEC981100232404 /* GiveMoneyVerifyBinding.m in Sources */,
 				8D0AE80C1BE0C1A700D9D50C /* RegisterViewController.m in Sources */,
 				819C3AC71BD49862008D2CFD /* GrabBagCell.m in Sources */,
+				81B674091BF0A780007CEF51 /* HistoryMemoryCell.m in Sources */,
 				8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */,
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				817E33A71BD7840000D05103 /* ChooseCell.m in Sources */,
@@ -2981,6 +3090,7 @@
 				811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */,
 				81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */,
 				812F6BE81BD8DDE10000D8E9 /* BindingPhoneViewController.m in Sources */,
+				81E831121BF06AFB00127EE8 /* MyAlreadyCell.m in Sources */,
 				81BA1C081BD4F4AB00DBA5BE /* CheckViewController.m in Sources */,
 				81ED03141BD0C877005F4B02 /* MyBankViewController.m in Sources */,
 				8D4FF5DA1BE339A200BAE25F /* AFURLRequestSerialization.m in Sources */,
@@ -3002,6 +3112,7 @@
 				81BA1C0B1BD4FCB100DBA5BE /* MyNewsViewController.m in Sources */,
 				8191E2221BDDF202000A6E8C /* ServiceCell.m in Sources */,
 				815A6FD21BEB89A2003059A5 /* BindingBankCardViewController.m in Sources */,
+				81B674041BF0A608007CEF51 /* HistoryMemoryViewController.m in Sources */,
 				8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */,
 				817DD4B01BCF5B2400042B09 /* MiddleView.m in Sources */,
 				8D90117A1BD5D8FA00E5D62A /* TransactionViewController.m in Sources */,
@@ -3012,6 +3123,7 @@
 				8DE61D9B1BDF20D70031A5CE /* FileOfManage.m in Sources */,
 				8D5DBB841BD4838200F556B9 /* CastUpTableViewCell.m in Sources */,
 				818523C91BE35E75002FC653 /* MendLoginCell.m in Sources */,
+				81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */,
 				818063971BD5D3C700E83492 /* MyInvitationViewController.m in Sources */,
 				8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */,
 				81F237711BE8568B009D7A67 /* NewMakeSureCell.m in Sources */,
@@ -3073,6 +3185,7 @@
 				81701C0B1BE701C300B45BAA /* MendDealCell.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
 				817E33941BD7576600D05103 /* MeCell.m in Sources */,
+				81B674011BF0873B007CEF51 /* InviteNameViewController.m in Sources */,
 				815D27A41BE21040005410C6 /* UpCell.m in Sources */,
 				817DD46F1BCF501100042B09 /* MineCell.m in Sources */,
 				8D121FBD1BD4D0CB00B3C1FE /* ProductSettingViewController.m in Sources */,
@@ -3082,11 +3195,13 @@
 				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,
 				8D3F95DF1BE20EF200013A8E /* YesterdayViewController.m in Sources */,
 				81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */,
+				81E831061BF0469F00127EE8 /* MyChoosePlanner.m in Sources */,
 				8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */,
 				8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */,
 				8D0AE8041BE0ABFB00D9D50C /* RegisterOfView.m in Sources */,
 				8DD180A21BD731E000F71CEA /* GetMoneyTipTableViewCell.m in Sources */,
 				8D3F95D01BE1C27E00013A8E /* RegisterOfResult.m in Sources */,
+				81E8310E1BF0695400127EE8 /* MyAlreadyBindingBank.m in Sources */,
 				817988311BC93FF6007C8C3E /* BasicMessageCell.m in Sources */,
 				81BA1BFD1BD4DE7000DBA5BE /* MoreActivityCell.m in Sources */,
 				81BA1C0F1BD4FE2600DBA5BE /* MyNewsCell.m in Sources */,
@@ -3122,6 +3237,7 @@
 				81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */,
 				8D121FE01BD4D92600B3C1FE /* SettingPieTableViewCell.m in Sources */,
 				8D3125E61BD7689200143B71 /* BaseViewController.m in Sources */,
+				81B6740D1BF0AE26007CEF51 /* ApplyScheduleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -110,6 +110,7 @@
             return cell;
         } else {
             CastDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"castDetail"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         

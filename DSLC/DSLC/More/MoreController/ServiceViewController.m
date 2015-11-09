@@ -15,8 +15,11 @@
     UITableView *_tableView;
     NSArray *imageArr;
     NSArray *titleArr;
+    NSArray *contentArr;
     UIButton *buttonBlack;
     UIView *viewWhite;
+    UIButton *butblack;
+    UIView *viewCopy;
 }
 
 @end
@@ -39,8 +42,9 @@
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 1)];
     [_tableView registerNib:[UINib nibWithNibName:@"ServiceCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    imageArr = @[@[@"zaixiankefu"], @[@"lianxikefu"]];
-    titleArr = @[@[@"在线客服"], @[@"客服热线"]];
+    imageArr = @[@[@"lianxikefu"], @[@"微信", @"新浪微博"]];
+    titleArr = @[@[@"客服热线"],@[@"微信公众号", @"官方微博"]];
+    contentArr = @[@[@"400-254-569"], @[@"大圣理财服务号", @"大圣理财平台"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -67,17 +71,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if (section == 0) {
+        
+        return 1;
+        
+    } else {
+        
+        return 2;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    
-    if (cell == nil) {
-        
-        cell = [[ServiceCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
-    }
     
     NSArray *rowArr = [imageArr objectAtIndex:indexPath.section];
     cell.imageViewLeft.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [rowArr objectAtIndex:indexPath.row]]];
@@ -87,21 +93,13 @@
     cell.labelTitle.text = [[titleArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
+    cell.labelNum.text = [[contentArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    cell.labelNum.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    cell.labelNum.textAlignment = NSTextAlignmentRight;
+    
     if (indexPath.section == 0) {
         
-        cell.labelNum.hidden = YES;
-    }
-    
-    if (indexPath.section == 1) {
-        
-        if (indexPath.row == 0) {
-            
-            cell.labelNum.text = @"400-254-569";
-            cell.labelNum.textColor = [UIColor daohanglan];
-            cell.labelNum.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-            cell.labelNum.textAlignment = NSTextAlignmentRight;
-            
-        }
+        cell.labelNum.textColor = [UIColor daohanglan];
     }
     
     cell.labelLine.backgroundColor = [UIColor grayColor];
@@ -116,7 +114,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
         
         buttonBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
         AppDelegate *app = [[UIApplication sharedApplication] delegate];
@@ -131,9 +129,28 @@
         
         [self viewWhiteShow];
         
-    } else {
+    } else if (indexPath.section == 1) {
         
-        NSLog(@"在线客服");
+        if (indexPath.row == 0) {
+            
+            butblack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+            AppDelegate *app = [[UIApplication sharedApplication] delegate];
+            [app.tabBarVC.view addSubview:butblack];
+            butblack.alpha = 0.3;
+            [butblack addTarget:self action:@selector(buttonWeiXin:) forControlEvents:UIControlEventTouchUpInside];
+            
+            viewCopy = [CreatView creatViewWithFrame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 - 80, WIDTH_CONTROLLER_DEFAULT - 80, 100) backgroundColor:[UIColor whiteColor]];
+            [app.tabBarVC.view addSubview:viewCopy];
+            viewCopy.layer.cornerRadius = 5;
+            viewCopy.layer.masksToBounds = YES;
+            
+            UILabel *labelWeiXin = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewCopy.frame.size.width, viewCopy.frame.size.height) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:18] text:@"已复制微信公众号名称"];
+            [viewCopy addSubview:labelWeiXin];
+            
+        } else {
+        
+            NSLog(@"新浪微博");
+        }
     }
 }
 
@@ -187,6 +204,16 @@
     
     button = nil;
     viewWhite = nil;
+}
+
+//微信遮罩消失
+- (void)buttonWeiXin:(UIButton *)button
+{
+    [butblack removeFromSuperview];
+    [viewCopy removeFromSuperview];
+    
+    butblack = nil;
+    viewCopy = nil;
 }
 
 - (void)callMakeSureButton:(UIButton *)button

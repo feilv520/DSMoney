@@ -14,6 +14,7 @@
 {
     UITableView *_tableView;
     NSArray *contentArr;
+    NSArray *redBagArr;
     CGRect rect;
     BOOL sunShine;
     
@@ -37,7 +38,15 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self.navigationItem setTitle:@"新手指南"];
+    if (self.signStr == YES) {
+        
+        [self.navigationItem setTitle:@"红包说明"];
+        
+    } else {
+        
+        [self.navigationItem setTitle:@"新手指南"];
+    }
+    
     [self setWithAllView];
     [self contentShow];
 }
@@ -53,7 +62,15 @@
     _tableView.tableFooterView = [UIView new];
     [_tableView registerNib:[UINib nibWithNibName:@"NewHandCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    contentArr = @[@"1、大圣理财是什么?", @"2、大圣理财提供的投资理财项目?", @"3、大圣理财平台上的资金安全保障?", @"4、大圣理财平台的收益保障?"];
+    if (self.signStr == YES) {
+        
+        redBagArr = @[@"1、怎么获得红包", @"2、红包可以做什么", @"3、红包可以拆开多次使用吗?", @"4、下单时使用了红包,订单取消红包还会返还吗"];
+        
+    } else {
+        
+        contentArr = @[@"1、大圣理财是什么?", @"2、大圣理财提供的投资理财项目?", @"3、大圣理财平台上的资金安全保障?", @"4、大圣理财平台的收益保障?"];
+    }
+    
 }
 
 - (void)setWithAllView{
@@ -90,6 +107,7 @@
         labelContent.frame = CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, rect.size.height);
         
         return viewGraySectionZero;
+        
     } else if (section == 1) {
         
         
@@ -181,7 +199,16 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    cell.labelQuestion.text = [contentArr objectAtIndex:indexPath.section];
+    if (self.signStr == YES) {
+        
+        cell.labelQuestion.text = [redBagArr objectAtIndex:indexPath.section];
+        
+    } else {
+        
+        cell.labelQuestion.text = [contentArr objectAtIndex:indexPath.section];
+        
+    }
+    
     cell.labelQuestion.font = [UIFont systemFontOfSize:15];
     
     return cell;

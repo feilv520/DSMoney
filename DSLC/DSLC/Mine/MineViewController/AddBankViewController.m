@@ -96,6 +96,11 @@
     cell.textField.font = [UIFont systemFontOfSize:14];
     cell.textField.tintColor = [UIColor yuanColor];
     
+    if (indexPath.row == 1 || indexPath.row == 3 || indexPath.row == 5) {
+        
+        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+    }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (indexPath.row == 2) {
@@ -115,6 +120,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > 0) {
+        
+        [self.view endEditing:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

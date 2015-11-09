@@ -22,6 +22,7 @@
 #import "MyInformation.h"
 #import "LoginViewController.h"
 #import "SetDealSecret.h"
+#import "MyAlreadyBindingBank.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -188,16 +189,18 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     if (section == 3) {
         
-        UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (50.0 / 667.0))];
+        UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (100.0 / 667.0))];
         viewFoot.backgroundColor = [UIColor huibai];
         
-        UIButton *butExit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 15, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"退出登录"];
+        UIButton *butExit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"退出登录"];
         [viewFoot addSubview:butExit];
         [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         [butExit addTarget:self action:@selector(buttonExit:) forControlEvents:UIControlEventTouchUpInside];
         return viewFoot;
+        
     } else {
+        
         return nil;
     }
 }
@@ -260,8 +263,13 @@
     
     if (indexPath.section == 1) {
         
+//        如果没有绑定银行卡 需要跳转到绑定银行卡页面
         MyBankViewController *myBankVC = [[MyBankViewController alloc] init];
         [self.navigationController pushViewController:myBankVC animated:YES];
+        
+//        如果已经绑定了银行卡 跳转的是所绑定的银行卡页面
+//        MyAlreadyBindingBank *already = [[MyAlreadyBindingBank alloc] init];
+//        [self.navigationController pushViewController:already animated:YES];
         
     } else if (indexPath.section == 2) {
         
