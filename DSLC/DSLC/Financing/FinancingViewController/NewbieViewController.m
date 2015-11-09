@@ -11,6 +11,7 @@
 #import "FinancingCell.h"
 #import "NewBieCell.h"
 #import "FDetailViewController.h"
+#import "ProductListModel.h"
 
 @interface NewbieViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -19,7 +20,10 @@
     UIImageView *imageView;
 }
 
+@property (nonatomic, strong) NSMutableArray *productListArray;
+
 @end
+
 
 @implementation NewbieViewController
 
@@ -27,9 +31,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    [self getProductList];
     
-    [self tableViewShow];
+    self.view.backgroundColor = [UIColor huibai];
+    
+    self.productListArray = [NSMutableArray array];
+    
 }
 
 - (void)tableViewShow
@@ -38,6 +45,7 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.backgroundColor = [UIColor huibai];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
@@ -57,7 +65,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return self.productListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -214,9 +222,42 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     FDetailViewController *detailVC = [[FDetailViewController alloc] init];
-    detailVC.estimate = NO;
+    if (indexPath.row == 0) {
+        detailVC.estimate = NO;
+    } else {
+        detailVC.estimate = YES;
+    }
+    detailVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getProductList{
+    
+    NSDictionary *parameter = @{@"productType":@3,@"curPage":@1};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        NSArray *array = [responseObject objectForKey:@"Product"];
+        for (NSDictionary *dic in array) {
+            ProductListModel *productM = [[ProductListModel alloc] init];
+            [productM setValuesForKeysWithDictionary:dic];
+            [self.productListArray addObject:productM];
+        }
+        
+        [self tableViewShow];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

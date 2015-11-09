@@ -10,7 +10,9 @@
 
 @implementation MyAfHTTPClient
 
+//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.178:8080/tongjiang/admin/p2p/";
 static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/admin/p2p/";
+
 
 + (_Nullable instancetype)sharedClient {
     static MyAfHTTPClient *_sharedClient = nil;
@@ -63,6 +65,9 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/admin/
         
         NSData *doubi = responseObject;
         NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
+        
+//        NSLog(@"%@",responseString);
+        
         NSString *character = nil;
         for (int i = 0; i < responseString.length; i ++) {
             character = [responseString substringWithRange:NSMakeRange(i, 1)];
@@ -70,37 +75,12 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/admin/
                 [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
         }
         responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
+//        NSLog(@"%@",responseString);
         NSDictionary *responseData = [MyAfHTTPClient parseJSONStringToNSDictionary:responseString];
         success(task,responseData);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(task,error);
     }];
 }
-
-////判断网络连接状态
-//-(BOOL) isConnectionAvailable{
-//    
-//    BOOL isExistenceNetwork = YES;
-//    Reachability *reach = [Reachability reachabilityWithHostName:@"www.baidu.com"];
-//    
-//    switch ([reach currentReachabilityStatus]) {
-//        case NotReachable:
-//            isExistenceNetwork = NO;
-//            //NSLog(@"notReachable");
-//            break;
-//        case ReachableViaWiFi:
-//            isExistenceNetwork = YES;
-//            //NSLog(@"WIFI");
-//            break;
-//        case ReachableViaWWAN:
-//            isExistenceNetwork = YES;
-//            //NSLog(@"3G");
-//            break;
-//    }
-//    
-//    
-//    return isExistenceNetwork;
-//}
-
 
 @end

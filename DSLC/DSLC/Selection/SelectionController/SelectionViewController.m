@@ -17,6 +17,7 @@
 #import "MessageDetailViewController.h"
 #import "NewHandViewController.h"
 #import "MyAfHTTPClient.h"
+#import "ProductListModel.h"
 
 
 @interface SelectionViewController ()<UIScrollViewDelegate>{
@@ -30,12 +31,14 @@
     NSTimer *timer;
     
 }
+
+@property (nonatomic, strong) ProductListModel *productM;
+
 @end
 
 @implementation SelectionViewController
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewDidAppear:NO];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
@@ -48,7 +51,6 @@
     [self makeBackgroundView];
     [self makeScrollView];
     [self makeThreeButtons];
-    [self makeOnlyView];
     [self makePayButton];
     [self makeSafeView];
     
@@ -59,6 +61,9 @@
     NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
     // 更改timer对象的优先级
     [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    
+//    [self getAdvList];
+    [self getPickProduct];
     
 }
 
@@ -174,10 +179,10 @@
     
     selectionFTView.moreButton.layer.borderColor = [[UIColor colorWithRed:117.0 / 255.0 green:119.0 / 255.0 blue:125.0 / 255.0 alpha:1] CGColor];
     
-    NSMutableAttributedString *numberText = [[NSMutableAttributedString alloc] initWithString:@"8.02%"];
-    NSMutableAttributedString *dayText = [[NSMutableAttributedString alloc] initWithString:@"3 天"];
-    NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:@"24.3 万元"];
-    NSMutableAttributedString *firstMoneyText = [[NSMutableAttributedString alloc] initWithString:@"1,000 元"];
+    NSMutableAttributedString *numberText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[self.productM productAnnualYield]]];
+    NSMutableAttributedString *dayText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[self.productM productPeriod]]];
+    NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万元",[self.productM residueMoney]]];
+    NSMutableAttributedString *firstMoneyText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[self.productM productAmountMin]]];
     
     NSRange numRange = NSMakeRange(0, [[numberText string] rangeOfString:@"%"].location);
     NSRange markRange = NSMakeRange([[numberText string] rangeOfString:@"%"].location, 1);
@@ -235,26 +240,6 @@
 }
 
 - (void)payButtonAction:(id)sender{
-    // 手势VC
-//    MyHandViewController *myhandVC = [[MyHandViewController alloc] init];
-//    [self presentViewController:myhandVC animated:YES completion:^{
-//        
-//    }];
-    
-    // 在投资金
-//    CastProduceViewController *castPVC = [[CastProduceViewController alloc] init];
-//    [self.view.window.rootViewController presentViewController:castPVC animated:YES completion:^{
-//
-//    }];
-    // 资产配置
-    
-//    [self.view.window.rootViewController presentViewController:pSettringVC animated:YES completion:^{
-
-//    }];
-//    ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
-//    [self.view.window.rootViewController presentViewController:pSettringVC animated:YES completion:^{
-//
-//    }];
     
 //    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
 //    session.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -352,6 +337,39 @@
         [self presentViewController:alertController animated:YES completion:nil];
     }
     
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getAdvList{
+
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+- (void)getPickProduct{
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getPickProduct" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        self.productM = [[ProductListModel alloc] init];
+        NSDictionary *dic = [responseObject objectForKey:@"Product"];
+        [self.productM setValuesForKeysWithDictionary:dic];
+        
+        [self makeOnlyView];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 /*
 #pragma mark - Navigation

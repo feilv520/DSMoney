@@ -357,6 +357,12 @@
         
         self.myAccountInfo = responseObject;
         
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        
+        [dic setValue:[responseObject objectForKey:@"invitationMyCode"] forKey:@"invitationMyCode"];
+        
+        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+        
         [self viewHeadContent];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

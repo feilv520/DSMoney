@@ -264,7 +264,10 @@
 #pragma mark --------------------------------
 
 - (void)getMyInviteInfo{
-    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"invitationMyCode":@"dIWCQa"};
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"invitationMyCode":[dic objectForKey:@"invitationMyCode"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyInviteInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

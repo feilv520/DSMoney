@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		810D25271BC7917B00DAF83F /* CreatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 810D25261BC7917B00DAF83F /* CreatView.m */; };
-		8110A4F01BC64A0A00E38485 /* ppp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8110A4EF1BC64A0A00E38485 /* ppp.m */; };
 		8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AE1BEB5C560084292B /* 钻石红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7AC1BEB5C560084292B /* 钻石红包@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -381,6 +380,8 @@
 		8D4FF5E31BE339A200BAE25F /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FF5D21BE339A200BAE25F /* UIProgressView+AFNetworking.m */; settings = {ASSET_TAGS = (); }; };
 		8D4FF5E41BE339A200BAE25F /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FF5D41BE339A200BAE25F /* UIRefreshControl+AFNetworking.m */; settings = {ASSET_TAGS = (); }; };
 		8D4FF5E51BE339A200BAE25F /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FF5D61BE339A200BAE25F /* UIWebView+AFNetworking.m */; settings = {ASSET_TAGS = (); }; };
+		8D50559E1BF082780034759B /* ProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50559D1BF082780034759B /* ProductListModel.m */; settings = {ASSET_TAGS = (); }; };
+		8D5055A11BF08CA20034759B /* ProductDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5055A01BF08CA20034759B /* ProductDetailModel.m */; settings = {ASSET_TAGS = (); }; };
 		8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D55DB051BC7BE91004649CE /* shouyebanner.png */; };
 		8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB381BC8D2F3004FBDD3 /* SelectionV.xib */; };
 		8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AEB3B1BC8DAA4004FBDD3 /* SelectionV.m */; };
@@ -534,8 +535,6 @@
 /* Begin PBXFileReference section */
 		810D25251BC7917B00DAF83F /* CreatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatView.h; sourceTree = "<group>"; };
 		810D25261BC7917B00DAF83F /* CreatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatView.m; sourceTree = "<group>"; };
-		8110A4EE1BC64A0A00E38485 /* ppp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ppp.h; sourceTree = "<group>"; };
-		8110A4EF1BC64A0A00E38485 /* ppp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ppp.m; sourceTree = "<group>"; };
 		8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@2x.png"; sourceTree = "<group>"; };
 		8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@3x.png"; sourceTree = "<group>"; };
 		8118D7AC1BEB5C560084292B /* 钻石红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钻石红包@2x.png"; sourceTree = "<group>"; };
@@ -1067,6 +1066,10 @@
 		8D4FF5D41BE339A200BAE25F /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		8D4FF5D51BE339A200BAE25F /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		8D4FF5D61BE339A200BAE25F /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		8D50559C1BF082780034759B /* ProductListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductListModel.h; sourceTree = "<group>"; };
+		8D50559D1BF082780034759B /* ProductListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductListModel.m; sourceTree = "<group>"; };
+		8D50559F1BF08CA20034759B /* ProductDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetailModel.h; sourceTree = "<group>"; };
+		8D5055A01BF08CA20034759B /* ProductDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetailModel.m; sourceTree = "<group>"; };
 		8D55DB041BC7B53A004649CE /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
 		8D55DB051BC7BE91004649CE /* shouyebanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyebanner.png; sourceTree = "<group>"; };
 		8D5AEB381BC8D2F3004FBDD3 /* SelectionV.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionV.xib; sourceTree = "<group>"; };
@@ -1848,8 +1851,10 @@
 		81D8ADA01BC646C400A15E01 /* FinancingModel */ = {
 			isa = PBXGroup;
 			children = (
-				8110A4EE1BC64A0A00E38485 /* ppp.h */,
-				8110A4EF1BC64A0A00E38485 /* ppp.m */,
+				8D50559C1BF082780034759B /* ProductListModel.h */,
+				8D50559D1BF082780034759B /* ProductListModel.m */,
+				8D50559F1BF08CA20034759B /* ProductDetailModel.h */,
+				8D5055A01BF08CA20034759B /* ProductDetailModel.m */,
 			);
 			path = FinancingModel;
 			sourceTree = "<group>";
@@ -2947,6 +2952,7 @@
 				8DD1809D1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m in Sources */,
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
 				8D4FF5E21BE339A200BAE25F /* UIImageView+AFNetworking.m in Sources */,
+				8D50559E1BF082780034759B /* ProductListModel.m in Sources */,
 				81AC90C91BEC8C6600232404 /* BankWhichCell.m in Sources */,
 				8175BEBD1BEA02270044026E /* ShareFinishViewController.m in Sources */,
 				81C138171BDF64D80088E792 /* LoginCell.m in Sources */,
@@ -3026,7 +3032,6 @@
 				8D0CB4981BE760C00039D826 /* RiskDisclosureViewController.m in Sources */,
 				81F237751BE86031009D7A67 /* CashFinishViewController.m in Sources */,
 				8175BE841BE9CE850044026E /* InvestNoticeViewController.m in Sources */,
-				8110A4F01BC64A0A00E38485 /* ppp.m in Sources */,
 				817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */,
 				8175BE8C1BE9E2430044026E /* ChooseRedBagViewController.m in Sources */,
 				8D3125DE1BD763F900143B71 /* GetMoneyVerifyViewController.m in Sources */,
@@ -3079,6 +3084,7 @@
 				8190A3091BD87D3E002B53F5 /* AddCardCell.m in Sources */,
 				819C3AB61BD47E57008D2CFD /* MyRedBagViewController.m in Sources */,
 				8184EC401BCCD113003F440D /* MoneyCell.m in Sources */,
+				8D5055A11BF08CA20034759B /* ProductDetailModel.m in Sources */,
 				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,
 				8D3F95DF1BE20EF200013A8E /* YesterdayViewController.m in Sources */,
 				81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */,

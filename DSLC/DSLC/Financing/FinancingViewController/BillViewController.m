@@ -14,6 +14,7 @@
 #import "NewbieViewController.h"
 #import "BillCell.h"
 #import "FDetailViewController.h"
+#import "ProductListModel.h"
 
 @interface BillViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -36,16 +37,25 @@
     UIImageView *imageView;
 }
 
+@property (nonatomic, strong) NSMutableArray *productListArray;
+
 @end
 
 @implementation BillViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getProductList];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    [self tableViewShow];
+    self.view.backgroundColor = [UIColor huibai];
+    
+    self.productListArray = [NSMutableArray array];
+    
 }
 
 - (void)tableViewShow
@@ -54,6 +64,7 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.backgroundColor = [UIColor huibai];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     _tableView.tableFooterView.backgroundColor = [UIColor huibai];
     [_tableView setSeparatorColor:[UIColor colorWithRed:246 / 255.0 green:247 / 255.0 blue:249 / 255.0 alpha:1.0]];
@@ -71,7 +82,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.productListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,7 +98,7 @@
     cell.labelMonth.text = @"个月固定投资";
     cell.labelMonth.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
-    cell.labelQiTou.text = @"1,000起投";
+    cell.labelQiTou.text = [NSString stringWithFormat:@"%@起投",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]];
     cell.labelQiTou.textColor = [UIColor zitihui];
     cell.labelQiTou.font = [UIFont fontWithName:@"CenturyGothic" size:11];
     cell.labelQiTou.textAlignment = NSTextAlignmentRight;
@@ -95,7 +106,7 @@
     cell.viewLine1.backgroundColor = [UIColor grayColor];
     cell.viewLine1.alpha = 0.2;
     
-    NSMutableAttributedString *leftString = [[NSMutableAttributedString alloc] initWithString:@"8.02%"];
+    NSMutableAttributedString *leftString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[[self.productListArray objectAtIndex:indexPath.row] productAnnualYield]]];
     NSRange left = NSMakeRange(0, [[leftString string] rangeOfString:@"%"].location);
     [leftString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:left];
     [leftString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:left];
@@ -104,7 +115,7 @@
     [leftString addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:right];
     [cell.labelLeftUp setAttributedText:leftString];
     
-    NSMutableAttributedString *midString = [[NSMutableAttributedString alloc] initWithString:@"90天"];
+    NSMutableAttributedString *midString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[[self.productListArray objectAtIndex:indexPath.row] productPeriod]]];
     NSRange leftMid = NSMakeRange(0, [[midString string] rangeOfString:@"天"].location);
     [midString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:leftMid];
     NSRange rightMid = NSMakeRange([[midString string] length] - 1, 1);
@@ -113,7 +124,7 @@
     [cell.labelMidUp setAttributedText:midString];
     
     [cell.butRightUp setImage:[UIImage imageNamed:@"组-14"] forState:UIControlStateNormal];
-    NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:@"24.3万元"];
+    NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
     NSRange rightLeft = NSMakeRange(0, [[rightString string] rangeOfString:@"万"].location);
     [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:rightLeft];
     NSRange rightR = NSMakeRange([[rightString string] length] - 2, 2);
@@ -152,7 +163,35 @@
     
     FDetailViewController *detailVC = [[FDetailViewController alloc] init];
     detailVC.estimate = YES;
+    detailVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
     [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getProductList{
+    
+    NSDictionary *parameter = @{@"productType":@1,@"curPage":@1};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        NSArray *array = [responseObject objectForKey:@"Product"];
+        for (NSDictionary *dic in array) {
+            ProductListModel *productM = [[ProductListModel alloc] init];
+            [productM setValuesForKeysWithDictionary:dic];
+            [self.productListArray addObject:productM];
+        }
+        
+        [self tableViewShow];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

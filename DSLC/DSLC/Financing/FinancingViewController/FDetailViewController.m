@@ -19,6 +19,7 @@
 #import "FDescriptionViewController.h"
 #import "RecordViewController.h"
 #import "InvestNoticeViewController.h"
+#import "ProductDetailModel.h"
 
 @interface FDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -29,9 +30,18 @@
     UIView *viewSuan;
 }
 @property (nonatomic, strong) UIControl *viewBotton;
+@property (nonatomic, strong) ProductDetailModel *detailM;
+@property (nonatomic, strong) NSString *residueMoney;
+@property (nonatomic, strong) NSString *buyNumber;
 @end
 
 @implementation FDetailViewController
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [_viewBotton removeFromSuperview];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -50,13 +60,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    [self getProductDetail];
+    
+    self.view.backgroundColor = [UIColor huibai];
 
     titleArr = @[@"产品描述", @"投资须知", @"投资记录"];
     
     [self.navigationItem setTitle:@"产品详情"];
     
-    [self showTableView];
 }
 
 //头部分区的tableView展示
@@ -130,11 +141,6 @@
     if (indexPath.section == 0) {
         
         FixInvestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse1"];
-        if (cell == nil) {
-            
-            cell = [[FixInvestCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse1"];
-            
-        }
         
         cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.viewLine.alpha = 0.9;
@@ -145,18 +151,18 @@
             
         } else {
             
-            cell.labelMonth.text = @"3个月固定投资";
+            cell.labelMonth.text = [self.detailM productName];
             
         }
         
         cell.labelMonth.font = [UIFont systemFontOfSize:15];
         
-        cell.labelBuyNum.text = @"已有362人购买";
+        cell.labelBuyNum.text = [NSString stringWithFormat:@"已有%@人购买",self.buyNumber];
         cell.labelBuyNum.textAlignment = NSTextAlignmentRight;
         cell.labelBuyNum.font = [UIFont systemFontOfSize:12];
         cell.labelBuyNum.textColor = [UIColor zitihui];
         
-        NSMutableAttributedString *redString = [[NSMutableAttributedString alloc] initWithString:@"8.02%"];
+        NSMutableAttributedString *redString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[self.detailM productAnnualYield]]];
         NSRange redLocation = NSMakeRange(0, [[redString string] rangeOfString:@"%"].location);
         [redString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redLocation];
         [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:redLocation];
@@ -164,7 +170,7 @@
         [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:percent];
         [cell.labelPercentage setAttributedText:redString];
         
-        NSMutableAttributedString *dayString = [[NSMutableAttributedString alloc] initWithString:@"360天"];
+        NSMutableAttributedString *dayString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[self.detailM productPeriod]]];
         NSRange dayRange = NSMakeRange(0, [[dayString string] rangeOfString:@"天"].location);
         [dayString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:dayRange];
         NSRange tianRange = NSMakeRange([[dayString string] length] - 1, 1);
@@ -183,7 +189,7 @@
         cell.labelDeadline.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelDeadline.textAlignment = NSTextAlignmentCenter;
         
-        cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", @"24.6万"];
+        cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", self.residueMoney];
         cell.labelSurplus.textColor = [UIColor zitihui];
         cell.labelSurplus.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelSurplus.backgroundColor = [UIColor clearColor];
@@ -198,11 +204,6 @@
         
         BasicMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse2"];
         
-        if (cell == nil) {
-            
-            cell = [[BasicMessageCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse2"];
-        }
-        
         cell.labelBaseMess.text = @"基本信息";
         cell.labelBaseMess.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
@@ -213,7 +214,7 @@
         cell.labelName.textColor = [UIColor zitihui];
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.nameContent.text = @"3个月固定资产";
+        cell.nameContent.text = [self.detailM productName];
         cell.nameContent.textColor = [UIColor zitihui];
         cell.nameContent.textAlignment = NSTextAlignmentRight;
         cell.nameContent.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -222,7 +223,7 @@
         cell.labelNumber.textColor = [UIColor zitihui];
         cell.labelNumber.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.numberContent.text = @"3M001";
+        cell.numberContent.text = [self.detailM productCode];
         cell.numberContent.textColor = [UIColor zitihui];
         cell.numberContent.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.numberContent.textAlignment = NSTextAlignmentRight;
@@ -231,7 +232,7 @@
         cell.labelInvestor.textColor = [UIColor zitihui];
         cell.labelInvestor.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.InvestorContent.text = @"9.0%";
+        cell.InvestorContent.text = [self.detailM productAnnualYield];
         cell.InvestorContent.textColor = [UIColor zitihui];
         cell.InvestorContent.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.InvestorContent.textAlignment = NSTextAlignmentRight;
@@ -240,7 +241,7 @@
         cell.labelData.textColor = [UIColor zitihui];
         cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.labelIntraday.text = @"90天";
+        cell.labelIntraday.text = [self.detailM productPeriod];
         cell.labelIntraday.textColor = [UIColor zitihui];
         cell.labelIntraday.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.labelIntraday.textAlignment = NSTextAlignmentRight;
@@ -249,7 +250,7 @@
         cell.labelStyle.textColor = [UIColor zitihui];
         cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.labelIncome.text = @"购买当天起息";
+        cell.labelIncome.text = [self.detailM productInterestTypeName];
         cell.labelIncome.textColor = [UIColor zitihui];
         cell.labelIncome.font = [UIFont systemFontOfSize:15];
         cell.labelIncome.textAlignment = NSTextAlignmentRight;
@@ -258,7 +259,7 @@
         cell.labelComeTime.textColor = [UIColor zitihui];
         cell.labelComeTime.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.ComeTime.text = @"产品到期后一个工作日";
+        cell.ComeTime.text = [self.detailM productToaccountTypeName];
         cell.ComeTime.textColor = [UIColor zitihui];
         cell.ComeTime.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
@@ -285,11 +286,6 @@
     } else if (indexPath.section == 2) {
         
         PlanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse3"];
-        
-        if (cell == nil) {
-            
-            cell = [[PlanCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse3"];
-        }
         
         cell.labelPlan.text = @"投资计划";
         cell.labelPlan.textColor = [UIColor zitihui];
@@ -494,10 +490,28 @@
     calendar = nil;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [_viewBotton removeFromSuperview];
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getProductDetail{
+    NSDictionary *parameter = @{@"productId":self.idString};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        self.residueMoney = [responseObject objectForKey:@"residueMoney"];
+        self.buyNumber = [responseObject objectForKey:@"buyCount"];
+        
+        self.detailM = [[ProductDetailModel alloc] init];
+        NSDictionary *dic = [responseObject objectForKey:@"Product"];
+        [self.detailM setValuesForKeysWithDictionary:dic];
+        
+        [self showTableView];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
