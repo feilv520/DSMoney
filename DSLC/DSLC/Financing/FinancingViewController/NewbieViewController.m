@@ -83,7 +83,7 @@
         cell.labelShouYiLv.text = @"预期年化收益率";
         cell.labelShouYiLv.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         
-        NSMutableAttributedString *redString = [[NSMutableAttributedString alloc] initWithString:@"8.02%"];
+        NSMutableAttributedString *redString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[[self.productListArray objectAtIndex:indexPath.row] productAnnualYield]]];
         NSRange leftRange = NSMakeRange(0, [[redString string] rangeOfString:@"%"].location);
         [redString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:leftRange];
         [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:45] range:leftRange];
@@ -101,21 +101,21 @@
         [cell.buttonImage setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
         cell.buttonImage.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:@"3天"];
+        NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[[self.productListArray objectAtIndex:indexPath.row] productPeriod]]];
         NSRange redRange = NSMakeRange(0, [[textString string] rangeOfString:@"天"].location);
         [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:redRange];
         NSRange symbol = NSMakeRange([[textString string] length] - 1, 1);
         [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:symbol];
         [cell.labelLeftUp setAttributedText:textString];
         
-        NSMutableAttributedString *midString = [[NSMutableAttributedString alloc] initWithString:@"24.3万元"];
+        NSMutableAttributedString *midString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
         NSRange midRange = NSMakeRange(0, [[midString string] rangeOfString:@"万"].location);
         [midString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:midRange];
         NSRange rightStr = NSMakeRange([[midString string] length] - 2, 2);
         [midString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:rightStr];
         [cell.labelMidUp setAttributedText:midString];
 
-        NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:@"1,000元"];
+        NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]]];
         NSRange threeRange = NSMakeRange(0, [[rightString string] rangeOfString:@"元"].location);
         [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:threeRange];
         NSRange three = NSMakeRange([[rightString string] length] - 1, 1);
@@ -146,7 +146,7 @@
         cell.viewGiPian.layer.cornerRadius = 4;
         cell.viewGiPian.layer.masksToBounds = YES;
         
-        cell.labelMonth.text = @"标的007";
+        cell.labelMonth.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
         cell.labelMonth.font = [UIFont systemFontOfSize:15];
         
         cell.viewLine.alpha = 0.7;
@@ -155,7 +155,7 @@
         cell.labelPercentage.textColor = [UIColor blackColor];
         cell.labelPercentage.textAlignment = NSTextAlignmentCenter;
         
-        NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:@"8.02%"];
+        NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[[self.productListArray objectAtIndex:indexPath.row] productAnnualYield]]];
 //    ,号前面是指起始位置 ,号后面是指到%这个位置截止的总长度
         NSRange redRange = NSMakeRange(0, [[textString string] rangeOfString:@"%"].location);
         [textString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
@@ -173,7 +173,7 @@
         cell.labelDayNum.textAlignment = NSTextAlignmentCenter;
         cell.labelDayNum.font = [UIFont systemFontOfSize:22];
         
-        NSMutableAttributedString *textYear = [[NSMutableAttributedString alloc] initWithString:@"90天"];
+        NSMutableAttributedString *textYear = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[[self.productListArray objectAtIndex:indexPath.row] productPeriod]]];
         NSRange numText = NSMakeRange(0, [[textYear string] rangeOfString:@"天"].location);
         [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:numText];
         NSRange dayText = NSMakeRange([[textYear string] length] - 1, 1);
@@ -183,7 +183,7 @@
         cell.labelMoney.textAlignment = NSTextAlignmentCenter;
         cell.labelMoney.font = [UIFont systemFontOfSize:22];
         
-        NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:@"1,000元"];
+        NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]]];
         NSRange moneyNum = NSMakeRange(0, [[moneyText string] rangeOfString:@"元"].location);
         [moneyText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:moneyNum];
         NSRange yuanStr = NSMakeRange([[moneyText string] length] - 1, 1);
@@ -200,7 +200,7 @@
         cell.labelQiTou.textColor = [UIColor zitihui];
         cell.labelQiTou.font = [UIFont systemFontOfSize:12];
         
-        cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", @"24.6万"];
+        cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%@万",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
         cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
         cell.labelSurplus.textColor = [UIColor zitihui];
         cell.labelSurplus.font = [UIFont systemFontOfSize:12];
