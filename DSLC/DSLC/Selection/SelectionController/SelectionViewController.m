@@ -204,8 +204,27 @@
     [selectionFTView.moneyLabel setAttributedText:moneyText];
     [selectionFTView.firstLabel setAttributedText:firstMoneyText];
     
+    [selectionFTView.moreButton addTarget:self action:@selector(moreActionButton:) forControlEvents:UIControlEventTouchUpInside];
+    
     [backgroundScrollView addSubview:selectionFTView];
     
+}
+
+- (void)moreActionButton:(id)sender{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+    
+    UIButton *indexButton = [app.tabBarVC.tabButtonArray objectAtIndex:1];
+    
+    for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+        
+        if (indexButton.tag != tempButton.tag) {
+            NSLog(@"%ld",tempButton.tag);
+            [tempButton setSelected:NO];
+        }
+    }
+    
+    [indexButton setSelected:YES];
 }
 
 // 立即抢购

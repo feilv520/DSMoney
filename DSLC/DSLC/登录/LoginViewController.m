@@ -28,6 +28,9 @@
     UITextField *textField2;
     
     UIButton *indexButton;
+    AppDelegate *app;
+    
+    NSString *flagString;
 }
 
 @property (nonatomic, strong) NSDictionary *flagLogin;
@@ -56,17 +59,19 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:NO];
-    [app.tabBarVC setLabelLineHidden:NO];
+    
+    if (![flagString isEqualToString:@"MCM"]) {
+        app = [[UIApplication sharedApplication] delegate];
+        [app.tabBarVC setSuppurtGestureTransition:NO];
+        [app.tabBarVC setTabbarViewHidden:NO];
+        [app.tabBarVC setLabelLineHidden:NO];
+    }
+    
 }
 
 //导航返回按钮
 - (void)buttonReturn:(UIBarButtonItem *)bar
 {
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    
     [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(indexButton.tag * WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
     
     for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
@@ -98,8 +103,19 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideWithTabbarView:) name:@"hideWithTabbarView" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beforeWithViewhideWithTabbarView:) name:@"beforeWithView" object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addWithNotifiacationCenter:) name:@"hideWithTabbar" object:nil];
     
+}
+
+- (void)beforeWithViewhideWithTabbarView:(NSNotification *)not{
+    
+    flagString = [not object];
+    
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:YES];
+    [app.tabBarVC setLabelLineHidden:YES];
 }
 
 - (void)addWithNotifiacationCenter:(NSNotification *)not{
@@ -110,7 +126,6 @@
     
     indexButton = [not object];
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC setSuppurtGestureTransition:NO];
     [app.tabBarVC setTabbarViewHidden:YES];
     [app.tabBarVC setLabelLineHidden:YES];

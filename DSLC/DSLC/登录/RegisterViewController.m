@@ -56,6 +56,13 @@
     
 }
 
+//导航返回按钮
+- (void)buttonReturn:(UIBarButtonItem *)bar
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 // 注册流程图一
 - (void)RegisterProcessPhoto{
     NSBundle *rootBundle = [NSBundle mainBundle];
@@ -167,6 +174,8 @@
     registerV.getCode.layer.borderWidth = 1.f;
     registerV.getCode.layer.borderColor = [UIColor redColor].CGColor;
     
+    registerV.getCode.layer.cornerRadius = 4.f;
+    
     [registerV.getCode addTarget:self action:@selector(getCodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.scrollView addSubview:registerV];
@@ -224,8 +233,25 @@
 // 确认按钮执行方法 (第二步 : 实名验证)
 - (void)sureButtonAction:(UIButton *)btn{
     
-    [self RegisterButtonAction];
+    if ([registerV.phoneNumber.text length] <= 0) {
     
+        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+        
+    } else if ([registerV.smsCode.text length] <= 0) {
+        
+        [ProgressHUD showMessage:@"请输入验证码" Width:100 High:20];
+        
+    } else if ([registerV.loginPassword.text length] <= 0) {
+        
+        [ProgressHUD showMessage:@"请输入设置密码" Width:100 High:20];
+        
+    } else if ([registerV.sureLoginPassword.text length] <= 0) {
+     
+        [ProgressHUD showMessage:@"请输入确认密码" Width:100 High:20];
+        
+    } else {
+        [self RegisterButtonAction];
+    }
 }
 
 - (void)sureButtonActionFinish:(UIButton *)btn{
