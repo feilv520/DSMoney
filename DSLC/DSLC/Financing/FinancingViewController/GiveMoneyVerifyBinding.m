@@ -8,6 +8,7 @@
 
 #import "GiveMoneyVerifyBinding.h"
 #import "MendDeal2Cell.h"
+#import "GiveMoneyFinish.h"
 
 @interface GiveMoneyVerifyBinding () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -50,6 +51,7 @@
     butGive.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butGive setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [butGive setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    [butGive addTarget:self action:@selector(giveMoney:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *labelPhone = [CreatView creatWithLabelFrame:CGRectMake(15, 20, WIDTH_CONTROLLER_DEFAULT - 30, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
     [viewHead addSubview:labelPhone];
@@ -99,7 +101,15 @@
     cell.buttonGet.layer.borderWidth = 0.5;
     [cell.buttonGet addTarget:self action:@selector(getCode:) forControlEvents:UIControlEventTouchUpInside];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+//充值按钮
+- (void)giveMoney:(UIButton *)button
+{
+    GiveMoneyFinish *giveMoney = [[GiveMoneyFinish alloc] init];
+    [self.navigationController pushViewController:giveMoney animated:YES];
 }
 
 - (void)bindingBankTextField:(UITextField *)textField

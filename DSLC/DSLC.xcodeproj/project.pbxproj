@@ -12,6 +12,14 @@
 		8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AE1BEB5C560084292B /* 钻石红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7AC1BEB5C560084292B /* 钻石红包@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AF1BEB5C560084292B /* 钻石红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7AD1BEB5C560084292B /* 钻石红包@3x.png */; settings = {ASSET_TAGS = (); }; };
+		811F0AFC1BF318F6001F6AA4 /* GiveMoneyFinish.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F0AFB1BF318F6001F6AA4 /* GiveMoneyFinish.m */; settings = {ASSET_TAGS = (); }; };
+		811F0AFF1BF32798001F6AA4 /* LiftupMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F0AFE1BF32798001F6AA4 /* LiftupMoneyViewController.m */; settings = {ASSET_TAGS = (); }; };
+		811F0B021BF33421001F6AA4 /* BindingBankCardLiftUpMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F0B011BF33421001F6AA4 /* BindingBankCardLiftUpMoney.m */; settings = {ASSET_TAGS = (); }; };
+		811F0B061BF33D30001F6AA4 /* BindingOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F0B041BF33D30001F6AA4 /* BindingOneCell.m */; settings = {ASSET_TAGS = (); }; };
+		811F0B071BF33D30001F6AA4 /* BindingOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811F0B051BF33D30001F6AA4 /* BindingOneCell.xib */; settings = {ASSET_TAGS = (); }; };
+		811F0B0B1BF33D42001F6AA4 /* BindingTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F0B091BF33D42001F6AA4 /* BindingTwoCell.m */; settings = {ASSET_TAGS = (); }; };
+		811F0B0C1BF33D42001F6AA4 /* BindingTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811F0B0A1BF33D42001F6AA4 /* BindingTwoCell.xib */; settings = {ASSET_TAGS = (); }; };
+		811F0B0F1BF344EC001F6AA4 /* LiftUpMoneyCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F0B0E1BF344EC001F6AA4 /* LiftUpMoneyCheck.m */; settings = {ASSET_TAGS = (); }; };
 		811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E001BC7A13800CAD6F5 /* FinancingCell.m */; };
 		811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */; };
 		811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */; };
@@ -563,6 +571,20 @@
 		8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@3x.png"; sourceTree = "<group>"; };
 		8118D7AC1BEB5C560084292B /* 钻石红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钻石红包@2x.png"; sourceTree = "<group>"; };
 		8118D7AD1BEB5C560084292B /* 钻石红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钻石红包@3x.png"; sourceTree = "<group>"; };
+		811F0AFA1BF318F6001F6AA4 /* GiveMoneyFinish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiveMoneyFinish.h; sourceTree = "<group>"; };
+		811F0AFB1BF318F6001F6AA4 /* GiveMoneyFinish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiveMoneyFinish.m; sourceTree = "<group>"; };
+		811F0AFD1BF32798001F6AA4 /* LiftupMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiftupMoneyViewController.h; sourceTree = "<group>"; };
+		811F0AFE1BF32798001F6AA4 /* LiftupMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiftupMoneyViewController.m; sourceTree = "<group>"; };
+		811F0B001BF33421001F6AA4 /* BindingBankCardLiftUpMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingBankCardLiftUpMoney.h; sourceTree = "<group>"; };
+		811F0B011BF33421001F6AA4 /* BindingBankCardLiftUpMoney.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingBankCardLiftUpMoney.m; sourceTree = "<group>"; };
+		811F0B031BF33D30001F6AA4 /* BindingOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingOneCell.h; sourceTree = "<group>"; };
+		811F0B041BF33D30001F6AA4 /* BindingOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingOneCell.m; sourceTree = "<group>"; };
+		811F0B051BF33D30001F6AA4 /* BindingOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingOneCell.xib; sourceTree = "<group>"; };
+		811F0B081BF33D42001F6AA4 /* BindingTwoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingTwoCell.h; sourceTree = "<group>"; };
+		811F0B091BF33D42001F6AA4 /* BindingTwoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingTwoCell.m; sourceTree = "<group>"; };
+		811F0B0A1BF33D42001F6AA4 /* BindingTwoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingTwoCell.xib; sourceTree = "<group>"; };
+		811F0B0D1BF344EC001F6AA4 /* LiftUpMoneyCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiftUpMoneyCheck.h; sourceTree = "<group>"; };
+		811F0B0E1BF344EC001F6AA4 /* LiftUpMoneyCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiftUpMoneyCheck.m; sourceTree = "<group>"; };
 		811F9DFF1BC7A13800CAD6F5 /* FinancingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingCell.h; sourceTree = "<group>"; };
 		811F9E001BC7A13800CAD6F5 /* FinancingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingCell.m; sourceTree = "<group>"; };
 		811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinancingCell.xib; sourceTree = "<group>"; };
@@ -2004,6 +2026,8 @@
 		8D3125C91BD740D400143B71 /* 充值 */ = {
 			isa = PBXGroup;
 			children = (
+				811F0AFA1BF318F6001F6AA4 /* GiveMoneyFinish.h */,
+				811F0AFB1BF318F6001F6AA4 /* GiveMoneyFinish.m */,
 			);
 			name = "充值";
 			sourceTree = "<group>";
@@ -2103,6 +2127,12 @@
 				8D3125DB1BD763F900143B71 /* GetMoneyVerifyViewController.h */,
 				8D3125DC1BD763F900143B71 /* GetMoneyVerifyViewController.m */,
 				8D3125DD1BD763F900143B71 /* GetMoneyVerifyViewController.xib */,
+				811F0AFD1BF32798001F6AA4 /* LiftupMoneyViewController.h */,
+				811F0AFE1BF32798001F6AA4 /* LiftupMoneyViewController.m */,
+				811F0B001BF33421001F6AA4 /* BindingBankCardLiftUpMoney.h */,
+				811F0B011BF33421001F6AA4 /* BindingBankCardLiftUpMoney.m */,
+				811F0B0D1BF344EC001F6AA4 /* LiftUpMoneyCheck.h */,
+				811F0B0E1BF344EC001F6AA4 /* LiftUpMoneyCheck.m */,
 			);
 			name = "提现";
 			sourceTree = "<group>";
@@ -2218,6 +2248,12 @@
 				8DD180951BD72E5900F71CEA /* GetMoneyTableViewCell.h */,
 				8DD180961BD72E5900F71CEA /* GetMoneyTableViewCell.m */,
 				8DD180971BD72E5900F71CEA /* GetMoneyTableViewCell.xib */,
+				811F0B031BF33D30001F6AA4 /* BindingOneCell.h */,
+				811F0B041BF33D30001F6AA4 /* BindingOneCell.m */,
+				811F0B051BF33D30001F6AA4 /* BindingOneCell.xib */,
+				811F0B081BF33D42001F6AA4 /* BindingTwoCell.h */,
+				811F0B091BF33D42001F6AA4 /* BindingTwoCell.m */,
+				811F0B0A1BF33D42001F6AA4 /* BindingTwoCell.xib */,
 				8DD1809A1BD730E100F71CEA /* GetMoneyNumberTableViewCell.h */,
 				8DD1809B1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m */,
 				8DD1809C1BD730E100F71CEA /* GetMoneyNumberTableViewCell.xib */,
@@ -2822,12 +2858,14 @@
 				81B6741A1BF0AFEB007CEF51 /* 蓝框@3x.png in Resources */,
 				8175BE9C1BE9E5760044026E /* 组-21-拷贝-14@2x.png in Resources */,
 				8D9011AB1BD6337C00E5D62A /* 2@2x.png in Resources */,
+				811F0B071BF33D30001F6AA4 /* BindingOneCell.xib in Resources */,
 				8D3F95E01BE20EF200013A8E /* YesterdayViewController.xib in Resources */,
 				8175BEB41BE9F2F50044026E /* 朋友圈@2x.png in Resources */,
 				8D0AE7FA1BE09CE500D9D50C /* register-3@2x.png in Resources */,
 				8175BEAD1BE9F2F50044026E /* 微信@3x.png in Resources */,
 				817DD49F1BCF547E00042B09 /* jiaoyi@3x.png in Resources */,
 				8DEDE1EC1BCD05C7008086D3 /* Calendar.xib in Resources */,
+				811F0B0C1BF33D42001F6AA4 /* BindingTwoCell.xib in Resources */,
 				8191E22F1BDE00DC000A6E8C /* cuo@3x.png in Resources */,
 				8179883C1BC9403A007C8C3E /* ThreeCell.xib in Resources */,
 				8191E2281BDDF5F0000A6E8C /* lianxikefu@2x.png in Resources */,
@@ -3090,6 +3128,7 @@
 				8D0AE80C1BE0C1A700D9D50C /* RegisterViewController.m in Sources */,
 				819C3AC71BD49862008D2CFD /* GrabBagCell.m in Sources */,
 				81B674091BF0A780007CEF51 /* HistoryMemoryCell.m in Sources */,
+				811F0B0F1BF344EC001F6AA4 /* LiftUpMoneyCheck.m in Sources */,
 				8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */,
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				817E33A71BD7840000D05103 /* ChooseCell.m in Sources */,
@@ -3155,6 +3194,7 @@
 				8DEDE26D1BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				81AC90C21BEC82BD00232404 /* BindingBankSucceController.m in Sources */,
 				81D703F71BE06D1F0074DF30 /* ForgetSecretCell.m in Sources */,
+				811F0B021BF33421001F6AA4 /* BindingBankCardLiftUpMoney.m in Sources */,
 				8D0CB4981BE760C00039D826 /* RiskDisclosureViewController.m in Sources */,
 				81F237751BE86031009D7A67 /* CashFinishViewController.m in Sources */,
 				8175BE841BE9CE850044026E /* InvestNoticeViewController.m in Sources */,
@@ -3179,8 +3219,10 @@
 				8D5DBB8E1BD48F1900F556B9 /* CastDetailTableViewCell.m in Sources */,
 				81AC90C51BEC88C100232404 /* RechargeAlreadyBinding.m in Sources */,
 				8191E2111BDDB9DE000A6E8C /* NewHandViewController.m in Sources */,
+				811F0AFC1BF318F6001F6AA4 /* GiveMoneyFinish.m in Sources */,
 				81898B781BDF180600DD4E44 /* UIPlaceHolderTextView.m in Sources */,
 				819C3ABA1BD483C4008D2CFD /* MyRedBagCell.m in Sources */,
+				811F0B0B1BF33D42001F6AA4 /* BindingTwoCell.m in Sources */,
 				8D0CB4891BE75C860039D826 /* SimpleDescriptionsViewController.m in Sources */,
 				8D878CD81BC7548B00844575 /* b.m in Sources */,
 				818523C21BE35BDB002FC653 /* MendLoginViewController.m in Sources */,
@@ -3193,6 +3235,7 @@
 				81F5FA0A1BD9E1FE008C38BF /* ChangeNumViewController.m in Sources */,
 				81F4BD5B1BECC06B00C308F8 /* SetDealSecret.m in Sources */,
 				817988361BC94014007C8C3E /* PlanCell.m in Sources */,
+				811F0AFF1BF32798001F6AA4 /* LiftupMoneyViewController.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
 				8D1921CD1BD4E2060038195E /* XYPieChart.m in Sources */,
 				818063AE1BD6437D00E83492 /* PayMoneyViewController.m in Sources */,
@@ -3238,6 +3281,7 @@
 				8DEDE1F21BCD05F9008086D3 /* Calendar.m in Sources */,
 				8D4FF5E11BE339A200BAE25F /* UIButton+AFNetworking.m in Sources */,
 				8D121FDB1BD4D83600B3C1FE /* SettingGetMoneyTableViewCell.m in Sources */,
+				811F0B061BF33D30001F6AA4 /* BindingOneCell.m in Sources */,
 				81ED03201BD0DDAD005F4B02 /* AddBankCell.m in Sources */,
 				8175BEB91BE9F7160044026E /* ShareEveryCell.m in Sources */,
 				8D121FE51BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.m in Sources */,

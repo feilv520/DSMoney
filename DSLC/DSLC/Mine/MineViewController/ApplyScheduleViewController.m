@@ -38,12 +38,15 @@
     self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"申请进度"];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishApplyButton:)];
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:14]} forState:UIControlStateNormal];
+    
     [self contentShow];
 }
 
 - (void)contentShow
 {
-    contentArr = @[@"大额转账申请已提交", @"请去银行转账后,提供银行转账流水单号", @"财务待审", @"充值成功"];
+    contentArr = @[@"已提交申请", @"请在打款后,提供转账/POS单号", @"财务待审", @"充值成功"];
     
     viewWhite = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT / 2) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewWhite];
@@ -84,7 +87,7 @@
     [butEdit setBackgroundImage:[UIImage imageNamed:@"红框"] forState:UIControlStateHighlighted];
     [butEdit addTarget:self action:@selector(buttonEdit:) forControlEvents:UIControlEventTouchUpInside];
     
-    fieldShuRu = [CreatView creatWithfFrame:CGRectMake(40, 140, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 35) setPlaceholder:@"银行转账流水号" setTintColor:[UIColor grayColor]];
+    fieldShuRu = [CreatView creatWithfFrame:CGRectMake(40, 140, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 35) setPlaceholder:nil setTintColor:[UIColor grayColor]];
     [viewWhite addSubview:fieldShuRu];
     fieldShuRu.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 35)];
     fieldShuRu.delegate = self;
@@ -156,6 +159,7 @@
         
         labelTwo = (UILabel *)[self.view viewWithTag:2001];
         labelTwo.textColor = [UIColor chongzhiColor];
+        labelTwo.text = @"已打款";
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishBarButton:)];
         [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:14]} forState:UIControlStateNormal];

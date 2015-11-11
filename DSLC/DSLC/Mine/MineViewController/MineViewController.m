@@ -28,6 +28,8 @@
 #import "LoginViewController.h"
 #import "MyChoosePlanner.h"
 #import "MyAlreadyBindingBank.h"
+#import "RechargeAlreadyBinding.h"
+#import "LiftupMoneyViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -217,17 +219,17 @@
     middleView.labelMyMoney.text = @"在投金额";
     middleView.labelMyMoney.textColor = [UIColor zitihui];
     middleView.labelMyMoney.textAlignment = NSTextAlignmentCenter;
-    middleView.labelMyMoney.font = [UIFont systemFontOfSize:12];
+    middleView.labelMyMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
     middleView.labelData.text = @"账户余额";
     middleView.labelData.textColor = [UIColor zitihui];
     middleView.labelData.textAlignment = NSTextAlignmentCenter;
-    middleView.labelData.font = [UIFont systemFontOfSize:12];
+    middleView.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
     middleView.labelTAllMoney.text = @"累计收益";
     middleView.labelTAllMoney.textColor = [UIColor zitihui];
     middleView.labelTAllMoney.textAlignment = NSTextAlignmentCenter;
-    middleView.labelTAllMoney.font = [UIFont systemFontOfSize:12];
+    middleView.labelTAllMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
     middleView.viewDiBu.backgroundColor = [UIColor huibai];
         
@@ -326,15 +328,21 @@
 //充值按钮
 - (void)rechargeMoney:(UIButton *)button
 {
-    PayMoneyViewController *payMoneyVC = [[PayMoneyViewController alloc] init];
-    [self.navigationController pushViewController:payMoneyVC animated:YES];
+//    PayMoneyViewController *payMoneyVC = [[PayMoneyViewController alloc] init];
+//    [self.navigationController pushViewController:payMoneyVC animated:YES];
+    
+    RechargeAlreadyBinding *recharge = [[RechargeAlreadyBinding alloc] init];
+    [self.navigationController pushViewController:recharge animated:YES];
 }
 
 //提现按钮
 - (void)withdrawMoney:(UIButton *)button
 {
-    GetMoneyViewController *getMoneyVC = [[GetMoneyViewController alloc] init];
-    [self.navigationController pushViewController:getMoneyVC animated:YES];
+//    GetMoneyViewController *getMoneyVC = [[GetMoneyViewController alloc] init];
+//    [self.navigationController pushViewController:getMoneyVC animated:YES];
+    
+    LiftupMoneyViewController *liftupVC = [[LiftupMoneyViewController alloc] init];
+    [self.navigationController pushViewController:liftupVC animated:YES];
 }
 
 //大额充值

@@ -60,7 +60,7 @@
     nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"转账金额"];
     textArray = @[@"请输入真实姓名", @"选择发卡银行", @"银行卡号", @"预留银行开户手机号", @"转账额度"];
     
-    buttonApply = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"申请"];
+    buttonApply = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"提交申请"];
     [_tableView.tableFooterView addSubview:buttonApply];
     buttonApply.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
@@ -156,7 +156,7 @@
 //申请按钮
 - (void)applyBigMoney:(UIButton *)button
 {
-    if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 19 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0) {
+    if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 1 && fieldPhoneNum.text.length == 1 && fieldMoney.text.length > 0) {
         
         ApplyScheduleViewController *scheduleVC = [[ApplyScheduleViewController alloc] init];
         [self.view endEditing:YES];

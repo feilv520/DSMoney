@@ -38,9 +38,10 @@
 - (void)setQRButton{
     UIButton *payButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    payButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (51 / 375.0), 120, WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), 43);
+    payButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (51 / 375.0), 170, WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), 43);
     
-    [payButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
+    [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+    [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [payButton setTitle:@"确定" forState:UIControlStateNormal];
     
     [payButton addTarget:self action:@selector(sureButtonAction:) forControlEvents:UIControlEventTouchUpInside];
