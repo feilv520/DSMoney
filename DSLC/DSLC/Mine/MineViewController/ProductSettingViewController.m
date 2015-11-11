@@ -16,6 +16,7 @@
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
 #import "CastProduceViewController.h"
+#import "MyAccountProductView.h"
 
 @interface ProductSettingViewController () <UITableViewDataSource, UITableViewDelegate, XYPieChartDataSource, XYPieChartDelegate>
 
@@ -24,6 +25,10 @@
 @property (nonatomic, strong) XYPieChart *pieChartLeft;
 @property(nonatomic, strong) NSMutableArray *slices;
 @property(nonatomic, strong) NSArray        *sliceColors;
+
+@property (nonatomic, strong) NSDictionary *moneyDic;
+
+@property (nonatomic, strong) NSMutableArray *nameMArr;
 
 @end
 
@@ -58,18 +63,13 @@
     
     [self.view addSubview:self.mainTableView];
     
-    self.slices = [NSMutableArray arrayWithCapacity:10];
-    
-    for(int i = 0; i < 3; i ++)
-    {
-        NSNumber *one = [NSNumber numberWithInt:rand()%60+20];
-        [_slices addObject:one];
-    }
+    self.slices = [NSMutableArray arrayWithCapacity:4];
     
     self.sliceColors =[NSArray arrayWithObjects:
                        [UIColor colorWithRed:246/255.0 green:155/255.0 blue:0/255.0 alpha:1],
                        [UIColor colorWithRed:129/255.0 green:195/255.0 blue:29/255.0 alpha:1],
-                       [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:1],nil];
+                       [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:1],
+                       [UIColor colorWithRed:0/255.0 green:1 blue:1 alpha:1],nil];
     
     self.pieChartLeft = [[XYPieChart alloc] initWithFrame:CGRectMake((150 / 375.0) * WIDTH_CONTROLLER_DEFAULT , 0, (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT, (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT)];
     
@@ -107,21 +107,25 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             SettingTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"title"];
+            
+            cell.AllMoney.text = [NSString stringWithFormat:@"%@万元",[self.moneyDic objectForKey:@"totalMoney"]];
+            
             return cell;
         } else {
             SettingGetMoneyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"getMoney"];
             
-            NSMutableAttributedString *redString = [[NSMutableAttributedString alloc] initWithString:@"13,234.56元"];
+            NSMutableAttributedString *redString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[self.moneyDic objectForKey:@"yeProfit"]]];
             NSRange redShuZi = NSMakeRange(0, [[redString string] rangeOfString:@"元"].location);
             [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:redShuZi];
             
             NSRange YUANString = NSMakeRange([[redString string] length] - 1, 1);
             [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:YUANString];
+            [redString addAttribute:NSForegroundColorAttributeName value:Color_Black range:YUANString];
             [cell.yesterdayLabel setAttributedText:redString];
             cell.yesterdayLabel.textColor = [UIColor daohanglan];
             cell.yesterdayLabel.textAlignment = NSTextAlignmentCenter;
             
-            NSMutableAttributedString *wanYuanStr = [[NSMutableAttributedString alloc] initWithString:@"23.05万元"];
+            NSMutableAttributedString *wanYuanStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万元",[self.moneyDic objectForKey:@"totalProfit"]]];
             NSRange shuziStr = NSMakeRange(0, [[wanYuanStr string] rangeOfString:@"万"].location);
             [wanYuanStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:shuziStr];
             NSRange wanZiStr = NSMakeRange([[wanYuanStr string] length] - 2, 2);
@@ -141,6 +145,54 @@
             return cell;
         } else {
             SettingPieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pie"];
+            
+            NSBundle *rootBundle = [NSBundle mainBundle];
+            
+            MyAccountProductView *myAccountPView = [[rootBundle loadNibNamed:@"MyAccountProductView" owner:nil options:nil] lastObject];
+            
+            myAccountPView.frame = CGRectMake(17, 20, 120, 160);
+            
+            [cell addSubview:myAccountPView];
+            
+            if ([[self.moneyDic objectForKey:@"Asset"] count] == 1) {
+                
+                myAccountPView.GSView.hidden = NO;
+                myAccountPView.GSLabel.hidden = NO;
+                
+            } else if ([[self.moneyDic objectForKey:@"Asset"] count] == 2) {
+                
+                myAccountPView.GSView.hidden = NO;
+                myAccountPView.GSLabel.hidden = NO;
+                
+                myAccountPView.PJView.hidden = NO;
+                myAccountPView.PJLabel.hidden = NO;
+                
+            } else if ([[self.moneyDic objectForKey:@"Asset"] count] == 3) {
+                
+                myAccountPView.GSView.hidden = NO;
+                myAccountPView.GSLabel.hidden = NO;
+                
+                myAccountPView.PJView.hidden = NO;
+                myAccountPView.PJLabel.hidden = NO;
+                
+                myAccountPView.NewView.hidden = NO;
+                myAccountPView.NewLabel.hidden = NO;
+                
+            } else if ([[self.moneyDic objectForKey:@"Asset"] count] == 4) {
+                
+                myAccountPView.GSView.hidden = NO;
+                myAccountPView.GSLabel.hidden = NO;
+                
+                myAccountPView.PJView.hidden = NO;
+                myAccountPView.PJLabel.hidden = NO;
+                
+                myAccountPView.NewView.hidden = NO;
+                myAccountPView.NewLabel.hidden = NO;
+                
+                myAccountPView.BDView.hidden = NO;
+                myAccountPView.BDLabel.hidden = NO;
+                
+            }
             
             [cell addSubview:self.pieChartLeft];
             
@@ -212,11 +264,12 @@
 
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
 {
-    return self.slices.count;
+    return [[self.moneyDic objectForKey:@"Asset"] count];
 }
 
 - (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index
 {
+    NSLog(@"%ld",[[self.slices objectAtIndex:index] intValue]);
     return [[self.slices objectAtIndex:index] intValue];
 }
 
@@ -253,6 +306,62 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAssetInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@",responseObject);
+        self.moneyDic = [NSDictionary dictionary];
+        self.moneyDic = responseObject;
+        
+//        totalMoney
+        
+        CGFloat GSNumber = 0.0f;
+        CGFloat PJNumber = 0.0f;
+        CGFloat NewNumber = 0.0f;
+        CGFloat BDNumber = 0.0f;
+        
+        for(int i = 0; i < [[self.moneyDic objectForKey:@"Asset"] count]; i ++)
+        {
+            if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"固收理财"]) {
+                
+                GSNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+
+//                NSString *nameString = [NSString stringWithFormat:@"固收理财%f%%",GSNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue]];
+                
+                NSString *nameString = [NSString stringWithFormat:@"固收理财%f%%",GSNumber / 110000.0];
+                
+                [self.nameMArr addObject:nameString];
+                
+
+                
+            } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"票据投资"]) {
+                
+                PJNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+                
+                NSString *nameString = [NSString stringWithFormat:@"票据投资%f%%",PJNumber / 110000.0];
+                
+                [self.nameMArr addObject:nameString];
+                
+            } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"新手专享"]) {
+                
+                NewNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+                
+                NSString *nameString = [NSString stringWithFormat:@"新手专享%f%%",NewNumber / 110000.0];
+                
+                [self.nameMArr addObject:nameString];
+                
+            } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"标的"]) {
+                
+                BDNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+                
+                NSString *nameString = [NSString stringWithFormat:@"标的%f%%",BDNumber / 110000.0];
+                
+                [self.nameMArr addObject:nameString];
+                
+            }
+            
+            
+//            NSNumber *one = [NSNumber numberWithInt:rand()%100];
+//            [_slices addObject:one];
+        }
+        
+        [self.mainTableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

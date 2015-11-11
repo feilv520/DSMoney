@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="CenturyGothic.TTF">
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MyAccountProductView">
+            <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="固收理财65%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdn-Tk-p4Z">
+                    <rect key="frame" x="20" y="18" width="102" height="21"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="票据投资35%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ScV-Zy-z2A">
+                    <rect key="frame" x="20" y="54" width="102" height="21"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gb3-QS-mOU">
+                    <rect key="frame" x="0.0" y="22" width="15" height="15"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.96470588239999999" green="0.60784313729999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dOi-7X-ncT">
+                    <rect key="frame" x="0.0" y="58" width="15" height="15"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.50588235290000005" green="0.76470588240000004" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAI-nF-aJ7">
+                    <rect key="frame" x="0.0" y="94" width="15" height="15"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.24313725489999999" green="0.67843137249999996" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="新手专享0%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhe-eh-M58">
+                    <rect key="frame" x="20" y="90" width="75" height="21"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vuF-by-rnL">
+                    <rect key="frame" x="0.0" y="130" width="15" height="15"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="标的0%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPQ-dP-NWd">
+                    <rect key="frame" x="20" y="126" width="75" height="21"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="BDLabel" destination="bPQ-dP-NWd" id="Wwr-gm-uvj"/>
+                <outlet property="BDView" destination="vuF-by-rnL" id="Ptl-C1-D22"/>
+                <outlet property="GSLabel" destination="bdn-Tk-p4Z" id="0wq-hK-Y4J"/>
+                <outlet property="GSView" destination="gb3-QS-mOU" id="JJL-M8-aNp"/>
+                <outlet property="NewLabel" destination="yhe-eh-M58" id="nPl-sJ-lzf"/>
+                <outlet property="NewView" destination="XAI-nF-aJ7" id="wqT-3J-DdA"/>
+                <outlet property="PJLabel" destination="ScV-Zy-z2A" id="z3b-zA-Afp"/>
+                <outlet property="PJView" destination="dOi-7X-ncT" id="C26-K4-R9B"/>
+            </connections>
+            <point key="canvasLocation" x="155" y="295"/>
+        </view>
+    </objects>
+</document>

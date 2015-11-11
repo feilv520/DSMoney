@@ -360,9 +360,16 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"%@",responseObject);
+        NSLog(@"MyAccountInfo = %@",responseObject);
         
         self.myAccountInfo = responseObject;
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]]) {
+            NSLog(@"134897189374987342987243789423");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            return ;
+        }
         
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
         

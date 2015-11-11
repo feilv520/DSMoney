@@ -15,6 +15,7 @@
 #import "ThreeViewController.h"
 #import "define.h"
 #import "LoginViewController.h"
+#import "UMSocial.h"
 
 @interface AppDelegate ()
 {
@@ -63,6 +64,8 @@
     // Override point for customization after application launch.
     
     [self exitNetwork];
+    
+    [UMSocialData setAppKey:@"5642ad7e67e58e8463006218"];
     
     NSDictionary *dic = self.flagDic;
     
