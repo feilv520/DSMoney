@@ -89,7 +89,7 @@
     cell.viewGiPian.layer.cornerRadius = 4;
     cell.viewGiPian.layer.masksToBounds = YES;
     
-    cell.labelMonth.text = [nameArray objectAtIndex:indexPath.row];
+    cell.labelMonth.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
     cell.labelMonth.font = [UIFont systemFontOfSize:15];
     
     cell.viewLine.alpha = 0.7;

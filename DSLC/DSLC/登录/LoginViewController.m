@@ -290,6 +290,8 @@
                 textField1.text = @"";
                 textField2.text = @"";
                 
+            } else {
+                [ProgressHUD showMessage:@"手机号或密码错误" Width:100 High:20];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -320,9 +322,11 @@
     NSDictionary *parameter = @{@"phone":[self.flagUserInfo objectForKey:@"userPhone"],@"password":[self.flagUserInfo objectForKey:@"password"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self.view endEditing:YES];
+        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
 
-            NSLog(@"%@",responseObject);
+            NSLog(@"AutoLogin = %@",responseObject);
             
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [self.flagUserInfo objectForKey:@"password"],@"password",
@@ -341,7 +345,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+        NSLog(@"error = %@",error);
     }];
 
 }

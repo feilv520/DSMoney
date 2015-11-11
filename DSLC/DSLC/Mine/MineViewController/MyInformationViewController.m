@@ -150,7 +150,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == 3) {
-        return 80;
+        return 100;
     } else {
         return 0.5;
     }
