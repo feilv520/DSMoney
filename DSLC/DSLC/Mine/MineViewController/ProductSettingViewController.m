@@ -328,8 +328,6 @@
                 
                 [self.nameMArr addObject:nameString];
                 
-
-                
             } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"票据投资"]) {
                 
                 PJNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
