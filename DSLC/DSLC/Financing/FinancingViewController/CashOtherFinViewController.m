@@ -177,6 +177,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [butBlack removeFromSuperview];
     [viewTanKuang removeFromSuperview];
     

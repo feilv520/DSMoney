@@ -39,7 +39,7 @@
 @implementation SelectionViewController
 
 - (void)viewWillAppear:(BOOL)animated{
-    [super viewDidAppear:NO];
+    [super viewWillAppear:NO];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
@@ -62,7 +62,7 @@
     // 更改timer对象的优先级
     [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
     
-//    [self getAdvList];
+    [self getAdvList];
     [self getPickProduct];
     
 }
@@ -365,7 +365,7 @@
 
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"%@",responseObject);
+        NSLog(@"AD = %@",responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

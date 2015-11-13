@@ -8,9 +8,13 @@
 
 #import "BaseViewController.h"
 #import "AppDelegate.h"
+#import "ProductDetailModel.h"
+
 
 @interface MakeSureViewController : BaseViewController
 
 @property (nonatomic) BOOL decide;
 
+@property (nonatomic, strong) ProductDetailModel *detailM;
+@property (nonatomic, strong) NSString *residueMoney;
 @end

@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CastDetailTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *assetName;
+@property (weak, nonatomic) IBOutlet UILabel *assetMoney;
 
 @end

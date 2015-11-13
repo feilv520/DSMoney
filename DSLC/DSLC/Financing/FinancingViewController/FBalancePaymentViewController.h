@@ -23,4 +23,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldSecret;
 @property (weak, nonatomic) IBOutlet UIButton *butForget;
 
+@property (nonatomic, strong) NSString *idString;
+@property (nonatomic, strong) NSString *productName;
+@property (nonatomic, strong) NSString *moneyString;
+@property (nonatomic, strong) NSString *typeString;
+
 @end

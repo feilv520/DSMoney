@@ -94,6 +94,11 @@
         if ([[responseObject objectForKey:@"result"]isEqualToNumber:[NSNumber numberWithInt:200]]) {
             ChangeNumViewController *changeNumVC = [[ChangeNumViewController alloc] init];
             [self.navigationController pushViewController:changeNumVC animated:YES];
+            
+            _textField.text = @"";
+            
+        } else {
+            
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

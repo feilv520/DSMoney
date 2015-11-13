@@ -18,29 +18,38 @@
 
 @interface CastProduceViewController ()<UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView *mainTableView;
+@property (nonatomic, strong) UITableView *mainTV;
+
+@property (nonatomic, strong) NSDictionary *castDic;
 
 @end
 
 @implementation CastProduceViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getCastProduct];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     self.view.backgroundColor = buttonBorderColor;
     
-    self.mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 84) style:UITableViewStylePlain];
+    self.mainTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 84) style:UITableViewStylePlain];
     
-    self.mainTableView.backgroundColor = buttonBorderColor;
+    self.mainTV.backgroundColor = buttonBorderColor;
     
-    self.mainTableView.dataSource = self;
-    self.mainTableView.delegate = self;
+    self.mainTV.dataSource = self;
+    self.mainTV.delegate = self;
     
-    [self.mainTableView registerNib:[UINib nibWithNibName:@"CastUpTableViewCell" bundle:nil] forCellReuseIdentifier:@"castUp"];
-    [self.mainTableView registerNib:[UINib nibWithNibName:@"CastDownTableViewCell" bundle:nil] forCellReuseIdentifier:@"castDown"];
-    [self.mainTableView registerNib:[UINib nibWithNibName:@"CastDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"castDetail"];
+    [self.mainTV registerNib:[UINib nibWithNibName:@"CastUpTableViewCell" bundle:nil] forCellReuseIdentifier:@"castUp"];
+    [self.mainTV registerNib:[UINib nibWithNibName:@"CastDownTableViewCell" bundle:nil] forCellReuseIdentifier:@"castDown"];
+    [self.mainTV registerNib:[UINib nibWithNibName:@"CastDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"castDetail"];
     
-    [self.view addSubview:self.mainTableView];
+    [self.view addSubview:self.mainTV];
     
     [self setXYButton];
     
@@ -68,7 +77,7 @@
     
     [tableBottom addSubview:xyButton];
     
-    self.mainTableView.tableFooterView = tableBottom;
+    self.mainTV.tableFooterView = tableBottom;
     
 }
 
@@ -96,27 +105,41 @@
     if (section == 0) {
         return 1;
     } else {
-        return 3;
+        return [[[self.castDic objectForKey:@"Product"] objectForKey:@"Asset"] count] + 1;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        CastUpTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"castUp"];
-        return cell;
+        if (indexPath.row == 0) {
+            CastUpTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"castUp"];
+            cell.productName.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productName"];
+            cell.productType.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productType"];
+            cell.productNumber.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"];
+            cell.productMoney.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"money"];
+            cell.productProfit.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productAmountMin"];
+            cell.productDate.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productToaccountTypeName"];
+            return cell;
+        } else {
+            return nil;
+        }
     } else {
         if (indexPath.row == 0) {
             CastDownTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"castDown"];
             return cell;
         } else {
             CastDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"castDetail"];
+            
+            cell.assetName.text = [[[[self.castDic objectForKey:@"Product"] objectForKey:@"Asset"] objectAtIndex:indexPath.row - 1] objectForKey:@"assetName"];
+            cell.assetMoney.text = [[[[self.castDic objectForKey:@"Product"] objectForKey:@"Asset"] objectAtIndex:indexPath.row - 1] objectForKey:@"investMoney"];
+            
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         
     }
     
-    return nil;
+//    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -138,9 +161,35 @@
     if (indexPath.section == 1) {
         
         MoneyDetailViewController *moneyDetail = [[MoneyDetailViewController alloc] init];
+        moneyDetail.idString = [[[[self.castDic objectForKey:@"Product"] objectForKey:@"Asset"] objectAtIndex:indexPath.row - 1] objectForKey:@"assetId"];
         [self.navigationController pushViewController:moneyDetail animated:YES];
         
     }
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getCastProduct{
+
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"productId":self.idString,@"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getCastProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        self.castDic = [NSDictionary dictionary];
+        self.castDic = responseObject;
+        
+        [self.mainTV reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

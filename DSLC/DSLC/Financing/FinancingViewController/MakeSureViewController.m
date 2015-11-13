@@ -228,7 +228,7 @@
             
         } else {
             
-            cell.labelMonth.text = @"3个月固定投资";
+            cell.labelMonth.text = [self.detailM productName];
             
         }
         
@@ -238,17 +238,19 @@
         
         
         
-        NSMutableAttributedString *year = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@", @"年化收益率", @"8.02%"]];
+        NSMutableAttributedString *year = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@", @"年化收益率", [self.detailM productAnnualYield]]];
         NSRange black = NSMakeRange(0, [[year string] rangeOfString:@":"].location);
         [year addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:black];
+        [cell.labelYear setAttributedText:year];
+        cell.labelYear.textColor = [UIColor zitihui];
         
-        NSMutableAttributedString *moneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@", @"剩余总额", @"34.2万元"]];
+        NSMutableAttributedString *moneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@", @"剩余总额", self.residueMoney]];
         NSRange moneyRange = NSMakeRange(0, [[moneyStr string] length]);
         [moneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:moneyRange];
         [cell.labelSheng setAttributedText:moneyStr];
         cell.labelSheng.textColor = [UIColor zitihui];
         
-        NSMutableAttributedString *moneyS = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@", @"起投资金", @"1,000元起投,每1000元递增"]];
+        NSMutableAttributedString *moneyS = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@%@", @"起投资金", [self.detailM productAmountMin],@"元起投,每1000元递增"]];
         NSRange Range = NSMakeRange(0, [[moneyS string] length]);
         [moneyS addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:Range];
         [cell.labelMoney setAttributedText:moneyS];
@@ -260,10 +262,6 @@
     } else if (indexPath.section == 1) {
         
         MoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse2"];
-        if (cell == nil) {
-            
-            cell = [[MoneyCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse2"];
-        }
         
         cell.labelMoney.text = @"投资金额";
         cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -295,6 +293,8 @@
         cell.textField.layer.borderWidth = 0.5;
         cell.textField.layer.borderColor = [[UIColor shurukuangBian] CGColor];
         
+        [cell.textField addTarget:self action:@selector(ValueChanged:) forControlEvents:UIControlEventEditingChanged];
+        
         cell.labelOneZi.text = @"元";
         cell.labelOneZi.font = [UIFont systemFontOfSize:14];
         cell.labelOneZi.textColor = [UIColor zitihui];
@@ -303,9 +303,11 @@
         cell.labelShouRu.text = @"预计到期收益";
         cell.labelShouRu.font = [UIFont systemFontOfSize:15];
         
+        cell.labelYuan.tag = 9898;
+        
         if (self.decide == NO) {
             
-            cell.labelYuan.text = @"5.00元";
+            cell.labelYuan.text = [NSString stringWithFormat:@"%.f",[cell.textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36000.0];
             
         } else {
             
@@ -385,11 +387,6 @@
     } else {
         
         CashMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse4"];
-        
-        if (cell == nil) {
-            
-            cell = [[CashMoneyCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse4"];
-        }
         
         cell.labelCash.text = @"支付金额";
         cell.labelCash.font = [UIFont systemFontOfSize:15];
@@ -595,7 +592,7 @@
 //偏移量回收键盘
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y >= 1) {
+    if (scrollView.contentOffset.y != 0) {
         
         self.textFieldC = (UITextField *)[self.view viewWithTag:199];
         [self.textFieldC resignFirstResponder];
@@ -605,8 +602,35 @@
 //确认投资按钮
 - (void)buttonAffirmMoney:(UIButton *)button
 {
+    UITextField *textField = (UITextField *)[self.view viewWithTag:199];
     FBalancePaymentViewController *balanceVC = [[FBalancePaymentViewController alloc] init];
+    balanceVC.productName = [self.detailM productName];
+    balanceVC.idString = [self.detailM productId];
+    balanceVC.moneyString = textField.text;
+    balanceVC.typeString = [self.detailM productType];
     [self.navigationController pushViewController:balanceVC animated:YES];
+}
+
+#pragma mark textField 的监控方法
+#pragma mark --------------------------------
+
+- (void)ValueChanged:(UITextField *)textField{
+    
+    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:1];
+    NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:3];
+    MoneyCell *cell = (MoneyCell *)[self.tableView cellForRowAtIndexPath:path];
+    CashMoneyCell *cell1 = (CashMoneyCell *)[self.tableView cellForRowAtIndexPath:path1];
+    cell.labelYuan.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36000.0];
+    cell1.labelYuanShu.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue]];
+    
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (range.location >= 10) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

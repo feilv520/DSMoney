@@ -29,6 +29,9 @@
     NSArray *rightArray;
 }
 
+@property (nonatomic, strong) NSDictionary *asset;
+@property (nonatomic, strong) NSDictionary *product;
+
 @end
 
 @implementation MoneyDetailViewController
@@ -36,6 +39,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self getAssetDetail];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -363,6 +368,34 @@
 //            
 //        }
     }
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getAssetDetail{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"productId":self.idString,@"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/asset/getAssetDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        self.asset = [NSDictionary dictionary];
+        self.asset = [responseObject objectForKey:@"Asset"];
+        self.product = [NSDictionary dictionary];
+        self.product = [responseObject objectForKey:@"Product"];
+        
+        NSLog(@"%@",self.idString);
+        
+        [_tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

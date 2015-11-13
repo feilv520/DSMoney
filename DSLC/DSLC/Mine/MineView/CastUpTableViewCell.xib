@@ -28,7 +28,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="221"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="国承创投基金wt9101期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABi-yg-Lq3">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABi-yg-Lq3">
                         <rect key="frame" x="10" y="16" width="357" height="21"/>
                         <animations/>
                         <constraints>
@@ -189,6 +189,14 @@
                 </constraints>
             </tableViewCellContentView>
             <animations/>
+            <connections>
+                <outlet property="productDate" destination="h8y-4f-FNe" id="j4T-d0-hSI"/>
+                <outlet property="productMoney" destination="XSy-Gy-cjI" id="p3w-ic-Qwo"/>
+                <outlet property="productName" destination="ABi-yg-Lq3" id="jOB-BU-hY8"/>
+                <outlet property="productNumber" destination="FVe-rv-rwr" id="ctW-JX-XYe"/>
+                <outlet property="productProfit" destination="ibQ-Tz-MrG" id="ast-Gn-Ifx"/>
+                <outlet property="productType" destination="Ox1-el-0h2" id="oYI-mw-lO9"/>
+            </connections>
             <point key="canvasLocation" x="313.5" y="335"/>
         </tableViewCell>
     </objects>

@@ -10,4 +10,6 @@
 
 @interface CastProduceViewController : BaseViewController
 
+@property (nonatomic, strong) NSString *idString;
+
 @end

@@ -269,7 +269,7 @@
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"invitationMyCode":[dic objectForKey:@"invitationMyCode"]};
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"invitationMyCode":[dic objectForKey:@"invitationMyCode"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyInviteInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

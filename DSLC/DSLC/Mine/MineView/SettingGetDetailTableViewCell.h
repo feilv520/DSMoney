@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingGetDetailTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *productName;
 
 @end
