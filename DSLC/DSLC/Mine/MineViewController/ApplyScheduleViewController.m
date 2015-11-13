@@ -149,7 +149,7 @@
         UILabel *labelTime = [CreatView creatWithLabelFrame:CGRectMake(40, 140, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"2015-09-10 12:00"];
         [viewWhite addSubview:labelTime];
         
-        UIButton *buttWell = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT / 2 + 60, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 银行转账流单号已经提交成功,\n 我们将在24小时内进行核实!"];
+        UIButton *buttWell = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT / 2 + 60, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 转账/POS单号已经提交成功,\n 我们将在24小时内进行核实!"];
         [viewWhite addSubview:buttWell];
         buttWell.titleLabel.numberOfLines = 2;
         buttWell.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];

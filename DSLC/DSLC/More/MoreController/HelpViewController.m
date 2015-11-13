@@ -42,7 +42,7 @@
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 1)];
     [_tableView registerNib:[UINib nibWithNibName:@"HelpCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    titleArr = @[@"新手指南", @"投资与操作"];
+    titleArr = @[@"新手指南", @"常见问题"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

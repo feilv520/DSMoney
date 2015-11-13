@@ -23,6 +23,7 @@
 #import "LoginViewController.h"
 #import "SetDealSecret.h"
 #import "MyAlreadyBindingBank.h"
+#import "AddBankViewController.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -76,7 +77,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor huibai];
     
     [self.navigationItem setTitle:@"我的资料"];
     
@@ -88,7 +89,7 @@
 - (void)tableViewShow
 {
     titleArr = @[@[@"我的银行卡"],
-                 @[@"绑定手机", @"绑定邮箱", @"实名认证"],
+                 @[@"更换手机", @"绑定邮箱", @"实名认证"],
                  @[@"登录密码", @"交易密码", @"手势密码", @"修改手势密码"]];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
@@ -264,8 +265,8 @@
     if (indexPath.section == 1) {
         
 //        如果没有绑定银行卡 需要跳转到绑定银行卡页面
-        MyBankViewController *myBankVC = [[MyBankViewController alloc] init];
-        [self.navigationController pushViewController:myBankVC animated:YES];
+        AddBankViewController *addBankVC = [[AddBankViewController alloc] init];
+        [self.navigationController pushViewController:addBankVC animated:YES];
         
 //        如果已经绑定了银行卡 跳转的是所绑定的银行卡页面
 //        MyAlreadyBindingBank *already = [[MyAlreadyBindingBank alloc] init];

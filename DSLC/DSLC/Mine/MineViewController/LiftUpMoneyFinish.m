@@ -1,14 +1,14 @@
 //
-//  GiveMoneyFinish.m
+//  LiftUpMoneyFinish.m
 //  DSLC
 //
-//  Created by ios on 15/11/11.
+//  Created by ios on 15/11/12.
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import "GiveMoneyFinish.h"
+#import "LiftUpMoneyFinish.h"
 
-@interface GiveMoneyFinish ()
+@interface LiftUpMoneyFinish ()
 
 {
     NSArray *labelName;
@@ -16,34 +16,37 @@
 
 @end
 
-@implementation GiveMoneyFinish
+@implementation LiftUpMoneyFinish
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor huibai];
-    [self.navigationItem setTitle:@"支付完成"];
+    [self.navigationItem setTitle:@"提现"];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishReturn:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishRight:)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:14], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
-    [self contentShow];
+    [self tableViewShow];
 }
 
-- (void)contentShow
+- (void)tableViewShow
 {
-    UIButton *buttonOk = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 35, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@" 充值成功"];
-    [self.view addSubview:buttonOk];
-    buttonOk.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [buttonOk setImage:[UIImage imageNamed:@"iconfont_complete"] forState:UIControlStateNormal];
+    UIButton *buttonFinish = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 25, WIDTH_CONTROLLER_DEFAULT, 25) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@" 提现申请已提交"];
+    [self.view addSubview:buttonFinish];
+    buttonFinish.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [buttonFinish setImage:[UIImage imageNamed:@"iconfont_complete"] forState:UIControlStateNormal];
     
-    UIView *viewWhite = [CreatView creatViewWithFrame:CGRectMake(30, 95, WIDTH_CONTROLLER_DEFAULT - 60, 100) backgroundColor:[UIColor whiteColor]];
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 50, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"预计最快2个工作日内到账"];
+    [self.view addSubview:labelAlert];
+    
+    UIView *viewWhite = [CreatView creatViewWithFrame:CGRectMake(30, 100, WIDTH_CONTROLLER_DEFAULT - 60, 100) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewWhite];
-    viewWhite.layer.cornerRadius = 4;
+    viewWhite.layer.cornerRadius = 5;
     viewWhite.layer.masksToBounds = YES;
-    viewWhite.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    viewWhite.layer.borderWidth = 0.3;
+    viewWhite.layer.borderWidth = 0.2;
+    viewWhite.layer.borderColor = [[UIColor grayColor] CGColor];
     
     CGFloat viewWidth = viewWhite.frame.size.width;
     
@@ -52,35 +55,22 @@
     labelLine.backgroundColor = [UIColor lightGrayColor];
     labelLine.alpha = 0.7;
     
-    labelName = @[@"充值金额", @"银行卡"];
+    labelName = @[@"提现金额", @"银行卡"];
     
     for (int i = 0; i < 2; i++) {
         
         UILabel *labelTitle = [CreatView creatWithLabelFrame:CGRectMake(10, 10 + 30 * i + 20 * i, (viewWidth - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:[labelName objectAtIndex:i]];
         [viewWhite addSubview:labelTitle];
     }
-    
+
     UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake((viewWidth - 20)/2 + 10, 10, (viewWidth - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"$1"];
     [viewWhite addSubview:labelMoney];
     
-    UILabel *labelTailNum = [CreatView creatWithLabelFrame:CGRectMake((viewWidth - 20)/2 + 10, 60, (viewWidth - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"尾号9988"];
+    UILabel *labelTailNum = [CreatView creatWithLabelFrame:CGRectMake((viewWidth - 20)/2 + 10, 60, (viewWidth - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"工商银行9988"];
     [viewWhite addSubview:labelTailNum];
-    
-    UIButton *buttonGo = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 255, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"去赚钱"];
-    [self.view addSubview:buttonGo];
-    buttonGo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [buttonGo setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-    [buttonGo setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-    [buttonGo addTarget:self action:@selector(buttonGoToGetMoney:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-//去赚钱按钮
-- (void)buttonGoToGetMoney:(UIButton *)button
-{
-    NSLog(@"充值");
-}
-
-- (void)finishReturn:(UIBarButtonItem *)bar
+- (void)finishRight:(UIBarButtonItem *)bar
 {
     NSArray *viewController = [self.navigationController viewControllers];
     [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];

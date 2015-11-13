@@ -133,23 +133,25 @@
         
         if (indexPath.row == 0) {
             
-            butblack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-            AppDelegate *app = [[UIApplication sharedApplication] delegate];
-            [app.tabBarVC.view addSubview:butblack];
-            butblack.alpha = 0.3;
-            [butblack addTarget:self action:@selector(buttonWeiXin:) forControlEvents:UIControlEventTouchUpInside];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已复制微信公众号名称"];
             
-            viewCopy = [CreatView creatViewWithFrame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 - 80, WIDTH_CONTROLLER_DEFAULT - 80, 100) backgroundColor:[UIColor whiteColor]];
-            [app.tabBarVC.view addSubview:viewCopy];
-            viewCopy.layer.cornerRadius = 5;
-            viewCopy.layer.masksToBounds = YES;
-            
-            UILabel *labelWeiXin = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewCopy.frame.size.width, viewCopy.frame.size.height) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:18] text:@"已复制微信公众号名称"];
-            [viewCopy addSubview:labelWeiXin];
+//            butblack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+//            AppDelegate *app = [[UIApplication sharedApplication] delegate];
+//            [app.tabBarVC.view addSubview:butblack];
+//            butblack.alpha = 0.3;
+//            [butblack addTarget:self action:@selector(buttonWeiXin:) forControlEvents:UIControlEventTouchUpInside];
+//            
+//            viewCopy = [CreatView creatViewWithFrame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 - 80, WIDTH_CONTROLLER_DEFAULT - 80, 100) backgroundColor:[UIColor whiteColor]];
+//            [app.tabBarVC.view addSubview:viewCopy];
+//            viewCopy.layer.cornerRadius = 5;
+//            viewCopy.layer.masksToBounds = YES;
+//            
+//            UILabel *labelWeiXin = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewCopy.frame.size.width, viewCopy.frame.size.height) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:18] text:@"已复制微信公众号名称"];
+//            [viewCopy addSubview:labelWeiXin];
             
         } else {
         
-            NSLog(@"新浪微博");
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已复制微博公众账号"];
         }
     }
 }

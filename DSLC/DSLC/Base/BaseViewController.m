@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "ProgressHUD.h"
 
 @interface BaseViewController ()
 
@@ -48,6 +49,20 @@
 - (void)setTitleString:(NSString *)titleString
 {
     self.navigationItem.title = titleString;
+}
+
+- (void)showTanKuangWithMode:(MBProgressHUDMode)mode Text:(NSString *)text
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = mode;
+    hud.labelText = text;
+    hud.labelFont = [UIFont systemFontOfSize:12];
+    hud.minSize = CGSizeMake(0, 55);
+    hud.margin = 10;
+    hud.yOffset = -50;
+    hud.cornerRadius = 5.0f;
+    hud.removeFromSuperViewOnHide = YES;
+    [hud hide:YES afterDelay:0.8];
 }
 
 //导航内容

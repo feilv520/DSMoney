@@ -14,6 +14,7 @@
 #import "InviteNumCell.h"
 #import "InviteNameCell.h"
 #import "InviteNameViewController.h"
+#import "SocialPlatformViewController.h"
 
 @interface MyInvitationViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -252,14 +253,14 @@
 //复制按钮
 - (void)copyButton:(UIButton *)button
 {
-    NSLog(@"复制");
+    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已复制"];
 }
 
 //邀请按钮
 - (void)buttonInvite:(UIButton *)button
 {
-    InviteNameViewController *inviteName = [[InviteNameViewController alloc] init];
-    [self.navigationController pushViewController:inviteName animated:YES];
+    SocialPlatformViewController *socialVC = [[SocialPlatformViewController alloc] init];
+    [self.navigationController pushViewController:socialVC animated:YES];
 }
 
 #pragma mark 网络请求方法
@@ -269,7 +270,7 @@
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"invitationMyCode":[dic objectForKey:@"invitationMyCode"]};
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"invitationMyCode":[dic objectForKey:@"invitationMyCode"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyInviteInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

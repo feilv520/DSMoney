@@ -540,8 +540,10 @@
             self.viewWhite.labelKnow.font = [UIFont systemFontOfSize:15];
             self.viewWhite.labelKnow.numberOfLines = 0;
             
-            self.viewWhite.labelBook.text = @"本人已仔细阅读/理解该收益权产品<<风险提示书>>全文,并愿意自行承担投资风险";
             self.viewWhite.labelBook.textColor = [UIColor zitihui];
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"];
+            [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor chongzhiColor] range:[@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"rangeOfString:@"<<购买条款>>、<<收益权转让协议>>"]];
+            [self.viewWhite.labelBook setAttributedText:attStr];
             self.viewWhite.labelBook.font = [UIFont systemFontOfSize:15];
             self.viewWhite.labelBook.numberOfLines = 0;
             

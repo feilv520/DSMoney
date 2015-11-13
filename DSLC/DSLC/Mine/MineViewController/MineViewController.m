@@ -78,7 +78,7 @@
 
 - (void)showPictureAndTitle
 {
-    titleArr = @[@"账户资产", @"我的资料", @"红包活动", @"好友邀请", @"交易记录", @"消息中心"];
+    titleArr = @[@"账户资产", @"我的资料", @"我的红包", @"好友邀请", @"交易记录", @"消息中心"];
     pictureArr = @[@"zhanghu", @"ziliao", @"hongbao", @"haoyou", @"jiaoyi", @"xiaoxi"];
 }
 

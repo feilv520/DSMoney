@@ -8,6 +8,7 @@
 
 #import "LiftUpMoneyCheck.h"
 #import "MendDeal2Cell.h"
+#import "LiftUpMoneyFinish.h"
 
 @interface LiftUpMoneyCheck () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -71,6 +72,7 @@
     buttonOK.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonOK setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [buttonOK setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    [buttonOK addTarget:self action:@selector(buttonMkeSureLiftUp:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -123,6 +125,7 @@
     cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     cell.textField.tintColor = [UIColor grayColor];
     cell.textField.delegate = self;
+    cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     [cell.textField addTarget:self action:@selector(textFieldPleaseShuRu:) forControlEvents:UIControlEventEditingChanged];
     
     if (indexPath.section == 0) {
@@ -150,6 +153,7 @@
         [cell.buttonGet setTitleColor:[UIColor chongzhiColor] forState:UIControlStateNormal];
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -167,6 +171,23 @@
         
         [buttonOK setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [buttonOK setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    }
+}
+
+//确定按钮
+- (void)buttonMkeSureLiftUp:(UIButton *)button
+{
+    textField1 = (UITextField *)[self.view viewWithTag:777];
+    textField2 = (UITextField *)[self.view viewWithTag:888];
+    
+    if (textField1.text.length == 6 && textField2.text.length == 6) {
+        
+        LiftUpMoneyFinish *finish = [[LiftUpMoneyFinish alloc] init];
+        [self.navigationController pushViewController:finish animated:YES];
+        
+    } else {
+        
+        
     }
 }
 

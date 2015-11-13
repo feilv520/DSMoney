@@ -47,5 +47,6 @@
 #import "AFNetworking.h"
 #import "AFHTTPSessionManager.h"
 #import "MyAfHTTPClient.h"
+#import "MBProgressHUD.h"
 
 #endif /* Header_h */

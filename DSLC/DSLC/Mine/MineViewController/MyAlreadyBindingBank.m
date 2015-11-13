@@ -35,6 +35,7 @@
     [self.view addSubview:_tabelView];
     _tabelView.dataSource = self;
     _tabelView.delegate = self;
+    _tabelView.backgroundColor = [UIColor huibai];
     _tabelView.tableFooterView = [UIView new];
     [_tabelView registerNib:[UINib nibWithNibName:@"MyAlreadyCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }

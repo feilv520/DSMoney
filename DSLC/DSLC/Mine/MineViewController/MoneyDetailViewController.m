@@ -18,6 +18,7 @@
 #import "RiskConditionsViewController.h"
 #import "RiskDisclosureViewController.h"
 #import "TeamDescriptionsViewController.h"
+#import "RiskAlertBookViewController.h"
 
 @interface MoneyDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -247,37 +248,37 @@
         
         cell.imageTimeZhou.image = [UIImage imageNamed:@"750chanpin"];
         
-        cell.buyPlan.text = @"购买计划";
+        cell.buyPlan.text = @"开售时间";
         cell.buyPlan.textColor = [UIColor zitihui];
-        cell.buyPlan.font = [UIFont systemFontOfSize:12];
+        cell.buyPlan.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.timeOne.text = @"2015-9-22";
         cell.timeOne.textColor = [UIColor zitihui];
-        cell.timeOne.font = [UIFont systemFontOfSize:12];
+        cell.timeOne.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.beginDay.text = @"起息日";
         cell.beginDay.textColor = [UIColor zitihui];
-        cell.beginDay.font = [UIFont systemFontOfSize:12];
+        cell.beginDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.rightNowTime.text = @"立即起息";
         cell.rightNowTime.textColor = [UIColor zitihui];
-        cell.rightNowTime.font = [UIFont systemFontOfSize:12];
+        cell.rightNowTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.labelEndDay.text = @"结息日";
         cell.labelEndDay.textColor = [UIColor zitihui];
-        cell.labelEndDay.font = [UIFont systemFontOfSize:12];
+        cell.labelEndDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.endTime.text = @"2015-9-24";
         cell.endTime.textColor = [UIColor zitihui];
-        cell.endTime.font = [UIFont systemFontOfSize:12];
+        cell.endTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.labelCash.text = @"兑付日";
+        cell.labelCash.text = @"预计到账日";
         cell.labelCash.textColor = [UIColor zitihui];
-        cell.labelCash.font = [UIFont systemFontOfSize:12];
+        cell.labelCash.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.cashDay.text = @"2015-9-25";
         cell.cashDay.textColor = [UIColor zitihui];
-        cell.cashDay.font = [UIFont systemFontOfSize:12];
+        cell.cashDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.imageQuan.image = [UIImage imageNamed:@"750产品详情"];
         
@@ -350,8 +351,9 @@
             
         } else if (indexPath.row == 4) {
             
-            RiskDisclosureViewController *riskDisVC = [[RiskDisclosureViewController alloc] init];
-            [self.navigationController pushViewController:riskDisVC animated:YES];
+            RiskAlertBookViewController *risk = [[RiskAlertBookViewController alloc] init];
+            risk.disign = NO;
+            [self.navigationController pushViewController:risk animated:YES];
             
         } else if (indexPath.row == 3) {
             

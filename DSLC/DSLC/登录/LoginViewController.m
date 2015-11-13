@@ -16,7 +16,7 @@
 #import "ForgetSecretViewController.h"
 #import "SelectionViewController.h"
 
-@interface LoginViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface LoginViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 {
     UITableView *_tableView;
@@ -206,11 +206,15 @@
     cell.textField.placeholder = [placeholderArr objectAtIndex:indexPath.row];
     cell.textField.font = [UIFont fontWithName:@"placeholder" size:14];
     cell.textField.tintColor = [UIColor grayColor];
+    cell.textField.delegate = self;
     cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     cell.textField.tag = 1000 + indexPath.row;
+    cell.textField.textColor = [UIColor zitihui];
+    
     if (indexPath.row == 1) {
         cell.textField.secureTextEntry = YES;
     }
+    
     [cell.textField addTarget:self action:@selector(editContent:) forControlEvents:UIControlEventEditingChanged];
     
     cell.imageLeft.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [ImageArr objectAtIndex:indexPath.row]]];
@@ -219,12 +223,38 @@
     return cell;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 1000) {
+        
+        if (range.location == 11) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+        
+    } else {
+        
+        if (range.location == 3) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+    }
+}
+
 - (void)editContent:(UITextField *)textField
 {
     textField1 = (UITextField *)[self.view viewWithTag:1000];
     textField2 = (UITextField *)[self.view viewWithTag:1001];
     
-    if (textField1.text.length > 0 && textField2.text.length > 0) {
+    if (textField1.text.length == 11 && textField2.text.length == 3) {
         
         [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -243,7 +273,7 @@
     textField1 = (UITextField *)[self.view viewWithTag:1000];
     textField2 = (UITextField *)[self.view viewWithTag:1001];
     
-    if (textField1.text.length > 0 && textField2.text.length > 0) {
+    if (textField1.text.length == 11 && textField2.text.length == 3) {
         
 //        NSDictionary *parameter = @{@"phone":@"15955454588",@"password":@"123"};
         NSDictionary *parameter = @{@"phone":textField1.text,@"password":textField2.text};

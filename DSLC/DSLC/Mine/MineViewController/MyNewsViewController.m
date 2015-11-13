@@ -17,7 +17,7 @@
 
 {
     UITableView *_tableView;
-    NSArray *picArr;
+    NSMutableArray *picArr;
 }
 
 @end
@@ -36,7 +36,7 @@
 
 - (void)tableViewShow
 {
-    picArr = @[@"icon04@2x", @"icon05@2x", @"icon04@2x", @"icon05@2x"];
+    picArr = [NSMutableArray arrayWithObjects:@"icon04@2x", @"icon05@2x", @"icon04@2x", @"icon05@2x", nil];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
@@ -47,6 +47,15 @@
     [_tableView registerNib:[UINib nibWithNibName:@"MyNewsCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        [picArr removeObjectAtIndex:[indexPath row]];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 63;
@@ -54,7 +63,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return picArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

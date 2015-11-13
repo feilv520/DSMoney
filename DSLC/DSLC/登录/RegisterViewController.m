@@ -13,6 +13,8 @@
 #import "RegisterOfView.h"
 #import "RegisterOfResult.h"
 #import "RegisterOfPassButton.h"
+#import "InviteRegisterViewController.h"
+#import "RiskAlertBookViewController.h"
 
 @interface RegisterViewController ()<UITextFieldDelegate>{
     NSInteger number;
@@ -94,7 +96,7 @@
     teacherRegister.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT / 2.0, 0, WIDTH_CONTROLLER_DEFAULT / 2.0, 48);
     
     [userRegister setTitle:@"用户注册" forState:UIControlStateNormal];
-    [userRegister setTitleColor:Color_Red forState:UIControlStateNormal];
+    [userRegister setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
     
     [teacherRegister setTitle:@"理财师注册" forState:UIControlStateNormal];
     [teacherRegister setTitleColor:Color_Black forState:UIControlStateNormal];
@@ -155,6 +157,12 @@
     
 }
 
+- (void)InviteShuoMing:(UIButton *)button
+{
+    InviteRegisterViewController *invite = [[InviteRegisterViewController alloc] init];
+    [self.navigationController pushViewController:invite animated:YES];
+}
+
 // 注册信息
 - (void)RegisterMessage{
     
@@ -172,11 +180,14 @@
     
     registerV.getCode.layer.masksToBounds = YES;
     registerV.getCode.layer.borderWidth = 1.f;
-    registerV.getCode.layer.borderColor = [UIColor redColor].CGColor;
+    registerV.getCode.layer.borderColor = [UIColor daohanglan].CGColor;
+    [registerV.getCode setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+    registerV.getCode.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
     registerV.getCode.layer.cornerRadius = 4.f;
     
     [registerV.getCode addTarget:self action:@selector(getCodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [registerV.problemButton addTarget:self action:@selector(InviteShuoMing:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.scrollView addSubview:registerV];
 }
@@ -206,11 +217,12 @@
     
     [bookButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     
-    [bookButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [bookButton.titleLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:12]];
     
     [bookButton addTarget:self action:@selector(bookButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [bookButton setTitle:@"<<风险提示书>>" forState:UIControlStateNormal];
+    [bookButton setTitleColor:[UIColor chongzhiColor] forState:UIControlStateNormal];
     
     [self.scrollView addSubview:bookButton];
     
@@ -220,7 +232,7 @@
     
     [payButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
     [payButton setTitle:@"确定" forState:UIControlStateNormal];
-    
+    payButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [payButton addTarget:self action:@selector(sureButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
@@ -365,8 +377,11 @@
 }
 
 // 风险提示书
-- (void)bookButtonAction:(UIButton *)btn{
-    NSLog(@"<<风险提示书>>");
+- (void)bookButtonAction:(UIButton *)btn
+{
+    RiskAlertBookViewController *riskVC = [[RiskAlertBookViewController alloc] init];
+    riskVC.disign = YES;
+    [self.navigationController pushViewController:riskVC animated:YES];
 }
 
 // 获得验证码
@@ -374,7 +389,7 @@
     [self.view endEditing:YES];
     
     if (registerV.phoneNumber.text.length == 0) {
-        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
     } else {
         NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {

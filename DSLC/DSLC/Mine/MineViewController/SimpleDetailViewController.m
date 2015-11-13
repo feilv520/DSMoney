@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"项目简述";
+    self.navigationItem.title = @"项目详情";
 }
 
 - (void)didReceiveMemoryWarning {

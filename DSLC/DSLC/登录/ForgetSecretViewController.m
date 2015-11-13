@@ -53,8 +53,9 @@
     titleArr = @[@"设置新登录密码", @"确认新登录密码"];
     textFieldArr = @[@"请输入新登录密码", @"请再次输入新登录密码"];
     
-    textFieldPhoneNum = [CreatView creatWithfFrame:CGRectMake(130, 10, WIDTH_CONTROLLER_DEFAULT - 130 - 10, 30) setPlaceholder:@"请输入手机号" setTintColor:[UIColor grayColor]];
-    
+    textFieldPhoneNum = [CreatView creatWithfFrame:CGRectMake(130, 10, WIDTH_CONTROLLER_DEFAULT - 130 - 10, 30) setPlaceholder:nil setTintColor:[UIColor grayColor]];
+    textFieldPhoneNum.text = @"15940942599";
+    textFieldPhoneNum.enabled = NO;
     textFieldPhoneNum.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     textFieldPhoneNum.keyboardType = UIKeyboardTypeNumberPad;
     

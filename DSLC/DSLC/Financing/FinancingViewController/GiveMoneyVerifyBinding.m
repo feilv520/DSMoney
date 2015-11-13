@@ -114,7 +114,7 @@
 
 - (void)bindingBankTextField:(UITextField *)textField
 {
-    if (textField.text.length > 0) {
+    if (textField.text.length == 6) {
         
         [butGive setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butGive setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
