@@ -45,12 +45,14 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self getProductList];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self getProductList];
     
     self.view.backgroundColor = [UIColor huibai];
     
