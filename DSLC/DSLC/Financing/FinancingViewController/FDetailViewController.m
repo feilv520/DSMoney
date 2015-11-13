@@ -21,7 +21,7 @@
 #import "InvestNoticeViewController.h"
 #import "ProductDetailModel.h"
 
-@interface FDetailViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface FDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     UITableView *_tableView;
     NSArray *titleArr;
@@ -430,7 +430,8 @@
         
         makeSureVC.decide = NO;
     }
-    
+    makeSureVC.detailM = self.detailM;
+    makeSureVC.residueMoney = self.residueMoney;
     [self.navigationController pushViewController:makeSureVC animated:YES];
 }
 
@@ -450,8 +451,6 @@
         
         bView.backgroundColor = Color_Black;
         bView.alpha = 0.3;
-        
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
         
         [app.tabBarVC.view addSubview:bView];
         
@@ -474,12 +473,24 @@
         calendar.layer.masksToBounds = YES;
         calendar.layer.cornerRadius = 4.0;
         
+        calendar.inputMoney.delegate = self;
         [calendar.closeButton addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [calendar.calButton addTarget:self action:@selector(calButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        calendar.yearLv.text = [self.detailM productAnnualYield];
+        calendar.dayLabel.text = [self.detailM productPeriod];
         
         [app.tabBarVC.view addSubview:calendar];
 
     }
 
+}
+
+- (void)calButtonAction:(id)sender{
+    
+    calendar.totalLabel.text = [NSString stringWithFormat:@"%.2f",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * ([[self.detailM productPeriod] floatValue] / 36000.0)];
+    
 }
 
 - (void)closeButton:(UIButton *)but{
@@ -488,6 +499,20 @@
     
     bView = nil;
     calendar = nil;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [UIView animateWithDuration:0.5f animations:^{
+        CGFloat margin_x = (38 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+        CGFloat margin_y = (182 / 667.0) * HEIGHT_CONTROLLER_DEFAULT;
+        CGFloat width = (301 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+            margin_y -= 30;
+        }
+        
+        calendar.frame = CGRectMake(margin_x, margin_y - 40, width, 301);
+    }];
 }
 
 #pragma mark 网络请求方法

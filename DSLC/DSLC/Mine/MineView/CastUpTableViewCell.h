@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface CastUpTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *productName;
+@property (weak, nonatomic) IBOutlet UILabel *productType;
+@property (weak, nonatomic) IBOutlet UILabel *productNumber;
+@property (weak, nonatomic) IBOutlet UILabel *productMoney;
+@property (weak, nonatomic) IBOutlet UILabel *productProfit;
+@property (weak, nonatomic) IBOutlet UILabel *productDate;
 
 @end

@@ -261,6 +261,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [buttonHei removeFromSuperview];
     [viewChoose removeFromSuperview];
     

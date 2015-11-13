@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -19,12 +19,14 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="计算收益" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5m-5h-SVT">
                     <rect key="frame" x="0.0" y="17" width="301" height="21"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ntb-uR-Pgs">
                     <rect key="frame" x="261" y="18" width="22" height="22"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="itt-aS-YLv"/>
                         <constraint firstAttribute="width" constant="22" id="owc-IR-dvE"/>
@@ -33,6 +35,7 @@
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入理财金额" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0xc-Lh-nPM">
                     <rect key="frame" x="23" y="56" width="255" height="49"/>
+                    <animations/>
                     <color key="backgroundColor" red="0.91764705882352937" green="0.95686274509803915" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -43,6 +46,7 @@
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZW-6t-zrv">
                     <rect key="frame" x="255" y="70" width="17" height="21"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="17" id="FKq-DP-H50"/>
                         <constraint firstAttribute="height" constant="21" id="iPV-jI-2iJ"/>
@@ -53,14 +57,17 @@
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mPj-Uq-Tgw">
                     <rect key="frame" x="23" y="113" width="255" height="1"/>
+                    <animations/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tNs-ZY-Uft">
                     <rect key="frame" x="23" y="174" width="255" height="1"/>
+                    <animations/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iocn.png" translatesAutoresizingMaskIntoConstraints="NO" id="3nS-bp-ezt">
                     <rect key="frame" x="50" y="132" width="22" height="22"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="CcR-yQ-Kic"/>
                         <constraint firstAttribute="width" constant="22" id="cP1-xc-E4b"/>
@@ -68,16 +75,18 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NjP-vj-L8M">
                     <rect key="frame" x="84" y="133" width="58" height="21"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="58" id="Vcb-WT-3TR"/>
                         <constraint firstAttribute="height" constant="21" id="ec9-nZ-fc7"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar.png" translatesAutoresizingMaskIntoConstraints="NO" id="LCi-hg-9ai">
                     <rect key="frame" x="178" y="132" width="22" height="22"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="22" id="RYv-3E-fMT"/>
                         <constraint firstAttribute="height" constant="22" id="cIj-b2-ODp"/>
@@ -85,16 +94,18 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UvV-67-1di">
                     <rect key="frame" x="208" y="133" width="56" height="21"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="56" id="517-Wp-rdK"/>
                         <constraint firstAttribute="height" constant="21" id="iYa-Zq-uIH"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KcM-9M-CBz">
                     <rect key="frame" x="150" y="132" width="1" height="22"/>
+                    <animations/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="PWf-Ay-ZZ8"/>
@@ -103,18 +114,20 @@
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="产品预期收益（元）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Bg-Vd-1Ll">
                     <rect key="frame" x="22" y="175" width="255" height="59"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="255" id="07s-s0-TZc"/>
                         <constraint firstAttribute="height" constant="59" id="fbt-ai-6b8"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncH-Xr-9RR">
-                    <rect key="frame" x="236" y="174" width="42" height="59"/>
+                    <rect key="frame" x="169" y="174" width="109" height="59"/>
+                    <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="42" id="RA6-Oz-5jz"/>
+                        <constraint firstAttribute="width" constant="109" id="RA6-Oz-5jz"/>
                         <constraint firstAttribute="height" constant="59" id="bSN-ll-vGq"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -123,11 +136,13 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6Q-8i-QsG">
                     <rect key="frame" x="15" y="242" width="271" height="44"/>
+                    <animations/>
                     <state key="normal" title="计算" backgroundImage="btn_red.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="NjP-vj-L8M" firstAttribute="top" secondItem="mPj-Uq-Tgw" secondAttribute="bottom" constant="19" id="4CS-oq-zF8"/>
@@ -178,7 +193,12 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="calButton" destination="D6Q-8i-QsG" id="OrU-fe-Tyj"/>
                 <outlet property="closeButton" destination="ntb-uR-Pgs" id="aJV-gk-b1P"/>
+                <outlet property="dayLabel" destination="UvV-67-1di" id="AqZ-7x-vjW"/>
+                <outlet property="inputMoney" destination="0xc-Lh-nPM" id="KS1-pN-m6B"/>
+                <outlet property="totalLabel" destination="ncH-Xr-9RR" id="cVE-gZ-UQQ"/>
+                <outlet property="yearLv" destination="NjP-vj-L8M" id="PvQ-AY-FIb"/>
             </connections>
             <point key="canvasLocation" x="373.5" y="394.5"/>
         </view>

@@ -43,6 +43,9 @@
             </tableViewCellContentView>
             <animations/>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+            <connections>
+                <outlet property="productName" destination="ddB-ZR-1SM" id="Xy5-Hd-98j"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

@@ -10,4 +10,6 @@
 
 @interface MoneyDetailViewController : BaseViewController
 
+@property (nonatomic, strong) NSString *idString;
+
 @end

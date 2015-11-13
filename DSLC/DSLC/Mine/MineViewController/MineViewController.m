@@ -51,7 +51,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC setSuppurtGestureTransition:NO];
@@ -372,7 +372,7 @@
         
         self.myAccountInfo = responseObject;
         
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]]) {
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
             NSLog(@"134897189374987342987243789423");
             [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
             [self.navigationController popToRootViewControllerAnimated:NO];

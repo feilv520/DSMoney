@@ -67,6 +67,10 @@
             </tableViewCellContentView>
             <animations/>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+            <connections>
+                <outlet property="assetMoney" destination="PCR-J3-MRU" id="zQW-tn-tKA"/>
+                <outlet property="assetName" destination="2Zh-km-APb" id="Zha-7H-sPX"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

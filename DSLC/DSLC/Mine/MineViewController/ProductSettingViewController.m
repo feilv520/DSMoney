@@ -64,6 +64,7 @@
     [self.view addSubview:self.mainTableView];
     
     self.slices = [NSMutableArray arrayWithCapacity:4];
+    self.nameMArr = [NSMutableArray arrayWithCapacity:4];
     
     self.sliceColors =[NSArray arrayWithObjects:
                        [UIColor colorWithRed:246/255.0 green:155/255.0 blue:0/255.0 alpha:1],
@@ -108,7 +109,7 @@
         if (indexPath.row == 0) {
             SettingTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"title"];
             
-            cell.AllMoney.text = [NSString stringWithFormat:@"%@万元",[self.moneyDic objectForKey:@"totalMoney"]];
+            cell.AllMoney.text = [NSString stringWithFormat:@"%@元",[self.moneyDic objectForKey:@"totalMoney"]];
             
             return cell;
         } else {
@@ -125,10 +126,10 @@
             cell.yesterdayLabel.textColor = [UIColor daohanglan];
             cell.yesterdayLabel.textAlignment = NSTextAlignmentCenter;
             
-            NSMutableAttributedString *wanYuanStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万元",[self.moneyDic objectForKey:@"totalProfit"]]];
-            NSRange shuziStr = NSMakeRange(0, [[wanYuanStr string] rangeOfString:@"万"].location);
+            NSMutableAttributedString *wanYuanStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[self.moneyDic objectForKey:@"totalProfit"]]];
+            NSRange shuziStr = NSMakeRange(0, [[wanYuanStr string] rangeOfString:@"元"].location);
             [wanYuanStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:shuziStr];
-            NSRange wanZiStr = NSMakeRange([[wanYuanStr string] length] - 2, 2);
+            NSRange wanZiStr = NSMakeRange([[wanYuanStr string] length] - 1, 1);
             [wanYuanStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:wanZiStr];
             [cell.allDay setAttributedText:wanYuanStr];
             cell.allDay.textAlignment = NSTextAlignmentCenter;
@@ -144,6 +145,9 @@
             
             return cell;
         } else {
+            if ([[self.moneyDic objectForKey:@"Asset"] count] == 0) {
+                return nil;
+            } else {
             SettingPieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pie"];
             
             NSBundle *rootBundle = [NSBundle mainBundle];
@@ -154,49 +158,70 @@
             
             [cell addSubview:myAccountPView];
             
-            if ([[self.moneyDic objectForKey:@"Asset"] count] == 1) {
+            if ([self.nameMArr count] == 1) {
                 
                 myAccountPView.GSView.hidden = NO;
                 myAccountPView.GSLabel.hidden = NO;
                 
-            } else if ([[self.moneyDic objectForKey:@"Asset"] count] == 2) {
+                myAccountPView.GSLabel.text = [self.nameMArr objectAtIndex:0];
+                
+            } else if ([self.nameMArr count] == 2) {
                 
                 myAccountPView.GSView.hidden = NO;
                 myAccountPView.GSLabel.hidden = NO;
+                
+                myAccountPView.GSLabel.text = [self.nameMArr objectAtIndex:0];
                 
                 myAccountPView.PJView.hidden = NO;
                 myAccountPView.PJLabel.hidden = NO;
                 
-            } else if ([[self.moneyDic objectForKey:@"Asset"] count] == 3) {
+                myAccountPView.PJLabel.text = [self.nameMArr objectAtIndex:1];
+                
+            } else if ([self.nameMArr count] == 3) {
                 
                 myAccountPView.GSView.hidden = NO;
                 myAccountPView.GSLabel.hidden = NO;
                 
+                myAccountPView.GSLabel.text = [self.nameMArr objectAtIndex:0];
+                
                 myAccountPView.PJView.hidden = NO;
                 myAccountPView.PJLabel.hidden = NO;
+                
+                myAccountPView.PJLabel.text = [self.nameMArr objectAtIndex:1];
                 
                 myAccountPView.NewView.hidden = NO;
                 myAccountPView.NewLabel.hidden = NO;
                 
-            } else if ([[self.moneyDic objectForKey:@"Asset"] count] == 4) {
+                myAccountPView.NewLabel.text = [self.nameMArr objectAtIndex:2];
+                
+            } else if ([self.nameMArr count] == 4) {
                 
                 myAccountPView.GSView.hidden = NO;
                 myAccountPView.GSLabel.hidden = NO;
                 
+                myAccountPView.GSLabel.text = [self.nameMArr objectAtIndex:0];
+
                 myAccountPView.PJView.hidden = NO;
                 myAccountPView.PJLabel.hidden = NO;
                 
+                myAccountPView.PJLabel.text = [self.nameMArr objectAtIndex:1];
+                
                 myAccountPView.NewView.hidden = NO;
                 myAccountPView.NewLabel.hidden = NO;
+                
+                myAccountPView.NewLabel.text = [self.nameMArr objectAtIndex:2];
                 
                 myAccountPView.BDView.hidden = NO;
                 myAccountPView.BDLabel.hidden = NO;
+                
+                myAccountPView.BDLabel.text = [self.nameMArr objectAtIndex:3];
                 
             }
             
             [cell addSubview:self.pieChartLeft];
             
             return cell;
+            }
         }
     } else {
         if (indexPath.row == 0) {
@@ -204,10 +229,16 @@
             cell.AllMoney.hidden = YES;
             return cell;
         } else {
-            SettingGetDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"getDetail"];
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
+            if ([[self.moneyDic objectForKey:@"Product"] count] == 0) {
+                return nil;
+            } else {
+                SettingGetDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"getDetail"];
+                
+                cell.productName.text = [[[self.moneyDic objectForKey:@"Product"] objectAtIndex:indexPath.row - 1] objectForKey:@"productName"];
+                
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                return cell;
+            }
         }
     }
 }
@@ -216,9 +247,17 @@
     if (section == 0) {
         return 2;
     } else if (section == 1) {
-        return 2;
+        if ([[self.moneyDic objectForKey:@"Asset"] count] == 0) {
+            return 1;
+        } else {
+            return 2;
+        }
     } else {
-        return 2;
+        if ([[self.moneyDic objectForKey:@"Product"] count] == 0) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 }
 
@@ -249,6 +288,7 @@
         if (indexPath.row == 1) {
             
             CastProduceViewController *castPVC = [[CastProduceViewController alloc] init];
+            castPVC.idString = [[[self.moneyDic objectForKey:@"Product"] objectAtIndex:indexPath.row - 1] objectForKey:@"productId"];
             [self.navigationController pushViewController:castPVC animated:YES];
         }
     }
@@ -264,13 +304,13 @@
 
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
 {
-    return [[self.moneyDic objectForKey:@"Asset"] count];
+    return [self.slices count];
 }
 
 - (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index
 {
-    NSLog(@"%ld",[[self.slices objectAtIndex:index] intValue]);
-    return [[self.slices objectAtIndex:index] intValue];
+//    NSLog(@"%ld",[[self.slices objectAtIndex:index] floatValue]);
+    return [[self.slices objectAtIndex:index] floatValue];
 }
 
 - (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
@@ -297,6 +337,71 @@
     NSLog(@"did select slice at index %ld",(unsigned long)index);
 }
 
+//        totalMoney
+- (void)totalWithMoney{
+    
+    CGFloat GSNumber = 0.0f;
+    CGFloat PJNumber = 0.0f;
+    CGFloat NewNumber = 0.0f;
+    CGFloat BDNumber = 0.0f;
+    
+    for(NSInteger i = 0; i < [[self.moneyDic objectForKey:@"Asset"] count]; i ++)
+    {
+        if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"固收理财"]) {
+            
+            GSNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+            
+//                NSString *nameString = [NSString stringWithFormat:@"固收理财%f%%",GSNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue]];
+            
+        } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"票据理财"]) {
+            
+            PJNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+            
+        } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"新手专享"]) {
+            
+            NewNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+            
+        } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"标的"]) {
+            
+            BDNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+            
+        }
+        
+        
+        //            NSNumber *one = [NSNumber numberWithInt:rand()%100];
+        //            [_slices addObject:one];
+    }
+
+    for (NSInteger i = 0; i < 4; i ++) {
+        if (GSNumber != 0.0f) {
+            NSString *nameString = [NSString stringWithFormat:@"固收理财%.0f%%",GSNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue] * 100];
+
+            [self.nameMArr addObject:nameString];
+            [self.slices addObject:[NSString stringWithFormat:@"%f",GSNumber]];
+            GSNumber = 0.0f;
+        } else if (PJNumber != 0.0f) {
+            NSString *nameString = [NSString stringWithFormat:@"票据投资%.0f%%",PJNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue] * 100];
+
+            [self.nameMArr addObject:nameString];
+            [self.slices addObject:[NSString stringWithFormat:@"%f",PJNumber]];
+            PJNumber = 0.0f;
+        } else if (NewNumber != 0.0f) {
+            NSString *nameString = [NSString stringWithFormat:@"新手专享%.0f%%",NewNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue] * 100];
+
+            [self.nameMArr addObject:nameString];
+            [self.slices addObject:[NSString stringWithFormat:@"%f",NewNumber]];
+            NewNumber = 0.0f;
+        } else if (BDNumber != 0.0f) {
+            NSString *nameString = [NSString stringWithFormat:@"标的%.0f%%",BDNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue] * 100];
+
+            [self.nameMArr addObject:nameString];
+            [self.slices addObject:[NSString stringWithFormat:@"%f",BDNumber]];
+            BDNumber = 0.0f;
+        }
+    }
+    
+}
+
 #pragma mark 网络请求方法
 #pragma mark --------------------------------
 
@@ -309,55 +414,7 @@
         self.moneyDic = [NSDictionary dictionary];
         self.moneyDic = responseObject;
         
-//        totalMoney
-        
-        CGFloat GSNumber = 0.0f;
-        CGFloat PJNumber = 0.0f;
-        CGFloat NewNumber = 0.0f;
-        CGFloat BDNumber = 0.0f;
-        
-        for(int i = 0; i < [[self.moneyDic objectForKey:@"Asset"] count]; i ++)
-        {
-            if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"固收理财"]) {
-                
-                GSNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
-
-//                NSString *nameString = [NSString stringWithFormat:@"固收理财%f%%",GSNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue]];
-                
-                NSString *nameString = [NSString stringWithFormat:@"固收理财%f%%",GSNumber / 110000.0];
-                
-                [self.nameMArr addObject:nameString];
-                
-            } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"票据投资"]) {
-                
-                PJNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
-                
-                NSString *nameString = [NSString stringWithFormat:@"票据投资%f%%",PJNumber / 110000.0];
-                
-                [self.nameMArr addObject:nameString];
-                
-            } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"新手专享"]) {
-                
-                NewNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
-                
-                NSString *nameString = [NSString stringWithFormat:@"新手专享%f%%",NewNumber / 110000.0];
-                
-                [self.nameMArr addObject:nameString];
-                
-            } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"标的"]) {
-                
-                BDNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
-                
-                NSString *nameString = [NSString stringWithFormat:@"标的%f%%",BDNumber / 110000.0];
-                
-                [self.nameMArr addObject:nameString];
-                
-            }
-            
-            
-//            NSNumber *one = [NSNumber numberWithInt:rand()%100];
-//            [_slices addObject:one];
-        }
+        [self totalWithMoney];
         
         [self.mainTableView reloadData];
         

@@ -43,13 +43,13 @@
 
 - (void)showContent
 {
-    self.labelMonth1.text = @"   3个月固定资产";
+    self.labelMonth1.text = self.productName;
     self.labelMonth1.font = [UIFont systemFontOfSize:15];
     
     self.labelLine1.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.labelLine1.alpha = 0.7;
     
-    NSMutableAttributedString *qianshuStr = [[NSMutableAttributedString alloc] initWithString:@"2,000 元"];
+    NSMutableAttributedString *qianshuStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ 元",self.moneyString]];
     NSRange yuanStr = NSMakeRange(0, [[qianshuStr string] rangeOfString:@"元"].location);
     [qianshuStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:yuanStr];
     [qianshuStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:26] range:yuanStr];
@@ -123,10 +123,10 @@
 //        支付没有红包
 //        CashOtherFinViewController *cashOther = [[CashOtherFinViewController alloc] init];
 //        [self.navigationController pushViewController:cashOther animated:YES];
-        
+        [self buyProduct];
 //        支付有红包
-        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
-        [self.navigationController pushViewController:shareHave animated:YES];
+//        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
+//        [self.navigationController pushViewController:shareHave animated:YES];
         
     } else {
         
@@ -158,6 +158,32 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)buyProduct{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"productId":self.idString,@"productType":self.typeString,@"packetId":@0,@"orderMoney":self.moneyString,@"payMoney":@0,@"payType":@1,@"payPwd":self.textFieldSecret.text,@"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"buyProduct = %@",responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
+            [self.navigationController pushViewController:shareHave animated:YES];
+            [ProgressHUD showMessage:@"支付成功" Width:100 High:20];
+        } else {
+            [ProgressHUD showMessage:@"支付失败" Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

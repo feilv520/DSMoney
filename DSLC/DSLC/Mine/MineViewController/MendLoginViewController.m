@@ -114,21 +114,26 @@
     textField2 = (UITextField *)[self.view viewWithTag:301];
     textField3 = (UITextField *)[self.view viewWithTag:302];
 
+    self.flagDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
     if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0) {
-        NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"],@"optType":@1,@"oldPwd":textField1.text,@"newPwd":textField2.text,@"smsCode":@""};
+        NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"optType":@1,@"oldPwd":textField1.text,@"newPwd":textField2.text,@"smsCode":@""};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+                [ProgressHUD showMessage:[NSString stringWithFormat:@"%@,需要重新登陆",[responseObject objectForKey:@"resultMsg"]] Width:100 High:20];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            } else {
                 [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
             }
-            [self.navigationController popViewControllerAnimated:YES];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];
         
     } else {
         
-        NSLog(@"111111");
+        [ProgressHUD showMessage:@"请按要求全部填写好" Width:100 High:20];
     }
 }
 
