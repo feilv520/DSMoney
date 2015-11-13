@@ -420,19 +420,38 @@
 //确认投资按钮
 - (void)makeSureButton:(UIButton *)button
 {
-    MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    if (self.estimate == YES) {
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        makeSureVC.decide = YES;
+        if (responseObject == nil) {
+            [ProgressHUD showMessage:@"请先登录,然后再投资" Width:100 High:20];
+        } else {
+            
+            MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
+            
+            if (self.estimate == YES) {
+                
+                makeSureVC.decide = YES;
+                
+            } else {
+                
+                makeSureVC.decide = NO;
+            }
+            makeSureVC.detailM = self.detailM;
+            makeSureVC.residueMoney = self.residueMoney;
+            [self.navigationController pushViewController:makeSureVC animated:YES];
+        }
+
         
-    } else {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        makeSureVC.decide = NO;
-    }
-    makeSureVC.detailM = self.detailM;
-    makeSureVC.residueMoney = self.residueMoney;
-    [self.navigationController pushViewController:makeSureVC animated:YES];
+        NSLog(@"%@", error);
+        
+    }];
+    
 }
 
 // 计算收益图层
