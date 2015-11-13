@@ -174,7 +174,7 @@
         
         NSRange totalRed = NSMakeRange(0, [[redNumStr string] rangeOfString:@"元"].location);
         [redNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:totalRed];
-        [redNumStr addAttribute:NSForegroundColorAttributeName value:Color_Red range:totalRed];
+        [redNumStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:totalRed];
         NSRange yuanRed = NSMakeRange([[redNumStr string] rangeOfString:@"元"].location, 1);
         [redNumStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:yuanRed];
         NSRange numRed = NSMakeRange([[redNumStr string] rangeOfString:@"元"].location + 2, 8);

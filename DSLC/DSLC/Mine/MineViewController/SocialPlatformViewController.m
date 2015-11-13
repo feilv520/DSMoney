@@ -79,6 +79,7 @@
     cell.labelNAME.text = [[nameArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell.labelNAME.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
