@@ -448,8 +448,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
     
     [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:YES];
-    [app.tabBarVC setLabelLineHidden:YES];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
     
 }
 

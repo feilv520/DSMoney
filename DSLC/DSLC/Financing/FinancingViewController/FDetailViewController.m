@@ -422,35 +422,41 @@
 {
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+    if ([dic objectForKey:@"token"] != nil) {
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
         
-        if (responseObject == nil) {
-            [ProgressHUD showMessage:@"请先登录,然后再投资" Width:100 High:20];
-        } else {
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
-            
-            if (self.estimate == YES) {
-                
-                makeSureVC.decide = YES;
-                
+            if (responseObject == nil) {
+                [ProgressHUD showMessage:@"请先登录,然后再投资" Width:100 High:20];
+
             } else {
                 
-                makeSureVC.decide = NO;
+                MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
+                
+                if (self.estimate == YES) {
+                    
+                    makeSureVC.decide = YES;
+                    
+                } else {
+                    
+                    makeSureVC.decide = NO;
+                }
+                makeSureVC.detailM = self.detailM;
+                makeSureVC.residueMoney = self.residueMoney;
+                [self.navigationController pushViewController:makeSureVC animated:YES];
             }
-            makeSureVC.detailM = self.detailM;
-            makeSureVC.residueMoney = self.residueMoney;
-            [self.navigationController pushViewController:makeSureVC animated:YES];
-        }
 
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        NSLog(@"%@", error);
-        
-    }];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            
+        }];
+    } else {
+        [ProgressHUD showMessage:@"请先登录,然后再投资" Width:100 High:20];
+    }
     
 }
 
@@ -555,6 +561,24 @@
         
         NSLog(@"%@", error);
         
+    }];
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+// 预定产品
+- (void)orderProduct{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameters = @{@"productId":[self.detailM productId],@"productType":[self.detailM productType],@"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/orderProduct" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"orderProduct = %@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
     }];
 }
 

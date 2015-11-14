@@ -178,6 +178,13 @@
     [registerV.loginPassword addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     [registerV.sureLoginPassword addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     
+    registerV.phoneNumber.delegate = self;
+    registerV.smsCode.delegate = self;
+    registerV.phoneNumber.delegate = self;
+    registerV.loginPassword.delegate = self;
+    registerV.sureLoginPassword.delegate = self;
+    registerV.sandMyselfIDCard.delegate = self;
+    
     registerV.getCode.layer.masksToBounds = YES;
     registerV.getCode.layer.borderWidth = 1.f;
     registerV.getCode.layer.borderColor = [UIColor daohanglan].CGColor;
@@ -332,48 +339,84 @@
 
 // 注册按钮执行的方法
 - (void)RegisterButtonAction{
-    NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":registerV.sureLoginPassword.text,@"finaCard":registerV.sandMyselfIDCard.text};
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
-        NSLog(@"%@",responseObject);
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
-//            [buttonWithView removeFromSuperview];
-//            [payButton removeFromSuperview];
-//            [registerV removeFromSuperview];
-//            registerV = nil;
-//        
-//            registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
-//        
-//            NSBundle *rootBundle = [NSBundle mainBundle];
-//            NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
-//            NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
-//            NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
-//        
-//            registerR = [rootArrayOfResult lastObject];
-//        
-//            registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
-//        
-//            registerV = [rootArrayOfView objectAtIndex:1];
-//        
-//            registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
-//        
-//            registerB = [rootArrayOfPButton lastObject];
-//        
-//            registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
-//        
-//            [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-//            [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
-//            
-//            [self.scrollView addSubview:registerV];
-//            [self.scrollView addSubview:registerR];
-//            [self.scrollView addSubview:registerB];
-            [self.navigationController popViewControllerAnimated:YES];
+    
+    if (registerV.phoneNumber.text.length < 11) {
+        [ProgressHUD showMessage:@"手机号必须为11位" Width:100 High:20];
+    } else if (registerV.smsCode.text.length < 6) {
+        [ProgressHUD showMessage:@"验证码必须为6位" Width:100 High:20];
+    } else if (registerV.loginPassword.text.length < 6){
+        [ProgressHUD showMessage:@"密码必须为6-12位" Width:100 High:20];
+    } else if (registerV.loginPassword.text != registerV.sureLoginPassword.text){
+        [ProgressHUD showMessage:@"输入的登录密码与确认的登录密码不匹配" Width:100 High:20];
+    } else {
+        NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":registerV.sandMyselfIDCard.text,@"finaCard":registerV.sandMyselfIDCard.text};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"%@",responseObject);
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+    //            [buttonWithView removeFromSuperview];
+    //            [payButton removeFromSuperview];
+    //            [registerV removeFromSuperview];
+    //            registerV = nil;
+    //        
+    //            registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
+    //        
+    //            NSBundle *rootBundle = [NSBundle mainBundle];
+    //            NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
+    //            NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
+    //            NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
+    //        
+    //            registerR = [rootArrayOfResult lastObject];
+    //        
+    //            registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+    //        
+    //            registerV = [rootArrayOfView objectAtIndex:1];
+    //        
+    //            registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
+    //        
+    //            registerB = [rootArrayOfPButton lastObject];
+    //        
+    //            registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
+    //        
+    //            [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    //            [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
+    //            
+    //            [self.scrollView addSubview:registerV];
+    //            [self.scrollView addSubview:registerR];
+    //            [self.scrollView addSubview:registerB];
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField == registerV.phoneNumber) {
+        if (range.location > 10) {
+            return NO;
         }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
+    } else if (textField == registerV.smsCode) {
+        if (range.location > 5) {
+            return NO;
+        }
+    } else if (textField == registerV.loginPassword) {
+        if (range.location > 11) {
+            return NO;
+        }
+    } else if (textField == registerV.sureLoginPassword) {
+        if (range.location > 11) {
+            return NO;
+        }
+    } else {
+        return YES;
+    }
+    return YES;
 }
 
 // 风险提示书

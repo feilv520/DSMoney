@@ -48,5 +48,7 @@
 #import "AFHTTPSessionManager.h"
 #import "MyAfHTTPClient.h"
 #import "MBProgressHUD.h"
+#import "NSString+Check.h"
+
 
 #endif /* Header_h */

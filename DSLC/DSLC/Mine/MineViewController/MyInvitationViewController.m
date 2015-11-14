@@ -22,6 +22,8 @@
     UITableView *_tableView;
 }
 
+@property (nonatomic, strong) NSDictionary *dicMyInvite;
+
 @end
 
 @implementation MyInvitationViewController
@@ -275,6 +277,8 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyInviteInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@",responseObject);
+        
+        self.dicMyInvite = responseObject;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

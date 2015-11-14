@@ -535,6 +535,7 @@
 		8DD180A31BD731E000F71CEA /* GetMoneyTipTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD180A11BD731E000F71CEA /* GetMoneyTipTableViewCell.xib */; };
 		8DD4C2471BDE1BE600C4C58C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8191E2311BDE0BE1000A6E8C /* AboutViewController.m */; };
 		8DD4C2481BDE1BFA00C4C58C /* SuggestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8191E2341BDE0E7C000A6E8C /* SuggestionViewController.m */; };
+		8DD955CC1BF6D5EB00C17A65 /* NSString+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD955CB1BF6D5EB00C17A65 /* NSString+Check.m */; settings = {ASSET_TAGS = (); }; };
 		8DE61D9B1BDF20D70031A5CE /* FileOfManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE61D9A1BDF20D70031A5CE /* FileOfManage.m */; settings = {ASSET_TAGS = (); }; };
 		8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE61D9E1BDF284E0031A5CE /* ProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
 		8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */; };
@@ -1353,6 +1354,8 @@
 		8DD1809F1BD731E000F71CEA /* GetMoneyTipTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyTipTableViewCell.h; sourceTree = "<group>"; };
 		8DD180A01BD731E000F71CEA /* GetMoneyTipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyTipTableViewCell.m; sourceTree = "<group>"; };
 		8DD180A11BD731E000F71CEA /* GetMoneyTipTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetMoneyTipTableViewCell.xib; sourceTree = "<group>"; };
+		8DD955CA1BF6D5EB00C17A65 /* NSString+Check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Check.h"; sourceTree = "<group>"; };
+		8DD955CB1BF6D5EB00C17A65 /* NSString+Check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Check.m"; sourceTree = "<group>"; };
 		8DE61D991BDF20D70031A5CE /* FileOfManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileOfManage.h; sourceTree = "<group>"; };
 		8DE61D9A1BDF20D70031A5CE /* FileOfManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileOfManage.m; sourceTree = "<group>"; };
 		8DE61D9D1BDF284E0031A5CE /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
@@ -1455,6 +1458,8 @@
 				8D55DB041BC7B53A004649CE /* define.h */,
 				8DE61D991BDF20D70031A5CE /* FileOfManage.h */,
 				8DE61D9A1BDF20D70031A5CE /* FileOfManage.m */,
+				8DD955CA1BF6D5EB00C17A65 /* NSString+Check.h */,
+				8DD955CB1BF6D5EB00C17A65 /* NSString+Check.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -3461,6 +3466,7 @@
 				817E33941BD7576600D05103 /* MeCell.m in Sources */,
 				81B674011BF0873B007CEF51 /* InviteNameViewController.m in Sources */,
 				815D27A41BE21040005410C6 /* UpCell.m in Sources */,
+				8DD955CC1BF6D5EB00C17A65 /* NSString+Check.m in Sources */,
 				817DD46F1BCF501100042B09 /* MineCell.m in Sources */,
 				8D121FBD1BD4D0CB00B3C1FE /* ProductSettingViewController.m in Sources */,
 				8190A3091BD87D3E002B53F5 /* AddCardCell.m in Sources */,

@@ -125,6 +125,9 @@
             cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
             cell.textField.tintColor = [UIColor grayColor];
             cell.textField.tag = 900 + indexPath.row;
+            if (indexPath.row == 2 || indexPath.row == 3) {
+                cell.textField.secureTextEntry = YES;
+            }
             cell.textField.delegate = self;
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             [cell.textField addTarget:self action:@selector(textFieldEditing:) forControlEvents:UIControlEventEditingChanged];
@@ -162,14 +165,6 @@
         
         [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
-        
-    }
-    
-    if (![textField3.text isEqualToString:textField2.text]) {
-        
-        [self.view endEditing:YES];
-        NSLog(@"kk");
-        [ProgressHUD showMessage:@"输入的密码与再次确认的密码不匹配" Width:80 High:80];
         
     }
     
@@ -214,8 +209,10 @@
         
         
         
-    } else {
+    } else if (![textField3.text isEqualToString:textField2.text]) {
         
+        [self.view endEditing:YES];
+        [ProgressHUD showMessage:@"输入的登录密码与确认的登录密码不匹配" Width:80 High:80];
         
     }
 }

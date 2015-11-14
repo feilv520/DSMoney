@@ -59,13 +59,13 @@
     scrollView = [CreatView creatWithScrollViewFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 45) backgroundColor:[UIColor whiteColor] contentSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT/3, 0) contentOffSet:CGPointMake(0, 0)];
     [self.view addSubview:scrollView];
     
-    button1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"火爆专区"];
+    button1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:@"火爆专区"];
     [scrollView addSubview:button1];
     button1.tag = 101;
     button1.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [button1 addTarget:self action:@selector(button1Press:) forControlEvents:UIControlEventTouchUpInside];
     
-    button2 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:@"固收理财"];
+    button2 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"固收理财"];
     [scrollView addSubview:button2];
     button2.tag = 201;
     button2.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -77,18 +77,23 @@
     button3.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [button3 addTarget:self action:@selector(button3Press:) forControlEvents:UIControlEventTouchUpInside];
     
-    labelLine = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2) backgroundColor:[UIColor daohanglan] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/3, 2) backgroundColor:[UIColor daohanglan] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     [self.view addSubview:labelLine];
     
     newbieVC = [[NewbieViewController alloc] init];
     
     financingVC = [[FinancingViewController alloc] init];
     
-    billVC = [[BillViewController alloc] init];
-    [self addChildViewController:billVC];
-    [self.view addSubview:billVC.view];
-    billVC.view.tag = 300;
-    billVC.view.frame = CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 45 - 20 - 53);
+    newbieVC = [[NewbieViewController alloc] init];
+    [self addChildViewController:newbieVC];
+    [self.view addSubview:newbieVC.view];
+    newbieVC.view.frame = CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 45);
+    
+//    billVC = [[BillViewController alloc] init];
+//    [self addChildViewController:billVC];
+//    [self.view addSubview:billVC.view];
+//    billVC.view.tag = 300;
+//    billVC.view.frame = CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 45 - 20 - 53);
 }
 
 - (void)button1Press:(UIButton *)button

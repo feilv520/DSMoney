@@ -72,6 +72,7 @@
 //导航返回按钮
 - (void)buttonReturn:(UIBarButtonItem *)bar
 {
+    [self.view endEditing:YES];
     [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(indexButton.tag * WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
     
     for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
@@ -238,7 +239,7 @@
         
     } else {
         
-        if (range.location == 3) {
+        if (range.location == 12) {
             
             return NO;
             
@@ -254,7 +255,7 @@
     textField1 = (UITextField *)[self.view viewWithTag:1000];
     textField2 = (UITextField *)[self.view viewWithTag:1001];
     
-    if (textField1.text.length == 11 && textField2.text.length == 3) {
+    if (textField1.text.length == 11 && (textField2.text.length >= 6 && textField2.text.length <= 12)) {
         
         [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -264,6 +265,7 @@
         [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     }
+    
 }
 
 // 登录按钮执行方法
@@ -273,7 +275,7 @@
     textField1 = (UITextField *)[self.view viewWithTag:1000];
     textField2 = (UITextField *)[self.view viewWithTag:1001];
     
-    if (textField1.text.length == 11 && textField2.text.length == 3) {
+    if (textField1.text.length == 11 && (textField2.text.length >= 6 && textField2.text.length <= 12)) {
         
 //        NSDictionary *parameter = @{@"phone":@"15955454588",@"password":@"123"};
         NSDictionary *parameter = @{@"phone":textField1.text,@"password":textField2.text};
@@ -328,8 +330,13 @@
             NSLog(@"%@",error);
         }];
         
-    } else {
+    } else if(textField1.text.length < 11) {
         
+        [ProgressHUD showMessage:@"手机号必须为11位" Width:100 High:20];
+        
+    } else if (textField2.text.length < 6) {
+        
+        [ProgressHUD showMessage:@"密码必须为6-12位" Width:100 High:20];
         
     }
     

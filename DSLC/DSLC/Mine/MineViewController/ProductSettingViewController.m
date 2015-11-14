@@ -406,6 +406,8 @@
 #pragma mark --------------------------------
 
 - (void)getMyAssetInfo{
+    NSLog(@"%@",[self.flagDic objectForKey:@"token"]);
+    
     NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAssetInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {

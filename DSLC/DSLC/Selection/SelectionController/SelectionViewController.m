@@ -18,6 +18,7 @@
 #import "NewHandViewController.h"
 #import "MyAfHTTPClient.h"
 #import "ProductListModel.h"
+#import "FDetailViewController.h"
 
 
 @interface SelectionViewController ()<UIScrollViewDelegate>{
@@ -260,16 +261,10 @@
 
 - (void)payButtonAction:(id)sender{
     
-//    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-//    session.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    session.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSDictionary *parameter = @{@"phone":@"15955454588",@"password":@"123"};
-
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
+    FDetailViewController *detailVC = [[FDetailViewController alloc] init];
+    detailVC.estimate = NO;
+    detailVC.idString = [self.productM productId];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma scrollView dalagate
