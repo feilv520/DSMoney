@@ -34,13 +34,13 @@
     NSString *path;
     UIButton *butBlack;
     UIView *viewDown;
-    NSMutableArray *dataArr;
     
     UIImage *imageChange;
     
     UIButton *indexButton;
 }
 
+@property (nonatomic, strong) NSDictionary *dataDic;
 @property (nonatomic) UIImagePickerController *imagePicker;
 
 @property (nonatomic, strong) NSDictionary *flagLogin;
@@ -198,15 +198,10 @@
         
         MeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMe"];
         
-        if (cell == nil) {
-            
-            cell = [[MeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuseMe"];
-        }
-        
         cell.imageHeadPic.image = [UIImage imageNamed:@"组-4-拷贝"];
         cell.imageRight.image = [UIImage imageNamed:@"arrow"];
         
-        cell.labelName.text = @"郑晓东";
+        cell.labelName.text = [self.dataDic objectForKey:@"userRealname"];
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -215,11 +210,6 @@
     } else {
     
     MyInformationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    
-    if (cell == nil) {
-        
-        cell = [[MyInformationCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
-    }
     
     NSArray *rowArr = [titleArr objectAtIndex:indexPath.section - 1];
     cell.labelTitle.text = [rowArr objectAtIndex:indexPath.row];
@@ -437,6 +427,28 @@
     [app.tabBarVC setTabbarViewHidden:NO];
     [app.tabBarVC setLabelLineHidden:NO];
     
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getData
+{
+    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        self.dataDic = [NSDictionary dictionary];
+        self.dataDic = [responseObject objectForKey:@"User"];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
