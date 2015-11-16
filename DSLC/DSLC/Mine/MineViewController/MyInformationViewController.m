@@ -92,12 +92,14 @@
                  @[@"更换手机", @"绑定邮箱", @"实名认证"],
                  @[@"登录密码", @"交易密码", @"手势密码", @"修改手势密码"]];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor huibai];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 1)];
+    
+    _tableView.separatorColor = [UIColor groupTableViewBackgroundColor];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
     _tableView.tableFooterView = view;
     view.backgroundColor = [UIColor huibai];
     [_tableView registerNib:[UINib nibWithNibName:@"MyInformationCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
@@ -112,6 +114,12 @@
     [switchLeft setOn:[flag isEqualToString:@"YES"]?YES:NO];
 
     [switchLeft addTarget:self action:@selector(showSwitchGetOnOrOff:) forControlEvents:UIControlEventValueChanged];
+    
+    UIButton *butExit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"退出登录"];
+    [view addSubview:butExit];
+    [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+    [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+    [butExit addTarget:self action:@selector(buttonExit:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)getData
@@ -137,23 +145,20 @@
     }];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.5;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
         
-        return 0;
+        return 0.1;
         
     } else {
         
-        return 11;
-    }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 3) {
-        return 100;
-    } else {
-        return 0.5;
+        return 10;
     }
 }
 
@@ -184,25 +189,6 @@
     } else {
         
         return 2;
-    }
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    if (section == 3) {
-        
-        UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (100.0 / 667.0))];
-        viewFoot.backgroundColor = [UIColor huibai];
-        
-        UIButton *butExit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"退出登录"];
-        [viewFoot addSubview:butExit];
-        [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [butExit setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        [butExit addTarget:self action:@selector(buttonExit:) forControlEvents:UIControlEventTouchUpInside];
-        return viewFoot;
-        
-    } else {
-        
-        return nil;
     }
 }
 
