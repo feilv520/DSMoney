@@ -122,29 +122,6 @@
     [butExit addTarget:self action:@selector(buttonExit:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)getData
-{
-    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"]};
-    
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
-        NSLog(@"%@",responseObject);
-        
-        NSDictionary *dataDic = [responseObject objectForKey:@"User"];
-        
-        MyInformation *information = [[MyInformation alloc] init];
-        [information setValuesForKeysWithDictionary:dataDic];
-        
-        dataArr = [NSMutableArray array];
-        [dataArr addObject:information];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        NSLog(@"%@", error);
-        
-    }];
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.5;
