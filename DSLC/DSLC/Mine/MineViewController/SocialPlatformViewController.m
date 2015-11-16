@@ -38,7 +38,7 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor huibai];
-    _tableView.separatorColor = [UIColor clearColor];
+    _tableView.separatorColor = [UIColor groupTableViewBackgroundColor];
     [_tableView registerNib:[UINib nibWithNibName:@"InviteSocilPlatFormCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     picArr = @[@[@"微信"], @[@"朋友圈"], @[@"新浪微博"], @[@"人人网"], @[@"QQ空间"], @[@"PhoneNum"]];
