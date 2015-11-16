@@ -251,6 +251,13 @@
 		81B18E201BE761B600D448FA /* LastEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B18E1F1BE761B600D448FA /* LastEmailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81B18E241BE77EA700D448FA /* EmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B18E221BE77EA700D448FA /* EmailCell.m */; settings = {ASSET_TAGS = (); }; };
 		81B18E251BE77EA700D448FA /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B18E231BE77EA700D448FA /* EmailCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81B5209E1BF96F4200D8E8D1 /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B5209D1BF96F4200D8E8D1 /* AddressBookViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81B520A21BF9746400D8E8D1 /* AddressBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B520A01BF9746400D8E8D1 /* AddressBookCell.m */; settings = {ASSET_TAGS = (); }; };
+		81B520A31BF9746400D8E8D1 /* AddressBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B520A11BF9746400D8E8D1 /* AddressBookCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81B520A61BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B520A41BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81B520A71BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B520A51BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81B520AA1BF9A71100D8E8D1 /* iconfont-sousuo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B520A81BF9A71100D8E8D1 /* iconfont-sousuo@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81B520AB1BF9A71100D8E8D1 /* iconfont-sousuo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B520A91BF9A71100D8E8D1 /* iconfont-sousuo@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81B674011BF0873B007CEF51 /* InviteNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B674001BF0873B007CEF51 /* InviteNameViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81B674041BF0A608007CEF51 /* HistoryMemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B674031BF0A608007CEF51 /* HistoryMemoryViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81B674091BF0A780007CEF51 /* HistoryMemoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B674071BF0A780007CEF51 /* HistoryMemoryCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -941,6 +948,15 @@
 		81B18E211BE77EA700D448FA /* EmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailCell.h; sourceTree = "<group>"; };
 		81B18E221BE77EA700D448FA /* EmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailCell.m; sourceTree = "<group>"; };
 		81B18E231BE77EA700D448FA /* EmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailCell.xib; sourceTree = "<group>"; };
+		81B5209C1BF96F4200D8E8D1 /* AddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookViewController.h; sourceTree = "<group>"; };
+		81B5209D1BF96F4200D8E8D1 /* AddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewController.m; sourceTree = "<group>"; };
+		81B5209F1BF9746400D8E8D1 /* AddressBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookCell.h; sourceTree = "<group>"; };
+		81B520A01BF9746400D8E8D1 /* AddressBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookCell.m; sourceTree = "<group>"; };
+		81B520A11BF9746400D8E8D1 /* AddressBookCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressBookCell.xib; sourceTree = "<group>"; };
+		81B520A41BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-yaoqinghaoyou@2x.png"; sourceTree = "<group>"; };
+		81B520A51BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-yaoqinghaoyou@3x.png"; sourceTree = "<group>"; };
+		81B520A81BF9A71100D8E8D1 /* iconfont-sousuo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-sousuo@2x.png"; sourceTree = "<group>"; };
+		81B520A91BF9A71100D8E8D1 /* iconfont-sousuo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-sousuo@3x.png"; sourceTree = "<group>"; };
 		81B673FF1BF0873B007CEF51 /* InviteNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteNameViewController.h; sourceTree = "<group>"; };
 		81B674001BF0873B007CEF51 /* InviteNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteNameViewController.m; sourceTree = "<group>"; };
 		81B674021BF0A608007CEF51 /* HistoryMemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryMemoryViewController.h; sourceTree = "<group>"; };
@@ -1689,6 +1705,10 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				81B520A81BF9A71100D8E8D1 /* iconfont-sousuo@2x.png */,
+				81B520A91BF9A71100D8E8D1 /* iconfont-sousuo@3x.png */,
+				81B520A41BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@2x.png */,
+				81B520A51BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png */,
 				816CDF281BF19A63007785FC /* 组-15@2x.png */,
 				816CDF291BF19A63007785FC /* 组-15@3x.png */,
 				81B6740E1BF0AFEB007CEF51 /* 申请进度 */,
@@ -2212,6 +2232,8 @@
 				818063961BD5D3C700E83492 /* MyInvitationViewController.m */,
 				816F1ECC1BF5B30F00DB6B65 /* SocialPlatformViewController.h */,
 				816F1ECD1BF5B30F00DB6B65 /* SocialPlatformViewController.m */,
+				81B5209C1BF96F4200D8E8D1 /* AddressBookViewController.h */,
+				81B5209D1BF96F4200D8E8D1 /* AddressBookViewController.m */,
 				81B673FF1BF0873B007CEF51 /* InviteNameViewController.h */,
 				81B674001BF0873B007CEF51 /* InviteNameViewController.m */,
 			);
@@ -2353,6 +2375,9 @@
 				8180639D1BD5D87100E83492 /* InviteNumCell.h */,
 				8180639E1BD5D87100E83492 /* InviteNumCell.m */,
 				818063A41BD5D89000E83492 /* InviteNameCell.xib */,
+				81B5209F1BF9746400D8E8D1 /* AddressBookCell.h */,
+				81B520A01BF9746400D8E8D1 /* AddressBookCell.m */,
+				81B520A11BF9746400D8E8D1 /* AddressBookCell.xib */,
 			);
 			name = "好友邀请";
 			sourceTree = "<group>";
@@ -2939,6 +2964,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D9011B01BD6337C00E5D62A /* 4@3x.png in Resources */,
+				81B520A31BF9746400D8E8D1 /* AddressBookCell.xib in Resources */,
 				817DD4AB1BCF547E00042B09 /* zhanghu@3x.png in Resources */,
 				81B6741B1BF0AFEB007CEF51 /* 红框@2x.png in Resources */,
 				8D0AE8011BE09F6800D9D50C /* RegisterProcess.xib in Resources */,
@@ -3134,6 +3160,7 @@
 				8175BEAF1BE9F2F50044026E /* 腾讯微博@3x.png in Resources */,
 				8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */,
 				8DEDE1B31BCCFEB5008086D3 /* arrow@2x.png in Resources */,
+				81B520A71BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png in Resources */,
 				817E33821BD733D100D05103 /* 9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝@2x.png in Resources */,
 				817DD4901BCF547E00042B09 /* anniu@2x.png in Resources */,
 				8D4B8C091BF2F48E00A88285 /* UMSShareListController.xib in Resources */,
@@ -3175,6 +3202,7 @@
 				816F1ED71BF5CA3D00DB6B65 /* PhoneNum@3x.png in Resources */,
 				8D9011B11BD6337C00E5D62A /* 5@2x.png in Resources */,
 				8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */,
+				81B520AB1BF9A71100D8E8D1 /* iconfont-sousuo@3x.png in Resources */,
 				8175BECF1BEA1B290044026E /* 分享失败@2x.png in Resources */,
 				8DD1809E1BD730E100F71CEA /* GetMoneyNumberTableViewCell.xib in Resources */,
 				81701C111BE703F200B45BAA /* MendDeal2Cell.xib in Resources */,
@@ -3244,6 +3272,7 @@
 				81B6741C1BF0AFEB007CEF51 /* 红框@3x.png in Resources */,
 				817E33AE1BD78ED500D05103 /* iconfont@3x.png in Resources */,
 				8D6692771BD0D02E00CD2CAF /* MyHandViewController.xib in Resources */,
+				81B520AA1BF9A71100D8E8D1 /* iconfont-sousuo@2x.png in Resources */,
 				817988321BC93FF6007C8C3E /* BasicMessageCell.xib in Resources */,
 				81C8BBD01BDA3535005B9DFF /* HelpCell.xib in Resources */,
 				817DD4B21BCF5B3900042B09 /* MiddleView.xib in Resources */,
@@ -3270,6 +3299,7 @@
 				8175BE9D1BE9E5760044026E /* 组-21-拷贝-14@3x.png in Resources */,
 				81C8BBCA1BDA2F8D005B9DFF /* yijianfankui@2x.png in Resources */,
 				816CDF2B1BF19A63007785FC /* 组-15@3x.png in Resources */,
+				81B520A61BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@2x.png in Resources */,
 				8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */,
 				81BA1C141BD5000700DBA5BE /* icon05@2x.png in Resources */,
 				8DEDE1C41BCCFF01008086D3 /* iconfont_graycuo@2x.png in Resources */,
@@ -3423,6 +3453,7 @@
 				81ED031C1BD0DA35005F4B02 /* AddBankViewController.m in Sources */,
 				8175BE7C1BE9B4250044026E /* RecordViewController.m in Sources */,
 				81B18E1D1BE756F300D448FA /* EmailViewController.m in Sources */,
+				81B520A21BF9746400D8E8D1 /* AddressBookCell.m in Sources */,
 				8DEDE26E1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m in Sources */,
 				8191E21A1BDDC8BE000A6E8C /* NewHandCell.m in Sources */,
 				8D9011831BD62AFA00E5D62A /* MSelectionView.m in Sources */,
@@ -3471,6 +3502,7 @@
 				8D121FBD1BD4D0CB00B3C1FE /* ProductSettingViewController.m in Sources */,
 				8190A3091BD87D3E002B53F5 /* AddCardCell.m in Sources */,
 				819C3AB61BD47E57008D2CFD /* MyRedBagViewController.m in Sources */,
+				81B5209E1BF96F4200D8E8D1 /* AddressBookViewController.m in Sources */,
 				8184EC401BCCD113003F440D /* MoneyCell.m in Sources */,
 				8D5055A11BF08CA20034759B /* ProductDetailModel.m in Sources */,
 				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,

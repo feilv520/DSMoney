@@ -8,6 +8,7 @@
 
 #import "SocialPlatformViewController.h"
 #import "InviteSocilPlatFormCell.h"
+#import "AddressBookViewController.h"
 
 @interface SocialPlatformViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -81,6 +82,15 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 5) {
+        
+        AddressBookViewController *addressVC = [[AddressBookViewController alloc] init];
+        [self.navigationController pushViewController:addressVC animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

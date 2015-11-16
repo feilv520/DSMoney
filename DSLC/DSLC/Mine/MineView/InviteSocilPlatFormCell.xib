@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,16 +15,31 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eSr-bu-zHu">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eSr-bu-zHu">
                         <rect key="frame" x="10" y="7" width="36" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="36" id="76I-NL-IX5"/>
+                            <constraint firstAttribute="height" constant="36" id="o4c-f3-SIo"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YN8-wo-Rmc">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YN8-wo-Rmc">
                         <rect key="frame" x="55" y="10" width="307" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="307" id="Eqy-mu-YzB"/>
+                            <constraint firstAttribute="height" constant="30" id="YsE-sx-ZYG"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="YN8-wo-Rmc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="HDl-gD-02R"/>
+                    <constraint firstItem="eSr-bu-zHu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="NKB-VW-ZrN"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="YN8-wo-Rmc" secondAttribute="trailing" constant="5" id="ZCx-o0-3rG"/>
+                    <constraint firstItem="YN8-wo-Rmc" firstAttribute="leading" secondItem="eSr-bu-zHu" secondAttribute="trailing" constant="9" id="oRh-m7-Inx"/>
+                    <constraint firstItem="eSr-bu-zHu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="qlF-Nr-ttZ"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="imagePIc" destination="eSr-bu-zHu" id="GeT-2C-ls5"/>
