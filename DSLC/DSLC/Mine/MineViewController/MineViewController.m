@@ -40,6 +40,9 @@
     UIView *viewHead;
     UIView *viewFoot;
     MiddleView *middleView;
+    UILabel *moneyLabel;
+    UIButton *myRedBagButton;
+    UIButton *messageButton;
 }
 
 @property (nonatomic, strong) NSDictionary *myAccountInfo;
@@ -265,6 +268,61 @@
     
     cell.imageRight.image = [UIImage imageNamed:@"arrow"];
     
+    if (indexPath.row == 0) {
+        
+        if (moneyLabel == nil) {
+            moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 155, 0, WIDTH_CONTROLLER_DEFAULT - 100, 50)];
+            
+            moneyLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+            moneyLabel.textColor = [UIColor zitihui];
+            [cell addSubview:moneyLabel];
+        }
+        moneyLabel.text = [NSString stringWithFormat:@"%@元在投资金",[self.myAccountInfo objectForKey:@"totalMoney"]];
+    } else if (indexPath.row == 2) {
+        
+        if (myRedBagButton == nil) {
+            myRedBagButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            
+            myRedBagButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60, 15, 30, 20);
+            
+            myRedBagButton.userInteractionEnabled = NO;
+            
+            myRedBagButton.layer.masksToBounds = YES;
+            myRedBagButton.layer.cornerRadius = 8.f;
+            
+            [myRedBagButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
+            
+            myRedBagButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+            
+            [cell addSubview:myRedBagButton];
+            
+        }
+        
+        [myRedBagButton setTitle:[self.myAccountInfo objectForKey:@"redPacket"] forState:UIControlStateNormal];
+        
+    } else if (indexPath.row == 5) {
+        if (messageButton == nil) {
+            messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            
+            messageButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60, 15, 30, 20);
+            
+            messageButton.userInteractionEnabled = NO;
+            
+            messageButton.layer.masksToBounds = YES;
+            messageButton.layer.cornerRadius = 8.f;
+            
+            [messageButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
+
+            messageButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+            
+            [cell addSubview:messageButton];
+            
+        }
+        
+        [messageButton setTitle:[self.myAccountInfo objectForKey:@"msgCount"] forState:UIControlStateNormal];
+        
+    }
+    
     return cell;
 }
 
@@ -386,6 +444,7 @@
         [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
         
         [self viewHeadContent];
+        [_tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

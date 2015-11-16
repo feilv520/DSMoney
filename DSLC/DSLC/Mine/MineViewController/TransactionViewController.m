@@ -223,9 +223,12 @@
 #pragma mark --------------------------------
 
 - (void)getMyTradeList{
-    NSDictionary *parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"]};
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getMyTradeList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    NSLog(@"token = %@",[self.flagDic objectForKey:@"token"]);
+    
+    NSDictionary *parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":@"2015-10-01",@"tranEndDate":@"2015-10-31",@"tranType":@""};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyTradeList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@",responseObject);
         

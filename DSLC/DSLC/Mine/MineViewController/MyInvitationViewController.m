@@ -23,6 +23,7 @@
 }
 
 @property (nonatomic, strong) NSDictionary *dicMyInvite;
+@property (nonatomic, strong) NSArray *myInviteWithPeopleNumber;
 
 @end
 
@@ -96,7 +97,7 @@
 {
     if (section == 2) {
         
-        return 6;
+        return self.myInviteWithPeopleNumber.count + 1;
         
     } else {
         
@@ -112,21 +113,21 @@
         
         cell.imageHead.image = [UIImage imageNamed:@"picture"];
         
-        cell.labelName.text = @"李四";
+        cell.labelName.text = [self.dicMyInvite objectForKey:@"name"];
         cell.labelName.textAlignment = NSTextAlignmentCenter;
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.labInviteNum.text = @"我的邀请码";
         cell.labInviteNum.font = [UIFont systemFontOfSize:11];
         
-        cell.labelNum.text = @"W35A";
+        cell.labelNum.text = [self.dicMyInvite objectForKey:@"invitationMyCode"];
         cell.labelNum.textColor = [UIColor daohanglan];
         cell.labelNum.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         
         cell.labelHttp.text = @"邀请链接";
         cell.labelHttp.font = [UIFont systemFontOfSize:11];
         
-        cell.labelHttpNum.text = @"2eidjcom";
+        cell.labelHttpNum.text = [self.dicMyInvite objectForKey:@"link"];
         cell.labelHttpNum.textColor = [UIColor daohanglan];
         cell.labelHttpNum.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         
@@ -159,19 +160,17 @@
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        NSMutableAttributedString *peopleNum = [[NSMutableAttributedString alloc] initWithString:@"6人\n邀请人数"];
+        NSMutableAttributedString *peopleNum = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@人\n邀请人数",[self.dicMyInvite objectForKey:@"openRedPacketAmount"]]];
         [peopleNum addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:NSMakeRange(0, [peopleNum length])];
         
         NSRange invite = NSMakeRange(0, [[peopleNum string] rangeOfString:@"人"].location);
         [peopleNum addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:invite];
-        NSRange REN = NSMakeRange(1, 1);
+        NSRange REN = NSMakeRange([[peopleNum string] rangeOfString:@"人"].location, [[peopleNum string] length] - [[peopleNum string] rangeOfString:@"人"].location);
         [peopleNum addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:REN];
-        NSRange NUM = NSMakeRange(3, 4);
-        [peopleNum addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:NUM];
         
         [cell.labelPeople setAttributedText:peopleNum];
         
-        NSMutableAttributedString *redNumStr = [[NSMutableAttributedString alloc] initWithString:@"1,234元\n累计打开邀请红包"];
+        NSMutableAttributedString *redNumStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元\n累计打开邀请红包",[self.dicMyInvite objectForKey:@"openRedPacketAmount"]]];
         [redNumStr addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:NSMakeRange(0, [redNumStr length])];
         
         NSRange totalRed = NSMakeRange(0, [[redNumStr string] rangeOfString:@"元"].location);
@@ -184,7 +183,8 @@
         
         [cell.redBag setAttributedText:redNumStr];
         
-        NSMutableAttributedString *moneyNumStr = [[NSMutableAttributedString alloc] initWithString:@"1,234元\n累计佣金"];
+        NSMutableAttributedString *moneyNumStr = [[NSMutableAttributedString alloc] initWithString:
+                                                  [NSString stringWithFormat:@"%@元\n累计佣金",[self.dicMyInvite objectForKey:@"inviteTotalMoney"]]];
         [moneyNumStr addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:NSMakeRange(0, [moneyNumStr length])];
 
         NSRange total = NSMakeRange(0, [[moneyNumStr string] rangeOfString:@"元"].location);
@@ -231,15 +231,17 @@
             
         } else {
         
-            cell.labelName.text = @"张三";
+            cell.labelName.text = [[self.myInviteWithPeopleNumber objectAtIndex:indexPath.row - 1] objectForKey:@"userRealname"];
             cell.labelName.textAlignment = NSTextAlignmentCenter;
             cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         
-            cell.labelTime.text = @"2015-9-2";
+            NSString *inviteTimeString = [[self.myInviteWithPeopleNumber objectAtIndex:indexPath.row - 1] objectForKey:@"inviteTime"];
+            inviteTimeString = [inviteTimeString substringWithRange:NSMakeRange(0, 11)];
+            cell.labelTime.text = inviteTimeString;
             cell.labelTime.textAlignment = NSTextAlignmentCenter;
             cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         
-            cell.labelMoney.text = @"290元";
+            cell.labelMoney.text = [[self.myInviteWithPeopleNumber objectAtIndex:indexPath.row - 1] objectForKey:@"inviteMoney"];
             cell.labelMoney.textAlignment = NSTextAlignmentCenter;
             cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:14];
             
@@ -279,6 +281,11 @@
         NSLog(@"%@",responseObject);
         
         self.dicMyInvite = responseObject;
+        
+        self.myInviteWithPeopleNumber = [NSArray array];
+        self.myInviteWithPeopleNumber = [responseObject objectForKey:@"User"];
+        
+        [_tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
