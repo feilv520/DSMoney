@@ -27,6 +27,9 @@
 		812F6BEB1BD8ED240000D8E9 /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BEA1BD8ED240000D8E9 /* PhoneViewController.m */; };
 		812F6BEE1BD8ED310000D8E9 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BED1BD8ED310000D8E9 /* MessageViewController.m */; };
 		81334F5E1BCBC3BD000A9B8A /* 7501111.png in Resources */ = {isa = PBXBuildFile; fileRef = 81334F5D1BCBC3BD000A9B8A /* 7501111.png */; };
+		81349D0D1BF9D72900D845EF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81349D0C1BF9D72900D845EF /* AddressBook.framework */; };
+		81349D0F1BF9D73C00D845EF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81349D0E1BF9D73C00D845EF /* AddressBookUI.framework */; };
+		81349D121BF9D7E800D845EF /* AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 81349D111BF9D7E800D845EF /* AddressBook.m */; settings = {ASSET_TAGS = (); }; };
 		813785941BF4AB700044A588 /* InviteRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 813785931BF4AB700044A588 /* InviteRegisterViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81379F191BEAF56F002CDB16 /* 成长@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81379F151BEAF56F002CDB16 /* 成长@2x.png */; settings = {ASSET_TAGS = (); }; };
 		81379F1A1BEAF56F002CDB16 /* 成长@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81379F161BEAF56F002CDB16 /* 成长@3x.png */; settings = {ASSET_TAGS = (); }; };
@@ -315,6 +318,21 @@
 		81D703FD1BE073730074DF30 /* ForgetSecret2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D703FB1BE073730074DF30 /* ForgetSecret2Cell.xib */; settings = {ASSET_TAGS = (); }; };
 		81D704001BE0B2AF0074DF30 /* BillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703FF1BE0B2AF0074DF30 /* BillViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81D704031BE0D0D40074DF30 /* NewbieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D704021BE0D0D40074DF30 /* NewbieViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81D72FA91BFAC26B0067A277 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D72FA81BFAC26B0067A277 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81D72FAD1BFAC4990067A277 /* ChatLeftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D72FAB1BFAC4990067A277 /* ChatLeftCell.m */; settings = {ASSET_TAGS = (); }; };
+		81D72FAE1BFAC4990067A277 /* ChatLeftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FAC1BFAC4990067A277 /* ChatLeftCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81D72FB21BFAC4AE0067A277 /* ChatRightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D72FB01BFAC4AE0067A277 /* ChatRightCell.m */; settings = {ASSET_TAGS = (); }; };
+		81D72FB31BFAC4AE0067A277 /* ChatRightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FB11BFAC4AE0067A277 /* ChatRightCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81D72FB61BFACA800067A277 /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FB41BFACA800067A277 /* add@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81D72FB71BFACA800067A277 /* add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FB51BFACA800067A277 /* add@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81D72FBC1BFAD63B0067A277 /* left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FB81BFAD63B0067A277 /* left@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81D72FBD1BFAD63B0067A277 /* left@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FB91BFAD63B0067A277 /* left@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81D72FBE1BFAD63B0067A277 /* right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FBA1BFAD63B0067A277 /* right@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81D72FBF1BFAD63B0067A277 /* right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FBB1BFAD63B0067A277 /* right@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81D72FC41BFB04890067A277 /* LeftWindow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FC01BFB04890067A277 /* LeftWindow@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81D72FC51BFB04890067A277 /* LeftWindow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FC11BFB04890067A277 /* LeftWindow@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81D72FC61BFB04890067A277 /* rightWindow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FC21BFB04890067A277 /* rightWindow@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81D72FC71BFB04890067A277 /* rightWindow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FC31BFB04890067A277 /* rightWindow@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD991BC6427800A15E01 /* MineViewController.m */; };
 		81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8ADA21BC646D100A15E01 /* FinancingViewController.m */; };
 		81E831061BF0469F00127EE8 /* MyChoosePlanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E831051BF0469F00127EE8 /* MyChoosePlanner.m */; settings = {ASSET_TAGS = (); }; };
@@ -638,6 +656,10 @@
 		812F6BEC1BD8ED310000D8E9 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		812F6BED1BD8ED310000D8E9 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		81334F5D1BCBC3BD000A9B8A /* 7501111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7501111.png; sourceTree = "<group>"; };
+		81349D0C1BF9D72900D845EF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		81349D0E1BF9D73C00D845EF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		81349D101BF9D7E800D845EF /* AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBook.h; sourceTree = "<group>"; };
+		81349D111BF9D7E800D845EF /* AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBook.m; sourceTree = "<group>"; };
 		813785921BF4AB700044A588 /* InviteRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteRegisterViewController.h; sourceTree = "<group>"; };
 		813785931BF4AB700044A588 /* InviteRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteRegisterViewController.m; sourceTree = "<group>"; };
 		81379F151BEAF56F002CDB16 /* 成长@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "成长@2x.png"; sourceTree = "<group>"; };
@@ -1036,6 +1058,24 @@
 		81D703FF1BE0B2AF0074DF30 /* BillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillViewController.m; sourceTree = "<group>"; };
 		81D704011BE0D0D40074DF30 /* NewbieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewbieViewController.h; sourceTree = "<group>"; };
 		81D704021BE0D0D40074DF30 /* NewbieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewbieViewController.m; sourceTree = "<group>"; };
+		81D72FA71BFAC26B0067A277 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		81D72FA81BFAC26B0067A277 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		81D72FAA1BFAC4990067A277 /* ChatLeftCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatLeftCell.h; sourceTree = "<group>"; };
+		81D72FAB1BFAC4990067A277 /* ChatLeftCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatLeftCell.m; sourceTree = "<group>"; };
+		81D72FAC1BFAC4990067A277 /* ChatLeftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLeftCell.xib; sourceTree = "<group>"; };
+		81D72FAF1BFAC4AE0067A277 /* ChatRightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRightCell.h; sourceTree = "<group>"; };
+		81D72FB01BFAC4AE0067A277 /* ChatRightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRightCell.m; sourceTree = "<group>"; };
+		81D72FB11BFAC4AE0067A277 /* ChatRightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatRightCell.xib; sourceTree = "<group>"; };
+		81D72FB41BFACA800067A277 /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
+		81D72FB51BFACA800067A277 /* add@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@3x.png"; sourceTree = "<group>"; };
+		81D72FB81BFAD63B0067A277 /* left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left@2x.png"; sourceTree = "<group>"; };
+		81D72FB91BFAD63B0067A277 /* left@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left@3x.png"; sourceTree = "<group>"; };
+		81D72FBA1BFAD63B0067A277 /* right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right@2x.png"; sourceTree = "<group>"; };
+		81D72FBB1BFAD63B0067A277 /* right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right@3x.png"; sourceTree = "<group>"; };
+		81D72FC01BFB04890067A277 /* LeftWindow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LeftWindow@2x.png"; sourceTree = "<group>"; };
+		81D72FC11BFB04890067A277 /* LeftWindow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LeftWindow@3x.png"; sourceTree = "<group>"; };
+		81D72FC21BFB04890067A277 /* rightWindow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rightWindow@2x.png"; sourceTree = "<group>"; };
+		81D72FC31BFB04890067A277 /* rightWindow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rightWindow@3x.png"; sourceTree = "<group>"; };
 		81D8AD981BC6427800A15E01 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		81D8AD991BC6427800A15E01 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		81D8ADA11BC646D100A15E01 /* FinancingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingViewController.h; sourceTree = "<group>"; };
@@ -1429,6 +1469,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81349D0F1BF9D73C00D845EF /* AddressBookUI.framework in Frameworks */,
+				81349D0D1BF9D72900D845EF /* AddressBook.framework in Frameworks */,
 				8D4B8C1E1BF2F63800A88285 /* libz.tbd in Frameworks */,
 				8D4B8C1C1BF2F62E00A88285 /* libstdc++.tbd in Frameworks */,
 				8D4B8C1A1BF2F62100A88285 /* CoreTelephony.framework in Frameworks */,
@@ -1568,6 +1610,12 @@
 				81E831071BF0488400127EE8 /* MyChoosePlannerCell.h */,
 				81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */,
 				81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */,
+				81D72FAA1BFAC4990067A277 /* ChatLeftCell.h */,
+				81D72FAB1BFAC4990067A277 /* ChatLeftCell.m */,
+				81D72FAC1BFAC4990067A277 /* ChatLeftCell.xib */,
+				81D72FAF1BFAC4AE0067A277 /* ChatRightCell.h */,
+				81D72FB01BFAC4AE0067A277 /* ChatRightCell.m */,
+				81D72FB11BFAC4AE0067A277 /* ChatRightCell.xib */,
 			);
 			name = "我的理财师";
 			sourceTree = "<group>";
@@ -1705,6 +1753,16 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				81D72FC01BFB04890067A277 /* LeftWindow@2x.png */,
+				81D72FC11BFB04890067A277 /* LeftWindow@3x.png */,
+				81D72FC21BFB04890067A277 /* rightWindow@2x.png */,
+				81D72FC31BFB04890067A277 /* rightWindow@3x.png */,
+				81D72FB81BFAD63B0067A277 /* left@2x.png */,
+				81D72FB91BFAD63B0067A277 /* left@3x.png */,
+				81D72FBA1BFAD63B0067A277 /* right@2x.png */,
+				81D72FBB1BFAD63B0067A277 /* right@3x.png */,
+				81D72FB41BFACA800067A277 /* add@2x.png */,
+				81D72FB51BFACA800067A277 /* add@3x.png */,
 				81B520A81BF9A71100D8E8D1 /* iconfont-sousuo@2x.png */,
 				81B520A91BF9A71100D8E8D1 /* iconfont-sousuo@3x.png */,
 				81B520A41BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@2x.png */,
@@ -1863,6 +1921,8 @@
 				81E831051BF0469F00127EE8 /* MyChoosePlanner.m */,
 				817E33721BD72D6800D05103 /* MyPlannerViewController.h */,
 				817E33731BD72D6800D05103 /* MyPlannerViewController.m */,
+				81D72FA71BFAC26B0067A277 /* ChatViewController.h */,
+				81D72FA81BFAC26B0067A277 /* ChatViewController.m */,
 				818063AC1BD6437D00E83492 /* PayMoneyViewController.h */,
 				818063AD1BD6437D00E83492 /* PayMoneyViewController.m */,
 				817E33991BD77A8800D05103 /* ChooseStyleViewController.h */,
@@ -1974,6 +2034,8 @@
 				81F237771BE89887009D7A67 /* MyInformation.m */,
 				8D1191931BF1E59300A2DE05 /* productMoneyModel.h */,
 				8D1191941BF1E59300A2DE05 /* productMoneyModel.m */,
+				81349D101BF9D7E800D845EF /* AddressBook.h */,
+				81349D111BF9D7E800D845EF /* AddressBook.m */,
 			);
 			path = MineModel;
 			sourceTree = "<group>";
@@ -2718,6 +2780,8 @@
 		8D9356C01BC607C500BC2BFA = {
 			isa = PBXGroup;
 			children = (
+				81349D0E1BF9D73C00D845EF /* AddressBookUI.framework */,
+				81349D0C1BF9D72900D845EF /* AddressBook.framework */,
 				8D4B8C1D1BF2F63800A88285 /* libz.tbd */,
 				8D4B8C1B1BF2F62E00A88285 /* libstdc++.tbd */,
 				8D4B8C171BF2F61600A88285 /* libsqlite3.tbd */,
@@ -2989,8 +3053,10 @@
 				8D6EFBA91BC78B02009FE101 /* shouyeqiepian7500_25.png in Resources */,
 				8175BEAC1BE9F2F50044026E /* 微信@2x.png in Resources */,
 				8D4B8C041BF2F48E00A88285 /* UMSCommentInputControlleriPad.xib in Resources */,
+				81D72FB61BFACA800067A277 /* add@2x.png in Resources */,
 				8175BE811BE9B50D0044026E /* RecordCell.xib in Resources */,
 				817DD4701BCF501100042B09 /* MineCell.xib in Resources */,
+				81D72FBC1BFAD63B0067A277 /* left@2x.png in Resources */,
 				8DD180991BD72E5900F71CEA /* GetMoneyTableViewCell.xib in Resources */,
 				8DEDE1CC1BCCFF44008086D3 /* iconfont_complete@2x.png in Resources */,
 				8D9011B41BD6337C00E5D62A /* 6@3x.png in Resources */,
@@ -3066,6 +3132,7 @@
 				81A6EB121BE784BD00F9FDD1 /* NewBieCell.xib in Resources */,
 				817DD4A41BCF547E00042B09 /* tixian@2x.png in Resources */,
 				8180639C1BD5D7E500E83492 /* MyInviteCell.xib in Resources */,
+				81D72FC41BFB04890067A277 /* LeftWindow@2x.png in Resources */,
 				818523BC1BE31B80002FC653 /* 组-14@3x.png in Resources */,
 				8D9356DC1BC607C500BC2BFA /* LaunchScreen.storyboard in Resources */,
 				81C8BBCB1BDA2F8D005B9DFF /* yijianfankui@3x.png in Resources */,
@@ -3089,6 +3156,7 @@
 				8DEDE1EC1BCD05C7008086D3 /* Calendar.xib in Resources */,
 				811F0B0C1BF33D42001F6AA4 /* BindingTwoCell.xib in Resources */,
 				8191E22F1BDE00DC000A6E8C /* cuo@3x.png in Resources */,
+				81D72FBF1BFAD63B0067A277 /* right@3x.png in Resources */,
 				8179883C1BC9403A007C8C3E /* ThreeCell.xib in Resources */,
 				8191E2281BDDF5F0000A6E8C /* lianxikefu@2x.png in Resources */,
 				8DEDE1D41BCCFFD8008086D3 /* iocn_saft@2x.png in Resources */,
@@ -3163,6 +3231,7 @@
 				81B520A71BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png in Resources */,
 				817E33821BD733D100D05103 /* 9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝@2x.png in Resources */,
 				817DD4901BCF547E00042B09 /* anniu@2x.png in Resources */,
+				81D72FB31BFAC4AE0067A277 /* ChatRightCell.xib in Resources */,
 				8D4B8C091BF2F48E00A88285 /* UMSShareListController.xib in Resources */,
 				81B18E251BE77EA700D448FA /* EmailCell.xib in Resources */,
 				8118D7AE1BEB5C560084292B /* 钻石红包@2x.png in Resources */,
@@ -3174,6 +3243,7 @@
 				8D3F95F01BE2188500013A8E /* shouyi@2x.png in Resources */,
 				8DEDE1D51BCCFFD8008086D3 /* iocn_saft@3x.png in Resources */,
 				8175BE9A1BE9E5760044026E /* 组-21-拷贝-13@2x.png in Resources */,
+				81D72FC51BFB04890067A277 /* LeftWindow@3x.png in Resources */,
 				8175BED01BEA1B290044026E /* 分享失败@3x.png in Resources */,
 				8DEDE1C81BCCFF21008086D3 /* iconfont_greencuo@2x.png in Resources */,
 				81B18E161BE7387A00D448FA /* bar-full@3x.png in Resources */,
@@ -3184,6 +3254,7 @@
 				817E33851BD733D100D05103 /* b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658@3x.png in Resources */,
 				818063A61BD5D89000E83492 /* InviteNameCell.xib in Resources */,
 				8D88A4E11BCE087400EE22F5 /* emptyyuan@2x.png in Resources */,
+				81D72FBD1BFAD63B0067A277 /* left@3x.png in Resources */,
 				81AC90B81BEC55D200232404 /* BindingBankCell.xib in Resources */,
 				8D9011AF1BD6337C00E5D62A /* 4@2x.png in Resources */,
 				8D1921D41BD4FD7F0038195E /* banner01@2x.png in Resources */,
@@ -3194,10 +3265,13 @@
 				81B18E191BE7387A00D448FA /* iconfont-zhuanxiangeps@2x.png in Resources */,
 				8D66927B1BD0D27D00CD2CAF /* gesture_node_normal.png in Resources */,
 				8D0AE7F41BE09CE500D9D50C /* iconfont-register-gantanhao001@2x.png in Resources */,
+				81D72FB71BFACA800067A277 /* add@3x.png in Resources */,
 				81ED030C1BD09BC8005F4B02 /* MyInformationCell.xib in Resources */,
+				81D72FBE1BFAD63B0067A277 /* right@2x.png in Resources */,
 				8D121FE61BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.xib in Resources */,
 				8DEDE1DF1BCD0035008086D3 /* icon_CCB@2x.png in Resources */,
 				8D6692851BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png in Resources */,
+				81D72FC61BFB04890067A277 /* rightWindow@2x.png in Resources */,
 				816F1ED61BF5CA3D00DB6B65 /* PhoneNum@2x.png in Resources */,
 				816F1ED71BF5CA3D00DB6B65 /* PhoneNum@3x.png in Resources */,
 				8D9011B11BD6337C00E5D62A /* 5@2x.png in Resources */,
@@ -3222,6 +3296,7 @@
 				8175BEC21BEA052E0044026E /* 拆红包@2x.png in Resources */,
 				8190A30A1BD87D3E002B53F5 /* AddCardCell.xib in Resources */,
 				817DD4911BCF547E00042B09 /* anniu@3x.png in Resources */,
+				81D72FAE1BFAC4990067A277 /* ChatLeftCell.xib in Resources */,
 				817DD4A21BCF547E00042B09 /* shape-29@2x.png in Resources */,
 				8D4B8C001BF2F48E00A88285 /* UMSocialLocalizable.strings in Resources */,
 				81B18E171BE7387A00D448FA /* iconfont-liwu@2x.png in Resources */,
@@ -3246,6 +3321,7 @@
 				8175BE891BE9D1020044026E /* InvestNoticeCell.xib in Resources */,
 				817DD4A81BCF547E00042B09 /* xiaoxi@2x.png in Resources */,
 				8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */,
+				81D72FC71BFB04890067A277 /* rightWindow@3x.png in Resources */,
 				81F237721BE8568B009D7A67 /* NewMakeSureCell.xib in Resources */,
 				8DEDE1E11BCD0035008086D3 /* icon_ICBC@2x.png in Resources */,
 				8D0AE7F51BE09CE500D9D50C /* iconfont-register-gantanhao001@3x.png in Resources */,
@@ -3346,6 +3422,7 @@
 				816F1ED21BF5C61C00DB6B65 /* InviteSocilPlatFormCell.m in Sources */,
 				81379F2C1BEB48AA002CDB16 /* CashOtherFinViewController.m in Sources */,
 				8D5DBB891BD4839B00F556B9 /* CastDownTableViewCell.m in Sources */,
+				81D72FB21BFAC4AE0067A277 /* ChatRightCell.m in Sources */,
 				8175BE901BE9E3730044026E /* ChooseRedBagCell.m in Sources */,
 				8DD1809D1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m in Sources */,
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
@@ -3375,6 +3452,7 @@
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				817E33A71BD7840000D05103 /* ChooseCell.m in Sources */,
 				8D4FF5E41BE339A200BAE25F /* UIRefreshControl+AFNetworking.m in Sources */,
+				81D72FAD1BFAC4990067A277 /* ChatLeftCell.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
 				818523BF1BE34AC1002FC653 /* ThreeViewController.m in Sources */,
 				81BA1BF41BD4CB4300DBA5BE /* WinAPrizeViewController.m in Sources */,
@@ -3492,6 +3570,7 @@
 				8D4FF5E01BE339A200BAE25F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				8D4FF5DF1BE339A200BAE25F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				8D6692831BD0D8A600CD2CAF /* MyHandButton.m in Sources */,
+				81349D121BF9D7E800D845EF /* AddressBook.m in Sources */,
 				81701C0B1BE701C300B45BAA /* MendDealCell.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
 				817E33941BD7576600D05103 /* MeCell.m in Sources */,
@@ -3535,6 +3614,7 @@
 				81ED03201BD0DDAD005F4B02 /* AddBankCell.m in Sources */,
 				8175BEB91BE9F7160044026E /* ShareEveryCell.m in Sources */,
 				8D121FE51BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.m in Sources */,
+				81D72FA91BFAC26B0067A277 /* ChatViewController.m in Sources */,
 				81ED02C51BD08CFD005F4B02 /* MyInformationViewController.m in Sources */,
 				81701C071BE6FEA300B45BAA /* MendDealViewController.m in Sources */,
 				8D5DBB7F1BD4819C00F556B9 /* CastProduceViewController.m in Sources */,
@@ -3699,8 +3779,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = DSLC/Info.plist;
@@ -3713,7 +3793,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7b5ac45f-a565-47da-bfb8-bef19d5d8a09";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3722,8 +3802,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = DSLC/Info.plist;
@@ -3736,7 +3816,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7b5ac45f-a565-47da-bfb8-bef19d5d8a09";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

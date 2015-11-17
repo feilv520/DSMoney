@@ -11,6 +11,7 @@
 #import "MyPlannerCell.h"
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
+#import "ChatViewController.h"
 
 @interface MyPlannerViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -170,7 +171,8 @@
 //咨询按钮
 - (void)askQuestionButton:(UIButton *)button
 {
-    NSLog(@"咨询");
+    ChatViewController *chatVC = [[ChatViewController alloc] init];
+    [self.navigationController pushViewController:chatVC animated:YES];
 }
 
 //已经申请服务按钮

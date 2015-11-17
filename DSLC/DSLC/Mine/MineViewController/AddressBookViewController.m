@@ -9,8 +9,10 @@
 #import "AddressBookViewController.h"
 #import "AddressBookCell.h"
 #import "InviteNameViewController.h"
+#import "AddressBook.h"
+#import <AddressBook/AddressBook.h>
 
-@interface AddressBookViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface AddressBookViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 {
     UITableView *_tablView;
@@ -22,6 +24,12 @@
     UIButton *butInput;
     UIButton *butBlack;
     UIButton *buttonCancel;
+    CFIndex sumPeople;
+    
+//    中文排序后的数组
+    NSMutableArray *sortArray;
+//    存所有同学的姓（去重）
+    
 }
 
 @end
@@ -36,6 +44,7 @@
     [self.navigationItem setTitle:@"选择朋友"];
     
     [self tableViewShow];
+    [self getPhoneNum];
     [self buttonSearchContent];
     [self buttonInviteContent];
 }
@@ -105,6 +114,101 @@
     viewLineDown.alpha = 0.3;
 }
 
+//获取手机通讯录
+- (void)getPhoneNum
+{
+    ABAddressBookRef addressBooks = nil;
+    
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
+        
+    {
+        addressBooks =  ABAddressBookCreateWithOptions(NULL, NULL);
+        
+        //获取通讯录权限
+        
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        
+        ABAddressBookRequestAccessWithCompletion(addressBooks, ^(bool granted, CFErrorRef error){dispatch_semaphore_signal(sema);});
+        
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        
+    } else {
+        
+        addressBooks = ABAddressBookCreate();
+    }
+    
+//    获取通讯录中所有人
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBooks);
+//    获取通讯录的人数
+    sumPeople = ABAddressBookGetPersonCount(addressBooks);
+    
+    nameArr = [NSMutableArray array];
+    
+//    循环 获取每个人的个人信息
+    for (int i = 0; i < sumPeople; i++) {
+        
+        AddressBook *addressBook = [[AddressBook alloc] init];
+        
+//        获取个人
+        ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+//        获取个人名字
+        CFTypeRef abName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
+        CFTypeRef abLastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
+        CFStringRef abFullName = ABRecordCopyCompositeName(person);
+        NSString *nameString = (__bridge NSString *)abName;
+        NSString *lastNameString = (__bridge NSString *)abLastName;
+        
+        if ((__bridge id)abFullName != nil) {
+            nameString = (__bridge NSString *)abFullName;
+        } else {
+            if ((__bridge id)abLastName != nil)
+            {
+                nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
+            }
+        }
+        addressBook.name = nameString;
+        addressBook.recordID = (NSInteger)ABRecordGetRecordID(person);
+        
+        ABPropertyID multiProperties[] = {
+            kABPersonPhoneProperty,
+            kABPersonEmailProperty
+        };
+        
+        NSInteger multiPropertiesTotal = sizeof(multiProperties) / sizeof(ABPropertyID);
+        for (NSInteger j = 0; j < multiPropertiesTotal; j++) {
+            ABPropertyID property = multiProperties[j];
+            ABMultiValueRef valuesRef = ABRecordCopyValue(person, property);
+            NSInteger valuesCount = 0;
+            if (valuesRef != nil) valuesCount = ABMultiValueGetCount(valuesRef);
+            
+            if (valuesCount == 0) {
+                CFRelease(valuesRef);
+                continue;
+            }
+            
+            //获取电话号码
+            for (NSInteger k = 0; k < valuesCount; k++) {
+                CFTypeRef value = ABMultiValueCopyValueAtIndex(valuesRef, k);
+                switch (j) {
+                    case 0: {// Phone number
+                        addressBook.phoneNum = (__bridge NSString*)value;
+                        break;
+                    }
+                    
+                }
+                CFRelease(value);
+            }
+            CFRelease(valuesRef);
+        }
+        
+        [nameArr addObject:addressBook];
+        
+        if (abName) CFRelease(abName);
+        if (abLastName) CFRelease(abLastName);
+        if (abFullName) CFRelease(abFullName);
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.1;
@@ -127,17 +231,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return nameArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AddressBookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    cell.labelName.text = @"丁颖";
+    AddressBook *book = [nameArr objectAtIndex:indexPath.section];
+    
+    cell.labelName.text =book.name;
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
-    cell.labelPhoneNum.text = @"15988889999";
+    cell.labelPhoneNum.text = book.phoneNum;
     cell.labelPhoneNum.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     cell.labelPhoneNum.textColor = [UIColor zitihui];
     
@@ -146,15 +252,6 @@
     cell.buttonInvite.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.buttonInvite.layer.cornerRadius = 3;
     cell.buttonInvite.layer.masksToBounds = YES;
-    
-    if (indexPath.section == 0 || indexPath.section == 3) {
-        
-        if (indexPath.row == 2 || indexPath.row == 4) {
-            
-            [cell.buttonInvite setTitle:@"已邀请" forState:UIControlStateNormal];
-            [cell.buttonInvite setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-        }
-    }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -177,6 +274,7 @@
     tableView.sectionIndexBackgroundColor = [UIColor clearColor];
 //    修改索引的字体颜色
     tableView.sectionIndexColor= [UIColor zitihui];
+    tableView.sectionIndexMinimumDisplayRowCount = 2;
     return letterArr;
 }
 
@@ -204,9 +302,22 @@
     
     _textField = [CreatView creatWithfFrame:CGRectMake(20, 0, butInput.frame.size.width - 25, 30) setPlaceholder:@"搜索" setTintColor:[UIColor grayColor]];
     [butInput addSubview:_textField];
+    _textField.delegate = self;
+    _textField.returnKeyType = UIReturnKeySearch;
     _textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [_textField becomeFirstResponder];
     [_textField addTarget:self action:@selector(searchTextFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
 }
 
 - (void)searchTextFieldEdit:(UITextField *)textField

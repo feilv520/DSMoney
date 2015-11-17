@@ -213,7 +213,10 @@
     cell.textField.textColor = [UIColor zitihui];
     
     if (indexPath.row == 1) {
+        cell.textField.text = @"123456";
         cell.textField.secureTextEntry = YES;
+    } else {
+        cell.textField.text = @"15955454591";
     }
     
     [cell.textField addTarget:self action:@selector(editContent:) forControlEvents:UIControlEventEditingChanged];
