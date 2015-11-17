@@ -25,7 +25,7 @@
 #import "MyAlreadyBindingBank.h"
 #import "AddBankViewController.h"
 
-@interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
 {
     UITableView *_tableView;

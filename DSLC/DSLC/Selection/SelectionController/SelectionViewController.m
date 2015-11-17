@@ -341,6 +341,8 @@
     if (button.tag == 2) {
         NewHandViewController *newHandVC = [[NewHandViewController alloc] init];
         [self.navigationController pushViewController:newHandVC animated:YES];
+    } else if (button.tag == 1){
+
     } else {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:sView.titleLabel.text message:sView.titleLabel.text preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];

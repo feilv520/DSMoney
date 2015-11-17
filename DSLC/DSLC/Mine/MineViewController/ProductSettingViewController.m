@@ -347,21 +347,19 @@
     
     for(NSInteger i = 0; i < [[self.moneyDic objectForKey:@"Asset"] count]; i ++)
     {
-        if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"固收理财"]) {
+        if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productType"] isEqualToString:@"1"]) {
             
             GSNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
             
-//                NSString *nameString = [NSString stringWithFormat:@"固收理财%f%%",GSNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue]];
-            
-        } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"票据理财"]) {
+        } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productType"] isEqualToString:@"2"]) {
             
             PJNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
             
-        } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"新手专享"]) {
+        } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productType"] isEqualToString:@"3"]) {
             
             NewNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
             
-        } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productTypeName"] isEqualToString:@"标的"]) {
+        } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productType"] isEqualToString:@"4"]) {
             
             BDNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
             
@@ -392,13 +390,16 @@
             [self.slices addObject:[NSString stringWithFormat:@"%f",NewNumber]];
             NewNumber = 0.0f;
         } else if (BDNumber != 0.0f) {
-            NSString *nameString = [NSString stringWithFormat:@"标的%.0f%%",BDNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue] * 100];
+            NSString *nameString = [NSString stringWithFormat:@"标的投资%.0f%%",BDNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue] * 100];
 
             [self.nameMArr addObject:nameString];
             [self.slices addObject:[NSString stringWithFormat:@"%f",BDNumber]];
             BDNumber = 0.0f;
         }
     }
+    
+    NSLog(@"%@",self.nameMArr);
+    NSLog(@"%@",self.slices);
     
 }
 

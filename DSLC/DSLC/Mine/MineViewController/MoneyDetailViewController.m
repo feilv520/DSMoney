@@ -67,8 +67,7 @@
     
     titleArray = @[@"项目简述", @"项目详情", @"风控条件", @"管理团队简介", @"风险揭示"];
     otherArray = @[@"其他包含此资产的产品", @"3个月固收理财", @"6个月固收理财", @"9个月固收理财"];
-    leftArray = @[@"产品名称", @"产品类型", @"资产总额", @"预计到期日", @"起息日", @"结息日", @"预计到帐日", @"收益分配方式", @"融资方名称", @"项目资金用途", @"还款来源", @"开售时间"];
-    rightArray = @[@"蓝光12期项目", @"债权转让", @"1,500万元", @"2016-04-22", @"2015-10-22", @"2016-04-22", @"2016-04-23", @"到期一次兑付本金收益", @"蓝光", @"用于蓝光和骏下属各项目开发建设", @"蓝光和骏经营收入", @"2015-10-19"];
+    leftArray = @[@"产品名称", @"产品类型", @"资产总额", @"开售时间", @"起息日", @"结息日", @"预计到帐日", @"收益分配方式", @"融资方名称", @"项目资金用途", @"还款来源"];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -127,7 +126,7 @@
         
     } else if (section == 1) {
         
-        return 13;
+        return 12;
         
     } else if (section == 2) {
         
@@ -150,15 +149,10 @@
         
         ProjectNameCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
-        if (cell == nil) {
-            
-            cell = [[ProjectNameCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
-        }
-        
-        cell.labelName.text = @"东方资产陆家嘴投资项目";
+        cell.labelName.text = [self.asset objectForKey:@"assetName"];
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        NSMutableAttributedString *percentStr = [[NSMutableAttributedString alloc] initWithString:@"8.01%"];
+        NSMutableAttributedString *percentStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@~%@%%",[self.asset objectForKey:@"assetAnnualYieldb"],[self.asset objectForKey:@"assetAnnualYielde"]]];
         NSRange leftStr = NSMakeRange(0, [[percentStr string] rangeOfString:@"%"].location);
         [percentStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:leftStr];
         [percentStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:leftStr];
@@ -189,11 +183,11 @@
         cell.labelRightDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.viewDown.backgroundColor = [UIColor qianhuise];
-        cell.labelSheng.text = @"剩余总额:";
+        cell.labelSheng.text = @"资产总额:";
         cell.labelSheng.textColor = [UIColor zitihui];
         cell.labelSheng.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.labelMoney.text = @"1500万元";
+        cell.labelMoney.text = [self.asset objectForKey:@"assetAmount"];
         cell.labelMoney.textColor = [UIColor zitihui];
         cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelMoney.textAlignment = NSTextAlignmentRight;
@@ -378,7 +372,9 @@
 - (void)getAssetDetail{
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"productId":self.idString,@"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"assetId":self.idString,@"token":[dic objectForKey:@"token"]};
+    
+    NSLog(@"%@",parameter);
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/asset/getAssetDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -389,7 +385,7 @@
         self.product = [NSDictionary dictionary];
         self.product = [responseObject objectForKey:@"Product"];
         
-        NSLog(@"%@",self.idString);
+        rightArray = @[[self.asset objectForKey:@"assetName"], [self.asset objectForKey:@"assetTypeName"], [self.asset objectForKey:@"assetAmount"], [self.asset objectForKey:@"assetSaleTime"], [self.asset objectForKey:@"assetInterestBdate"], [self.asset objectForKey:@"assetInterestEdate"], [self.asset objectForKey:@"assetToaccountDate"], [self.asset objectForKey:@"assetYieldDistribType"], [self.asset objectForKey:@"assetFinancierName"], [self.asset objectForKey:@"assetFundsUse"], [self.asset objectForKey:@"assetRepaymentSource"]];
         
         [_tableView reloadData];
         

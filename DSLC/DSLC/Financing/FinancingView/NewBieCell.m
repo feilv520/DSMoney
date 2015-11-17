@@ -7,6 +7,8 @@
 //
 
 #import "NewBieCell.h"
+#import "define.h"
+
 
 @implementation NewBieCell
 

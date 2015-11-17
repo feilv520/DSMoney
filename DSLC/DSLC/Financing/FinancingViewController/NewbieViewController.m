@@ -86,7 +86,7 @@
         NSMutableAttributedString *redString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[[self.productListArray objectAtIndex:indexPath.row] productAnnualYield]]];
         NSRange leftRange = NSMakeRange(0, [[redString string] rangeOfString:@"%"].location);
         [redString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:leftRange];
-        [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:45] range:leftRange];
+        [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
         
         NSRange rightRange = NSMakeRange([[redString string] length] - 1, 1);
         [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:rightRange];

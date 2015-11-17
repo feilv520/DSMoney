@@ -428,7 +428,9 @@
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            if (responseObject == nil) {
+            NSLog(@"%@",responseObject);
+            
+            if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
                 [ProgressHUD showMessage:@"请先登录,然后再投资" Width:100 High:20];
 
             } else {
