@@ -271,10 +271,11 @@
     if (indexPath.row == 0) {
         
         if (moneyLabel == nil) {
-            moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 155, 0, WIDTH_CONTROLLER_DEFAULT - 100, 50)];
+            moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 0, WIDTH_CONTROLLER_DEFAULT - 125, 50)];
             
             moneyLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
             moneyLabel.textColor = [UIColor zitihui];
+            moneyLabel.textAlignment = NSTextAlignmentRight;
             [cell addSubview:moneyLabel];
         }
         moneyLabel.text = [NSString stringWithFormat:@"%@元在投资金",[self.myAccountInfo objectForKey:@"totalMoney"]];

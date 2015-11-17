@@ -307,6 +307,7 @@
                                          [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
                                          [responseObject objectForKey:@"token"],@"token",nil];
                     [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                    NSLog(@"%@",[responseObject objectForKey:@"token"]);
                 }
                 // 判断是否存在isLogin.plist文件
                 if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
@@ -359,6 +360,23 @@
 
 // 自动登录方法
 - (void)autoLogin{
+    
+//    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+//    
+//    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+//    
+//    NSLog(@"%@",parameter);
+//    
+//    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+//        
+//        NSLog(@"autoLogin = %@",responseObject);
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        
+//        NSLog(@"%@", error);
+//        
+//    }];
+    
     NSDictionary *parameter = @{@"phone":[self.flagUserInfo objectForKey:@"userPhone"],@"password":[self.flagUserInfo objectForKey:@"password"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
