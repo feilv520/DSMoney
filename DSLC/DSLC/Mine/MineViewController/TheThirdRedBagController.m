@@ -30,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"我的红包"];
     
     [self viewShow];
@@ -58,11 +58,14 @@
 
 - (void)tableViewShow
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 55, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 55) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 50) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.separatorColor = [UIColor clearColor];
+    _tableView.backgroundColor = [UIColor huibai];
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 5)];
+    _tableView.tableHeaderView.backgroundColor = [UIColor huibai];
     _tableView.tableFooterView = [UIView new];
     [_tableView registerNib:[UINib nibWithNibName:@"NewHandCSSCell" bundle:nil] forCellReuseIdentifier:@"reuseNewHand"];
     [_tableView registerNib:[UINib nibWithNibName:@"TheThirdRedBagCell" bundle:nil] forCellReuseIdentifier:@"Reuse"];
@@ -131,6 +134,7 @@
         cell.labelTime.textColor = [UIColor zitihui];
         cell.labelTime.backgroundColor = [UIColor clearColor];
         
+        cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
@@ -183,6 +187,7 @@
         cell.labelTime.textColor = [UIColor zitihui];
         cell.labelTime.backgroundColor = [UIColor clearColor];
         
+        cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
@@ -228,6 +233,7 @@
         
         cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
         
+        cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }

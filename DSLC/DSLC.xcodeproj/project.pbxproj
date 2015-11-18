@@ -249,6 +249,9 @@
 		819B52EC1BFC4462002FDF1E /* NewHandCSSCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819B52EA1BFC4462002FDF1E /* NewHandCSSCell.xib */; settings = {ASSET_TAGS = (); }; };
 		819B52EE1BFC5198002FDF1E /* 钻石红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 819B52ED1BFC5198002FDF1E /* 钻石红包@3x.png */; settings = {ASSET_TAGS = (); }; };
 		819B52F01BFC51AD002FDF1E /* 钻石红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 819B52EF1BFC51AD002FDF1E /* 钻石红包@2x.png */; settings = {ASSET_TAGS = (); }; };
+		819B52F31BFC5D54002FDF1E /* NSString+Characters.m in Sources */ = {isa = PBXBuildFile; fileRef = 819B52F11BFC5D54002FDF1E /* NSString+Characters.m */; settings = {ASSET_TAGS = (); }; };
+		819B52F91BFC6930002FDF1E /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = 819B52F61BFC6930002FDF1E /* ChineseString.m */; settings = {ASSET_TAGS = (); }; };
+		819B52FA1BFC6930002FDF1E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 819B52F71BFC6930002FDF1E /* pinyin.c */; settings = {ASSET_TAGS = (); }; };
 		819C3AB61BD47E57008D2CFD /* MyRedBagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C3AB51BD47E57008D2CFD /* MyRedBagViewController.m */; };
 		819C3ABA1BD483C4008D2CFD /* MyRedBagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 819C3AB81BD483C4008D2CFD /* MyRedBagCell.m */; };
 		819C3ABB1BD483C4008D2CFD /* MyRedBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819C3AB91BD483C4008D2CFD /* MyRedBagCell.xib */; };
@@ -979,6 +982,12 @@
 		819B52EA1BFC4462002FDF1E /* NewHandCSSCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewHandCSSCell.xib; sourceTree = "<group>"; };
 		819B52ED1BFC5198002FDF1E /* 钻石红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钻石红包@3x.png"; sourceTree = "<group>"; };
 		819B52EF1BFC51AD002FDF1E /* 钻石红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钻石红包@2x.png"; sourceTree = "<group>"; };
+		819B52F11BFC5D54002FDF1E /* NSString+Characters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Characters.m"; sourceTree = "<group>"; };
+		819B52F21BFC5D54002FDF1E /* NSString+Characters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Characters.h"; sourceTree = "<group>"; };
+		819B52F51BFC6930002FDF1E /* ChineseString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseString.h; sourceTree = "<group>"; };
+		819B52F61BFC6930002FDF1E /* ChineseString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseString.m; sourceTree = "<group>"; };
+		819B52F71BFC6930002FDF1E /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
+		819B52F81BFC6930002FDF1E /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		819C3AB41BD47E57008D2CFD /* MyRedBagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRedBagViewController.h; sourceTree = "<group>"; };
 		819C3AB51BD47E57008D2CFD /* MyRedBagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRedBagViewController.m; sourceTree = "<group>"; };
 		819C3AB71BD483C4008D2CFD /* MyRedBagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRedBagCell.h; sourceTree = "<group>"; };
@@ -1555,6 +1564,8 @@
 		810D25241BC7916C00DAF83F /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				819B52F11BFC5D54002FDF1E /* NSString+Characters.m */,
+				819B52F21BFC5D54002FDF1E /* NSString+Characters.h */,
 				8DE59AB41BFC191500741149 /* CJNavigationController.h */,
 				8DE59AB51BFC191500741149 /* CJNavigationController.m */,
 				8D3125E41BD7689200143B71 /* BaseViewController.h */,
@@ -1684,6 +1695,17 @@
 			path = "产品";
 			sourceTree = "<group>";
 		};
+		819B52F41BFC6930002FDF1E /* ChineseSorting */ = {
+			isa = PBXGroup;
+			children = (
+				819B52F51BFC6930002FDF1E /* ChineseString.h */,
+				819B52F61BFC6930002FDF1E /* ChineseString.m */,
+				819B52F71BFC6930002FDF1E /* pinyin.c */,
+				819B52F81BFC6930002FDF1E /* pinyin.h */,
+			);
+			path = ChineseSorting;
+			sourceTree = "<group>";
+		};
 		81B674051BF0A75E007CEF51 /* 大额充值 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1772,6 +1794,7 @@
 		81C2DAA51BC755F10007AC48 /* Three */ = {
 			isa = PBXGroup;
 			children = (
+				819B52F41BFC6930002FDF1E /* ChineseSorting */,
 				818A39E31BF475A800F01CAA /* MBProgressHUD.h */,
 				818A39E41BF475A800F01CAA /* MBProgressHUD.m */,
 				8D4B8C0B1BF2F49400A88285 /* Wechat */,
@@ -3655,6 +3678,7 @@
 				819B52C61BFC127E002FDF1E /* NotSeparateCell.m in Sources */,
 				8D0CB48E1BE75DB20039D826 /* SimpleDetailViewController.m in Sources */,
 				8D4FF5E31BE339A200BAE25F /* UIProgressView+AFNetworking.m in Sources */,
+				819B52F31BFC5D54002FDF1E /* NSString+Characters.m in Sources */,
 				8191E21E1BDDF03D000A6E8C /* ServiceViewController.m in Sources */,
 				81F5FA0A1BD9E1FE008C38BF /* ChangeNumViewController.m in Sources */,
 				81F4BD5B1BECC06B00C308F8 /* SetDealSecret.m in Sources */,
@@ -3667,6 +3691,7 @@
 				817E339B1BD77A8800D05103 /* ChooseStyleViewController.m in Sources */,
 				8D4FF5E01BE339A200BAE25F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				8D4FF5DF1BE339A200BAE25F /* AFNetworkActivityIndicatorManager.m in Sources */,
+				819B52F91BFC6930002FDF1E /* ChineseString.m in Sources */,
 				8D6692831BD0D8A600CD2CAF /* MyHandButton.m in Sources */,
 				81349D121BF9D7E800D845EF /* AddressBook.m in Sources */,
 				81701C0B1BE701C300B45BAA /* MendDealCell.m in Sources */,
@@ -3701,6 +3726,7 @@
 				8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */,
 				8D4FF5DD1BE339A200BAE25F /* AFAutoPurgingImageCache.m in Sources */,
 				8D1191951BF1E59300A2DE05 /* productMoneyModel.m in Sources */,
+				819B52FA1BFC6930002FDF1E /* pinyin.c in Sources */,
 				81D704031BE0D0D40074DF30 /* NewbieViewController.m in Sources */,
 				81F5FA111BDA1C2E008C38BF /* MoreCell.m in Sources */,
 				8180639B1BD5D7E500E83492 /* MyInviteCell.m in Sources */,
@@ -3877,8 +3903,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = DSLC/Info.plist;
@@ -3891,7 +3917,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bb43edd3-768c-4ba8-adeb-13ea7f88436f";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3900,8 +3926,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = DSLC/Info.plist;
@@ -3914,7 +3940,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bb43edd3-768c-4ba8-adeb-13ea7f88436f";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

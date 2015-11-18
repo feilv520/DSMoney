@@ -11,6 +11,8 @@
 #import "InviteNameViewController.h"
 #import "AddressBook.h"
 #import <AddressBook/AddressBook.h>
+#import "NSString+Characters.h"
+#import "ChineseString.h"
 
 @interface AddressBookViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -28,8 +30,7 @@
     
 //    中文排序后的数组
     NSMutableArray *sortArray;
-//    存所有同学的姓（去重）
-    
+    NSMutableArray *letterResultArr;
 }
 
 @end
@@ -40,6 +41,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    letterResultArr = [NSMutableArray array];
+    sortArray = [NSMutableArray array];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"选择朋友"];
     
@@ -47,6 +51,8 @@
     [self getPhoneNum];
     [self buttonSearchContent];
     [self buttonInviteContent];
+    
+    
 }
 
 - (void)tableViewShow
@@ -202,6 +208,7 @@
         }
         
         [nameArr addObject:addressBook];
+        NSLog(@"$$$$$$$$$$%@", nameArr);
         
         if (abName) CFRelease(abName);
         if (abLastName) CFRelease(abLastName);
@@ -226,24 +233,27 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return letterArr.count;
+    sortArray = [ChineseString IndexArray:nameArr];
+    return sortArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return nameArr.count;
+    letterResultArr = [ChineseString LetterSortArray:nameArr];
+    NSMutableArray *addressArr = [self addWIthPhoneNumber:letterResultArr];
+    return [[addressArr objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AddressBookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    AddressBook *book = [nameArr objectAtIndex:indexPath.section];
-    
-    cell.labelName.text =book.name;
+//    cell.labelName.text = [[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+//    cell.labelName.text = [[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] name];
+    AddressBook *addressBo = [[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
-    cell.labelPhoneNum.text = book.phoneNum;
+//    cell.labelPhoneNum.text = book.phoneNum;
     cell.labelPhoneNum.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     cell.labelPhoneNum.textColor = [UIColor zitihui];
     
@@ -261,7 +271,7 @@
 {
     UIView *view = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor huibai]];
     
-    UILabel *labelLetter = [CreatView creatWithLabelFrame:CGRectMake(10, 0, WIDTH_CONTROLLER_DEFAULT - 20, 20) backgroundColor:[UIColor huibai] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[letterArr objectAtIndex:section]];
+    UILabel *labelLetter = [CreatView creatWithLabelFrame:CGRectMake(10, 0, WIDTH_CONTROLLER_DEFAULT - 20, 20) backgroundColor:[UIColor huibai] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[sortArray objectAtIndex:section]];
     [view addSubview:labelLetter];
     
     return view;
@@ -363,6 +373,29 @@
     
     [butBlack removeFromSuperview];
     butBlack = nil;
+}
+
+#pragma mark 方法
+#pragma mark --------------------
+
+- (NSMutableArray *)addWIthPhoneNumber:(NSMutableArray *)arr{
+    
+    for (NSInteger i = 0; i < [arr count]; i++) {
+        for (NSInteger d = 0; d < [[arr objectAtIndex:i] count]; d++) {
+            for (NSInteger j = 0; j < [nameArr count]; j++) {
+//                NSLog(@"%@,,%@",[[nameArr objectAtIndex:j] name],[[arr objectAtIndex:i] objectAtIndex:d]);
+                if ([[[nameArr objectAtIndex:j] name] isEqualToString:[[arr objectAtIndex:i] objectAtIndex:d]]) {
+                    AddressBook *addressB = [[AddressBook alloc] init];
+                    [addressB setName:[arr objectAtIndex:i]];
+                    [addressB setPhoneNum:[[nameArr objectAtIndex:j] phoneNum]];
+                    [[arr objectAtIndex:i] replaceObjectAtIndex:d withObject:addressB];
+                    break;
+                }
+            }
+        }
+    }
+//    NSLog(@"-=-=-=-=-=-%@",arr);
+    return arr;
 }
 
 - (void)didReceiveMemoryWarning {

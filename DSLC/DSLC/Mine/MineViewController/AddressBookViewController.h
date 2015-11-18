@@ -10,5 +10,13 @@
 
 @interface AddressBookViewController : BaseViewController
 
+//返回tableview右方indexArray
++(NSMutableArray*)IndexArray:(NSArray*)stringArr;
+
+//返回联系人
++(NSMutableArray*)LetterSortArray:(NSArray*)stringArr;
+
+//返回一组字母排序数组(中英混排)排序后的数组
++(NSMutableArray*)SortArray:(NSArray*)stringArr;
 
 @end

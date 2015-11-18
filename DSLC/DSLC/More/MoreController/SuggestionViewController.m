@@ -80,7 +80,7 @@
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         
         NSInteger statistics = [textView.text length];
-        NSString *sumStr = [NSString stringWithFormat:@"%ld", statistics];
+        NSString *sumStr = [NSString stringWithFormat:@"%ld", (long)statistics];
         NSString *sumString = [NSString stringWithFormat:@"%@%@", sumStr, @"/500"];
         NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:sumString];
         NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
