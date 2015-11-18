@@ -49,7 +49,7 @@
                     <color key="backgroundColor" red="0.24313725489999999" green="0.67843137249999996" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="新手专享0%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhe-eh-M58">
-                    <rect key="frame" x="20" y="90" width="75" height="21"/>
+                    <rect key="frame" x="20" y="90" width="100" height="21"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -61,7 +61,7 @@
                     <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="标的0%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPQ-dP-NWd">
-                    <rect key="frame" x="20" y="126" width="75" height="21"/>
+                    <rect key="frame" x="20" y="126" width="100" height="21"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
