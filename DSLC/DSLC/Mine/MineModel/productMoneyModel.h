@@ -14,4 +14,6 @@
 
 @property (nonatomic, copy) NSString *productName;
 
+@property (nonatomic, copy) NSString *productType;
+
 @end

@@ -70,7 +70,7 @@
     
     [backView addSubview:yesterdayLabel];
     
-    UILabel *yesterdayMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(photoImgView.frame.size.width - 120, 0, 100, 50)];
+    UILabel *yesterdayMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(photoImgView.frame.size.width - 210, 0, 200, 50)];
     
     NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ 元",self.totalProfit]];
     NSRange numString = NSMakeRange(0, [[redStringM string] rangeOfString:@"元"].location);

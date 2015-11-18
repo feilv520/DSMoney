@@ -171,7 +171,7 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"buyProduct = %@",responseObject);
-        if ([[responseObject objectForKey:@"result"] isEqualToString:@"200"]) {
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
             [self.navigationController pushViewController:shareHave animated:YES];
             [ProgressHUD showMessage:@"支付成功" Width:100 High:20];
@@ -185,6 +185,8 @@
         
     }];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

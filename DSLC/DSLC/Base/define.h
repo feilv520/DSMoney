@@ -49,6 +49,6 @@
 #import "MyAfHTTPClient.h"
 #import "MBProgressHUD.h"
 #import "NSString+Check.h"
-
+#import "CJNavigationController.h"
 
 #endif /* Header_h */

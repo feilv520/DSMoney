@@ -191,7 +191,7 @@
                 <outlet property="viewBottom" destination="eBn-Fk-dhw" id="Eu9-Sh-MSg"/>
                 <outlet property="viewLine" destination="J6H-XQ-fXO" id="Nc0-qp-zSK"/>
             </connections>
-            <point key="canvasLocation" x="300.5" y="421.5"/>
+            <point key="canvasLocation" x="132.5" y="344.5"/>
         </tableViewCell>
     </objects>
 </document>

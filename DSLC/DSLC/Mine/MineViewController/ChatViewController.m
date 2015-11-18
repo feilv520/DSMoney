@@ -142,7 +142,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70;
+    ChatLeftCell *cell = (ChatLeftCell *)[self tableView:_tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

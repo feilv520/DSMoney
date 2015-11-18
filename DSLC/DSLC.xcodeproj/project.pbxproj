@@ -582,6 +582,7 @@
 		8DD4C2471BDE1BE600C4C58C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8191E2311BDE0BE1000A6E8C /* AboutViewController.m */; };
 		8DD4C2481BDE1BFA00C4C58C /* SuggestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8191E2341BDE0E7C000A6E8C /* SuggestionViewController.m */; };
 		8DD955CC1BF6D5EB00C17A65 /* NSString+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD955CB1BF6D5EB00C17A65 /* NSString+Check.m */; settings = {ASSET_TAGS = (); }; };
+		8DE59AB61BFC191500741149 /* CJNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE59AB51BFC191500741149 /* CJNavigationController.m */; settings = {ASSET_TAGS = (); }; };
 		8DE61D9B1BDF20D70031A5CE /* FileOfManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE61D9A1BDF20D70031A5CE /* FileOfManage.m */; settings = {ASSET_TAGS = (); }; };
 		8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE61D9E1BDF284E0031A5CE /* ProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
 		8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */; };
@@ -1458,6 +1459,8 @@
 		8DD180A11BD731E000F71CEA /* GetMoneyTipTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetMoneyTipTableViewCell.xib; sourceTree = "<group>"; };
 		8DD955CA1BF6D5EB00C17A65 /* NSString+Check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Check.h"; sourceTree = "<group>"; };
 		8DD955CB1BF6D5EB00C17A65 /* NSString+Check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Check.m"; sourceTree = "<group>"; };
+		8DE59AB41BFC191500741149 /* CJNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJNavigationController.h; sourceTree = "<group>"; };
+		8DE59AB51BFC191500741149 /* CJNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJNavigationController.m; sourceTree = "<group>"; };
 		8DE61D991BDF20D70031A5CE /* FileOfManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileOfManage.h; sourceTree = "<group>"; };
 		8DE61D9A1BDF20D70031A5CE /* FileOfManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileOfManage.m; sourceTree = "<group>"; };
 		8DE61D9D1BDF284E0031A5CE /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
@@ -1552,6 +1555,8 @@
 		810D25241BC7916C00DAF83F /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				8DE59AB41BFC191500741149 /* CJNavigationController.h */,
+				8DE59AB51BFC191500741149 /* CJNavigationController.m */,
 				8D3125E41BD7689200143B71 /* BaseViewController.h */,
 				8D3125E51BD7689200143B71 /* BaseViewController.m */,
 				81898B761BDF180600DD4E44 /* UIPlaceHolderTextView.h */,
@@ -3531,6 +3536,7 @@
 				815A6FCF1BEB7EFF003059A5 /* RechargeViewController.m in Sources */,
 				8D11918C1BF1D25A00A2DE05 /* YesterdayViewController.m in Sources */,
 				8175BE881BE9D1020044026E /* InvestNoticeCell.m in Sources */,
+				8DE59AB61BFC191500741149 /* CJNavigationController.m in Sources */,
 				81AC90CD1BEC981100232404 /* GiveMoneyVerifyBinding.m in Sources */,
 				8D0AE80C1BE0C1A700D9D50C /* RegisterViewController.m in Sources */,
 				819C3AC71BD49862008D2CFD /* GrabBagCell.m in Sources */,
@@ -3871,8 +3877,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = DSLC/Info.plist;
@@ -3885,7 +3891,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "bb43edd3-768c-4ba8-adeb-13ea7f88436f";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3894,8 +3900,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = DSLC/Info.plist;
@@ -3908,7 +3914,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "bb43edd3-768c-4ba8-adeb-13ea7f88436f";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

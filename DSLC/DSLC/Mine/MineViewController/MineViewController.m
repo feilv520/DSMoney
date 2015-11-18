@@ -442,6 +442,8 @@
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
         
         [dic setValue:[responseObject objectForKey:@"invitationMyCode"] forKey:@"invitationMyCode"];
+        [dic setValue:[responseObject objectForKey:@"accBalance"] forKey:@"accBalance"];
+        [dic setValue:[responseObject objectForKey:@"redPacket"] forKey:@"redPacket"];
         
         [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
         
