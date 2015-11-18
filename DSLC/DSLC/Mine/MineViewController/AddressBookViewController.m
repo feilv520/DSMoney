@@ -31,6 +31,8 @@
 //    中文排序后的数组
     NSMutableArray *sortArray;
     NSMutableArray *letterResultArr;
+    
+    NSMutableArray *addressArr;
 }
 
 @end
@@ -240,7 +242,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     letterResultArr = [ChineseString LetterSortArray:nameArr];
-    NSMutableArray *addressArr = [self addWIthPhoneNumber:letterResultArr];
+    addressArr = [self addWIthPhoneNumber:letterResultArr];
+    NSLog(@"addressArr = %@",[[[addressArr objectAtIndex:0] objectAtIndex:0] name]);
     return [[addressArr objectAtIndex:section] count];
 }
 
@@ -249,11 +252,11 @@
     AddressBookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
 //    cell.labelName.text = [[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-//    cell.labelName.text = [[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] name];
-    AddressBook *addressBo = [[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    cell.labelName.text = [[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] name];
+
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
-//    cell.labelPhoneNum.text = book.phoneNum;
+    cell.labelPhoneNum.text = [[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] phoneNum];
     cell.labelPhoneNum.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     cell.labelPhoneNum.textColor = [UIColor zitihui];
     
@@ -379,15 +382,16 @@
 #pragma mark --------------------
 
 - (NSMutableArray *)addWIthPhoneNumber:(NSMutableArray *)arr{
-    
+//    NSLog(@"=-=-=-=-=-=-=-=-%@",arr);
     for (NSInteger i = 0; i < [arr count]; i++) {
         for (NSInteger d = 0; d < [[arr objectAtIndex:i] count]; d++) {
             for (NSInteger j = 0; j < [nameArr count]; j++) {
 //                NSLog(@"%@,,%@",[[nameArr objectAtIndex:j] name],[[arr objectAtIndex:i] objectAtIndex:d]);
                 if ([[[nameArr objectAtIndex:j] name] isEqualToString:[[arr objectAtIndex:i] objectAtIndex:d]]) {
                     AddressBook *addressB = [[AddressBook alloc] init];
-                    [addressB setName:[arr objectAtIndex:i]];
+                    [addressB setName:[[arr objectAtIndex:i] objectAtIndex:d]];
                     [addressB setPhoneNum:[[nameArr objectAtIndex:j] phoneNum]];
+//                    NSLog(@"-----%@..,,%@",addressB.name,addressB.phoneNum);
                     [[arr objectAtIndex:i] replaceObjectAtIndex:d withObject:addressB];
                     break;
                 }
