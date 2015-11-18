@@ -256,7 +256,7 @@
         if ([[self.moneyDic objectForKey:@"Product"] count] == 0) {
             return 1;
         } else {
-            return 2;
+            return [[self.moneyDic objectForKey:@"Product"] count] + 1;
         }
     }
 }
