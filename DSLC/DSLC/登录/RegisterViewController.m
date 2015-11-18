@@ -339,14 +339,14 @@
 
 // 注册按钮执行的方法
 - (void)RegisterButtonAction{
-    
+    [self.view endEditing:YES];
     if (registerV.phoneNumber.text.length < 11) {
         [ProgressHUD showMessage:@"手机号必须为11位" Width:100 High:20];
     } else if (registerV.smsCode.text.length < 6) {
         [ProgressHUD showMessage:@"验证码必须为6位" Width:100 High:20];
     } else if (registerV.loginPassword.text.length < 6){
         [ProgressHUD showMessage:@"密码必须为6-12位" Width:100 High:20];
-    } else if (registerV.loginPassword.text != registerV.sureLoginPassword.text){
+    } else if (![registerV.loginPassword.text isEqualToString:registerV.sureLoginPassword.text]){
         [ProgressHUD showMessage:@"输入的登录密码与确认的登录密码不匹配" Width:100 High:20];
     } else {
         NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":registerV.sandMyselfIDCard.text,@"finaCard":registerV.sandMyselfIDCard.text};

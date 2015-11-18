@@ -138,6 +138,24 @@
     [self.view endEditing:YES];
 }
 
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)findPwd{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    
+    
+    NSDictionary *parameters = @{@"payPwd":textField1.text,@"userId":};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
