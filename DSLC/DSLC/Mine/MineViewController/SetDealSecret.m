@@ -65,7 +65,7 @@
     
     if (textField1.text.length > 0 && textField2.text.length > 0) {
         
-        [self.navigationController popViewControllerAnimated:YES];
+        [self findPwd];
 
     } else {
         
@@ -91,6 +91,7 @@
     cell.labelLeft.text = [nameArray objectAtIndex:indexPath.row];
     cell.labelLeft.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
+    cell.textField.secureTextEntry = YES;
     cell.textField.placeholder = [textArray objectAtIndex:indexPath.row];
     cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     cell.textField.tintColor = [UIColor grayColor];
@@ -144,12 +145,16 @@
 - (void)findPwd{
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
+    textField1 = (UITextField *)[self.view viewWithTag:700];
     
+    NSDictionary *parameters = @{@"payPwd":textField1.text,@"userId":[dic objectForKey:@"id"]};
     
-    NSDictionary *parameters = @{@"payPwd":textField1.text,@"userId":[dic objectForKey:@"userId"]};
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    NSLog(@"%@",parameters);
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/setPayPwd" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         NSLog(@"%@",responseObject);
         [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
