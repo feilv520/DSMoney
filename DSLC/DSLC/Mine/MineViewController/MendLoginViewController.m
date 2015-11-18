@@ -128,7 +128,7 @@
                 
             } else {
                 
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"网络不好使啦!"];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"网络不给力啦!"];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
