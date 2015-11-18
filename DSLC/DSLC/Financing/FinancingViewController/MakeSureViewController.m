@@ -255,7 +255,7 @@
         [cell.labelSheng setAttributedText:moneyStr];
         cell.labelSheng.textColor = [UIColor zitihui];
         
-        NSMutableAttributedString *moneyS = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@%@", @"起投资金", [self.detailM productAmountMin],@"元起投,每1000元递增"]];
+        NSMutableAttributedString *moneyS = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@%@", @"起投资金", [self.detailM amountMin],@"元起投,每1000元递增"]];
         NSRange Range = NSMakeRange(0, [[moneyS string] length]);
         [moneyS addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:Range];
         [cell.labelMoney setAttributedText:moneyS];

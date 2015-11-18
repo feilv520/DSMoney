@@ -550,6 +550,8 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        NSLog(@"%@",responseObject);
+        
         self.residueMoney = [responseObject objectForKey:@"residueMoney"];
         self.buyNumber = [responseObject objectForKey:@"buyCount"];
         

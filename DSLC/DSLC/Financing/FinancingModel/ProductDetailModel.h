@@ -32,4 +32,6 @@
 
 @property (nonatomic, copy) NSString *productPeriod;
 
+@property (nonatomic, copy) NSString *amountMin;
+
 @end
