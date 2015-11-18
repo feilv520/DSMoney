@@ -146,7 +146,7 @@
     
     
     
-    NSDictionary *parameters = @{@"payPwd":textField1.text,@"userId":};
+    NSDictionary *parameters = @{@"payPwd":textField1.text,@"userId":[dic objectForKey:@"userId"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         NSLog(@"%@",responseObject);
         [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
