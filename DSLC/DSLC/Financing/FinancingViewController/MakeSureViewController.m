@@ -34,6 +34,9 @@
 @property (nonatomic) FConfirmMoney *viewWhite;
 @property (nonatomic) UITextField *textFieldC;
 @property (nonatomic) UIButton *makeSure;
+
+@property (nonatomic, strong) NSDictionary *accountDic;
+
 @end
 
 @implementation MakeSureViewController
@@ -41,6 +44,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.accountDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];;
     
     self.view.backgroundColor = [UIColor huibai];
     
@@ -356,8 +361,8 @@
                 [cell.butRecharge setTitleColor:[UIColor chongzhiColor] forState:UIControlStateNormal];
                 [cell.butRecharge addTarget:self action:@selector(cashMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
                 
-                self.qianShu.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 12 - 60, 0, 60, 48);
-                self.qianShu.text = @"56.02元";
+                self.qianShu.frame = CGRectMake(100, 0, WIDTH_CONTROLLER_DEFAULT - 110, 48);
+                self.qianShu.text = [self.accountDic objectForKey:@"accBalance"];
                 self.qianShu.textColor = [UIColor daohanglan];
                 self.qianShu.textAlignment = NSTextAlignmentRight;
                 [cell addSubview:self.qianShu];
@@ -366,7 +371,7 @@
                 
             } else {
                 
-                self.labelJiGe.text = @"2个";
+                self.labelJiGe.text = [self.accountDic objectForKey:@"redPacket"];
                 self.labelJiGe.textAlignment = NSTextAlignmentCenter;
                 self.labelJiGe.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 16 - 30, 0, 30, 48);
                 [cell addSubview:self.labelJiGe];
@@ -462,8 +467,10 @@
         AppDelegate *app = [[UIApplication sharedApplication] delegate];
         
         self.textFieldC = (UITextField *)[self.view viewWithTag:199];
-        CGFloat numberInt = self.qianShu.text.intValue;
-        CGFloat shuRuInt = self.textFieldC.text.intValue;
+        CGFloat numberInt = [[[self.accountDic objectForKey:@"accBalance"] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
+        CGFloat shuRuInt = self.textFieldC.text.floatValue;
+        
+//        NSLog(@"--- %@ ====--- %.f %.f",[[self.accountDic objectForKey:@"accBalance"] stringByReplacingOccurrencesOfString:@"," withString:@""],numberInt,shuRuInt);
         
 //        当输入的值大于余额值 提示余额不足 是否充值
         if (shuRuInt > numberInt && shuRuInt != 0) {

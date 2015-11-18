@@ -328,7 +328,7 @@
 - (void)checkSmsCode{
     NSDictionary *parameters = @{@"smsCode":registerV.smsCode.text};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/checkSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        if ([[responseObject objectForKey:@"result"] isEqualToString:@"200"]) {
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             [self RegisterButtonAction];
         }
         [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];

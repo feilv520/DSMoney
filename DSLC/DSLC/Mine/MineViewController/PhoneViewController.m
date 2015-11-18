@@ -147,7 +147,7 @@
             
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
             NSLog(@"ooooooo%@", responseObject);
-            if ([[responseObject objectForKey:@"result"] isEqualToString:@"200"]) {
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
                 
 //                ChangeNumViewController *changeNumVC = [[ChangeNumViewController alloc] init];
 //                [self.navigationController pushViewController:changeNumVC animated:YES];

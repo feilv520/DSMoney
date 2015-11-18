@@ -126,7 +126,7 @@
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
             NSLog(@"ooooooo%@", responseObject);
             NSArray *viewControllers = [self.navigationController viewControllers];
-            if ([[responseObject objectForKey:@"result"] isEqualToString:@"200"]) {
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
                 [self.navigationController popToViewController:[viewControllers objectAtIndex:1] animated:YES];
             }
             
