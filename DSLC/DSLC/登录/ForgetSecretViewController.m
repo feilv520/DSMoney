@@ -54,8 +54,8 @@
     textFieldArr = @[@"请输入新登录密码", @"请再次输入新登录密码"];
     
     textFieldPhoneNum = [CreatView creatWithfFrame:CGRectMake(130, 10, WIDTH_CONTROLLER_DEFAULT - 130 - 10, 30) setPlaceholder:nil setTintColor:[UIColor grayColor]];
-    textFieldPhoneNum.text = @"15940942599";
-    textFieldPhoneNum.enabled = NO;
+//    textFieldPhoneNum.text = @"15940942599";
+    textFieldPhoneNum.placeholder = @"请输入手机号";
     textFieldPhoneNum.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     textFieldPhoneNum.keyboardType = UIKeyboardTypeNumberPad;
     
@@ -193,10 +193,12 @@
     textField2 = (UITextField *)[self.view viewWithTag:902];
     textField3 = (UITextField *)[self.view viewWithTag:903];
     
-    if (textFieldPhoneNum.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField2.text == textField3.text) {
+    if (textFieldPhoneNum.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && [textField2.text isEqualToString:textField3.text]) {
         
         NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"],@"optType":@2,@"oldPwd":@"",@"newPwd":textField2.text,@"smsCode":textField1.text};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"%@",responseObject);
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
