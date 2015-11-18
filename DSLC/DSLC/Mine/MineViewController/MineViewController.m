@@ -30,6 +30,7 @@
 #import "MyAlreadyBindingBank.h"
 #import "RechargeAlreadyBinding.h"
 #import "LiftupMoneyViewController.h"
+#import "TheThirdRedBagController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -338,7 +339,7 @@
         
     } else if (indexPath.row == 2) {
         
-        NewRedBagViewController *myRedBagVC = [[NewRedBagViewController alloc] init];
+        TheThirdRedBagController *myRedBagVC = [[TheThirdRedBagController alloc] init];
         [self.navigationController pushViewController:myRedBagVC animated:YES];
         
     } else if (indexPath.row == 0) {
