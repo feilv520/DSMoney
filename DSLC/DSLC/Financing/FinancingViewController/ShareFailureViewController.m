@@ -59,6 +59,7 @@
     butGoOn.layer.masksToBounds = YES;
     butGoOn.layer.borderColor = [[UIColor daohanglan] CGColor];
     butGoOn.layer.borderWidth = 0.5;
+    [butGoOn addTarget:self action:@selector(buttonFinish:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *butShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 90)/2 + 50, 200, (WIDTH_CONTROLLER_DEFAULT - 90)/2, 40) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"分享拿红包"];
     [self.view addSubview:butShare];

@@ -176,7 +176,7 @@
             [self.navigationController pushViewController:shareHave animated:YES];
             [ProgressHUD showMessage:@"支付成功" Width:100 High:20];
         } else {
-            [ProgressHUD showMessage:@"支付失败" Width:100 High:20];
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
