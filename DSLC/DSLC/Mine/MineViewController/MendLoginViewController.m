@@ -128,7 +128,7 @@
                 
             } else {
                 
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"网络不给力啦!"];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的原登录密码错误"];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
