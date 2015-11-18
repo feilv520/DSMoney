@@ -42,6 +42,7 @@
     _textField = [CreatView creatWithfFrame:CGRectMake(90, 10, viewWhite.frame.size.width - 80 - 20, 30) setPlaceholder:@"请输入登录密码" setTintColor:[UIColor grayColor]];
     [viewWhite addSubview:_textField];
     _textField.delegate = self;
+    _textField.keyboardType = UIKeyboardTypeNumberPad;
     _textField.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [_textField addTarget:self action:@selector(textFiledEdit:) forControlEvents:UIControlEventEditingChanged];
     
@@ -53,9 +54,21 @@
     [buttonNext addTarget:self action:@selector(buttonNext:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location > 11) {
+        
+        return NO;
+        
+    } else {
+        
+        return YES;
+    }
+}
+
 - (void)textFiledEdit:(UITextField *)textField
 {
-    if ([textField.text length] > 0) {
+    if ([textField.text length] >= 6 && [textField.text length] <= 12) {
         
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -74,6 +87,7 @@
         
     } else {
         [self checkUserInfo];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码错误"];
     }
 }
 
@@ -106,6 +120,15 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [self.view endEditing:YES];
+    [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+    [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
 }
 
 - (void)didReceiveMemoryWarning {

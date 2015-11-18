@@ -45,6 +45,7 @@
     
     _textField1 = [CreatView creatWithfFrame:CGRectMake(85, 10, WIDTH_CONTROLLER_DEFAULT - 95, 30) setPlaceholder:@"请输入新手机号" setTintColor:[UIColor grayColor]];
     [viewTop addSubview:_textField1];
+    _textField1.keyboardType = UIKeyboardTypeNumberPad;
     _textField1.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [_textField1 addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     
@@ -56,6 +57,7 @@
     
     _textField2 = [CreatView creatWithfFrame:CGRectMake(85, 10, 150, 30) setPlaceholder:@"请输入验证码" setTintColor:[UIColor grayColor]];
     [viewDown addSubview:_textField2];
+    _textField2.keyboardType = UIKeyboardTypeNumberPad;
     _textField2.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [_textField2 addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     

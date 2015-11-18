@@ -8,7 +8,7 @@
 
 #import "RealNameViewController.h"
 
-@interface RealNameViewController ()
+@interface RealNameViewController () <UITextFieldDelegate>
 
 {
     UITextField *_textField1;
@@ -54,6 +54,7 @@
     
     _textField1 = [CreatView creatWithfFrame:CGRectMake(90, 10, WIDTH_CONTROLLER_DEFAULT - 100, 30) setPlaceholder:@"真实姓名" setTintColor:[UIColor grayColor]];
     [viewWhite addSubview:_textField1];
+    _textField1.delegate = self;
     _textField1.textColor = [UIColor zitihui];
     _textField1.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [_textField1 addTarget:self action:@selector(textFieldCanEdit:) forControlEvents:UIControlEventEditingChanged];
@@ -61,6 +62,8 @@
     _textField2 = [CreatView creatWithfFrame:CGRectMake(90, 60, WIDTH_CONTROLLER_DEFAULT - 100, 30) setPlaceholder:@"请输入身份证号" setTintColor:[UIColor grayColor]];
     [viewWhite addSubview:_textField2];
     _textField2.textColor = [UIColor zitihui];
+    _textField2.delegate = self;
+    _textField2.tag = 133;
     _textField2.keyboardType = UIKeyboardTypeNumberPad;
     _textField2.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [_textField2 addTarget:self action:@selector(textFieldCanEdit:) forControlEvents:UIControlEventEditingChanged];
@@ -72,9 +75,28 @@
     [buttonNext addTarget:self action:@selector(nextStepButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 133) {
+        
+        if (range.location == 18) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+        
+    } else {
+        
+        return YES;
+    }
+}
+
 - (void)textFieldCanEdit:(UITextField *)textField
 {
-    if ([_textField1.text length] > 0 && [_textField2.text length] > 0) {
+    if ([_textField1.text length] > 0 && [_textField2.text length] == 18) {
         
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -90,9 +112,10 @@
 //认证按钮
 - (void)nextStepButton:(UIButton *)button
 {
-    if ([_textField1.text length] > 0 && [_textField2.text length] > 0 && [_textField3.text length] > 0) {
+    if ([_textField1.text length] > 0 && [_textField2.text length] == 18) {
         
-        NSLog(@"认证");
+        NSArray *viewController = [self.navigationController viewControllers];
+        [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
         
     } else {
         
