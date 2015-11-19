@@ -93,7 +93,7 @@
 //获取验证码
 - (void)getNumButton:(UIButton *)button
 {
-    NSDictionary *parameter = @{@"phone":@"13354288036"};
+    NSDictionary *parameter = @{@"phone":textFieldPhoneNumber.text};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -149,8 +149,8 @@
             NSLog(@"ooooooo%@", responseObject);
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
                 
-//                ChangeNumViewController *changeNumVC = [[ChangeNumViewController alloc] init];
-//                [self.navigationController pushViewController:changeNumVC animated:YES];
+                ChangeNumViewController *changeNumVC = [[ChangeNumViewController alloc] init];
+                [self.navigationController pushViewController:changeNumVC animated:YES];
                 
             }
             
@@ -164,12 +164,6 @@
     } else {
         
     }
-}
-
-//获取验证码按钮
-- (void)getValidationNum:(UIButton *)button
-{
-    NSLog(@"获取验证码");
 }
 
 - (void)labelLineShow:(UILabel *)label
