@@ -61,6 +61,7 @@
     [app.tabBarVC setSuppurtGestureTransition:NO];
     [app.tabBarVC setTabbarViewHidden:NO];
     [app.tabBarVC setLabelLineHidden:NO];
+    
 }
 
 - (void)viewDidLoad {
@@ -416,6 +417,11 @@
 - (void)yesterdayButtonAction:(id)sender{
     YesterdayViewController *yesterdayVC = [[YesterdayViewController alloc] init];
     [self.navigationController pushViewController:yesterdayVC animated:YES];
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView;
+{
+    [self MyAccountInfo];
 }
 
 #pragma mark 网络请求方法

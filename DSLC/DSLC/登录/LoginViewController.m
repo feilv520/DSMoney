@@ -215,6 +215,7 @@
     if (indexPath.row == 1) {
 //        cell.textField.text = @"123456";
         cell.textField.secureTextEntry = YES;
+        cell.textField.keyboardType = UIKeyboardTypeDefault;
     } else {
 //        cell.textField.text = @"15955454591";
     }

@@ -44,6 +44,8 @@
 @property (nonatomic) UIImagePickerController *imagePicker;
 
 @property (nonatomic, strong) NSDictionary *flagLogin;
+
+@property (nonatomic, strong) UIImageView *imageView;
 //@property (nonatomic, strong) NSDictionary *flagDic;
 
 @end
@@ -176,6 +178,7 @@
         MeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMe"];
         
         cell.imageHeadPic.image = [UIImage imageNamed:@"组-4-拷贝"];
+        cell.imageHeadPic.tag = 9908;
         cell.imageRight.image = [UIImage imageNamed:@"arrow"];
         
         cell.labelName.text = [self.dataDic objectForKey:@"userRealname"];
@@ -313,36 +316,77 @@
 - (void)takeCamera:(UIButton *)button
 {
     NSLog(@"拍照");
+    //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+//        if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+//            sourceType = UIImagePickerControllerSourceTypeCamera;
+//        }
+    //sourceType = UIImagePickerControllerSourceTypeCamera; //照相机
+    //sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //图片库
+    //sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum; //保存的相片
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];//初始化
+    picker.delegate = self;
+    picker.allowsEditing = YES;//设置可编辑
+    picker.sourceType = sourceType;
+    [self presentViewController:picker animated:YES completion:nil];//进入照相界面
 }
 
 //从相册选择
 - (void)chooseFromPicture:(UIButton *)button
 {
     NSLog(@"从相册选择");
+    UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
+    }
     
-//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-//        
-//        _imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-//        _imagePicker.delegate = self;
-//        _imagePicker.allowsEditing = YES;
-//        [self presentViewController:_imagePicker animated:YES completion:nil];
-//    }
-//
-//    [butBlack removeFromSuperview];
-//    [viewDown removeFromSuperview];
-//    
-//    butBlack = nil;
-//    viewDown = nil;
+    pickerImage.delegate = self;
+
+    pickerImage.navigationBar.barTintColor = [UIColor colorWithRed:223.0/255 green:74.0/255 blue:67.0/255 alpha:1];
+    
+    pickerImage.allowsEditing = NO;
+    [self presentViewController:pickerImage animated:YES completion:nil];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    if (picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
-        
-        UIImage *editImage = [info objectForKey:UIImagePickerControllerEditedImage];
-        imageChange = editImage;
-        [_imagePicker dismissViewControllerAnimated:YES completion:nil];
-    }
+    self.imageView = (UIImageView *)[self.view viewWithTag:9908];
+    
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+    
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    /* 此处info 有六个值
+     * UIImagePickerControllerMediaType; // an NSString UTTypeImage)
+     * UIImagePickerControllerOriginalImage;  // a UIImage 原始图片
+     * UIImagePickerControllerEditedImage;    // a UIImage 裁剪后图片
+     * UIImagePickerControllerCropRect;       // an NSValue (CGRect)
+     * UIImagePickerControllerMediaURL;       // an NSURL
+     * UIImagePickerControllerReferenceURL    // an NSURL that references an asset in the AssetsLibrary framework
+     * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
+     */
+    // 保存图片至本地，方法见下文
+    [self saveImage:image withName:@"currentImage.png"];
+    
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
+    
+    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+    
+    [self.imageView setImage:savedImage];
+    
+}
+
+- (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
+{
+    
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+    // 将图片写入文件
+    
+    [imageData writeToFile:fullPath atomically:NO];
 }
 
 //取消按钮

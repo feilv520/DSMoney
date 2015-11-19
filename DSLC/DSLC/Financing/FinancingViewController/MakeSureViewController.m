@@ -241,8 +241,6 @@
         cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.viewLine.alpha = 0.7;
         
-        
-        
         NSMutableAttributedString *year = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@", @"年化收益率", [self.detailM productAnnualYield]]];
         NSRange black = NSMakeRange(0, [[year string] rangeOfString:@":"].location);
         [year addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:black];
