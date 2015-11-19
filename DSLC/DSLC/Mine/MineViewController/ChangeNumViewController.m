@@ -8,7 +8,7 @@
 
 #import "ChangeNumViewController.h"
 
-@interface ChangeNumViewController ()
+@interface ChangeNumViewController () <UITextFieldDelegate>
 
 {
     UITextField *_textField1;
@@ -45,6 +45,8 @@
     
     _textField1 = [CreatView creatWithfFrame:CGRectMake(85, 10, WIDTH_CONTROLLER_DEFAULT - 95, 30) setPlaceholder:@"请输入新手机号" setTintColor:[UIColor grayColor]];
     [viewTop addSubview:_textField1];
+    _textField1.delegate = self;
+    _textField1.tag = 309;
     _textField1.keyboardType = UIKeyboardTypeNumberPad;
     _textField1.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [_textField1 addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
@@ -57,6 +59,8 @@
     
     _textField2 = [CreatView creatWithfFrame:CGRectMake(85, 10, 150, 30) setPlaceholder:@"请输入验证码" setTintColor:[UIColor grayColor]];
     [viewDown addSubview:_textField2];
+    _textField2.delegate = self;
+    _textField2.tag = 308;
     _textField2.keyboardType = UIKeyboardTypeNumberPad;
     _textField2.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [_textField2 addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
@@ -85,9 +89,36 @@
     [butMakeSure addTarget:self action:@selector(makeSureButtonLast:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    if (textField.tag == 308) {
+//        
+//        if (range.location == 11) {
+//            
+//            return NO;
+//            
+//        } else {
+//            
+//            return YES;
+//            
+//        }
+//        
+//    } else {
+//        
+//        if (range.location == 6) {
+//            
+//            return NO;
+//            
+//        } else {
+//            
+//            return YES;
+//        }
+//    }
+//}
+
 - (void)textFieldEdit:(UITextField *)textField
 {
-    if ([_textField1.text length] > 0 && [_textField2.text length] > 0) {
+    if ([_textField1.text length] == 11 && [_textField2.text length] == 6) {
         
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -102,7 +133,7 @@
 //获取验证码
 - (void)getNumButton:(UIButton *)button
 {
-    NSDictionary *parameter = @{@"phone":@"13354288036"};
+    NSDictionary *parameter = @{@"phone":@"15940942599"};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -119,13 +150,15 @@
 //确定按钮
 - (void)makeSureButtonLast:(UIButton *)button
 {
-    if ([_textField1.text length] > 0 && [_textField2.text length] > 0) {
+    if ([_textField1.text length] == 11 && [_textField2.text length] == 6) {
         
         NSDictionary *parameter = @{@"phone":_textField1.text,@"smsCode":_textField2.text};
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPhone" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"更换手机号成功"];
             NSLog(@"ooooooo%@", responseObject);
             NSArray *viewControllers = [self.navigationController viewControllers];
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
@@ -135,6 +168,7 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             NSLog(@"fffffffff%@", error);
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"网络不给力啦!"];
             
         }];
         

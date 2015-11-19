@@ -1,11 +1,13 @@
 //
 //  ChatViewController.h
-//  DSLC
+//  Content
 //
 //  Created by ios on 15/11/17.
-//  Copyright © 2015年 马成铭. All rights reserved.
+//  Copyright © 2015年 ios. All rights reserved.
 //
 
+
+#import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
 @interface ChatViewController : BaseViewController

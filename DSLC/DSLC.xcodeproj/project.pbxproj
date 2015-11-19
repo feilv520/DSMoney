@@ -194,6 +194,9 @@
 		8184EC461BCCD12A003F440D /* RedBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC441BCCD12A003F440D /* RedBagCell.xib */; };
 		8184EC4A1BCCD13C003F440D /* CashMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC481BCCD13C003F440D /* CashMoneyCell.m */; };
 		8184EC4B1BCCD13C003F440D /* CashMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC491BCCD13C003F440D /* CashMoneyCell.xib */; };
+		8184EF4A1BFDBC5600496989 /* OneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EF471BFDBC5600496989 /* OneCell.m */; settings = {ASSET_TAGS = (); }; };
+		8184EF4B1BFDBC5600496989 /* TwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EF491BFDBC5600496989 /* TwoCell.m */; settings = {ASSET_TAGS = (); }; };
+		8184EF4E1BFDBD9E00496989 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EF4C1BFDBD9E00496989 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		818523AE1BE3125D002FC653 /* BillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 818523AC1BE3125D002FC653 /* BillCell.m */; settings = {ASSET_TAGS = (); }; };
 		818523AF1BE3125D002FC653 /* BillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818523AD1BE3125D002FC653 /* BillCell.xib */; settings = {ASSET_TAGS = (); }; };
 		818523B71BE31B80002FC653 /* 圆角矩形-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818523B11BE31B80002FC653 /* 圆角矩形-2@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -342,11 +345,6 @@
 		81D703FD1BE073730074DF30 /* ForgetSecret2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D703FB1BE073730074DF30 /* ForgetSecret2Cell.xib */; settings = {ASSET_TAGS = (); }; };
 		81D704001BE0B2AF0074DF30 /* BillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703FF1BE0B2AF0074DF30 /* BillViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81D704031BE0D0D40074DF30 /* NewbieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D704021BE0D0D40074DF30 /* NewbieViewController.m */; settings = {ASSET_TAGS = (); }; };
-		81D72FA91BFAC26B0067A277 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D72FA81BFAC26B0067A277 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
-		81D72FAD1BFAC4990067A277 /* ChatLeftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D72FAB1BFAC4990067A277 /* ChatLeftCell.m */; settings = {ASSET_TAGS = (); }; };
-		81D72FAE1BFAC4990067A277 /* ChatLeftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FAC1BFAC4990067A277 /* ChatLeftCell.xib */; settings = {ASSET_TAGS = (); }; };
-		81D72FB21BFAC4AE0067A277 /* ChatRightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D72FB01BFAC4AE0067A277 /* ChatRightCell.m */; settings = {ASSET_TAGS = (); }; };
-		81D72FB31BFAC4AE0067A277 /* ChatRightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FB11BFAC4AE0067A277 /* ChatRightCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81D72FB61BFACA800067A277 /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FB41BFACA800067A277 /* add@2x.png */; settings = {ASSET_TAGS = (); }; };
 		81D72FB71BFACA800067A277 /* add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FB51BFACA800067A277 /* add@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81D72FBC1BFAD63B0067A277 /* left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FB81BFAD63B0067A277 /* left@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -905,6 +903,12 @@
 		8184EC471BCCD13C003F440D /* CashMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashMoneyCell.h; sourceTree = "<group>"; };
 		8184EC481BCCD13C003F440D /* CashMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashMoneyCell.m; sourceTree = "<group>"; };
 		8184EC491BCCD13C003F440D /* CashMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashMoneyCell.xib; sourceTree = "<group>"; };
+		8184EF461BFDBC5600496989 /* OneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneCell.h; sourceTree = "<group>"; };
+		8184EF471BFDBC5600496989 /* OneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneCell.m; sourceTree = "<group>"; };
+		8184EF481BFDBC5600496989 /* TwoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoCell.h; sourceTree = "<group>"; };
+		8184EF491BFDBC5600496989 /* TwoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoCell.m; sourceTree = "<group>"; };
+		8184EF4C1BFDBD9E00496989 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		8184EF4D1BFDBD9E00496989 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		818523AB1BE3125D002FC653 /* BillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillCell.h; sourceTree = "<group>"; };
 		818523AC1BE3125D002FC653 /* BillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillCell.m; sourceTree = "<group>"; };
 		818523AD1BE3125D002FC653 /* BillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillCell.xib; sourceTree = "<group>"; };
@@ -1114,14 +1118,6 @@
 		81D703FF1BE0B2AF0074DF30 /* BillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillViewController.m; sourceTree = "<group>"; };
 		81D704011BE0D0D40074DF30 /* NewbieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewbieViewController.h; sourceTree = "<group>"; };
 		81D704021BE0D0D40074DF30 /* NewbieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewbieViewController.m; sourceTree = "<group>"; };
-		81D72FA71BFAC26B0067A277 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		81D72FA81BFAC26B0067A277 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
-		81D72FAA1BFAC4990067A277 /* ChatLeftCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatLeftCell.h; sourceTree = "<group>"; };
-		81D72FAB1BFAC4990067A277 /* ChatLeftCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatLeftCell.m; sourceTree = "<group>"; };
-		81D72FAC1BFAC4990067A277 /* ChatLeftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLeftCell.xib; sourceTree = "<group>"; };
-		81D72FAF1BFAC4AE0067A277 /* ChatRightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRightCell.h; sourceTree = "<group>"; };
-		81D72FB01BFAC4AE0067A277 /* ChatRightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRightCell.m; sourceTree = "<group>"; };
-		81D72FB11BFAC4AE0067A277 /* ChatRightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatRightCell.xib; sourceTree = "<group>"; };
 		81D72FB41BFACA800067A277 /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
 		81D72FB51BFACA800067A277 /* add@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@3x.png"; sourceTree = "<group>"; };
 		81D72FB81BFAD63B0067A277 /* left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left@2x.png"; sourceTree = "<group>"; };
@@ -1672,12 +1668,10 @@
 				81E831071BF0488400127EE8 /* MyChoosePlannerCell.h */,
 				81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */,
 				81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */,
-				81D72FAA1BFAC4990067A277 /* ChatLeftCell.h */,
-				81D72FAB1BFAC4990067A277 /* ChatLeftCell.m */,
-				81D72FAC1BFAC4990067A277 /* ChatLeftCell.xib */,
-				81D72FAF1BFAC4AE0067A277 /* ChatRightCell.h */,
-				81D72FB01BFAC4AE0067A277 /* ChatRightCell.m */,
-				81D72FB11BFAC4AE0067A277 /* ChatRightCell.xib */,
+				8184EF461BFDBC5600496989 /* OneCell.h */,
+				8184EF471BFDBC5600496989 /* OneCell.m */,
+				8184EF481BFDBC5600496989 /* TwoCell.h */,
+				8184EF491BFDBC5600496989 /* TwoCell.m */,
 			);
 			name = "我的理财师";
 			sourceTree = "<group>";
@@ -2009,8 +2003,8 @@
 				81E831051BF0469F00127EE8 /* MyChoosePlanner.m */,
 				817E33721BD72D6800D05103 /* MyPlannerViewController.h */,
 				817E33731BD72D6800D05103 /* MyPlannerViewController.m */,
-				81D72FA71BFAC26B0067A277 /* ChatViewController.h */,
-				81D72FA81BFAC26B0067A277 /* ChatViewController.m */,
+				8184EF4D1BFDBD9E00496989 /* ChatViewController.h */,
+				8184EF4C1BFDBD9E00496989 /* ChatViewController.m */,
 				818063AC1BD6437D00E83492 /* PayMoneyViewController.h */,
 				818063AD1BD6437D00E83492 /* PayMoneyViewController.m */,
 				817E33991BD77A8800D05103 /* ChooseStyleViewController.h */,
@@ -3341,7 +3335,6 @@
 				81B520A71BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png in Resources */,
 				817E33821BD733D100D05103 /* 9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝@2x.png in Resources */,
 				817DD4901BCF547E00042B09 /* anniu@2x.png in Resources */,
-				81D72FB31BFAC4AE0067A277 /* ChatRightCell.xib in Resources */,
 				8D4B8C091BF2F48E00A88285 /* UMSShareListController.xib in Resources */,
 				81B18E251BE77EA700D448FA /* EmailCell.xib in Resources */,
 				8DEDE1DD1BCD0035008086D3 /* icon_CB@2x.png in Resources */,
@@ -3406,7 +3399,6 @@
 				8175BEC21BEA052E0044026E /* 拆红包@2x.png in Resources */,
 				8190A30A1BD87D3E002B53F5 /* AddCardCell.xib in Resources */,
 				817DD4911BCF547E00042B09 /* anniu@3x.png in Resources */,
-				81D72FAE1BFAC4990067A277 /* ChatLeftCell.xib in Resources */,
 				817DD4A21BCF547E00042B09 /* shape-29@2x.png in Resources */,
 				819B52EE1BFC5198002FDF1E /* 钻石红包@3x.png in Resources */,
 				8D4B8C001BF2F48E00A88285 /* UMSocialLocalizable.strings in Resources */,
@@ -3538,7 +3530,6 @@
 				816F1ED21BF5C61C00DB6B65 /* InviteSocilPlatFormCell.m in Sources */,
 				81379F2C1BEB48AA002CDB16 /* CashOtherFinViewController.m in Sources */,
 				8D5DBB891BD4839B00F556B9 /* CastDownTableViewCell.m in Sources */,
-				81D72FB21BFAC4AE0067A277 /* ChatRightCell.m in Sources */,
 				8175BE901BE9E3730044026E /* ChooseRedBagCell.m in Sources */,
 				8DD1809D1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m in Sources */,
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
@@ -3569,8 +3560,8 @@
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				817E33A71BD7840000D05103 /* ChooseCell.m in Sources */,
 				8D4FF5E41BE339A200BAE25F /* UIRefreshControl+AFNetworking.m in Sources */,
-				81D72FAD1BFAC4990067A277 /* ChatLeftCell.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
+				8184EF4A1BFDBC5600496989 /* OneCell.m in Sources */,
 				818523BF1BE34AC1002FC653 /* ThreeViewController.m in Sources */,
 				81BA1BF41BD4CB4300DBA5BE /* WinAPrizeViewController.m in Sources */,
 				818063A51BD5D89000E83492 /* InviteNameCell.m in Sources */,
@@ -3669,6 +3660,7 @@
 				81898B781BDF180600DD4E44 /* UIPlaceHolderTextView.m in Sources */,
 				819C3ABA1BD483C4008D2CFD /* MyRedBagCell.m in Sources */,
 				811F0B0B1BF33D42001F6AA4 /* BindingTwoCell.m in Sources */,
+				8184EF4E1BFDBD9E00496989 /* ChatViewController.m in Sources */,
 				8D0CB4891BE75C860039D826 /* SimpleDescriptionsViewController.m in Sources */,
 				8D878CD81BC7548B00844575 /* b.m in Sources */,
 				818523C21BE35BDB002FC653 /* MendLoginViewController.m in Sources */,
@@ -3681,6 +3673,7 @@
 				819B52F31BFC5D54002FDF1E /* NSString+Characters.m in Sources */,
 				8191E21E1BDDF03D000A6E8C /* ServiceViewController.m in Sources */,
 				81F5FA0A1BD9E1FE008C38BF /* ChangeNumViewController.m in Sources */,
+				8184EF4B1BFDBC5600496989 /* TwoCell.m in Sources */,
 				81F4BD5B1BECC06B00C308F8 /* SetDealSecret.m in Sources */,
 				817988361BC94014007C8C3E /* PlanCell.m in Sources */,
 				811F0AFF1BF32798001F6AA4 /* LiftupMoneyViewController.m in Sources */,
@@ -3738,7 +3731,6 @@
 				81ED03201BD0DDAD005F4B02 /* AddBankCell.m in Sources */,
 				8175BEB91BE9F7160044026E /* ShareEveryCell.m in Sources */,
 				8D121FE51BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.m in Sources */,
-				81D72FA91BFAC26B0067A277 /* ChatViewController.m in Sources */,
 				81ED02C51BD08CFD005F4B02 /* MyInformationViewController.m in Sources */,
 				81701C071BE6FEA300B45BAA /* MendDealViewController.m in Sources */,
 				8D5DBB7F1BD4819C00F556B9 /* CastProduceViewController.m in Sources */,

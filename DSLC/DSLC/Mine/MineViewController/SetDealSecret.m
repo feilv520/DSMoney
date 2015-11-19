@@ -63,13 +63,13 @@
     textField1 = (UITextField *)[self.view viewWithTag:700];
     textField2 = (UITextField *)[self.view viewWithTag:701];
     
-    if (textField1.text.length > 0 && textField2.text.length > 0) {
+    if ([textField1.text isEqualToString:textField2.text]) {
         
         [self findPwd];
 
     } else {
         
-        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"设置的交易密码与确认的交易密码不匹配"];
     }
         
 }
