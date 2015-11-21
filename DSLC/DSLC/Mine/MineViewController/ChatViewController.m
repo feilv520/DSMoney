@@ -74,7 +74,6 @@
     _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _tableView.separatorColor = [UIColor clearColor];
     
@@ -121,17 +120,26 @@
 //发送消息
 - (void)sendMessage:(UIButton *)button
 {
-    NSLog(@"发送");
+    NSDictionary *parameter = @{@"recUserId":@38, @"msgContent":_textField.text};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/sendMsg" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"vvvvvv%@", responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+    }];
 }
 
 //获取消息列表
 - (void)getDataList
 {
     NSDictionary *parameter = @{@"recUserId":@38, @"msgType":@1};
-    NSLog(@"%@", parameter);
+
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"1111111%@", responseObject);
+        NSLog(@"111&&&1111%@", responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
@@ -161,8 +169,7 @@
         
     } else {
         
-        return rect.size.height + 40;
-
+        return rect.size.height + 60;
     }
 }
 

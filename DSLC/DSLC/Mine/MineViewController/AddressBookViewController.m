@@ -14,10 +14,11 @@
 #import "NSString+Characters.h"
 #import "ChineseString.h"
 
-@interface AddressBookViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface AddressBookViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UISearchDisplayDelegate>
 
 {
     UITableView *_tablView;
+    UITableView *tableViewSearch;
     NSArray *letterArr;
     NSMutableArray *nameArr;
     UITextField *_textField;
@@ -33,6 +34,10 @@
     NSMutableArray *letterResultArr;
     
     NSMutableArray *addressArr;
+    
+    UIView *viewGuo;
+    UIButton *button;
+    NSMutableArray *checkArr;
 }
 
 @end
@@ -45,6 +50,9 @@
     
     letterResultArr = [NSMutableArray array];
     sortArray = [NSMutableArray array];
+    checkArr = [NSMutableArray array];
+    
+    butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 114, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 50 - 20) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"选择朋友"];
@@ -53,7 +61,6 @@
     [self getPhoneNum];
     [self buttonSearchContent];
     [self buttonInviteContent];
-    
     
 }
 
@@ -90,10 +97,23 @@
     [butInput addTarget:self action:@selector(buttonSearchPress:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+//键盘搜索按钮触发事件
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    [butBlack removeFromSuperview];
+    butBlack = nil;
+    
+    if (checkArr.count == 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"搜索的内容不存在"];
+    }
+    return YES;
+}
+
 //邀请新朋友
 - (void)buttonInviteContent
 {
-    UIButton *button = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 50, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:nil];
+    button = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 50, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:nil];
     [self.view addSubview:button];
     [button addTarget:self action:@selector(buttonInviteFriend:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -235,39 +255,64 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    sortArray = [ChineseString IndexArray:nameArr];
-    return sortArray.count;
+    if (checkArr.count == 0) {
+        
+        sortArray = [ChineseString IndexArray:nameArr];
+        return sortArray.count;
+        
+    } else {
+        
+        sortArray = [ChineseString IndexArray:checkArr];
+        return sortArray.count;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    letterResultArr = [ChineseString LetterSortArray:nameArr];
-    addressArr = [self addWIthPhoneNumber:letterResultArr];
-    NSLog(@"addressArr = %@",[[[addressArr objectAtIndex:0] objectAtIndex:0] name]);
-    return [[addressArr objectAtIndex:section] count];
+    if (checkArr.count == 0) {
+        
+        letterResultArr = [ChineseString LetterSortArray:nameArr];
+        addressArr = [self addWIthPhoneNumber:letterResultArr];
+        return [[addressArr objectAtIndex:section] count];
+
+        
+    } else {
+        
+        return checkArr.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AddressBookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-//    cell.labelName.text = [[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.labelName.text = [[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] name];
-
-    cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-    
-    cell.labelPhoneNum.text = [[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] phoneNum];
-    cell.labelPhoneNum.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-    cell.labelPhoneNum.textColor = [UIColor zitihui];
-    
     [cell.buttonInvite setTitle:@"邀请" forState:UIControlStateNormal];
     [cell.buttonInvite setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
     cell.buttonInvite.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.buttonInvite.layer.cornerRadius = 3;
     cell.buttonInvite.layer.masksToBounds = YES;
+    cell.buttonInvite.tintColor = [UIColor whiteColor];
+    [cell.buttonInvite addTarget:self action:@selector(buttonGoodFriandInvite:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+    cell.labelPhoneNum.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    cell.labelPhoneNum.textColor = [UIColor zitihui];
+    
+    if (checkArr.count == 0) {
+        
+        cell.labelName.text = [[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] name];
+        
+        cell.labelPhoneNum.text = [[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] phoneNum];
+    
+    } else {
+        
+        cell.labelName.text = [[checkArr objectAtIndex:indexPath.row] name];
+        cell.labelPhoneNum.text = [[checkArr objectAtIndex:indexPath.row] phoneNum];
+    }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -289,6 +334,37 @@
     tableView.sectionIndexColor= [UIColor zitihui];
     tableView.sectionIndexMinimumDisplayRowCount = 2;
     return letterArr;
+}
+
+//邀请按钮
+- (void)buttonGoodFriandInvite:(UIButton *)buttonIn
+{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSLog(@"%@eeeeee", dic);
+    NSDictionary *parameter = @{@"userName":@"马成精", @"phoneNum":@"13354288036",@"token":[dic objectForKey:@"token"]};
+//    NSDictionary *parameter = @{@"userName":[dic objectForKey:@"userNickname"], @"phoneNum":@"15940942599"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/inviteFriend" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        if (buttonIn.tintColor == [UIColor whiteColor]) {
+            
+            buttonIn.tintColor = [UIColor orangeColor];
+            [buttonIn setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+            [buttonIn setTitle:@"已邀请" forState:UIControlStateNormal];
+            buttonIn.enabled = NO;
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"收到短信有点慢哦!请耐心等待."];
+            
+        } else {
+            
+            
+        }
+        NSLog(@"%@", responseObject);
+        NSLog(@"%@", [responseObject objectForKey:@"resultMsg"]);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 //搜索按钮
@@ -324,18 +400,51 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [checkArr removeAllObjects];
+    checkArr = nil;
+    checkArr = [NSMutableArray array];
+    
+    for (AddressBook * address in nameArr) {
+        
+        NSString *name = address.name;
+        
+//        rangeOfString前面是要被搜索的字符串 后面是要搜索的字符串
+//        NSNotFound是搜索的内容没被发现,或者不存在
+        if ([name rangeOfString:textField.text].location != NSNotFound) {
+            
+            [checkArr addObject:address];
+            
+        } else {
+            
+        }
+    }
+    
+    [_tablView reloadData];
+    
     [textField resignFirstResponder];
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    
-}
-
+//textField绑定方法
 - (void)searchTextFieldEdit:(UITextField *)textField
 {
+    [butBlack removeFromSuperview];
+    butBlack = nil;
     
+    butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 114, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 50 - 20) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    
+    if (textField.text.length == 0) {
+        
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        
+        [app.tabBarVC.view addSubview:butBlack];
+        butBlack.alpha = 0.3;
+        [butBlack addTarget:self action:@selector(makeButtonBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+        
+    } else {
+        
+        
+    }
 }
 
 //邀请新朋友按钮
@@ -363,6 +472,9 @@
     butInput.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [butInput setImage:[UIImage imageNamed:@"iconfont-sousuo"] forState:UIControlStateNormal];
     [butInput setImage:[UIImage imageNamed:@"iconfont-sousuo"] forState:UIControlStateHighlighted];
+    
+    [checkArr removeAllObjects];
+    [_tablView reloadData];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

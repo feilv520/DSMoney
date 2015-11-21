@@ -15,7 +15,7 @@
 #pragma mark - 返回tableview右方 indexArray
 +(NSMutableArray*)IndexArray:(NSArray*)stringArr
 {
-    NSLog(@"%@",stringArr);
+    NSLog(@"----------%@",stringArr);
     NSMutableArray *tempArray = [self ReturnSortChineseArrar:stringArr];
     NSMutableArray *A_Result = [NSMutableArray array];
     NSString *tempString ;

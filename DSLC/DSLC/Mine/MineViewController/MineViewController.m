@@ -456,7 +456,7 @@
         [self viewHeadContent];
         [_tableView reloadData];
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
         
         NSLog(@"%@", error);
         

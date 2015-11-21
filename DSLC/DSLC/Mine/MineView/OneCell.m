@@ -36,7 +36,7 @@
 {
     [super layoutSubviews];
     
-    self.imageLeft.frame = CGRectMake(10, 5, 40, 40);
+    self.imageLeft.frame = CGRectMake(10, 10, 40, 40);
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
     CGRect rect = [self.labelLeft.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 100, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
@@ -46,13 +46,13 @@
     
     if (width < WIDTH_CONTROLLER_DEFAULT - 100) {
         
-        self.labelLeft.frame = CGRectMake(70, 15, width, rect.size.height);
-        self.imageContect.frame = CGRectMake(60, 5, width + 20, rect.size.height +  20);
+        self.labelLeft.frame = CGRectMake(70, 20, width, rect.size.height);
+        self.imageContect.frame = CGRectMake(60, 10, width + 20, rect.size.height +  20);
         
     } else {
         
-        self.labelLeft.frame = CGRectMake(80, 15, WIDTH_CONTROLLER_DEFAULT - 100, rect.size.height);
-        self.imageContect.frame = CGRectMake(60, 5, WIDTH_CONTROLLER_DEFAULT - 70, rect.size.height +  20);
+        self.labelLeft.frame = CGRectMake(80, 20, WIDTH_CONTROLLER_DEFAULT - 100, rect.size.height);
+        self.imageContect.frame = CGRectMake(60, 10, WIDTH_CONTROLLER_DEFAULT - 70, rect.size.height +  20);
     }
 }
 
