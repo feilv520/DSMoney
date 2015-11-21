@@ -33,6 +33,8 @@
     
     [self getProductList];
     
+    [self loadingWithView:self.view loadingFlag:NO height:120.0];
+    
     self.view.backgroundColor = [UIColor huibai];
     
     self.productListArray = [NSMutableArray array];
@@ -49,6 +51,9 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
+    
+    [self addTableViewWithHeader:_tableView];
+    [self addTableViewWithFooter:_tableView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -239,6 +244,8 @@
     NSDictionary *parameter = @{@"productType":@3,@"curPage":@1};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [self loadingWithHidden:YES];
         
         NSLog(@"%@",responseObject);
         

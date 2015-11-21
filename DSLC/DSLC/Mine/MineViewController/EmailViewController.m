@@ -105,19 +105,10 @@
 //发送邮件按钮
 - (void)sendEmail:(UIButton *)button
 {
+    [_textField resignFirstResponder];
     if (_textField.text.length > 0) {
         
-        [_textField resignFirstResponder];
-        
-        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
-        
-        [buttonNext setTitle:@"重新发送(50s)" forState:UIControlStateNormal];
-        _textField.enabled = NO;
-        
-        [self.view addSubview:butRemember];
-        [self.view addSubview:viewBig];
-        [viewBig addSubview:_tableView];
+        [self updateUserEmail];
         
     } else {
         
@@ -154,6 +145,40 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [_textField resignFirstResponder];
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)updateUserEmail{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"email":_textField.text};
+    
+    NSLog(@"%@",parameter);
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/mail/updateUserEmail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"updateUserEmail = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]){
+        
+            [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+            [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+            
+            [buttonNext setTitle:@"重新发送(50s)" forState:UIControlStateNormal];
+            _textField.enabled = NO;
+            
+            [self.view addSubview:butRemember];
+            [self.view addSubview:viewBig];
+            [viewBig addSubview:_tableView];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

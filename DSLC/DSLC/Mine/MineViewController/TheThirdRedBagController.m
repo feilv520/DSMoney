@@ -10,6 +10,7 @@
 #import "TheThirdRedBagCell.h"
 #import "NotSeparateCell.h"
 #import "NewHandCSSCell.h"
+#import "RedBagModel.h"
 
 @interface TheThirdRedBagController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -22,6 +23,8 @@
     UILabel *labelGet;
 }
 
+@property (nonatomic, strong) NSArray *redBagArray;
+
 @end
 
 @implementation TheThirdRedBagController
@@ -32,6 +35,8 @@
     
     self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"我的红包"];
+    
+    self.redBagArray = [NSArray array];
     
     [self getMyRedPacketList];
     [self viewShow];
@@ -317,6 +322,7 @@
         
         NSLog(@"getMyRedPacketList = %@",responseObject);
         
+        self.redBagArray = [responseObject objectForKey:@"RedPacket"];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

@@ -48,6 +48,10 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
+  
+    // 加密解密
+//    NSString* encrypt = @"pLQDHCqvXyOkF7Pr0AFkVKyhed8JBTkY";
+//    NSString* decrypt = [self decryptUseDES:encrypt];
     
     [self makeBackgroundView];
     [self makeScrollView];
@@ -66,6 +70,9 @@
     [self getAdvList];
     [self getPickProduct];
     
+    [self loadingWithView:self.view loadingFlag:NO height:self.view.center.y];
+    
+    backgroundScrollView.hidden = YES;
 }
 
 // 添加控件
@@ -374,6 +381,10 @@
 - (void)getPickProduct{
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getPickProduct" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [self loadingWithHidden:YES];
+        
+        backgroundScrollView.hidden = NO;
         
         self.productM = [[ProductListModel alloc] init];
         NSDictionary *dic = [responseObject objectForKey:@"Product"];

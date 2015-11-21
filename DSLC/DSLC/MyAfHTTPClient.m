@@ -13,6 +13,7 @@
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.178:8080/tongjiang/admin/p2p/";
 static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interface/p2p/";
 
+//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.69:8080/tongjiang/interface/p2p/";
 
 + (_Nullable instancetype)sharedClient {
     static MyAfHTTPClient *_sharedClient = nil;
