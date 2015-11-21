@@ -10,9 +10,10 @@
 
 @interface RedBagModel : NSObject
 
+@property (nonatomic, copy) NSString *rpID;
 @property (nonatomic, copy) NSString *daysLimit;
 @property (nonatomic, copy) NSString *redPacketId;
-@property (nonatomic, copy) NSString *rpAmout;
+@property (nonatomic, copy) NSString *rpAmount;
 @property (nonatomic, copy) NSString *rpFloor;
 @property (nonatomic, copy) NSString *rpImg;
 @property (nonatomic, copy) NSString *rpLimit;
