@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8D9356C81BC607C500BC2BFA"
-               BuildableName = "DSLC.app"
+               BuildableName = "&#x5927;&#x5723;&#x7406;&#x8d22;.app"
                BlueprintName = "DSLC"
                ReferencedContainer = "container:DSLC.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D9356C81BC607C500BC2BFA"
-            BuildableName = "DSLC.app"
+            BuildableName = "&#x5927;&#x5723;&#x7406;&#x8d22;.app"
             BlueprintName = "DSLC"
             ReferencedContainer = "container:DSLC.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D9356C81BC607C500BC2BFA"
-            BuildableName = "DSLC.app"
+            BuildableName = "&#x5927;&#x5723;&#x7406;&#x8d22;.app"
             BlueprintName = "DSLC"
             ReferencedContainer = "container:DSLC.xcodeproj">
          </BuildableReference>
@@ -100,7 +100,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D9356C81BC607C500BC2BFA"
-            BuildableName = "DSLC.app"
+            BuildableName = "&#x5927;&#x5723;&#x7406;&#x8d22;.app"
             BlueprintName = "DSLC"
             ReferencedContainer = "container:DSLC.xcodeproj">
          </BuildableReference>

@@ -54,6 +54,8 @@
     
     [self getProductList];
     
+    [self loadingWithView:self.view loadingFlag:NO height:120.0];
+    
     self.view.backgroundColor = [UIColor huibai];
     
     self.productListArray = [NSMutableArray array];
@@ -71,6 +73,9 @@
     _tableView.tableFooterView.backgroundColor = [UIColor huibai];
     [_tableView setSeparatorColor:[UIColor colorWithRed:246 / 255.0 green:247 / 255.0 blue:249 / 255.0 alpha:1.0]];
     [_tableView registerNib:[UINib nibWithNibName:@"BillCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    
+    [self addTableViewWithHeader:_tableView];
+    [self addTableViewWithFooter:_tableView];
     
     butRedArray = @[@"3", @"6", @"9", @"12", @"7", @"9", @"1", @"5", @"6", @"8"];
     
@@ -177,6 +182,8 @@
     NSDictionary *parameter = @{@"productType":@1,@"curPage":@1};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [self loadingWithHidden:YES];
         
         NSLog(@"%@",responseObject);
         

@@ -39,16 +39,21 @@
 #define pushVC(viewController) [self.navigationController pushViewController:viewController animated:YES]
 #define popVC [self.navigationController popViewControllerAnimated:YES]
 
-#import "FileOfManage.h"
-#import "ProgressHUD.h"
-#import "UIColor+AddColor.h"
-#import "CreatView.h"
-#import "TPKeyboardAvoidingScrollView.h"
-#import "AFNetworking.h"
-#import "AFHTTPSessionManager.h"
-#import "MyAfHTTPClient.h"
-#import "MBProgressHUD.h"
-#import "NSString+Check.h"
-#import "CJNavigationController.h"
+#import "FileOfManage.h"                     // 文件管理类
+#import "ProgressHUD.h"                      // 提示框的第三方
+#import "UIColor+AddColor.h"                 // 颜色类目
+#import "CreatView.h"                        // 创建控件类
+#import "TPKeyboardAvoidingScrollView.h"     // 自适应键盘类
+#import "AFNetworking.h"                     // AFN网络请求
+#import "AFHTTPSessionManager.h"             // AFN网络请求
+#import "MyAfHTTPClient.h"                   // 网络请求
+#import "MBProgressHUD.h"                    // 提示框
+#import "NSString+Check.h"                   // 检验的类目
+#import "CJNavigationController.h"           // CJ导航栏类
+#import "MJRefresh.h"                        // 第三方刷新类
+#import "UIViewController+Loading.h"         // 试图控制器的类目
+#import "GTMBase64.h"
+#include <CommonCrypto/CommonCryptor.h>
+
 
 #endif /* Header_h */

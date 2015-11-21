@@ -39,6 +39,8 @@
     
     [self getProductList];
     
+    [self loadingWithView:self.view loadingFlag:NO height:120.0];
+    
     self.productListArray = [NSMutableArray array];
     
     buttonTag = 101;
@@ -70,6 +72,9 @@
     [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     nameArray = @[@"小银票001", @"小银票002", @"小银票003", @"小银票004", @"小银票005", @"小银票006", @"小银票007", @"小银票008", @"小银票009", @"小银票010"];
+    
+    [self addTableViewWithHeader:_tableView];
+    [self addTableViewWithFooter:_tableView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -197,6 +202,8 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
+        
         NSLog(@"%@",responseObject);
         
         NSArray *array = [responseObject objectForKey:@"Product"];
@@ -213,7 +220,26 @@
         NSLog(@"%@", error);
         
     }];
+    
 }
+
+//- (void)loadNewData:(MJRefreshGifHeader *)header{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{        // 刷新表格
+//        [_tableView reloadData];                // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+//        [header setState:MJRefreshStateIdle];
+//    });
+//}
+//
+//- (void)loadMoreData:(MJRefreshBackGifFooter *)footer{
+//    //    / 2.模拟2秒后刷新表格UI（真实开发中，可以移除这段gcd代码）
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        // 刷新表格
+//        [_tableView reloadData];
+//        
+//        // 拿到当前的上拉刷新控件，结束刷新状态
+//        [_tableView.mj_footer endRefreshing];
+//    });
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
