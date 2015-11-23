@@ -613,6 +613,7 @@
 		8D9356DC1BC607C500BC2BFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D9356DA1BC607C500BC2BFA /* LaunchScreen.storyboard */; };
 		8D9356E71BC607C500BC2BFA /* DSLCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356E61BC607C500BC2BFA /* DSLCTests.m */; };
 		8D9356F21BC607C500BC2BFA /* DSLCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356F11BC607C500BC2BFA /* DSLCUITests.m */; };
+		8DA060CD1C02BEBD00E3E025 /* DES3Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA060CC1C02BEBD00E3E025 /* DES3Util.m */; settings = {ASSET_TAGS = (); }; };
 		8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD180931BD72C1300F71CEA /* GetMoneyViewController.m */; };
 		8DD180981BD72E5900F71CEA /* GetMoneyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD180961BD72E5900F71CEA /* GetMoneyTableViewCell.m */; };
 		8DD180991BD72E5900F71CEA /* GetMoneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD180971BD72E5900F71CEA /* GetMoneyTableViewCell.xib */; };
@@ -1556,6 +1557,8 @@
 		8D9356ED1BC607C500BC2BFA /* DSLCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DSLCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9356F11BC607C500BC2BFA /* DSLCUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLCUITests.m; sourceTree = "<group>"; };
 		8D9356F31BC607C500BC2BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DA060CB1C02BEBD00E3E025 /* DES3Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DES3Util.h; sourceTree = "<group>"; };
+		8DA060CC1C02BEBD00E3E025 /* DES3Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DES3Util.m; sourceTree = "<group>"; };
 		8DD180921BD72C1300F71CEA /* GetMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyViewController.h; sourceTree = "<group>"; };
 		8DD180931BD72C1300F71CEA /* GetMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyViewController.m; sourceTree = "<group>"; };
 		8DD180951BD72E5900F71CEA /* GetMoneyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyTableViewCell.h; sourceTree = "<group>"; };
@@ -1683,6 +1686,8 @@
 				8DD955CB1BF6D5EB00C17A65 /* NSString+Check.m */,
 				8D88D1081BFEEDDE0051D6DA /* UIViewController+Loading.h */,
 				8D88D1091BFEEDDE0051D6DA /* UIViewController+Loading.m */,
+				8DA060CB1C02BEBD00E3E025 /* DES3Util.h */,
+				8DA060CC1C02BEBD00E3E025 /* DES3Util.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -3987,6 +3992,7 @@
 				8184EC401BCCD113003F440D /* MoneyCell.m in Sources */,
 				8D5055A11BF08CA20034759B /* ProductDetailModel.m in Sources */,
 				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,
+				8DA060CD1C02BEBD00E3E025 /* DES3Util.m in Sources */,
 				81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */,
 				81E831061BF0469F00127EE8 /* MyChoosePlanner.m in Sources */,
 				8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */,
@@ -4185,8 +4191,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = DSLC/Info.plist;
@@ -4198,8 +4204,6 @@
 					"$(PROJECT_DIR)/DSLC/Three/Wechat",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				PRODUCT_NAME = "大圣理财";
 				PROVISIONING_PROFILE = "8378951f-c1b2-4de4-8b1b-4de5bb6cb030";
 				SDKROOT = iphoneos;
@@ -4210,8 +4214,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = DSLC/Info.plist;
@@ -4224,8 +4228,6 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				PRODUCT_NAME = "大圣理财";
 				PROVISIONING_PROFILE = "8378951f-c1b2-4de4-8b1b-4de5bb6cb030";
 				SDKROOT = iphoneos;

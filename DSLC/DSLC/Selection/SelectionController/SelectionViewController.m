@@ -50,8 +50,12 @@
     // Do any additional setup after loading the view.
   
     // 加密解密
-//    NSString* encrypt = @"pLQDHCqvXyOkF7Pr0AFkVKyhed8JBTkY";
+    NSString* encrypt = @"X2p9Uo45Tzk6Ntu6W7Ev+Q==";
 //    NSString* decrypt = [self decryptUseDES:encrypt];
+//    NSString *encrypt = [DES3Util encrypt:@"11111111"];
+    NSString *decrypt = [DES3Util decrypt:encrypt];
+    
+    NSLog(@"123123-12-3-123-12-3-123--- %@ ==== %@",encrypt,decrypt);
     
     [self makeBackgroundView];
     [self makeScrollView];
