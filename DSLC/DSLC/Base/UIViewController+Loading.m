@@ -121,7 +121,7 @@
     loadingImgView.hidden = hidden;
 }
 
--(NSString*) decryptUseDES:(NSString*)cipherText{
+- (NSString*)decryptUseDES:(NSString*)cipherText{
     
     NSString* key = @"o0al4OaEWBzA1";
     // 利用 GTMBase64 解碼 Base64 字串
@@ -150,7 +150,7 @@
     return plainText;
 }
 
--(NSString *) encryptUseDES:(NSString *)clearText
+- (NSString *)encryptUseDES:(NSString *)clearText
 {
     NSString* key = @"o0al4OaEWBzA1";
     NSData *data = [clearText dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];

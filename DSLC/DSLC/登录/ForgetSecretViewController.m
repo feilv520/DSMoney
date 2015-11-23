@@ -38,6 +38,12 @@
     [self tableViewShowTime];
     
 }
+//导航返回按钮
+- (void)buttonReturn:(UIBarButtonItem *)bar
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)tableViewShowTime
 {
@@ -189,14 +195,17 @@
 //确定按钮
 - (void)ensureButton:(UIButton *)button
 {
+    
+    [self.view endEditing:YES];
+    
     textField1 = (UITextField *)[self.view viewWithTag:500];
     textField2 = (UITextField *)[self.view viewWithTag:902];
     textField3 = (UITextField *)[self.view viewWithTag:903];
     
     if (textFieldPhoneNum.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && [textField2.text isEqualToString:textField3.text]) {
         
-        NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"],@"optType":@2,@"oldPwd":@"",@"newPwd":textField2.text,@"smsCode":textField1.text};
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSDictionary *parameter = @{@"phone":textFieldPhoneNum.text,@"smsCode":textField1.text,@"password":textField2.text};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/findPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
             NSLog(@"%@",responseObject);
             
@@ -204,6 +213,8 @@
                 [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
                 NSArray *array = self.navigationController.viewControllers;
                 [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
+            } else {
+                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);

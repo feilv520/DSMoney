@@ -54,6 +54,6 @@
 #import "UIViewController+Loading.h"         // 试图控制器的类目
 #import "GTMBase64.h"
 #include <CommonCrypto/CommonCryptor.h>
-
+#import "DES3Util.h"                         // 加密
 
 #endif /* Header_h */

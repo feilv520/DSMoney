@@ -82,7 +82,7 @@
 {
     RedBagModel *redbagModel = [self.redBagArray objectAtIndex:indexPath.row];
     
-    if ([[redbagModel rpType] isEqualToString:@"1"] || [[redbagModel rpType] isEqualToString:@"0"] || [[redbagModel rpType] isEqualToString:@"2"] || [[redbagModel rpType] isEqualToString:@"3"]) {
+    if ([[redbagModel rpType] isEqualToString:@"新手体验红包"] || [[redbagModel rpType] isEqualToString:@"定向红包"] || [[redbagModel rpType] isEqualToString:@"随机红包"] || [[redbagModel rpType] isEqualToString:@"邀请红包"]) {
     
         return 145;
     
@@ -101,7 +101,7 @@
 {
     RedBagModel *redbagModel = [self.redBagArray objectAtIndex:indexPath.row];
 
-    if ([[redbagModel rpType] isEqualToString:@"1"] || [[redbagModel rpType] isEqualToString:@"0"]) {
+    if ([[redbagModel rpType] isEqualToString:@"新手体验红包"] || [[redbagModel rpType] isEqualToString:@"定向红包"]) {
     
         NewHandCSSCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNewHand"];
 
@@ -150,7 +150,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
 
-    } else if ([[redbagModel rpType] isEqualToString:@"2"] || [[redbagModel rpType] isEqualToString:@"3"]) {
+    } else if ([[redbagModel rpType] isEqualToString:@"随机红包"] || [[redbagModel rpType] isEqualToString:@"邀请红包"]) {
         TheThirdRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse"];
 
         cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
@@ -203,7 +203,7 @@
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    } else if ([[[self.redBagArray objectAtIndex:indexPath.row] rpType] isEqualToString:@"4"]) {
+    } else if ([[[self.redBagArray objectAtIndex:indexPath.row] rpType] isEqualToString:@"阶梯红包"]) {
         NotSeparateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse1"];
 
         cell.labelSend.text = @"送";
