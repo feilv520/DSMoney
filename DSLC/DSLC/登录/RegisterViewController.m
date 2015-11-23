@@ -434,11 +434,12 @@
     if (registerV.phoneNumber.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
     } else {
-        NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text};
+        NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text,@"msgType":@"1"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [ProgressHUD showMessage:@"系统异常" Width:100 High:20];
             NSLog(@"%@",error);
         }];
     }

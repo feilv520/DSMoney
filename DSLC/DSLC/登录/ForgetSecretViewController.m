@@ -182,7 +182,7 @@
     if (textFieldPhoneNum.text.length == 0) {
         [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
     } else {
-        NSDictionary *parameters = @{@"phone":textFieldPhoneNum.text};
+        NSDictionary *parameters = @{@"phone":textFieldPhoneNum.text,@"msgType":@"3"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
@@ -204,7 +204,7 @@
     
     if (textFieldPhoneNum.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && [textField2.text isEqualToString:textField3.text]) {
         
-        NSDictionary *parameter = @{@"phone":textFieldPhoneNum.text,@"smsCode":textField1.text,@"password":textField2.text};
+        NSDictionary *parameter = @{@"phone":textFieldPhoneNum.text,@"smsCode":textField1.text,@"password":textField2.text,@"msgType":@"3"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/findPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
             NSLog(@"%@",responseObject);
@@ -212,6 +212,7 @@
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
                 NSArray *array = self.navigationController.viewControllers;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
                 [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
             } else {
                 [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];

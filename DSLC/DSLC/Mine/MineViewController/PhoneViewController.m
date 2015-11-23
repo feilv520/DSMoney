@@ -141,7 +141,7 @@
 {
     if ([textFieldSmsCode.text length] > 0 && [textFieldPhoneNumber.text length] > 0) {
         
-        NSDictionary *parameter = @{@"smsCode":textFieldSmsCode.text};
+        NSDictionary *parameter = @{@"smsCode":textFieldSmsCode.text,@"phone":textFieldPhoneNumber.text};
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/checkSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             

@@ -422,11 +422,23 @@
 // 退出按钮的动作
 - (void)buttonExit:(UIButton *)button
 {
+    
+    
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
     [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
     
+    NSMutableDictionary *usersDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    //设置属性值,没有的数据就新建，已有的数据就修改。
+    [usersDic setObject:@"mcm" forKey:@"token"];
+    
+    [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+    
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+    
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
     
     indexButton = app.tabBarVC.tabButtonArray[0];
     
@@ -442,11 +454,7 @@
 
     [self.navigationController popToRootViewControllerAnimated:YES];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
-    
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:NO];
-    [app.tabBarVC setLabelLineHidden:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
     
 }
 

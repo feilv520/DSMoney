@@ -150,9 +150,11 @@
 //确定按钮
 - (void)makeSureButtonLast:(UIButton *)button
 {
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
     if ([_textField1.text length] == 11 && [_textField2.text length] == 6) {
         
-        NSDictionary *parameter = @{@"phone":_textField1.text,@"smsCode":_textField2.text};
+        NSDictionary *parameter = @{@"phone":_textField1.text,@"smsCode":_textField2.text,@"token":[dic objectForKey:@"token"]};
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPhone" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             

@@ -322,7 +322,7 @@
                 [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
                 MineViewController *mineVC = [[MineViewController alloc] init];
                 [self.navigationController pushViewController:mineVC animated:NO];
-                [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
+//                [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
                 
                 textField1.text = @"";
                 textField2.text = @"";
@@ -399,7 +399,7 @@
             
             MineViewController *mineVC = [[MineViewController alloc] init];
             [self.navigationController pushViewController:mineVC animated:NO];
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
+//            [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
         
         }
         
