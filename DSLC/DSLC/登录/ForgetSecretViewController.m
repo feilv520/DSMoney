@@ -122,6 +122,7 @@
             cell.textField.hidden = YES;
             [cell addSubview:textFieldPhoneNum];
             textFieldPhoneNum.tag = 1000;
+            
         } else {
             
             cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row - 2];

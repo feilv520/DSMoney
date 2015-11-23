@@ -7,6 +7,7 @@
 //
 
 #import "InviteRegisterViewController.h"
+#import "InviteNumReginCell.h"
 
 @interface InviteRegisterViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -43,7 +44,7 @@
     
     titleArr = @[@"1.怎么获得邀请码?", @"2.邀请码可以做什么?"];
     contentArr = @[@[@"在谈到中美应对气候变化及开展新能源领域合作时，李克强表示，当前中国正在推进经济结构性改革和结构调整，走绿  色可持续发展道路。在这一进程中，中国愿同世界各国携手合作，综合施策，共同应对气候变化挑战。发展包括核电在内的清洁能源是一条重要途径。"],
-                   @[@"中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。"]];
+                   @[@"中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。中新社北京11月12日电 (记者 郭金超)中国国务院总理李克强12日下午在中南海紫光阁会见来华访问的比尔·盖茨。"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -68,20 +69,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    InviteNumReginCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
     if (cell == nil) {
         
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
+        cell = [[InviteNumReginCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
     }
     
-    cell.textLabel.text = [[contentArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.textLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-    cell.textLabel.textColor = [UIColor zitihui];
+    cell.labelAsk.text = [[contentArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:13], NSFontAttributeName, nil];
-    rect = [cell.textLabel.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 20, 300000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
-    cell.textLabel.numberOfLines = 0;
+    rect = [cell.labelAsk.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 20, 300000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+    cell.labelAsk.numberOfLines = 0;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

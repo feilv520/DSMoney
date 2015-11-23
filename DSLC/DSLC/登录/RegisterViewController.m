@@ -203,34 +203,22 @@
 - (void)RegisterSureButton{
     
     UIButton *tapButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    tapButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (95 / 375.0), 400, WIDTH_CONTROLLER_DEFAULT * (100 / 375.0), 15);
-    
+    tapButton.frame = CGRectMake(0, 400, WIDTH_CONTROLLER_DEFAULT/2, 15);
     [tapButton setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
-
     [tapButton setTitleColor:Color_Black forState:UIControlStateNormal];
-    
     [tapButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
-
-    [tapButton addTarget:self action:@selector(bookButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    
+    tapButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [tapButton setTitle:@"平台服务条款" forState:UIControlStateNormal];
-    
     [self.scrollView addSubview:tapButton];
     
     UIButton *bookButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    bookButton.frame = CGRectMake(CGRectGetMaxX(tapButton.frame) - 10, 400, WIDTH_CONTROLLER_DEFAULT * (100 / 375.0), 15);
-    
+    bookButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 400, WIDTH_CONTROLLER_DEFAULT/2, 15);
     [bookButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    
     [bookButton.titleLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:12]];
-    
     [bookButton addTarget:self action:@selector(bookButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    
+    bookButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [bookButton setTitle:@"<<风险提示书>>" forState:UIControlStateNormal];
     [bookButton setTitleColor:[UIColor chongzhiColor] forState:UIControlStateNormal];
-    
     [self.scrollView addSubview:bookButton];
     
     payButton = [UIButton buttonWithType:UIButtonTypeCustom];

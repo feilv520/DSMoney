@@ -93,7 +93,7 @@
         
     } else {
         
-        NSLog(@"规定输入金额不能小于1元");
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"规定输入的金额不能小于1元"];
     }
 }
 

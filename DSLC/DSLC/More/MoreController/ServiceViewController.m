@@ -20,6 +20,7 @@
     UIView *viewWhite;
     UIButton *butblack;
     UIView *viewCopy;
+    UILabel *labelCallOut;
 }
 
 @end
@@ -159,29 +160,50 @@
 //白色弹框
 - (void)viewWhiteShow
 {
-    UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewWhite.frame.size.width - 33, 8, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewWhite.frame.size.width - 26, 8, WIDTH_CONTROLLER_DEFAULT * (20.0 / 375.0), WIDTH_CONTROLLER_DEFAULT * (20.0 / 375.0)) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [butCancle setBackgroundImage:[UIImage imageNamed:@"cuo"] forState:UIControlStateNormal];
     [viewWhite addSubview:butCancle];
     [butCancle addTarget:self action:@selector(buttonCanclePress:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *labelCallOut = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, viewWhite.frame.size.width, 30)];
+    CGRect rectMain = [[UIScreen mainScreen] bounds];
+    
+    labelCallOut = [[UILabel alloc] initWithFrame:CGRectMake(0, WIDTH_CONTROLLER_DEFAULT * (20.0 / 375.0) + 10, viewWhite.frame.size.width, HEIGHT_CONTROLLER_DEFAULT * (30.0 / 667.0))];
+    UIButton *butMakeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, HEIGHT_CONTROLLER_DEFAULT * (30.0 / 667.0) + WIDTH_CONTROLLER_DEFAULT * (20.0 / 375.0) + 20, viewWhite.frame.size.width - 40, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"呼叫"];
+    
+    if (rectMain.size.width == 320) {
+        
+        NSMutableAttributedString *callOutStr = [[NSMutableAttributedString alloc] initWithString:@"拨打客服电话 :400-254-569?"];
+        NSRange callString = NSMakeRange(0, [[callOutStr string] rangeOfString:@":"].location);
+        [callOutStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:callString];
+        
+        NSRange numString = NSMakeRange(8, [[callOutStr string] rangeOfString:@"?"].location - 8);
+        [callOutStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:numString];
+        [callOutStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:numString];
+        
+        NSRange yuan = NSMakeRange([[callOutStr string] length] - 1, 1);
+        [callOutStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:yuan];
+        [labelCallOut setAttributedText:callOutStr];
+
+    } else {
+        
+        NSMutableAttributedString *callOutStr = [[NSMutableAttributedString alloc] initWithString:@"拨打客服电话 : 400-254-569?"];
+        NSRange callString = NSMakeRange(0, [[callOutStr string] rangeOfString:@":"].location);
+        [callOutStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:callString];
+        
+        NSRange numString = NSMakeRange(8, [[callOutStr string] rangeOfString:@"?"].location - 8);
+        [callOutStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:numString];
+        [callOutStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:numString];
+        
+        NSRange yuan = NSMakeRange([[callOutStr string] length] - 1, 1);
+        [callOutStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:yuan];
+        [labelCallOut setAttributedText:callOutStr];
+        
+        butMakeSure.frame = CGRectMake(20, HEIGHT_CONTROLLER_DEFAULT * (30.0 / 667.0) + WIDTH_CONTROLLER_DEFAULT * (20.0 / 375.0) + 30, viewWhite.frame.size.width - 40, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0));
+    }
+    
     [viewWhite addSubview:labelCallOut];
-    
-    NSMutableAttributedString *callOutStr = [[NSMutableAttributedString alloc] initWithString:@"拨打客服电话 : 400-254-569?"];
-    NSRange callString = NSMakeRange(0, [[callOutStr string] rangeOfString:@":"].location);
-    [callOutStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:callString];
-    
-    NSRange numString = NSMakeRange(8, [[callOutStr string] rangeOfString:@"?"].location - 8);
-    [callOutStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:numString];
-    [callOutStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:numString];
-    
-    NSRange yuan = NSMakeRange([[callOutStr string] length] - 1, 1);
-    [callOutStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:yuan];
-    
-    [labelCallOut setAttributedText:callOutStr];
     labelCallOut.textAlignment = NSTextAlignmentCenter;
     
-    UIButton *butMakeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, 90, viewWhite.frame.size.width - 40, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"呼叫"];
     [viewWhite addSubview:butMakeSure];
     [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
     [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];

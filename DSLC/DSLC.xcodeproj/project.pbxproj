@@ -21,6 +21,8 @@
 		811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E001BC7A13800CAD6F5 /* FinancingCell.m */; };
 		811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */; };
 		811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */; };
+		81200C181C0315EE00F70DDD /* RiskAlertBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81200C171C0315EE00F70DDD /* RiskAlertBookCell.m */; settings = {ASSET_TAGS = (); }; };
+		81200C1E1C031F1700F70DDD /* InviteNumReginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81200C1D1C031F1700F70DDD /* InviteNumReginCell.m */; settings = {ASSET_TAGS = (); }; };
 		812F6BE81BD8DDE10000D8E9 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BE71BD8DDE10000D8E9 /* BindingPhoneViewController.m */; };
 		812F6BEB1BD8ED240000D8E9 /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BEA1BD8ED240000D8E9 /* PhoneViewController.m */; };
 		812F6BEE1BD8ED310000D8E9 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BED1BD8ED310000D8E9 /* MessageViewController.m */; };
@@ -712,6 +714,10 @@
 		811F9E011BC7A13800CAD6F5 /* FinancingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinancingCell.xib; sourceTree = "<group>"; };
 		811F9E051BC7D29900CAD6F5 /* UIColor+AddColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AddColor.h"; sourceTree = "<group>"; };
 		811F9E061BC7D29900CAD6F5 /* UIColor+AddColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AddColor.m"; sourceTree = "<group>"; };
+		81200C161C0315EE00F70DDD /* RiskAlertBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskAlertBookCell.h; sourceTree = "<group>"; };
+		81200C171C0315EE00F70DDD /* RiskAlertBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiskAlertBookCell.m; sourceTree = "<group>"; };
+		81200C1C1C031F1700F70DDD /* InviteNumReginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteNumReginCell.h; sourceTree = "<group>"; };
+		81200C1D1C031F1700F70DDD /* InviteNumReginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteNumReginCell.m; sourceTree = "<group>"; };
 		812F6BE61BD8DDE10000D8E9 /* BindingPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingPhoneViewController.h; sourceTree = "<group>"; };
 		812F6BE71BD8DDE10000D8E9 /* BindingPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingPhoneViewController.m; sourceTree = "<group>"; };
 		812F6BE91BD8ED240000D8E9 /* PhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneViewController.h; sourceTree = "<group>"; };
@@ -1885,6 +1891,10 @@
 				81D703F91BE073730074DF30 /* ForgetSecret2Cell.h */,
 				81D703FA1BE073730074DF30 /* ForgetSecret2Cell.m */,
 				81D703FB1BE073730074DF30 /* ForgetSecret2Cell.xib */,
+				81200C161C0315EE00F70DDD /* RiskAlertBookCell.h */,
+				81200C171C0315EE00F70DDD /* RiskAlertBookCell.m */,
+				81200C1C1C031F1700F70DDD /* InviteNumReginCell.h */,
+				81200C1D1C031F1700F70DDD /* InviteNumReginCell.m */,
 			);
 			path = "自定义cell";
 			sourceTree = "<group>";
@@ -4003,6 +4013,7 @@
 				81E831061BF0469F00127EE8 /* MyChoosePlanner.m in Sources */,
 				8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */,
 				8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */,
+				81200C1E1C031F1700F70DDD /* InviteNumReginCell.m in Sources */,
 				8D0AE8041BE0ABFB00D9D50C /* RegisterOfView.m in Sources */,
 				8DD180A21BD731E000F71CEA /* GetMoneyTipTableViewCell.m in Sources */,
 				8D45187A1C00553E00FAF998 /* MD5Encryption.m in Sources */,
@@ -4021,6 +4032,7 @@
 				8D1191951BF1E59300A2DE05 /* productMoneyModel.m in Sources */,
 				819B52FA1BFC6930002FDF1E /* pinyin.c in Sources */,
 				81D704031BE0D0D40074DF30 /* NewbieViewController.m in Sources */,
+				81200C181C0315EE00F70DDD /* RiskAlertBookCell.m in Sources */,
 				81F5FA111BDA1C2E008C38BF /* MoreCell.m in Sources */,
 				8180639B1BD5D7E500E83492 /* MyInviteCell.m in Sources */,
 				8162D11D1BE1BCC900CACAB6 /* XinXiCell.m in Sources */,

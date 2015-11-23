@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -27,11 +27,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dW7-Fk-WwL">
-                        <rect key="frame" x="281" y="12" width="82" height="20"/>
+                        <rect key="frame" x="279" y="12" width="82" height="20"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="82" id="A8i-zd-2ON"/>
-                            <constraint firstAttribute="height" constant="20" id="gf8-ut-mTd"/>
+                            <constraint firstAttribute="width" constant="82" id="ZAN-l7-4bd"/>
+                            <constraint firstAttribute="height" constant="20" id="q17-kA-WOJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,8 +42,8 @@
                 <constraints>
                     <constraint firstItem="zvN-MB-XAl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="a1n-Gg-VGU"/>
                     <constraint firstItem="zvN-MB-XAl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="g6s-a8-9YH"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="dW7-Fk-WwL" secondAttribute="trailing" constant="4" id="l22-jc-aHo"/>
-                    <constraint firstItem="dW7-Fk-WwL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="ppu-3S-gbf"/>
+                    <constraint firstItem="dW7-Fk-WwL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="iRr-lD-FyM"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="dW7-Fk-WwL" secondAttribute="trailing" constant="6" id="uSA-Qb-eU9"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
@@ -51,7 +51,7 @@
                 <outlet property="labelCash" destination="zvN-MB-XAl" id="3IP-oT-cjq"/>
                 <outlet property="labelYuanShu" destination="dW7-Fk-WwL" id="uN4-02-7Ei"/>
             </connections>
-            <point key="canvasLocation" x="507.5" y="360"/>
+            <point key="canvasLocation" x="242.5" y="347"/>
         </tableViewCell>
     </objects>
 </document>

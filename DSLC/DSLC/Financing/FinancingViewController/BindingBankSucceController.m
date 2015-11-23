@@ -101,7 +101,17 @@
 //开始投资
 - (void)buttonBeginCashMoney:(UIButton *)button
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    textField1 = (UITextField *)[self.view viewWithTag:700];
+    textField2 = (UITextField *)[self.view viewWithTag:701];
+    
+    if ([textField1.text isEqualToString:textField2.text]) {
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    } else {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的交易密码与确认的交易不匹配"];
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -121,7 +131,7 @@
     textField1 = (UITextField *)[self.view viewWithTag:700];
     textField2 = (UITextField *)[self.view viewWithTag:701];
 
-    if (textField1.text.length > 0 && textField2.text.length > 0) {
+    if (textField1.text.length == 6 && textField2.text.length == 6) {
         
         [buttonMoney setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonMoney setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];

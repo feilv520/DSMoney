@@ -129,7 +129,7 @@
         buttonBlack.alpha = 0.3;
         [buttonBlack addTarget:self action:@selector(suggestionButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
         
-        viewMakeSure = [CreatView creatViewWithFrame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 - 80, WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT/4 - 20) backgroundColor:[UIColor whiteColor]];
+        viewMakeSure = [CreatView creatViewWithFrame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 - 100, WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT/4 - 20) backgroundColor:[UIColor whiteColor]];
         [app.tabBarVC.view addSubview:viewMakeSure];
         viewMakeSure.layer.cornerRadius = 3;
         viewMakeSure.layer.masksToBounds = YES;
@@ -137,8 +137,9 @@
         [_textView resignFirstResponder];
         
         CGFloat viewWidth = viewMakeSure.frame.size.width;
+        CGFloat viewHeight = viewMakeSure.frame.size.height;
         
-        UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 25, viewWidth, 50) backgroundColor:[UIColor whiteColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+        UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 20, viewWidth, (viewHeight - 20)/2) backgroundColor:[UIColor whiteColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
         [viewMakeSure addSubview:labelAlert];
         labelAlert.numberOfLines = 2;
         
@@ -147,7 +148,7 @@
         [alertStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:[@"反馈已发送!\n感谢您的宝贵意见" rangeOfString:@"感谢您的宝贵意见"]];
         [labelAlert setAttributedText:alertStr];
         
-        UIButton *buttonDing = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, 90, viewWidth - 40, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"好的"];
+        UIButton *buttonDing = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, (viewHeight - 20)/2 + 20, viewWidth - 40, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"好的"];
         [viewMakeSure addSubview:buttonDing];
         buttonDing.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         [buttonDing setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];

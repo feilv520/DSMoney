@@ -11,6 +11,5 @@
 @interface NewMakeSureCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonLeft;
-@property (weak, nonatomic) IBOutlet UILabel *labelRight;
 
 @end

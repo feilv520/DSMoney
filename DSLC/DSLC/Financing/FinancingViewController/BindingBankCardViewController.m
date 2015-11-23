@@ -35,6 +35,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    TPKeyboardAvoidingScrollView *tpScrollView = [TPKeyboardAvoidingScrollView new];
+    
+    self.view = tpScrollView;
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"绑定银行卡"];
     
@@ -49,7 +53,7 @@
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor huibai];
     
-    UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 130)];
+    UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (150.0 / 667.0))];
     viewFoot.backgroundColor = [UIColor huibai];
     _tableView.tableFooterView = viewFoot;
     
@@ -57,21 +61,21 @@
     [_tableView registerNib:[UINib nibWithNibName:@"BindingBankCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     
     nameArray = @[@"持卡人", @"开户行", @"开户省市", @"银行卡号", @"预留手机号", @""];
-    TEXTfIELDaRRAY = @[@"黄冬明", @"选择开户银行", @"选择省市", @"请输入本人银行卡号", @"请输入在银行预留的手机号", @""];
+    TEXTfIELDaRRAY = @[@"黄冬明", @"选择开户银行", @"选择省市", @"请输入本人银行卡号", @"请输入预留的手机号", @""];
     
     UIButton *buttonHint = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 10, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@"若没有选择开户行和开户省市,在您提现时需要再次补充"];
     [viewFoot addSubview:buttonHint];
     buttonHint.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
     [buttonHint setImage:[UIImage imageNamed:@"提示"] forState:UIControlStateNormal];
     
-    buttonGood = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 90, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    buttonGood = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [viewFoot addSubview:buttonGood];
     buttonGood.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonGood setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [buttonGood setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [buttonGood addTarget:self action:@selector(buttonBindingBank:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 140, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@"由中国银行保障您的账户资金安全"];
+    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 60 + HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@"由中国银行保障您的账户资金安全"];
     [viewFoot addSubview:buttonSafe];
     buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
     [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
@@ -97,7 +101,7 @@
         cell.labelLeft.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
         cell.textField.placeholder = @"请输入验证码";
-        cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         cell.textField.tintColor = [UIColor grayColor];
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.textField.tag = 704;
@@ -124,7 +128,7 @@
         cell.labelLeft.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
         cell.textField.placeholder = [TEXTfIELDaRRAY objectAtIndex:indexPath.row];
-        cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         cell.textField.tintColor = [UIColor grayColor];
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.textField.tag = indexPath.row + 600;
@@ -209,19 +213,30 @@
     NSLog(@"666666");
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    
+//    textField3 = (UITextField *)[self.view viewWithTag:603];
+//    textField4 = (UITextField *)[self.view viewWithTag:604];
+//    textField5 = (UITextField *)[self.view viewWithTag:704];
+//    
+//    if (scrollView.contentOffset.y > 0) {
+//        
+//        [textField3 resignFirstResponder];
+//        [textField4 resignFirstResponder];
+//        [textField5 resignFirstResponder];
+//    }
+//}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    
     textField3 = (UITextField *)[self.view viewWithTag:603];
     textField4 = (UITextField *)[self.view viewWithTag:604];
     textField5 = (UITextField *)[self.view viewWithTag:704];
-    
-    if (scrollView.contentOffset.y > 0) {
-        
-        [textField3 resignFirstResponder];
-        [textField4 resignFirstResponder];
-        [textField5 resignFirstResponder];
-    }
+
+    [textField3 resignFirstResponder];
+    [textField4 resignFirstResponder];
+    [textField5 resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

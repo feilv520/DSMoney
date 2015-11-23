@@ -35,6 +35,7 @@
 @property (nonatomic) FConfirmMoney *viewWhite;
 @property (nonatomic) UITextField *textFieldC;
 @property (nonatomic) UIButton *makeSure;
+@property (nonatomic) UIButton *buttonNew;
 
 @property (nonatomic, strong) NSDictionary *accountDic;
 
@@ -70,23 +71,14 @@
 //TableView展示
 - (void)showTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.backgroundColor = [UIColor huibai];
     
     UIView *viewFoot = [[UIView alloc] init];
-    
-    if (self.decide == NO) {
-        
-        viewFoot.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 130);
-        
-    } else {
-        
-        viewFoot.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 250);
-    }
-    
+    viewFoot.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (150.0 / 667.0));
     viewFoot.backgroundColor = [UIColor huibai];
     self.tableView.tableFooterView = viewFoot;
     
@@ -96,7 +88,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"CashMoneyCell" bundle:nil] forCellReuseIdentifier:@"reuse4"];
     [self.tableView registerNib:[UINib nibWithNibName:@"NewMakeSureCell" bundle:nil] forCellReuseIdentifier:@"reuseNew"];
     
-    _makeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (44.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (60.0 / 667.0), (WIDTH_CONTROLLER_DEFAULT - 80), HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"确认投资"];
+    _makeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (40.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (60.0 / 667.0), (WIDTH_CONTROLLER_DEFAULT - WIDTH_CONTROLLER_DEFAULT * (80.0 / 375.0)), HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"确认投资"];
     
     if (self.decide == NO) {
         
@@ -114,7 +106,7 @@
     [viewFoot addSubview:_makeSure];
     [_makeSure addTarget:self action:@selector(makeSureMoney:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 110, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"由中国银行保障您的账户资金安全"];
+    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (60.0 / 667.0) + HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0) + HEIGHT_CONTROLLER_DEFAULT * (10.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * 20.0 / 667.0) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"由中国银行保障您的账户资金安全"];
     [viewFoot addSubview:buttonSafe];
     buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
     [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
@@ -126,6 +118,10 @@
     self.labelJiGe.font = [UIFont systemFontOfSize:15];
     
     self.imageViewRight = [[UIImageView alloc] init];
+    
+    self.buttonNew = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.buttonNew setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.buttonNew.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendValuenotification:) name:@"sendValue" object:nil];
 }
@@ -193,15 +189,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (self.decide == NO) {
-        
-        return 3;
-        
-    } else {
-        
-        return 4;
-        
-    }
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -286,7 +274,7 @@
         
         if (self.decide == NO) {
             
-            cell.textField.text = @"10,000";
+            cell.textField.text = @"5,000";
             cell.textField.enabled = NO;
             
         } else {
@@ -318,7 +306,7 @@
         
         if (self.decide == NO) {
             
-            cell.labelYuan.text = [NSString stringWithFormat:@"%.f",[cell.textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36000.0];
+            cell.labelYuan.text = [NSString stringWithFormat:@"%.2f%@",[cell.textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36000.0, @"元"];
             
         } else {
             
@@ -341,17 +329,20 @@
             
             NewMakeSureCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNew"];
             
-            [cell.buttonLeft setTitle:@"新手体验金" forState:UIControlStateNormal];
+            [cell.buttonLeft setTitle:@"我的红包" forState:UIControlStateNormal];
             [cell.buttonLeft setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [cell.buttonLeft setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
             cell.buttonLeft.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
             cell.buttonLeft.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-            cell.buttonLeft.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
             
-            cell.labelRight.text = @"10,000元";
-            cell.labelRight.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-            cell.labelRight.textColor = [UIColor daohanglan];
-            cell.labelRight.textAlignment = NSTextAlignmentRight;
+            self.labelJiGe.text = [NSString stringWithFormat:@"%@%@", [self.accountDic objectForKey:@"redPacket"], @"个"];
+            self.labelJiGe.textAlignment = NSTextAlignmentCenter;
+            self.labelJiGe.textAlignment = NSTextAlignmentRight;
+            self.labelJiGe.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 20 - 16 - 100, 0, 100, 48);
+            [cell addSubview:self.labelJiGe];
+            
+            self.imageViewRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 14, 16, 16, 16);
+            self.imageViewRight.image = [UIImage imageNamed:@"7501111"];
+            [cell addSubview:self.imageViewRight];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -377,13 +368,13 @@
                 
             } else {
                 
-                self.labelJiGe.text = [self.accountDic objectForKey:@"redPacket"];
+                self.labelJiGe.text = [NSString stringWithFormat:@"%@%@", [self.accountDic objectForKey:@"redPacket"], @"个"];
                 self.labelJiGe.textAlignment = NSTextAlignmentCenter;
                 self.labelJiGe.textAlignment = NSTextAlignmentRight;
                 self.labelJiGe.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 20 - 16 - 100, 0, 100, 48);
                 [cell addSubview:self.labelJiGe];
                 
-                self.imageViewRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 16, 16, 16, 16);
+                self.imageViewRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 14, 16, 16, 16);
                 self.imageViewRight.image = [UIImage imageNamed:@"7501111"];
                 [cell addSubview:self.imageViewRight];
             }
@@ -403,10 +394,26 @@
         cell.labelCash.text = @"支付金额";
         cell.labelCash.font = [UIFont systemFontOfSize:15];
         
-        cell.labelYuanShu.text = @"0.00元";
-        cell.labelYuanShu.font = [UIFont systemFontOfSize:15];
-        cell.labelYuanShu.textColor = [UIColor daohanglan];
-        cell.labelYuanShu.textAlignment = NSTextAlignmentRight;
+        if (self.decide == NO) {
+            
+            cell.labelYuanShu.hidden = YES;
+            self.buttonNew.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 20)/2 + 5, 12, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 20);
+            [cell addSubview:self.buttonNew];
+            [self.buttonNew setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
+            self.buttonNew.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+            
+            NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"新手体验金5,000元"];
+            NSRange LeftSange = NSMakeRange([[redStr string] length] - 6, 6);
+            [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:LeftSange];
+            [self.buttonNew setAttributedTitle:redStr forState:UIControlStateNormal];
+            
+        } else {
+            
+            cell.labelYuanShu.text = @"0.00元";
+            cell.labelYuanShu.font = [UIFont systemFontOfSize:15];
+            cell.labelYuanShu.textColor = [UIColor daohanglan];
+            cell.labelYuanShu.textAlignment = NSTextAlignmentRight;
+        }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -419,11 +426,24 @@
     
     if (indexPath.section == 2) {
         
-        if (indexPath.row == 1) {
+        if (self.decide == NO) {
             
-            ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
-            [self.navigationController pushViewController:chooseVC animated:YES];
+            if (indexPath.row == 0) {
+                
+                ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
+                [self.navigationController pushViewController:chooseVC animated:YES];
+            }
+            
+        } else {
+            
+            if (indexPath.row == 1) {
+                
+                ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
+                [self.navigationController pushViewController:chooseVC animated:YES];
+            }
+            
         }
+        
     }
 }
 
@@ -523,12 +543,7 @@
             NSBundle *rootBundle = [NSBundle mainBundle];
             self.viewWhite = (FConfirmMoney *)[[rootBundle loadNibNamed:@"FConfirmMoney" owner:nil options:nil] lastObject];
             
-            CGFloat viewX = WIDTH_CONTROLLER_DEFAULT * (38 / 375.0);
-            CGFloat viewH = WIDTH_CONTROLLER_DEFAULT * (158 / 375.0);
-            CGFloat viewWeith = WIDTH_CONTROLLER_DEFAULT * (301 / 375.0);
-            CGFloat viewHejght = HEIGHT_CONTROLLER_DEFAULT * (301 / 667.0);
-            
-            self.viewWhite.frame = CGRectMake(viewX, viewH, viewWeith, viewHejght);
+            self.viewWhite.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300)/2, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 120, 301, 300);
             self.viewWhite.layer.masksToBounds = YES;
             self.viewWhite.layer.cornerRadius = 4;
             [app.tabBarVC.view addSubview:self.viewWhite];
