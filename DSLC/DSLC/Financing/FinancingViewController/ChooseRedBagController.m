@@ -9,6 +9,7 @@
 #import "ChooseRedBagController.h"
 #import "NotSeparateCell.h"
 #import "TheThirdRedBagCell.h"
+#import "RedBagModel.h"
 
 @interface ChooseRedBagController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -18,6 +19,8 @@
     NSArray *styleArr;
 }
 
+@property (nonatomic, strong) NSMutableArray *redBagArray;
+
 @end
 
 @implementation ChooseRedBagController
@@ -25,6 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self getMyRedPacketList];
+    
+    self.redBagArray = [NSMutableArray array];
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"选择红包"];
@@ -57,14 +64,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return self.redBagArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    RedBagModel *redbagModel = [self.redBagArray objectAtIndex:indexPath.row];
+        
     NotSeparateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse1"];
-    
-    cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
     
     cell.labelSend.text = @"送";
     cell.labelSend.textColor = [UIColor whiteColor];
@@ -74,33 +81,36 @@
     cell.labelSend.layer.cornerRadius = 5;
     cell.labelSend.layer.masksToBounds = YES;
     
-    NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"10,000元"];
+    NSString *string = [NSString stringWithFormat:@"%@~%@元",[redbagModel rpFloor],[redbagModel rpTop]];
+    NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:string];
     NSRange leftStr = NSMakeRange(0, [[redStr string] rangeOfString:@"元"].location);
     [redStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:leftStr];
     [redStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:22] range:leftStr];
-    [redStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:[@"10,000元" rangeOfString:@"元"]];
+    [redStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:[string rangeOfString:@"元"]];
     [cell.labelMoney setAttributedText:redStr];
     cell.labelMoney.textColor = [UIColor daohanglan];
     cell.labelMoney.backgroundColor = [UIColor clearColor];
     
-    cell.labelBagStyle.text = [styleArr objectAtIndex:indexPath.row];
+    cell.labelBagStyle.text = [redbagModel rpType];
     cell.labelBagStyle.backgroundColor = [UIColor clearColor];
     cell.labelBagStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-    cell.laeblRequest.text = @"单笔投资金额满1000元";
+    cell.laeblRequest.text = [NSString stringWithFormat:@"单笔投资金额满%@",[redbagModel rpLimit]];
     cell.laeblRequest.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     cell.laeblRequest.textColor = [UIColor zitihui];
     cell.laeblRequest.backgroundColor = [UIColor clearColor];
     
-    cell.labelDays.text = @"理财期限大于100天";
+    cell.labelDays.text = [NSString stringWithFormat:@"理财期限大于%@天",[redbagModel daysLimit]];
     cell.labelDays.textColor = [UIColor zitihui];
     cell.labelDays.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     cell.labelDays.backgroundColor = [UIColor clearColor];
     
-    cell.labelTime.text = [NSString stringWithFormat:@"%@%@", @"有效期:截止", @"20天"];
+    cell.labelTime.text = [NSString stringWithFormat:@"%@%@", @"有效期:截止", [redbagModel rpTime]];
     cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:11];
     cell.labelTime.textColor = [UIColor zitihui];
     cell.labelTime.backgroundColor = [UIColor clearColor];
+    
+    cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
     
     cell.backgroundColor = [UIColor huibai];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -109,8 +119,37 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendValue" object:[styleArr objectAtIndex:indexPath.row]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendValue" object:[self.redBagArray objectAtIndex:indexPath.row]];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getMyRedPacketList{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyRedPacketList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getMyRedPacketList = %@",responseObject);
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"RedPacket"]) {
+            if ([[dic objectForKey:@"rpType"] isEqualToString:@"随机红包"] || [[dic objectForKey:@"rpType"] isEqualToString:@"新手体验红包"]) {
+                RedBagModel *redbagModel = [[RedBagModel alloc] init];
+                [redbagModel setValuesForKeysWithDictionary:dic];
+                [self.redBagArray addObject:redbagModel];
+            }
+        }
+        
+        [_tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

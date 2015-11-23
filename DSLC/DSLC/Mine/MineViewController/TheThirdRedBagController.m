@@ -6,11 +6,14 @@
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
+
+
 #import "TheThirdRedBagController.h"
 #import "TheThirdRedBagCell.h"
 #import "NotSeparateCell.h"
 #import "NewHandCSSCell.h"
 #import "RedBagModel.h"
+#import "FDetailViewController.h"
 
 @interface TheThirdRedBagController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -82,7 +85,7 @@
 {
     RedBagModel *redbagModel = [self.redBagArray objectAtIndex:indexPath.row];
     
-    if ([[redbagModel rpType] isEqualToString:@"新手体验红包"] || [[redbagModel rpType] isEqualToString:@"定向红包"] || [[redbagModel rpType] isEqualToString:@"随机红包"] || [[redbagModel rpType] isEqualToString:@"邀请红包"]) {
+    if ([[redbagModel rpType] isEqualToString:@"1"] || [[redbagModel rpType] isEqualToString:@"0"] || [[redbagModel rpType] isEqualToString:@"2"] || [[redbagModel rpType] isEqualToString:@"3"]) {
     
         return 145;
     
@@ -101,7 +104,7 @@
 {
     RedBagModel *redbagModel = [self.redBagArray objectAtIndex:indexPath.row];
 
-    if ([[redbagModel rpType] isEqualToString:@"新手体验红包"] || [[redbagModel rpType] isEqualToString:@"定向红包"]) {
+    if ([[redbagModel rpType] isEqualToString:@"1"]) {
     
         NewHandCSSCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNewHand"];
 
@@ -112,7 +115,7 @@
         [cell.buttonCan setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         cell.buttonCan.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         [cell.buttonCan addTarget:self action:@selector(buttonRightNowMake:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         cell.labelSend.text = @"送";
         cell.labelSend.textColor = [UIColor whiteColor];
         cell.labelSend.textAlignment = NSTextAlignmentCenter;
@@ -132,7 +135,7 @@
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.backgroundColor = [UIColor clearColor];
 
-        cell.labelStyle.text = [styleArr objectAtIndex:indexPath.row];
+        cell.labelStyle.text = [redbagModel rpType];
         cell.labelStyle.backgroundColor = [UIColor clearColor];
         cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
 
@@ -150,7 +153,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
 
-    } else if ([[redbagModel rpType] isEqualToString:@"随机红包"] || [[redbagModel rpType] isEqualToString:@"邀请红包"]) {
+    } else if ([[redbagModel rpType] isEqualToString:@"3"] || [[redbagModel rpType] isEqualToString:@"0"]) {
         TheThirdRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse"];
 
         cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
@@ -161,7 +164,8 @@
         [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
-
+        [cell.buttonOpen setTag:indexPath.row];
+        
         cell.labelAend.text = @"送";
         cell.labelAend.textColor = [UIColor whiteColor];
         cell.labelAend.textAlignment = NSTextAlignmentCenter;
@@ -181,7 +185,7 @@
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.backgroundColor = [UIColor clearColor];
 
-        cell.labelStyle.text = [styleArr objectAtIndex:indexPath.row];
+        cell.labelStyle.text = [redbagModel rpTypeName];
         cell.labelStyle.backgroundColor = [UIColor clearColor];
         cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
 
@@ -203,7 +207,61 @@
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    } else if ([[[self.redBagArray objectAtIndex:indexPath.row] rpType] isEqualToString:@"阶梯红包"]) {
+    } else if ([[redbagModel rpType] isEqualToString:@"2"]) {
+        TheThirdRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse"];
+        
+        cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
+        
+        [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
+        [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.buttonOpen setTag:indexPath.row];
+        
+        cell.labelAend.text = @"送";
+        cell.labelAend.textColor = [UIColor whiteColor];
+        cell.labelAend.textAlignment = NSTextAlignmentCenter;
+        cell.labelAend.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        cell.labelAend.backgroundColor = [UIColor daohanglan];
+        cell.labelAend.layer.cornerRadius = 5;
+        cell.labelAend.layer.masksToBounds = YES;
+        
+        NSString *string = [NSString stringWithFormat:@"%@元",[redbagModel rpAmount]];
+        
+        NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:string];
+        NSRange leftStr = NSMakeRange(0, [[redStr string] rangeOfString:@"元"].location);
+        [redStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:leftStr];
+        [redStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:22] range:leftStr];
+        [redStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:[string rangeOfString:@"元"]];
+        [cell.labelMoney setAttributedText:redStr];
+        cell.labelMoney.textColor = [UIColor daohanglan];
+        cell.labelMoney.backgroundColor = [UIColor clearColor];
+        
+        cell.labelStyle.text = [redbagModel rpType];
+        cell.labelStyle.backgroundColor = [UIColor clearColor];
+        cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        
+        cell.labelRequier.text = [NSString stringWithFormat:@"单笔投资金额满%@",[redbagModel rpLimit]];
+        cell.labelRequier.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.labelRequier.textColor = [UIColor zitihui];
+        cell.labelRequier.backgroundColor = [UIColor clearColor];
+        
+        cell.labelDay.text = [NSString stringWithFormat:@"理财期限大于%@天",[redbagModel daysLimit]];
+        cell.labelDay.textColor = [UIColor zitihui];
+        cell.labelDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        cell.labelDay.backgroundColor = [UIColor clearColor];
+        
+        cell.labelTime.text = [NSString stringWithFormat:@"%@%@", @"有效期:截止", [redbagModel rpTime]];
+        cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+        cell.labelTime.textColor = [UIColor zitihui];
+        cell.labelTime.backgroundColor = [UIColor clearColor];
+        
+        cell.backgroundColor = [UIColor huibai];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    } else if ([[[self.redBagArray objectAtIndex:indexPath.row] rpType] isEqualToString:@"4"]) {
         NotSeparateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse1"];
 
         cell.labelSend.text = @"送";
@@ -224,7 +282,7 @@
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.backgroundColor = [UIColor clearColor];
 
-        cell.labelBagStyle.text = [styleArr objectAtIndex:indexPath.row];
+        cell.labelBagStyle.text = [redbagModel rpType];
         cell.labelBagStyle.backgroundColor = [UIColor clearColor];
         cell.labelBagStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
 
@@ -417,31 +475,37 @@
 //立即使用
 - (void)buttonRightNowMake:(UIButton *)button
 {
-    butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC.view addSubview:butBlack];
-    [butBlack setBackgroundImage:[UIImage imageNamed:@"钻石红包"] forState:UIControlStateNormal];
-    [butBlack addTarget:self action:@selector(openFinish:) forControlEvents:UIControlEventTouchUpInside];
-    
-    labelGet = [[UILabel alloc] initWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/3 + 40, butBlack.frame.size.width, 70)];
-    [butBlack addSubview:labelGet];
-    labelGet.textAlignment = NSTextAlignmentCenter;
-    labelGet.backgroundColor = [UIColor clearColor];
-    NSMutableAttributedString *frontStr = [[NSMutableAttributedString alloc] initWithString:@"恭喜您获得100元现金红包\n\n已转入账户余额"];
-    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[@"恭喜您获得100元现金红包\n\n已转入账户余额" rangeOfString:@"恭喜您获得"]];
-    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[@"恭喜您获得100元现金红包\n\n已转入账户余额" rangeOfString:@"元现金红包"]];
-    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:[@"恭喜您获得100元现金红包\n\n已转入账户余额" rangeOfString:@"已转入账户余额"]];
-    //    取到恭~0的长度 减掉5 就剩100
-    NSRange shuZi = NSMakeRange(5, [[frontStr string] rangeOfString:@"元"].location - 5);
-    [frontStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
-    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:25] range:shuZi];
-    [labelGet setAttributedText:frontStr];
-    labelGet.numberOfLines = 3;
+//    butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+//    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+//    [app.tabBarVC.view addSubview:butBlack];
+//    [butBlack setBackgroundImage:[UIImage imageNamed:@"钻石红包"] forState:UIControlStateNormal];
+//    [butBlack addTarget:self action:@selector(openFinish:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    labelGet = [[UILabel alloc] initWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/3 + 40, butBlack.frame.size.width, 70)];
+//    [butBlack addSubview:labelGet];
+//    labelGet.textAlignment = NSTextAlignmentCenter;
+//    labelGet.backgroundColor = [UIColor clearColor];
+//    NSMutableAttributedString *frontStr = [[NSMutableAttributedString alloc] initWithString:@"恭喜您获得100元现金红包\n\n已转入账户余额"];
+//    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[@"恭喜您获得100元现金红包\n\n已转入账户余额" rangeOfString:@"恭喜您获得"]];
+//    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[@"恭喜您获得100元现金红包\n\n已转入账户余额" rangeOfString:@"元现金红包"]];
+//    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:[@"恭喜您获得100元现金红包\n\n已转入账户余额" rangeOfString:@"已转入账户余额"]];
+//    //    取到恭~0的长度 减掉5 就剩100
+//    NSRange shuZi = NSMakeRange(5, [[frontStr string] rangeOfString:@"元"].location - 5);
+//    [frontStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
+//    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:25] range:shuZi];
+//    [labelGet setAttributedText:frontStr];
+//    labelGet.numberOfLines = 3;
+    FDetailViewController *detailVC = [[FDetailViewController alloc] init];
+    detailVC.estimate = NO;
+    detailVC.idString = @"71";
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 //拆开红包
 - (void)openRedBagButton:(UIButton *)button
 {
+    [self openRedPacket:button];
+    
     butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC.view addSubview:butBlack];
@@ -489,6 +553,39 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)openRedPacket:(id)sender{
+    
+    UIButton *button = sender;
+    
+    NSLog(@"tag = %ld",button.tag);
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"redPacketId":[[self.redBagArray objectAtIndex:button.tag] redPacketId]};
+    
+    NSLog(@"%@",parameter);
+    NSLog(@"%@",[[self.redBagArray objectAtIndex:button.tag] rpType]);
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/openRedPacket" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"openRedPacket = %@",responseObject);
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"RedPacket"]) {
+            RedBagModel *redbagModel = [[RedBagModel alloc] init];
+            [redbagModel setValuesForKeysWithDictionary:dic];
+            [self.redBagArray addObject:redbagModel];
+        }
+        
+        [_tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -22,6 +22,7 @@
 #import "RechargeViewController.h"
 #import "RechargeAlreadyBinding.h"
 #import "ChooseRedBagController.h"
+#import "RedBagModel.h"
 
 @interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (nonatomic) UITableView *tableView;
@@ -128,7 +129,8 @@
 
 - (void)sendValuenotification:(NSNotification *)notice
 {
-    self.labelJiGe.text = [notice object];
+    RedBagModel *redbagModel = [notice object];
+    self.labelJiGe.text = [NSString stringWithFormat:@"%@~%@元",[redbagModel rpFloor], [redbagModel rpTop]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

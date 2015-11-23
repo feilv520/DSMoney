@@ -50,7 +50,7 @@
     // Do any additional setup after loading the view.
   
     // 加密解密
-    NSString* encrypt = @"X2p9Uo45Tzk6Ntu6W7Ev+Q==";
+    NSString* encrypt = @"xCRL5cF0FpU=";
 //    NSString* decrypt = [self decryptUseDES:encrypt];
 //    NSString *encrypt = [DES3Util encrypt:@"11111111"];
     NSString *decrypt = [DES3Util decrypt:encrypt];

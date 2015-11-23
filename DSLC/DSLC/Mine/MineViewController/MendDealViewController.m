@@ -201,7 +201,7 @@
     if (textField5.text.length == 0) {
         [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
     } else {
-        NSDictionary *parameters = @{@"phone":textField5.text};
+        NSDictionary *parameters = @{@"phone":textField5.text,@"msgType":@"4"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
