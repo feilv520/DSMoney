@@ -67,6 +67,18 @@
         [app.tabBarVC setLabelLineHidden:NO];
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideWithTabbarView:) name:@"hideWithTabbarView" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beforeWithViewhideWithTabbarView:) name:@"beforeWithView" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addWithNotifiacationCenter:) name:@"hideWithTabbar" object:nil];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"beforeWithView" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbar" object:nil];
 }
 
 //导航返回按钮
@@ -101,12 +113,6 @@
     self.view.backgroundColor = [UIColor qianhuise];
     [self tableviewShow];
     [self navigationControllerShow];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideWithTabbarView:) name:@"hideWithTabbarView" object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beforeWithViewhideWithTabbarView:) name:@"beforeWithView" object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addWithNotifiacationCenter:) name:@"hideWithTabbar" object:nil];
     
 }
 
