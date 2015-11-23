@@ -48,12 +48,6 @@
     imageBagArr = @[@"银元宝", @"铜元宝", @"钻石", @"金元宝", @"阶梯", @"邀请"];
     styleArr = @[@"银元宝红包", @"铜元宝红包", @"钻石红包", @"金元宝红包", @"阶梯红包", @"邀请红包"];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendValuenotification:) name:@"sendValue" object:nil];
-}
-
-- (void)sendValuenotification:(NSNotification *)notice
-{
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -111,6 +105,12 @@
     cell.backgroundColor = [UIColor huibai];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendValue" object:[styleArr objectAtIndex:indexPath.row]];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
