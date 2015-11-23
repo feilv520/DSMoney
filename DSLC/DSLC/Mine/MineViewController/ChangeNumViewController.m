@@ -133,10 +133,11 @@
 //获取验证码
 - (void)getNumButton:(UIButton *)button
 {
-    NSDictionary *parameter = @{@"phone":@"15940942599"};
-    
+    NSDictionary *parameter = @{@"phone":_textField1.text, @"msgType":@"2"};
+
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已发送"];
         [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         NSLog(@"ooooooo%@", responseObject);
         

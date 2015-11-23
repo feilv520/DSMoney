@@ -445,7 +445,7 @@
     for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
         
         if (indexButton.tag != tempButton.tag) {
-            NSLog(@"%ld",tempButton.tag);
+            NSLog(@"%ld",(long)tempButton.tag);
             [tempButton setSelected:NO];
         }
     }

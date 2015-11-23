@@ -72,8 +72,9 @@
     
     UILabel *yesterdayMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(photoImgView.frame.size.width - 210, 0, 200, 50)];
     
-    NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ 元",self.totalProfit]];
+    NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ 元",[DES3Util decrypt:self.totalProfit]]];
     NSRange numString = NSMakeRange(0, [[redStringM string] rangeOfString:@"元"].location);
+    
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:numString];
         NSRange oneString = NSMakeRange([[redStringM string] length] - 1, 1);

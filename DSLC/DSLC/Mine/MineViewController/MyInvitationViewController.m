@@ -160,7 +160,7 @@
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        NSMutableAttributedString *peopleNum = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@人\n邀请人数",[self.dicMyInvite objectForKey:@"openRedPacketAmount"]]];
+        NSMutableAttributedString *peopleNum = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@人\n邀请人数",[DES3Util decrypt:[self.dicMyInvite objectForKey:@"openRedPacketAmount"]]]];
         [peopleNum addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:NSMakeRange(0, [peopleNum length])];
         
         NSRange invite = NSMakeRange(0, [[peopleNum string] rangeOfString:@"人"].location);
@@ -170,7 +170,7 @@
         
         [cell.labelPeople setAttributedText:peopleNum];
         
-        NSMutableAttributedString *redNumStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元\n累计打开邀请红包",[self.dicMyInvite objectForKey:@"openRedPacketAmount"]]];
+        NSMutableAttributedString *redNumStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元\n累计打开邀请红包",[DES3Util decrypt:[self.dicMyInvite objectForKey:@"openRedPacketAmount"]]]];
         [redNumStr addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:NSMakeRange(0, [redNumStr length])];
         
         NSRange totalRed = NSMakeRange(0, [[redNumStr string] rangeOfString:@"元"].location);
@@ -184,7 +184,7 @@
         [cell.redBag setAttributedText:redNumStr];
         
         NSMutableAttributedString *moneyNumStr = [[NSMutableAttributedString alloc] initWithString:
-                                                  [NSString stringWithFormat:@"%@元\n累计佣金",[self.dicMyInvite objectForKey:@"inviteTotalMoney"]]];
+                                                  [NSString stringWithFormat:@"%@元\n累计佣金",[DES3Util decrypt:[self.dicMyInvite objectForKey:@"inviteTotalMoney"]]]];
         [moneyNumStr addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:NSMakeRange(0, [moneyNumStr length])];
 
         NSRange total = NSMakeRange(0, [[moneyNumStr string] rangeOfString:@"元"].location);

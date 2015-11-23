@@ -121,6 +121,7 @@
             cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
             cell.textField.hidden = YES;
             [cell addSubview:textFieldPhoneNum];
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             textFieldPhoneNum.tag = 1000;
             
         } else {
@@ -136,7 +137,6 @@
                 cell.textField.secureTextEntry = YES;
             }
             cell.textField.delegate = self;
-            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             [cell.textField addTarget:self action:@selector(textFieldEditing:) forControlEvents:UIControlEventEditingChanged];
         }
         
@@ -152,7 +152,6 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-        
     }
     
 }
@@ -163,7 +162,7 @@
     textField2 = (UITextField *)[self.view viewWithTag:902];
     textField3 = (UITextField *)[self.view viewWithTag:903];
     
-    if (textFieldPhoneNum.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField2.text == textField3.text) {
+    if (textFieldPhoneNum.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && [textField2.text isEqualToString:textField3.text]) {
         
         [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];

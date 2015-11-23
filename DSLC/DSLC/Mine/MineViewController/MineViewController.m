@@ -163,8 +163,7 @@
     UILabel *labelNum = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT)/2, HEIGHT_CONTROLLER_DEFAULT * (63.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (200.0 / 375.0), 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     
     NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17元"];
-//    - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str;
-    [redStringM replaceCharactersInRange:NSMakeRange(0, [[redStringM string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%@ ",[self.myAccountInfo objectForKey:@"yeMoney"]]];
+    [redStringM replaceCharactersInRange:NSMakeRange(0, [[redStringM string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%@ ",[DES3Util decrypt:[self.myAccountInfo objectForKey:@"yeMoney"]]]];
     NSRange numString = NSMakeRange(0, [[redStringM string] rangeOfString:@"元"].location);
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:32] range:numString];
@@ -184,6 +183,7 @@
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         labelZi.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     }
+    
     [imageRedBG addSubview:labelZi];
     
     UIButton *yesterdayButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 25, HEIGHT_CONTROLLER_DEFAULT * (128.0 / 667.0), 20, 20) backgroundColor:nil textColor:nil titleText:nil];
@@ -206,17 +206,17 @@
     middleView.viewLLine.backgroundColor = [UIColor grayColor];
     middleView.viewLLine.alpha = 0.3;
     
-    middleView.labelYuan.text = [self.myAccountInfo objectForKey:@"totalMoney"];
+    middleView.labelYuan.text = [DES3Util decrypt: [self.myAccountInfo objectForKey:@"totalMoney"]];
     middleView.labelYuan.textColor = Color_Black;
     middleView.labelYuan.alpha = 0.7;
     middleView.labelYuan.textAlignment = NSTextAlignmentCenter;
     
-    middleView.labelWanYuan.text = [self.myAccountInfo objectForKey:@"accBalance"];
+    middleView.labelWanYuan.text = [DES3Util decrypt: [self.myAccountInfo objectForKey:@"accBalance"]];
     middleView.labelWanYuan.textColor = Color_Black;
     middleView.labelWanYuan.alpha = 0.7;
     middleView.labelWanYuan.textAlignment = NSTextAlignmentCenter;
     
-    middleView.labelAllMoney.text = [self.myAccountInfo objectForKey:@"totalProfit"];
+    middleView.labelAllMoney.text = [DES3Util decrypt: [self.myAccountInfo objectForKey:@"totalProfit"]];
     middleView.labelAllMoney.textColor = Color_Black;
     middleView.labelAllMoney.alpha = 0.7;
     middleView.labelAllMoney.textAlignment = NSTextAlignmentCenter;
@@ -280,7 +280,7 @@
             moneyLabel.textAlignment = NSTextAlignmentRight;
             [cell addSubview:moneyLabel];
         }
-        moneyLabel.text = [NSString stringWithFormat:@"%@元在投资金",[self.myAccountInfo objectForKey:@"totalMoney"]];
+        moneyLabel.text = [NSString stringWithFormat:@"%@元在投资金",[DES3Util decrypt:[self.myAccountInfo objectForKey:@"totalMoney"]]];
     } else if (indexPath.row == 2) {
         
         if (myRedBagButton == nil) {

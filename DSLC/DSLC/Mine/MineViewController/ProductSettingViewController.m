@@ -109,13 +109,13 @@
         if (indexPath.row == 0) {
             SettingTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"title"];
             
-            cell.AllMoney.text = [NSString stringWithFormat:@"%@元",[self.moneyDic objectForKey:@"totalMoney"]];
+            cell.AllMoney.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[self.moneyDic objectForKey:@"totalMoney"]]];
             
             return cell;
         } else {
             SettingGetMoneyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"getMoney"];
             
-            NSMutableAttributedString *redString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[self.moneyDic objectForKey:@"yeProfit"]]];
+            NSMutableAttributedString *redString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[self.moneyDic objectForKey:@"yeProfit"]]]];
             NSRange redShuZi = NSMakeRange(0, [[redString string] rangeOfString:@"元"].location);
             [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:redShuZi];
             
@@ -126,7 +126,7 @@
             cell.yesterdayLabel.textColor = [UIColor daohanglan];
             cell.yesterdayLabel.textAlignment = NSTextAlignmentCenter;
             
-            NSMutableAttributedString *wanYuanStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[self.moneyDic objectForKey:@"totalProfit"]]];
+            NSMutableAttributedString *wanYuanStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[self.moneyDic objectForKey:@"totalProfit"]]]];
             NSRange shuziStr = NSMakeRange(0, [[wanYuanStr string] rangeOfString:@"元"].location);
             [wanYuanStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:shuziStr];
             NSRange wanZiStr = NSMakeRange([[wanYuanStr string] length] - 1, 1);

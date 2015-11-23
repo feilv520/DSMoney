@@ -361,7 +361,7 @@
                 [cell.butRecharge addTarget:self action:@selector(cashMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
                 
                 self.qianShu.frame = CGRectMake(100, 0, WIDTH_CONTROLLER_DEFAULT - 110, 48);
-                self.qianShu.text = [self.accountDic objectForKey:@"accBalance"];
+                self.qianShu.text = [DES3Util decrypt:[self.accountDic objectForKey:@"accBalance"]];
                 self.qianShu.textColor = [UIColor daohanglan];
                 self.qianShu.textAlignment = NSTextAlignmentRight;
                 [cell addSubview:self.qianShu];

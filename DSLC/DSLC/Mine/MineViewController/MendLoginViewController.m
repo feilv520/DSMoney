@@ -82,7 +82,6 @@
     cell.textFieldRight.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     cell.textFieldRight.tintColor = [UIColor grayColor];
     cell.textFieldRight.tag = indexPath.row + 300;
-    cell.textFieldRight.keyboardType = UIKeyboardTypeNumberPad;
     [cell.textFieldRight addTarget:self action:@selector(editTextField:) forControlEvents:UIControlEventEditingChanged];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

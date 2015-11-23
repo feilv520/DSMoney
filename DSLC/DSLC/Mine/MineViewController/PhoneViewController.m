@@ -87,16 +87,16 @@
     [butNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [butNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [butNext addTarget:self action:@selector(nextButton:) forControlEvents:UIControlEventTouchUpInside];
-
 }
 
 //获取验证码
 - (void)getNumButton:(UIButton *)button
 {
-    NSDictionary *parameter = @{@"phone":textFieldPhoneNumber.text};
+    NSDictionary *parameter = @{@"phone":textFieldPhoneNumber.text, @"msgType":@"2"};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已发送"];
         [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         NSLog(@"ooooooo%@", responseObject);
         
@@ -141,7 +141,7 @@
 {
     if ([textFieldSmsCode.text length] > 0 && [textFieldPhoneNumber.text length] > 0) {
         
-        NSDictionary *parameter = @{@"smsCode":textFieldSmsCode.text,@"phone":textFieldPhoneNumber.text};
+        NSDictionary *parameter = @{@"smsCode":textFieldSmsCode.text,@"phone":textFieldPhoneNumber.text,};
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/checkSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
