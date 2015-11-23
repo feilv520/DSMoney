@@ -21,6 +21,7 @@
 #import "FBalancePaymentViewController.h"
 #import "RechargeViewController.h"
 #import "RechargeAlreadyBinding.h"
+#import "ChooseRedBagController.h"
 
 @interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (nonatomic) UITableView *tableView;
@@ -412,7 +413,7 @@
         
         if (indexPath.row == 1) {
             
-            ChooseRedBagViewController *chooseVC = [[ChooseRedBagViewController alloc] init];
+            ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
             [self.navigationController pushViewController:chooseVC animated:YES];
         }
     }

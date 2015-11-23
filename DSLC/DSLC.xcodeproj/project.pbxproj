@@ -367,6 +367,7 @@
 		81E90EF61BCB4300004BA8A5 /* 750产品111.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E90EF51BCB4300004BA8A5 /* 750产品111.png */; };
 		81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E90EF71BCB430B004BA8A5 /* 750chanpin.png */; };
 		81E90EFA1BCB4312004BA8A5 /* 750产品详情.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E90EF91BCB4312004BA8A5 /* 750产品详情.png */; };
+		81EB61901C02A77F00A84696 /* ChooseRedBagController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EB618F1C02A77F00A84696 /* ChooseRedBagController.m */; settings = {ASSET_TAGS = (); }; };
 		81ED02C51BD08CFD005F4B02 /* MyInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81ED02C41BD08CFD005F4B02 /* MyInformationViewController.m */; };
 		81ED030B1BD09BC8005F4B02 /* MyInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81ED03091BD09BC8005F4B02 /* MyInformationCell.m */; };
 		81ED030C1BD09BC8005F4B02 /* MyInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81ED030A1BD09BC8005F4B02 /* MyInformationCell.xib */; };
@@ -1186,6 +1187,8 @@
 		81E90EF51BCB4300004BA8A5 /* 750产品111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "750产品111.png"; sourceTree = "<group>"; };
 		81E90EF71BCB430B004BA8A5 /* 750chanpin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 750chanpin.png; sourceTree = "<group>"; };
 		81E90EF91BCB4312004BA8A5 /* 750产品详情.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "750产品详情.png"; sourceTree = "<group>"; };
+		81EB618E1C02A77F00A84696 /* ChooseRedBagController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseRedBagController.h; sourceTree = "<group>"; };
+		81EB618F1C02A77F00A84696 /* ChooseRedBagController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseRedBagController.m; sourceTree = "<group>"; };
 		81ED02C31BD08CFD005F4B02 /* MyInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformationViewController.h; sourceTree = "<group>"; };
 		81ED02C41BD08CFD005F4B02 /* MyInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationViewController.m; sourceTree = "<group>"; };
 		81ED03081BD09BC8005F4B02 /* MyInformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformationCell.h; sourceTree = "<group>"; };
@@ -2207,6 +2210,8 @@
 				8D3A2FDF1BE7100000913DEC /* FDescriptionViewController.xib */,
 				8184EC351BCC96E1003F440D /* MakeSureViewController.h */,
 				8184EC361BCC96E1003F440D /* MakeSureViewController.m */,
+				81EB618E1C02A77F00A84696 /* ChooseRedBagController.h */,
+				81EB618F1C02A77F00A84696 /* ChooseRedBagController.m */,
 				815A6FCD1BEB7EFF003059A5 /* RechargeViewController.h */,
 				815A6FCE1BEB7EFF003059A5 /* RechargeViewController.m */,
 				81AC90C31BEC88C100232404 /* RechargeAlreadyBinding.h */,
@@ -3798,6 +3803,7 @@
 				8D88D0FE1BFECCB40051D6DA /* MJRefreshBackNormalFooter.m in Sources */,
 				816F1ED21BF5C61C00DB6B65 /* InviteSocilPlatFormCell.m in Sources */,
 				81379F2C1BEB48AA002CDB16 /* CashOtherFinViewController.m in Sources */,
+				81EB61901C02A77F00A84696 /* ChooseRedBagController.m in Sources */,
 				8D5DBB891BD4839B00F556B9 /* CastDownTableViewCell.m in Sources */,
 				8175BE901BE9E3730044026E /* ChooseRedBagCell.m in Sources */,
 				8DD1809D1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m in Sources */,
@@ -4198,10 +4204,8 @@
 					"$(PROJECT_DIR)/DSLC/Three/Wechat",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "8378951f-c1b2-4de4-8b1b-4de5bb6cb030";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4224,10 +4228,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "8378951f-c1b2-4de4-8b1b-4de5bb6cb030";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
