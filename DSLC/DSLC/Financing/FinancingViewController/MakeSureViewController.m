@@ -126,6 +126,13 @@
     self.labelJiGe.font = [UIFont systemFontOfSize:15];
     
     self.imageViewRight = [[UIImageView alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendValuenotification:) name:@"sendValue" object:nil];
+}
+
+- (void)sendValuenotification:(NSNotification *)notice
+{
+    self.labelJiGe.text = [notice object];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -372,7 +379,8 @@
                 
                 self.labelJiGe.text = [self.accountDic objectForKey:@"redPacket"];
                 self.labelJiGe.textAlignment = NSTextAlignmentCenter;
-                self.labelJiGe.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 16 - 30, 0, 30, 48);
+                self.labelJiGe.textAlignment = NSTextAlignmentRight;
+                self.labelJiGe.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 20 - 16 - 100, 0, 100, 48);
                 [cell addSubview:self.labelJiGe];
                 
                 self.imageViewRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 16, 16, 16, 16);
