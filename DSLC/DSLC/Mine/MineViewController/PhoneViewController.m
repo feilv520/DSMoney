@@ -61,6 +61,7 @@
     
     textFieldSmsCode = [CreatView creatWithfFrame:CGRectMake(CGRectGetMaxX(labelNew.frame)+ 10, 10, 180, 30) setPlaceholder:@"请输入验证码" setTintColor:[UIColor grayColor]];
     [viewDown addSubview:textFieldSmsCode];
+    textFieldSmsCode.keyboardType = UIKeyboardTypeNumberPad;
     textFieldSmsCode.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [textFieldSmsCode addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     [textFieldSmsCode addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];

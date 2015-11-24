@@ -60,7 +60,6 @@
     textFieldArr = @[@"请输入新登录密码", @"请再次输入新登录密码"];
     
     textFieldPhoneNum = [CreatView creatWithfFrame:CGRectMake(130, 10, WIDTH_CONTROLLER_DEFAULT - 130 - 10, 30) setPlaceholder:nil setTintColor:[UIColor grayColor]];
-//    textFieldPhoneNum.text = @"15940942599";
     textFieldPhoneNum.placeholder = @"请输入手机号";
     textFieldPhoneNum.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     textFieldPhoneNum.keyboardType = UIKeyboardTypeNumberPad;
@@ -94,7 +93,7 @@
         cell.textField.placeholder = @"请输入验证码";
         cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textField.tintColor = [UIColor grayColor];
-        cell.textField.tag = 500;
+        cell.textField.tag = 5000;
         cell.textField.delegate = self;
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         [cell.textField addTarget:self action:@selector(textFieldEditing:) forControlEvents:UIControlEventEditingChanged];
@@ -117,12 +116,13 @@
         
         if (indexPath.row == 0) {
             
-            cell.labelTitle.text = @"绑定手机号";
+            cell.labelTitle.text = @"手机号";
             cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
             cell.textField.hidden = YES;
             [cell addSubview:textFieldPhoneNum];
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             textFieldPhoneNum.tag = 1000;
+            textFieldPhoneNum.delegate = self;
             
         } else {
             
@@ -158,22 +158,90 @@
 
 - (void)textFieldEditing:(UITextField *)textField
 {
-    textField1 = (UITextField *)[self.view viewWithTag:500];
+    textField1 = (UITextField *)[self.view viewWithTag:5000];
     textField2 = (UITextField *)[self.view viewWithTag:902];
     textField3 = (UITextField *)[self.view viewWithTag:903];
     
-    if (textFieldPhoneNum.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && [textField2.text isEqualToString:textField3.text]) {
-        
-        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        
-    } else {
-        
+    if (textFieldPhoneNum.text.length < 11) {
+
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+
+    } else if (textField1.text.length < 6) {
+
         [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
         
+    } else if (textField2.text.length <6) {
+
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (textField3.text.length < 6) {
+
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (![textField2.text isEqualToString:textField3.text]) {
+
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     }
     
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 1000) {
+        
+        if (range.location == 11) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+        
+    } else if (textField.tag == 5000) {
+        
+        if (range.location == 6) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+            
+        }
+        
+    } else if (textField.tag == 902) {
+        
+        if (range.location <= 11) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+        
+    } else {
+        
+        if (range.location <= 11) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+    }
 }
 
 //获取验证码
@@ -195,15 +263,23 @@
 //确定按钮
 - (void)ensureButton:(UIButton *)button
 {
-    
     [self.view endEditing:YES];
     
-    textField1 = (UITextField *)[self.view viewWithTag:500];
+    textField1 = (UITextField *)[self.view viewWithTag:5000];
     textField2 = (UITextField *)[self.view viewWithTag:902];
     textField3 = (UITextField *)[self.view viewWithTag:903];
     
-    if (textFieldPhoneNum.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && [textField2.text isEqualToString:textField3.text]) {
-        
+    if (textFieldPhoneNum.text.length < 11) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的手机号有误"];
+    } else if (textField1.text.length < 6) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的验证码有误"];
+    } else if (textField2.text.length <6) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的密码有误"];
+    } else if (textField3.text.length < 6) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的密码码有误"];
+    } else if (![textField2.text isEqualToString:textField3.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的密码与再次确认的密码不匹配"];
+    } else {        
         NSDictionary *parameter = @{@"phone":textFieldPhoneNum.text,@"smsCode":textField1.text,@"password":textField2.text,@"msgType":@"3"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/findPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
@@ -220,14 +296,6 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];
-        
-        
-        
-    } else if (![textField3.text isEqualToString:textField2.text]) {
-        
-        [self.view endEditing:YES];
-        [ProgressHUD showMessage:@"输入的登录密码与确认的登录密码不匹配" Width:80 High:80];
-        
     }
 }
 

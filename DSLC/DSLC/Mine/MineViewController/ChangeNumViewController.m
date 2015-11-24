@@ -89,32 +89,32 @@
     [butMakeSure addTarget:self action:@selector(makeSureButtonLast:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    if (textField.tag == 308) {
-//        
-//        if (range.location == 11) {
-//            
-//            return NO;
-//            
-//        } else {
-//            
-//            return YES;
-//            
-//        }
-//        
-//    } else {
-//        
-//        if (range.location == 6) {
-//            
-//            return NO;
-//            
-//        } else {
-//            
-//            return YES;
-//        }
-//    }
-//}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 308) {
+        
+        if (range.location == 11) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+            
+        }
+        
+    } else {
+        
+        if (range.location == 6) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+    }
+}
 
 - (void)textFieldEdit:(UITextField *)textField
 {

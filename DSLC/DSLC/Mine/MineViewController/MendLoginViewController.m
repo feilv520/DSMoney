@@ -10,7 +10,7 @@
 #import "MendLoginCell.h"
 #import "ForgetSecretViewController.h"
 
-@interface MendLoginViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MendLoginViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 {
     UITableView *_tableView;
@@ -33,9 +33,6 @@
     self.view.backgroundColor = [UIColor huibai];
     
     [self.navigationItem setTitle:@"修改登录密码"];
-    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"找回" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarItem:)];
-//    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:15], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
     [self contentShow];
 }
@@ -81,11 +78,24 @@
     cell.textFieldRight.placeholder = [textArr objectAtIndex:indexPath.row];
     cell.textFieldRight.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     cell.textFieldRight.tintColor = [UIColor grayColor];
+    cell.textFieldRight.delegate = self;
     cell.textFieldRight.tag = indexPath.row + 300;
     [cell.textFieldRight addTarget:self action:@selector(editTextField:) forControlEvents:UIControlEventEditingChanged];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location <= 11) {
+        
+        return YES;
+        
+    } else {
+        
+        return NO;
+    }
 }
 
 - (void)editTextField:(UITextField *)textField
@@ -94,16 +104,32 @@
     textField2 = (UITextField *)[self.view viewWithTag:301];
     textField3 = (UITextField *)[self.view viewWithTag:302];
     
-    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0) {
-        
-        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        
-    } else {
+    if (textField1.text.length < 6) {
         
         [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (textField2.text.length < 6) {
+        
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (textField3.text.length < 6) {
+        
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (![textField2.text isEqualToString:textField3.text]) {
+        
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [butMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     }
+    
 }
 
 //确定按钮
@@ -112,10 +138,27 @@
     textField1 = (UITextField *)[self.view viewWithTag:300];
     textField2 = (UITextField *)[self.view viewWithTag:301];
     textField3 = (UITextField *)[self.view viewWithTag:302];
-
-    self.flagDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    if (textField1.text.length >= 6 && textField1.text.length <=12 && [textField2.text isEqualToString:textField3.text]) {
+    if (textField1.text.length < 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的密码有误"];
+        
+    } else if (textField2.text.length < 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码不符合要求"];
+        
+    } else if (textField3.text.length < 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"确认的密码与输入的密码不匹配"];
+        
+    } else if (![textField2.text isEqualToString:textField3.text]) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"确认的密码与输入的密码不匹配"];
+        
+    } else {
+        
+        self.flagDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        
         NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"optType":@1,@"oldPwd":textField1.text,@"newPwd":textField2.text,@"smsCode":@""};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
@@ -127,15 +170,11 @@
                 
             } else {
                 
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的原登录密码错误"];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"原登录密码不对"];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];
-        
-    } else {
-        
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"新密码与确认密码不匹配"];
     }
 }
 
