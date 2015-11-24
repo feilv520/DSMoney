@@ -232,7 +232,7 @@
         cell.labelInvestor.textColor = [UIColor zitihui];
         cell.labelInvestor.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.InvestorContent.text = [self.detailM productAnnualYield];
+        cell.InvestorContent.text = [NSString stringWithFormat:@"%@%%",[self.detailM productAnnualYield]];
         cell.InvestorContent.textColor = [UIColor zitihui];
         cell.InvestorContent.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.InvestorContent.textAlignment = NSTextAlignmentRight;
@@ -516,8 +516,12 @@
 
 - (void)calButtonAction:(id)sender{
     
-    calendar.totalLabel.text = [NSString stringWithFormat:@"%.2f",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * ([[self.detailM productPeriod] floatValue] / 36000.0)];
+    if (calendar.inputMoney.text == nil) {
+        [self showTanKuangWithMode:MBProgressHUDModeIndeterminate Text:@"请输入投资金额"];
+    } else {
     
+        calendar.totalLabel.text = [NSString stringWithFormat:@"%.2f",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * ([[self.detailM productPeriod] floatValue] / 36000.0)];
+    }
 }
 
 - (void)closeButton:(UIButton *)but{

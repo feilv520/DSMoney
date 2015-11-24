@@ -24,7 +24,9 @@
 #import "ChooseRedBagController.h"
 #import "RedBagModel.h"
 
-@interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>{
+    RedBagModel *redbagModel;
+}
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) NSArray *titleArr;
 @property (nonatomic) UILabel *qianShu;
@@ -129,7 +131,7 @@
 
 - (void)sendValuenotification:(NSNotification *)notice
 {
-    RedBagModel *redbagModel = [notice object];
+    redbagModel = [notice object];
     self.labelJiGe.text = [NSString stringWithFormat:@"%@~%@元",[redbagModel rpFloor], [redbagModel rpTop]];
 }
 
@@ -488,8 +490,35 @@
 //    判断新手还是固收或银行票据
     if (self.decide == NO) {
         
-        CashFinishViewController *cashFinishVC = [[CashFinishViewController alloc] init];
-        [self.navigationController pushViewController:cashFinishVC animated:YES];
+        self.textFieldC = (UITextField *)[self.view viewWithTag:199];
+        
+        if ([redbagModel redPacketId] != nil) {
+        
+            NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+            
+            NSDictionary *parameter = @{@"productId":[self.detailM productId],@"packetId":[redbagModel rpID],@"orderMoney":[NSNumber numberWithFloat:[[self.textFieldC.text stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue]],@"payMoney":@0,@"payType":@0,@"payPwd":@0,@"token":[dic objectForKey:@"token"]};
+            
+            NSLog(@"%@",parameter);
+            
+            [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+                
+                NSLog(@"buyProduct = %@",responseObject);
+                if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                    CashFinishViewController *cashFinishVC = [[CashFinishViewController alloc] init];
+                    [self.navigationController pushViewController:cashFinishVC animated:YES];
+                } else {
+                    [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+                }
+                
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                
+                NSLog(@"%@", error);
+                
+            }];
+        
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先选择新手红包"];
+        }
         
     } else {
         

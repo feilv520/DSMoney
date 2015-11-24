@@ -136,7 +136,7 @@
         NSLog(@"getMyRedPacketList = %@",responseObject);
         
         for (NSDictionary *dic in [responseObject objectForKey:@"RedPacket"]) {
-            if ([[dic objectForKey:@"rpType"] isEqualToString:@"随机红包"] || [[dic objectForKey:@"rpType"] isEqualToString:@"新手体验红包"]) {
+            if ([[dic objectForKey:@"rpType"] isEqualToString:@"2"] || [[dic objectForKey:@"rpType"] isEqualToString:@"1"]) {
                 RedBagModel *redbagModel = [[RedBagModel alloc] init];
                 [redbagModel setValuesForKeysWithDictionary:dic];
                 [self.redBagArray addObject:redbagModel];

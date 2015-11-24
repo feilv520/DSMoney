@@ -437,6 +437,7 @@
 		8D3125E61BD7689200143B71 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125E51BD7689200143B71 /* BaseViewController.m */; };
 		8D3125EA1BD7798000143B71 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125E81BD7798000143B71 /* ForgetPasswordViewController.m */; };
 		8D3125EB1BD7798000143B71 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3125E91BD7798000143B71 /* ForgetPasswordViewController.xib */; };
+		8D31DF221C04874700B676AF /* MTransactionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D31DF211C04874700B676AF /* MTransactionModel.m */; settings = {ASSET_TAGS = (); }; };
 		8D3A2FD11BE70F5500913DEC /* lianggeren@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3A2FCF1BE70F5500913DEC /* lianggeren@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D3A2FD21BE70F5500913DEC /* lianggeren@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3A2FD01BE70F5500913DEC /* lianggeren@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D3A2FD91BE70FBF00913DEC /* PhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A2FD41BE70FBF00913DEC /* PhotoTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -1297,6 +1298,8 @@
 		8D3125E71BD7798000143B71 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
 		8D3125E81BD7798000143B71 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
 		8D3125E91BD7798000143B71 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
+		8D31DF201C04874700B676AF /* MTransactionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTransactionModel.h; sourceTree = "<group>"; };
+		8D31DF211C04874700B676AF /* MTransactionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTransactionModel.m; sourceTree = "<group>"; };
 		8D3A2FCF1BE70F5500913DEC /* lianggeren@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lianggeren@2x.png"; sourceTree = "<group>"; };
 		8D3A2FD01BE70F5500913DEC /* lianggeren@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lianggeren@3x.png"; sourceTree = "<group>"; };
 		8D3A2FD31BE70FBF00913DEC /* PhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTableViewCell.h; sourceTree = "<group>"; };
@@ -2209,6 +2212,8 @@
 				81349D111BF9D7E800D845EF /* AddressBook.m */,
 				8D4518631C00410100FAF998 /* RedBagModel.h */,
 				8D4518641C00410100FAF998 /* RedBagModel.m */,
+				8D31DF201C04874700B676AF /* MTransactionModel.h */,
+				8D31DF211C04874700B676AF /* MTransactionModel.m */,
 			);
 			path = MineModel;
 			sourceTree = "<group>";
@@ -3996,6 +4001,7 @@
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
 				817E33941BD7576600D05103 /* MeCell.m in Sources */,
 				81B674011BF0873B007CEF51 /* InviteNameViewController.m in Sources */,
+				8D31DF221C04874700B676AF /* MTransactionModel.m in Sources */,
 				815D27A41BE21040005410C6 /* UpCell.m in Sources */,
 				8DD955CC1BF6D5EB00C17A65 /* NSString+Check.m in Sources */,
 				8D88D0FD1BFECCB40051D6DA /* MJRefreshBackGifFooter.m in Sources */,
