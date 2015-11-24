@@ -175,7 +175,7 @@
     NSArray *rootArray = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
     registerV = [rootArray firstObject];
     
-    registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, (150 / 375.0) * HEIGHT_CONTROLLER_DEFAULT);
+    registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, (125 / 375.0) * HEIGHT_CONTROLLER_DEFAULT);
     
     [registerV.sandMyselfIDCard addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     [registerV.smsCode addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
