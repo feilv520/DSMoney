@@ -4223,7 +4223,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "95317571-7c76-4a98-a436-6f370b35d14c";
+				PROVISIONING_PROFILE = "97bc9dff-bb13-4d20-a14e-692f4fa4a195";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4247,7 +4247,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "95317571-7c76-4a98-a436-6f370b35d14c";
+				PROVISIONING_PROFILE = "97bc9dff-bb13-4d20-a14e-692f4fa4a195";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
