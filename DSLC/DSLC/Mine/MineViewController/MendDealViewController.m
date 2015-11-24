@@ -19,11 +19,11 @@
     NSArray *textArray;
     UIButton *buttonMake;
     
-    UITextField *textField1;
-    UITextField *textField2;
-    UITextField *textField3;
-    UITextField *textField4;
-    UITextField *textField5;
+    UITextField *textLast;
+    UITextField *textNew;
+    UITextField *textMakeSure;
+    UITextField *textPhone;
+    UITextField *textNum;
 }
 
 @end
@@ -130,78 +130,155 @@
 
 - (void)mendDealTextField:(UITextField *)textField
 {
-    textField4 = (UITextField *)[self.view viewWithTag:603];
-    textField5 = (UITextField *)[self.view viewWithTag:604];
+    textLast = (UITextField *)[self.view viewWithTag:700];
+    textNew = (UITextField *)[self.view viewWithTag:701];
+    textMakeSure = (UITextField *)[self.view viewWithTag:702];
+    textPhone = (UITextField *)[self.view viewWithTag:703];
+    textNum = (UITextField *)[self.view viewWithTag:704];
     
-    if (textField3.text.length > 0 && textField4.text.length > 0 && textField5.text.length > 0) {
-        
-        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        
-    } else {
+    if (textLast.text.length < 6) {
         
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (textNew.text.length < 6) {
+        
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (textMakeSure.text.length < 6) {
+        
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (![textNew.text isEqualToString:textMakeSure.text]) {
+        
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (textPhone.text.length < 11) {
+        
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (textNum.text.length < 6) {
+        
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     }
+    
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    textField1 = (UITextField *)[self.view viewWithTag:700];
-    textField2 = (UITextField *)[self.view viewWithTag:701];
-    textField3 = (UITextField *)[self.view viewWithTag:702];
-    textField4 = (UITextField *)[self.view viewWithTag:703];
-    textField5 = (UITextField *)[self.view viewWithTag:704];
-    
-    [textField1 resignFirstResponder];
-    [textField2 resignFirstResponder];
-    [textField3 resignFirstResponder];
-    [textField5 resignFirstResponder];
+    if (textField.tag == 703) {
+        
+        if (range.location < 11) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+        
+    } else if (textField.tag == 704) {
+        
+        if (range.location == 6) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+        
+    } else {
+        
+        if (range.location <= 19) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+    }
 }
 
 //确定按钮
 - (void)makeSureButtonMendDeal:(UIButton *)button
 {
-    textField1 = (UITextField *)[self.view viewWithTag:700];
-    textField2 = (UITextField *)[self.view viewWithTag:701];
-    textField3 = (UITextField *)[self.view viewWithTag:702];
-    textField4 = (UITextField *)[self.view viewWithTag:703];
-    textField5 = (UITextField *)[self.view viewWithTag:704];
+    [self.view endEditing:YES];
     
-    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0 && textField4.text.length > 0 && textField5.text.length > 0) {
+    textLast = (UITextField *)[self.view viewWithTag:700];
+    textNew = (UITextField *)[self.view viewWithTag:701];
+    textMakeSure = (UITextField *)[self.view viewWithTag:702];
+    textPhone = (UITextField *)[self.view viewWithTag:703];
+    textNum = (UITextField *)[self.view viewWithTag:704];
+    
+    if (textLast.text.length == 0) {
         
-        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入信息"];
         
-        NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"],@"optType":@1,@"oldPayPwd":textField1.text,@"newPwd":textField2.text,@"smsCode":@""};
+    } else if (textLast.text.length < 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的原交易密码有误"];
+        
+    } else if (textNew.text.length < 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的新交易密码不符合要求"];
+        
+    } else if (textMakeSure.text.length < 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的新交易密码与原交易密码不匹配"];
+        
+    } else if (![textNew.text isEqualToString:textMakeSure.text]) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的新交易密码与原交易密码不匹配"];
+        
+    } else if (textPhone.text.length < 11) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的手机号有误"];
+        
+    } else if (textNum.text.length < 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的验证码有误"];
+        
+    } else {
+        
+        NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"],@"optType":@1,@"oldPayPwd":textLast.text,@"newPwd":textNew.text,@"smsCode":@""};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
             }
+            
             [self.navigationController popViewControllerAnimated:YES];
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];
-        
-    } else {
-        
-        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-        [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+ 
     }
-
 }
 
 // 获得验证码
 - (void)getCodeButtonAction:(UIButton *)btn{
+    
     [self.view endEditing:YES];
     
-    textField5 = (UITextField *)[self.view viewWithTag:704];
+    textNum = (UITextField *)[self.view viewWithTag:704];
     
-    if (textField5.text.length == 0) {
+    if (textNum.text.length == 0) {
         [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
     } else {
-        NSDictionary *parameters = @{@"phone":textField5.text,@"msgType":@"4"};
+        NSDictionary *parameters = @{@"phone":textNum.text,@"msgType":@"4"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
@@ -209,6 +286,11 @@
             NSLog(@"%@",error);
         }];
     }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {
