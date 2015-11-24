@@ -61,7 +61,6 @@
     self.textFieldSecret.placeholder = @"请输入交易密码";
     self.textFieldSecret.secureTextEntry = YES;
     self.textFieldSecret.font = [UIFont systemFontOfSize:14];
-    self.textFieldSecret.keyboardType = UIKeyboardTypeNumberPad;
     self.textFieldSecret.tintColor = [UIColor grayColor];
     self.textFieldSecret.delegate = self;
     [self.textFieldSecret addTarget:self action:@selector(textLengthChange:) forControlEvents:UIControlEventEditingChanged];
@@ -103,7 +102,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
-    if (range.location == 6){
+    if (range.location == 20){
 
         return  NO;
         
@@ -118,7 +117,7 @@
 {
     [self.textFieldSecret resignFirstResponder];
     
-    if (self.textFieldSecret.text.length == 6) {
+    if ( self.textFieldSecret.text.length > 5 && self.textFieldSecret.text.length < 21) {
         
 //        支付没有红包
 //        CashOtherFinViewController *cashOther = [[CashOtherFinViewController alloc] init];
@@ -143,7 +142,7 @@
 // 判断字符串长度
 - (void)textLengthChange:(UITextField *)textField
 {
-    if ( self.textFieldSecret.text.length == 6) {
+    if ( self.textFieldSecret.text.length > 5 && self.textFieldSecret.text.length < 21) {
         
         [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -166,7 +165,7 @@
 - (void)buyProduct{
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"productId":self.idString,@"productType":self.typeString,@"packetId":@0,@"orderMoney":self.moneyString,@"payMoney":@0,@"payType":@1,@"payPwd":self.textFieldSecret.text,@"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"productId":self.idString,@"packetId":@0,@"orderMoney":self.moneyString,@"payMoney":@0,@"payType":@1,@"payPwd":self.textFieldSecret.text,@"token":[dic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

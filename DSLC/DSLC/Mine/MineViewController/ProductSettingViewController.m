@@ -349,19 +349,19 @@
     {
         if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productType"] isEqualToString:@"1"]) {
             
-            GSNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+            GSNumber += [[[DES3Util decrypt:[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"]]stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
             
         } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productType"] isEqualToString:@"2"]) {
             
-            PJNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+            PJNumber += [[[DES3Util decrypt:[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"]]stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
             
         } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productType"] isEqualToString:@"3"]) {
             
-            NewNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+            NewNumber += [[[DES3Util decrypt:[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"]]stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
             
         } else if ([[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productType"] isEqualToString:@"4"]) {
             
-            BDNumber += [[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"] floatValue];
+            BDNumber += [[[DES3Util decrypt:[[[self.moneyDic objectForKey:@"Asset"] objectAtIndex:i] objectForKey:@"productMoney"]]stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
             
         }
         
@@ -370,27 +370,31 @@
         //            [_slices addObject:one];
     }
 
+    CGFloat totalFloat = [[[DES3Util decrypt:[self.moneyDic objectForKey:@"totalMoney"]] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
+    
+    NSLog(@"%f",[[[DES3Util decrypt:[self.moneyDic objectForKey:@"totalMoney"]] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue]);
+    
     for (NSInteger i = 0; i < 4; i ++) {
         if (GSNumber != 0.0f) {
-            NSString *nameString = [NSString stringWithFormat:@"固收理财%.0f%%",GSNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue] * 100];
+            NSString *nameString = [NSString stringWithFormat:@"固收理财%.0f%%",GSNumber * 100.0 / totalFloat ];
 
             [self.nameMArr addObject:nameString];
             [self.slices addObject:[NSString stringWithFormat:@"%f",GSNumber]];
             GSNumber = 0.0f;
         } else if (PJNumber != 0.0f) {
-            NSString *nameString = [NSString stringWithFormat:@"票据投资%.0f%%",PJNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue] * 100];
+            NSString *nameString = [NSString stringWithFormat:@"票据投资%.0f%%",PJNumber * 100.0 / totalFloat];
 
             [self.nameMArr addObject:nameString];
             [self.slices addObject:[NSString stringWithFormat:@"%f",PJNumber]];
             PJNumber = 0.0f;
         } else if (NewNumber != 0.0f) {
-            NSString *nameString = [NSString stringWithFormat:@"新手专享%.0f%%",NewNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue] * 100];
+            NSString *nameString = [NSString stringWithFormat:@"新手专享%.0f%%",NewNumber * 100.0 / totalFloat];
 
             [self.nameMArr addObject:nameString];
             [self.slices addObject:[NSString stringWithFormat:@"%f",NewNumber]];
             NewNumber = 0.0f;
         } else if (BDNumber != 0.0f) {
-            NSString *nameString = [NSString stringWithFormat:@"标的投资%.0f%%",BDNumber / [[self.moneyDic objectForKey:@"totalMoney"] floatValue] * 100];
+            NSString *nameString = [NSString stringWithFormat:@"标的投资%.0f%%",BDNumber * 100.0 / totalFloat];
 
             [self.nameMArr addObject:nameString];
             [self.slices addObject:[NSString stringWithFormat:@"%f",BDNumber]];

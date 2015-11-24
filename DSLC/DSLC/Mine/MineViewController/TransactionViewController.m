@@ -13,12 +13,18 @@
 #import "AppDelegate.h"
 #import "TranctionTableViewCell.h"
 #import "MSelectionView.h"
+#import "MTransactionModel.h"
 
 @interface TransactionViewController () <UITableViewDataSource, UITableViewDelegate>{
     UIView *selectionView;
     UIView *bView;
+    
+    NSMutableArray *transactionArr;
+    NSDictionary *transactionDic;
+    
 }
-
+@property (nonatomic, strong) NSMutableArray *transactionArray;
+@property (nonatomic, strong) NSMutableArray *transactionName;
 @property (nonatomic, strong) UITableView *mainTableView;
 
 @end
@@ -29,6 +35,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = Color_Gray;
+    
+    self.transactionArray = [NSMutableArray array];
+    self.transactionName = [NSMutableArray array];
     
     [self getMyTradeList];
     
@@ -151,11 +160,12 @@
     UIButton *labelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     [labelButton setFrame:CGRectMake(10, -7, 60, 60)];
-    if (section == 0) {
-        [labelButton setImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
-    } else {
-        [labelButton setImage:[UIImage imageNamed:@"8"] forState:UIControlStateNormal];
-    }
+    
+    NSString *monthString = [self.transactionName objectAtIndex:section];
+    
+    monthString = [monthString substringWithRange:NSMakeRange(5, 2)];
+    
+    [labelButton setImage:[UIImage imageNamed:monthString] forState:UIControlStateNormal];
     
     [labelButton setTitle:@" 月" forState:UIControlStateNormal];
     [labelButton.titleLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:14]];
@@ -196,23 +206,28 @@
     
     TranctionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tranction"];
     
+    cell.userInteractionEnabled = NO;
+    
     cell.contentView.layer.masksToBounds = YES;
     cell.contentView.layer.cornerRadius = 8.0;
+    
+    MTransactionModel *tModel = [[[self.transactionArray objectAtIndex:indexPath.section] objectForKey:[self.transactionName objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+
+    cell.dateLabel.text = [tModel tradeTime];
+    cell.stateLabel.text = [tModel tradeStatus];
+    cell.typeLabel.text = [tModel tradeType];
+    cell.moneyLabel.text = [DES3Util decrypt:[tModel tradeMoney]];
     
     return cell;
     
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return self.transactionName.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0) {
-        return 4;
-    } else {
-        return 2;
-    }
+    return [[[self.transactionArray objectAtIndex:section] objectForKey:[self.transactionName objectAtIndex:section]] count];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -226,11 +241,32 @@
     
     NSLog(@"token = %@",[self.flagDic objectForKey:@"token"]);
     
-    NSDictionary *parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":@"2015-10-01",@"tranEndDate":@"2015-10-31",@"tranType":@""};
+    NSDictionary *parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":@"",@"tranEndDate":@"",@"tranType":@""};
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyTradeList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/trade/getMyTradeRecords" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"%@",responseObject);
+        NSLog(@"%@",[responseObject objectForKey:@"Trade"]);
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
+            self.transactionName = [[dic allKeys] copy];
+        }
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
+            for (NSInteger i = 0; i < self.transactionName.count; i++) {
+                transactionArr = [NSMutableArray array];
+                for (NSDictionary *ddic in [dic objectForKey:[self.transactionName objectAtIndex:i]]) {
+                    MTransactionModel *tModel = [[MTransactionModel alloc] init];
+                    [tModel setValuesForKeysWithDictionary:ddic];
+                    [transactionArr addObject:tModel];
+                }
+                transactionDic = [NSDictionary dictionaryWithObject:transactionArr forKey:[self.transactionName objectAtIndex:i]];
+                [self.transactionArray addObject:transactionDic];
+            }
+        }
+        
+        [_mainTableView reloadData];
+//        NSLog(@"transactionName = %@",self.transactionName);
+//        NSLog(@"transactionArray = %@",self.transactionArray);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

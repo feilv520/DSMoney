@@ -499,7 +499,7 @@
 //    labelGet.numberOfLines = 3;
     FDetailViewController *detailVC = [[FDetailViewController alloc] init];
     detailVC.estimate = NO;
-    detailVC.idString = @"71";
+    detailVC.idString = @"79";
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
