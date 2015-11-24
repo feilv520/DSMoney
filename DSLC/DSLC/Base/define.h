@@ -55,5 +55,6 @@
 #import "GTMBase64.h"
 #include <CommonCrypto/CommonCryptor.h>
 #import "DES3Util.h"                         // 加密
+#import "NSString+Check.h"                   // 字符串检查
 
 #endif /* Header_h */

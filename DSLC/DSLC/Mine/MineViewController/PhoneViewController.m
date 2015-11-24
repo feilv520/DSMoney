@@ -16,6 +16,9 @@
     UITextField *textFieldPhoneNumber;
     UITextField *textFieldSmsCode;
     UIButton *butNext;
+    
+    NSInteger seconds;
+    NSTimer *timer;
 }
 
 @end
@@ -25,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    seconds = 120;
     
     self.view.backgroundColor = [UIColor huibai];
     
@@ -38,11 +43,11 @@
     UIView *viewTop = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewTop];
 
-    UILabel *labelLine1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
-    [self.view addSubview:labelLine1];
-    [self labelLineShow:labelLine1];
+//    UILabel *labelLine1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
+//    [self.view addSubview:labelLine1];
+//    [self labelLineShow:labelLine1];
     
-    UILabel *labelNew = [CreatView creatWithLabelFrame:CGRectMake(10, 0.5, 60, 49.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"%@", @"原手机号"]];
+    UILabel *labelNew = [CreatView creatWithLabelFrame:CGRectMake(10, 1, 60, 49) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"%@", @"原手机号"]];
     
     textFieldPhoneNumber = [CreatView creatWithfFrame:CGRectMake(CGRectGetMaxX(labelNew.frame)+ 10, 1, WIDTH_CONTROLLER_DEFAULT - 100, 49.5) setPlaceholder:@"请输入原来的手机号" setTintColor:[UIColor grayColor]];
     textFieldPhoneNumber.font = [UIFont systemFontOfSize:15];
@@ -56,7 +61,7 @@
     UIView *viewDown = [CreatView creatViewWithFrame:CGRectMake(0, 60, WIDTH_CONTROLLER_DEFAULT, 50)backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewDown];
     
-    UILabel *labelVerify = [CreatView creatWithLabelFrame:CGRectMake(10, 0.5, 50, 49.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"验证码"];
+    UILabel *labelVerify = [CreatView creatWithLabelFrame:CGRectMake(10, 1, 50, 49) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"验证码"];
     [viewDown addSubview:labelVerify];
     
     textFieldSmsCode = [CreatView creatWithfFrame:CGRectMake(CGRectGetMaxX(labelNew.frame)+ 10, 10, 180, 30) setPlaceholder:@"请输入验证码" setTintColor:[UIColor grayColor]];
@@ -71,17 +76,18 @@
     butGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     butGet.layer.cornerRadius = 4;
     butGet.layer.masksToBounds = YES;
+    butGet.tag = 9080;
     butGet.layer.borderWidth = 0.5;
     butGet.layer.borderColor = [[UIColor daohanglan] CGColor];
     [butGet addTarget:self action:@selector(getNumButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *labelLine2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5)];
-    [viewDown addSubview:labelLine2];
-    [self labelLineShow:labelLine2];
+//    UILabel *labelLine2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5)];
+//    [viewDown addSubview:labelLine2];
+//    [self labelLineShow:labelLine2];
     
-    UILabel *labelLine3 = [[UILabel alloc] initWithFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
-    [viewDown addSubview:labelLine3];
-    [self labelLineShow:labelLine3];
+//    UILabel *labelLine3 = [[UILabel alloc] initWithFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
+//    [viewDown addSubview:labelLine3];
+//    [self labelLineShow:labelLine3];
     
     butNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT * (170.0 / 667.0), WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
     [self.view addSubview:butNext];
@@ -93,19 +99,26 @@
 //获取验证码
 - (void)getNumButton:(UIButton *)button
 {
-    NSDictionary *parameter = @{@"phone":textFieldPhoneNumber.text, @"msgType":@"2"};
+    if (textFieldPhoneNumber.text.length <= 0){
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+    } else {
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已发送"];
-        [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
-        NSLog(@"ooooooo%@", responseObject);
+        NSDictionary *parameter = @{@"phone":textFieldPhoneNumber.text, @"msgType":@"2"};
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已发送"];
+            NSLog(@"ooooooo%@", responseObject);
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"fffffffff%@", error);
+            
+        }];
         
-        NSLog(@"fffffffff%@", error);
-        
-    }];
+    }
 }
 
 #pragma mark textField delegate
@@ -172,6 +185,50 @@
     label.backgroundColor = [UIColor grayColor];
     label.alpha = 0.2;
 }
+
+#pragma mark 验证码倒计时
+#pragma mark --------------------------------
+
+// 验证码倒计时
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:9080];
+    
+    NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",seconds];
+    
+    if (seconds == 1) {
+        [theTimer invalidate];
+        seconds = 120;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor daohanglan].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [button setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+        [button setEnabled:YES];
+    }else{
+        seconds--;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor zitihui].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setEnabled:NO];
+    }
+}
+
+- (void)releaseTImer {
+    if (timer) {
+        if ([timer respondsToSelector:@selector(isValid)]) {
+            if ([timer isValid]) {
+                [timer invalidate];
+                seconds = 120;
+            }
+        }
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
