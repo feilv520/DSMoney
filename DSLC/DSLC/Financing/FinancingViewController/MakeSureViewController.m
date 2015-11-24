@@ -496,7 +496,7 @@
         AppDelegate *app = [[UIApplication sharedApplication] delegate];
         
         self.textFieldC = (UITextField *)[self.view viewWithTag:199];
-        CGFloat numberInt = [[[self.accountDic objectForKey:@"accBalance"] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
+        CGFloat numberInt = [[[DES3Util decrypt:[self.accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
         CGFloat shuRuInt = self.textFieldC.text.floatValue;
         
 //        NSLog(@"--- %@ ====--- %.f %.f",[[self.accountDic objectForKey:@"accBalance"] stringByReplacingOccurrencesOfString:@"," withString:@""],numberInt,shuRuInt);
