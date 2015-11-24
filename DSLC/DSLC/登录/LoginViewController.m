@@ -238,24 +238,24 @@
 {
     if (textField.tag == 1000) {
         
-        if (range.location == 11) {
+        if (range.location < 11) {
             
-            return NO;
+            return YES;
             
         } else {
             
-            return YES;
+            return NO;
         }
         
     } else {
         
-        if (range.location == 12) {
+        if (range.location < 12) {
             
-            return NO;
+            return YES;
             
         } else {
             
-            return YES;
+            return NO;
         }
     }
 }
@@ -265,15 +265,28 @@
     textField1 = (UITextField *)[self.view viewWithTag:1000];
     textField2 = (UITextField *)[self.view viewWithTag:1001];
     
-    if (textField1.text.length == 11 && (textField2.text.length >= 6 && textField2.text.length <= 12)) {
+    if (textField1.text.length == 0) {
         
-        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入..."];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (textField1.text.length != 11) {
+        
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (textField2.text.length < 6) {
+        
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"登录密码错误"];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
         
     } else {
         
-        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     }
     
 }
@@ -286,6 +299,7 @@
     textField2 = (UITextField *)[self.view viewWithTag:1001];
     
     if (textField1.text.length == 11 && (textField2.text.length >= 6 && textField2.text.length <= 12)) {
+//        *
         if ([NSString validateMobile:textField1.text]) {
             NSDictionary *parameter = @{@"phone":textField1.text,@"password":textField2.text};
             [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -333,6 +347,7 @@
                     textField2.text = @"";
                     
                 } else {
+                    
                     [ProgressHUD showMessage:@"手机号或密码错误" Width:100 High:20];
                 }
                 

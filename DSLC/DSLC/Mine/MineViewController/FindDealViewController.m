@@ -10,7 +10,7 @@
 #import "MendDealCell.h"
 #import "MendDeal2Cell.h"
 
-@interface FindDealViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface FindDealViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 {
     UITableView *_tableView;
@@ -18,10 +18,13 @@
     NSArray *textArray;
     UIButton *butReally;
     
-    UITextField *textField0;
-    UITextField *textField1;
-    UITextField *textField2;
-    UITextField *textField3;
+    UITextField *textPhoneNum;
+    UITextField *textCheckNum;
+    UITextField *textNewDeal;
+    UITextField *textMakeNew;
+    
+    NSInteger seconds;
+    NSTimer *timer;
 }
 
 @end
@@ -32,9 +35,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"找回交易密码"];
     
+    seconds = 120;
     [self tableViewShow];
 }
 
@@ -81,6 +85,7 @@
         cell.buttonGet.layer.cornerRadius = 3;
         cell.buttonGet.layer.masksToBounds = YES;
         cell.buttonGet.layer.borderWidth = 0.5;
+        cell.buttonGet.tag = 5678;
         cell.buttonGet.layer.borderColor = [[UIColor daohanglan] CGColor];
         [cell.buttonGet addTarget:self action:@selector(getCodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -91,6 +96,8 @@
         cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textField.tintColor = [UIColor grayColor];
         cell.textField.tag = 701;
+        cell.textField.delegate = self;
+        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         [cell.textField addTarget:self action:@selector(findSecretTextFieldEdit:) forControlEvents:UIControlEventEditingChanged];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -106,7 +113,13 @@
         cell.textField.placeholder = [textArray objectAtIndex:indexPath.row];
         cell.textField.tintColor = [UIColor grayColor];
         cell.textField.tag = indexPath.row + 700;
+        cell.textField.delegate = self;
         [cell.textField addTarget:self action:@selector(findSecretTextFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+        
+        if (indexPath.row == 0) {
+            
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+        }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -114,52 +127,135 @@
     }
 }
 
-- (void)findSecretTextFieldEdit:(UITextField *)textField
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    textField1 = (UITextField *)[self.view viewWithTag:701];
-    textField2 = (UITextField *)[self.view viewWithTag:702];
-    textField3 = (UITextField *)[self.view viewWithTag:703];
-    
-    if (textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0) {
+    if (textField.tag == 700) {
         
-        [butReally setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [butReally setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        if (range.location < 11) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+        
+    } else if (textField.tag == 701) {
+        
+        if (range.location == 6) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
         
     } else {
         
+        if (range.location < 20) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+    }
+}
+
+- (void)findSecretTextFieldEdit:(UITextField *)textField
+{
+    textPhoneNum = (UITextField *)[self.view viewWithTag:700];
+    textCheckNum = (UITextField *)[self.view viewWithTag:701];
+    textNewDeal = (UITextField *)[self.view viewWithTag:702];
+    textMakeNew = (UITextField *)[self.view viewWithTag:703];
+    
+    if (![NSString validateMobile:textPhoneNum.text]) {
+        
         [butReally setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [butReally setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+
+    } else if (textCheckNum.text.length != 6) {
+        
+        [butReally setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butReally setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+
+    } else if (textNewDeal.text.length < 6) {
+        
+        [butReally setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butReally setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+
+    } else if (![textNewDeal.text isEqualToString:textMakeNew.text]) {
+        
+        [butReally setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butReally setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+
+    } else {
+        
+        [butReally setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [butReally setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     }
 }
 
 //确定按钮
 - (void)findSecretMakeSure:(UIButton *)button
 {
-    textField0 = (UITextField *)[self.view viewWithTag:700];
-    textField1 = (UITextField *)[self.view viewWithTag:701];
-    textField2 = (UITextField *)[self.view viewWithTag:702];
-    textField3 = (UITextField *)[self.view viewWithTag:703];
+    [self.view endEditing:YES];
     
-    if (textField0.text.length > 0 && textField1.text.length > 0 && textField2.text.length > 0 && textField3.text.length > 0) {
+    textPhoneNum = (UITextField *)[self.view viewWithTag:700];
+    textCheckNum = (UITextField *)[self.view viewWithTag:701];
+    textNewDeal = (UITextField *)[self.view viewWithTag:702];
+    textMakeNew = (UITextField *)[self.view viewWithTag:703];
+    
+    if (textPhoneNum.text.length == 0) {
         
-        NSLog(@"对了");
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if (![NSString validateMobile:textPhoneNum.text]) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
+    } else if (textCheckNum.text.length != 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
+        
+    } else if (textNewDeal.text.length < 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
+        
+    } else if (textMakeNew.text.length < 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
+        
+    } else if (![textNewDeal.text isEqualToString:textMakeNew.text]) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
         
     } else {
         
+        NSLog(@"对了");
     }
-
+        
 }
 
 // 获得验证码
 - (void)getCodeButtonAction:(UIButton *)btn{
     [self.view endEditing:YES];
     
-    textField0 = (UITextField *)[self.view viewWithTag:700];
+    textPhoneNum = (UITextField *)[self.view viewWithTag:700];
     
-    if (textField0.text.length == 0) {
+    if (textPhoneNum.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if (![NSString validateMobile:textPhoneNum.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
     } else {
-        NSDictionary *parameters = @{@"phone":textField0.text};
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+        
+        NSDictionary *parameters = @{@"phone":textPhoneNum.text, @"msgType":@"4 "};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
@@ -167,6 +263,39 @@
             NSLog(@"%@",error);
         }];
     }
+}
+
+// 验证码倒计时
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:5678];
+    
+    if (seconds == 1) {
+        [theTimer invalidate];
+        seconds = 120;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor daohanglan].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [button setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+        [button setEnabled:YES];
+    }else{
+        seconds--;
+        NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",seconds];
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor zitihui].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setEnabled:NO];
+    }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

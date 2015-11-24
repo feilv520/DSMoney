@@ -42,18 +42,15 @@
 {
     UIView *viewTop = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewTop];
-
-//    UILabel *labelLine1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
-//    [self.view addSubview:labelLine1];
-//    [self labelLineShow:labelLine1];
     
     UILabel *labelNew = [CreatView creatWithLabelFrame:CGRectMake(10, 1, 60, 49) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"%@", @"原手机号"]];
     
     textFieldPhoneNumber = [CreatView creatWithfFrame:CGRectMake(CGRectGetMaxX(labelNew.frame)+ 10, 1, WIDTH_CONTROLLER_DEFAULT - 100, 49.5) setPlaceholder:@"请输入原来的手机号" setTintColor:[UIColor grayColor]];
+    textFieldPhoneNumber.tag = 77777;
+    textFieldPhoneNumber.delegate = self;
     textFieldPhoneNumber.font = [UIFont systemFontOfSize:15];
     textFieldPhoneNumber.keyboardType = UIKeyboardTypeNumberPad;
     [textFieldPhoneNumber addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
-    [textFieldPhoneNumber addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     [viewTop addSubview:textFieldPhoneNumber];
     [viewTop addSubview:labelNew];
@@ -66,10 +63,11 @@
     
     textFieldSmsCode = [CreatView creatWithfFrame:CGRectMake(CGRectGetMaxX(labelNew.frame)+ 10, 10, 180, 30) setPlaceholder:@"请输入验证码" setTintColor:[UIColor grayColor]];
     [viewDown addSubview:textFieldSmsCode];
+    textFieldSmsCode.tag = 66666;
+    textFieldSmsCode.delegate = self;
     textFieldSmsCode.keyboardType = UIKeyboardTypeNumberPad;
     textFieldSmsCode.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [textFieldSmsCode addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
-    [textFieldSmsCode addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     UIButton *butGet = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 100, 10, 90, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] titleText:@"获取验证码"];
     [viewDown addSubview:butGet];
@@ -80,14 +78,6 @@
     butGet.layer.borderWidth = 0.5;
     butGet.layer.borderColor = [[UIColor daohanglan] CGColor];
     [butGet addTarget:self action:@selector(getNumButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-//    UILabel *labelLine2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5)];
-//    [viewDown addSubview:labelLine2];
-//    [self labelLineShow:labelLine2];
-    
-//    UILabel *labelLine3 = [[UILabel alloc] initWithFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
-//    [viewDown addSubview:labelLine3];
-//    [self labelLineShow:labelLine3];
     
     butNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT * (170.0 / 667.0), WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
     [self.view addSubview:butNext];
@@ -101,6 +91,10 @@
 {
     if (textFieldPhoneNumber.text.length <= 0){
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if (![NSString validateMobile:textFieldPhoneNumber.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
     } else {
     
         timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
@@ -126,26 +120,45 @@
 
 - (void)textFieldEdit:(UITextField *)textField
 {
-    if ([textFieldSmsCode.text length] > 0 && [textFieldPhoneNumber.text length] > 0) {
-        [butNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [butNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        
-    } else {
+    if (textFieldPhoneNumber.text.length != 11) {
         
         [butNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [butNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else if (textFieldSmsCode.text.length != 6) {
+        
+        [butNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [butNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [butNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [butNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     }
 }
 
-- (void)textFieldDidChange:(UITextField *)textField
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (textField == textFieldSmsCode) {
-        if (textField.text.length > 6) {
-            textField.text = [textField.text substringToIndex:6];
+    if (textField.tag == 77777) {
+        
+        if (range.location < 11) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
         }
-    } else if (textField == textFieldPhoneNumber) {
-        if (textField.text.length > 11) {
-            textField.text = [textField.text substringToIndex:11];
+        
+    } else {
+        
+        if (range.location == 6) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
         }
     }
 }
@@ -153,7 +166,15 @@
 //下一步按钮
 - (void)nextButton:(UIButton *)button
 {
-    if ([textFieldSmsCode.text length] > 0 && [textFieldPhoneNumber.text length] > 0) {
+    if (textFieldPhoneNumber.text.length == 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if (textFieldSmsCode.text.length != 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
+        
+    } else {
         
         NSDictionary *parameter = @{@"smsCode":textFieldSmsCode.text,@"phone":textFieldPhoneNumber.text,};
         
@@ -166,6 +187,9 @@
                 ChangeNumViewController *changeNumVC = [[ChangeNumViewController alloc] init];
                 [self.navigationController pushViewController:changeNumVC animated:YES];
                 
+            } else {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -173,11 +197,42 @@
             NSLog(@"fffffffff%@", error);
             
         }];
-        ChangeNumViewController *changeNumVC = [[ChangeNumViewController alloc] init];
-        [self.navigationController pushViewController:changeNumVC animated:YES];
-    } else {
-        
+
     }
+    
+    
+//    if ([textFieldSmsCode.text length] > 0 && [textFieldPhoneNumber.text length] > 0) {
+//        
+//        NSDictionary *parameter = @{@"smsCode":textFieldSmsCode.text,@"phone":textFieldPhoneNumber.text,};
+//        
+//        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/checkSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+//            
+//            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+//            NSLog(@"ooooooo%@", responseObject);
+//            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+//                
+//                ChangeNumViewController *changeNumVC = [[ChangeNumViewController alloc] init];
+//                [self.navigationController pushViewController:changeNumVC animated:YES];
+//                
+//            } else {
+//                
+//                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
+//            }
+//            
+//        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//            
+//            NSLog(@"fffffffff%@", error);
+//            
+//        }];
+//
+//    } else {
+//        
+//    }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 - (void)labelLineShow:(UILabel *)label

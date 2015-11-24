@@ -139,21 +139,25 @@
     textField2 = (UITextField *)[self.view viewWithTag:301];
     textField3 = (UITextField *)[self.view viewWithTag:302];
     
-    if (textField1.text.length < 6) {
+    if (textField1.text.length == 0) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的密码有误"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入登录密码"];
+        
+    } else if (textField1.text.length < 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码错误"];
         
     } else if (textField2.text.length < 6) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码不符合要求"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
         
     } else if (textField3.text.length < 6) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"确认的密码与输入的密码不匹配"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
         
     } else if (![textField2.text isEqualToString:textField3.text]) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"确认的密码与输入的密码不匹配"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
         
     } else {
         
@@ -170,7 +174,7 @@
                 
             } else {
                 
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"原登录密码不对"];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码错误"];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

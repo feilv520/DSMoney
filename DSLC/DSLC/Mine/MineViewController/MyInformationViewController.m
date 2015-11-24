@@ -268,16 +268,21 @@
             
         } else if (indexPath.row == 1) {
             
-//            如果已经设置交易密码 跳转的是修改交易密码
-//            MendDealViewController *mendDeal = [[MendDealViewController alloc] init];
-//            [self.navigationController pushViewController:mendDeal animated:YES];
+            NSString *design = [[self.dataDic objectForKey:@"setPayPwd"] description];
+            NSLog(@"设置没有:%@", design);
             
-//            如果没有设置交易密码 需要设置交易密码
-            SetDealSecret *setDeal = [[SetDealSecret alloc] init];
-            [self.navigationController pushViewController:setDeal animated:YES];
-            
+            if ([design isEqualToString:@"1"]) {
+                
+                MendDealViewController *mendDeal = [[MendDealViewController alloc] init];
+                [self.navigationController pushViewController:mendDeal animated:YES];
+                
+            } else {
+                
+                SetDealSecret *setDeal = [[SetDealSecret alloc] init];
+                [self.navigationController pushViewController:setDeal animated:YES];
+
+            }
         }
-        
     }
 }
 
@@ -422,8 +427,6 @@
 // 退出按钮的动作
 - (void)buttonExit:(UIButton *)button
 {
-    
-    
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
     [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
     

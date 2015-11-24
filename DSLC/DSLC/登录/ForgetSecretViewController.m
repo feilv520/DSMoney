@@ -38,7 +38,7 @@
     
     seconds = 120;
     
-    self.view.backgroundColor = [UIColor qianhuise];
+    self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"找回登录密码"];
     
     [self tableViewShowTime];
@@ -169,7 +169,7 @@
     textField2 = (UITextField *)[self.view viewWithTag:902];
     textField3 = (UITextField *)[self.view viewWithTag:903];
     
-    if (textFieldPhoneNum.text.length < 11) {
+    if (![NSString validateMobile:textFieldPhoneNum.text]) {
 
         [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
@@ -252,10 +252,18 @@
 }
 
 //获取验证码
-- (void)getCodeButtonAction:(UIButton *)btn{
+- (void)getCodeButtonAction:(UIButton *)btn
+{
     [self.view endEditing:YES];
+    
+    textFieldPhoneNum = (UITextField *)[self.view viewWithTag:1000];
+    
     if (textFieldPhoneNum.text.length == 0) {
         [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+        
+    } else if (![NSString validateMobile:textFieldPhoneNum.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
     } else {
         
         timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
@@ -279,16 +287,18 @@
     textField2 = (UITextField *)[self.view viewWithTag:902];
     textField3 = (UITextField *)[self.view viewWithTag:903];
     
-    if (textFieldPhoneNum.text.length < 11) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的手机号有误"];
+    if (textFieldPhoneNum.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入信息"];
+    } else if (![NSString validateMobile:textFieldPhoneNum.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
     } else if (textField1.text.length < 6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的验证码有误"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
     } else if (textField2.text.length <6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的密码有误"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
     } else if (textField3.text.length < 6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的密码码有误"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
     } else if (![textField2.text isEqualToString:textField3.text]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的密码与再次确认的密码不匹配"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
     } else {        
         NSDictionary *parameter = @{@"phone":textFieldPhoneNum.text,@"smsCode":textField1.text,@"password":textField2.text,@"msgType":@"3"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/findPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {

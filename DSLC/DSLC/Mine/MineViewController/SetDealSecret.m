@@ -73,12 +73,14 @@
     textField1 = (UITextField *)[self.view viewWithTag:700];
     textField2 = (UITextField *)[self.view viewWithTag:701];
     
-    if (textField1.text.length < 6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"设置的交易密码不符合要求"];
+    if (textField1.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请设置交易密码"];
+    } else if (textField1.text.length < 6) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
     } else if (textField2.text.length < 6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"设置的交易密码与确认的交易密码不匹配"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
     } else if (![textField1.text isEqualToString:textField2.text]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"设置的交易密码与确认的交易密码不匹配"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
     } else {
         [self findPwd];
     }
@@ -151,17 +153,6 @@
         [buttonMoney setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonMoney setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     }
-    
-//    if (textField1.text.length >= 6 && textField2.text.length >= 6 && [textField1.text isEqualToString:textField2.text]) {
-//        
-//        [buttonMoney setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-//        [buttonMoney setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-//        
-//    } else {
-//        
-//        [buttonMoney setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-//        [buttonMoney setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
-//    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

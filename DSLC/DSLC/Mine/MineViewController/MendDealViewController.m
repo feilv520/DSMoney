@@ -24,6 +24,9 @@
     UITextField *textMakeSure;
     UITextField *textPhone;
     UITextField *textNum;
+    
+    NSInteger seconds;
+    NSTimer *timer;
 }
 
 @end
@@ -40,6 +43,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"找回" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarPress:)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:15], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
+    seconds = 120;
     [self tableViewShow];
 }
 
@@ -94,6 +98,7 @@
         cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textField.tintColor = [UIColor grayColor];
         cell.textField.tag = 704;
+        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.textField.delegate = self;
         [cell.textField addTarget:self action:@selector(mendDealTextField:) forControlEvents:UIControlEventEditingChanged];
         
@@ -101,6 +106,7 @@
         [cell.buttonGet setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
         cell.buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.buttonGet.layer.cornerRadius = 3;
+        cell.buttonGet.tag = 1090;
         cell.buttonGet.layer.masksToBounds = YES;
         cell.buttonGet.layer.borderColor = [[UIColor daohanglan] CGColor];
         cell.buttonGet.layer.borderWidth = 0.5;
@@ -122,6 +128,11 @@
         cell.textField.tag = indexPath.row + 700;
         cell.textField.delegate = self;
         [cell.textField addTarget:self action:@selector(mendDealTextField:) forControlEvents:UIControlEventEditingChanged];
+        
+        if (indexPath.row == 3) {
+            
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+        }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -156,7 +167,7 @@
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
         
-    } else if (textPhone.text.length < 11) {
+    } else if (![NSString validateMobile:textPhone.text]) {
         
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
@@ -224,31 +235,31 @@
     
     if (textLast.text.length == 0) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入信息"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入交易密码"];
         
     } else if (textLast.text.length < 6) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的原交易密码有误"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码错误"];
         
     } else if (textNew.text.length < 6) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的新交易密码不符合要求"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
         
     } else if (textMakeSure.text.length < 6) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的新交易密码与原交易密码不匹配"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
         
     } else if (![textNew.text isEqualToString:textMakeSure.text]) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的新交易密码与原交易密码不匹配"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
         
-    } else if (textPhone.text.length < 11) {
+    } else if (![NSString validateMobile:textPhone.text]) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的手机号有误"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
         
     } else if (textNum.text.length < 6) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的验证码有误"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
         
     } else {
         
@@ -273,18 +284,64 @@
     
     [self.view endEditing:YES];
     
-    textNum = (UITextField *)[self.view viewWithTag:704];
+    textPhone = (UITextField *)[self.view viewWithTag:703];
     
-    if (textNum.text.length == 0) {
-        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+    if (textPhone.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if (![NSString validateMobile:textPhone.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入手机格式有误"];
+        
     } else {
-        NSDictionary *parameters = @{@"phone":textNum.text,@"msgType":@"4"};
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+        
+        NSDictionary *parameters = @{@"phone":textPhone.text,@"msgType":@"4"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];
+    }
+}
+
+// 验证码倒计时
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:1090];
+    
+    if (seconds == 1) {
+        [theTimer invalidate];
+        seconds = 120;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor daohanglan].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [button setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+        [button setEnabled:YES];
+    }else{
+        seconds--;
+        NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",seconds];
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor zitihui].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setEnabled:NO];
+    }
+}
+
+- (void)releaseTImer {
+    if (timer) {
+        if ([timer respondsToSelector:@selector(isValid)]) {
+            if ([timer isValid]) {
+                [timer invalidate];
+                seconds = 120;
+            }
+        }
     }
 }
 

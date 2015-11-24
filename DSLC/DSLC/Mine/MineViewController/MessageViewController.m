@@ -55,27 +55,27 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (range.location > 11) {
+    if (range.location < 11) {
         
-        return NO;
+        return YES;
         
     } else {
         
-        return YES;
+        return NO;
     }
 }
 
 - (void)textFiledEdit:(UITextField *)textField
 {
-    if ([textField.text length] >= 6 && [textField.text length] <= 12) {
-        
-        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        
-    } else {
+    if ([textField.text length] < 6) {
         
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     }
 }
 
@@ -84,9 +84,11 @@
 {
     if ([_textField.text length] == 0) {
         
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入密码"];
+        
     } else {
+        
         [self checkUserInfo];
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码错误"];
     }
 }
 
@@ -111,6 +113,8 @@
             _textField.text = @"";
             
         } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"登录密码错误"];
             
         }
         
