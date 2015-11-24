@@ -71,14 +71,14 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beforeWithViewhideWithTabbarView:) name:@"beforeWithView" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addWithNotifiacationCenter:) name:@"hideWithTabbar" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addWithNotifiacationCenter:) name:@"hideWithTabbar" object:nil];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"beforeWithView" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbar" object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"beforeWithView" object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbar" object:nil];
 }
 
 //导航返回按钮
@@ -286,60 +286,62 @@
     textField2 = (UITextField *)[self.view viewWithTag:1001];
     
     if (textField1.text.length == 11 && (textField2.text.length >= 6 && textField2.text.length <= 12)) {
-        
-//        NSDictionary *parameter = @{@"phone":@"15955454588",@"password":@"123"};
-        NSDictionary *parameter = @{@"phone":textField1.text,@"password":textField2.text};
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-            
-            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                // 判断是否存在Member.plist文件
-                if (![FileOfManage ExistOfFile:@"Member.plist"]) {
-                    [FileOfManage createWithFile:@"Member.plist"];
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         textField2.text,@"password",
-                                         [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
-                                         [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
-                                         [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
-                                         [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
-                                         [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
-                                         [responseObject objectForKey:@"token"],@"token",nil];
-                    [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
-                } else {
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         textField2.text,@"password",
-                                         [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
-                                         [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
-                                         [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
-                                         [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
-                                         [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
-                                         [responseObject objectForKey:@"token"],@"token",nil];
-                    [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
-                    NSLog(@"%@",[responseObject objectForKey:@"token"]);
-                }
-                // 判断是否存在isLogin.plist文件
-                if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
-                    [FileOfManage createWithFile:@"isLogin.plist"];
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
-                    [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-                } else {
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
-                    [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-                }
-                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
-                MineViewController *mineVC = [[MineViewController alloc] init];
-                [self.navigationController pushViewController:mineVC animated:NO];
-//                [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
+        if ([NSString validateMobile:textField1.text]) {
+            NSDictionary *parameter = @{@"phone":textField1.text,@"password":textField2.text};
+            [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
                 
-                textField1.text = @"";
-                textField2.text = @"";
+                if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    // 判断是否存在Member.plist文件
+                    if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+                        [FileOfManage createWithFile:@"Member.plist"];
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                             textField2.text,@"password",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                             [responseObject objectForKey:@"token"],@"token",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                    } else {
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                             textField2.text,@"password",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                             [responseObject objectForKey:@"token"],@"token",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                        NSLog(@"%@",[responseObject objectForKey:@"token"]);
+                    }
+                    // 判断是否存在isLogin.plist文件
+                    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                        [FileOfManage createWithFile:@"isLogin.plist"];
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                    } else {
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                    }
+                    [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+                    MineViewController *mineVC = [[MineViewController alloc] init];
+                    [self.navigationController pushViewController:mineVC animated:NO];
+                    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
+                    
+                    textField1.text = @"";
+                    textField2.text = @"";
+                    
+                } else {
+                    [ProgressHUD showMessage:@"手机号或密码错误" Width:100 High:20];
+                }
                 
-            } else {
-                [ProgressHUD showMessage:@"手机号或密码错误" Width:100 High:20];
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"%@",error);
-        }];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"%@",error);
+            }];
+        } else {
+            [ProgressHUD showMessage:@"手机号格式不正确" Width:100 High:20];
+        }
         
     } else if(textField1.text.length < 11) {
         
@@ -383,8 +385,9 @@
 //        NSLog(@"%@", error);
 //        
 //    }];
-    
-    NSDictionary *parameter = @{@"phone":[self.flagUserInfo objectForKey:@"userPhone"],@"password":[self.flagUserInfo objectForKey:@"password"]};
+
+    NSDictionary *parameter = @{@"phone":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"userPhone"]],@"password":[self.flagUserInfo objectForKey:@"password"]};
+    NSLog(@"%@",parameter);
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         [self.view endEditing:YES];
@@ -405,7 +408,7 @@
             
             MineViewController *mineVC = [[MineViewController alloc] init];
             [self.navigationController pushViewController:mineVC animated:NO];
-//            [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
         
         }
         

@@ -114,12 +114,12 @@
 - (void)sendEmail:(UIButton *)button
 {
     [_textField resignFirstResponder];
-    if (_textField.text.length > 0) {
+    if ([NSString validateEmail:_textField.text]) {
         
         [self updateUserEmail];
         
     } else {
-        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"邮箱格式不正确,请更正."];
     }
     
     

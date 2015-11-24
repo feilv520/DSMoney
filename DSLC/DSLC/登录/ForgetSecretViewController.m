@@ -22,6 +22,10 @@
     UITextField *textField1;
     UITextField *textField2;
     UITextField *textField3;
+    
+    NSInteger seconds;
+    
+    NSTimer *timer;
 }
 
 @end
@@ -31,6 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    seconds = 120;
     
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"找回登录密码"];
@@ -102,6 +108,7 @@
         [cell.butGet setTitle:@"获取验证码" forState:UIControlStateNormal];
         [cell.butGet setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
         cell.butGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.butGet.tag = 9080;
         cell.butGet.layer.cornerRadius = 3;
         cell.butGet.layer.masksToBounds = YES;
         cell.butGet.layer.borderWidth = 0.5;
@@ -182,6 +189,9 @@
     if (textFieldPhoneNum.text.length == 0) {
         [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
     } else {
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+        
         NSDictionary *parameters = @{@"phone":textFieldPhoneNum.text,@"msgType":@"3"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
@@ -234,6 +244,48 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
+}
+
+#pragma mark 验证码倒计时
+#pragma mark --------------------------------
+
+// 验证码倒计时
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:9080];
+    
+    if (seconds == 1) {
+        [theTimer invalidate];
+        seconds = 120;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor daohanglan].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [button setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+        [button setEnabled:YES];
+    }else{
+        seconds--;
+        NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",seconds];
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor zitihui].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setEnabled:NO];
+    }
+}
+
+- (void)releaseTImer {
+    if (timer) {
+        if ([timer respondsToSelector:@selector(isValid)]) {
+            if ([timer isValid]) {
+                [timer invalidate];
+                seconds = 120;
+            }
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

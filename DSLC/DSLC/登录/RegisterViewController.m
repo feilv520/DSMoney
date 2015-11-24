@@ -26,6 +26,9 @@
     RegisterProcess *registerP;
     RegisterOfResult *registerR;
     RegisterOfPassButton *registerB;
+    
+    NSTimer *timer;
+    NSInteger seconds;
 }
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
@@ -48,6 +51,8 @@
     [self.navigationItem setTitle:@"注册大圣理财"];
     
     number = 0;
+    
+    seconds = 120;
     
     self.scrollView.contentSize = CGSizeMake(1, 730);
     
@@ -170,7 +175,7 @@
     NSArray *rootArray = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
     registerV = [rootArray firstObject];
     
-    registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, (170 / 375.0) * HEIGHT_CONTROLLER_DEFAULT);
+    registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, (150 / 375.0) * HEIGHT_CONTROLLER_DEFAULT);
     
     [registerV.sandMyselfIDCard addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     [registerV.smsCode addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
@@ -187,6 +192,7 @@
     
     registerV.getCode.layer.masksToBounds = YES;
     registerV.getCode.layer.borderWidth = 1.f;
+    registerV.getCode.tag = 9080;
     registerV.getCode.layer.borderColor = [UIColor daohanglan].CGColor;
     [registerV.getCode setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
     registerV.getCode.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
@@ -223,7 +229,7 @@
     
     payButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    payButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (51 / 375.0), 420, WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), 43);
+    payButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (51 / 375.0), 440, WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), 43);
     
     [payButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
     [payButton setTitle:@"确定" forState:UIControlStateNormal];
@@ -314,6 +320,7 @@
 
 // 检测验证码
 - (void)checkSmsCode{
+    
     NSDictionary *parameters = @{@"smsCode":registerV.smsCode.text};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/checkSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
@@ -422,6 +429,9 @@
     if (registerV.phoneNumber.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
     } else {
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+        
         NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text,@"msgType":@"1"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
@@ -443,6 +453,49 @@
         
         [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    }
+}
+
+#pragma mark 验证码倒计时
+#pragma mark --------------------------------
+
+// 验证码倒计时
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:9080];
+    
+    NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",seconds];
+    
+    if (seconds == 1) {
+        [theTimer invalidate];
+        seconds = 120;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor daohanglan].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [button setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+        [button setEnabled:YES];
+    }else{
+        seconds--;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor zitihui].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setEnabled:NO];
+    }
+}
+
+- (void)releaseTImer {
+    if (timer) {
+        if ([timer respondsToSelector:@selector(isValid)]) {
+            if ([timer isValid]) {
+                [timer invalidate];
+                seconds = 120;
+            }
+        }
     }
 }
 
