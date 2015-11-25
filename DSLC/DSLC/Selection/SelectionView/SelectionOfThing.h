@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *firstLabel;
+@property (weak, nonatomic) IBOutlet UILabel *productName;
 
 @end

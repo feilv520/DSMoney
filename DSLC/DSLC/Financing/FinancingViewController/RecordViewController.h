@@ -10,4 +10,6 @@
 
 @interface RecordViewController : BaseViewController
 
+@property (nonatomic, strong) NSString *idString;
+
 @end

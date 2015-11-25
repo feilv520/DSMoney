@@ -8,12 +8,15 @@
 
 #import "RecordViewController.h"
 #import "RecordCell.h"
+#import "ProductBuyRecords.h"
 
 @interface RecordViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tableView;
 }
+
+@property (nonatomic, strong) NSMutableArray *productListArray;
 
 @end
 
@@ -23,10 +26,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.productListArray = [NSMutableArray array];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"投资记录"];
     
-    [self tableViewShow];
+    [self getProductBuyRecords];
 }
 
 - (void)tableViewShow
@@ -46,23 +51,59 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 7;
+    return self.productListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    cell.labelWho.text = @"张**购买了300,000元";
+    ProductBuyRecords *buyRecords = [self.productListArray objectAtIndex:indexPath.row];
+    
+    NSString *whoString = [NSString stringWithFormat:@"%@**购买了%@",[buyRecords tranName],[buyRecords tranAmount]];
+    cell.labelWho.text = whoString;
     cell.labelWho.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    cell.labelTime.text = @"2015-09-09 12:00";
+    cell.labelTime.text = [buyRecords tranTime];
     cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     cell.labelTime.textColor = [UIColor zitihui];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getProductBuyRecords{
+    
+    NSDictionary *parameter = @{@"productId":self.idString,@"curPage":@1};
+    
+    NSLog(@"%@",parameter);
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductBuyRecords" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [self loadingWithHidden:YES];
+        
+        NSLog(@"%@",responseObject);
+        
+        NSArray *array = [responseObject objectForKey:@"Transaction"];
+        for (NSDictionary *dic in array) {
+            ProductBuyRecords *productBR = [[ProductBuyRecords alloc] init];
+            [productBR setValuesForKeysWithDictionary:dic];
+            [self.productListArray addObject:productBR];
+        }
+        
+        [self tableViewShow];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

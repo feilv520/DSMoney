@@ -218,6 +218,8 @@
     
     [selectionFTView.moreButton addTarget:self action:@selector(moreActionButton:) forControlEvents:UIControlEventTouchUpInside];
     
+    selectionFTView.productName.text = [self.productM productName];
+    
     [backgroundScrollView addSubview:selectionFTView];
     
 }
@@ -385,6 +387,8 @@
 - (void)getPickProduct{
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getPickProduct" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getPickProduct = %@",responseObject);
         
         [self loadingWithHidden:YES];
         

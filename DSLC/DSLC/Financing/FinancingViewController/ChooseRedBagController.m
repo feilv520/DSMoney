@@ -91,7 +91,7 @@
     cell.labelMoney.textColor = [UIColor daohanglan];
     cell.labelMoney.backgroundColor = [UIColor clearColor];
     
-    cell.labelBagStyle.text = [redbagModel rpType];
+    cell.labelBagStyle.text = [redbagModel rpTypeName];
     cell.labelBagStyle.backgroundColor = [UIColor clearColor];
     cell.labelBagStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     

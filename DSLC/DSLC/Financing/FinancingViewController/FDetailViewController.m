@@ -28,6 +28,8 @@
     Calendar *calendar;
     UIView *bView;
     UIView *viewSuan;
+    
+    UIButton *butMakeSure;
 }
 @property (nonatomic, strong) UIControl *viewBotton;
 @property (nonatomic, strong) ProductDetailModel *detailM;
@@ -50,9 +52,7 @@
     
     self.viewBotton = [[UIControl alloc] initWithFrame:CGRectMake(0, app.tabBarVC.view.frame.size.height - 49, WIDTH_CONTROLLER_DEFAULT, app.tabBarVC.view.frame.size.height)];
     [app.tabBarVC.view addSubview:self.viewBotton];
-    self.viewBotton.backgroundColor = [UIColor greenColor];
-
-    [self showBottonView];
+    self.viewBotton.backgroundColor = [UIColor huibai];
     
 }
 
@@ -300,7 +300,7 @@
         cell.buyPlan.textColor = [UIColor zitihui];
         cell.buyPlan.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.timeOne.text = @"2015-9-22";
+        cell.timeOne.text = [self.detailM beginTime];
         cell.timeOne.textColor = [UIColor zitihui];
         cell.timeOne.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
@@ -308,7 +308,7 @@
         cell.beginDay.textColor = [UIColor zitihui];
         cell.beginDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.rightNowTime.text = @"立即起息";
+        cell.rightNowTime.text = [self.detailM beginTime];
         cell.rightNowTime.textColor = [UIColor zitihui];
         cell.rightNowTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
@@ -316,7 +316,7 @@
         cell.labelEndDay.textColor = [UIColor zitihui];
         cell.labelEndDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.endTime.text = @"2015-9-24";
+        cell.endTime.text = [self.detailM endTime];
         cell.endTime.textColor = [UIColor zitihui];
         cell.endTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
@@ -324,7 +324,7 @@
         cell.labelCash.textColor = [UIColor zitihui];
         cell.labelCash.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.cashDay.text = @"2015-9-25";
+        cell.cashDay.text = [self.detailM cashTime];
         cell.cashDay.textColor = [UIColor zitihui];
         cell.cashDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
@@ -367,6 +367,7 @@
         } else if (indexPath.row == 2) {
             
             RecordViewController *recordVC = [[RecordViewController alloc] init];
+            recordVC.idString = self.idString;
             [self.navigationController pushViewController:recordVC animated:YES];
             
         } else {
@@ -398,19 +399,25 @@
     [buttonCal addTarget:self action:@selector(calendarView) forControlEvents:UIControlEventTouchUpInside];
     [self.viewBotton addSubview:buttonCal];
     
-    UIButton *butMakeSure = [UIButton buttonWithType:UIButtonTypeCustom];
+    butMakeSure = [UIButton buttonWithType:UIButtonTypeCustom];
     butMakeSure.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/4, 0, WIDTH_CONTROLLER_DEFAULT/4*3, 49);
     [self.viewBotton addSubview:butMakeSure];
+    butMakeSure.tag = 9080;
     
     if (self.estimate == NO) {
         
-        [butMakeSure setTitle:@"投资(可使用1,000元体验金)" forState:UIControlStateNormal];
+        [butMakeSure setTitle:@"投资(可使用5,000元体验金)" forState:UIControlStateNormal];
         
     } else {
-        
-        [butMakeSure setTitle:@"投资(1,000元起投)" forState:UIControlStateNormal];
-        
+        NSLog(@"%@",self.residueMoney);
+        if ([self.residueMoney isEqualToString:@"0.00"]) {
+            [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
+        } else {
+            [butMakeSure setTitle:@"投资(1,000元起投)" forState:UIControlStateNormal];
+        }
     }
+    
+    
     
     butMakeSure.titleLabel.font = [UIFont systemFontOfSize:15];
     butMakeSure.backgroundColor = [UIColor daohanglan];
@@ -420,6 +427,10 @@
 //确认投资按钮
 - (void)makeSureButton:(UIButton *)button
 {
+    if ([self.residueMoney isEqualToString:@"0.00"]) {
+        [self orderProduct];
+        return;
+    }
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     if ([dic objectForKey:@"token"] != nil) {
@@ -564,6 +575,7 @@
         [self.detailM setValuesForKeysWithDictionary:dic];
         
         [self showTableView];
+         [self showBottonView];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -577,6 +589,7 @@
 
 // 预定产品
 - (void)orderProduct{
+    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSDictionary *parameters = @{@"productId":[self.detailM productId],@"productType":[self.detailM productType],@"token":[dic objectForKey:@"token"]};
@@ -584,7 +597,15 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/orderProduct" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"orderProduct = %@",responseObject);
-        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已预约"];
+            
+            butMakeSure.userInteractionEnabled = NO;
+            [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
+            [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        } else {
+            [ProgressHUD showMessage:@"请先登录,然后再预约" Width:100 High:20];
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
     }];

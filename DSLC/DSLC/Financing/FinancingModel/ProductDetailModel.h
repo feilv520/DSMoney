@@ -34,4 +34,12 @@
 
 @property (nonatomic, copy) NSString *amountMin;
 
+@property (nonatomic, copy) NSString *beginTime;
+
+@property (nonatomic, copy) NSString *cashTime;
+
+@property (nonatomic, copy) NSString *endTime;
+
+@property (nonatomic, copy) NSString *amountIncrease;
+
 @end

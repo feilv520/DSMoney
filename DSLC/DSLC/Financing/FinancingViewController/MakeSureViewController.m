@@ -241,19 +241,19 @@
         cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.viewLine.alpha = 0.7;
         
-        NSMutableAttributedString *year = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@", @"年化收益率", [self.detailM productAnnualYield]]];
+        NSMutableAttributedString *year = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@%%", @"年化收益率", [self.detailM productAnnualYield]]];
         NSRange black = NSMakeRange(0, [[year string] rangeOfString:@":"].location);
         [year addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:black];
         [cell.labelYear setAttributedText:year];
         cell.labelYear.textColor = [UIColor zitihui];
         
-        NSMutableAttributedString *moneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@", @"剩余总额", self.residueMoney]];
+        NSMutableAttributedString *moneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@元", @"剩余总额", self.residueMoney]];
         NSRange moneyRange = NSMakeRange(0, [[moneyStr string] length]);
         [moneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:moneyRange];
         [cell.labelSheng setAttributedText:moneyStr];
         cell.labelSheng.textColor = [UIColor zitihui];
         
-        NSMutableAttributedString *moneyS = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@%@", @"起投资金", [self.detailM amountMin],@"元起投,每1000元递增"]];
+        NSMutableAttributedString *moneyS = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@元起投,每%@元递增", @"起投资金", [self.detailM amountMin],[self.detailM amountIncrease]]];
         NSRange Range = NSMakeRange(0, [[moneyS string] length]);
         [moneyS addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:Range];
         [cell.labelMoney setAttributedText:moneyS];
@@ -564,56 +564,56 @@
 
 //            当输入的值小于余额时 可以投资
         } else if (shuRuInt < numberInt && shuRuInt != 0) {
-
-            self.controlBlack = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
-            [app.tabBarVC.view addSubview:self.controlBlack];
-            self.controlBlack.backgroundColor = [UIColor blackColor];
-            self.controlBlack.alpha = 0.3;
-            [self.controlBlack addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
-            
-            NSBundle *rootBundle = [NSBundle mainBundle];
-            self.viewWhite = (FConfirmMoney *)[[rootBundle loadNibNamed:@"FConfirmMoney" owner:nil options:nil] lastObject];
-            
-            self.viewWhite.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300)/2, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 120, 301, 300);
-            self.viewWhite.layer.masksToBounds = YES;
-            self.viewWhite.layer.cornerRadius = 4;
-            [app.tabBarVC.view addSubview:self.viewWhite];
-            
-            self.viewWhite.labelName.text = @"尊敬的黄经理";
-            self.viewWhite.labelName.font = [UIFont systemFontOfSize:15];
-            
-            [self.viewWhite.buttonClose setImage:[UIImage imageNamed:@"iconfont_graycuo"] forState:UIControlStateNormal];
-            [self.viewWhite.buttonClose addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
-            
-            self.viewWhite.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
-            self.viewWhite.labelLine.alpha = 0.7;
-            
-            self.viewWhite.labelSign.text = @"在购买<<新手专享>>前请您确认:";
-            self.viewWhite.labelSign.font = [UIFont systemFontOfSize:15];
-            self.viewWhite.labelSign.textColor = [UIColor zitihui];
-            
-            self.viewWhite.labelKnow.text = @"本人已清除知悉该收益权产品的基础信息,并已充分了解其产品特性";
-            self.viewWhite.labelKnow.textColor = [UIColor zitihui];
-            self.viewWhite.labelKnow.font = [UIFont systemFontOfSize:15];
-            self.viewWhite.labelKnow.numberOfLines = 0;
-            
-            self.viewWhite.labelBook.textColor = [UIColor zitihui];
-            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"];
-            [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor chongzhiColor] range:[@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"rangeOfString:@"<<购买条款>>、<<收益权转让协议>>"]];
-            [self.viewWhite.labelBook setAttributedText:attStr];
-            self.viewWhite.labelBook.font = [UIFont systemFontOfSize:15];
-            self.viewWhite.labelBook.numberOfLines = 0;
-            
-            self.viewWhite.imageBlueOne.image = [UIImage imageNamed:@"blueyuan"];
-            self.viewWhite.imageBlueTwo.image = [UIImage imageNamed:@"blueyuan"];
-            
-            [self.viewWhite.buttonAffirm setTitle:@"确认" forState:UIControlStateNormal];
-            self.viewWhite.buttonAffirm.titleLabel.font = [UIFont systemFontOfSize:15];
-            self.viewWhite.buttonAffirm.layer.cornerRadius = 4;
-            self.viewWhite.buttonAffirm.layer.masksToBounds = YES;
-            self.viewWhite.buttonAffirm.backgroundColor = [UIColor daohanglan];
-            [self.viewWhite.buttonAffirm addTarget:self action:@selector(buttonAffirmMoney:) forControlEvents:UIControlEventTouchUpInside];
-
+            if (shuRuInt < [[self.detailM amountMin] floatValue]) {
+                self.controlBlack = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+                [app.tabBarVC.view addSubview:self.controlBlack];
+                self.controlBlack.backgroundColor = [UIColor blackColor];
+                self.controlBlack.alpha = 0.3;
+                [self.controlBlack addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+                
+                NSBundle *rootBundle = [NSBundle mainBundle];
+                self.viewWhite = (FConfirmMoney *)[[rootBundle loadNibNamed:@"FConfirmMoney" owner:nil options:nil] lastObject];
+                
+                self.viewWhite.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300)/2, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 120, 301, 300);
+                self.viewWhite.layer.masksToBounds = YES;
+                self.viewWhite.layer.cornerRadius = 4;
+                [app.tabBarVC.view addSubview:self.viewWhite];
+                
+                self.viewWhite.labelName.text = @"尊敬的黄经理";
+                self.viewWhite.labelName.font = [UIFont systemFontOfSize:15];
+                
+                [self.viewWhite.buttonClose setImage:[UIImage imageNamed:@"iconfont_graycuo"] forState:UIControlStateNormal];
+                [self.viewWhite.buttonClose addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+                
+                self.viewWhite.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
+                self.viewWhite.labelLine.alpha = 0.7;
+                
+                self.viewWhite.labelSign.text = @"在购买<<新手专享>>前请您确认:";
+                self.viewWhite.labelSign.font = [UIFont systemFontOfSize:15];
+                self.viewWhite.labelSign.textColor = [UIColor zitihui];
+                
+                self.viewWhite.labelKnow.text = @"本人已清除知悉该收益权产品的基础信息,并已充分了解其产品特性";
+                self.viewWhite.labelKnow.textColor = [UIColor zitihui];
+                self.viewWhite.labelKnow.font = [UIFont systemFontOfSize:15];
+                self.viewWhite.labelKnow.numberOfLines = 0;
+                
+                self.viewWhite.labelBook.textColor = [UIColor zitihui];
+                NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"];
+                [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor chongzhiColor] range:[@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"rangeOfString:@"<<购买条款>>、<<收益权转让协议>>"]];
+                [self.viewWhite.labelBook setAttributedText:attStr];
+                self.viewWhite.labelBook.font = [UIFont systemFontOfSize:15];
+                self.viewWhite.labelBook.numberOfLines = 0;
+                
+                self.viewWhite.imageBlueOne.image = [UIImage imageNamed:@"blueyuan"];
+                self.viewWhite.imageBlueTwo.image = [UIImage imageNamed:@"blueyuan"];
+                
+                [self.viewWhite.buttonAffirm setTitle:@"确认" forState:UIControlStateNormal];
+                self.viewWhite.buttonAffirm.titleLabel.font = [UIFont systemFontOfSize:15];
+                self.viewWhite.buttonAffirm.layer.cornerRadius = 4;
+                self.viewWhite.buttonAffirm.layer.masksToBounds = YES;
+                self.viewWhite.buttonAffirm.backgroundColor = [UIColor daohanglan];
+                [self.viewWhite.buttonAffirm addTarget:self action:@selector(buttonAffirmMoney:) forControlEvents:UIControlEventTouchUpInside];
+            }
         }
     }
 }

@@ -86,7 +86,7 @@
 //继续投资按钮
 - (void)goOnButton:(UIButton *)button
 {
-    NSLog(@"继续投资");
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 //分享拿红包按钮

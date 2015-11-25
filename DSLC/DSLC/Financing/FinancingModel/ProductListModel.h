@@ -22,5 +22,7 @@
 
 @property (nonatomic, copy) NSString *residueMoney;
 
+@property (nonatomic, copy) NSString *productStatus;
+
 @end
 

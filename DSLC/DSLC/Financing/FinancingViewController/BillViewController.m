@@ -35,6 +35,8 @@
     NSArray *butRedArray;
     
     UIImageView *imageView;
+    
+    NSInteger flag;
 }
 
 @property (nonatomic, strong) NSMutableArray *productListArray;
@@ -78,8 +80,6 @@
     [self addTableViewWithFooter:_tableView];
     
     butRedArray = @[@"3", @"6", @"9", @"12", @"7", @"9", @"1", @"5", @"6", @"8"];
-    
-    imageView = [CreatView creatImageViewWithFrame:CGRectMake(275, 65, 49, 49) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"已售罄"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -102,7 +102,7 @@
     [cell.buttonRed setTitle:[NSString stringWithFormat:@"%@", [butRedArray objectAtIndex:indexPath.row]] forState:UIControlStateNormal];
     cell.buttonRed.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    cell.labelMonth.text = @"个月固定投资";
+    cell.labelMonth.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
     cell.labelMonth.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
     cell.labelQiTou.text = [NSString stringWithFormat:@"%@起投",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]];
@@ -131,7 +131,7 @@
     [cell.labelMidUp setAttributedText:midString];
     
     [cell.butRightUp setImage:[UIImage imageNamed:@"组-14"] forState:UIControlStateNormal];
-    NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
+    NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@万元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
     NSRange rightLeft = NSMakeRange(0, [[rightString string] rangeOfString:@"万"].location);
     [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:rightLeft];
     NSRange rightR = NSMakeRange([[rightString string] length] - 2, 2);
@@ -151,13 +151,24 @@
     cell.labelRightDown.textColor = [UIColor zitihui];
     cell.labelRightDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-    if (indexPath.row == 3) {
+//    NSLog(@"%@------%ld",[[self.productListArray objectAtIndex:indexPath.row] productStatus]);
+    if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"4"]) {
+        
+        flag = indexPath.row;
         
         cell.labelRightDown.hidden = YES;
         cell.butRightUp.hidden = YES;
         
+        imageView = [CreatView creatImageViewWithFrame:CGRectMake(275, 65, 49, 49) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"已售罄"]];
+        
         [cell addSubview:imageView];
         
+    } else {
+        cell.labelRightDown.hidden = NO;
+        cell.butRightUp.hidden = NO;
+        
+        [imageView removeFromSuperview];
+        imageView = nil;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
