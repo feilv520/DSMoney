@@ -117,7 +117,7 @@
     cell.BackView.layer.cornerRadius = 4.f;
     
     cell.titleLabel.text = [[self.productArray objectAtIndex:indexPath.row] productName];
-    cell.moneyLabel.text = [[self.productArray objectAtIndex:indexPath.row] productProfit];
+    cell.moneyLabel.text = [DES3Util decrypt:[[self.productArray objectAtIndex:indexPath.row] productProfit]];
     
     return cell;
 }

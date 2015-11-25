@@ -32,12 +32,12 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCR-J3-MRU">
-                        <rect key="frame" x="72" y="50" width="70" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCR-J3-MRU">
+                        <rect key="frame" x="85" y="50" width="276" height="21"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="MYb-Ae-MSh"/>
-                            <constraint firstAttribute="width" constant="70" id="yvk-Uf-y37"/>
+                            <constraint firstAttribute="width" constant="276" id="yvk-Uf-y37"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,9 +59,9 @@
                     <constraint firstItem="2Zh-km-APb" firstAttribute="leading" secondItem="20w-SX-Osb" secondAttribute="leading" id="KMd-Mj-rtN"/>
                     <constraint firstItem="PCR-J3-MRU" firstAttribute="top" secondItem="2Zh-km-APb" secondAttribute="bottom" constant="8" id="joM-sf-jNd"/>
                     <constraint firstItem="2Zh-km-APb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="oO2-db-6Mz"/>
-                    <constraint firstItem="PCR-J3-MRU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="72" id="pLH-Gp-Smn"/>
+                    <constraint firstItem="PCR-J3-MRU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="85" id="pLH-Gp-Smn"/>
                     <constraint firstItem="BMc-yN-uPz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="34" id="rA4-de-Th6"/>
-                    <constraint firstItem="2Zh-km-APb" firstAttribute="centerX" secondItem="PCR-J3-MRU" secondAttribute="centerX" constant="-21" id="vWM-hg-DY3"/>
+                    <constraint firstItem="2Zh-km-APb" firstAttribute="centerX" secondItem="PCR-J3-MRU" secondAttribute="centerX" constant="-137" id="vWM-hg-DY3"/>
                     <constraint firstItem="20w-SX-Osb" firstAttribute="top" secondItem="2Zh-km-APb" secondAttribute="bottom" constant="8" symbolic="YES" id="wVj-zd-bUH"/>
                 </constraints>
             </tableViewCellContentView>
