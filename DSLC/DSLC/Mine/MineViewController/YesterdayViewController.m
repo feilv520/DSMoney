@@ -24,6 +24,8 @@
     
     self.productArray = [NSMutableArray array];
     
+    [self.navigationItem setTitle:@"昨日收益"];
+    
     [super viewDidLoad];
     
     [self getMyProfit];

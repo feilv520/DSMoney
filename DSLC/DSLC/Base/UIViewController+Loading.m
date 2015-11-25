@@ -180,4 +180,35 @@
     return plainText;
 }
 
+- (void)noDateWithView:(NSString *)nameString height:(CGFloat)height view:(UIView *)view{
+    UIView *noDateView = [[UIView alloc] initWithFrame:CGRectMake(0, height, WIDTH_CONTROLLER_DEFAULT, 200)];
+    
+    noDateView.tag = 9909;
+    
+    noDateView.backgroundColor = Color_Clear;
+    
+    [view addSubview:noDateView];
+    
+    UIImageView *noDateImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"filefile"]];
+    noDateImgV.frame = CGRectMake(0, 0, 58, 58);
+
+    noDateImgV.center = CGPointMake(view.center.x, 0);
+
+    
+    [noDateView addSubview:noDateImgV];
+    
+    UILabel *noDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(noDateImgV.frame), WIDTH_CONTROLLER_DEFAULT, 25)];
+    [noDateLabel setText:@"无数据"];
+    noDateLabel.textAlignment = NSTextAlignmentCenter;
+    
+    [noDateView addSubview:noDateLabel];
+    
+}
+
+- (void)noDataViewWithRemoveToView{
+    UIView *noDateView = [self.view viewWithTag:9909];
+    
+    [noDateView removeFromSuperview];
+}
+
 @end

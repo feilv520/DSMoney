@@ -15,7 +15,7 @@
 #import "MSelectionView.h"
 #import "MTransactionModel.h"
 
-@interface TransactionViewController () <UITableViewDataSource, UITableViewDelegate>{
+@interface TransactionViewController () <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>{
     UIView *selectionView;
     UIView *bView;
     
@@ -27,6 +27,10 @@
     NSString *tranBeginDate;
     NSString *tranEndDate;
     
+    NSArray *yearArr;
+    NSArray *monthArr;
+    
+    UIPickerView *myPickerView;
 }
 @property (nonatomic, strong) NSMutableArray *transactionArray;
 @property (nonatomic, strong) NSMutableArray *transactionName;
@@ -43,6 +47,9 @@
     
     self.transactionArray = [NSMutableArray array];
     self.transactionName = [NSMutableArray array];
+    
+    yearArr = @[@"2010",@"2011",@"2012",@"2013",@"2014",@"2015",@"2016",@"2017",@"2018",@"2019",@"2020",@"2021",@"2022",@"2023",@"2024",@"2025",@"2026",@"2027",@"2028",@"2029",@"2030",@"2031",@"2032",@"2033",@"2034",@"2035",@"2036",@"2037",@"2038",@"2039",@"2040",@"2041",@"2042",@"2043",@"2044",@"2045"];
+    monthArr = @[@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12"];
     
     tranBeginDate = @"";
     tranEndDate = @"";
@@ -67,7 +74,8 @@
 }
 
 - (void)itemAction:(UIBarButtonItem *)barButtonItem{
-    
+    [self noDataViewWithRemoveToView];
+    [myPickerView removeFromSuperview];
     if ([barButtonItem.title isEqualToString:@"收起"]) {
         [UIView animateWithDuration:0.5 animations:^{
             selectionView.frame = CGRectMake(0, -200, WIDTH_CONTROLLER_DEFAULT, 200);
@@ -79,7 +87,8 @@
     } else {
         [UIView animateWithDuration:0.5 animations:^{
             selectionView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 200);
-            bView.alpha = 0.7;
+            bView.alpha = 0.3;
+            
         } completion:^(BOOL finished) {
             
         }];
@@ -92,20 +101,34 @@
     
     NSInteger number = btn.tag;
     
-    [self getMyTradeList:0];
-    [UIView animateWithDuration:0.5 animations:^{
-        selectionView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 200);
-        bView.alpha = 0.7;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
+    if (number == 0 || number == 2 || number == 3 || number == 4 || number == 5 || number == 6) {
+        [UIView animateWithDuration:0.5 animations:^{
+            selectionView.frame = CGRectMake(0, -200, WIDTH_CONTROLLER_DEFAULT, 200);
+            bView.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else {
+        [UIView animateWithDuration:0.5 animations:^{
+            selectionView.frame = CGRectMake(0, -200, WIDTH_CONTROLLER_DEFAULT, 200);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    self.navigationItem.rightBarButtonItem.title = @"筛选";
+    NSLog(@"%ld",number);
     switch (number) {
         case 0:
+            tranBeginDate = @"";
+            tranEndDate = @"";
             [self getMyTradeList:0];
             break;
         case 1:
-            
+            [self setPickerView];
+            tranBeginDate = @"2015-11-01";
+            tranEndDate = @"2015-11-31";
+            [myPickerView selectRow:5  inComponent:0 animated:NO];
+            [myPickerView selectRow:10  inComponent:1 animated:NO];
             break;
         case 2:
             [self getMyTradeList:1];
@@ -131,6 +154,7 @@
 //导航返回按钮
 - (void)buttonReturn:(UIBarButtonItem *)bar
 {
+    [myPickerView removeFromSuperview];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -178,6 +202,104 @@
     
 }
 
+// 创建PickerView
+- (void)setPickerView{
+    myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 217, WIDTH_CONTROLLER_DEFAULT, 200)];
+    
+//    [self.view addSubview:pickerView];
+
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.window addSubview:myPickerView];
+    
+    myPickerView.backgroundColor = [UIColor whiteColor];
+    
+    myPickerView.dataSource = self;
+    myPickerView.delegate = self;
+}
+
+#pragma mark pickerView 的代理方法
+#pragma mark --------------------------------
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView
+{
+    // 返回2表明该控件只包含2列
+    return 2;
+}
+// UIPickerViewDataSource中定义的方法，该方法返回值决定该控件指定列包含多少个列表项
+- (NSInteger)pickerView:(UIPickerView *)pickerView
+numberOfRowsInComponent:(NSInteger)component
+{
+    // 如果是第一列，返回yesrArr中元素的个数
+    // 即yesrArr包含多少个元素，第一列就包含多少个列表项
+    if (component == 0) {
+        return yearArr.count;
+    }
+    // 如果是其他列，返回monthArr中元素的个数。
+    // 即monthArr包含多少个元素，其他列（只有第二列）包含多少个列表项
+    return monthArr.count;
+}
+// UIPickerViewDelegate中定义的方法，该方法返回的NSString将作为
+// UIPickerView中指定列、指定列表项上显示的标题
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:
+(NSInteger)row forComponent:(NSInteger)component
+{
+    // 如果是第一列，返回yesrArr中row索引处的元素
+    // 即第一列的列表项标题由yesrArr集合元素决定。
+    if (component == 0) {
+        return [yearArr objectAtIndex:row];
+    }
+    // 如果是其他列（只有第二列），返回monthArr中row索引处的元素
+    // 即第二列的列表项标题由monthArr集合元素决定。
+    return [monthArr objectAtIndex:row];
+}
+// 当用户选中UIPickerViewDataSource中指定列、指定列表项时激发该方法
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:
+(NSInteger)row inComponent:(NSInteger)component
+{
+    NSArray* tmp  = component == 0 ? yearArr: monthArr;
+//    NSString* tip = component == 0 ? @"年": @"月";
+//    // 使用一个UIAlertView来显示用户选中的列表项
+//    UIAlertView* alert = [[UIAlertView alloc]
+//                          initWithTitle:@"提示"
+//                          message:[NSString stringWithFormat:@"你选中的%@是：%@，"
+//                                   , tip , [tmp objectAtIndex:row]]
+//                          delegate:nil
+//                          cancelButtonTitle:@"确定"
+//                          otherButtonTitles:nil];
+    if (component == 0) {
+        tranBeginDate = [tranBeginDate stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:[tmp objectAtIndex:row]];
+        tranEndDate = [tranEndDate stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:[tmp objectAtIndex:row]];
+    } else {
+        tranBeginDate = [tranBeginDate stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:[tmp objectAtIndex:row]];
+        tranEndDate = [tranEndDate stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:[tmp objectAtIndex:row]];
+    }
+    
+    if (component == 1) {
+        [UIView animateWithDuration:0.5 animations:^{
+            [myPickerView removeFromSuperview];
+            bView.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            [self getMyTradeList:0];
+        }];
+    }
+    
+    NSLog(@"%@--%@",tranBeginDate,tranEndDate);
+    
+//    [alert show];
+}
+// UIPickerViewDelegate中定义的方法，该方法返回的NSString将作为
+// UIPickerView中指定列的宽度
+- (CGFloat)pickerView:(UIPickerView *)pickerView
+    widthForComponent:(NSInteger)component
+{
+    // 如果是第二列，宽度为90
+//    if (component == 1) {
+        return WIDTH_CONTROLLER_DEFAULT / 2.0;
+//    }
+    // 如果是其他列（只有第一列），宽度为210
+//    return 210;
+}
+
 // 创建TableView
 - (void)showTableView{
     self.mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 74) style:UITableViewStylePlain];
@@ -192,11 +314,7 @@
     [self.view addSubview:self.mainTableView];
 
 }
-
-//- (void)setPickerView{
-//    UIPickerView *
-//}
-
+    
 #pragma mark tableview delegate and dataSource
 #pragma mark --------------------------------
 
@@ -264,8 +382,14 @@
     MTransactionModel *tModel = [[[self.transactionArray objectAtIndex:indexPath.section] objectForKey:[self.transactionName objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
 
     cell.dateLabel.text = [tModel tradeTime];
-    cell.stateLabel.text = [tModel tradeStatus];
-    cell.typeLabel.text = [tModel tradeType];
+    if ([[tModel tradeStatus] isEqualToString:@"0"]) {
+        cell.stateLabel.text = @"失败";
+        cell.stateLabel.textColor = [UIColor zitihui];
+    } else {
+        cell.stateLabel.text = @"成功";
+        cell.stateLabel.textColor = [UIColor blueColor];
+    }
+    cell.typeLabel.text = [tModel tradeTypeName];
     cell.moneyLabel.text = [DES3Util decrypt:[tModel tradeMoney]];
     
     return cell;
@@ -294,36 +418,39 @@
     if (number == 0 || number == 1) {
         parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":tranBeginDate,@"tranEndDate":tranEndDate,@"tranType":@""};
     } else {
-        parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":@"",@"tranEndDate":@"",@"tranType":@""};
+        parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":@"",@"tranEndDate":@"",@"tranType":[NSNumber numberWithInteger:number]};
     }
-    
-    
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/trade/getMyTradeRecords" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@",[responseObject objectForKey:@"Trade"]);
         
-        for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
-            self.transactionName = [[dic allKeys] copy];
-        }
-        
-        for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
-            for (NSInteger i = 0; i < self.transactionName.count; i++) {
-                transactionArr = [NSMutableArray array];
-                for (NSDictionary *ddic in [dic objectForKey:[self.transactionName objectAtIndex:i]]) {
-                    MTransactionModel *tModel = [[MTransactionModel alloc] init];
-                    [tModel setValuesForKeysWithDictionary:ddic];
-                    [transactionArr addObject:tModel];
-                }
-                transactionDic = [NSDictionary dictionaryWithObject:transactionArr forKey:[self.transactionName objectAtIndex:i]];
-                [self.transactionArray addObject:transactionDic];
+        if ([[[responseObject objectForKey:@"Trade"] objectAtIndex:0] count] == 0) {
+            [self noDateWithView:nil height:120 view:self.view];
+            [_mainTableView setHidden:YES];
+        } else {
+            [_mainTableView setHidden:NO];
+            for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
+                self.transactionName = [[dic allKeys] copy];
             }
-        }
-        
-        [_mainTableView reloadData];
+            
+            for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
+                for (NSInteger i = 0; i < self.transactionName.count; i++) {
+                    transactionArr = [NSMutableArray array];
+                    for (NSDictionary *ddic in [dic objectForKey:[self.transactionName objectAtIndex:i]]) {
+                        MTransactionModel *tModel = [[MTransactionModel alloc] init];
+                        [tModel setValuesForKeysWithDictionary:ddic];
+                        [transactionArr addObject:tModel];
+                    }
+                    transactionDic = [NSDictionary dictionaryWithObject:transactionArr forKey:[self.transactionName objectAtIndex:i]];
+                    [self.transactionArray addObject:transactionDic];
+                }
+            }
+            
+            [_mainTableView reloadData];
 //        NSLog(@"transactionName = %@",self.transactionName);
 //        NSLog(@"transactionArray = %@",self.transactionArray);
-        
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
