@@ -37,6 +37,8 @@
     UIImageView *imageView;
     
     NSInteger flag;
+    
+    NSMutableArray *flagArray;
 }
 
 @property (nonatomic, strong) NSMutableArray *productListArray;
@@ -62,6 +64,9 @@
     
     self.productListArray = [NSMutableArray array];
     
+    flagArray = [NSMutableArray array];
+    
+    imageView = [CreatView creatImageViewWithFrame:CGRectMake(275, 65, 49, 49) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"已售罄"]];
 }
 
 - (void)tableViewShow
@@ -151,24 +156,14 @@
     cell.labelRightDown.textColor = [UIColor zitihui];
     cell.labelRightDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-//    NSLog(@"%@------%ld",[[self.productListArray objectAtIndex:indexPath.row] productStatus]);
     if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"4"]) {
-        
-        flag = indexPath.row;
-        
+        cell.saleOut.hidden = NO;
         cell.labelRightDown.hidden = YES;
         cell.butRightUp.hidden = YES;
-        
-        imageView = [CreatView creatImageViewWithFrame:CGRectMake(275, 65, 49, 49) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"已售罄"]];
-        
-        [cell addSubview:imageView];
-        
     } else {
+        cell.saleOut.hidden = YES;
         cell.labelRightDown.hidden = NO;
         cell.butRightUp.hidden = NO;
-        
-        [imageView removeFromSuperview];
-        imageView = nil;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -200,6 +195,7 @@
         
         NSArray *array = [responseObject objectForKey:@"Product"];
         for (NSDictionary *dic in array) {
+            [flagArray addObject:[dic objectForKey:@"productStatus"]];
             ProductListModel *productM = [[ProductListModel alloc] init];
             [productM setValuesForKeysWithDictionary:dic];
             [self.productListArray addObject:productM];

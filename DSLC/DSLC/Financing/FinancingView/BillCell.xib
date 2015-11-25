@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -28,7 +28,7 @@
                                 <state key="normal" title="Button"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nuz-Qe-dZQ">
-                                <rect key="frame" x="40" y="10" width="141" height="25"/>
+                                <rect key="frame" x="43" y="10" width="141" height="25"/>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -124,6 +124,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="已售罄.png" highlightedImage="已售罄.png" translatesAutoresizingMaskIntoConstraints="NO" id="0dJ-2L-UhP">
+                                <rect key="frame" x="272" y="56" width="50" height="50"/>
+                                <animations/>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -145,7 +149,7 @@
                             <constraint firstItem="exd-hM-5iw" firstAttribute="top" secondItem="zA5-wE-bvn" secondAttribute="bottom" constant="10" id="NYl-CV-6mx"/>
                             <constraint firstAttribute="height" constant="114" id="NcZ-br-egW"/>
                             <constraint firstItem="LkT-1N-BJm" firstAttribute="top" secondItem="v5o-tA-BNJ" secondAttribute="bottom" constant="4" id="P9w-Ed-E2E"/>
-                            <constraint firstItem="Nuz-Qe-dZQ" firstAttribute="leading" secondItem="QDc-eg-lij" secondAttribute="leading" constant="40" id="PQP-Pl-VET"/>
+                            <constraint firstItem="Nuz-Qe-dZQ" firstAttribute="leading" secondItem="QDc-eg-lij" secondAttribute="leading" constant="43" id="PQP-Pl-VET"/>
                             <constraint firstItem="v5o-tA-BNJ" firstAttribute="leading" secondItem="IE7-mF-u5C" secondAttribute="trailing" constant="3" id="SfX-Zd-HXs"/>
                             <constraint firstItem="3XO-Gj-G5o" firstAttribute="top" secondItem="QDc-eg-lij" secondAttribute="top" constant="10" id="T6d-DM-rkm"/>
                             <constraint firstItem="zA5-wE-bvn" firstAttribute="top" secondItem="p63-dX-DdH" secondAttribute="bottom" constant="10" id="TuP-Js-use"/>
@@ -188,6 +192,7 @@
                 <outlet property="labelMonth" destination="Nuz-Qe-dZQ" id="gYU-3W-J2o"/>
                 <outlet property="labelQiTou" destination="p63-dX-DdH" id="ej7-u8-nyc"/>
                 <outlet property="labelRightDown" destination="LkT-1N-BJm" id="y7e-Bw-MKz"/>
+                <outlet property="saleOut" destination="0dJ-2L-UhP" id="Tfx-aG-B1S"/>
                 <outlet property="viewLine1" destination="zA5-wE-bvn" id="MgW-Ns-Lkv"/>
                 <outlet property="viewLine2" destination="9wm-06-ezw" id="tNW-EK-11b"/>
                 <outlet property="viewLine3" destination="sU8-Uc-Nq5" id="Vai-QV-PhD"/>
@@ -195,4 +200,7 @@
             <point key="canvasLocation" x="-536.5" y="302"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="已售罄.png" width="75" height="75"/>
+    </resources>
 </document>

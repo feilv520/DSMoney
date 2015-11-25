@@ -154,7 +154,7 @@
     cell.labelSurplus.font = [UIFont systemFontOfSize:12];
     cell.labelSurplus.backgroundColor = [UIColor clearColor];
     
-    if (indexPath.row == 0) {
+    if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
         
         cell.progressView.hidden = YES;
         
@@ -167,7 +167,9 @@
     } else {
         
         //    设置进度条的进度值 并动画展示
-        [cell.progressView setProgress:0.7 animated:YES];
+        CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
+        
+        [cell.progressView setProgress:bL animated:YES];
         //    设置进度条的颜色
         cell.progressView.trackTintColor = [UIColor progressBackColor];
         //    设置进度条的进度颜色

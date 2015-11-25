@@ -18,6 +18,8 @@
 {
     UITableView *_tableView;
     UIImageView *imageView;
+    UIButton *butLastTime;
+    
 }
 
 @property (nonatomic, strong) NSMutableArray *productListArray;
@@ -211,10 +213,33 @@
         cell.labelSurplus.font = [UIFont systemFontOfSize:12];
         cell.labelSurplus.backgroundColor = [UIColor clearColor];
 
-        imageView = [CreatView creatImageViewWithFrame:CGRectMake(131, 15, 210, 8) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"bar-full"]];
-        cell.progressView.hidden = YES;
-        [cell.viewBottom addSubview:imageView];
+//        imageView = [CreatView creatImageViewWithFrame:CGRectMake(131, 15, 210, 8) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"bar-full"]];
+//        cell.progressView.hidden = YES;
+//        [cell.viewBottom addSubview:imageView];
         cell.viewBottom.backgroundColor = [UIColor qianhuise];
+
+        if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
+            
+            cell.progressView.hidden = YES;
+            
+            butLastTime = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(131, 9, 210, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 倒计时 12:12:65"];
+            [cell.viewBottom addSubview:butLastTime];
+            butLastTime.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+            butLastTime.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+            [butLastTime setImage:[UIImage imageNamed:@"61-拷贝"] forState:UIControlStateNormal];
+            
+        } else {
+            
+            //    设置进度条的进度值 并动画展示
+            CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
+            
+            [cell.progressView setProgress:bL animated:YES];
+            //    设置进度条的颜色
+            cell.progressView.trackTintColor = [UIColor progressBackColor];
+            //    设置进度条的进度颜色
+            cell.progressView.progressTintColor = [UIColor progressColor];
+            
+        }
         
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

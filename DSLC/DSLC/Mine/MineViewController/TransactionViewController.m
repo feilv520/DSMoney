@@ -22,6 +22,11 @@
     NSMutableArray *transactionArr;
     NSDictionary *transactionDic;
     
+    NSDictionary *parameter;
+    
+    NSString *tranBeginDate;
+    NSString *tranEndDate;
+    
 }
 @property (nonatomic, strong) NSMutableArray *transactionArray;
 @property (nonatomic, strong) NSMutableArray *transactionName;
@@ -39,7 +44,10 @@
     self.transactionArray = [NSMutableArray array];
     self.transactionName = [NSMutableArray array];
     
-    [self getMyTradeList];
+    tranBeginDate = @"";
+    tranEndDate = @"";
+    
+    [self getMyTradeList:0];
     
     [self showTableView];
     [self naviagationContentShow];
@@ -82,6 +90,42 @@
 
 - (void)buttonAction:(UIButton *)btn{
     
+    NSInteger number = btn.tag;
+    
+    [self getMyTradeList:0];
+    [UIView animateWithDuration:0.5 animations:^{
+        selectionView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 200);
+        bView.alpha = 0.7;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    switch (number) {
+        case 0:
+            [self getMyTradeList:0];
+            break;
+        case 1:
+            
+            break;
+        case 2:
+            [self getMyTradeList:1];
+            break;
+        case 3:
+            [self getMyTradeList:5];
+            break;
+        case 4:
+            [self getMyTradeList:3];
+            break;
+        case 5:
+            [self getMyTradeList:2];
+            break;
+        case 6:
+            [self getMyTradeList:4];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 //导航返回按钮
@@ -125,6 +169,8 @@
         [buttonView.selectionButton setBackgroundImage:[UIImage imageNamed:@"矩形-10"] forState:UIControlStateNormal];
         [buttonView.selectionButton setBackgroundImage:[UIImage imageNamed:@"anniuS"] forState:UIControlStateSelected];
         
+        buttonView.selectionButton.tag = i;
+        
         [buttonView.selectionButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [selectionView addSubview:buttonView];
@@ -146,6 +192,10 @@
     [self.view addSubview:self.mainTableView];
 
 }
+
+//- (void)setPickerView{
+//    UIPickerView *
+//}
 
 #pragma mark tableview delegate and dataSource
 #pragma mark --------------------------------
@@ -237,11 +287,17 @@
 #pragma mark 网络请求方法
 #pragma mark --------------------------------
 
-- (void)getMyTradeList{
+- (void)getMyTradeList:(NSInteger)number{
     
     NSLog(@"token = %@",[self.flagDic objectForKey:@"token"]);
     
-    NSDictionary *parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":@"",@"tranEndDate":@"",@"tranType":@""};
+    if (number == 0 || number == 1) {
+        parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":tranBeginDate,@"tranEndDate":tranEndDate,@"tranType":@""};
+    } else {
+        parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":@"",@"tranEndDate":@"",@"tranType":@""};
+    }
+    
+    
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/trade/getMyTradeRecords" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

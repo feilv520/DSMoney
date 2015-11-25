@@ -38,4 +38,11 @@
     return [emailTest evaluateWithObject:email];
 }
 
++ (BOOL) validatePassword:(NSString *)password
+{
+    NSString *passwordRegex = @"[a-zA-Z][a-zA-Z0-9]{5,19}$";
+    NSPredicate *passwordTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", passwordRegex];
+    return [passwordTest evaluateWithObject:password];
+}
+
 @end

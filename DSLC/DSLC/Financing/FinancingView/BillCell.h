@@ -22,5 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelLeftDown;
 @property (weak, nonatomic) IBOutlet UILabel *labelMidDown;
 @property (weak, nonatomic) IBOutlet UILabel *labelRightDown;
+@property (weak, nonatomic) IBOutlet UIImageView *saleOut;
 
 @end

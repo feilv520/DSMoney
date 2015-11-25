@@ -12,4 +12,5 @@
 
 + (BOOL) validateMobile:(NSString *)mobile;
 + (BOOL) validateEmail:(NSString *)email;
++ (BOOL) validatePassword:(NSString *)password;
 @end
