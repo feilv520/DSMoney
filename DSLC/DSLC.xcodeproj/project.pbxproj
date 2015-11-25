@@ -384,6 +384,10 @@
 		81F237721BE8568B009D7A67 /* NewMakeSureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F237701BE8568B009D7A67 /* NewMakeSureCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81F237751BE86031009D7A67 /* CashFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F237741BE86031009D7A67 /* CashFinishViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81F237781BE89887009D7A67 /* MyInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F237771BE89887009D7A67 /* MyInformation.m */; settings = {ASSET_TAGS = (); }; };
+		81F343851C0584EB001EF374 /* 圆角矩形-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F343811C0584EB001EF374 /* 圆角矩形-3@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81F343861C0584EB001EF374 /* 圆角矩形-3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F343821C0584EB001EF374 /* 圆角矩形-3@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81F343871C0584EB001EF374 /* iconfont-complete-拷贝-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F343831C0584EB001EF374 /* iconfont-complete-拷贝-3@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81F343881C0584EB001EF374 /* iconfont-complete-拷贝-3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F343841C0584EB001EF374 /* iconfont-complete-拷贝-3@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81F4BD5B1BECC06B00C308F8 /* SetDealSecret.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F4BD5A1BECC06B00C308F8 /* SetDealSecret.m */; settings = {ASSET_TAGS = (); }; };
 		81F5FA0A1BD9E1FE008C38BF /* ChangeNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA091BD9E1FE008C38BF /* ChangeNumViewController.m */; };
 		81F5FA0D1BDA0D2E008C38BF /* RealNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA0C1BDA0D2E008C38BF /* RealNameViewController.m */; };
@@ -1221,6 +1225,10 @@
 		81F237741BE86031009D7A67 /* CashFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashFinishViewController.m; sourceTree = "<group>"; };
 		81F237761BE89887009D7A67 /* MyInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformation.h; sourceTree = "<group>"; };
 		81F237771BE89887009D7A67 /* MyInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformation.m; sourceTree = "<group>"; };
+		81F343811C0584EB001EF374 /* 圆角矩形-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形-3@2x.png"; sourceTree = "<group>"; };
+		81F343821C0584EB001EF374 /* 圆角矩形-3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形-3@3x.png"; sourceTree = "<group>"; };
+		81F343831C0584EB001EF374 /* iconfont-complete-拷贝-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-complete-拷贝-3@2x.png"; sourceTree = "<group>"; };
+		81F343841C0584EB001EF374 /* iconfont-complete-拷贝-3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-complete-拷贝-3@3x.png"; sourceTree = "<group>"; };
 		81F4BD591BECC06B00C308F8 /* SetDealSecret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetDealSecret.h; sourceTree = "<group>"; };
 		81F4BD5A1BECC06B00C308F8 /* SetDealSecret.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetDealSecret.m; sourceTree = "<group>"; };
 		81F5FA081BD9E1FE008C38BF /* ChangeNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNumViewController.h; sourceTree = "<group>"; };
@@ -1954,6 +1962,10 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				81F343811C0584EB001EF374 /* 圆角矩形-3@2x.png */,
+				81F343821C0584EB001EF374 /* 圆角矩形-3@3x.png */,
+				81F343831C0584EB001EF374 /* iconfont-complete-拷贝-3@2x.png */,
+				81F343841C0584EB001EF374 /* iconfont-complete-拷贝-3@3x.png */,
 				8D4343801BFDEB0A000BA004 /* 上面 */,
 				8D4343891BFDEB0A000BA004 /* 中间 */,
 				819B52C81BFC2094002FDF1E /* 银元宝@2x.png */,
@@ -3558,6 +3570,7 @@
 				8191E22E1BDE00DC000A6E8C /* cuo@2x.png in Resources */,
 				8DEDE1D01BCCFFA5008086D3 /* blueyuan@2x.png in Resources */,
 				8175BEB01BE9F2F50044026E /* QQ空间@2x.png in Resources */,
+				81F343861C0584EB001EF374 /* 圆角矩形-3@3x.png in Resources */,
 				8D0AE7FB1BE09CE500D9D50C /* register-3@3x.png in Resources */,
 				81B674221BF0AFEB007CEF51 /* yuan@3x.png in Resources */,
 				817E33AD1BD78ED500D05103 /* iconfont@2x.png in Resources */,
@@ -3609,6 +3622,7 @@
 				8D3F95EC1BE2188500013A8E /* moneymoney@2x.png in Resources */,
 				81AC90BC1BEC7F9900232404 /* 提示@3x.png in Resources */,
 				8D3F95EF1BE2188500013A8E /* filefile@3x.png in Resources */,
+				81F343881C0584EB001EF374 /* iconfont-complete-拷贝-3@3x.png in Resources */,
 				817DD4A11BCF547E00042B09 /* quebao@3x.png in Resources */,
 				8175BEAE1BE9F2F50044026E /* 腾讯微博@2x.png in Resources */,
 				8D3125EB1BD7798000143B71 /* ForgetPasswordViewController.xib in Resources */,
@@ -3629,6 +3643,7 @@
 				8D4B8C091BF2F48E00A88285 /* UMSShareListController.xib in Resources */,
 				81B18E251BE77EA700D448FA /* EmailCell.xib in Resources */,
 				8DEDE1DD1BCD0035008086D3 /* icon_CB@2x.png in Resources */,
+				81F343871C0584EB001EF374 /* iconfont-complete-拷贝-3@2x.png in Resources */,
 				8D4343941BFDEB0B000BA004 /* loading_up_03.png in Resources */,
 				8175BEC31BEA052E0044026E /* 拆红包@3x.png in Resources */,
 				8175BEAB1BE9F2F50044026E /* 新浪微博@3x.png in Resources */,
@@ -3761,6 +3776,7 @@
 				816F1ED31BF5C61C00DB6B65 /* InviteSocilPlatFormCell.xib in Resources */,
 				8D9011851BD62B0600E5D62A /* MSelectionView.xib in Resources */,
 				8D1191921BF1DC1C00A2DE05 /* ProductMoneyTableViewCell.xib in Resources */,
+				81F343851C0584EB001EF374 /* 圆角矩形-3@2x.png in Resources */,
 				8D4343921BFDEB0B000BA004 /* loading_up_01.png in Resources */,
 				8DEDE1E21BCD0035008086D3 /* icon_ICBC@3x.png in Resources */,
 				81379F1B1BEAF56F002CDB16 /* 使用@2x.png in Resources */,

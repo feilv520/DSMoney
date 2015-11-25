@@ -29,6 +29,8 @@
     
     NSTimer *timer;
     NSInteger seconds;
+    
+    UIButton *tapButton;
 }
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
@@ -185,10 +187,15 @@
     
     registerV.phoneNumber.delegate = self;
     registerV.smsCode.delegate = self;
-    registerV.phoneNumber.delegate = self;
     registerV.loginPassword.delegate = self;
     registerV.sureLoginPassword.delegate = self;
     registerV.sandMyselfIDCard.delegate = self;
+    
+    registerV.phoneNumber.tintColor = [UIColor grayColor];
+    registerV.smsCode.tintColor = [UIColor grayColor];
+    registerV.loginPassword.tintColor = [UIColor grayColor];
+    registerV.sureLoginPassword.tintColor = [UIColor grayColor];
+    registerV.sandMyselfIDCard.tintColor = [UIColor grayColor];
     
     registerV.getCode.layer.masksToBounds = YES;
     registerV.getCode.layer.borderWidth = 1.f;
@@ -208,24 +215,39 @@
 // 确认按钮
 - (void)RegisterSureButton{
     
-    UIButton *tapButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    tapButton.frame = CGRectMake(0, 400, WIDTH_CONTROLLER_DEFAULT/2, 15);
-    [tapButton setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
+    tapButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    tapButton.frame = CGRectMake(0, 400, WIDTH_CONTROLLER_DEFAULT/3, 15);
+    [tapButton setImage:[UIImage imageNamed:@"圆角矩形-3"] forState:UIControlStateNormal];
     [tapButton setTitleColor:Color_Black forState:UIControlStateNormal];
     [tapButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    tapButton.tag = 88888888;
     tapButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [tapButton setTitle:@"平台服务条款" forState:UIControlStateNormal];
+    [tapButton setTitle:@"注册即同意" forState:UIControlStateNormal];
     [self.scrollView addSubview:tapButton];
+    [tapButton addTarget:self action:@selector(checkChooseButton:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *bookButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    bookButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 400, WIDTH_CONTROLLER_DEFAULT/2, 15);
+    bookButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 400, WIDTH_CONTROLLER_DEFAULT/3*2, 15);
     [bookButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [bookButton.titleLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:12]];
     [bookButton addTarget:self action:@selector(bookButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     bookButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [bookButton setTitle:@"<<风险提示书>>" forState:UIControlStateNormal];
+    [bookButton setTitle:@"<<大圣理财平台用户服务协议>>" forState:UIControlStateNormal];
     [bookButton setTitleColor:[UIColor chongzhiColor] forState:UIControlStateNormal];
     [self.scrollView addSubview:bookButton];
+    
+    CGRect width = [[UIScreen mainScreen] bounds];
+    
+    if (width.size.width == 320) {
+        
+        tapButton.frame = CGRectMake(0, 400, WIDTH_CONTROLLER_DEFAULT/3, 15);
+        bookButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 400, WIDTH_CONTROLLER_DEFAULT/3*2, 15);
+        
+    } else {
+        
+        tapButton.frame = CGRectMake(0, 400, WIDTH_CONTROLLER_DEFAULT/3 + 10, 15);
+        bookButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 + 10, 400, WIDTH_CONTROLLER_DEFAULT/3*2, 15);
+    }
     
     payButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -243,28 +265,32 @@
     
 }
 
-// 确认按钮执行方法 (第二步 : 实名验证)
-- (void)sureButtonAction:(UIButton *)btn{
-    
-    if ([registerV.phoneNumber.text length] <= 0) {
-    
-        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+//勾选按钮
+- (void)checkChooseButton:(UIButton *)button
+{
+    if (button.tag == 88888888) {
         
-    } else if ([registerV.smsCode.text length] <= 0) {
+        button.tintColor = [UIColor whiteColor];
+        [button setImage:[UIImage imageNamed:@"iconfont-complete-拷贝-3"] forState:UIControlStateNormal];
+        button.tag = 9876;
         
-        [ProgressHUD showMessage:@"请输入验证码" Width:100 High:20];
-        
-    } else if ([registerV.loginPassword.text length] <= 0) {
-        
-        [ProgressHUD showMessage:@"请输入设置密码" Width:100 High:20];
-        
-    } else if ([registerV.sureLoginPassword.text length] <= 0) {
-     
-        [ProgressHUD showMessage:@"请输入确认密码" Width:100 High:20];
+        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         
     } else {
-        [self RegisterButtonAction];
+        
+        button.tintColor = [UIColor grayColor];
+        [button setImage:[UIImage imageNamed:@"圆角矩形-3"] forState:UIControlStateNormal];
+        button.tag = 88888888;
+        
+        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     }
+}
+
+// 确认按钮执行方法 (第二步 : 实名验证)
+- (void)sureButtonAction:(UIButton *)btn{
+    [self RegisterButtonAction];
 }
 
 - (void)sureButtonActionFinish:(UIButton *)btn{
@@ -326,30 +352,57 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             [self RegisterButtonAction];
         }
-        [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
 }
 
 // 注册按钮执行的方法
-- (void)RegisterButtonAction{
+- (void)RegisterButtonAction
+{
     [self.view endEditing:YES];
-    if (registerV.phoneNumber.text.length < 11) {
-        [ProgressHUD showMessage:@"手机号必须为11位" Width:100 High:20];
-    } else if (registerV.smsCode.text.length < 6) {
-        [ProgressHUD showMessage:@"验证码必须为6位" Width:100 High:20];
+    
+    if (registerV.phoneNumber.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if (registerV.phoneNumber.text.length != 11) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
+    } else if (registerV.smsCode.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
+        
+    } else if (registerV.smsCode.text.length != 6) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
+        
+    } else if (registerV.loginPassword.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请设置登录密码"];
+        
     } else if (registerV.loginPassword.text.length < 6){
-        [ProgressHUD showMessage:@"密码必须为6-12位" Width:100 High:20];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
+        
+    } else if (registerV.sureLoginPassword.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入确认密码"];
+        
+    } else if (registerV.sureLoginPassword.text.length < 6) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
+        
     } else if (![registerV.loginPassword.text isEqualToString:registerV.sureLoginPassword.text]){
-        [ProgressHUD showMessage:@"输入的登录密码与确认的登录密码不匹配" Width:100 High:20];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
+        
+    } else if (tapButton.tintColor != [UIColor whiteColor]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请勾选"];
+        
     } else {
+        
         NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":registerV.sandMyselfIDCard.text,@"finaCard":registerV.sandMyselfIDCard.text};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
             NSLog(@"%@",responseObject);
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                
     //            [buttonWithView removeFromSuperview];
     //            [payButton removeFromSuperview];
     //            [registerV removeFromSuperview];
@@ -382,7 +435,8 @@
     //            [self.scrollView addSubview:registerB];
                 [self.navigationController popViewControllerAnimated:YES];
             } else {
-                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+//
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -428,6 +482,10 @@
     
     if (registerV.phoneNumber.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if (![NSString validateMobile:registerV.phoneNumber.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
     } else {
         
         timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
@@ -435,9 +493,10 @@
         NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text,@"msgType":@"1"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
-            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [ProgressHUD showMessage:@"系统异常" Width:100 High:20];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"系统异常"];
             NSLog(@"%@",error);
         }];
     }
@@ -445,15 +504,15 @@
 
 // 按钮变颜色
 - (void)textFieldEdit:(UITextField *)textField{
-    if ([registerV.smsCode.text length] > 0 && [registerV.phoneNumber.text length] > 0 && [registerV.loginPassword.text length] > 0 && [registerV.sureLoginPassword.text length] > 0) {
-        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        
-    } else {
-        
-        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
-    }
+//    if ([registerV.smsCode.text length] > 0 && [registerV.phoneNumber.text length] > 0 && [registerV.loginPassword.text length] > 0 && [registerV.sureLoginPassword.text length] > 0) {
+//        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+//        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+//        
+//    } else {
+//        
+//        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+//        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+//    }
 }
 
 #pragma mark 验证码倒计时

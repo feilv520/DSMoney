@@ -170,6 +170,14 @@
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
         
+    } else if (![NSString validateMobile:textFieldPhoneNumber.text]) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
+    } else if (textFieldSmsCode.text.length == 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
+        
     } else if (textFieldSmsCode.text.length != 6) {
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
@@ -180,7 +188,6 @@
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/checkSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
             NSLog(@"ooooooo%@", responseObject);
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
                 

@@ -24,7 +24,6 @@
     UITextField *textField3;
     
     NSInteger seconds;
-    
     NSTimer *timer;
 }
 
@@ -259,7 +258,7 @@
     textFieldPhoneNum = (UITextField *)[self.view viewWithTag:1000];
     
     if (textFieldPhoneNum.text.length == 0) {
-        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
         
     } else if (![NSString validateMobile:textFieldPhoneNum.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
@@ -271,7 +270,7 @@
         NSDictionary *parameters = @{@"phone":textFieldPhoneNum.text,@"msgType":@"3"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
-            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已发送"];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];
