@@ -127,15 +127,15 @@
         
         CGFloat viewWidth = viewWhite.frame.size.width;
         
-        UILabel *labelInvite = [CreatView creatWithLabelFrame:CGRectMake(0, 10, viewWidth, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"提示"];
+        UILabel *labelInvite = [CreatView creatWithLabelFrame:CGRectMake(0, 5, viewWidth, 25) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"提示"];
         [viewWhite addSubview:labelInvite];
         
-        UILabel *labelLine = [[UILabel alloc] initWithFrame:CGRectMake(5, 49.5, viewWidth - 10, 0.5)];
+        UILabel *labelLine = [[UILabel alloc] initWithFrame:CGRectMake(5, 39.5, viewWidth - 10, 0.5)];
         [viewWhite addSubview:labelLine];
         labelLine.backgroundColor = [UIColor grayColor];
         labelLine.alpha = 0.3;
         
-        UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 50, viewWidth, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:17] text:@"邀请成功!系统已为您发送邀请短信"];
+        UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 45, viewWidth, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"邀请成功!\n系统已为您发送邀请短信"];
         [viewWhite addSubview:labelAlert];
         
         UIButton *buttGood = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, 110, viewWidth - 40, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"好的"];
