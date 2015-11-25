@@ -173,7 +173,7 @@
                     </constraints>
                     <state key="normal" image="iconfont-register-gantanhao001.png"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QqS-Mt-zKW">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QqS-Mt-zKW">
                     <rect key="frame" x="287" y="54" width="80" height="30"/>
                     <animations/>
                     <constraints>
