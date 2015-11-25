@@ -36,7 +36,7 @@
     butPhoneNum.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     [butPhoneNum addTarget:self action:@selector(buttonByPhone:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageView *imageViewRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 26, 17, 16, 16) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"arrow"]];
+    UIImageView *imageViewRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 26, HEIGHT_CONTROLLER_DEFAULT * (17.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (16.0 / 375.0), WIDTH_CONTROLLER_DEFAULT * (16.0 / 375.0)) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"arrow"]];
     [butPhoneNum addSubview:imageViewRight];
     imageViewRight.userInteractionEnabled = YES;
     
@@ -47,7 +47,7 @@
     butMessage.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     [butMessage addTarget:self action:@selector(buttonUserMessage:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageView *imageRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 26, 17, 16, 16) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"arrow"]];
+    UIImageView *imageRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 26, HEIGHT_CONTROLLER_DEFAULT * (17.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (16.0 / 375.0), WIDTH_CONTROLLER_DEFAULT * (16.0 / 375.0)) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"arrow"]];
     [butMessage addSubview:imageRight];
     imageRight.userInteractionEnabled = YES;
 }

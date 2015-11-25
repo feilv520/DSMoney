@@ -70,6 +70,7 @@
     cell.laeblCardNum.textColor = [UIColor zitihui];
     cell.laeblCardNum.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

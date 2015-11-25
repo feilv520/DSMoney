@@ -228,7 +228,7 @@
         
     } else if (textField.tag == 902) {
         
-        if (range.location <= 11) {
+        if (range.location < 20) {
             
             return YES;
             
@@ -239,7 +239,7 @@
         
     } else {
         
-        if (range.location <= 11) {
+        if (range.location < 20) {
             
             return YES;
             
@@ -287,17 +287,32 @@
     textField3 = (UITextField *)[self.view viewWithTag:903];
     
     if (textFieldPhoneNum.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入信息"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
     } else if (![NSString validateMobile:textFieldPhoneNum.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
+    } else if (textField1.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
+        
     } else if (textField1.text.length < 6) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
-    } else if (textField2.text.length <6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
+        
+    } else if (textField2.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请设置登录密码"];
+        
+    } else if (![NSString validatePassword:textField2.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位含字母和数字,以字母开头"];
+        
+    } else if (textField3.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入确认密码"];
+        
     } else if (textField3.text.length < 6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
+        
     } else if (![textField2.text isEqualToString:textField3.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
+        
     } else {        
         NSDictionary *parameter = @{@"phone":textFieldPhoneNum.text,@"smsCode":textField1.text,@"password":textField2.text,@"msgType":@"3"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/findPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {

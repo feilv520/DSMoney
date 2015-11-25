@@ -42,6 +42,7 @@
     _textField = [CreatView creatWithfFrame:CGRectMake(90, 10, viewWhite.frame.size.width - 80 - 20, 30) setPlaceholder:@"请输入登录密码" setTintColor:[UIColor grayColor]];
     [viewWhite addSubview:_textField];
     _textField.delegate = self;
+    _textField.secureTextEntry = YES;
     _textField.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [_textField addTarget:self action:@selector(textFiledEdit:) forControlEvents:UIControlEventEditingChanged];
     

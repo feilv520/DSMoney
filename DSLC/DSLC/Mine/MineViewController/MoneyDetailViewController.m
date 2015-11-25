@@ -43,7 +43,7 @@
     
     [self getAssetDetail];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor huibai];
     
     [self.navigationItem setTitle:@"资产详情"];
     [self tableViewShowContent];
@@ -55,6 +55,7 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.backgroundColor = [UIColor huibai];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 30)];
     _tableView.tableFooterView.backgroundColor = [UIColor huibai];
     [_tableView setSeparatorColor:[UIColor colorWithRed:246 / 255.0 green:247 / 255.0 blue:249 / 255.0 alpha:1.0]];
@@ -335,34 +336,36 @@
         
         if (indexPath.row == 0) {
             
+//            项目简述
             SimpleDescriptionsViewController *simpleDesVC = [[SimpleDescriptionsViewController alloc] init];
             [self.navigationController pushViewController:simpleDesVC animated:YES];
             
         } else if (indexPath.row == 1) {
             
+//            项目详情
             SimpleDetailViewController *simpleDetailVC = [[SimpleDetailViewController alloc] init];
             [self.navigationController pushViewController:simpleDetailVC animated:YES];
             
         } else if (indexPath.row == 2) {
             
+//            风控条件
             RiskConditionsViewController *riskConVC = [[RiskConditionsViewController alloc] init];
             [self.navigationController pushViewController:riskConVC animated:YES];
             
         } else if (indexPath.row == 4) {
             
+//            风控揭示
             RiskAlertBookViewController *risk = [[RiskAlertBookViewController alloc] init];
             risk.disign = NO;
             [self.navigationController pushViewController:risk animated:YES];
             
         } else if (indexPath.row == 3) {
             
+//            管理团队简介
             TeamDescriptionsViewController *teamVC = [[TeamDescriptionsViewController alloc] init];
             [self.navigationController pushViewController:teamVC animated:YES];
             
         }
-//        } else {
-//            
-//        }
     }
 }
 

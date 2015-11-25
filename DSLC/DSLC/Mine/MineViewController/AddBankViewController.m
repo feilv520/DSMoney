@@ -148,6 +148,54 @@
     }
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        if (textField.tag == 402) {
+            
+            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 100);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        } else if (textField.tag == 404) {
+            
+            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                    
+                    _tableView.contentOffset = CGPointMake(0, 100);
+                    
+                } completion:^(BOOL finished) {
+                    
+                }];
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        } else if (textField.tag == 405) {
+            
+            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                    
+                    _tableView.contentOffset = CGPointMake(0, 150);
+                    
+                } completion:^(BOOL finished) {
+                    
+                }];
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    }
+    return YES;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
@@ -193,10 +241,10 @@
     if (indexPath.row == 5) {
         
         [cell addSubview:buttonGet];
-        buttonGet.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 80, 10, 80, 30);
+        buttonGet.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 70, 10, 70, 30);
         [buttonGet setTitle:@"获取验证码" forState:UIControlStateNormal];
         [buttonGet setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
-        buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         buttonGet.layer.cornerRadius = 3;
         buttonGet.layer.masksToBounds = YES;
         buttonGet.layer.borderColor = [[UIColor daohanglan] CGColor];
@@ -216,7 +264,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y > 0) {
+    if (scrollView.contentOffset.y < 100) {
         
         [self.view endEditing:YES];
     }

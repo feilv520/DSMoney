@@ -68,7 +68,7 @@
     _textField2.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [_textField2 addTarget:self action:@selector(textFieldCanEdit:) forControlEvents:UIControlEventEditingChanged];
     
-    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT * (150.0 / 667.0), WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"认证"];
+    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 135, WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"认证"];
     [self.view addSubview:buttonNext];
     buttonNext.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
@@ -112,14 +112,20 @@
 //认证按钮
 - (void)nextStepButton:(UIButton *)button
 {
-    if ([_textField1.text length] > 0 && [_textField2.text length] == 18) {
+    [self.view endEditing:YES];
+    
+    if (_textField1.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入真实姓名"];
         
-        NSArray *viewController = [self.navigationController viewControllers];
-        [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
+    } else if (_textField2.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入身份证号"];
+        
+    } else if (_textField2.text.length != 18) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"身份证号格式不对"];
         
     } else {
-        
-        
+        NSArray *viewController = [self.navigationController viewControllers];
+        [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
     }
 }
 

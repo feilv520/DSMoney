@@ -378,8 +378,8 @@
     } else if (registerV.loginPassword.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请设置登录密码"];
         
-    } else if (registerV.loginPassword.text.length < 6){
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
+    } else if (![NSString validatePassword:registerV.loginPassword.text]){
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符,以字母开头"];
         
     } else if (registerV.sureLoginPassword.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入确认密码"];
@@ -455,11 +455,11 @@
             return NO;
         }
     } else if (textField == registerV.loginPassword) {
-        if (range.location > 11) {
+        if (range.location > 19) {
             return NO;
         }
     } else if (textField == registerV.sureLoginPassword) {
-        if (range.location > 11) {
+        if (range.location > 19) {
             return NO;
         }
     } else {
@@ -523,7 +523,7 @@
     
     UIButton *button = (UIButton *)[self.view viewWithTag:9080];
     
-    NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",seconds];
+    NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",(long)seconds];
     
     if (seconds == 1) {
         [theTimer invalidate];

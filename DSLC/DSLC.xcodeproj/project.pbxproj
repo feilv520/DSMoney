@@ -55,6 +55,8 @@
 		8162D1231BE1BD3300CACAB6 /* OtherProjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8162D1211BE1BD3300CACAB6 /* OtherProjectCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8162D1271BE1BD9C00CACAB6 /* DownFourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8162D1251BE1BD9C00CACAB6 /* DownFourCell.m */; settings = {ASSET_TAGS = (); }; };
 		8162D1281BE1BD9C00CACAB6 /* DownFourCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8162D1261BE1BD9C00CACAB6 /* DownFourCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8164BBC31C05D5F700023461 /* ProjectSimpleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8164BBC21C05D5F700023461 /* ProjectSimpleCell.m */; settings = {ASSET_TAGS = (); }; };
+		8164BBC61C05DD2C00023461 /* ProjectContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8164BBC51C05DD2C00023461 /* ProjectContentCell.m */; settings = {ASSET_TAGS = (); }; };
 		816CDF2A1BF19A63007785FC /* 组-15@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 816CDF281BF19A63007785FC /* 组-15@2x.png */; settings = {ASSET_TAGS = (); }; };
 		816CDF2B1BF19A63007785FC /* 组-15@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 816CDF291BF19A63007785FC /* 组-15@3x.png */; settings = {ASSET_TAGS = (); }; };
 		816CDF2E1BF1A018007785FC /* EditBigMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 816CDF2D1BF1A018007785FC /* EditBigMoney.m */; settings = {ASSET_TAGS = (); }; };
@@ -774,6 +776,10 @@
 		8162D1241BE1BD9C00CACAB6 /* DownFourCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownFourCell.h; sourceTree = "<group>"; };
 		8162D1251BE1BD9C00CACAB6 /* DownFourCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownFourCell.m; sourceTree = "<group>"; };
 		8162D1261BE1BD9C00CACAB6 /* DownFourCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownFourCell.xib; sourceTree = "<group>"; };
+		8164BBC11C05D5F700023461 /* ProjectSimpleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectSimpleCell.h; sourceTree = "<group>"; };
+		8164BBC21C05D5F700023461 /* ProjectSimpleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectSimpleCell.m; sourceTree = "<group>"; };
+		8164BBC41C05DD2C00023461 /* ProjectContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContentCell.h; sourceTree = "<group>"; };
+		8164BBC51C05DD2C00023461 /* ProjectContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectContentCell.m; sourceTree = "<group>"; };
 		816CDF281BF19A63007785FC /* 组-15@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-15@2x.png"; sourceTree = "<group>"; };
 		816CDF291BF19A63007785FC /* 组-15@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-15@3x.png"; sourceTree = "<group>"; };
 		816CDF2C1BF1A018007785FC /* EditBigMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBigMoney.h; sourceTree = "<group>"; };
@@ -913,8 +919,8 @@
 		817E33911BD7576600D05103 /* MeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeCell.h; sourceTree = "<group>"; };
 		817E33921BD7576600D05103 /* MeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeCell.m; sourceTree = "<group>"; };
 		817E33931BD7576600D05103 /* MeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeCell.xib; sourceTree = "<group>"; };
-		817E33961BD772A700D05103 /* BigMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigMoneyViewController.h; sourceTree = "<group>"; };
-		817E33971BD772A700D05103 /* BigMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigMoneyViewController.m; sourceTree = "<group>"; };
+		817E33961BD772A700D05103 /* BigMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BigMoneyViewController.h; path = ../BigMoneyViewController.h; sourceTree = "<group>"; };
+		817E33971BD772A700D05103 /* BigMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BigMoneyViewController.m; path = ../BigMoneyViewController.m; sourceTree = "<group>"; };
 		817E33991BD77A8800D05103 /* ChooseStyleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseStyleViewController.h; sourceTree = "<group>"; };
 		817E339A1BD77A8800D05103 /* ChooseStyleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseStyleViewController.m; sourceTree = "<group>"; };
 		817E339C1BD77F6D00D05103 /* ChooseStyleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseStyleCell.h; sourceTree = "<group>"; };
@@ -1097,8 +1103,8 @@
 		81B520A91BF9A71100D8E8D1 /* iconfont-sousuo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-sousuo@3x.png"; sourceTree = "<group>"; };
 		81B673FF1BF0873B007CEF51 /* InviteNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteNameViewController.h; sourceTree = "<group>"; };
 		81B674001BF0873B007CEF51 /* InviteNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteNameViewController.m; sourceTree = "<group>"; };
-		81B674021BF0A608007CEF51 /* HistoryMemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryMemoryViewController.h; sourceTree = "<group>"; };
-		81B674031BF0A608007CEF51 /* HistoryMemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryMemoryViewController.m; sourceTree = "<group>"; };
+		81B674021BF0A608007CEF51 /* HistoryMemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HistoryMemoryViewController.h; path = ../HistoryMemoryViewController.h; sourceTree = "<group>"; };
+		81B674031BF0A608007CEF51 /* HistoryMemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HistoryMemoryViewController.m; path = ../HistoryMemoryViewController.m; sourceTree = "<group>"; };
 		81B674061BF0A780007CEF51 /* HistoryMemoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryMemoryCell.h; sourceTree = "<group>"; };
 		81B674071BF0A780007CEF51 /* HistoryMemoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryMemoryCell.m; sourceTree = "<group>"; };
 		81B674081BF0A780007CEF51 /* HistoryMemoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryMemoryCell.xib; sourceTree = "<group>"; };
@@ -2134,6 +2140,7 @@
 		81D8AD951BC640DA00A15E01 /* MineViewController */ = {
 			isa = PBXGroup;
 			children = (
+				81F343891C05BFDC001EF374 /* 大额充值 */,
 				812F6BE51BD8DDAC0000D8E9 /* 绑定手机 */,
 				8D3125E01BD7669000143B71 /* baseViewController */,
 				8D3125D01BD7447500143B71 /* 提现 */,
@@ -2158,14 +2165,10 @@
 				817E339A1BD77A8800D05103 /* ChooseStyleViewController.m */,
 				8190A3031BD876EA002B53F5 /* AddCardViewController.h */,
 				8190A3041BD876EB002B53F5 /* AddCardViewController.m */,
-				817E33961BD772A700D05103 /* BigMoneyViewController.h */,
-				817E33971BD772A700D05103 /* BigMoneyViewController.m */,
 				81B6740B1BF0AE26007CEF51 /* ApplyScheduleViewController.h */,
 				81B6740C1BF0AE26007CEF51 /* ApplyScheduleViewController.m */,
 				816CDF2C1BF1A018007785FC /* EditBigMoney.h */,
 				816CDF2D1BF1A018007785FC /* EditBigMoney.m */,
-				81B674021BF0A608007CEF51 /* HistoryMemoryViewController.h */,
-				81B674031BF0A608007CEF51 /* HistoryMemoryViewController.m */,
 				8D6692731BD0D02E00CD2CAF /* MyHandViewController.h */,
 				8D6692741BD0D02E00CD2CAF /* MyHandViewController.m */,
 				8D6692751BD0D02E00CD2CAF /* MyHandViewController.xib */,
@@ -2385,6 +2388,17 @@
 				81ED03171BD0D429005F4B02 /* 2013123115540975@3x.png */,
 			);
 			path = "我的银行卡";
+			sourceTree = "<group>";
+		};
+		81F343891C05BFDC001EF374 /* 大额充值 */ = {
+			isa = PBXGroup;
+			children = (
+				817E33961BD772A700D05103 /* BigMoneyViewController.h */,
+				817E33971BD772A700D05103 /* BigMoneyViewController.m */,
+				81B674021BF0A608007CEF51 /* HistoryMemoryViewController.h */,
+				81B674031BF0A608007CEF51 /* HistoryMemoryViewController.m */,
+			);
+			path = "大额充值";
 			sourceTree = "<group>";
 		};
 		8D0AE7EB1BE09CE500D9D50C /* 注册 */ = {
@@ -2607,6 +2621,10 @@
 				8D4B8C1F1BF328A000A88285 /* MyAccountProductView.h */,
 				8D4B8C201BF328A000A88285 /* MyAccountProductView.m */,
 				8D4B8C221BF328B400A88285 /* MyAccountProductView.xib */,
+				8164BBC11C05D5F700023461 /* ProjectSimpleCell.h */,
+				8164BBC21C05D5F700023461 /* ProjectSimpleCell.m */,
+				8164BBC41C05DD2C00023461 /* ProjectContentCell.h */,
+				8164BBC51C05DD2C00023461 /* ProjectContentCell.m */,
 			);
 			name = "账户资产";
 			sourceTree = "<group>";
@@ -3871,6 +3889,7 @@
 				8DE59AB61BFC191500741149 /* CJNavigationController.m in Sources */,
 				81AC90CD1BEC981100232404 /* GiveMoneyVerifyBinding.m in Sources */,
 				8D0AE80C1BE0C1A700D9D50C /* RegisterViewController.m in Sources */,
+				8164BBC31C05D5F700023461 /* ProjectSimpleCell.m in Sources */,
 				819C3AC71BD49862008D2CFD /* GrabBagCell.m in Sources */,
 				8D88D0F61BFECCB40051D6DA /* MJRefreshBackFooter.m in Sources */,
 				81B674091BF0A780007CEF51 /* HistoryMemoryCell.m in Sources */,
@@ -4060,6 +4079,7 @@
 				8D1191951BF1E59300A2DE05 /* productMoneyModel.m in Sources */,
 				819B52FA1BFC6930002FDF1E /* pinyin.c in Sources */,
 				81D704031BE0D0D40074DF30 /* NewbieViewController.m in Sources */,
+				8164BBC61C05DD2C00023461 /* ProjectContentCell.m in Sources */,
 				81200C181C0315EE00F70DDD /* RiskAlertBookCell.m in Sources */,
 				81F5FA111BDA1C2E008C38BF /* MoreCell.m in Sources */,
 				8180639B1BD5D7E500E83492 /* MyInviteCell.m in Sources */,

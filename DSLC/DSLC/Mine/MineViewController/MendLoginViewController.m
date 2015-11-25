@@ -88,7 +88,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (range.location <= 11) {
+    if (range.location < 20) {
         
         return YES;
         
@@ -147,9 +147,9 @@
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码错误"];
         
-    } else if (textField2.text.length < 6) {
+    } else if (![NSString validatePassword:textField2.text]) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位含字母和数字,以字母开头"];
         
     } else if (textField3.text.length < 6) {
         

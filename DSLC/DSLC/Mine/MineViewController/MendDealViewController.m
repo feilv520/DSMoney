@@ -55,11 +55,11 @@
 
 - (void)tableViewShow
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 250) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    _tableView.scrollEnabled = NO;
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
     _tableView.backgroundColor = [UIColor huibai];
     [_tableView registerNib:[UINib nibWithNibName:@"MendDealCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"MendDeal2Cell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
@@ -67,8 +67,8 @@
     nameArray = @[@"原交易密码", @"新交易密码", @"确认新交易密码", @"您的手机号", @"验证码"];
     textArray = @[@"请输入原交易密码", @"请输入新交易密码", @"请再次输入新交易密码", @"请输入手机号", @""];
     
-    buttonMake = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 310, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
-    [self.view addSubview:buttonMake];
+    buttonMake = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    [_tableView.tableFooterView addSubview:buttonMake];
     buttonMake.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
@@ -129,9 +129,15 @@
         cell.textField.delegate = self;
         [cell.textField addTarget:self action:@selector(mendDealTextField:) forControlEvents:UIControlEventEditingChanged];
         
+        if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2) {
+            
+            cell.textField.secureTextEntry = YES;
+        }
+        
         if (indexPath.row == 3) {
             
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.backgroundColor = [UIColor clearColor];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -182,7 +188,7 @@
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     }
-    
+
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -222,9 +228,47 @@
     }
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        if (textField.tag == 703) {
+            
+            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 150);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+        } else if (textField.tag == 704) {
+            
+            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 150);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    }
+    
+    return YES;
+}
+
 //确定按钮
 - (void)makeSureButtonMendDeal:(UIButton *)button
 {
+    [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        
+        _tableView.contentOffset = CGPointMake(0, 0);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
     [self.view endEditing:YES];
     
     textLast = (UITextField *)[self.view viewWithTag:700];
@@ -241,9 +285,9 @@
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码错误"];
         
-    } else if (textNew.text.length < 6) {
+    } else if (![NSString validatePassword:textNew.text]) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位含字母和数字,以字母开头"];
         
     } else if (textMakeSure.text.length < 6) {
         
@@ -323,7 +367,7 @@
         [button setEnabled:YES];
     }else{
         seconds--;
-        NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",seconds];
+        NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",(long)seconds];
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 1.f;
         button.layer.borderColor = [UIColor zitihui].CGColor;
@@ -345,9 +389,12 @@
     }
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.view endEditing:YES];
+    if (scrollView.contentOffset.y < 100) {
+        
+        [self.view endEditing:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

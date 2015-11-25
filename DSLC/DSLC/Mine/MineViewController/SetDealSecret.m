@@ -75,12 +75,19 @@
     
     if (textField1.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请设置交易密码"];
-    } else if (textField1.text.length < 6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
+        
+    } else if (![NSString validatePassword:textField1.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位含字母和数字,以字母开头"];
+        
+    } else if (textField2.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入确认交易密码"];
+        
     } else if (textField2.text.length < 6) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
+        
     } else if (![textField1.text isEqualToString:textField2.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
+        
     } else {
         [self findPwd];
     }

@@ -153,9 +153,46 @@
     }
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        if (textField.tag == 603) {
+           
+            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 100);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        } else if (textField.tag == 604) {
+            
+            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 100);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    }
+    return YES;
+}
+
 //申请按钮
 - (void)applyBigMoney:(UIButton *)button
 {
+    [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        
+        _tableView.contentOffset = CGPointMake(0, 0);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [self.view endEditing:YES];
+    
     if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 1 && fieldPhoneNum.text.length == 1 && fieldMoney.text.length > 0) {
         
         ApplyScheduleViewController *scheduleVC = [[ApplyScheduleViewController alloc] init];
@@ -174,7 +211,7 @@
 //回收键盘
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y > 0) {
+    if (scrollView.contentOffset.y < 100) {
         
         [self.view endEditing:YES];
     }

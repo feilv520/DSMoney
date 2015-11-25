@@ -101,7 +101,7 @@
     _tableView.backgroundColor = [UIColor huibai];
     
     _tableView.separatorColor = [UIColor groupTableViewBackgroundColor];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 130)];
     _tableView.tableFooterView = view;
     view.backgroundColor = [UIColor huibai];
     [_tableView registerNib:[UINib nibWithNibName:@"MyInformationCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
