@@ -56,6 +56,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC setSuppurtGestureTransition:NO];
@@ -69,6 +70,8 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor huibai];
+    
+    [self loadingWithView:self.view loadingFlag:NO height:self.view.center.y];
     
     [self MyAccountInfo];
 
@@ -89,7 +92,7 @@
 
 - (void)showTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 52) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 52) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.backgroundColor = [UIColor huibai];
     _tableView.dataSource = self;
@@ -451,18 +454,21 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
             [self.navigationController popToRootViewControllerAnimated:NO];
             return ;
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]){
+        
+            [self loadingWithHidden:YES];
+            
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+            
+            [dic setValue:[responseObject objectForKey:@"invitationMyCode"] forKey:@"invitationMyCode"];
+            [dic setValue:[responseObject objectForKey:@"accBalance"] forKey:@"accBalance"];
+            [dic setValue:[responseObject objectForKey:@"redPacket"] forKey:@"redPacket"];
+            
+            [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            
+            [self viewHeadContent];
+            [_tableView reloadData];
         }
-        
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-        
-        [dic setValue:[responseObject objectForKey:@"invitationMyCode"] forKey:@"invitationMyCode"];
-        [dic setValue:[responseObject objectForKey:@"accBalance"] forKey:@"accBalance"];
-        [dic setValue:[responseObject objectForKey:@"redPacket"] forKey:@"redPacket"];
-        
-        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
-        
-        [self viewHeadContent];
-        [_tableView reloadData];
         
     } failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
         

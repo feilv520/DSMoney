@@ -62,6 +62,8 @@
     
     [self getProductDetail];
     
+    [self loadingWithView:self.view loadingFlag:NO height:120.0];
+    
     self.view.backgroundColor = [UIColor huibai];
 
     titleArr = @[@"产品描述", @"投资须知", @"投资记录"];
@@ -567,6 +569,8 @@
         
         NSLog(@"%@",responseObject);
         
+        [self loadingWithHidden:YES];
+        
         self.residueMoney = [responseObject objectForKey:@"residueMoney"];
         self.buyNumber = [responseObject objectForKey:@"buyCount"];
         
@@ -575,7 +579,7 @@
         [self.detailM setValuesForKeysWithDictionary:dic];
         
         [self showTableView];
-         [self showBottonView];
+        [self showBottonView];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

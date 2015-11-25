@@ -24,5 +24,7 @@
 
 @property (nonatomic, copy) NSString *productStatus;
 
+@property (nonatomic, copy) NSString *productInitLimit;
+
 @end
 

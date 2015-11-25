@@ -299,8 +299,9 @@
     textField2 = (UITextField *)[self.view viewWithTag:1001];
     
     if (textField1.text.length == 11 && (textField2.text.length >= 6 && textField2.text.length <= 12)) {
-//        *
-        if ([NSString validateMobile:textField1.text]) {
+        if (![NSString validatePassword:textField2.text]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"首字母开头"];
+        } else if ([NSString validateMobile:textField1.text]) {
             NSDictionary *parameter = @{@"phone":textField1.text,@"password":textField2.text};
             [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
                 
@@ -348,23 +349,31 @@
                     
                 } else {
                     
-                    [ProgressHUD showMessage:@"手机号或密码错误" Width:100 High:20];
+                    [ProgressHUD showMessage:@"登录密码错误" Width:100 High:20];
                 }
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 NSLog(@"%@",error);
             }];
         } else {
-            [ProgressHUD showMessage:@"手机号格式不正确" Width:100 High:20];
+            [ProgressHUD showMessage:@"手机号格式错误" Width:100 High:20];
         }
+        
+    } else if(textField1.text.length == 0) {
+        
+        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
         
     } else if(textField1.text.length < 11) {
         
-        [ProgressHUD showMessage:@"手机号必须为11位" Width:100 High:20];
+        [ProgressHUD showMessage:@"手机号格式错误" Width:100 High:20];
+        
+    } else if (textField2.text.length == 0) {
+        
+        [ProgressHUD showMessage:@"请输入密码" Width:100 High:20];
         
     } else if (textField2.text.length < 6) {
         
-        [ProgressHUD showMessage:@"密码必须为6-12位" Width:100 High:20];
+        [ProgressHUD showMessage:@"6~20位字符，至少包含字母和数字两种" Width:100 High:20];
         
     }
     
