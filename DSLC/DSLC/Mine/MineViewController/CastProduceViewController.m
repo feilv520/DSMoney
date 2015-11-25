@@ -115,9 +115,9 @@
             CastUpTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"castUp"];
             cell.productName.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productName"];
             cell.productType.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productType"];
-            cell.productNumber.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"];
-            cell.productMoney.text = [DES3Util decrypt:[[self.castDic objectForKey:@"Product"] objectForKey:@"money"] ];
-            cell.productProfit.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productAmountMin"];
+            cell.productNumber.text = [NSString stringWithFormat:@"%@%%",[[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"]];
+            cell.productMoney.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[[self.castDic objectForKey:@"Product"] objectForKey:@"money"]]];
+            cell.productProfit.text = [NSString stringWithFormat:@"%@元",[[self.castDic objectForKey:@"Product"] objectForKey:@"productAmountMin"]];
             cell.productDate.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productToaccountTypeName"];
             return cell;
         } else {
@@ -131,7 +131,7 @@
             CastDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"castDetail"];
             
             cell.assetName.text = [[[[self.castDic objectForKey:@"Product"] objectForKey:@"Asset"] objectAtIndex:indexPath.row - 1] objectForKey:@"assetName"];
-            cell.assetMoney.text = [DES3Util decrypt:[[[[self.castDic objectForKey:@"Product"] objectForKey:@"Asset"] objectAtIndex:indexPath.row - 1] objectForKey:@"investMoney"]];
+            cell.assetMoney.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[[[[self.castDic objectForKey:@"Product"] objectForKey:@"Asset"] objectAtIndex:indexPath.row - 1] objectForKey:@"investMoney"]]];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
