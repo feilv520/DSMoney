@@ -158,7 +158,7 @@
         
         cell.progressView.hidden = YES;
         
-        butLastTime = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(131, 9, 210, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 倒计时 12:12:65"];
+        butLastTime = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 240, 9, 210, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 倒计时 12:12:65"];
         [cell.viewBottom addSubview:butLastTime];
         butLastTime.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         butLastTime.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;

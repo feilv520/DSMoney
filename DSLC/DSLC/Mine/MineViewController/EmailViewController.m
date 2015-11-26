@@ -21,6 +21,9 @@
     
     UITableView *_tableView;
     NSArray *contentArr;
+    
+    NSInteger seconds;
+    NSTimer *timer;
 }
 
 @end
@@ -34,6 +37,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"绑定邮箱"];
     
+    seconds = 50;
     [self contentShow];
     [self rememberContent];
 }
@@ -114,15 +118,17 @@
 - (void)sendEmail:(UIButton *)button
 {
     [_textField resignFirstResponder];
+    
+//    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+    
     if ([NSString validateEmail:_textField.text]) {
         
         [self updateUserEmail];
         
     } else {
+        
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"邮箱格式不正确,请更正."];
     }
-    
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -148,6 +154,45 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+
+// 验证码倒计时
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:9080];
+    
+    if (seconds == 1) {
+        [theTimer invalidate];
+        seconds = 50;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor daohanglan].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [button setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+        [button setEnabled:YES];
+    }else{
+        seconds--;
+        NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",(long)seconds];
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor zitihui].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setEnabled:NO];
+    }
+}
+
+- (void)releaseTImer {
+    if (timer) {
+        if ([timer respondsToSelector:@selector(isValid)]) {
+            if ([timer isValid]) {
+                [timer invalidate];
+                seconds = 50;
+            }
+        }
+    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

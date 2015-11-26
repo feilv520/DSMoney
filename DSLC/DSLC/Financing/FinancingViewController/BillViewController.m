@@ -66,7 +66,7 @@
     
     flagArray = [NSMutableArray array];
     
-    imageView = [CreatView creatImageViewWithFrame:CGRectMake(275, 65, 49, 49) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"已售罄"]];
+    imageView = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 49, 65, 49, 49) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"已售罄"]];
 }
 
 - (void)tableViewShow

@@ -224,6 +224,7 @@
     
 }
 
+//更多按钮
 - (void)moreActionButton:(id)sender{
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];

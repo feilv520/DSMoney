@@ -71,21 +71,36 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4zJ-6S-ibK">
                                 <rect key="frame" x="0.0" y="98" width="355" height="38"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaY-vS-kfR">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaY-vS-kfR">
                                         <rect key="frame" x="5" y="9" width="113" height="20"/>
                                         <animations/>
                                         <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="d1A-T7-jeP"/>
+                                            <constraint firstAttribute="width" constant="113" id="xve-VQ-zE5"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Ae-WB-TB7">
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Ae-WB-TB7">
                                         <rect key="frame" x="131" y="18" width="210" height="2"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="210" id="2nc-8Y-ZKW"/>
+                                            <constraint firstAttribute="height" constant="2" id="sYF-Jh-7wG"/>
+                                        </constraints>
                                     </progressView>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="2Ae-WB-TB7" secondAttribute="trailing" constant="14" id="0pI-GK-c2U"/>
+                                    <constraint firstItem="FaY-vS-kfR" firstAttribute="leading" secondItem="4zJ-6S-ibK" secondAttribute="leading" constant="5" id="Vnw-bM-8zm"/>
+                                    <constraint firstItem="2Ae-WB-TB7" firstAttribute="leading" secondItem="4zJ-6S-ibK" secondAttribute="leading" constant="131" id="hbl-cP-gnW"/>
+                                    <constraint firstItem="FaY-vS-kfR" firstAttribute="top" secondItem="4zJ-6S-ibK" secondAttribute="top" constant="9" id="uTZ-VK-aB6"/>
+                                    <constraint firstItem="2Ae-WB-TB7" firstAttribute="top" secondItem="4zJ-6S-ibK" secondAttribute="top" constant="18" id="ubt-6v-ZxX"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRq-yh-bqE">
                                 <rect key="frame" x="0.0" y="69" width="118" height="18"/>

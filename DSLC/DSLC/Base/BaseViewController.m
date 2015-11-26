@@ -37,6 +37,7 @@
     [app.tabBarVC setTabbarViewHidden:YES];
     [app.tabBarVC setLabelLineHidden:YES];
 }
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

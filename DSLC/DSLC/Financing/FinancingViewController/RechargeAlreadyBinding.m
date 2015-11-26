@@ -108,20 +108,31 @@
     }
 }
 
+//下一步按钮
 - (void)alreadyBindingButton:(UIButton *)button
 {
+    [self.view endEditing:YES];
     textFieldTag = (UITextField *)[self.view viewWithTag:188];
     CGFloat shuRu = textFieldTag.text.intValue;
     
-    if (shuRu > 0) {
+    if (textFieldTag.text.length == 0) {
         
-        GiveMoneyVerifyBinding *giveMVB = [[GiveMoneyVerifyBinding alloc] init];
-        [self.navigationController pushViewController:giveMVB animated:YES];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额,充值金额最小为1元"];
         
     } else {
         
+        if (shuRu > 0) {
+            
+            GiveMoneyVerifyBinding *giveMVB = [[GiveMoneyVerifyBinding alloc] init];
+            [self.navigationController pushViewController:giveMVB animated:YES];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值金额最小为1元"];
+        }
         
     }
+    
 }
 
 - (void)textAlreadyBinding:(UITextField *)textField

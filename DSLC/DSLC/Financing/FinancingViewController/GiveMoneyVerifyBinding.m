@@ -16,6 +16,8 @@
     UITableView *_tableView;
     UITextField *_textField;
     UIButton *butGive;
+    
+    UITextField *textFieldCode;
 }
 
 @end
@@ -60,6 +62,11 @@
     [phoneStr addAttribute:NSForegroundColorAttributeName value:[UIColor chongzhiColor] range:range];
     [labelPhone setAttributedText:phoneStr];
     labelPhone.numberOfLines = 2;
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        labelPhone.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    }
     
     UILabel *labelLine = [[UILabel alloc] initWithFrame:CGRectMake(10, 79.5, WIDTH_CONTROLLER_DEFAULT - 20, 0.5)];
     [viewHead addSubview:labelLine];
@@ -108,8 +115,20 @@
 //充值按钮
 - (void)giveMoney:(UIButton *)button
 {
-    GiveMoneyFinish *giveMoney = [[GiveMoneyFinish alloc] init];
-    [self.navigationController pushViewController:giveMoney animated:YES];
+    textFieldCode = (UITextField *)[self.view viewWithTag:308];
+    
+    if (textFieldCode.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
+        
+    } else if (textFieldCode.text.length != 6) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
+        
+    } else {
+        GiveMoneyFinish *giveMoney = [[GiveMoneyFinish alloc] init];
+        [self.navigationController pushViewController:giveMoney animated:YES];
+        
+    }
+    
 }
 
 - (void)bindingBankTextField:(UITextField *)textField
@@ -140,7 +159,7 @@
 
 - (void)getCode:(UIButton *)button
 {
-    NSLog(@"1111111");
+    NSLog(@"获取验证码");
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

@@ -235,7 +235,7 @@
         
         if (textField.tag == 703) {
             
-            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 
                 _tableView.contentOffset = CGPointMake(0, 150);
                 
@@ -245,7 +245,7 @@
             
         } else if (textField.tag == 704) {
             
-            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 
                 _tableView.contentOffset = CGPointMake(0, 150);
                 
@@ -261,7 +261,7 @@
 //确定按钮
 - (void)makeSureButtonMendDeal:(UIButton *)button
 {
-    [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         
         _tableView.contentOffset = CGPointMake(0, 0);
         

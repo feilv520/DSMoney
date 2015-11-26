@@ -159,7 +159,7 @@
         
         if (textField.tag == 603) {
            
-            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 
                 _tableView.contentOffset = CGPointMake(0, 100);
                 
@@ -168,7 +168,7 @@
             }];
         } else if (textField.tag == 604) {
             
-            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 
                 _tableView.contentOffset = CGPointMake(0, 100);
                 
@@ -183,7 +183,7 @@
 //申请按钮
 - (void)applyBigMoney:(UIButton *)button
 {
-    [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         
         _tableView.contentOffset = CGPointMake(0, 0);
         

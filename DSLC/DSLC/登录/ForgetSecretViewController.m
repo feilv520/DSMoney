@@ -52,12 +52,13 @@
 
 - (void)tableViewShowTime
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 200) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor qianhuise];
-    _tableView.scrollEnabled = NO;
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
+    _tableView.tableFooterView.backgroundColor = [UIColor huibai];
     [_tableView registerNib:[UINib nibWithNibName:@"ForgetSecretCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"ForgetSecret2Cell" bundle:nil] forCellReuseIdentifier:@"reuse2"];
     
@@ -69,8 +70,8 @@
     textFieldPhoneNum.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     textFieldPhoneNum.keyboardType = UIKeyboardTypeNumberPad;
     
-    butEnsure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 260, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
-    [self.view addSubview:butEnsure];
+    butEnsure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    [_tableView.tableFooterView addSubview:butEnsure];
     [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [butEnsure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [butEnsure addTarget:self action:@selector(ensureButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -141,6 +142,7 @@
             cell.textField.tag = 900 + indexPath.row;
             if (indexPath.row == 2 || indexPath.row == 3) {
                 cell.textField.secureTextEntry = YES;
+                cell.textField.returnKeyType = UIReturnKeySearch;
             }
             cell.textField.delegate = self;
             [cell.textField addTarget:self action:@selector(textFieldEditing:) forControlEvents:UIControlEventEditingChanged];
@@ -160,6 +162,12 @@
         return cell;
     }
     
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    
+    return YES;
 }
 
 - (void)textFieldEditing:(UITextField *)textField
@@ -358,7 +366,7 @@
         [button setEnabled:YES];
     }else{
         seconds--;
-        NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",seconds];
+        NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",(long)seconds];
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 1.f;
         button.layer.borderColor = [UIColor zitihui].CGColor;
