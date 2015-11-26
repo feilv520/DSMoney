@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "RedBagModel.h"
 
 @interface ShareHaveRedBag : BaseViewController
+
+@property (nonatomic, strong) RedBagModel *redbagModel;
 
 @end

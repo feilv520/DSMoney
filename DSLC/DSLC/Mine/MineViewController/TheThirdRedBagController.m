@@ -87,10 +87,11 @@
 {
     RedBagModel *redbagModel = [self.redBagArray objectAtIndex:indexPath.row];
     
-    if ([[redbagModel rpType] isEqualToString:@"1"] || [[redbagModel rpType] isEqualToString:@"2"] ) {
-    
-        return 145;
-    
+    if ([[redbagModel rpType] isEqualToString:@"1"] || [[redbagModel rpType] isEqualToString:@"0"] || [[redbagModel rpType] isEqualToString:@"3"] || [[redbagModel rpType] isEqualToString:@"4"]) {
+        if ([[redbagModel rpStatus] isEqualToString:@"0"])
+            return 145;
+        else
+            return 100;
     } else {
         
         return 100;
@@ -159,14 +160,17 @@
         TheThirdRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse"];
 
         cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
-
-//        [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-//        [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-//        [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
-//        [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-//        [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
-//        [cell.buttonOpen setTag:indexPath.row];
+        if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
+            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+            [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
+            [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.buttonOpen setTag:indexPath.row];
+        } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
+            cell.contentView.backgroundColor = [UIColor zitihui];
+        }
         
         cell.labelAend.text = @"送";
         cell.labelAend.textColor = [UIColor whiteColor];
@@ -212,15 +216,21 @@
     } else if ([[redbagModel rpType] isEqualToString:@"2"]) {
         TheThirdRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse"];
         
+        NSLog(@"rpStatus = %@",[redbagModel rpStatus]);
+        
         cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
         
-        [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
-        [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-        [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.buttonOpen setTag:indexPath.row];
+        if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
+            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+            [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
+            [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.buttonOpen setTag:indexPath.row];
+        } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
+            cell.contentView.backgroundColor = [UIColor zitihui];
+        }
         
         cell.labelAend.text = @"送";
         cell.labelAend.textColor = [UIColor whiteColor];
@@ -230,7 +240,7 @@
         cell.labelAend.layer.cornerRadius = 5;
         cell.labelAend.layer.masksToBounds = YES;
         
-        NSString *string = [NSString stringWithFormat:@"%@元",[redbagModel rpAmount]];
+        NSString *string = [NSString stringWithFormat:@"%@~%@元",[redbagModel rpFloor],[redbagModel rpTop]];
         
         NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:string];
         NSRange leftStr = NSMakeRange(0, [[redStr string] rangeOfString:@"元"].location);
@@ -265,7 +275,19 @@
         return cell;
     } else if ([[[self.redBagArray objectAtIndex:indexPath.row] rpType] isEqualToString:@"4"]) {
         NotSeparateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse1"];
-
+        
+        if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
+            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+            [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
+            [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.buttonOpen setTag:indexPath.row];
+        } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
+            cell.contentView.backgroundColor = [UIColor zitihui];
+        }
+        
         cell.labelSend.text = @"送";
         cell.labelSend.textColor = [UIColor whiteColor];
         cell.labelSend.textAlignment = NSTextAlignmentCenter;
@@ -497,9 +519,10 @@
 //    [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:25] range:shuZi];
 //    [labelGet setAttributedText:frontStr];
 //    labelGet.numberOfLines = 3;
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
     FDetailViewController *detailVC = [[FDetailViewController alloc] init];
     detailVC.estimate = NO;
-    detailVC.idString = @"79";
+    detailVC.idString = [dic objectForKey:@"NewProduct"];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
@@ -543,7 +566,7 @@
     
     UIButton *button = sender;
     
-    NSLog(@"tag = %ld",button.tag);
+    NSLog(@"tag = %ld",(long)button.tag);
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     

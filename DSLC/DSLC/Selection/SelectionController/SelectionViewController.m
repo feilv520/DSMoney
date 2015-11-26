@@ -34,10 +34,27 @@
 }
 
 @property (nonatomic, strong) ProductListModel *productM;
+@property (nonatomic, strong) NSDictionary *newProductDic;
 
 @end
 
 @implementation SelectionViewController
+
+// 手势标识文件
+- (NSDictionary *)newProductDic{
+    if (_newProductDic == nil) {
+        
+        if (![FileOfManage ExistOfFile:@"NewProduct.plist"]) {
+            [FileOfManage createWithFile:@"NewProduct.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"0",@"NewProduct",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
+        }
+        
+        NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
+        _newProductDic = dics;
+    }
+    return _newProductDic;
+}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:NO];
@@ -50,7 +67,7 @@
     // Do any additional setup after loading the view.
   
     // 加密解密
-    NSString* encrypt = @"Eu59Zr0fcbA7uVOtOygt/Q==";
+    NSString* encrypt = @"T5+VBpjWOWNqKlfP5PGRIw==";
 //    NSString* decrypt = [self decryptUseDES:encrypt];
 //    NSString *encrypt = [DES3Util encrypt:@"11111111"];
     NSString *decrypt = [DES3Util decrypt:encrypt];
@@ -398,6 +415,15 @@
         self.productM = [[ProductListModel alloc] init];
         NSDictionary *dic = [responseObject objectForKey:@"Product"];
         [self.productM setValuesForKeysWithDictionary:dic];
+        
+        if (![FileOfManage ExistOfFile:@"NewProduct.plist"]) {
+            [FileOfManage createWithFile:@"NewProduct.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[self.productM productId],@"NewProduct",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
+        } else {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[self.productM productId],@"NewProduct",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
+        }
         
         [self makeOnlyView];
         

@@ -42,7 +42,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [_viewBotton removeFromSuperview];
+    [_viewBotton setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -50,10 +50,13 @@
     [super viewWillAppear:animated];
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     
-    self.viewBotton = [[UIControl alloc] initWithFrame:CGRectMake(0, app.tabBarVC.view.frame.size.height - 49, WIDTH_CONTROLLER_DEFAULT, app.tabBarVC.view.frame.size.height)];
-    [app.tabBarVC.view addSubview:self.viewBotton];
-    self.viewBotton.backgroundColor = [UIColor huibai];
-    
+    if (self.viewBotton == nil) {
+        self.viewBotton = [[UIControl alloc] initWithFrame:CGRectMake(0, app.tabBarVC.view.frame.size.height - 49, WIDTH_CONTROLLER_DEFAULT, app.tabBarVC.view.frame.size.height)];
+        [app.tabBarVC.view addSubview:self.viewBotton];
+        self.viewBotton.backgroundColor = [UIColor huibai];
+    } else {
+        self.viewBotton.hidden = NO;
+    }
 }
 
 - (void)viewDidLoad {
@@ -243,7 +246,7 @@
         cell.labelData.textColor = [UIColor zitihui];
         cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.labelIntraday.text = [self.detailM productPeriod];
+        cell.labelIntraday.text = [NSString stringWithFormat:@"%@天",[self.detailM productPeriod]];
         cell.labelIntraday.textColor = [UIColor zitihui];
         cell.labelIntraday.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.labelIntraday.textAlignment = NSTextAlignmentRight;
@@ -412,8 +415,6 @@
         }
     }
     
-    
-    
     butMakeSure.titleLabel.font = [UIFont systemFontOfSize:15];
     butMakeSure.backgroundColor = [UIColor daohanglan];
     [butMakeSure addTarget:self action:@selector(makeSureButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -433,8 +434,6 @@
         NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-            
-            NSLog(@"%@",responseObject);
             
             if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
                 [ProgressHUD showMessage:@"请先登录,然后再投资" Width:100 High:20];

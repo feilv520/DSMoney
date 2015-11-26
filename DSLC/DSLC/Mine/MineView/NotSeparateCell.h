@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *laeblRequest;
 @property (weak, nonatomic) IBOutlet UILabel *labelDays;
 @property (weak, nonatomic) IBOutlet UILabel *labelTime;
+@property (weak, nonatomic) IBOutlet UIButton *buttonOpen;
 
 @end
