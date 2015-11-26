@@ -94,7 +94,10 @@
             return 100;
     } else {
         
-        return 100;
+        if ([[redbagModel rpStatus] isEqualToString:@"0"])
+            return 145;
+        else
+            return 100;
     }
 }
 
@@ -138,7 +141,7 @@
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.backgroundColor = [UIColor clearColor];
 
-        cell.labelStyle.text = [redbagModel rpTypeName];
+        cell.labelStyle.text = [redbagModel rpName];
         cell.labelStyle.backgroundColor = [UIColor clearColor];
         cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
 
@@ -191,7 +194,7 @@
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.backgroundColor = [UIColor clearColor];
 
-        cell.labelStyle.text = [redbagModel rpTypeName];
+        cell.labelStyle.text = [redbagModel rpName];
         cell.labelStyle.backgroundColor = [UIColor clearColor];
         cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
 
@@ -251,7 +254,7 @@
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.backgroundColor = [UIColor clearColor];
         
-        cell.labelStyle.text = [redbagModel rpTypeName];
+        cell.labelStyle.text = [redbagModel rpName];
         cell.labelStyle.backgroundColor = [UIColor clearColor];
         cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
@@ -306,7 +309,7 @@
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.backgroundColor = [UIColor clearColor];
 
-        cell.labelBagStyle.text = [redbagModel rpTypeName];
+        cell.labelBagStyle.text = [redbagModel rpName];
         cell.labelBagStyle.backgroundColor = [UIColor clearColor];
         cell.labelBagStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
 
