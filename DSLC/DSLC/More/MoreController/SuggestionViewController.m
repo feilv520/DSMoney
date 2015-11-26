@@ -121,50 +121,71 @@
 //提交按钮
 - (void)buttonMakeSureSubmit:(UIButton *)button
 {
-    if (_textView.text.length > 0 && _textView.text.length <= 500) {
-        
-        buttonBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [app.tabBarVC.view addSubview:buttonBlack];
-        buttonBlack.alpha = 0.3;
-        [buttonBlack addTarget:self action:@selector(suggestionButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
-        
-        viewMakeSure = [CreatView creatViewWithFrame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 - 100, WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT/4 - 20) backgroundColor:[UIColor whiteColor]];
-        [app.tabBarVC.view addSubview:viewMakeSure];
-        viewMakeSure.layer.cornerRadius = 3;
-        viewMakeSure.layer.masksToBounds = YES;
-        
-        [_textView resignFirstResponder];
-        
-        CGFloat viewWidth = viewMakeSure.frame.size.width;
-        CGFloat viewHeight = viewMakeSure.frame.size.height;
-        
-        UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 20, viewWidth, (viewHeight - 20)/2) backgroundColor:[UIColor whiteColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
-        [viewMakeSure addSubview:labelAlert];
-        labelAlert.numberOfLines = 2;
-        
-        NSMutableAttributedString *alertStr = [[NSMutableAttributedString alloc] initWithString:@"反馈已发送!\n感谢您的宝贵意见"];
-        [alertStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:[@"反馈已发送!\n感谢您的宝贵意见" rangeOfString:@"反馈已发送!"]];
-        [alertStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:[@"反馈已发送!\n感谢您的宝贵意见" rangeOfString:@"感谢您的宝贵意见"]];
-        [labelAlert setAttributedText:alertStr];
-        
-        UIButton *buttonDing = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, (viewHeight - 20)/2 + 20, viewWidth - 40, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"好的"];
-        [viewMakeSure addSubview:buttonDing];
-        buttonDing.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        [buttonDing setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [buttonDing setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        [buttonDing addTarget:self action:@selector(suggestionButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewWidth - 25, 5, 20, 20) backgroundColor:[UIColor whiteColor] textColor:nil titleText:nil];
-        [viewMakeSure addSubview:butCancle];
-        [butCancle setBackgroundImage:[UIImage imageNamed:@"cuo"] forState:UIControlStateNormal];
-        [butCancle setBackgroundImage:[UIImage imageNamed:@"cuo"] forState:UIControlStateHighlighted];
-        [butCancle addTarget:self action:@selector(suggestionButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    if (_textView.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请留下宝贵意见"];
         
     } else {
+        [self getSuggestionData];
         
-        
+//        buttonBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+//        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+//        [app.tabBarVC.view addSubview:buttonBlack];
+//        buttonBlack.alpha = 0.3;
+//        [buttonBlack addTarget:self action:@selector(suggestionButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        viewMakeSure = [CreatView creatViewWithFrame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 - 100, WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT/4 - 20) backgroundColor:[UIColor whiteColor]];
+//        [app.tabBarVC.view addSubview:viewMakeSure];
+//        viewMakeSure.layer.cornerRadius = 3;
+//        viewMakeSure.layer.masksToBounds = YES;
+//        
+//        [_textView resignFirstResponder];
+//        
+//        CGFloat viewWidth = viewMakeSure.frame.size.width;
+//        CGFloat viewHeight = viewMakeSure.frame.size.height;
+//        
+//        UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 20, viewWidth, (viewHeight - 20)/2) backgroundColor:[UIColor whiteColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+//        [viewMakeSure addSubview:labelAlert];
+//        labelAlert.numberOfLines = 2;
+//        
+//        NSMutableAttributedString *alertStr = [[NSMutableAttributedString alloc] initWithString:@"反馈已发送!\n感谢您的宝贵意见"];
+//        [alertStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:[@"反馈已发送!\n感谢您的宝贵意见" rangeOfString:@"反馈已发送!"]];
+//        [alertStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:[@"反馈已发送!\n感谢您的宝贵意见" rangeOfString:@"感谢您的宝贵意见"]];
+//        [labelAlert setAttributedText:alertStr];
+//        
+//        UIButton *buttonDing = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, (viewHeight - 20)/2 + 20, viewWidth - 40, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"好的"];
+//        [viewMakeSure addSubview:buttonDing];
+//        buttonDing.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+//        [buttonDing setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+//        [buttonDing setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+//        [buttonDing addTarget:self action:@selector(suggestionButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewWidth - 25, 5, 20, 20) backgroundColor:[UIColor whiteColor] textColor:nil titleText:nil];
+//        [viewMakeSure addSubview:butCancle];
+//        [butCancle setBackgroundImage:[UIImage imageNamed:@"cuo"] forState:UIControlStateNormal];
+//        [butCancle setBackgroundImage:[UIImage imageNamed:@"cuo"] forState:UIControlStateHighlighted];
+//        [butCancle addTarget:self action:@selector(suggestionButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
     }
+}
+
+//数据
+- (void)getSuggestionData
+{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSDictionary *parameter = @{@"content":_textView.text, @"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/feedback" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"======%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"提交成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 //点击黑色遮罩 弹框消失

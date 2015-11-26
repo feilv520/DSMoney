@@ -199,14 +199,24 @@
 #pragma mark 网络请求方法
 #pragma mark --------------------------------
 
-- (void)getMyFinPlanner{
+- (void)getMyFinPlanner
+{
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    
     NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyFinPlanner" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:300]]) {
+            
+            [self noDateWithView:@"木有理财师" height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 view:self.view];
+            _tableView.hidden = YES;
+            
+        } else {
+            
+            [self noDataViewWithRemoveToView];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

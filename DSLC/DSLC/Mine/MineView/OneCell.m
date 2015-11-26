@@ -46,8 +46,8 @@
     
     if (width < WIDTH_CONTROLLER_DEFAULT - 100) {
         
-        self.labelLeft.frame = CGRectMake(70, 20, width, rect.size.height);
-        self.imageContect.frame = CGRectMake(60, 10, width + 20, rect.size.height +  20);
+        self.labelLeft.frame = CGRectMake(75, 20, width, rect.size.height);
+        self.imageContect.frame = CGRectMake(60, 10, width + 25, rect.size.height +  20);
         
     } else {
         

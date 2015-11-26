@@ -9,18 +9,20 @@
 #import "ChatViewController.h"
 #import "OneCell.h"
 #import "TwoCell.h"
+#import "Chat.h"
 
 @interface ChatViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 {
     UITableView *_tableView;
-    NSArray *chatArray;
+    NSMutableArray *chatArray;
     CGRect rect;
     
     UIView *viewImport;
     UITextField *_textField;
     UIButton *buttonSend;
     CGFloat keyboardhight;
+    CGSize keyboardSize;
 }
 
 @end
@@ -33,6 +35,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"咨询理财师"];
+    
+    chatArray = [NSMutableArray array];
     
     [self getDataList];
     [self importWindow];
@@ -55,8 +59,8 @@
 {
     NSDictionary *info = [aNotification userInfo];
     
-    //     keyboardSize为键盘尺寸 (有width, height)
-    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;//得到键盘的高度
+//     keyboardSize为键盘尺寸 (有width, height)
+    keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;//得到键盘的高度
     
     [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         
@@ -75,17 +79,8 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    _tableView.separatorColor = [UIColor clearColor];
+    _tableView.separatorColor = [UIColor magentaColor];
     
-    chatArray = @[@"我是好人我是好人我是好人我是好人我是好人我是好人我是好人",
-                  @"沈殿霞的女儿郑欣宜几乎是在全港影迷的关注下长大，然而这个“星二代”却不怎么让人省心。继承了母亲体型的郑欣宜减肥史长达10年，身高167厘米的她体重曾达到104公斤，后惊人甩掉46公斤。成功瘦身的郑欣宜在母亲的帮助下进入演艺圈，但并未拿出代表作。",
-                  @"反而关于郑欣宜泡夜店、夜不归宿、挥霍无度等报道却不绝于耳，在肥肥去世后不久，郑欣宜更先后传出与师父闹翻、变卖房产兑现1300万港元等负面消息。",
-                  @"在“星二代”中条件最好的房祖名也总是让人放不下心。由于父亲成龙的关系，房祖名以众星捧月的方式进入娱乐圈，但至今在演艺事业上还没有太大的建树，但他却是绯闻不断，香港记者还曾多次拍到了房祖名流连于夜店的照片。从目前来看，房祖名还没有做过让成龙脸上特别增光的事情，而他想要超越父亲的成就，也实在是无从说起。在“星二代”中条件最好的房祖名也总是让人放不下心。",
-                  @"你最近好吗",
-                  @"你是我的小呀小苹果,怎么爱你都不嫌多,红红的小脸照进我的心窝",
-                  @"喔喔",
-                  @"这是一个柚子, 好吃的柚子",
-                  @"太阳当空照,花儿对我笑,小鸟说早早早,你为什么背上小书包,我要炸学校,天天不迟到,爱学习,爱劳动,长大要为人民立功劳"];
 }
 
 //输入窗口
@@ -123,18 +118,38 @@
 //发送消息
 - (void)sendMessage:(UIButton *)button
 {
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    if (_textField.text.length == 0) {
+        
+    } else {
+        
+//        [_textField resignFirstResponder];
+//        
+//        [UIView animateWithDuration:0.001 animations:^{
+//            
+//            viewImport.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 20 - 50, WIDTH_CONTROLLER_DEFAULT, 50);
+//        }];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        
+        NSDictionary *parameter = @{@"recUserId":[dic objectForKey:@"id"], @"msgContent":_textField.text};
+        
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/sendMsg" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"vvvvvv%@", responseObject);
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                
+                [chatArray addObject:_textField.text];
+                [_tableView reloadData];
+                _textField.text = nil;
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+        }];
+    }
     
-    NSDictionary *parameter = @{@"recUserId":[dic objectForKey:@"id"], @"msgContent":_textField.text};
-    
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/sendMsg" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
-        NSLog(@"vvvvvv%@", responseObject);
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        NSLog(@"%@", error);
-    }];
 }
 
 //获取消息列表
@@ -147,6 +162,26 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"111&&&1111%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            if (chatArray.count == 0) {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"暂无消息"];
+            } else {
+                
+                for (NSDictionary *chatDic in [responseObject objectForKey:@"Msg"]) {
+                    
+                    Chat *chat = [[Chat alloc] init];
+                    [chat setValuesForKeysWithDictionary:chatDic];
+                    [chatArray addObject:chat];
+                    NSLog(@"%@,,,,,,,,,,,,,,", chatArray);
+                }
+                
+                [_tableView reloadData];
+            }
+            
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
@@ -236,7 +271,7 @@
 //回收键盘
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y > 0) {
+    if (scrollView.contentOffset.y != 0) {
         
         [_textField resignFirstResponder];//键盘回收
         

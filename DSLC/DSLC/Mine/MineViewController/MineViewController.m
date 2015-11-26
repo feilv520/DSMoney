@@ -377,7 +377,7 @@
     [self.navigationController pushViewController:myInformationVC animated:YES];
 }
 
-//邀请按钮
+//我的理财师按钮
 - (void)inviteButton:(UIButton *)button
 {
 //    如果已经有字的理财师直接跳转到我的理财师

@@ -45,12 +45,12 @@
     
     [self getMyAssetInfo];
     
-    self.view.backgroundColor = TabelVie_Color_Gray;
+    self.view.backgroundColor = [UIColor huibai];
     
     self.mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 84) style:UITableViewStylePlain];
     
     self.mainTableView.backgroundColor = TabelVie_Color_Gray;
-    
+    self.mainTableView.backgroundColor = [UIColor huibai];
     self.mainTableView.dataSource = self;
     self.mainTableView.delegate = self;
     

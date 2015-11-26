@@ -193,8 +193,25 @@
     
     [self.view endEditing:YES];
     
-    if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 1 && fieldPhoneNum.text.length == 1 && fieldMoney.text.length > 0) {
+    if (fileldName.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入姓名"];
         
+    } else if (fieldBankCard.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入银行卡号"];
+        
+    } else if (fieldBankCard.text.length != 19) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"银行卡号格式错误"];
+        
+    } else if (fieldPhoneNum.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if (![NSString validateMobile:fieldPhoneNum.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
+    } else if (fieldMoney.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入转账金额"];
+        
+    } else {
         ApplyScheduleViewController *scheduleVC = [[ApplyScheduleViewController alloc] init];
         [self.view endEditing:YES];
         [self.navigationController pushViewController:scheduleVC animated:YES];

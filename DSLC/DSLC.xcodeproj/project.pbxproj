@@ -390,6 +390,8 @@
 		81F343861C0584EB001EF374 /* 圆角矩形-3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F343821C0584EB001EF374 /* 圆角矩形-3@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81F343871C0584EB001EF374 /* iconfont-complete-拷贝-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F343831C0584EB001EF374 /* iconfont-complete-拷贝-3@2x.png */; settings = {ASSET_TAGS = (); }; };
 		81F343881C0584EB001EF374 /* iconfont-complete-拷贝-3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F343841C0584EB001EF374 /* iconfont-complete-拷贝-3@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81F496FE1C06EF71002F3413 /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F496FD1C06EF71002F3413 /* Chat.m */; settings = {ASSET_TAGS = (); }; };
+		81F497011C072929002F3413 /* Planner.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F497001C072929002F3413 /* Planner.m */; settings = {ASSET_TAGS = (); }; };
 		81F4BD5B1BECC06B00C308F8 /* SetDealSecret.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F4BD5A1BECC06B00C308F8 /* SetDealSecret.m */; settings = {ASSET_TAGS = (); }; };
 		81F5FA0A1BD9E1FE008C38BF /* ChangeNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA091BD9E1FE008C38BF /* ChangeNumViewController.m */; };
 		81F5FA0D1BDA0D2E008C38BF /* RealNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA0C1BDA0D2E008C38BF /* RealNameViewController.m */; };
@@ -1236,6 +1238,10 @@
 		81F343821C0584EB001EF374 /* 圆角矩形-3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形-3@3x.png"; sourceTree = "<group>"; };
 		81F343831C0584EB001EF374 /* iconfont-complete-拷贝-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-complete-拷贝-3@2x.png"; sourceTree = "<group>"; };
 		81F343841C0584EB001EF374 /* iconfont-complete-拷贝-3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-complete-拷贝-3@3x.png"; sourceTree = "<group>"; };
+		81F496FC1C06EF71002F3413 /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
+		81F496FD1C06EF71002F3413 /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
+		81F496FF1C072929002F3413 /* Planner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planner.h; sourceTree = "<group>"; };
+		81F497001C072929002F3413 /* Planner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Planner.m; sourceTree = "<group>"; };
 		81F4BD591BECC06B00C308F8 /* SetDealSecret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetDealSecret.h; sourceTree = "<group>"; };
 		81F4BD5A1BECC06B00C308F8 /* SetDealSecret.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetDealSecret.m; sourceTree = "<group>"; };
 		81F5FA081BD9E1FE008C38BF /* ChangeNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNumViewController.h; sourceTree = "<group>"; };
@@ -2237,6 +2243,10 @@
 				8D31DF211C04874700B676AF /* MTransactionModel.m */,
 				8D4144121C06A003002926DA /* MessageModel.h */,
 				8D4144131C06A003002926DA /* MessageModel.m */,
+				81F496FC1C06EF71002F3413 /* Chat.h */,
+				81F496FD1C06EF71002F3413 /* Chat.m */,
+				81F496FF1C072929002F3413 /* Planner.h */,
+				81F497001C072929002F3413 /* Planner.m */,
 			);
 			path = MineModel;
 			sourceTree = "<group>";
@@ -3938,6 +3948,7 @@
 				819B52EB1BFC4462002FDF1E /* NewHandCSSCell.m in Sources */,
 				81D703FC1BE073730074DF30 /* ForgetSecret2Cell.m in Sources */,
 				81B18E201BE761B600D448FA /* LastEmailViewController.m in Sources */,
+				81F496FE1C06EF71002F3413 /* Chat.m in Sources */,
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
 				8D0CB4A41BE7806D0039D826 /* MyAfHTTPClient.m in Sources */,
 				8D90117F1BD61B3400E5D62A /* TranctionTableViewCell.m in Sources */,
@@ -4034,6 +4045,7 @@
 				817988361BC94014007C8C3E /* PlanCell.m in Sources */,
 				811F0AFF1BF32798001F6AA4 /* LiftupMoneyViewController.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
+				81F497011C072929002F3413 /* Planner.m in Sources */,
 				8D1921CD1BD4E2060038195E /* XYPieChart.m in Sources */,
 				818063AE1BD6437D00E83492 /* PayMoneyViewController.m in Sources */,
 				81C138121BDF61F30088E792 /* LoginViewController.m in Sources */,

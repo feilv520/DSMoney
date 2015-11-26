@@ -54,7 +54,9 @@
 
 - (void)showTanKuangWithMode:(MBProgressHUDMode)mode Text:(NSString *)text
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:app.tabBarVC.view animated:YES];
     hud.mode = mode;
     hud.labelText = text;
     hud.labelFont = [UIFont systemFontOfSize:12];

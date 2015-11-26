@@ -46,8 +46,8 @@
     
     if (width < WIDTH_CONTROLLER_DEFAULT - 100) {
         
-        self.labelRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - width - 50, 20, width, rect.size.height);
-        self.imageContect.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - width - 60, 10, width + 10, rect.size.height +  20);
+        self.labelRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - width - 50 - 25, 20, width, rect.size.height);
+        self.imageContect.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - width - 50 - 40, 10, width + 40, rect.size.height +  20);
         
     } else {
         
@@ -55,7 +55,6 @@
         self.imageContect.frame = CGRectMake(15, 10, WIDTH_CONTROLLER_DEFAULT - 65, rect.size.height +  20);
     }
     
-    NSLog(@"%f", self.labelRight.frame.size.height);
 }
 
 - (void)awakeFromNib {
