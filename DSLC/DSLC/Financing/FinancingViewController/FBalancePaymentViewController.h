@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "RedBagModel.h"
 
 @interface FBalancePaymentViewController : BaseViewController
 
@@ -23,9 +24,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldSecret;
 @property (weak, nonatomic) IBOutlet UIButton *butForget;
 
-@property (nonatomic, strong) NSString *idString;
-@property (nonatomic, strong) NSString *productName;
-@property (nonatomic, strong) NSString *moneyString;
-@property (nonatomic, strong) NSString *typeString;
+@property (nonatomic, copy) NSString *idString;
+@property (nonatomic, copy) NSString *productName;
+@property (nonatomic, copy) NSString *moneyString;
+@property (nonatomic, copy) NSString *typeString;
+@property (nonatomic, strong) RedBagModel *redbagModel;
 
 @end

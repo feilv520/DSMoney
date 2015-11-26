@@ -121,10 +121,7 @@
     [self.textFieldSecret resignFirstResponder];
     
     if ( self.textFieldSecret.text.length > 5 && self.textFieldSecret.text.length < 21) {
-        
-//        支付没有红包
-//        CashOtherFinViewController *cashOther = [[CashOtherFinViewController alloc] init];
-//        [self.navigationController pushViewController:cashOther animated:YES];
+    
         [self buyProduct];
 //        支付有红包
 //        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
@@ -174,9 +171,17 @@
         
         NSLog(@"buyProduct = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-            ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
-            [self.navigationController pushViewController:shareHave animated:YES];
-            [ProgressHUD showMessage:@"支付成功" Width:100 High:20];
+            if ([self.redbagModel rpID] == nil) {
+//              支付没有红包
+                CashOtherFinViewController *cashOther = [[CashOtherFinViewController alloc] init];
+                [self.navigationController pushViewController:cashOther animated:YES];
+            } else {
+//              支付有红包
+                ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
+                shareHave.redbagModel = self.redbagModel;
+                [self.navigationController pushViewController:shareHave animated:YES];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
+            }
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }

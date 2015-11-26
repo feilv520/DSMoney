@@ -132,7 +132,7 @@
 - (void)sendValuenotification:(NSNotification *)notice
 {
     redbagModel = [notice object];
-    self.labelJiGe.text = [NSString stringWithFormat:@"%@~%@元",[redbagModel rpFloor], [redbagModel rpTop]];
+    self.labelJiGe.text = [NSString stringWithFormat:@"%@",[redbagModel rpTypeName]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -278,7 +278,7 @@
         
         if (self.decide == NO) {
             
-            cell.textField.text = @"5,000";
+            cell.textField.text = @"5000";
             cell.textField.enabled = NO;
             
         } else {
@@ -292,7 +292,6 @@
         cell.textField.delegate = self;
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.textField.layer.cornerRadius = 4;
-        cell.textField.tag = 5698;
         cell.textField.backgroundColor = [UIColor shurukuangColor];
         cell.textField.layer.borderWidth = 0.5;
         cell.textField.layer.borderColor = [[UIColor shurukuangBian] CGColor];
@@ -429,7 +428,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    UITextField *textField = (UITextField *)[self.view viewWithTag:5698];
+    UITextField *textField = (UITextField *)[self.view viewWithTag:199];
     
     if (indexPath.section == 2) {
         
@@ -437,18 +436,22 @@
             
             if (indexPath.row == 0) {
                 
+                NSLog(@"%@-op-op-op-%@",textField.text,[self.detailM amountMin]);
+                
                 if (![textField.text isEqualToString:@""] && [textField.text floatValue] >= [[self.detailM amountMin] floatValue]) {
                     ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
                     chooseVC.buyMoney = textField.text;
                     chooseVC.days = [self.detailM productPeriod];
                     [self.navigationController pushViewController:chooseVC animated:YES];
                 } else {
-                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入金额"];
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入金额,大于起投金额"];
                 }
                 
             }
             
         } else {
+            
+            NSLog(@"%@-op-op-op-%@",textField.text,[self.detailM amountMin]);
             
             if (indexPath.row == 1) {
                 
@@ -458,7 +461,7 @@
                     chooseVC.days = [self.detailM productPeriod];
                     [self.navigationController pushViewController:chooseVC animated:YES];
                 } else {
-                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入金额"];
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入金额,大于起投金额"];
                 }
             }
             
@@ -580,7 +583,7 @@
 
 //            当输入的值小于余额时 可以投资
         } else if (shuRuInt < numberInt && shuRuInt != 0) {
-            if (shuRuInt < [[self.detailM amountMin] floatValue]) {
+            if (shuRuInt >= [[self.detailM amountMin] floatValue]) {
                 self.controlBlack = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
                 [app.tabBarVC.view addSubview:self.controlBlack];
                 self.controlBlack.backgroundColor = [UIColor blackColor];
@@ -686,6 +689,7 @@
     balanceVC.idString = [self.detailM productId];
     balanceVC.moneyString = textField.text;
     balanceVC.typeString = [self.detailM productType];
+    balanceVC.redbagModel = redbagModel;
     [self.navigationController pushViewController:balanceVC animated:YES];
 }
 
