@@ -129,9 +129,11 @@
 - (void)getMyRedPacketList{
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":self.buyMoney,@"days":self.days};
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyRedPacketList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    NSLog(@"%@",parameter);
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/getUserRedPacketRandList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"getMyRedPacketList = %@",responseObject);
         

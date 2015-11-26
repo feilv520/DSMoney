@@ -268,15 +268,8 @@
         cell.labelEarnings.text = @"收益分配方式";
         cell.labelEarnings.textColor = [UIColor zitihui];
         cell.labelEarnings.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        
-        if (self.estimate == NO) {
             
-            cell.labelLast.text = @"产品到期兑付收益,平台回收新手体验金";
-            
-        } else {
-            
-            cell.labelLast.text = @"产品到期兑付本金收益";
-        }
+        cell.labelLast.text = [self.detailM productYieldDistribTypeName];
         
         cell.labelLast.textColor = [UIColor zitihui];
         cell.labelLast.font = [UIFont fontWithName:@"CenturyGothic" size:15];

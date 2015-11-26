@@ -12,6 +12,7 @@
 #import "define.h"
 #import "MyNewsCell.h"
 #import "MessageDetailViewController.h"
+#import "MessageModel.h"
 
 @interface MyNewsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -19,6 +20,8 @@
     UITableView *_tableView;
     NSMutableArray *picArr;
 }
+
+@property (nonatomic, strong) NSMutableArray *msgArr;
 
 @end
 
@@ -28,10 +31,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.msgArr = [NSMutableArray array];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self getDataList];
+    
     [self.navigationItem setTitle:@"消息中心"];
-    [self tableViewShow];
+    
 }
 
 - (void)tableViewShow
@@ -63,26 +70,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return picArr.count;
+    return self.msgArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MyNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    if (cell == nil) {
-        
-        cell = [[MyNewsCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
-    }
+    MessageModel *mModel = [self.msgArr objectAtIndex:indexPath.row];
     
-    cell.labelPrize.text = @"大圣理财年终福利大派送";
+    cell.labelPrize.text = [mModel msgText];
     cell.labelPrize.font = [UIFont systemFontOfSize:15];
     
-    cell.labelTime.text = @"2015-09-09 18:38";
+    cell.labelTime.text = [mModel sendTime];
     cell.labelTime.textColor = [UIColor zitihui];
     cell.labelTime.font = [UIFont systemFontOfSize:12];
     
-    cell.imageLeft.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [picArr objectAtIndex:indexPath.row]]];
+    if (indexPath.row % 2 == 0) {
+        cell.imageLeft.image = [UIImage imageNamed:@"icon04"];
+    } else {
+        cell.imageLeft.image = [UIImage imageNamed:@"icon05"];
+    }
     
     return cell;
 }
@@ -91,15 +99,44 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     MessageDetailViewController *messageDetailVC = [[MessageDetailViewController alloc] init];
-    
-    messageDetailVC.textString = @"为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．\n为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．为了庆祝大圣理财平台销售额突破1个亿，大圣理财特此推出年终福利大派送活动．";
+
+    messageDetailVC.idString = [[self.msgArr objectAtIndex:indexPath.row] msgTextId];
 
     [self.navigationController pushViewController:messageDetailVC animated:YES];
     
 }
 
-#pragma mark buttonAction other
+#pragma mark 网络请求方法
 #pragma mark --------------------------------
+
+//获取消息列表
+- (void)getDataList
+{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"recUserId":[dic objectForKey:@"id"], @"msgType":@1};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        if ([[responseObject objectForKey:@"Msg"] count] == 0) {
+            [self noDateWithView:nil height:120 view:self.view];
+        } else {
+        
+            for (NSDictionary *dic in [responseObject objectForKey:@"Msg"]) {
+                MessageModel *messageM = [[MessageModel alloc] init];
+                [messageM setValuesForKeysWithDictionary:dic];
+                [self.msgArr addObject:messageM];
+            }
+        
+            [self tableViewShow];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

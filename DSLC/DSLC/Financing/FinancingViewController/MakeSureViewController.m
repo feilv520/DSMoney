@@ -292,6 +292,7 @@
         cell.textField.delegate = self;
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.textField.layer.cornerRadius = 4;
+        cell.textField.tag = 5698;
         cell.textField.backgroundColor = [UIColor shurukuangColor];
         cell.textField.layer.borderWidth = 0.5;
         cell.textField.layer.borderColor = [[UIColor shurukuangBian] CGColor];
@@ -428,22 +429,37 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    UITextField *textField = (UITextField *)[self.view viewWithTag:5698];
+    
     if (indexPath.section == 2) {
         
         if (self.decide == NO) {
             
             if (indexPath.row == 0) {
                 
-                ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
-                [self.navigationController pushViewController:chooseVC animated:YES];
+                if (![textField.text isEqualToString:@""] && [textField.text floatValue] >= [[self.detailM amountMin] floatValue]) {
+                    ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
+                    chooseVC.buyMoney = textField.text;
+                    chooseVC.days = [self.detailM productPeriod];
+                    [self.navigationController pushViewController:chooseVC animated:YES];
+                } else {
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入金额"];
+                }
+                
             }
             
         } else {
             
             if (indexPath.row == 1) {
                 
-                ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
-                [self.navigationController pushViewController:chooseVC animated:YES];
+                if (![textField.text isEqualToString:@""] && [textField.text floatValue] >= [[self.detailM amountMin] floatValue]) {
+                    ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
+                    chooseVC.buyMoney = textField.text;
+                    chooseVC.days = [self.detailM productPeriod];
+                    [self.navigationController pushViewController:chooseVC animated:YES];
+                } else {
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入金额"];
+                }
             }
             
         }
