@@ -7,6 +7,7 @@
 //
 
 #import "MessageDetailViewController.h"
+#import "MessageModel.h"
 
 @interface MessageDetailViewController ()
 
@@ -17,17 +18,38 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.textLabel.text = self.textString;
-    
     [self.navigationItem setTitle:@"消息详情"];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self getDataList];
 }
 
-
+// 获取消息详情
+- (void)getDataList
+{
+    NSDictionary *parameter = @{@"msgTextId":self.idString, @"msgType":@1};
+    
+    NSLog(@"%@",parameter);
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        MessageModel *messageModel = [[MessageModel alloc] init];
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"Msg"]) {
+            [messageModel setValuesForKeysWithDictionary:dic];
+        }
+        
+//        self.textLabel.text = [messageModel msgText];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

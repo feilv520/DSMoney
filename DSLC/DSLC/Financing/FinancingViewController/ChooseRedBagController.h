@@ -10,4 +10,7 @@
 
 @interface ChooseRedBagController : BaseViewController
 
+@property (nonatomic, copy) NSString *buyMoney;
+@property (nonatomic, copy) NSString *days;
+
 @end

@@ -117,10 +117,15 @@
     [buttonSend addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
 //发送消息
 - (void)sendMessage:(UIButton *)button
 {
-    NSDictionary *parameter = @{@"recUserId":@38, @"msgContent":_textField.text};
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"recUserId":[dic objectForKey:@"id"], @"msgContent":_textField.text};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/sendMsg" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -135,7 +140,9 @@
 //获取消息列表
 - (void)getDataList
 {
-    NSDictionary *parameter = @{@"recUserId":@38, @"msgType":@1};
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"recUserId":[dic objectForKey:@"id"], @"msgType":@0};
 
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
