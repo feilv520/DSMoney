@@ -35,6 +35,9 @@
 @property (nonatomic, strong) ProductDetailModel *detailM;
 @property (nonatomic, strong) NSString *residueMoney;
 @property (nonatomic, strong) NSString *buyNumber;
+
+
+
 @end
 
 @implementation FDetailViewController
@@ -426,7 +429,13 @@
     if ([self.residueMoney isEqualToString:@"0.00"]) {
         [self orderProduct];
         return;
+    } else if ([self.residueMoney floatValue] <= [[self.detailM amountMin] floatValue]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"剩余金额已小于起投金额,不能投资此产品"];
+        return;
     }
+    
+    
+    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     if ([dic objectForKey:@"token"] != nil) {
@@ -449,6 +458,7 @@
                 } else {
                     
                     makeSureVC.decide = NO;
+                    makeSureVC.nHand = self.nHand;
                 }
                 makeSureVC.detailM = self.detailM;
                 makeSureVC.residueMoney = self.residueMoney;

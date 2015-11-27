@@ -15,4 +15,6 @@
 
 @property (nonatomic, strong) NSString *idString;
 
+@property (nonatomic, strong) NSString *nHand;
+
 @end

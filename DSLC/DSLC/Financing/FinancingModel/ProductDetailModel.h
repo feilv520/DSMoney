@@ -42,4 +42,6 @@
 
 @property (nonatomic, copy) NSString *amountIncrease;
 
+@property (nonatomic, copy) NSString *minRedPacketMoney;
+
 @end

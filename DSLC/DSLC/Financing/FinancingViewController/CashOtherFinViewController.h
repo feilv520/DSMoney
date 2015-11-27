@@ -10,4 +10,6 @@
 
 @interface CashOtherFinViewController : BaseViewController
 
+@property (nonatomic, strong) NSString *nHand;
+
 @end

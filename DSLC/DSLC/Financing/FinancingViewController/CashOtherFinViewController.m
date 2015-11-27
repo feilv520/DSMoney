@@ -38,15 +38,15 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(buttonNull:)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishBarPress:)];
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishBarPress:)];
+//    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
     [self contentShow];
 }
 
 - (void)contentShow
 {
-    contentArr = @[@"投资金额:10,000元", @"预期到期收益:200元", @"兑付日期:2015-02-03"];
+    contentArr = @[@"投资金额:5,000元", @"预期到期收益:200元", @"兑付日期:2015-02-03"];
     
     UIButton *butonDo = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 60, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"恭喜你投资成功"];
     [butonDo setImage:[UIImage imageNamed:@"iconfont_complete"] forState:UIControlStateNormal];
@@ -147,7 +147,11 @@
 
 - (void)finishBarPress:(UIBarButtonItem *)bar
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([self.nHand isEqualToString:@"my"]) {
+        NSArray *arrVC = self.navigationController.viewControllers;
+        [self.navigationController popToViewController:[arrVC objectAtIndex:1] animated:YES];
+    } else
+        [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)buttonNull:(UIBarButtonItem *)button

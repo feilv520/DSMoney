@@ -37,15 +37,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"支付完成"];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishButton:)];
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:15], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishButton:)];
+//    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:15], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
     [self contentShow];
 }
 
 - (void)contentShow
 {
-    titleArr = @[@"投资金额:10,000元", @"预期到期收益:200元", @"兑付日期:2015-2-3"];
+    titleArr = @[@"投资金额:5,000元", @"预期到期收益:200元", @"兑付日期:2015-2-3"];
     
     UIButton *butFinish = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 60, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"恭喜您投资成功"];
     [self.view addSubview:butFinish];
@@ -86,6 +86,10 @@
 //继续投资按钮
 - (void)goOnButton:(UIButton *)button
 {
+    if ([self.nHand isEqualToString:@"my"]) {
+        NSArray *arrVC = self.navigationController.viewControllers;
+        [self.navigationController popToViewController:[arrVC objectAtIndex:1] animated:YES];
+    } else
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -170,12 +174,12 @@
     viewTanKuang = nil;
 }
 
-//导航完成按钮
-- (void)finishButton:(UIBarButtonItem *)bar
-{
-    NSArray *array = self.navigationController.viewControllers;
-    [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
-}
+////导航完成按钮
+//- (void)finishButton:(UIBarButtonItem *)bar
+//{
+//    NSArray *array = self.navigationController.viewControllers;
+//    [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
+//}
 
 - (void)viewWillDisappear:(BOOL)animated
 {

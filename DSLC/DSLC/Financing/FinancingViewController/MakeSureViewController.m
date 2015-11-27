@@ -23,8 +23,9 @@
 #import "RechargeAlreadyBinding.h"
 #import "ChooseRedBagController.h"
 #import "RedBagModel.h"
+#import "ShareHaveRedBag.h"
 
-@interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>{
+@interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>{
     RedBagModel *redbagModel;
 }
 @property (nonatomic) UITableView *tableView;
@@ -339,11 +340,11 @@
             cell.buttonLeft.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
             cell.buttonLeft.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             
-            self.labelJiGe.text = [NSString stringWithFormat:@"%@%@", [self.accountDic objectForKey:@"redPacket"], @"个"];
-            self.labelJiGe.textAlignment = NSTextAlignmentCenter;
-            self.labelJiGe.textAlignment = NSTextAlignmentRight;
-            self.labelJiGe.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 20 - 16 - 100, 0, 100, 48);
-            [cell addSubview:self.labelJiGe];
+//            self.labelJiGe.text = [NSString stringWithFormat:@"%@%@", [self.accountDic objectForKey:@"redPacket"], @"个"];
+//            self.labelJiGe.textAlignment = NSTextAlignmentCenter;
+//            self.labelJiGe.textAlignment = NSTextAlignmentRight;
+//            self.labelJiGe.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 20 - 16 - 100, 0, 100, 48);
+//            [cell addSubview:self.labelJiGe];
             
             self.imageViewRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 14, 16, 16, 16);
             self.imageViewRight.image = [UIImage imageNamed:@"7501111"];
@@ -373,11 +374,11 @@
                 
             } else {
                 
-                self.labelJiGe.text = [NSString stringWithFormat:@"%@%@", [self.accountDic objectForKey:@"redPacket"], @"个"];
-                self.labelJiGe.textAlignment = NSTextAlignmentCenter;
-                self.labelJiGe.textAlignment = NSTextAlignmentRight;
-                self.labelJiGe.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 20 - 16 - 100, 0, 100, 48);
-                [cell addSubview:self.labelJiGe];
+//                self.labelJiGe.text = [NSString stringWithFormat:@"%@%@", [self.accountDic objectForKey:@"redPacket"], @"个"];
+//                self.labelJiGe.textAlignment = NSTextAlignmentCenter;
+//                self.labelJiGe.textAlignment = NSTextAlignmentRight;
+//                self.labelJiGe.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 20 - 16 - 100, 0, 100, 48);
+//                [cell addSubview:self.labelJiGe];
                 
                 self.imageViewRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 14, 16, 16, 16);
                 self.imageViewRight.image = [UIImage imageNamed:@"7501111"];
@@ -440,10 +441,14 @@
                 NSLog(@"%@-op-op-op-%@",textField.text,[self.detailM amountMin]);
                 
                 if (![textField.text isEqualToString:@""] && [textField.text floatValue] >= [[self.detailM amountMin] floatValue]) {
-                    ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
-                    chooseVC.buyMoney = textField.text;
-                    chooseVC.days = [self.detailM productPeriod];
-                    [self.navigationController pushViewController:chooseVC animated:YES];
+                    if ([textField.text floatValue] >= [[self.detailM minRedPacketMoney] floatValue]) {
+                        ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
+                        chooseVC.buyMoney = textField.text;
+                        chooseVC.days = [self.detailM productPeriod];
+                        [self.navigationController pushViewController:chooseVC animated:YES];
+                    } else {
+                        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"没有可用的红包"];
+                    }
                 } else {
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入金额,大于起投金额"];
                 }
@@ -457,10 +462,14 @@
             if (indexPath.row == 1) {
                 
                 if (![textField.text isEqualToString:@""] && [textField.text floatValue] >= [[self.detailM amountMin] floatValue]) {
-                    ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
-                    chooseVC.buyMoney = textField.text;
-                    chooseVC.days = [self.detailM productPeriod];
-                    [self.navigationController pushViewController:chooseVC animated:YES];
+                    if ([textField.text floatValue] >= [[self.detailM minRedPacketMoney] floatValue]) {
+                        ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
+                        chooseVC.buyMoney = textField.text;
+                        chooseVC.days = [self.detailM productPeriod];
+                        [self.navigationController pushViewController:chooseVC animated:YES];
+                    } else {
+                        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"没有可用的红包"];
+                    }
                 } else {
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入金额,大于起投金额"];
                 }
@@ -528,33 +537,40 @@
         
         self.textFieldC = (UITextField *)[self.view viewWithTag:199];
         
-        if ([redbagModel redPacketId] != nil) {
-        
-            NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-            
-            NSDictionary *parameter = @{@"productId":[self.detailM productId],@"packetId":[redbagModel rpID],@"orderMoney":[NSNumber numberWithFloat:[[self.textFieldC.text stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue]],@"payMoney":@0,@"payType":@0,@"payPwd":@0,@"token":[dic objectForKey:@"token"]};
-            
-            NSLog(@"%@",parameter);
-            
-            [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-                
-                NSLog(@"buyProduct = %@",responseObject);
-                if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-                    CashFinishViewController *cashFinishVC = [[CashFinishViewController alloc] init];
-                    [self.navigationController pushViewController:cashFinishVC animated:YES];
-                } else {
-                    [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
-                }
-                
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                
-                NSLog(@"%@", error);
-                
-            }];
-        
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        NSDictionary *parameter;
+        if ([redbagModel rpID] == nil) {
+            parameter = @{@"productId":[self.detailM productId],@"packetId":@"",@"orderMoney":[NSNumber numberWithFloat:[self.textFieldC.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"]};
         } else {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先选择新手红包"];
+            parameter = @{@"productId":[self.detailM productId],@"packetId":[redbagModel rpID],@"orderMoney":[NSNumber numberWithFloat:[self.textFieldC.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"]};
         }
+        
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"buyProduct = %@",responseObject);
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                if ([redbagModel rpID] == nil) {
+    //              支付没有红包
+                    CashFinishViewController *cashFinish = [[CashFinishViewController alloc] init];
+                    cashFinish.nHand = self.nHand;
+                    [self.navigationController pushViewController:cashFinish animated:YES];
+                } else {
+    //              支付有红包
+                    ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
+                    shareHave.redbagModel = redbagModel;
+                    shareHave.nHand = self.nHand;
+                    [self.navigationController pushViewController:shareHave animated:YES];
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
+                }
+            } else {
+                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            
+        }];
         
     } else {
         
@@ -601,56 +617,77 @@
 //            当输入的值小于余额时 可以投资
         } else if (shuRuInt < numberInt && shuRuInt != 0) {
             if (shuRuInt >= [[self.detailM amountMin] floatValue]) {
-                self.controlBlack = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
-                [app.tabBarVC.view addSubview:self.controlBlack];
-                self.controlBlack.backgroundColor = [UIColor blackColor];
-                self.controlBlack.alpha = 0.3;
-                [self.controlBlack addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
-                
-                NSBundle *rootBundle = [NSBundle mainBundle];
-                self.viewWhite = (FConfirmMoney *)[[rootBundle loadNibNamed:@"FConfirmMoney" owner:nil options:nil] lastObject];
-                
-                self.viewWhite.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300)/2, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 120, 301, 300);
-                self.viewWhite.layer.masksToBounds = YES;
-                self.viewWhite.layer.cornerRadius = 4;
-                [app.tabBarVC.view addSubview:self.viewWhite];
-                
-                self.viewWhite.labelName.text = @"尊敬的黄经理";
-                self.viewWhite.labelName.font = [UIFont systemFontOfSize:15];
-                
-                [self.viewWhite.buttonClose setImage:[UIImage imageNamed:@"iconfont_graycuo"] forState:UIControlStateNormal];
-                [self.viewWhite.buttonClose addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
-                
-                self.viewWhite.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
-                self.viewWhite.labelLine.alpha = 0.7;
-                
-                self.viewWhite.labelSign.text = @"在购买<<新手专享>>前请您确认:";
-                self.viewWhite.labelSign.font = [UIFont systemFontOfSize:15];
-                self.viewWhite.labelSign.textColor = [UIColor zitihui];
-                
-                self.viewWhite.labelKnow.text = @"本人已清除知悉该收益权产品的基础信息,并已充分了解其产品特性";
-                self.viewWhite.labelKnow.textColor = [UIColor zitihui];
-                self.viewWhite.labelKnow.font = [UIFont systemFontOfSize:15];
-                self.viewWhite.labelKnow.numberOfLines = 0;
-                
-                self.viewWhite.labelBook.textColor = [UIColor zitihui];
-                NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"];
-                [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor chongzhiColor] range:[@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"rangeOfString:@"<<购买条款>>、<<收益权转让协议>>"]];
-                [self.viewWhite.labelBook setAttributedText:attStr];
-                self.viewWhite.labelBook.font = [UIFont systemFontOfSize:15];
-                self.viewWhite.labelBook.numberOfLines = 0;
-                
-                self.viewWhite.imageBlueOne.image = [UIImage imageNamed:@"blueyuan"];
-                self.viewWhite.imageBlueTwo.image = [UIImage imageNamed:@"blueyuan"];
-                
-                [self.viewWhite.buttonAffirm setTitle:@"确认" forState:UIControlStateNormal];
-                self.viewWhite.buttonAffirm.titleLabel.font = [UIFont systemFontOfSize:15];
-                self.viewWhite.buttonAffirm.layer.cornerRadius = 4;
-                self.viewWhite.buttonAffirm.layer.masksToBounds = YES;
-                self.viewWhite.buttonAffirm.backgroundColor = [UIColor daohanglan];
-                [self.viewWhite.buttonAffirm addTarget:self action:@selector(buttonAffirmMoney:) forControlEvents:UIControlEventTouchUpInside];
+                if (shuRuInt < [[self.detailM minRedPacketMoney] floatValue]) {
+                    [self showSureView:app];
+                } else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你还有未使用的红包,要不要去看看?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去看看",nil];
+                    // optional - add more buttons:
+                    [alert show];
+                }
             }
         }
+    }
+}
+
+- (void)showSureView:(AppDelegate *)app{
+    
+    self.controlBlack = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+    [app.tabBarVC.view addSubview:self.controlBlack];
+    self.controlBlack.backgroundColor = [UIColor blackColor];
+    self.controlBlack.alpha = 0.3;
+    [self.controlBlack addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSBundle *rootBundle = [NSBundle mainBundle];
+    self.viewWhite = (FConfirmMoney *)[[rootBundle loadNibNamed:@"FConfirmMoney" owner:nil options:nil] lastObject];
+    
+    self.viewWhite.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300)/2, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 120, 301, 300);
+    self.viewWhite.layer.masksToBounds = YES;
+    self.viewWhite.layer.cornerRadius = 4;
+    [app.tabBarVC.view addSubview:self.viewWhite];
+    
+    self.viewWhite.labelName.text = @"尊敬的黄经理";
+    self.viewWhite.labelName.font = [UIFont systemFontOfSize:15];
+    
+    [self.viewWhite.buttonClose setImage:[UIImage imageNamed:@"iconfont_graycuo"] forState:UIControlStateNormal];
+    [self.viewWhite.buttonClose addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.viewWhite.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.viewWhite.labelLine.alpha = 0.7;
+    
+    self.viewWhite.labelSign.text = @"在购买<<新手专享>>前请您确认:";
+    self.viewWhite.labelSign.font = [UIFont systemFontOfSize:15];
+    self.viewWhite.labelSign.textColor = [UIColor zitihui];
+    
+    self.viewWhite.labelKnow.text = @"本人已清除知悉该收益权产品的基础信息,并已充分了解其产品特性";
+    self.viewWhite.labelKnow.textColor = [UIColor zitihui];
+    self.viewWhite.labelKnow.font = [UIFont systemFontOfSize:15];
+    self.viewWhite.labelKnow.numberOfLines = 0;
+    
+    self.viewWhite.labelBook.textColor = [UIColor zitihui];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"];
+    [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor chongzhiColor] range:[@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"rangeOfString:@"<<购买条款>>、<<收益权转让协议>>"]];
+    [self.viewWhite.labelBook setAttributedText:attStr];
+    self.viewWhite.labelBook.font = [UIFont systemFontOfSize:15];
+    self.viewWhite.labelBook.numberOfLines = 0;
+    
+    self.viewWhite.imageBlueOne.image = [UIImage imageNamed:@"blueyuan"];
+    self.viewWhite.imageBlueTwo.image = [UIImage imageNamed:@"blueyuan"];
+    
+    [self.viewWhite.buttonAffirm setTitle:@"确认" forState:UIControlStateNormal];
+    self.viewWhite.buttonAffirm.titleLabel.font = [UIFont systemFontOfSize:15];
+    self.viewWhite.buttonAffirm.layer.cornerRadius = 4;
+    self.viewWhite.buttonAffirm.layer.masksToBounds = YES;
+    self.viewWhite.buttonAffirm.backgroundColor = [UIColor daohanglan];
+    [self.viewWhite.buttonAffirm addTarget:self action:@selector(buttonAffirmMoney:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark alertView 的 代理方法
+#pragma mark --------------------------------
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [self showSureView:app];
     }
 }
 
@@ -707,6 +744,7 @@
     balanceVC.moneyString = textField.text;
     balanceVC.typeString = [self.detailM productType];
     balanceVC.redbagModel = redbagModel;
+    balanceVC.nHand = self.nHand;
     [self.navigationController pushViewController:balanceVC animated:YES];
 }
 

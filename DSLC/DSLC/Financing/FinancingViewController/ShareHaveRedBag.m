@@ -32,9 +32,9 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(buttonNothing:)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishLastBarPress:)];
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
-    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishLastBarPress:)];
+//    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+//    
     [self contentShow];
 }
 
@@ -154,7 +154,11 @@
 
 - (void)finishLastBarPress:(UIBarButtonItem *)bar
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([self.nHand isEqualToString:@"my"]) {
+        NSArray *arrVC = self.navigationController.viewControllers;
+        [self.navigationController popToViewController:[arrVC objectAtIndex:1] animated:YES];
+    } else
+        [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)buttonNothing:(UIBarButtonItem *)button

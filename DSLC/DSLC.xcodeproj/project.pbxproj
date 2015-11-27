@@ -441,6 +441,10 @@
 		8D1921D11BD4FC840038195E /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1921CF1BD4FC840038195E /* MessageDetailViewController.m */; };
 		8D1921D21BD4FC840038195E /* MessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1921D01BD4FC840038195E /* MessageDetailViewController.xib */; };
 		8D1921D41BD4FD7F0038195E /* banner01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1921D31BD4FD7F0038195E /* banner01@2x.png */; };
+		8D29F9811C08047D00D45E43 /* 已打开@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D29F9731C08047D00D45E43 /* 已打开@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D29F9821C08047D00D45E43 /* 已打开@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D29F9741C08047D00D45E43 /* 已打开@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D29F99E1C08048700D45E43 /* 已过期@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D29F9901C08048700D45E43 /* 已过期@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D29F99F1C08048700D45E43 /* 已过期@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D29F9911C08048700D45E43 /* 已过期@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D3125DE1BD763F900143B71 /* GetMoneyVerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125DC1BD763F900143B71 /* GetMoneyVerifyViewController.m */; };
 		8D3125DF1BD763F900143B71 /* GetMoneyVerifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3125DD1BD763F900143B71 /* GetMoneyVerifyViewController.xib */; };
 		8D3125E61BD7689200143B71 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125E51BD7689200143B71 /* BaseViewController.m */; };
@@ -1315,6 +1319,10 @@
 		8D1921CF1BD4FC840038195E /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
 		8D1921D01BD4FC840038195E /* MessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageDetailViewController.xib; sourceTree = "<group>"; };
 		8D1921D31BD4FD7F0038195E /* banner01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "banner01@2x.png"; path = "../banner01@2x.png"; sourceTree = "<group>"; };
+		8D29F9731C08047D00D45E43 /* 已打开@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已打开@2x.png"; sourceTree = "<group>"; };
+		8D29F9741C08047D00D45E43 /* 已打开@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已打开@3x.png"; sourceTree = "<group>"; };
+		8D29F9901C08048700D45E43 /* 已过期@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已过期@2x.png"; sourceTree = "<group>"; };
+		8D29F9911C08048700D45E43 /* 已过期@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已过期@3x.png"; sourceTree = "<group>"; };
 		8D3125DB1BD763F900143B71 /* GetMoneyVerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyVerifyViewController.h; sourceTree = "<group>"; };
 		8D3125DC1BD763F900143B71 /* GetMoneyVerifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyVerifyViewController.m; sourceTree = "<group>"; };
 		8D3125DD1BD763F900143B71 /* GetMoneyVerifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetMoneyVerifyViewController.xib; sourceTree = "<group>"; };
@@ -1978,6 +1986,8 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8D29F98F1C08048700D45E43 /* 已失效 */,
+				8D29F9721C08047D00D45E43 /* 已打开 */,
 				81F343811C0584EB001EF374 /* 圆角矩形-3@2x.png */,
 				81F343821C0584EB001EF374 /* 圆角矩形-3@3x.png */,
 				81F343831C0584EB001EF374 /* iconfont-complete-拷贝-3@2x.png */,
@@ -2448,6 +2458,24 @@
 				8D3F95D61BE1C90C00013A8E /* RegisterOfPassButton.xib */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		8D29F9721C08047D00D45E43 /* 已打开 */ = {
+			isa = PBXGroup;
+			children = (
+				8D29F9731C08047D00D45E43 /* 已打开@2x.png */,
+				8D29F9741C08047D00D45E43 /* 已打开@3x.png */,
+			);
+			path = "已打开";
+			sourceTree = "<group>";
+		};
+		8D29F98F1C08048700D45E43 /* 已失效 */ = {
+			isa = PBXGroup;
+			children = (
+				8D29F9901C08048700D45E43 /* 已过期@2x.png */,
+				8D29F9911C08048700D45E43 /* 已过期@3x.png */,
+			);
+			path = "已失效";
 			sourceTree = "<group>";
 		};
 		8D3125C91BD740D400143B71 /* 充值 */ = {
@@ -3460,6 +3488,7 @@
 				8DEDE1B71BCCFEB5008086D3 /* fan@2x.png in Resources */,
 				8D9011BE1BD6337C00E5D62A /* 矩形-10@3x.png in Resources */,
 				817DD4A51BCF547E00042B09 /* tixian@3x.png in Resources */,
+				8D29F9821C08047D00D45E43 /* 已打开@3x.png in Resources */,
 				8DEDE1C11BCCFEF8008086D3 /* iocn@3x.png in Resources */,
 				8191E2231BDDF202000A6E8C /* ServiceCell.xib in Resources */,
 				81C8BBC61BDA2F8D005B9DFF /* guanyu@2x.png in Resources */,
@@ -3696,6 +3725,7 @@
 				8D9356D71BC607C500BC2BFA /* Main.storyboard in Resources */,
 				8D0AE7F71BE09CE500D9D50C /* register-1@3x.png in Resources */,
 				817E33851BD733D100D05103 /* b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658@3x.png in Resources */,
+				8D29F9811C08047D00D45E43 /* 已打开@2x.png in Resources */,
 				818063A61BD5D89000E83492 /* InviteNameCell.xib in Resources */,
 				8D88A4E11BCE087400EE22F5 /* emptyyuan@2x.png in Resources */,
 				81D72FBD1BFAD63B0067A277 /* left@3x.png in Resources */,
@@ -3779,6 +3809,7 @@
 				8D9011BC1BD6337C00E5D62A /* anniuS@3x.png in Resources */,
 				817988371BC94014007C8C3E /* PlanCell.xib in Resources */,
 				8D121FD71BD4D4CE00B3C1FE /* SettingTitleTableViewCell.xib in Resources */,
+				8D29F99E1C08048700D45E43 /* 已过期@2x.png in Resources */,
 				8D3F95ED1BE2188500013A8E /* moneymoney@3x.png in Resources */,
 				8D9011B51BD6337C00E5D62A /* 7@2x.png in Resources */,
 				8D9011BB1BD6337C00E5D62A /* anniuS@2x.png in Resources */,
@@ -3823,6 +3854,7 @@
 				811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */,
 				8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */,
 				817DD4A91BCF547E00042B09 /* xiaoxi@3x.png in Resources */,
+				8D29F99F1C08048700D45E43 /* 已过期@3x.png in Resources */,
 				81BA1C041BD4E1ED00DBA5BE /* computer1.png in Resources */,
 				8D4343991BFDEB0B000BA004 /* loading_up_08.png in Resources */,
 				81B18E1A1BE7387A00D448FA /* iconfont-zhuanxiangeps@3x.png in Resources */,
