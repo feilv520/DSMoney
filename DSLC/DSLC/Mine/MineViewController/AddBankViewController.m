@@ -154,7 +154,7 @@
         
         if (textField.tag == 402) {
             
-            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 
                 _tableView.contentOffset = CGPointMake(0, 100);
                 
@@ -163,30 +163,18 @@
             }];
         } else if (textField.tag == 404) {
             
-            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 
-                [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                    
-                    _tableView.contentOffset = CGPointMake(0, 100);
-                    
-                } completion:^(BOOL finished) {
-                    
-                }];
+                _tableView.contentOffset = CGPointMake(0, 100);
                 
             } completion:^(BOOL finished) {
                 
             }];
         } else if (textField.tag == 405) {
             
-            [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                
-                [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                     
-                    _tableView.contentOffset = CGPointMake(0, 150);
-                    
-                } completion:^(BOOL finished) {
-                    
-                }];
+                _tableView.contentOffset = CGPointMake(0, 150);
                 
             } completion:^(BOOL finished) {
                 

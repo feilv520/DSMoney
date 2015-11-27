@@ -274,6 +274,7 @@
         cell.textField.leftViewMode = UITextFieldViewModeAlways;
         cell.textField.tintColor = [UIColor yuanColor];
         cell.textField.tag = 199;
+        cell.textField.delegate = self;
         [cell.textField addTarget:self action:@selector(textFieldEditShow:) forControlEvents:UIControlEventEditingChanged];
         
         if (self.decide == NO) {
@@ -489,6 +490,22 @@
         [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [_makeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            _tableView.contentOffset = CGPointMake(0, 145);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    
+    return YES;
 }
 
 //充值按钮

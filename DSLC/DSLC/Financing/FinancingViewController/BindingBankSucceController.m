@@ -104,25 +104,33 @@
     textField1 = (UITextField *)[self.view viewWithTag:700];
     textField2 = (UITextField *)[self.view viewWithTag:701];
     
-    if ([textField1.text isEqualToString:textField2.text]) {
+    if (textField1.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入交易密码"];
         
-        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else if (![NSString validatePassword:textField1.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"交易密码格式错误"];
+        
+    } else if (textField2.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入确认交易密码"];
+        
+    } else if (![textField1.text isEqualToString:textField2.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次输入密码不一致"];
         
     } else {
-        
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入的交易密码与确认的交易不匹配"];
+        NSArray *viewController = [self.navigationController viewControllers];
+        [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
     }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (range.location == 6) {
+    if (range.location < 20) {
         
-        return NO;
+        return YES;
         
     } else {
         
-        return YES;
+        return NO;
     }
 }
 

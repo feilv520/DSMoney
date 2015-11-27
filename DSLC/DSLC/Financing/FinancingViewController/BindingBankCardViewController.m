@@ -35,9 +35,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    TPKeyboardAvoidingScrollView *tpScrollView = [TPKeyboardAvoidingScrollView new];
-    
-    self.view = tpScrollView;
+//    TPKeyboardAvoidingScrollView *tpScrollView = [TPKeyboardAvoidingScrollView new];
+//    
+//    self.view = tpScrollView;
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"绑定银行卡"];
@@ -132,6 +132,8 @@
         cell.textField.tintColor = [UIColor grayColor];
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.textField.tag = indexPath.row + 600;
+
+        cell.textField.delegate = self;
         [cell.textField addTarget:self action:@selector(bindingBankTextField:) forControlEvents:UIControlEventEditingChanged];
         
         if (indexPath.row == 0) {
@@ -153,6 +155,46 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        if (textField.tag == 603) {
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 100);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+        } else if (textField.tag == 704) {
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 150);
+                NSLog(@"%f", _tableView.contentOffset.y);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+        } else if (textField.tag == 604) {
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 150);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+
+        }
+    }
+    return YES;
 }
 
 //确定按钮
@@ -213,30 +255,18 @@
     NSLog(@"666666");
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    
-//    textField3 = (UITextField *)[self.view viewWithTag:603];
-//    textField4 = (UITextField *)[self.view viewWithTag:604];
-//    textField5 = (UITextField *)[self.view viewWithTag:704];
-//    
-//    if (scrollView.contentOffset.y > 0) {
-//        
-//        [textField3 resignFirstResponder];
-//        [textField4 resignFirstResponder];
-//        [textField5 resignFirstResponder];
-//    }
-//}
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    textField3 = (UITextField *)[self.view viewWithTag:603];
-    textField4 = (UITextField *)[self.view viewWithTag:604];
-    textField5 = (UITextField *)[self.view viewWithTag:704];
-
-    [textField3 resignFirstResponder];
-    [textField4 resignFirstResponder];
-    [textField5 resignFirstResponder];
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        if (scrollView.contentOffset.y < 100) {
+            
+            [self.view endEditing:YES];
+        }
+    } else {
+        
+        [self.view endEditing:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

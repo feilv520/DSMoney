@@ -109,7 +109,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Planner *planner = [plannerArr objectAtIndex:indexPath.section];
     MyPlannerViewController *plannerVC = [[MyPlannerViewController alloc] init];
+    plannerVC.IDStr = planner.ID;
     [self.navigationController pushViewController:plannerVC animated:YES];
 }
 

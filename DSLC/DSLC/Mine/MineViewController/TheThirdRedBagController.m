@@ -14,6 +14,7 @@
 #import "NewHandCSSCell.h"
 #import "RedBagModel.h"
 #import "FDetailViewController.h"
+#import "RedBagExplainViewController.h"
 
 @interface TheThirdRedBagController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -46,9 +47,19 @@
     
     self.redBagArray = [NSMutableArray array];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"红包说明" style:UIBarButtonItemStylePlain target:self action:@selector(barRightItem:)];
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+    
     [self getMyRedPacketList];
     [self viewShow];
     [self tableViewShow];
+}
+
+//红包说明
+- (void)barRightItem:(UIBarButtonItem *)bar
+{
+    RedBagExplainViewController *redBag = [[RedBagExplainViewController alloc] init];
+    [self.navigationController pushViewController:redBag animated:YES];
 }
 
 - (void)viewShow
