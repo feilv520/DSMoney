@@ -94,9 +94,9 @@
             return 100;
     } else {
         
-        if ([[redbagModel rpStatus] isEqualToString:@"0"])
-            return 145;
-        else
+//        if ([[redbagModel rpStatus] isEqualToString:@"0"])
+//            return 145;
+//        else
             return 100;
     }
 }
@@ -113,14 +113,8 @@
     if ([[redbagModel rpType] isEqualToString:@"1"]) {
     
         NewHandCSSCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNewHand"];
-
-        cell.imagePic.image = [UIImage imageNamed:@"新手体验金"];
-        [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        [cell.buttonCan setTitle:@"立即使用" forState:UIControlStateNormal];
-        [cell.buttonCan setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        cell.buttonCan.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-        [cell.buttonCan addTarget:self action:@selector(buttonRightNowMake:) forControlEvents:UIControlEventTouchUpInside];
+        
+        cell.buttonCan.hidden = YES;
         
         cell.labelSend.text = @"送";
         cell.labelSend.textColor = [UIColor whiteColor];
@@ -157,23 +151,50 @@
         
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
+            
+            cell.imagePic.image = [UIImage imageNamed:@"新手体验金"];
+            [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+            [cell.buttonCan setTitle:@"立即使用" forState:UIControlStateNormal];
+            [cell.buttonCan setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            cell.buttonCan.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            [cell.buttonCan addTarget:self action:@selector(buttonRightNowMake:) forControlEvents:UIControlEventTouchUpInside];
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
+            cell.labelSend.backgroundColor = [UIColor daohanglan];
+            cell.labelStyle.textColor = [UIColor daohanglan];
+            
+        } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已打开"]];
+            cell.labelSend.backgroundColor = [UIColor zitihui];
+            cell.labelStyle.textColor = [UIColor zitihui];
+            cell.labelMoney.textColor = [UIColor zitihui];
+            
+        } else if ([[redbagModel rpStatus] isEqualToString:@"3"]){
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已过期"]];
+            cell.labelSend.backgroundColor = [UIColor zitihui];
+            cell.labelStyle.textColor = [UIColor zitihui];
+            cell.labelMoney.textColor = [UIColor zitihui];
+            
+        }
+
+        
         return cell;
 
     } else if ([[redbagModel rpType] isEqualToString:@"3"] || [[redbagModel rpType] isEqualToString:@"0"]) {
         TheThirdRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse"];
-
-        cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
-        if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
-            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-            [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
-            [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-            [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.buttonOpen setTag:indexPath.row];
-        } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
-            cell.contentView.backgroundColor = [UIColor zitihui];
-        }
+        
+        [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
+        [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.buttonOpen setTag:indexPath.row];
         
         cell.labelAend.text = @"送";
         cell.labelAend.textColor = [UIColor whiteColor];
@@ -182,7 +203,7 @@
         cell.labelAend.backgroundColor = [UIColor daohanglan];
         cell.labelAend.layer.cornerRadius = 5;
         cell.labelAend.layer.masksToBounds = YES;
-
+        
         NSString *string = [NSString stringWithFormat:@"%@元",[redbagModel rpAmount]];
         
         NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:string];
@@ -193,21 +214,21 @@
         [cell.labelMoney setAttributedText:redStr];
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.backgroundColor = [UIColor clearColor];
-
+        
         cell.labelStyle.text = [redbagModel rpName];
         cell.labelStyle.backgroundColor = [UIColor clearColor];
         cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-
+        
         cell.labelRequier.text = [NSString stringWithFormat:@"单笔投资金额满%@",[redbagModel rpLimit]];
         cell.labelRequier.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.labelRequier.textColor = [UIColor zitihui];
         cell.labelRequier.backgroundColor = [UIColor clearColor];
-
+        
         cell.labelDay.text = [NSString stringWithFormat:@"理财期限大于%@天",[redbagModel daysLimit]];
         cell.labelDay.textColor = [UIColor zitihui];
         cell.labelDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelDay.backgroundColor = [UIColor clearColor];
-
+        
         cell.labelTime.text = [NSString stringWithFormat:@"%@%@", @"有效期:截止", [redbagModel rpTime]];
         cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:11];
         cell.labelTime.textColor = [UIColor zitihui];
@@ -215,25 +236,45 @@
         
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
+            cell.labelAend.backgroundColor = [UIColor daohanglan];
+            cell.labelStyle.textColor = [UIColor daohanglan];
+            
+        } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已打开"]];
+            cell.labelAend.backgroundColor = [UIColor zitihui];
+            cell.labelStyle.textColor = [UIColor zitihui];
+            cell.labelMoney.textColor = [UIColor zitihui];
+            
+        } else if ([[redbagModel rpStatus] isEqualToString:@"3"]){
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已过期"]];
+            cell.labelAend.backgroundColor = [UIColor zitihui];
+            cell.labelStyle.textColor = [UIColor zitihui];
+            cell.labelMoney.textColor = [UIColor zitihui];
+            
+        }
+        
         return cell;
     } else if ([[redbagModel rpType] isEqualToString:@"2"]) {
         TheThirdRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse"];
         
         NSLog(@"rpStatus = %@",[redbagModel rpStatus]);
         
-        cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
+        cell.buttonOpen.hidden = YES;
         
-        if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
-            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-            [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
-            [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-            [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.buttonOpen setTag:indexPath.row];
-        } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
-            cell.contentView.backgroundColor = [UIColor zitihui];
-        }
+//        if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
+//            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+//            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+//            [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
+//            [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//            cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+//            [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
+//            [cell.buttonOpen setTag:indexPath.row];
+//        } else
         
         cell.labelAend.text = @"送";
         cell.labelAend.textColor = [UIColor whiteColor];
@@ -275,21 +316,31 @@
         
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if ([[redbagModel rpStatus] isEqualToString:@"3"]){
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已过期"]];
+            cell.labelAend.backgroundColor = [UIColor zitihui];
+            cell.labelStyle.textColor = [UIColor zitihui];
+            cell.labelMoney.textColor = [UIColor zitihui];
+            
+        } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已打开"]];
+            cell.labelAend.backgroundColor = [UIColor zitihui];
+            cell.labelStyle.textColor = [UIColor zitihui];
+            cell.labelMoney.textColor = [UIColor zitihui];
+            
+        } else if([[redbagModel rpStatus] isEqualToString:@"0"] || [[redbagModel rpStatus] isEqualToString:@"1"]){
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
+            cell.labelAend.backgroundColor = [UIColor daohanglan];
+            cell.labelStyle.textColor = [UIColor daohanglan];
+        }
         return cell;
     } else if ([[[self.redBagArray objectAtIndex:indexPath.row] rpType] isEqualToString:@"4"]) {
         NotSeparateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse1"];
         
-        if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
-            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-            [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
-            [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-            [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.buttonOpen setTag:indexPath.row];
-        } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
-            cell.contentView.backgroundColor = [UIColor zitihui];
-        }
+        cell.buttonOpen.hidden = YES;
         
         cell.labelSend.text = @"送";
         cell.labelSend.textColor = [UIColor whiteColor];
@@ -298,7 +349,7 @@
         cell.labelSend.backgroundColor = [UIColor daohanglan];
         cell.labelSend.layer.cornerRadius = 5;
         cell.labelSend.layer.masksToBounds = YES;
-
+        
         NSString *string = [NSString stringWithFormat:@"%@~%@元",[redbagModel rpFloor],[redbagModel rpTop]];
         NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:string];
         NSRange leftStr = NSMakeRange(0, [[redStr string] rangeOfString:@"元"].location);
@@ -308,30 +359,61 @@
         [cell.labelMoney setAttributedText:redStr];
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.backgroundColor = [UIColor clearColor];
-
+        
         cell.labelBagStyle.text = [redbagModel rpName];
         cell.labelBagStyle.backgroundColor = [UIColor clearColor];
         cell.labelBagStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-
+        
         cell.laeblRequest.text = [NSString stringWithFormat:@"单笔投资金额满%@",[redbagModel rpLimit]];
         cell.laeblRequest.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.laeblRequest.textColor = [UIColor zitihui];
         cell.laeblRequest.backgroundColor = [UIColor clearColor];
-
+        
         cell.labelDays.text = [NSString stringWithFormat:@"理财期限大于%@天",[redbagModel daysLimit]];
         cell.labelDays.textColor = [UIColor zitihui];
         cell.labelDays.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelDays.backgroundColor = [UIColor clearColor];
-
+        
         cell.labelTime.text = [NSString stringWithFormat:@"%@%@", @"有效期:截止", [redbagModel rpTime]];
         cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:11];
         cell.labelTime.textColor = [UIColor zitihui];
         cell.labelTime.backgroundColor = [UIColor clearColor];
-
+        
         cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
         
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if ([[redbagModel rpStatus] isEqualToString:@"3"]){
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已过期"]];
+            cell.labelSend.backgroundColor = [UIColor zitihui];
+            cell.labelBagStyle.textColor = [UIColor zitihui];
+            cell.labelMoney.textColor = [UIColor zitihui];
+            
+        } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已打开"]];
+            cell.labelSend.backgroundColor = [UIColor zitihui];
+            cell.labelBagStyle.textColor = [UIColor zitihui];
+            cell.labelMoney.textColor = [UIColor zitihui];
+            
+        } else if([[redbagModel rpStatus] isEqualToString:@"0"]){
+            cell.buttonOpen.hidden = NO;
+            
+            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+            [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
+            [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.buttonOpen setTag:indexPath.row];
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
+            cell.labelSend.backgroundColor = [UIColor daohanglan];
+            cell.labelBagStyle.textColor = [UIColor daohanglan];
+        }
+        
+        
         return cell;
     } else {
         return nil;
@@ -525,6 +607,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
     FDetailViewController *detailVC = [[FDetailViewController alloc] init];
     detailVC.estimate = NO;
+    detailVC.nHand = @"my";
     detailVC.idString = [dic objectForKey:@"NewProduct"];
     [self.navigationController pushViewController:detailVC animated:YES];
 }

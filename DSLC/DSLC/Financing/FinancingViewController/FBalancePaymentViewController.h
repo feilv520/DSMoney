@@ -30,4 +30,6 @@
 @property (nonatomic, copy) NSString *typeString;
 @property (nonatomic, strong) RedBagModel *redbagModel;
 
+@property (nonatomic, strong) NSString *nHand;
+
 @end

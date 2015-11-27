@@ -17,4 +17,7 @@
 
 @property (nonatomic, strong) ProductDetailModel *detailM;
 @property (nonatomic, strong) NSString *residueMoney;
+
+@property (nonatomic, strong) NSString *nHand;
+
 @end
