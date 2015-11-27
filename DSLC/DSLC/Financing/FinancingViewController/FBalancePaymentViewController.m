@@ -171,10 +171,14 @@
         
         NSLog(@"buyProduct = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+            
             if ([self.redbagModel rpID] == nil) {
 //              支付没有红包
                 CashOtherFinViewController *cashOther = [[CashOtherFinViewController alloc] init];
-                
+                cashOther.nHand = self.nHand;
                 [self.navigationController pushViewController:cashOther animated:YES];
             } else {
 //              支付有红包

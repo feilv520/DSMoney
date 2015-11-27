@@ -615,15 +615,17 @@
             [butDecide addTarget:self action:@selector(decideCashMoney:) forControlEvents:UIControlEventTouchUpInside];
 
 //            当输入的值小于余额时 可以投资
-        } else if (shuRuInt < numberInt && shuRuInt != 0) {
+        } else if (shuRuInt <= numberInt && shuRuInt != 0) {
             if (shuRuInt >= [[self.detailM amountMin] floatValue]) {
-                if (shuRuInt < [[self.detailM minRedPacketMoney] floatValue]) {
+                if (shuRuInt < [[self.detailM minRedPacketMoney] floatValue] && [redbagModel rpID] != nil) {
                     [self showSureView:app];
                 } else {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你还有未使用的红包,要不要去看看?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去看看",nil];
                     // optional - add more buttons:
                     [alert show];
                 }
+            } else {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"投资金额要大于起投金额"];
             }
         }
     }
@@ -685,9 +687,15 @@
 #pragma mark --------------------------------
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    self.textFieldC = (UITextField *)[self.view viewWithTag:199];
     if (buttonIndex == 0) {
         AppDelegate *app = [[UIApplication sharedApplication] delegate];
         [self showSureView:app];
+    } else {
+        ChooseRedBagController *chooseVC = [[ChooseRedBagController alloc] init];
+        chooseVC.buyMoney = self.textFieldC.text;
+        chooseVC.days = [self.detailM productPeriod];
+        [self.navigationController pushViewController:chooseVC animated:YES];
     }
 }
 

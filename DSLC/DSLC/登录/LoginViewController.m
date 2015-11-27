@@ -307,6 +307,8 @@
                 
                 if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                     // 判断是否存在Member.plist文件
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
                     if (![FileOfManage ExistOfFile:@"Member.plist"]) {
                         [FileOfManage createWithFile:@"Member.plist"];
                         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -418,6 +420,8 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
 
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
             NSLog(@"AutoLogin = %@",responseObject);
             
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:

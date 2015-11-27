@@ -93,6 +93,8 @@
     
     [self loadingWithView:self.view loadingFlag:NO height:self.view.center.y];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPickProduct) name:@"refrushToPickProduct" object:nil];
+    
     backgroundScrollView.hidden = YES;
 }
 
@@ -293,7 +295,13 @@
 - (void)payButtonAction:(id)sender{
     
     FDetailViewController *detailVC = [[FDetailViewController alloc] init];
-    detailVC.estimate = NO;
+    
+    if ([[self.productM productType] isEqualToString:@"3"]) {
+        detailVC.estimate = NO;
+    } else {
+        detailVC.estimate = YES;
+    }
+    
     detailVC.idString = [self.productM productId];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
@@ -401,6 +409,9 @@
         
     }];
 }
+
+#pragma mark 刷新精选产品 和 网络请求方法
+#pragma mark --------------------------------
 
 - (void)getPickProduct{
     
