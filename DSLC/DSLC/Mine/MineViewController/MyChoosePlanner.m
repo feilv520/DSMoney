@@ -80,7 +80,7 @@
     
     cell.imageHead.image = [UIImage imageNamed:@"picture"];
     
-    cell.labelName.text = plan.userNickname;
+    cell.labelName.text = plan.userRealname;
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     cell.labelInvite.text = plan.inviteCode;
@@ -112,6 +112,8 @@
     Planner *planner = [plannerArr objectAtIndex:indexPath.section];
     MyPlannerViewController *plannerVC = [[MyPlannerViewController alloc] init];
     plannerVC.IDStr = planner.ID;
+    plannerVC.name = planner.userRealname;
+    plannerVC.inviteNum = planner.inviteCode;
     [self.navigationController pushViewController:plannerVC animated:YES];
 }
 
@@ -120,7 +122,7 @@
 {
     NSDictionary *parameter = @{@"curPage":@1};
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getFinPlannerList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getIndexFinPlannerList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@", responseObject);
         
@@ -150,7 +152,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"%@", error);
     }];
 }
 

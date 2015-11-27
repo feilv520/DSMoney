@@ -10,7 +10,7 @@
 
 @interface Planner : NSObject
 @property (nonatomic) NSString *ID;
-@property (nonatomic) NSString *userNickname;
+@property (nonatomic) NSString *userRealname;
 @property (nonatomic) NSString *inviteCode;
 @property (nonatomic) NSString *avatarImg;
 @end

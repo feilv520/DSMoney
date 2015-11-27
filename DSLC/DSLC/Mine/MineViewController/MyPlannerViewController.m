@@ -57,7 +57,7 @@
 - (void)tableViewShow
 {
     titleArr = @[@"邀请码", @"共为客户赚取金额", @"以服务客户人数", @"累计投资总额"];
-    monAndPeoArr = @[@"867543", @"3,803.00元", @"237,438人", @"237,438元"];
+    monAndPeoArr = @[self.inviteNum, @"3,803.00元", @"237,438人", @"237,438元"];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
@@ -98,7 +98,7 @@
     [imageHead addSubview:imageCrown];
     imageCrown.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
-    labelName = [CreatView creatWithLabelFrame:CGRectMake(0, 115, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"林海峰"];
+    labelName = [CreatView creatWithLabelFrame:CGRectMake(0, 115, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:self.name];
     [imageBottom addSubview:labelName];
     labelName.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
@@ -111,9 +111,9 @@
     buttonAsk.layer.borderColor = [[UIColor whiteColor] CGColor];
     [buttonAsk addTarget:self action:@selector(askQuestionButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butAlready = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (213.0 / 375.0), 156, WIDTH_CONTROLLER_DEFAULT * (136.0 / 375.0), 37) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"已申请服务"];
+    UIButton *butAlready = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (213.0 / 375.0), 156, WIDTH_CONTROLLER_DEFAULT * (136.0 / 375.0), 37) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"申请服务"];
     [imageBottom addSubview:butAlready];
-    [butAlready setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
+//    [butAlready setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
     butAlready.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     butAlready.layer.cornerRadius = 4;
     butAlready.layer.masksToBounds = YES;
@@ -210,8 +210,8 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:300]]) {
             
-            [self noDateWithView:@"木有理财师" height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 view:self.view];
-            _tableView.hidden = YES;
+//            [self noDateWithView:@"木有理财师" height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 view:self.view];
+//            _tableView.hidden = YES;
             
         } else {
             

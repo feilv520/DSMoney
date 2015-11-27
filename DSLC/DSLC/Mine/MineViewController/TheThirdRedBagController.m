@@ -165,6 +165,7 @@
         
         if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
             
+            cell.buttonCan.hidden = NO;
             cell.imagePic.image = [UIImage imageNamed:@"新手体验金"];
             [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
             [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -239,6 +240,12 @@
         cell.labelDay.textColor = [UIColor zitihui];
         cell.labelDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelDay.backgroundColor = [UIColor clearColor];
+        
+        if ([[redbagModel rpType] isEqualToString:@"0"]) {
+            
+            cell.labelDay.hidden = YES;
+            
+        }
         
         cell.labelTime.text = [NSString stringWithFormat:@"%@%@", @"有效期:截止", [redbagModel rpTime]];
         cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:11];

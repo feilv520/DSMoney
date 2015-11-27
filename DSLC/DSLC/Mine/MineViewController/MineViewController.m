@@ -380,7 +380,7 @@
 //我的理财师按钮
 - (void)inviteButton:(UIButton *)button
 {
-//    如果已经有字的理财师直接跳转到我的理财师
+//    如果已经有自己的理财师直接跳转到我的理财师
 //    MyPlannerViewController *myPlannerVC = [[MyPlannerViewController alloc] init];
 //    [self.navigationController pushViewController:myPlannerVC animated:YES];
     

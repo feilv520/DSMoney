@@ -13,6 +13,7 @@
 #import "CashOtherFinViewController.h"
 #import "ShareHaveRedBag.h"
 #import "ForgetSecretViewController.h"
+#import "FindDealViewController.h"
 
 @interface FBalancePaymentViewController () <UITextFieldDelegate>
 
@@ -94,9 +95,8 @@
 //忘记密码?按钮
 - (void)ForgetSecretButton:(UIButton *)button
 {
-    ForgetSecretViewController *forgetSecretVC = [[ForgetSecretViewController alloc] init];
-    forgetSecretVC.typeString = @"login";
-    [self.navigationController pushViewController:forgetSecretVC animated:YES];
+    FindDealViewController *findSecretVC = [[FindDealViewController alloc] init];
+    [self.navigationController pushViewController:findSecretVC animated:YES];
 }
 
 #pragma textFieldDalagate

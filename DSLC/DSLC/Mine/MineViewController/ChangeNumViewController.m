@@ -158,9 +158,8 @@
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已发送"];
-            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
-            NSLog(@"ooooooo%@", responseObject);
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            NSLog(@"iiiii%@", responseObject);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
@@ -175,6 +174,7 @@
 //确定按钮
 - (void)makeSureButtonLast:(UIButton *)button
 {
+    [self.view endEditing:YES];
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     if (_textField1.text.length == 0) {
@@ -198,22 +198,21 @@
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
             
             NSLog(@"ooooooo%@", responseObject);
-            //            NSArray *viewControllers = [self.navigationController viewControllers];
+
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-                //                [self.navigationController popToViewController:[viewControllers objectAtIndex:1] animated:YES];
+               
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"更换手机号成功"];
                 NSArray *viewController = [self.navigationController viewControllers];
                 [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
                 
             } else {
                 
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"更换失败,验证码错误"];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             NSLog(@"fffffffff%@", error);
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"网络不给力啦!"];
             
         }];
 
@@ -237,7 +236,7 @@
         [button setEnabled:YES];
     }else{
         seconds--;
-        NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",seconds];
+        NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",(long)seconds];
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 1.f;
         button.layer.borderColor = [UIColor zitihui].CGColor;
@@ -263,6 +262,11 @@
 {
     label.backgroundColor = [UIColor grayColor];
     label.alpha = 0.2;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

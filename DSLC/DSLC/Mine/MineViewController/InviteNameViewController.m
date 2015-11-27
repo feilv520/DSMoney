@@ -110,41 +110,69 @@
 //邀请按钮
 - (void)buttonInviteGoodFriend:(UIButton *)button
 {
-    if (_textName.text.length > 0 && _textPhoneNum.text.length == 11) {
+    if (_textName.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入姓名"];
+        
+    } else if (_textPhoneNum.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号码"];
+        
+    } else if (![NSString validateMobile:_textPhoneNum.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号码格式错误"];
+        
+    } else {
         
         [self.view endEditing:YES];
-        
-        buttBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [app.tabBarVC.view addSubview:buttBlack];
-        buttBlack.alpha = 0.3;
-        [buttBlack addTarget:self action:@selector(buttonBlackMakeDisappear:) forControlEvents:UIControlEventTouchUpInside];
-        
-        viewWhite = [CreatView creatViewWithFrame:CGRectMake(40, (HEIGHT_CONTROLLER_DEFAULT - 40)/2 - 90, WIDTH_CONTROLLER_DEFAULT - 80, 180) backgroundColor:[UIColor whiteColor]];
-        [app.tabBarVC.view addSubview:viewWhite];
-        viewWhite.layer.cornerRadius = 5;
-        viewWhite.layer.masksToBounds = YES;
-        
-        CGFloat viewWidth = viewWhite.frame.size.width;
-        
-        UILabel *labelInvite = [CreatView creatWithLabelFrame:CGRectMake(0, 5, viewWidth, 25) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"提示"];
-        [viewWhite addSubview:labelInvite];
-        
-        UILabel *labelLine = [[UILabel alloc] initWithFrame:CGRectMake(5, 39.5, viewWidth - 10, 0.5)];
-        [viewWhite addSubview:labelLine];
-        labelLine.backgroundColor = [UIColor grayColor];
-        labelLine.alpha = 0.3;
-        
-        UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 45, viewWidth, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"邀请成功!\n系统已为您发送邀请短信"];
-        [viewWhite addSubview:labelAlert];
-        
-        UIButton *buttGood = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, 110, viewWidth - 40, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"好的"];
-        [viewWhite addSubview:buttGood];
-        buttGood.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        [buttGood setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [buttGood setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        [buttGood addTarget:self action:@selector(buttonBlackMakeDisappear:) forControlEvents:UIControlEventTouchUpInside];
+        [self inviteGetData];
     }
+}
+
+- (void)inviteGetData
+{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSLog(@"%@", dic);
+    NSDictionary *parameter = @{@"userName":_textName.text, @"phoneNum":_textPhoneNum.text, @"token":[dic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/inviteFriend" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            buttBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+            AppDelegate *app = [[UIApplication sharedApplication] delegate];
+            [app.tabBarVC.view addSubview:buttBlack];
+            buttBlack.alpha = 0.3;
+            [buttBlack addTarget:self action:@selector(buttonBlackMakeDisappear:) forControlEvents:UIControlEventTouchUpInside];
+            
+            viewWhite = [CreatView creatViewWithFrame:CGRectMake(40, (HEIGHT_CONTROLLER_DEFAULT - 40)/2 - 90, WIDTH_CONTROLLER_DEFAULT - 80, 180) backgroundColor:[UIColor whiteColor]];
+            [app.tabBarVC.view addSubview:viewWhite];
+            viewWhite.layer.cornerRadius = 5;
+            viewWhite.layer.masksToBounds = YES;
+            
+            CGFloat viewWidth = viewWhite.frame.size.width;
+            
+            UILabel *labelInvite = [CreatView creatWithLabelFrame:CGRectMake(0, 5, viewWidth, 25) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"提示"];
+            [viewWhite addSubview:labelInvite];
+            
+            UILabel *labelLine = [[UILabel alloc] initWithFrame:CGRectMake(5, 39.5, viewWidth - 10, 0.5)];
+            [viewWhite addSubview:labelLine];
+            labelLine.backgroundColor = [UIColor grayColor];
+            labelLine.alpha = 0.3;
+            
+            UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 45, viewWidth, 65) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"邀请成功!\n系统已为您发送邀请短信"];
+            labelAlert.numberOfLines = 2;
+            [viewWhite addSubview:labelAlert];
+            
+            UIButton *buttGood = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, 120, viewWidth - 40, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"好的"];
+            [viewWhite addSubview:buttGood];
+            buttGood.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+            [buttGood setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            [buttGood setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+            [buttGood addTarget:self action:@selector(buttonBlackMakeDisappear:) forControlEvents:UIControlEventTouchUpInside];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)buttonBlackMakeDisappear:(UIButton *)button
@@ -154,6 +182,8 @@
     
     buttBlack = nil;
     viewWhite = nil;
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

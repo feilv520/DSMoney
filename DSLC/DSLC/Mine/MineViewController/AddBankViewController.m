@@ -27,7 +27,9 @@
     UIButton *buttonNext;
     
     UITextField *textFieldZero;
+    UITextField *textFieldOne;
     UITextField *textFieldTwo;
+    UITextField *textFieldThree;
     UITextField *textFieldFour;
     UITextField *textFieldFive;
 }
@@ -78,11 +80,40 @@
 - (void)nextButton:(UIButton *)button
 {
     textFieldZero = (UITextField *)[self.view viewWithTag:400];
+    textFieldOne = (UITextField *)[self.view viewWithTag:401];
     textFieldTwo = (UITextField *)[self.view viewWithTag:402];
+    textFieldThree = (UITextField *)[self.view viewWithTag:403];
     textFieldFour = (UITextField *)[self.view viewWithTag:404];
     textFieldFive = (UITextField *)[self.view viewWithTag:405];
     
-    if (textFieldZero.text.length > 0 && textFieldTwo.text.length == 19 && textFieldFour.text.length == 11 && textFieldFive.text.length == 6) {
+    if (textFieldZero.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入持卡人姓名"];
+        
+    } else if (textFieldTwo.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请选择开户银行"];
+        
+    } else if (textFieldTwo.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入本人银行卡号"];
+        
+    } else if (textFieldTwo.text.length != 19) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"银行卡号格式错误"];
+        
+    } else if (textFieldThree.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请选择开户城市"];
+        
+    } else if (textFieldFour.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if (![NSString validateMobile:textFieldFour.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式有误"];
+        
+    } else if (textFieldFive.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
+        
+    } else if (textFieldFive.text.length != 6) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
+        
+    } else {
         
         NSArray *viewController = [self.navigationController viewControllers];
         [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
@@ -93,13 +124,13 @@
 {
     if (textField.tag == 402) {
 
-        if (range.location == 19) {
+        if (range.location < 19) {
             
-            return NO;
+            return YES;
             
         } else {
             
-            return YES;
+            return NO;
         }
         
     } else if (textField.tag == 404) {
@@ -132,11 +163,13 @@
 - (void)textFieldPress:(UITextField *)textField
 {
     textFieldZero = (UITextField *)[self.view viewWithTag:400];
+    textFieldOne = (UITextField *)[self.view viewWithTag:401];
     textFieldTwo = (UITextField *)[self.view viewWithTag:402];
+    textFieldThree = (UITextField *)[self.view viewWithTag:403];
     textFieldFour = (UITextField *)[self.view viewWithTag:404];
     textFieldFive = (UITextField *)[self.view viewWithTag:405];
     
-    if (textFieldZero.text.length > 0 && textFieldTwo.text.length == 19 && textFieldFour.text.length == 11 && textFieldFive.text.length == 6) {
+    if (textFieldZero.text.length > 0 && textFieldTwo.text.length > 0 && textFieldTwo.text.length == 19 && textFieldThree.text.length > 0 && textFieldFour.text.length == 11 && textFieldFive.text.length == 6) {
         
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
