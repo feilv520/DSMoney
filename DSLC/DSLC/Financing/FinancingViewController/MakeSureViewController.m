@@ -43,6 +43,8 @@
 
 @property (nonatomic, strong) NSDictionary *accountDic;
 
+@property (nonatomic, strong) NSMutableArray *redBagArray;
+
 @end
 
 @implementation MakeSureViewController
@@ -52,6 +54,8 @@
     // Do any additional setup after loading the view.
     
     self.accountDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];;
+    
+    self.redBagArray = [NSMutableArray array];
     
     self.view.backgroundColor = [UIColor huibai];
     
@@ -532,6 +536,7 @@
 //确认投资按钮
 - (void)makeSureMoney:(UIButton *)button
 {
+    [self getMyRedPacketList];
 //    判断新手还是固收或银行票据
     if (self.decide == NO) {
         
@@ -617,12 +622,16 @@
 //            当输入的值小于余额时 可以投资
         } else if (shuRuInt <= numberInt && shuRuInt != 0) {
             if (shuRuInt >= [[self.detailM amountMin] floatValue]) {
-                if (shuRuInt < [[self.detailM minRedPacketMoney] floatValue] && [redbagModel rpID] != nil) {
+                if ([redbagModel rpID] != nil) {
                     [self showSureView:app];
                 } else {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你还有未使用的红包,要不要去看看?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去看看",nil];
-                    // optional - add more buttons:
-                    [alert show];
+                    if (self.redBagArray.count == 0) {
+                        [self showSureView:app];
+                    } else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你还有未使用的红包,要不要去看看?" delegate:self cancelButtonTitle:@"拒绝去看" otherButtonTitles:@"去看看",nil];
+                        // optional - add more buttons:
+                        [alert show];
+                    }
                 }
             } else {
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"投资金额要大于起投金额"];
@@ -714,7 +723,7 @@
 {
     [self.buttBlack removeFromSuperview];
     [self.viewBottom removeFromSuperview];
-    
+
     self.buttBlack = nil;
     self.viewBottom = nil;
 }
@@ -736,7 +745,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView.contentOffset.y != 0) {
-        
+        [self getMyRedPacketList];
         self.textFieldC = (UITextField *)[self.view viewWithTag:199];
         [self.textFieldC resignFirstResponder];
     }
@@ -777,6 +786,34 @@
         return YES;
     }
 }
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getMyRedPacketList{
+    if (self.textFieldC == nil) {
+        return;
+    }
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":self.textFieldC.text,@"days":[self.detailM productPeriod]};
+    
+    NSLog(@"getMyRedPacketList parameter = %@",parameter);
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/getUserRedPacketRandList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getMyRedPacketList = %@",responseObject);
+        
+        self.redBagArray = [responseObject objectForKey:@"RedPacket"];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

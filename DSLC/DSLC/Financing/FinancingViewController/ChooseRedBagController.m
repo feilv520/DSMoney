@@ -91,7 +91,7 @@
     cell.labelMoney.textColor = [UIColor daohanglan];
     cell.labelMoney.backgroundColor = [UIColor clearColor];
     
-    cell.labelBagStyle.text = [redbagModel rpTypeName];
+    cell.labelBagStyle.text = [redbagModel rpName];
     cell.labelBagStyle.backgroundColor = [UIColor clearColor];
     cell.labelBagStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
@@ -99,6 +99,10 @@
     cell.laeblRequest.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     cell.laeblRequest.textColor = [UIColor zitihui];
     cell.laeblRequest.backgroundColor = [UIColor clearColor];
+    
+    if ([[redbagModel rpType] isEqualToString:@"1"]) {
+        cell.laeblRequest.hidden = YES;
+    }
     
     cell.labelDays.text = [NSString stringWithFormat:@"理财期限大于%@天",[redbagModel daysLimit]];
     cell.labelDays.textColor = [UIColor zitihui];

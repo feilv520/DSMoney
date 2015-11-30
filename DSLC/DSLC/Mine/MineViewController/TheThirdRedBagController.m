@@ -150,10 +150,12 @@
         cell.labelStyle.backgroundColor = [UIColor clearColor];
         cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
 
-        cell.labelRequire.text = [NSString stringWithFormat:@"单笔投资金额满%@",[redbagModel rpLimit]];
+//        cell.labelRequire.text = [NSString stringWithFormat:@"单笔投资金额满%@",[redbagModel rpLimit]];
         cell.labelRequire.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.labelRequire.textColor = [UIColor zitihui];
         cell.labelRequire.backgroundColor = [UIColor clearColor];
+        
+        cell.labelRequire.text = @"仅限购买新手专享";
 
         cell.labelTime.text = [NSString stringWithFormat:@"%@%@", @"有效期:截止", [redbagModel rpTime]];
         cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:11];
@@ -387,7 +389,10 @@
         cell.laeblRequest.textColor = [UIColor zitihui];
         cell.laeblRequest.backgroundColor = [UIColor clearColor];
         
-        cell.labelDays.text = [NSString stringWithFormat:@"理财期限大于%@天",[redbagModel daysLimit]];
+        cell.laeblRequest.hidden = YES;
+        
+        cell.labelDays.text = [NSString stringWithFormat:@"累积在投金额满%@元",[redbagModel rpLimit]];
+//        cell.labelDays.text = [NSString stringWithFormat:@"理财期限大于%@天",[redbagModel daysLimit]];
         cell.labelDays.textColor = [UIColor zitihui];
         cell.labelDays.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelDays.backgroundColor = [UIColor clearColor];
@@ -698,15 +703,33 @@
         
         NSString *moneyString = [NSString stringWithFormat:@"恭喜您获得%@元现金红包\n\n已转入账户余额",[self.openRedBagDic objectForKey:@"rpAmount"]];
         
-        NSMutableAttributedString *frontStr = [[NSMutableAttributedString alloc] initWithString:moneyString];
-        [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[moneyString rangeOfString:@"恭喜您获得"]];
-        [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[moneyString rangeOfString:@"元现金红包"]];
-        [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:[moneyString rangeOfString:@"已转入账户余额"]];
-        //    取到恭~0的长度 减掉5 就剩100
-        NSRange shuZi = NSMakeRange(5, [[frontStr string] rangeOfString:@"元"].location - 5);
-        [frontStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
-        [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:25] range:shuZi];
-        [labelGet setAttributedText:frontStr];
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            
+            NSMutableAttributedString *frontStr = [[NSMutableAttributedString alloc] initWithString:moneyString];
+            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:[moneyString rangeOfString:@"恭喜您获得"]];
+            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:[moneyString rangeOfString:@"元现金红包"]];
+            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:[moneyString rangeOfString:@"已转入账户余额"]];
+            //    取到恭~0的长度 减掉5 就剩100
+            NSRange shuZi = NSMakeRange(5, [[frontStr string] rangeOfString:@"元"].location - 5);
+            [frontStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
+            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:shuZi];
+            
+            [labelGet setAttributedText:frontStr];
+            
+        } else {
+        
+            NSMutableAttributedString *frontStr = [[NSMutableAttributedString alloc] initWithString:moneyString];
+            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[moneyString rangeOfString:@"恭喜您获得"]];
+            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[moneyString rangeOfString:@"元现金红包"]];
+            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:[moneyString rangeOfString:@"已转入账户余额"]];
+            //    取到恭~0的长度 减掉5 就剩100
+            NSRange shuZi = NSMakeRange(5, [[frontStr string] rangeOfString:@"元"].location - 5);
+            [frontStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
+            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:25] range:shuZi];
+            
+            [labelGet setAttributedText:frontStr];
+            
+        }
         labelGet.numberOfLines = 3;
         
         [_tableView reloadData];
