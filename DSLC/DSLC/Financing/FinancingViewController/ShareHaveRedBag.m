@@ -48,7 +48,7 @@
     UILabel *labelSurprise = [CreatView creatWithLabelFrame:CGRectMake(0, 90, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"大圣豪礼很劲爆,打开有惊喜哦 !"];
     [self.view addSubview:labelSurprise];
     
-    UIButton *buttonOpen = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 150, WIDTH_CONTROLLER_DEFAULT - 80, 180) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    UIButton *buttonOpen = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 150, WIDTH_CONTROLLER_DEFAULT - 80, (180 / 667) * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [self.view addSubview:buttonOpen];
     [buttonOpen setBackgroundImage:[UIImage imageNamed:@"没打开的红包"] forState:UIControlStateNormal];
     [buttonOpen setBackgroundImage:[UIImage imageNamed:@"没打开的红包"] forState:UIControlStateHighlighted];
