@@ -17,8 +17,12 @@
 #import "SelectionOfSafe.h"
 #import "GetMoneyVerifyViewController.h"
 
-@interface GetMoneyViewController ()<UITableViewDataSource, UITableViewDelegate>{
+@interface GetMoneyViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+
+{
     NSString *moneyString;
+    UIButton *payButton;
+    UITextField *_textField;
 }
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -57,7 +61,7 @@
     
     footView.backgroundColor = Color_Clear;
     
-    UIButton *payButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    payButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     payButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (51 / 375.0), 40, WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), 43);
     
@@ -101,10 +105,22 @@
     }
 }
 
-- (void)nextButtonAction:(UIButton *)btn{
-    GetMoneyVerifyViewController *verify = [[GetMoneyVerifyViewController alloc] init];
-    verify.moneyString = moneyString;
-    [self.navigationController pushViewController:verify animated:YES];
+- (void)nextButtonAction:(UIButton *)btn
+{
+    _textField = (UITextField *)[self.view viewWithTag:6721];
+    
+    if (_textField.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入提现金额"];
+        
+    } else if ([_textField.text isEqualToString:@"0"]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"提现金额不能为0"];
+        
+    } else {
+        GetMoneyVerifyViewController *verify = [[GetMoneyVerifyViewController alloc] init];
+        verify.moneyString = moneyString;
+        [self.navigationController pushViewController:verify animated:YES];
+        
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -144,6 +160,8 @@
         } else {
             GetMoneyNumberTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"getMoneyN"];
             [cell.textfield addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
+            cell.textfield.delegate = self;
+            cell.textfield.tag = 6721;
             return cell;
         }
     } else {
@@ -159,6 +177,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    _textField = (UITextField *)[self.view viewWithTag:6721];
+    
+    if (_textField.text.length == 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入提现金额"];
+    }
+    return YES;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

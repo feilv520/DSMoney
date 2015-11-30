@@ -67,7 +67,7 @@
                 <outlet property="labelTitle" destination="4KI-YC-mFi" id="Ka4-p5-pKl"/>
                 <outlet property="moneyAndPeople" destination="eMU-aK-V36" id="LgQ-YG-2Bl"/>
             </connections>
-            <point key="canvasLocation" x="-49.5" y="301"/>
+            <point key="canvasLocation" x="212.5" y="312"/>
         </tableViewCell>
     </objects>
 </document>

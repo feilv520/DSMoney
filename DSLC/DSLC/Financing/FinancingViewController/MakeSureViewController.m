@@ -759,8 +759,8 @@
 #pragma mark textField 的监控方法
 #pragma mark --------------------------------
 
-- (void)ValueChanged:(UITextField *)textField{
-    
+- (void)ValueChanged:(UITextField *)textField
+{
     NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:1];
     NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:3];
     MoneyCell *cell = (MoneyCell *)[self.tableView cellForRowAtIndexPath:path];

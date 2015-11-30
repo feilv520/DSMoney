@@ -12,6 +12,7 @@
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
 #import "ChatViewController.h"
+#import "Planner.h"
 
 @interface MyPlannerViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -25,6 +26,8 @@
     UIImageView *imageCrown;
     CGFloat height;
     UILabel *labelName;
+    NSMutableArray *contentArr;
+    Planner *planner;
 }
 
 @end
@@ -47,6 +50,7 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
+    contentArr = [NSMutableArray array];
     
     [self getMyFinPlanner];
     
@@ -57,7 +61,7 @@
 - (void)tableViewShow
 {
     titleArr = @[@"邀请码", @"共为客户赚取金额", @"以服务客户人数", @"累计投资总额"];
-    monAndPeoArr = @[self.inviteNum, @"3,803.00元", @"237,438人", @"237,438元"];
+//    monAndPeoArr = @[self.inviteNum, @"3,803.00元", @"237,438人", @"237,438元"];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
@@ -98,7 +102,7 @@
     [imageHead addSubview:imageCrown];
     imageCrown.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
-    labelName = [CreatView creatWithLabelFrame:CGRectMake(0, 115, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:self.name];
+    labelName = [CreatView creatWithLabelFrame:CGRectMake(0, 115, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
     [imageBottom addSubview:labelName];
     labelName.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
@@ -139,14 +143,22 @@
     cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
     cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    cell.moneyAndPeople.text = [monAndPeoArr objectAtIndex:indexPath.row];
-    cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    cell.moneyAndPeople.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.moneyAndPeople.textAlignment = NSTextAlignmentRight;
+    labelName.text = planner.userRealname;
     
     if (indexPath.row == 1) {
-        
         cell.moneyAndPeople.textColor = [UIColor daohanglan];
+        cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", planner.totalProfit, @"元"];
         
+    } else if (indexPath.row == 0) {
+        cell.moneyAndPeople.text = planner.inviteCode;
+        
+    } else if (indexPath.row == 2) {
+        cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", planner.serCount, @"人"];
+        
+    } else {
+        cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", planner.totalAmount, @"元"];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -198,29 +210,28 @@
 
 #pragma mark 网络请求方法
 #pragma mark --------------------------------
-
 - (void)getMyFinPlanner
 {
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"fpId":self.IDStr};
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyFinPlanner" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getIndexFinPlannerInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@",responseObject);
         
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:300]]) {
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-//            [self noDateWithView:@"木有理财师" height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 view:self.view];
-//            _tableView.hidden = YES;
-            
-        } else {
-            
-            [self noDataViewWithRemoveToView];
+            planner = [[Planner alloc] init];
+            NSDictionary *dataDic = [responseObject objectForKey:@"User"];
+            [planner setValuesForKeysWithDictionary:dataDic];
+            [contentArr addObject:planner];
+            NSLog(@"mmmmmmm%@", contentArr);
         }
+        
+        [_tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        NSLog(@"%@", error);
+        NSLog(@"jjjjjj%@", error);
         
     }];
 }

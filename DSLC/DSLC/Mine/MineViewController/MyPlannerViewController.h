@@ -13,7 +13,5 @@
 @interface MyPlannerViewController : BaseViewController
 
 @property (nonatomic) NSString *IDStr;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *inviteNum;
 
 @end

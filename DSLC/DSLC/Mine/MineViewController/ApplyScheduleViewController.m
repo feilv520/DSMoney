@@ -57,25 +57,78 @@
     
     CGFloat viewHeight = viewWhite.frame.size.height;
     
-    imageSchedule = [CreatView creatImageViewWithFrame:CGRectMake(18, 20, 16, viewHeight - 40) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"流程"]];
+    imageSchedule = [CreatView creatImageViewWithFrame:CGRectMake(18, 20, 14, viewHeight - 40) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"流程"]];
     [viewWhite addSubview:imageSchedule];
     
-    for (int i = 0; i < 4; i++) {
+    if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
         
-        UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 75 * i, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
-        [viewWhite addSubview:label];
-        label.tag = 2000 + i;
-        
-        if (i == 0) {
+        for (int i = 0; i < 4; i++) {
             
-            label.textColor = [UIColor chongzhiColor];
+            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 50 * i, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
+            [viewWhite addSubview:label];
+            label.tag = 2000 + i;
+            
+            if (i == 0) {
+                
+                label.textColor = [UIColor chongzhiColor];
+            }
+            
+            if (i == 1) {
+                
+                label.frame = CGRectMake(40, 83, WIDTH_CONTROLLER_DEFAULT - 50, 20);
+            }
+            
+            if (i == 2) {
+                label.frame = CGRectMake(40, 150, WIDTH_CONTROLLER_DEFAULT/2, 20);
+            }
+            
+            if (i == 3) {
+                label.frame = CGRectMake(40, 215, WIDTH_CONTROLLER_DEFAULT/2, 20);
+            }
         }
         
-        if (i == 1) {
+    } else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
+        
+        for (int i = 0; i < 4; i++) {
             
-            label.frame = CGRectMake(40, 115, WIDTH_CONTROLLER_DEFAULT - 50, 20);
+            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 60 * i, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
+            [viewWhite addSubview:label];
+            label.tag = 2000 + i;
+            
+            if (i == 0) {
+                
+                label.textColor = [UIColor chongzhiColor];
+            }
+            
+            if (i == 1) {
+                
+                label.frame = CGRectMake(40, 98, WIDTH_CONTROLLER_DEFAULT - 50, 20);
+            }
+            
         }
+
+    } else {
+        
+        for (int i = 0; i < 4; i++) {
+            
+            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 75 * i, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
+            [viewWhite addSubview:label];
+            label.tag = 2000 + i;
+            
+            if (i == 0) {
+                
+                label.textColor = [UIColor chongzhiColor];
+            }
+            
+            if (i == 1) {
+                
+                label.frame = CGRectMake(40, 115, WIDTH_CONTROLLER_DEFAULT - 50, 20);
+            }
+            
+        }
+
     }
+    
     
     UILabel *labelTime = [CreatView creatWithLabelFrame:CGRectMake(40, 45, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"2015-10-09 12:00"];
     [viewWhite addSubview:labelTime];
@@ -87,7 +140,23 @@
     [butEdit setBackgroundImage:[UIImage imageNamed:@"红框"] forState:UIControlStateHighlighted];
     [butEdit addTarget:self action:@selector(buttonEdit:) forControlEvents:UIControlEventTouchUpInside];
     
-    fieldShuRu = [CreatView creatWithfFrame:CGRectMake(40, 140, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 35) setPlaceholder:nil setTintColor:[UIColor grayColor]];
+    if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
+        
+        fieldShuRu = [CreatView creatWithfFrame:CGRectMake(40, 120, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 35) setPlaceholder:nil setTintColor:[UIColor grayColor]];
+        
+        butSubmit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40 +  WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30 + 10, 110, WIDTH_CONTROLLER_DEFAULT - 40 - (WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30) - 15 - 10, 35) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"提交"];
+        
+    } else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
+        
+        fieldShuRu = [CreatView creatWithfFrame:CGRectMake(40, 125, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 35) setPlaceholder:nil setTintColor:[UIColor grayColor]];
+        
+        butSubmit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40 +  WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30 + 10, 125, WIDTH_CONTROLLER_DEFAULT - 40 - (WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30) - 15 - 10, 35) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"提交"];
+    } else {
+        
+        fieldShuRu = [CreatView creatWithfFrame:CGRectMake(40, 150, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 35) setPlaceholder:nil setTintColor:[UIColor grayColor]];
+        
+        butSubmit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40 +  WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30 + 10, 150, WIDTH_CONTROLLER_DEFAULT - 40 - (WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30) - 15 - 10, 35) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"提交"];
+    }
     [viewWhite addSubview:fieldShuRu];
     fieldShuRu.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 35)];
     fieldShuRu.delegate = self;
@@ -102,7 +171,6 @@
     fieldShuRu.layer.borderWidth = 0.5;
     [fieldShuRu addTarget:self action:@selector(textFieldEditApply:) forControlEvents:UIControlEventEditingChanged];
     
-    butSubmit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40 +  WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30 + 10, 140, WIDTH_CONTROLLER_DEFAULT - 40 - (WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30) - 15 - 10, 35) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"提交"];
     [viewWhite addSubview:butSubmit];
     butSubmit.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [butSubmit setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateNormal];
@@ -215,14 +283,14 @@
     UILabel *labelCancle = [CreatView creatWithLabelFrame:CGRectMake(0, viewHeight/4 - 10, viewWidth, 25) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:15] text:@"取消大额充值申请?"];
     [viewChoose addSubview:labelCancle];
     
-    UIButton *bCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, viewHeight/2 + 10, (viewWidth - 30)/2, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"取消"];
+    UIButton *bCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, viewHeight/2 + 10, (viewWidth - 30)/2, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"取消"];
     [viewChoose addSubview:bCancle];
     bCancle.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [bCancle setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateNormal];
     [bCancle setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateHighlighted];
     [bCancle addTarget:self action:@selector(buttonChooseDisappear:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *buttonOK = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20 + (viewWidth - 30)/2, viewHeight/2 + 10, (viewWidth - 30)/2, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor chongzhiColor] titleText:@"确认"];
+    UIButton *buttonOK = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20 + (viewWidth - 30)/2, viewHeight/2 + 10, (viewWidth - 30)/2, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor chongzhiColor] titleText:@"确认"];
     [viewChoose addSubview:buttonOK];
     buttonOK.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonOK setBackgroundImage:[UIImage imageNamed:@"蓝框"] forState:UIControlStateNormal];

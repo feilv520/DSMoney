@@ -174,7 +174,7 @@
             cell.buttonCan.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
             [cell.buttonCan addTarget:self action:@selector(buttonRightNowMake:) forControlEvents:UIControlEventTouchUpInside];
             
-            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
             cell.labelSend.backgroundColor = [UIColor daohanglan];
             cell.labelStyle.textColor = [UIColor daohanglan];
             
@@ -256,7 +256,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
-            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
             cell.labelAend.backgroundColor = [UIColor daohanglan];
             cell.labelStyle.textColor = [UIColor daohanglan];
             
@@ -350,7 +350,7 @@
             cell.labelMoney.textColor = [UIColor zitihui];
             
         } else if([[redbagModel rpStatus] isEqualToString:@"0"] || [[redbagModel rpStatus] isEqualToString:@"1"]){
-            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
             cell.labelAend.backgroundColor = [UIColor daohanglan];
             cell.labelStyle.textColor = [UIColor daohanglan];
         }
@@ -397,7 +397,7 @@
         cell.labelTime.textColor = [UIColor zitihui];
         cell.labelTime.backgroundColor = [UIColor clearColor];
         
-        cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
+        cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
         
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -637,7 +637,7 @@
 }
 
 #pragma mark 网络请求方法
-#pragma mark --------------------------------
+#pragma mark ------------------------------------------------------------------------------------------------
 
 - (void)getMyRedPacketList{
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];

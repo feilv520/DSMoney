@@ -18,6 +18,9 @@
     UIButton *butGive;
     
     UITextField *textFieldCode;
+    
+    NSInteger seconds;
+    NSTimer *timer;
 }
 
 @end
@@ -30,6 +33,7 @@
     
     self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"付款验证"];
+    seconds = 120;
     
     [self contentShow];
 }
@@ -121,7 +125,7 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
         
     } else if (textFieldCode.text.length != 6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码格式错误"];
         
     } else {
         GiveMoneyFinish *giveMoney = [[GiveMoneyFinish alloc] init];
@@ -157,9 +161,50 @@
     }
 }
 
+//获取验证码
 - (void)getCode:(UIButton *)button
 {
-    NSLog(@"获取验证码");
+    [self.view endEditing:YES];
+    
+}
+
+// 验证码倒计时
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:9080];
+    
+    if (seconds == 1) {
+        [theTimer invalidate];
+        seconds = 120;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor daohanglan].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [button setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+        [button setEnabled:YES];
+    }else{
+        seconds--;
+        NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",(long)seconds];
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor zitihui].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setEnabled:NO];
+    }
+}
+
+- (void)releaseTImer {
+    if (timer) {
+        if ([timer respondsToSelector:@selector(isValid)]) {
+            if ([timer isValid]) {
+                [timer invalidate];
+                seconds = 120;
+            }
+        }
+    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

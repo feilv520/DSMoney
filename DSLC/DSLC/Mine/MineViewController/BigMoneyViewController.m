@@ -11,6 +11,7 @@
 #import "MendDealCell.h"
 #import "HistoryMemoryViewController.h"
 #import "ApplyScheduleViewController.h"
+#import "ChooseOpenAnAccountBank.h"
 
 @interface BigMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -21,6 +22,7 @@
     NSArray *textArray;
     
     UIButton *buttonApply;
+    UIImageView *imageRight;
     
     UITextField *fileldName;
     UITextField *fieldBank;
@@ -66,6 +68,8 @@
     [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [buttonApply addTarget:self action:@selector(applyBigMoney:) forControlEvents:UIControlEventTouchUpInside];
+    
+    imageRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 13, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"jiantou"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -98,8 +102,23 @@
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     
+    if (indexPath.row == 1) {
+        
+        [cell addSubview:imageRight];
+//        cell.textField.enabled = NO;
+    }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1) {
+        
+        ChooseOpenAnAccountBank *chooseOAAB = [[ChooseOpenAnAccountBank alloc] init];
+        [self.navigationController pushViewController:chooseOAAB animated:YES];
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -212,9 +231,8 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入转账金额"];
         
     } else {
-        ApplyScheduleViewController *scheduleVC = [[ApplyScheduleViewController alloc] init];
+        [self getData];
         [self.view endEditing:YES];
-        [self.navigationController pushViewController:scheduleVC animated:YES];
     }
 }
 
@@ -232,6 +250,34 @@
         
         [self.view endEditing:YES];
     }
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+- (void)getData
+{
+    fileldName = (UITextField *)[self.view viewWithTag:600];
+    fieldBank = (UITextField *)[self.view viewWithTag:601];
+    fieldBankCard = (UITextField *)[self.view viewWithTag:602];
+    fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
+    fieldMoney = (UITextField *)[self.view viewWithTag:604];
+
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSDictionary *parameter = @{@"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"token":[dic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/bigPutOn" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"zzzzzzz%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            ApplyScheduleViewController *scheduleVC = [[ApplyScheduleViewController alloc] init];
+            [self.navigationController pushViewController:scheduleVC animated:YES];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

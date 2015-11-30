@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface Planner : NSObject
+
 @property (nonatomic) NSString *ID;
 @property (nonatomic) NSString *userRealname;
 @property (nonatomic) NSString *inviteCode;
 @property (nonatomic) NSString *avatarImg;
+@property (nonatomic) NSString *totalAmount;
+@property (nonatomic) NSString *totalProfit;
+@property (nonatomic) NSString *serCount;
+
 @end

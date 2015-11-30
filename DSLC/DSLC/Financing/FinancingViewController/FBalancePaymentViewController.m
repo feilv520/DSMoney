@@ -120,15 +120,14 @@
 {
     [self.textFieldSecret resignFirstResponder];
     
-    if ( self.textFieldSecret.text.length > 5 && self.textFieldSecret.text.length < 21) {
-    
-        [self buyProduct];
-//        支付有红包
-//        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
-//        [self.navigationController pushViewController:shareHave animated:YES];
+    if (self.textFieldSecret.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入支付密码"];
         
     } else {
-        
+        [self buyProduct];
+        //        支付有红包
+        //        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
+        //        [self.navigationController pushViewController:shareHave animated:YES];
         
     }
 }
@@ -189,7 +188,7 @@
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
             }
         } else {
-            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

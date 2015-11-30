@@ -157,6 +157,44 @@
     }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 603) {
+        
+        if (range.location == 19) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+    } else if (textField.tag == 604) {
+        
+        if (range.location == 11) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+    } else if (textField.tag == 704) {
+        
+        if (range.location == 6) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+    } else {
+        
+        return YES;
+    }
+}
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
@@ -194,6 +232,7 @@
 
         }
     }
+    
     return YES;
 }
 
@@ -204,14 +243,27 @@
     textField4 = (UITextField *)[self.view viewWithTag:604];
     textField5 = (UITextField *)[self.view viewWithTag:704];
     
-    if (textField3.text.length > 0 && textField4.text.length > 0 && textField5.text.length > 0) {
+    if (textField3.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入银行卡号"];
         
-        BindingBankSucceController *succeeVC = [[BindingBankSucceController alloc] init];
-        [self.navigationController pushViewController:succeeVC animated:YES];
+    } else if (textField3.text.length != 19) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"银行卡号格式错误"];
+        
+    } else if (textField4.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入预留手机号"];
+        
+    } else if (![NSString validateMobile:textField4.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
+    } else if (textField5.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
+        
+    } else if (textField5.text.length != 6) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码格式错误"];
         
     } else {
-        
-        
+        BindingBankSucceController *succeeVC = [[BindingBankSucceController alloc] init];
+        [self.navigationController pushViewController:succeeVC animated:YES];
     }
 }
 

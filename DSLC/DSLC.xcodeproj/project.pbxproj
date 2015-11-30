@@ -119,6 +119,8 @@
 		817988371BC94014007C8C3E /* PlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817988351BC94014007C8C3E /* PlanCell.xib */; };
 		8179883B1BC9403A007C8C3E /* ThreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817988391BC9403A007C8C3E /* ThreeCell.m */; };
 		8179883C1BC9403A007C8C3E /* ThreeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8179883A1BC9403A007C8C3E /* ThreeCell.xib */; };
+		817B16121C0C2F1100EEB937 /* ChooseOpenAnAccountBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 817B16111C0C2F1100EEB937 /* ChooseOpenAnAccountBank.m */; settings = {ASSET_TAGS = (); }; };
+		817B16151C0C317100EEB937 /* BigMoneyHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 817B16141C0C317100EEB937 /* BigMoneyHistory.m */; settings = {ASSET_TAGS = (); }; };
 		817DD46F1BCF501100042B09 /* MineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 817DD46D1BCF501100042B09 /* MineCell.m */; };
 		817DD4701BCF501100042B09 /* MineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817DD46E1BCF501100042B09 /* MineCell.xib */; };
 		817DD4901BCF547E00042B09 /* anniu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 817DD4721BCF547E00042B09 /* anniu@2x.png */; };
@@ -871,6 +873,10 @@
 		817988381BC9403A007C8C3E /* ThreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeCell.h; sourceTree = "<group>"; };
 		817988391BC9403A007C8C3E /* ThreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeCell.m; sourceTree = "<group>"; };
 		8179883A1BC9403A007C8C3E /* ThreeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeCell.xib; sourceTree = "<group>"; };
+		817B16101C0C2F1100EEB937 /* ChooseOpenAnAccountBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseOpenAnAccountBank.h; sourceTree = "<group>"; };
+		817B16111C0C2F1100EEB937 /* ChooseOpenAnAccountBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseOpenAnAccountBank.m; sourceTree = "<group>"; };
+		817B16131C0C317100EEB937 /* BigMoneyHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigMoneyHistory.h; sourceTree = "<group>"; };
+		817B16141C0C317100EEB937 /* BigMoneyHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigMoneyHistory.m; sourceTree = "<group>"; };
 		817DD46C1BCF501100042B09 /* MineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCell.h; sourceTree = "<group>"; };
 		817DD46D1BCF501100042B09 /* MineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineCell.m; sourceTree = "<group>"; };
 		817DD46E1BCF501100042B09 /* MineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineCell.xib; sourceTree = "<group>"; };
@@ -1114,8 +1120,8 @@
 		81B674061BF0A780007CEF51 /* HistoryMemoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryMemoryCell.h; sourceTree = "<group>"; };
 		81B674071BF0A780007CEF51 /* HistoryMemoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryMemoryCell.m; sourceTree = "<group>"; };
 		81B674081BF0A780007CEF51 /* HistoryMemoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryMemoryCell.xib; sourceTree = "<group>"; };
-		81B6740B1BF0AE26007CEF51 /* ApplyScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyScheduleViewController.h; sourceTree = "<group>"; };
-		81B6740C1BF0AE26007CEF51 /* ApplyScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyScheduleViewController.m; sourceTree = "<group>"; };
+		81B6740B1BF0AE26007CEF51 /* ApplyScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplyScheduleViewController.h; path = ../ApplyScheduleViewController.h; sourceTree = "<group>"; };
+		81B6740C1BF0AE26007CEF51 /* ApplyScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplyScheduleViewController.m; path = ../ApplyScheduleViewController.m; sourceTree = "<group>"; };
 		81B6740F1BF0AFEB007CEF51 /* 蓝框@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝框@2x.png"; sourceTree = "<group>"; };
 		81B674101BF0AFEB007CEF51 /* 蓝框@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝框@3x.png"; sourceTree = "<group>"; };
 		81B674111BF0AFEB007CEF51 /* 红框@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "红框@2x.png"; sourceTree = "<group>"; };
@@ -2185,8 +2191,6 @@
 				817E339A1BD77A8800D05103 /* ChooseStyleViewController.m */,
 				8190A3031BD876EA002B53F5 /* AddCardViewController.h */,
 				8190A3041BD876EB002B53F5 /* AddCardViewController.m */,
-				81B6740B1BF0AE26007CEF51 /* ApplyScheduleViewController.h */,
-				81B6740C1BF0AE26007CEF51 /* ApplyScheduleViewController.m */,
 				816CDF2C1BF1A018007785FC /* EditBigMoney.h */,
 				816CDF2D1BF1A018007785FC /* EditBigMoney.m */,
 				8D6692731BD0D02E00CD2CAF /* MyHandViewController.h */,
@@ -2258,6 +2262,8 @@
 				81F496FD1C06EF71002F3413 /* Chat.m */,
 				81F496FF1C072929002F3413 /* Planner.h */,
 				81F497001C072929002F3413 /* Planner.m */,
+				817B16131C0C317100EEB937 /* BigMoneyHistory.h */,
+				817B16141C0C317100EEB937 /* BigMoneyHistory.m */,
 			);
 			path = MineModel;
 			sourceTree = "<group>";
@@ -2420,6 +2426,10 @@
 			children = (
 				817E33961BD772A700D05103 /* BigMoneyViewController.h */,
 				817E33971BD772A700D05103 /* BigMoneyViewController.m */,
+				817B16101C0C2F1100EEB937 /* ChooseOpenAnAccountBank.h */,
+				817B16111C0C2F1100EEB937 /* ChooseOpenAnAccountBank.m */,
+				81B6740B1BF0AE26007CEF51 /* ApplyScheduleViewController.h */,
+				81B6740C1BF0AE26007CEF51 /* ApplyScheduleViewController.m */,
 				81B674021BF0A608007CEF51 /* HistoryMemoryViewController.h */,
 				81B674031BF0A608007CEF51 /* HistoryMemoryViewController.m */,
 			);
@@ -4085,6 +4095,7 @@
 				817E339B1BD77A8800D05103 /* ChooseStyleViewController.m in Sources */,
 				8D4FF5E01BE339A200BAE25F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				8D4FF5DF1BE339A200BAE25F /* AFNetworkActivityIndicatorManager.m in Sources */,
+				817B16121C0C2F1100EEB937 /* ChooseOpenAnAccountBank.m in Sources */,
 				8D88D0FB1BFECCB40051D6DA /* MJRefreshAutoNormalFooter.m in Sources */,
 				819B52F91BFC6930002FDF1E /* ChineseString.m in Sources */,
 				8D6692831BD0D8A600CD2CAF /* MyHandButton.m in Sources */,
@@ -4117,6 +4128,7 @@
 				8DD180A21BD731E000F71CEA /* GetMoneyTipTableViewCell.m in Sources */,
 				8D45187A1C00553E00FAF998 /* MD5Encryption.m in Sources */,
 				8D3F95D01BE1C27E00013A8E /* RegisterOfResult.m in Sources */,
+				817B16151C0C317100EEB937 /* BigMoneyHistory.m in Sources */,
 				81E8310E1BF0695400127EE8 /* MyAlreadyBindingBank.m in Sources */,
 				817988311BC93FF6007C8C3E /* BasicMessageCell.m in Sources */,
 				81BA1BFD1BD4DE7000DBA5BE /* MoreActivityCell.m in Sources */,

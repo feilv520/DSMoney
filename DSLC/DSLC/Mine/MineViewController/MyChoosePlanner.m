@@ -112,8 +112,6 @@
     Planner *planner = [plannerArr objectAtIndex:indexPath.section];
     MyPlannerViewController *plannerVC = [[MyPlannerViewController alloc] init];
     plannerVC.IDStr = planner.ID;
-    plannerVC.name = planner.userRealname;
-    plannerVC.inviteNum = planner.inviteCode;
     [self.navigationController pushViewController:plannerVC animated:YES];
 }
 
