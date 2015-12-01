@@ -219,6 +219,8 @@
 		818A39E51BF475A800F01CAA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 818A39E41BF475A800F01CAA /* MBProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
 		818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 818DEDFB1BCDF13500454A0E /* FConfirmMoney.m */; };
 		818DEDFE1BCDF15B00454A0E /* FConfirmMoney.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818DEDFD1BCDF15B00454A0E /* FConfirmMoney.xib */; };
+		818F0D741C0D3DCB00319D19 /* BuyClauseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818F0D731C0D3DCB00319D19 /* BuyClauseViewController.m */; settings = {ASSET_TAGS = (); }; };
+		818F0D771C0D3E1100319D19 /* UsufructAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818F0D761C0D3E1100319D19 /* UsufructAssignmentViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8190A3051BD876EB002B53F5 /* AddCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8190A3041BD876EB002B53F5 /* AddCardViewController.m */; };
 		8190A3091BD87D3E002B53F5 /* AddCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8190A3071BD87D3E002B53F5 /* AddCardCell.m */; };
 		8190A30A1BD87D3E002B53F5 /* AddCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8190A3081BD87D3E002B53F5 /* AddCardCell.xib */; };
@@ -1006,6 +1008,10 @@
 		818DEDFA1BCDF13500454A0E /* FConfirmMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FConfirmMoney.h; sourceTree = "<group>"; };
 		818DEDFB1BCDF13500454A0E /* FConfirmMoney.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FConfirmMoney.m; sourceTree = "<group>"; };
 		818DEDFD1BCDF15B00454A0E /* FConfirmMoney.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FConfirmMoney.xib; sourceTree = "<group>"; };
+		818F0D721C0D3DCB00319D19 /* BuyClauseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyClauseViewController.h; sourceTree = "<group>"; };
+		818F0D731C0D3DCB00319D19 /* BuyClauseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyClauseViewController.m; sourceTree = "<group>"; };
+		818F0D751C0D3E1100319D19 /* UsufructAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsufructAssignmentViewController.h; sourceTree = "<group>"; };
+		818F0D761C0D3E1100319D19 /* UsufructAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsufructAssignmentViewController.m; sourceTree = "<group>"; };
 		8190A3031BD876EA002B53F5 /* AddCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCardViewController.h; sourceTree = "<group>"; };
 		8190A3041BD876EB002B53F5 /* AddCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCardViewController.m; sourceTree = "<group>"; };
 		8190A3061BD87D3E002B53F5 /* AddCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCardCell.h; sourceTree = "<group>"; };
@@ -2280,6 +2286,10 @@
 				8D3A2FDF1BE7100000913DEC /* FDescriptionViewController.xib */,
 				8184EC351BCC96E1003F440D /* MakeSureViewController.h */,
 				8184EC361BCC96E1003F440D /* MakeSureViewController.m */,
+				818F0D721C0D3DCB00319D19 /* BuyClauseViewController.h */,
+				818F0D731C0D3DCB00319D19 /* BuyClauseViewController.m */,
+				818F0D751C0D3E1100319D19 /* UsufructAssignmentViewController.h */,
+				818F0D761C0D3E1100319D19 /* UsufructAssignmentViewController.m */,
 				81EB618E1C02A77F00A84696 /* ChooseRedBagController.h */,
 				81EB618F1C02A77F00A84696 /* ChooseRedBagController.m */,
 				815A6FCD1BEB7EFF003059A5 /* RechargeViewController.h */,
@@ -4006,6 +4016,7 @@
 				81BA1C0B1BD4FCB100DBA5BE /* MyNewsViewController.m in Sources */,
 				8191E2221BDDF202000A6E8C /* ServiceCell.m in Sources */,
 				815A6FD21BEB89A2003059A5 /* BindingBankCardViewController.m in Sources */,
+				818F0D771C0D3E1100319D19 /* UsufructAssignmentViewController.m in Sources */,
 				8D88D1051BFECCB40051D6DA /* UIScrollView+MJExtension.m in Sources */,
 				81B674041BF0A608007CEF51 /* HistoryMemoryViewController.m in Sources */,
 				8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */,
@@ -4065,6 +4076,7 @@
 				81AC90C51BEC88C100232404 /* RechargeAlreadyBinding.m in Sources */,
 				8191E2111BDDB9DE000A6E8C /* NewHandViewController.m in Sources */,
 				811F0AFC1BF318F6001F6AA4 /* GiveMoneyFinish.m in Sources */,
+				818F0D741C0D3DCB00319D19 /* BuyClauseViewController.m in Sources */,
 				81898B781BDF180600DD4E44 /* UIPlaceHolderTextView.m in Sources */,
 				819C3ABA1BD483C4008D2CFD /* MyRedBagCell.m in Sources */,
 				811F0B0B1BF33D42001F6AA4 /* BindingTwoCell.m in Sources */,

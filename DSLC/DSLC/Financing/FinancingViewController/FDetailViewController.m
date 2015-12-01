@@ -445,7 +445,7 @@
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
             if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
-                [ProgressHUD showMessage:@"请先登录,然后再投资" Width:100 High:20];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先登录,然后再投资"];
 
             } else {
                 
@@ -517,22 +517,40 @@
         
         calendar.inputMoney.delegate = self;
         [calendar.closeButton addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
-        
+        [calendar.calButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [calendar.calButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         [calendar.calButton addTarget:self action:@selector(calButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        calendar.viewDown.backgroundColor = [UIColor shurukuangColor];
+        calendar.viewDown.layer.cornerRadius = 4;
+        calendar.viewDown.layer.masksToBounds = YES;
+        calendar.viewDown.layer.borderColor = [[UIColor shurukuangBian] CGColor];
+        calendar.viewDown.layer.borderWidth = 0.5;
+        
+        calendar.inputMoney.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+        calendar.inputMoney.leftViewMode = UITextFieldViewModeAlways;
+        calendar.inputMoney.tintColor = [UIColor grayColor];
         
         calendar.yearLv.text = [self.detailM productAnnualYield];
         calendar.dayLabel.text = [self.detailM productPeriod];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+        [calendar addGestureRecognizer:tap];
+        [tap addTarget:self action:@selector(returnKeyboard:)];
         
         [app.tabBarVC.view addSubview:calendar];
-
     }
-
 }
 
-- (void)calButtonAction:(id)sender{
-    
+- (void)returnKeyboard:(UITapGestureRecognizer *)tap
+{
+    [calendar endEditing:YES];
+}
+
+//计算按钮
+- (void)calButtonAction:(id)sender
+{
     if (calendar.inputMoney.text == nil) {
-        [self showTanKuangWithMode:MBProgressHUDModeIndeterminate Text:@"请输入投资金额"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入投资金额"];
     } else {
     
         calendar.totalLabel.text = [NSString stringWithFormat:@"%.2f",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * ([[self.detailM productPeriod] floatValue] / 36000.0)];

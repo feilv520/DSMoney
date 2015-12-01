@@ -19,5 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonAffirm;
 @property (weak, nonatomic) IBOutlet UIImageView *imageBlueOne;
 @property (weak, nonatomic) IBOutlet UIImageView *imageBlueTwo;
+@property (weak, nonatomic) IBOutlet UILabel *labelLeft;
+@property (weak, nonatomic) IBOutlet UILabel *labelRight;
+@property (weak, nonatomic) IBOutlet UILabel *labelDown;
 
 @end

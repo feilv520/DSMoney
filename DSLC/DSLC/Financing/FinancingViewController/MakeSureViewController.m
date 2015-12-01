@@ -24,6 +24,8 @@
 #import "ChooseRedBagController.h"
 #import "RedBagModel.h"
 #import "ShareHaveRedBag.h"
+#import "BuyClauseViewController.h"
+#import "UsufructAssignmentViewController.h"
 
 @interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>{
     RedBagModel *redbagModel;
@@ -602,7 +604,7 @@
             
             CGFloat viewWidth = self.viewBottom.frame.size.width;
             
-            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(0, 30, viewWidth, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:15] text:@"您的余额不足,去充值?"];
+            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(0, 30, viewWidth, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"您的余额不足,去充值?"];
             [self.viewBottom addSubview:label];
             
             UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, 90, (viewWidth - 50)/2, 40) backgroundColor:[UIColor colorWithRed:114.0 / 225.0 green:113.0 / 225.0 blue:111.0 / 225.0 alpha:1.0] textColor:[UIColor whiteColor] titleText:@"取消"];
@@ -657,7 +659,7 @@
     [app.tabBarVC.view addSubview:self.viewWhite];
     
     self.viewWhite.labelName.text = @"尊敬的黄经理";
-    self.viewWhite.labelName.font = [UIFont systemFontOfSize:15];
+    self.viewWhite.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     [self.viewWhite.buttonClose setImage:[UIImage imageNamed:@"iconfont_graycuo"] forState:UIControlStateNormal];
     [self.viewWhite.buttonClose addTarget:self action:@selector(controlBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
@@ -666,30 +668,61 @@
     self.viewWhite.labelLine.alpha = 0.7;
     
     self.viewWhite.labelSign.text = @"在购买<<新手专享>>前请您确认:";
-    self.viewWhite.labelSign.font = [UIFont systemFontOfSize:15];
+    self.viewWhite.labelSign.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     self.viewWhite.labelSign.textColor = [UIColor zitihui];
     
     self.viewWhite.labelKnow.text = @"本人已清除知悉该收益权产品的基础信息,并已充分了解其产品特性";
     self.viewWhite.labelKnow.textColor = [UIColor zitihui];
-    self.viewWhite.labelKnow.font = [UIFont systemFontOfSize:15];
+    self.viewWhite.labelKnow.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     self.viewWhite.labelKnow.numberOfLines = 0;
     
+    self.viewWhite.labelBook.text = @"本人已仔细阅读/理解该收益权产品";
     self.viewWhite.labelBook.textColor = [UIColor zitihui];
-    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"];
-    [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor chongzhiColor] range:[@"本人已仔细阅读/理解该收益权产品\n<<购买条款>>、<<收益权转让协议>>全文,并愿意自行承担投资风险"rangeOfString:@"<<购买条款>>、<<收益权转让协议>>"]];
-    [self.viewWhite.labelBook setAttributedText:attStr];
-    self.viewWhite.labelBook.font = [UIFont systemFontOfSize:15];
-    self.viewWhite.labelBook.numberOfLines = 0;
+    self.viewWhite.labelBook.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    
+    self.viewWhite.labelLeft.text = @"<<购买条款>>";
+    self.viewWhite.labelLeft.textColor = [UIColor chongzhiColor];
+    self.viewWhite.labelLeft.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    self.viewWhite.labelLeft.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapLeft = [[UITapGestureRecognizer alloc] init];
+    [self.viewWhite.labelLeft addGestureRecognizer:tapLeft];
+    [tapLeft addTarget:self action:@selector(buyClauseTap:)];
+    
+    self.viewWhite.labelRight.text = @"<<收益权转让协议>>";
+    self.viewWhite.labelRight.textColor = [UIColor chongzhiColor];
+    self.viewWhite.labelRight.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    self.viewWhite.labelRight.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+    [self.viewWhite.labelRight addGestureRecognizer:tap];
+    [tap addTarget:self action:@selector(usufructAssignmentTap:)];
+    
+    self.viewWhite.labelDown.text = @"全文,并愿意自行承担投资风险";
+    self.viewWhite.labelDown.textColor = [UIColor zitihui];
+    self.viewWhite.labelDown.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     self.viewWhite.imageBlueOne.image = [UIImage imageNamed:@"blueyuan"];
     self.viewWhite.imageBlueTwo.image = [UIImage imageNamed:@"blueyuan"];
     
     [self.viewWhite.buttonAffirm setTitle:@"确认" forState:UIControlStateNormal];
-    self.viewWhite.buttonAffirm.titleLabel.font = [UIFont systemFontOfSize:15];
+    self.viewWhite.buttonAffirm.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     self.viewWhite.buttonAffirm.layer.cornerRadius = 4;
     self.viewWhite.buttonAffirm.layer.masksToBounds = YES;
     self.viewWhite.buttonAffirm.backgroundColor = [UIColor daohanglan];
     [self.viewWhite.buttonAffirm addTarget:self action:@selector(buttonAffirmMoney:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//购买条款跳转
+- (void)buyClauseTap:(UITapGestureRecognizer *)tap
+{
+    BuyClauseViewController *buyClause = [[BuyClauseViewController alloc] init];
+    [self.navigationController pushViewController:buyClause animated:YES];
+}
+
+//收益权转让协议
+- (void)usufructAssignmentTap:(UITapGestureRecognizer *)tap
+{
+    UsufructAssignmentViewController *usufruct = [[UsufructAssignmentViewController alloc] init];
+    [self.navigationController pushViewController:usufruct animated:YES];
 }
 
 #pragma mark alertView 的 代理方法
