@@ -46,7 +46,7 @@
 - (void)showContent
 {
     self.labelMonth1.text = self.productName;
-    self.labelMonth1.font = [UIFont systemFontOfSize:15];
+    self.labelMonth1.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     self.labelLine1.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.labelLine1.alpha = 0.7;

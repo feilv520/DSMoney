@@ -34,8 +34,8 @@
                             <animations/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="39" id="UbB-8z-O6I"/>
-                                <constraint firstAttribute="width" constant="355" id="Ze6-hh-iwF"/>
+                                <constraint firstAttribute="height" constant="39" id="Ygq-QV-goy"/>
+                                <constraint firstAttribute="width" constant="355" id="wL8-nf-F0J"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,8 +45,9 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="375" id="1Qk-H7-Hrt"/>
-                        <constraint firstItem="IKw-m1-NTs" firstAttribute="centerX" secondItem="tRQ-YV-Aia" secondAttribute="centerX" id="OnX-1Z-aG5"/>
-                        <constraint firstItem="IKw-m1-NTs" firstAttribute="top" secondItem="tRQ-YV-Aia" secondAttribute="top" id="lTJ-6L-D6d"/>
+                        <constraint firstAttribute="trailing" secondItem="IKw-m1-NTs" secondAttribute="trailing" constant="10" id="KOS-5g-VmT"/>
+                        <constraint firstItem="IKw-m1-NTs" firstAttribute="top" secondItem="tRQ-YV-Aia" secondAttribute="top" id="W15-lq-RVw"/>
+                        <constraint firstItem="IKw-m1-NTs" firstAttribute="leading" secondItem="tRQ-YV-Aia" secondAttribute="leading" constant="10" id="s0P-pC-u5A"/>
                         <constraint firstAttribute="height" constant="39" id="sff-jW-nkE"/>
                     </constraints>
                 </view>
@@ -201,7 +202,7 @@
                 <constraint firstItem="TuC-ee-Fap" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="x6K-2K-6mg"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="81.5" y="255.5"/>
+            <point key="canvasLocation" x="-277.5" y="240.5"/>
         </view>
     </objects>
     <resources>

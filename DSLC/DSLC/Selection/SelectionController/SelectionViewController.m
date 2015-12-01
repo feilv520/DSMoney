@@ -153,7 +153,8 @@
 }
 
 // 三个按钮View
-- (void)makeThreeButtons{
+- (void)makeThreeButtons
+{
     UIView *threeView = [[UIView alloc] initWithFrame:CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 90)];
     
     threeView.backgroundColor = mainColor;
@@ -218,7 +219,7 @@
     NSRange numRange = NSMakeRange(0, [[numberText string] rangeOfString:@"%"].location);
     NSRange markRange = NSMakeRange([[numberText string] rangeOfString:@"%"].location, 1);
     
-    [numberText addAttribute:NSForegroundColorAttributeName value:Color_Red range:numRange];
+    [numberText addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:numRange];
     [numberText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:(45.0 / 375.0) * WIDTH_CONTROLLER_DEFAULT] range:numRange];
     [numberText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:(28.0 / 375.0) * WIDTH_CONTROLLER_DEFAULT] range:markRange];
     [selectionFTView.numberLabel setAttributedText:numberText];

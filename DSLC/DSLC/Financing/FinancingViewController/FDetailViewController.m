@@ -30,6 +30,7 @@
     UIView *viewSuan;
     
     UIButton *butMakeSure;
+    NSDictionary *dataDic;
 }
 @property (nonatomic, strong) UIControl *viewBotton;
 @property (nonatomic, strong) ProductDetailModel *detailM;
@@ -414,7 +415,7 @@
         if ([self.residueMoney isEqualToString:@"0.00"]) {
             [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
         } else {
-            [butMakeSure setTitle:@"投资(1,000元起投)" forState:UIControlStateNormal];
+            [butMakeSure setTitle:[NSString stringWithFormat:@"%@%@%@", @"投资(",[dataDic objectForKey:@"amountMin"], @"元起投)"] forState:UIControlStateNormal];
         }
     }
     
@@ -472,7 +473,7 @@
             
         }];
     } else {
-        [ProgressHUD showMessage:@"请先登录,然后再投资" Width:100 High:20];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先登录,然后再投资"];
     }
     
 }
@@ -544,6 +545,19 @@
 - (void)returnKeyboard:(UITapGestureRecognizer *)tap
 {
     [calendar endEditing:YES];
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        CGFloat margin_x = (38 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+        CGFloat margin_y = (182 / 667.0) * HEIGHT_CONTROLLER_DEFAULT;
+        CGFloat width = (301 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+
+        }
+        
+        calendar.frame = CGRectMake(margin_x, margin_y - 40, width, 301);
+    }];
+
 }
 
 //计算按钮
@@ -565,7 +579,8 @@
     calendar = nil;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
     [UIView animateWithDuration:0.5f animations:^{
         CGFloat margin_x = (38 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
         CGFloat margin_y = (182 / 667.0) * HEIGHT_CONTROLLER_DEFAULT;
@@ -587,7 +602,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"%@",responseObject);
+        NSLog(@"ppppppppppppppp%@",responseObject);
         
         [self loadingWithHidden:YES];
         
@@ -595,8 +610,8 @@
         self.buyNumber = [responseObject objectForKey:@"buyCount"];
         
         self.detailM = [[ProductDetailModel alloc] init];
-        NSDictionary *dic = [responseObject objectForKey:@"Product"];
-        [self.detailM setValuesForKeysWithDictionary:dic];
+        dataDic = [responseObject objectForKey:@"Product"];
+        [self.detailM setValuesForKeysWithDictionary:dataDic];
         
         [self showTableView];
         [self showBottonView];
@@ -609,7 +624,7 @@
 }
 
 #pragma mark 网络请求方法
-#pragma mark --------------------------------
+#pragma mark -----------------------------
 
 // 预定产品
 - (void)orderProduct{
