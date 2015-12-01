@@ -116,7 +116,9 @@
 //    labelGet.numberOfLines = 3;
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"id":[self.redbagModel rpID]};
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"redPacketId":[self.redbagModel rpID]};
+    
+    NSLog(@"%@",parameter);
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/openRedPacket" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
