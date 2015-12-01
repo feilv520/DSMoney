@@ -172,6 +172,9 @@
     button = nil;
     
     CashOtherFinViewController *cashOFVC = [[CashOtherFinViewController alloc] init];
+    cashOFVC.moneyString = self.moneyString;
+    cashOFVC.endTimeString = self.endTimeString;
+    cashOFVC.productName = self.productName;
     [self.navigationController pushViewController:cashOFVC animated:NO];
 }
 
@@ -196,9 +199,32 @@
     //根据`responseCode`得到发送结果,如果分享成功
     if(response.responseCode == UMSResponseCodeSuccess)
     {
+        [self getShareRedPacket];
         //得到分享到的微博平台名
         NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
     }
+}
+
+#pragma mark 分享成功拿红包
+#pragma mark --------------------------------
+
+- (void)getShareRedPacket{
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/getShareRedPacket" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享成功,红包已入帐."];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

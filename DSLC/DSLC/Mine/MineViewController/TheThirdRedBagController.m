@@ -679,12 +679,14 @@
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"redPacketId":[[self.redBagArray objectAtIndex:button.tag] redPacketId]};
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"redPacketId":[[self.redBagArray objectAtIndex:button.tag] rpID]};
     
     NSLog(@"%@",parameter);
     NSLog(@"%@",[[self.redBagArray objectAtIndex:button.tag] rpType]);
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/openRedPacket" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [self getMyRedPacketList];
         
         NSLog(@"openRedPacket = %@",responseObject);
         

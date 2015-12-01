@@ -28,6 +28,7 @@
 @property (nonatomic, copy) NSString *productName;
 @property (nonatomic, copy) NSString *moneyString;
 @property (nonatomic, copy) NSString *typeString;
+@property (nonatomic, copy) NSString *endTimeString;
 @property (nonatomic, strong) RedBagModel *redbagModel;
 
 @property (nonatomic, strong) NSString *nHand;
