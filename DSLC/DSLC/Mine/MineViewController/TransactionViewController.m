@@ -423,6 +423,21 @@ numberOfRowsInComponent:(NSInteger)component
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/trade/getMyTradeRecords" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
+            NSLog(@"134897189374987342987243789423");
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            return ;
+        }
+        
         NSLog(@"%@",[responseObject objectForKey:@"Trade"]);
         
         if ([[[responseObject objectForKey:@"Trade"] objectAtIndex:0] count] == 0) {

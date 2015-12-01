@@ -178,7 +178,6 @@
             
             cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
             cell.labelSend.backgroundColor = [UIColor daohanglan];
-            cell.labelStyle.textColor = [UIColor daohanglan];
             
         } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
             
@@ -260,7 +259,6 @@
         if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
             cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
             cell.labelAend.backgroundColor = [UIColor daohanglan];
-            cell.labelStyle.textColor = [UIColor daohanglan];
             
         } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
             
@@ -354,7 +352,6 @@
         } else if([[redbagModel rpStatus] isEqualToString:@"0"] || [[redbagModel rpStatus] isEqualToString:@"1"]){
             cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
             cell.labelAend.backgroundColor = [UIColor daohanglan];
-            cell.labelStyle.textColor = [UIColor daohanglan];
         }
         return cell;
     } else if ([[[self.redBagArray objectAtIndex:indexPath.row] rpType] isEqualToString:@"4"]) {
@@ -433,7 +430,6 @@
             
             cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row]]];
             cell.labelSend.backgroundColor = [UIColor daohanglan];
-            cell.labelBagStyle.textColor = [UIColor daohanglan];
         }
         
         
@@ -652,16 +648,29 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyRedPacketList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"getMyRedPacketList = %@",responseObject);
-        
-        UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[responseObject objectForKey:@"redPacketIncome"]]]];
-        [headView addSubview:labelMoney];
-        
-        for (NSDictionary *dic in [responseObject objectForKey:@"RedPacket"]) {
-            RedBagModel *redbagModel = [[RedBagModel alloc] init];
-            [redbagModel setValuesForKeysWithDictionary:dic];
-            [self.redBagArray addObject:redbagModel];
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[responseObject objectForKey:@"redPacketIncome"]]]];
+            [headView addSubview:labelMoney];
+            
+            for (NSDictionary *dic in [responseObject objectForKey:@"RedPacket"]) {
+                RedBagModel *redbagModel = [[RedBagModel alloc] init];
+                [redbagModel setValuesForKeysWithDictionary:dic];
+                [self.redBagArray addObject:redbagModel];
+            }
+        }  else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
+            NSLog(@"134897189374987342987243789423");
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            return ;
         }
-        
         [_tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
