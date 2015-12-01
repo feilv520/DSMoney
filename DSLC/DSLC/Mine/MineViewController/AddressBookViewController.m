@@ -291,6 +291,7 @@
     cell.buttonInvite.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.buttonInvite.layer.cornerRadius = 3;
     cell.buttonInvite.layer.masksToBounds = YES;
+    NSLog(@"bbbbbbbb%ld", cell.buttonInvite.tag);
     cell.buttonInvite.tintColor = [UIColor whiteColor];
     [cell.buttonInvite addTarget:self action:@selector(buttonGoodFriandInvite:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -340,25 +341,30 @@
 - (void)buttonGoodFriandInvite:(UIButton *)buttonIn
 {
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    NSLog(@"%@eeeeee", dic);
-    NSDictionary *parameter = @{@"userName":@"马成精", @"phoneNum":@"13354288036",@"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"userName":@"马成精", @"phoneNum":@"13354288036", @"token":[dic objectForKey:@"token"]};
 //    NSDictionary *parameter = @{@"userName":[dic objectForKey:@"userNickname"], @"phoneNum":@"15940942599"};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/inviteFriend" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        if (buttonIn.tintColor == [UIColor whiteColor]) {
+        NSLog(@"-----------------%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-            buttonIn.tintColor = [UIColor orangeColor];
-            [buttonIn setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-            [buttonIn setTitle:@"已邀请" forState:UIControlStateNormal];
-            buttonIn.enabled = NO;
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"收到短信有点慢哦!请耐心等待."];
+            if (buttonIn.tintColor == [UIColor whiteColor]) {
+                
+                buttonIn.tintColor = [UIColor orangeColor];
+                [buttonIn setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+                [buttonIn setTitle:@"已邀请" forState:UIControlStateNormal];
+                buttonIn.enabled = NO;
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"收到短信有点慢哦!请耐心等待."];
+                
+            } else {
+                
+            }
             
         } else {
             
-            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
-        NSLog(@"%@", responseObject);
-        NSLog(@"%@", [responseObject objectForKey:@"resultMsg"]);
+        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
