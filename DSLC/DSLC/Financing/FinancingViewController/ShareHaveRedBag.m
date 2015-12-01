@@ -8,8 +8,10 @@
 
 #import "ShareHaveRedBag.h"
 #import "CashOtherFinViewController.h"
+#import "define.h"
 
-@interface ShareHaveRedBag ()
+
+@interface ShareHaveRedBag () <UMSocialUIDelegate>
 
 {
     UIButton *butSurprise;
@@ -18,6 +20,8 @@
 }
 
 @property (nonatomic, strong) NSDictionary *openRedBagDic;
+
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 @end
 
@@ -34,7 +38,14 @@
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishLastBarPress:)];
 //    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
-//    
+//
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+    
+    self.scrollView.contentSize = CGSizeMake(1, 750);
+    
+    [self.view addSubview:self.scrollView];
+    
     [self contentShow];
 }
 
@@ -42,23 +53,23 @@
 {
     UIButton *butonDo = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 60, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"恭喜你投资成功 !"];
     [butonDo setImage:[UIImage imageNamed:@"iconfont_complete"] forState:UIControlStateNormal];
-    [self.view addSubview:butonDo];
+    [self.scrollView addSubview:butonDo];
     butonDo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     UILabel *labelSurprise = [CreatView creatWithLabelFrame:CGRectMake(0, 90, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"大圣豪礼很劲爆,打开有惊喜哦 !"];
-    [self.view addSubview:labelSurprise];
+    [self.scrollView addSubview:labelSurprise];
     
-    UIButton *buttonOpen = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 150, WIDTH_CONTROLLER_DEFAULT - 80, (180 / 667) * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    UIButton *buttonOpen = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 150, WIDTH_CONTROLLER_DEFAULT - 80, 180) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [self.view addSubview:buttonOpen];
     [buttonOpen setBackgroundImage:[UIImage imageNamed:@"没打开的红包"] forState:UIControlStateNormal];
     [buttonOpen setBackgroundImage:[UIImage imageNamed:@"没打开的红包"] forState:UIControlStateHighlighted];
     [buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *labelExplain = [CreatView creatWithLabelFrame:CGRectMake(0, 340, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont systemFontOfSize:12] text:@"没打开?到“我的账户”-“红包活动”里打开"];
-    [self.view addSubview:labelExplain];
+    [self.scrollView addSubview:labelExplain];
     
     UIButton *buttonGOON = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 400, (WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] titleText:@"继续投资"];
-    [self.view addSubview:buttonGOON];
+    [self.scrollView addSubview:buttonGOON];
     buttonGOON.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     buttonGOON.layer.cornerRadius = 3;
     buttonGOON.layer.masksToBounds = YES;
@@ -67,10 +78,13 @@
     [buttonGOON addTarget:self action:@selector(finishLastBarPress:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *buttonShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2 + 50, 400, (WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2, 40) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"分享拿红包"];
-    [self.view addSubview:buttonShare];
+    [self.scrollView addSubview:buttonShare];
     buttonShare.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     buttonShare.layer.cornerRadius = 3;
     buttonShare.layer.masksToBounds = YES;
+    
+    [buttonShare addTarget:self action:@selector(shareButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 //拆红包按钮
@@ -102,7 +116,7 @@
 //    labelGet.numberOfLines = 3;
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"redPacketId":[self.redbagModel redPacketId]};
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"id":[self.redbagModel rpID]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/openRedPacket" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -142,6 +156,15 @@
 
 }
 
+- (void)shareButtonAction:(id)sender{
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"56447cbc67e58efd78001914"
+                                      shareText:@"大圣理财,金融街的新宠."
+                                     shareImage:[UIImage imageNamed:@"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658@3x"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
+                                       delegate:self];
+}
+
 //打开钻石红包按钮
 - (void)didOpenRedBag:(UIButton *)button
 {
@@ -164,6 +187,18 @@
 - (void)buttonNothing:(UIBarButtonItem *)button
 {
     
+}
+
+#pragma mark 分享成功回调方法
+#pragma mark --------------------------------
+
+- (void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的微博平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -98,7 +98,7 @@
     
     
     for (NSInteger i = 1; i <= 8; i++) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_middle_0%ld",i]];
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_middle_0%ld",(long)i]];
         [imgArray addObject:image];
     }
     

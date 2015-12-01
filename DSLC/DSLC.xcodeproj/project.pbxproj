@@ -636,6 +636,10 @@
 		8D9356E71BC607C500BC2BFA /* DSLCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356E61BC607C500BC2BFA /* DSLCTests.m */; };
 		8D9356F21BC607C500BC2BFA /* DSLCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356F11BC607C500BC2BFA /* DSLCUITests.m */; };
 		8DA060CD1C02BEBD00E3E025 /* DES3Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA060CC1C02BEBD00E3E025 /* DES3Util.m */; settings = {ASSET_TAGS = (); }; };
+		8DBC8A6C1C0D44DA00378FFE /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBC8A681C0D44DA00378FFE /* libSocialQQ.a */; settings = {ASSET_TAGS = (); }; };
+		8DBC8A6D1C0D44DA00378FFE /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBC8A691C0D44DA00378FFE /* TencentOpenAPI.framework */; settings = {ASSET_TAGS = (); }; };
+		8DBC8A6E1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8DBC8A6A1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle */; settings = {ASSET_TAGS = (); }; };
+		8DBC8A701C0D450F00378FFE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBC8A6F1C0D450F00378FFE /* SystemConfiguration.framework */; };
 		8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD180931BD72C1300F71CEA /* GetMoneyViewController.m */; };
 		8DD180981BD72E5900F71CEA /* GetMoneyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD180961BD72E5900F71CEA /* GetMoneyTableViewCell.m */; };
 		8DD180991BD72E5900F71CEA /* GetMoneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD180971BD72E5900F71CEA /* GetMoneyTableViewCell.xib */; };
@@ -1618,6 +1622,11 @@
 		8D9356F31BC607C500BC2BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DA060CB1C02BEBD00E3E025 /* DES3Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DES3Util.h; sourceTree = "<group>"; };
 		8DA060CC1C02BEBD00E3E025 /* DES3Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DES3Util.m; sourceTree = "<group>"; };
+		8DBC8A681C0D44DA00378FFE /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
+		8DBC8A691C0D44DA00378FFE /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		8DBC8A6A1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		8DBC8A6B1C0D44DA00378FFE /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
+		8DBC8A6F1C0D450F00378FFE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8DD180921BD72C1300F71CEA /* GetMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyViewController.h; sourceTree = "<group>"; };
 		8DD180931BD72C1300F71CEA /* GetMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyViewController.m; sourceTree = "<group>"; };
 		8DD180951BD72E5900F71CEA /* GetMoneyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyTableViewCell.h; sourceTree = "<group>"; };
@@ -1690,6 +1699,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DBC8A701C0D450F00378FFE /* SystemConfiguration.framework in Frameworks */,
+				8DBC8A6C1C0D44DA00378FFE /* libSocialQQ.a in Frameworks */,
+				8DBC8A6D1C0D44DA00378FFE /* TencentOpenAPI.framework in Frameworks */,
 				81349D0F1BF9D73C00D845EF /* AddressBookUI.framework in Frameworks */,
 				81349D0D1BF9D72900D845EF /* AddressBook.framework in Frameworks */,
 				8D4B8C1E1BF2F63800A88285 /* libz.tbd in Frameworks */,
@@ -1969,6 +1981,7 @@
 				818A39E31BF475A800F01CAA /* MBProgressHUD.h */,
 				818A39E41BF475A800F01CAA /* MBProgressHUD.m */,
 				8D4B8C0B1BF2F49400A88285 /* Wechat */,
+				8DBC8A671C0D44DA00378FFE /* TencentOpenAPI */,
 				8D4B8BE51BF2F48D00A88285 /* UMSocial_Sdk_4.3 */,
 				8D4FF5B41BE339A200BAE25F /* AFNetworking */,
 				8D4FF5C21BE339A200BAE25F /* UIKit+AFNetworking */,
@@ -3248,6 +3261,7 @@
 		8D9356C01BC607C500BC2BFA = {
 			isa = PBXGroup;
 			children = (
+				8DBC8A6F1C0D450F00378FFE /* SystemConfiguration.framework */,
 				81349D0E1BF9D73C00D845EF /* AddressBookUI.framework */,
 				81349D0C1BF9D72900D845EF /* AddressBook.framework */,
 				8D4B8C1D1BF2F63800A88285 /* libz.tbd */,
@@ -3323,6 +3337,17 @@
 				8D9356F31BC607C500BC2BFA /* Info.plist */,
 			);
 			path = DSLCUITests;
+			sourceTree = "<group>";
+		};
+		8DBC8A671C0D44DA00378FFE /* TencentOpenAPI */ = {
+			isa = PBXGroup;
+			children = (
+				8DBC8A681C0D44DA00378FFE /* libSocialQQ.a */,
+				8DBC8A691C0D44DA00378FFE /* TencentOpenAPI.framework */,
+				8DBC8A6A1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle */,
+				8DBC8A6B1C0D44DA00378FFE /* UMSocialQQHandler.h */,
+			);
+			path = TencentOpenAPI;
 			sourceTree = "<group>";
 		};
 		8DE61D9C1BDF284E0031A5CE /* TIPProgressHUD */ = {
@@ -3847,6 +3872,7 @@
 				81B6741D1BF0AFEB007CEF51 /* 流程@2x.png in Resources */,
 				81B6741C1BF0AFEB007CEF51 /* 红框@3x.png in Resources */,
 				817E33AE1BD78ED500D05103 /* iconfont@3x.png in Resources */,
+				8DBC8A6E1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				8D6692771BD0D02E00CD2CAF /* MyHandViewController.xib in Resources */,
 				81B520AA1BF9A71100D8E8D1 /* iconfont-sousuo@2x.png in Resources */,
 				819B52E11BFC2094002FDF1E /* 金元宝@3x.png in Resources */,
@@ -4336,6 +4362,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DSLC/Three/TencentOpenAPI",
+				);
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = DSLC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -4344,6 +4374,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DSLC/Three/UMSocial_Sdk_4.3",
 					"$(PROJECT_DIR)/DSLC/Three/Wechat",
+					"$(PROJECT_DIR)/DSLC/Three/TencentOpenAPI",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
@@ -4359,6 +4390,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DSLC/Three/TencentOpenAPI",
+				);
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = DSLC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -4367,6 +4402,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DSLC/Three/UMSocial_Sdk_4.3",
 					"$(PROJECT_DIR)/DSLC/Three/Wechat",
+					"$(PROJECT_DIR)/DSLC/Three/TencentOpenAPI",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
