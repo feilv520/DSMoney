@@ -15,7 +15,7 @@
 #import "ThreeViewController.h"
 #import "define.h"
 #import "LoginViewController.h"
-#import "UMSocial.h"
+
 
 @interface AppDelegate ()
 {
@@ -65,7 +65,11 @@
     
     [self exitNetwork];
     
-    [UMSocialData setAppKey:@"5642ad7e67e58e8463006218"];
+    [UMSocialData setAppKey:@"56447cbc67e58efd78001914"];
+    
+    [UMSocialWechatHandler setWXAppId:@"wx66e42cb8f7320c64" appSecret:@"d4624c36b6795d1d99dcf0547af5443d" url:@"http://www.umeng.com/social"];
+    
+    [UMSocialQQHandler setQQWithAppId:@"1104923253" appKey:@"MNbKfU7inKrzxAvU" url:@"http://www.umeng.com/social"];
     
     NSDictionary *dic = self.flagDic;
     
@@ -190,6 +194,14 @@
      }];
 }
 
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+//    BOOL result = [UMSocialSnsService handleOpenURL:url];
+//    if (result == FALSE) {
+//        //调用其他SDK，例如支付宝SDK等
+//    }
+//    return result;
+//}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -214,6 +226,18 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return  [UMSocialSnsService handleOpenURL:url];
+}
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return  [UMSocialSnsService handleOpenURL:url];
 }
 
 @end

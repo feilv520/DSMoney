@@ -56,5 +56,8 @@
 #include <CommonCrypto/CommonCryptor.h>
 #import "DES3Util.h"                         // 加密
 #import "NSString+Check.h"                   // 字符串检查
+#import "UMSocial.h"                         // 友盟分享
+#import "UMSocialWechatHandler.h"            // 微信分享
+#import "UMSocialQQHandler.h"                // QQ分享
 
 #endif /* Header_h */

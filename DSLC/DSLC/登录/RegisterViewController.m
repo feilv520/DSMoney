@@ -56,7 +56,7 @@
     
     seconds = 120;
     
-    self.scrollView.contentSize = CGSizeMake(1, 730);
+    self.scrollView.contentSize = CGSizeMake(1, 750);
     
     [self RegisterProcessPhoto];
     [self RegisterNav];
@@ -177,7 +177,7 @@
     NSArray *rootArray = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
     registerV = [rootArray firstObject];
     
-    registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, (125 / 375.0) * HEIGHT_CONTROLLER_DEFAULT);
+    registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, 225);
     
     [registerV.sandMyselfIDCard addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     [registerV.smsCode addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];

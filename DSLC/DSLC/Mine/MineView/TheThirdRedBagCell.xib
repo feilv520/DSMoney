@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -27,8 +27,8 @@
                         <rect key="frame" x="5" y="105" width="365" height="35"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="3eQ-Bh-uB7"/>
-                            <constraint firstAttribute="width" constant="365" id="pig-TZ-uE6"/>
+                            <constraint firstAttribute="width" constant="365" id="NhC-Ud-b5p"/>
+                            <constraint firstAttribute="height" constant="35" id="y2S-mJ-1z2"/>
                         </constraints>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbj-xq-Olx">
@@ -100,6 +100,7 @@
                 </subviews>
                 <animations/>
                 <constraints>
+                    <constraint firstItem="C3k-OP-oZj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="7yb-lY-pTQ"/>
                     <constraint firstItem="hfr-nN-JR7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="22" id="7z2-ut-stk"/>
                     <constraint firstItem="YbX-gC-f2h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-3" id="8h2-o6-h3w"/>
                     <constraint firstItem="Kbj-xq-Olx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="26" id="Agt-zd-byt"/>
@@ -113,14 +114,13 @@
                     <constraint firstAttribute="trailingMargin" secondItem="ca3-Ae-tSx" secondAttribute="trailing" constant="16" id="SZ1-iX-j1M"/>
                     <constraint firstItem="9pH-GV-vni" firstAttribute="top" secondItem="ca3-Ae-tSx" secondAttribute="bottom" constant="6" id="V85-wJ-uwb"/>
                     <constraint firstItem="ca3-Ae-tSx" firstAttribute="leading" secondItem="hfr-nN-JR7" secondAttribute="trailing" constant="8" id="WbV-dU-sub"/>
-                    <constraint firstItem="C3k-OP-oZj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-3" id="XN3-O8-EJQ"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="C3k-OP-oZj" secondAttribute="trailing" constant="-3" id="cQ3-cg-gHq"/>
-                    <constraint firstItem="C3k-OP-oZj" firstAttribute="top" secondItem="YbX-gC-f2h" secondAttribute="bottom" id="eQd-ko-ifT"/>
+                    <constraint firstItem="C3k-OP-oZj" firstAttribute="top" secondItem="YbX-gC-f2h" secondAttribute="bottom" id="Wjg-hC-NBI"/>
                     <constraint firstAttribute="trailingMargin" secondItem="9pH-GV-vni" secondAttribute="trailing" constant="16" id="eah-MJ-9fG"/>
                     <constraint firstItem="fi5-wI-TY0" firstAttribute="leading" secondItem="hfr-nN-JR7" secondAttribute="trailing" constant="8" id="hWx-oV-HRB"/>
                     <constraint firstAttribute="trailingMargin" secondItem="fi5-wI-TY0" secondAttribute="trailing" constant="16" id="kaU-m7-mKe"/>
                     <constraint firstItem="hfr-nN-JR7" firstAttribute="leading" secondItem="Kbj-xq-Olx" secondAttribute="trailing" constant="5" id="njb-2l-R8x"/>
                     <constraint firstItem="teK-xs-E7n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="u2B-iu-3Hq"/>
+                    <constraint firstAttribute="trailing" secondItem="C3k-OP-oZj" secondAttribute="trailing" constant="5" id="w0Q-Z4-vn4"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
