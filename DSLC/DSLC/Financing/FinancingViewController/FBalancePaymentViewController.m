@@ -178,12 +178,18 @@
 //              支付没有红包
                 CashOtherFinViewController *cashOther = [[CashOtherFinViewController alloc] init];
                 cashOther.nHand = self.nHand;
+                cashOther.moneyString = self.moneyString;
+                cashOther.endTimeString = self.endTimeString;
+                cashOther.productName = self.productName;
                 [self.navigationController pushViewController:cashOther animated:YES];
             } else {
 //              支付有红包
                 ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
                 shareHave.nHand = self.nHand;
                 shareHave.redbagModel = self.redbagModel;
+                shareHave.moneyString = self.moneyString;
+                shareHave.endTimeString = self.endTimeString;
+                shareHave.productName = self.productName;
                 [self.navigationController pushViewController:shareHave animated:YES];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
             }

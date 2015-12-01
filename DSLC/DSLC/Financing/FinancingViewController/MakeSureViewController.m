@@ -47,6 +47,8 @@
 
 @property (nonatomic, strong) NSMutableArray *redBagArray;
 
+@property (nonatomic, strong) NSString *moneyString;
+
 @end
 
 @implementation MakeSureViewController
@@ -560,12 +562,18 @@
     //              支付没有红包
                     CashFinishViewController *cashFinish = [[CashFinishViewController alloc] init];
                     cashFinish.nHand = self.nHand;
+                    cashFinish.moneyString = self.textFieldC.text;
+                    cashFinish.endTimeString = [self.detailM endTime];
+                    cashFinish.productName = [self.detailM productName];
                     [self.navigationController pushViewController:cashFinish animated:YES];
                 } else {
     //              支付有红包
                     ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
                     shareHave.redbagModel = redbagModel;
                     shareHave.nHand = self.nHand;
+                    shareHave.moneyString = self.textFieldC.text;
+                    shareHave.endTimeString = [self.detailM endTime];
+                    shareHave.productName = [self.detailM productName];
                     [self.navigationController pushViewController:shareHave animated:YES];
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
                 }
@@ -778,10 +786,12 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView.contentOffset.y != 0) {
-        [self getMyRedPacketList];
         self.textFieldC = (UITextField *)[self.view viewWithTag:199];
         [self.textFieldC resignFirstResponder];
     }
+//    if (scrollView.contentOffset.y > 0){
+//        [self getMyRedPacketList];
+//    }
 }
 
 //确认投资按钮
@@ -795,6 +805,8 @@
     balanceVC.typeString = [self.detailM productType];
     balanceVC.redbagModel = redbagModel;
     balanceVC.nHand = self.nHand;
+    balanceVC.endTimeString = [self.detailM endTime];
+    
     [self.navigationController pushViewController:balanceVC animated:YES];
 }
 
@@ -818,6 +830,10 @@
     } else {
         return YES;
     }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [self getMyRedPacketList];
 }
 
 #pragma mark 网络请求方法

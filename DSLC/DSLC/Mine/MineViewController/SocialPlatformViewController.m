@@ -10,7 +10,7 @@
 #import "InviteSocilPlatFormCell.h"
 #import "AddressBookViewController.h"
 
-@interface SocialPlatformViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface SocialPlatformViewController () <UITableViewDataSource, UITableViewDelegate, UMSocialUIDelegate>
 
 {
     UITableView *_tableView;
@@ -86,10 +86,69 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 5) {
+    if (indexPath.section == 0) {
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"大圣理财,金融街的新宠." image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            NSLog(@"%u",response.responseCode);
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"邀请成功！");
+            }
+        }];
+        
+    } else if (indexPath.section == 1) {
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"大圣理财,金融街的新宠." image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            NSLog(@"%u",response.responseCode);
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"邀请成功！");
+            }
+        }];
+        
+    } else if (indexPath.section == 2) {
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"大圣理财,金融街的新宠." image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+            NSLog(@"shareResponse = %u",shareResponse.responseCode);
+            if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"邀请成功！");
+            }
+        }];
+        
+    } else if (indexPath.section == 3) {
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToRenren] content:@"大圣理财,金融街的新宠." image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            NSLog(@"%u",response.responseCode);
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"邀请成功！");
+            }
+        }];
+        
+    } else if (indexPath.section == 4) {
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"大圣理财,金融街的新宠." image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            NSLog(@"%u",response.responseCode);
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"邀请成功！");
+            }
+        }];
+        
+    } else if (indexPath.section == 5) {
         
         AddressBookViewController *addressVC = [[AddressBookViewController alloc] init];
         [self.navigationController pushViewController:addressVC animated:YES];
+        
+    }
+}
+
+#pragma mark 分享成功回调方法
+#pragma mark --------------------------------
+
+- (void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response{
+    //根据`responseCode`得到发送结果,如果分享成功
+    NSLog(@"%u",response.responseCode);
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的微博平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
     }
 }
 

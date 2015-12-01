@@ -12,7 +12,7 @@
 #import "ShareFinishViewController.h"
 #import "ShareFailureViewController.h"
 
-@interface CashFinishViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface CashFinishViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UMSocialUIDelegate>
 
 {
     NSArray *titleArr;
@@ -45,7 +45,8 @@
 
 - (void)contentShow
 {
-    titleArr = @[@"投资金额:5,000元", @"预期到期收益:200元", @"兑付日期:2015-2-3"];
+    
+    titleArr = @[[NSString stringWithFormat:@"投资金额:%@元",self.moneyString], [NSString stringWithFormat:@"预期到期收益:%f元",(arc4random() % 500) + 20.3], [NSString stringWithFormat:@"兑付日期:%@",self.endTimeString]];
     
     UIButton *butFinish = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 60, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"恭喜您投资成功"];
     [self.view addSubview:butFinish];
@@ -91,42 +92,49 @@
         [self.navigationController popToViewController:[arrVC objectAtIndex:1] animated:YES];
     } else
     [self.navigationController popToRootViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getPayNumber" object:nil];
 }
 
 //分享拿红包按钮
 - (void)shareGiveRedBag:(UIButton *)button
 {
-    butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC.view addSubview:butBlack];
-    butBlack.alpha = 0.3;
-    [butBlack addTarget:self action:@selector(makeButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
-    
-    viewTanKuang = [CreatView creatViewWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 330, WIDTH_CONTROLLER_DEFAULT, 330) backgroundColor:[UIColor whiteColor]];
-    [app.tabBarVC.view addSubview:viewTanKuang];
-    
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(viewTanKuang.frame.size.width/3, (viewTanKuang.frame.size.height - 80)/2);
-    flowLayout.minimumInteritemSpacing = 0;
-    flowLayout.minimumLineSpacing = 0;
-    collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, viewTanKuang.frame.size.height - 59) collectionViewLayout:flowLayout];
-    [viewTanKuang addSubview:collection];
-    collection.dataSource = self;
-    collection.delegate = self;
-    collection.backgroundColor = [UIColor whiteColor];
-    [collection registerNib:[UINib nibWithNibName:@"ShareEveryCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
-    
-    nameArray = @[@"微信好友", @"新浪微博", @"朋友圈", @"人人网", @"QQ空间", @"腾讯微博"];
-    imageArray = @[@"微信", @"新浪微博", @"朋友圈", @"人人网", @"QQ空间", @"腾讯微博"];
-    
-    butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, viewTanKuang.frame.size.height - 79, viewTanKuang.frame.size.width, 59) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:@"取消"];
-    [viewTanKuang addSubview:butCancle];
-    butCancle.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
-    [butCancle addTarget:self action:@selector(buttonCanclePress:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
-    [butCancle addSubview:labelLine];
-    labelLine.alpha = 0.3;
+//    butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+//    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+//    [app.tabBarVC.view addSubview:butBlack];
+//    butBlack.alpha = 0.3;
+//    [butBlack addTarget:self action:@selector(makeButtonDisappear:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    viewTanKuang = [CreatView creatViewWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 330, WIDTH_CONTROLLER_DEFAULT, 330) backgroundColor:[UIColor whiteColor]];
+//    [app.tabBarVC.view addSubview:viewTanKuang];
+//    
+//    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+//    flowLayout.itemSize = CGSizeMake(viewTanKuang.frame.size.width/3, (viewTanKuang.frame.size.height - 80)/2);
+//    flowLayout.minimumInteritemSpacing = 0;
+//    flowLayout.minimumLineSpacing = 0;
+//    collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, viewTanKuang.frame.size.height - 59) collectionViewLayout:flowLayout];
+//    [viewTanKuang addSubview:collection];
+//    collection.dataSource = self;
+//    collection.delegate = self;
+//    collection.backgroundColor = [UIColor whiteColor];
+//    [collection registerNib:[UINib nibWithNibName:@"ShareEveryCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
+//    
+//    nameArray = @[@"微信好友", @"新浪微博", @"朋友圈", @"人人网", @"QQ空间", @"腾讯微博"];
+//    imageArray = @[@"微信", @"新浪微博", @"朋友圈", @"人人网", @"QQ空间", @"腾讯微博"];
+//    
+//    butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, viewTanKuang.frame.size.height - 79, viewTanKuang.frame.size.width, 59) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:@"取消"];
+//    [viewTanKuang addSubview:butCancle];
+//    butCancle.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+//    [butCancle addTarget:self action:@selector(buttonCanclePress:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+//    [butCancle addSubview:labelLine];
+//    labelLine.alpha = 0.3;
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"56447cbc67e58efd78001914"
+                                      shareText:@"大圣理财,金融街的新宠."
+                                     shareImage:[UIImage imageNamed:@"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658@3x"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
+                                       delegate:self];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -194,6 +202,41 @@
     [app.tabBarVC setSuppurtGestureTransition:NO];
     [app.tabBarVC setTabbarViewHidden:NO];
     [app.tabBarVC setLabelLineHidden:NO];
+}
+
+#pragma mark 分享成功回调方法
+#pragma mark --------------------------------
+
+- (void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        [self getShareRedPacket];
+        //得到分享到的微博平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
+}
+
+#pragma mark 分享成功拿红包
+#pragma mark --------------------------------
+
+- (void)getShareRedPacket{
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/getShareRedPacket" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享成功,红包已入帐."];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
