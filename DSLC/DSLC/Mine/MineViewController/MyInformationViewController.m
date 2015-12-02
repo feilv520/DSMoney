@@ -324,6 +324,13 @@
 //拍照
 - (void)takeCamera:(UIButton *)button
 {
+    
+    [butBlack removeFromSuperview];
+    [viewDown removeFromSuperview];
+    
+    butBlack = nil;
+    viewDown = nil;
+    
     NSLog(@"拍照");
     //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -343,6 +350,12 @@
 //从相册选择
 - (void)chooseFromPicture:(UIButton *)button
 {
+    [butBlack removeFromSuperview];
+    [viewDown removeFromSuperview];
+    
+    butBlack = nil;
+    viewDown = nil;
+    
     NSLog(@"从相册选择");
     UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {

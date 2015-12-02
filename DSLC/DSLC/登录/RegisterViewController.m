@@ -706,6 +706,7 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
     
+    NSLog(@"photoData = %@",photoData);
 }
 
 - (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
