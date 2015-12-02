@@ -291,7 +291,6 @@
     cell.buttonInvite.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.buttonInvite.layer.cornerRadius = 3;
     cell.buttonInvite.layer.masksToBounds = YES;
-    NSLog(@"bbbbbbbb%ld", cell.buttonInvite.tag);
     cell.buttonInvite.tintColor = [UIColor whiteColor];
     [cell.buttonInvite addTarget:self action:@selector(buttonGoodFriandInvite:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -340,9 +339,16 @@
 //邀请按钮
 - (void)buttonGoodFriandInvite:(UIButton *)buttonIn
 {
+    UITableViewCell * cell = (UITableViewCell *)[[buttonIn superview] superview];
+    NSIndexPath * indexPath = [_tablView indexPathForCell:cell];
+    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    NSDictionary *parameter = @{@"userName":@"马成精", @"phoneNum":@"13354288036", @"token":[dic objectForKey:@"token"]};
-//    NSDictionary *parameter = @{@"userName":[dic objectForKey:@"userNickname"], @"phoneNum":@"15940942599"};
+    
+    NSString *phoneNumString = [[[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] phoneNum] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    NSDictionary *parameter = @{@"userName":[[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] name], @"phoneNum":phoneNumString, @"token":[dic objectForKey:@"token"]};
+    NSLog(@"nciqqqqqqqq%@", parameter);
+
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/inviteFriend" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"-----------------%@", responseObject);
@@ -357,6 +363,7 @@
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"收到短信有点慢哦!请耐心等待."];
                 
             } else {
+                
                 
             }
             

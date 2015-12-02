@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface ApplyScheduleViewController : BaseViewController
-
+@property (nonatomic) NSString *ID;
 @end

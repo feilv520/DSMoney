@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "ApplySchedule.h"
 
 @interface EditBigMoney : BaseViewController
-
+@property (nonatomic) ApplySchedule *schedule;
 @end

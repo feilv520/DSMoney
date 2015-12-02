@@ -74,33 +74,31 @@
     
     if ([[bigMoney.status description] isEqualToString:@"0"]) {
         cell.labelState.text = @"已申请";
+        cell.labelState.textColor= [UIColor zitihui];
         
     } else if ([[bigMoney.status description] isEqualToString:@"1"]) {
         cell.labelState.text = @"已提供银行转账流水号";
+        cell.labelState.textColor = [UIColor chongzhiColor];
 
     } else if ([[bigMoney.status description] isEqualToString:@"2"]) {
         cell.labelState.text = @"审核失败";
+        cell.labelState.textColor = [UIColor daohanglan];
         
     } else if ([[bigMoney.status description] isEqualToString:@"3"]) {
         cell.labelState.text = @"审核成功";
+        cell.labelState.textColor = [UIColor chongzhiColor];
         
     } else if ([[bigMoney.status description] isEqualToString:@"4"]) {
         cell.labelState.text = @"复核失败";
+        cell.labelState.textColor = [UIColor daohanglan];
         
     } else if ([[bigMoney.status description] isEqualToString:@"5"]) {
         cell.labelState.text = @"复核成功";
-        
-    } else {
-        cell.labelState.text = @"充值成功";
-    }
-    
-    if (indexPath.row == 0 || indexPath.row == 1) {
-        
         cell.labelState.textColor = [UIColor chongzhiColor];
         
     } else {
-        
-        cell.labelState.textColor = [UIColor daohanglan];
+        cell.labelState.text = @"充值成功";
+        cell.labelState.textColor = [UIColor chongzhiColor];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

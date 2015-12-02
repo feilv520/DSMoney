@@ -270,8 +270,11 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
+            NSString *IDstr = [[responseObject objectForKey:@"id"] description];
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             ApplyScheduleViewController *scheduleVC = [[ApplyScheduleViewController alloc] init];
+            scheduleVC.ID = IDstr;
+            NSLog(@"1:%@", IDstr);
             [self.navigationController pushViewController:scheduleVC animated:YES];
         }
         

@@ -50,7 +50,7 @@
     [_tabelView registerNib:[UINib nibWithNibName:@"MendDealCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"转账金额"];
-    textArray = @[@"李敏镐", @"中国银行", @"622 3243 3421 5785 346", @"13897687756", @"6,389,567"];
+    textArray = @[[DES3Util decrypt:self.schedule.realName], self.schedule.bankName, [DES3Util decrypt:self.schedule.account], [DES3Util decrypt:self.schedule.phone], [DES3Util decrypt:self.schedule.money]];
     
     buttonOk = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [_tabelView.tableFooterView addSubview:buttonOk];
@@ -58,7 +58,13 @@
     [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [buttonOk addTarget:self action:@selector(makeSureEditReturn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendMessageNotice:) name:@"send" object:nil];
+}
 
+- (void)sendMessageNotice:(NSNotification *)notice
+{
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -124,9 +130,29 @@
     if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 19 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0) {
         
         NSArray *viewController = [self.navigationController viewControllers];
+        [self getData];
         [self.navigationController popToViewController:[viewController objectAtIndex:3] animated:YES];
     }
 
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+- (void)getData
+{
+    fileldName = (UITextField *)[self.view viewWithTag:600];
+    fieldBank = (UITextField *)[self.view viewWithTag:601];
+    fieldBankCard = (UITextField *)[self.view viewWithTag:602];
+    fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
+    fieldMoney = (UITextField *)[self.view viewWithTag:604];
+    NSLog(@"3:%@", self.schedule.Id);
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSDictionary *paremeter = @{@"id":self.schedule.Id, @"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"token":[dic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateBigPutOnSerialNum" parameters:paremeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

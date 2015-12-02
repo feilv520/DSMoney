@@ -341,7 +341,7 @@
                         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
                         [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
                     }
-                    [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                     MineViewController *mineVC = [[MineViewController alloc] init];
                     [self.navigationController pushViewController:mineVC animated:NO];
                     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
@@ -351,7 +351,8 @@
                     
                 } else {
                     
-                    [ProgressHUD showMessage:@"登录密码错误" Width:100 High:20];
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                    
                 }
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
