@@ -59,5 +59,7 @@
 #import "UMSocial.h"                         // 友盟分享
 #import "UMSocialWechatHandler.h"            // 微信分享
 #import "UMSocialQQHandler.h"                // QQ分享
+#import "YYWebImage.h"                       // 异步图片加载框架
+
 
 #endif /* Header_h */

@@ -13,7 +13,7 @@
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.178:8080/tongjiang/admin/p2p/";
 static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interface/p2p/";
 
-//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.69:8080/tongjiang/interface/p2p/";
+//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.203:8080/tongjiang/interface/p2p/";
 
 + (_Nullable instancetype)sharedClient {
     static MyAfHTTPClient *_sharedClient = nil;
@@ -78,6 +78,75 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interf
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(task,error);
     }];
+}
+
+- (void)uploadFile:(UIImage *)img
+{
+    NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,@"app/user/upUserHeader"];
+
+    NSData *data = [self resetSizeOfImageData:img maxSize:1024 * 2];
+    
+    NSDictionary *dic = @{@"ImgData":data};
+    
+    [self POST:URLPostString parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        // 设置时间格式
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+        
+        [formData appendPartWithFileData:data name:@"ImgData" fileName:fileName mimeType:@"application/octet-stream"];
+    } success:^(NSURLSessionDataTask * _Nullable task, id  _Nonnull responseObject) {
+        NSData *doubi = responseObject;
+        NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
+        
+        NSString *character = nil;
+        for (int i = 0; i < responseString.length; i ++) {
+            character = [responseString substringWithRange:NSMakeRange(i, 1)];
+            if ([character isEqualToString:@"\\"])
+                [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
+        }
+        responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
+        
+        NSLog(@"responseString = %@",responseString);
+        
+        NSLog(@"上传成功");
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"上传失败");
+    }];
+}
+
+- (NSData *)resetSizeOfImageData:(UIImage *)source_image maxSize:(NSInteger)maxSize
+{
+    //先调整分辨率
+    CGSize newSize = CGSizeMake(source_image.size.width, source_image.size.height);
+    
+    CGFloat tempHeight = newSize.height / 1024;
+    CGFloat tempWidth = newSize.width / 1024;
+    
+    if (tempWidth > 1.0 && tempWidth > tempHeight) {
+        newSize = CGSizeMake(source_image.size.width / tempWidth, source_image.size.height / tempWidth);
+    }
+    else if (tempHeight > 1.0 && tempWidth < tempHeight){
+        newSize = CGSizeMake(source_image.size.width / tempHeight, source_image.size.height / tempHeight);
+    }
+    
+    UIGraphicsBeginImageContext(newSize);
+    [source_image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //调整大小
+    NSData *imageData = UIImageJPEGRepresentation(newImage,1.0);
+    NSUInteger sizeOrigin = [imageData length];
+    NSUInteger sizeOriginKB = sizeOrigin / 1024;
+    if (sizeOriginKB > maxSize) {
+        NSData *finallImageData = UIImageJPEGRepresentation(newImage,0.50);
+        return finallImageData;
+    }
+    
+    return imageData;
 }
 
 @end

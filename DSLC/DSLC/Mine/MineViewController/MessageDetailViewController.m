@@ -34,17 +34,17 @@
     
     NSLog(@"%@",parameter);
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@",responseObject);
         
         MessageModel *messageModel = [[MessageModel alloc] init];
         
-        for (NSDictionary *dic in [responseObject objectForKey:@"Msg"]) {
-            [messageModel setValuesForKeysWithDictionary:dic];
-        }
+        [messageModel setValuesForKeysWithDictionary:[responseObject objectForKey:@"Msg"]];
         
-//        self.textLabel.text = [messageModel msgText];
+        self.textLabel.text = [messageModel msgText];
+        
+        self.titleLabel.text = [messageModel msgTitle];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);

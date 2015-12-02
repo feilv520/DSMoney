@@ -16,7 +16,7 @@
 #import "InviteRegisterViewController.h"
 #import "RiskAlertBookViewController.h"
 
-@interface RegisterViewController ()<UITextFieldDelegate>{
+@interface RegisterViewController ()<UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
     NSInteger number;
     NSInteger buttonTag;
     UIButton *payButton;
@@ -31,9 +31,17 @@
     NSInteger seconds;
     
     UIButton *tapButton;
+    
+    // 上传按钮
+    UIButton *butBlack;
+    UIView *viewDown;
+    
+    NSData *photoData;
 }
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
+
+@property (nonatomic, assign) BOOL flag;
 
 @end
 
@@ -125,6 +133,7 @@
 
 // 导航按钮执行方法
 - (void)buttonAction:(UIButton *)btn{
+    [self.view endEditing:YES];
     [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         if (btn.tag == 1000) {
             if (btn.tag != buttonTag){
@@ -140,7 +149,7 @@
             registerV.inviteNumber.text = @"邀请码(选填)";
             registerV.sandMyselfIDCard.placeholder = @"请输入邀请码";
             [registerV.problemButton setImage:[UIImage imageNamed:@"iconfont-register-gantanhao001"] forState:UIControlStateNormal];
-            
+            self.flag = NO;
         } else {
             if (btn.tag != buttonTag){
                 lableRedLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT / 2, 48, WIDTH_CONTROLLER_DEFAULT / 2.0, 2);
@@ -154,8 +163,9 @@
             
             registerV.inviteNumber.text = @"上传名片";
             registerV.sandMyselfIDCard.placeholder = @"请上传您的个人名片";
+            registerV.sandMyselfIDCard.userInteractionEnabled = NO;
             [registerV.problemButton setImage:[UIImage imageNamed:@"jiantou"] forState:UIControlStateNormal];
-            
+            self.flag = YES;
         }
         
     } completion:^(BOOL finished) {
@@ -166,8 +176,24 @@
 
 - (void)InviteShuoMing:(UIButton *)button
 {
-    InviteRegisterViewController *invite = [[InviteRegisterViewController alloc] init];
-    [self.navigationController pushViewController:invite animated:YES];
+    [self.view endEditing:YES];
+    if (self.flag) {
+        butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [app.tabBarVC.view addSubview:butBlack];
+        butBlack.alpha = 0.3;
+        [butBlack addTarget:self action:@selector(buttonBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+        
+        viewDown = [CreatView creatViewWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 180, WIDTH_CONTROLLER_DEFAULT, 160) backgroundColor:[UIColor huibai]];
+        [app.tabBarVC.view addSubview:viewDown];
+        
+        [self viewDownShow];
+    } else {
+        
+        InviteRegisterViewController *invite = [[InviteRegisterViewController alloc] init];
+        [self.navigationController pushViewController:invite animated:YES];
+        
+    }
 }
 
 // 注册信息
@@ -394,8 +420,12 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请勾选"];
         
     } else {
-        
-        NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":registerV.sandMyselfIDCard.text,@"finaCard":registerV.sandMyselfIDCard.text};
+        NSDictionary *parameters = [NSDictionary dictionary];
+        if (self.flag) {
+            parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":@"",@"finaCard":photoData};
+        } else {
+            parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":registerV.sandMyselfIDCard.text,@"finaCard":@""};
+        }
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
             NSLog(@"%@",responseObject);
@@ -557,6 +587,139 @@
         }
     }
 }
+
+#pragma mark 上传头像
+#pragma mark --------------------------------
+
+//弹出框
+- (void)viewDownShow
+{
+    UIButton *butCamera = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"拍照"];
+    [viewDown addSubview:butCamera];
+    butCamera.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [butCamera addTarget:self action:@selector(takeCamera:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *labelLine1 = [CreatView creatWithLabelFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [butCamera addSubview:labelLine1];
+    labelLine1.alpha = 0.2;
+    
+    UIButton *butPicture = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 50, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"从手机相册选择"];
+    [viewDown addSubview:butPicture];
+    butPicture.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [butPicture addTarget:self action:@selector(chooseFromPicture:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 110, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] titleText:@"取消"];
+    [viewDown addSubview:butCancle];
+    butCancle.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [butCancle addTarget:self action:@selector(buttonCancle:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *labelLine2 = [CreatView creatWithLabelFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [butPicture addSubview:labelLine2];
+    labelLine2.alpha = 0.3;
+    
+    UILabel *labelLine3 = [CreatView creatWithLabelFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [butCancle addSubview:labelLine3];
+    labelLine3.alpha = 0.3;
+}
+
+//取消按钮
+- (void)buttonCancle:(UIButton *)button
+{
+    [butBlack removeFromSuperview];
+    [viewDown removeFromSuperview];
+    
+    butBlack = nil;
+    viewDown = nil;
+}
+
+//黑色遮罩层消失
+- (void)buttonBlackDisappear:(UIButton *)button
+{
+    [button removeFromSuperview];
+    [viewDown removeFromSuperview];
+    
+    viewDown = nil;
+    button = nil;
+}
+
+//拍照
+- (void)takeCamera:(UIButton *)button
+{
+    NSLog(@"拍照");
+    //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    //        if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+    //            sourceType = UIImagePickerControllerSourceTypeCamera;
+    //        }
+    //sourceType = UIImagePickerControllerSourceTypeCamera; //照相机
+    //sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //图片库
+    //sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum; //保存的相片
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];//初始化
+    picker.delegate = self;
+    picker.allowsEditing = YES;//设置可编辑
+    picker.sourceType = sourceType;
+    [self presentViewController:picker animated:YES completion:nil];//进入照相界面
+}
+
+//从相册选择
+- (void)chooseFromPicture:(UIButton *)button
+{
+    NSLog(@"从相册选择");
+    UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
+    }
+    
+    pickerImage.delegate = self;
+    
+    pickerImage.navigationBar.barTintColor = [UIColor colorWithRed:223.0/255 green:74.0/255 blue:67.0/255 alpha:1];
+    
+    pickerImage.allowsEditing = NO;
+    [self presentViewController:pickerImage animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+    
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    /* 此处info 有六个值
+     * UIImagePickerControllerMediaType; // an NSString UTTypeImage)
+     * UIImagePickerControllerOriginalImage;  // a UIImage 原始图片
+     * UIImagePickerControllerEditedImage;    // a UIImage 裁剪后图片
+     * UIImagePickerControllerCropRect;       // an NSValue (CGRect)
+     * UIImagePickerControllerMediaURL;       // an NSURL
+     * UIImagePickerControllerReferenceURL    // an NSURL that references an asset in the AssetsLibrary framework
+     * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
+     */
+    // 保存图片至本地，方法见下文
+    [self saveImage:image withName:@"currentImage.png"];
+    
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
+    
+    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+    
+    photoData = [[MyAfHTTPClient sharedClient] resetSizeOfImageData:savedImage maxSize:1024 * 2];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+    
+}
+
+- (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
+{
+    
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+    // 将图片写入文件
+    
+    [imageData writeToFile:fullPath atomically:NO];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -177,11 +177,15 @@
         
         MeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMe"];
         
-        cell.imageHeadPic.image = [UIImage imageNamed:@"组-4-拷贝"];
+//        cell.imageHeadPic.image = [UIImage imageNamed:@"组-4-拷贝"];
+        cell.imageHeadPic.yy_imageURL = [self.dataDic objectForKey:@"avatarImg"];
         cell.imageHeadPic.tag = 9908;
+        cell.imageHeadPic.layer.masksToBounds = YES;
+        cell.imageHeadPic.layer.cornerRadius = 20.0f;
+        
         cell.imageRight.image = [UIImage imageNamed:@"arrow"];
         
-        cell.labelName.text = [self.dataDic objectForKey:@"userRealname"];
+        cell.labelName.text = [DES3Util decrypt:[self.dataDic objectForKey:@"userRealname"]];
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -189,13 +193,13 @@
         
     } else {
     
-    MyInformationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    
-    NSArray *rowArr = [titleArr objectAtIndex:indexPath.section - 1];
-    cell.labelTitle.text = [rowArr objectAtIndex:indexPath.row];
-    cell.labelTitle.font = [UIFont systemFontOfSize:15];
-    
-    cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+        MyInformationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        
+        NSArray *rowArr = [titleArr objectAtIndex:indexPath.section - 1];
+        cell.labelTitle.text = [rowArr objectAtIndex:indexPath.row];
+        cell.labelTitle.font = [UIFont systemFontOfSize:15];
+        
+        cell.imageRight.image = [UIImage imageNamed:@"arrow"];
     
 //    if (indexPath.section == 3) {
 //        
@@ -380,6 +384,10 @@
     
     [self.imageView setImage:savedImage];
     
+    [[MyAfHTTPClient sharedClient] uploadFile:savedImage];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+    
 }
 
 - (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
@@ -470,11 +478,6 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"%@",responseObject);
-        
-        self.dataDic = [NSDictionary dictionary];
-        self.dataDic = [responseObject objectForKey:@"User"];
-        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
             NSLog(@"134897189374987342987243789423");
             if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
@@ -489,7 +492,12 @@
             [self.navigationController popToRootViewControllerAnimated:NO];
             return ;
         }
+        NSLog(@"%@",responseObject);
         
+        self.dataDic = [NSDictionary dictionary];
+        self.dataDic = [responseObject objectForKey:@"User"];
+        
+        [_tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
