@@ -320,7 +320,7 @@
         
         if (self.decide == NO) {
             
-            cell.labelYuan.text = [NSString stringWithFormat:@"%.2f%@",[cell.textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36000.0, @"元"];
+            cell.labelYuan.text = [NSString stringWithFormat:@"%.2f%@",[cell.textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0, @"元"];
             
         } else {
             
@@ -819,7 +819,7 @@
     NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:3];
     MoneyCell *cell = (MoneyCell *)[self.tableView cellForRowAtIndexPath:path];
     CashMoneyCell *cell1 = (CashMoneyCell *)[self.tableView cellForRowAtIndexPath:path1];
-    cell.labelYuan.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36000.0];
+    cell.labelYuan.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
     cell1.labelYuanShu.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue]];
     
 }
