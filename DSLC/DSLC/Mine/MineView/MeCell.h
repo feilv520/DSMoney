@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "define.h"
 
 @interface MeCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *labelName;
-@property (weak, nonatomic) IBOutlet UIImageView *imageHeadPic;
+@property (weak, nonatomic) IBOutlet YYAnimatedImageView *imageHeadPic;
 @property (weak, nonatomic) IBOutlet UIImageView *imageRight;
 
 @end

@@ -644,6 +644,24 @@
 		8D9356DC1BC607C500BC2BFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D9356DA1BC607C500BC2BFA /* LaunchScreen.storyboard */; };
 		8D9356E71BC607C500BC2BFA /* DSLCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356E61BC607C500BC2BFA /* DSLCTests.m */; };
 		8D9356F21BC607C500BC2BFA /* DSLCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356F11BC607C500BC2BFA /* DSLCUITests.m */; };
+		8D9BE8E41C0EC94D003C67D3 /* YYCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8BE1C0EC94D003C67D3 /* YYCache.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8E51C0EC94D003C67D3 /* YYDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8C01C0EC94D003C67D3 /* YYDiskCache.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8E61C0EC94D003C67D3 /* YYKVStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8C21C0EC94D003C67D3 /* YYKVStorage.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8E71C0EC94D003C67D3 /* YYMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8C41C0EC94D003C67D3 /* YYMemoryCache.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8E81C0EC94D003C67D3 /* _YYWebImageSetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8C71C0EC94D003C67D3 /* _YYWebImageSetter.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8E91C0EC94D003C67D3 /* CALayer+YYWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8C91C0EC94D003C67D3 /* CALayer+YYWebImage.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8EA1C0EC94D003C67D3 /* MKAnnotationView+YYWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8CB1C0EC94D003C67D3 /* MKAnnotationView+YYWebImage.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8EB1C0EC94D003C67D3 /* UIButton+YYWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8CD1C0EC94D003C67D3 /* UIButton+YYWebImage.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8EC1C0EC94D003C67D3 /* UIImage+YYWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8CF1C0EC94D003C67D3 /* UIImage+YYWebImage.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8ED1C0EC94D003C67D3 /* UIImageView+YYWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8D11C0EC94D003C67D3 /* UIImageView+YYWebImage.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8EE1C0EC94D003C67D3 /* YYAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8D41C0EC94D003C67D3 /* YYAnimatedImageView.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8EF1C0EC94D003C67D3 /* YYFrameImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8D61C0EC94D003C67D3 /* YYFrameImage.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8F01C0EC94D003C67D3 /* YYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8D81C0EC94D003C67D3 /* YYImage.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8F11C0EC94D003C67D3 /* YYImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8DA1C0EC94D003C67D3 /* YYImageCoder.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8F21C0EC94D003C67D3 /* YYSpriteSheetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8DC1C0EC94D003C67D3 /* YYSpriteSheetImage.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8F31C0EC94D003C67D3 /* YYImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8DE1C0EC94D003C67D3 /* YYImageCache.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8F41C0EC94D003C67D3 /* YYWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8E11C0EC94D003C67D3 /* YYWebImageManager.m */; settings = {ASSET_TAGS = (); }; };
+		8D9BE8F51C0EC94D003C67D3 /* YYWebImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8E31C0EC94D003C67D3 /* YYWebImageOperation.m */; settings = {ASSET_TAGS = (); }; };
 		8DA060CD1C02BEBD00E3E025 /* DES3Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA060CC1C02BEBD00E3E025 /* DES3Util.m */; settings = {ASSET_TAGS = (); }; };
 		8DBC8A6C1C0D44DA00378FFE /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBC8A681C0D44DA00378FFE /* libSocialQQ.a */; settings = {ASSET_TAGS = (); }; };
 		8DBC8A6D1C0D44DA00378FFE /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBC8A691C0D44DA00378FFE /* TencentOpenAPI.framework */; settings = {ASSET_TAGS = (); }; };
@@ -1639,6 +1657,43 @@
 		8D9356ED1BC607C500BC2BFA /* DSLCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DSLCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9356F11BC607C500BC2BFA /* DSLCUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLCUITests.m; sourceTree = "<group>"; };
 		8D9356F31BC607C500BC2BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D9BE8BD1C0EC94D003C67D3 /* YYCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCache.h; sourceTree = "<group>"; };
+		8D9BE8BE1C0EC94D003C67D3 /* YYCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYCache.m; sourceTree = "<group>"; };
+		8D9BE8BF1C0EC94D003C67D3 /* YYDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYDiskCache.h; sourceTree = "<group>"; };
+		8D9BE8C01C0EC94D003C67D3 /* YYDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYDiskCache.m; sourceTree = "<group>"; };
+		8D9BE8C11C0EC94D003C67D3 /* YYKVStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYKVStorage.h; sourceTree = "<group>"; };
+		8D9BE8C21C0EC94D003C67D3 /* YYKVStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYKVStorage.m; sourceTree = "<group>"; };
+		8D9BE8C31C0EC94D003C67D3 /* YYMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYMemoryCache.h; sourceTree = "<group>"; };
+		8D9BE8C41C0EC94D003C67D3 /* YYMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYMemoryCache.m; sourceTree = "<group>"; };
+		8D9BE8C61C0EC94D003C67D3 /* _YYWebImageSetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _YYWebImageSetter.h; sourceTree = "<group>"; };
+		8D9BE8C71C0EC94D003C67D3 /* _YYWebImageSetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _YYWebImageSetter.m; sourceTree = "<group>"; };
+		8D9BE8C81C0EC94D003C67D3 /* CALayer+YYWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+YYWebImage.h"; sourceTree = "<group>"; };
+		8D9BE8C91C0EC94D003C67D3 /* CALayer+YYWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+YYWebImage.m"; sourceTree = "<group>"; };
+		8D9BE8CA1C0EC94D003C67D3 /* MKAnnotationView+YYWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+YYWebImage.h"; sourceTree = "<group>"; };
+		8D9BE8CB1C0EC94D003C67D3 /* MKAnnotationView+YYWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+YYWebImage.m"; sourceTree = "<group>"; };
+		8D9BE8CC1C0EC94D003C67D3 /* UIButton+YYWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+YYWebImage.h"; sourceTree = "<group>"; };
+		8D9BE8CD1C0EC94D003C67D3 /* UIButton+YYWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+YYWebImage.m"; sourceTree = "<group>"; };
+		8D9BE8CE1C0EC94D003C67D3 /* UIImage+YYWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+YYWebImage.h"; sourceTree = "<group>"; };
+		8D9BE8CF1C0EC94D003C67D3 /* UIImage+YYWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YYWebImage.m"; sourceTree = "<group>"; };
+		8D9BE8D01C0EC94D003C67D3 /* UIImageView+YYWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YYWebImage.h"; sourceTree = "<group>"; };
+		8D9BE8D11C0EC94D003C67D3 /* UIImageView+YYWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YYWebImage.m"; sourceTree = "<group>"; };
+		8D9BE8D31C0EC94D003C67D3 /* YYAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYAnimatedImageView.h; sourceTree = "<group>"; };
+		8D9BE8D41C0EC94D003C67D3 /* YYAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAnimatedImageView.m; sourceTree = "<group>"; };
+		8D9BE8D51C0EC94D003C67D3 /* YYFrameImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFrameImage.h; sourceTree = "<group>"; };
+		8D9BE8D61C0EC94D003C67D3 /* YYFrameImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYFrameImage.m; sourceTree = "<group>"; };
+		8D9BE8D71C0EC94D003C67D3 /* YYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImage.h; sourceTree = "<group>"; };
+		8D9BE8D81C0EC94D003C67D3 /* YYImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImage.m; sourceTree = "<group>"; };
+		8D9BE8D91C0EC94D003C67D3 /* YYImageCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageCoder.h; sourceTree = "<group>"; };
+		8D9BE8DA1C0EC94D003C67D3 /* YYImageCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImageCoder.m; sourceTree = "<group>"; };
+		8D9BE8DB1C0EC94D003C67D3 /* YYSpriteSheetImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSpriteSheetImage.h; sourceTree = "<group>"; };
+		8D9BE8DC1C0EC94D003C67D3 /* YYSpriteSheetImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSpriteSheetImage.m; sourceTree = "<group>"; };
+		8D9BE8DD1C0EC94D003C67D3 /* YYImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageCache.h; sourceTree = "<group>"; };
+		8D9BE8DE1C0EC94D003C67D3 /* YYImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImageCache.m; sourceTree = "<group>"; };
+		8D9BE8DF1C0EC94D003C67D3 /* YYWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYWebImage.h; sourceTree = "<group>"; };
+		8D9BE8E01C0EC94D003C67D3 /* YYWebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYWebImageManager.h; sourceTree = "<group>"; };
+		8D9BE8E11C0EC94D003C67D3 /* YYWebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYWebImageManager.m; sourceTree = "<group>"; };
+		8D9BE8E21C0EC94D003C67D3 /* YYWebImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYWebImageOperation.h; sourceTree = "<group>"; };
+		8D9BE8E31C0EC94D003C67D3 /* YYWebImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYWebImageOperation.m; sourceTree = "<group>"; };
 		8DA060CB1C02BEBD00E3E025 /* DES3Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DES3Util.h; sourceTree = "<group>"; };
 		8DA060CC1C02BEBD00E3E025 /* DES3Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DES3Util.m; sourceTree = "<group>"; };
 		8DBC8A681C0D44DA00378FFE /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
@@ -1994,6 +2049,7 @@
 		81C2DAA51BC755F10007AC48 /* Three */ = {
 			isa = PBXGroup;
 			children = (
+				8D9BE8BB1C0EC94D003C67D3 /* YYWebImage */,
 				8D4518701C00553E00FAF998 /* Encryption */,
 				8D88D0C81BFECCB40051D6DA /* MJRefresh */,
 				819B52F41BFC6930002FDF1E /* ChineseSorting */,
@@ -3368,6 +3424,74 @@
 			path = DSLCUITests;
 			sourceTree = "<group>";
 		};
+		8D9BE8BB1C0EC94D003C67D3 /* YYWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				8D9BE8BC1C0EC94D003C67D3 /* Cache */,
+				8D9BE8C51C0EC94D003C67D3 /* Categories */,
+				8D9BE8D21C0EC94D003C67D3 /* Image */,
+				8D9BE8DD1C0EC94D003C67D3 /* YYImageCache.h */,
+				8D9BE8DE1C0EC94D003C67D3 /* YYImageCache.m */,
+				8D9BE8DF1C0EC94D003C67D3 /* YYWebImage.h */,
+				8D9BE8E01C0EC94D003C67D3 /* YYWebImageManager.h */,
+				8D9BE8E11C0EC94D003C67D3 /* YYWebImageManager.m */,
+				8D9BE8E21C0EC94D003C67D3 /* YYWebImageOperation.h */,
+				8D9BE8E31C0EC94D003C67D3 /* YYWebImageOperation.m */,
+			);
+			path = YYWebImage;
+			sourceTree = "<group>";
+		};
+		8D9BE8BC1C0EC94D003C67D3 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				8D9BE8BD1C0EC94D003C67D3 /* YYCache.h */,
+				8D9BE8BE1C0EC94D003C67D3 /* YYCache.m */,
+				8D9BE8BF1C0EC94D003C67D3 /* YYDiskCache.h */,
+				8D9BE8C01C0EC94D003C67D3 /* YYDiskCache.m */,
+				8D9BE8C11C0EC94D003C67D3 /* YYKVStorage.h */,
+				8D9BE8C21C0EC94D003C67D3 /* YYKVStorage.m */,
+				8D9BE8C31C0EC94D003C67D3 /* YYMemoryCache.h */,
+				8D9BE8C41C0EC94D003C67D3 /* YYMemoryCache.m */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		8D9BE8C51C0EC94D003C67D3 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				8D9BE8C61C0EC94D003C67D3 /* _YYWebImageSetter.h */,
+				8D9BE8C71C0EC94D003C67D3 /* _YYWebImageSetter.m */,
+				8D9BE8C81C0EC94D003C67D3 /* CALayer+YYWebImage.h */,
+				8D9BE8C91C0EC94D003C67D3 /* CALayer+YYWebImage.m */,
+				8D9BE8CA1C0EC94D003C67D3 /* MKAnnotationView+YYWebImage.h */,
+				8D9BE8CB1C0EC94D003C67D3 /* MKAnnotationView+YYWebImage.m */,
+				8D9BE8CC1C0EC94D003C67D3 /* UIButton+YYWebImage.h */,
+				8D9BE8CD1C0EC94D003C67D3 /* UIButton+YYWebImage.m */,
+				8D9BE8CE1C0EC94D003C67D3 /* UIImage+YYWebImage.h */,
+				8D9BE8CF1C0EC94D003C67D3 /* UIImage+YYWebImage.m */,
+				8D9BE8D01C0EC94D003C67D3 /* UIImageView+YYWebImage.h */,
+				8D9BE8D11C0EC94D003C67D3 /* UIImageView+YYWebImage.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		8D9BE8D21C0EC94D003C67D3 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				8D9BE8D31C0EC94D003C67D3 /* YYAnimatedImageView.h */,
+				8D9BE8D41C0EC94D003C67D3 /* YYAnimatedImageView.m */,
+				8D9BE8D51C0EC94D003C67D3 /* YYFrameImage.h */,
+				8D9BE8D61C0EC94D003C67D3 /* YYFrameImage.m */,
+				8D9BE8D71C0EC94D003C67D3 /* YYImage.h */,
+				8D9BE8D81C0EC94D003C67D3 /* YYImage.m */,
+				8D9BE8D91C0EC94D003C67D3 /* YYImageCoder.h */,
+				8D9BE8DA1C0EC94D003C67D3 /* YYImageCoder.m */,
+				8D9BE8DB1C0EC94D003C67D3 /* YYSpriteSheetImage.h */,
+				8D9BE8DC1C0EC94D003C67D3 /* YYSpriteSheetImage.m */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 		8DBC8A671C0D44DA00378FFE /* TencentOpenAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -3989,6 +4113,7 @@
 				8D88D0FA1BFECCB40051D6DA /* MJRefreshAutoGifFooter.m in Sources */,
 				8DD4C2471BDE1BE600C4C58C /* AboutViewController.m in Sources */,
 				8D4FF5DE1BE339A200BAE25F /* AFImageDownloader.m in Sources */,
+				8D9BE8EE1C0EC94D003C67D3 /* YYAnimatedImageView.m in Sources */,
 				81ED030B1BD09BC8005F4B02 /* MyInformationCell.m in Sources */,
 				8D88D0FE1BFECCB40051D6DA /* MJRefreshBackNormalFooter.m in Sources */,
 				816F1ED21BF5C61C00DB6B65 /* InviteSocilPlatFormCell.m in Sources */,
@@ -4026,6 +4151,7 @@
 				81B674091BF0A780007CEF51 /* HistoryMemoryCell.m in Sources */,
 				811F0B0F1BF344EC001F6AA4 /* LiftUpMoneyCheck.m in Sources */,
 				8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */,
+				8D9BE8E71C0EC94D003C67D3 /* YYMemoryCache.m in Sources */,
 				8D9356D11BC607C500BC2BFA /* AppDelegate.m in Sources */,
 				817E33A71BD7840000D05103 /* ChooseCell.m in Sources */,
 				8D4FF5E41BE339A200BAE25F /* UIRefreshControl+AFNetworking.m in Sources */,
@@ -4038,6 +4164,7 @@
 				81C8BBD31BDA3544005B9DFF /* HelpViewController.m in Sources */,
 				818A39E51BF475A800F01CAA /* MBProgressHUD.m in Sources */,
 				813785941BF4AB700044A588 /* InviteRegisterViewController.m in Sources */,
+				8D9BE8F01C0EC94D003C67D3 /* YYImage.m in Sources */,
 				81D703F31BE06BD60074DF30 /* ForgetSecretViewController.m in Sources */,
 				817E33981BD772A700D05103 /* BigMoneyViewController.m in Sources */,
 				8D4FF5D71BE339A200BAE25F /* AFHTTPSessionManager.m in Sources */,
@@ -4065,6 +4192,7 @@
 				819B52EB1BFC4462002FDF1E /* NewHandCSSCell.m in Sources */,
 				81D703FC1BE073730074DF30 /* ForgetSecret2Cell.m in Sources */,
 				81B18E201BE761B600D448FA /* LastEmailViewController.m in Sources */,
+				8D9BE8E91C0EC94D003C67D3 /* CALayer+YYWebImage.m in Sources */,
 				81F496FE1C06EF71002F3413 /* Chat.m in Sources */,
 				8D5AEB411BC8DE41004FBDD3 /* SelectionOfThing.m in Sources */,
 				8D0CB4A41BE7806D0039D826 /* MyAfHTTPClient.m in Sources */,
@@ -4075,6 +4203,8 @@
 				8D88D1011BFECCB40051D6DA /* MJRefreshNormalHeader.m in Sources */,
 				81F237781BE89887009D7A67 /* MyInformation.m in Sources */,
 				8D88D10A1BFEEDDE0051D6DA /* UIViewController+Loading.m in Sources */,
+				8D9BE8EA1C0EC94D003C67D3 /* MKAnnotationView+YYWebImage.m in Sources */,
+				8D9BE8E41C0EC94D003C67D3 /* YYCache.m in Sources */,
 				816CDF2E1BF1A018007785FC /* EditBigMoney.m in Sources */,
 				8DFA5C941BCE64D900AED2B2 /* FQuickPayViewController.m in Sources */,
 				81BA1C0B1BD4FCB100DBA5BE /* MyNewsViewController.m in Sources */,
@@ -4096,6 +4226,7 @@
 				818523C91BE35E75002FC653 /* MendLoginCell.m in Sources */,
 				81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */,
 				818063971BD5D3C700E83492 /* MyInvitationViewController.m in Sources */,
+				8D9BE8E61C0EC94D003C67D3 /* YYKVStorage.m in Sources */,
 				8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */,
 				81F237711BE8568B009D7A67 /* NewMakeSureCell.m in Sources */,
 				8D88D1041BFECCB40051D6DA /* MJRefreshConst.m in Sources */,
@@ -4133,6 +4264,8 @@
 				8D1191911BF1DC1C00A2DE05 /* ProductMoneyTableViewCell.m in Sources */,
 				819B52C21BFC0E45002FDF1E /* TheThirdRedBagController.m in Sources */,
 				81F5FA0D1BDA0D2E008C38BF /* RealNameViewController.m in Sources */,
+				8D9BE8F31C0EC94D003C67D3 /* YYImageCache.m in Sources */,
+				8D9BE8EB1C0EC94D003C67D3 /* UIButton+YYWebImage.m in Sources */,
 				8175BECC1BEA14440044026E /* ShareFailureViewController.m in Sources */,
 				8D4FF5DB1BE339A200BAE25F /* AFURLResponseSerialization.m in Sources */,
 				8D121FD61BD4D4CE00B3C1FE /* SettingTitleTableViewCell.m in Sources */,
@@ -4168,6 +4301,7 @@
 				8D1921CD1BD4E2060038195E /* XYPieChart.m in Sources */,
 				818063AE1BD6437D00E83492 /* PayMoneyViewController.m in Sources */,
 				81C138121BDF61F30088E792 /* LoginViewController.m in Sources */,
+				8D9BE8EF1C0EC94D003C67D3 /* YYFrameImage.m in Sources */,
 				817E339B1BD77A8800D05103 /* ChooseStyleViewController.m in Sources */,
 				8D4FF5E01BE339A200BAE25F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				8D4FF5DF1BE339A200BAE25F /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -4179,6 +4313,8 @@
 				81701C0B1BE701C300B45BAA /* MendDealCell.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
 				817E33941BD7576600D05103 /* MeCell.m in Sources */,
+				8D9BE8ED1C0EC94D003C67D3 /* UIImageView+YYWebImage.m in Sources */,
+				8D9BE8EC1C0EC94D003C67D3 /* UIImage+YYWebImage.m in Sources */,
 				81B674011BF0873B007CEF51 /* InviteNameViewController.m in Sources */,
 				8D31DF221C04874700B676AF /* MTransactionModel.m in Sources */,
 				815D27A41BE21040005410C6 /* UpCell.m in Sources */,
@@ -4196,6 +4332,7 @@
 				8DA060CD1C02BEBD00E3E025 /* DES3Util.m in Sources */,
 				81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */,
 				816D15321C082638008CFBBC /* InvestNoticeCell.m in Sources */,
+				8D9BE8E51C0EC94D003C67D3 /* YYDiskCache.m in Sources */,
 				81E831061BF0469F00127EE8 /* MyChoosePlanner.m in Sources */,
 				8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */,
 				8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */,
@@ -4223,11 +4360,14 @@
 				81200C181C0315EE00F70DDD /* RiskAlertBookCell.m in Sources */,
 				81F5FA111BDA1C2E008C38BF /* MoreCell.m in Sources */,
 				8180639B1BD5D7E500E83492 /* MyInviteCell.m in Sources */,
+				8D9BE8F41C0EC94D003C67D3 /* YYWebImageManager.m in Sources */,
 				8162D11D1BE1BCC900CACAB6 /* XinXiCell.m in Sources */,
+				8D9BE8E81C0EC94D003C67D3 /* _YYWebImageSetter.m in Sources */,
 				8DEDE1F21BCD05F9008086D3 /* Calendar.m in Sources */,
 				8D4FF5E11BE339A200BAE25F /* UIButton+AFNetworking.m in Sources */,
 				8D121FDB1BD4D83600B3C1FE /* SettingGetMoneyTableViewCell.m in Sources */,
 				811F0B061BF33D30001F6AA4 /* BindingOneCell.m in Sources */,
+				8D9BE8F21C0EC94D003C67D3 /* YYSpriteSheetImage.m in Sources */,
 				81ED03201BD0DDAD005F4B02 /* AddBankCell.m in Sources */,
 				8175BEB91BE9F7160044026E /* ShareEveryCell.m in Sources */,
 				8D121FE51BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.m in Sources */,
@@ -4236,6 +4376,7 @@
 				8D5DBB7F1BD4819C00F556B9 /* CastProduceViewController.m in Sources */,
 				8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */,
 				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
+				8D9BE8F11C0EC94D003C67D3 /* YYImageCoder.m in Sources */,
 				8190A3051BD876EB002B53F5 /* AddCardViewController.m in Sources */,
 				81379F291BEB0272002CDB16 /* NewRedBagViewController.m in Sources */,
 				8D3A2FDB1BE70FBF00913DEC /* TextTableViewCell.m in Sources */,
@@ -4243,6 +4384,7 @@
 				818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */,
 				81D704001BE0B2AF0074DF30 /* BillViewController.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
+				8D9BE8F51C0EC94D003C67D3 /* YYWebImageOperation.m in Sources */,
 				8D88D0FC1BFECCB40051D6DA /* MJRefreshAutoStateFooter.m in Sources */,
 				8D4FF5D91BE339A200BAE25F /* AFSecurityPolicy.m in Sources */,
 				8D88D1071BFECCB40051D6DA /* UIView+MJExtension.m in Sources */,

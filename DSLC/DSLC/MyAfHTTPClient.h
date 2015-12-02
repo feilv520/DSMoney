@@ -35,4 +35,10 @@ typedef void (^failure)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnul
 
 + (nullable NSDictionary *)parseJSONStringToNSDictionary:(nullable NSString *)JSONString;
 
+// 上传图片
+- (void)uploadFile:(nullable UIImage *)img;
+
+// 压缩图片
+- (NSData *)resetSizeOfImageData:(UIImage *)source_image maxSize:(NSInteger)maxSize;
+
 @end

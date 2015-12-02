@@ -231,7 +231,7 @@
             
         } else {
         
-            cell.labelName.text = [[self.myInviteWithPeopleNumber objectAtIndex:indexPath.row - 1] objectForKey:@"userRealname"];
+            cell.labelName.text = [DES3Util decrypt:[[self.myInviteWithPeopleNumber objectAtIndex:indexPath.row - 1] objectForKey:@"userRealname"]];
             cell.labelName.textAlignment = NSTextAlignmentCenter;
             cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         
@@ -241,7 +241,7 @@
             cell.labelTime.textAlignment = NSTextAlignmentCenter;
             cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         
-            cell.labelMoney.text = [[self.myInviteWithPeopleNumber objectAtIndex:indexPath.row - 1] objectForKey:@"inviteMoney"];
+            cell.labelMoney.text = [DES3Util decrypt:[[self.myInviteWithPeopleNumber objectAtIndex:indexPath.row - 1] objectForKey:@"inviteMoney"]];
             cell.labelMoney.textAlignment = NSTextAlignmentCenter;
             cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:14];
             

@@ -46,6 +46,8 @@
     UIButton *messageButton;
 }
 
+@property (nonatomic, strong) NSString *imgString;
+
 @property (nonatomic, strong) NSDictionary *myAccountInfo;
 
 @end
@@ -77,6 +79,8 @@
 
     [self showPictureAndTitle];
     [self showTableView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeWithImageView) name:@"exchangeWithImageView" object:nil];
 }
 
 - (void)pushWithViewController{
@@ -142,10 +146,21 @@
     imageRedBG.userInteractionEnabled = YES;
     
 //    头像按钮
-    UIButton *butHeadPic = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, 22,WIDTH_CONTROLLER_DEFAULT * (50 / 375.0), WIDTH_CONTROLLER_DEFAULT * (50 / 375.0)) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    UIButton *butHeadPic = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(15, 22,WIDTH_CONTROLLER_DEFAULT * (40 / 375.0), WIDTH_CONTROLLER_DEFAULT * (40 / 375.0)) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [imageRedBG addSubview:butHeadPic];
-    [butHeadPic setBackgroundImage:[UIImage imageNamed:@"shape-29"] forState:UIControlStateNormal];
-    butHeadPic.layer.cornerRadius = 25;
+    
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
+    
+    if ([fullPath isEqualToString:@""]) {
+        [butHeadPic setBackgroundImage:[UIImage imageNamed:@"shape-29"] forState:UIControlStateNormal];
+    } else {
+        YYAnimatedImageView *imgView = [YYAnimatedImageView new];
+        imgView.tag = 4739;
+        imgView.yy_imageURL = [NSURL URLWithString:self.imgString];
+        imgView.frame = CGRectMake(0, 0, butHeadPic.frame.size.width, butHeadPic.frame.size.height);
+        [butHeadPic addSubview:imgView];
+    }
+    butHeadPic.layer.cornerRadius = 20;
     butHeadPic.layer.masksToBounds = YES;
     [butHeadPic addTarget:self action:@selector(headPictureButton:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -433,6 +448,8 @@
 - (void)MyAccountInfo{
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
+    self.imgString = [dic objectForKey:@"avatarImg"];
+    
     NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -475,6 +492,12 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)exchangeWithImageView{
+    YYAnimatedImageView *imgV = (YYAnimatedImageView *)[self.view viewWithTag:4739];
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
+    imgV.image = [UIImage imageNamed:fullPath];
 }
 
 - (void)didReceiveMemoryWarning {

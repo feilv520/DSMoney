@@ -88,7 +88,9 @@
     _tableView.backgroundColor = [UIColor huibai];
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 5)];
     _tableView.tableHeaderView.backgroundColor = [UIColor huibai];
-    _tableView.tableFooterView = [UIView new];
+    UIView *vieww = [UIView new];
+    vieww.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10);
+    _tableView.tableFooterView = vieww;
     [_tableView registerNib:[UINib nibWithNibName:@"NewHandCSSCell" bundle:nil] forCellReuseIdentifier:@"reuseNewHand"];
     [_tableView registerNib:[UINib nibWithNibName:@"TheThirdRedBagCell" bundle:nil] forCellReuseIdentifier:@"Reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"NotSeparateCell" bundle:nil] forCellReuseIdentifier:@"Reuse1"];
@@ -198,7 +200,85 @@
         
         return cell;
 
-    } else if ([[redbagModel rpType] isEqualToString:@"3"] || [[redbagModel rpType] isEqualToString:@"0"]) {
+    } else if ([[redbagModel rpType] isEqualToString:@"0"]) {
+        
+        NewHandCSSCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNewHand"];
+        
+        cell.buttonCan.hidden = YES;
+        
+        cell.labelSend.text = @"送";
+        cell.labelSend.textColor = [UIColor whiteColor];
+        cell.labelSend.textAlignment = NSTextAlignmentCenter;
+        cell.labelSend.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        cell.labelSend.backgroundColor = [UIColor daohanglan];
+        cell.labelSend.layer.cornerRadius = 5;
+        cell.labelSend.layer.masksToBounds = YES;
+        
+        NSString *string = [NSString stringWithFormat:@"%@元",[redbagModel rpAmount]];
+        
+        NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:string];
+        NSRange leftStr = NSMakeRange(0, [[redStr string] rangeOfString:@"元"].location);
+        [redStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:leftStr];
+        [redStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:22] range:leftStr];
+        [redStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:[string rangeOfString:@"元"]];
+        [cell.labelMoney setAttributedText:redStr];
+        cell.labelMoney.textColor = [UIColor daohanglan];
+        cell.labelMoney.backgroundColor = [UIColor clearColor];
+        
+        cell.labelStyle.text = [redbagModel rpName];
+        cell.labelStyle.backgroundColor = [UIColor clearColor];
+        cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        
+        //        cell.labelRequire.text = [NSString stringWithFormat:@"单笔投资金额满%@",[redbagModel rpLimit]];
+        cell.labelRequire.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.labelRequire.textColor = [UIColor zitihui];
+        cell.labelRequire.backgroundColor = [UIColor clearColor];
+        
+        cell.labelRequire.text = @"可直接打开";
+        
+        cell.labelTime.text = [NSString stringWithFormat:@"%@%@", @"有效期:截止", [redbagModel rpTime]];
+        cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+        cell.labelTime.textColor = [UIColor zitihui];
+        cell.labelTime.backgroundColor = [UIColor clearColor];
+        
+        cell.backgroundColor = [UIColor huibai];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.imagePic.image = [UIImage imageNamed:@"新手体验金"];
+        
+        if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
+            
+            cell.buttonCan.hidden = NO;
+            [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+            [cell.buttonCan setTitle:@"拆红包" forState:UIControlStateNormal];
+            [cell.buttonCan setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            cell.buttonCan.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            [cell.buttonCan addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
+            cell.labelSend.backgroundColor = [UIColor daohanglan];
+            
+        } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已打开"]];
+            cell.labelSend.backgroundColor = [UIColor zitihui];
+            cell.labelStyle.textColor = [UIColor zitihui];
+            cell.labelMoney.textColor = [UIColor zitihui];
+            
+        } else if ([[redbagModel rpStatus] isEqualToString:@"3"]){
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已过期"]];
+            cell.labelSend.backgroundColor = [UIColor zitihui];
+            cell.labelStyle.textColor = [UIColor zitihui];
+            cell.labelMoney.textColor = [UIColor zitihui];
+            
+        }
+        
+        
+        return cell;
+        
+    } else if ([[redbagModel rpType] isEqualToString:@"3"]) {
         TheThirdRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse"];
         
         [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
@@ -695,55 +775,56 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/openRedPacket" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        [self getMyRedPacketList];
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
         
-        NSLog(@"openRedPacket = %@",responseObject);
-        
-        self.openRedBagDic = [responseObject objectForKey:@"RedPacket"];
-        
-        butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [app.tabBarVC.view addSubview:butBlack];
-        [butBlack setBackgroundImage:[UIImage imageNamed:@"钻石红包"] forState:UIControlStateNormal];
-        [butBlack addTarget:self action:@selector(openFinish:) forControlEvents:UIControlEventTouchUpInside];
-        
-        labelGet = [[UILabel alloc] initWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/3 + 40, butBlack.frame.size.width, 70)];
-        [butBlack addSubview:labelGet];
-        labelGet.textAlignment = NSTextAlignmentCenter;
-        labelGet.backgroundColor = [UIColor clearColor];
-        
-        NSString *moneyString = [NSString stringWithFormat:@"恭喜您获得%@元现金红包\n\n已转入账户余额",[self.openRedBagDic objectForKey:@"rpAmount"]];
-        
-        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            NSLog(@"openRedPacket = %@",responseObject);
             
-            NSMutableAttributedString *frontStr = [[NSMutableAttributedString alloc] initWithString:moneyString];
-            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:[moneyString rangeOfString:@"恭喜您获得"]];
-            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:[moneyString rangeOfString:@"元现金红包"]];
-            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:[moneyString rangeOfString:@"已转入账户余额"]];
-            //    取到恭~0的长度 减掉5 就剩100
-            NSRange shuZi = NSMakeRange(5, [[frontStr string] rangeOfString:@"元"].location - 5);
-            [frontStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
-            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:shuZi];
+            self.openRedBagDic = [responseObject objectForKey:@"RedPacket"];
             
-            [labelGet setAttributedText:frontStr];
+            butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+            AppDelegate *app = [[UIApplication sharedApplication] delegate];
+            [app.tabBarVC.view addSubview:butBlack];
+            [butBlack setBackgroundImage:[UIImage imageNamed:@"钻石红包"] forState:UIControlStateNormal];
+            [butBlack addTarget:self action:@selector(openFinish:) forControlEvents:UIControlEventTouchUpInside];
             
-        } else {
-        
-            NSMutableAttributedString *frontStr = [[NSMutableAttributedString alloc] initWithString:moneyString];
-            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[moneyString rangeOfString:@"恭喜您获得"]];
-            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[moneyString rangeOfString:@"元现金红包"]];
-            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:[moneyString rangeOfString:@"已转入账户余额"]];
-            //    取到恭~0的长度 减掉5 就剩100
-            NSRange shuZi = NSMakeRange(5, [[frontStr string] rangeOfString:@"元"].location - 5);
-            [frontStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
-            [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:25] range:shuZi];
+            labelGet = [[UILabel alloc] initWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/3 + 40, butBlack.frame.size.width, 70)];
+            [butBlack addSubview:labelGet];
+            labelGet.textAlignment = NSTextAlignmentCenter;
+            labelGet.backgroundColor = [UIColor clearColor];
             
-            [labelGet setAttributedText:frontStr];
+            NSString *moneyString = [NSString stringWithFormat:@"恭喜您获得%@元现金红包\n\n已转入账户余额",[self.openRedBagDic objectForKey:@"rpAmount"]];
             
+            if (WIDTH_CONTROLLER_DEFAULT == 320) {
+                
+                NSMutableAttributedString *frontStr = [[NSMutableAttributedString alloc] initWithString:moneyString];
+                [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:[moneyString rangeOfString:@"恭喜您获得"]];
+                [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:[moneyString rangeOfString:@"元现金红包"]];
+                [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:[moneyString rangeOfString:@"已转入账户余额"]];
+                //    取到恭~0的长度 减掉5 就剩100
+                NSRange shuZi = NSMakeRange(5, [[frontStr string] rangeOfString:@"元"].location - 5);
+                [frontStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
+                [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:shuZi];
+                
+                [labelGet setAttributedText:frontStr];
+                
+            } else {
+            
+                NSMutableAttributedString *frontStr = [[NSMutableAttributedString alloc] initWithString:moneyString];
+                [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[moneyString rangeOfString:@"恭喜您获得"]];
+                [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:[moneyString rangeOfString:@"元现金红包"]];
+                [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:[moneyString rangeOfString:@"已转入账户余额"]];
+                //    取到恭~0的长度 减掉5 就剩100
+                NSRange shuZi = NSMakeRange(5, [[frontStr string] rangeOfString:@"元"].location - 5);
+                [frontStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
+                [frontStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:25] range:shuZi];
+                
+                [labelGet setAttributedText:frontStr];
+                
+            }
+            labelGet.numberOfLines = 3;
+            
+            [self getMyRedPacketList];
         }
-        labelGet.numberOfLines = 3;
-        
-        [_tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
