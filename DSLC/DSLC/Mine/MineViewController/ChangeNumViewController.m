@@ -195,13 +195,13 @@
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPhone" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+//            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
             
             NSLog(@"ooooooo%@", responseObject);
 
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
                
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"更换手机号成功"];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                 NSArray *viewController = [self.navigationController viewControllers];
                 [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
                 
