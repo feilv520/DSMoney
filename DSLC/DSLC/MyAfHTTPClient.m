@@ -111,6 +111,14 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interf
         
         NSLog(@"responseString = %@",responseString);
         
+        NSDictionary *responseData = [MyAfHTTPClient parseJSONStringToNSDictionary:responseString];
+        
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        
+        [dic setValue:[responseData objectForKey:@"avatarImg"] forKey:@"avatarImg"];
+        
+        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+        
         NSLog(@"上传成功");
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"上传失败");
