@@ -1018,10 +1018,10 @@
 		8184EC471BCCD13C003F440D /* CashMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashMoneyCell.h; sourceTree = "<group>"; };
 		8184EC481BCCD13C003F440D /* CashMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashMoneyCell.m; sourceTree = "<group>"; };
 		8184EC491BCCD13C003F440D /* CashMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashMoneyCell.xib; sourceTree = "<group>"; };
-		8184EF461BFDBC5600496989 /* OneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneCell.h; sourceTree = "<group>"; };
-		8184EF471BFDBC5600496989 /* OneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneCell.m; sourceTree = "<group>"; };
-		8184EF481BFDBC5600496989 /* TwoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoCell.h; sourceTree = "<group>"; };
-		8184EF491BFDBC5600496989 /* TwoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoCell.m; sourceTree = "<group>"; };
+		8184EF461BFDBC5600496989 /* OneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OneCell.h; path = ../MineView/OneCell.h; sourceTree = "<group>"; };
+		8184EF471BFDBC5600496989 /* OneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OneCell.m; path = ../MineView/OneCell.m; sourceTree = "<group>"; };
+		8184EF481BFDBC5600496989 /* TwoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoCell.h; path = ../MineView/TwoCell.h; sourceTree = "<group>"; };
+		8184EF491BFDBC5600496989 /* TwoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoCell.m; path = ../MineView/TwoCell.m; sourceTree = "<group>"; };
 		8184EF4C1BFDBD9E00496989 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = ../ChatViewController.m; sourceTree = "<group>"; };
 		8184EF4D1BFDBD9E00496989 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = ../ChatViewController.h; sourceTree = "<group>"; };
 		818523AB1BE3125D002FC653 /* BillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillCell.h; sourceTree = "<group>"; };
@@ -1925,10 +1925,6 @@
 				81E831071BF0488400127EE8 /* MyChoosePlannerCell.h */,
 				81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */,
 				81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */,
-				8184EF461BFDBC5600496989 /* OneCell.h */,
-				8184EF471BFDBC5600496989 /* OneCell.m */,
-				8184EF481BFDBC5600496989 /* TwoCell.h */,
-				8184EF491BFDBC5600496989 /* TwoCell.m */,
 			);
 			name = "我的理财师";
 			sourceTree = "<group>";
@@ -2370,6 +2366,10 @@
 				81F496FD1C06EF71002F3413 /* Chat.m */,
 				81F496FF1C072929002F3413 /* Planner.h */,
 				81F497001C072929002F3413 /* Planner.m */,
+				8184EF461BFDBC5600496989 /* OneCell.h */,
+				8184EF471BFDBC5600496989 /* OneCell.m */,
+				8184EF481BFDBC5600496989 /* TwoCell.h */,
+				8184EF491BFDBC5600496989 /* TwoCell.m */,
 				817B16131C0C317100EEB937 /* BigMoneyHistory.h */,
 				817B16141C0C317100EEB937 /* BigMoneyHistory.m */,
 				8182A7E41C0E97EA00FA1216 /* ApplySchedule.h */,

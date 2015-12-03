@@ -71,7 +71,7 @@
     [headView addSubview:viewLine];
     viewLine.alpha = 0.3;
     
-    UILabel *labelBag = [CreatView creatWithLabelFrame:CGRectMake(10, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"累计使用红包"];
+    UILabel *labelBag = [CreatView creatWithLabelFrame:CGRectMake(10, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor clearColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"累计使用红包"];
     [headView addSubview:labelBag];
     
     imageBagArr = @[@"新手体验金", @"银元宝", @"铜元宝", @"钻石", @"金元宝", @"阶梯", @"邀请"];
@@ -731,7 +731,7 @@
         
         NSLog(@"getMyRedPacketList = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[responseObject objectForKey:@"redPacketIncome"]]]];
+            UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[responseObject objectForKey:@"redPacketIncome"]]]];
             [headView addSubview:labelMoney];
             
             for (NSDictionary *dic in [responseObject objectForKey:@"RedPacket"]) {

@@ -11,5 +11,6 @@
 @interface Chat : NSObject
 
 @property (nonatomic) NSString *msgText;
+@property (nonatomic) NSString *sendTime;
 
 @end

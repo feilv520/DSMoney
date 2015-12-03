@@ -281,9 +281,9 @@
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入交易密码"];
         
-    } else if (textLast.text.length < 6) {
+    } else if (![NSString validatePassword:textLast.text]) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码错误"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位含字母和数字,以字母开头"];
         
     } else if (![NSString validatePassword:textNew.text]) {
         
