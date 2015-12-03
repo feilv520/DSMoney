@@ -100,7 +100,7 @@
 {
     RedBagModel *redbagModel = [self.redBagArray objectAtIndex:indexPath.row];
     
-    if ([[redbagModel rpType] isEqualToString:@"1"] || [[redbagModel rpType] isEqualToString:@"0"] || [[redbagModel rpType] isEqualToString:@"3"] || [[redbagModel rpType] isEqualToString:@"4"]) {
+    if ([[redbagModel rpType] isEqualToString:@"1"] || [[redbagModel rpType] isEqualToString:@"0"] || [[redbagModel rpType] isEqualToString:@"3"] || [[redbagModel rpType] isEqualToString:@"4"] || [[redbagModel rpType] isEqualToString:@"2"]) {
         if ([[redbagModel rpStatus] isEqualToString:@"0"])
             return 145;
         else
@@ -199,7 +199,6 @@
             
         }
 
-        
         return cell;
 
     } else if ([[redbagModel rpType] isEqualToString:@"0"]) {
@@ -338,6 +337,8 @@
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        cell.imagePic.image = [UIImage imageNamed:@"新手体验金"];
+        
         if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
             cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
             cell.labelAend.backgroundColor = [UIColor daohanglan];
@@ -365,16 +366,6 @@
         NSLog(@"rpStatus = %@",[redbagModel rpStatus]);
         
         cell.buttonOpen.hidden = YES;
-        
-//        if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
-//            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-//            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-//            [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
-//            [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//            cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-//            [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
-//            [cell.buttonOpen setTag:indexPath.row];
-//        } else
         
         cell.labelAend.text = @"送";
         cell.labelAend.textColor = [UIColor whiteColor];
@@ -417,6 +408,8 @@
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        cell.imagePic.image = [UIImage imageNamed:@"新手体验金"];
+        
         if ([[redbagModel rpStatus] isEqualToString:@"3"]){
             
             cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已过期"]];
@@ -431,8 +424,18 @@
             cell.labelStyle.textColor = [UIColor zitihui];
             cell.labelMoney.textColor = [UIColor zitihui];
             
-        } else if([[redbagModel rpStatus] isEqualToString:@"0"] || [[redbagModel rpStatus] isEqualToString:@"1"]){
-            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
+        } else if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
+            cell.buttonOpen.hidden = NO;
+            
+            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+            [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
+            [cell.buttonOpen setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            cell.buttonOpen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            [cell.buttonOpen addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.buttonOpen setTag:indexPath.row];
+            
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [imageBagArr objectAtIndex:indexPath.row % 6]]];
             cell.labelAend.backgroundColor = [UIColor daohanglan];
         }
         return cell;
@@ -481,10 +484,11 @@
         cell.labelTime.textColor = [UIColor zitihui];
         cell.labelTime.backgroundColor = [UIColor clearColor];
         
-        cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
-        
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.imagePic.image = [UIImage imageNamed:@"新手体验金"];
+        
         if ([[redbagModel rpStatus] isEqualToString:@"3"]){
             
             cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"已过期"]];
@@ -824,7 +828,7 @@
                 
             }
             labelGet.numberOfLines = 3;
-            
+            self.redBagArray = [NSMutableArray array];
             [self getMyRedPacketList];
         }
         

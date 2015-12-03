@@ -426,6 +426,7 @@
         } else {
             parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":registerV.sandMyselfIDCard.text,@"finaCard":@""};
         }
+        NSLog(@"%@",parameters);
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
             NSLog(@"%@",responseObject);
@@ -645,6 +646,12 @@
 //拍照
 - (void)takeCamera:(UIButton *)button
 {
+    [butBlack removeFromSuperview];
+    [viewDown removeFromSuperview];
+    
+    butBlack = nil;
+    viewDown = nil;
+    
     NSLog(@"拍照");
     //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -664,6 +671,12 @@
 //从相册选择
 - (void)chooseFromPicture:(UIButton *)button
 {
+    [butBlack removeFromSuperview];
+    [viewDown removeFromSuperview];
+    
+    butBlack = nil;
+    viewDown = nil;
+    
     NSLog(@"从相册选择");
     UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
@@ -696,17 +709,16 @@
      * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
      */
     // 保存图片至本地，方法见下文
-    [self saveImage:image withName:@"currentImage.png"];
+    [self saveImage:image withName:@"cardIDImage.png"];
     
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"cardIDImage.png"];
     
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
     
+    NSLog(@"cardIDImage = %@",savedImage);
+    
     photoData = [[MyAfHTTPClient sharedClient] resetSizeOfImageData:savedImage maxSize:1024 * 2];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
-    
-    NSLog(@"photoData = %@",photoData);
 }
 
 - (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
