@@ -50,4 +50,5 @@
 + (UIColor *) shurukuangBian;//输入框边颜色
 + (UIColor *) yuanColor;//元字颜色
 + (UIColor *) chongzhiColor;//充值颜色
+
 @end

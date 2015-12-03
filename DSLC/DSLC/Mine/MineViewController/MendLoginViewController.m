@@ -143,13 +143,21 @@
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入登录密码"];
         
-    } else if (textField1.text.length < 6) {
+    } else if (![NSString validatePassword:textField1.text]) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码错误"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位含字母和数字,以字母开头"];
+        
+    } else if (textField2.text.length == 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入新登录密码"];
         
     } else if (![NSString validatePassword:textField2.text]) {
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位含字母和数字,以字母开头"];
+        
+    } else if (textField3.text.length == 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入确认登录密码"];
         
     } else if (textField3.text.length < 6) {
         

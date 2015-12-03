@@ -946,8 +946,8 @@
 		817DD4AE1BCF5B2400042B09 /* MiddleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiddleView.h; sourceTree = "<group>"; };
 		817DD4AF1BCF5B2400042B09 /* MiddleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiddleView.m; sourceTree = "<group>"; };
 		817DD4B11BCF5B3900042B09 /* MiddleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleView.xib; sourceTree = "<group>"; };
-		817E33721BD72D6800D05103 /* MyPlannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPlannerViewController.h; sourceTree = "<group>"; };
-		817E33731BD72D6800D05103 /* MyPlannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPlannerViewController.m; sourceTree = "<group>"; };
+		817E33721BD72D6800D05103 /* MyPlannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyPlannerViewController.h; path = ../MyPlannerViewController.h; sourceTree = "<group>"; };
+		817E33731BD72D6800D05103 /* MyPlannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyPlannerViewController.m; path = ../MyPlannerViewController.m; sourceTree = "<group>"; };
 		817E33751BD7303200D05103 /* MyPlannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPlannerCell.h; sourceTree = "<group>"; };
 		817E33761BD7303200D05103 /* MyPlannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPlannerCell.m; sourceTree = "<group>"; };
 		817E33771BD7303200D05103 /* MyPlannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyPlannerCell.xib; sourceTree = "<group>"; };
@@ -1022,8 +1022,8 @@
 		8184EF471BFDBC5600496989 /* OneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneCell.m; sourceTree = "<group>"; };
 		8184EF481BFDBC5600496989 /* TwoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoCell.h; sourceTree = "<group>"; };
 		8184EF491BFDBC5600496989 /* TwoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoCell.m; sourceTree = "<group>"; };
-		8184EF4C1BFDBD9E00496989 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
-		8184EF4D1BFDBD9E00496989 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		8184EF4C1BFDBD9E00496989 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = ../ChatViewController.m; sourceTree = "<group>"; };
+		8184EF4D1BFDBD9E00496989 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = ../ChatViewController.h; sourceTree = "<group>"; };
 		818523AB1BE3125D002FC653 /* BillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillCell.h; sourceTree = "<group>"; };
 		818523AC1BE3125D002FC653 /* BillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillCell.m; sourceTree = "<group>"; };
 		818523AD1BE3125D002FC653 /* BillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillCell.xib; sourceTree = "<group>"; };
@@ -1255,8 +1255,8 @@
 		81D8AD991BC6427800A15E01 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		81D8ADA11BC646D100A15E01 /* FinancingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingViewController.h; sourceTree = "<group>"; };
 		81D8ADA21BC646D100A15E01 /* FinancingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingViewController.m; sourceTree = "<group>"; };
-		81E831041BF0469F00127EE8 /* MyChoosePlanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChoosePlanner.h; sourceTree = "<group>"; };
-		81E831051BF0469F00127EE8 /* MyChoosePlanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyChoosePlanner.m; sourceTree = "<group>"; };
+		81E831041BF0469F00127EE8 /* MyChoosePlanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyChoosePlanner.h; path = ../MyChoosePlanner.h; sourceTree = "<group>"; };
+		81E831051BF0469F00127EE8 /* MyChoosePlanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyChoosePlanner.m; path = ../MyChoosePlanner.m; sourceTree = "<group>"; };
 		81E831071BF0488400127EE8 /* MyChoosePlannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChoosePlannerCell.h; sourceTree = "<group>"; };
 		81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyChoosePlannerCell.m; sourceTree = "<group>"; };
 		81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyChoosePlannerCell.xib; sourceTree = "<group>"; };
@@ -1946,6 +1946,19 @@
 			path = "产品";
 			sourceTree = "<group>";
 		};
+		8199FD3F1C0FE09B008686C4 /* 我的理财师 */ = {
+			isa = PBXGroup;
+			children = (
+				81E831041BF0469F00127EE8 /* MyChoosePlanner.h */,
+				81E831051BF0469F00127EE8 /* MyChoosePlanner.m */,
+				817E33721BD72D6800D05103 /* MyPlannerViewController.h */,
+				817E33731BD72D6800D05103 /* MyPlannerViewController.m */,
+				8184EF4D1BFDBD9E00496989 /* ChatViewController.h */,
+				8184EF4C1BFDBD9E00496989 /* ChatViewController.m */,
+			);
+			path = "我的理财师";
+			sourceTree = "<group>";
+		};
 		819B52F41BFC6930002FDF1E /* ChineseSorting */ = {
 			isa = PBXGroup;
 			children = (
@@ -2268,6 +2281,7 @@
 		81D8AD951BC640DA00A15E01 /* MineViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8199FD3F1C0FE09B008686C4 /* 我的理财师 */,
 				81F343891C05BFDC001EF374 /* 大额充值 */,
 				812F6BE51BD8DDAC0000D8E9 /* 绑定手机 */,
 				8D3125E01BD7669000143B71 /* baseViewController */,
@@ -2281,12 +2295,6 @@
 				8D3125C91BD740D400143B71 /* 充值 */,
 				81D8AD981BC6427800A15E01 /* MineViewController.h */,
 				81D8AD991BC6427800A15E01 /* MineViewController.m */,
-				81E831041BF0469F00127EE8 /* MyChoosePlanner.h */,
-				81E831051BF0469F00127EE8 /* MyChoosePlanner.m */,
-				817E33721BD72D6800D05103 /* MyPlannerViewController.h */,
-				817E33731BD72D6800D05103 /* MyPlannerViewController.m */,
-				8184EF4D1BFDBD9E00496989 /* ChatViewController.h */,
-				8184EF4C1BFDBD9E00496989 /* ChatViewController.m */,
 				818063AC1BD6437D00E83492 /* PayMoneyViewController.h */,
 				818063AD1BD6437D00E83492 /* PayMoneyViewController.m */,
 				817E33991BD77A8800D05103 /* ChooseStyleViewController.h */,

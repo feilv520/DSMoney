@@ -191,4 +191,5 @@
 + (UIColor *) chongzhiColor {
     return [UIColor colorFromHexCode:@"#1ba7f7"];
 }
+
 @end

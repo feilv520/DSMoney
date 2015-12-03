@@ -142,7 +142,6 @@
                     Planner *plan = [[Planner alloc] init];
                     [plan setValuesForKeysWithDictionary:userDic];
                     [plannerArr addObject:plan];
-                    NSLog(@"========%@", plannerArr);
                 }
                 
                 [_tableView reloadData];

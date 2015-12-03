@@ -343,11 +343,10 @@
     NSIndexPath * indexPath = [_tablView indexPathForCell:cell];
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    
+//    把手机号中的-去掉
     NSString *phoneNumString = [[[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] phoneNum] stringByReplacingOccurrencesOfString:@"-" withString:@""];
     
     NSDictionary *parameter = @{@"userName":[[[letterResultArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] name], @"phoneNum":phoneNumString, @"token":[dic objectForKey:@"token"]};
-    NSLog(@"nciqqqqqqqq%@", parameter);
 
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/inviteFriend" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

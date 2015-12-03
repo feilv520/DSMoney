@@ -68,6 +68,7 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor huibai];
+    _tableView.showsVerticalScrollIndicator = NO;
     
     viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 215)];
     _tableView.tableHeaderView = viewHead;
@@ -216,7 +217,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getIndexFinPlannerInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"%@",responseObject);
+        NSLog(@"我的理财师:%@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             

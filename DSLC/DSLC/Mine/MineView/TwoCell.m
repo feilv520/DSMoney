@@ -19,10 +19,14 @@
         self.labelRight = [[UILabel alloc] init];
         self.labelRight.textColor = [UIColor whiteColor];
         self.labelRight.font = [UIFont systemFontOfSize:13];
+        self.labelRight.backgroundColor = [UIColor colorWithRed:154.0 / 225.0 green:154.0 / 225.0 blue:154.0 / 225.0 alpha:1.0];
+        self.labelRight.layer.cornerRadius = 8;
+        self.labelRight.layer.masksToBounds = YES;
+        self.labelRight.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.labelRight];
         
         self.imageContect = [[UIImageView alloc] init];
-        [self.contentView addSubview:self.imageContect];
+//        [self.contentView addSubview:self.imageContect];
         
         self.imageRight = [[UIImageView alloc] init];
         self.imageRight.backgroundColor = [UIColor clearColor];
@@ -39,22 +43,20 @@
     self.imageRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 50, 10, 40, 40);
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
-    CGRect rect = [self.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 100, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+    CGRect rect = [self.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
     self.labelRight.numberOfLines = 0;
     
-    CGFloat width = self.labelRight.text.length * 13;
+    CGFloat width = self.labelRight.text.length * 13 + 20;
     
-    if (width < WIDTH_CONTROLLER_DEFAULT - 100) {
-        
-        self.labelRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - width - 50 - 25, 20, width, rect.size.height);
-        self.imageContect.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - width - 50 - 40, 10, width + 40, rect.size.height +  20);
-        
+    if (width < WIDTH_CONTROLLER_DEFAULT - 70) {
+
+        self.labelRight.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60 - width, 10, width, rect.size.height + 20);
+
     } else {
-        
-        self.labelRight.frame = CGRectMake(25, 20, WIDTH_CONTROLLER_DEFAULT - 95, rect.size.height);
-        self.imageContect.frame = CGRectMake(15, 10, WIDTH_CONTROLLER_DEFAULT - 65, rect.size.height +  20);
+
+        self.labelRight.frame = CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 70, rect.size.height + 20);
+
     }
-    
 }
 
 - (void)awakeFromNib {

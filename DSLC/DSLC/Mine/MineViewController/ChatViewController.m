@@ -79,7 +79,9 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    _tableView.separatorColor = [UIColor magentaColor];
+    _tableView.separatorColor = [UIColor clearColor];
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 20)];
+    _tableView.tableHeaderView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
 }
 
@@ -113,7 +115,7 @@
 }
 
 #pragma mark 网络请求方法
-#pragma mark ------------------------------------------------------------------------------------------------
+#pragma mark ------------------------------------------------------------------------------
 
 //发送消息
 - (void)sendMessage:(UIButton *)button
@@ -231,14 +233,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (rect.size.height <= 60) {
-        
-        return 80;
-        
-    } else {
-        
-        return rect.size.height + 60;
-    }
+    return rect.size.height + 20 + 30;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -261,7 +256,7 @@
         [cell.imageLeft setImage:[UIImage imageNamed:@"left"]];
 
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
-        rect = [cell.labelLeft.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 100, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        rect = [cell.labelLeft.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
         cell.labelLeft.numberOfLines = 0;
         
         cell.imageContect.image = [UIImage imageNamed:@"LeftWindow"];
@@ -284,7 +279,7 @@
         [cell.imageRight setImage:[UIImage imageNamed:@"right"]];
         
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
-        rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 95, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
         cell.labelRight.numberOfLines = 0;
         
         cell.imageContect.image = [UIImage imageNamed:@"rightWindow"];
