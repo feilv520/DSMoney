@@ -67,9 +67,9 @@
     
     [UMSocialData setAppKey:@"56447cbc67e58efd78001914"];
     
-    [UMSocialWechatHandler setWXAppId:@"wx66e42cb8f7320c64" appSecret:@"d4624c36b6795d1d99dcf0547af5443d" url:@"http://www.umeng.com/social"];
+    [UMSocialWechatHandler setWXAppId:@"wx66e42cb8f7320c64" appSecret:@"d4624c36b6795d1d99dcf0547af5443d" url:@"http://www.dslc.cn"];
     
-    [UMSocialQQHandler setQQWithAppId:@"1104923253" appKey:@"MNbKfU7inKrzxAvU" url:@"http://www.umeng.com/social"];
+    [UMSocialQQHandler setQQWithAppId:@"1104927343" appKey:@"9RRogveZHZO6ZlWk" url:@"http://www.dslc.cn"];
     
     NSDictionary *dic = self.flagDic;
     

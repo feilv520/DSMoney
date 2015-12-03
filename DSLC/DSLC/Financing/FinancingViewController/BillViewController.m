@@ -138,7 +138,7 @@
     [cell.butRightUp setImage:[UIImage imageNamed:@"组-14"] forState:UIControlStateNormal];
     NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
     NSRange rightLeft = NSMakeRange(0, [[rightString string] rangeOfString:@"元"].location);
-    [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:rightLeft];
+    [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:[self sizeOfLength:[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]] range:rightLeft];
     NSRange rightR = NSMakeRange([[rightString string] length] - 1, 1);
     [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:rightR];
     [rightString addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:rightR];

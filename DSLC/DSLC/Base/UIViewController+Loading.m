@@ -211,4 +211,20 @@
     [noDateView removeFromSuperview];
 }
 
+- (NSInteger)sizeOfLength:(NSString *)string{
+    if (string.length >= 8) {
+        if (self.view.frame.size.width == 320) {
+            return 12;
+        } else {
+            return 15;
+        }
+    } else {
+        if (self.view.frame.size.width == 320) {
+            return 15;
+        } else {
+            return 17;
+        }
+    }
+}
+
 @end

@@ -213,7 +213,7 @@
     
     NSMutableAttributedString *numberText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[self.productM productAnnualYield]]];
     NSMutableAttributedString *dayText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[self.productM productPeriod]]];
-    NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万元",[self.productM residueMoney]]];
+    NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[self.productM residueMoney]]];
     NSMutableAttributedString *firstMoneyText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[self.productM productAmountMin]]];
     
     NSRange numRange = NSMakeRange(0, [[numberText string] rangeOfString:@"%"].location);
@@ -225,11 +225,18 @@
     [selectionFTView.numberLabel setAttributedText:numberText];
     
     NSRange markDayRange = NSMakeRange([[dayText string] rangeOfString:@"天"].location , 1);
-    NSRange markWRange = NSMakeRange([[moneyText string] rangeOfString:@"万"].location , 2);
+    NSRange markWRange = NSMakeRange([[moneyText string] rangeOfString:@"元"].location , 1);
     NSRange markYuanRange = NSMakeRange([[firstMoneyText string] rangeOfString:@"元"].location , 1);
     
+    NSRange dRange = NSMakeRange(0, [[dayText string] rangeOfString:@"天"].location);
+    NSRange qWRange = NSMakeRange(0, [[moneyText string] rangeOfString:@"元"].location);
+    NSRange yRange = NSMakeRange(0, [[firstMoneyText string] rangeOfString:@"元"].location);
+    
+    [dayText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:[self sizeOfLength:[self.productM residueMoney]]] range:dRange];
     [dayText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:markDayRange];
+    [moneyText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:[self sizeOfLength:[self.productM residueMoney]]] range:qWRange];
     [moneyText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:markWRange];
+    [firstMoneyText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:[self sizeOfLength:[self.productM residueMoney]]] range:yRange];
     [firstMoneyText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:markYuanRange];
     
     [selectionFTView.dayLabel setAttributedText:dayText];
@@ -254,7 +261,7 @@
     for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
         
         if (indexButton.tag != tempButton.tag) {
-            NSLog(@"%ld",tempButton.tag);
+            NSLog(@"%ld",(long)tempButton.tag);
             [tempButton setSelected:NO];
         }
     }
