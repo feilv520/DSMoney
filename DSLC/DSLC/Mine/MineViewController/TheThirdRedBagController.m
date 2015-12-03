@@ -167,10 +167,12 @@
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        cell.imagePic.image = [UIImage imageNamed:@"新手体验金"];
+        
         if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
             
             cell.buttonCan.hidden = NO;
-            cell.imagePic.image = [UIImage imageNamed:@"新手体验金"];
+            
             [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
             [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
             [cell.buttonCan setTitle:@"立即使用" forState:UIControlStateNormal];
@@ -178,7 +180,7 @@
             cell.buttonCan.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
             [cell.buttonCan addTarget:self action:@selector(buttonRightNowMake:) forControlEvents:UIControlEventTouchUpInside];
             
-            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [imageBagArr objectAtIndex:indexPath.row % 6]]];
             cell.labelSend.backgroundColor = [UIColor daohanglan];
             
         } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){
@@ -256,7 +258,7 @@
             cell.buttonCan.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
             [cell.buttonCan addTarget:self action:@selector(openRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
             
-            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
+            cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [imageBagArr objectAtIndex:indexPath.row % 6]]];
             cell.labelSend.backgroundColor = [UIColor daohanglan];
             
         } else if ([[redbagModel rpStatus] isEqualToString:@"2"]){

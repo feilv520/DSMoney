@@ -177,8 +177,11 @@
         
         MeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMe"];
         
-//        cell.imageHeadPic.image = [UIImage imageNamed:@"组-4-拷贝"];
-        cell.imageHeadPic.yy_imageURL = [self.dataDic objectForKey:@"avatarImg"];
+        if ([[self.dataDic objectForKey:@"avatarImg"] isEqualToString:@""]) {
+            cell.imageHeadPic.image = [UIImage imageNamed:@"组-4-拷贝"];
+        } else {
+            cell.imageHeadPic.yy_imageURL = [self.dataDic objectForKey:@"avatarImg"];
+        }
         cell.imageHeadPic.tag = 9908;
         cell.imageHeadPic.layer.masksToBounds = YES;
         cell.imageHeadPic.layer.cornerRadius = 20.0f;

@@ -149,9 +149,7 @@
     UIButton *butHeadPic = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(15, 22,WIDTH_CONTROLLER_DEFAULT * (40 / 375.0), WIDTH_CONTROLLER_DEFAULT * (40 / 375.0)) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [imageRedBG addSubview:butHeadPic];
     
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
-    
-    if ([fullPath isEqualToString:@""]) {
+    if ([self.imgString isEqualToString:@""]) {
         [butHeadPic setBackgroundImage:[UIImage imageNamed:@"shape-29"] forState:UIControlStateNormal];
     } else {
         YYAnimatedImageView *imgView = [YYAnimatedImageView new];
@@ -160,7 +158,7 @@
         imgView.frame = CGRectMake(0, 0, butHeadPic.frame.size.width, butHeadPic.frame.size.height);
         [butHeadPic addSubview:imgView];
     }
-    butHeadPic.layer.cornerRadius = 20;
+    butHeadPic.layer.cornerRadius = WIDTH_CONTROLLER_DEFAULT * (20 / 375.0);
     butHeadPic.layer.masksToBounds = YES;
     [butHeadPic addTarget:self action:@selector(headPictureButton:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -224,17 +222,20 @@
     middleView.viewLLine.backgroundColor = [UIColor grayColor];
     middleView.viewLLine.alpha = 0.3;
     
-    middleView.labelYuan.text = [DES3Util decrypt: [self.myAccountInfo objectForKey:@"totalMoney"]];
+    middleView.labelWanYuan.text = [[DES3Util decrypt: [self.myAccountInfo objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
+    middleView.labelWanYuan.font = [UIFont systemFontOfSize:[self sizeOfLength:middleView.labelWanYuan.text]];
+    middleView.labelWanYuan.textColor = Color_Black;
+    middleView.labelWanYuan.alpha = 0.7;
+    middleView.labelWanYuan.textAlignment = NSTextAlignmentCenter;
+
+    middleView.labelYuan.text = [[DES3Util decrypt: [self.myAccountInfo objectForKey:@"totalMoney"]]  stringByReplacingOccurrencesOfString:@"," withString:@""];
+    middleView.labelYuan.font = [UIFont systemFontOfSize:[self sizeOfLength:middleView.labelWanYuan.text]];
     middleView.labelYuan.textColor = Color_Black;
     middleView.labelYuan.alpha = 0.7;
     middleView.labelYuan.textAlignment = NSTextAlignmentCenter;
     
-    middleView.labelWanYuan.text = [DES3Util decrypt: [self.myAccountInfo objectForKey:@"accBalance"]];
-    middleView.labelWanYuan.textColor = Color_Black;
-    middleView.labelWanYuan.alpha = 0.7;
-    middleView.labelWanYuan.textAlignment = NSTextAlignmentCenter;
-    
-    middleView.labelAllMoney.text = [DES3Util decrypt: [self.myAccountInfo objectForKey:@"totalProfit"]];
+    middleView.labelAllMoney.text = [[DES3Util decrypt: [self.myAccountInfo objectForKey:@"totalProfit"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
+    middleView.labelAllMoney.font = [UIFont systemFontOfSize:[self sizeOfLength:middleView.labelWanYuan.text]];
     middleView.labelAllMoney.textColor = Color_Black;
     middleView.labelAllMoney.alpha = 0.7;
     middleView.labelAllMoney.textAlignment = NSTextAlignmentCenter;

@@ -38,4 +38,7 @@
 // 隐藏无数据
 - (void)noDataViewWithRemoveToView;
 
+// 判断字号
+- (NSInteger)sizeOfLength:(NSString *)string;
+
 @end
