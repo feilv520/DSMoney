@@ -247,6 +247,7 @@
 {
     EditBigMoney *money = [[EditBigMoney alloc] init];
     money.schedule = applySch;
+    NSLog(@"^^^^^^^^^%@", money.schedule.Id);
     [self.navigationController pushViewController:money animated:YES];
 }
 

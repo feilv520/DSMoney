@@ -91,6 +91,7 @@
     cell.textField.tintColor = [UIColor grayColor];
     cell.textField.delegate = self;
     cell.textField.tag = indexPath.row + 600;
+    NSLog(@"----------%d", cell.textField.tag);
     [cell.textField addTarget:self action:@selector(bigMoneyCanEdit:) forControlEvents:UIControlEventEditingChanged];
     
     if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
@@ -127,13 +128,9 @@
 //确定按钮
 - (void)makeSureEditReturn:(UIButton *)button
 {
-    if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 19 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0) {
-        
-        NSArray *viewController = [self.navigationController viewControllers];
-        [self getData];
-        [self.navigationController popToViewController:[viewController objectAtIndex:3] animated:YES];
-    }
-
+//    NSArray *viewController = [self.navigationController viewControllers];
+    [self getData];
+//    [self.navigationController popToViewController:[viewController objectAtIndex:3] animated:YES];
 }
 
 #pragma mark 网络请求方法
@@ -145,14 +142,32 @@
     fieldBankCard = (UITextField *)[self.view viewWithTag:602];
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
     fieldMoney = (UITextField *)[self.view viewWithTag:604];
-    NSLog(@"3:%@", self.schedule.Id);
+
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    NSDictionary *paremeter = @{@"id":self.schedule.Id, @"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"token":[dic objectForKey:@"token"]};
+    NSDictionary *paremeter = @{@"id":self.schedule.Id, @"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"tranSerialNum":@"", @"token":[dic objectForKey:@"token"]};
+    NSLog(@"777777777777");
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateBigPutOnSerialNum" parameters:paremeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", responseObject);
         
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
     }];
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField.tag == 603 || textField.tag == 604) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            _tabelView.contentOffset = CGPointMake(0, 100);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    return YES;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

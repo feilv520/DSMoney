@@ -31,6 +31,8 @@
 #import "RechargeAlreadyBinding.h"
 #import "LiftupMoneyViewController.h"
 #import "TheThirdRedBagController.h"
+#import "EditBigMoney.h"
+#import "ApplyScheduleViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -428,8 +430,19 @@
 //大额充值
 - (void)bigMoneyRecharge:(UIButton *)button
 {
-    BigMoneyViewController *bigMoneyVC = [[BigMoneyViewController alloc] init];
-    [self.navigationController pushViewController:bigMoneyVC animated:YES];
+//    bigId为0的时候 说明没有进行大额申请 跳转的是到大额申请页面
+    if ([[[self.myAccountInfo objectForKey:@"bigId"] description] isEqualToString:@"0"]) {
+    
+        BigMoneyViewController *bigMoneyVC = [[BigMoneyViewController alloc] init];
+        [self.navigationController pushViewController:bigMoneyVC animated:YES];
+        
+    } else {
+        
+//        正在申请中跳转的是申请步骤页面
+        ApplyScheduleViewController *apply = [[ApplyScheduleViewController alloc] init];
+        apply.ID = [[self.myAccountInfo objectForKey:@"bigId"] description];
+        [self.navigationController pushViewController:apply animated:YES];
+    }
 }
 
 //昨日收益
