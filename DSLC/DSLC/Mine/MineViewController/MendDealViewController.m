@@ -43,7 +43,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"找回" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarPress:)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:15], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
-    seconds = 120;
+    seconds = 60;
     [self tableViewShow];
 }
 
@@ -357,7 +357,7 @@
     
     if (seconds == 1) {
         [theTimer invalidate];
-        seconds = 120;
+        seconds = 60;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 1.f;
         button.layer.borderColor = [UIColor daohanglan].CGColor;
@@ -383,7 +383,7 @@
         if ([timer respondsToSelector:@selector(isValid)]) {
             if ([timer isValid]) {
                 [timer invalidate];
-                seconds = 120;
+                seconds = 60;
             }
         }
     }

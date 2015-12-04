@@ -61,5 +61,10 @@
 #import "UMSocialQQHandler.h"                // QQ分享
 #import "YYWebImage.h"                       // 异步图片加载框架
 
+//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.188:8080/tongjiang/interface/p2p/";
+static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interface/p2p/";
+
+//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.203:8080/tongjiang/interface/p2p/";
+//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.232:8080/tongjiang/interface/p2p/";
 
 #endif /* Header_h */

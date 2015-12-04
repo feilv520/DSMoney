@@ -392,9 +392,9 @@
      * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
      */
     // 保存图片至本地，方法见下文
-    [self saveImage:image withName:@"currentImage.png"];
+    [self saveImage:image withName:@"currentImage.jpg"];
     
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.jpg"];
     
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
     
@@ -402,7 +402,7 @@
     
     [[MyAfHTTPClient sharedClient] uploadFile:savedImage];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+    
     
 }
 
@@ -504,7 +504,7 @@
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
             [self.navigationController popToRootViewControllerAnimated:NO];
             return ;
         }

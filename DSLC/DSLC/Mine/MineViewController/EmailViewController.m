@@ -37,7 +37,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"绑定邮箱"];
     
-    seconds = 50;
+    seconds = 60;
     [self contentShow];
     [self rememberContent];
 }
@@ -163,7 +163,7 @@
     
     if (seconds == 1) {
         [theTimer invalidate];
-        seconds = 50;
+        seconds = 60;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 1.f;
         button.layer.borderColor = [UIColor daohanglan].CGColor;
@@ -189,7 +189,7 @@
         if ([timer respondsToSelector:@selector(isValid)]) {
             if ([timer isValid]) {
                 [timer invalidate];
-                seconds = 50;
+                seconds = 60;
             }
         }
     }

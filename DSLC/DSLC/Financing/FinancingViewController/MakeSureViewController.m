@@ -290,11 +290,11 @@
             
             cell.textField.text = @"5000";
             cell.textField.enabled = NO;
-            
+            cell.labelOneZi.text = @"猴币";
         } else {
             
             cell.textField.placeholder = @"请输入投资金额";
-            
+            cell.labelOneZi.text = @"元";
         }
         
         cell.textField.font = [UIFont systemFontOfSize:14];
@@ -308,7 +308,7 @@
         
         [cell.textField addTarget:self action:@selector(ValueChanged:) forControlEvents:UIControlEventEditingChanged];
         
-        cell.labelOneZi.text = @"元";
+        
         cell.labelOneZi.font = [UIFont systemFontOfSize:14];
         cell.labelOneZi.textColor = [UIColor zitihui];
         cell.labelOneZi.backgroundColor = [UIColor clearColor];
@@ -416,8 +416,8 @@
             [self.buttonNew setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
             self.buttonNew.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
             
-            NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"新手体验金5,000元"];
-            NSRange LeftSange = NSMakeRange([[redStr string] length] - 6, 6);
+            NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"新手体验金5,000猴币"];
+            NSRange LeftSange = NSMakeRange([[redStr string] length] - 7, 7);
             [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:LeftSange];
             [self.buttonNew setAttributedTitle:redStr forState:UIControlStateNormal];
             
@@ -666,7 +666,7 @@
     self.viewWhite.layer.cornerRadius = 4;
     [app.tabBarVC.view addSubview:self.viewWhite];
     
-    self.viewWhite.labelName.text = @"尊敬的黄经理";
+    self.viewWhite.labelName.text = @"尊敬的用户";
     self.viewWhite.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     [self.viewWhite.buttonClose setImage:[UIImage imageNamed:@"iconfont_graycuo"] forState:UIControlStateNormal];

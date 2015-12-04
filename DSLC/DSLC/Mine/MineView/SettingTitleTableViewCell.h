@@ -11,5 +11,6 @@
 @interface SettingTitleTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *AllMoney;
+@property (weak, nonatomic) IBOutlet UILabel *title;
 
 @end

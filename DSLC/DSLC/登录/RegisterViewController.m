@@ -36,7 +36,7 @@
     UIButton *butBlack;
     UIView *viewDown;
     
-    NSData *photoData;
+    NSData *finaCard;
 }
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
@@ -62,7 +62,7 @@
     
     number = 0;
     
-    seconds = 120;
+    seconds = 60;
     
     self.scrollView.contentSize = CGSizeMake(1, 750);
     
@@ -422,57 +422,145 @@
     } else {
         NSDictionary *parameters = [NSDictionary dictionary];
         if (self.flag) {
-            parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":@"",@"finaCard":photoData};
+            
+            NSLog(@"理财师注册");
+            
+            NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"cardIDImage.jpg"];
+            
+            UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+            
+            finaCard = [[MyAfHTTPClient sharedClient] resetSizeOfImageData:savedImage maxSize:1024 * 2];
+        
+            parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":@"",@"ImgData":finaCard};
+            
+            NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,@"app/register"];
+            
+            [[MyAfHTTPClient sharedClient] POST:URLPostString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                // 设置时间格式
+                formatter.dateFormat = @"yyyyMMddHHmmss";
+                NSString *str = [formatter stringFromDate:[NSDate date]];
+                NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+                
+                [formData appendPartWithFileData:finaCard name:@"ImgData" fileName:fileName mimeType:@"application/octet-stream"];
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+                
+                NSData *doubi = responseObject;
+                NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
+                
+                NSString *character = nil;
+                for (int i = 0; i < responseString.length; i ++) {
+                    character = [responseString substringWithRange:NSMakeRange(i, 1)];
+                    if ([character isEqualToString:@"\\"])
+                        [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
+                }
+                responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
+                
+                NSLog(@"responseString = %@",responseString);
+                
+                NSDictionary *responseDic = [MyAfHTTPClient parseJSONStringToNSDictionary:responseString];
+                
+                NSLog(@"%@",responseDic);
+                
+                if ([[responseDic objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
+                    
+                    //            [buttonWithView removeFromSuperview];
+                    //            [payButton removeFromSuperview];
+                    //            [registerV removeFromSuperview];
+                    //            registerV = nil;
+                    //
+                    //            registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
+                    //
+                    //            NSBundle *rootBundle = [NSBundle mainBundle];
+                    //            NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
+                    //            NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
+                    //            NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
+                    //
+                    //            registerR = [rootArrayOfResult lastObject];
+                    //
+                    //            registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+                    //
+                    //            registerV = [rootArrayOfView objectAtIndex:1];
+                    //
+                    //            registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
+                    //
+                    //            registerB = [rootArrayOfPButton lastObject];
+                    //
+                    //            registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
+                    //
+                    //            [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    //            [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
+                    //
+                    //            [self.scrollView addSubview:registerV];
+                    //            [self.scrollView addSubview:registerR];
+                    //            [self.scrollView addSubview:registerB];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
+                }
+
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"%@",error);
+            }];
+            
         } else {
+            
+            NSLog(@"普通注册");
+            
             parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":registerV.sandMyselfIDCard.text,@"finaCard":@""};
+            
+            [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+                
+                NSLog(@"%@",responseObject);
+                if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                    
+                    //            [buttonWithView removeFromSuperview];
+                    //            [payButton removeFromSuperview];
+                    //            [registerV removeFromSuperview];
+                    //            registerV = nil;
+                    //
+                    //            registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
+                    //
+                    //            NSBundle *rootBundle = [NSBundle mainBundle];
+                    //            NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
+                    //            NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
+                    //            NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
+                    //
+                    //            registerR = [rootArrayOfResult lastObject];
+                    //
+                    //            registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+                    //
+                    //            registerV = [rootArrayOfView objectAtIndex:1];
+                    //
+                    //            registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
+                    //
+                    //            registerB = [rootArrayOfPButton lastObject];
+                    //
+                    //            registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
+                    //
+                    //            [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    //            [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
+                    //
+                    //            [self.scrollView addSubview:registerV];
+                    //            [self.scrollView addSubview:registerR];
+                    //            [self.scrollView addSubview:registerB];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    //
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                }
+                
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"%@",error);
+            }];
+            
         }
-        NSLog(@"%@",parameters);
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-            
-            NSLog(@"%@",responseObject);
-            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-                
-    //            [buttonWithView removeFromSuperview];
-    //            [payButton removeFromSuperview];
-    //            [registerV removeFromSuperview];
-    //            registerV = nil;
-    //        
-    //            registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
-    //        
-    //            NSBundle *rootBundle = [NSBundle mainBundle];
-    //            NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
-    //            NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
-    //            NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
-    //        
-    //            registerR = [rootArrayOfResult lastObject];
-    //        
-    //            registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
-    //        
-    //            registerV = [rootArrayOfView objectAtIndex:1];
-    //        
-    //            registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
-    //        
-    //            registerB = [rootArrayOfPButton lastObject];
-    //        
-    //            registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
-    //        
-    //            [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    //            [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
-    //            
-    //            [self.scrollView addSubview:registerV];
-    //            [self.scrollView addSubview:registerR];
-    //            [self.scrollView addSubview:registerB];
-                [self.navigationController popViewControllerAnimated:YES];
-            } else {
-//
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"%@",error);
-        }];
     }
 }
 
@@ -558,7 +646,7 @@
     
     if (seconds == 1) {
         [theTimer invalidate];
-        seconds = 120;
+        seconds = 60;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 1.f;
         button.layer.borderColor = [UIColor daohanglan].CGColor;
@@ -583,7 +671,7 @@
         if ([timer respondsToSelector:@selector(isValid)]) {
             if ([timer isValid]) {
                 [timer invalidate];
-                seconds = 120;
+                seconds = 60;
             }
         }
     }
@@ -709,15 +797,7 @@
      * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
      */
     // 保存图片至本地，方法见下文
-    [self saveImage:image withName:@"cardIDImage.png"];
-    
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"cardIDImage.png"];
-    
-    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-    
-    NSLog(@"cardIDImage = %@",savedImage);
-    
-    photoData = [[MyAfHTTPClient sharedClient] resetSizeOfImageData:savedImage maxSize:1024 * 2];
+    [self saveImage:image withName:@"cardIDImage.jpg"];
     
 }
 
