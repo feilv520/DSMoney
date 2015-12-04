@@ -9,6 +9,7 @@
 #import "ApplyScheduleViewController.h"
 #import "EditBigMoney.h"
 #import "ApplySchedule.h"
+#import "BigMoneyViewController.h"
 
 @interface ApplyScheduleViewController () <UITextFieldDelegate>
 
@@ -26,6 +27,8 @@
     UIButton *butFinish;
     
     UILabel *labelTwo;
+    UILabel *labelThree;
+    UILabel *labelFour;
     UILabel *labelTime;
     NSMutableArray *dataArray;
     UILabel *labeltime;
@@ -35,6 +38,8 @@
     UILabel *labelCheckTime;
 //    充值成功与否时间
     UILabel *labelDoTime;
+    UIButton *buttWell;
+    UIButton *buttonAplly;
 }
 
 @end
@@ -52,6 +57,13 @@
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:14]} forState:UIControlStateNormal];
     
     dataArray = [NSMutableArray array];
+    [self getData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"reload" object:nil];
+}
+
+- (void)reloadData:(NSNotification *)notice
+{
     [self getData];
 }
 
@@ -238,8 +250,61 @@
         
     } else if ([[applySch.status description] isEqualToString:@"3"]) {
         
+        labelThree = (UILabel *)[self.view viewWithTag:2002];
+        labelThree.textColor = [UIColor chongzhiColor];
+        labelThree.text = @"财务已审核";
+        imageSchedule.image = [UIImage imageNamed:@"组-16"];
+        labelCheckTime.text = applySch.checkTime;
+        [buttWell setTitle:@"财务审核通过,预计30分钟内到账" forState:UIControlStateNormal];
         
+    } else if ([[applySch.status description] isEqualToString:@"2"] || [[applySch.status description] isEqualToString:@"4"]) {
+        
+        labelThree.text = @"审核失败";
+        labelThree.textColor = [UIColor daohanglan];
+        labelCheckTime.text = applySch.checkTime;
+        imageSchedule.image = [UIImage imageNamed:@"组-19"];
+        
+        buttWell.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 + 40, WIDTH_CONTROLLER_DEFAULT, 50);
+        [buttWell setTitle:@"审核未通过,您提交的信息有误,\n请在核对后重新申请如有问题\n请拨打客服热线:400-816-2283" forState:UIControlStateNormal];
+        
+//        重新申请按钮
+        buttonAplly = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 + 40 + 50 + 30, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"重新申请"];
+        [self.view addSubview:buttonAplly];
+        buttonAplly.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        [buttonAplly addTarget:self action:@selector(buttonAnotherApply:) forControlEvents:UIControlEventTouchUpInside];
+        
+    } else if ([[applySch.status description] isEqualToString:@"6"]) {
+        
+        labelFour = (UILabel *)[self.view viewWithTag:2003];
+        labelFour.text = @"充值成功";
+        labelFour.textColor = [UIColor chongzhiColor];
+        
+        labelDoTime.text = applySch.recheckTime;
+        imageSchedule.image = [UIImage imageNamed:@"组-17"];
+        [buttWell setTitle:@"恭喜您充值成功" forState:UIControlStateNormal];
+        
+        buttonAplly = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 + 40 + 50 + 30, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"去赚钱"];
+        [self.view addSubview:buttonAplly];
+        buttonAplly.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        [buttonAplly addTarget:self action:@selector(buttonGoGetMoney:) forControlEvents:UIControlEventTouchUpInside];
     }
+}
+
+//审核失败 重新申请按钮
+- (void)buttonAnotherApply:(UIButton *)button
+{
+    BigMoneyViewController *bigMoney = [[BigMoneyViewController alloc] init];
+    [self.navigationController pushViewController:bigMoney animated:YES];
+}
+
+//充值成功 去赚钱按钮
+- (void)buttonGoGetMoney:(UIButton *)button
+{
+    NSLog(@"去赚钱");
 }
 
 //编辑
@@ -279,7 +344,7 @@
         
         [viewWhite addSubview:labelTime];
         
-        UIButton *buttWell = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT / 2 + 60, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 转账/POS单号已经提交成功,\n 我们将在24小时内进行核实!"];
+        buttWell = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT / 2 + 60, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 转账/POS单号已经提交成功,\n 我们将在24小时内进行核实!"];
         [viewWhite addSubview:buttWell];
         buttWell.titleLabel.numberOfLines = 2;
         buttWell.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];

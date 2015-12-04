@@ -59,13 +59,13 @@
     [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [buttonOk addTarget:self action:@selector(makeSureEditReturn:) forControlEvents:UIControlEventTouchUpInside];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendMessageNotice:) name:@"send" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendMessageNotice:) name:@"send" object:nil];
 }
 
-- (void)sendMessageNotice:(NSNotification *)notice
-{
-    
-}
+//- (void)sendMessageNotice:(NSNotification *)notice
+//{
+//    
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -91,7 +91,6 @@
     cell.textField.tintColor = [UIColor grayColor];
     cell.textField.delegate = self;
     cell.textField.tag = indexPath.row + 600;
-    NSLog(@"----------%d", cell.textField.tag);
     [cell.textField addTarget:self action:@selector(bigMoneyCanEdit:) forControlEvents:UIControlEventEditingChanged];
     
     if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
@@ -128,9 +127,7 @@
 //确定按钮
 - (void)makeSureEditReturn:(UIButton *)button
 {
-//    NSArray *viewController = [self.navigationController viewControllers];
     [self getData];
-//    [self.navigationController popToViewController:[viewController objectAtIndex:3] animated:YES];
 }
 
 #pragma mark 网络请求方法
@@ -145,10 +142,17 @@
 
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     NSDictionary *paremeter = @{@"id":self.schedule.Id, @"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"tranSerialNum":@"", @"token":[dic objectForKey:@"token"]};
-    NSLog(@"777777777777");
+
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateBigPutOnSerialNum" parameters:paremeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
