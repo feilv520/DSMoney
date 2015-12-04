@@ -67,7 +67,7 @@
     
     [UMSocialData setAppKey:@"56447cbc67e58efd78001914"];
     
-    [UMSocialWechatHandler setWXAppId:@"wx66e42cb8f7320c64" appSecret:@"d4624c36b6795d1d99dcf0547af5443d" url:@"http://www.dslc.cn"];
+    [UMSocialWechatHandler setWXAppId:@"wxebb3d94fc5272ea8" appSecret:@"89f84525f50a31fc0acf6b551f9bcbc8" url:@"http://www.dslc.cn"];
     
     [UMSocialQQHandler setQQWithAppId:@"1104927343" appKey:@"9RRogveZHZO6ZlWk" url:@"http://www.dslc.cn"];
     

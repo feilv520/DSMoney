@@ -143,6 +143,8 @@
             SettingTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"title"];
             cell.AllMoney.hidden = YES;
             
+            cell.title.text = @"投资金额";
+            
             return cell;
         } else {
             if ([[self.moneyDic objectForKey:@"Asset"] count] == 0) {
@@ -227,6 +229,9 @@
         if (indexPath.row == 0) {
             SettingTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"title"];
             cell.AllMoney.hidden = YES;
+            
+            cell.title.text = @"收益权列表";
+            
             return cell;
         } else {
             if ([[self.moneyDic objectForKey:@"Product"] count] == 0) {

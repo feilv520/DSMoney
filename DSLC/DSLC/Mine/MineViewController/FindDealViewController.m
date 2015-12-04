@@ -38,7 +38,7 @@
     self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"找回交易密码"];
     
-    seconds = 120;
+    seconds = 60;
     [self tableViewShow];
 }
 
@@ -315,7 +315,7 @@
     
     if (seconds == 1) {
         [theTimer invalidate];
-        seconds = 120;
+        seconds = 60;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 1.f;
         button.layer.borderColor = [UIColor daohanglan].CGColor;

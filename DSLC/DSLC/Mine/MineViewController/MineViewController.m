@@ -496,9 +496,7 @@
 }
 
 - (void)exchangeWithImageView{
-    YYAnimatedImageView *imgV = (YYAnimatedImageView *)[self.view viewWithTag:4739];
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
-    imgV.image = [UIImage imageNamed:fullPath];
+    [self MyAccountInfo];
 }
 
 - (void)didReceiveMemoryWarning {

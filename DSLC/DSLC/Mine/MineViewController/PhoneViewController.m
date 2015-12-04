@@ -29,7 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    seconds = 120;
+    seconds = 60;
     
     self.view.backgroundColor = [UIColor huibai];
     
@@ -260,7 +260,7 @@
     
     if (seconds == 1) {
         [theTimer invalidate];
-        seconds = 120;
+        seconds = 60;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 1.f;
         button.layer.borderColor = [UIColor daohanglan].CGColor;
@@ -285,7 +285,7 @@
         if ([timer respondsToSelector:@selector(isValid)]) {
             if ([timer isValid]) {
                 [timer invalidate];
-                seconds = 120;
+                seconds = 60;
             }
         }
     }

@@ -10,11 +10,6 @@
 
 @implementation MyAfHTTPClient
 
-//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.178:8080/tongjiang/admin/p2p/";
-static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interface/p2p/";
-
-//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.203:8080/tongjiang/interface/p2p/";
-//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.232:8080/tongjiang/interface/p2p/";
 + (_Nullable instancetype)sharedClient {
     static MyAfHTTPClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
@@ -118,6 +113,8 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interf
         [dic setValue:[responseData objectForKey:@"avatarImg"] forKey:@"avatarImg"];
         
         [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
         
         NSLog(@"上传成功");
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

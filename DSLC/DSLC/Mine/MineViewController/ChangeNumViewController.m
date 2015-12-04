@@ -30,7 +30,7 @@
     
     [self.navigationItem setTitle:@"更换手机号"];
     
-    seconds = 120;
+    seconds = 60;
     [self contentShow];
 }
 
@@ -226,7 +226,7 @@
     
     if (seconds == 1) {
         [theTimer invalidate];
-        seconds = 120;
+        seconds = 60;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 1.f;
         button.layer.borderColor = [UIColor daohanglan].CGColor;
@@ -252,7 +252,7 @@
         if ([timer respondsToSelector:@selector(isValid)]) {
             if ([timer isValid]) {
                 [timer invalidate];
-                seconds = 120;
+                seconds = 60;
             }
         }
     }
