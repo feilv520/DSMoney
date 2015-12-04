@@ -150,6 +150,8 @@
         [labelGet setAttributedText:frontStr];
         labelGet.numberOfLines = 3;
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);

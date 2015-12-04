@@ -137,6 +137,7 @@
         cell.buttonCopy.layer.cornerRadius = 3;
         cell.buttonCopy.layer.masksToBounds = YES;
         cell.buttonCopy.layer.borderWidth = 1;
+        cell.buttonCopy.tag = 1002;
         cell.buttonCopy.layer.borderColor = [[UIColor daohanglan] CGColor];
         [cell.buttonCopy addTarget:self action:@selector(copyButton:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -146,6 +147,7 @@
         cell.butCopyTwo.layer.cornerRadius = 3;
         cell.butCopyTwo.layer.masksToBounds = YES;
         cell.butCopyTwo.layer.borderWidth = 1;
+        cell.butCopyTwo.tag = 1003;
         cell.butCopyTwo.layer.borderColor = [[UIColor daohanglan] CGColor];
         [cell.butCopyTwo addTarget:self action:@selector(copyButton:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -258,6 +260,13 @@
 - (void)copyButton:(UIButton *)button
 {
     [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已复制"];
+    if (button.tag == 1002) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        [pasteboard setString:[self.dicMyInvite objectForKey:@"invitationMyCode"]];
+    } else if (button.tag == 1003) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        [pasteboard setString:[self.dicMyInvite objectForKey:@"link"]];
+    }
 }
 
 //邀请按钮

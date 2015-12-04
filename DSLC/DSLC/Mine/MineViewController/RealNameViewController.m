@@ -64,7 +64,6 @@
     _textField2.textColor = [UIColor zitihui];
     _textField2.delegate = self;
     _textField2.tag = 133;
-    _textField2.keyboardType = UIKeyboardTypeNumberPad;
     _textField2.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [_textField2 addTarget:self action:@selector(textFieldCanEdit:) forControlEvents:UIControlEventEditingChanged];
     
@@ -124,8 +123,9 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"身份证号格式不对"];
         
     } else {
-        NSArray *viewController = [self.navigationController viewControllers];
-        [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
+//        NSArray *viewController = [self.navigationController viewControllers];
+//        [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
+        [self authRrealName];
     }
 }
 
@@ -139,6 +139,45 @@
 {
     [self.view endEditing:YES];
 }
+
+#pragma mark 实名认证
+#pragma mark --------------------------------
+
+- (void)authRrealName
+{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"userId":[dic objectForKey:@"id"],@"realName":_textField1.text,@"IDCardNum":_textField2.text};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/authRrealName" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
+            NSLog(@"134897189374987342987243789423");
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            return ;
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            NSLog(@"%@",responseObject);
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+       
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

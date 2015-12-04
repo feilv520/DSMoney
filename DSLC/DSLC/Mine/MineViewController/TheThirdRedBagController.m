@@ -828,7 +828,14 @@
                 
             }
             labelGet.numberOfLines = 3;
+            
+            [self.redBagArray removeAllObjects];
+            self.redBagArray = nil;
+            
             self.redBagArray = [NSMutableArray array];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+            
             [self getMyRedPacketList];
         }
         
