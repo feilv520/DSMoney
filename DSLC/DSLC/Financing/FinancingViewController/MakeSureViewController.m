@@ -308,7 +308,6 @@
         
         [cell.textField addTarget:self action:@selector(ValueChanged:) forControlEvents:UIControlEventEditingChanged];
         
-        
         cell.labelOneZi.font = [UIFont systemFontOfSize:14];
         cell.labelOneZi.textColor = [UIColor zitihui];
         cell.labelOneZi.backgroundColor = [UIColor clearColor];

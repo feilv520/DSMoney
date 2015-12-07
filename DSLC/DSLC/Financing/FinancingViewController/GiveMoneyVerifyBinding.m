@@ -61,7 +61,7 @@
     
     UILabel *labelPhone = [CreatView creatWithLabelFrame:CGRectMake(15, 20, WIDTH_CONTROLLER_DEFAULT - 30, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
     [viewHead addSubview:labelPhone];
-    NSMutableAttributedString *phoneStr = [[NSMutableAttributedString alloc] initWithString:@"本次交易需要短信确认,校验码已发送至您的手机\n150****0686"];
+    NSMutableAttributedString *phoneStr = [[NSMutableAttributedString alloc] initWithString:@"本次交易需要短信确认,校验码已发送至您的手机\n159****2599"];
     NSRange range = NSMakeRange([[phoneStr string] length] - 11, 11);
     [phoneStr addAttribute:NSForegroundColorAttributeName value:[UIColor chongzhiColor] range:range];
     [labelPhone setAttributedText:phoneStr];
@@ -108,6 +108,7 @@
     cell.buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     cell.buttonGet.layer.cornerRadius = 3;
     cell.buttonGet.layer.masksToBounds = YES;
+    cell.buttonGet.tag = 777777;
     cell.buttonGet.layer.borderColor = [[UIColor daohanglan] CGColor];
     cell.buttonGet.layer.borderWidth = 0.5;
     [cell.buttonGet addTarget:self action:@selector(getCode:) forControlEvents:UIControlEventTouchUpInside];
@@ -125,7 +126,7 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
         
     } else if (textFieldCode.text.length != 6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码格式错误"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
         
     } else {
         GiveMoneyFinish *giveMoney = [[GiveMoneyFinish alloc] init];
@@ -166,12 +167,35 @@
 {
     [self.view endEditing:YES];
     
+    textFieldCode = (UITextField *)[self.view viewWithTag:1000];
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+    
+    NSDictionary *parameters = @{@"phone":[DES3Util decrypt:[dic objectForKey:@"userPhone"]],@"msgType":@"3"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+
 }
 
 // 验证码倒计时
 -(void)timerFireMethod:(NSTimer *)theTimer {
     
-    UIButton *button = (UIButton *)[self.view viewWithTag:9080];
+    UIButton *button = (UIButton *)[self.view viewWithTag:777777];
     
     if (seconds == 1) {
         [theTimer invalidate];

@@ -80,28 +80,28 @@
     NSLog(@"充值");
     
     NSArray *viewController = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewController objectAtIndex:0] animated:YES];
+    [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
     
-//    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-//    [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
-//    
-//    UIButton *indexButton = [app.tabBarVC.tabButtonArray objectAtIndex:1];
-//    
-//    for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
-//        
-//        if (indexButton.tag != tempButton.tag) {
-//            NSLog(@"%ld",(long)tempButton.tag);
-//            [tempButton setSelected:NO];
-//        }
-//    }
-//    
-//    [indexButton setSelected:YES];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+    
+    UIButton *indexButton = [app.tabBarVC.tabButtonArray objectAtIndex:1];
+    
+    for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+        
+        if (indexButton.tag != tempButton.tag) {
+
+            [tempButton setSelected:NO];
+        }
+    }
+    
+    [indexButton setSelected:YES];
 }
 
 - (void)finishReturn:(UIBarButtonItem *)bar
 {
     NSArray *viewController = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewController objectAtIndex:0] animated:YES];
+    [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

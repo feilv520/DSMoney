@@ -410,6 +410,7 @@
 //充值按钮
 - (void)rechargeMoney:(UIButton *)button
 {
+//    删除版
 //    PayMoneyViewController *payMoneyVC = [[PayMoneyViewController alloc] init];
 //    [self.navigationController pushViewController:payMoneyVC animated:YES];
     

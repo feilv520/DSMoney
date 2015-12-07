@@ -11,13 +11,15 @@
 #import "BankWhichCell.h"
 #import "GiveMoneyVerifyBinding.h"
 
-@interface RechargeAlreadyBinding () <UITableViewDataSource, UITableViewDelegate>
+@interface RechargeAlreadyBinding () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 {
     UITableView *_tabelView;
     UIButton *buttonNext;
     
     UITextField *textFieldTag;
+    NSInteger seconds;
+    NSTimer *timer;
 }
 
 @end
@@ -90,13 +92,14 @@
         
         AddBankCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse1"];
         
-        cell.labelTitle.text = @"金额充值";
+        cell.labelTitle.text = @"充值金额";
         cell.labelTitle.font = [UIFont systemFontOfSize:15];
         
         cell.textField.placeholder = @"充值金额最小为1元";
         cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textField.tintColor = [UIColor yuanColor];
         cell.textField.tag = 188;
+        cell.textField.delegate = self;
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         [cell.textField addTarget:self action:@selector(textAlreadyBinding:) forControlEvents:UIControlEventEditingChanged];
         
@@ -108,6 +111,17 @@
     }
 }
 
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    if ([[textField.text substringFromIndex:0] isEqualToString:@"0"]) {
+//        textField.text = @"";
+//        return YES;
+//        
+//    } else {
+//        return YES;
+//    }
+//}
+
 //下一步按钮
 - (void)alreadyBindingButton:(UIButton *)button
 {
@@ -116,23 +130,16 @@
     CGFloat shuRu = textFieldTag.text.intValue;
     
     if (textFieldTag.text.length == 0) {
-        
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额,充值金额最小为1元"];
         
-    } else {
+    } else if (shuRu > 0){
+        GiveMoneyVerifyBinding *giveMVB = [[GiveMoneyVerifyBinding alloc] init];
+        [self.navigationController pushViewController:giveMVB animated:YES];
         
-        if (shuRu > 0) {
-            
-            GiveMoneyVerifyBinding *giveMVB = [[GiveMoneyVerifyBinding alloc] init];
-            [self.navigationController pushViewController:giveMVB animated:YES];
-            
-        } else {
-            
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值金额最小为1元"];
-        }
+    } else if ([textFieldTag.text isEqualToString:@"0"]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"最小金额为1元"];
         
     }
-    
 }
 
 - (void)textAlreadyBinding:(UITextField *)textField

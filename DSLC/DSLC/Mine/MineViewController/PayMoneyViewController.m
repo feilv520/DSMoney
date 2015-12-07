@@ -35,32 +35,32 @@
 
 - (void)contentShow
 {
-    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (100.0 / 667.0)) backgroundColor:[UIColor whiteColor]];
+    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewBottom];
     viewBottom.backgroundColor = [UIColor whiteColor];
     
-    UILabel *labelLine1 = [CreatView creatWithLabelFrame:CGRectMake(10, HEIGHT_CONTROLLER_DEFAULT * (49.5 / 677.0), WIDTH_CONTROLLER_DEFAULT - 20, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    UILabel *labelLine1 = [CreatView creatWithLabelFrame:CGRectMake(10, 49.5, WIDTH_CONTROLLER_DEFAULT - 20, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     [viewBottom addSubview:labelLine1];
     labelLine1.alpha = 0.2;
     
-    UILabel *labelLine2 = [CreatView creatWithLabelFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (99.5 / 667.5), WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    UILabel *labelLine2 = [CreatView creatWithLabelFrame:CGRectMake(0, 99.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     [viewBottom addSubview:labelLine2];
     labelLine2.alpha = 0.2;
     
-    UIView *viewDown = [CreatView creatViewWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (110.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (110.0 / 667.0)) backgroundColor:[UIColor whiteColor]];
+    UIView *viewDown = [CreatView creatViewWithFrame:CGRectMake(0, 110, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (110.0 / 667.0)) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewDown];
     
     UILabel *labelLine3 = [CreatView creatWithLabelFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     [viewDown addSubview:labelLine3];
     labelLine3.alpha = 0.2;
     
-    UILabel *labelLine4 = [CreatView creatWithLabelFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (109.5 / 667.0), WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    UILabel *labelLine4 = [CreatView creatWithLabelFrame:CGRectMake(0, 109.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     [viewDown addSubview:labelLine4];
     labelLine4.alpha = 0.2;
     
     butNext = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:butNext];
-    butNext.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT * (270.0 / 667.0), WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0));
+    butNext.frame = CGRectMake(40, 270, WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0));
     [butNext setTitle:@"下一步" forState:UIControlStateNormal];
     [butNext setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [butNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
@@ -76,16 +76,16 @@
     UILabel *labelThree = [CreatView creatWithLabelFrame:CGRectMake(10, 80, WIDTH_CONTROLLER_DEFAULT - 20, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"2.一次最高可以充值50万。"];
     [viewDown addSubview:labelThree];
     
-    UILabel *labelBalance = [CreatView creatWithLabelFrame:CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT * (90.0 / 375.0), 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"账户余额(元)"];
+    UILabel *labelBalance = [CreatView creatWithLabelFrame:CGRectMake(10, 10, 90, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"账户余额(元)"];
     [viewBottom addSubview:labelBalance];
     
-    UILabel *labelYuE = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (110.0 / 375.0), 10, WIDTH_CONTROLLER_DEFAULT - WIDTH_CONTROLLER_DEFAULT * (120.0 / 375.0), 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"9.93"];
+    UILabel *labelYuE = [CreatView creatWithLabelFrame:CGRectMake(110, 10, WIDTH_CONTROLLER_DEFAULT - 120, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"9.93"];
     [viewBottom addSubview:labelYuE];
     
-    UILabel *labelCash = [CreatView creatWithLabelFrame:CGRectMake(10, HEIGHT_CONTROLLER_DEFAULT * (60.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (90.0 / 375.0), 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"充值金额(元)"];
+    UILabel *labelCash = [CreatView creatWithLabelFrame:CGRectMake(10, 60, 90, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"充值金额(元)"];
     [viewBottom addSubview:labelCash];
     
-    _textField = [CreatView creatWithfFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (110.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (60.0 / 667.0), WIDTH_CONTROLLER_DEFAULT - WIDTH_CONTROLLER_DEFAULT * (120.0 / 375.0), 30) setPlaceholder:@"充值金额最小为1元" setTintColor:[UIColor grayColor]];
+    _textField = [CreatView creatWithfFrame:CGRectMake(110, 60, WIDTH_CONTROLLER_DEFAULT - 120, 30) setPlaceholder:@"充值金额最小为1元" setTintColor:[UIColor grayColor]];
     [self.view addSubview:_textField];
     _textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     _textField.delegate = self;
