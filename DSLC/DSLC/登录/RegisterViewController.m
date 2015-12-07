@@ -363,6 +363,7 @@
 }
 
 - (void)passButtonAction:(UIButton *)btn{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -466,38 +467,40 @@
                     
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
                     
-                    //            [buttonWithView removeFromSuperview];
-                    //            [payButton removeFromSuperview];
-                    //            [registerV removeFromSuperview];
-                    //            registerV = nil;
-                    //
-                    //            registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
-                    //
-                    //            NSBundle *rootBundle = [NSBundle mainBundle];
-                    //            NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
-                    //            NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
-                    //            NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
-                    //
-                    //            registerR = [rootArrayOfResult lastObject];
-                    //
-                    //            registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
-                    //
-                    //            registerV = [rootArrayOfView objectAtIndex:1];
-                    //
-                    //            registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
-                    //
-                    //            registerB = [rootArrayOfPButton lastObject];
-                    //
-                    //            registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
-                    //
-                    //            [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-                    //            [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
-                    //
-                    //            [self.scrollView addSubview:registerV];
-                    //            [self.scrollView addSubview:registerR];
-                    //            [self.scrollView addSubview:registerB];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    [buttonWithView removeFromSuperview];
+                    [payButton removeFromSuperview];
+                    [registerV removeFromSuperview];
+                    registerV = nil;
+        
+                    registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
+        
+                    NSBundle *rootBundle = [NSBundle mainBundle];
+                    NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
+                    NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
+                    NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
+        
+                    registerR = [rootArrayOfResult lastObject];
+        
+                    registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+        
+                    registerV = [rootArrayOfView objectAtIndex:1];
+        
+                    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
+        
+                    registerB = [rootArrayOfPButton lastObject];
+        
+                    registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
+        
+                    [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
+        
+                    [self.scrollView addSubview:registerV];
+                    [self.scrollView addSubview:registerR];
+                    [self.scrollView addSubview:registerB];
+                    
+                    // 跳过操作
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+//                    [self.navigationController popViewControllerAnimated:YES];
                 } else {
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
                 }
@@ -519,38 +522,40 @@
                     
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                     
-                    //            [buttonWithView removeFromSuperview];
-                    //            [payButton removeFromSuperview];
-                    //            [registerV removeFromSuperview];
-                    //            registerV = nil;
-                    //
-                    //            registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
-                    //
-                    //            NSBundle *rootBundle = [NSBundle mainBundle];
-                    //            NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
-                    //            NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
-                    //            NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
-                    //
-                    //            registerR = [rootArrayOfResult lastObject];
-                    //
-                    //            registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
-                    //
-                    //            registerV = [rootArrayOfView objectAtIndex:1];
-                    //
-                    //            registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
-                    //
-                    //            registerB = [rootArrayOfPButton lastObject];
-                    //
-                    //            registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
-                    //
-                    //            [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-                    //            [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
-                    //
-                    //            [self.scrollView addSubview:registerV];
-                    //            [self.scrollView addSubview:registerR];
-                    //            [self.scrollView addSubview:registerB];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    [buttonWithView removeFromSuperview];
+                    [payButton removeFromSuperview];
+                    [registerV removeFromSuperview];
+                    registerV = nil;
+        
+                    registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
+        
+                    NSBundle *rootBundle = [NSBundle mainBundle];
+                    NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
+                    NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
+                    NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
+        
+                    registerR = [rootArrayOfResult lastObject];
+        
+                    registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+        
+                    registerV = [rootArrayOfView objectAtIndex:1];
+        
+                    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
+        
+                    registerB = [rootArrayOfPButton lastObject];
+        
+                    registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
+        
+                    [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
+        
+                    [self.scrollView addSubview:registerV];
+                    [self.scrollView addSubview:registerR];
+                    [self.scrollView addSubview:registerB];
+                    
+                    // 返回方法
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+//                    [self.navigationController popViewControllerAnimated:YES];
                 } else {
                     //
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
