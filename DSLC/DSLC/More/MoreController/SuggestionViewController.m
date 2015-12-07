@@ -106,13 +106,9 @@
 
 //规定不超过编辑字数范围500 如果输入超过500 就不能再输入
 -(BOOL)textView:(UITextView*)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    NSLog(@"range.length = %ld",range.location);
-    NSLog(@"text = %@",text);
-    NSLog(@"textView.text = %@",textView.text);
     NSString *new = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    NSLog(@"new = %@",new);
     NSInteger res = 500 - [new length];
-    NSLog(@"res = %ld",res);
+
     if(res >= 0){
         return YES;
     } else {
