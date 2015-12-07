@@ -282,6 +282,8 @@
     } else if ([[redbagModel rpType] isEqualToString:@"3"]) {
         TheThirdRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Reuse"];
         
+        cell.buttonOpen.hidden = YES;
+        
         [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
@@ -340,6 +342,7 @@
         cell.imagePic.image = [UIImage imageNamed:@"新手体验金"];
         
         if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
+            cell.buttonOpen.hidden = NO;
             cell.imagePic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageBagArr objectAtIndex:indexPath.row % 6]]];
             cell.labelAend.backgroundColor = [UIColor daohanglan];
             

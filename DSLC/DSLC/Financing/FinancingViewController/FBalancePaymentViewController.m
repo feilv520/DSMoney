@@ -164,7 +164,13 @@
 - (void)buyProduct{
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"productId":self.idString,@"packetId":[self.redbagModel rpID],@"orderMoney":self.moneyString,@"payMoney":@0,@"payType":@1,@"payPwd":self.textFieldSecret.text,@"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter;
+    
+    if ([self.redbagModel rpID] == nil){
+        parameter = @{@"productId":self.idString,@"packetId":@"",@"orderMoney":self.moneyString,@"payMoney":@0,@"payType":@1,@"payPwd":self.textFieldSecret.text,@"token":[dic objectForKey:@"token"]};
+    } else {
+        parameter = @{@"productId":self.idString,@"packetId":[self.redbagModel rpID],@"orderMoney":self.moneyString,@"payMoney":@0,@"payType":@1,@"payPwd":self.textFieldSecret.text,@"token":[dic objectForKey:@"token"]};
+    }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
