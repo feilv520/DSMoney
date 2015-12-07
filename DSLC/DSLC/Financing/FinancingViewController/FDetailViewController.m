@@ -567,7 +567,7 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入投资金额"];
     } else {
     
-        calendar.totalLabel.text = [NSString stringWithFormat:@"%.2f",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * ([[self.detailM productPeriod] floatValue] / 36000.0)];
+        calendar.totalLabel.text = [NSString stringWithFormat:@"%.2f",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * ([[self.detailM productPeriod] floatValue] / 36500.0)];
     }
 }
 
