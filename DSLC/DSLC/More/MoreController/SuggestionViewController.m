@@ -74,28 +74,28 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
+    NSInteger statistics = [textView.text length];
+    NSString *sumStr = [NSString stringWithFormat:@"%ld", (long)statistics];
+    NSString *sumString = [NSString stringWithFormat:@"%@%@", sumStr, @"/500"];
+    NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:sumString];
+    NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
+    [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
+    [labelStat setAttributedText:redStr];
+    
+    if ([textView.text isEqualToString:@""]) {
+        
+        NSLog(@"0");
+        NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"0/500"];
+        NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
+        [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
+        [labelStat setAttributedText:redStr];
+        
+    }
+    
     if (textView.text.length > 0 && textView.text.length <= 500) {
         
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        
-        NSInteger statistics = [textView.text length];
-        NSString *sumStr = [NSString stringWithFormat:@"%ld", (long)statistics];
-        NSString *sumString = [NSString stringWithFormat:@"%@%@", sumStr, @"/500"];
-        NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:sumString];
-        NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
-        [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
-        [labelStat setAttributedText:redStr];
-
-        if ([textView.text isEqualToString:@""]) {
-            
-            NSLog(@"0");
-            NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"0/500"];
-            NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
-            [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
-            [labelStat setAttributedText:redStr];
-
-        }
         
     } else {
 
