@@ -27,8 +27,8 @@
                         <rect key="frame" x="74" y="8" width="293" height="30"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="APi-59-WW3"/>
-                            <constraint firstAttribute="width" constant="293" id="BnI-Qj-ihC"/>
+                            <constraint firstAttribute="width" constant="293" id="Pav-TE-gHw"/>
+                            <constraint firstAttribute="height" constant="30" id="X9G-ZS-sSd"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -48,12 +48,13 @@
                 </subviews>
                 <animations/>
                 <constraints>
-                    <constraint firstItem="yAG-KK-rWH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="KRc-kU-0a5"/>
-                    <constraint firstItem="yAG-KK-rWH" firstAttribute="leading" secondItem="KLW-b4-z2j" secondAttribute="trailing" constant="24" id="XAZ-Z5-CDH"/>
+                    <constraint firstItem="yAG-KK-rWH" firstAttribute="leading" secondItem="KLW-b4-z2j" secondAttribute="trailing" constant="24" id="Kz2-cB-VtA"/>
+                    <constraint firstItem="ocj-3G-c5j" firstAttribute="top" secondItem="yAG-KK-rWH" secondAttribute="bottom" id="LaC-u2-zVj"/>
+                    <constraint firstItem="yAG-KK-rWH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="RIS-qT-a7D"/>
+                    <constraint firstItem="yAG-KK-rWH" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="VIn-dt-eom"/>
                     <constraint firstItem="ocj-3G-c5j" firstAttribute="leading" secondItem="KLW-b4-z2j" secondAttribute="trailing" constant="24" id="cA3-1h-b7v"/>
                     <constraint firstItem="KLW-b4-z2j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="11" id="leC-EG-YKy"/>
                     <constraint firstItem="KLW-b4-z2j" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="uON-R6-DVj"/>
-                    <constraint firstItem="ocj-3G-c5j" firstAttribute="top" secondItem="yAG-KK-rWH" secondAttribute="bottom" id="xgg-F1-g6q"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>

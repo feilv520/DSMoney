@@ -396,9 +396,7 @@
             cell.labelRedBag.font = [UIFont systemFontOfSize:15];
             
             return cell;
-            
         }
-        
         
     } else {
         
@@ -410,7 +408,7 @@
         if (self.decide == NO) {
             
             cell.labelYuanShu.hidden = YES;
-            self.buttonNew.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 20)/2 + 5, 12, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 20);
+            self.buttonNew.frame = CGRectMake(80, 12, WIDTH_CONTROLLER_DEFAULT - 90, 20);
             [cell addSubview:self.buttonNew];
             [self.buttonNew setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
             self.buttonNew.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
