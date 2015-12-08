@@ -667,6 +667,7 @@
 		8DBC8A6D1C0D44DA00378FFE /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBC8A691C0D44DA00378FFE /* TencentOpenAPI.framework */; settings = {ASSET_TAGS = (); }; };
 		8DBC8A6E1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8DBC8A6A1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle */; settings = {ASSET_TAGS = (); }; };
 		8DBC8A701C0D450F00378FFE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBC8A6F1C0D450F00378FFE /* SystemConfiguration.framework */; };
+		8DCBFFEC1C16C374003FFD20 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCBFFE91C16C374003FFD20 /* libMobClickLibrary.a */; settings = {ASSET_TAGS = (); }; };
 		8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD180931BD72C1300F71CEA /* GetMoneyViewController.m */; };
 		8DD180981BD72E5900F71CEA /* GetMoneyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD180961BD72E5900F71CEA /* GetMoneyTableViewCell.m */; };
 		8DD180991BD72E5900F71CEA /* GetMoneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD180971BD72E5900F71CEA /* GetMoneyTableViewCell.xib */; };
@@ -1701,6 +1702,9 @@
 		8DBC8A6A1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		8DBC8A6B1C0D44DA00378FFE /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
 		8DBC8A6F1C0D450F00378FFE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8DCBFFE91C16C374003FFD20 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		8DCBFFEA1C16C374003FFD20 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		8DCBFFEB1C16C374003FFD20 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		8DD180921BD72C1300F71CEA /* GetMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyViewController.h; sourceTree = "<group>"; };
 		8DD180931BD72C1300F71CEA /* GetMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyViewController.m; sourceTree = "<group>"; };
 		8DD180951BD72E5900F71CEA /* GetMoneyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyTableViewCell.h; sourceTree = "<group>"; };
@@ -1782,6 +1786,7 @@
 				8D4B8C1C1BF2F62E00A88285 /* libstdc++.tbd in Frameworks */,
 				8D4B8C1A1BF2F62100A88285 /* CoreTelephony.framework in Frameworks */,
 				8D4B8C181BF2F61600A88285 /* libsqlite3.tbd in Frameworks */,
+				8DCBFFEC1C16C374003FFD20 /* libMobClickLibrary.a in Frameworks */,
 				8DEDE1FB1BCD1A21008086D3 /* CoreGraphics.framework in Frameworks */,
 				8D4B8C161BF2F5EA00A88285 /* libiconv.tbd in Frameworks */,
 				8D4B8C141BF2F5B300A88285 /* Security.framework in Frameworks */,
@@ -2058,6 +2063,7 @@
 		81C2DAA51BC755F10007AC48 /* Three */ = {
 			isa = PBXGroup;
 			children = (
+				8DCBFFE81C16C374003FFD20 /* UMAnalytics_Sdk_3.6.6 */,
 				8D9BE8BB1C0EC94D003C67D3 /* YYWebImage */,
 				8D4518701C00553E00FAF998 /* Encryption */,
 				8D88D0C81BFECCB40051D6DA /* MJRefresh */,
@@ -3511,6 +3517,16 @@
 			path = TencentOpenAPI;
 			sourceTree = "<group>";
 		};
+		8DCBFFE81C16C374003FFD20 /* UMAnalytics_Sdk_3.6.6 */ = {
+			isa = PBXGroup;
+			children = (
+				8DCBFFE91C16C374003FFD20 /* libMobClickLibrary.a */,
+				8DCBFFEA1C16C374003FFD20 /* MobClick.h */,
+				8DCBFFEB1C16C374003FFD20 /* MobClickSocialAnalytics.h */,
+			);
+			path = UMAnalytics_Sdk_3.6.6;
+			sourceTree = "<group>";
+		};
 		8DE61D9C1BDF284E0031A5CE /* TIPProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -4563,6 +4579,7 @@
 					"$(PROJECT_DIR)/DSLC/Three/UMSocial_Sdk_4.3",
 					"$(PROJECT_DIR)/DSLC/Three/Wechat",
 					"$(PROJECT_DIR)/DSLC/Three/TencentOpenAPI",
+					"$(PROJECT_DIR)/DSLC/Three/UMAnalytics_Sdk_3.6.6",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
@@ -4591,6 +4608,7 @@
 					"$(PROJECT_DIR)/DSLC/Three/UMSocial_Sdk_4.3",
 					"$(PROJECT_DIR)/DSLC/Three/Wechat",
 					"$(PROJECT_DIR)/DSLC/Three/TencentOpenAPI",
+					"$(PROJECT_DIR)/DSLC/Three/UMAnalytics_Sdk_3.6.6",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
