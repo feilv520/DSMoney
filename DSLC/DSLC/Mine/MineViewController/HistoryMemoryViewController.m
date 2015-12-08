@@ -96,6 +96,10 @@
         cell.labelState.text = @"复核成功";
         cell.labelState.textColor = [UIColor chongzhiColor];
         
+    } else if ([[bigMoney.status description] isEqualToString:@"6"]) {
+        cell.labelState.text = @"取消充值";
+        cell.labelState.textColor = [UIColor zitihui];
+        
     } else {
         cell.labelState.text = @"充值成功";
         cell.labelState.textColor = [UIColor chongzhiColor];

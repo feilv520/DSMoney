@@ -55,17 +55,11 @@
     buttonOk = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [_tabelView.tableFooterView addSubview:buttonOk];
     buttonOk.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-    [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+    [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+    [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     [buttonOk addTarget:self action:@selector(makeSureEditReturn:) forControlEvents:UIControlEventTouchUpInside];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendMessageNotice:) name:@"send" object:nil];
-}
 
-//- (void)sendMessageNotice:(NSNotification *)notice
-//{
-//    
-//}
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -91,7 +85,6 @@
     cell.textField.tintColor = [UIColor grayColor];
     cell.textField.delegate = self;
     cell.textField.tag = indexPath.row + 600;
-    [cell.textField addTarget:self action:@selector(bigMoneyCanEdit:) forControlEvents:UIControlEventEditingChanged];
     
     if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
         
@@ -103,24 +96,33 @@
     return cell;
 }
 
-//编辑绑定判断
-- (void)bigMoneyCanEdit:(UITextField *)textField
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    fileldName = (UITextField *)[self.view viewWithTag:600];
-    fieldBank = (UITextField *)[self.view viewWithTag:601];
-    fieldBankCard = (UITextField *)[self.view viewWithTag:602];
-    fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
-    fieldMoney = (UITextField *)[self.view viewWithTag:604];
-    
-    if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 19 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0) {
+    if (textField.tag == 602) {
         
-        [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        if (range.location == 19) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+        
+    } else if (textField.tag == 603) {
+        
+        if (range.location == 11) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
         
     } else {
         
-        [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-        [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        return YES;
     }
 }
 
@@ -152,6 +154,11 @@
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
+            
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -150,6 +150,7 @@
         }
     }
     
+//    申请的时间
     labeltime = [CreatView creatWithLabelFrame:CGRectMake(40, 45, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:applySch.createTime];
     [viewWhite addSubview:labeltime];
     
@@ -241,57 +242,171 @@
     [butFinish setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateHighlighted];
     [butFinish addTarget:self action:@selector(finishApplyButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    if ([[applySch.status description] isEqualToString:@"1"]) {
+//    此处是状态判断
+    
+//    "1"是指已提交流水单号
+    if ([[applySch.status description] isEqualToString:@"100"]) {
+        [self oneContent];
         
-        labelTime.hidden = NO;
-        fieldShuRu.hidden = YES;
-        butSubmit.hidden = YES;
-        imageSchedule.image = [UIImage imageNamed:@"组-15"];
+//    "2"或"4"
+    } else if ([[applySch.status description] isEqualToString:@"1"] || [[applySch.status description] isEqualToString:@"1"]) {
+        [self oneContent];
+        [self twoOrFourContent];
         
+//    "3"审核成功 即初审成功
     } else if ([[applySch.status description] isEqualToString:@"3"]) {
+        [self oneContent];
+        [self threeContent];
         
-        labelThree = (UILabel *)[self.view viewWithTag:2002];
-        labelThree.textColor = [UIColor chongzhiColor];
-        labelThree.text = @"财务已审核";
-        imageSchedule.image = [UIImage imageNamed:@"组-16"];
-        labelCheckTime.text = applySch.checkTime;
-        [buttWell setTitle:@"财务审核通过,预计30分钟内到账" forState:UIControlStateNormal];
-        
-    } else if ([[applySch.status description] isEqualToString:@"2"] || [[applySch.status description] isEqualToString:@"4"]) {
-        
-        labelThree.text = @"审核失败";
-        labelThree.textColor = [UIColor daohanglan];
-        labelCheckTime.text = applySch.checkTime;
-        imageSchedule.image = [UIImage imageNamed:@"组-19"];
-        
-        buttWell.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 + 40, WIDTH_CONTROLLER_DEFAULT, 50);
-        [buttWell setTitle:@"审核未通过,您提交的信息有误,\n请在核对后重新申请如有问题\n请拨打客服热线:400-816-2283" forState:UIControlStateNormal];
-        
-//        重新申请按钮
-        buttonAplly = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 + 40 + 50 + 30, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"重新申请"];
-        [self.view addSubview:buttonAplly];
-        buttonAplly.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-        [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        [buttonAplly addTarget:self action:@selector(buttonAnotherApply:) forControlEvents:UIControlEventTouchUpInside];
-        
-    } else if ([[applySch.status description] isEqualToString:@"6"]) {
-        
-        labelFour = (UILabel *)[self.view viewWithTag:2003];
-        labelFour.text = @"充值成功";
-        labelFour.textColor = [UIColor chongzhiColor];
-        
-        labelDoTime.text = applySch.recheckTime;
-        imageSchedule.image = [UIImage imageNamed:@"组-17"];
-        [buttWell setTitle:@"恭喜您充值成功" forState:UIControlStateNormal];
-        
-        buttonAplly = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 + 40 + 50 + 30, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"去赚钱"];
-        [self.view addSubview:buttonAplly];
-        buttonAplly.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-        [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        [buttonAplly addTarget:self action:@selector(buttonGoGetMoney:) forControlEvents:UIControlEventTouchUpInside];
+//    "5"充值成功
+    } else if ([[applySch.status description] isEqualToString:@"5"]) {
+        [self oneContent];
+        [self fiveContent];
     }
+}
+
+//状态是1时的内容
+- (void)oneContent
+{
+    if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
+        
+        labelTime = [CreatView creatWithLabelFrame:CGRectMake(40, 110, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:applySch.updateTime];
+        
+    } else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
+        
+        labelTime = [CreatView creatWithLabelFrame:CGRectMake(40, 125, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:applySch.updateTime];
+        
+    } else {
+        
+        labelTime = [CreatView creatWithLabelFrame:CGRectMake(40, 145, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:applySch.updateTime];
+    }
+    
+    [viewWhite addSubview:labelTime];
+    
+    labelTwo = (UILabel *)[self.view viewWithTag:2001];
+    labelTwo.text = @"已打款";
+    labelTwo.textColor = [UIColor chongzhiColor];
+    
+    butEdit.hidden = YES;
+    fieldShuRu.hidden = YES;
+    butSubmit.hidden = YES;
+    imageSchedule.image = [UIImage imageNamed:@"组-15"];
+    
+    butFinish.hidden = YES;
+    buttCancle.hidden = YES;
+    
+    buttWell = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT / 2 + 60, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 转账/POS单号已经提交成功,\n 我们将在24小时内进行核实!"];
+    [viewWhite addSubview:buttWell];
+    buttWell.titleLabel.numberOfLines = 2;
+    buttWell.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    [buttWell setImage:[UIImage imageNamed:@"iconfont"] forState:UIControlStateNormal];
+}
+
+//状态是2或4时的内容
+- (void)twoOrFourContent
+{
+    buttWell.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 + 40, WIDTH_CONTROLLER_DEFAULT, 55);
+    [buttWell setTitle:@" 审核未通过,您提交的信息有误,\n请在核对后重新申请如有问题\n请拨打客服热线:400-816-2283" forState:UIControlStateNormal];
+    [buttWell setImage:[UIImage imageNamed:@"iconfont-register-gantanhao001"] forState:UIControlStateNormal];
+    buttWell.titleLabel.numberOfLines = 3;
+    
+    //        重新申请按钮
+    buttonAplly = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 + 40 + 55 + 10, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"重新申请"];
+    [self.view addSubview:buttonAplly];
+    buttonAplly.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+    [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+    [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+    [buttonAplly addTarget:self action:@selector(buttonAnotherApply:) forControlEvents:UIControlEventTouchUpInside];
+    
+    labelThree = (UILabel *)[self.view viewWithTag:2002];
+    
+    if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
+        
+        labelTwo = (UILabel *)[self.view viewWithTag:2001];
+        labelTwo.frame = CGRectMake(40, 117, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        labelTime.frame = CGRectMake(40, 135 + 5, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        
+        labelThree.frame = CGRectMake(40, 212, WIDTH_CONTROLLER_DEFAULT/2, 20);
+        labelCheckTime.frame = CGRectMake(40, 234, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        
+    } else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
+        
+        labelTwo = (UILabel *)[self.view viewWithTag:2001];
+        labelTwo.frame = CGRectMake(40, 137, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        labelTime.frame = CGRectMake(40, 155 + 5, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        
+        labelThree.frame = CGRectMake(40, 252, WIDTH_CONTROLLER_DEFAULT/2, 20);
+        labelCheckTime.frame = CGRectMake(40, 274, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        
+    } else {
+        
+        labelTwo = (UILabel *)[self.view viewWithTag:2001];
+        labelTwo.frame = CGRectMake(40, 162, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        labelTime.frame = CGRectMake(40, 180 + 5, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        
+        labelThree.frame = CGRectMake(40, 298, WIDTH_CONTROLLER_DEFAULT/2, 20);
+        labelCheckTime.frame = CGRectMake(40, 320, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        
+        buttWell.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 + 60, WIDTH_CONTROLLER_DEFAULT, 55);
+        buttonAplly.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 + 60 + 55 + 10, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+    }
+    
+    labelThree.text = @"审核失败";
+    labelThree.textColor = [UIColor daohanglan];
+    
+    labelCheckTime.hidden = NO;
+    labelCheckTime.text = applySch.checkTime;
+    labelCheckTime.text = @"labelCheckTime";
+    imageSchedule.image = [UIImage imageNamed:@"组-19"];
+    
+    labelFour = (UILabel *)[self.view viewWithTag:2003];
+    labelFour.hidden = YES;
+    
+}
+
+//状态是3时的内容
+- (void)threeContent
+{
+    labelThree = (UILabel *)[self.view viewWithTag:2002];
+    labelThree.textColor = [UIColor chongzhiColor];
+    labelThree.text = @"财务已审核";
+    
+    labelCheckTime.hidden = NO;
+    labelCheckTime.text = applySch.checkTime;
+    labelCheckTime.text = @"labelCheckTime";
+    
+    imageSchedule.image = [UIImage imageNamed:@"组-16"];
+    [buttWell setTitle:@"财务审核通过,预计30分钟内到账" forState:UIControlStateNormal];
+}
+
+//状态是5时的内容
+- (void)fiveContent
+{
+    labelThree = (UILabel *)[self.view viewWithTag:2002];
+    labelThree.text = @"财务已审核";
+    labelThree.textColor = [UIColor chongzhiColor];
+    
+    labelCheckTime.hidden = NO;
+    labelCheckTime.text = applySch.recheckTime;
+    labelCheckTime.text = @"labelCheckTime";
+    
+    labelFour = (UILabel *)[self.view viewWithTag:2003];
+    labelFour.text = @"充值成功";
+    labelFour.textColor = [UIColor chongzhiColor];
+    
+    labelDoTime.hidden = NO;
+    labelDoTime.text = applySch.recheckTime;
+    labelDoTime.text = @"labelDoTime";
+    imageSchedule.image = [UIImage imageNamed:@"组-17"];
+    [buttWell setTitle:@"恭喜您充值成功" forState:UIControlStateNormal];
+    buttWell.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 + 60, WIDTH_CONTROLLER_DEFAULT, 20);
+    
+    buttonAplly = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT / 2 + 60 + 25, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"去赚钱"];
+    [self.view addSubview:buttonAplly];
+    buttonAplly.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+    [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+    [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+    [buttonAplly addTarget:self action:@selector(buttonGoGetMoney:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 //审核失败 重新申请按钮
@@ -305,6 +420,23 @@
 - (void)buttonGoGetMoney:(UIButton *)button
 {
     NSLog(@"去赚钱");
+    NSArray *viewController = [self.navigationController viewControllers];
+    [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+    
+    UIButton *indexButton = [app.tabBarVC.tabButtonArray objectAtIndex:1];
+    
+    for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+        
+        if (indexButton.tag != tempButton.tag) {
+            
+            [tempButton setSelected:NO];
+        }
+    }
+    
+    [indexButton setSelected:YES];
 }
 
 //编辑
@@ -318,6 +450,31 @@
 
 //提交按钮
 - (void)submitButton:(UIButton *)button
+{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSDictionary *paremeter = @{@"id":applySch.Id, @"realName":@"", @"bankName":@"", @"account":@"", @"phone":@"", @"money":@"", @"tranSerialNum":fieldShuRu.text, @"token":[dic objectForKey:@"token"]};
+    NSLog(@"%@", paremeter);
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateBigPutOnSerialNum" parameters:paremeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"bbbbbbbbbbb%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"提交成功"];
+            [self submitButtonContent];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//提交按钮展示
+- (void)submitButtonContent
 {
     if (fieldShuRu.text.length == 6) {
         
@@ -363,7 +520,6 @@
         
         
     }
-    
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -392,6 +548,12 @@
 
 //取消申请
 - (void)cancleApplyButton:(UIButton *)button
+{
+    [self cancleBigMoneyApply];
+}
+
+//取消大额申请展示
+- (void)cancleBigMoneyApply
 {
     buttonHei = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
@@ -423,6 +585,7 @@
     [buttonOK setBackgroundImage:[UIImage imageNamed:@"蓝框"] forState:UIControlStateNormal];
     [buttonOK setBackgroundImage:[UIImage imageNamed:@"蓝框"] forState:UIControlStateHighlighted];
     [buttonOK addTarget:self action:@selector(buttonMakeSureCancle:) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 //完成按钮
@@ -445,8 +608,26 @@
 //确认取消按钮
 - (void)buttonMakeSureCancle:(UIButton *)button
 {
-    NSArray *viewControllers = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewControllers objectAtIndex:1] animated:YES];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSDictionary *paramter = @{@"id":self.ID, @"token":[dic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/cancelBigPutOn" parameters:paramter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"ffffffffff%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            NSArray *viewControllers = [self.navigationController viewControllers];
+            [self.navigationController popToViewController:[viewControllers objectAtIndex:1] animated:YES];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
