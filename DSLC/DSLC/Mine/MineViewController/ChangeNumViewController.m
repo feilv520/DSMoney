@@ -201,10 +201,11 @@
 
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
                
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-                NSArray *viewController = [self.navigationController viewControllers];
-                [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
-                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"更换手机号成功,请重新登录"];
+                // 指定跳到那个界面
+//                NSArray *viewController = [self.navigationController viewControllers];
+//                [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
+                [self.navigationController popToRootViewControllerAnimated:YES];
             } else {
                 
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];

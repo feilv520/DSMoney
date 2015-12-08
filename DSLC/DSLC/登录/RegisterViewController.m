@@ -37,6 +37,8 @@
     UIView *viewDown;
     
     NSData *finaCard;
+    
+    NSString *userID;
 }
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
@@ -61,6 +63,8 @@
     [self.navigationItem setTitle:@"注册大圣理财"];
     
     number = 0;
+    
+    userID = 0;
     
     seconds = 60;
     
@@ -320,41 +324,56 @@
 }
 
 - (void)sureButtonActionFinish:(UIButton *)btn{
-    [registerB removeFromSuperview];
-    [registerR removeFromSuperview];
-    [registerV removeFromSuperview];
-    registerB = nil;
-    registerR = nil;
-    registerV = nil;
     
-    registerP.photoImageView.image = [UIImage imageNamed:@"register-3"];
-
-    NSBundle *rootBundle = [NSBundle mainBundle];
-    NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
-    NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
-    NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
+    NSDictionary *parameter = @{@"userId":userID,@"realName":registerV.realName.text,@"IDCardNum":registerV.IDCard.text};
     
-    registerR = [rootArrayOfResult lastObject];
-    
-    registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
-    
-    registerR.titleSuccess.text = @"验证成功";
-    registerR.passTitle.text = @"您可以绑定银行卡，也可以选择跳过．";
-    
-    registerV = [rootArrayOfView lastObject];
-    
-    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 313);
-    
-    registerB = [rootArrayOfPButton lastObject];
-    
-    registerB.frame = CGRectMake(0, CGRectGetMaxY(registerV.frame), WIDTH_CONTROLLER_DEFAULT, 100);
-    
-    [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [registerB.sureButton addTarget:self action:@selector(sureButtonActionPass:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.scrollView addSubview:registerV];
-    [self.scrollView addSubview:registerR];
-    [self.scrollView addSubview:registerB];
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/authRrealName" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            NSLog(@"%@",responseObject);
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            [registerB removeFromSuperview];
+            [registerR removeFromSuperview];
+            [registerV removeFromSuperview];
+            registerB = nil;
+            registerR = nil;
+            registerV = nil;
+        
+            registerP.photoImageView.image = [UIImage imageNamed:@"register-3"];
+        
+            NSBundle *rootBundle = [NSBundle mainBundle];
+            NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
+            NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
+            NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
+        
+            registerR = [rootArrayOfResult lastObject];
+        
+            registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+        
+            registerR.titleSuccess.text = @"验证成功";
+            registerR.passTitle.text = @"您可以绑定银行卡，也可以选择跳过．";
+        
+            registerV = [rootArrayOfView lastObject];
+        
+            registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 270);
+        
+            registerB = [rootArrayOfPButton lastObject];
+        
+            registerB.frame = CGRectMake(0, CGRectGetMaxY(registerV.frame), WIDTH_CONTROLLER_DEFAULT, 100);
+        
+            [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+            [registerB.sureButton addTarget:self action:@selector(sureButtonActionPass:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [self.scrollView addSubview:registerV];
+            [self.scrollView addSubview:registerR];
+            [self.scrollView addSubview:registerB];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
     
 }
 
@@ -485,11 +504,11 @@
         
                     registerV = [rootArrayOfView objectAtIndex:1];
         
-                    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
+                    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 90);
         
                     registerB = [rootArrayOfPButton lastObject];
         
-                    registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
+                    registerB.frame = CGRectMake(0, 290, WIDTH_CONTROLLER_DEFAULT, 100);
         
                     [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                     [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
@@ -522,6 +541,8 @@
                     
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                     
+                    userID = [responseObject objectForKey:@"userId"];
+                    
                     [buttonWithView removeFromSuperview];
                     [payButton removeFromSuperview];
                     [registerV removeFromSuperview];
@@ -540,11 +561,11 @@
         
                     registerV = [rootArrayOfView objectAtIndex:1];
         
-                    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 134);
+                    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 90);
         
                     registerB = [rootArrayOfPButton lastObject];
         
-                    registerB.frame = CGRectMake(0, 320, WIDTH_CONTROLLER_DEFAULT, 100);
+                    registerB.frame = CGRectMake(0, 290, WIDTH_CONTROLLER_DEFAULT, 100);
         
                     [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                     [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];

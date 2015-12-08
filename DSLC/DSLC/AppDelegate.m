@@ -65,11 +65,13 @@
     
     [self exitNetwork];
     
-    [UMSocialData setAppKey:@"56447cbc67e58efd78001914"];
+    [UMSocialData setAppKey:@"5642ad7e67e58e8463006218"];
     
     [UMSocialWechatHandler setWXAppId:@"wxebb3d94fc5272ea8" appSecret:@"89f84525f50a31fc0acf6b551f9bcbc8" url:@"http://www.dslc.cn"];
     
     [UMSocialQQHandler setQQWithAppId:@"1104927343" appKey:@"9RRogveZHZO6ZlWk" url:@"http://www.dslc.cn"];
+    
+    [MobClick startWithAppkey:@"5642ad7e67e58e8463006218" reportPolicy:BATCH   channelId:@""];
     
     NSDictionary *dic = self.flagDic;
     

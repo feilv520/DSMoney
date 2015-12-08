@@ -60,6 +60,10 @@
 #import "UMSocialWechatHandler.h"            // 微信分享
 #import "UMSocialQQHandler.h"                // QQ分享
 #import "YYWebImage.h"                       // 异步图片加载框架
+#import "MobClick.h"                         // 友盟统计插件
+
+
+// 访问地址
 
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.188:8080/tongjiang/interface/p2p/";
 static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interface/p2p/";

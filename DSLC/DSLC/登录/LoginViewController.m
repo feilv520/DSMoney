@@ -307,12 +307,13 @@
                 
                 if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                     // 判断是否存在Member.plist文件
+                    [MobClick profileSignInWithPUID:[[responseObject objectForKey:@"User"] objectForKey:@"id"]];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
                     if (![FileOfManage ExistOfFile:@"Member.plist"]) {
                         [FileOfManage createWithFile:@"Member.plist"];
                         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                             textField2.text,@"password",
+                                             [DES3Util encrypt:textField2.text],@"password",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
@@ -322,7 +323,7 @@
                         [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                     } else {
                         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                             textField2.text,@"password",
+                                             [DES3Util encrypt:textField2.text],@"password",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
@@ -413,7 +414,7 @@
 //        
 //    }];
 
-    NSDictionary *parameter = @{@"phone":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"userPhone"]],@"password":[self.flagUserInfo objectForKey:@"password"]};
+    NSDictionary *parameter = @{@"phone":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"userPhone"]],@"password":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"password"]]};
     NSLog(@"%@",parameter);
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -421,12 +422,13 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
 
+            [MobClick profileSignInWithPUID:[[responseObject objectForKey:@"User"] objectForKey:@"id"]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
             NSLog(@"AutoLogin = %@",responseObject);
             
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [self.flagUserInfo objectForKey:@"password"],@"password",
+                                 [DES3Util encrypt:[self.flagUserInfo objectForKey:@"password"]],@"password",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",

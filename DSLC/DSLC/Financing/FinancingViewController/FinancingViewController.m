@@ -208,6 +208,8 @@
         
         NSLog(@"%@",responseObject);
         
+        [MobClick event:@"bankZone" attributes:responseObject];
+        
         NSArray *array = [responseObject objectForKey:@"Product"];
         for (NSDictionary *dic in array) {
             ProductListModel *productM = [[ProductListModel alloc] init];
