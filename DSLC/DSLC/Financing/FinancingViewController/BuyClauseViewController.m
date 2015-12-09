@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationItem setTitle:@"购买条款"];
+    [self.navigationItem setTitle:@"风险提示书"];
 }
 
 - (void)didReceiveMemoryWarning {

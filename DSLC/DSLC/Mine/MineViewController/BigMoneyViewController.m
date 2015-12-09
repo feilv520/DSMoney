@@ -105,7 +105,7 @@
     if (indexPath.row == 1) {
         
         [cell addSubview:imageRight];
-//        cell.textField.enabled = NO;
+        cell.textField.enabled = NO;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

@@ -22,5 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelLeft;
 @property (weak, nonatomic) IBOutlet UILabel *labelRight;
 @property (weak, nonatomic) IBOutlet UILabel *labelDown;
+@property (weak, nonatomic) IBOutlet UILabel *labelTwo;
 
 @end

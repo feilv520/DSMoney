@@ -372,7 +372,7 @@
                 [cell.butRecharge addTarget:self action:@selector(cashMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
                 
                 self.qianShu.frame = CGRectMake(100, 0, WIDTH_CONTROLLER_DEFAULT - 110, 48);
-                self.qianShu.text = [DES3Util decrypt:[self.accountDic objectForKey:@"accBalance"]];
+                self.qianShu.text = [NSString stringWithFormat:@"%@%@", [DES3Util decrypt:[self.accountDic objectForKey:@"accBalance"]], @"元"];
                 self.qianShu.textColor = [UIColor daohanglan];
                 self.qianShu.textAlignment = NSTextAlignmentRight;
                 [cell addSubview:self.qianShu];
@@ -592,8 +592,6 @@
         CGFloat numberInt = [[[DES3Util decrypt:[self.accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
         CGFloat shuRuInt = self.textFieldC.text.floatValue;
         
-//        NSLog(@"--- %@ ====--- %.f %.f",[[self.accountDic objectForKey:@"accBalance"] stringByReplacingOccurrencesOfString:@"," withString:@""],numberInt,shuRuInt);
-        
 //        当输入的值大于余额值 提示余额不足 是否充值
         if (shuRuInt > numberInt && shuRuInt != 0) {
         
@@ -672,38 +670,46 @@
     self.viewWhite.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.viewWhite.labelLine.alpha = 0.7;
     
-    self.viewWhite.labelSign.text = @"在购买<<新手专享>>前请您确认:";
-    self.viewWhite.labelSign.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    self.viewWhite.labelSign.text = [NSString stringWithFormat:@"%@%@%@", @"在购买", self.detailM.productName, @"前请您确认:"];
+    self.viewWhite.labelSign.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     self.viewWhite.labelSign.textColor = [UIColor zitihui];
     
     self.viewWhite.labelKnow.text = @"本人已清除知悉该收益权产品的基础信息,并已充分了解其产品特性";
     self.viewWhite.labelKnow.textColor = [UIColor zitihui];
-    self.viewWhite.labelKnow.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    self.viewWhite.labelKnow.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     self.viewWhite.labelKnow.numberOfLines = 0;
     
     self.viewWhite.labelBook.text = @"本人已仔细阅读/理解该收益权产品";
     self.viewWhite.labelBook.textColor = [UIColor zitihui];
-    self.viewWhite.labelBook.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    self.viewWhite.labelBook.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
-    self.viewWhite.labelLeft.text = @"<<购买条款>>";
+    self.viewWhite.labelLeft.text = @"《风险提示书》";
     self.viewWhite.labelLeft.textColor = [UIColor chongzhiColor];
-    self.viewWhite.labelLeft.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    self.viewWhite.labelLeft.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     self.viewWhite.labelLeft.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapLeft = [[UITapGestureRecognizer alloc] init];
     [self.viewWhite.labelLeft addGestureRecognizer:tapLeft];
     [tapLeft addTarget:self action:@selector(buyClauseTap:)];
     
-    self.viewWhite.labelRight.text = @"<<收益权转让协议>>";
+    self.viewWhite.labelRight.text = @"《产品收益权转让及服务";
     self.viewWhite.labelRight.textColor = [UIColor chongzhiColor];
-    self.viewWhite.labelRight.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    self.viewWhite.labelRight.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     self.viewWhite.labelRight.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
     [self.viewWhite.labelRight addGestureRecognizer:tap];
     [tap addTarget:self action:@selector(usufructAssignmentTap:)];
     
-    self.viewWhite.labelDown.text = @"全文,并愿意自行承担投资风险";
-    self.viewWhite.labelDown.textColor = [UIColor zitihui];
-    self.viewWhite.labelDown.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    self.viewWhite.labelDown.text = @"协议》";
+    self.viewWhite.labelDown.textColor = [UIColor chongzhiColor];
+    self.viewWhite.labelDown.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+    self.viewWhite.labelDown.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] init];
+    [self.viewWhite.labelDown addGestureRecognizer:tapGesture];
+    [tapGesture addTarget:self action:@selector(usufructAssignmentTap:)];
+    
+    self.viewWhite.labelTwo.text = @"全文,并愿意自行承担投资风险";
+    self.viewWhite.labelTwo.textColor = [UIColor zitihui];
+    self.viewWhite.labelTwo.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
     self.viewWhite.imageBlueOne.image = [UIImage imageNamed:@"blueyuan"];
     self.viewWhite.imageBlueTwo.image = [UIImage imageNamed:@"blueyuan"];

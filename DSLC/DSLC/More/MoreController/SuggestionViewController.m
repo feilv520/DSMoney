@@ -92,10 +92,13 @@
         
     }
     
-    if (textView.text.length > 0 && textView.text.length <= 500) {
+    if (textView.text.length > 0 && textView.text.length <= 10) {
         
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        
+    } else if (textView.text.length > 10) {
+        textView.text = [textView.text substringToIndex:10];
         
     } else {
 
@@ -105,16 +108,35 @@
 }
 
 //规定不超过编辑字数范围500 如果输入超过500 就不能再输入
--(BOOL)textView:(UITextView*)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    NSString *new = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    NSInteger res = 500 - [new length];
-
-    if(res >= 0){
+-(BOOL)textView:(UITextView*)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+//    NSString *new = [textView.text stringByReplacingCharactersInRange:range withString:text];
+//    NSInteger res = 500 - [new length];
+//
+//    if(res >= 0){
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+    
+    if (range.location < 10) {
+        
         return YES;
+        
     } else {
+        
         return NO;
     }
 }
+
+//- (void)textViewDidChange:(UITextView *)textView
+//{
+//    //该判断用于联想输入
+//    if (textView.text.length > BOOKMARK_WORD_LIMIT)
+//    {
+//        textView.text = [textView.text substringToIndex:BOOKMARK_WORD_LIMIT];
+//    }
+//}
 
 //提交按钮
 - (void)buttonMakeSureSubmit:(UIButton *)button

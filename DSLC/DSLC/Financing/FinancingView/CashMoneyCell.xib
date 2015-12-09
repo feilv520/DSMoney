@@ -18,6 +18,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvN-MB-XAl">
                         <rect key="frame" x="10" y="12" width="66" height="20"/>
                         <animations/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="eXd-Ig-bDj"/>
                             <constraint firstAttribute="width" constant="66" id="vcg-D5-KyY"/>
@@ -27,11 +28,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dW7-Fk-WwL">
-                        <rect key="frame" x="279" y="12" width="82" height="20"/>
+                        <rect key="frame" x="84" y="12" width="277" height="20"/>
                         <animations/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="82" id="ZAN-l7-4bd"/>
-                            <constraint firstAttribute="height" constant="20" id="q17-kA-WOJ"/>
+                            <constraint firstAttribute="width" constant="277" id="3Ps-9z-5FZ"/>
+                            <constraint firstAttribute="height" constant="20" id="Y7h-LB-IUi"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,8 +44,9 @@
                 <constraints>
                     <constraint firstItem="zvN-MB-XAl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="a1n-Gg-VGU"/>
                     <constraint firstItem="zvN-MB-XAl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="g6s-a8-9YH"/>
-                    <constraint firstItem="dW7-Fk-WwL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="iRr-lD-FyM"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="dW7-Fk-WwL" secondAttribute="trailing" constant="6" id="uSA-Qb-eU9"/>
+                    <constraint firstItem="dW7-Fk-WwL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="s8b-Wl-OC0"/>
+                    <constraint firstItem="dW7-Fk-WwL" firstAttribute="leading" secondItem="zvN-MB-XAl" secondAttribute="trailing" constant="8" id="v5s-Gv-hGJ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="dW7-Fk-WwL" secondAttribute="trailing" constant="6" id="xoz-2d-N4v"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>

@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationItem setTitle:@"收益转让协议"];
+    [self.navigationItem setTitle:@"产品收益权转让及服务协议"];
     
 }
 
