@@ -62,6 +62,7 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.separatorColor = [UIColor clearColor];
     _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     UIView *viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];

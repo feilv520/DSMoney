@@ -84,7 +84,7 @@
     [self addTableViewWithHeader:_tableView];
     [self addTableViewWithFooter:_tableView];
     
-//    butRedArray = @[@"3", @"6", @"9", @"12", @"7", @"9", @"1", @"5", @"6", @"8"];
+    butRedArray = @[@"3", @"6", @"9", @"12", @"7", @"9", @"1", @"5", @"6", @"8"];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,16 +105,14 @@
     
     ProductListModel *proModel = [self.productListArray objectAtIndex:indexPath.row];
     
-    NSMutableAttributedString *nameStr = [[NSMutableAttributedString alloc] initWithString:proModel.productName];
-    NSRange monthRange = NSMakeRange(0, [[nameStr string] rangeOfString:@"个"].location);
-    [nameStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:monthRange];
-    [nameStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:monthRange];
-    [cell.buttonRed.titleLabel setAttributedText:nameStr];
-    NSLog(@"-----------%@", [nameStr string]);
-    
+    NSString *monthStr = [proModel.productName substringWithRange:NSMakeRange(0, [proModel.productName rangeOfString:@"个"].location)];
+    [cell.buttonRed setTitle:monthStr forState:UIControlStateNormal];
+    [cell.buttonRed setTitle:[butRedArray objectAtIndex:indexPath.row] forState:UIControlStateNormal];
     [cell.buttonRed setBackgroundImage:[UIImage imageNamed:@"圆角矩形-2"] forState:UIControlStateNormal];
     
-    cell.labelMonth.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
+    NSString *lastStr = [proModel.productName substringWithRange:NSMakeRange([proModel.productName rangeOfString:@"个"].location, proModel.productName.length - monthStr.length)];
+    
+    cell.labelMonth.text = lastStr;
     cell.labelMonth.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
     cell.labelQiTou.text = [NSString stringWithFormat:@"%@起投",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]];

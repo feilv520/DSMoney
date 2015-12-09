@@ -144,7 +144,7 @@
         if (btn.tag == 1000) {
             if (btn.tag != buttonTag){
                 lableRedLine.frame = CGRectMake(0, 48, WIDTH_CONTROLLER_DEFAULT / 2.0, 2);
-                [btn setTitleColor:Color_Red forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
                 
                 UIButton *button = (UIButton *)[self.view viewWithTag:buttonTag];
                 [button setTitleColor:Color_Black forState:UIControlStateNormal];
@@ -160,7 +160,7 @@
         } else {
             if (btn.tag != buttonTag){
                 lableRedLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT / 2, 48, WIDTH_CONTROLLER_DEFAULT / 2.0, 2);
-                [btn setTitleColor:Color_Red forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
                 
                 UIButton *button = (UIButton *)[self.view viewWithTag:buttonTag];
                 [button setTitleColor:Color_Black forState:UIControlStateNormal];
