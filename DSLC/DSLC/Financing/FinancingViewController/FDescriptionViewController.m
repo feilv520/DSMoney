@@ -34,6 +34,14 @@
     
     [self.view addSubview:webView];
     
+    NSLog(@"%@",self.detailString);
+    
+    self.detailString = [self.detailString stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
+    self.detailString = [self.detailString stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
+    self.detailString = [self.detailString stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    self.detailString = [self.detailString stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+    self.detailString = [self.detailString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    
     [webView loadHTMLString:self.detailString baseURL:nil];
     
 }
