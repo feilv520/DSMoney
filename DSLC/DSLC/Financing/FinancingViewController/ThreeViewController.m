@@ -100,6 +100,8 @@
 {
     NSLog(@"1");
     
+    [MobClick event:@"hotZone"];
+    
     [billVC removeFromParentViewController];
     [billVC.view removeFromSuperview];
     billVC = nil;
@@ -130,6 +132,8 @@
 {
     NSLog(@"2");
     
+    [MobClick event:@"setZone"];
+    
     [financingVC.view removeFromSuperview];
     [financingVC removeFromParentViewController];
     financingVC = nil;
@@ -159,6 +163,8 @@
 - (void)button3Press:(UIButton *)button
 {
     NSLog(@"3");
+    
+    [MobClick event:@"bankZone"];
     
     [newbieVC removeFromParentViewController];
     [newbieVC.view removeFromSuperview];

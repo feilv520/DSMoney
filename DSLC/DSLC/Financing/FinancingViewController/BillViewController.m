@@ -200,8 +200,6 @@
         
         NSLog(@"%@",responseObject);
         
-        [MobClick event:@"setZone" attributes:responseObject];
-        
         NSArray *array = [responseObject objectForKey:@"Product"];
         for (NSDictionary *dic in array) {
             [flagArray addObject:[dic objectForKey:@"productStatus"]];

@@ -36,15 +36,24 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"%@",responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
         
-        MessageModel *messageModel = [[MessageModel alloc] init];
-        
-        [messageModel setValuesForKeysWithDictionary:[responseObject objectForKey:@"Msg"]];
-        
-        self.textLabel.text = [messageModel msgText];
-        
-        self.titleLabel.text = [messageModel msgTitle];
+            NSLog(@"%@",responseObject);
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+            
+            MessageModel *messageModel = [[MessageModel alloc] init];
+            
+            [messageModel setValuesForKeysWithDictionary:[responseObject objectForKey:@"Msg"]];
+            
+            self.textLabel.text = [messageModel msgText];
+            
+            self.titleLabel.text = [messageModel msgTitle];
+            
+            [self noDataViewWithRemoveToView];
+        } else {
+            [self noDateWithView:@"无数据" height:330 view:self.view];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);

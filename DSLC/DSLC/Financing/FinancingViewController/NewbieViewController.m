@@ -388,8 +388,6 @@
         
         NSLog(@"%@",responseObject);
         
-        [MobClick event:@"hotZone" attributes:responseObject];
-        
         NSArray *array = [responseObject objectForKey:@"Product"];
         
         [self.productListArray removeAllObjects];

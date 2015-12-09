@@ -119,9 +119,8 @@
     } else if (_textField2.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入身份证号"];
         
-    } else if (_textField2.text.length != 18) {
+    } else if (![NSString validateIDCardNumber:_textField2.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"身份证号格式不对"];
-        
     } else {
 //        NSArray *viewController = [self.navigationController viewControllers];
 //        [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];

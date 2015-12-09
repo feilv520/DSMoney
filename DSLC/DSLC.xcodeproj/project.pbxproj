@@ -681,6 +681,7 @@
 		8DE59AB61BFC191500741149 /* CJNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE59AB51BFC191500741149 /* CJNavigationController.m */; settings = {ASSET_TAGS = (); }; };
 		8DE61D9B1BDF20D70031A5CE /* FileOfManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE61D9A1BDF20D70031A5CE /* FileOfManage.m */; settings = {ASSET_TAGS = (); }; };
 		8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE61D9E1BDF284E0031A5CE /* ProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
+		8DEACD051C17D00700548166 /* 默认头像.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEACD041C17D00700548166 /* 默认头像.png */; settings = {ASSET_TAGS = (); }; };
 		8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */; };
 		8DEDE1B31BCCFEB5008086D3 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1AD1BCCFEB5008086D3 /* arrow@2x.png */; };
 		8DEDE1B41BCCFEB5008086D3 /* arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1AE1BCCFEB5008086D3 /* arrow@3x.png */; };
@@ -1724,6 +1725,7 @@
 		8DE61D9A1BDF20D70031A5CE /* FileOfManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileOfManage.m; sourceTree = "<group>"; };
 		8DE61D9D1BDF284E0031A5CE /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		8DE61D9E1BDF284E0031A5CE /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
+		8DEACD041C17D00700548166 /* 默认头像.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "默认头像.png"; sourceTree = "<group>"; };
 		8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DEDE1AD1BCCFEB5008086D3 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
 		8DEDE1AE1BCCFEB5008086D3 /* arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@3x.png"; sourceTree = "<group>"; };
@@ -2101,6 +2103,7 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8DEACD041C17D00700548166 /* 默认头像.png */,
 				8D29F98F1C08048700D45E43 /* 已失效 */,
 				8D29F9721C08047D00D45E43 /* 已打开 */,
 				81F343811C0584EB001EF374 /* 圆角矩形-3@2x.png */,
@@ -3925,6 +3928,7 @@
 				8DEDE1C51BCCFF01008086D3 /* iconfont_graycuo@3x.png in Resources */,
 				8D6692801BD0D82100CD2CAF /* Home_refresh_bg.png in Resources */,
 				8D3F95D21BE1C28A00013A8E /* RegisterOfResult.xib in Resources */,
+				8DEACD051C17D00700548166 /* 默认头像.png in Resources */,
 				8175BEAF1BE9F2F50044026E /* 腾讯微博@3x.png in Resources */,
 				8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */,
 				8DEDE1B31BCCFEB5008086D3 /* arrow@2x.png in Resources */,
