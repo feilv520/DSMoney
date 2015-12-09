@@ -245,11 +245,11 @@
 //    此处是状态判断
     
 //    "1"是指已提交流水单号
-    if ([[applySch.status description] isEqualToString:@"100"]) {
+    if ([[applySch.status description] isEqualToString:@"1"]) {
         [self oneContent];
         
 //    "2"或"4"
-    } else if ([[applySch.status description] isEqualToString:@"1"] || [[applySch.status description] isEqualToString:@"1"]) {
+    } else if ([[applySch.status description] isEqualToString:@"2"] || [[applySch.status description] isEqualToString:@"4"]) {
         [self oneContent];
         [self twoOrFourContent];
         

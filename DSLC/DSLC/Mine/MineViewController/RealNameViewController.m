@@ -38,14 +38,14 @@
     [self.view addSubview:viewWhite];
     viewWhite.backgroundColor = [UIColor whiteColor];
     
-    UILabel *realName = [CreatView creatWithLabelFrame:CGRectMake(10, 0, 60, 49.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"真实姓名"];
+    UILabel *realName = [CreatView creatWithLabelFrame:CGRectMake(10, 0, 60, 49.5) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"真实姓名"];
     [viewWhite addSubview:realName];
     
     UILabel *labelLine1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 49.5, WIDTH_CONTROLLER_DEFAULT - 20, 0.5)];
     [viewWhite addSubview:labelLine1];
     [self labelLineShow:labelLine1];
     
-    UILabel *documentStyle = [CreatView creatWithLabelFrame:CGRectMake(10, 50, 60, 49.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"身份证号"];
+    UILabel *documentStyle = [CreatView creatWithLabelFrame:CGRectMake(10, 50, 60, 49.5) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"身份证号"];
     [viewWhite addSubview:documentStyle];
     
     UILabel *labelLine2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 99.5, WIDTH_CONTROLLER_DEFAULT - 20, 0.5)];
@@ -67,7 +67,7 @@
     _textField2.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [_textField2 addTarget:self action:@selector(textFieldCanEdit:) forControlEvents:UIControlEventEditingChanged];
     
-    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 135, WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"认证"];
+    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 160, WIDTH_CONTROLLER_DEFAULT - 80, HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"认证"];
     [self.view addSubview:buttonNext];
     buttonNext.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
@@ -177,7 +177,6 @@
         
     }];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

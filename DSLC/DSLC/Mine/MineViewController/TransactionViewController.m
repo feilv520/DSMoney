@@ -31,6 +31,7 @@
     NSArray *monthArr;
     
     UIPickerView *myPickerView;
+    
 }
 @property (nonatomic, strong) NSMutableArray *transactionArray;
 @property (nonatomic, strong) NSMutableArray *transactionName;
@@ -59,7 +60,7 @@
     [self showTableView];
     [self naviagationContentShow];
     [self showSelectionView];
-    
+
 }
 
 //导航内容
@@ -116,7 +117,7 @@
         }];
     }
     self.navigationItem.rightBarButtonItem.title = @"筛选";
-    NSLog(@"%ld",number);
+    NSLog(@"%ld",(long)number);
     switch (number) {
         case 0:
             tranBeginDate = @"";
@@ -149,6 +150,8 @@
         default:
             break;
     }
+    
+    
 }
 
 //导航返回按钮

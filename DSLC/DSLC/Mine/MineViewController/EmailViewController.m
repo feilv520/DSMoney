@@ -37,7 +37,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"绑定邮箱"];
     
-    seconds = 60;
+    seconds = 50;
     [self contentShow];
     [self rememberContent];
 }
@@ -64,6 +64,7 @@
     
     buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 110, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"发送验证邮箱"];
     [self.view addSubview:buttonNext];
+    buttonNext.tag = 7690;
     buttonNext.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
@@ -119,7 +120,6 @@
 {
     [_textField resignFirstResponder];
     
-//    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
     
     if ([NSString validateEmail:_textField.text]) {
         
@@ -159,25 +159,25 @@
 // 验证码倒计时
 -(void)timerFireMethod:(NSTimer *)theTimer {
     
-    UIButton *button = (UIButton *)[self.view viewWithTag:9080];
+    UIButton *button = (UIButton *)[self.view viewWithTag:7690];
     
     if (seconds == 1) {
         [theTimer invalidate];
-        seconds = 60;
-        button.layer.masksToBounds = YES;
-        button.layer.borderWidth = 1.f;
-        button.layer.borderColor = [UIColor daohanglan].CGColor;
-        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
-        [button setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+        seconds = 50;
+        [button setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+        [button setTitle:@"重新发送" forState: UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setEnabled:YES];
+        
+        _textField.enabled = YES;
+        
     }else{
+        
         seconds--;
         NSString *title = [NSString stringWithFormat:@"重新发送(%lds)",(long)seconds];
-        button.layer.masksToBounds = YES;
-        button.layer.borderWidth = 1.f;
-        button.layer.borderColor = [UIColor zitihui].CGColor;
-        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        [button setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
         [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [button setTitle:title forState:UIControlStateNormal];
         [button setEnabled:NO];
@@ -189,7 +189,7 @@
         if ([timer respondsToSelector:@selector(isValid)]) {
             if ([timer isValid]) {
                 [timer invalidate];
-                seconds = 60;
+                seconds = 50;
             }
         }
     }
@@ -216,10 +216,8 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]){
         
-            [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-            [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+            timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
             
-            [buttonNext setTitle:@"重新发送(50s)" forState:UIControlStateNormal];
             _textField.enabled = NO;
             
             [self.view addSubview:butRemember];

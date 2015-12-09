@@ -39,6 +39,8 @@
     NSData *finaCard;
     
     NSString *userID;
+    
+    UIButton *bookButton;
 }
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
@@ -146,13 +148,14 @@
                 
                 UIButton *button = (UIButton *)[self.view viewWithTag:buttonTag];
                 [button setTitleColor:Color_Black forState:UIControlStateNormal];
-                
+                [bookButton setTitle:@"《大圣理财平台用户服务协议》" forState:UIControlStateNormal];
                 buttonTag = btn.tag;
             }
             
             registerV.inviteNumber.text = @"邀请码(选填)";
             registerV.sandMyselfIDCard.placeholder = @"请输入邀请码";
             [registerV.problemButton setImage:[UIImage imageNamed:@"iconfont-register-gantanhao001"] forState:UIControlStateNormal];
+            
             self.flag = NO;
         } else {
             if (btn.tag != buttonTag){
@@ -169,6 +172,8 @@
             registerV.sandMyselfIDCard.placeholder = @"请上传您的个人名片";
             registerV.sandMyselfIDCard.userInteractionEnabled = NO;
             [registerV.problemButton setImage:[UIImage imageNamed:@"jiantou"] forState:UIControlStateNormal];
+            
+            [bookButton setTitle:@"《大圣理财平台理财师服务协议》" forState:UIControlStateNormal];
             self.flag = YES;
         }
         
@@ -256,13 +261,13 @@
     [self.scrollView addSubview:tapButton];
     [tapButton addTarget:self action:@selector(checkChooseButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *bookButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    bookButton = [UIButton buttonWithType:UIButtonTypeCustom];
     bookButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 400, WIDTH_CONTROLLER_DEFAULT/3*2, 15);
     [bookButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [bookButton.titleLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:12]];
     [bookButton addTarget:self action:@selector(bookButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     bookButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [bookButton setTitle:@"<<大圣理财平台用户服务协议>>" forState:UIControlStateNormal];
+    [bookButton setTitle:@"《大圣理财平台用户服务协议》" forState:UIControlStateNormal];
     [bookButton setTitleColor:[UIColor chongzhiColor] forState:UIControlStateNormal];
     [self.scrollView addSubview:bookButton];
     
