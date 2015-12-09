@@ -8,6 +8,7 @@
 
 #import "EditBigMoney.h"
 #import "MendDealCell.h"
+#import "ChooseOpenAnAccountBank.h"
 
 @interface EditBigMoney () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -23,6 +24,8 @@
     UITextField *fieldBankCard;
     UITextField *fieldPhoneNum;
     UITextField *fieldMoney;
+    
+    UIImageView *imageViewR;
 }
 
 @end
@@ -37,6 +40,15 @@
     [self.navigationItem setTitle:@"大额充值申请"];
     
     [self contentShow];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnBankName:) name:@"bank" object:nil];
+}
+
+- (void)returnBankName:(NSNotification *)notice
+{
+    NSString *bankName = [notice object];
+    fieldBank = (UITextField *)[self.view viewWithTag:601];
+    fieldBank.text = bankName;
 }
 
 - (void)contentShow
@@ -59,6 +71,7 @@
     [buttonOk setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     [buttonOk addTarget:self action:@selector(makeSureEditReturn:) forControlEvents:UIControlEventTouchUpInside];
 
+    imageViewR = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 22, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"jiantou"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -91,9 +104,21 @@
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     
+    if (indexPath.row == 1) {
+        
+        cell.textField.enabled = NO;
+        [cell addSubview:imageViewR];
+    }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ChooseOpenAnAccountBank *choose = [[ChooseOpenAnAccountBank alloc] init];
+    [self.navigationController pushViewController:choose animated:YES];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
