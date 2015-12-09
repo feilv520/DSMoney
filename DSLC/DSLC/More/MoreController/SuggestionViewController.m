@@ -76,11 +76,22 @@
 {
     NSInteger statistics = [textView.text length];
     NSString *sumStr = [NSString stringWithFormat:@"%ld", (long)statistics];
-    NSString *sumString = [NSString stringWithFormat:@"%@%@", sumStr, @"/500"];
-    NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:sumString];
-    NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
-    [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
-    [labelStat setAttributedText:redStr];
+    if (statistics >= 500) {
+        NSString *sumString = [NSString stringWithFormat:@"%@%@", @"10", @"/500"];
+        NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:sumString];
+        NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
+        [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
+        [labelStat setAttributedText:redStr];
+    } else {
+        NSString *sumString = [NSString stringWithFormat:@"%@%@", sumStr, @"/500"];
+        NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:sumString];
+        NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
+        [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
+        [labelStat setAttributedText:redStr];
+    }
+    
+    
+   
     
     if ([textView.text isEqualToString:@""]) {
         
@@ -92,13 +103,13 @@
         
     }
     
-    if (textView.text.length > 0 && textView.text.length <= 10) {
+    if (textView.text.length > 0 && textView.text.length <= 500) {
         
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         
-    } else if (textView.text.length > 10) {
-        textView.text = [textView.text substringToIndex:10];
+    } else if (textView.text.length > 500) {
+        textView.text = [textView.text substringToIndex:500];
         
     } else {
 
@@ -110,16 +121,7 @@
 //规定不超过编辑字数范围500 如果输入超过500 就不能再输入
 -(BOOL)textView:(UITextView*)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-//    NSString *new = [textView.text stringByReplacingCharactersInRange:range withString:text];
-//    NSInteger res = 500 - [new length];
-//
-//    if(res >= 0){
-//        return YES;
-//    } else {
-//        return NO;
-//    }
-    
-    if (range.location < 10) {
+    if (range.location < 500) {
         
         return YES;
         
