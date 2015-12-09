@@ -828,7 +828,11 @@
      * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
      */
     // 保存图片至本地，方法见下文
-    [self saveImage:image withName:@"cardIDImage.jpg"];
+    [self saveImage:image withName:@"cardIDImage.png"];
+    
+    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"上传成功"];
+    
+    registerV.sandMyselfIDCard.placeholder = @"名片.png";
     
 }
 
@@ -840,6 +844,8 @@
     
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
     // 将图片写入文件
+    
+    NSLog(@"%@",fullPath);
     
     [imageData writeToFile:fullPath atomically:NO];
 }

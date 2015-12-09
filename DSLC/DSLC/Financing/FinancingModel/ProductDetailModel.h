@@ -44,4 +44,6 @@
 
 @property (nonatomic, copy) NSString *minRedPacketMoney;
 
+@property (nonatomic, copy) NSNumber *isOrder;
+
 @end
