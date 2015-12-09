@@ -685,6 +685,7 @@
 		8DE61D9B1BDF20D70031A5CE /* FileOfManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE61D9A1BDF20D70031A5CE /* FileOfManage.m */; settings = {ASSET_TAGS = (); }; };
 		8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE61D9E1BDF284E0031A5CE /* ProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
 		8DEACD051C17D00700548166 /* 默认头像.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEACD041C17D00700548166 /* 默认头像.png */; settings = {ASSET_TAGS = (); }; };
+		8DEACD081C1805BC00548166 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEACD071C1805BC00548166 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */; };
 		8DEDE1B31BCCFEB5008086D3 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1AD1BCCFEB5008086D3 /* arrow@2x.png */; };
 		8DEDE1B41BCCFEB5008086D3 /* arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1AE1BCCFEB5008086D3 /* arrow@3x.png */; };
@@ -1734,6 +1735,8 @@
 		8DE61D9D1BDF284E0031A5CE /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		8DE61D9E1BDF284E0031A5CE /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		8DEACD041C17D00700548166 /* 默认头像.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "默认头像.png"; sourceTree = "<group>"; };
+		8DEACD061C1805BC00548166 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		8DEACD071C1805BC00548166 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DEDE1AD1BCCFEB5008086D3 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
 		8DEDE1AE1BCCFEB5008086D3 /* arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@3x.png"; sourceTree = "<group>"; };
@@ -2076,6 +2079,8 @@
 		81C2DAA51BC755F10007AC48 /* Three */ = {
 			isa = PBXGroup;
 			children = (
+				8DEACD061C1805BC00548166 /* JSONKit.h */,
+				8DEACD071C1805BC00548166 /* JSONKit.m */,
 				8DCBFFE81C16C374003FFD20 /* UMAnalytics_Sdk_3.6.6 */,
 				8D9BE8BB1C0EC94D003C67D3 /* YYWebImage */,
 				8D4518701C00553E00FAF998 /* Encryption */,
@@ -4371,6 +4376,7 @@
 				8D88D0F71BFECCB40051D6DA /* MJRefreshComponent.m in Sources */,
 				81B5209E1BF96F4200D8E8D1 /* AddressBookViewController.m in Sources */,
 				8184EC401BCCD113003F440D /* MoneyCell.m in Sources */,
+				8DEACD081C1805BC00548166 /* JSONKit.m in Sources */,
 				8D5055A11BF08CA20034759B /* ProductDetailModel.m in Sources */,
 				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,
 				8DA060CD1C02BEBD00E3E025 /* DES3Util.m in Sources */,

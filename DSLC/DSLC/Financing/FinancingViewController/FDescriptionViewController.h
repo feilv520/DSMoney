@@ -10,4 +10,6 @@
 
 @interface FDescriptionViewController : BaseViewController
 
+@property (nonatomic, copy) NSString *detailString;
+
 @end

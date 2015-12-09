@@ -46,7 +46,7 @@
 //导航返回按钮
 - (void)buttonReturn:(UIBarButtonItem *)bar
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -330,7 +330,7 @@
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                 NSArray *array = self.navigationController.viewControllers;
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
                 [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
                 
             } else {

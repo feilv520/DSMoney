@@ -392,9 +392,9 @@
      * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
      */
     // 保存图片至本地，方法见下文
-    [self saveImage:image withName:@"currentImage.jpg"];
+    [self saveImage:image withName:@"currentImage.png"];
     
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.jpg"];
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
     
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
     
@@ -504,7 +504,7 @@
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
             [self.navigationController popToRootViewControllerAnimated:NO];
             return ;
         }
