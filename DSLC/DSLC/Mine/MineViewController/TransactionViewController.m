@@ -436,7 +436,7 @@ numberOfRowsInComponent:(NSInteger)component
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
             [self.navigationController popToRootViewControllerAnimated:NO];
             return ;
         }

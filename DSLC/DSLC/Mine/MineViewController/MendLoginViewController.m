@@ -176,7 +176,7 @@
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
                 [ProgressHUD showMessage:[NSString stringWithFormat:@"%@,需要重新登陆",[responseObject objectForKey:@"resultMsg"]] Width:100 High:20];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 

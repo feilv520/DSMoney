@@ -82,7 +82,7 @@
 //导航返回按钮
 - (void)buttonReturn:(UIBarButtonItem *)bar
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -387,7 +387,7 @@
 }
 
 - (void)passButtonAction:(UIButton *)btn{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -450,7 +450,7 @@
             
             NSLog(@"理财师注册");
             
-            NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"cardIDImage.jpg"];
+            NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"cardIDImage.png"];
             
             UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
             
@@ -465,7 +465,7 @@
                 // 设置时间格式
                 formatter.dateFormat = @"yyyyMMddHHmmss";
                 NSString *str = [formatter stringFromDate:[NSDate date]];
-                NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+                NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
                 
                 [formData appendPartWithFileData:finaCard name:@"ImgData" fileName:fileName mimeType:@"application/octet-stream"];
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {

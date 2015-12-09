@@ -304,7 +304,11 @@
         cell.buyPlan.textColor = [UIColor zitihui];
         cell.buyPlan.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.timeOne.text = [self.detailM beginTime];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"YYYY-MM-dd"];
+        NSString *dateString = [formatter stringFromDate:[NSDate date]];
+        
+        cell.timeOne.text = dateString;
         cell.timeOne.textColor = [UIColor zitihui];
         cell.timeOne.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
@@ -366,6 +370,7 @@
         if (indexPath.row == 0) {
             
             FDescriptionViewController *fDes = [[FDescriptionViewController alloc] init];
+            fDes.detailString = [self.detailM productDetail];
             [self.navigationController pushViewController:fDes animated:YES];
             
         } else if (indexPath.row == 2) {

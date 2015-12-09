@@ -414,8 +414,11 @@
 //        
 //    }];
 
+    
+    NSLog(@"password = %@",[DES3Util decrypt:[self.flagUserInfo objectForKey:@"password"]]);
+    
     NSDictionary *parameter = @{@"phone":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"userPhone"]],@"password":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"password"]]};
-    NSLog(@"%@",parameter);
+    NSLog(@"loginParameter = %@",parameter);
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         [self.view endEditing:YES];

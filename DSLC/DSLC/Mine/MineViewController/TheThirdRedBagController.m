@@ -27,6 +27,8 @@
     UILabel *labelGet;
     
     UIView *headView;
+    
+    UILabel *labelMoney;
 }
 
 @property (nonatomic, strong) NSMutableArray *redBagArray;
@@ -73,6 +75,9 @@
     
     UILabel *labelBag = [CreatView creatWithLabelFrame:CGRectMake(10, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor clearColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"累计使用红包"];
     [headView addSubview:labelBag];
+    
+    labelMoney = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"0.00元"]];
+    [headView addSubview:labelMoney];
     
     imageBagArr = @[@"新手体验金", @"银元宝", @"铜元宝", @"钻石", @"金元宝", @"阶梯", @"邀请"];
     styleArr = @[@"新手体验金", @"银元宝红包", @"铜元宝红包", @"钻石红包", @"金元宝红包", @"阶梯红包", @"邀请红包"];
@@ -738,8 +743,7 @@
         
         NSLog(@"getMyRedPacketList = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[responseObject objectForKey:@"redPacketIncome"]]]];
-            [headView addSubview:labelMoney];
+            labelMoney.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[responseObject objectForKey:@"redPacketIncome"]]];
             
             for (NSDictionary *dic in [responseObject objectForKey:@"RedPacket"]) {
                 RedBagModel *redbagModel = [[RedBagModel alloc] init];
@@ -756,7 +760,7 @@
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
             [self.navigationController popToRootViewControllerAnimated:NO];
             return ;
         }
