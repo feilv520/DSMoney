@@ -46,6 +46,8 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"历史记录" style:UIBarButtonItemStylePlain target:self action:@selector(rightBar:)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:15], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnBankName:) name:@"bank" object:nil];
+    
     [self tableViewShow];
 }
 
@@ -276,11 +278,22 @@
             scheduleVC.ID = IDstr;
             NSLog(@"1:%@", IDstr);
             [self.navigationController pushViewController:scheduleVC animated:YES];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
+}
+
+- (void)returnBankName:(NSNotification *)notice
+{
+    NSString *bankName = [notice object];
+    fieldBank = (UITextField *)[self.view viewWithTag:601];
+    fieldBank.text = bankName;
 }
 
 - (void)didReceiveMemoryWarning {

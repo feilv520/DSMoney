@@ -62,7 +62,16 @@
     cell.labelBank.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.labelBank.text = bank.bankName;
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BankName *bank = [bankNameArr objectAtIndex:indexPath.row];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"bank" object:bank.bankName];
+    NSLog(@"%@", bank.bankName);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark 网络请求方法
@@ -75,13 +84,12 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-            BankName *bankName = [[BankName alloc] init];
             NSMutableArray *bankArray = [responseObject objectForKey:@"Bank"];
             for (NSDictionary *dataDic in bankArray) {
+                BankName *bankName = [[BankName alloc] init];
                 [bankName setValuesForKeysWithDictionary:dataDic];
                 [bankNameArr addObject:bankName];
             }
-            
             [_tableView reloadData];
             
         } else {
