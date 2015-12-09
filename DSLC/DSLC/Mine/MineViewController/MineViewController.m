@@ -152,7 +152,7 @@
     [imageRedBG addSubview:butHeadPic];
     
     if ([self.imgString isEqualToString:@""]) {
-        [butHeadPic setBackgroundImage:[UIImage imageNamed:@"shape-29"] forState:UIControlStateNormal];
+        [butHeadPic setBackgroundImage:[UIImage imageNamed:@"默认头像"] forState:UIControlStateNormal];
     } else {
         YYAnimatedImageView *imgView = [YYAnimatedImageView new];
         imgView.tag = 4739;
@@ -321,8 +321,12 @@
             [cell addSubview:myRedBagButton];
             
         }
-        
-        [myRedBagButton setTitle:[self.myAccountInfo objectForKey:@"redPacket"] forState:UIControlStateNormal];
+        if ([[self.myAccountInfo objectForKey:@"redPacket"] isEqualToString:@"0"]) {
+            myRedBagButton.hidden = YES;
+        } else {
+            myRedBagButton.hidden = NO;
+            [myRedBagButton setTitle:[self.myAccountInfo objectForKey:@"redPacket"] forState:UIControlStateNormal];
+        }
         
     } else if (indexPath.row == 5) {
         if (messageButton == nil) {
@@ -342,9 +346,12 @@
             [cell addSubview:messageButton];
             
         }
-        
-        [messageButton setTitle:[self.myAccountInfo objectForKey:@"msgCount"] forState:UIControlStateNormal];
-        
+        if ([[self.myAccountInfo objectForKey:@"msgCount"] isEqualToString:@"0"]) {
+            messageButton.hidden = YES;
+        } else {
+            messageButton.hidden = NO;
+            [messageButton setTitle:[self.myAccountInfo objectForKey:@"msgCount"] forState:UIControlStateNormal];
+        }
     }
     
     return cell;

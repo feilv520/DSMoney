@@ -178,7 +178,7 @@
         MeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMe"];
         
         if ([[self.dataDic objectForKey:@"avatarImg"] isEqualToString:@""]) {
-            cell.imageHeadPic.image = [UIImage imageNamed:@"组-4-拷贝"];
+            cell.imageHeadPic.image = [UIImage imageNamed:@"默认头像"];
         } else {
             cell.imageHeadPic.yy_imageURL = [self.dataDic objectForKey:@"avatarImg"];
         }
