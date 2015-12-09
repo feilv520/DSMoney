@@ -31,6 +31,8 @@
     
     UIButton *butMakeSure;
     NSDictionary *dataDic;
+    
+    NSInteger isOrder;
 }
 @property (nonatomic, strong) UIControl *viewBotton;
 @property (nonatomic, strong) ProductDetailModel *detailM;
@@ -413,14 +415,21 @@
     } else {
         NSLog(@"%@",self.residueMoney);
         if ([self.residueMoney isEqualToString:@"0.00"]) {
-            [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
+            if ([[self.detailM isOrder] isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
+                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            } else {
+                [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
+                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+            }
         } else {
             [butMakeSure setTitle:[NSString stringWithFormat:@"%@%@%@", @"投资(",[dataDic objectForKey:@"amountMin"], @"元起投)"] forState:UIControlStateNormal];
+            [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         }
     }
     
     butMakeSure.titleLabel.font = [UIFont systemFontOfSize:15];
-    butMakeSure.backgroundColor = [UIColor daohanglan];
+    
     [butMakeSure addTarget:self action:@selector(makeSureButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -632,6 +641,8 @@
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSDictionary *parameters = @{@"productId":[self.detailM productId],@"productType":[self.detailM productType],@"token":[dic objectForKey:@"token"]};
+    
+    NSLog(@"%@",parameters);
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/orderProduct" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
