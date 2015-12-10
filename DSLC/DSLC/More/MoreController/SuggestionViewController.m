@@ -77,7 +77,7 @@
     NSInteger statistics = [textView.text length];
     NSString *sumStr = [NSString stringWithFormat:@"%ld", (long)statistics];
     if (statistics >= 500) {
-        NSString *sumString = [NSString stringWithFormat:@"%@%@", @"10", @"/500"];
+        NSString *sumString = [NSString stringWithFormat:@"%@%@", @"500", @"/500"];
         NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:sumString];
         NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
         [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
