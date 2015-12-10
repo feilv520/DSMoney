@@ -200,7 +200,7 @@
         cell.labelDeadline.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelDeadline.textAlignment = NSTextAlignmentCenter;
         
-        cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", self.residueMoney];
+        cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@%@", @"剩余总额:", self.residueMoney, @"元"];
         cell.labelSurplus.textColor = [UIColor zitihui];
         cell.labelSurplus.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelSurplus.backgroundColor = [UIColor clearColor];

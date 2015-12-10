@@ -149,7 +149,7 @@
     cell.labelQiTou.textColor = [UIColor zitihui];
     cell.labelQiTou.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-    cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%@万元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
+    cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
     cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
     cell.labelSurplus.textColor = [UIColor zitihui];
     cell.labelSurplus.font = [UIFont fontWithName:@"CenturyGothic" size:12];
