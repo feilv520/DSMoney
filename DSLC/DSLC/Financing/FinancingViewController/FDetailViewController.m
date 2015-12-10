@@ -420,12 +420,17 @@
     } else {
         NSLog(@"%@",self.residueMoney);
         if ([self.residueMoney isEqualToString:@"0.00"]) {
-            if ([[self.detailM isOrder] isEqualToNumber:[NSNumber numberWithInt:0]]) {
-                [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
-                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            if ([[self.detailM productType] isEqualToString:@"1"]) {
+                if ([[self.detailM isOrder] isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                    [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
+                    [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+                } else {
+                    [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
+                    [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+                }
             } else {
-                [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
-                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+                [butMakeSure setTitle:[NSString stringWithFormat:@"%@%@%@", @"投资(",[dataDic objectForKey:@"amountMin"], @"元起投)"] forState:UIControlStateNormal];
+                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
             }
         } else {
             [butMakeSure setTitle:[NSString stringWithFormat:@"%@%@%@", @"投资(",[dataDic objectForKey:@"amountMin"], @"元起投)"] forState:UIControlStateNormal];
