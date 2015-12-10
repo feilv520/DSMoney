@@ -35,44 +35,36 @@
 - (void)showWithTableView{
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
-    
+    [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = [UIColor huibai];
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
     self.tableView.separatorColor = [UIColor huibai];
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, (160 / 667.0) * HEIGHT_CONTROLLER_DEFAULT + 5)];
+    self.tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
+    [self headViewContent];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ProductMoneyTableViewCell" bundle:nil] forCellReuseIdentifier:@"productMoney"];
-    
-    [self.view addSubview:self.tableView];
-    
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, WIDTH_CONTROLLER_DEFAULT - 20, (160 / 687.0) * HEIGHT_CONTROLLER_DEFAULT)];
-    
-    NSLog(@"%f",HEIGHT_CONTROLLER_DEFAULT);
-    
+- (void)headViewContent
+{    
     UIImageView *photoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyi"]];
-    photoImgView.frame = CGRectMake(10, 10, headerView.frame.size.width, headerView.frame.size.height - 50);
-    
+    photoImgView.frame = CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, self.tableView.tableHeaderView.frame.size.height - 50);
     photoImgView.layer.cornerRadius = 4.f;
     photoImgView.layer.masksToBounds = YES;
-    
-    [headerView addSubview:photoImgView];
+    [self.tableView.tableHeaderView addSubview:photoImgView];
     
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(photoImgView.frame), photoImgView.frame.size.width, 50)];
     backView.backgroundColor = Color_White;
-    
-    UILabel *yesterdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 50)];
+
+    UILabel *yesterdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.tableView.tableHeaderView.frame.size.height - 40, (WIDTH_CONTROLLER_DEFAULT - 20)/3, 40)];
     yesterdayLabel.text = @"昨日收益";
     yesterdayLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     yesterdayLabel.textAlignment = NSTextAlignmentLeft;
+    [self.tableView.tableHeaderView addSubview:yesterdayLabel];
     
-    [backView addSubview:yesterdayLabel];
-    
-    UILabel *yesterdayMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(photoImgView.frame.size.width - 210, 0, 200, 50)];
+    UILabel *yesterdayMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 20)/3 + 10, self.tableView.tableHeaderView.frame.size.height - 40, (WIDTH_CONTROLLER_DEFAULT - 20)/3*2, 40)];
     
     NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ 元",[DES3Util decrypt:self.totalProfit]]];
     NSRange numString = NSMakeRange(0, [[redStringM string] rangeOfString:@"元"].location);
@@ -90,17 +82,58 @@
     [redStringM addAttribute:NSForegroundColorAttributeName value:Color_Red range:numString];
     [yesterdayMoneyLabel setAttributedText:redStringM];
     yesterdayMoneyLabel.textAlignment = NSTextAlignmentRight;
+    [self.tableView.tableHeaderView addSubview:yesterdayMoneyLabel];
     
-    [backView addSubview:yesterdayMoneyLabel];
-    
-    [headerView addSubview:backView];
-    
-    return headerView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 200;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, WIDTH_CONTROLLER_DEFAULT - 20, (160 / 687.0) * HEIGHT_CONTROLLER_DEFAULT)];
+//    
+//    NSLog(@"%f",HEIGHT_CONTROLLER_DEFAULT);
+//    
+//    UIImageView *photoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyi"]];
+//    photoImgView.frame = CGRectMake(10, 10, headerView.frame.size.width, headerView.frame.size.height - 50);
+//    
+//    photoImgView.layer.cornerRadius = 4.f;
+//    photoImgView.layer.masksToBounds = YES;
+//    
+//    [headerView addSubview:photoImgView];
+//    
+//    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(photoImgView.frame), photoImgView.frame.size.width, 50)];
+//    backView.backgroundColor = Color_White;
+//    
+//    UILabel *yesterdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 50)];
+//    yesterdayLabel.text = @"昨日收益";
+//    yesterdayLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+//    yesterdayLabel.textAlignment = NSTextAlignmentLeft;
+//    
+//    [backView addSubview:yesterdayLabel];
+//    
+//    UILabel *yesterdayMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(photoImgView.frame.size.width - 210, 0, 200, 50)];
+//    
+//    NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ 元",[DES3Util decrypt:self.totalProfit]]];
+//    NSRange numString = NSMakeRange(0, [[redStringM string] rangeOfString:@"元"].location);
+//    
+//    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+//        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:numString];
+//        NSRange oneString = NSMakeRange([[redStringM string] length] - 1, 1);
+//        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:oneString];
+//        
+//    } else {
+//        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:30] range:numString];
+//        NSRange oneString = NSMakeRange([[redStringM string] length] - 1, 1);
+//        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:oneString];
+//    }
+//    [redStringM addAttribute:NSForegroundColorAttributeName value:Color_Red range:numString];
+//    [yesterdayMoneyLabel setAttributedText:redStringM];
+//    yesterdayMoneyLabel.textAlignment = NSTextAlignmentRight;
+//    
+//    [backView addSubview:yesterdayMoneyLabel];
+//    
+//    [headerView addSubview:backView];
+//    
+//    return headerView;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;

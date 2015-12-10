@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="CenturyGothic.TTF">
@@ -21,26 +22,39 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E98-mC-63A">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E98-mC-63A">
                         <rect key="frame" x="8" y="5" width="359" height="40"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXB-40-eM6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXB-40-eM6">
                                 <rect key="frame" x="8" y="8" width="250" height="21"/>
                                 <animations/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="5Kk-nr-AIA"/>
+                                    <constraint firstAttribute="width" constant="250" id="m4Z-ta-L3O"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mn-yV-cBe">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mn-yV-cBe">
                                 <rect key="frame" x="115" y="8" width="225" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="225" id="jHN-Wb-ISz"/>
+                                    <constraint firstAttribute="height" constant="21" id="o1u-lh-jxm"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZp-yz-Tr8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZp-yz-Tr8">
                                 <rect key="frame" x="340" y="9" width="17" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="17" id="RMt-Mf-wcx"/>
+                                    <constraint firstAttribute="height" constant="21" id="gg4-2R-B55"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -48,10 +62,27 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="CvV-dO-tQn"/>
+                            <constraint firstItem="SXB-40-eM6" firstAttribute="leading" secondItem="E98-mC-63A" secondAttribute="leading" constant="8" id="S9w-xn-FK6"/>
+                            <constraint firstItem="SXB-40-eM6" firstAttribute="top" secondItem="E98-mC-63A" secondAttribute="top" constant="8" id="XBe-ky-7Kx"/>
+                            <constraint firstItem="1Mn-yV-cBe" firstAttribute="top" secondItem="E98-mC-63A" secondAttribute="top" constant="8" id="XZN-ML-4WB"/>
+                            <constraint firstAttribute="trailing" secondItem="lZp-yz-Tr8" secondAttribute="trailing" constant="2" id="aNT-67-aSD"/>
+                            <constraint firstAttribute="width" constant="359" id="bbC-md-bif"/>
+                            <constraint firstItem="lZp-yz-Tr8" firstAttribute="top" secondItem="E98-mC-63A" secondAttribute="top" constant="9" id="iZ4-eI-gX9"/>
+                            <constraint firstItem="lZp-yz-Tr8" firstAttribute="leading" secondItem="1Mn-yV-cBe" secondAttribute="trailing" id="lhm-yQ-VaV"/>
+                            <constraint firstItem="1Mn-yV-cBe" firstAttribute="leading" secondItem="E98-mC-63A" secondAttribute="leading" constant="115" id="vtR-gK-emU"/>
+                            <constraint firstItem="lZp-yz-Tr8" firstAttribute="leading" secondItem="1Mn-yV-cBe" secondAttribute="trailing" id="yNP-GV-9Jy"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="E98-mC-63A" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-3" id="OfX-O3-Z8s"/>
+                    <constraint firstItem="E98-mC-63A" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="QSd-m2-F0L"/>
+                    <constraint firstItem="E98-mC-63A" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="bze-uf-K5I"/>
+                </constraints>
             </tableViewCellContentView>
             <animations/>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>

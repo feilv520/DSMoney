@@ -117,8 +117,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ChooseOpenAnAccountBank *choose = [[ChooseOpenAnAccountBank alloc] init];
-    [self.navigationController pushViewController:choose animated:YES];
+    if (indexPath.row == 1) {
+        
+        ChooseOpenAnAccountBank *choose = [[ChooseOpenAnAccountBank alloc] init];
+        [self.navigationController pushViewController:choose animated:YES];
+        
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

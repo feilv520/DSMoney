@@ -10,6 +10,7 @@
 #import "MendDeal2Cell.h"
 #import "BindingBankCell.h"
 #import "BindingBankSucceController.h"
+#import "ChooseOpenAnAccountBank.h"
 
 @interface BindingBankCardViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -20,6 +21,7 @@
     UITextField *textField3;
     UITextField *textField4;
     UITextField *textField5;
+    UITextField *textFieldBank;
     
     NSArray *nameArray;
     NSArray *TEXTfIELDaRRAY;
@@ -34,10 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-//    TPKeyboardAvoidingScrollView *tpScrollView = [TPKeyboardAvoidingScrollView new];
-//    
-//    self.view = tpScrollView;
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"绑定银行卡"];
@@ -155,6 +153,23 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1) {
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnChooseBankName:) name:@"bank" object:nil];
+        
+        ChooseOpenAnAccountBank *chooseBank = [[ChooseOpenAnAccountBank alloc] init];
+        [self.navigationController pushViewController:chooseBank animated:YES];
+    }
+}
+
+- (void)returnChooseBankName:(NSNotification *)notice
+{
+    textFieldBank = (UITextField *)[self.view viewWithTag:601];
+    textFieldBank.text = [notice object];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

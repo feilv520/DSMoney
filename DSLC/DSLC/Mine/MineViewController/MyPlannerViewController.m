@@ -28,6 +28,7 @@
     UILabel *labelName;
     NSMutableArray *contentArr;
     Planner *planner;
+    UIButton *butAlready;
 }
 
 @end
@@ -116,9 +117,8 @@
     buttonAsk.layer.borderColor = [[UIColor whiteColor] CGColor];
     [buttonAsk addTarget:self action:@selector(askQuestionButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butAlready = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (213.0 / 375.0), 156, WIDTH_CONTROLLER_DEFAULT * (136.0 / 375.0), 37) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"申请服务"];
+    butAlready = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (213.0 / 375.0), 156, WIDTH_CONTROLLER_DEFAULT * (136.0 / 375.0), 37) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"申请服务"];
     [imageBottom addSubview:butAlready];
-//    [butAlready setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
     butAlready.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     butAlready.layer.cornerRadius = 4;
     butAlready.layer.masksToBounds = YES;
@@ -188,10 +188,28 @@
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 
-//已经申请服务按钮
+//申请理财师服务按钮
 - (void)alreadyApplyForButton:(UIButton *)button
 {
     NSLog(@"已经申请服务");
+    
+    NSDictionary *parmeter = @{@"finUserId":self.IDStr};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/applyFinanciers" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"vvvvvvvvvvv%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [butAlready setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 //导航返回按钮
