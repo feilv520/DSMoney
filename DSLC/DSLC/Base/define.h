@@ -39,6 +39,9 @@
 #define pushVC(viewController) [self.navigationController pushViewController:viewController animated:YES]
 #define popVC [self.navigationController popViewControllerAnimated:YES]
 
+// 判断系统
+#define iOS7 ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0)
+
 #import "FileOfManage.h"                     // 文件管理类
 #import "ProgressHUD.h"                      // 提示框的第三方
 #import "UIColor+AddColor.h"                 // 颜色类目
@@ -62,6 +65,7 @@
 #import "YYWebImage.h"                       // 异步图片加载框架
 #import "MobClick.h"                         // 友盟统计插件
 #import "JSONKit.h"                          // 第三方解析库
+
 
 
 // 访问地址

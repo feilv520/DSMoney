@@ -19,6 +19,7 @@
 #import "MyAfHTTPClient.h"
 #import "ProductListModel.h"
 #import "FDetailViewController.h"
+#import "AdModel.h"
 
 
 @interface SelectionViewController ()<UIScrollViewDelegate>{
@@ -35,6 +36,8 @@
 
 @property (nonatomic, strong) ProductListModel *productM;
 @property (nonatomic, strong) NSDictionary *newProductDic;
+
+@property (nonatomic, strong) NSMutableArray *photoArray;
 
 @end
 
@@ -66,6 +69,8 @@
 
     // Do any additional setup after loading the view.
   
+    self.photoArray = [NSMutableArray array];
+    
     // 加密解密
     NSString* encrypt = @"T5+VBpjWOWNqKlfP5PGRIw==";
 //    NSString* decrypt = [self decryptUseDES:encrypt];
@@ -75,7 +80,6 @@
     NSLog(@"123123-12-3-123-12-3-123--- %@ ==== %@",encrypt,decrypt);
     
     [self makeBackgroundView];
-    [self makeScrollView];
     [self makeThreeButtons];
     [self makePayButton];
     [self makeSafeView];
@@ -114,9 +118,11 @@
 
 // 广告滚动控件
 - (void)makeScrollView{
+    NSInteger photoIndex = self.photoArray.count + 2;
+    
     bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180)];
     bannerScrollView.backgroundColor = Color_White;
-    bannerScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * 5,0);
+    bannerScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * photoIndex,0);
     bannerScrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
     bannerScrollView.showsHorizontalScrollIndicator = NO;
     bannerScrollView.showsVerticalScrollIndicator = NO;
@@ -126,31 +132,61 @@
     
     [backgroundScrollView addSubview:bannerScrollView];
     
-    UIImageView *banner1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyebanner"]];
-    UIImageView *banner2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyebanner"]];
-    UIImageView *banner3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyebanner"]];
-    UIImageView *banner4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyebanner"]];
-    UIImageView *banner5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouyebanner"]];
+    YYAnimatedImageView *bannerFirst = [YYAnimatedImageView new];
+    bannerFirst.yy_imageURL = [NSURL URLWithString:[[self.photoArray objectAtIndex:0] adImg]];
+    bannerFirst.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180);
     
-    banner1.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180);
-    banner2.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT, 0, WIDTH_CONTROLLER_DEFAULT, 180);
-    banner3.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * 2, 0, WIDTH_CONTROLLER_DEFAULT, 180);
-    banner4.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * 3, 0, WIDTH_CONTROLLER_DEFAULT, 180);
-    banner5.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * 4, 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    YYAnimatedImageView *bannerLast = [YYAnimatedImageView new];
+    bannerLast.yy_imageURL = [NSURL URLWithString:[[self.photoArray objectAtIndex:self.photoArray.count - 1] adImg]];
+    bannerLast.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (self.photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    
+    for (NSInteger i = 0; i < self.photoArray.count; i++) {
+        YYAnimatedImageView *bannerObject = [YYAnimatedImageView new];
+        bannerObject.yy_imageURL = [NSURL URLWithString:[[self.photoArray objectAtIndex:i] adImg]];
+        bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+        
+        [bannerScrollView addSubview:bannerObject];
+    }
+    
+    [bannerScrollView addSubview:bannerFirst];
+    [bannerScrollView addSubview:bannerLast];
     
     pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 150, WIDTH_CONTROLLER_DEFAULT, 30)];
     
-    pageControl.numberOfPages = 3;
+    pageControl.numberOfPages = self.photoArray.count;
     pageControl.currentPage = 0;
     
-    [bannerScrollView addSubview:banner1];
-    [bannerScrollView addSubview:banner2];
-    [bannerScrollView addSubview:banner3];
-    [bannerScrollView addSubview:banner4];
-    [bannerScrollView addSubview:banner5];
+    [self changePageControlImage];
+
     [backgroundScrollView addSubview:pageControl];
     
 }
+
+//改变pagecontrol中圆点样式
+- (void)changePageControlImage
+{
+    static UIImage *imgCurrent = nil;
+    static UIImage *imgOther = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        imgCurrent = [UIImage imageNamed:@"banner_red"];
+        imgOther = [UIImage imageNamed:@"banner_black"];
+    });
+    
+    
+    if (iOS7) {
+        [pageControl setValue:imgCurrent forKey:@"_currentPageImage"];
+        [pageControl setValue:imgOther forKey:@"_pageImage"];
+    } else {
+        for (int i = 0;i < 3; i++) {
+            UIImageView *imageVieW = [pageControl.subviews objectAtIndex:i];
+            imageVieW.frame = CGRectMake(imageVieW.frame.origin.x, imageVieW.frame.origin.y, 20, 20);
+            imageVieW.image = pageControl.currentPage == i ? imgCurrent : imgOther;
+        }
+    }
+}
+
 
 // 三个按钮View
 - (void)makeThreeButtons
@@ -410,6 +446,14 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"AD = %@",responseObject);
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
+            AdModel *adModel = [[AdModel alloc] init];
+            [adModel setValuesForKeysWithDictionary:dic];
+            [self.photoArray addObject:adModel];
+        }
+        
+        [self makeScrollView];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

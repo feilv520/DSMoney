@@ -188,7 +188,7 @@
         cell.labelSheng.textColor = [UIColor zitihui];
         cell.labelSheng.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.labelMoney.text = [NSString stringWithFormat:@"%@万元",[self.asset objectForKey:@"assetAmount"]];
+        cell.labelMoney.text = [NSString stringWithFormat:@"%@元",[self.asset objectForKey:@"assetAmount"]];
         cell.labelMoney.textColor = [UIColor zitihui];
         cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelMoney.textAlignment = NSTextAlignmentRight;
@@ -388,7 +388,7 @@
         self.product = [NSDictionary dictionary];
         self.product = [responseObject objectForKey:@"Product"];
         
-        rightArray = @[[self.asset objectForKey:@"assetName"], [self.asset objectForKey:@"assetTypeName"], [NSString stringWithFormat:@"%@万元",[self.asset objectForKey:@"assetAmount"]], [self.asset objectForKey:@"assetSaleTime"], [self.asset objectForKey:@"assetInterestBdate"], [self.asset objectForKey:@"assetInterestEdate"], [self.asset objectForKey:@"assetToaccountDate"], [self.asset objectForKey:@"assetYieldDistribType"], [self.asset objectForKey:@"assetFinancierName"], [self.asset objectForKey:@"assetFundsUse"], [self.asset objectForKey:@"assetRepaymentSource"]];
+        rightArray = @[[self.asset objectForKey:@"assetName"], [self.asset objectForKey:@"assetTypeName"], [NSString stringWithFormat:@"%@元",[self.asset objectForKey:@"assetAmount"]], [self.asset objectForKey:@"assetSaleTime"], [self.asset objectForKey:@"assetInterestBdate"], [self.asset objectForKey:@"assetInterestEdate"], [self.asset objectForKey:@"assetToaccountDate"], [self.asset objectForKey:@"assetYieldDistribType"], [self.asset objectForKey:@"assetFinancierName"], [self.asset objectForKey:@"assetFundsUse"], [self.asset objectForKey:@"assetRepaymentSource"]];
         
         [_tableView reloadData];
         
