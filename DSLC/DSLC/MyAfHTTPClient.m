@@ -67,7 +67,7 @@
                 [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
         }
         responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
-        NSLog(@"%@",responseString);
+//        NSLog(@"%@",responseString);
         NSDictionary *responseData = [MyAfHTTPClient parseJSONStringToNSDictionary:responseString];
         success(task,responseData);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
