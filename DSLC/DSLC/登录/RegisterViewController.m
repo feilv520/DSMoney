@@ -82,7 +82,7 @@
 //导航返回按钮
 - (void)buttonReturn:(UIBarButtonItem *)bar
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

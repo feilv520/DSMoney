@@ -106,8 +106,8 @@
     ProductListModel *proModel = [self.productListArray objectAtIndex:indexPath.row];
     
     NSString *monthStr = [proModel.productName substringWithRange:NSMakeRange(0, [proModel.productName rangeOfString:@"个"].location)];
+    
     [cell.buttonRed setTitle:monthStr forState:UIControlStateNormal];
-    [cell.buttonRed setTitle:[butRedArray objectAtIndex:indexPath.row] forState:UIControlStateNormal];
     [cell.buttonRed setBackgroundImage:[UIImage imageNamed:@"圆角矩形-2"] forState:UIControlStateNormal];
     
     NSString *lastStr = [proModel.productName substringWithRange:NSMakeRange([proModel.productName rangeOfString:@"个"].location, proModel.productName.length - monthStr.length)];
