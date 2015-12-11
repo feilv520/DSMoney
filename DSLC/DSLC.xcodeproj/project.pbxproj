@@ -359,6 +359,9 @@
 		81C8BBCF1BDA3535005B9DFF /* HelpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C8BBCD1BDA3535005B9DFF /* HelpCell.m */; };
 		81C8BBD01BDA3535005B9DFF /* HelpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C8BBCE1BDA3535005B9DFF /* HelpCell.xib */; };
 		81C8BBD31BDA3544005B9DFF /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C8BBD21BDA3544005B9DFF /* HelpViewController.m */; };
+		81CBB74A1C1AC1D3002CDE97 /* NewHandGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CBB7491C1AC1D3002CDE97 /* NewHandGuide.m */; settings = {ASSET_TAGS = (); }; };
+		81CBB74D1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CBB74C1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m */; settings = {ASSET_TAGS = (); }; };
+		81CBB7501C1AC6E9002CDE97 /* SafeProtectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CBB74F1C1AC6E9002CDE97 /* SafeProtectViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81D703F31BE06BD60074DF30 /* ForgetSecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703F21BE06BD60074DF30 /* ForgetSecretViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81D703F71BE06D1F0074DF30 /* ForgetSecretCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703F51BE06D1F0074DF30 /* ForgetSecretCell.m */; settings = {ASSET_TAGS = (); }; };
 		81D703F81BE06D1F0074DF30 /* ForgetSecretCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D703F61BE06D1F0074DF30 /* ForgetSecretCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -1244,6 +1247,12 @@
 		81C8BBCE1BDA3535005B9DFF /* HelpCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpCell.xib; sourceTree = "<group>"; };
 		81C8BBD11BDA3544005B9DFF /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		81C8BBD21BDA3544005B9DFF /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		81CBB7481C1AC1D3002CDE97 /* NewHandGuide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHandGuide.h; sourceTree = "<group>"; };
+		81CBB7491C1AC1D3002CDE97 /* NewHandGuide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHandGuide.m; sourceTree = "<group>"; };
+		81CBB74B1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MillionsAndMillionsRiskMoney.h; sourceTree = "<group>"; };
+		81CBB74C1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MillionsAndMillionsRiskMoney.m; sourceTree = "<group>"; };
+		81CBB74E1C1AC6E9002CDE97 /* SafeProtectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafeProtectViewController.h; sourceTree = "<group>"; };
+		81CBB74F1C1AC6E9002CDE97 /* SafeProtectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafeProtectViewController.m; sourceTree = "<group>"; };
 		81D703F11BE06BD60074DF30 /* ForgetSecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetSecretViewController.h; sourceTree = "<group>"; };
 		81D703F21BE06BD60074DF30 /* ForgetSecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetSecretViewController.m; sourceTree = "<group>"; };
 		81D703F41BE06D1F0074DF30 /* ForgetSecretCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetSecretCell.h; sourceTree = "<group>"; };
@@ -3154,6 +3163,12 @@
 			children = (
 				81C2DAAA1BC7563A0007AC48 /* SelectionViewController.h */,
 				81C2DAAB1BC7563A0007AC48 /* SelectionViewController.m */,
+				81CBB74E1C1AC6E9002CDE97 /* SafeProtectViewController.h */,
+				81CBB74F1C1AC6E9002CDE97 /* SafeProtectViewController.m */,
+				81CBB74B1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.h */,
+				81CBB74C1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m */,
+				81CBB7481C1AC1D3002CDE97 /* NewHandGuide.h */,
+				81CBB7491C1AC1D3002CDE97 /* NewHandGuide.m */,
 			);
 			path = SelectionController;
 			sourceTree = "<group>";
@@ -4228,6 +4243,7 @@
 				81C8BBD31BDA3544005B9DFF /* HelpViewController.m in Sources */,
 				818A39E51BF475A800F01CAA /* MBProgressHUD.m in Sources */,
 				813785941BF4AB700044A588 /* InviteRegisterViewController.m in Sources */,
+				81CBB74A1C1AC1D3002CDE97 /* NewHandGuide.m in Sources */,
 				8D9BE8F01C0EC94D003C67D3 /* YYImage.m in Sources */,
 				81D703F31BE06BD60074DF30 /* ForgetSecretViewController.m in Sources */,
 				817E33981BD772A700D05103 /* BigMoneyViewController.m in Sources */,
@@ -4294,6 +4310,7 @@
 				818063971BD5D3C700E83492 /* MyInvitationViewController.m in Sources */,
 				8D9BE8E61C0EC94D003C67D3 /* YYKVStorage.m in Sources */,
 				8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */,
+				81CBB74D1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m in Sources */,
 				81F237711BE8568B009D7A67 /* NewMakeSureCell.m in Sources */,
 				8D88D1041BFECCB40051D6DA /* MJRefreshConst.m in Sources */,
 				8175BE801BE9B50D0044026E /* RecordCell.m in Sources */,
@@ -4402,6 +4419,7 @@
 				81E831061BF0469F00127EE8 /* MyChoosePlanner.m in Sources */,
 				8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */,
 				8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */,
+				81CBB7501C1AC6E9002CDE97 /* SafeProtectViewController.m in Sources */,
 				81200C1E1C031F1700F70DDD /* InviteNumReginCell.m in Sources */,
 				8D0AE8041BE0ABFB00D9D50C /* RegisterOfView.m in Sources */,
 				8DD180A21BD731E000F71CEA /* GetMoneyTipTableViewCell.m in Sources */,

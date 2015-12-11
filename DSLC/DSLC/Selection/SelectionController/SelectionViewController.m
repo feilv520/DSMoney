@@ -20,6 +20,9 @@
 #import "ProductListModel.h"
 #import "FDetailViewController.h"
 #import "AdModel.h"
+#import "NewHandGuide.h"
+#import "MillionsAndMillionsRiskMoney.h"
+#import "SafeProtectViewController.h"
 
 
 @interface SelectionViewController ()<UIScrollViewDelegate>{
@@ -419,21 +422,23 @@
 - (void)buttonAction:(id)sender{
     
     UIButton *button = (UIButton *)sender;
-    SelectionV *sView = (SelectionV *)button.superview;
+//    SelectionV *sView = (SelectionV *)button.superview;
     
     if (button.tag == 2) {
-        NewHandViewController *newHandVC = [[NewHandViewController alloc] init];
-        [self.navigationController pushViewController:newHandVC animated:YES];
+        
+        NewHandGuide *newHand = [[NewHandGuide alloc] init];
+        [self.navigationController pushViewController:newHand animated:YES];
+        
     } else if (button.tag == 1){
+        
+        MillionsAndMillionsRiskMoney *riskMoney = [[MillionsAndMillionsRiskMoney alloc] init];
+        [self.navigationController pushViewController:riskMoney animated:YES];
 
     } else {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:sView.titleLabel.text message:sView.titleLabel.text preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
-        [alertController addAction:cancelAction];
-        [alertController addAction:okAction];
         
-        [self presentViewController:alertController animated:YES completion:nil];
+        SafeProtectViewController *safe = [[SafeProtectViewController alloc] init];
+        [self.navigationController pushViewController:safe animated:YES];
+
     }
     
 }

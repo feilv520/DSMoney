@@ -45,7 +45,7 @@
     
     imageArr = @[@[@"lianxikefu"], @[@"微信", @"新浪微博"]];
     titleArr = @[@[@"客服热线"],@[@"微信公众号", @"官方微博"]];
-    contentArr = @[@[@"400-254-569"], @[@"大圣理财服务号", @"大圣理财平台"]];
+    contentArr = @[@[@"400-816-2283"], @[@"大圣理财服务号", @"大圣理财平台"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -172,7 +172,7 @@
     
     if (rectMain.size.width == 320) {
         
-        NSMutableAttributedString *callOutStr = [[NSMutableAttributedString alloc] initWithString:@"拨打客服电话 :400-254-569?"];
+        NSMutableAttributedString *callOutStr = [[NSMutableAttributedString alloc] initWithString:@"拨打客服电话 :400-816-2283?"];
         NSRange callString = NSMakeRange(0, [[callOutStr string] rangeOfString:@":"].location);
         [callOutStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:callString];
         
@@ -186,7 +186,7 @@
 
     } else {
         
-        NSMutableAttributedString *callOutStr = [[NSMutableAttributedString alloc] initWithString:@"拨打客服电话 : 400-254-569?"];
+        NSMutableAttributedString *callOutStr = [[NSMutableAttributedString alloc] initWithString:@"拨打客服电话 : 400-816-2283?"];
         NSRange callString = NSMakeRange(0, [[callOutStr string] rangeOfString:@":"].location);
         [callOutStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:callString];
         
@@ -242,7 +242,7 @@
 
 - (void)callMakeSureButton:(UIButton *)button
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%ld", 13354288036]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%d", 400-816-2283]];
     [[UIApplication sharedApplication] openURL:url];
 }
 
