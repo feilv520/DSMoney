@@ -179,6 +179,7 @@
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
             
             if ([self.redbagModel rpID] == nil) {
 //              支付没有红包
@@ -199,7 +200,7 @@
                 shareHave.endTimeString = self.endTimeString;
                 shareHave.productName = self.productName;
                 [self.navigationController pushViewController:shareHave animated:YES];
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
+//                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
             }
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
