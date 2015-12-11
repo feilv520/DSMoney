@@ -177,6 +177,7 @@
     
     CashOtherFinViewController *cashOFVC = [[CashOtherFinViewController alloc] init];
     cashOFVC.moneyString = self.moneyString;
+    cashOFVC.syString = self.syString;
     cashOFVC.endTimeString = self.endTimeString;
     cashOFVC.productName = self.productName;
     [self.navigationController pushViewController:cashOFVC animated:NO];

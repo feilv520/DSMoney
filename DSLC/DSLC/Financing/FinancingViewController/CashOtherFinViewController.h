@@ -15,6 +15,7 @@
 
 @property (nonatomic, copy) NSString *productName;
 @property (nonatomic, copy) NSString *moneyString;
+@property (nonatomic, copy) NSString *syString;
 @property (nonatomic, copy) NSString *endTimeString;
 
 @end

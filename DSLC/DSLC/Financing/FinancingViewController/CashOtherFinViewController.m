@@ -51,7 +51,7 @@
 
 - (void)contentShow
 {
-    contentArr = @[[NSString stringWithFormat:@"投资金额:%@元",self.moneyString], [NSString stringWithFormat:@"预期到期收益:%.2f元",(arc4random() % 30) + 20.3], [NSString stringWithFormat:@"兑付日期:%@",self.endTimeString]];
+    contentArr = @[[NSString stringWithFormat:@"投资金额:%@元",self.moneyString], [NSString stringWithFormat:@"预期到期收益:%@",self.syString], [NSString stringWithFormat:@"兑付日期:%@",self.endTimeString]];
     
     UIButton *butonDo = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 60, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"恭喜你投资成功"];
     [butonDo setImage:[UIImage imageNamed:@"iconfont_complete"] forState:UIControlStateNormal];

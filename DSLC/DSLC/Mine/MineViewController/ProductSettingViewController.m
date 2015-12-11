@@ -420,20 +420,20 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAssetInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-//        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
-//            NSLog(@"134897189374987342987243789423");
-//            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
-//                [FileOfManage createWithFile:@"isLogin.plist"];
-//                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-//                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-//            } else {
-//                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-//                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-//            }
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
-//            [self.navigationController popToRootViewControllerAnimated:NO];
-//            return ;
-//        }
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
+            NSLog(@"134897189374987342987243789423");
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            return ;
+        }
         
         NSLog(@"%@",responseObject);
         self.moneyDic = [NSDictionary dictionary];

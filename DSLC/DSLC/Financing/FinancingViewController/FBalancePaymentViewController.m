@@ -185,6 +185,7 @@
                 CashOtherFinViewController *cashOther = [[CashOtherFinViewController alloc] init];
                 cashOther.nHand = self.nHand;
                 cashOther.moneyString = self.moneyString;
+                cashOther.syString = self.syString;
                 cashOther.endTimeString = self.endTimeString;
                 cashOther.productName = self.productName;
                 [self.navigationController pushViewController:cashOther animated:YES];
@@ -194,6 +195,7 @@
                 shareHave.nHand = self.nHand;
                 shareHave.redbagModel = self.redbagModel;
                 shareHave.moneyString = self.moneyString;
+                shareHave.syString = self.syString;
                 shareHave.endTimeString = self.endTimeString;
                 shareHave.productName = self.productName;
                 [self.navigationController pushViewController:shareHave animated:YES];

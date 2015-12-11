@@ -338,6 +338,8 @@ numberOfRowsInComponent:(NSInteger)component
     
     [labelButton setImage:[UIImage imageNamed:monthString] forState:UIControlStateNormal];
     
+    NSLog(@"monthString = %@",monthString);
+    
     [labelButton setTitle:@" 月" forState:UIControlStateNormal];
     [labelButton.titleLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:14]];
     [labelButton setTitleColor:Color_Red forState:UIControlStateNormal];
@@ -436,7 +438,7 @@ numberOfRowsInComponent:(NSInteger)component
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
             [self.navigationController popToRootViewControllerAnimated:NO];
             return ;
         }
