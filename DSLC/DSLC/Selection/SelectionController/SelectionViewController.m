@@ -360,12 +360,12 @@
     CGRect bounds = scrollView.frame;
     [pageControl setCurrentPage:offset.x / bounds.size.width - 1];
     
-    if (offset.x == WIDTH_CONTROLLER_DEFAULT * 4) {
+    if (offset.x == WIDTH_CONTROLLER_DEFAULT * (self.photoArray.count + 1)) {
         [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
         pageControl.currentPage = 0;
     } else if (offset.x == 0) {
-        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * 3, 0) animated:NO];
-        pageControl.currentPage = 2;
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * self.photoArray.count, 0) animated:NO];
+        pageControl.currentPage = self.photoArray.count - 1;
     }
 
 }
@@ -395,12 +395,12 @@
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     CGPoint offset = [scrollView contentOffset];
     
-    if (offset.x == WIDTH_CONTROLLER_DEFAULT * 4) {
+    if (offset.x == WIDTH_CONTROLLER_DEFAULT * (self.photoArray.count + 1)) {
         [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
         pageControl.currentPage = 0;
     } else if (offset.x == 0) {
-        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * 3, 0) animated:NO];
-        pageControl.currentPage = 2;
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * self.photoArray.count, 0) animated:NO];
+        pageControl.currentPage = self.photoArray.count - 1;
     }
 }
 
