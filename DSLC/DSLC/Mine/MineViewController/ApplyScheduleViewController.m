@@ -620,6 +620,9 @@
             NSArray *viewControllers = [self.navigationController viewControllers];
             [self.navigationController popToViewController:[viewControllers objectAtIndex:1] animated:YES];
             
+            // 刷新我的账户数据
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+            
         } else {
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];

@@ -193,7 +193,9 @@
 {
     NSLog(@"已经申请服务");
     
-    NSDictionary *parmeter = @{@"finUserId":self.IDStr};
+    NSDictionary *parmeter = @{@"finUserId":planner.ID};
+    NSLog(@"-------%@", planner.ID);
+    
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/applyFinanciers" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"vvvvvvvvvvv%@", responseObject);
@@ -202,6 +204,8 @@
             
             [butAlready setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+            
         } else {
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];

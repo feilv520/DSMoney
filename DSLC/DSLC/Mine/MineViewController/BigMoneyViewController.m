@@ -278,6 +278,8 @@
             scheduleVC.ID = IDstr;
             NSLog(@"1:%@", IDstr);
             [self.navigationController pushViewController:scheduleVC animated:YES];
+            // 刷新我的账户数据
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
             
         } else {
             

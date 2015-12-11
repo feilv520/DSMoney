@@ -17,5 +17,11 @@
 @property (nonatomic) NSString *totalAmount;
 @property (nonatomic) NSString *totalProfit;
 @property (nonatomic) NSString *serCount;
+@property (nonatomic) NSString *earnMoney;
+@property (nonatomic) NSString *money;
+@property (nonatomic) NSString *serveCount;
+@property (nonatomic) NSString *userAccount;
+@property (nonatomic) NSString *userNickname;
+@property (nonatomic) NSString *userPhone;
 
 @end

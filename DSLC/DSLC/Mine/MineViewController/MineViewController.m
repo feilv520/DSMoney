@@ -33,6 +33,7 @@
 #import "TheThirdRedBagController.h"
 #import "EditBigMoney.h"
 #import "ApplyScheduleViewController.h"
+#import "Planner.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -46,6 +47,7 @@
     UILabel *moneyLabel;
     UIButton *myRedBagButton;
     UIButton *messageButton;
+    NSMutableArray *plannerArray;
 }
 
 @property (nonatomic, strong) NSString *imgString;
@@ -74,6 +76,8 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor huibai];
+    
+    plannerArray = [NSMutableArray array];
     
     [self loadingWithView:self.view loadingFlag:NO height:self.view.center.y];
     
@@ -405,13 +409,39 @@
 //我的理财师按钮
 - (void)inviteButton:(UIButton *)button
 {
-//    如果已经有自己的理财师直接跳转到我的理财师
-//    MyPlannerViewController *myPlannerVC = [[MyPlannerViewController alloc] init];
-//    [self.navigationController pushViewController:myPlannerVC animated:YES];
-    
-//    如果还没有自己的理财师 跳转到可选理财师的页面
-    MyChoosePlanner *myChoose = [[MyChoosePlanner alloc] init];
-    [self.navigationController pushViewController:myChoose animated:YES];
+    if ([[[self.myAccountInfo objectForKey:@"myFinPlanner"] description] isEqualToString:@"0"]) {
+        
+//      如果还没有自己的理财师 跳转到理财师列表的页面
+        MyChoosePlanner *myChoose = [[MyChoosePlanner alloc] init];
+        [self.navigationController pushViewController:myChoose animated:YES];
+        
+    } else {
+        
+//      如果已经有自己的理财师直接跳转到我的理财师
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        NSDictionary *parmeter = @{@"token":[dic objectForKey:@"token"]};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyFinPlanner" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"^^^^^^^^^%@", responseObject);
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                
+                NSDictionary *dataDic = [responseObject objectForKey:@"User"];
+                Planner *planner = [[Planner alloc] init];
+                [planner setValuesForKeysWithDictionary:dataDic];
+                [plannerArray addObject: planner];
+            }
+            
+            NSLog(@"iiiiiiii%@", plannerArray);
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
+//        MyPlannerViewController *myPlannerVC = [[MyPlannerViewController alloc] init];
+//        [self.navigationController pushViewController:myPlannerVC animated:YES];
+        
+    }
 }
 
 //充值按钮
