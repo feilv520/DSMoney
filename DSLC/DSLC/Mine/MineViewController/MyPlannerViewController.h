@@ -13,5 +13,6 @@
 @interface MyPlannerViewController : BaseViewController
 
 @property (nonatomic) NSString *IDStr;
+@property (nonatomic) NSInteger design;
 
 @end

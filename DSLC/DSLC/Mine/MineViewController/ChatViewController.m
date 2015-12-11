@@ -115,7 +115,7 @@
 }
 
 #pragma mark 网络请求方法
-#pragma mark ------------------------------------------------------------------------------
+#pragma mark --------------------------
 
 //发送消息
 - (void)sendMessage:(UIButton *)button
@@ -179,7 +179,7 @@
 
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"111&&&1111%@", responseObject);
+        NSLog(@"咨询详情:111&&&1111%@", responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
@@ -189,7 +189,7 @@
                 [chat setValuesForKeysWithDictionary:dataDic];
                 [chatArray addObject:chat];
             }
-            NSLog(@"数组:%@", chatArray);
+
             [_tableView reloadData];
             
         } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {

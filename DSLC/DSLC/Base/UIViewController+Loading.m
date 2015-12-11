@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+Loading.h"
+#import "AppDelegate.h"
 
 @implementation UIViewController (Loading)
 
@@ -226,5 +227,22 @@
         }
     }
 }
+
+- (void)showTanKuangWithMode:(MBProgressHUDMode)mode Text:(NSString *)text
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:app.tabBarVC.view animated:YES];
+    hud.mode = mode;
+    hud.labelText = text;
+    hud.labelFont = [UIFont systemFontOfSize:12];
+    hud.minSize = CGSizeMake(0, 55);
+    hud.margin = 10;
+    hud.yOffset = -50;
+    hud.cornerRadius = 5.0f;
+    hud.removeFromSuperViewOnHide = YES;
+    [hud hide:YES afterDelay:0.8];
+}
+
 
 @end

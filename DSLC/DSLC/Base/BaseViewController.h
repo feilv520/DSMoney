@@ -18,6 +18,4 @@
 
 - (void)setTitleString:(NSString *)titleString;
 
-- (void)showTanKuangWithMode:(MBProgressHUDMode)mode Text:(NSString *)text;
-
 @end

@@ -41,4 +41,6 @@
 // 判断字号
 - (NSInteger)sizeOfLength:(NSString *)string;
 
+- (void)showTanKuangWithMode:(MBProgressHUDMode)mode Text:(NSString *)text;
+
 @end

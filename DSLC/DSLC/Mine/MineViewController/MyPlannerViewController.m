@@ -22,13 +22,15 @@
     NSArray *titleArr;
     NSArray *monAndPeoArr;
     UIImageView *imageBottom;
-    UIImageView *imageHead;
+    YYAnimatedImageView *imageHead;
     UIImageView *imageCrown;
     CGFloat height;
     UILabel *labelName;
     NSMutableArray *contentArr;
     Planner *planner;
     UIButton *butAlready;
+    
+    BOOL panduan;
 }
 
 @end
@@ -52,6 +54,12 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     contentArr = [NSMutableArray array];
+    panduan = NO;
+    
+    UIImageView *imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageReturn];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnMineLeaf:)];
+    [imageReturn addGestureRecognizer:tap];
     
     [self getMyFinPlanner];
     
@@ -59,10 +67,22 @@
     [self tableViewShow];
 }
 
+- (void)returnMineLeaf:(UIBarButtonItem *)bar
+{
+    if (panduan == YES) {
+        
+        NSArray *viewController = [self.navigationController viewControllers];
+        [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
+        
+    } else {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (void)tableViewShow
 {
     titleArr = @[@"邀请码", @"共为客户赚取金额", @"以服务客户人数", @"累计投资总额"];
-//    monAndPeoArr = @[self.inviteNum, @"3,803.00元", @"237,438人", @"237,438元"];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
@@ -74,7 +94,6 @@
     viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 215)];
     _tableView.tableHeaderView = viewHead;
     viewHead.backgroundColor = [UIColor whiteColor];
-    [self viewHeadShow];
     
     UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
     _tableView.tableFooterView = viewFoot;
@@ -96,7 +115,8 @@
 //    让子类自动布局
     imageBottom.autoresizesSubviews = YES;
     
-    imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 40, 25, 80, 80) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658"]];
+//    @"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658"
+    imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 40, 25, 80, 80) backGroundColor:[UIColor clearColor] setImage:nil];
     [imageBottom addSubview:imageHead];
     imageHead.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
@@ -140,27 +160,53 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MyPlannerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    
     cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
     cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    cell.moneyAndPeople.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    cell.moneyAndPeople.textAlignment = NSTextAlignmentRight;
-    labelName.text = planner.userRealname;
-    
-    if (indexPath.row == 1) {
-        cell.moneyAndPeople.textColor = [UIColor daohanglan];
-        cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", planner.totalProfit, @"元"];
+    if (self.design == 1) {
+       
+        cell.moneyAndPeople.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        cell.moneyAndPeople.textAlignment = NSTextAlignmentRight;
+        labelName.text = [DES3Util decrypt:planner.userRealname];
+        imageHead.yy_imageURL = [NSURL URLWithString:planner.avatarImg];
         
-    } else if (indexPath.row == 0) {
-        cell.moneyAndPeople.text = planner.inviteCode;
-        
-    } else if (indexPath.row == 2) {
-        cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", planner.serCount, @"人"];
+        if (indexPath.row == 1) {
+            cell.moneyAndPeople.textColor = [UIColor daohanglan];
+            cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", [DES3Util decrypt:planner.earnMoney], @"元"];
+            
+        } else if (indexPath.row == 0) {
+            cell.moneyAndPeople.text = planner.inviteCode;
+            
+        } else if (indexPath.row == 2) {
+            cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", planner.serveCount, @"人"];
+            
+        } else {
+            cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", planner.totalAmount, @"元"];
+        }
         
     } else {
-        cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", planner.totalAmount, @"元"];
+        
+        cell.moneyAndPeople.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        cell.moneyAndPeople.textAlignment = NSTextAlignmentRight;
+        labelName.text = planner.userRealname;
+        imageHead.yy_imageURL = [NSURL URLWithString:planner.avatarImg];
+        
+        if (indexPath.row == 1) {
+            cell.moneyAndPeople.textColor = [UIColor daohanglan];
+            cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", planner.totalProfit, @"元"];
+            
+        } else if (indexPath.row == 0) {
+            cell.moneyAndPeople.text = planner.inviteCode;
+            
+        } else if (indexPath.row == 2) {
+            cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", planner.serCount, @"人"];
+            
+        } else {
+            cell.moneyAndPeople.text = [NSString stringWithFormat:@"%@%@", planner.totalAmount, @"元"];
+        }
+        
     }
+    
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -204,6 +250,8 @@
             
             [butAlready setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            panduan = YES;
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
             
         } else {
@@ -235,41 +283,75 @@
 #pragma mark --------------------------------
 - (void)getMyFinPlanner
 {
-    NSDictionary *parameter = @{@"fpId":self.IDStr};
-    
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getIndexFinPlannerInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    if (self.design == 1) {
         
-        NSLog(@"我的理财师:%@",responseObject);
-        
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        NSDictionary *parmeter = @{@"token":[dic objectForKey:@"token"]};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyFinPlanner" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            planner = [[Planner alloc] init];
-            NSDictionary *dataDic = [responseObject objectForKey:@"User"];
-            [planner setValuesForKeysWithDictionary:dataDic];
-            [contentArr addObject:planner];
-            NSLog(@"mmmmmmm%@", contentArr);
-        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
-            NSLog(@"134897189374987342987243789423");
-            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
-                [FileOfManage createWithFile:@"isLogin.plist"];
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            NSLog(@"^^^^^^^^^%@", responseObject);
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                
+                NSDictionary *dataDic = [responseObject objectForKey:@"User"];
+                planner = [[Planner alloc] init];
+                [planner setValuesForKeysWithDictionary:dataDic];
+                
+                [self viewHeadShow];
+                [butAlready setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
+                
             } else {
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
-            [self.navigationController popToRootViewControllerAnimated:NO];
-            return ;
-        }
+            
+            [_tableView reloadData];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
         
-        [_tableView reloadData];
+    } else {
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSDictionary *parameter = @{@"fpId":self.IDStr};
         
-        NSLog(@"jjjjjj%@", error);
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getIndexFinPlannerInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"我的理财师:%@",responseObject);
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                
+                planner = [[Planner alloc] init];
+                NSDictionary *dataDic = [responseObject objectForKey:@"User"];
+                [planner setValuesForKeysWithDictionary:dataDic];
+                [contentArr addObject:planner];
+                [self viewHeadShow];
+                NSLog(@"mmmmmmm%@", contentArr);
+            } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
+                NSLog(@"134897189374987342987243789423");
+                if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                    [FileOfManage createWithFile:@"isLogin.plist"];
+                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                    [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                } else {
+                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                    [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
+                [self.navigationController popToRootViewControllerAnimated:NO];
+                return ;
+            }
+            
+            [_tableView reloadData];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"jjjjjj%@", error);
+            
+        }];
         
-    }];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
