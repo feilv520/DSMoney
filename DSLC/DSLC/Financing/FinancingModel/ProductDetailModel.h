@@ -46,4 +46,6 @@
 
 @property (nonatomic, copy) NSNumber *isOrder;
 
+@property (nonatomic, copy) NSString *productDaysLimit;
+
 @end
