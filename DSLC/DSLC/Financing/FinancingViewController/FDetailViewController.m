@@ -430,7 +430,8 @@
                 }
             } else {
                 [butMakeSure setTitle:[NSString stringWithFormat:@"%@%@%@", @"投资(",[dataDic objectForKey:@"amountMin"], @"元起投)"] forState:UIControlStateNormal];
-                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+                [butMakeSure setUserInteractionEnabled:NO];
             }
         } else {
             [butMakeSure setTitle:[NSString stringWithFormat:@"%@%@%@", @"投资(",[dataDic objectForKey:@"amountMin"], @"元起投)"] forState:UIControlStateNormal];
@@ -453,8 +454,6 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"剩余金额已小于起投金额,不能投资此产品"];
         return;
     }
-    
-    
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
@@ -552,7 +551,12 @@
         calendar.inputMoney.tintColor = [UIColor grayColor];
         
         calendar.yearLv.text = [self.detailM productAnnualYield];
-        calendar.dayLabel.text = [self.detailM productPeriod];
+        
+        if ([[self.detailM productType] isEqualToString:@"2"])
+            calendar.dayLabel.text = [self.detailM productDaysLimit];
+        else
+            calendar.dayLabel.text = [self.detailM productPeriod];
+        
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
         [calendar addGestureRecognizer:tap];
         [tap addTarget:self action:@selector(returnKeyboard:)];
@@ -586,7 +590,7 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入投资金额"];
     } else {
     
-        calendar.totalLabel.text = [NSString stringWithFormat:@"%.2f",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * ([[self.detailM productPeriod] floatValue] / 36500.0)];
+        calendar.totalLabel.text = [NSString stringWithFormat:@"%.2f",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * ([calendar.dayLabel.text floatValue] / 36500.0)];
     }
 }
 
