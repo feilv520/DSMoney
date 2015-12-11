@@ -387,7 +387,7 @@
 }
 
 - (void)passButtonAction:(UIButton *)btn{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -49,6 +49,8 @@
 
 @property (nonatomic, strong) NSString *moneyString;
 
+@property (nonatomic, strong) NSString *syString;
+
 @end
 
 @implementation MakeSureViewController
@@ -808,6 +810,7 @@
     balanceVC.typeString = [self.detailM productType];
     balanceVC.redbagModel = redbagModel;
     balanceVC.nHand = self.nHand;
+    balanceVC.syString = self.syString;
     balanceVC.endTimeString = [self.detailM endTime];
     
     [self.navigationController pushViewController:balanceVC animated:YES];
@@ -823,6 +826,7 @@
     MoneyCell *cell = (MoneyCell *)[self.tableView cellForRowAtIndexPath:path];
     CashMoneyCell *cell1 = (CashMoneyCell *)[self.tableView cellForRowAtIndexPath:path1];
     cell.labelYuan.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
+    self.syString = cell.labelYuan.text;
     cell1.labelYuanShu.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue]];
     
 }
