@@ -47,6 +47,7 @@
 {
     
     titleArr = @[[NSString stringWithFormat:@"投资金额:%@元",self.moneyString], [NSString stringWithFormat:@"预期到期收益:%@",self.syString], [NSString stringWithFormat:@"兑付日期:%@",self.endTimeString]];
+    NSLog(@"=====%@", self.syString);
     
     UIButton *butFinish = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 60, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"恭喜您投资成功"];
     [self.view addSubview:butFinish];

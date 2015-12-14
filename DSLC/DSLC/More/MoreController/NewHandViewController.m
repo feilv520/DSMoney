@@ -47,8 +47,19 @@
         [self.navigationItem setTitle:@"新手指南"];
     }
     
-    [self setWithAllView];
-    [self contentShow];
+    [self webViewShow];
+//    [self setWithAllView];
+//    [self contentShow];
+}
+
+- (void)webViewShow
+{
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
+    [self.view addSubview:webView];
+    
+    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/more_guide.do"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
 }
 
 - (void)contentShow

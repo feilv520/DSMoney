@@ -381,6 +381,7 @@
 		81D72FC71BFB04890067A277 /* rightWindow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FC31BFB04890067A277 /* rightWindow@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD991BC6427800A15E01 /* MineViewController.m */; };
 		81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8ADA21BC646D100A15E01 /* FinancingViewController.m */; };
+		81E54E6A1C1EB86D0007303B /* UsualQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E831061BF0469F00127EE8 /* MyChoosePlanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E831051BF0469F00127EE8 /* MyChoosePlanner.m */; settings = {ASSET_TAGS = (); }; };
 		81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */; settings = {ASSET_TAGS = (); }; };
 		81E8310B1BF0488400127EE8 /* MyChoosePlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -1293,6 +1294,8 @@
 		81D8AD991BC6427800A15E01 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		81D8ADA11BC646D100A15E01 /* FinancingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingViewController.h; sourceTree = "<group>"; };
 		81D8ADA21BC646D100A15E01 /* FinancingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingViewController.m; sourceTree = "<group>"; };
+		81E54E681C1EB86D0007303B /* UsualQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsualQuestionViewController.h; sourceTree = "<group>"; };
+		81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsualQuestionViewController.m; sourceTree = "<group>"; };
 		81E831041BF0469F00127EE8 /* MyChoosePlanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyChoosePlanner.h; path = ../MyChoosePlanner.h; sourceTree = "<group>"; };
 		81E831051BF0469F00127EE8 /* MyChoosePlanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyChoosePlanner.m; path = ../MyChoosePlanner.m; sourceTree = "<group>"; };
 		81E831071BF0488400127EE8 /* MyChoosePlannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChoosePlannerCell.h; sourceTree = "<group>"; };
@@ -3228,6 +3231,8 @@
 				81C8BBD21BDA3544005B9DFF /* HelpViewController.m */,
 				8191E20F1BDDB9DE000A6E8C /* NewHandViewController.h */,
 				8191E2101BDDB9DE000A6E8C /* NewHandViewController.m */,
+				81E54E681C1EB86D0007303B /* UsualQuestionViewController.h */,
+				81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */,
 				8191E21C1BDDF03D000A6E8C /* ServiceViewController.h */,
 				8191E21D1BDDF03D000A6E8C /* ServiceViewController.m */,
 				8191E2331BDE0E7C000A6E8C /* SuggestionViewController.h */,
@@ -4684,6 +4689,7 @@
 				81B5209E1BF96F4200D8E8D1 /* AddressBookViewController.m in Sources */,
 				8184EC401BCCD113003F440D /* MoneyCell.m in Sources */,
 				8DEACD081C1805BC00548166 /* JSONKit.m in Sources */,
+				81E54E6A1C1EB86D0007303B /* UsualQuestionViewController.m in Sources */,
 				8D5055A11BF08CA20034759B /* ProductDetailModel.m in Sources */,
 				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,
 				8DA060CD1C02BEBD00E3E025 /* DES3Util.m in Sources */,

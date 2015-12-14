@@ -29,7 +29,18 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"投资须知"];
     
-    [self tableViewShow];
+//    [self tableViewShow];
+    [self webViewShow];
+}
+
+- (void)webViewShow
+{
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
+    [self.view addSubview:webView];
+    
+    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/prouctInfo/productDescThree.do?productId=159&type=2&_FUN=descSolid.do"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
 }
 
 - (void)tableViewShow

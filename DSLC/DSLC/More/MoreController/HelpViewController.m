@@ -9,6 +9,7 @@
 #import "HelpViewController.h"
 #import "HelpCell.h"
 #import "NewHandViewController.h"
+#import "UsualQuestionViewController.h"
 
 @interface HelpViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -81,7 +82,8 @@
         
     } else {
         
-        
+        UsualQuestionViewController *usualQuestion = [[UsualQuestionViewController alloc] init];
+        [self.navigationController pushViewController:usualQuestion animated:YES];
     }
 }
 

@@ -322,6 +322,7 @@
         if (self.decide == NO) {
             
             cell.labelYuan.text = [NSString stringWithFormat:@"%.2f%@",[cell.textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0, @"元"];
+            self.syString = cell.labelYuan.text;
             
         } else {
             
@@ -839,8 +840,32 @@
     }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    [self getMyRedPacketList];
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.textFieldC = (UITextField *)[self.view viewWithTag:199];
+    
+    NSInteger shuruMoney = self.textFieldC.text.integerValue;
+    NSInteger qiTouMoney = self.detailM.amountMin.integerValue;
+    NSInteger diZengMoney = self.detailM.amountIncrease.integerValue;
+    NSInteger money = (shuruMoney - qiTouMoney) % diZengMoney;
+    NSLog(@"==============%ld", (long)money);
+    
+    if (shuruMoney >= qiTouMoney) {
+        
+        if (money == 0) {
+            
+            [self getMyRedPacketList];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请按照起投金额和递增金额条件输入"];
+        }
+        
+    } else {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"投资金额大于起投金额"];
+    }
+    
 }
 
 #pragma mark 网络请求方法

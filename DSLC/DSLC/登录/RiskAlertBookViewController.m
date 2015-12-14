@@ -37,8 +37,18 @@
         [self.navigationItem setTitle:@"风控揭示"];
     }
     
+    [self webViewShow];
+//    [self tableViewsHOW];
+}
+
+- (void)webViewShow
+{
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
+    [self.view addSubview:webView];
     
-    [self tableViewsHOW];
+    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/lr_hint.do"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
 }
 
 - (void)tableViewsHOW

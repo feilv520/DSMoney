@@ -29,7 +29,18 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"邀请码说明"];
     
-    [self tableViewShow];
+//    [self tableViewShow];
+    [self webViewShow];
+}
+
+- (void)webViewShow
+{
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
+    [self.view addSubview:webView];
+    
+    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/lr_invite.do"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
 }
 
 - (void)tableViewShow

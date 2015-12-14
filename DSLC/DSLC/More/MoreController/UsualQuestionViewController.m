@@ -1,26 +1,25 @@
 //
-//  AboutViewController.m
+//  UsualQuestionViewController.m
 //  DSLC
 //
-//  Created by ios on 15/10/26.
+//  Created by ios on 15/12/14.
 //  Copyright © 2015年 马成铭. All rights reserved.
 //
 
-#import "AboutViewController.h"
+#import "UsualQuestionViewController.h"
 
-@interface AboutViewController ()
+@interface UsualQuestionViewController ()
 
 @end
 
-@implementation AboutViewController
+@implementation UsualQuestionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self.navigationItem setTitle:@"关于大圣理财"];
+    [self.navigationItem setTitle:@"常见问题"];
     
     [self webViewShow];
 }
@@ -30,7 +29,7 @@
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
     [self.view addSubview:webView];
     
-    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/more_about.do"];
+    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/more_problem.do"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

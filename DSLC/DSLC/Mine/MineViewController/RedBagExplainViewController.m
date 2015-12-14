@@ -21,6 +21,17 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationItem.title = @"红包说明";
+    [self VIEWsHOW];
+}
+
+- (void)VIEWsHOW
+{
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
+    [self.view addSubview:webView];
+    
+    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/accountInfo/mi_redbag2.do"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
 }
 
 - (void)didReceiveMemoryWarning {

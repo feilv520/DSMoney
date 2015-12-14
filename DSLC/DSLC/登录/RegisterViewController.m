@@ -442,7 +442,7 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
         
     } else if (tapButton.tintColor != [UIColor whiteColor]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请勾选"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请勾选大圣理财平台服务协议"];
         
     } else {
         NSDictionary *parameters = [NSDictionary dictionary];
