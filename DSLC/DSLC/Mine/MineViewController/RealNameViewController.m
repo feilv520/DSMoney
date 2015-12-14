@@ -166,6 +166,7 @@
         } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             NSLog(@"%@",responseObject);
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }
        

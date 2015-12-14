@@ -39,10 +39,9 @@
     
     UIButton *indexButton;
     
+    UILabel *labelBingPhone;
     UILabel *labelBingEmail;
-    UILabel *labelPhoneBing;
     UILabel *labelBingRealName;
-    
 }
 
 @property (nonatomic, strong) NSDictionary *dataDic;
@@ -90,6 +89,8 @@
     
     [self tableViewShow];
     [self getData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"reload" object:nil];
 }
 
 //tableView展示
@@ -214,11 +215,30 @@
             
             cell.labelPan.hidden = NO;
             cell.labelPan.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+            cell.labelPan.textColor = [UIColor chongzhiColor];
+            cell.labelPan.tag = indexPath.row + 900;
             
-            if (indexPath.row == 1 || indexPath.row == 2) {
-                
+            if (indexPath.row == 1) {
                 cell.labelPan.text = @"未绑定";
-                cell.labelPan.textColor = [UIColor chongzhiColor];
+                
+                if ([[[self.dataDic objectForKey:@"emailStatus"] description] isEqualToString:@"2"]) {
+                    NSLog(@"是否有绑定:%@", [self.dataDic objectForKey:@"emailStatus"]);
+                    cell.labelPan.text = @"已绑定";
+                }
+                
+            } else if (indexPath.row == 2) {
+                cell.labelPan.text = @"未认证";
+                
+                NSString *shifou = [self.dataDic objectForKey:@"realNameStatus"];
+                NSLog(@"是否有实名认证:%@", shifou);
+                
+                if ([[shifou description] isEqualToString:@"2"]) {
+                    
+                    cell.labelPan.text = @"已认证";
+                }
+                
+            } else {
+                cell.labelPan.text = [DES3Util decrypt:[self.dataDic objectForKey:@"userAccount"]];
             }
         }
     
@@ -295,8 +315,6 @@
             
             NSString *design = [[self.dataDic objectForKey:@"setPayPwd"] description];
             NSLog(@"设置没有:%@", design);
-            
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"reload" object:nil];
             
             if ([design isEqualToString:@"1"]) {
                 
