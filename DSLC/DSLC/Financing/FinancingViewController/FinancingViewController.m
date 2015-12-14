@@ -152,7 +152,7 @@
     cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
     cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
     cell.labelSurplus.textColor = [UIColor zitihui];
-    cell.labelSurplus.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    cell.labelSurplus.font = [UIFont fontWithName:@"CenturyGothic" size:10];
     cell.labelSurplus.backgroundColor = [UIColor clearColor];
     
     if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
