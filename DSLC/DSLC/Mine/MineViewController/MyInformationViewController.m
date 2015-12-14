@@ -42,6 +42,7 @@
     UILabel *labelBingEmail;
     UILabel *labelPhoneBing;
     UILabel *labelBingRealName;
+    
 }
 
 @property (nonatomic, strong) NSDictionary *dataDic;
