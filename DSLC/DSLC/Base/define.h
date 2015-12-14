@@ -65,6 +65,7 @@
 #import "YYWebImage.h"                       // 异步图片加载框架
 #import "MobClick.h"                         // 友盟统计插件
 #import "JSONKit.h"                          // 第三方解析库
+#import "LLPaySdk.h"                         // 连连支付
 
 // 访问地址
 

@@ -22,7 +22,7 @@
     UIButton *payButton;
     UILabel *lableRedLine;
     UIView *buttonWithView;
-    RegisterOfView *registerV;
+    
     RegisterProcess *registerP;
     RegisterOfResult *registerR;
     RegisterOfPassButton *registerB;
@@ -44,6 +44,8 @@
 }
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
+
+@property (nonatomic, strong) RegisterOfView *registerV;
 
 @property (nonatomic, assign) BOOL flag;
 
@@ -152,9 +154,9 @@
                 buttonTag = btn.tag;
             }
             
-            registerV.inviteNumber.text = @"邀请码(选填)";
-            registerV.sandMyselfIDCard.placeholder = @"请输入邀请码";
-            [registerV.problemButton setImage:[UIImage imageNamed:@"iconfont-register-gantanhao001"] forState:UIControlStateNormal];
+            self.registerV.inviteNumber.text = @"邀请码(选填)";
+            self.registerV.sandMyselfIDCard.placeholder = @"请输入邀请码";
+            [self.registerV.problemButton setImage:[UIImage imageNamed:@"iconfont-register-gantanhao001"] forState:UIControlStateNormal];
             
             self.flag = NO;
         } else {
@@ -168,10 +170,10 @@
                 buttonTag = btn.tag;
             }
             
-            registerV.inviteNumber.text = @"上传名片";
-            registerV.sandMyselfIDCard.placeholder = @"请上传您的个人名片";
-            registerV.sandMyselfIDCard.userInteractionEnabled = NO;
-            [registerV.problemButton setImage:[UIImage imageNamed:@"jiantou"] forState:UIControlStateNormal];
+            self.registerV.inviteNumber.text = @"上传名片";
+            self.registerV.sandMyselfIDCard.placeholder = @"请上传您的个人名片";
+            self.registerV.sandMyselfIDCard.userInteractionEnabled = NO;
+            [self.registerV.problemButton setImage:[UIImage imageNamed:@"jiantou"] forState:UIControlStateNormal];
             
             [bookButton setTitle:@"《大圣理财平台理财师服务协议》" forState:UIControlStateNormal];
             self.flag = YES;
@@ -210,41 +212,42 @@
     
     NSBundle *rootBundle = [NSBundle mainBundle];
     NSArray *rootArray = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
-    registerV = [rootArray firstObject];
+
+    self.registerV = [rootArray firstObject];
     
-    registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, 225);
+    self.registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, 225);
     
-    [registerV.sandMyselfIDCard addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
-    [registerV.smsCode addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
-    [registerV.phoneNumber addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
-    [registerV.loginPassword addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
-    [registerV.sureLoginPassword addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    [self.registerV.sandMyselfIDCard addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    [self.registerV.smsCode addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    [self.registerV.phoneNumber addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    [self.registerV.loginPassword addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
+    [self.registerV.sureLoginPassword addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     
-    registerV.phoneNumber.delegate = self;
-    registerV.smsCode.delegate = self;
-    registerV.loginPassword.delegate = self;
-    registerV.sureLoginPassword.delegate = self;
-    registerV.sandMyselfIDCard.delegate = self;
+    self.registerV.phoneNumber.delegate = self;
+    self.registerV.smsCode.delegate = self;
+    self.registerV.loginPassword.delegate = self;
+    self.registerV.sureLoginPassword.delegate = self;
+    self.registerV.sandMyselfIDCard.delegate = self;
     
-    registerV.phoneNumber.tintColor = [UIColor grayColor];
-    registerV.smsCode.tintColor = [UIColor grayColor];
-    registerV.loginPassword.tintColor = [UIColor grayColor];
-    registerV.sureLoginPassword.tintColor = [UIColor grayColor];
-    registerV.sandMyselfIDCard.tintColor = [UIColor grayColor];
+    self.registerV.phoneNumber.tintColor = [UIColor grayColor];
+    self.registerV.smsCode.tintColor = [UIColor grayColor];
+    self.registerV.loginPassword.tintColor = [UIColor grayColor];
+    self.registerV.sureLoginPassword.tintColor = [UIColor grayColor];
+    self.registerV.sandMyselfIDCard.tintColor = [UIColor grayColor];
     
-    registerV.getCode.layer.masksToBounds = YES;
-    registerV.getCode.layer.borderWidth = 1.f;
-    registerV.getCode.tag = 9080;
-    registerV.getCode.layer.borderColor = [UIColor daohanglan].CGColor;
-    [registerV.getCode setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
-    registerV.getCode.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    self.registerV.getCode.layer.masksToBounds = YES;
+    self.registerV.getCode.layer.borderWidth = 1.f;
+    self.registerV.getCode.tag = 9080;
+    self.registerV.getCode.layer.borderColor = [UIColor daohanglan].CGColor;
+    [self.registerV.getCode setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+    self.registerV.getCode.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
-    registerV.getCode.layer.cornerRadius = 4.f;
+    self.registerV.getCode.layer.cornerRadius = 4.f;
     
-    [registerV.getCode addTarget:self action:@selector(getCodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [registerV.problemButton addTarget:self action:@selector(InviteShuoMing:) forControlEvents:UIControlEventTouchUpInside];
+    [self.registerV.getCode addTarget:self action:@selector(getCodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.registerV.problemButton addTarget:self action:@selector(InviteShuoMing:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.scrollView addSubview:registerV];
+    [self.scrollView addSubview:self.registerV];
 }
 
 // 确认按钮
@@ -330,7 +333,10 @@
 
 - (void)sureButtonActionFinish:(UIButton *)btn{
     
-    NSDictionary *parameter = @{@"userId":userID,@"realName":registerV.realName.text,@"IDCardNum":registerV.IDCard.text};
+    NSLog(@"self.registerV.realName.text = %@",self.registerV.realName.text);
+    NSLog(@"self.registerV.IDCard.text = %@",self.registerV.IDCard.text);
+    
+    NSDictionary *parameter = @{@"userId":userID,@"realName":self.registerV.realName.text,@"IDCardNum":self.registerV.IDCard.text};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/authRrealName" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -339,10 +345,10 @@
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [registerB removeFromSuperview];
             [registerR removeFromSuperview];
-            [registerV removeFromSuperview];
+            [self.registerV removeFromSuperview];
             registerB = nil;
             registerR = nil;
-            registerV = nil;
+            self.registerV = nil;
         
             registerP.photoImageView.image = [UIImage imageNamed:@"register-3"];
         
@@ -357,19 +363,19 @@
         
             registerR.titleSuccess.text = @"验证成功";
             registerR.passTitle.text = @"您可以绑定银行卡，也可以选择跳过．";
+            
+            self.registerV = [rootArrayOfView lastObject];
         
-            registerV = [rootArrayOfView lastObject];
-        
-            registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 270);
+            self.registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 270);
         
             registerB = [rootArrayOfPButton lastObject];
         
-            registerB.frame = CGRectMake(0, CGRectGetMaxY(registerV.frame), WIDTH_CONTROLLER_DEFAULT, 100);
+            registerB.frame = CGRectMake(0, CGRectGetMaxY(self.registerV.frame), WIDTH_CONTROLLER_DEFAULT, 100);
         
             [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [registerB.sureButton addTarget:self action:@selector(sureButtonActionPass:) forControlEvents:UIControlEventTouchUpInside];
             
-            [self.scrollView addSubview:registerV];
+            [self.scrollView addSubview:self.registerV];
             [self.scrollView addSubview:registerR];
             [self.scrollView addSubview:registerB];
         }
@@ -398,7 +404,7 @@
 // 检测验证码
 - (void)checkSmsCode{
     
-    NSDictionary *parameters = @{@"smsCode":registerV.smsCode.text};
+    NSDictionary *parameters = @{@"smsCode":self.registerV.smsCode.text};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/checkSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             [self RegisterButtonAction];
@@ -414,31 +420,31 @@
 {
     [self.view endEditing:YES];
     
-    if (registerV.phoneNumber.text.length == 0) {
+    if (self.registerV.phoneNumber.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
         
-    } else if (registerV.phoneNumber.text.length != 11) {
+    } else if (self.registerV.phoneNumber.text.length != 11) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
         
-    } else if (registerV.smsCode.text.length == 0) {
+    } else if (self.registerV.smsCode.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
         
-    } else if (registerV.smsCode.text.length != 6) {
+    } else if (self.registerV.smsCode.text.length != 6) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
         
-    } else if (registerV.loginPassword.text.length == 0) {
+    } else if (self.registerV.loginPassword.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请设置登录密码"];
         
-    } else if (![NSString validatePassword:registerV.loginPassword.text]){
+    } else if (![NSString validatePassword:self.registerV.loginPassword.text]){
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符,以字母开头"];
         
-    } else if (registerV.sureLoginPassword.text.length == 0) {
+    } else if (self.registerV.sureLoginPassword.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入确认密码"];
         
-    } else if (registerV.sureLoginPassword.text.length < 6) {
+    } else if (self.registerV.sureLoginPassword.text.length < 6) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
         
-    } else if (![registerV.loginPassword.text isEqualToString:registerV.sureLoginPassword.text]){
+    } else if (![self.registerV.loginPassword.text isEqualToString:self.registerV.sureLoginPassword.text]){
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"两次密码输入不一致"];
         
     } else if (tapButton.tintColor != [UIColor whiteColor]) {
@@ -456,7 +462,7 @@
             
             finaCard = [[MyAfHTTPClient sharedClient] resetSizeOfImageData:savedImage maxSize:1024 * 2];
         
-            parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":@"",@"ImgData":finaCard};
+            parameters = @{@"phone":self.registerV.phoneNumber.text,@"smsCode":self.registerV.smsCode.text,@"password":self.registerV.loginPassword.text,@"invitationCode":@"",@"ImgData":finaCard};
             
             NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,@"app/register"];
             
@@ -493,8 +499,8 @@
                     
                     [buttonWithView removeFromSuperview];
                     [payButton removeFromSuperview];
-                    [registerV removeFromSuperview];
-                    registerV = nil;
+                    [self.registerV removeFromSuperview];
+                    self.registerV = nil;
         
                     registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
         
@@ -507,9 +513,9 @@
         
                     registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
         
-                    registerV = [rootArrayOfView objectAtIndex:1];
+                    self.registerV = [rootArrayOfView objectAtIndex:1];
         
-                    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 90);
+                    self.registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 90);
         
                     registerB = [rootArrayOfPButton lastObject];
         
@@ -518,7 +524,7 @@
                     [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                     [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
         
-                    [self.scrollView addSubview:registerV];
+                    [self.scrollView addSubview:self.registerV];
                     [self.scrollView addSubview:registerR];
                     [self.scrollView addSubview:registerB];
                     
@@ -537,7 +543,7 @@
             
             NSLog(@"普通注册");
             
-            parameters = @{@"phone":registerV.phoneNumber.text,@"smsCode":registerV.smsCode.text,@"password":registerV.loginPassword.text,@"invitationCode":registerV.sandMyselfIDCard.text,@"finaCard":@""};
+            parameters = @{@"phone":self.registerV.phoneNumber.text,@"smsCode":self.registerV.smsCode.text,@"password":self.registerV.loginPassword.text,@"invitationCode":self.registerV.sandMyselfIDCard.text,@"finaCard":@""};
             
             [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
                 
@@ -550,8 +556,8 @@
                     
                     [buttonWithView removeFromSuperview];
                     [payButton removeFromSuperview];
-                    [registerV removeFromSuperview];
-                    registerV = nil;
+                    [self.registerV removeFromSuperview];
+                    self.registerV = nil;
         
                     registerP.photoImageView.image = [UIImage imageNamed:@"register-2"];
         
@@ -564,9 +570,9 @@
         
                     registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
         
-                    registerV = [rootArrayOfView objectAtIndex:1];
+                    self.registerV = [rootArrayOfView objectAtIndex:1];
         
-                    registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 90);
+                    self.registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 90);
         
                     registerB = [rootArrayOfPButton lastObject];
         
@@ -575,7 +581,7 @@
                     [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                     [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
         
-                    [self.scrollView addSubview:registerV];
+                    [self.scrollView addSubview:self.registerV];
                     [self.scrollView addSubview:registerR];
                     [self.scrollView addSubview:registerB];
                     
@@ -596,19 +602,19 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (textField == registerV.phoneNumber) {
+    if (textField == self.registerV.phoneNumber) {
         if (range.location > 10) {
             return NO;
         }
-    } else if (textField == registerV.smsCode) {
+    } else if (textField == self.registerV.smsCode) {
         if (range.location > 5) {
             return NO;
         }
-    } else if (textField == registerV.loginPassword) {
+    } else if (textField == self.registerV.loginPassword) {
         if (range.location > 19) {
             return NO;
         }
-    } else if (textField == registerV.sureLoginPassword) {
+    } else if (textField == self.registerV.sureLoginPassword) {
         if (range.location > 19) {
             return NO;
         }
@@ -630,17 +636,17 @@
 - (void)getCodeButtonAction:(UIButton *)btn{
     [self.view endEditing:YES];
     
-    if (registerV.phoneNumber.text.length == 0) {
+    if (self.registerV.phoneNumber.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
         
-    } else if (![NSString validateMobile:registerV.phoneNumber.text]) {
+    } else if (![NSString validateMobile:self.registerV.phoneNumber.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
         
     } else {
         
         timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
         
-        NSDictionary *parameters = @{@"phone":registerV.phoneNumber.text,@"msgType":@"1"};
+        NSDictionary *parameters = @{@"phone":self.registerV.phoneNumber.text,@"msgType":@"1"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -654,7 +660,7 @@
 
 // 按钮变颜色
 - (void)textFieldEdit:(UITextField *)textField{
-//    if ([registerV.smsCode.text length] > 0 && [registerV.phoneNumber.text length] > 0 && [registerV.loginPassword.text length] > 0 && [registerV.sureLoginPassword.text length] > 0) {
+//    if ([self.registerV.smsCode.text length] > 0 && [self.registerV.phoneNumber.text length] > 0 && [self.registerV.loginPassword.text length] > 0 && [self.registerV.sureLoginPassword.text length] > 0) {
 //        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
 //        [payButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
 //        
@@ -832,7 +838,7 @@
     
     [self showTanKuangWithMode:MBProgressHUDModeText Text:@"上传成功"];
     
-    registerV.sandMyselfIDCard.placeholder = @"名片.png";
+    self.registerV.sandMyselfIDCard.placeholder = @"名片.png";
     
 }
 
