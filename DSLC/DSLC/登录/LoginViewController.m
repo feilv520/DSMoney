@@ -398,23 +398,6 @@
 // 自动登录方法
 - (void)autoLogin{
     
-//    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-//    
-//    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
-//    
-//    NSLog(@"%@",parameter);
-//    
-//    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-//        
-//        NSLog(@"autoLogin = %@",responseObject);
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        
-//        NSLog(@"%@", error);
-//        
-//    }];
-
-    
     NSLog(@"password = %@",[DES3Util decrypt:[self.flagUserInfo objectForKey:@"password"]]);
     
     NSDictionary *parameter = @{@"phone":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"userPhone"]],@"password":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"password"]]};
@@ -444,6 +427,10 @@
             [self.navigationController pushViewController:mineVC animated:NO];
             [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
         
+        } else {
+            [app.tabBarVC setSuppurtGestureTransition:NO];
+            [app.tabBarVC setTabbarViewHidden:NO];
+            [app.tabBarVC setLabelLineHidden:NO];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

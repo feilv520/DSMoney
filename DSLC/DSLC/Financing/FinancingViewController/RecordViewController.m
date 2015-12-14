@@ -60,7 +60,7 @@
     
     ProductBuyRecords *buyRecords = [self.productListArray objectAtIndex:indexPath.row];
     
-    NSString *whoString = [NSString stringWithFormat:@"%@**购买了%@",[buyRecords tranName],[buyRecords tranAmount]];
+    NSString *whoString = [NSString stringWithFormat:@"%@购买了%@",[buyRecords tranName],[buyRecords tranAmount]];
     cell.labelWho.text = whoString;
     cell.labelWho.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
