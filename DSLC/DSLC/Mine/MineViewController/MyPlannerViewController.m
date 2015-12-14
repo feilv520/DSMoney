@@ -299,6 +299,7 @@
                 
                 [self viewHeadShow];
                 [butAlready setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
+                butAlready.enabled = NO;
                 
             } else {
                 

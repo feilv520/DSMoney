@@ -139,13 +139,15 @@
     textField2 = (UITextField *)[self.view viewWithTag:301];
     textField3 = (UITextField *)[self.view viewWithTag:302];
     
+    self.flagDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSLog(@"77777777%@", [DES3Util decrypt:[self.flagDic objectForKeyedSubscript:@"password"]]);
     if (textField1.text.length == 0) {
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入登录密码"];
         
-    } else if (![NSString validatePassword:textField1.text]) {
+    } else if (![textField1.text isEqualToString:[DES3Util decrypt:[self.flagDic objectForKeyedSubscript:@"password"] ]]) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位含字母和数字,以字母开头"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"原登录密码错误"];
         
     } else if (textField2.text.length == 0) {
         
@@ -154,6 +156,10 @@
     } else if (![NSString validatePassword:textField2.text]) {
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位含字母和数字,以字母开头"];
+        
+    } else if ([textField2.text isEqualToString:textField1.text]) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"新登录密码不能与原登录密码一样"];
         
     } else if (textField3.text.length == 0) {
         

@@ -38,6 +38,10 @@
     UIImage *imageChange;
     
     UIButton *indexButton;
+    
+    UILabel *labelBingEmail;
+    UILabel *labelPhoneBing;
+    UILabel *labelBingRealName;
 }
 
 @property (nonatomic, strong) NSDictionary *dataDic;
@@ -197,12 +201,25 @@
     } else {
     
         MyInformationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        cell.labelPan.hidden = YES;
         
         NSArray *rowArr = [titleArr objectAtIndex:indexPath.section - 1];
         cell.labelTitle.text = [rowArr objectAtIndex:indexPath.row];
         cell.labelTitle.font = [UIFont systemFontOfSize:15];
         
         cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+        
+        if (indexPath.section == 2) {
+            
+            cell.labelPan.hidden = NO;
+            cell.labelPan.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+            
+            if (indexPath.row == 1 || indexPath.row == 2) {
+                
+                cell.labelPan.text = @"未绑定";
+                cell.labelPan.textColor = [UIColor chongzhiColor];
+            }
+        }
     
 //    if (indexPath.section == 3) {
 //        
@@ -278,6 +295,8 @@
             NSString *design = [[self.dataDic objectForKey:@"setPayPwd"] description];
             NSLog(@"设置没有:%@", design);
             
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"reload" object:nil];
+            
             if ([design isEqualToString:@"1"]) {
                 
                 MendDealViewController *mendDeal = [[MendDealViewController alloc] init];
@@ -291,6 +310,11 @@
             }
         }
     }
+}
+
+- (void)reloadData:(NSNotification *)notice
+{
+    [self getData];
 }
 
 //弹出框

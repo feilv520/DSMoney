@@ -66,11 +66,9 @@
 #import "MobClick.h"                         // 友盟统计插件
 #import "JSONKit.h"                          // 第三方解析库
 
-
-
 // 访问地址
 
-//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.188:8080/tongjiang/interface/p2p/";
+//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.14:8080/tongjiang/interface/p2p/";
 static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interface/p2p/";
 
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.203:8080/tongjiang/interface/p2p/";

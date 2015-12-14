@@ -32,16 +32,32 @@
                             <constraint firstAttribute="height" constant="16" id="wvi-Hs-A39"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3E-nz-MrX">
+                        <rect key="frame" x="188" y="10" width="156" height="30"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="3Ne-gc-bix"/>
+                            <constraint firstAttribute="width" constant="156" id="70r-Dp-WbC"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="T3E-nz-MrX" firstAttribute="leading" secondItem="ZsQ-jY-7vu" secondAttribute="trailing" constant="78" id="EwA-eK-VDh"/>
                     <constraint firstItem="JU2-Pz-LHP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="9" id="SMx-fW-4zn"/>
+                    <constraint firstItem="T3E-nz-MrX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="Uzy-SO-RDD"/>
+                    <constraint firstItem="JU2-Pz-LHP" firstAttribute="leading" secondItem="T3E-nz-MrX" secondAttribute="trailing" constant="6" id="WlE-vr-9VT"/>
                     <constraint firstItem="ZsQ-jY-7vu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="cZ4-k8-LO6"/>
                     <constraint firstItem="ZsQ-jY-7vu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="kew-UL-iAW"/>
                     <constraint firstAttribute="trailingMargin" secondItem="JU2-Pz-LHP" secondAttribute="trailing" constant="1" id="mLt-dO-STe"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="imageRight" destination="JU2-Pz-LHP" id="Qlc-eN-gNI"/>
+                <outlet property="labelPan" destination="T3E-nz-MrX" id="j6O-lu-tgc"/>
                 <outlet property="labelTitle" destination="ZsQ-jY-7vu" id="sy0-cB-bUi"/>
             </connections>
             <point key="canvasLocation" x="94.5" y="289"/>

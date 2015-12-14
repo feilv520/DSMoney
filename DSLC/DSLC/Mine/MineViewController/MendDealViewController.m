@@ -277,13 +277,23 @@
     textPhone = (UITextField *)[self.view viewWithTag:703];
     textNum = (UITextField *)[self.view viewWithTag:704];
     
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
+    NSLog(@"=====%@", dic);
     if (textLast.text.length == 0) {
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入交易密码"];
         
-    } else if (![NSString validatePassword:textLast.text]) {
+    } else if (![textLast.text isEqualToString:[DES3Util decrypt:[dic objectForKey:@"dealSecret"]]]) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位含字母和数字,以字母开头"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"原交易密码错误"];
+        
+    } else if (textNew.text.length == 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请设置新交易密码"];
+        
+    } else if ([textNew.text isEqualToString:textLast.text]) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"设置的新交易密码不能与原交易密码一样"];
         
     } else if (![NSString validatePassword:textNew.text]) {
         

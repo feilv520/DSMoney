@@ -181,8 +181,20 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/setPayPwd" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         NSLog(@"%@",responseObject);
-        [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        
+        NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
+
+        //设置属性值,没有的数据就新建，已有的数据就修改。
+        [usersDic setObject:[DES3Util encrypt:textField2.text] forKey:@"dealSecret"];
+        //写入文件
+        [usersDic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
+        
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
         [self.navigationController popViewControllerAnimated:YES];
+        
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
