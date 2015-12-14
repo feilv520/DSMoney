@@ -806,7 +806,7 @@
     FBalancePaymentViewController *balanceVC = [[FBalancePaymentViewController alloc] init];
     balanceVC.productName = [self.detailM productName];
     balanceVC.idString = [self.detailM productId];
-    balanceVC.moneyString = textField.text;
+    balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textField.text floatValue]];
     balanceVC.typeString = [self.detailM productType];
     balanceVC.redbagModel = redbagModel;
     balanceVC.nHand = self.nHand;

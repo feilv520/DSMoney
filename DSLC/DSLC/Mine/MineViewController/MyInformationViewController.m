@@ -481,7 +481,7 @@
 
     [self.navigationController popToRootViewControllerAnimated:YES];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
     
 }
 

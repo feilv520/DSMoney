@@ -70,10 +70,10 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新手专享" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jil-3U-5ut">
-                    <rect key="frame" x="140" y="112" width="91" height="21"/>
+                    <rect key="frame" x="140" y="112" width="177" height="21"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="91" id="r5r-wW-EL9"/>
+                        <constraint firstAttribute="width" constant="177" id="r5r-wW-EL9"/>
                         <constraint firstAttribute="height" constant="21" id="wIV-CC-nHm"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -181,7 +181,7 @@
                 <constraint firstItem="rJE-WJ-FVG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ale-7L-3Px"/>
                 <constraint firstItem="s5R-db-0kI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="104" id="cJu-PK-fcP"/>
                 <constraint firstItem="1Oj-Fm-uLV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cZt-YB-ah1"/>
-                <constraint firstItem="Jil-3U-5ut" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="20" id="gn9-PI-sQb"/>
+                <constraint firstItem="Jil-3U-5ut" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="63.5" id="gn9-PI-sQb"/>
                 <constraint firstItem="rJE-WJ-FVG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ipx-qQ-2ei"/>
                 <constraint firstItem="YDQ-DG-1J2" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="14" id="mfR-Q9-xKS"/>
                 <constraint firstItem="GKg-AT-hnQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="p2a-bO-VBk"/>
