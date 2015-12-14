@@ -416,6 +416,7 @@
     if (self.estimate == NO) {
         
         [butMakeSure setTitle:@"投资(可使用5,000元体验金)" forState:UIControlStateNormal];
+        [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         
     } else {
         NSLog(@"%@",self.residueMoney);
@@ -551,12 +552,23 @@
         calendar.inputMoney.leftViewMode = UITextFieldViewModeAlways;
         calendar.inputMoney.tintColor = [UIColor grayColor];
         
-        calendar.yearLv.text = [self.detailM productAnnualYield];
+        calendar.yearLv.text = [NSString stringWithFormat:@"%@%%",[self.detailM productAnnualYield]];
+        
+        NSString *daysLimitString = @"0";
+        NSString *daysPeriodString = @"0";
+        
+        if (![[self.detailM productDaysLimit] isEqualToString:@"0"]) {
+            daysLimitString = [self.detailM productDaysLimit];
+        }
+        
+        if (![[self.detailM productPeriod] isEqualToString:@"0"]) {
+            daysPeriodString = [self.detailM productPeriod];
+        }
         
         if ([[self.detailM productType] isEqualToString:@"2"])
-            calendar.dayLabel.text = [self.detailM productDaysLimit];
+            calendar.dayLabel.text = [NSString stringWithFormat:@"%@天",daysLimitString];
         else
-            calendar.dayLabel.text = [self.detailM productPeriod];
+            calendar.dayLabel.text = [NSString stringWithFormat:@"%@天",daysPeriodString];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
         [calendar addGestureRecognizer:tap];

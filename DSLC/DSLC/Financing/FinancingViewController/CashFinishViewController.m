@@ -130,7 +130,7 @@
 //    [butCancle addSubview:labelLine];
 //    labelLine.alpha = 0.3;
     [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:@"56447cbc67e58efd78001914"
+                                         appKey:@"5642ad7e67e58e8463006218"
                                       shareText:@"大圣理财,金融街的新宠."
                                      shareImage:[UIImage imageNamed:@"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658@3x"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]

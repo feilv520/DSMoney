@@ -223,7 +223,7 @@
             cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
             cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
             cell.labelSurplus.textColor = [UIColor zitihui];
-            cell.labelSurplus.font = [UIFont systemFontOfSize:12];
+            cell.labelSurplus.font = [UIFont systemFontOfSize:10];
             cell.labelSurplus.backgroundColor = [UIColor clearColor];
             
             //        imageView = [CreatView creatImageViewWithFrame:CGRectMake(131, 15, 210, 8) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"bar-full"]];
