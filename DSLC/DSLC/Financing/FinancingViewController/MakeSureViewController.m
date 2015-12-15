@@ -873,10 +873,15 @@
     NSInteger money = shuruMoney % diZengMoney;
     NSLog(@"==============%ld", (long)money);
     
-    if (shuruMoney >= qiTouMoney) {
+    if (shuruMoney == qiTouMoney) {
+        _makeSure.enabled = YES;
+        [self getMyRedPacketList];
+        
+    } else if (shuruMoney > qiTouMoney) {
         
         if (money == 0) {
             
+            _makeSure.enabled = YES;
             [self getMyRedPacketList];
             
         } else {
