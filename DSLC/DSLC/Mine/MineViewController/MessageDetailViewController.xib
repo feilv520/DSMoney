@@ -60,7 +60,7 @@
                     <rect key="frame" x="10" y="225" width="357" height="15"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="357" id="Y0H-wg-5hw"/>
+                        <constraint firstAttribute="width" constant="357" id="fUg-RR-Tmd"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
                     <color key="textColor" red="0.45882352939999999" green="0.46666666670000001" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -72,16 +72,17 @@
             <constraints>
                 <constraint firstItem="v2J-hc-Se8" firstAttribute="top" secondItem="QEU-Cc-rk7" secondAttribute="bottom" constant="8" id="3J1-44-zMb"/>
                 <constraint firstItem="M8q-Jc-wxG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="13" id="QW9-R2-Dqn"/>
-                <constraint firstItem="hRn-oc-xD7" firstAttribute="top" secondItem="v2J-hc-Se8" secondAttribute="bottom" constant="28" id="Tbo-CH-jiE"/>
                 <constraint firstItem="M8q-Jc-wxG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="UI6-dd-F66"/>
                 <constraint firstItem="v2J-hc-Se8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="aeV-si-IeH"/>
-                <constraint firstItem="hRn-oc-xD7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="fuI-pw-DXO"/>
                 <constraint firstAttribute="trailing" secondItem="v2J-hc-Se8" secondAttribute="trailing" constant="10" id="kLV-7T-9D2"/>
                 <constraint firstItem="QEU-Cc-rk7" firstAttribute="top" secondItem="M8q-Jc-wxG" secondAttribute="bottom" constant="8" id="lYV-ca-Nnq"/>
+                <constraint firstItem="hRn-oc-xD7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="mtY-dV-7pl"/>
+                <constraint firstItem="hRn-oc-xD7" firstAttribute="top" secondItem="v2J-hc-Se8" secondAttribute="bottom" constant="28" id="mzq-8G-3Ua"/>
+                <constraint firstAttribute="trailing" secondItem="hRn-oc-xD7" secondAttribute="trailing" constant="8" id="qgO-gW-Qku"/>
                 <constraint firstItem="QEU-Cc-rk7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="uhm-O2-yH6"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="291.5" y="396.5"/>
+            <point key="canvasLocation" x="-132.5" y="403.5"/>
         </view>
     </objects>
     <resources>

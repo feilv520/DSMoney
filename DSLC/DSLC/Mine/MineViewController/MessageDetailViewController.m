@@ -19,6 +19,7 @@
     [super viewWillAppear:animated];
     
     [self.navigationItem setTitle:@"消息详情"];
+    
 }
 
 - (void)viewDidLoad {

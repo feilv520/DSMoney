@@ -143,25 +143,12 @@
                 
                 Chat *chat = [[Chat alloc] init];
                 chat.msgText = _textField.text;
+//                [chatArray insertObject:chat atIndex:0];
                 [chatArray addObject:chat];
                 [_tableView reloadData];
                 _textField.text = nil;
                 
-            } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
-                NSLog(@"134897189374987342987243789423");
-                if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
-                    [FileOfManage createWithFile:@"isLogin.plist"];
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-                    [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-                } else {
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-                    [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-                }
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
-                [self.navigationController popToRootViewControllerAnimated:NO];
-                return ;
             }
-            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             NSLog(@"%@", error);
@@ -245,7 +232,7 @@
         cell = [[TwoCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
     }
     
-    Chat *chat = [chatArray objectAtIndex:chatArray.count - indexPath.row - 1];
+    Chat *chat = [chatArray objectAtIndex:indexPath.row];
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
     cell.labelRight.numberOfLines = 0;

@@ -870,7 +870,7 @@
     NSInteger shuruMoney = self.textFieldC.text.integerValue;
     NSInteger qiTouMoney = self.detailM.amountMin.integerValue;
     NSInteger diZengMoney = self.detailM.amountIncrease.integerValue;
-    NSInteger money = (shuruMoney - qiTouMoney) % diZengMoney;
+    NSInteger money = shuruMoney % diZengMoney;
     NSLog(@"==============%ld", (long)money);
     
     if (shuruMoney >= qiTouMoney) {
@@ -882,6 +882,7 @@
         } else {
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请按照起投金额和递增金额条件输入"];
+            _makeSure.enabled = NO;
         }
         
     } else {
