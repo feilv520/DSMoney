@@ -56,12 +56,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yb5-q5-Cro">
-                        <rect key="frame" x="163" y="67" width="188" height="17"/>
+                        <rect key="frame" x="163" y="67" width="175" height="17"/>
                         <animations/>
                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="NQ8-m5-hBC"/>
-                            <constraint firstAttribute="width" constant="188" id="sHn-d2-Xgb"/>
+                            <constraint firstAttribute="width" constant="175" id="sHn-d2-Xgb"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -118,7 +118,7 @@
                     <constraint firstItem="Yb5-q5-Cro" firstAttribute="leading" secondItem="EZE-v8-mNz" secondAttribute="trailing" constant="33" id="WaQ-Er-4ej"/>
                     <constraint firstItem="ZhZ-GY-96V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="Zcy-2X-ibd"/>
                     <constraint firstItem="ZhZ-GY-96V" firstAttribute="top" secondItem="WCm-Ru-RZO" secondAttribute="bottom" constant="10" id="dAw-Lq-PnD"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Yb5-q5-Cro" secondAttribute="trailing" constant="16" id="ky1-hY-YGn"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Yb5-q5-Cro" secondAttribute="trailing" constant="29" id="ky1-hY-YGn"/>
                     <constraint firstItem="0xc-OM-Wby" firstAttribute="leading" secondItem="KLP-XT-BiA" secondAttribute="trailing" constant="-159" id="lZG-BI-1KH"/>
                     <constraint firstItem="EZE-v8-mNz" firstAttribute="top" secondItem="KLP-XT-BiA" secondAttribute="bottom" constant="15" id="mTP-XO-Xk1"/>
                     <constraint firstAttribute="trailingMargin" secondItem="WCm-Ru-RZO" secondAttribute="trailing" constant="-3" id="mZ7-4T-h7V"/>
