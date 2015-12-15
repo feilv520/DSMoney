@@ -91,9 +91,11 @@
     if ([self.nHand isEqualToString:@"my"]) {
         NSArray *arrVC = self.navigationController.viewControllers;
         [self.navigationController popToViewController:[arrVC objectAtIndex:1] animated:YES];
-    } else
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getPayNumber" object:nil];
+    } else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getPayNumber" object:nil];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
 }
 
 //分享拿红包按钮

@@ -163,6 +163,7 @@
         [self.navigationController popToViewController:[arrVC objectAtIndex:1] animated:YES];
     } else
         [self.navigationController popToRootViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
 }
 
 - (void)buttonNull:(UIBarButtonItem *)button

@@ -548,10 +548,17 @@
     if (self.decide == NO) {
 
         if (self.redBagArray.count != 0) {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你还有未使用的红包,要不要去看看?" delegate:self cancelButtonTitle:@"拒绝去看" otherButtonTitles:@"去看看",nil];
-            // optional - add more buttons:
-            [alert show];
+            if ([redbagModel rpID] == nil) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你还有未使用的红包,要不要去看看?" delegate:self cancelButtonTitle:@"拒绝去看" otherButtonTitles:@"去看看",nil];
+                // optional - add more buttons:
+                [alert show];
+            } else {
+                AppDelegate *app = [[UIApplication sharedApplication] delegate];
+                [self showSureView:app];
+            }
+        } else {
+            AppDelegate *app = [[UIApplication sharedApplication] delegate];
+            [self showSureView:app];
         }
     
     } else {

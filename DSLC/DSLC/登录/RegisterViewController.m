@@ -378,6 +378,8 @@
             [self.scrollView addSubview:self.registerV];
             [self.scrollView addSubview:registerR];
             [self.scrollView addSubview:registerB];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
