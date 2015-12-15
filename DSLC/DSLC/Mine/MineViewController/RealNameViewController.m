@@ -168,6 +168,8 @@
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
        
         
