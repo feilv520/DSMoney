@@ -181,6 +181,7 @@
     
     FDetailViewController *detailVC = [[FDetailViewController alloc] init];
     detailVC.estimate = YES;
+    detailVC.pandaun = YES;
     detailVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
     [self.navigationController pushViewController:detailVC animated:YES];
 }

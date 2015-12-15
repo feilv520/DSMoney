@@ -52,7 +52,8 @@
         
         if (![FileOfManage ExistOfFile:@"NewProduct.plist"]) {
             [FileOfManage createWithFile:@"NewProduct.plist"];
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"0",@"NewProduct",nil];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"0",@"NewProduct",@"",@"dealSecret",nil];
+            
             [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
         }
         
@@ -488,10 +489,14 @@
         
         if (![FileOfManage ExistOfFile:@"NewProduct.plist"]) {
             [FileOfManage createWithFile:@"NewProduct.plist"];
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[self.productM productId],@"NewProduct",nil];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
+            //设置属性值,没有的数据就新建，已有的数据就修改。
+            [dic setObject:[self.productM productId] forKey:@"NewProduct"];
             [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
         } else {
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[self.productM productId],@"NewProduct",nil];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
+            //设置属性值,没有的数据就新建，已有的数据就修改。
+            [dic setObject:[self.productM productId] forKey:@"NewProduct"];
             [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
         }
         

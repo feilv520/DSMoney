@@ -165,10 +165,10 @@
         cell.labelLine.backgroundColor = [UIColor grayColor];
         cell.labelLine.alpha = 0.2;
         
-        NSMutableAttributedString *monthStr = [[NSMutableAttributedString alloc] initWithString:@"6个月"];
-        NSRange rangeMonth = NSMakeRange(0, [[monthStr string] rangeOfString:@"个"].location);
+        NSMutableAttributedString *monthStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[self.asset objectForKey:@"assetDaysLimit"]]];
+        NSRange rangeMonth = NSMakeRange(0, [[monthStr string] rangeOfString:@"天"].location);
         [monthStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:rangeMonth];
-        NSRange range = NSMakeRange([[monthStr string] length] - 2, 2);
+        NSRange range = NSMakeRange([[monthStr string] length] - 1, 1);
         [monthStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:range];
         [cell.labelRightUp setAttributedText:monthStr];
         cell.labelRightUp.textAlignment = NSTextAlignmentCenter;

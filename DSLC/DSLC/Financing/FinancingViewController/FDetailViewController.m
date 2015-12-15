@@ -33,13 +33,13 @@
     NSDictionary *dataDic;
     
     NSInteger isOrder;
+    
+    UIButton *butCountDown;
 }
 @property (nonatomic, strong) UIControl *viewBotton;
 @property (nonatomic, strong) ProductDetailModel *detailM;
 @property (nonatomic, strong) NSString *residueMoney;
 @property (nonatomic, strong) NSString *buyNumber;
-
-
 
 @end
 
@@ -79,6 +79,7 @@
     
     [self.navigationItem setTitle:@"产品详情"];
     
+    butCountDown = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((self.view.frame.size.width - 20)/2, 0, (self.view.frame.size.width - 20)/2, 29) backgroundColor:[UIColor greenColor] textColor:[UIColor zitihui] titleText:nil];
 }
 
 //头部分区的tableView展示
@@ -200,10 +201,47 @@
         cell.labelDeadline.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelDeadline.textAlignment = NSTextAlignmentCenter;
         
-        cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@%@", @"剩余总额:", self.residueMoney, @"元"];
+        cell.labelSurplus.text = [NSString stringWithFormat:@" %@%@%@", @"剩余总额:", self.residueMoney, @"元"];
         cell.labelSurplus.textColor = [UIColor zitihui];
         cell.labelSurplus.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelSurplus.backgroundColor = [UIColor clearColor];
+        
+//        固收已售完时显示倒计时
+        if (self.pandaun == YES) {
+            
+            if ([self.residueMoney isEqualToString:@"0.00"]) {
+                
+                [cell.butCountDown setImage:[UIImage imageNamed:@"61-拷贝"] forState:UIControlStateNormal];
+                [cell.butCountDown setTitle:[NSString stringWithFormat:@" %@ %@", @"倒计时", @"12:12:12"] forState:UIControlStateNormal];
+                
+            } else {
+                
+                cell.butCountDown.hidden = YES;
+            }
+            
+//            新手专享倒计时
+        } else if (self.estimate == NO) {
+            
+            if ([self.residueMoney isEqualToString:@"0.00"]) {
+            
+                [cell.butCountDown setImage:[UIImage imageNamed:@"61-拷贝"] forState:UIControlStateNormal];
+                [cell.butCountDown setTitle:[NSString stringWithFormat:@" %@ %@", @"倒计时", @"12:12:12"] forState:UIControlStateNormal];
+                
+//                火爆专区非新手专享没剩余时要隐藏
+            } else {
+                
+                cell.butCountDown.hidden = YES;
+            }
+           
+//            其他不用显示倒计时要隐藏
+        } else {
+            
+            cell.butCountDown.hidden = YES;
+        }
+        
+        [cell.butCountDown setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+        cell.butCountDown.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        [cell.butCountDown setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         
         cell.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.labelLine.alpha = 0.9;

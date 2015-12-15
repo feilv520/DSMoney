@@ -123,6 +123,11 @@
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         }
         
+        if (indexPath.row == 2 || indexPath.row == 3) {
+            
+            cell.textField.secureTextEntry = YES;
+        }
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
@@ -274,10 +279,37 @@
         
     } else {
         
-        NSArray *viewController = [self.navigationController viewControllers];
-        [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
+        [self getCodeData];
     }
         
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+- (void)getCodeData
+{
+    textNewDeal = (UITextField *)[self.view viewWithTag:702];
+    textCheckNum = (UITextField *)[self.view viewWithTag:701];
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSDictionary *parmeter = @{@"phone":[DES3Util decrypt:[dic objectForKey:@"userAccount"]], @"optType":@2, @"oldPayPwd":@"", @"newPayPwd":textNewDeal.text, @"smsCode":textCheckNum.text, @"token":[dic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPayPwd" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"找回交易密码:rrrrrrr%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            NSArray *viewController = [self.navigationController viewControllers];
+            [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 // 获得验证码

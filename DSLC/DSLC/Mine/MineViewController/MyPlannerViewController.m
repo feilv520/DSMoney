@@ -117,11 +117,15 @@
     
 //    @"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658"
     imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 40, 25, 80, 80) backGroundColor:[UIColor clearColor] setImage:nil];
+    imageHead.layer.cornerRadius = 40;
+    imageHead.layer.masksToBounds = YES;
+    imageHead.layer.borderWidth = 0.5;
+    imageHead.layer.borderColor = [[UIColor clearColor]CGColor];
     [imageBottom addSubview:imageHead];
     imageHead.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
-    imageCrown = [CreatView creatImageViewWithFrame:CGRectMake(58, 0, WIDTH_CONTROLLER_DEFAULT * (20.0 / 375.0), WIDTH_CONTROLLER_DEFAULT * (15.0 / 375.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"huangguan"]];
-    [imageHead addSubview:imageCrown];
+    imageCrown = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 + 18, 25, WIDTH_CONTROLLER_DEFAULT * (20.0 / 375.0), WIDTH_CONTROLLER_DEFAULT * (15.0 / 375.0)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"huangguan"]];
+    [imageBottom addSubview:imageCrown];
     imageCrown.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
     labelName = [CreatView creatWithLabelFrame:CGRectMake(0, 115, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];

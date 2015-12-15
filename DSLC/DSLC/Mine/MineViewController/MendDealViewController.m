@@ -279,6 +279,8 @@
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
     NSLog(@"=====%@", dic);
+    NSLog(@"zzzzzzzzz%@", [DES3Util decrypt:[dic objectForKey:@"dealSecret"]]);
+    
     if (textLast.text.length == 0) {
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入交易密码"];
@@ -317,11 +319,15 @@
         
     } else {
         
-        NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"],@"optType":@1,@"oldPayPwd":textLast.text,@"newPwd":textNew.text,@"smsCode":@""};
+        NSDictionary *dataDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+
+        NSDictionary *parameter = @{@"phone":[DES3Util decrypt:[dataDic objectForKey:@"userAccount"]], @"optType":@1,@"oldPayPwd":textLast.text,@"newPwd":textNew.text,@"smsCode":textNum.text, @"token":[dataDic objectForKey:@"token"]};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            } else {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
             
             [self.navigationController popViewControllerAnimated:YES];
@@ -353,7 +359,16 @@
         NSDictionary *parameters = @{@"phone":textPhone.text,@"msgType":@"4"};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             NSLog(@"%@",responseObject);
-            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                
+            } else {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            }
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];

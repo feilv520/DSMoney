@@ -34,17 +34,17 @@
     self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"设置交易密码"];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(findDealSecret:)];
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:14], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(findDealSecret:)];
+//    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:14], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
     [self tableViewShow];
 }
 
-- (void)findDealSecret:(UIBarButtonItem *)bar
-{
-    MendDealViewController *dealVC = [[MendDealViewController alloc] init];
-    [self.navigationController pushViewController:dealVC animated:YES];
-}
+//- (void)findDealSecret:(UIBarButtonItem *)bar
+//{
+//    MendDealViewController *dealVC = [[MendDealViewController alloc] init];
+//    [self.navigationController pushViewController:dealVC animated:YES];
+//}
 
 - (void)tableViewShow
 {

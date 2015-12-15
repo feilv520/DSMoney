@@ -17,4 +17,6 @@
 
 @property (nonatomic, strong) NSString *nHand;
 
+@property (nonatomic) BOOL pandaun;
+
 @end
