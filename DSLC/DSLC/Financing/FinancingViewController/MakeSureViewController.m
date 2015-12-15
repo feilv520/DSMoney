@@ -75,15 +75,26 @@
     self.titleArr = @[@"账户余额", @"我的红包"];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.controlBlack.hidden = NO;
+    self.viewWhite.hidden = NO;
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    [self.controlBlack removeFromSuperview];
-    [self.viewWhite removeFromSuperview];
+//    [self.controlBlack removeFromSuperview];
+//    [self.viewWhite removeFromSuperview];
+//    
+//    self.controlBlack = nil;
+//    self.viewWhite = nil;
     
-    self.controlBlack = nil;
-    self.viewWhite = nil;
+    self.controlBlack.hidden = YES;
+    self.viewWhite.hidden = YES;
+    
 }
 
 //TableView展示
