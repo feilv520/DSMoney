@@ -21,6 +21,8 @@
 
 @property (nonatomic, retain) NSMutableDictionary *orderDic;
 
+@property (nonatomic, strong) LLPaySdk *sdk;
+
 @end
 
 #pragma mark - 创建订单
@@ -43,9 +45,11 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.orderDic = [self createOrder];
+    
     self.view.backgroundColor = [UIColor huibai];
     
-    self.navigationItem.title = @"余额支付";
+    self.navigationItem.title = @"支付";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     [self showContent];
@@ -89,7 +93,7 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
     [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [self.butPayment setTitle:@"支付" forState:UIControlStateNormal];
     self.butPayment.titleLabel.font  = [UIFont systemFontOfSize:15];
-    [self.butPayment addTarget:self action:@selector(cashMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.butPayment addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
         
     self.labelSecret.text = @"支付密码";
     self.labelSecret.font = [UIFont systemFontOfSize:15];
@@ -143,7 +147,7 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
         
     } else {
 //        [self pay];
-        [self buyProduct];
+//        [self buyProduct];
         //        支付有红包
         //        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
         //        [self.navigationController pushViewController:shareHave animated:YES];
@@ -237,7 +241,7 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
 #pragma mark --------------------------------
 
 #pragma mark - 订单支付
-- (void)pay{
+- (void)pay:(id)sender{
     
     LLPayUtil *payUtil = [[LLPayUtil alloc] init];
     
@@ -251,13 +255,17 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
     // TODO: 根据需要使用特定支付方式
     
     // 快捷支付
-    //    [[LLPaySdk sharedSdk] presentQuickPaySdkInViewController:self withTraderInfo:signedOrder];
+//        [[LLPaySdk sharedSdk] presentQuickPaySdkInViewController:self withTraderInfo:signedOrder];
     
     // 认证支付
     [[LLPaySdk sharedSdk] presentVerifyPaySdkInViewController:self withTraderInfo:signedOrder];
     
     // 预授权
     //  [self.sdk presentPreAuthPaySdkInViewController:self withTraderInfo:signedOrder];
+    
+    self.sdk = [[LLPaySdk alloc] init];
+    self.sdk.sdkDelegate = self;
+//    [self.sdk presentVerifyPaySdkInViewController:self withTraderInfo:signedOrder];
     
 }
 
@@ -328,8 +336,7 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
 
 - (NSMutableDictionary*)createOrder{
     
-    
-    NSString *partnerPrefix = @"LL"; // TODO: 修改成自己公司前缀
+    NSString *partnerPrefix = @"DSLC"; // TODO: 修改成自己公司前缀
     
     NSString *signType = @"MD5";    // MD5 || RSA || HMAC
     
@@ -358,11 +365,11 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
                            //商户订单时间	dt_order	是	String(14)	格式：YYYYMMDDH24MISS  14位数字，精确到秒
                            //                           @"money_order":@"0.10",
                            //交易金额	money_order	是	Number(8,2)	该笔订单的资金总额，单位为RMB-元。大于0的数字，精确到小数点后两位。 如：49.65
-                           @"money_order" : @"0.01",
+                           @"money_order" : self.moneyString,
                            
                            @"no_order":[NSString stringWithFormat:@"%@%@",partnerPrefix,  simOrder],
                            //商户唯一订单号	no_order	是	String(32)	商户系统唯一订单号
-                           @"name_goods":@"订单名",
+                           @"name_goods":@"我噻",
                            //商品名称	name_goods	否	String(40)
                            @"info_order":simOrder,
                            //订单附加信息	info_order	否	String(255)	商户订单的备注信息

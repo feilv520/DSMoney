@@ -456,6 +456,11 @@
         NSDictionary *parameters = [NSDictionary dictionary];
         if (self.flag) {
             
+            if (![self.registerV.sandMyselfIDCard.placeholder isEqualToString:@"名片.png"]){
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"理财师注册必须上传头像"];
+                return;
+            }
+            
             NSLog(@"理财师注册");
             
             NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"cardIDImage.png"];
