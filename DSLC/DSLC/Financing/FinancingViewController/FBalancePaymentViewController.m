@@ -93,7 +93,7 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
     [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [self.butPayment setTitle:@"支付" forState:UIControlStateNormal];
     self.butPayment.titleLabel.font  = [UIFont systemFontOfSize:15];
-    [self.butPayment addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
+    [self.butPayment addTarget:self action:@selector(cashMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
         
     self.labelSecret.text = @"支付密码";
     self.labelSecret.font = [UIFont systemFontOfSize:15];
@@ -147,7 +147,7 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
         
     } else {
 //        [self pay];
-//        [self buyProduct];
+        [self buyProduct];
         //        支付有红包
         //        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
         //        [self.navigationController pushViewController:shareHave animated:YES];
@@ -266,6 +266,7 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
     self.sdk = [[LLPaySdk alloc] init];
     self.sdk.sdkDelegate = self;
 //    [self.sdk presentVerifyPaySdkInViewController:self withTraderInfo:signedOrder];
+    [self.sdk presentPaySdkInViewController:self withTraderInfo:signedOrder];
     
 }
 
