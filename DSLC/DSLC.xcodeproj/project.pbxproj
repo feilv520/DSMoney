@@ -4928,7 +4928,10 @@
 					"$(PROJECT_DIR)/DSLC/Three/LLPay_iOS_SDK_V2.4",
 					"$(PROJECT_DIR)/DSLC/Three/LLPayUtils/crypto",
 				);
-				OTHER_LDFLAGS = "$(SRCROOT)/DSLC/Three/LLPay_iOS_SDK_V2.4/libPaySdkColor.a";
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"$(SRCROOT)/DSLC/Three/LLPay_iOS_SDK_V2.4/libPaySdkColor.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
 				PROVISIONING_PROFILE = "97bc9dff-bb13-4d20-a14e-692f4fa4a195";
@@ -4962,7 +4965,10 @@
 					"$(PROJECT_DIR)/DSLC/Three/LLPayUtils/crypto",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "$(SRCROOT)/DSLC/Three/LLPay_iOS_SDK_V2.4/libPaySdkColor.a";
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"$(SRCROOT)/DSLC/Three/LLPay_iOS_SDK_V2.4/libPaySdkColor.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
 				PROVISIONING_PROFILE = "97bc9dff-bb13-4d20-a14e-692f4fa4a195";

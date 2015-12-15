@@ -68,6 +68,10 @@
     [self.navigationItem setTitle:@"确认投资"];
     [self showTableView];
     
+    if (self.decide == NO) {
+        [self getMyRedPacketList];
+    }
+    
     self.titleArr = @[@"账户余额", @"我的红包"];
 }
 
@@ -323,7 +327,7 @@
             
             cell.labelYuan.text = [NSString stringWithFormat:@"%.2f%@",[cell.textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0, @"元"];
             self.syString = cell.labelYuan.text;
-            
+            NSLog(@"self.syString = %@",self.syString);
         } else {
             
             cell.labelYuan.text = @"0.00元";
@@ -540,53 +544,16 @@
 //确认投资按钮
 - (void)makeSureMoney:(UIButton *)button
 {
-    [self getMyRedPacketList];
 //    判断新手还是固收或银行票据
     if (self.decide == NO) {
-        
-        self.textFieldC = (UITextField *)[self.view viewWithTag:199];
-        
-        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-        NSDictionary *parameter;
-        if ([redbagModel rpID] == nil) {
-            parameter = @{@"productId":[self.detailM productId],@"packetId":@"",@"orderMoney":[NSNumber numberWithFloat:[self.textFieldC.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"]};
-        } else {
-            parameter = @{@"productId":[self.detailM productId],@"packetId":[redbagModel rpID],@"orderMoney":[NSNumber numberWithFloat:[self.textFieldC.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"]};
+
+        if (self.redBagArray.count != 0) {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你还有未使用的红包,要不要去看看?" delegate:self cancelButtonTitle:@"拒绝去看" otherButtonTitles:@"去看看",nil];
+            // optional - add more buttons:
+            [alert show];
         }
-        
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-            
-            NSLog(@"buyProduct = %@",responseObject);
-            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-                if ([redbagModel rpID] == nil) {
-    //              支付没有红包
-                    CashFinishViewController *cashFinish = [[CashFinishViewController alloc] init];
-                    cashFinish.nHand = self.nHand;
-                    cashFinish.moneyString = self.textFieldC.text;
-                    cashFinish.endTimeString = [self.detailM endTime];
-                    cashFinish.productName = [self.detailM productName];
-                    [self.navigationController pushViewController:cashFinish animated:YES];
-                } else {
-    //              支付有红包
-                    ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
-                    shareHave.redbagModel = redbagModel;
-                    shareHave.nHand = self.nHand;
-                    shareHave.moneyString = self.textFieldC.text;
-                    shareHave.endTimeString = [self.detailM endTime];
-                    shareHave.productName = [self.detailM productName];
-                    [self.navigationController pushViewController:shareHave animated:YES];
-                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
-                }
-            } else {
-                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-            NSLog(@"%@", error);
-            
-        }];
-        
+    
     } else {
         
         AppDelegate *app = [[UIApplication sharedApplication] delegate];
@@ -803,18 +770,67 @@
 //确认投资按钮
 - (void)buttonAffirmMoney:(UIButton *)button
 {
-    UITextField *textField = (UITextField *)[self.view viewWithTag:199];
-    FBalancePaymentViewController *balanceVC = [[FBalancePaymentViewController alloc] init];
-    balanceVC.productName = [self.detailM productName];
-    balanceVC.idString = [self.detailM productId];
-    balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textField.text floatValue]];
-    balanceVC.typeString = [self.detailM productType];
-    balanceVC.redbagModel = redbagModel;
-    balanceVC.nHand = self.nHand;
-    balanceVC.syString = self.syString;
-    balanceVC.endTimeString = [self.detailM endTime];
-    
-    [self.navigationController pushViewController:balanceVC animated:YES];
+    if (self.decide == NO) {
+        self.textFieldC = (UITextField *)[self.view viewWithTag:199];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        NSDictionary *parameter;
+        if ([redbagModel rpID] == nil) {
+            parameter = @{@"productId":[self.detailM productId],@"packetId":@"",@"orderMoney":[NSNumber numberWithFloat:[self.textFieldC.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"]};
+        } else {
+            parameter = @{@"productId":[self.detailM productId],@"packetId":[redbagModel rpID],@"orderMoney":[NSNumber numberWithFloat:[self.textFieldC.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"]};
+        }
+        
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"buyProduct = %@",responseObject);
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                if ([redbagModel rpID] == nil) {
+                    //              支付没有红包
+                    CashFinishViewController *cashFinish = [[CashFinishViewController alloc] init];
+                    cashFinish.nHand = self.nHand;
+                    cashFinish.moneyString = self.textFieldC.text;
+                    cashFinish.endTimeString = [self.detailM endTime];
+                    cashFinish.productName = [self.detailM productName];
+                    cashFinish.syString = self.syString;
+                    [self.navigationController pushViewController:cashFinish animated:YES];
+                } else {
+                    //              支付有红包
+                    ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
+                    shareHave.redbagModel = redbagModel;
+                    shareHave.nHand = self.nHand;
+                    shareHave.moneyString = self.textFieldC.text;
+                    shareHave.endTimeString = [self.detailM endTime];
+                    shareHave.productName = [self.detailM productName];
+                    shareHave.syString = self.syString;
+                    [self.navigationController pushViewController:shareHave animated:YES];
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
+                }
+            } else {
+                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            
+        }];
+
+    } else {
+        
+        UITextField *textField = (UITextField *)[self.view viewWithTag:199];
+        FBalancePaymentViewController *balanceVC = [[FBalancePaymentViewController alloc] init];
+        balanceVC.productName = [self.detailM productName];
+        balanceVC.idString = [self.detailM productId];
+        balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textField.text floatValue]];
+        balanceVC.typeString = [self.detailM productType];
+        balanceVC.redbagModel = redbagModel;
+        balanceVC.nHand = self.nHand;
+        balanceVC.syString = self.syString;
+        balanceVC.endTimeString = [self.detailM endTime];
+        
+        [self.navigationController pushViewController:balanceVC animated:YES];
+    }
 }
 
 #pragma mark textField 的监控方法
@@ -872,13 +888,23 @@
 #pragma mark --------------------------------
 
 - (void)getMyRedPacketList{
-    if (self.textFieldC == nil) {
-        return;
+
+    if (self.redBagArray.count > 0) {
+        [self.redBagArray removeAllObjects];
+        self.redBagArray = nil;
+        self.redBagArray = [NSMutableArray array];
     }
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":self.textFieldC.text,@"days":[self.detailM productPeriod]};
+    NSDictionary *parameter = nil;
+    
+    if (self.decide == NO) {
+        parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":@"5000",@"days":[self.detailM productPeriod]};
+    } else {
+        parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":self.textFieldC.text,@"days":[self.detailM productPeriod]};
+    }
+    
     
     NSLog(@"getMyRedPacketList parameter = %@",parameter);
     
