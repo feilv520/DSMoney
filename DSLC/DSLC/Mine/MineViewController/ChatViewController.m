@@ -36,6 +36,12 @@
 
 @implementation ChatViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    viewImport.hidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -163,17 +169,10 @@
                 [_tableView reloadData];
                 _textField.text = nil;
                 
-                [UIView animateWithDuration:0.5 animations:^{
-                    _tableView.contentOffset = CGPointMake(0, 50);
-                }];
-                
-//                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
-//                    
-//                    
-//                    
-//                } completion:^(BOOL finished) {
-//                    
+//                [UIView animateWithDuration:0.5 animations:^{
+                    _tableView.contentOffset = CGPointMake(0, rect.size.height + 50);
 //                }];
+                NSLog(@"---------------%f", _tableView.contentOffset.y);
                 
             } else {
                 
@@ -367,8 +366,9 @@
 {
     [super viewWillDisappear:animated];
     
-    [viewImport removeFromSuperview];
-    viewImport = nil;
+//    [viewImport removeFromSuperview];
+//    viewImport = nil;
+    viewImport.hidden = YES;
     
     [self.view endEditing:YES];
 }

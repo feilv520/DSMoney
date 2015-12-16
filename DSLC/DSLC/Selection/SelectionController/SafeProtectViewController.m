@@ -30,10 +30,13 @@
 
 - (void)webViewShow
 {
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
     [self.view addSubview:webView];
     webView.delegate = self;
     webView.scalesPageToFit = YES;
+    
+    webView.scrollView.showsHorizontalScrollIndicator = NO;
+    webView.scrollView.bounces = NO;
     
     NSURL *url = [NSURL URLWithString:@"http://192.168.0.41:8080/tongjiang/more_security.do"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];

@@ -9,7 +9,7 @@
 #import "NewHandViewController.h"
 #import "NewHandCell.h"
 
-@interface NewHandViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface NewHandViewController () <UITableViewDataSource,  UITableViewDelegate>
 
 {
     UITableView *_tableView;
@@ -54,8 +54,11 @@
 
 - (void)webViewShow
 {
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
     [self.view addSubview:webView];
+    
+    webView.scrollView.showsHorizontalScrollIndicator = NO;
+    webView.scrollView.bounces = NO;
     
     NSURL *url = [NSURL URLWithString:@"http://192.168.0.41:8080/tongjiang/more_guide.do"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -133,7 +136,6 @@
         
         return viewGraySectionOne;
     } else if (section == 2) {
-        
         
         UILabel *labelContent = [CreatView creatWithLabelFrame:CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, 10) backgroundColor:[UIColor huibai] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。\n新手专享是大圣理财对于每一位注册用户鼓励投资的一种模拟投资体验,投资本金为10000元由大圣理财提供,期限3天到期后兑付3天收益。"];
         [viewGraySectionTwo addSubview:labelContent];

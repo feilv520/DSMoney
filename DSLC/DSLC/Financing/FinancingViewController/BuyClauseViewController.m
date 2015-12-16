@@ -20,6 +20,21 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"风险提示书"];
+    
+    [self webViewShow];
+}
+
+- (void)webViewShow
+{
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
+    [self.view addSubview:webView];
+    
+    webView.scrollView.showsHorizontalScrollIndicator = NO;
+    webView.scrollView.bounces = NO;
+    
+    NSURL *url = [NSURL URLWithString:@"http://192.168.0.39:8080/tongjiang/prouctInfo/LegalAgreement.do?type=txtRisk"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
 }
 
 - (void)didReceiveMemoryWarning {
