@@ -291,7 +291,7 @@
     if (indexPath.section == 2) {
             
         CastProduceViewController *castPVC = [[CastProduceViewController alloc] init];
-        castPVC.idString = [[[self.moneyDic objectForKey:@"Product"] objectAtIndex:indexPath.row - 1] objectForKey:@"productId"];
+        castPVC.idString = [[[self.moneyDic objectForKey:@"Product"] objectAtIndex:indexPath.row - 1] objectForKey:@"orderId"];
         [self.navigationController pushViewController:castPVC animated:YES];
         
     }

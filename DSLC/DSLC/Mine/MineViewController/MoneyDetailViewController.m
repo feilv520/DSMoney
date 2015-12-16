@@ -381,16 +381,34 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/asset/getAssetDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"%@",responseObject);
-        
-        self.asset = [NSDictionary dictionary];
-        self.asset = [responseObject objectForKey:@"Asset"];
-        self.product = [NSDictionary dictionary];
-        self.product = [responseObject objectForKey:@"Product"];
-        
-        rightArray = @[[self.asset objectForKey:@"assetName"], [self.asset objectForKey:@"assetTypeName"], [NSString stringWithFormat:@"%@元",[self.asset objectForKey:@"assetAmount"]], [self.asset objectForKey:@"assetSaleTime"], [self.asset objectForKey:@"assetInterestBdate"], [self.asset objectForKey:@"assetInterestEdate"], [self.asset objectForKey:@"assetToaccountDate"], [self.asset objectForKey:@"assetYieldDistribType"], [self.asset objectForKey:@"assetFinancierName"], [self.asset objectForKey:@"assetFundsUse"], [self.asset objectForKey:@"assetRepaymentSource"]];
-        
-        [_tableView reloadData];
+            NSLog(@"%@",responseObject);
+            
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
+            NSLog(@"134897189374987342987243789423");
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            return ;
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]){
+            
+            self.asset = [NSDictionary dictionary];
+            self.asset = [responseObject objectForKey:@"Asset"];
+            self.product = [NSDictionary dictionary];
+            self.product = [responseObject objectForKey:@"Product"];
+            
+            rightArray = @[[self.asset objectForKey:@"assetName"], [self.asset objectForKey:@"assetTypeName"], [NSString stringWithFormat:@"%@元",[self.asset objectForKey:@"assetAmount"]], [self.asset objectForKey:@"assetSaleTime"], [self.asset objectForKey:@"assetInterestBdate"], [self.asset objectForKey:@"assetInterestEdate"], [self.asset objectForKey:@"assetToaccountDate"], [self.asset objectForKey:@"assetYieldDistribType"], [self.asset objectForKey:@"assetFinancierName"], [self.asset objectForKey:@"assetFundsUse"], [self.asset objectForKey:@"assetRepaymentSource"]];
+            
+            [_tableView reloadData];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

@@ -34,8 +34,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
     self.view.backgroundColor = buttonBorderColor;
     
     self.mainTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 84) style:UITableViewStylePlain];
@@ -124,7 +122,7 @@
             
             cell.productProfit.text = [NSString stringWithFormat:@"%.2lf元",[moneyString floatValue] * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"] floatValue] * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productPeriod"] floatValue] / 36500.0];
             
-            cell.productDate.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productToaccountTypeName"];
+            cell.productDate.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"dueDate"];
             
             return cell;
         } else {
@@ -167,6 +165,10 @@
     
     if (indexPath.section == 1) {
         
+        if ([[[[[self.castDic objectForKey:@"Product"] objectForKey:@"Asset"] objectAtIndex:indexPath.row - 1] objectForKey:@"assetId"] isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"该底层资产不存在"];
+            return;
+        }
         MoneyDetailViewController *moneyDetail = [[MoneyDetailViewController alloc] init];
         moneyDetail.idString = [[[[self.castDic objectForKey:@"Product"] objectForKey:@"Asset"] objectAtIndex:indexPath.row - 1] objectForKey:@"assetId"];
         [self.navigationController pushViewController:moneyDetail animated:YES];
@@ -181,16 +183,34 @@
 
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"productId":self.idString,@"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"orderId":self.idString,@"token":[dic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getCastProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@",responseObject);
         
-        self.castDic = [NSDictionary dictionary];
-        self.castDic = responseObject;
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
+            NSLog(@"134897189374987342987243789423");
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:nil];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            return ;
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
         
-        [self.mainTV reloadData];
+            self.castDic = [NSDictionary dictionary];
+            self.castDic = responseObject;
+            
+            [self.mainTV reloadData];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
