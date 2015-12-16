@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -11,14 +11,18 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bV-1o-aHl">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bV-1o-aHl">
                     <rect key="frame" x="8" y="25" width="170" height="50"/>
                     <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Lt1-BY-cNo"/>
+                        <constraint firstAttribute="width" constant="170" id="SoR-Hy-b8O"/>
+                    </constraints>
                     <state key="normal" title="跳过" backgroundImage="btn_gray.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfI-yP-gM6">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfI-yP-gM6">
                     <rect key="frame" x="197" y="25" width="170" height="50"/>
                     <animations/>
                     <state key="normal" title="确定" backgroundImage="btn_red.png">
@@ -28,6 +32,15 @@
             </subviews>
             <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="nfI-yP-gM6" firstAttribute="height" secondItem="5bV-1o-aHl" secondAttribute="height" id="1va-z0-muz"/>
+                <constraint firstAttribute="trailing" secondItem="nfI-yP-gM6" secondAttribute="trailing" constant="8" id="9MS-on-uZ0"/>
+                <constraint firstItem="nfI-yP-gM6" firstAttribute="width" secondItem="5bV-1o-aHl" secondAttribute="width" id="gCr-ei-BcE"/>
+                <constraint firstItem="5bV-1o-aHl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="gUa-NK-guF"/>
+                <constraint firstItem="nfI-yP-gM6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="huA-y9-5ks"/>
+                <constraint firstItem="5bV-1o-aHl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="iZ2-cL-Hkl"/>
+                <constraint firstItem="nfI-yP-gM6" firstAttribute="leading" secondItem="5bV-1o-aHl" secondAttribute="trailing" constant="19" id="lBI-Az-fQ8"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="passButton" destination="5bV-1o-aHl" id="sV4-Gj-lYJ"/>
