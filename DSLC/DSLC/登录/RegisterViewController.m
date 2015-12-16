@@ -159,6 +159,12 @@
             [self.registerV.problemButton setImage:[UIImage imageNamed:@"iconfont-register-gantanhao001"] forState:UIControlStateNormal];
             
             self.flag = NO;
+            
+            self.registerV.phoneNumber.text = @"";
+            self.registerV.smsCode.text = @"";
+            self.registerV.loginPassword.text = @"";
+            self.registerV.sureLoginPassword.text = @"";
+            
         } else {
             if (btn.tag != buttonTag){
                 lableRedLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT / 2, 48, WIDTH_CONTROLLER_DEFAULT / 2.0, 2);
@@ -177,6 +183,12 @@
             
             [bookButton setTitle:@"《大圣理财平台理财师服务协议》" forState:UIControlStateNormal];
             self.flag = YES;
+            
+            self.registerV.phoneNumber.text = @"";
+            self.registerV.smsCode.text = @"";
+            self.registerV.loginPassword.text = @"";
+            self.registerV.sureLoginPassword.text = @"";
+            
         }
         
     } completion:^(BOOL finished) {
@@ -213,7 +225,7 @@
     NSBundle *rootBundle = [NSBundle mainBundle];
     NSArray *rootArray = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
 
-    self.registerV = [rootArray firstObject];
+    self.registerV = [rootArray lastObject];
     
     self.registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, 225);
     
@@ -538,6 +550,9 @@
                     // 跳过操作
 //                    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
 //                    [self.navigationController popViewControllerAnimated:YES];
+                    tapButton.hidden = YES;
+                    bookButton.hidden = YES;
+                    
                 } else {
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
                 }
@@ -595,6 +610,9 @@
                     // 返回方法
 //                    [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
 //                    [self.navigationController popViewControllerAnimated:YES];
+                    tapButton.hidden = YES;
+                    bookButton.hidden = YES;
+                    
                 } else {
                     //
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
