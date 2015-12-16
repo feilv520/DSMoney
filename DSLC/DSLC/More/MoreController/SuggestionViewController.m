@@ -47,7 +47,7 @@
     
     labelStat = [CreatView creatWithLabelFrame:CGRectMake(viewWhite.frame.size.width - 65, viewWhite.frame.size.height - 20, 55, 15) backgroundColor:[UIColor whiteColor] textColor:nil textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:nil];
     [viewWhite addSubview:labelStat];
-    NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"0/500"];
+    NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"0/200"];
     NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
     [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
     [labelStat setAttributedText:redStr];
@@ -69,47 +69,46 @@
     [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [butMakeSure addTarget:self action:@selector(buttonMakeSureSubmit:) forControlEvents:UIControlEventTouchUpInside];
-    
 }
 
 - (void)textViewDidChange:(UITextView *)textView
 {
     NSInteger statistics = [textView.text length];
     NSString *sumStr = [NSString stringWithFormat:@"%ld", (long)statistics];
-    if (statistics >= 500) {
-        NSString *sumString = [NSString stringWithFormat:@"%@%@", @"500", @"/500"];
+    
+    if (statistics >= 200) {
+        NSString *sumString = [NSString stringWithFormat:@"%@%@", @"200", @"/200"];
         NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:sumString];
         NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
         [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
         [labelStat setAttributedText:redStr];
+        
     } else {
-        NSString *sumString = [NSString stringWithFormat:@"%@%@", sumStr, @"/500"];
+        
+        NSString *sumString = [NSString stringWithFormat:@"%@%@", sumStr, @"/200"];
         NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:sumString];
         NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
         [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
         [labelStat setAttributedText:redStr];
     }
-    
-    
-   
     
     if ([textView.text isEqualToString:@""]) {
         
         NSLog(@"0");
-        NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"0/500"];
+        NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"0/200"];
         NSRange frontStr = NSMakeRange(0, [[redStr string] rangeOfString:@"/"].location);
         [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:frontStr];
         [labelStat setAttributedText:redStr];
         
     }
     
-    if (textView.text.length > 0 && textView.text.length <= 500) {
+    if (textView.text.length > 0 && textView.text.length <= 200) {
         
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         
-    } else if (textView.text.length > 500) {
-        textView.text = [textView.text substringToIndex:500];
+    } else if (textView.text.length > 200) {
+        textView.text = [textView.text substringToIndex:200];
         
     } else {
 
@@ -118,10 +117,10 @@
     }
 }
 
-//规定不超过编辑字数范围500 如果输入超过500 就不能再输入
+//规定不超过编辑字数范围200 如果输入超过200 就不能再输入
 -(BOOL)textView:(UITextView*)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if (range.location < 500) {
+    if (range.location < 200) {
         
         return YES;
         

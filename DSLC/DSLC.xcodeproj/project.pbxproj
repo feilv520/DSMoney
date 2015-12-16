@@ -301,6 +301,7 @@
 		81B18E201BE761B600D448FA /* LastEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B18E1F1BE761B600D448FA /* LastEmailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81B18E241BE77EA700D448FA /* EmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B18E221BE77EA700D448FA /* EmailCell.m */; settings = {ASSET_TAGS = (); }; };
 		81B18E251BE77EA700D448FA /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B18E231BE77EA700D448FA /* EmailCell.xib */; settings = {ASSET_TAGS = (); }; };
+		81B43C2F1C2139FE005F158F /* SendTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B43C2E1C2139FE005F158F /* SendTime.m */; settings = {ASSET_TAGS = (); }; };
 		81B5209E1BF96F4200D8E8D1 /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B5209D1BF96F4200D8E8D1 /* AddressBookViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81B520A21BF9746400D8E8D1 /* AddressBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B520A01BF9746400D8E8D1 /* AddressBookCell.m */; settings = {ASSET_TAGS = (); }; };
 		81B520A31BF9746400D8E8D1 /* AddressBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B520A11BF9746400D8E8D1 /* AddressBookCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -1051,10 +1052,10 @@
 		8184EC471BCCD13C003F440D /* CashMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashMoneyCell.h; sourceTree = "<group>"; };
 		8184EC481BCCD13C003F440D /* CashMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashMoneyCell.m; sourceTree = "<group>"; };
 		8184EC491BCCD13C003F440D /* CashMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashMoneyCell.xib; sourceTree = "<group>"; };
-		8184EF461BFDBC5600496989 /* OneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OneCell.h; path = ../MineView/OneCell.h; sourceTree = "<group>"; };
-		8184EF471BFDBC5600496989 /* OneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OneCell.m; path = ../MineView/OneCell.m; sourceTree = "<group>"; };
-		8184EF481BFDBC5600496989 /* TwoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoCell.h; path = ../MineView/TwoCell.h; sourceTree = "<group>"; };
-		8184EF491BFDBC5600496989 /* TwoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoCell.m; path = ../MineView/TwoCell.m; sourceTree = "<group>"; };
+		8184EF461BFDBC5600496989 /* OneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneCell.h; sourceTree = "<group>"; };
+		8184EF471BFDBC5600496989 /* OneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneCell.m; sourceTree = "<group>"; };
+		8184EF481BFDBC5600496989 /* TwoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoCell.h; sourceTree = "<group>"; };
+		8184EF491BFDBC5600496989 /* TwoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoCell.m; sourceTree = "<group>"; };
 		8184EF4C1BFDBD9E00496989 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = ../ChatViewController.m; sourceTree = "<group>"; };
 		8184EF4D1BFDBD9E00496989 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = ../ChatViewController.h; sourceTree = "<group>"; };
 		818523AB1BE3125D002FC653 /* BillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillCell.h; sourceTree = "<group>"; };
@@ -1184,6 +1185,8 @@
 		81B18E211BE77EA700D448FA /* EmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailCell.h; sourceTree = "<group>"; };
 		81B18E221BE77EA700D448FA /* EmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailCell.m; sourceTree = "<group>"; };
 		81B18E231BE77EA700D448FA /* EmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailCell.xib; sourceTree = "<group>"; };
+		81B43C2D1C2139FE005F158F /* SendTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendTime.h; sourceTree = "<group>"; };
+		81B43C2E1C2139FE005F158F /* SendTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendTime.m; sourceTree = "<group>"; };
 		81B5209C1BF96F4200D8E8D1 /* AddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookViewController.h; sourceTree = "<group>"; };
 		81B5209D1BF96F4200D8E8D1 /* AddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewController.m; sourceTree = "<group>"; };
 		81B5209F1BF9746400D8E8D1 /* AddressBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookCell.h; sourceTree = "<group>"; };
@@ -2073,6 +2076,10 @@
 		817E33A31BD7830E00D05103 /* 我的理财师 */ = {
 			isa = PBXGroup;
 			children = (
+				8184EF461BFDBC5600496989 /* OneCell.h */,
+				8184EF471BFDBC5600496989 /* OneCell.m */,
+				8184EF481BFDBC5600496989 /* TwoCell.h */,
+				8184EF491BFDBC5600496989 /* TwoCell.m */,
 				817E33751BD7303200D05103 /* MyPlannerCell.h */,
 				817E33761BD7303200D05103 /* MyPlannerCell.m */,
 				817E33771BD7303200D05103 /* MyPlannerCell.xib */,
@@ -2531,12 +2538,10 @@
 				8D4144131C06A003002926DA /* MessageModel.m */,
 				81F496FC1C06EF71002F3413 /* Chat.h */,
 				81F496FD1C06EF71002F3413 /* Chat.m */,
+				81B43C2D1C2139FE005F158F /* SendTime.h */,
+				81B43C2E1C2139FE005F158F /* SendTime.m */,
 				81F496FF1C072929002F3413 /* Planner.h */,
 				81F497001C072929002F3413 /* Planner.m */,
-				8184EF461BFDBC5600496989 /* OneCell.h */,
-				8184EF471BFDBC5600496989 /* OneCell.m */,
-				8184EF481BFDBC5600496989 /* TwoCell.h */,
-				8184EF491BFDBC5600496989 /* TwoCell.m */,
 				817B16131C0C317100EEB937 /* BigMoneyHistory.h */,
 				817B16141C0C317100EEB937 /* BigMoneyHistory.m */,
 				8182A7E41C0E97EA00FA1216 /* ApplySchedule.h */,
@@ -4587,6 +4592,7 @@
 				81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */,
 				818063971BD5D3C700E83492 /* MyInvitationViewController.m in Sources */,
 				8D9BE8E61C0EC94D003C67D3 /* YYKVStorage.m in Sources */,
+				81B43C2F1C2139FE005F158F /* SendTime.m in Sources */,
 				8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */,
 				81CBB74D1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m in Sources */,
 				81F237711BE8568B009D7A67 /* NewMakeSureCell.m in Sources */,

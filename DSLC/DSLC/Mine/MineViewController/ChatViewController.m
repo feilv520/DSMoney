@@ -10,12 +10,14 @@
 #import "OneCell.h"
 #import "TwoCell.h"
 #import "Chat.h"
+#import "SendTime.h"
 
 @interface ChatViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 {
     UITableView *_tableView;
     NSMutableArray *chatArray;
+    NSMutableArray *timeArray;
     CGRect rect;
     
     UIView *viewImport;
@@ -23,6 +25,11 @@
     UIButton *buttonSend;
     CGFloat keyboardhight;
     CGSize keyboardSize;
+    UILabel *labelTime;
+    NSString *timeStr;
+    
+    Chat *chat;
+    SendTime *time;
 }
 
 @end
@@ -37,6 +44,8 @@
     [self.navigationItem setTitle:@"咨询理财师"];
     
     chatArray = [NSMutableArray array];
+    timeArray = [NSMutableArray array];
+    timeStr = @"";
     
     [self getDataList];
     [self importWindow];
@@ -73,14 +82,15 @@
 
 - (void)tableViewShow
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 50 - 64) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 50 - 64) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
     _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _tableView.separatorColor = [UIColor clearColor];
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 20)];
+//    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 20)];
+    _tableView.tableFooterView = [UIView new];
     _tableView.tableHeaderView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
 }
@@ -120,16 +130,15 @@
 //发送消息
 - (void)sendMessage:(UIButton *)button
 {
+    [_textField resignFirstResponder];
+    [UIView animateWithDuration:0.001 animations:^{
+        
+        viewImport.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 20 - 50, WIDTH_CONTROLLER_DEFAULT, 50);
+    }];
+    
     if (_textField.text.length == 0) {
         
     } else {
-        
-//        [_textField resignFirstResponder];
-//        
-//        [UIView animateWithDuration:0.001 animations:^{
-//            
-//            viewImport.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 20 - 50, WIDTH_CONTROLLER_DEFAULT, 50);
-//        }];
         
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
         
@@ -141,14 +150,36 @@
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
-                Chat *chat = [[Chat alloc] init];
+                chat = [[Chat alloc] init];
                 chat.msgText = _textField.text;
-//                [chatArray insertObject:chat atIndex:0];
+                
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSString *dataTime = [formatter stringFromDate:[NSDate date]];
+                chat.sendTime = dataTime;
+                
                 [chatArray addObject:chat];
+                
                 [_tableView reloadData];
                 _textField.text = nil;
                 
+                [UIView animateWithDuration:0.5 animations:^{
+                    _tableView.contentOffset = CGPointMake(0, 50);
+                }];
+                
+//                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+//                    
+//                    
+//                    
+//                } completion:^(BOOL finished) {
+//                    
+//                }];
+                
+            } else {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             NSLog(@"%@", error);
@@ -172,7 +203,8 @@
             
             NSMutableArray *dataArr = [responseObject objectForKey:@"Msg"];
             for (NSDictionary *dataDic in dataArr) {
-                Chat *chat = [[Chat alloc] init];
+                
+                chat = [[Chat alloc] init];
                 [chat setValuesForKeysWithDictionary:dataDic];
                 [chatArray addObject:chat];
             }
@@ -214,14 +246,38 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.1;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return rect.size.height + 20 + 30;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return chatArray.count;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *viewTime = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 20)];
+    labelTime = [CreatView creatWithLabelFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:10] text:[[chatArray objectAtIndex:section] sendTime]];
+    [viewTime addSubview:labelTime];
+    
+    return viewTime;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -229,14 +285,16 @@
     TwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
     if (cell == nil) {
+        
         cell = [[TwoCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
     }
     
-    Chat *chat = [chatArray objectAtIndex:indexPath.row];
-    
+    chat = [chatArray objectAtIndex:indexPath.section];
+
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
     cell.labelRight.numberOfLines = 0;
     cell.labelRight.text = chat.msgText;
+
     rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
     
     

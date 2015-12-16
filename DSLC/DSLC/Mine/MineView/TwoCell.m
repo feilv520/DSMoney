@@ -25,6 +25,12 @@
         self.labelRight.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.labelRight];
         
+//        self.labelTime = [[UILabel alloc] init];
+//        [self addSubview:self.labelTime];
+//        self.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+//        self.labelTime.textColor = [UIColor zitihui];
+//        self.labelTime.textAlignment = NSTextAlignmentCenter;
+        
         self.imageContect = [[UIImageView alloc] init];
 //        [self.contentView addSubview:self.imageContect];
         

@@ -13,5 +13,6 @@
 @property (nonatomic) UIImageView *imageContect;
 @property (nonatomic) UILabel *labelRight;
 @property (nonatomic) UIImageView *imageRight;
+@property (nonatomic) UILabel *labelTime;
 
 @end

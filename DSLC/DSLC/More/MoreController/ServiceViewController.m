@@ -242,7 +242,7 @@
 
 - (void)callMakeSureButton:(UIButton *)button
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%d", 400-816-2283]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", @"400-816-2283"]];
     [[UIApplication sharedApplication] openURL:url];
 }
 

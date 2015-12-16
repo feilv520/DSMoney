@@ -35,7 +35,7 @@
     webView.delegate = self;
     webView.scalesPageToFit = YES;
     
-    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/more_guide.do"];
+    NSURL *url = [NSURL URLWithString:@"http://192.168.0.41:8080/tongjiang/more_guide.do"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }
