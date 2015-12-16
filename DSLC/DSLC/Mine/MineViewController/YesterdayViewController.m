@@ -42,6 +42,7 @@
     self.tableView.separatorColor = [UIColor huibai];
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, (160 / 667.0) * HEIGHT_CONTROLLER_DEFAULT + 5)];
     self.tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
+
     [self headViewContent];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ProductMoneyTableViewCell" bundle:nil] forCellReuseIdentifier:@"productMoney"];
@@ -145,6 +146,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ProductMoneyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"productMoney"];
+    
+    cell.selectionStyle = UITableViewCellEditingStyleNone;
     
     cell.BackView.layer.masksToBounds = YES;
     cell.BackView.layer.cornerRadius = 4.f;
