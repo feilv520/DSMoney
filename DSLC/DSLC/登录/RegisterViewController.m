@@ -359,22 +359,20 @@
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [registerB removeFromSuperview];
-            [registerR removeFromSuperview];
             [self.registerV removeFromSuperview];
             registerB = nil;
-            registerR = nil;
             self.registerV = nil;
         
             registerP.photoImageView.image = [UIImage imageNamed:@"register-3"];
         
             NSBundle *rootBundle = [NSBundle mainBundle];
             NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
-            NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
+//            NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
             NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
         
-            registerR = [rootArrayOfResult lastObject];
+//            registerR = [rootArrayOfResult lastObject];
         
-            registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+            registerR.frame = CGRectMake(0, 95, WIDTH_CONTROLLER_DEFAULT, 65);
         
             registerR.titleSuccess.text = @"验证成功";
             registerR.passTitle.text = @"您可以绑定银行卡，也可以选择跳过．";
@@ -387,7 +385,7 @@
         
             registerB.frame = CGRectMake(0, CGRectGetMaxY(self.registerV.frame), WIDTH_CONTROLLER_DEFAULT, 100);
         
-            self.scrollView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, CGRectGetMaxY(registerB.frame));
+            self.scrollView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 800);
             
             [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [registerB.sureButton addTarget:self action:@selector(sureButtonActionPass:) forControlEvents:UIControlEventTouchUpInside];
