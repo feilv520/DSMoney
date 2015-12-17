@@ -146,8 +146,8 @@ static NSString *kLLPartnerKey = @"201512161000642725gcct_20151216";   // 密钥
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入支付密码"];
         
     } else {
-        [self pay:nil];
-//        [self buyProduct];
+//        [self pay:nil];
+        [self buyProduct];
         //        支付有红包
         //        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
         //        [self.navigationController pushViewController:shareHave animated:YES];
