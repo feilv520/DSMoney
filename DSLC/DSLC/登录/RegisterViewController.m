@@ -354,6 +354,9 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             NSLog(@"%@",responseObject);
+            
+            
+            
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [registerB removeFromSuperview];
             [registerR removeFromSuperview];
@@ -384,6 +387,8 @@
         
             registerB.frame = CGRectMake(0, CGRectGetMaxY(self.registerV.frame), WIDTH_CONTROLLER_DEFAULT, 100);
         
+            self.scrollView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, CGRectGetMaxY(registerB.frame));
+            
             [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [registerB.sureButton addTarget:self action:@selector(sureButtonActionPass:) forControlEvents:UIControlEventTouchUpInside];
             

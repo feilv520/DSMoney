@@ -36,8 +36,8 @@
  */
 
 // TODO: 修改两个参数成商户自己的配置
-static NSString *kLLOidPartner = @"201408071000001543";   // 商户号
-static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
+static NSString *kLLOidPartner = @"201512161000642725";   // 商户号
+static NSString *kLLPartnerKey = @"201512161000642725gcct_20151216";   // 密钥
 
 @implementation FBalancePaymentViewController
 
@@ -146,8 +146,8 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入支付密码"];
         
     } else {
-//        [self pay:nil];
-        [self buyProduct];
+        [self pay:nil];
+//        [self buyProduct];
         //        支付有红包
         //        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
         //        [self.navigationController pushViewController:shareHave animated:YES];
@@ -338,7 +338,7 @@ static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
 
 - (NSMutableDictionary*)createOrder{
     
-    NSString *partnerPrefix = @"DSLC"; // TODO: 修改成自己公司前缀
+    NSString *partnerPrefix = @"GCCT"; // TODO: 修改成自己公司前缀
     
     NSString *signType = @"MD5";    // MD5 || RSA || HMAC
     
