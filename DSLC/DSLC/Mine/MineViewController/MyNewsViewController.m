@@ -79,14 +79,14 @@
     
     MessageModel *mModel = [self.msgArr objectAtIndex:indexPath.row];
     
-    cell.labelPrize.text = [mModel msgText];
+    cell.labelPrize.text = [mModel msgTitle];
     cell.labelPrize.font = [UIFont systemFontOfSize:15];
     
     cell.labelTime.text = [mModel sendTime];
     cell.labelTime.textColor = [UIColor zitihui];
     cell.labelTime.font = [UIFont systemFontOfSize:12];
     
-    if (indexPath.row % 2 == 0) {
+    if ([[mModel msgType] isEqualToString:@"0"]) {
         cell.imageLeft.image = [UIImage imageNamed:@"icon04"];
     } else {
         cell.imageLeft.image = [UIImage imageNamed:@"icon05"];
