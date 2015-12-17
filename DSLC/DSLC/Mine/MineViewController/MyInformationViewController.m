@@ -42,6 +42,8 @@
     UILabel *labelBingPhone;
     UILabel *labelBingEmail;
     UILabel *labelBingRealName;
+    
+    UILabel *labelPhone;
 }
 
 @property (nonatomic, strong) NSDictionary *dataDic;
@@ -238,7 +240,9 @@
                 }
                 
             } else {
-                cell.labelPan.text = [DES3Util decrypt:[self.dataDic objectForKey:@"userAccount"]];
+                
+                cell.labelPan.tag = 1388;
+                
             }
         }
     
@@ -555,6 +559,10 @@
         
         self.dataDic = [NSDictionary dictionary];
         self.dataDic = [responseObject objectForKey:@"User"];
+        
+        labelPhone = (UILabel *)[self.view viewWithTag:1388];
+        NSString *phoneStr = [DES3Util decrypt:[self.dataDic objectForKey:@"userAccount"]];
+        labelPhone.text = [phoneStr stringByReplacingCharactersInRange:NSMakeRange(3, 4)  withString:@"****"];
         
         [_tableView reloadData];
         

@@ -225,7 +225,7 @@
     NSBundle *rootBundle = [NSBundle mainBundle];
     NSArray *rootArray = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
 
-    self.registerV = [rootArray lastObject];
+    self.registerV = [rootArray firstObject];
     
     self.registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, 225);
     

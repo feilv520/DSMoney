@@ -285,10 +285,6 @@
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入交易密码"];
         
-    } else if (![textLast.text isEqualToString:[DES3Util decrypt:[dic objectForKey:@"dealSecret"]]]) {
-        
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"原交易密码错误"];
-        
     } else if (textNew.text.length == 0) {
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请设置新交易密码"];
@@ -321,18 +317,20 @@
         
         NSDictionary *dataDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
 
-        NSDictionary *parameter = @{@"phone":[DES3Util decrypt:[dataDic objectForKey:@"userAccount"]], @"optType":@1,@"oldPayPwd":textLast.text,@"newPwd":textNew.text,@"smsCode":textNum.text, @"token":[dataDic objectForKey:@"token"]};
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSDictionary *parameter = @{@"phone":[DES3Util decrypt:[dataDic objectForKey:@"userAccount"]], @"optType":@1,@"oldPayPwd":textLast.text,@"newPayPwd":textNew.text,@"smsCode":textNum.text, @"token":[dataDic objectForKey:@"token"]};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPayPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"222222222222修改交易密码:%@", responseObject);
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                [self.navigationController popViewControllerAnimated:YES];
                 
             } else {
                 
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
             
-            [self.navigationController popViewControllerAnimated:YES];
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);

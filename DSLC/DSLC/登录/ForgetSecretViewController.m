@@ -334,7 +334,8 @@
                 [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
                 
             } else {
-                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
@@ -342,10 +343,18 @@
     }
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.view endEditing:YES];
+    if (scrollView.contentOffset.y != 0) {
+        
+        [self.view endEditing:YES];
+    }
 }
+
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    [self.view endEditing:YES];
+//}
 
 #pragma mark 验证码倒计时
 #pragma mark --------------------------------
