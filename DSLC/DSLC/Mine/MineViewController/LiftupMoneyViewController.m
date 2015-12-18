@@ -140,6 +140,33 @@
     
 }
 
+//提现接口
+- (void)liftUpMoneyGetData
+{
+    NSDictionary *dealDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
+    NSLog(@"=====%@", dealDic);
+    NSLog(@"zzzzzzzzz%@", [DES3Util decrypt:[dealDic objectForKey:@"dealSecret"]]);
+
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSDictionary *parmeter = @{@"fmoney":_textField.text, @"payPwd":[DES3Util decrypt:[dealDic objectForKey:@"dealSecret"]], @"token":[dic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/putOff" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"eeeeeeeee提现接口:%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            BindingBankCardLiftUpMoney *binding = [[BindingBankCardLiftUpMoney alloc] init];
+            [self.navigationController pushViewController:binding animated:YES];
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
@@ -166,10 +193,12 @@
 {
     _textField = (UITextField *)[self.view viewWithTag:111111];
     
-    if (_textField.text.length > 0) {
+    if (_textField.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入提现金额"];
         
-        BindingBankCardLiftUpMoney *binding = [[BindingBankCardLiftUpMoney alloc] init];
-        [self.navigationController pushViewController:binding animated:YES];
+    } else if (_textField.text.length > 0) {
+        
+        [self liftUpMoneyGetData];
     }
 }
 

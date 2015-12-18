@@ -270,8 +270,18 @@
     if (indexPath.section == 1) {
         
 //        如果没有绑定银行卡 需要跳转到绑定银行卡页面
-        AddBankViewController *addBankVC = [[AddBankViewController alloc] init];
-        [self.navigationController pushViewController:addBankVC animated:YES];
+//        AddBankViewController *addBankVC = [[AddBankViewController alloc] init];
+//        [self.navigationController pushViewController:addBankVC animated:YES];
+        
+        if ([[[self.dataDic objectForKey:@"realNameStatus"] description] isEqualToString:@"2"]) {
+            
+            NSLog(@"我已经实名认证了");
+            
+        } else {
+            
+            RealNameViewController *realName = [[RealNameViewController alloc] init];
+            [self.navigationController pushViewController:realName animated:YES];
+        }
         
 //        如果已经绑定了银行卡 跳转的是所绑定的银行卡页面
 //        MyAlreadyBindingBank *already = [[MyAlreadyBindingBank alloc] init];
