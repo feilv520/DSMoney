@@ -511,6 +511,8 @@
             [dic setValue:[responseObject objectForKey:@"invitationMyCode"] forKey:@"invitationMyCode"];
             [dic setValue:[responseObject objectForKey:@"accBalance"] forKey:@"accBalance"];
             [dic setValue:[responseObject objectForKey:@"redPacket"] forKey:@"redPacket"];
+            [dic setValue:[responseObject objectForKey:@"realName"] forKey:@"realName"];
+            [dic setValue:[responseObject objectForKey:@"cardNumber"] forKey:@"cardNumber"];
             
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
