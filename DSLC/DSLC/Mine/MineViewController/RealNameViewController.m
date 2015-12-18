@@ -7,6 +7,8 @@
 //
 
 #import "RealNameViewController.h"
+#import "AddBankCell.h"
+#import "AddBankViewController.h"
 
 @interface RealNameViewController () <UITextFieldDelegate>
 
@@ -165,9 +167,29 @@
             return ;
         } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             NSLog(@"%@",responseObject);
+            
+            if (self.realNamePan == YES) {
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            } else {
+                
+                AddBankViewController *addBank = [[AddBankViewController alloc] init];
+                [self.navigationController pushViewController:addBank animated:YES];
+            }
+            
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
-            [self.navigationController popViewControllerAnimated:YES];
+            
+            NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+            
+            //设置属性值,没有的数据就新建，已有的数据就修改。
+            [usersDic setObject:[DES3Util encrypt:_textField1.text] forKey:@"realName"];
+            [usersDic setObject:[DES3Util encrypt:_textField2.text] forKey:@"cardNumber"];
+            //写入文件
+            [usersDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }

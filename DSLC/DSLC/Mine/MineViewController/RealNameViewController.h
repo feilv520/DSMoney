@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface RealNameViewController : BaseViewController
-
+@property (nonatomic) BOOL realNamePan;
 @end

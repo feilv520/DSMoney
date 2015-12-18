@@ -273,17 +273,18 @@
     
     if (indexPath.section == 1) {
         
-//        如果没有绑定银行卡 需要跳转到绑定银行卡页面
-//        AddBankViewController *addBankVC = [[AddBankViewController alloc] init];
-//        [self.navigationController pushViewController:addBankVC animated:YES];
         
         if ([[[self.dataDic objectForKey:@"realNameStatus"] description] isEqualToString:@"2"]) {
             
-            [self pay:nil];
+//            [self pay:nil];
+//            如果没有绑定银行卡 需要跳转到绑定银行卡页面
+            AddBankViewController *addBankVC = [[AddBankViewController alloc] init];
+            [self.navigationController pushViewController:addBankVC animated:YES];
             
         } else {
             
             RealNameViewController *realName = [[RealNameViewController alloc] init];
+            realName.realNamePan = NO;
             [self.navigationController pushViewController:realName animated:YES];
         }
         
@@ -301,6 +302,7 @@
         } else if (indexPath.row == 2) {
             
             RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
+            realNameVC.realNamePan = YES;
             [self.navigationController pushViewController:realNameVC animated:YES];
             
         } else if (indexPath.row == 1) {
@@ -760,9 +762,9 @@
         
         [param addEntriesFromDictionary:@{
                                           
-                                          @"id_no":@"220204199204180655",
+                                          @"id_no":[dic objectForKey:@"cardNumber"],
                                           //证件号码 id_no 否 String
-                                          @"acct_name":@"马成铭",
+                                          @"acct_name":[dic objectForKey:@"realName"],
                                           //银行账号姓名 acct_name 否 String
                                           
                                           //                                          @"id_no":@"140621199212052213",
@@ -770,6 +772,7 @@
                                           //                                          @"acct_name":@"杨磊磊",
                                           //                                          //银行账号姓名 acct_name 否 String
                                           }];
+        NSLog(@"======身份证号:%@", [dic objectForKey:@"cardNumber"]);
     }
     
     
