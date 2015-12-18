@@ -84,7 +84,6 @@
     [self MyAccountInfo];
 
     [self showPictureAndTitle];
-    [self showTableView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeWithImageView) name:@"exchangeWithImageView" object:nil];
 }
@@ -490,7 +489,7 @@
         
         self.myAccountInfo = responseObject;
         
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]]) {
             NSLog(@"134897189374987342987243789423");
             if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
                 [FileOfManage createWithFile:@"isLogin.plist"];
@@ -515,6 +514,7 @@
             
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
+            [self showTableView];
             [self viewHeadContent];
             [_tableView reloadData];
         }

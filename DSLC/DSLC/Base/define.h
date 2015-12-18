@@ -66,6 +66,19 @@
 #import "MobClick.h"                         // 友盟统计插件
 #import "JSONKit.h"                          // 第三方解析库
 #import "LLPaySdk.h"                         // 连连支付
+#import "LLPayUtil.h"                        // 连连文件
+
+/*
+ 正式环境 认证支付测试商户号  201408071000001543
+ MD5 key  201408071000001543test_20140812
+ 
+ 正式环境 快捷支付测试商户号  201408071000001546
+ MD5 key  201408071000001546_test_20140815
+ */
+
+// TODO: 修改两个参数成商户自己的配置
+static NSString *kLLOidPartner = @"201408071000001543";   // 商户号
+static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
 
 // 访问地址
 
