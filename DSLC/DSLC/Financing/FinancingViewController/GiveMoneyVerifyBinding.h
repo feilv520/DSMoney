@@ -10,4 +10,6 @@
 
 @interface GiveMoneyVerifyBinding : BaseViewController
 
+@property (nonatomic, strong) NSString *money;
+
 @end

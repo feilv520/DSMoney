@@ -34,6 +34,7 @@
 #import "EditBigMoney.h"
 #import "ApplyScheduleViewController.h"
 #import "Planner.h"
+#import "RealNameViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -430,8 +431,15 @@
 //    PayMoneyViewController *payMoneyVC = [[PayMoneyViewController alloc] init];
 //    [self.navigationController pushViewController:payMoneyVC animated:YES];
     
-    RechargeAlreadyBinding *recharge = [[RechargeAlreadyBinding alloc] init];
-    [self.navigationController pushViewController:recharge animated:YES];
+    if ([[self.myAccountInfo objectForKey:@"realName"] isEqualToString:@""]) {
+        RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
+//        realNameVC.
+        [self.navigationController pushViewController:realNameVC animated:YES];
+    } else {
+        RechargeAlreadyBinding *recharge = [[RechargeAlreadyBinding alloc] init];
+        [self.navigationController pushViewController:recharge animated:YES];
+        
+    }
 }
 
 //提现按钮

@@ -134,6 +134,7 @@
         
     } else if (shuRu > 0){
         GiveMoneyVerifyBinding *giveMVB = [[GiveMoneyVerifyBinding alloc] init];
+        giveMVB.money = textFieldTag.text;
         [self.navigationController pushViewController:giveMVB animated:YES];
         
     } else if ([textFieldTag.text isEqualToString:@"0"]) {
