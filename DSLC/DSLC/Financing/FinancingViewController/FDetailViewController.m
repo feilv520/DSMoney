@@ -453,7 +453,7 @@
     
     if (self.estimate == NO) {
         
-        [butMakeSure setTitle:@"投资(可使用5,000元体验金)" forState:UIControlStateNormal];
+        [butMakeSure setTitle:@"投资(可使用5,000猴币)" forState:UIControlStateNormal];
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         
     } else {

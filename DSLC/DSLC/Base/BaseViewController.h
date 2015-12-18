@@ -12,7 +12,7 @@
 #import "define.h"
 #import "CreatView.h"
 
-@interface BaseViewController : UIViewController
+@interface BaseViewController : UIViewController <LLPaySdkDelegate>
 
 @property (nonatomic, strong) NSDictionary *flagDic;
 

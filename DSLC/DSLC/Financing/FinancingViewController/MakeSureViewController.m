@@ -828,6 +828,11 @@
                     [self.navigationController pushViewController:shareHave animated:YES];
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
                 }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+                
             } else {
                 [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
             }
