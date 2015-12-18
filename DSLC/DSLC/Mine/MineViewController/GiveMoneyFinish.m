@@ -307,7 +307,7 @@
 
 - (void)putOn{
     
-    NSDictionary *par
+//    NSDictionary *par
     
 }
 
