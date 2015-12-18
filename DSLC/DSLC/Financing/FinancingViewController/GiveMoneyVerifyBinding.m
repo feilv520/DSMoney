@@ -45,6 +45,8 @@
 
 - (void)contentShow
 {
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 130) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
@@ -66,7 +68,8 @@
     
     UILabel *labelPhone = [CreatView creatWithLabelFrame:CGRectMake(15, 20, WIDTH_CONTROLLER_DEFAULT - 30, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
     [viewHead addSubview:labelPhone];
-    NSMutableAttributedString *phoneStr = [[NSMutableAttributedString alloc] initWithString:@"本次交易需要短信确认,校验码已发送至您的手机\n159****2599"];
+    NSString *phoneString = [DES3Util decrypt:[dic objectForKey:@"userPhone"]];
+    NSMutableAttributedString *phoneStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"本次交易需要短信确认,校验码已发送至您的手机\n%@",[phoneString stringByReplacingCharactersInRange:NSMakeRange(4, 4) withString:@"****"]]];
     NSRange range = NSMakeRange([[phoneStr string] length] - 11, 11);
     [phoneStr addAttribute:NSForegroundColorAttributeName value:[UIColor chongzhiColor] range:range];
     [labelPhone setAttributedText:phoneStr];
