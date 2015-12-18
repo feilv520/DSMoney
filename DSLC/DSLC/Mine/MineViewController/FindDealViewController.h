@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface FindDealViewController : BaseViewController
-
+@property (nonatomic) BOOL whichOne;
 @end

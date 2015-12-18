@@ -50,6 +50,7 @@
 - (void)rightBarPress:(UIBarButtonItem *)bar
 {
     FindDealViewController *findDealVC = [[FindDealViewController alloc] init];
+    findDealVC.whichOne = YES;
     [self.navigationController pushViewController:findDealVC animated:YES];
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -140,7 +140,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6v-Q8-zeJ">
-                    <rect key="frame" x="52" y="270" width="272" height="44"/>
+                    <rect key="frame" x="52" y="210" width="272" height="44"/>
                     <animations/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -187,7 +187,7 @@
                 <constraint firstAttribute="trailing" secondItem="EA2-wY-gmm" secondAttribute="trailing" constant="8" id="Zya-dx-g3F"/>
                 <constraint firstItem="D7W-YP-exv" firstAttribute="top" secondItem="eTQ-h7-LLz" secondAttribute="bottom" id="bHc-B2-l3x"/>
                 <constraint firstItem="tRQ-YV-Aia" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="bfc-ga-sHB"/>
-                <constraint firstItem="C6v-Q8-zeJ" firstAttribute="top" secondItem="EA2-wY-gmm" secondAttribute="bottom" constant="86" id="dNX-ma-dDx"/>
+                <constraint firstItem="C6v-Q8-zeJ" firstAttribute="top" secondItem="EA2-wY-gmm" secondAttribute="bottom" constant="26" id="dNX-ma-dDx"/>
                 <constraint firstItem="C6v-Q8-zeJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="52" id="gQM-Wm-BuY"/>
                 <constraint firstAttribute="trailing" secondItem="C6v-Q8-zeJ" secondAttribute="trailing" constant="51" id="hOb-Q6-AlI"/>
                 <constraint firstAttribute="trailing" secondItem="tZT-Sl-jW2" secondAttribute="trailing" id="hmC-Wd-hGT"/>

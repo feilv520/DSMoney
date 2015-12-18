@@ -15,12 +15,13 @@
 #import "ForgetSecretViewController.h"
 #import "FindDealViewController.h"
 #import "LLPayUtil.h"
+#import "SetDealSecret.h"
 
 
 @interface FBalancePaymentViewController () <UITextFieldDelegate, LLPaySdkDelegate>
 
 @property (nonatomic, retain) NSMutableDictionary *orderDic;
-
+@property (nonatomic, strong) UIButton *buttonSet;
 @property (nonatomic, strong) LLPaySdk *sdk;
 
 @end
@@ -84,10 +85,16 @@ static NSString *kLLPartnerKey = @"201512161000642725gcct_20151216";   // 密钥
     
     self.textFieldSecret.placeholder = @"请输入交易密码";
     self.textFieldSecret.secureTextEntry = YES;
+    self.textFieldSecret.hidden = YES;
     self.textFieldSecret.font = [UIFont systemFontOfSize:14];
     self.textFieldSecret.tintColor = [UIColor grayColor];
     self.textFieldSecret.delegate = self;
     [self.textFieldSecret addTarget:self action:@selector(textLengthChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    self.buttonSet = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(100, 12, 90, 21) backgroundColor:[UIColor clearColor] textColor:[UIColor chongzhiColor] titleText:@"设置交易密码"];
+    self.buttonSet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    [self.buttonSet addTarget:self action:@selector(setDealSecret:) forControlEvents:UIControlEventTouchUpInside];
+    [self.viewDianDi addSubview:self.buttonSet];
     
     [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [self.butPayment setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
@@ -102,6 +109,7 @@ static NSString *kLLPartnerKey = @"201512161000642725gcct_20151216";   // 密钥
     [self.butForget setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.butForget.titleLabel.font = [UIFont systemFontOfSize:15];
     self.butForget.backgroundColor = [UIColor clearColor];
+    self.butForget.hidden = YES;
     [self.butForget addTarget:self action:@selector(ForgetSecretButton:) forControlEvents:UIControlEventTouchUpInside];
     
     self.lableLine2.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -112,17 +120,47 @@ static NSString *kLLPartnerKey = @"201512161000642725gcct_20151216";   // 密钥
     
     self.labelLine4.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.labelLine4.alpha = 0.7;
+    
+    if (self.dealPanDuan.intValue == 0) {
+        
+        NSLog(@"%@", self.dealPanDuan);
+        self.buttonSet.hidden = NO;
+        
+    } else {
+        
+        self.butForget.hidden = NO;
+        self.textFieldSecret.hidden = NO;
+        self.buttonSet.hidden = YES;
+    }
+}
+
+//设置交易密码
+- (void)setDealSecret:(UIButton *)button
+{
+    SetDealSecret *deal = [[SetDealSecret alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setDealSecretNotice:) name:@"setDeal" object:nil];
+    
+    [self.navigationController pushViewController:deal animated:YES];
+}
+
+- (void)setDealSecretNotice:(NSNotification *)notice
+{
+    self.buttonSet.hidden = YES;
+    self.butForget.hidden = NO;
+    self.textFieldSecret.hidden = NO;
 }
 
 //忘记密码?按钮
 - (void)ForgetSecretButton:(UIButton *)button
 {
     FindDealViewController *findSecretVC = [[FindDealViewController alloc] init];
+    findSecretVC.whichOne = NO;
     [self.navigationController pushViewController:findSecretVC animated:YES];
 }
 
 #pragma textFieldDalagate
-#pragma --------------------------
+#pragma -----------------
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {

@@ -51,6 +51,10 @@
 
 @property (nonatomic, strong) NSString *syString;
 
+@property (nonatomic, strong) NSString *numStr;
+
+@property (nonatomic) FBalancePaymentViewController *balanceVC;
+
 @end
 
 @implementation MakeSureViewController
@@ -837,18 +841,41 @@
     } else {
         
         UITextField *textField = (UITextField *)[self.view viewWithTag:199];
-        FBalancePaymentViewController *balanceVC = [[FBalancePaymentViewController alloc] init];
-        balanceVC.productName = [self.detailM productName];
-        balanceVC.idString = [self.detailM productId];
-        balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textField.text floatValue]];
-        balanceVC.typeString = [self.detailM productType];
-        balanceVC.redbagModel = redbagModel;
-        balanceVC.nHand = self.nHand;
-        balanceVC.syString = self.syString;
-        balanceVC.endTimeString = [self.detailM endTime];
+        _balanceVC = [[FBalancePaymentViewController alloc] init];
+        _balanceVC.productName = [self.detailM productName];
+        _balanceVC.idString = [self.detailM productId];
+        _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textField.text floatValue]];
+        _balanceVC.typeString = [self.detailM productType];
+        _balanceVC.redbagModel = redbagModel;
+        _balanceVC.nHand = self.nHand;
+        _balanceVC.syString = self.syString;
+        _balanceVC.endTimeString = [self.detailM endTime];
         
-        [self.navigationController pushViewController:balanceVC animated:YES];
+        [self getMyMessageData];
     }
+}
+
+//是否有设置交易密码
+- (void)getMyMessageData
+{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSDictionary *parmeter = @{@"token":[dic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"wwwww我的资料:判断是否设置交易密码:%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            NSDictionary *userDic = [responseObject objectForKey:@"User"];
+            _numStr = [userDic objectForKey:@"setPayPwd"];
+            _balanceVC.dealPanDuan = _numStr;
+            NSLog(@"是否有设置交易密码:%@", _numStr);
+            [self.navigationController pushViewController:_balanceVC animated:YES];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 #pragma mark textField 的监控方法

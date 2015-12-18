@@ -299,8 +299,15 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            NSArray *viewController = [self.navigationController viewControllers];
-            [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
+//            点击修改交易密码页的找回交易密码成功后需返回两页
+            if (self.whichOne == YES) {
+                
+                NSArray *viewController = [self.navigationController viewControllers];
+                [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
+            } else {
+//                购买时忘记交易密码只需返回一页
+                [self.navigationController popViewControllerAnimated:YES];
+            }
             
         } else {
             

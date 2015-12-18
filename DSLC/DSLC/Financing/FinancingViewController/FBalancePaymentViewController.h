@@ -33,5 +33,6 @@
 @property (nonatomic, strong) RedBagModel *redbagModel;
 
 @property (nonatomic, strong) NSString *nHand;
+@property (nonatomic, strong) NSString *dealPanDuan;
 
 @end
