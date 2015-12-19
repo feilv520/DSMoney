@@ -39,6 +39,7 @@
     
     if (bankArray.count == 0) {
         AddBankViewController *addBVC = [[AddBankViewController alloc] init];
+        addBVC.realNameStatus = YES;
         pushVC(addBVC);
     }
     
