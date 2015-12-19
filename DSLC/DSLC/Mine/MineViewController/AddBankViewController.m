@@ -23,6 +23,7 @@
     NSArray *textFieldArr;
     UIImageView *imageViewRight;
     UIImageView *imageRight;
+    UIImageView *imageRightView;
     UILabel *labelChoose;
     UIButton *buttonGet;
     UIButton *buttonNext;
@@ -33,6 +34,8 @@
     UITextField *textFieldThree;
     UITextField *textFieldFour;
     UITextField *textFieldFive;
+    UITextField *textFieldSix;
+    UITextField *textFieldSeven;
     
     NSInteger seconds;
     NSTimer *timer;
@@ -65,15 +68,15 @@
 - (void)returnBankName:(NSNotification *)notice
 {
     NSString *bankName = [notice object];
-    textFieldOne = (UITextField *)[self.view viewWithTag:401];
+    textFieldOne = (UITextField *)[self.view viewWithTag:402];
     textFieldOne.text = bankName;
 }
 
 //视图内容
 - (void)showViewControllerContent
 {
-    titleArr = @[@"持卡人", @"开户银行", @"银行卡号", @"开户城市", @"手机号", @"验证码"];
-    textFieldArr = @[[dicRealName objectForKey:@"realName"], @"请选择开户银行", @"请输入本人银行卡号", @"请选择开户城市", @"请输入预留在银行的手机号", @"请输入短信验证码"];
+    titleArr = @[@"持卡人", @"银行卡号", @"开户行", @"开户行省",@"开户行市", @"开户行支行",  @"支付金额", @"手机号"];
+    textFieldArr = @[[dicRealName objectForKey:@"realName"], @"请输入本人银行卡号", @"请选择开户银行", @"请选择开户所在的省", @"请选择开户所在的市", @"请输入开户行支行", @"0.01元", @"请输入预留在银行的手机号"];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
@@ -87,6 +90,7 @@
     
     imageViewRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
     imageRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
+    imageRightView = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
     
     buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0))/2, HEIGHT_CONTROLLER_DEFAULT * (47.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (43.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [view addSubview:buttonNext];
@@ -106,6 +110,8 @@
     textFieldThree = (UITextField *)[self.view viewWithTag:403];
     textFieldFour = (UITextField *)[self.view viewWithTag:404];
     textFieldFive = (UITextField *)[self.view viewWithTag:405];
+    textFieldSix = (UITextField *)[self.view viewWithTag:406];
+    textFieldSeven = (UITextField *)[self.view viewWithTag:407];
     
     if (textFieldZero.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入持卡人姓名"];
@@ -113,26 +119,20 @@
     } else if (textFieldTwo.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请选择开户银行"];
         
-    } else if (textFieldTwo.text.length == 0) {
+    } else if (textFieldOne.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入本人银行卡号"];
         
-    } else if (textFieldTwo.text.length != 19) {
+    } else if (textFieldOne.text.length != 19) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"银行卡号格式错误"];
         
-    } else if (textFieldThree.text.length == 0) {
+    } else if (textFieldThree.text.length == 0 || textFieldFour.text.length == 0 || textFieldFive.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请选择开户城市"];
         
-    } else if (textFieldFour.text.length == 0) {
+    } else if (textFieldSeven.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
         
-    } else if (![NSString validateMobile:textFieldFour.text]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式有误"];
-        
-    } else if (textFieldFive.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
-        
-    } else if (textFieldFive.text.length != 6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
+    } else if (textFieldSeven.text.length != 11) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
         
     } else {
         self.orderDic = [self createOrder];
@@ -142,7 +142,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (textField.tag == 402) {
+    if (textField.tag == 401) {
 
         if (range.location < 19) {
             
@@ -153,7 +153,7 @@
             return NO;
         }
         
-    } else if (textField.tag == 404) {
+    } else if (textField.tag == 407) {
         
         if (range.location == 11) {
             
@@ -164,17 +164,19 @@
             return YES;
         }
         
-    } else if (textField.tag == 405) {
-        
-        if (range.location == 6) {
-            
-            return NO;
-            
-        } else {
-            
-            return YES;
-        }
-    } else {
+    }
+//    else if (textField.tag == 405) {
+//        
+//        if (range.location == 6) {
+//            
+//            return NO;
+//            
+//        } else {
+//            
+//            return YES;
+//        }
+//    }
+    else {
         
         return YES;
     }
@@ -188,8 +190,10 @@
     textFieldThree = (UITextField *)[self.view viewWithTag:403];
     textFieldFour = (UITextField *)[self.view viewWithTag:404];
     textFieldFive = (UITextField *)[self.view viewWithTag:405];
+    textFieldSix = (UITextField *)[self.view viewWithTag:406];
+    textFieldSeven = (UITextField *)[self.view viewWithTag:407];
     
-    if (textFieldZero.text.length > 0 && textFieldTwo.text.length > 0 && textFieldTwo.text.length == 19 && textFieldThree.text.length > 0 && textFieldFour.text.length == 11 && textFieldFive.text.length == 6) {
+    if (textFieldZero.text.length > 0 && textFieldOne.text.length > 0 && textFieldOne.text.length == 19 && textFieldThree.text.length > 0 && textFieldFour.text.length > 0 && textFieldFive.text.length > 0 && textFieldSeven.text.length == 11) {
         
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -232,6 +236,15 @@
             } completion:^(BOOL finished) {
                 
             }];
+        } else if (textField.tag == 407) {
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 150);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
         }
     }
     return YES;
@@ -242,60 +255,84 @@
     return 50;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    if (section == 0) {
+        return 6;
+    } else {
+        return 2;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        return 10.0;
+    }
+    return 0.5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AddBankCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
     cell.labelTitle.font = [UIFont systemFontOfSize:15];
-        
-    if (indexPath.row == 0) {
-        cell.textField.text = [textFieldArr objectAtIndex:indexPath.row];
+    
+    if (indexPath.section == 0) {
+        cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
+        if (indexPath.row == 0) {
+            cell.textField.text = [textFieldArr objectAtIndex:indexPath.row];
+        } else {
+            cell.textField.placeholder = [textFieldArr objectAtIndex:indexPath.row];
+        }
     } else {
-        cell.textField.placeholder = [textFieldArr objectAtIndex:indexPath.row];
+        cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row + 6];
+        if (indexPath.row == 0) {
+            cell.textField.text = [textFieldArr objectAtIndex:indexPath.row + 6];
+        } else {
+            cell.textField.placeholder = [textFieldArr objectAtIndex:indexPath.row + 6];
+        }
     }
     
     cell.textField.font = [UIFont systemFontOfSize:14];
     cell.textField.tintColor = [UIColor yuanColor];
     cell.textField.delegate = self;
-    cell.textField.tag = indexPath.row + 400;
+    if (indexPath.section == 1)
+        cell.textField.tag = indexPath.row + 406;
+    else
+        cell.textField.tag = indexPath.row + 400;
     [cell.textField addTarget:self action:@selector(textFieldPress:) forControlEvents:UIControlEventEditingChanged];
     
-    if (indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 5) {
+    if (indexPath.row == 1 || indexPath.row == 4 || indexPath.row == 5) {
             
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
-        
+    
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            cell.textField.userInteractionEnabled = NO;
+        }
+        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+    }
+    
     if (indexPath.row == 3) {
             
         [cell addSubview:imageViewRight];
         cell.textField.enabled = YES;
     }
     
-    if (indexPath.row == 1) {
+    if (indexPath.row == 2) {
         
         [cell addSubview:imageRight];
         cell.textField.enabled = NO;
     }
     
-    if (indexPath.row == 5) {
-        
-        [cell addSubview:buttonGet];
-        buttonGet.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 70, 10, 70, 30);
-        [buttonGet setTitle:@"获取验证码" forState:UIControlStateNormal];
-        [buttonGet setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
-        buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-        buttonGet.tag = 909090;
-        buttonGet.layer.cornerRadius = 3;
-        buttonGet.layer.masksToBounds = YES;
-        buttonGet.layer.borderColor = [[UIColor daohanglan] CGColor];
-        buttonGet.layer.borderWidth = 0.5;
-        [buttonGet addTarget:self action:@selector(buttonPressOK:) forControlEvents:UIControlEventTouchUpInside];
+    if (indexPath.row == 4) {
+        [cell addSubview:imageRightView];
+        cell.textField.enabled = YES;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -307,7 +344,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 1) {
+    if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
         
         ChooseOpenAnAccountBank *chooseBank = [[ChooseOpenAnAccountBank alloc] init];
         [self.navigationController pushViewController:chooseBank animated:YES];
@@ -331,8 +368,10 @@
     textFieldThree = (UITextField *)[self.view viewWithTag:403];
     textFieldFour = (UITextField *)[self.view viewWithTag:404];
     textFieldFive = (UITextField *)[self.view viewWithTag:405];
+    textFieldSix = (UITextField *)[self.view viewWithTag:406];
+    textFieldSeven = (UITextField *)[self.view viewWithTag:407];
     
-    NSDictionary *parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardholder":[dicRealName objectForKey:@"realName"], @"IDCard":[dicRealName objectForKey:@"cardNumber"], @"cardName":textFieldOne.text, @"cardAccount":textFieldTwo.text, @"bankProvince":@"辽宁省", @"bankCity":@"大连", @"bankId":@"01050000", @"phone":textFieldFour.text, @"bankBranch":@"沙河口区", @"token":[dicRealName objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardholder":[dicRealName objectForKey:@"realName"], @"IDCard":[dicRealName objectForKey:@"cardNumber"], @"cardName":textFieldOne.text, @"cardAccount":textFieldTwo.text, @"bankProvince":@"辽宁省", @"bankCity":@"大连", @"bankId":@"01050000", @"phone":textFieldSeven.text, @"bankBranch":@"沙河口区", @"token":[dicRealName objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/addBankCard" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -518,7 +557,7 @@
                            //                           @"flag_modify":@"1",
                            //修改标记 flag_modify 否 String 0-可以修改，默认为0, 1-不允许修改 与id_type,id_no,acct_name配合使用，如果该用户在商户系统已经实名认证过了，则在绑定银行卡的输入信息不能修改，否则可以修改
                            
-                           @"card_no":textFieldTwo.text,
+                           @"card_no":textFieldOne.text,
                            //银行卡号 card_no 否 银行卡号前置，卡号可以在商户的页面输入
                            
                            //                           @"no_agree":@"2014070900123076",

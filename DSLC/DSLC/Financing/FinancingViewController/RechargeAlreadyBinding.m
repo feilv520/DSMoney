@@ -145,9 +145,9 @@
     CGFloat shuRu = textFieldTag.text.intValue;
     
     if (textFieldTag.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额,充值金额最小为1元"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额,充值金额最小为100元"];
         
-    } else if (shuRu > 0){
+    } else if (shuRu >= 100){
 //        GiveMoneyVerifyBinding *giveMVB = [[GiveMoneyVerifyBinding alloc] init];
 //        giveMVB.money = textFieldTag.text;
 //        [self.navigationController pushViewController:giveMVB animated:YES];
@@ -155,7 +155,10 @@
         [self pay:nil];
         
     } else if ([textFieldTag.text isEqualToString:@"0"]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"最小金额为1元"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"最小金额为100元"];
+        
+    } else {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值金额最小为100元"];
         
     }
 }
@@ -427,10 +430,12 @@
 
 - (void)putOn{
     
+    textFieldTag = (UITextField *)[self.view viewWithTag:188];
+    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     // 注意要修改
-    NSDictionary *parameter = @{@"fmoney":@"0.01",@"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"fmoney":textFieldTag.text,@"token":[dic objectForKey:@"token"]};
     
     NSLog(@"%@",parameter);
     
@@ -439,8 +444,14 @@
         NSLog(@"putOn = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             GiveMoneyFinish *giveMoney = [[GiveMoneyFinish alloc] init];
+            giveMoney.moneyString = textFieldTag.text;
+            giveMoney.bankAccount = [[self.dataDic objectForKey:@"BankCard"] objectForKey:@"bankAcc"];
             [self.navigationController pushViewController:giveMoney animated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
         }
+//        else {
+//            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+//        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);

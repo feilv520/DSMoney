@@ -10,4 +10,7 @@
 
 @interface GiveMoneyFinish : BaseViewController
 
+@property (nonatomic, strong) NSString *moneyString;
+@property (nonatomic, strong) NSString *bankAccount;
+
 @end

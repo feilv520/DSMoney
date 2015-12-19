@@ -474,6 +474,7 @@
 		8D29F9821C08047D00D45E43 /* 已打开@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D29F9741C08047D00D45E43 /* 已打开@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D29F99E1C08048700D45E43 /* 已过期@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D29F9901C08048700D45E43 /* 已过期@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D29F99F1C08048700D45E43 /* 已过期@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D29F9911C08048700D45E43 /* 已过期@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D2D02CD1C256C2F004B2562 /* BannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2D02CC1C256C2F004B2562 /* BannerViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D3125DE1BD763F900143B71 /* GetMoneyVerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125DC1BD763F900143B71 /* GetMoneyVerifyViewController.m */; };
 		8D3125DF1BD763F900143B71 /* GetMoneyVerifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3125DD1BD763F900143B71 /* GetMoneyVerifyViewController.xib */; };
 		8D3125E61BD7689200143B71 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125E51BD7689200143B71 /* BaseViewController.m */; };
@@ -1436,6 +1437,8 @@
 		8D29F9741C08047D00D45E43 /* 已打开@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已打开@3x.png"; sourceTree = "<group>"; };
 		8D29F9901C08048700D45E43 /* 已过期@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已过期@2x.png"; sourceTree = "<group>"; };
 		8D29F9911C08048700D45E43 /* 已过期@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已过期@3x.png"; sourceTree = "<group>"; };
+		8D2D02CB1C256C2F004B2562 /* BannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerViewController.h; sourceTree = "<group>"; };
+		8D2D02CC1C256C2F004B2562 /* BannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerViewController.m; sourceTree = "<group>"; };
 		8D3125DB1BD763F900143B71 /* GetMoneyVerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyVerifyViewController.h; sourceTree = "<group>"; };
 		8D3125DC1BD763F900143B71 /* GetMoneyVerifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyVerifyViewController.m; sourceTree = "<group>"; };
 		8D3125DD1BD763F900143B71 /* GetMoneyVerifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetMoneyVerifyViewController.xib; sourceTree = "<group>"; };
@@ -3329,6 +3332,8 @@
 				81CBB74C1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m */,
 				81CBB7481C1AC1D3002CDE97 /* NewHandGuide.h */,
 				81CBB7491C1AC1D3002CDE97 /* NewHandGuide.m */,
+				8D2D02CB1C256C2F004B2562 /* BannerViewController.h */,
+				8D2D02CC1C256C2F004B2562 /* BannerViewController.m */,
 			);
 			path = SelectionController;
 			sourceTree = "<group>";
@@ -4677,6 +4682,7 @@
 				8D4FF5DB1BE339A200BAE25F /* AFURLResponseSerialization.m in Sources */,
 				8D121FD61BD4D4CE00B3C1FE /* SettingTitleTableViewCell.m in Sources */,
 				8D5DBB8E1BD48F1900F556B9 /* CastDetailTableViewCell.m in Sources */,
+				8D2D02CD1C256C2F004B2562 /* BannerViewController.m in Sources */,
 				81AC90C51BEC88C100232404 /* RechargeAlreadyBinding.m in Sources */,
 				8191E2111BDDB9DE000A6E8C /* NewHandViewController.m in Sources */,
 				811F0AFC1BF318F6001F6AA4 /* GiveMoneyFinish.m in Sources */,

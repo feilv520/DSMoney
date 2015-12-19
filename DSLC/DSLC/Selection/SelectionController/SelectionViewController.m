@@ -23,6 +23,7 @@
 #import "NewHandGuide.h"
 #import "MillionsAndMillionsRiskMoney.h"
 #import "SafeProtectViewController.h"
+#import "BannerViewController.h"
 
 
 @interface SelectionViewController ()<UIScrollViewDelegate>{
@@ -148,6 +149,15 @@
         YYAnimatedImageView *bannerObject = [YYAnimatedImageView new];
         bannerObject.yy_imageURL = [NSURL URLWithString:[[self.photoArray objectAtIndex:i] adImg]];
         bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+        UITapGestureRecognizer *tapLeft = [[UITapGestureRecognizer alloc] init];
+        [bannerObject addGestureRecognizer:tapLeft];
+        [tapLeft addTarget:self action:@selector(bannerObject:)];
+        bannerObject.userInteractionEnabled = YES;
+        
+        //手指数
+        tapLeft.numberOfTouchesRequired = 1;
+        //点击次数
+        tapLeft.numberOfTapsRequired = 1;
         
         [bannerScrollView addSubview:bannerObject];
     }
@@ -164,6 +174,12 @@
 
     [backgroundScrollView addSubview:pageControl];
     
+}
+
+- (void)bannerObject:(UITapGestureRecognizer *)tap{
+    BannerViewController *bannerVC = [[BannerViewController alloc] init];
+    bannerVC.photoName = [NSString stringWithFormat:@"%ld",tap.numberOfTouchesRequired];
+    pushVC(bannerVC);
 }
 
 //改变pagecontrol中圆点样式
