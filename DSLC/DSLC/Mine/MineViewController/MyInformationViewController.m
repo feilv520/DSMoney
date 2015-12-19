@@ -281,8 +281,10 @@
             NSMutableArray *bankArr = [self.dataDic objectForKey:@"BankCard"];
             if (bankArr.count != 0) {
                 
+                [self bankCardData];
                 //如果已经绑定了银行卡 跳转的是所绑定的银行卡页面
                 MyAlreadyBindingBank *already = [[MyAlreadyBindingBank alloc] init];
+                already.bankName = bank;
                 [self.navigationController pushViewController:already animated:YES];
                 
             } else {

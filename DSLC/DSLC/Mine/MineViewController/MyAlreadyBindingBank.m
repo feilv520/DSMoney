@@ -55,11 +55,12 @@
     MyAlreadyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
     cell.imageSign.image = [UIImage imageNamed:@"2013123115540975"];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    cell.laeblBankName.text = @"中国工商银行";
+    cell.laeblBankName.text = [NSString stringWithFormat:@"%@%@", @"中国", self.bankName.bankName];
     cell.laeblBankName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    cell.labelName.text = @"张学伟";
+    cell.labelName.text = [dic objectForKey:@"realName"];
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     cell.labelCard.text = @"储蓄卡";

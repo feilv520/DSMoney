@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "BankName.h"
 
 @interface MyAlreadyBindingBank : BaseViewController
-
+@property (nonatomic) BankName *bankName;
 @end
