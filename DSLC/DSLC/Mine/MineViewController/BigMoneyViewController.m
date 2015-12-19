@@ -23,12 +23,15 @@
     
     UIButton *buttonApply;
     UIImageView *imageRight;
+    UIImageView *imageBusness;
     
     UITextField *fileldName;
     UITextField *fieldBank;
     UITextField *fieldBankCard;
     UITextField *fieldPhoneNum;
     UITextField *fieldMoney;
+    UITextField *fieldBusness;
+    UITextField *fieldTime;
 }
 
 @end
@@ -58,11 +61,11 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor huibai];
-    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 130)];
     [_tableView registerNib:[UINib nibWithNibName:@"MendDealCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"转账金额"];
-    textArray = @[@"请输入真实姓名", @"选择发卡银行", @"银行卡号", @"预留银行开户手机号", @"转账额度"];
+    nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"充值金额", @"商户", @"刷卡时间", @"上传POS单照片"];
+    textArray = @[@"输入真实姓名", @"输入开户银行", @"银行卡号", @"请输入手机号", @"输入充值金额", @"请选择商户", @"请输入时间", @"请上传POS单照片"];
     
     buttonApply = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"提交申请"];
     [_tableView.tableFooterView addSubview:buttonApply];
@@ -72,6 +75,8 @@
     [buttonApply addTarget:self action:@selector(applyBigMoney:) forControlEvents:UIControlEventTouchUpInside];
     
     imageRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 13, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"jiantou"]];
+    
+    imageBusness = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 13, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"jiantou"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -81,7 +86,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -108,6 +113,12 @@
         
         [cell addSubview:imageRight];
         cell.textField.enabled = NO;
+    }
+    
+    if (indexPath.row == 5) {
+        
+        [cell addSubview:imageBusness];
+//        cell.textField.enabled = NO;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -161,8 +172,10 @@
     fieldBankCard = (UITextField *)[self.view viewWithTag:602];
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
     fieldMoney = (UITextField *)[self.view viewWithTag:604];
+    fieldBusness = (UITextField *)[self.view viewWithTag:605];
+    fieldTime = (UITextField *)[self.view viewWithTag:606];
     
-    if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 19 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0) {
+    if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 19 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0 && fieldBusness.text.length != 0 && fieldTime.text != 0) {
         
         [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -178,7 +191,18 @@
 {
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         
-        if (textField.tag == 603) {
+        if (textField.tag == 602) {
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 50);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+//            [fieldBankCard becomeFirstResponder];
+
+        } else if (textField.tag == 603) {
            
             [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 
@@ -187,15 +211,30 @@
             } completion:^(BOOL finished) {
                 
             }];
+//            [fieldPhoneNum becomeFirstResponder];
+            
         } else if (textField.tag == 604) {
             
             [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 
-                _tableView.contentOffset = CGPointMake(0, 100);
+                _tableView.contentOffset = CGPointMake(0, 200);
                 
             } completion:^(BOOL finished) {
                 
             }];
+//            [fieldMoney becomeFirstResponder];
+            
+        } else if (textField.tag == 606) {
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 250);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+
+//            [fieldTime becomeFirstResponder];
         }
     }
     return YES;
@@ -204,6 +243,14 @@
 //申请按钮
 - (void)applyBigMoney:(UIButton *)button
 {
+    fileldName = (UITextField *)[self.view viewWithTag:600];
+    fieldBank = (UITextField *)[self.view viewWithTag:601];
+    fieldBankCard = (UITextField *)[self.view viewWithTag:602];
+    fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
+    fieldMoney = (UITextField *)[self.view viewWithTag:604];
+    fieldBusness = (UITextField *)[self.view viewWithTag:605];
+    fieldTime = (UITextField *)[self.view viewWithTag:606];
+    
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         
         _tableView.contentOffset = CGPointMake(0, 0);
@@ -230,7 +277,13 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
         
     } else if (fieldMoney.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入转账金额"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额"];
+        
+    } else if (fieldBusness.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请选择商户"];
+        
+    } else if (fieldTime.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入刷卡时间"];
         
     } else {
         [self getData];
@@ -248,7 +301,7 @@
 //回收键盘
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y < 100) {
+    if (scrollView.contentOffset.y < 150) {
         
         [self.view endEditing:YES];
     }
@@ -263,9 +316,11 @@
     fieldBankCard = (UITextField *)[self.view viewWithTag:602];
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
     fieldMoney = (UITextField *)[self.view viewWithTag:604];
+    fieldBusness = (UITextField *)[self.view viewWithTag:605];
+    fieldTime = (UITextField *)[self.view viewWithTag:606];
 
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    NSDictionary *parameter = @{@"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"busName":fieldBusness.text, @"posTime":fieldTime.text, @"posImg":@"", @"token":[dic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/bigPutOn" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"zzzzzzz%@", responseObject);
@@ -277,6 +332,7 @@
             ApplyScheduleViewController *scheduleVC = [[ApplyScheduleViewController alloc] init];
             scheduleVC.ID = IDstr;
             NSLog(@"1:%@", IDstr);
+            scheduleVC.doOr = YES;
             [self.navigationController pushViewController:scheduleVC animated:YES];
             // 刷新我的账户数据
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];

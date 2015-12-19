@@ -67,7 +67,7 @@
     cell.labelCard.textColor = [UIColor zitihui];
     cell.labelCard.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
-    cell.laeblCardNum.text = @"6225**** ****8823";
+    cell.laeblCardNum.text = [NSString stringWithFormat:@"%@%@", @"*** **** **** ****", self.bankName.bankAcc];
     cell.laeblCardNum.textColor = [UIColor zitihui];
     cell.laeblCardNum.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     

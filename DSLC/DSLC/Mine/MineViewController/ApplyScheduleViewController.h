@@ -10,4 +10,5 @@
 
 @interface ApplyScheduleViewController : BaseViewController
 @property (nonatomic) NSString *ID;
+@property (nonatomic) BOOL doOr;
 @end

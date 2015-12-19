@@ -12,6 +12,7 @@
 
 @property (nonatomic) NSString *bankCode;
 @property (nonatomic) NSString *bankName;
+@property (nonatomic) NSString *bankAcc;
 @property (nonatomic) NSString *iD;
 
 @end

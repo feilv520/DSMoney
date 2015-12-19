@@ -56,10 +56,21 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishApplyButton:)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:14]} forState:UIControlStateNormal];
     
+    UIImageView *imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageReturn];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonReturn:)];
+    [imageReturn addGestureRecognizer:tap];
+    
     dataArray = [NSMutableArray array];
     [self getData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"reload" object:nil];
+}
+
+- (void)buttonReturn:(UIBarButtonItem *)bar
+{
+    NSArray *viewController = [self.navigationController viewControllers];
+    [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
 }
 
 - (void)reloadData:(NSNotification *)notice

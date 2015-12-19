@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gn0-3z-cju">
-                        <rect key="frame" x="280" y="15" width="85" height="25"/>
+                        <rect key="frame" x="280" y="10" width="85" height="25"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="HqA-dP-E8O"/>
@@ -74,7 +74,7 @@
                     <constraint firstItem="PQ0-VI-XDf" firstAttribute="leading" secondItem="Qay-h1-XIF" secondAttribute="trailing" constant="10" id="KaS-uT-cKs"/>
                     <constraint firstItem="Qay-h1-XIF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="RxE-h3-bVs"/>
                     <constraint firstItem="PQ0-VI-XDf" firstAttribute="top" secondItem="tnH-Dw-kp0" secondAttribute="bottom" constant="1" id="Uug-Se-JOj"/>
-                    <constraint firstItem="gn0-3z-cju" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="eq1-bp-X5I"/>
+                    <constraint firstItem="gn0-3z-cju" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="eq1-bp-X5I"/>
                     <constraint firstItem="tnH-Dw-kp0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="f0G-0T-M9y"/>
                     <constraint firstItem="hwj-5P-tVl" firstAttribute="leading" secondItem="Qay-h1-XIF" secondAttribute="trailing" constant="10" id="fLc-oi-l3x"/>
                     <constraint firstItem="tnH-Dw-kp0" firstAttribute="leading" secondItem="Qay-h1-XIF" secondAttribute="trailing" constant="10" id="iGf-8B-s0c"/>

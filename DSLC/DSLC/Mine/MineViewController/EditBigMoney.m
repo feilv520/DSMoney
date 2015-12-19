@@ -24,6 +24,8 @@
     UITextField *fieldBankCard;
     UITextField *fieldPhoneNum;
     UITextField *fieldMoney;
+    UITextField *fieldBusness;
+    UITextField *fieldTime;
     
     UIImageView *imageViewR;
 }
@@ -61,7 +63,7 @@
     _tabelView.backgroundColor = [UIColor huibai];
     [_tabelView registerNib:[UINib nibWithNibName:@"MendDealCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"转账金额"];
+    nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"充值金额", @"商户", @"刷卡时间", @"上传POS单照片"];
     textArray = @[[DES3Util decrypt:self.schedule.realName], self.schedule.bankName, [DES3Util decrypt:self.schedule.account], [DES3Util decrypt:self.schedule.phone], [DES3Util decrypt:self.schedule.money]];
     
     buttonOk = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
@@ -81,7 +83,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
