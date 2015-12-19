@@ -401,7 +401,15 @@
                 // TODO: 协议号
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
                 [self getBankCard];
-                [self.navigationController popViewControllerAnimated:YES];
+                NSArray *viewController = [self.navigationController viewControllers];
+                
+                if (self.realNameStatus == YES) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                } else {
+                    [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
+                    
+                }
             }
             else if ([result_pay isEqualToString:@"PROCESSING"])
             {

@@ -342,6 +342,7 @@
                         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
                         [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
                     }
+                    
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                     MineViewController *mineVC = [[MineViewController alloc] init];
                     [self.navigationController pushViewController:mineVC animated:NO];
@@ -351,7 +352,7 @@
                     textField2.text = @"";
                     
                 } else {
-                    
+                    NSLog(@"%@",responseObject);
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                     
                 }

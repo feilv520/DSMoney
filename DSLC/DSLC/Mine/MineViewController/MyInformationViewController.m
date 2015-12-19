@@ -24,6 +24,7 @@
 #import "SetDealSecret.h"
 #import "MyAlreadyBindingBank.h"
 #import "AddBankViewController.h"
+#import "BankName.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -34,6 +35,7 @@
     NSString *path;
     UIButton *butBlack;
     UIView *viewDown;
+    BankName *bank;
     
     UIImage *imageChange;
     
@@ -44,6 +46,7 @@
     UILabel *labelBingRealName;
     
     UILabel *labelPhone;
+    NSMutableArray *bankArray;
 }
 
 @property (nonatomic, strong) NSDictionary *dataDic;
@@ -273,13 +276,23 @@
     
     if (indexPath.section == 1) {
         
-        
         if ([[[self.dataDic objectForKey:@"realNameStatus"] description] isEqualToString:@"2"]) {
             
-//            [self pay:nil];
-//            如果没有绑定银行卡 需要跳转到绑定银行卡页面
-            AddBankViewController *addBankVC = [[AddBankViewController alloc] init];
-            [self.navigationController pushViewController:addBankVC animated:YES];
+            NSMutableArray *bankArr = [self.dataDic objectForKey:@"BankCard"];
+            if (bankArr.count != 0) {
+                
+                //如果已经绑定了银行卡 跳转的是所绑定的银行卡页面
+                MyAlreadyBindingBank *already = [[MyAlreadyBindingBank alloc] init];
+                [self.navigationController pushViewController:already animated:YES];
+                
+            } else {
+                
+                //如果没有绑定银行卡 需要跳转到绑定银行卡页面
+                AddBankViewController *addBankVC = [[AddBankViewController alloc] init];
+                addBankVC.realNameStatus = YES;
+                [self.navigationController pushViewController:addBankVC animated:YES];
+                
+            }
             
         } else {
             
@@ -287,10 +300,6 @@
             realName.realNamePan = NO;
             [self.navigationController pushViewController:realName animated:YES];
         }
-        
-//        如果已经绑定了银行卡 跳转的是所绑定的银行卡页面
-//        MyAlreadyBindingBank *already = [[MyAlreadyBindingBank alloc] init];
-//        [self.navigationController pushViewController:already animated:YES];
         
     } else if (indexPath.section == 2) {
         
@@ -349,6 +358,15 @@
             }
         }
     }
+}
+
+//银行卡数据
+- (void)bankCardData
+{
+    NSDictionary *temoDic = [self.dataDic objectForKey:@"BankCard"];
+    bank = [[BankName alloc] init];
+    [bank setValuesForKeysWithDictionary:temoDic];
+    
 }
 
 - (void)reloadData:(NSNotification *)notice
@@ -556,6 +574,8 @@
     NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"asasasasasa%@", responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
             NSLog(@"134897189374987342987243789423");

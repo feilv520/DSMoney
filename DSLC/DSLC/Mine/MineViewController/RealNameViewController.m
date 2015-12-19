@@ -176,6 +176,7 @@
             } else {
                 
                 AddBankViewController *addBank = [[AddBankViewController alloc] init];
+                addBank.realNameStatus = self.realNamePan;
                 [self.navigationController pushViewController:addBank animated:YES];
             }
             
