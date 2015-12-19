@@ -433,7 +433,7 @@
     
     if ([[self.myAccountInfo objectForKey:@"realName"] isEqualToString:@""]) {
         RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
-//        realNameVC.
+        realNameVC.realNamePan = YES;
         [self.navigationController pushViewController:realNameVC animated:YES];
     } else {
         RechargeAlreadyBinding *recharge = [[RechargeAlreadyBinding alloc] init];

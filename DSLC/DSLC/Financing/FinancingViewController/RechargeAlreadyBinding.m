@@ -10,6 +10,7 @@
 #import "AddBankCell.h"
 #import "BankWhichCell.h"
 #import "GiveMoneyVerifyBinding.h"
+#import "AddBankViewController.h"
 
 @interface RechargeAlreadyBinding () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -20,7 +21,11 @@
     UITextField *textFieldTag;
     NSInteger seconds;
     NSTimer *timer;
+    
+    NSArray *bankArray;
 }
+
+@property (nonatomic, strong) NSDictionary *dataDic;
 
 @end
 
@@ -29,6 +34,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    bankArray = [self.dataDic objectForKey:@"BankCard"];
+    
+    if (bankArray.count == 0) {
+        AddBankViewController *addBVC = [[AddBankViewController alloc] init];
+        pushVC(addBVC);
+    }
     
     self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"充值"];
@@ -78,10 +90,10 @@
         
         cell.imageBank.image = [UIImage imageNamed:@"2013123115540975"];
         
-        cell.labelBank.text = @"中国工商银行卡(储蓄卡)";
+        cell.labelBank.text = [[[self.dataDic objectForKey:@"BankCard"] objectAtIndex:0] objectForKey:@"bankName"];
         cell.labelBank.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.labelNum.text = @"尾号8888";
+        cell.labelNum.text = [NSString stringWithFormat:@"尾号%@",[[[self.dataDic objectForKey:@"BankCard"] objectAtIndex:0] objectForKey:@"bankAcc"]];
         cell.labelNum.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.labelNum.textAlignment = NSTextAlignmentRight;
         
@@ -164,6 +176,43 @@
 {
     [self.view endEditing:YES];
 }
+
+#pragma mark 网络请求获得我的绑定的银行卡号
+#pragma mark --------------------------------
+
+- (void)getData
+{
+    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
+            NSLog(@"134897189374987342987243789423");
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            return ;
+        }
+        
+        self.dataDic = [NSDictionary dictionary];
+        self.dataDic = [responseObject objectForKey:@"User"];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
