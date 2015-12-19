@@ -60,10 +60,10 @@
         [viewWhite addSubview:labelTitle];
     }
     
-    UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake((viewWidth - 20)/2 + 10, 10, (viewWidth - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"$1"];
+    UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake((viewWidth - 20)/2 + 10, 10, (viewWidth - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:[NSString stringWithFormat:@"$%@",self.moneyString]];
     [viewWhite addSubview:labelMoney];
     
-    UILabel *labelTailNum = [CreatView creatWithLabelFrame:CGRectMake((viewWidth - 20)/2 + 10, 60, (viewWidth - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"尾号9988"];
+    UILabel *labelTailNum = [CreatView creatWithLabelFrame:CGRectMake((viewWidth - 20)/2 + 10, 60, (viewWidth - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:[NSString stringWithFormat:@"尾号%@",self.bankAccount]];
     [viewWhite addSubview:labelTailNum];
     
     UIButton *buttonGo = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 255, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"去赚钱"];
