@@ -59,12 +59,12 @@
     [self.view addSubview:_tabelView];
     _tabelView.dataSource = self;
     _tabelView.delegate = self;
-    _tabelView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
+    _tabelView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 130)];
     _tabelView.backgroundColor = [UIColor huibai];
     [_tabelView registerNib:[UINib nibWithNibName:@"MendDealCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"充值金额", @"商户", @"刷卡时间", @"上传POS单照片"];
-    textArray = @[[DES3Util decrypt:self.schedule.realName], self.schedule.bankName, [DES3Util decrypt:self.schedule.account], [DES3Util decrypt:self.schedule.phone], [DES3Util decrypt:self.schedule.money]];
+    textArray = @[[DES3Util decrypt:self.schedule.realName], self.schedule.bankName, [DES3Util decrypt:self.schedule.account], [DES3Util decrypt:self.schedule.phone], [DES3Util decrypt:self.schedule.money], self.schedule.busName, self.schedule.posTime, self.schedule.posImg];
     
     buttonOk = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [_tabelView.tableFooterView addSubview:buttonOk];
@@ -172,9 +172,11 @@
     fieldBankCard = (UITextField *)[self.view viewWithTag:602];
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
     fieldMoney = (UITextField *)[self.view viewWithTag:604];
+    fieldBusness = (UITextField *)[self.view viewWithTag:605];
+    fieldTime = (UITextField *)[self.view viewWithTag:606];
 
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    NSDictionary *paremeter = @{@"id":self.schedule.Id, @"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"tranSerialNum":@"", @"token":[dic objectForKey:@"token"]};
+    NSDictionary *paremeter = @{@"id":self.schedule.Id, @"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"busName":fieldBusness.text, @"posTime":fieldTime.text, @"posImg":@"", @"token":[dic objectForKey:@"token"]};
 
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateBigPutOnSerialNum" parameters:paremeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -185,7 +187,6 @@
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
-            
             
         } else {
             
@@ -199,11 +200,29 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if (textField.tag == 603 || textField.tag == 604) {
+    if (textField.tag == 603) {
         
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             
             _tabelView.contentOffset = CGPointMake(0, 100);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else if (textField.tag == 604) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            _tabelView.contentOffset = CGPointMake(0, 200);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else if (textField.tag == 605) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            _tabelView.contentOffset = CGPointMake(0, 250);
             
         } completion:^(BOOL finished) {
             

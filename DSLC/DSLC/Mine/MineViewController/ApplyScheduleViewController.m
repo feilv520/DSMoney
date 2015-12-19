@@ -17,6 +17,7 @@
     NSArray *contentArr;
     UIButton *buttonHei;
     UIView *viewChoose;
+    UILabel *labelLine;
     
     UIView *viewWhite;
     UIImageView *imageSchedule;
@@ -40,6 +41,7 @@
     UILabel *labelDoTime;
     UIButton *buttWell;
     UIButton *buttonAplly;
+    UIButton *butSubmitAlert;
 }
 
 @end
@@ -80,25 +82,25 @@
 
 - (void)contentShow
 {
-    contentArr = @[@"已提交申请", @"请在打款后,提供转账/POS单号", @"财务待审", @"充值成功"];
+    contentArr = @[@"大额充值申请已提交", @"财务待审", @"充值成功"];
     
-    viewWhite = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT / 2 + 25) backgroundColor:[UIColor whiteColor]];
+    viewWhite = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT / 2 - 10) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewWhite];
     
-    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 + 25 - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 - 10 - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     [viewWhite addSubview:labelLine];
     labelLine.alpha = 0.2;
     
     CGFloat viewHeight = viewWhite.frame.size.height;
     
-    imageSchedule = [CreatView creatImageViewWithFrame:CGRectMake(18, 20, 14, viewHeight - 40 - 25) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"流程"]];
+    imageSchedule = [CreatView creatImageViewWithFrame:CGRectMake(18, 22, 14, viewHeight - 40 - 25) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"1"]];
     [viewWhite addSubview:imageSchedule];
     
-    if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
-        
-        for (int i = 0; i < 4; i++) {
+//    if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
+    
+        for (int i = 0; i < 3; i++) {
             
-            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 50 * i, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
+            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 70 * i, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
             [viewWhite addSubview:label];
             label.tag = 2000 + i;
             
@@ -109,57 +111,62 @@
             
             if (i == 1) {
                 
-                label.frame = CGRectMake(40, 83, WIDTH_CONTROLLER_DEFAULT - 50, 20);
+                label.frame = CGRectMake(40, 103, WIDTH_CONTROLLER_DEFAULT - 50, 20);
             }
-            
-            if (i == 2) {
-                label.frame = CGRectMake(40, 150, WIDTH_CONTROLLER_DEFAULT/2, 20);
-            }
-            
-            if (i == 3) {
-                label.frame = CGRectMake(40, 215, WIDTH_CONTROLLER_DEFAULT/2, 20);
-            }
-        }
-        
-    } else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
-        
-        for (int i = 0; i < 4; i++) {
-            
-            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 60 * i, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
-            [viewWhite addSubview:label];
-            label.tag = 2000 + i;
-            
-            if (i == 0) {
-                
-                label.textColor = [UIColor chongzhiColor];
-            }
-            
-            if (i == 1) {
-                
-                label.frame = CGRectMake(40, 98, WIDTH_CONTROLLER_DEFAULT - 50, 20);
-            }
-            
-        }
 
-    } else {
-        
-        for (int i = 0; i < 4; i++) {
-            
-            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 75 * i, WIDTH_CONTROLLER_DEFAULT/2 - 5, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
-            [viewWhite addSubview:label];
-            label.tag = 2000 + i;
-            
-            if (i == 0) {
-                
-                label.textColor = [UIColor chongzhiColor];
+            if (i == 2) {
+                label.frame = CGRectMake(40, 183, WIDTH_CONTROLLER_DEFAULT/2, 20);
             }
-            
-            if (i == 1) {
-                
-                label.frame = CGRectMake(40, 115, WIDTH_CONTROLLER_DEFAULT - 50, 20);
-            }
+
         }
-    }
+    
+//    }
+//    else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
+//        
+//        for (int i = 0; i < 4; i++) {
+//            
+//            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 60 * i, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
+//            [viewWhite addSubview:label];
+//            label.tag = 2000 + i;
+//            
+//            if (i == 0) {
+//                
+//                label.textColor = [UIColor chongzhiColor];
+//            }
+//            
+//            if (i == 1) {
+//                
+//                label.frame = CGRectMake(40, 98, WIDTH_CONTROLLER_DEFAULT - 50, 20);
+//            }
+//            
+//        }
+//
+//    } else {
+//        
+//        for (int i = 0; i < 4; i++) {
+//            
+//            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 75 * i, WIDTH_CONTROLLER_DEFAULT/2 - 5, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
+//            [viewWhite addSubview:label];
+//            label.tag = 2000 + i;
+//            
+//            if (i == 0) {
+//                
+//                label.textColor = [UIColor chongzhiColor];
+//            }
+//            
+//            if (i == 1) {
+//                
+//                label.frame = CGRectMake(40, 115, WIDTH_CONTROLLER_DEFAULT - 50, 20);
+//            }
+//        }
+//    }
+    
+//    大额申请已提交显示的提示
+    butSubmitAlert = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 - 10 + 25, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@"大额充值申请单已经提交成功,\n我们将在2个工作日内进行核实!"];
+    [self.view addSubview:butSubmitAlert];
+    butSubmitAlert.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    butSubmitAlert.titleLabel.numberOfLines = 2;
+    [butSubmitAlert setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
     
 //    申请的时间
     labeltime = [CreatView creatWithLabelFrame:CGRectMake(40, 45, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:applySch.createTime];
@@ -172,23 +179,17 @@
     [butEdit setBackgroundImage:[UIImage imageNamed:@"红框"] forState:UIControlStateHighlighted];
     [butEdit addTarget:self action:@selector(buttonEdit:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    
     if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
         
-        fieldShuRu = [CreatView creatWithfFrame:CGRectMake(40, 110, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 35) setPlaceholder:nil setTintColor:[UIColor grayColor]];
-        
-        butSubmit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40 +  WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30 + 10, 110, WIDTH_CONTROLLER_DEFAULT - 40 - (WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30) - 15 - 10, 35) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"提交"];
-        
 //        财务审核时间
-        labelCheckTime = [CreatView creatWithLabelFrame:CGRectMake(40, 175, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"啦啦啦啦"];
+        labelCheckTime = [CreatView creatWithLabelFrame:CGRectMake(40, 125, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"啦啦啦啦"];
         
 //        充值成功与否时间
-        labelDoTime = [CreatView creatWithLabelFrame:CGRectMake(40, 240, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"kkkk"];
+        labelDoTime = [CreatView creatWithLabelFrame:CGRectMake(40, 205, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"kkkk"];
         
     } else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
-        
-        fieldShuRu = [CreatView creatWithfFrame:CGRectMake(40, 125, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 35) setPlaceholder:nil setTintColor:[UIColor grayColor]];
-        
-        butSubmit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40 +  WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30 + 10, 125, WIDTH_CONTROLLER_DEFAULT - 40 - (WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30) - 15 - 10, 35) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"提交"];
         
 //        财务审核时间
         labelCheckTime = [CreatView creatWithLabelFrame:CGRectMake(40, 205, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"啦啦啦啦"];
@@ -198,40 +199,12 @@
         
     } else {
         
-        fieldShuRu = [CreatView creatWithfFrame:CGRectMake(40, 145, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 35) setPlaceholder:nil setTintColor:[UIColor grayColor]];
-        
-        butSubmit = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40 +  WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30 + 10, 145, WIDTH_CONTROLLER_DEFAULT - 40 - (WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30) - 15 - 10, 35) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"提交"];
-        
 //        财务审核时间
         labelCheckTime = [CreatView creatWithLabelFrame:CGRectMake(40, 235, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"啦啦啦啦"];
         
 //        充值成功与否时间
         labelDoTime = [CreatView creatWithLabelFrame:CGRectMake(40, 330, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"kkkk"];
     }
-    
-//    输入单号
-    [viewWhite addSubview:fieldShuRu];
-    fieldShuRu.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 35)];
-    fieldShuRu.delegate = self;
-    fieldShuRu.leftViewMode = UITextFieldViewModeAlways;
-    fieldShuRu.textColor = [UIColor zitihui];
-    fieldShuRu.keyboardType = UIKeyboardTypeNumberPad;
-    fieldShuRu.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-    fieldShuRu.backgroundColor = [UIColor shurukuangColor];
-    fieldShuRu.layer.cornerRadius = 5;
-    fieldShuRu.layer.masksToBounds = YES;
-    fieldShuRu.layer.borderColor = [[UIColor shurukuangBian] CGColor];
-    fieldShuRu.layer.borderWidth = 0.5;
-    [fieldShuRu addTarget:self action:@selector(textFieldEditApply:) forControlEvents:UIControlEventEditingChanged];
-    
-//    提交按钮
-    [viewWhite addSubview:butSubmit];
-    butSubmit.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-    [butSubmit setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateNormal];
-    [butSubmit setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateHighlighted];
-    butSubmit.layer.cornerRadius = 4;
-    butSubmit.layer.masksToBounds = YES;
-    [butSubmit addTarget:self action:@selector(submitButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [viewWhite addSubview:labelCheckTime];
     [viewWhite addSubview:labelDoTime];
@@ -256,7 +229,7 @@
 //    此处是状态判断
     
 //    "1"是指已提交流水单号
-    if ([[applySch.status description] isEqualToString:@"1"]) {
+    if ([[applySch.status description] isEqualToString:@"100"]) {
         [self oneContent];
         
 //    "2"或"4"
@@ -292,25 +265,23 @@
         labelTime = [CreatView creatWithLabelFrame:CGRectMake(40, 145, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:applySch.updateTime];
     }
     
-    [viewWhite addSubview:labelTime];
+//    [viewWhite addSubview:labelTime];
     
     labelTwo = (UILabel *)[self.view viewWithTag:2001];
     labelTwo.text = @"已打款";
     labelTwo.textColor = [UIColor chongzhiColor];
     
     butEdit.hidden = YES;
-    fieldShuRu.hidden = YES;
-    butSubmit.hidden = YES;
     imageSchedule.image = [UIImage imageNamed:@"组-15"];
     
     butFinish.hidden = YES;
     buttCancle.hidden = YES;
     
-    buttWell = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT / 2 + 60, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 转账/POS单号已经提交成功,\n 我们将在24小时内进行核实!"];
-    [viewWhite addSubview:buttWell];
-    buttWell.titleLabel.numberOfLines = 2;
-    buttWell.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-    [buttWell setImage:[UIImage imageNamed:@"iconfont"] forState:UIControlStateNormal];
+//    buttWell = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT / 2 + 60, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 转账/POS单号已经提交成功,\n 我们将在24小时内进行核实!"];
+//    [viewWhite addSubview:buttWell];
+//    buttWell.titleLabel.numberOfLines = 2;
+//    buttWell.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+//    [buttWell setImage:[UIImage imageNamed:@"iconfont"] forState:UIControlStateNormal];
 }
 
 //状态是2或4时的内容
@@ -378,41 +349,40 @@
 //状态是3时的内容
 - (void)threeContent
 {
-    labelThree = (UILabel *)[self.view viewWithTag:2002];
-    labelThree.textColor = [UIColor chongzhiColor];
-    labelThree.text = @"财务已审核";
+    labelTwo = (UILabel *)[self.view viewWithTag:2001];
+    labelTwo.textColor = [UIColor chongzhiColor];
+    labelTwo.text = @"审核通过";
     
     labelCheckTime.hidden = NO;
     labelCheckTime.text = applySch.checkTime;
     labelCheckTime.text = @"labelCheckTime";
     
-    imageSchedule.image = [UIImage imageNamed:@"组-16"];
-    [buttWell setTitle:@"财务审核通过,预计30分钟内到账" forState:UIControlStateNormal];
+    imageSchedule.image = [UIImage imageNamed:@"2"];
+    [butSubmitAlert setTitle:@"审核通过,金额将在30分钟内到您的账户余额。" forState:UIControlStateNormal];
 }
 
 //状态是5时的内容
 - (void)fiveContent
 {
-    labelThree = (UILabel *)[self.view viewWithTag:2002];
-    labelThree.text = @"财务已审核";
+    labelTwo = (UILabel *)[self.view viewWithTag:2001];
+    labelThree.text = @"审核通过";
     labelThree.textColor = [UIColor chongzhiColor];
     
     labelCheckTime.hidden = NO;
     labelCheckTime.text = applySch.recheckTime;
     labelCheckTime.text = @"labelCheckTime";
     
-    labelFour = (UILabel *)[self.view viewWithTag:2003];
-    labelFour.text = @"充值成功";
-    labelFour.textColor = [UIColor chongzhiColor];
+    labelThree = (UILabel *)[self.view viewWithTag:2002];
+    labelThree.text = @"充值成功";
+    labelThree.textColor = [UIColor chongzhiColor];
     
     labelDoTime.hidden = NO;
     labelDoTime.text = applySch.recheckTime;
     labelDoTime.text = @"labelDoTime";
-    imageSchedule.image = [UIImage imageNamed:@"组-17"];
-    [buttWell setTitle:@"恭喜您充值成功" forState:UIControlStateNormal];
-    buttWell.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 + 60, WIDTH_CONTROLLER_DEFAULT, 20);
+    imageSchedule.image = [UIImage imageNamed:@"4"];
+    [butSubmitAlert setTitle:@"恭喜您充值成功" forState:UIControlStateNormal];
     
-    buttonAplly = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT / 2 + 60 + 25, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"去赚钱"];
+    buttonAplly = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT / 2 + 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"去赚钱"];
     [self.view addSubview:buttonAplly];
     buttonAplly.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
@@ -456,6 +426,7 @@
     EditBigMoney *money = [[EditBigMoney alloc] init];
     money.schedule = applySch;
     NSLog(@"^^^^^^^^^%@", money.schedule.Id);
+    NSLog(@"kkkkkkkkk%@", applySch.busName);
     [self.navigationController pushViewController:money animated:YES];
 }
 
@@ -658,7 +629,7 @@
     NSDictionary *parameter = @{@"id":self.ID, @"token":[dic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getBigPutOnInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"hhhhhh%@", responseObject);
+        NSLog(@"大额申请详情:hhhhhh%@", responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
