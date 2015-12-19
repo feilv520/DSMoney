@@ -32,7 +32,7 @@
     webView.scrollView.showsHorizontalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
-    NSURL *url = [NSURL URLWithString:@"http://192.168.0.39:8080/tongjiang/prouctInfo/LegalAgreement.do?type=txtRisk"];
+    NSURL *url = [NSURL URLWithString:@"http://58.215.161.86/prouctInfo/LegalAgreement.html?type=txtRisk"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

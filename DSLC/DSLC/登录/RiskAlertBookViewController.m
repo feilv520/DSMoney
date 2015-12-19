@@ -27,15 +27,8 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    if (self.disign == YES) {
         
-        [self.navigationItem setTitle:@"风险提示书"];
-        
-    } else {
-        
-        [self.navigationItem setTitle:@"风控揭示"];
-    }
+    [self.navigationItem setTitle:@"大圣理财平台用户服务协议"];
     
     [self webViewShow];
 //    [self tableViewsHOW];
@@ -49,7 +42,7 @@
     webView.scrollView.showsHorizontalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
-    NSURL *url = [NSURL URLWithString:@"http://192.168.0.41:8080/tongjiang/lr_hint.do"];
+    NSURL *url = [NSURL URLWithString:@"http://58.215.161.86/regist.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

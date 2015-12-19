@@ -33,7 +33,7 @@
     webView.scrollView.showsHorizontalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
-    NSURL *url = [NSURL URLWithString:@"http://192.168.0.41:8080/tongjiang/more_about.do"];
+    NSURL *url = [NSURL URLWithString:@"http://58.215.161.86/more_about.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }
