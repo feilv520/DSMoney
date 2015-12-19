@@ -135,7 +135,6 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
         
     } else {
-        [self getBankCard];
         self.orderDic = [self createOrder];
         [self pay:nil];
     }
