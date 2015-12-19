@@ -517,6 +517,9 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
     [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+    
     NSMutableDictionary *usersDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     //设置属性值,没有的数据就新建，已有的数据就修改。
     [usersDic setObject:@"mcm" forKey:@"token"];
