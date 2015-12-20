@@ -13,7 +13,7 @@
 #import "AddBankViewController.h"
 #import "GiveMoneyFinish.h"
 
-@interface RechargeAlreadyBinding () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface RechargeAlreadyBinding () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 {
     UITableView *_tabelView;
@@ -211,20 +211,18 @@
             return ;
         } else {
         
-            
             self.dataDic = [NSDictionary dictionary];
             self.dataDic = [responseObject objectForKey:@"User"];
             
             bankDic = [self.dataDic objectForKey:@"BankCard"];
             
             if (bankDic.count == 0) {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先绑定银行卡,再充值"];
-                AddBankViewController *addBVC = [[AddBankViewController alloc] init];
-                addBVC.realNameStatus = YES;
-                pushVC(addBVC);
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先绑定银行卡,再充值" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去绑卡",nil];
+                // optional - add more buttons:
+                [alert show];
+            } else {
+                [self contentShow];
             }
-            
-            [self contentShow];
             
             [_tabelView reloadData];
         }
@@ -233,6 +231,16 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        AddBankViewController *addBVC = [[AddBankViewController alloc] init];
+        addBVC.realNameStatus = YES;
+        pushVC(addBVC);
+    } else {
+        popVC;
+    }
 }
 
 #pragma mark 连连支付按钮

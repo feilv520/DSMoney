@@ -9,6 +9,7 @@
 #import "ChooseOpenAnAccountBank.h"
 #import "BankListCell.h"
 #import "BankName.h"
+#import "City.h"
 
 @interface ChooseOpenAnAccountBank () <UITableViewDataSource, UITableViewDelegate>
 
@@ -30,7 +31,13 @@
     bankNameArr = [NSMutableArray array];
     
     [self tableViewContentShow];
-    [self getData];
+    if ([self.flagSelect isEqualToString:@"2"]) {
+        [self getData];
+    } else if ([self.flagSelect isEqualToString:@"3"]) {
+        [self getAreaListOfP];
+    } else if ([self.flagSelect isEqualToString:@"4"]) {
+        [self getAreaListOfS];
+    }
 }
 
 - (void)tableViewContentShow
@@ -58,19 +65,31 @@
 {
     BankListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    BankName *bank = [bankNameArr objectAtIndex:indexPath.row];
     cell.labelBank.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    cell.labelBank.text = bank.bankName;
-    
+    if ([self.flagSelect isEqualToString:@"3"] || [self.flagSelect isEqualToString:@"4"]) {
+        City *city = [bankNameArr objectAtIndex:indexPath.row];
+        cell.labelBank.text = city.cityName;
+    } else {
+        BankName *bank = [bankNameArr objectAtIndex:indexPath.row];
+        cell.labelBank.text = bank.bankName;
+    }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BankName *bank = [bankNameArr objectAtIndex:indexPath.row];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"bank" object:bank.bankName];
-    NSLog(@"%@", bank.bankName);
+    if ([self.flagSelect isEqualToString:@"3"] || [self.flagSelect isEqualToString:@"4"]) {
+        City *city = [bankNameArr objectAtIndex:indexPath.row];
+        if ([self.flagSelect isEqualToString:@"3"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"cityP" object:city];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"cityS" object:city];
+        }
+    } else {
+        BankName *bank = [bankNameArr objectAtIndex:indexPath.row];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"bank" object:bank];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -99,6 +118,64 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"mmmmmmmmmmm%@", error);
+        
+    }];
+}
+
+- (void)getAreaListOfP {
+    
+    NSDictionary *parameters = @{@"type":@"1",@"proviceCode":@""};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getAreaList" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getAreaListOfP = %@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            NSMutableArray *bankArray = [responseObject objectForKey:@"Area"];
+            for (NSDictionary *dataDic in bankArray) {
+                City *bankName = [[City alloc] init];
+                [bankName setValuesForKeysWithDictionary:dataDic];
+                [bankNameArr addObject:bankName];
+            }
+            [_tableView reloadData];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@", error);
+        
+    }];
+}
+
+- (void)getAreaListOfS {
+    
+    NSDictionary *parameters = @{@"type":@2,@"proviceCode":self.cityCode};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getAreaList" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getAreaListOfP = %@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            NSMutableArray *bankArray = [responseObject objectForKey:@"Area"];
+            for (NSDictionary *dataDic in bankArray) {
+                City *bankName = [[City alloc] init];
+                [bankName setValuesForKeysWithDictionary:dataDic];
+                [bankNameArr addObject:bankName];
+            }
+            [_tableView reloadData];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@", error);
         
     }];
 }

@@ -10,4 +10,6 @@
 
 @interface ChooseOpenAnAccountBank : BaseViewController
 
+@property (nonatomic, strong) NSString *flagSelect;
+@property (nonatomic, strong) NSString *cityCode;
 @end
