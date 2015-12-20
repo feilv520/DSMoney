@@ -470,6 +470,7 @@
 		8D1921D11BD4FC840038195E /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1921CF1BD4FC840038195E /* MessageDetailViewController.m */; };
 		8D1921D21BD4FC840038195E /* MessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1921D01BD4FC840038195E /* MessageDetailViewController.xib */; };
 		8D1921D41BD4FD7F0038195E /* banner01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1921D31BD4FD7F0038195E /* banner01@2x.png */; };
+		8D2088301C266E7900372F66 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D20882F1C266E7900372F66 /* City.m */; settings = {ASSET_TAGS = (); }; };
 		8D29F9811C08047D00D45E43 /* 已打开@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D29F9731C08047D00D45E43 /* 已打开@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D29F9821C08047D00D45E43 /* 已打开@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D29F9741C08047D00D45E43 /* 已打开@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D29F99E1C08048700D45E43 /* 已过期@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D29F9901C08048700D45E43 /* 已过期@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -1433,6 +1434,8 @@
 		8D1921CF1BD4FC840038195E /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
 		8D1921D01BD4FC840038195E /* MessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageDetailViewController.xib; sourceTree = "<group>"; };
 		8D1921D31BD4FD7F0038195E /* banner01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "banner01@2x.png"; path = "../banner01@2x.png"; sourceTree = "<group>"; };
+		8D20882E1C266E7900372F66 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
+		8D20882F1C266E7900372F66 /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
 		8D29F9731C08047D00D45E43 /* 已打开@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已打开@2x.png"; sourceTree = "<group>"; };
 		8D29F9741C08047D00D45E43 /* 已打开@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已打开@3x.png"; sourceTree = "<group>"; };
 		8D29F9901C08048700D45E43 /* 已过期@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已过期@2x.png"; sourceTree = "<group>"; };
@@ -2568,6 +2571,8 @@
 				8182A7E51C0E97EA00FA1216 /* ApplySchedule.m */,
 				816CCCF11C1832FD006FA6F2 /* BankName.h */,
 				816CCCF21C1832FD006FA6F2 /* BankName.m */,
+				8D20882E1C266E7900372F66 /* City.h */,
+				8D20882F1C266E7900372F66 /* City.m */,
 			);
 			path = MineModel;
 			sourceTree = "<group>";
@@ -4787,6 +4792,7 @@
 				8D4FF5E11BE339A200BAE25F /* UIButton+AFNetworking.m in Sources */,
 				8D121FDB1BD4D83600B3C1FE /* SettingGetMoneyTableViewCell.m in Sources */,
 				811F0B061BF33D30001F6AA4 /* BindingOneCell.m in Sources */,
+				8D2088301C266E7900372F66 /* City.m in Sources */,
 				8D9BE8F21C0EC94D003C67D3 /* YYSpriteSheetImage.m in Sources */,
 				81ED03201BD0DDAD005F4B02 /* AddBankCell.m in Sources */,
 				8175BEB91BE9F7160044026E /* ShareEveryCell.m in Sources */,
