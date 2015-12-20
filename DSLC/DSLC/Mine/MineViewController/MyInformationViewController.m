@@ -484,9 +484,6 @@
     [self.imageView setImage:savedImage];
     
     [[MyAfHTTPClient sharedClient] uploadFile:savedImage];
-    
-    
-    
 }
 
 - (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName

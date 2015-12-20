@@ -13,7 +13,7 @@
 #import "ApplyScheduleViewController.h"
 #import "ChooseOpenAnAccountBank.h"
 
-@interface BigMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface BigMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
 {
     UITableView *_tableView;
@@ -24,6 +24,7 @@
     UIButton *buttonApply;
     UIImageView *imageRight;
     UIImageView *imageBusness;
+    UIImageView *imagePos;
     
     UITextField *fileldName;
     UITextField *fieldBank;
@@ -32,6 +33,10 @@
     UITextField *fieldMoney;
     UITextField *fieldBusness;
     UITextField *fieldTime;
+    UITextField *fieldPos;
+    
+    UIImageView *imageView;
+    NSData *finaCard;
 }
 
 @end
@@ -64,8 +69,8 @@
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 130)];
     [_tableView registerNib:[UINib nibWithNibName:@"MendDealCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"充值金额", @"商户", @"刷卡时间", @"上传POS单照片"];
-    textArray = @[@"输入真实姓名", @"输入开户银行", @"银行卡号", @"请输入手机号", @"输入充值金额", @"请选择商户", @"请输入时间", @"请上传POS单照片"];
+    nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"刷卡时间", @"商户", @"充值金额", @"上传POS单照片"];
+    textArray = @[@"输入真实姓名", @"输入开户银行", @"银行卡号", @"请输入手机号", @"时间格式2016010101010", @"请选择商户", @"请输入充值金额", @"请上传POS单照片"];
     
     buttonApply = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"提交申请"];
     [_tableView.tableFooterView addSubview:buttonApply];
@@ -77,6 +82,12 @@
     imageRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 13, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"jiantou"]];
     
     imageBusness = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 13, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"jiantou"]];
+    
+    imagePos = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 13, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"jiantou"]];
+    
+    imageView = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 66, 5, 40, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"Pos"]];
+    imageView.layer.cornerRadius = 3;
+    imageView.layer.masksToBounds = YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -104,7 +115,7 @@
     cell.textField.tag = indexPath.row + 600;
     [cell.textField addTarget:self action:@selector(bigMoneyCashMoney:) forControlEvents:UIControlEventEditingChanged];
     
-    if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
+    if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 6) {
         
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
@@ -118,12 +129,29 @@
     if (indexPath.row == 5) {
         
         [cell addSubview:imageBusness];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeTap:)];
+//        [cell.textField addGestureRecognizer:tap];
+//        cell.textField.userInteractionEnabled = YES;
 //        cell.textField.enabled = NO;
+    }
+    
+    if (indexPath.row == 7) {
+        
+        cell.textField.enabled = NO;
+        [cell addSubview:imagePos];
+        [cell addSubview:imageView];
+        imageView.tag = 19999;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
+//转化时间
+//- (void)timeTap:(UITapGestureRecognizer *)tap
+//{
+//    NSLog(@"tap");
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -131,7 +159,149 @@
         
         ChooseOpenAnAccountBank *chooseOAAB = [[ChooseOpenAnAccountBank alloc] init];
         [self.navigationController pushViewController:chooseOAAB animated:YES];
+        
+    } else if (indexPath.row == 7) {
+        
+        UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
+        }
+        
+        pickerImage.delegate = self;
+        
+        pickerImage.navigationBar.barTintColor = [UIColor colorWithRed:223.0/255 green:74.0/255 blue:67.0/255 alpha:1];
+        
+        pickerImage.allowsEditing = NO;
+        [self presentViewController:pickerImage animated:YES completion:nil];
+        
+    } else if (indexPath.row == 5) {
+        NSLog(@"tap");
+        fieldTime = (UITextField *)[self.view viewWithTag:604];
+        
+        if (fieldTime.text.length == 14) {
+            
+            
+            
+        } else {
+            
+        }
     }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    imageView = (UIImageView *)[self.view viewWithTag:19999];
+    
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+    
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    /* 此处info 有六个值
+     * UIImagePickerControllerMediaType; // an NSString UTTypeImage)
+     * UIImagePickerControllerOriginalImage;  // a UIImage 原始图片
+     * UIImagePickerControllerEditedImage;    // a UIImage 裁剪后图片
+     * UIImagePickerControllerCropRect;       // an NSValue (CGRect)
+     * UIImagePickerControllerMediaURL;       // an NSURL
+     * UIImagePickerControllerReferenceURL    // an NSURL that references an asset in the AssetsLibrary framework
+     * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
+     */
+    // 保存图片至本地，方法见下文
+    [self saveImage:image withName:@"posImage.png"];
+    fieldPos = (UITextField *)[self.view viewWithTag:607];
+    fieldPos.text = @"已上传POS单照片";
+    
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"posImage.png"];
+    
+    NSLog(@"%@",fullPath);
+    
+    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+    
+    [imageView setImage:savedImage];
+    
+//    [[MyAfHTTPClient sharedClient] uploadFile:savedImage];
+}
+
+- (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
+{
+    
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+    // 将图片写入文件
+    
+    [imageData writeToFile:fullPath atomically:NO];
+}
+
+- (void)posData
+{
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"posImage.png"];
+    
+    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+    
+    finaCard = [[MyAfHTTPClient sharedClient] resetSizeOfImageData:savedImage maxSize:1024 * 2];
+    
+    fileldName = (UITextField *)[self.view viewWithTag:600];
+    fieldBank = (UITextField *)[self.view viewWithTag:601];
+    fieldBankCard = (UITextField *)[self.view viewWithTag:602];
+    fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
+    fieldTime = (UITextField *)[self.view viewWithTag:604];
+    fieldBusness = (UITextField *)[self.view viewWithTag:605];
+    fieldMoney = (UITextField *)[self.view viewWithTag:606];
+    fieldPos = (UITextField *)[self.view viewWithTag:607];
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSDictionary *parameter = @{@"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"busName":fieldBusness.text, @"posTime":fieldTime.text, @"posImg":finaCard, @"token":[dic objectForKey:@"token"]};
+    
+    NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,@"app/user/bigPutOn"];
+    
+    [[MyAfHTTPClient sharedClient] POST:URLPostString parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        // 设置时间格式
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+        
+        [formData appendPartWithFileData:finaCard name:@"posImg" fileName:fileName mimeType:@"application/octet-stream"];
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        
+        NSData *doubi = responseObject;
+        NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
+        
+        NSString *character = nil;
+        for (int i = 0; i < responseString.length; i ++) {
+            character = [responseString substringWithRange:NSMakeRange(i, 1)];
+            if ([character isEqualToString:@"\\"])
+                [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
+        }
+        responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
+        
+        NSLog(@"上传pos单照片接口:eeeee%@",responseString);
+        
+        NSDictionary *responseDic = [MyAfHTTPClient parseJSONStringToNSDictionary:responseString];
+        
+        NSLog(@"%@",responseDic);
+        
+        if ([[responseDic objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            NSString *IDstr = [[responseDic objectForKey:@"id"] description];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
+            ApplyScheduleViewController *scheduleVC = [[ApplyScheduleViewController alloc] init];
+            scheduleVC.ID = IDstr;
+            NSLog(@"1:%@", IDstr);
+            scheduleVC.doOr = YES;
+            [self.navigationController pushViewController:scheduleVC animated:YES];
+            // 刷新我的账户数据
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -158,10 +328,53 @@
             return YES;
         }
         
-    } else {
+    } else if (textField.tag == 604) {
+        
+        if (range.location < 14) {
+            
+            return YES;
+            
+        } else if (range.location == 19){
+            
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
+    else {
         
         return YES;
     }
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if (textField.tag == 604) {
+        if ([textField.text isEqualToString:@""]) {
+            return YES;
+        } else {
+            NSLog(@"0000000000%@",textField.text);
+            NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+            [inputFormatter setDateFormat:@"yyyyMMddHHmmss"];
+            NSDate* inputDate = [inputFormatter dateFromString:textField.text];
+            
+            NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+            [outputFormatter setLocale:[NSLocale currentLocale]];
+            [outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSString *str = [outputFormatter stringFromDate:inputDate];
+            NSLog(@"9999999999%@",str);
+            
+            if (str == nil) {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入14位无符号无空格正确时间格式"];
+            } else {
+                textField.text = str;
+                
+            }
+        }
+    }
+    return YES;
 }
 
 //编辑绑定判断
@@ -171,9 +384,9 @@
     fieldBank = (UITextField *)[self.view viewWithTag:601];
     fieldBankCard = (UITextField *)[self.view viewWithTag:602];
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
-    fieldMoney = (UITextField *)[self.view viewWithTag:604];
+    fieldTime = (UITextField *)[self.view viewWithTag:604];
     fieldBusness = (UITextField *)[self.view viewWithTag:605];
-    fieldTime = (UITextField *)[self.view viewWithTag:606];
+    fieldMoney = (UITextField *)[self.view viewWithTag:606];
     
     if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 19 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0 && fieldBusness.text.length != 0 && fieldTime.text != 0) {
         
@@ -214,7 +427,7 @@
 //            [fieldPhoneNum becomeFirstResponder];
             
         } else if (textField.tag == 604) {
-            
+            textField.text = @"";
             [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 
                 _tableView.contentOffset = CGPointMake(0, 200);
@@ -247,9 +460,10 @@
     fieldBank = (UITextField *)[self.view viewWithTag:601];
     fieldBankCard = (UITextField *)[self.view viewWithTag:602];
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
-    fieldMoney = (UITextField *)[self.view viewWithTag:604];
+    fieldTime = (UITextField *)[self.view viewWithTag:604];
     fieldBusness = (UITextField *)[self.view viewWithTag:605];
-    fieldTime = (UITextField *)[self.view viewWithTag:606];
+    fieldMoney = (UITextField *)[self.view viewWithTag:606];
+    fieldPos = (UITextField *)[self.view viewWithTag:607];
     
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         
@@ -276,17 +490,28 @@
     } else if (![NSString validateMobile:fieldPhoneNum.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
         
-    } else if (fieldMoney.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额"];
+    } else if (fieldTime.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入年月日时分秒14位时间"];
         
     } else if (fieldBusness.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请选择商户"];
         
-    } else if (fieldTime.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入刷卡时间"];
+    } else if (fieldMoney.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额"];
         
     } else {
-        [self getData];
+        
+        if ([fieldPos.text isEqualToString:@"已上传POS单照片"]) {
+            
+            NSLog(@"已上传pos单");
+            [self posData];
+            
+        } else {
+            
+            NSLog(@"未上传");
+            [self getData];
+            
+        }
         [self.view endEditing:YES];
     }
 }
@@ -315,9 +540,10 @@
     fieldBank = (UITextField *)[self.view viewWithTag:601];
     fieldBankCard = (UITextField *)[self.view viewWithTag:602];
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
-    fieldMoney = (UITextField *)[self.view viewWithTag:604];
+    fieldTime = (UITextField *)[self.view viewWithTag:604];
     fieldBusness = (UITextField *)[self.view viewWithTag:605];
-    fieldTime = (UITextField *)[self.view viewWithTag:606];
+    fieldMoney = (UITextField *)[self.view viewWithTag:606];
+    fieldPos = (UITextField *)[self.view viewWithTag:607];
 
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     NSDictionary *parameter = @{@"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"busName":fieldBusness.text, @"posTime":fieldTime.text, @"posImg":@"", @"token":[dic objectForKey:@"token"]};
