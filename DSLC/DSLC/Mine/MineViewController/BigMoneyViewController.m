@@ -12,6 +12,7 @@
 #import "HistoryMemoryViewController.h"
 #import "ApplyScheduleViewController.h"
 #import "ChooseOpenAnAccountBank.h"
+#import "BankName.h"
 
 @interface BigMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -158,6 +159,7 @@
     if (indexPath.row == 1) {
         
         ChooseOpenAnAccountBank *chooseOAAB = [[ChooseOpenAnAccountBank alloc] init];
+        chooseOAAB.flagSelect = @"2";
         [self.navigationController pushViewController:chooseOAAB animated:YES];
         
     } else if (indexPath.row == 7) {
@@ -575,9 +577,9 @@
 
 - (void)returnBankName:(NSNotification *)notice
 {
-    NSString *bankName = [notice object];
+    BankName *bankName = [notice object];
     fieldBank = (UITextField *)[self.view viewWithTag:601];
-    fieldBank.text = bankName;
+    fieldBank.text = bankName.bankName;
 }
 
 - (void)didReceiveMemoryWarning {

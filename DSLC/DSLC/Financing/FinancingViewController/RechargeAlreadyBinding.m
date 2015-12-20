@@ -443,7 +443,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     // 注意要修改
-    NSDictionary *parameter = @{@"fmoney":textFieldTag.text,@"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"fmoney":textFieldTag.text,@"userId":[dic objectForKey:@"id"],@"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     
     NSLog(@"%@",parameter);
     
