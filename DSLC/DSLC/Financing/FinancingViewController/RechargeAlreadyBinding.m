@@ -91,7 +91,7 @@
         
         BankWhichCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
-        cell.imageBank.image = [UIImage imageNamed:@"2013123115540975"];
+        cell.imageBank.image = [UIImage imageNamed:[[self.dataDic objectForKey:@"BankCard"] objectForKey:@"bankName"]];
         
         cell.labelBank.text = [[self.dataDic objectForKey:@"BankCard"] objectForKey:@"bankName"];
         cell.labelBank.font = [UIFont fontWithName:@"CenturyGothic" size:15];

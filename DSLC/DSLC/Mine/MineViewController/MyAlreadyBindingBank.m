@@ -54,7 +54,7 @@
 {
     MyAlreadyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    cell.imageSign.image = [UIImage imageNamed:@"2013123115540975"];
+    cell.imageSign.image = [UIImage imageNamed:self.bankName.bankName];
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     cell.laeblBankName.text = [NSString stringWithFormat:@"%@", self.bankName.bankName];
