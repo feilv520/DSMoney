@@ -452,6 +452,9 @@
         NSLog(@"7777777绑定银行卡:%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+            
+        } else {
             
         }
         

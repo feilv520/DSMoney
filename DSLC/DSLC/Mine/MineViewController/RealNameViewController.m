@@ -190,7 +190,7 @@
             //写入文件
             [usersDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
