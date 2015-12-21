@@ -19,12 +19,13 @@
     UITableView *_tabelView;
     UIButton *buttonNext;
     
-    UITextField *textFieldTag;
     NSInteger seconds;
     NSTimer *timer;
     
     NSDictionary *bankDic;
 }
+
+@property (nonatomic, strong) UITextField *textFieldTag;
 
 @property (nonatomic, strong) NSDictionary *dataDic;
 
@@ -48,7 +49,13 @@
     
     self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"充值"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refrush:) name:@"refrushBK" object:nil];
 
+}
+
+- (void)refrush:(NSNotification *)not{
+    [self getData];
 }
 
 - (void)contentShow
@@ -110,13 +117,15 @@
         cell.labelTitle.text = @"充值金额";
         cell.labelTitle.font = [UIFont systemFontOfSize:15];
         
-        cell.textField.placeholder = @"充值金额最小为1元";
+        cell.textField.placeholder = @"充值金额最小为100元";
         cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textField.tintColor = [UIColor yuanColor];
         cell.textField.tag = 188;
-        cell.textField.delegate = self;
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         [cell.textField addTarget:self action:@selector(textAlreadyBinding:) forControlEvents:UIControlEventEditingChanged];
+        
+        self.textFieldTag = cell.textField;
+        self.textFieldTag.delegate = self;
         
         UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(cell.textField.frame.size.width - 20, 0, 15, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor yuanColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"元"];
         [cell.textField addSubview:label];
@@ -141,10 +150,11 @@
 - (void)alreadyBindingButton:(UIButton *)button
 {
     [self.view endEditing:YES];
-    textFieldTag = (UITextField *)[self.view viewWithTag:188];
-    CGFloat shuRu = textFieldTag.text.intValue;
+    CGFloat shuRu = self.textFieldTag.text.intValue;
     
-    if (textFieldTag.text.length == 0) {
+    NSLog(@"shuRu = %.2lf",shuRu);
+    NSLog(@"textFieldTag.text = %@",self.textFieldTag.text);
+    if (self.textFieldTag.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额,充值金额最小为100元"];
         
     } else if (shuRu >= 100){
@@ -154,7 +164,7 @@
 
         [self pay:nil];
         
-    } else if ([textFieldTag.text isEqualToString:@"0"]) {
+    } else if ([self.textFieldTag.text isEqualToString:@"0"]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"最小金额为100元"];
         
     } else {
@@ -165,7 +175,7 @@
 
 - (void)textAlreadyBinding:(UITextField *)textField
 {
-    textFieldTag = (UITextField *)[self.view viewWithTag:188];
+    NSLog(@"%@",self.textFieldTag.text);
     CGFloat shuRu = textField.text.intValue;
     
     if (shuRu > 0) {
@@ -438,12 +448,10 @@
 
 - (void)putOn{
     
-    textFieldTag = (UITextField *)[self.view viewWithTag:188];
-    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     // 注意要修改
-    NSDictionary *parameter = @{@"fmoney":textFieldTag.text,@"userId":[dic objectForKey:@"id"],@"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+    NSDictionary *parameter = @{@"fmoney":self.textFieldTag.text,@"userId":[dic objectForKey:@"id"],@"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     
     NSLog(@"%@",parameter);
     
@@ -452,7 +460,7 @@
         NSLog(@"putOn = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             GiveMoneyFinish *giveMoney = [[GiveMoneyFinish alloc] init];
-            giveMoney.moneyString = textFieldTag.text;
+            giveMoney.moneyString = self.textFieldTag.text;
             giveMoney.bankAccount = [[self.dataDic objectForKey:@"BankCard"] objectForKey:@"bankAcc"];
             [self.navigationController pushViewController:giveMoney animated:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];

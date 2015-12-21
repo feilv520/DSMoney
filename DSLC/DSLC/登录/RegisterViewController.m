@@ -1164,9 +1164,9 @@
         
         ChooseOpenAnAccountBank *chooseBank = [[ChooseOpenAnAccountBank alloc] init];
         if (indexPath.row == 2) {
-            chooseBank.flagSelect = @"2";
+            chooseBank.flagSelect = @"22";
         } else if (indexPath.row == 3) {
-            chooseBank.flagSelect = @"3";
+            chooseBank.flagSelect = @"33";
         }
         [self.navigationController pushViewController:chooseBank animated:YES];
     } else if (indexPath.row == 4) {
@@ -1175,7 +1175,7 @@
             return;
         }
         ChooseOpenAnAccountBank *chooseBank = [[ChooseOpenAnAccountBank alloc] init];
-        chooseBank.flagSelect = @"4";
+        chooseBank.flagSelect = @"44";
         chooseBank.cityCode = city.cityCode;
         
         [self.navigationController pushViewController:chooseBank animated:YES];
