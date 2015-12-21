@@ -483,7 +483,7 @@
     } else if (fieldBankCard.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入银行卡号"];
         
-    } else if (fieldBankCard.text.length != 19) {
+    } else if (![NSString checkCardNo:fieldBankCard.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"银行卡号格式错误"];
         
     } else if (fieldPhoneNum.text.length == 0) {
