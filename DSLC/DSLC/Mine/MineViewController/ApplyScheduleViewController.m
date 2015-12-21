@@ -307,7 +307,6 @@
         labelCheckTime.frame = CGRectMake(40, imageSchedule.frame.size.height + 27, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
         labelCheckTime.hidden = NO;
         labelCheckTime.text = applySch.checkTime;
-        labelCheckTime.text = @"checkTime";
         
     } else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
         
@@ -317,7 +316,6 @@
         labelCheckTime.frame = CGRectMake(40, imageSchedule.frame.size.height + 27, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
         labelCheckTime.hidden = NO;
         labelCheckTime.text = applySch.checkTime;
-        labelCheckTime.text = @"checkTime";
         
     } else {
         
@@ -327,7 +325,6 @@
         labelCheckTime.frame = CGRectMake(40, imageSchedule.frame.size.height + 25, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
         labelCheckTime.hidden = NO;
         labelCheckTime.text = applySch.checkTime;
-        labelCheckTime.text = @"checkTime";
     }
 }
 
@@ -344,7 +341,6 @@
     
     labelCheckTime.hidden = NO;
     labelCheckTime.text = applySch.checkTime;
-    labelCheckTime.text = @"labelCheckTime";
     
     imageSchedule.image = [UIImage imageNamed:@"审核通过"];
     [butSubmitAlert setTitle:@"审核通过,金额将在30分钟内到您的账户余额。" forState:UIControlStateNormal];
@@ -363,7 +359,6 @@
     
     labelCheckTime.hidden = NO;
     labelCheckTime.text = applySch.recheckTime;
-    labelCheckTime.text = @"labelCheckTime";
     
     labelThree = (UILabel *)[self.view viewWithTag:2002];
     labelThree.text = @"充值成功";
@@ -371,7 +366,6 @@
     
     labelDoTime.hidden = NO;
     labelDoTime.text = applySch.recheckTime;
-    labelDoTime.text = @"labelDoTime";
     imageSchedule.image = [UIImage imageNamed:@"充值成功"];
     [butSubmitAlert setTitle:@"恭喜您充值成功" forState:UIControlStateNormal];
     

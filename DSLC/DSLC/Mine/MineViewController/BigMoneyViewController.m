@@ -13,6 +13,7 @@
 #import "ApplyScheduleViewController.h"
 #import "ChooseOpenAnAccountBank.h"
 #import "BankName.h"
+#import "ChooseBusViewController.h"
 
 @interface BigMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -130,10 +131,8 @@
     if (indexPath.row == 5) {
         
         [cell addSubview:imageBusness];
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeTap:)];
-//        [cell.textField addGestureRecognizer:tap];
-//        cell.textField.userInteractionEnabled = YES;
-//        cell.textField.enabled = NO;
+        cell.textField.enabled = NO;
+
     }
     
     if (indexPath.row == 7) {
@@ -144,15 +143,14 @@
         imageView.tag = 19999;
     }
     
+    if (indexPath.row == 4) {
+        
+        cell.textField.clearButtonMode = YES;
+    }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
-
-//转化时间
-//- (void)timeTap:(UITapGestureRecognizer *)tap
-//{
-//    NSLog(@"tap");
-//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -179,17 +177,19 @@
         [self presentViewController:pickerImage animated:YES completion:nil];
         
     } else if (indexPath.row == 5) {
-        NSLog(@"tap");
-        fieldTime = (UITextField *)[self.view viewWithTag:604];
         
-        if (fieldTime.text.length == 14) {
-            
-            
-            
-        } else {
-            
-        }
+        ChooseBusViewController *chooseBusness = [[ChooseBusViewController alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsnoticeBusness:) name:@"busness" object:nil];
+        [self.view endEditing:YES];
+        [self.navigationController pushViewController:chooseBusness animated:YES];
     }
+}
+
+- (void)nsnoticeBusness:(NSNotification *)notice
+{
+    NSString *busnessStr = [notice object];
+    fieldBusness = (UITextField *)[self.view viewWithTag:605];
+    fieldBusness.text = busnessStr;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -356,23 +356,23 @@
         if ([textField.text isEqualToString:@""]) {
             return YES;
         } else {
-            NSLog(@"0000000000%@",textField.text);
+            NSLog(@"0000000000%@",[textField.text substringWithRange:NSMakeRange(4, 1)]);
             NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-            [inputFormatter setDateFormat:@"yyyyMMddHHmmss"];
-            NSDate* inputDate = [inputFormatter dateFromString:textField.text];
-            
-            NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-            [outputFormatter setLocale:[NSLocale currentLocale]];
-            [outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSString *str = [outputFormatter stringFromDate:inputDate];
-            NSLog(@"9999999999%@",str);
-            
-            if (str == nil) {
+            if (![[textField.text substringWithRange:NSMakeRange(4, 1)] isEqualToString:@"-"]) {
+                [inputFormatter setDateFormat:@"yyyyMMddHHmmss"];
+                NSDate* inputDate = [inputFormatter dateFromString:textField.text];
                 
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入14位无符号无空格正确时间格式"];
-            } else {
-                textField.text = str;
+                NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+                [outputFormatter setLocale:[NSLocale currentLocale]];
+                [outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSString *str = [outputFormatter stringFromDate:inputDate];
+                NSLog(@"9999999999%@",str);
                 
+                if (str == nil) {
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入14位无符号无空格正确时间格式"];
+                } else {
+                    textField.text = str;
+                }
             }
         }
     }

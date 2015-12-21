@@ -10,6 +10,7 @@
 #import "MendDealCell.h"
 #import "ChooseOpenAnAccountBank.h"
 #import "BankName.h"
+#import "ChooseBusViewController.h"
 
 @interface EditBigMoney () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -162,7 +163,20 @@
         
         pickerImage.allowsEditing = NO;
         [self presentViewController:pickerImage animated:YES completion:nil];
+        
+    } else if (indexPath.row == 5) {
+        
+        ChooseBusViewController *chooseBusness = [[ChooseBusViewController alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsNoticeBusness:) name:@"busness" object:nil];
+        [self.navigationController pushViewController:chooseBusness animated:YES];
     }
+}
+
+- (void)nsNoticeBusness:(NSNotification *)notice
+{
+    NSString *busnessName = [notice object];
+    fieldBusness = (UITextField *)[self.view viewWithTag:605];
+    fieldBusness.text = busnessName;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -213,23 +227,23 @@
         if ([textField.text isEqualToString:@""]) {
             return YES;
         } else {
-            NSLog(@"0000000000%@",textField.text);
+            NSLog(@"0000000000%@",[textField.text substringWithRange:NSMakeRange(4, 1)]);
             NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-            [inputFormatter setDateFormat:@"yyyyMMddHHmmss"];
-            NSDate* inputDate = [inputFormatter dateFromString:textField.text];
-            
-            NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-            [outputFormatter setLocale:[NSLocale currentLocale]];
-            [outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSString *str = [outputFormatter stringFromDate:inputDate];
-            NSLog(@"9999999999%@",str);
-            
-            if (str == nil) {
+            if (![[textField.text substringWithRange:NSMakeRange(4, 1)] isEqualToString:@"-"]) {
+                [inputFormatter setDateFormat:@"yyyyMMddHHmmss"];
+                NSDate* inputDate = [inputFormatter dateFromString:textField.text];
                 
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入14位无符号无空格正确时间格式"];
-            } else {
-                textField.text = str;
+                NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+                [outputFormatter setLocale:[NSLocale currentLocale]];
+                [outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSString *str = [outputFormatter stringFromDate:inputDate];
+                NSLog(@"9999999999%@",str);
                 
+                if (str == nil) {
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入14位无符号无空格正确时间格式"];
+                } else {
+                    textField.text = str;
+                }
             }
         }
     }
@@ -260,6 +274,17 @@
             return YES;
         }
         
+    } else if (textField.tag == 604) {
+        if (range.location < 14) {
+            
+            return YES;
+            
+        } else if (range.location == 19){
+            
+            return YES;
+        } else {
+            return NO;
+        }
     } else {
         
         return YES;

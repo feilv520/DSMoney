@@ -298,9 +298,12 @@
             
         } else {
             
+                            
             RealNameViewController *realName = [[RealNameViewController alloc] init];
             realName.realNamePan = NO;
             [self.navigationController pushViewController:realName animated:YES];
+                
+            
         }
         
     } else if (indexPath.section == 2) {
@@ -312,9 +315,15 @@
             
         } else if (indexPath.row == 2) {
             
-            RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
-            realNameVC.realNamePan = YES;
-            [self.navigationController pushViewController:realNameVC animated:YES];
+            if ([[[self.dataDic objectForKey:@"realNameStatus"] description] isEqualToString:@"2"]) {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已认证"];
+                
+            } else {
+                
+                RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
+                realNameVC.realNamePan = YES;
+                [self.navigationController pushViewController:realNameVC animated:YES];
+            }
             
         } else if (indexPath.row == 1) {
             

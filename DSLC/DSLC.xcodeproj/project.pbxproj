@@ -387,6 +387,7 @@
 		81D72FC71BFB04890067A277 /* rightWindow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D72FC31BFB04890067A277 /* rightWindow@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD991BC6427800A15E01 /* MineViewController.m */; };
 		81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8ADA21BC646D100A15E01 /* FinancingViewController.m */; };
+		81E0CCE11C27EF6700148609 /* ChooseBusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0CCE01C27EF6700148609 /* ChooseBusViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E54E6A1C1EB86D0007303B /* UsualQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */; settings = {ASSET_TAGS = (); }; };
 		81E8310B1BF0488400127EE8 /* MyChoosePlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -1361,6 +1362,8 @@
 		81D8AD991BC6427800A15E01 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		81D8ADA11BC646D100A15E01 /* FinancingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancingViewController.h; sourceTree = "<group>"; };
 		81D8ADA21BC646D100A15E01 /* FinancingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingViewController.m; sourceTree = "<group>"; };
+		81E0CCDF1C27EF6700148609 /* ChooseBusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseBusViewController.h; sourceTree = "<group>"; };
+		81E0CCE01C27EF6700148609 /* ChooseBusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseBusViewController.m; sourceTree = "<group>"; };
 		81E54E681C1EB86D0007303B /* UsualQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsualQuestionViewController.h; sourceTree = "<group>"; };
 		81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsualQuestionViewController.m; sourceTree = "<group>"; };
 		81E831071BF0488400127EE8 /* MyChoosePlannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChoosePlannerCell.h; sourceTree = "<group>"; };
@@ -2838,6 +2841,8 @@
 				817E33971BD772A700D05103 /* BigMoneyViewController.m */,
 				817B16101C0C2F1100EEB937 /* ChooseOpenAnAccountBank.h */,
 				817B16111C0C2F1100EEB937 /* ChooseOpenAnAccountBank.m */,
+				81E0CCDF1C27EF6700148609 /* ChooseBusViewController.h */,
+				81E0CCE01C27EF6700148609 /* ChooseBusViewController.m */,
 				81B6740B1BF0AE26007CEF51 /* ApplyScheduleViewController.h */,
 				81B6740C1BF0AE26007CEF51 /* ApplyScheduleViewController.m */,
 				816CDF2C1BF1A018007785FC /* EditBigMoney.h */,
@@ -5013,6 +5018,7 @@
 				8D9BE8F51C0EC94D003C67D3 /* YYWebImageOperation.m in Sources */,
 				8D88D0FC1BFECCB40051D6DA /* MJRefreshAutoStateFooter.m in Sources */,
 				8D4FF5D91BE339A200BAE25F /* AFSecurityPolicy.m in Sources */,
+				81E0CCE11C27EF6700148609 /* ChooseBusViewController.m in Sources */,
 				8D88D1071BFECCB40051D6DA /* UIView+MJExtension.m in Sources */,
 				81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */,
 				8D121FE01BD4D92600B3C1FE /* SettingPieTableViewCell.m in Sources */,
