@@ -26,6 +26,7 @@
 #import "ShareHaveRedBag.h"
 #import "BuyClauseViewController.h"
 #import "UsufructAssignmentViewController.h"
+#import "RealNameViewController.h"
 
 @interface MakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>{
     RedBagModel *redbagModel;
@@ -547,13 +548,17 @@
 //充值按钮
 - (void)cashMoneyButton:(UIButton *)button
 {
-//    *********未绑定银行卡的充值页面*************
-    RechargeViewController *rechargeVC = [[RechargeViewController alloc] init];
-    [self.navigationController pushViewController:rechargeVC animated:YES];
-    
-//    *********已经绑定银行卡的充值页面**************
-//    RechargeAlreadyBinding *already = [[RechargeAlreadyBinding alloc] init];
-//    [self.navigationController pushViewController:already animated:YES];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    if ([[dic objectForKey:@"realName"] isEqualToString:@""]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值必须先通过实名认证"];
+        RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
+        realNameVC.realNamePan = YES;
+        [self.navigationController pushViewController:realNameVC animated:YES];
+    } else {
+        RechargeAlreadyBinding *recharge = [[RechargeAlreadyBinding alloc] init];
+        [self.navigationController pushViewController:recharge animated:YES];
+        
+    }
 }
 
 //确认投资按钮

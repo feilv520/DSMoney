@@ -432,6 +432,7 @@
 //    [self.navigationController pushViewController:payMoneyVC animated:YES];
     
     if ([[self.myAccountInfo objectForKey:@"realName"] isEqualToString:@""]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值必须先通过实名认证"];
         RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
         realNameVC.realNamePan = YES;
         [self.navigationController pushViewController:realNameVC animated:YES];

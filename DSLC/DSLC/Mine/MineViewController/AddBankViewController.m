@@ -157,8 +157,8 @@
         
     } else {
         self.orderDic = [self createOrder];
-        [self pay:nil];
-//        [self getBankCard];
+//        [self pay:nil];
+        [self getBankCard];
     }
 }
 
@@ -452,7 +452,18 @@
         NSLog(@"7777777绑定银行卡:%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
+            NSArray *viewController = [self.navigationController viewControllers];
+            
+            if (self.realNameStatus == YES) {
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            } else {
+                [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
+                
+            }
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushBK" object:nil];
             
         } else {
             
@@ -516,15 +527,7 @@
                 // TODO: 协议号
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
                 [self getBankCard];
-                NSArray *viewController = [self.navigationController viewControllers];
                 
-                if (self.realNameStatus == YES) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                    
-                } else {
-                    [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
-                    
-                }
             }
             else if ([result_pay isEqualToString:@"PROCESSING"])
             {

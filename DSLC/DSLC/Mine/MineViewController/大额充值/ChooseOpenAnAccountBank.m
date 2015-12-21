@@ -38,6 +38,15 @@
     } else if ([self.flagSelect isEqualToString:@"4"]) {
         [self getAreaListOfS];
     }
+    
+    if ([self.flagSelect isEqualToString:@"22"]) {
+        [self getData];
+    } else if ([self.flagSelect isEqualToString:@"33"]) {
+        [self getAreaListOfP];
+    } else if ([self.flagSelect isEqualToString:@"44"]) {
+        [self getAreaListOfS];
+    }
+    
 }
 
 - (void)tableViewContentShow
@@ -66,13 +75,14 @@
     BankListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
     cell.labelBank.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    if ([self.flagSelect isEqualToString:@"3"] || [self.flagSelect isEqualToString:@"4"]) {
+    if ([self.flagSelect isEqualToString:@"3"] || [self.flagSelect isEqualToString:@"4"] || [self.flagSelect isEqualToString:@"33"] || [self.flagSelect isEqualToString:@"44"]) {
         City *city = [bankNameArr objectAtIndex:indexPath.row];
         cell.labelBank.text = city.cityName;
     } else {
         BankName *bank = [bankNameArr objectAtIndex:indexPath.row];
         cell.labelBank.text = bank.bankName;
     }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -90,6 +100,19 @@
         BankName *bank = [bankNameArr objectAtIndex:indexPath.row];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"bank" object:bank];
     }
+    
+    if ([self.flagSelect isEqualToString:@"33"] || [self.flagSelect isEqualToString:@"44"]) {
+        City *city = [bankNameArr objectAtIndex:indexPath.row];
+        if ([self.flagSelect isEqualToString:@"33"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"cityPR" object:city];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"citySR" object:city];
+        }
+    } else {
+        BankName *bank = [bankNameArr objectAtIndex:indexPath.row];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"bankR" object:bank];
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
