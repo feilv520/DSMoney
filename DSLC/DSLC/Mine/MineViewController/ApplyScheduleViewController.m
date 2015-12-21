@@ -83,13 +83,18 @@
 
 - (void)stateOneOrZero
 {
-    CGFloat viewHeight = viewWhite.frame.size.height;
-    
-    imageSchedule = [CreatView creatImageViewWithFrame:CGRectMake(18, 22, 14, viewHeight - 40 - 25) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"提交申请"]];
-    [viewWhite addSubview:imageSchedule];
-    
     //    大额申请已提交显示的提示
     butSubmitAlert = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 - 10 + 25, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@"大额充值申请单已经提交成功,\n我们将在2个工作日内进行核实!"];
+    if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
+        butSubmitAlert.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 - 10 + 25, WIDTH_CONTROLLER_DEFAULT, 30);
+    } else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
+        
+        butSubmitAlert.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 - 10 + 10, WIDTH_CONTROLLER_DEFAULT, 30);
+        
+    } else {
+        butSubmitAlert.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 - 10 + 10, WIDTH_CONTROLLER_DEFAULT, 30);
+    }
+    
     [self.view addSubview:butSubmitAlert];
     butSubmitAlert.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     butSubmitAlert.titleLabel.numberOfLines = 2;
@@ -135,6 +140,17 @@
     [viewWhite addSubview:labelLine];
     labelLine.alpha = 0.2;
     
+    CGFloat viewHeight = viewWhite.frame.size.height;
+    
+    imageSchedule = [CreatView creatImageViewWithFrame:CGRectMake(18, 22, 14, viewHeight - 40 - 25) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"提交申请"]];
+    [viewWhite addSubview:imageSchedule];
+    
+//        财务审核时间
+    labelCheckTime = [CreatView creatWithLabelFrame:CGRectMake(40, 125, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"啦啦啦啦"];
+    
+//        充值成功与否时间
+    labelDoTime = [CreatView creatWithLabelFrame:CGRectMake(40, 205, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"kkkk"];
+    
     if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
         
         for (int i = 0; i < 3; i++) {
@@ -157,33 +173,66 @@
                 label.frame = CGRectMake(40, 183, WIDTH_CONTROLLER_DEFAULT/2, 20);
             }
             
+            labelCheckTime.frame = CGRectMake(40, 125, WIDTH_CONTROLLER_DEFAULT/2, 20);
+            labelDoTime.frame = CGRectMake(40, 205, WIDTH_CONTROLLER_DEFAULT/2, 20);
         }
-        
-    }
-    
-    if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
-        
-        //        财务审核时间
-        labelCheckTime = [CreatView creatWithLabelFrame:CGRectMake(40, 125, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"啦啦啦啦"];
-        
-        //        充值成功与否时间
-        labelDoTime = [CreatView creatWithLabelFrame:CGRectMake(40, 205, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"kkkk"];
         
     } else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
         
-        //        财务审核时间
-        labelCheckTime = [CreatView creatWithLabelFrame:CGRectMake(40, 205, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"啦啦啦啦"];
-        
-        //        充值成功与否时间
-        labelDoTime = [CreatView creatWithLabelFrame:CGRectMake(40, 285, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"kkkk"];
+        for (int i = 0; i < 3; i++) {
+            
+            viewWhite.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT/2 - 55);
+            labelLine.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 - 55 - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5);
+            imageSchedule.frame = CGRectMake(18, 22, 14, viewWhite.frame.size.height - 44 - 20);
+            
+            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 60 * i, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
+            [viewWhite addSubview:label];
+            label.tag = 2000 + i;
+            
+            if (i == 0) {
+                
+                label.textColor = [UIColor chongzhiColor];
+            }
+            
+            if (i == 1) {
+                
+                label.frame = CGRectMake(40, 101, WIDTH_CONTROLLER_DEFAULT - 50, 20);
+            }
+            
+            labelCheckTime.frame = CGRectMake(40, 125, WIDTH_CONTROLLER_DEFAULT/2, 20);
+            labelDoTime.frame = CGRectMake(40, 205, WIDTH_CONTROLLER_DEFAULT/2, 20);
+        }
         
     } else {
         
-        //        财务审核时间
-        labelCheckTime = [CreatView creatWithLabelFrame:CGRectMake(40, 235, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"啦啦啦啦"];
-        
-        //        充值成功与否时间
-        labelDoTime = [CreatView creatWithLabelFrame:CGRectMake(40, 330, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"kkkk"];
+        for (int i = 0; i < 3; i++) {
+            
+            viewWhite.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT/2 - 50);
+            labelLine.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 - 50 - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5);
+            imageSchedule.frame = CGRectMake(18, 22, 14, viewWhite.frame.size.height - 44 - 20);
+            
+            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 75 * i, WIDTH_CONTROLLER_DEFAULT/2 - 5, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
+            [viewWhite addSubview:label];
+            label.tag = 2000 + i;
+            
+            if (i == 0) {
+                
+                label.textColor = [UIColor chongzhiColor];
+            }
+            
+            if (i == 1) {
+                
+                label.frame = CGRectMake(40, 131, WIDTH_CONTROLLER_DEFAULT - 50, 20);
+            }
+            
+            if (i == 2) {
+                
+                label.frame = CGRectMake(40, 233, WIDTH_CONTROLLER_DEFAULT/2 - 5, 20);
+            }
+            
+            labelCheckTime.frame = CGRectMake(40, 155, WIDTH_CONTROLLER_DEFAULT/2, 20);
+            labelDoTime.frame = CGRectMake(40, 258, WIDTH_CONTROLLER_DEFAULT/2, 20);
+        }
     }
     
     [viewWhite addSubview:labelCheckTime];
@@ -212,47 +261,6 @@
         [self threeContent];
         [self fiveContent];
     }
-
-    
-    //    else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
-//        
-//        for (int i = 0; i < 4; i++) {
-//            
-//            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 60 * i, WIDTH_CONTROLLER_DEFAULT/2, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
-//            [viewWhite addSubview:label];
-//            label.tag = 2000 + i;
-//            
-//            if (i == 0) {
-//                
-//                label.textColor = [UIColor chongzhiColor];
-//            }
-//            
-//            if (i == 1) {
-//                
-//                label.frame = CGRectMake(40, 98, WIDTH_CONTROLLER_DEFAULT - 50, 20);
-//            }
-//            
-//        }
-//
-//    } else {
-//        
-//        for (int i = 0; i < 4; i++) {
-//            
-//            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(40, 20 + 20 * i + 75 * i, WIDTH_CONTROLLER_DEFAULT/2 - 5, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[contentArr objectAtIndex:i]];
-//            [viewWhite addSubview:label];
-//            label.tag = 2000 + i;
-//            
-//            if (i == 0) {
-//                
-//                label.textColor = [UIColor chongzhiColor];
-//            }
-//            
-//            if (i == 1) {
-//                
-//                label.frame = CGRectMake(40, 115, WIDTH_CONTROLLER_DEFAULT - 50, 20);
-//            }
-//        }
-//    }
 }
 
 //状态是2或4时的内容
@@ -277,46 +285,49 @@
     [buttonShibai setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
     buttonShibai.titleLabel.numberOfLines = 3;
     
-    viewWhite.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT/3);
-    labelLine.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/3 - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5);
+    viewWhite.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT/3 - 30);
+    labelLine.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/3 - 30 - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5);
     
     imageSchedule.image = [UIImage imageNamed:@"审核失败"];
-    imageSchedule.frame = CGRectMake(18, 22, 14, HEIGHT_CONTROLLER_DEFAULT/3 - 44 - 10);
+    imageSchedule.frame = CGRectMake(18, 22, 14, HEIGHT_CONTROLLER_DEFAULT/3 - 44 - 30 - 20);
     
     labelFour = (UILabel *)[self.view viewWithTag:2002];
     labelFour.hidden = YES;
     
+    labelThree = (UILabel *)[self.view viewWithTag:2001];
     if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
         
-        labelThree = (UILabel *)[self.view viewWithTag:2001];
-        labelThree.frame = CGRectMake(40, imageSchedule.frame.size.height + 5, WIDTH_CONTROLLER_DEFAULT/2, 20);
+        viewWhite.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT/3 - 10);
+        labelLine.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/3 - 10 - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5);
+        imageSchedule.frame = CGRectMake(18, 22, 14, HEIGHT_CONTROLLER_DEFAULT/3 - 44 - 10 - 20);
+        
+        labelThree.frame = CGRectMake(40, imageSchedule.frame.size.height + 7, WIDTH_CONTROLLER_DEFAULT/2, 20);
         labelThree.text = @"审核失败";
         labelThree.textColor = [UIColor daohanglan];
-        labelCheckTime.frame = CGRectMake(40, imageSchedule.frame.size.height + 25, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        labelCheckTime.frame = CGRectMake(40, imageSchedule.frame.size.height + 27, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
         labelCheckTime.hidden = NO;
         labelCheckTime.text = applySch.checkTime;
         labelCheckTime.text = @"checkTime";
         
     } else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
         
-        labelTwo = (UILabel *)[self.view viewWithTag:2001];
-        labelTwo.frame = CGRectMake(40, 137, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
-        labelTime.frame = CGRectMake(40, 155 + 5, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
-        
-        labelThree.frame = CGRectMake(40, 252, WIDTH_CONTROLLER_DEFAULT/2, 20);
-        labelCheckTime.frame = CGRectMake(40, 274, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        labelThree.frame = CGRectMake(40, imageSchedule.frame.size.height + 5, WIDTH_CONTROLLER_DEFAULT/2, 20);
+        labelThree.text = @"审核失败";
+        labelThree.textColor = [UIColor daohanglan];
+        labelCheckTime.frame = CGRectMake(40, imageSchedule.frame.size.height + 27, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        labelCheckTime.hidden = NO;
+        labelCheckTime.text = applySch.checkTime;
+        labelCheckTime.text = @"checkTime";
         
     } else {
         
-        labelTwo = (UILabel *)[self.view viewWithTag:2001];
-        labelTwo.frame = CGRectMake(40, 162, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
-        labelTime.frame = CGRectMake(40, 180 + 5, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
-        
-        labelThree.frame = CGRectMake(40, 298, WIDTH_CONTROLLER_DEFAULT/2, 20);
-        labelCheckTime.frame = CGRectMake(40, 320, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
-        
-        buttWell.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 + 60, WIDTH_CONTROLLER_DEFAULT, 55);
-        buttonAplly.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT/2 + 60 + 55 + 10, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+        labelThree.frame = CGRectMake(40, imageSchedule.frame.size.height + 3, WIDTH_CONTROLLER_DEFAULT/2, 20);
+        labelThree.text = @"审核失败";
+        labelThree.textColor = [UIColor daohanglan];
+        labelCheckTime.frame = CGRectMake(40, imageSchedule.frame.size.height + 25, WIDTH_CONTROLLER_DEFAULT/3 * 2 - 30, 20);
+        labelCheckTime.hidden = NO;
+        labelCheckTime.text = applySch.checkTime;
+        labelCheckTime.text = @"checkTime";
     }
 }
 
