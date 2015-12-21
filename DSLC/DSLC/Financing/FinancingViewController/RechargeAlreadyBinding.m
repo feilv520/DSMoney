@@ -91,7 +91,7 @@
         
         BankWhichCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
-        cell.imageBank.image = [UIImage imageNamed:@"2013123115540975"];
+        cell.imageBank.image = [UIImage imageNamed:[[self.dataDic objectForKey:@"BankCard"] objectForKey:@"bankName"]];
         
         cell.labelBank.text = [[self.dataDic objectForKey:@"BankCard"] objectForKey:@"bankName"];
         cell.labelBank.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -456,10 +456,9 @@
             giveMoney.bankAccount = [[self.dataDic objectForKey:@"BankCard"] objectForKey:@"bankAcc"];
             [self.navigationController pushViewController:giveMoney animated:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
-//        else {
-//            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-//        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);

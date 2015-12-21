@@ -99,7 +99,7 @@
     titleArr = @[@"持卡人", @"银行卡号", @"开户行", @"开户行省",@"开户行市", @"开户行支行",  @"支付金额", @"手机号"];
     textFieldArr = @[[dicRealName objectForKey:@"realName"], @"请输入本人银行卡号", @"请选择开户银行", @"请选择开户所在的省", @"请选择开户所在的市", @"请输入开户行支行", @"0.01元", @"请输入预留在银行的手机号"];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 95) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -143,10 +143,10 @@
     } else if (textFieldOne.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入本人银行卡号"];
         
-    } else if (textFieldOne.text.length != 19) {
+    } else if (![NSString checkCardNo:textFieldOne.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"银行卡号格式错误"];
         
-    } else if (textFieldThree.text.length == 0 || textFieldFour.text.length == 0 || textFieldFive.text.length == 0) {
+    } else if (textFieldTwo.text.length == 0 || textFieldThree.text.length == 0 || textFieldFour.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请选择开户行,省,市(缺一不可)"];
         
     } else if (textFieldSeven.text.length == 0) {
@@ -215,7 +215,7 @@
     textFieldSix = (UITextField *)[self.view viewWithTag:406];
     textFieldSeven = (UITextField *)[self.view viewWithTag:407];
     
-    if (textFieldZero.text.length > 0 && textFieldOne.text.length > 0 && textFieldOne.text.length == 19 && textFieldThree.text.length > 0 && textFieldFour.text.length > 0 && textFieldFive.text.length > 0 && textFieldSeven.text.length == 11) {
+    if (textFieldZero.text.length > 0 && textFieldOne.text.length > 0 && textFieldThree.text.length > 0 && textFieldFour.text.length > 0 && textFieldTwo.text.length > 0 && textFieldSeven.text.length == 11) {
         
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -440,7 +440,12 @@
     
     NSLog(@"textFieldFive = %@",textFieldFive.text);
     
-    NSDictionary *parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"IDCard":[dicRealName objectForKey:@"cardNumber"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text, @"token":[dicRealName objectForKey:@"token"]};
+    NSDictionary *parmeter;
+    if (textFieldFive == nil) {
+        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"IDCard":[dicRealName objectForKey:@"cardNumber"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"token":[dicRealName objectForKey:@"token"]};
+    } else {
+        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"IDCard":[dicRealName objectForKey:@"cardNumber"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text, @"token":[dicRealName objectForKey:@"token"]};
+    }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/addBankCard" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

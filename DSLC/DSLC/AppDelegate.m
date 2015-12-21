@@ -63,6 +63,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
+    
     [self exitNetwork];
     
     [UMSocialData setAppKey:@"5642ad7e67e58e8463006218"];
@@ -96,22 +98,6 @@
         UINavigationController *navigation4 = [[UINavigationController alloc] initWithRootViewController:moreVC];
         
         self.viewControllerArr = @[navigation1, navigation2, navigation3, navigation4];
-        
-//        if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-//            LoginViewController *loginVC = [[LoginViewController alloc] init];
-//            UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:loginVC];
-//            NSMutableArray *muTabButtonArray = [NSMutableArray arrayWithArray:self.viewControllerArr];
-//            [muTabButtonArray replaceObjectAtIndex:2 withObject:navigation3];
-//            self.viewControllerArr = [muTabButtonArray copy];
-//        } else {
-//            NSDictionary *parameter = @{@"phone":[self.flagUserInfo objectForKey:@"userPhone"],@"password":[self.flagUserInfo objectForKey:@"password"]};
-//            [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-//                
-//            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//                NSLog(@"%@",error);
-//            }];
-//
-//        }
         
         butGrayArr = @[@"shouyeqiepian7500_25", @"shouyeqiepian750_28", @"shouyeqiepian750_30", @"shouyeqiepian750_32"];
         butColorArr = @[@"shouyeqiepian750_25_highlight", @"shouyeqiepian7500_28highlight", @"shouyeqiepian7500_30highlight", @"shouyeqiepian7500_32highlight"];
@@ -149,6 +135,18 @@
     
     
     return YES;
+}
+
+void UncaughtExceptionHandler(NSException *exception){
+    // 可以通过exception对象获取一些崩溃信息，我们就是通过这些崩溃信息来进行解析的，例如下面的symbols数组就是我们的崩溃堆栈。
+    NSArray *symbols = [exception callStackSymbols];
+    NSString *reason = [exception reason];
+    NSString *name = [exception name];
+    
+    NSLog(@"symbols = %@",symbols);
+    NSLog(@"reason = %@",reason);
+    NSLog(@"name = %@",name);
+    
 }
 
 - (void)exitNetwork{

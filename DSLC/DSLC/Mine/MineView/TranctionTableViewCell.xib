@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -7,6 +7,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="CenturyGothic.TTF">
+            <string>CenturyGothic</string>
             <string>CenturyGothic</string>
             <string>CenturyGothic</string>
             <string>CenturyGothic</string>
@@ -35,7 +36,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="买入" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcu-L3-S3i">
-                        <rect key="frame" x="10" y="12" width="250" height="15"/>
+                        <rect key="frame" x="10" y="10" width="250" height="15"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="qjA-hO-dWV"/>
@@ -67,17 +68,30 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXQ-Vi-hpt">
+                        <rect key="frame" x="10" y="25" width="352" height="21"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Vdu-Yh-Pda"/>
+                            <constraint firstAttribute="width" constant="352" id="gQl-J4-5N1"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <animations/>
                 <constraints>
-                    <constraint firstItem="4RU-55-Urp" firstAttribute="top" secondItem="gcu-L3-S3i" secondAttribute="bottom" constant="18" id="96w-AY-tkx"/>
-                    <constraint firstItem="GpB-mR-7Pm" firstAttribute="top" secondItem="gcu-L3-S3i" secondAttribute="bottom" constant="12" id="aTg-bu-D5d"/>
+                    <constraint firstItem="4RU-55-Urp" firstAttribute="top" secondItem="gcu-L3-S3i" secondAttribute="bottom" constant="20" id="96w-AY-tkx"/>
+                    <constraint firstItem="GpB-mR-7Pm" firstAttribute="top" secondItem="gcu-L3-S3i" secondAttribute="bottom" constant="14" id="aTg-bu-D5d"/>
                     <constraint firstItem="gcu-L3-S3i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="fzD-s8-HdK"/>
+                    <constraint firstItem="ZXQ-Vi-hpt" firstAttribute="top" secondItem="gcu-L3-S3i" secondAttribute="bottom" id="gq1-Cu-J7D"/>
                     <constraint firstAttribute="trailingMargin" secondItem="GpB-mR-7Pm" secondAttribute="trailing" constant="5" id="j22-0F-TNP"/>
                     <constraint firstAttribute="trailingMargin" secondItem="EMn-CV-6Z3" secondAttribute="trailing" constant="5" id="jrE-PA-csr"/>
+                    <constraint firstItem="ZXQ-Vi-hpt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="u1t-r3-CFH"/>
                     <constraint firstItem="4RU-55-Urp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="uB2-w8-gAl"/>
                     <constraint firstItem="EMn-CV-6Z3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="ykO-Pd-eoS"/>
-                    <constraint firstItem="gcu-L3-S3i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="z0E-NW-31p"/>
+                    <constraint firstItem="gcu-L3-S3i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="z0E-NW-31p"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
@@ -86,6 +100,7 @@
             <connections>
                 <outlet property="dateLabel" destination="4RU-55-Urp" id="XXh-ds-Y8g"/>
                 <outlet property="moneyLabel" destination="GpB-mR-7Pm" id="gyk-Tf-vWq"/>
+                <outlet property="productName" destination="ZXQ-Vi-hpt" id="bm2-lS-Ngb"/>
                 <outlet property="stateLabel" destination="EMn-CV-6Z3" id="Pbr-4y-mas"/>
                 <outlet property="typeLabel" destination="gcu-L3-S3i" id="J6E-o1-cF3"/>
             </connections>

@@ -396,6 +396,7 @@ numberOfRowsInComponent:(NSInteger)component
     }
     cell.typeLabel.text = [tModel tradeTypeName];
     cell.moneyLabel.text = [DES3Util decrypt:[tModel tradeMoney]];
+    cell.productName.text = [tModel tradeProductName];
     
     return cell;
     
