@@ -443,7 +443,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     // 注意要修改
-    NSDictionary *parameter = @{@"fmoney":textFieldTag.text,@"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"fmoney":textFieldTag.text,@"userId":[dic objectForKey:@"id"],@"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     
     NSLog(@"%@",parameter);
     
@@ -456,10 +456,9 @@
             giveMoney.bankAccount = [[self.dataDic objectForKey:@"BankCard"] objectForKey:@"bankAcc"];
             [self.navigationController pushViewController:giveMoney animated:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
-//        else {
-//            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-//        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);

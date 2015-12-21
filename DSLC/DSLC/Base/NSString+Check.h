@@ -14,4 +14,5 @@
 + (BOOL) validateEmail:(NSString *)email;
 + (BOOL) validatePassword:(NSString *)password;
 + (BOOL) validateIDCardNumber:(NSString *)IDCardNumber;
++ (BOOL) checkCardNo:(NSString*) cardNo;
 @end

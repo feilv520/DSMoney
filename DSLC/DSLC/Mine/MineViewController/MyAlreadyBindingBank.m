@@ -57,7 +57,7 @@
     cell.imageSign.image = [UIImage imageNamed:@"2013123115540975"];
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    cell.laeblBankName.text = [NSString stringWithFormat:@"%@%@", @"中国", self.bankName.bankName];
+    cell.laeblBankName.text = [NSString stringWithFormat:@"%@", self.bankName.bankName];
     cell.laeblBankName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     cell.labelName.text = [dic objectForKey:@"realName"];
@@ -67,7 +67,9 @@
     cell.labelCard.textColor = [UIColor zitihui];
     cell.labelCard.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
-    cell.laeblCardNum.text = [NSString stringWithFormat:@"%@%@", @"*** **** **** ****", self.bankName.bankAcc];
+    NSString *cardAccount = self.bankName.cardAccount;
+    cardAccount = [cardAccount stringByReplacingCharactersInRange:NSMakeRange(3, 12) withString:@"**** **** **"];
+    cell.laeblCardNum.text = [NSString stringWithFormat:@"%@", cardAccount];
     cell.laeblCardNum.textColor = [UIColor zitihui];
     cell.laeblCardNum.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
