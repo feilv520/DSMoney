@@ -135,6 +135,11 @@
         cell.textField.enabled = NO;
     }
     
+    if (indexPath.row == 5) {
+        
+        cell.textField.enabled = NO;
+    }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;

@@ -11,5 +11,5 @@
 #import "BaseViewController.h"
 
 @interface ChatViewController : BaseViewController
-
+@property (nonatomic) NSString *IId;
 @end

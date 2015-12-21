@@ -146,9 +146,9 @@
         
     } else {
         
-        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-        
-        NSDictionary *parameter = @{@"recUserId":[dic objectForKey:@"id"], @"msgContent":_textField.text};
+//        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+//        [dic objectForKey:@"id"]
+        NSDictionary *parameter = @{@"recUserId":self.IId, @"msgContent":_textField.text};
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/sendMsg" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             

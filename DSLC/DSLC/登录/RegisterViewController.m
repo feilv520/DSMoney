@@ -68,6 +68,9 @@
     City *city;
     City *cityS;
     BankName *bankName;
+    
+    // 姓名
+    NSString *ownerCardName;
 }
 
 @property (nonatomic) LLPaySdk *sdk;
@@ -411,13 +414,8 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             NSLog(@"%@",responseObject);
             
-            NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
             
-            //设置属性值,没有的数据就新建，已有的数据就修改。
-            [usersDic setObject:self.registerV.realName.text forKey:@"realName"];
-            [usersDic setObject:self.registerV.IDCard.text forKey:@"cardNumber"];
-            //写入文件
-            [usersDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            ownerCardName = self.registerV.realName.text;
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [registerB removeFromSuperview];
@@ -443,10 +441,10 @@
             
             registerB = [rootArrayOfPButton lastObject];
             
-            registerB.frame = CGRectMake(0, 600, WIDTH_CONTROLLER_DEFAULT, 100);
+            registerB.frame = CGRectMake(0, CGRectGetMaxY(_tableView.frame) + 100, WIDTH_CONTROLLER_DEFAULT, 100);
             
             [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-            [registerB.sureButton addTarget:self action:@selector(sureButtonActionPass:) forControlEvents:UIControlEventTouchUpInside];
+            [registerB.sureButton addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
             
             [self.scrollView addSubview:self.registerV];
             [self.scrollView addSubview:registerR];
@@ -976,12 +974,15 @@
 {
 
     titleArr = @[@"持卡人", @"银行卡号", @"开户行", @"开户行省",@"开户行市", @"开户行支行",  @"支付金额", @"手机号"];
-    textFieldArr = @[[dicRealName objectForKey:@"realName"], @"请输入本人银行卡号", @"请选择开户银行", @"请选择开户所在的省", @"请选择开户所在的市", @"请输入开户行支行", @"0.01元", @"请输入预留在银行的手机号"];
+    textFieldArr = @[ownerCardName, @"请输入本人银行卡号", @"请选择开户银行", @"请选择开户所在的省", @"请选择开户所在的市", @"请输入开户行支行", @"0.01元", @"请输入预留在银行的手机号"];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 95) style:UITableViewStylePlain];
-    [self.view addSubview:_tableView];
+    [self.scrollView addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    
+    _tableView.scrollEnabled = NO;
+    
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (90.0 / 667.0))];
     _tableView.tableFooterView = view;
     _tableView.backgroundColor = [UIColor huibai];

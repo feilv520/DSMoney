@@ -235,6 +235,7 @@
 - (void)askQuestionButton:(UIButton *)button
 {
     ChatViewController *chatVC = [[ChatViewController alloc] init];
+    chatVC.IId = planner.ID;
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 
