@@ -411,6 +411,14 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             NSLog(@"%@",responseObject);
             
+            NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+            
+            //设置属性值,没有的数据就新建，已有的数据就修改。
+            [usersDic setObject:self.registerV.realName.text forKey:@"realName"];
+            [usersDic setObject:self.registerV.IDCard.text forKey:@"cardNumber"];
+            //写入文件
+            [usersDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [registerB removeFromSuperview];
             [self.registerV removeFromSuperview];
