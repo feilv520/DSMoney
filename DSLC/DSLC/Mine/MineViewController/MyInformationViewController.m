@@ -540,6 +540,9 @@
 // 退出按钮的动作
 - (void)buttonExit:(UIButton *)button
 {
+    
+    [self logout];
+    
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
     [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
     
@@ -612,6 +615,25 @@
         labelPhone.text = [phoneStr stringByReplacingCharactersInRange:NSMakeRange(3, 4)  withString:@"****"];
         
         [_tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+- (void)logout
+{
+    NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/logout" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"asasasasasa%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已退出"];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
