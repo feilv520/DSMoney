@@ -24,6 +24,8 @@
     NSTimer *timer;
     
     NSDictionary *bankDic;
+    
+    NSString *ownerOrder;
 }
 
 @property (nonatomic, strong) UITextField *textFieldTag;
@@ -208,7 +210,7 @@
         NSLog(@"%@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
-            NSLog(@"134897189374987342987243789423");
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
                 [FileOfManage createWithFile:@"isLogin.plist"];
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
@@ -327,6 +329,7 @@
                 // TODO: 协议号
                 //[self.navigationController popToRootViewControllerAnimated:YES];
                 NSLog(@"putOn");
+                ownerOrder = dic[@"no_order"];
                 [self putOn];
             }
             else if ([result_pay isEqualToString:@"PROCESSING"])
@@ -472,7 +475,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     // 注意要修改
-    NSDictionary *parameter = @{@"fmoney":self.textFieldTag.text,@"userId":[dic objectForKey:@"id"],@"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+    NSDictionary *parameter = @{@"fmoney":self.textFieldTag.text,@"userId":[dic objectForKey:@"id"],@"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==",@"serialNum":ownerOrder};
     
     NSLog(@"%@",parameter);
     

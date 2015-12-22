@@ -62,7 +62,7 @@
     
     NSString *whoString = [NSString stringWithFormat:@"%@购买了%@元",[buyRecords tranName],[buyRecords tranAmount]];
     cell.labelWho.text = whoString;
-    cell.labelWho.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    cell.labelWho.font = [UIFont fontWithName:@"CenturyGothic" size:[self sizeOfLength:whoString]];
     
     cell.labelTime.text = [buyRecords tranTime];
     cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];

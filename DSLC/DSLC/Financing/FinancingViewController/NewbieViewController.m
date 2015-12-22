@@ -131,7 +131,7 @@
             NSMutableAttributedString *midString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
             NSRange midRange = NSMakeRange(0, [[midString string] rangeOfString:@"元"].location);
             [midString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:[self sizeOfLength:residueString]] range:midRange];
-            NSRange rightStr = NSMakeRange([[midString string] length] - 2, 2);
+            NSRange rightStr = NSMakeRange([[midString string] length] - 1, 1);
             [midString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:rightStr];
             [cell.labelMidUp setAttributedText:midString];
             

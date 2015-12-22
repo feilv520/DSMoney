@@ -646,6 +646,8 @@
 		8D5DBB8A1BD4839B00F556B9 /* CastDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5DBB881BD4839B00F556B9 /* CastDownTableViewCell.xib */; };
 		8D5DBB8E1BD48F1900F556B9 /* CastDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5DBB8C1BD48F1900F556B9 /* CastDetailTableViewCell.m */; };
 		8D5DBB8F1BD48F1900F556B9 /* CastDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5DBB8D1BD48F1900F556B9 /* CastDetailTableViewCell.xib */; };
+		8D65AE101C294ABF00FAEFF3 /* TTTTTTTBangKa.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D65AE0F1C294ABF00FAEFF3 /* TTTTTTTBangKa.xib */; settings = {ASSET_TAGS = (); }; };
+		8D65AE131C294AD900FAEFF3 /* TTTTTTTBangKa.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D65AE121C294AD900FAEFF3 /* TTTTTTTBangKa.m */; settings = {ASSET_TAGS = (); }; };
 		8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6692741BD0D02E00CD2CAF /* MyHandViewController.m */; };
 		8D6692771BD0D02E00CD2CAF /* MyHandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6692751BD0D02E00CD2CAF /* MyHandViewController.xib */; };
 		8D66927B1BD0D27D00CD2CAF /* gesture_node_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6692791BD0D27D00CD2CAF /* gesture_node_normal.png */; };
@@ -1810,6 +1812,9 @@
 		8D5DBB8B1BD48F1900F556B9 /* CastDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastDetailTableViewCell.h; sourceTree = "<group>"; };
 		8D5DBB8C1BD48F1900F556B9 /* CastDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastDetailTableViewCell.m; sourceTree = "<group>"; };
 		8D5DBB8D1BD48F1900F556B9 /* CastDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CastDetailTableViewCell.xib; sourceTree = "<group>"; };
+		8D65AE0F1C294ABF00FAEFF3 /* TTTTTTTBangKa.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TTTTTTTBangKa.xib; sourceTree = "<group>"; };
+		8D65AE111C294AD900FAEFF3 /* TTTTTTTBangKa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTTTTTBangKa.h; sourceTree = "<group>"; };
+		8D65AE121C294AD900FAEFF3 /* TTTTTTTBangKa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTTTTTBangKa.m; sourceTree = "<group>"; };
 		8D6692731BD0D02E00CD2CAF /* MyHandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHandViewController.h; sourceTree = "<group>"; };
 		8D6692741BD0D02E00CD2CAF /* MyHandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHandViewController.m; sourceTree = "<group>"; };
 		8D6692751BD0D02E00CD2CAF /* MyHandViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyHandViewController.xib; sourceTree = "<group>"; };
@@ -3161,6 +3166,9 @@
 				81E8310F1BF06AFB00127EE8 /* MyAlreadyCell.h */,
 				81E831101BF06AFB00127EE8 /* MyAlreadyCell.m */,
 				81E831111BF06AFB00127EE8 /* MyAlreadyCell.xib */,
+				8D65AE111C294AD900FAEFF3 /* TTTTTTTBangKa.h */,
+				8D65AE121C294AD900FAEFF3 /* TTTTTTTBangKa.m */,
+				8D65AE0F1C294ABF00FAEFF3 /* TTTTTTTBangKa.xib */,
 			);
 			name = "我的资料";
 			sourceTree = "<group>";
@@ -4353,6 +4361,7 @@
 				8D3F95EB1BE2188500013A8E /* yueyuesheng@3x.png in Resources */,
 				8D3EEA0B1C27AB400031F7C9 /* 北京银行@3x.png in Resources */,
 				8182A7F21C0EECD300FA1216 /* 组-17@3x.png in Resources */,
+				8D65AE101C294ABF00FAEFF3 /* TTTTTTTBangKa.xib in Resources */,
 				8D4343961BFDEB0B000BA004 /* loading_up_05.png in Resources */,
 				81B18E181BE7387A00D448FA /* iconfont-liwu@3x.png in Resources */,
 				8D3F95DA1BE20C1A00013A8E /* zuorishouyi-678@2x.png in Resources */,
@@ -4868,6 +4877,7 @@
 				8D9BE8E61C0EC94D003C67D3 /* YYKVStorage.m in Sources */,
 				81B43C2F1C2139FE005F158F /* SendTime.m in Sources */,
 				81422CDA1C27E2E200E515B6 /* MyPlannerViewController.m in Sources */,
+				8D65AE131C294AD900FAEFF3 /* TTTTTTTBangKa.m in Sources */,
 				8D6692761BD0D02E00CD2CAF /* MyHandViewController.m in Sources */,
 				81CBB74D1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m in Sources */,
 				81422CD81C27E2E200E515B6 /* ChatViewController.m in Sources */,
