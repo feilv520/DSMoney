@@ -12,6 +12,7 @@
 #import "GiveMoneyVerifyBinding.h"
 #import "AddBankViewController.h"
 #import "GiveMoneyFinish.h"
+#import "RealNameViewController.h"
 
 @interface RechargeAlreadyBinding () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
@@ -225,13 +226,22 @@
             self.dataDic = [responseObject objectForKey:@"User"];
             
             bankDic = [self.dataDic objectForKey:@"BankCard"];
-            
-            if (bankDic.count == 0) {
+
+            if (![[self.dataDic objectForKey:@"realNameStatus"] isEqualToNumber:[NSNumber numberWithInt:2]]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"为了您的账号安全,请先实名认证和绑卡" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去完善",nil];
+                // optional - add more buttons:
+                alert.tag = 9201;
+                [alert show];
+                
+            } else if (bankDic.count == 0) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先绑定银行卡,再充值" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去绑卡",nil];
                 // optional - add more buttons:
+                alert.tag = 9202;
                 [alert show];
+                
             } else {
                 [self contentShow];
+                
             }
             
             [_tabelView reloadData];
@@ -244,12 +254,23 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 1) {
-        AddBankViewController *addBVC = [[AddBankViewController alloc] init];
-        addBVC.realNameStatus = YES;
-        pushVC(addBVC);
-    } else {
-        popVC;
+    if (alertView.tag == 9201) {
+        if (buttonIndex == 1) {
+            RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
+            pushVC(realNameVC);
+        } else {
+            popVC;
+        }
+        
+    } else if (alertView.tag == 9202){
+        if (buttonIndex == 1) {
+            AddBankViewController *addBVC = [[AddBankViewController alloc] init];
+            addBVC.realNameStatus = YES;
+            pushVC(addBVC);
+        } else {
+            popVC;
+        }
+        
     }
 }
 

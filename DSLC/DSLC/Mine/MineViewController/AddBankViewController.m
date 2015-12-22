@@ -48,6 +48,9 @@
     City *city;
     City *cityS;
     BankName *bankName;
+    
+    //第三方返回的字段
+    NSString *ownerOrder;
 }
 
 @property (nonatomic) LLPaySdk *sdk;
@@ -72,6 +75,20 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnBankName:) name:@"bank" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnCityWithPName:) name:@"cityP" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnCityWithSName:) name:@"cityS" object:nil];
+}
+
+- (void)buttonReturn:(UIBarButtonItem *)bar{
+    NSArray *viewController = [self.navigationController viewControllers];
+    
+    NSLog(@"viewController = %@",viewController);
+    
+    if (self.realNameStatus == YES) {
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } else {
+        [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
+        
+    }
 }
 
 - (void)returnBankName:(NSNotification *)notice
@@ -527,6 +544,7 @@
                 //NSString *payBackAgreeNo = dic[@"agreementno"];
                 // TODO: 协议号
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+                ownerOrder = dic[@"no_order"];
                 [self getBankCard];
                 
             }
