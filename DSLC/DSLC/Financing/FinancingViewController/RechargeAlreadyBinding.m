@@ -24,6 +24,8 @@
     NSTimer *timer;
     
     NSDictionary *bankDic;
+    
+    NSString *ownerOrder;
 }
 
 @property (nonatomic, strong) UITextField *textFieldTag;
@@ -208,7 +210,7 @@
         NSLog(@"%@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
-            NSLog(@"134897189374987342987243789423");
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
                 [FileOfManage createWithFile:@"isLogin.plist"];
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
@@ -327,6 +329,7 @@
                 // TODO: 协议号
                 //[self.navigationController popToRootViewControllerAnimated:YES];
                 NSLog(@"putOn");
+                ownerOrder = dic[@"no_order"];
                 [self putOn];
             }
             else if ([result_pay isEqualToString:@"PROCESSING"])
@@ -377,6 +380,8 @@
 }
 
 - (NSMutableDictionary *)createOrder{
+    
+    NSDictionary *dicRealName = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSString *partnerPrefix = @"GCCT"; // TODO: 修改成自己公司前缀
     
@@ -447,9 +452,9 @@
         
         [param addEntriesFromDictionary:@{
                                           
-                                          @"id_no":@"220204199204180655",
+                                          @"id_no":[dicRealName objectForKey:@"cardNumber"],
                                           //证件号码 id_no 否 String
-                                          @"acct_name":@"马成铭",
+                                          @"acct_name":[dicRealName objectForKey:@"realName"],
                                           //银行账号姓名 acct_name 否 String
                                           
                                           //                                          @"id_no":@"140621199212052213",
@@ -472,7 +477,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     // 注意要修改
-    NSDictionary *parameter = @{@"fmoney":self.textFieldTag.text,@"userId":[dic objectForKey:@"id"],@"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+    NSDictionary *parameter = @{@"fmoney":self.textFieldTag.text,@"userId":[dic objectForKey:@"id"],@"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==",@"serialNum":ownerOrder};
     
     NSLog(@"%@",parameter);
     

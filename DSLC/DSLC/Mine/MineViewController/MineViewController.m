@@ -109,6 +109,8 @@
     _tableView.delegate = self;
     _tableView.showsVerticalScrollIndicator = NO;
     
+    _tableView.bounces = NO;
+    
     if (HEIGHT_CONTROLLER_DEFAULT == 500 || HEIGHT_CONTROLLER_DEFAULT == 480) {
         viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (320.0 / 667.0))];
     } else {
@@ -471,11 +473,6 @@
 - (void)yesterdayButtonAction:(id)sender{
     YesterdayViewController *yesterdayVC = [[YesterdayViewController alloc] init];
     [self.navigationController pushViewController:yesterdayVC animated:YES];
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView;
-{
-    [self MyAccountInfo];
 }
 
 #pragma mark 网络请求方法
