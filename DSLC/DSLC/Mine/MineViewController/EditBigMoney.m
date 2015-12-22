@@ -403,7 +403,7 @@
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
         NSLog(@"%@", error);
     }];
 }
@@ -428,7 +428,7 @@
         } completion:^(BOOL finished) {
             
         }];
-    } else if (textField.tag == 605) {
+    } else if (textField.tag == 606) {
         
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             
@@ -437,13 +437,14 @@
         } completion:^(BOOL finished) {
             
         }];
-    }
+        
+    } 
     return YES;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y > 0) {
+    if (scrollView.contentOffset.y < 150) {
         
         [self.view endEditing:YES];
     }

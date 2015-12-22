@@ -16,6 +16,7 @@
 #import "ChooseOpenAnAccountBank.h"
 #import "City.h"
 #import "BankName.h"
+#import "CanNotBindingBankCard.h"
 
 @interface AddBankViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -546,6 +547,8 @@
         case kLLPayResultFail:
         {
             msg = @"支付失败";
+            CanNotBindingBankCard *canNot = [[CanNotBindingBankCard alloc] init];
+            [self.navigationController pushViewController:canNot animated:YES];
         }
             break;
         case kLLPayResultCancel:

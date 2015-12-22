@@ -388,6 +388,10 @@
 		81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8AD991BC6427800A15E01 /* MineViewController.m */; };
 		81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D8ADA21BC646D100A15E01 /* FinancingViewController.m */; };
 		81E0CCE11C27EF6700148609 /* ChooseBusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0CCE01C27EF6700148609 /* ChooseBusViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81E0CCE41C28E4D700148609 /* CanNotBindingBankCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0CCE31C28E4D700148609 /* CanNotBindingBankCard.m */; settings = {ASSET_TAGS = (); }; };
+		81E0CCE71C28EC7400148609 /* 失败@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E0CCE51C28EC7400148609 /* 失败@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81E0CCE81C28EC7400148609 /* 失败@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E0CCE61C28EC7400148609 /* 失败@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81E0CCEB1C28ED3400148609 /* BindingEmailFailed.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0CCEA1C28ED3400148609 /* BindingEmailFailed.m */; settings = {ASSET_TAGS = (); }; };
 		81E54E6A1C1EB86D0007303B /* UsualQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */; settings = {ASSET_TAGS = (); }; };
 		81E8310B1BF0488400127EE8 /* MyChoosePlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -1364,6 +1368,12 @@
 		81D8ADA21BC646D100A15E01 /* FinancingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancingViewController.m; sourceTree = "<group>"; };
 		81E0CCDF1C27EF6700148609 /* ChooseBusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseBusViewController.h; sourceTree = "<group>"; };
 		81E0CCE01C27EF6700148609 /* ChooseBusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseBusViewController.m; sourceTree = "<group>"; };
+		81E0CCE21C28E4D700148609 /* CanNotBindingBankCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanNotBindingBankCard.h; sourceTree = "<group>"; };
+		81E0CCE31C28E4D700148609 /* CanNotBindingBankCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanNotBindingBankCard.m; sourceTree = "<group>"; };
+		81E0CCE51C28EC7400148609 /* 失败@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "失败@2x.png"; sourceTree = "<group>"; };
+		81E0CCE61C28EC7400148609 /* 失败@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "失败@3x.png"; sourceTree = "<group>"; };
+		81E0CCE91C28ED3400148609 /* BindingEmailFailed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingEmailFailed.h; sourceTree = "<group>"; };
+		81E0CCEA1C28ED3400148609 /* BindingEmailFailed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingEmailFailed.m; sourceTree = "<group>"; };
 		81E54E681C1EB86D0007303B /* UsualQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsualQuestionViewController.h; sourceTree = "<group>"; };
 		81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsualQuestionViewController.m; sourceTree = "<group>"; };
 		81E831071BF0488400127EE8 /* MyChoosePlannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChoosePlannerCell.h; sourceTree = "<group>"; };
@@ -2385,6 +2395,8 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				81E0CCE51C28EC7400148609 /* 失败@2x.png */,
+				81E0CCE61C28EC7400148609 /* 失败@3x.png */,
 				8D3EE9C91C27AB400031F7C9 /* 我的银行卡副本 */,
 				8DB744B41C1973AC0084D1A2 /* banner_black@2x.png */,
 				8DB744B51C1973AC0084D1A2 /* banner_black@3x.png */,
@@ -2957,6 +2969,8 @@
 				81ED03131BD0C877005F4B02 /* MyBankViewController.m */,
 				81E8310C1BF0695400127EE8 /* MyAlreadyBindingBank.h */,
 				81E8310D1BF0695400127EE8 /* MyAlreadyBindingBank.m */,
+				81E0CCE21C28E4D700148609 /* CanNotBindingBankCard.h */,
+				81E0CCE31C28E4D700148609 /* CanNotBindingBankCard.m */,
 				81ED031A1BD0DA35005F4B02 /* AddBankViewController.h */,
 				81ED031B1BD0DA35005F4B02 /* AddBankViewController.m */,
 				818063A91BD61A7E00E83492 /* VerifyViewController.h */,
@@ -2975,6 +2989,8 @@
 				81B18E1F1BE761B600D448FA /* LastEmailViewController.m */,
 				81B18E1B1BE756F300D448FA /* EmailViewController.h */,
 				81B18E1C1BE756F300D448FA /* EmailViewController.m */,
+				81E0CCE91C28ED3400148609 /* BindingEmailFailed.h */,
+				81E0CCEA1C28ED3400148609 /* BindingEmailFailed.m */,
 			);
 			name = "我的资料";
 			sourceTree = "<group>";
@@ -4540,6 +4556,7 @@
 				81B18E191BE7387A00D448FA /* iconfont-zhuanxiangeps@2x.png in Resources */,
 				8D66927B1BD0D27D00CD2CAF /* gesture_node_normal.png in Resources */,
 				8D0AE7F41BE09CE500D9D50C /* iconfont-register-gantanhao001@2x.png in Resources */,
+				81E0CCE81C28EC7400148609 /* 失败@3x.png in Resources */,
 				81D72FB71BFACA800067A277 /* add@3x.png in Resources */,
 				81ED030C1BD09BC8005F4B02 /* MyInformationCell.xib in Resources */,
 				81D72FBE1BFAD63B0067A277 /* right@2x.png in Resources */,
@@ -4687,6 +4704,7 @@
 				8182A7F01C0EECD300FA1216 /* 组-16@3x.png in Resources */,
 				8DEDE1C41BCCFF01008086D3 /* iconfont_graycuo@2x.png in Resources */,
 				8D121FE11BD4D92600B3C1FE /* SettingPieTableViewCell.xib in Resources */,
+				81E0CCE71C28EC7400148609 /* 失败@2x.png in Resources */,
 				819C3ABB1BD483C4008D2CFD /* MyRedBagCell.xib in Resources */,
 				8D9011A81BD6337C00E5D62A /* 12@3x.png in Resources */,
 				817DD4981BCF547E00042B09 /* haoyou@2x.png in Resources */,
@@ -4833,6 +4851,7 @@
 				818F0D771C0D3E1100319D19 /* UsufructAssignmentViewController.m in Sources */,
 				8D88D1051BFECCB40051D6DA /* UIScrollView+MJExtension.m in Sources */,
 				81B674041BF0A608007CEF51 /* HistoryMemoryViewController.m in Sources */,
+				81E0CCEB1C28ED3400148609 /* BindingEmailFailed.m in Sources */,
 				8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */,
 				817DD4B01BCF5B2400042B09 /* MiddleView.m in Sources */,
 				8D90117A1BD5D8FA00E5D62A /* TransactionViewController.m in Sources */,
@@ -4844,6 +4863,7 @@
 				8D5DBB841BD4838200F556B9 /* CastUpTableViewCell.m in Sources */,
 				818523C91BE35E75002FC653 /* MendLoginCell.m in Sources */,
 				81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */,
+				81E0CCE41C28E4D700148609 /* CanNotBindingBankCard.m in Sources */,
 				818063971BD5D3C700E83492 /* MyInvitationViewController.m in Sources */,
 				8D9BE8E61C0EC94D003C67D3 /* YYKVStorage.m in Sources */,
 				81B43C2F1C2139FE005F158F /* SendTime.m in Sources */,
