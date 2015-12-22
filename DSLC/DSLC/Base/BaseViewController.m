@@ -68,10 +68,10 @@
     
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
-    UIImageView *imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageReturn];
+    self.imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.imageReturn];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonReturn:)];
-    [imageReturn addGestureRecognizer:tap];
+    [self.imageReturn addGestureRecognizer:tap];
     
 }// 什么时候调用：每次触发手势之前都会询问下代理，是否触发。// 作用：拦截手势触发
 

@@ -348,11 +348,11 @@
     
     NSString *showMsg = [msg stringByAppendingString:[LLPayUtil jsonStringOfObj:dic]];
     
-    [[[UIAlertView alloc] initWithTitle:@"结果"
-                                message:showMsg
-                               delegate:nil
-                      cancelButtonTitle:@"确认"
-                      otherButtonTitles:nil] show];
+//    [[[UIAlertView alloc] initWithTitle:@"结果"
+//                                message:showMsg
+//                               delegate:nil
+//                      cancelButtonTitle:@"确认"
+//                      otherButtonTitles:nil] show];
 }
 
 - (NSMutableDictionary *)createOrder{

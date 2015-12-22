@@ -15,6 +15,7 @@
 @interface BaseViewController : UIViewController <LLPaySdkDelegate>
 
 @property (nonatomic, strong) NSDictionary *flagDic;
+@property (nonatomic, strong) UIImageView *imageReturn;
 
 - (void)setTitleString:(NSString *)titleString;
 
