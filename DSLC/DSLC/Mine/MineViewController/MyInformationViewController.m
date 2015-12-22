@@ -627,6 +627,8 @@
 {
     NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"]};
     
+    NSLog(@"%@",parameter);
+    
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/logout" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"asasasasasa%@", responseObject);

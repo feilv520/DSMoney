@@ -25,6 +25,8 @@
     self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"支付完成"];
     
+    self.imageReturn.hidden = YES;
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishReturn:)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:14], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
