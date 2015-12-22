@@ -157,8 +157,8 @@
         
     } else {
         self.orderDic = [self createOrder];
-//        [self pay:nil];
-        [self getBankCard];
+        [self pay:nil];
+//        [self getBankCard];
     }
 }
 
