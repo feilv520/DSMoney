@@ -77,8 +77,8 @@
  */
 
 // TODO: 修改两个参数成商户自己的配置
-static NSString *kLLOidPartner = @"201408071000001543";   // 商户号
-static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
+static NSString *kLLOidPartner = @"201512161000642725";   // 商户号
+static NSString *kLLPartnerKey = @"gcctdslc20151231_20160101";   // 密钥
 
 // 访问地址
 

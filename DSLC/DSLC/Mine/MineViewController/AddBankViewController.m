@@ -17,6 +17,7 @@
 #import "City.h"
 #import "BankName.h"
 #import "CanNotBindingBankCard.h"
+#import "TTTTTTTBangKa.h"
 
 @interface AddBankViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -117,11 +118,11 @@
     titleArr = @[@"持卡人", @"银行卡号", @"开户行", @"开户行省",@"开户行市", @"开户行支行",  @"支付金额", @"手机号"];
     textFieldArr = @[[dicRealName objectForKey:@"realName"], @"请输入本人银行卡号", @"请选择开户银行", @"请选择开户所在的省", @"请选择开户所在的市", @"请输入开户行支行", @"0.01元", @"请输入预留在银行的手机号"];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 95) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 85) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (90.0 / 667.0))];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (220.0 / 667.0))];
     _tableView.tableFooterView = view;
     _tableView.backgroundColor = [UIColor huibai];
     
@@ -133,6 +134,15 @@
     
     buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0))/2, HEIGHT_CONTROLLER_DEFAULT * (47.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (43.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [view addSubview:buttonNext];
+    
+    NSBundle *rootBundle = [NSBundle mainBundle];
+    
+    TTTTTTTBangKa *ttttttttBangKa = (TTTTTTTBangKa *)[[rootBundle loadNibNamed:@"TTTTTTTBangKa" owner:nil options:nil] lastObject];
+    
+    ttttttttBangKa.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (100.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, 155);
+    
+    [view addSubview:ttttttttBangKa];
+    
     [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
     [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [buttonNext addTarget:self action:@selector(nextButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -460,9 +470,9 @@
     
     NSDictionary *parmeter;
     if (textFieldFive == nil) {
-        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==", @"serialNum":ownerOrder,@"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==", @"serialNum":ownerOrder};
     } else {
-        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==",@"serialNum":@"1213",@"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==",@"serialNum":ownerOrder};
     }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/addBankCard" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -599,8 +609,6 @@
 
 - (NSMutableDictionary *)createOrder{
     
-    
-    
     NSString *partnerPrefix = @"GCCT"; // TODO: 修改成自己公司前缀
     
     NSString *signType = @"MD5";    // MD5 || RSA || HMAC
@@ -609,7 +617,6 @@
     // user_id，一个user_id标示一个用户
     // user_id为必传项，需要关联商户里的用户编号，一个user_id下的所有支付银行卡，身份证必须相同
     // demo中需要开发测试自己填入user_id, 可以先用自己的手机号作为标示，正式上线请使用商户内的用户编号
-    
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     

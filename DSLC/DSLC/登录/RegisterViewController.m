@@ -74,6 +74,8 @@
     NSString *ownerCardNumber;
     NSString *ownerID;
     NSString *ownerBCard;
+    
+    NSString *ownerOrder;
 }
 
 @property (nonatomic) LLPaySdk *sdk;
@@ -1220,16 +1222,16 @@
     
     NSDictionary *parmeter;
     if (textFieldFive == nil) {
-        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==",@"serialNum":ownerOrder};
     } else {
-        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==",@"serialNum":ownerOrder};
     }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/addBankCard" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"7777777绑定银行卡:%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
             [self.navigationController popViewControllerAnimated:YES];
             
@@ -1297,7 +1299,7 @@
                 // TODO: 协议号
 //                [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
                 [self getBankCard];
-                
+                ownerOrder = dic[@"no_order"];
 //                [self.navigationController popViewControllerAnimated:YES];
                 
             }
