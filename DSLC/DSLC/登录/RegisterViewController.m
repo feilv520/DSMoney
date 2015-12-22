@@ -71,6 +71,9 @@
     
     // 姓名
     NSString *ownerCardName;
+    NSString *ownerCardNumber;
+    NSString *ownerID;
+    NSString *ownerBCard;
 }
 
 @property (nonatomic) LLPaySdk *sdk;
@@ -132,7 +135,7 @@
     
     seconds = 60;
     
-    self.scrollView.contentSize = CGSizeMake(1, 750);
+    self.scrollView.contentSize = CGSizeMake(1, 900);
     
     [self RegisterProcessPhoto];
     [self RegisterNav];
@@ -407,6 +410,8 @@
 
 - (void)sureButtonActionFinish:(UIButton *)btn{
     
+    [self.view endEditing:YES];
+    
     NSDictionary *parameter = @{@"userId":userID,@"realName":self.registerV.realName.text,@"IDCardNum":self.registerV.IDCard.text};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/authRrealName" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -416,6 +421,7 @@
             
             
             ownerCardName = self.registerV.realName.text;
+            ownerCardNumber = self.registerV.IDCard.text;
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [registerB removeFromSuperview];
@@ -428,7 +434,6 @@
             NSBundle *rootBundle = [NSBundle mainBundle];
 //            NSArray *rootArrayOfView = [rootBundle loadNibNamed:@"RegisterOfView" owner:nil options:nil];
 //                        NSArray *rootArrayOfResult = [rootBundle loadNibNamed:@"RegisterOfResult" owner:nil options:nil];
-            NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
             
 //                        registerR = [rootArrayOfResult lastObject];
             
@@ -437,18 +442,9 @@
             registerR.titleSuccess.text = @"验证成功";
             registerR.passTitle.text = @"您可以绑定银行卡，也可以选择跳过．";
             
-            [self showViewControllerContent];
-            
-            registerB = [rootArrayOfPButton lastObject];
-            
-            registerB.frame = CGRectMake(0, CGRectGetMaxY(_tableView.frame) + 100, WIDTH_CONTROLLER_DEFAULT, 100);
-            
-            [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-            [registerB.sureButton addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
-            
-            [self.scrollView addSubview:self.registerV];
             [self.scrollView addSubview:registerR];
-            [self.scrollView addSubview:registerB];
+            
+            [self showViewControllerContent];
             
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -574,6 +570,8 @@
                 
                 if ([[responseDic objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                     
+                    ownerID = [responseDic objectForKey:@"userId"];
+                    
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
                     
                     [buttonWithView removeFromSuperview];
@@ -631,6 +629,8 @@
                 
                 NSLog(@"%@",responseObject);
                 if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    
+                    ownerID = [responseObject objectForKey:@"userId"];
                     
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                     
@@ -976,7 +976,7 @@
     titleArr = @[@"持卡人", @"银行卡号", @"开户行", @"开户行省",@"开户行市", @"开户行支行",  @"支付金额", @"手机号"];
     textFieldArr = @[ownerCardName, @"请输入本人银行卡号", @"请选择开户银行", @"请选择开户所在的省", @"请选择开户所在的市", @"请输入开户行支行", @"0.01元", @"请输入预留在银行的手机号"];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 95) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
     [self.scrollView addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -986,6 +986,19 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (90.0 / 667.0))];
     _tableView.tableFooterView = view;
     _tableView.backgroundColor = [UIColor huibai];
+    
+    NSBundle *rootBundle = [NSBundle mainBundle];
+    
+    NSArray *rootArrayOfPButton = [rootBundle loadNibNamed:@"RegisterOfPassButton" owner:nil options:nil];
+    
+    registerB = [rootArrayOfPButton lastObject];
+    
+    registerB.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100);
+    
+    [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [registerB.sureButton addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _tableView.tableFooterView = registerB;
     
     [_tableView registerNib:[UINib nibWithNibName:@"AddBankCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
@@ -1207,9 +1220,9 @@
     
     NSDictionary *parmeter;
     if (textFieldFive == nil) {
-        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     } else {
-        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/addBankCard" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -1217,6 +1230,8 @@
         NSLog(@"7777777绑定银行卡:%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+            [self.navigationController popViewControllerAnimated:YES];
             
         }
         
@@ -1231,7 +1246,11 @@
 #pragma mark - 订单支付
 - (void)pay:(id)sender{
     
+    [self.view endEditing:YES];
+    
     LLPayUtil *payUtil = [[LLPayUtil alloc] init];
+    
+    self.orderDic = [self createOrder];
     
     // 进行签名
     NSDictionary *signedOrder = [payUtil signedOrderDic:self.orderDic
@@ -1276,11 +1295,11 @@
                 //
                 //NSString *payBackAgreeNo = dic[@"agreementno"];
                 // TODO: 协议号
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
                 [self getBankCard];
                 
-                [self.navigationController popViewControllerAnimated:YES];
-                    
+//                [self.navigationController popViewControllerAnimated:YES];
+                
             }
             else if ([result_pay isEqualToString:@"PROCESSING"])
             {
@@ -1331,17 +1350,16 @@
 
 - (NSMutableDictionary *)createOrder{
     
-    
-    
     NSString *partnerPrefix = @"GCCT"; // TODO: 修改成自己公司前缀
     
     NSString *signType = @"MD5";    // MD5 || RSA || HMAC
-    
-    NSString *user_id = [dicRealName objectForKey:@"id"]; //
+//    dicRealName
+    NSString *user_id = ownerID; //
     // user_id，一个user_id标示一个用户
     // user_id为必传项，需要关联商户里的用户编号，一个user_id下的所有支付银行卡，身份证必须相同
     // demo中需要开发测试自己填入user_id, 可以先用自己的手机号作为标示，正式上线请使用商户内的用户编号
     
+    NSLog(@"%@",[user_id class]);
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     
@@ -1383,14 +1401,14 @@
                            //风险控制参数 否 此字段填写风控参数，采用json串的模式传入，字段名和字段内容彼此对应好
                            @"risk_item" : [LLPayUtil jsonStringOfObj:@{@"user_info_dt_register":@"20131030122130"}],
                            
-                           @"user_id": user_id,
+                           @"user_id": [NSString stringWithFormat:@"%@",user_id],
                            //商户用户唯一编号 否 该用户在商户系统中的唯一编号，要求是该编号在商户系统中唯一标识该用户
                            
                            
                            //                           @"flag_modify":@"1",
                            //修改标记 flag_modify 否 String 0-可以修改，默认为0, 1-不允许修改 与id_type,id_no,acct_name配合使用，如果该用户在商户系统已经实名认证过了，则在绑定银行卡的输入信息不能修改，否则可以修改
                            
-                           @"card_no":textFieldOne.text,
+                           @"card_no":ownerBCard,
                            //银行卡号 card_no 否 银行卡号前置，卡号可以在商户的页面输入
                            
                            //                           @"no_agree":@"2014070900123076",
@@ -1403,9 +1421,9 @@
         
         [param addEntriesFromDictionary:@{
                                           
-                                          @"id_no":[dicRealName objectForKey:@"cardNumber"],
+                                          @"id_no":ownerCardNumber,
                                           //证件号码 id_no 否 String
-                                          @"acct_name":[dicRealName objectForKey:@"realName"],
+                                          @"acct_name":ownerCardName,
                                           //银行账号姓名 acct_name 否 String
                                           
                                           //                                          @"id_no":@"140621199212052213",
@@ -1413,7 +1431,6 @@
                                           //                                          @"acct_name":@"杨磊磊",
                                           //                                          //银行账号姓名 acct_name 否 String
                                           }];
-        NSLog(@"======身份证号:%@", [dicRealName objectForKey:@"cardNumber"]);
     }
     
     
@@ -1460,6 +1477,13 @@
         }];
     }
     
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField.tag == 401) {
+        NSLog(@"401 = %@",textField.text);
+        ownerBCard = textField.text;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

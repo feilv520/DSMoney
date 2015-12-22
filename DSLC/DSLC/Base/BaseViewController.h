@@ -19,4 +19,7 @@
 
 - (void)setTitleString:(NSString *)titleString;
 
+//导航返回按钮
+- (void)buttonReturn:(UIBarButtonItem *)bar;
+
 @end
