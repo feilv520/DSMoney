@@ -757,7 +757,6 @@
     // user_id为必传项，需要关联商户里的用户编号，一个user_id下的所有支付银行卡，身份证必须相同
     // demo中需要开发测试自己填入user_id, 可以先用自己的手机号作为标示，正式上线请使用商户内的用户编号
     
-    
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     
     
