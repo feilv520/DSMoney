@@ -169,6 +169,7 @@
         
     } else {
 //        [self pay:nil];
+        [self submitLoadingWithView:self.view loadingFlag:NO height:0];
         [self buyProduct];
         //        支付有红包
         //        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
@@ -220,6 +221,7 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"buyProduct = %@",responseObject);
+        [self submitLoadingWithHidden:YES];
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];

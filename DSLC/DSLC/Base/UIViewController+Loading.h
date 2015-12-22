@@ -43,4 +43,7 @@
 
 - (void)showTanKuangWithMode:(MBProgressHUDMode)mode Text:(NSString *)text;
 
+- (void)submitLoadingWithView:(UIView *)view loadingFlag:(BOOL)loadingFlag height:(CGFloat)height;
+- (void)submitLoadingWithHidden:(BOOL)hidden;
+
 @end

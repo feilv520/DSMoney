@@ -87,8 +87,8 @@
     });
 }
 
-- (void)loadingWithView:(UIView *)view loadingFlag:(BOOL)loadingFlag height:(CGFloat)height{
-    
+- (void)loadingWithView:(UIView *)view loadingFlag:(BOOL)loadingFlag height:(CGFloat)height
+{
     NSMutableArray *imgArray = [NSMutableArray array];
     
     UIImageView *loadingImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
@@ -114,6 +114,51 @@
     [loadingImgView startAnimating];
     
     [view addSubview:loadingImgView];
+}
+
+- (void)submitLoadingWithView:(UIView *)view loadingFlag:(BOOL)loadingFlag height:(CGFloat)height
+{
+    NSMutableArray *imgArray = [NSMutableArray array];
+    
+    UIImageView *loadingImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    
+    loadingImgView.tag = 1989;
+    
+    loadingImgView.center = CGPointMake(self.view.center.x, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 60);
+    
+    for (NSInteger i = 1; i <= 8; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_middle_0%ld",(long)i]];
+        [imgArray addObject:image];
+    }
+    loadingImgView.hidden = loadingFlag;
+    
+    loadingImgView.animationImages = imgArray;
+    
+    loadingImgView.animationDuration = 1.0;
+    
+    loadingImgView.animationRepeatCount = 0;
+    
+    [loadingImgView startAnimating];
+    
+    UIView *viewGray = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor]];
+    viewGray.alpha = 0.3;
+    
+    UILabel *labelRoad = [CreatView creatWithLabelFrame:CGRectMake(0, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 20, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"取经路漫漫,请耐心..."];
+    [viewGray addSubview:labelRoad];
+    
+    [view addSubview:viewGray];
+    [view addSubview:loadingImgView];
+    viewGray.tag = 690;
+    loadingImgView.alpha = 1;
+}
+
+- (void)submitLoadingWithHidden:(BOOL)hidden
+{
+    UIView *viewDisappear = (UIView *)[self.view viewWithTag:690];
+    viewDisappear.hidden = hidden;
+    
+    UIImageView *loadingImg = (UIImageView *)[self.view viewWithTag:1989];
+    loadingImg.hidden = hidden;
 }
 
 - (void)loadingWithHidden:(BOOL)hidden{
