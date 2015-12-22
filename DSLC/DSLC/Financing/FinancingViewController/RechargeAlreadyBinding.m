@@ -381,6 +381,8 @@
 
 - (NSMutableDictionary *)createOrder{
     
+    NSDictionary *dicRealName = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
     NSString *partnerPrefix = @"GCCT"; // TODO: 修改成自己公司前缀
     
     NSString *signType = @"MD5";    // MD5 || RSA || HMAC
@@ -450,9 +452,9 @@
         
         [param addEntriesFromDictionary:@{
                                           
-                                          @"id_no":@"220204199204180655",
+                                          @"id_no":[dicRealName objectForKey:@"cardNumber"],
                                           //证件号码 id_no 否 String
-                                          @"acct_name":@"马成铭",
+                                          @"acct_name":[dicRealName objectForKey:@"realName"],
                                           //银行账号姓名 acct_name 否 String
                                           
                                           //                                          @"id_no":@"140621199212052213",
