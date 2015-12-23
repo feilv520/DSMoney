@@ -11,8 +11,13 @@
 #import "AddBankCell.h"
 #import "BindingBankCardLiftUpMoney.h"
 #import "SetDealSecret.h"
+#import "TTTTXianTableViewCell.h"
+#import "FindDealViewController.h"
+#import "RealNameViewController.h"
+#import "AddBankViewController.h"
+#import "RSA.h"
 
-@interface LiftupMoneyViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface LiftupMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 {
     UITableView *_tabelView;
@@ -24,6 +29,10 @@
     NSDictionary *bankDic;
     
     NSString *ownerOrder;
+    
+    UITextField *textFieldPassword;
+    
+    NSDictionary *dealDic;
 }
 
 @property (nonatomic, strong) NSDictionary *dataDic;
@@ -60,6 +69,7 @@
     _tabelView.tableFooterView = viewFoot;
     [_tabelView registerNib:[UINib nibWithNibName:@"BankWhichCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tabelView registerNib:[UINib nibWithNibName:@"AddBankCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
+    [_tabelView registerNib:[UINib nibWithNibName:@"TTTTXianTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuse2"];
     
     UIView *viewWite = [CreatView creatViewWithFrame:CGRectMake(0, 8, WIDTH_CONTROLLER_DEFAULT, 137) backgroundColor:[UIColor whiteColor]];
     [viewFoot addSubview:viewWite];
@@ -101,7 +111,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -127,7 +137,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
-    } else {
+    } else if (indexPath.row == 1){
         
         AddBankCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse1"];
         
@@ -150,27 +160,65 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
+    } else {
+        TTTTXianTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse2"];
+        
+        dealDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
+        
+        NSLog(@"dealSecret = %@",[dealDic objectForKey:@"dealSecret"]);
+        
+        if (![[dealDic objectForKey:@"dealSecret"] isEqualToString:@""]) {
+            cell.setPassword.hidden = YES;
+            cell.forget.hidden = NO;
+            cell.password.hidden = NO;
+        }
+        
+        [cell.setPassword addTarget:self action:@selector(setDealSecret:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.forget addTarget:self action:@selector(ForgetSecretButton:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cell;
+        
     }
     
+}
+
+//设置交易密码
+- (void)setDealSecret:(UIButton *)button
+{
+    SetDealSecret *deal = [[SetDealSecret alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hiddenWithCell:) name:@"hiddenWithCell" object:nil];
+    [self.navigationController pushViewController:deal animated:YES];
+}
+
+- (void)hiddenWithCell:(NSNotification *)not{
+    UIButton *forgetB = (UIButton *)[self.view viewWithTag:9873];
+    UIButton *setPWord = (UIButton *)[self.view viewWithTag:9871];
+    textFieldPassword = (UITextField *)[self.view viewWithTag:9898];
+    
+    forgetB.hidden = NO;
+    setPWord.hidden = YES;
+    textFieldPassword.hidden = NO;
+    
+    [_tabelView reloadData];
+}
+
+//忘记密码?按钮
+- (void)ForgetSecretButton:(UIButton *)button
+{
+    FindDealViewController *findSecretVC = [[FindDealViewController alloc] init];
+    findSecretVC.whichOne = NO;
+    [self.navigationController pushViewController:findSecretVC animated:YES];
 }
 
 //提现接口
 - (void)liftUpMoneyGetData
 {
-    NSDictionary *dealDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
     NSLog(@"=====%@", dealDic);
     NSLog(@"zzzzzzzzz%@", [DES3Util decrypt:[dealDic objectForKey:@"dealSecret"]]);
-
-    if ([dealDic objectForKey:@"dealSecret"]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"提现的时候必须要设置支付密码"];
-        SetDealSecret *deal = [[SetDealSecret alloc] init];
-        [self.navigationController pushViewController:deal animated:YES];
-        return;
-    }
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parmeter = @{@"bankCardId":[bankDic objectForKey:@"cardAccount"], @"fmoney":_textField.text, @"payPwd":[DES3Util decrypt:[dealDic objectForKey:@"dealSecret"]], @"token":[dic objectForKey:@"token"],@"serialNum":ownerOrder};
+    NSDictionary *parmeter = @{@"bankCardId":[bankDic objectForKey:@"cardAccount"], @"fmoney":_textField.text, @"payPwd":textFieldPassword.text, @"token":[dic objectForKey:@"token"],@"serialNum":ownerOrder};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/putOff" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"eeeeeeeee提现接口:%@", responseObject);
@@ -196,8 +244,8 @@
 - (void)textFieldLiftUpMoney:(UITextField *)textField
 {
     _textField = (UITextField *)[self.view viewWithTag:111111];
-    
-    if (_textField.text.length > 0) {
+//    && [textFieldPassword.text isEqualToString:[DES3Util decrypt:[dealDic objectForKey:@"dealSecret"]]]
+    if (_textField.text.length > 0 ) {
         
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -217,7 +265,11 @@
     if (_textField.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入提现金额"];
         
-    } else if (_textField.text.length > 0) {
+    }
+//    else if ([textFieldPassword.text isEqualToString:[DES3Util decrypt:[dealDic objectForKey:@"dealSecret"]]]){
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付密码输入不正确"];
+//    }
+    else if (_textField.text.length > 0) {
         
         [self pay:nil];
     }
@@ -288,18 +340,41 @@
     }];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 9201) {
+        if (buttonIndex == 1) {
+            RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
+            pushVC(realNameVC);
+        } else {
+            popVC;
+        }
+        
+    } else if (alertView.tag == 9202){
+        if (buttonIndex == 1) {
+            AddBankViewController *addBVC = [[AddBankViewController alloc] init];
+            addBVC.realNameStatus = YES;
+            pushVC(addBVC);
+        } else {
+            popVC;
+        }
+        
+    }
+}
+
 #pragma mark 连连支付按钮
 #pragma mark --------------------------------
 
 #pragma mark - 订单支付
 - (void)pay:(id)sender{
     
-    LLPayUtil *payUtil = [[LLPayUtil alloc] init];
+//    LLPayUtil *payUtil = [[LLPayUtil alloc] init];
     
+    NSDictionary *parameters = [self createOrder];
     // 进行签名
-    NSDictionary *signedOrder = [payUtil signedOrderDic:self.orderDic
-                                             andSignKey:kLLPartnerKey];
+//    NSDictionary *signedOrder = [payUtil signedOrderDic:parameters
+//                                             andSignKey:@"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJPb6UtHkRtCmunLtxgWUUkqKVMqdMrvLxU4UzTRaNddI2tHUszyTSntfz+l1S3BjRBvjx1/yvrFRvneW7lmM9w+e5LPUnIhqnNrl2aeioOJWHz+Ba6qrRXz8kCf6kfsAMG4H2A2xMcb26ZiMPZxFKHinuKcW7bT+bXTFxrQsR/JAgMBAAECgYEAh2vK6F/LzyPZrngeYblPCavL3ZftEFCw1saXrrB9TYLIheD1PTBO7C/RdAH2lcnH4V3LvkDlL3iv4Pp/F/c7Vvvgs/LbpXwnPvYVtdkZ1x3AZRfS/5uSrSoAkiN0zEJnmb3Ywp7YlCYfVlke4u6dhQN+WxvqPl69VMBzNpagXWECQQDlBVUvIqQp6e0Gsp4oOj3HyQtCT+BsaRZkLtMNTq5pcz/83s1H0cIoU8dTT7LCZvRw+yjYgQ5YBY9D0CZBmwdfAkEApUbzmt2klNpf2apadyI+fYcbYBky3kb2q6YZ/xQuCU8eSJC4F2bPDDfxpsIqADj5A8KB74EnB6h1UT9rQONx1wJBAMXuFfDmv3p58aAYPxgFPd+soU5uOkd3iyKKVVzq41G/iU3CQSgQ4Px5a4tVFeltkVUTu/lhkEQCig7Rlj6c/YECQHwqUIrQ5nsZj5bDv1Du/glp/ev1Il0Q7PHJSJB0RZ2ivbqAVnzmNLgWM0o3ZjxikNj9QIaA/aRoLzLJtTa7aGMCQFEkTk/9gIYYKolMwMllO/SN+dO54W1Pc/Dx65ZsEwzgq+UEBb0BjbxbVebVRcaXam6OKIuCW2KwdQuMlY6AqeQ="];
     
+    NSLog(@"signedOrder = %@",parameters);
     
     //    [LLPaySdk sharedSdk].sdkDelegate = self;
     
@@ -314,81 +389,22 @@
     // 预授权
     //  [self.sdk presentPreAuthPaySdkInViewController:self withTraderInfo:signedOrder];
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+//    AppDelegate *app = [[UIApplication sharedApplication] delegate];
     
-    self.sdk = [[LLPaySdk alloc] init];
-    self.sdk.sdkDelegate = self;
-    [self.sdk presentVerifyPaySdkInViewController:app.tabBarVC withTraderInfo:signedOrder];
-    
-}
+//    self.sdk = [[LLPaySdk alloc] init];
+//    self.sdk.sdkDelegate = self;
+//    [self.sdk presentVerifyPaySdkInViewController:app.tabBarVC withTraderInfo:signedOrder];
 
-#pragma -mark 支付结果 LLPaySdkDelegate
-// 订单支付结果返回，主要是异常和成功的不同状态
-// TODO: 开发人员需要根据实际业务调整逻辑
-- (void)paymentEnd:(LLPayResult)resultCode withResultDic:(NSDictionary *)dic
-{
-    NSString *msg = @"支付异常";
-    switch (resultCode) {
-        case kLLPayResultSuccess:
-        {
-            msg = @"支付成功";
-            
-            NSString* result_pay = dic[@"result_pay"];
-            if ([result_pay isEqualToString:@"SUCCESS"])
-            {
-                //
-                //NSString *payBackAgreeNo = dic[@"agreementno"];
-                // TODO: 协议号
-                //[self.navigationController popToRootViewControllerAnimated:YES];
-                NSLog(@"putOn");
-                ownerOrder = dic[@"no_order"];
-                [self liftUpMoneyGetData];
-            }
-            else if ([result_pay isEqualToString:@"PROCESSING"])
-            {
-                msg = @"支付单处理中";
-            }
-            else if ([result_pay isEqualToString:@"FAILURE"])
-            {
-                msg = @"支付单失败";
-            }
-            else if ([result_pay isEqualToString:@"REFUND"])
-            {
-                msg = @"支付单已退款";
-            }
-        }
-            break;
-        case kLLPayResultFail:
-        {
-            msg = @"支付失败";
-        }
-            break;
-        case kLLPayResultCancel:
-        {
-            msg = @"支付取消";
-        }
-            break;
-        case kLLPayResultInitError:
-        {
-            msg = @"sdk初始化异常";
-        }
-            break;
-        case kLLPayResultInitParamError:
-        {
-            msg = dic[@"ret_msg"];
-        }
-            break;
-        default:
-            break;
-    }
     
-//    NSString *showMsg = [msg stringByAppendingString:[LLPayUtil jsonStringOfObj:dic]];
     
-//    [[[UIAlertView alloc] initWithTitle:@"结果"
-//                                message:showMsg
-//                               delegate:nil
-//                      cancelButtonTitle:@"确认"
-//                      otherButtonTitles:nil] show];
+    [[MyAfHTTPClient sharedClient] postWithURLStringP:nil parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+    
 }
 
 - (NSMutableDictionary *)createOrder{
@@ -397,7 +413,7 @@
     
     NSString *partnerPrefix = @"GCCT"; // TODO: 修改成自己公司前缀
     
-    NSString *signType = @"MD5";    // MD5 || RSA || HMAC
+    NSString *signType = @"RSA";    // MD5 || RSA || HMAC
     
 //    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
@@ -415,30 +431,46 @@
     // TODO: 请开发人员修改下面订单的所有信息，以匹配实际需求
     // TODO: 请开发人员修改下面订单的所有信息，以匹配实际需求
     [param setDictionary:@{
-                           @"sign":@"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCSS/DiwdCf/aZsxxcacDnooGph3d2JOj5GXWi+q3gznZauZjkNP8SKl3J2liP0O6rU/Y/29+IUe+GTMhMOFJuZm1htAtKiu5ekW0GlBMWxf4FPkYlQkPE0FtaoMP3gYfh+OwI+fIRrpW3ySn3mScnc6Z700nU/VYrRkfcSCbSnRwIDAQAB",
                            @"flag_card":@"0",
-                           @"sign_type":signType,
-                           //签名方式	partner_sign_type	是	String	RSA  或者 MD5
-                           @"card_no":[bankDic objectForKey:@"cardAccount"],
-                           //商户业务类型	busi_partner	是	String(6)	虚拟商品销售：101001
-                           @"dt_order":simOrder,
-                           //商户订单时间	dt_order	是	String(14)	格式：YYYYMMDDH24MISS  14位数字，精确到秒
-                           @"money_order":_textField.text,
-                           //交易金额	money_order	是	Number(8,2)	该笔订单的资金总额，单位为RMB-元。大于0的数字，精确到小数点后两位。 如：49.65
-                           @"acct_name" : [bankDic objectForKey:@"bankName"],
+                           @"sign_type":[NSString stringWithFormat:@"%@",signType],
+                           @"sign":@"H7aw88qS+SBlOC9qxspmY/Nk79ea9zAjggWOWXblFxAgOYhNeVfeW/t8r47xoL8jd9bkYMAbldU5LV4ccWjm9sWlDrzhYDBSdp/PpxXXNAdXoBpMj9elBf0QgC/nfeWHUs7BMTwiy28mIHjyo5LZ2kiYWO53zW9Mo92s99YcFUI=",
                            
-                           @"no_order":[NSString stringWithFormat:@"%@%@",partnerPrefix,  simOrder],
+                           //签名方式	partner_sign_type	是	String	RSA  或者 MD5
+//                           @"card_no":[bankDic objectForKey:@"cardAccount"],
+                           @"card_no":@"6214830219956587",
+                           //商户业务类型	busi_partner	是	String(6)	虚拟商品销售：101001
+//                           @"dt_order":[NSString stringWithFormat:@"%@",simOrder],
+                           @"dt_order":@"20151223010117",
+                           //商户订单时间	dt_order	是	String(14)	格式：YYYYMMDDH24MISS  14位数字，精确到秒
+                           @"money_order":@"0.01",
+//                               _textField.text
+                           //交易金额	money_order	是	Number(8,2)	该笔订单的资金总额，单位为RMB-元。大于0的数字，精确到小数点后两位。 如：49.65
+//                           @"acct_name" : [self.flagDic objectForKey:@"realName"],
+                           
+                           @"acct_name":@"刘盼阳",
+                           
+//                           @"no_order":[NSString stringWithFormat:@"%@%@",partnerPrefix,  simOrder],
+                           @"no_order":@"20151223010117",
+                           
+                           @"bank_code":@"03080000",
+                           @"province_code":@"330000",
+                           @"city_code":@"310000",
+//                           @"brabank_name":@"中国工商银行杭州市文三路支行",
+                           @"brabank_name":@"",
+                           
+                           
                            //商户唯一订单号	no_order	是	String(32)	商户系统唯一订单号
 //                           @"name_goods":@"订单名",
                            //商品名称	name_goods	否	String(40)
-                           @"info_order":simOrder,
+//                           @"info_order":simOrder,
+                           @"info_order":@"提现",
                            //订单附加信息	info_order	否	String(255)	商户订单的备注信息
 //                           @"valid_order":@"10080",
                            //分钟为单位，默认为10080分钟（7天），从创建时间开始，过了此订单有效时间此笔订单就会被设置为失败状态不能再重新进行支付。
                            //                           @"shareing_data":@"201412030000035903^101001^10^分账说明1|201310102000003524^101001^11^分账说明2|201307232000003510^109001^12^分账说明3"
                            // 分账信息数据 shareing_data  否 变(1024)
                            
-                           @"notify_url":@"http://www.baidu.com",
+                           @"notify_url":@"http://localhost:8080/tongjiang/accountInfo/txBack&oid_partner=201512161000642725&province_code=310000&sign_type=RSA&user_id=9453",
                            //服务器异步通知地址	notify_url	是	String(64)	连连钱包支付平台在用户支付成功后通知商户服务端的地址，如：http://payhttp.xiaofubao.com/back.shtml
                            
                            @"api_version":@"1.2",
