@@ -202,6 +202,10 @@
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"提交成功"];
             [self.navigationController popViewControllerAnimated:YES];
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请登录,再进行反馈"];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
