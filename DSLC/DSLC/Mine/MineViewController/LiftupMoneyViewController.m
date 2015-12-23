@@ -163,15 +163,15 @@
     } else {
         TTTTXianTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse2"];
         
-        dealDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
+        NSLog(@"dealSecret = %@",[self.dataDic objectForKey:@"setPayPwd"]);
         
-        NSLog(@"dealSecret = %@",[dealDic objectForKey:@"dealSecret"]);
-        
-        if (![[dealDic objectForKey:@"dealSecret"] isEqualToString:@""]) {
+        if ([[self.dataDic objectForKey:@"setPayPwd"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
             cell.setPassword.hidden = YES;
             cell.forget.hidden = NO;
             cell.password.hidden = NO;
         }
+        
+        textFieldPassword = cell.password;
         
         [cell.setPassword addTarget:self action:@selector(setDealSecret:) forControlEvents:UIControlEventTouchUpInside];
         [cell.forget addTarget:self action:@selector(ForgetSecretButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -218,7 +218,7 @@
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parmeter = @{@"bankCardId":[bankDic objectForKey:@"cardAccount"], @"fmoney":_textField.text, @"payPwd":textFieldPassword.text, @"token":[dic objectForKey:@"token"],@"serialNum":ownerOrder};
+    NSDictionary *parmeter = @{@"bankCardId":[bankDic objectForKey:@"id"], @"fmoney":_textField.text, @"payPwd":textFieldPassword.text, @"token":[dic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/putOff" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"eeeeeeeee提现接口:%@", responseObject);
@@ -270,8 +270,8 @@
 //        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付密码输入不正确"];
 //    }
     else if (_textField.text.length > 0) {
-        
-        [self pay:nil];
+        [self liftUpMoneyGetData];
+//        [self pay:nil];
     }
 }
 

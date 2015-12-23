@@ -164,7 +164,7 @@
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"56447cbc67e58efd78001914"
                                       shareText:@"大圣理财,金融街的新宠."
-                                     shareImage:[UIImage imageNamed:@"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658@3x"]
+                                     shareImage:[UIImage imageNamed:@"默认头像.png"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
 }
@@ -186,6 +186,7 @@
 
 - (void)finishLastBarPress:(UIBarButtonItem *)bar
 {
+    [MobClick event:@"goon"];
     if ([self.nHand isEqualToString:@"my"]) {
         NSArray *arrVC = self.navigationController.viewControllers;
         [self.navigationController popToViewController:[arrVC objectAtIndex:1] animated:YES];

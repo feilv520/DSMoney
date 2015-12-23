@@ -125,10 +125,11 @@
 //    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
 //    [butCancle addSubview:labelLine];
 //    labelLine.alpha = 0.3;
+    [MobClick event:@"share"];
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
                                       shareText:@"大圣理财,金融街的新宠."
-                                     shareImage:[UIImage imageNamed:@"icon.png"]
+                                     shareImage:[UIImage imageNamed:@"默认头像.png"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
 }
@@ -158,6 +159,7 @@
 
 - (void)finishBarPress:(UIBarButtonItem *)bar
 {
+    [MobClick event:@"goon"];
     if ([self.nHand isEqualToString:@"my"]) {
         NSArray *arrVC = self.navigationController.viewControllers;
         [self.navigationController popToViewController:[arrVC objectAtIndex:1] animated:YES];

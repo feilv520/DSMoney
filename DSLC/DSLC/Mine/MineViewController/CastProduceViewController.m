@@ -82,6 +82,7 @@
 - (void)xyButtonAction:(UIButton *)btn{
     
     CheckViewController *checkVC = [[CheckViewController alloc] init];
+    checkVC.orderId = self.idString;
     [self.navigationController pushViewController:checkVC animated:YES];
 }
 
