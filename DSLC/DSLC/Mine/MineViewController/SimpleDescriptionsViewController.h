@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface SimpleDescriptionsViewController : BaseViewController
-
+@property (nonatomic) NSString *simple;
 @end

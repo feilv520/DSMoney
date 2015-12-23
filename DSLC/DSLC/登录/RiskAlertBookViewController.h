@@ -11,5 +11,6 @@
 @interface RiskAlertBookViewController : BaseViewController
 
 @property (nonatomic) BOOL disign;
+@property (nonatomic) NSString *risk;
 
 @end

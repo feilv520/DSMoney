@@ -261,9 +261,11 @@
 {
     [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已复制"];
     if (button.tag == 1002) {
+        [MobClick event:@"inviteNum"];
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         [pasteboard setString:[self.dicMyInvite objectForKey:@"invitationMyCode"]];
     } else if (button.tag == 1003) {
+        [MobClick event:@"copyHttp"];
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         [pasteboard setString:[self.dicMyInvite objectForKey:@"link"]];
     }
@@ -272,6 +274,7 @@
 //邀请按钮
 - (void)buttonInvite:(UIButton *)button
 {
+    [MobClick event:@"invitePeople"];
     SocialPlatformViewController *socialVC = [[SocialPlatformViewController alloc] init];
     [self.navigationController pushViewController:socialVC animated:YES];
 }

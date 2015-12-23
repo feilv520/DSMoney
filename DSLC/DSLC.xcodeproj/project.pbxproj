@@ -3013,7 +3013,6 @@
 		8D3125CC1BD7428200143B71 /* 账户资产 */ = {
 			isa = PBXGroup;
 			children = (
-				8D5DBB7C1BD4819C00F556B9 /* CastProduceViewController.h */,
 				8D5DBB7D1BD4819C00F556B9 /* CastProduceViewController.m */,
 				8D5DBB7E1BD4819C00F556B9 /* CastProduceViewController.xib */,
 				8D121FBA1BD4D0CB00B3C1FE /* ProductSettingViewController.h */,
@@ -3060,6 +3059,7 @@
 		8D3125CE1BD7429300143B71 /* 交易记录 */ = {
 			isa = PBXGroup;
 			children = (
+				8D5DBB7C1BD4819C00F556B9 /* CastProduceViewController.h */,
 				8D9011771BD5D8FA00E5D62A /* TransactionViewController.h */,
 				8D9011781BD5D8FA00E5D62A /* TransactionViewController.m */,
 				8D9011791BD5D8FA00E5D62A /* TransactionViewController.xib */,
@@ -4222,7 +4222,7 @@
 				TargetAttributes = {
 					8D9356C81BC607C500BC2BFA = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 7XD2FNJN7H;
+						DevelopmentTeam = Z7J5CQFNQ3;
 					};
 					8D9356E11BC607C500BC2BFA = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -5241,7 +5241,7 @@
 					"$(PROJECT_DIR)/DSLC/Three/LLPayUtils/crypto",
 				);
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.ds;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -5277,7 +5277,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.ds;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

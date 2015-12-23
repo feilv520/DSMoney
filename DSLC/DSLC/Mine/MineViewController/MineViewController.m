@@ -396,9 +396,7 @@
         
         MyInvitationViewController *myInvitationVC = [[MyInvitationViewController alloc] init];
         [self.navigationController pushViewController:myInvitationVC animated:YES];
-        
     }
-    
 }
 
 //头像按钮
@@ -454,6 +452,7 @@
 //大额充值
 - (void)bigMoneyRecharge:(UIButton *)button
 {
+    [MobClick event:@"BigMoney"];
 //    bigId为0的时候 说明没有进行大额申请 跳转的是到大额申请页面
     if ([[[self.myAccountInfo objectForKey:@"bigId"] description] isEqualToString:@"0"]) {
     

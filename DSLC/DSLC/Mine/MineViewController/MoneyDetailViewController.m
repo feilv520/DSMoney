@@ -338,12 +338,14 @@
             
 //            项目简述
             SimpleDescriptionsViewController *simpleDesVC = [[SimpleDescriptionsViewController alloc] init];
+            simpleDesVC.simple = [self.asset objectForKey:@"assetProjectResume"];
             [self.navigationController pushViewController:simpleDesVC animated:YES];
             
         } else if (indexPath.row == 1) {
             
 //            项目详情
             SimpleDetailViewController *simpleDetailVC = [[SimpleDetailViewController alloc] init];
+            simpleDetailVC.projectDeatil = [self.asset objectForKey:@"assetProjectDetail"];
             [self.navigationController pushViewController:simpleDetailVC animated:YES];
             
         } else if (indexPath.row == 2) {
@@ -354,15 +356,17 @@
             
         } else if (indexPath.row == 4) {
             
-//            风控揭示
+//            风险揭示
             RiskAlertBookViewController *risk = [[RiskAlertBookViewController alloc] init];
             risk.disign = NO;
+            risk.risk = [self.asset objectForKey:@"assetRiskNotice"];
             [self.navigationController pushViewController:risk animated:YES];
             
         } else if (indexPath.row == 3) {
             
 //            管理团队简介
             TeamDescriptionsViewController *teamVC = [[TeamDescriptionsViewController alloc] init];
+            teamVC.team = [self.asset objectForKey:@"assetManageTeam"];
             [self.navigationController pushViewController:teamVC animated:YES];
             
         }

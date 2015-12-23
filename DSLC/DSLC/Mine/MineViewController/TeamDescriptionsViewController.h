@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TeamDescriptionsViewController : BaseViewController
-
+@property (nonatomic) NSString *team;
 @end

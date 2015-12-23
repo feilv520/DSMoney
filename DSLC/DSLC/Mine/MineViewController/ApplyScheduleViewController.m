@@ -84,7 +84,7 @@
 - (void)stateOneOrZero
 {
     //    大额申请已提交显示的提示
-    butSubmitAlert = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 - 10 + 25, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@"大额充值申请单已经提交成功,\n我们将在2个工作日内进行核实!"];
+    butSubmitAlert = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 - 10 + 25, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@"大额充值申请单已经提交成功,\n我们将尽快为您审核!"];
     if (HEIGHT_CONTROLLER_DEFAULT == 480 + 20) {
         butSubmitAlert.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT/2 - 10 + 25, WIDTH_CONTROLLER_DEFAULT, 30);
     } else if (HEIGHT_CONTROLLER_DEFAULT == 568 + 20) {
@@ -337,13 +337,13 @@
     
     labelTwo = (UILabel *)[self.view viewWithTag:2001];
     labelTwo.textColor = [UIColor chongzhiColor];
-    labelTwo.text = @"审核通过";
+    labelTwo.text = @"初审通过";
     
     labelCheckTime.hidden = NO;
     labelCheckTime.text = applySch.checkTime;
     
     imageSchedule.image = [UIImage imageNamed:@"审核通过"];
-    [butSubmitAlert setTitle:@"审核通过,金额将在30分钟内到您的账户余额。" forState:UIControlStateNormal];
+    [butSubmitAlert setTitle:@"初审通过,我们将在30分钟内\n进行复核并打款到您的账户余额。" forState:UIControlStateNormal];
 }
 
 //状态是5时的内容

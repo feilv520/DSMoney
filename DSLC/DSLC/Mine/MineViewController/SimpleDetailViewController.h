@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface SimpleDetailViewController : BaseViewController
-
+@property (nonatomic) NSString *projectDeatil;
 @end

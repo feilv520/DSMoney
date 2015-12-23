@@ -8,7 +8,7 @@
 
 #import "SimpleDetailViewController.h"
 
-@interface SimpleDetailViewController ()
+@interface SimpleDetailViewController () <UIWebViewDelegate>
 
 @end
 
@@ -17,6 +17,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"项目详情";
+    
+    [self webViewShow];
+}
+
+- (void)webViewShow
+{
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
+    [self.view addSubview:webView];
+    webView.delegate = self;
+    
+    self.projectDeatil = [self.projectDeatil stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
+    self.projectDeatil = [self.projectDeatil stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
+    self.projectDeatil = [self.projectDeatil stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    self.projectDeatil = [self.projectDeatil stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+    self.projectDeatil = [self.projectDeatil stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    
+    [webView loadHTMLString:self.projectDeatil baseURL:nil];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '80%'"];//修改百分比即可
+    
+    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName(‘body‘)[0].style.webkitTextFillColor= ‘green‘"];//修改字体颜色
 }
 
 - (void)didReceiveMemoryWarning {
