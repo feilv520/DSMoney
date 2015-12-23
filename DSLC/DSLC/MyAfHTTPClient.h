@@ -27,6 +27,12 @@ typedef void (^failure)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnul
 //                               success:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSString * _Nullable responseObject))success
 //                               failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error))failure;
 
+// postP
+- (void)postWithURLStringP:(nullable NSString *)URLString
+                parameters:(nullable id)parameters
+                   success:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject))success
+                   failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error))failure;
+
 // post
 - (void)postWithURLString:(nullable NSString *)URLString
                              parameters:(nullable id)parameters

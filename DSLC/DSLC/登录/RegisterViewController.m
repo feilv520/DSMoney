@@ -1235,10 +1235,12 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
             [self.navigationController popViewControllerAnimated:YES];
             
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"error = %@",error);
     }];
 }
 
@@ -1298,8 +1300,8 @@
                 //NSString *payBackAgreeNo = dic[@"agreementno"];
                 // TODO: 协议号
 //                [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
-                [self getBankCard];
                 ownerOrder = dic[@"no_order"];
+                [self getBankCard];
 //                [self.navigationController popViewControllerAnimated:YES];
                 
             }

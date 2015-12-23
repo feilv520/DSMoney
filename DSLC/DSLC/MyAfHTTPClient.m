@@ -46,6 +46,36 @@
 //    
 //}
 
+- (void)postWithURLStringP:(NSString *)URLString
+               parameters:(id)parameters
+                  success:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject))success
+                  failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error))failure{
+    
+    NSString *URLPostString = [NSString stringWithFormat:@"https://yintong.com.cn/traderapi/cardandpay.htm"];
+    
+    [self POST:URLPostString parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nonnull responseObject) {
+        
+        NSData *doubi = responseObject;
+        NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"responseString = %@",responseString);
+        
+        NSString *character = nil;
+        for (int i = 0; i < responseString.length; i ++) {
+            character = [responseString substringWithRange:NSMakeRange(i, 1)];
+            if ([character isEqualToString:@"\\"])
+                [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
+        }
+        responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
+        //        NSLog(@"%@",responseString);
+        NSDictionary *responseData = [MyAfHTTPClient parseJSONStringToNSDictionary:responseString];
+        success(task,responseData);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(task,error);
+    }];
+}
+
+
 - (void)postWithURLString:(NSString *)URLString
                     parameters:(id)parameters
                        success:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject))success
