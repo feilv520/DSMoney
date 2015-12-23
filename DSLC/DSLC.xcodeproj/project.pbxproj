@@ -234,6 +234,7 @@
 		81898B781BDF180600DD4E44 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81898B771BDF180600DD4E44 /* UIPlaceHolderTextView.m */; settings = {ASSET_TAGS = (); }; };
 		818A39E21BF42F4D00F01CAA /* LiftUpMoneyFinish.m in Sources */ = {isa = PBXBuildFile; fileRef = 818A39E11BF42F4D00F01CAA /* LiftUpMoneyFinish.m */; settings = {ASSET_TAGS = (); }; };
 		818A39E51BF475A800F01CAA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 818A39E41BF475A800F01CAA /* MBProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
+		818D0C291C2AC58B008F7612 /* ProductO.m in Sources */ = {isa = PBXBuildFile; fileRef = 818D0C281C2AC58B008F7612 /* ProductO.m */; settings = {ASSET_TAGS = (); }; };
 		818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 818DEDFB1BCDF13500454A0E /* FConfirmMoney.m */; };
 		818DEDFE1BCDF15B00454A0E /* FConfirmMoney.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818DEDFD1BCDF15B00454A0E /* FConfirmMoney.xib */; };
 		818F0D741C0D3DCB00319D19 /* BuyClauseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818F0D731C0D3DCB00319D19 /* BuyClauseViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -1154,6 +1155,8 @@
 		818A39E11BF42F4D00F01CAA /* LiftUpMoneyFinish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiftUpMoneyFinish.m; sourceTree = "<group>"; };
 		818A39E31BF475A800F01CAA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		818A39E41BF475A800F01CAA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		818D0C271C2AC58B008F7612 /* ProductO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductO.h; sourceTree = "<group>"; };
+		818D0C281C2AC58B008F7612 /* ProductO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductO.m; sourceTree = "<group>"; };
 		818DEDFA1BCDF13500454A0E /* FConfirmMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FConfirmMoney.h; sourceTree = "<group>"; };
 		818DEDFB1BCDF13500454A0E /* FConfirmMoney.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FConfirmMoney.m; sourceTree = "<group>"; };
 		818DEDFD1BCDF15B00454A0E /* FConfirmMoney.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FConfirmMoney.xib; sourceTree = "<group>"; };
@@ -2700,6 +2703,8 @@
 				816CCCF21C1832FD006FA6F2 /* BankName.m */,
 				8D20882E1C266E7900372F66 /* City.h */,
 				8D20882F1C266E7900372F66 /* City.m */,
+				818D0C271C2AC58B008F7612 /* ProductO.h */,
+				818D0C281C2AC58B008F7612 /* ProductO.m */,
 			);
 			path = MineModel;
 			sourceTree = "<group>";
@@ -4780,6 +4785,7 @@
 				8DD1809D1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m in Sources */,
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
 				8D4FF5E21BE339A200BAE25F /* UIImageView+AFNetworking.m in Sources */,
+				818D0C291C2AC58B008F7612 /* ProductO.m in Sources */,
 				8D88D1021BFECCB40051D6DA /* MJRefreshStateHeader.m in Sources */,
 				8D50559E1BF082780034759B /* ProductListModel.m in Sources */,
 				81AC90C91BEC8C6600232404 /* BankWhichCell.m in Sources */,

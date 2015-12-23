@@ -19,6 +19,9 @@
 #import "RiskDisclosureViewController.h"
 #import "TeamDescriptionsViewController.h"
 #import "RiskAlertBookViewController.h"
+#import "MakeSureViewController.h"
+#import "FDetailViewController.h"
+#import "ProductO.h"
 
 @interface MoneyDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -28,10 +31,11 @@
     NSArray *otherArray;
     NSArray *leftArray;
     NSArray *rightArray;
+    NSMutableArray *proArray;
 }
 
 @property (nonatomic, strong) NSDictionary *asset;
-@property (nonatomic, strong) NSDictionary *product;
+@property (nonatomic, strong) NSArray *product;
 
 @end
 
@@ -44,6 +48,7 @@
     [self getAssetDetail];
     
     self.view.backgroundColor = [UIColor huibai];
+    proArray = [NSMutableArray array];
     
     [self.navigationItem setTitle:@"资产详情"];
     [self tableViewShowContent];
@@ -135,7 +140,7 @@
         
     } else if (section == 3) {
         
-        return 4;
+        return 1 + proArray.count;
         
     } else {
         
@@ -290,7 +295,6 @@
         
         OtherProjectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse3"];
         
-        cell.labelContent.text = [otherArray objectAtIndex:indexPath.row];
         cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.labelContent.textColor = [UIColor zitihui];
         
@@ -298,14 +302,18 @@
         
         if (indexPath.row == 0) {
             
+            cell.labelContent.text = @"其他包含此资产的产品";
             cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:15];
             cell.labelContent.textColor = [UIColor blackColor];
             cell.imageRight.hidden = YES;
+        } else {
+            cell.labelContent.text = [[proArray objectAtIndex:indexPath.row - 1] productName];
         }
         
         cell.labelLine.backgroundColor = [UIColor grayColor];
         cell.labelLine.alpha = 0.2;
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     } else {
@@ -370,6 +378,14 @@
             [self.navigationController pushViewController:teamVC animated:YES];
             
         }
+        
+    } else if (indexPath.section == 3) {
+        
+        FDetailViewController *detail = [[FDetailViewController alloc] init];
+        detail.idString = [[proArray objectAtIndex:indexPath.row - 1] idid];
+        NSLog(@"======%@", detail.idString);
+        detail.estimate = YES;
+        [self.navigationController pushViewController:detail animated:YES];
     }
 }
 
@@ -404,10 +420,16 @@
             
             self.asset = [NSDictionary dictionary];
             self.asset = [responseObject objectForKey:@"Asset"];
-            self.product = [NSDictionary dictionary];
+            self.product = [NSArray array];
             self.product = [responseObject objectForKey:@"Product"];
             
             rightArray = @[[self.asset objectForKey:@"assetName"], [self.asset objectForKey:@"assetTypeName"], [NSString stringWithFormat:@"%@元",[self.asset objectForKey:@"assetAmount"]], [self.asset objectForKey:@"assetSaleTime"], [self.asset objectForKey:@"assetInterestBdate"], [self.asset objectForKey:@"assetInterestEdate"], [self.asset objectForKey:@"assetToaccountDate"], [self.asset objectForKey:@"assetYieldDistribType"], [self.asset objectForKey:@"assetFinancierName"], [self.asset objectForKey:@"assetFundsUse"], [self.asset objectForKey:@"assetRepaymentSource"]];
+            
+            for (NSDictionary *proDic in self.product) {
+                ProductO *product = [[ProductO alloc] init];
+                [product setValuesForKeysWithDictionary:proDic];
+                [proArray addObject:product];
+            }
             
             [_tableView reloadData];
         } else {
