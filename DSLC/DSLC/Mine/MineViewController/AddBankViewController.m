@@ -613,7 +613,7 @@
     
     NSString *signType = @"MD5";    // MD5 || RSA || HMAC
     
-    NSString *user_id = [NSString stringWithFormat:@"gcctdslcandroid%@",[dicRealName objectForKey:@"id"]]; //
+    NSString *user_id = [dicRealName objectForKey:@"id"]; //
     // user_id，一个user_id标示一个用户
     // user_id为必传项，需要关联商户里的用户编号，一个user_id下的所有支付银行卡，身份证必须相同
     // demo中需要开发测试自己填入user_id, 可以先用自己的手机号作为标示，正式上线请使用商户内的用户编号
