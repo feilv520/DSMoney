@@ -505,7 +505,9 @@
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
+            
             if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
+                
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先登录,然后再投资"];
 
             } else {
@@ -534,6 +536,7 @@
             
         }];
     } else {
+        [self submitLoadingWithHidden:YES];
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先登录,然后再投资"];
     }
     

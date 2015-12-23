@@ -59,6 +59,24 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnBankName:) name:@"bank" object:nil];
     
     [self tableViewShow];
+    
+    self.imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.imageReturn];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonReturn:)];
+    [self.imageReturn addGestureRecognizer:tap];
+}
+
+- (void)buttonReturn:(UIBarButtonItem *)bar
+{
+    if (self.big == NO) {
+        
+        NSArray *arr = [self.navigationController viewControllers];
+        [self.navigationController popToViewController:[arr objectAtIndex:1] animated:YES];
+        
+    } else {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)tableViewShow
@@ -285,6 +303,8 @@
         
         NSLog(@"%@",responseDic);
         
+        [self submitLoadingWithHidden:YES];
+        
         if ([[responseDic objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
             NSString *IDstr = [[responseDic objectForKey:@"id"] description];
@@ -458,6 +478,8 @@
 //申请按钮
 - (void)applyBigMoney:(UIButton *)button
 {
+    [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+    
     fileldName = (UITextField *)[self.view viewWithTag:600];
     fieldBank = (UITextField *)[self.view viewWithTag:601];
     fieldBankCard = (UITextField *)[self.view viewWithTag:602];
@@ -552,6 +574,7 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/bigPutOn" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"zzzzzzz%@", responseObject);
+        [self submitLoadingWithHidden:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             

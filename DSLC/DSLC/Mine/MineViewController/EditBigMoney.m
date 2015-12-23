@@ -299,6 +299,7 @@
 //确定按钮
 - (void)makeSureEditReturn:(UIButton *)button
 {
+    [self submitLoadingWithView:self.view loadingFlag:NO height:0];
     fieldPos = (UITextField *)[self.view viewWithTag:607];
     NSLog(@"zzzzzzzzzz%@", fieldPos.text);
     if (![fieldPos.text isEqualToString:@"已上传POS单照片"]) {
@@ -358,6 +359,8 @@
         
         NSLog(@"%@",responseDic);
         
+        [self submitLoadingWithHidden:YES];
+        
         if ([[responseDic objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
@@ -391,6 +394,7 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateBigPutOnSerialNum" parameters:paremeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@", responseObject);
+        [self submitLoadingWithHidden:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             

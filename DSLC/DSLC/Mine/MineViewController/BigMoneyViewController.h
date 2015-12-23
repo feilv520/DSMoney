@@ -10,5 +10,5 @@
 #import "BaseViewController.h"
 
 @interface BigMoneyViewController : BaseViewController
-
+@property (nonatomic) BOOL big;
 @end

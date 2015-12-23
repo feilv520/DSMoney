@@ -5225,7 +5225,7 @@
 					"$(PROJECT_DIR)/DSLC/Three/LLPayUtils/crypto",
 				);
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.ds;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -5261,7 +5261,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.ds;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

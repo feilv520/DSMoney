@@ -548,6 +548,12 @@
 //充值按钮
 - (void)cashMoneyButton:(UIButton *)button
 {
+    [self.buttBlack removeFromSuperview];
+    [self.viewBottom removeFromSuperview];
+    
+    self.buttBlack = nil;
+    self.viewBottom = nil;
+    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     if ([[dic objectForKey:@"realName"] isEqualToString:@""]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值必须先通过实名认证"];
@@ -619,7 +625,7 @@
             butDecide.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
             butDecide.layer.cornerRadius = 3;
             butDecide.layer.masksToBounds = YES;
-            [butDecide addTarget:self action:@selector(decideCashMoney:) forControlEvents:UIControlEventTouchUpInside];
+            [butDecide addTarget:self action:@selector(cashMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
 
 //            当输入的值小于余额时 可以投资
         } else if (shuRuInt <= numberInt && shuRuInt != 0) {

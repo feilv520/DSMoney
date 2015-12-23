@@ -369,7 +369,7 @@
     imageSchedule.image = [UIImage imageNamed:@"充值成功"];
     [butSubmitAlert setTitle:@"恭喜您充值成功" forState:UIControlStateNormal];
     
-    buttonAplly = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT / 2 + 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"去赚钱"];
+    buttonAplly = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT / 2 + 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"完成"];
     [self.view addSubview:buttonAplly];
     buttonAplly.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [buttonAplly setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
@@ -388,23 +388,27 @@
 - (void)buttonGoGetMoney:(UIButton *)button
 {
     NSLog(@"去赚钱");
-    NSArray *viewController = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
-    
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
-    
-    UIButton *indexButton = [app.tabBarVC.tabButtonArray objectAtIndex:1];
-    
-    for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
-        
-        if (indexButton.tag != tempButton.tag) {
-            
-            [tempButton setSelected:NO];
-        }
-    }
-    
-    [indexButton setSelected:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    BigMoneyViewController *bigVC = [[BigMoneyViewController alloc] init];
+    bigVC.big = NO;
+    [self.navigationController pushViewController:bigVC animated:YES];
+//    NSArray *viewController = [self.navigationController viewControllers];
+//    [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
+//
+//    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+//    [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+//    
+//    UIButton *indexButton = [app.tabBarVC.tabButtonArray objectAtIndex:1];
+//    
+//    for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+//        
+//        if (indexButton.tag != tempButton.tag) {
+//            
+//            [tempButton setSelected:NO];
+//        }
+//    }
+//    
+//    [indexButton setSelected:YES];
 }
 
 //编辑
