@@ -29,7 +29,7 @@
 
 - (void)webViewShow
 {
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
     [self.view addSubview:webView];
     webView.delegate = self;
     webView.scalesPageToFit = YES;
@@ -37,7 +37,7 @@
     webView.scrollView.showsHorizontalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
-    NSURL *url = [NSURL URLWithString:@"http://www.baidu.com"];
+    NSURL *url = [NSURL URLWithString:self.photoUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

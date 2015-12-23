@@ -10,6 +10,6 @@
 
 @interface BannerViewController : BaseViewController
 
-@property (nonatomic, strong) NSString *photoName;
-
+@property (nonatomic, copy) NSString *photoName;
+@property (nonatomic, copy) NSString *photoUrl;
 @end

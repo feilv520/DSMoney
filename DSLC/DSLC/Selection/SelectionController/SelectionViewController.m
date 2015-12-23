@@ -137,17 +137,18 @@
     
     [backgroundScrollView addSubview:bannerScrollView];
     
-//    YYAnimatedImageView *bannerFirst = [YYAnimatedImageView new];
-//    bannerFirst.yy_imageURL = [NSURL URLWithString:[[self.photoArray objectAtIndex:0] adImg]];
-//    bannerFirst.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (self.photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
-//    
-//    YYAnimatedImageView *bannerLast = [YYAnimatedImageView new];
-//    bannerLast.yy_imageURL = [NSURL URLWithString:[[self.photoArray objectAtIndex:self.photoArray.count - 1] adImg]];
-//    bannerLast.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    YYAnimatedImageView *bannerFirst = [YYAnimatedImageView new];
+    bannerFirst.yy_imageURL = [NSURL URLWithString:[[self.photoArray objectAtIndex:0] adImg]];
+    bannerFirst.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (self.photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    
+    YYAnimatedImageView *bannerLast = [YYAnimatedImageView new];
+    bannerLast.yy_imageURL = [NSURL URLWithString:[[self.photoArray objectAtIndex:self.photoArray.count - 1] adImg]];
+    bannerLast.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180);
     
     for (NSInteger i = 0; i < self.photoArray.count; i++) {
         YYAnimatedImageView *bannerObject = [YYAnimatedImageView new];
         bannerObject.yy_imageURL = [NSURL URLWithString:[[self.photoArray objectAtIndex:i] adImg]];
+        bannerObject.tag = i;
         bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
         UITapGestureRecognizer *tapLeft = [[UITapGestureRecognizer alloc] init];
         [bannerObject addGestureRecognizer:tapLeft];
@@ -162,8 +163,8 @@
         [bannerScrollView addSubview:bannerObject];
     }
     
-//    [bannerScrollView addSubview:bannerFirst];
-//    [bannerScrollView addSubview:bannerLast];
+    [bannerScrollView addSubview:bannerFirst];
+    [bannerScrollView addSubview:bannerLast];
     
     pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 150, WIDTH_CONTROLLER_DEFAULT, 30)];
     
@@ -177,8 +178,12 @@
 }
 
 - (void)bannerObject:(UITapGestureRecognizer *)tap{
+    if (pageControl.currentPage == 4) {
+        return;
+    }
     BannerViewController *bannerVC = [[BannerViewController alloc] init];
-    bannerVC.photoName = [NSString stringWithFormat:@"%ld",tap.numberOfTouchesRequired];
+    bannerVC.photoName = [[self.photoArray objectAtIndex:pageControl.currentPage] adLabel];
+    bannerVC.photoUrl = [[self.photoArray objectAtIndex:pageControl.currentPage] adLink];
     pushVC(bannerVC);
 }
 
