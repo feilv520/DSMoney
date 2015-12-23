@@ -518,6 +518,8 @@
                     
                     makeSureVC.decide = YES;
                     
+                    [MobClick event:@"makeSure"];
+                    
                 } else {
                     
                     makeSureVC.decide = NO;

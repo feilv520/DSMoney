@@ -10,4 +10,6 @@
 
 @interface CheckViewController : BaseViewController
 
+@property (nonatomic, strong) NSString *orderId;
+
 @end
