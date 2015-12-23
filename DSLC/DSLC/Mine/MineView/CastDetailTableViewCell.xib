@@ -23,7 +23,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东方资产沪港通资产" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Zh-km-APb">
-                        <rect key="frame" x="10" y="21" width="152" height="21"/>
+                        <rect key="frame" x="10" y="21" width="329" height="21"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="7so-co-jyj"/>
@@ -61,7 +61,7 @@
                     <constraint firstItem="2Zh-km-APb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="oO2-db-6Mz"/>
                     <constraint firstItem="PCR-J3-MRU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="85" id="pLH-Gp-Smn"/>
                     <constraint firstItem="BMc-yN-uPz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="34" id="rA4-de-Th6"/>
-                    <constraint firstItem="2Zh-km-APb" firstAttribute="centerX" secondItem="PCR-J3-MRU" secondAttribute="centerX" constant="-137" id="vWM-hg-DY3"/>
+                    <constraint firstItem="2Zh-km-APb" firstAttribute="centerX" secondItem="PCR-J3-MRU" secondAttribute="centerX" constant="-48.5" id="vWM-hg-DY3"/>
                     <constraint firstItem="20w-SX-Osb" firstAttribute="top" secondItem="2Zh-km-APb" secondAttribute="bottom" constant="8" symbolic="YES" id="wVj-zd-bUH"/>
                 </constraints>
             </tableViewCellContentView>

@@ -76,6 +76,7 @@
     NSString *ownerBCard;
     
     NSString *ownerOrder;
+    
 }
 
 @property (nonatomic) LLPaySdk *sdk;
@@ -741,7 +742,12 @@
 - (void)bookButtonAction:(UIButton *)btn
 {
     RiskAlertBookViewController *riskVC = [[RiskAlertBookViewController alloc] init];
-    riskVC.disign = YES;
+    
+    if (self.flag)
+        riskVC.disign = @"registerOfP";
+    else
+        riskVC.disign = @"registerOfL";
+    
     [self.navigationController pushViewController:riskVC animated:YES];
 }
 

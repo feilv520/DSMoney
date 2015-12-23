@@ -366,7 +366,7 @@
             
 //            风险揭示
             RiskAlertBookViewController *risk = [[RiskAlertBookViewController alloc] init];
-            risk.disign = NO;
+            risk.disign = @"risk";
             risk.risk = [self.asset objectForKey:@"assetRiskNotice"];
             [self.navigationController pushViewController:risk animated:YES];
             
