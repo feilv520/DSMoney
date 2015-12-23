@@ -37,15 +37,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self getProductList];
+//    [self getProductList];
+    [self imageViewShow];
     
-    [self loadingWithView:self.view loadingFlag:NO height:120.0];
+//    [self loadingWithView:self.view loadingFlag:NO height:120.0];
     
     self.productListArray = [NSMutableArray array];
     
     buttonTag = 101;
     
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
@@ -53,6 +54,15 @@
     self.navigationItem.title = @"票据投资";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
+}
+
+- (void)imageViewShow
+{
+    UIImageView *imageBack = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 50, (HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/3 - 50, 100, 100) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"loading_middle_02"]];
+    [self.view addSubview:imageBack];
+    
+    UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(0, (HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/3 + 60, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"敬 请 期 待 哟..."];
+    [self.view addSubview:label];
 }
 
 //TableView展示
