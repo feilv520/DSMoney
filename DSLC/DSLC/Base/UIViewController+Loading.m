@@ -247,7 +247,7 @@
     [noDateView addSubview:noDateImgV];
     
     UILabel *noDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(noDateImgV.frame), WIDTH_CONTROLLER_DEFAULT, 25)];
-    [noDateLabel setText:@"无数据"];
+    [noDateLabel setText:nameString];
     noDateLabel.textAlignment = NSTextAlignmentCenter;
     
     [noDateView addSubview:noDateLabel];

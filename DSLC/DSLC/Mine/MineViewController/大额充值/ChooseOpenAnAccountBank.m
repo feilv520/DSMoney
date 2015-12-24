@@ -47,6 +47,8 @@
         [self getAreaListOfS];
     }
     
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    _tableView.hidden = YES;
 }
 
 - (void)tableViewContentShow
@@ -123,6 +125,8 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getBankList" parameters:NULL success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"mmmmmmmm%@", responseObject);
+        [self loadingWithHidden:YES];
+        _tableView.hidden = NO;
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             

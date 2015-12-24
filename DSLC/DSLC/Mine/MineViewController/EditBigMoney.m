@@ -37,6 +37,8 @@
     UIImageView *imagePos;
     YYAnimatedImageView *posImageView;
     NSData *finaCard;
+    
+    NSInteger countt;
 }
 
 @end
@@ -51,6 +53,7 @@
     [self.navigationItem setTitle:@"大额充值申请"];
     
     [self contentShow];
+    countt = 0;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnBankName:) name:@"bank" object:nil];
 }
@@ -299,9 +302,16 @@
 //确定按钮
 - (void)makeSureEditReturn:(UIButton *)button
 {
-    [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+    countt++;
+    if (countt == 1) {
+        [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+        
+    } else {
+        [self submitLoadingWithHidden:NO];
+    }
+
     fieldPos = (UITextField *)[self.view viewWithTag:607];
-    NSLog(@"zzzzzzzzzz%@", fieldPos.text);
+
     if (![fieldPos.text isEqualToString:@"已上传POS单照片"]) {
         NSLog(@"aaaaaaaaaaaaaa");
         [self upPosData];
@@ -373,6 +383,8 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
+        [self submitLoadingWithHidden:YES];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"网络超时,请再次提交"];
     }];
 }
 
@@ -409,6 +421,8 @@
         
     } failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
         NSLog(@"%@", error);
+        [self submitLoadingWithHidden:YES];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"网络超时,请再次提交"];
     }];
 }
 

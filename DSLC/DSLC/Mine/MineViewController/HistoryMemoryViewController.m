@@ -32,6 +32,8 @@
     [self getData];
     
     stateArr = [NSMutableArray array];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    _tabelView.hidden = YES;
 }
 
 - (void)tabelViewSHow
@@ -118,15 +120,25 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getBigPutOnList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"kkkkkkkkkkkkk%@", responseObject);
-        
+        [self loadingWithHidden:YES];
         NSMutableArray *dataArr = [responseObject objectForKey:@"BigPutOn"];
-        for (NSDictionary *dataDic in dataArr) {
-            BigMoneyHistory *bigMoney = [[BigMoneyHistory alloc] init];
-            [bigMoney setValuesForKeysWithDictionary:dataDic];
-            [stateArr addObject:bigMoney];
-        }
         
-        [_tabelView reloadData];
+        if (dataArr.count == 0) {
+            
+            [self noDateWithView:@"无历史记录" height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 view:self.view];
+            _tabelView.hidden = YES;
+            
+        } else {
+            _tabelView.hidden = NO;
+            
+            for (NSDictionary *dataDic in dataArr) {
+                BigMoneyHistory *bigMoney = [[BigMoneyHistory alloc] init];
+                [bigMoney setValuesForKeysWithDictionary:dataDic];
+                [stateArr addObject:bigMoney];
+            }
+            
+            [_tabelView reloadData];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

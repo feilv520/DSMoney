@@ -100,6 +100,9 @@
     [self getData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:@"reload" object:nil];
+    
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    _tableView.hidden = YES;
 }
 
 //tableView展示
@@ -606,6 +609,9 @@
             return ;
         }
         NSLog(@"%@",responseObject);
+        
+        [self loadingWithHidden:YES];
+        _tableView.hidden = NO;
         
         self.dataDic = [NSDictionary dictionary];
         self.dataDic = [responseObject objectForKey:@"User"];

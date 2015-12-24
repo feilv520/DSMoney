@@ -40,20 +40,25 @@
     
     UIImageView *imageView;
     NSData *finaCard;
+    
+    NSInteger countIns;
 }
 
 @end
 
 @implementation BigMoneyViewController
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self getVData];
-}
+//- (void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self getVData];
+    countIns = 0;
     
     self.view.backgroundColor = [UIColor whiteColor];
 
@@ -68,6 +73,9 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.imageReturn];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonReturn:)];
     [self.imageReturn addGestureRecognizer:tap];
+    
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    _tableView.hidden = YES;
 }
 
 - (void)buttonReturn:(UIBarButtonItem *)bar
@@ -307,9 +315,9 @@
         
         NSLog(@"%@",responseDic);
         
-        [self submitLoadingWithHidden:YES];
-        
+        [self loadingWithHidden:YES];
         if ([[responseDic objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            [self submitLoadingWithHidden:YES];
             
             NSString *IDstr = [[responseDic objectForKey:@"id"] description];
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
@@ -327,6 +335,8 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
+        [self submitLoadingWithHidden:YES];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"网络超时,请再次提交"];
     }];
 }
 
@@ -482,7 +492,13 @@
 //申请按钮
 - (void)applyBigMoney:(UIButton *)button
 {
-    [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+    countIns ++;
+    if (countIns == 1) {
+        [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+        
+    } else {
+        [self submitLoadingWithHidden:NO];
+    }
     
     fileldName = (UITextField *)[self.view viewWithTag:600];
     fieldBank = (UITextField *)[self.view viewWithTag:601];
@@ -599,6 +615,8 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
+        [self submitLoadingWithHidden:YES];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"网络超时,请再次提交"];
     }];
 }
 
@@ -619,6 +637,7 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"%@",responseObject);
+        [self loadingWithHidden:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -648,8 +667,6 @@
                 [self tableViewShow];
                 
             }
-            
-            [_tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

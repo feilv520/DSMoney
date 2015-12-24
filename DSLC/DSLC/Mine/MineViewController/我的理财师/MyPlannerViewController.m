@@ -172,7 +172,11 @@
         cell.moneyAndPeople.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.moneyAndPeople.textAlignment = NSTextAlignmentRight;
         labelName.text = [DES3Util decrypt:planner.userRealname];
-        imageHead.yy_imageURL = [NSURL URLWithString:planner.avatarImg];
+        if (planner.avatarImg == nil) {
+            imageHead.image = [UIImage imageNamed:@"默认头像"];
+        } else {
+            imageHead.yy_imageURL = [NSURL URLWithString:planner.avatarImg];
+        }
         
         if (indexPath.row == 1) {
             cell.moneyAndPeople.textColor = [UIColor daohanglan];
@@ -193,7 +197,13 @@
         cell.moneyAndPeople.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.moneyAndPeople.textAlignment = NSTextAlignmentRight;
         labelName.text = planner.userRealname;
-        imageHead.yy_imageURL = [NSURL URLWithString:planner.avatarImg];
+
+        if (planner.avatarImg == nil) {
+            imageHead.image = [UIImage imageNamed:@"默认头像"];
+        } else {
+            imageHead.yy_imageURL = [NSURL URLWithString:planner.avatarImg];
+        }
+
         
         if (indexPath.row == 1) {
             cell.moneyAndPeople.textColor = [UIColor daohanglan];

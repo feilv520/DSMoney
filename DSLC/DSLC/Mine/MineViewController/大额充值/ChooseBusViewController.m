@@ -37,7 +37,7 @@
     _tableView.delegate = self;
     _tableView.tableFooterView = [UIView new];
     
-    titleArr = @[@"通联", @"胜付通"];
+    titleArr = @[@"通联", @"盛付通"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

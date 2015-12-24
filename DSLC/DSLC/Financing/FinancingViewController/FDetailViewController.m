@@ -488,8 +488,6 @@
 //确认投资按钮
 - (void)makeSureButton:(UIButton *)button
 {
-    [self submitLoadingWithView:self.view  loadingFlag:NO height:0];
-    
     if ([self.residueMoney isEqualToString:@"0.00"]) {
         [self orderProduct];
         return;
