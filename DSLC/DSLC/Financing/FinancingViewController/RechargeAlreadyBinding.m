@@ -268,7 +268,7 @@
         if (buttonIndex == 1) {
             AddBankViewController *addBVC = [[AddBankViewController alloc] init];
             addBVC.realNameStatus = YES;
-            pushVC(addBVC);
+            [self.navigationController pushViewController:addBVC animated:YES];
         } else {
             popVC;
         }

@@ -98,6 +98,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)paymentEnd:(LLPayResult)resultCode withResultDic:(NSDictionary *)dic{
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

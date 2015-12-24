@@ -229,6 +229,11 @@
             cell.labelRight.text = [rightArray objectAtIndex:indexPath.row - 1];
             cell.labelRight.textColor = [UIColor zitihui];
             cell.labelRight.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            if (cell.labelRight.text.length > 15) {
+                cell.labelRight.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+            } else if (cell.labelRight.text.length > 18) {
+                cell.labelRight.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+            }
             cell.labelRight.textAlignment = NSTextAlignmentRight;
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -257,7 +262,7 @@
         cell.buyPlan.textColor = [UIColor zitihui];
         cell.buyPlan.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.timeOne.text = @"2015-9-22";
+        cell.timeOne.text = [self.asset objectForKey:@"assetSaleTime"];
         cell.timeOne.textColor = [UIColor zitihui];
         cell.timeOne.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
@@ -265,7 +270,7 @@
         cell.beginDay.textColor = [UIColor zitihui];
         cell.beginDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.rightNowTime.text = @"立即起息";
+        cell.rightNowTime.text = [self.asset objectForKey:@"assetInterestBdate"];
         cell.rightNowTime.textColor = [UIColor zitihui];
         cell.rightNowTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
@@ -273,7 +278,7 @@
         cell.labelEndDay.textColor = [UIColor zitihui];
         cell.labelEndDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.endTime.text = @"2015-9-24";
+        cell.endTime.text = [self.asset objectForKey:@"assetInterestEdate"];
         cell.endTime.textColor = [UIColor zitihui];
         cell.endTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
@@ -281,7 +286,7 @@
         cell.labelCash.textColor = [UIColor zitihui];
         cell.labelCash.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.cashDay.text = @"2015-9-25";
+        cell.cashDay.text = [self.asset objectForKey:@"assetToaccountDate"];
         cell.cashDay.textColor = [UIColor zitihui];
         cell.cashDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
