@@ -17,6 +17,7 @@
     UITextField *_textField2;
     UITextField *_textField3;
     UIButton *buttonNext;
+    NSInteger countNum;
 }
 
 @end
@@ -32,6 +33,7 @@
     [self.navigationItem setTitle:@"实名认证"];
     
     [self contentShow];
+    countNum = 0;
 }
 
 - (void)contentShow
@@ -113,6 +115,7 @@
 //认证按钮
 - (void)nextStepButton:(UIButton *)button
 {
+    [self submitLoadingWithView:self.view loadingFlag:0 height:0];
     [self.view endEditing:YES];
     
     if (_textField1.text.length == 0) {
@@ -167,6 +170,7 @@
             return ;
         } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             NSLog(@"%@",responseObject);
+            [self submitLoadingWithHidden:YES];
             
             if (self.realNamePan == YES) {
                 
