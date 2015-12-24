@@ -115,7 +115,7 @@
 //认证按钮
 - (void)nextStepButton:(UIButton *)button
 {
-    [self submitLoadingWithView:self.view loadingFlag:0 height:0];
+//    [self submitLoadingWithView:self.view loadingFlag:0 height:0];
     [self.view endEditing:YES];
     
     if (_textField1.text.length == 0) {
