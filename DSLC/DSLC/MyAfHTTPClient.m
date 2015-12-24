@@ -88,7 +88,7 @@
         NSData *doubi = responseObject;
         NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
         
-        NSLog(@"%@",responseString);
+//        NSLog(@"%@",responseString);
         
         NSString *character = nil;
         for (int i = 0; i < responseString.length; i ++) {

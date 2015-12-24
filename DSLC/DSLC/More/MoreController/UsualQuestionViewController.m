@@ -8,7 +8,7 @@
 
 #import "UsualQuestionViewController.h"
 
-@interface UsualQuestionViewController ()
+@interface UsualQuestionViewController () <UIWebViewDelegate>
 
 @end
 
@@ -29,12 +29,21 @@
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
     [self.view addSubview:webView];
     
+    [self loadingWithView:webView loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    
+    webView.delegate = self;
+    
     webView.scrollView.showsHorizontalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
-    NSURL *url = [NSURL URLWithString:@"http://192.168.0.41:8080/tongjiang/more_problem.do"];
+    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/more_problem.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self loadingWithHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

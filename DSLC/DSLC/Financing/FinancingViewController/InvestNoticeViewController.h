@@ -10,4 +10,6 @@
 
 @interface InvestNoticeViewController : BaseViewController
 
+@property (nonatomic) NSString *productID;
+
 @end

@@ -32,6 +32,8 @@
     plannerArr = [NSMutableArray array];
     [self tableViewShow];
     [self getPlannerData];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    _tableView.hidden = YES;
 }
 
 - (void)tableViewShow
@@ -125,6 +127,8 @@
         NSLog(@"%@", responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            [self loadingWithHidden:YES];
+            _tableView.hidden = NO;
             
             NSMutableArray *userArr = [responseObject objectForKey:@"User"];
             

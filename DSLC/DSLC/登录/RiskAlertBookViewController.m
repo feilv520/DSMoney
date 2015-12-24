@@ -47,6 +47,7 @@
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64)];
     [self.view addSubview:webView];
     webView.delegate = self;
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
     
     self.risk = [self.risk stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
     self.risk = [self.risk stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
@@ -59,13 +60,16 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '80%'"];//修改百分比即可
+    [self loadingWithHidden:YES];
+//    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '80%'"];//修改百分比即可
 }
 
 - (void)webViewShow
 {
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
     [self.view addSubview:webView];
+    webView.delegate = self;
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
     
     webView.scrollView.showsHorizontalScrollIndicator = NO;
     webView.scrollView.bounces = NO;

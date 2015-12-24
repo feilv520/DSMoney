@@ -331,6 +331,7 @@
                 NSDictionary *dataDic = [responseObject objectForKey:@"User"];
                 [planner setValuesForKeysWithDictionary:dataDic];
                 [contentArr addObject:planner];
+                
                 [self viewHeadShow];
                 NSLog(@"mmmmmmm%@", contentArr);
             } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {

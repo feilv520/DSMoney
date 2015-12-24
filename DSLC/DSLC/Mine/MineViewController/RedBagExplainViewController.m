@@ -8,7 +8,7 @@
 
 #import "RedBagExplainViewController.h"
 
-@interface RedBagExplainViewController ()
+@interface RedBagExplainViewController () <UIWebViewDelegate>
 
 @end
 
@@ -31,10 +31,17 @@
     
     webView.scrollView.showsHorizontalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
+    webView.delegate = self;
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
     
     NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/mi_redbag2.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self loadingWithHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

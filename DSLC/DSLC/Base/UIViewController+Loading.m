@@ -95,8 +95,11 @@
     
     loadingImgView.tag = 9098;
     
-    loadingImgView.center = CGPointMake(self.view.center.x, height);
-    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        loadingImgView.center = CGPointMake(160, height);
+    } else {
+        loadingImgView.center = CGPointMake(self.view.center.x, height);
+    }
     
     for (NSInteger i = 1; i <= 8; i++) {
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_middle_0%ld",(long)i]];

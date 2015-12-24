@@ -35,10 +35,14 @@
 
 - (void)webViewShow
 {
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
     [self.view addSubview:webView];
+    webView.scrollView.showsVerticalScrollIndicator = NO;
+    webView.scrollView.bounces = NO;
     
-    NSURL *url = [NSURL URLWithString:@"http://192.168.0.41:8080/tongjiang/prouctInfo/productDescThree.do?productId=165&type=2&_FUN=descSolid.do"];
+    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prouctInfo/product_descthree.html?productId=%@&type=2",self.productID];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

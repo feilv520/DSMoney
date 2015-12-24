@@ -39,6 +39,9 @@
     
     [self.navigationItem setTitle:@"消息中心"];
     
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    _tableView.hidden = YES;
+    
 }
 
 - (void)tableViewShow
@@ -137,8 +140,11 @@
         
         if ([[responseObject objectForKey:@"Msg"] count] == 0) {
             [self noDateWithView:nil height:120 view:self.view];
+            
         } else {
         
+            [self loadingWithHidden:YES];
+            _tableView.hidden = NO;
             for (NSDictionary *dic in [responseObject objectForKey:@"Msg"]) {
                 MessageModel *messageM = [[MessageModel alloc] init];
                 [messageM setValuesForKeysWithDictionary:dic];

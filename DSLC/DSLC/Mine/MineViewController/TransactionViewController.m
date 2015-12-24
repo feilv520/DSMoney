@@ -44,6 +44,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    
     self.view.backgroundColor = Color_Gray;
     
     self.transactionArray = [NSMutableArray array];
@@ -60,7 +62,8 @@
     [self showTableView];
     [self naviagationContentShow];
     [self showSelectionView];
-
+    bView.hidden = YES;
+    self.mainTableView.hidden = YES;
 }
 
 //导航内容
@@ -450,6 +453,8 @@ numberOfRowsInComponent:(NSInteger)component
             [self noDateWithView:nil height:120 view:self.view];
             [_mainTableView setHidden:YES];
         } else {
+            [self loadingWithHidden:YES];
+            [self loadingWithHidden:YES];
             [_mainTableView setHidden:NO];
             for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
                 self.transactionName = [[dic allKeys] copy];
