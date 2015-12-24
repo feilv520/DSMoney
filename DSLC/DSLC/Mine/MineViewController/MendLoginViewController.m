@@ -182,6 +182,8 @@
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
+                [self logout];
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[NSString stringWithFormat:@"%@,需要重新登陆",[responseObject objectForKey:@"resultMsg"]]];
                 [self.navigationController popToRootViewControllerAnimated:YES];
@@ -207,6 +209,27 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
+}
+
+- (void)logout
+{
+    NSDictionary *parameter = @{@"userId":[self.flagDic objectForKey:@"id"]};
+    
+    NSLog(@"%@",parameter);
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/logout" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"asasasasasa%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已退出"];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

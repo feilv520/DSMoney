@@ -78,6 +78,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnCityWithSName:) name:@"cityS" object:nil];
 }
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{  // 注意：只有非根控制器才有滑动返回功能，根控制器没有。  // 判断导航控制器是否只有一个子控制器，如果只有一个子控制器，肯定是根控制器
+    // 表示用户在根控制器界面，就不需要触发滑动手势，
+    return NO;
+
+}
+
 - (void)buttonReturn:(UIBarButtonItem *)bar{
     NSArray *viewController = [self.navigationController viewControllers];
     
@@ -122,7 +128,7 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (220.0 / 667.0))];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 250.0)];
     _tableView.tableFooterView = view;
     _tableView.backgroundColor = [UIColor huibai];
     
@@ -257,27 +263,9 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+    if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
         
-        if (textField.tag == 402) {
-            
-            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                
-                _tableView.contentOffset = CGPointMake(0, 100);
-                
-            } completion:^(BOOL finished) {
-                
-            }];
-        } else if (textField.tag == 404) {
-            
-            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                
-                _tableView.contentOffset = CGPointMake(0, 100);
-                
-            } completion:^(BOOL finished) {
-                
-            }];
-        } else if (textField.tag == 405) {
+        if (textField.tag == 405) {
             
             [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                     
