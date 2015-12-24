@@ -39,6 +39,11 @@
     NSInteger flag;
     
     NSMutableArray *flagArray;
+    
+    NSInteger page;
+    
+    BOOL moreFlag;
+    BOOL newFlag;
 }
 
 @property (nonatomic, strong) NSMutableArray *productListArray;
@@ -56,7 +61,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    page = 1;
+    
+    moreFlag = NO;
+    
+    newFlag = NO;
+    
     [self getProductList];
+    
+    [self tableViewShow];
+    
+    _tableView.hidden = YES;
     
     [self loadingWithView:self.view loadingFlag:NO height:120.0];
     
@@ -195,25 +210,66 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        [self loadingWithHidden:YES];
-        
-        NSLog(@"%@",responseObject);
-        
-        NSArray *array = [responseObject objectForKey:@"Product"];
-        for (NSDictionary *dic in array) {
-            [flagArray addObject:[dic objectForKey:@"productStatus"]];
-            ProductListModel *productM = [[ProductListModel alloc] init];
-            [productM setValuesForKeysWithDictionary:dic];
-            [self.productListArray addObject:productM];
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            [self loadingWithHidden:YES];
+            
+            newFlag = YES;
+            
+            _tableView.hidden = NO;
+            
+            NSLog(@"%@",responseObject);
+            
+            NSArray *array = [responseObject objectForKey:@"Product"];
+            
+            for (NSDictionary *dic in array) {
+                [flagArray addObject:[dic objectForKey:@"productStatus"]];
+                ProductListModel *productM = [[ProductListModel alloc] init];
+                [productM setValuesForKeysWithDictionary:dic];
+                [self.productListArray addObject:productM];
+            }
+            
+            if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
+                moreFlag = YES;
+            }
+            
+            [_tableView reloadData];
+
+        } else {
+            
         }
         
-        [self tableViewShow];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
         
     }];
+}
+
+#pragma mark 判断是否还要加载更多
+#pragma mark --------------------------------
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer{
+    
+    if (moreFlag) {
+        // 拿到当前的上拉刷新控件，结束刷新状态
+        [footer endRefreshing];
+    } else {
+        page ++;
+        [self getProductList];
+    }
+    
+}
+
+- (void)loadNewData:(MJRefreshGifHeader *)header{
+    [self.productListArray removeAllObjects];
+    self.productListArray = nil;
+    self.productListArray = [NSMutableArray array];
+    page = 1;
+    [self getProductList];
+    if (newFlag) {
+        [header endRefreshing];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
