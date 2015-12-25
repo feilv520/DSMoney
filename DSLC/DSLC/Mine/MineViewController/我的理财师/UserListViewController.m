@@ -40,12 +40,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.5;
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 10;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -68,11 +73,11 @@
     
     cell.labelContent.text = @"你是不是饿得慌???";
     cell.labelContent.textColor = [UIColor zitihui];
-    cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
     cell.labelTime.text = @"2015-12-26 17:25";
     cell.labelTime.textColor = [UIColor zitihui];
-    cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+    cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
     return cell;
 }
@@ -80,6 +85,23 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+- (void)getUserList
+{
+    NSDictionary *parameter = @{@"curPage":@1};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getIndexFinPlannerList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]){
+            
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

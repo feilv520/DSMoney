@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NiS-IU-cyr">
-                        <rect key="frame" x="70" y="48" width="292" height="23"/>
+                        <rect key="frame" x="70" y="45" width="292" height="23"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="292" id="0zj-YX-y8d"/>
@@ -44,7 +44,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFL-7f-Uok">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFL-7f-Uok">
                         <rect key="frame" x="251" y="15" width="111" height="25"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -63,12 +63,13 @@
                     <constraint firstItem="lH8-nC-Qq6" firstAttribute="leading" secondItem="neq-Ab-C7f" secondAttribute="trailing" constant="10" id="Rs5-Es-Vit"/>
                     <constraint firstAttribute="trailingMargin" secondItem="UFL-7f-Uok" secondAttribute="trailing" constant="5" id="b9h-Xc-KTu"/>
                     <constraint firstItem="lH8-nC-Qq6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="bNY-7P-toz"/>
-                    <constraint firstItem="NiS-IU-cyr" firstAttribute="top" secondItem="UFL-7f-Uok" secondAttribute="bottom" constant="8" id="co8-lM-g5M"/>
+                    <constraint firstItem="NiS-IU-cyr" firstAttribute="top" secondItem="UFL-7f-Uok" secondAttribute="bottom" constant="5" id="co8-lM-g5M"/>
                     <constraint firstItem="neq-Ab-C7f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="fsU-ev-Fre"/>
                     <constraint firstItem="UFL-7f-Uok" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="ker-mQ-Gh8"/>
                     <constraint firstItem="neq-Ab-C7f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="yzo-Da-Oca"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>
                 <outlet property="imageHead" destination="neq-Ab-C7f" id="iW6-Gz-lKP"/>
                 <outlet property="labelContent" destination="NiS-IU-cyr" id="eVG-Ju-wVj"/>

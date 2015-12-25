@@ -35,6 +35,7 @@
 #import "ApplyScheduleViewController.h"
 #import "Planner.h"
 #import "RealNameViewController.h"
+#import "UserListViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -49,6 +50,8 @@
     UIButton *myRedBagButton;
     UIButton *messageButton;
     NSMutableArray *plannerArray;
+    
+    UIButton *butInvitate;
 }
 
 @property (nonatomic, strong) NSString *imgString;
@@ -171,14 +174,16 @@
     [butHeadPic addTarget:self action:@selector(headPictureButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    我的理财师/咨询按钮
-    UIButton *butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - (85 / 375.0) * WIDTH_CONTROLLER_DEFAULT, 31, (75 / 375.0) * WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (25 / 667.0)) backgroundColor:nil textColor:[UIColor whiteColor] titleText:nil];
+    butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - (85 / 375.0) * WIDTH_CONTROLLER_DEFAULT, 31, (75 / 375.0) * WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (25 / 667.0)) backgroundColor:nil textColor:[UIColor whiteColor] titleText:nil];
     if ([[[self.myAccountInfo objectForKey:@"inviteType"] description] isEqualToString:@"0"]) {
 
         [butInvitate setBackgroundImage:[UIImage imageNamed:@"anniu"] forState:UIControlStateNormal];
         [butInvitate setTitle:@"我的理财师" forState:UIControlStateNormal];
+        butInvitate.tag = 9092;
         
     } else {
         [butInvitate setBackgroundImage:[UIImage imageNamed:@"121"] forState:UIControlStateNormal];
+        butInvitate.tag = 8090;
     }
     
 //    我的理财师按钮
@@ -188,7 +193,13 @@
     } else {
         butInvitate.titleLabel.font = [UIFont systemFontOfSize:13];
     }
-    [butInvitate addTarget:self action:@selector(inviteButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (butInvitate.tag == 9092) {
+        
+        [butInvitate addTarget:self action:@selector(inviteButton:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [butInvitate addTarget:self action:@selector(userListButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
 
 //    昨日收益钱数
     UILabel *labelNum = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT)/2, HEIGHT_CONTROLLER_DEFAULT * (63.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (200.0 / 375.0), 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
@@ -418,6 +429,13 @@
     [MobClick event:@"MyInformation"];
     MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
     [self.navigationController pushViewController:myInformationVC animated:YES];
+}
+
+//我的咨询按钮
+- (void)userListButton:(UIButton *)button
+{
+    UserListViewController *userList = [[UserListViewController alloc] init];
+    [self.navigationController pushViewController:userList animated:YES];
 }
 
 //我的理财师按钮
