@@ -15,6 +15,7 @@
 #import "ThreeViewController.h"
 #import "define.h"
 #import "LoginViewController.h"
+#import "WelcomeViewController.h"
 
 
 @interface AppDelegate ()
@@ -77,7 +78,7 @@
     
     NSDictionary *dic = self.flagDic;
     
-    NSString *flag = [dic objectForKey:@"FlagWithVC"];
+    NSString *flag = [dic objectForKey:@"FristOpen"];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
@@ -129,8 +130,13 @@
         
         self.window.rootViewController = self.tabBarVC;
     } else {
-        MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
-        self.window.rootViewController = myHandVC;
+        // 手势
+//        MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
+//        self.window.rootViewController = myHandVC;
+        
+        // 欢迎页
+        WelcomeViewController *welcome = [[WelcomeViewController alloc] init];
+        self.window.rootViewController = welcome;
     }
     
     
