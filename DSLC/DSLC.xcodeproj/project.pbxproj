@@ -2449,6 +2449,7 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8D3942F01C2D15B500783FD0 /* welcome */,
 				810C76671C2D1210000637FD /* 121@2x.png */,
 				810C76681C2D1210000637FD /* 121@3x.png */,
 				810C76691C2D1210000637FD /* 椭圆-2@2x.png */,
