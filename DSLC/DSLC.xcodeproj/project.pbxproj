@@ -493,6 +493,10 @@
 		8D3125EA1BD7798000143B71 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3125E81BD7798000143B71 /* ForgetPasswordViewController.m */; };
 		8D3125EB1BD7798000143B71 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3125E91BD7798000143B71 /* ForgetPasswordViewController.xib */; };
 		8D31DF221C04874700B676AF /* MTransactionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D31DF211C04874700B676AF /* MTransactionModel.m */; settings = {ASSET_TAGS = (); }; };
+		8D3942EF1C2D14B200783FD0 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3942EE1C2D14B200783FD0 /* WelcomeViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D3942F21C2D15C300783FD0 /* welcome_one.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3942F11C2D15C300783FD0 /* welcome_one.png */; settings = {ASSET_TAGS = (); }; };
+		8D3942F41C2D15C900783FD0 /* welcome_two.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3942F31C2D15C900783FD0 /* welcome_two.png */; settings = {ASSET_TAGS = (); }; };
+		8D3942F61C2D15CE00783FD0 /* welcome_three.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3942F51C2D15CE00783FD0 /* welcome_three.png */; settings = {ASSET_TAGS = (); }; };
 		8D3A2FD11BE70F5500913DEC /* lianggeren@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3A2FCF1BE70F5500913DEC /* lianggeren@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D3A2FD21BE70F5500913DEC /* lianggeren@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3A2FD01BE70F5500913DEC /* lianggeren@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D3A2FD91BE70FBF00913DEC /* PhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A2FD41BE70FBF00913DEC /* PhotoTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -1528,6 +1532,11 @@
 		8D3125E91BD7798000143B71 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
 		8D31DF201C04874700B676AF /* MTransactionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTransactionModel.h; sourceTree = "<group>"; };
 		8D31DF211C04874700B676AF /* MTransactionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTransactionModel.m; sourceTree = "<group>"; };
+		8D3942ED1C2D14B200783FD0 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		8D3942EE1C2D14B200783FD0 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		8D3942F11C2D15C300783FD0 /* welcome_one.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_one.png; sourceTree = "<group>"; };
+		8D3942F31C2D15C900783FD0 /* welcome_two.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_two.png; sourceTree = "<group>"; };
+		8D3942F51C2D15CE00783FD0 /* welcome_three.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_three.png; sourceTree = "<group>"; };
 		8D3A2FCF1BE70F5500913DEC /* lianggeren@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lianggeren@2x.png"; sourceTree = "<group>"; };
 		8D3A2FD01BE70F5500913DEC /* lianggeren@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lianggeren@3x.png"; sourceTree = "<group>"; };
 		8D3A2FD31BE70FBF00913DEC /* PhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTableViewCell.h; sourceTree = "<group>"; };
@@ -2137,6 +2146,8 @@
 				8D88D1091BFEEDDE0051D6DA /* UIViewController+Loading.m */,
 				8DA060CB1C02BEBD00E3E025 /* DES3Util.h */,
 				8DA060CC1C02BEBD00E3E025 /* DES3Util.m */,
+				8D3942ED1C2D14B200783FD0 /* WelcomeViewController.h */,
+				8D3942EE1C2D14B200783FD0 /* WelcomeViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2413,6 +2424,7 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8D3942F01C2D15B500783FD0 /* welcome */,
 				81E0CCE51C28EC7400148609 /* 失败@2x.png */,
 				81E0CCE61C28EC7400148609 /* 失败@3x.png */,
 				8D3EE9C91C27AB400031F7C9 /* 我的银行卡副本 */,
@@ -3285,6 +3297,16 @@
 				8D3125E91BD7798000143B71 /* ForgetPasswordViewController.xib */,
 			);
 			name = baseViewController;
+			sourceTree = "<group>";
+		};
+		8D3942F01C2D15B500783FD0 /* welcome */ = {
+			isa = PBXGroup;
+			children = (
+				8D3942F51C2D15CE00783FD0 /* welcome_three.png */,
+				8D3942F11C2D15C300783FD0 /* welcome_one.png */,
+				8D3942F31C2D15C900783FD0 /* welcome_two.png */,
+			);
+			name = welcome;
 			sourceTree = "<group>";
 		};
 		8D3EE9C91C27AB400031F7C9 /* 我的银行卡副本 */ = {
@@ -4397,6 +4419,7 @@
 				8D3EEA071C27AB400031F7C9 /* 农业银行@3x.png in Resources */,
 				817DD4AA1BCF547E00042B09 /* zhanghu@2x.png in Resources */,
 				81BA1C031BD4E1ED00DBA5BE /* computer0.png in Resources */,
+				8D3942F41C2D15C900783FD0 /* welcome_two.png in Resources */,
 				819B52DC1BFC2094002FDF1E /* 铜元宝@2x.png in Resources */,
 				8D3F95DB1BE20C1A00013A8E /* zuorishouyi-678@3x.png in Resources */,
 				8D0CB4991BE760C00039D826 /* RiskDisclosureViewController.xib in Resources */,
@@ -4576,6 +4599,7 @@
 				8D1921D41BD4FD7F0038195E /* banner01@2x.png in Resources */,
 				8DEDE1B51BCCFEB5008086D3 /* btn_red@2x.png in Resources */,
 				81BA1BF91BD4DBAA00DBA5BE /* WinAPrizeCell.xib in Resources */,
+				8D3942F61C2D15CE00783FD0 /* welcome_three.png in Resources */,
 				8DEDE1E91BCD00B0008086D3 /* btn_gray@2x.png in Resources */,
 				817E33A01BD77F6D00D05103 /* ChooseStyleCell.xib in Resources */,
 				8DB744BA1C1973AC0084D1A2 /* banner_red@2x.png in Resources */,
@@ -4668,6 +4692,7 @@
 				8D121FD71BD4D4CE00B3C1FE /* SettingTitleTableViewCell.xib in Resources */,
 				8D29F99E1C08048700D45E43 /* 已过期@2x.png in Resources */,
 				81FAAA2D1C256AC40020E9DD /* 提交申请@3x.png in Resources */,
+				8D3942F21C2D15C300783FD0 /* welcome_one.png in Resources */,
 				8D3F95ED1BE2188500013A8E /* moneymoney@3x.png in Resources */,
 				8D9011B51BD6337C00E5D62A /* 07@2x.png in Resources */,
 				8D9011BB1BD6337C00E5D62A /* anniuS@2x.png in Resources */,
@@ -5041,6 +5066,7 @@
 				81F5FA111BDA1C2E008C38BF /* MoreCell.m in Sources */,
 				8180639B1BD5D7E500E83492 /* MyInviteCell.m in Sources */,
 				8D9BE8F41C0EC94D003C67D3 /* YYWebImageManager.m in Sources */,
+				8D3942EF1C2D14B200783FD0 /* WelcomeViewController.m in Sources */,
 				8162D11D1BE1BCC900CACAB6 /* XinXiCell.m in Sources */,
 				8D9BE8E81C0EC94D003C67D3 /* _YYWebImageSetter.m in Sources */,
 				8D4E4E051C1E5A6A00AE2644 /* LLPDataSigner.m in Sources */,
@@ -5224,6 +5250,7 @@
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -5259,6 +5286,7 @@
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
