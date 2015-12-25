@@ -4,7 +4,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "736h",
-      "filename" : "iphone6-plus-portrait@3x.png",
+      "filename" : "iPhone6-Plus-portrait@3x.png",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "3x"
@@ -13,7 +13,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "667h",
-      "filename" : "iphone6-portrait@2x.png",
+      "filename" : "iPhone6-portrait@2x.png",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -38,7 +38,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "default.png",
+      "filename" : "Default.png",
       "extent" : "full-screen",
       "scale" : "1x"
     },

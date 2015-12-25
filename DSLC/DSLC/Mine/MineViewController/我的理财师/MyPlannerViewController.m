@@ -246,6 +246,8 @@
 {
     ChatViewController *chatVC = [[ChatViewController alloc] init];
     chatVC.IId = planner.ID;
+    chatVC.chatName = [DES3Util decrypt:planner.userRealname];
+    chatVC.userORplanner = YES;
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 

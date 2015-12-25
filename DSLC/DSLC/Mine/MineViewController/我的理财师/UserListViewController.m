@@ -8,6 +8,7 @@
 
 #import "UserListViewController.h"
 #import "UserListCell.h"
+#import "ChatViewController.h"
 
 @interface UserListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -40,7 +41,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 1;
+    if (section == 0) {
+        
+        return 0.5;
+        
+    } else {
+        
+        return 10;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -50,7 +58,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 1;
+    return 0.5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,14 +68,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UserListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    cell.imageHead.image = [UIImage imageNamed:@"anniu"];
+    cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
     cell.labelName.text = @"张三";
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
@@ -79,12 +87,16 @@
     cell.labelTime.textColor = [UIColor zitihui];
     cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    ChatViewController *chatVC = [[ChatViewController alloc] init];
+    chatVC.userORplanner = NO;
+    chatVC.chatName = @"张三";
+    [self.navigationController pushViewController:chatVC animated:YES];
 }
 
 #pragma mark 网络请求方法

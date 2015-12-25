@@ -12,4 +12,6 @@
 
 @interface ChatViewController : BaseViewController
 @property (nonatomic) NSString *IId;
+@property (nonatomic) NSString *chatName;
+@property (nonatomic) BOOL userORplanner;
 @end
