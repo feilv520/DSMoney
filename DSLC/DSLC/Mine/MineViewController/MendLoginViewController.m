@@ -175,6 +175,7 @@
         
     } else {
         
+        [self submitLoadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
         self.flagDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
         
         NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"optType":@1,@"oldPwd":textField1.text,@"newPwd":textField2.text,@"smsCode":@""};
@@ -182,6 +183,7 @@
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
+                [self submitLoadingWithHidden:YES];
                 [self logout];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];

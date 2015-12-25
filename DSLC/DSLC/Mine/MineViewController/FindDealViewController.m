@@ -279,6 +279,7 @@
         
     } else {
         
+        [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
         [self getCodeData];
     }
         
@@ -298,6 +299,7 @@
         NSLog(@"找回交易密码:rrrrrrr%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
+            [self submitLoadingWithHidden:YES];
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
 //            点击修改交易密码页的找回交易密码成功后需返回两页
             if (self.whichOne == YES) {

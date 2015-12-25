@@ -115,7 +115,6 @@
 //认证按钮
 - (void)nextStepButton:(UIButton *)button
 {
-//    [self submitLoadingWithView:self.view loadingFlag:0 height:0];
     [self.view endEditing:YES];
     
     if (_textField1.text.length == 0) {
@@ -129,6 +128,7 @@
     } else {
 //        NSArray *viewController = [self.navigationController viewControllers];
 //        [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
+        [self submitLoadingWithView:self.view loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
         [self authRrealName];
     }
 }
@@ -195,7 +195,9 @@
             [usersDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+            
         } else {
+            
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
        

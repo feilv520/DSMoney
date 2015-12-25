@@ -80,7 +80,9 @@
     
     Planner *plan = [plannerArr objectAtIndex:indexPath.section];
     
-    cell.imageHead.image = [UIImage imageNamed:@"picture"];
+    cell.imageHead.yy_imageURL = [NSURL URLWithString:plan.avatarImg];
+    cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.width/2;
+    cell.imageHead.layer.masksToBounds = YES;
     
     cell.labelName.text = plan.userRealname;
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -117,6 +119,8 @@
     [self.navigationController pushViewController:plannerVC animated:YES];
 }
 
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
 //获取数据
 - (void)getPlannerData
 {

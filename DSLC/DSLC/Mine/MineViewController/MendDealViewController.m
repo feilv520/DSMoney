@@ -315,6 +315,7 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
         
     } else {
+        [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
         
         NSDictionary *dataDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
 
@@ -324,6 +325,7 @@
             NSLog(@"222222222222修改交易密码:%@", responseObject);
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                [self loadingWithHidden:YES];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                 [self.navigationController popViewControllerAnimated:YES];
                 
@@ -331,7 +333,6 @@
                 
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
-            
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);

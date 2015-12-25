@@ -170,12 +170,19 @@
     butHeadPic.layer.masksToBounds = YES;
     [butHeadPic addTarget:self action:@selector(headPictureButton:) forControlEvents:UIControlEventTouchUpInside];
     
-//    邀请按钮
-    UIButton *butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - (85 / 375.0) * WIDTH_CONTROLLER_DEFAULT, 31, (75 / 375.0) * WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (25 / 667.0)) backgroundColor:nil textColor:[UIColor whiteColor] titleText:@"我的理财师"];
+//    我的理财师/咨询按钮
+    UIButton *butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - (85 / 375.0) * WIDTH_CONTROLLER_DEFAULT, 31, (75 / 375.0) * WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (25 / 667.0)) backgroundColor:nil textColor:[UIColor whiteColor] titleText:nil];
+    if ([[[self.myAccountInfo objectForKey:@"inviteType"] description] isEqualToString:@"0"]) {
+
+        [butInvitate setBackgroundImage:[UIImage imageNamed:@"anniu"] forState:UIControlStateNormal];
+        [butInvitate setTitle:@"我的理财师" forState:UIControlStateNormal];
+        
+    } else {
+        [butInvitate setBackgroundImage:[UIImage imageNamed:@"121"] forState:UIControlStateNormal];
+    }
     
 //    我的理财师按钮
     [imageRedBG addSubview:butInvitate];
-    [butInvitate setBackgroundImage:[UIImage imageNamed:@"anniu"] forState:UIControlStateNormal];
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         butInvitate.titleLabel.font = [UIFont systemFontOfSize:11];
     } else {
