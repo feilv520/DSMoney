@@ -116,7 +116,8 @@
     imageBottom.autoresizesSubviews = YES;
     
 //    @"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658"
-    imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 40, 25, 80, 80) backGroundColor:[UIColor clearColor] setImage:nil];
+    imageHead = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 40, 25, 80, 80)];
+    imageHead.backgroundColor = Color_Clear;
     imageHead.layer.cornerRadius = 40;
     imageHead.layer.masksToBounds = YES;
     imageHead.layer.borderWidth = 0.5;

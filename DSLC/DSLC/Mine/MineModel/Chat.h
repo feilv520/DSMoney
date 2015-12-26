@@ -12,5 +12,6 @@
 
 @property (nonatomic) NSString *msgText;
 @property (nonatomic) NSString *sendTime;
-
+@property (nonatomic) NSNumber *sendUserId;
+@property (nonatomic) NSNumber *recUserId;
 @end
