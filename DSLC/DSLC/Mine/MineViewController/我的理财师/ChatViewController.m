@@ -30,6 +30,12 @@
     
     Chat *chat;
     SendTime *time;
+    
+    CGFloat heightSum;
+    
+    BOOL flag;
+    
+    NSDictionary *dic;
 }
 
 @end
@@ -45,6 +51,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    heightSum = 0.0;
+    
+    flag = NO;
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -103,6 +115,10 @@
     _tableView.tableFooterView = [UIView new];
     _tableView.tableHeaderView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
+    if (!flag) {
+        _tableView.contentOffset = CGPointMake(0.5, 5000);
+    }
+    
 }
 
 //输入窗口
@@ -140,20 +156,15 @@
 //发送消息
 - (void)sendMessage:(UIButton *)button
 {
-    [_textField resignFirstResponder];
-    [UIView animateWithDuration:0.001 animations:^{
-        
-        viewImport.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 20 - 50, WIDTH_CONTROLLER_DEFAULT, 50);
-    }];
     
     if (_textField.text.length == 0) {
-        
+
     } else {
         
-//        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-//        [dic objectForKey:@"id"]
-        NSLog(@"self.IId = %@",self.IId);
-        NSDictionary *parameter = @{@"recUserId":self.IId, @"msgContent":_textField.text};
+        NSString *textString = _textField.text;
+        textString = [textString stringByReplacingOccurrencesOfString:@"\"" withString:@"^"];
+        
+        NSDictionary *parameter = @{@"recUserId":self.IId, @"msgContent":textString};
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/sendMsg" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
@@ -162,6 +173,7 @@
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
                 chat = [[Chat alloc] init];
+                chat.sendUserId = [NSNumber numberWithInteger:[[dic objectForKey:@"id"] integerValue]];
                 chat.msgText = _textField.text;
                 
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -174,8 +186,7 @@
                 [_tableView reloadData];
                 _textField.text = nil;
                 
-                _tableView.contentOffset = CGPointMake(0, rect.size.height + 50);
-                NSLog(@"---------------%f", _tableView.contentOffset.y);
+                [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:chatArray.count - 1] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
                 
             } else {
                 
@@ -208,6 +219,12 @@
                 chat = [[Chat alloc] init];
                 [chat setValuesForKeysWithDictionary:dataDic];
                 [chatArray addObject:chat];
+                
+                NSDictionary *dicF = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
+                
+                rect = [[chat msgText] boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dicF context:nil];
+                
+                heightSum += rect.size.height;
             }
 
             [self importWindow];
@@ -217,11 +234,11 @@
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
                 [FileOfManage createWithFile:@"isLogin.plist"];
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                NSDictionary *dicL = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dicL writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             } else {
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                NSDictionary *dicL = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dicL writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
             [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
             [self.navigationController popToRootViewControllerAnimated:NO];
@@ -307,10 +324,11 @@
 //    return cell;
 //    if (chatArray.count != 0) {
 //    }
+    dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     chat = [chatArray objectAtIndex:indexPath.section];
     
-    if (!chat) {
+    if (![[chat sendUserId] isEqualToNumber:[NSNumber numberWithInteger:[[dic objectForKey:@"id"] integerValue]]]) {
     
         OneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
 
@@ -319,18 +337,22 @@
             cell = [[OneCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
         }
         
-        [cell.labelLeft setText:[chat msgText]];
+        NSString *msgTextString = [chat msgText];
+        
+        msgTextString = [msgTextString stringByReplacingOccurrencesOfString:@"^" withString:@"\""];
+        
+        [cell.labelLeft setText:msgTextString];
         [cell.imageLeft setImage:[UIImage imageNamed:@"left"]];
 
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
-        rect = [cell.labelLeft.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        NSDictionary *dicF = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
+        rect = [cell.labelLeft.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dicF context:nil];
         cell.labelLeft.numberOfLines = 0;
         
         cell.imageContect.image = [UIImage imageNamed:@"LeftWindow"];
 
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//
+
         return cell;
 
     } else {
@@ -344,12 +366,11 @@
         
         chat = [chatArray objectAtIndex:indexPath.section];
         
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
+        NSDictionary *dicF = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
         cell.labelRight.numberOfLines = 0;
         cell.labelRight.text = chat.msgText;
         
-        rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
-        
+        rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dicF context:nil];
         
         [cell.imageRight setImage:[UIImage imageNamed:@"right"]];
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
