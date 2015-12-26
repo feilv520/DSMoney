@@ -301,11 +301,9 @@
             
         } else {
             
-                            
             RealNameViewController *realName = [[RealNameViewController alloc] init];
             realName.realNamePan = NO;
             [self.navigationController pushViewController:realName animated:YES];
-                
             
         }
         
@@ -330,8 +328,12 @@
             
         } else if (indexPath.row == 1) {
             
-            EmailViewController *emailVC = [[EmailViewController alloc] init];
-            [self.navigationController pushViewController:emailVC animated:YES];
+            if ([[[self.dataDic objectForKey:@"emailStatus"] description] isEqualToString:@"2"]) {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已绑定"];
+            } else {
+                EmailViewController *emailVC = [[EmailViewController alloc] init];
+                [self.navigationController pushViewController:emailVC animated:YES];
+            }
         }
         
     } else if (indexPath.section == 0) {

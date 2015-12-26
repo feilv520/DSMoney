@@ -448,9 +448,9 @@ numberOfRowsInComponent:(NSInteger)component
         }
         
         NSLog(@"%@",[responseObject objectForKey:@"Trade"]);
-        
+        [self loadingWithHidden:YES];
         if ([[[responseObject objectForKey:@"Trade"] objectAtIndex:0] count] == 0) {
-            [self noDateWithView:nil height:120 view:self.view];
+            [self noDateWithView:@"暂无交易记录" height:120 view:self.view];
             [_mainTableView setHidden:YES];
         } else {
             [self loadingWithHidden:YES];

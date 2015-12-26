@@ -249,6 +249,7 @@
     UILabel *noDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(noDateImgV.frame), WIDTH_CONTROLLER_DEFAULT, 25)];
     [noDateLabel setText:nameString];
     noDateLabel.textAlignment = NSTextAlignmentCenter;
+    noDateLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
     [noDateView addSubview:noDateLabel];
     
