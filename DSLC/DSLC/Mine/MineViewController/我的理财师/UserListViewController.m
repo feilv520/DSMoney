@@ -16,6 +16,7 @@
 {
     UITableView *_tableView;
     NSMutableArray *userListArr;
+    UIImageView *imageDian;
 }
 
 @end
@@ -32,6 +33,14 @@
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
     
     [self getUserList];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shifouYouDian:) name:@"dian" object:nil];
+}
+
+- (void)shifouYouDian:(NSNotification *)notice
+{
+    imageDian = (UIImageView *)[self.view viewWithTag:590];
+    imageDian.image = [UIImage imageNamed:@""];
 }
 
 - (void)tableViewShow
@@ -75,7 +84,23 @@
     
     UserList *userlist = [userListArr objectAtIndex:indexPath.section];
     
-    cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
+    if ([userlist.recAvatarImg isEqualToString:@""]) {
+        cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
+        
+    } else {
+        cell.imageHead.yy_imageURL = [NSURL URLWithString:userlist.recAvatarImg];
+    }
+    
+    if ([[userlist.msgStatus description] isEqualToString:@"1"]) {
+        cell.imageDian.image = [UIImage imageNamed:@"img_wd_buble_red"];
+    } else {
+        cell.imageDian.image = [UIImage imageNamed:@""];
+    }
+    
+    cell.imageDian.tag = 590;
+    cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.width/2;
+    cell.imageHead.layer.masksToBounds = YES;
+    
     cell.labelName.text = userlist.recUserName;
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
@@ -98,6 +123,7 @@
     chatVC.userORplanner = NO;
     chatVC.chatName = userlist.recUserName;
     chatVC.IId = userlist.recUserId;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 

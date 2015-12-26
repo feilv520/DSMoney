@@ -13,4 +13,6 @@
 @property (nonatomic) NSString *sendTime;
 @property (nonatomic) NSString *recUserId;
 @property (nonatomic) NSString *msgText;
+@property (nonatomic) NSString *recAvatarImg;
+@property (nonatomic) NSString *msgStatus;
 @end
