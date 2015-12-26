@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface UserList : NSObject
-@property (nonatomic) NSString *sendUserName;
+@property (nonatomic) NSString *recUserName;
 @property (nonatomic) NSString *sendTime;
-@property (nonatomic) NSString *sendUserId;
+@property (nonatomic) NSString *recUserId;
 @property (nonatomic) NSString *msgText;
 @end

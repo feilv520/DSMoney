@@ -76,7 +76,7 @@
     UserList *userlist = [userListArr objectAtIndex:indexPath.section];
     
     cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
-    cell.labelName.text = userlist.sendUserName;
+    cell.labelName.text = userlist.recUserName;
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     cell.labelContent.text = userlist.msgText;
@@ -96,8 +96,8 @@
     UserList *userlist = [userListArr objectAtIndex:indexPath.section];
     ChatViewController *chatVC = [[ChatViewController alloc] init];
     chatVC.userORplanner = NO;
-    chatVC.chatName = userlist.sendUserName;
-    chatVC.IId = userlist.sendUserId;
+    chatVC.chatName = userlist.recUserName;
+    chatVC.IId = userlist.recUserId;
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 
@@ -107,7 +107,7 @@
 {
     NSLog(@"6666666666");
     NSDictionary *parameter = @{@"msgType":@0};
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getUserMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]){
             
