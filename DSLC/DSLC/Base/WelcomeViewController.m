@@ -20,6 +20,9 @@
     NSArray *butGrayArr;
     NSArray *butColorArr;
     NSMutableArray *buttonArr;
+    
+    UIImageView *imgThree;
+    UIButton *startButton;
 }
 @property (nonatomic) KKTabBarViewController *tabBarVC;
 
@@ -43,14 +46,18 @@
     
     UIImageView *imgOne = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
     UIImageView *imgTwo = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
-    UIImageView *imgThree = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 2, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+    imgThree = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 2, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+    
+    imgThree.alpha = 1.0;
     
     imgOne.image = [UIImage imageNamed:@"welcome_one"];
     imgTwo.image = [UIImage imageNamed:@"welcome_two"];
     imgThree.image = [UIImage imageNamed:@"welcome_three"];
     
-    UIButton *startButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (102.0 / 375.0) + WIDTH_CONTROLLER_DEFAULT * 2, HEIGHT_CONTROLLER_DEFAULT * (560.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (170.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:Color_Black textColor:nil titleText:@"立即体验"];
+    startButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (102.0 / 375.0) + WIDTH_CONTROLLER_DEFAULT * 2, HEIGHT_CONTROLLER_DEFAULT * (560.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (170.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:Color_Clear textColor:nil titleText:@"立即体验"];
     [startButton addTarget:self action:@selector(intoMySystem:) forControlEvents:UIControlEventTouchUpInside];
+    
+    startButton.alpha = 1.0;
     
     [self.scrollView addSubview:startButton];
     
@@ -61,59 +68,69 @@
 }
 
 - (void)intoMySystem:(id)sender{
-    NSLog(@"123321");
-    NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Flag.plist"]];
     
-    [dics setValue:@"NO" forKey:@"FristOpen"];
-    
-    [dics writeToFile:[FileOfManage PathOfFile:@"Flag.plist"] atomically:YES];
-    
-    SelectionViewController *selectionVC = [[SelectionViewController alloc] init];
-    UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
-    
-    ThreeViewController *threeVC = [[ThreeViewController alloc] init];
-    UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
-    
-    //        MineViewController *mineVC = [[MineViewController alloc] init];
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
-    UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    
-    MoreViewController *moreVC = [[MoreViewController alloc] init];
-    UINavigationController *navigation4 = [[UINavigationController alloc] initWithRootViewController:moreVC];
-    
-    self.viewControllerArr = @[navigation1, navigation2, navigation3, navigation4];
-    
-    butGrayArr = @[@"shouyeqiepian7500_25", @"shouyeqiepian750_28", @"shouyeqiepian750_30", @"shouyeqiepian750_32"];
-    butColorArr = @[@"shouyeqiepian750_25_highlight", @"shouyeqiepian7500_28highlight", @"shouyeqiepian7500_30highlight", @"shouyeqiepian7500_32highlight"];
-    
-    buttonArr = [NSMutableArray array];
-    for (int i = 0; i < 4; i++) {
+    [UIView animateWithDuration:1.0 animations:^{
         
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
-        //        button.imageView.backgroundColor = [UIColor whiteColor];
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butGrayArr objectAtIndex:i]]] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butColorArr objectAtIndex:i]]] forState:UIControlStateSelected];
-        //       点击保持高亮状态,没有闪动的效果
-        [button setShowsTouchWhenHighlighted:YES];
-        [buttonArr addObject:button];
-    }
+        imgThree.alpha = 0.0;
+        startButton.alpha = 0.0;
+        
+    } completion:^(BOOL finished) {
+       
+        NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Flag.plist"]];
+        
+        [dics setValue:@"NO" forKey:@"FristOpen"];
+        
+        [dics writeToFile:[FileOfManage PathOfFile:@"Flag.plist"] atomically:YES];
+        
+        SelectionViewController *selectionVC = [[SelectionViewController alloc] init];
+        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
+        
+        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
+        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
+        
+        //        MineViewController *mineVC = [[MineViewController alloc] init];
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        
+        MoreViewController *moreVC = [[MoreViewController alloc] init];
+        UINavigationController *navigation4 = [[UINavigationController alloc] initWithRootViewController:moreVC];
+        
+        self.viewControllerArr = @[navigation1, navigation2, navigation3, navigation4];
+        
+        butGrayArr = @[@"shouyeqiepian7500_25", @"shouyeqiepian750_28", @"shouyeqiepian750_30", @"shouyeqiepian750_32"];
+        butColorArr = @[@"shouyeqiepian750_25_highlight", @"shouyeqiepian7500_28highlight", @"shouyeqiepian7500_30highlight", @"shouyeqiepian7500_32highlight"];
+        
+        buttonArr = [NSMutableArray array];
+        for (int i = 0; i < 4; i++) {
+            
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
+            //        button.imageView.backgroundColor = [UIColor whiteColor];
+            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butGrayArr objectAtIndex:i]]] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butColorArr objectAtIndex:i]]] forState:UIControlStateSelected];
+            //       点击保持高亮状态,没有闪动的效果
+            [button setShowsTouchWhenHighlighted:YES];
+            [buttonArr addObject:button];
+        }
+        
+        self.tabBarVC = [[KKTabBarViewController alloc] init];
+        //    存放试图控制器
+        [self.tabBarVC setControllerArray:self.viewControllerArr];
+        //    存放tabBar上的按钮
+        [self.tabBarVC setTabButtonArray:buttonArr];
+        //    设置tabBar的高度 默认为50
+        [self.tabBarVC setTabBarHeight:40];
+        //    设置是否可以手势滑动切换模块 默认为YES
+        [self.tabBarVC setSuppurtGestureTransition:YES];
+        //    设置点击按钮有无翻页效果 默认有
+        [self.tabBarVC setTransitionAnimated:NO];
+        
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        app.tabBarVC = self.tabBarVC;
+        app.window.rootViewController = self.tabBarVC;
+        
+    }];
     
-    self.tabBarVC = [[KKTabBarViewController alloc] init];
-    //    存放试图控制器
-    [self.tabBarVC setControllerArray:self.viewControllerArr];
-    //    存放tabBar上的按钮
-    [self.tabBarVC setTabButtonArray:buttonArr];
-    //    设置tabBar的高度 默认为50
-    [self.tabBarVC setTabBarHeight:40];
-    //    设置是否可以手势滑动切换模块 默认为YES
-    [self.tabBarVC setSuppurtGestureTransition:YES];
-    //    设置点击按钮有无翻页效果 默认有
-    [self.tabBarVC setTransitionAnimated:NO];
-    
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    app.tabBarVC = self.tabBarVC;
-    app.window.rootViewController = self.tabBarVC;
 }
 
 - (void)didReceiveMemoryWarning {
