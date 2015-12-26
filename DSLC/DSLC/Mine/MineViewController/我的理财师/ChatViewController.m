@@ -60,8 +60,6 @@
     timeStr = @"";
     
     [self getDataList];
-    [self importWindow];
-    [self tableViewShow];
     [self registerForKeyboardNotifications];
 }
 
@@ -154,11 +152,12 @@
         
 //        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
 //        [dic objectForKey:@"id"]
+        NSLog(@"self.IId = %@",self.IId);
         NSDictionary *parameter = @{@"recUserId":self.IId, @"msgContent":_textField.text};
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/sendMsg" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            NSLog(@"vvvvvv%@", responseObject);
+            NSLog(@"发送消息:vvvvvv%@", responseObject);
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
@@ -175,9 +174,7 @@
                 [_tableView reloadData];
                 _textField.text = nil;
                 
-//                [UIView animateWithDuration:0.5 animations:^{
-                    _tableView.contentOffset = CGPointMake(0, rect.size.height + 50);
-//                }];
+                _tableView.contentOffset = CGPointMake(0, rect.size.height + 50);
                 NSLog(@"---------------%f", _tableView.contentOffset.y);
                 
             } else {
@@ -196,9 +193,8 @@
 //获取消息列表
 - (void)getDataList
 {
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"recUserId":[dic objectForKey:@"id"], @"msgType":@0};
+    NSDictionary *parameter = @{@"recUserId":self.IId, @"msgType":@0};
 
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -214,7 +210,8 @@
                 [chatArray addObject:chat];
             }
 
-            [_tableView reloadData];
+            [self importWindow];
+            [self tableViewShow];
             
         } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -287,71 +284,79 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    
-    if (cell == nil) {
-        
-        cell = [[TwoCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
-    }
+//    TwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+//    
+//    if (cell == nil) {
+//        
+//        cell = [[TwoCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
+//    }
+//    
+//    chat = [chatArray objectAtIndex:indexPath.section];
+//
+//    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
+//    cell.labelRight.numberOfLines = 0;
+//    cell.labelRight.text = chat.msgText;
+//
+//    rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+//    
+//    
+//    [cell.imageRight setImage:[UIImage imageNamed:@"right"]];
+//    cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    
+//    return cell;
+//    if (chatArray.count != 0) {
+//    }
     
     chat = [chatArray objectAtIndex:indexPath.section];
+    
+    if (!chat) {
+    
+        OneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
 
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
-    cell.labelRight.numberOfLines = 0;
-    cell.labelRight.text = chat.msgText;
+        if (cell == nil) {
+            
+            cell = [[OneCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
+        }
+        
+        [cell.labelLeft setText:[chat msgText]];
+        [cell.imageLeft setImage:[UIImage imageNamed:@"left"]];
 
-    rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
-    
-    
-    [cell.imageRight setImage:[UIImage imageNamed:@"right"]];
-    cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    return cell;
-//    if (indexPath.row % 2 == 0) {
-//    
-//        OneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-//    
-//        if (cell == nil) {
-//            
-//            cell = [[OneCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
-//        }
-//            
-//        [cell.labelLeft setText:[chatArray objectAtIndex:indexPath.row]];
-//        [cell.imageLeft setImage:[UIImage imageNamed:@"left"]];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
+        rect = [cell.labelLeft.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        cell.labelLeft.numberOfLines = 0;
+        
+        cell.imageContect.image = [UIImage imageNamed:@"LeftWindow"];
+
+        cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //
-//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
-//        rect = [cell.labelLeft.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
-//        cell.labelLeft.numberOfLines = 0;
-//        
-//        cell.imageContect.image = [UIImage imageNamed:@"LeftWindow"];
-//
-//        cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        
-//        return cell;
-//
-//    } else {
-//        
-//        TwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse1"];
-//        
-//        if (cell == nil) {
-//            
-//            cell = [[TwoCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse1"];
-//        }
-//        
-//        [cell.labelRight setText:[chatArray objectAtIndex:indexPath.row]];
-//        [cell.imageRight setImage:[UIImage imageNamed:@"right"]];
-//
-//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
-//        rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
-//        cell.labelRight.numberOfLines = 0;
-//
-//        cell.imageContect.image = [UIImage imageNamed:@"rightWindow"];
-//        cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        return cell;
-//    }
+        return cell;
+
+    } else {
+        
+        TwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse1"];
+        
+        if (cell == nil) {
+            
+            cell = [[TwoCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse1"];
+        }
+        
+        chat = [chatArray objectAtIndex:indexPath.section];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
+        cell.labelRight.numberOfLines = 0;
+        cell.labelRight.text = chat.msgText;
+        
+        rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        
+        
+        [cell.imageRight setImage:[UIImage imageNamed:@"right"]];
+        cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+    }
 }
 
 //回收键盘

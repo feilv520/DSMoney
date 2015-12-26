@@ -23,11 +23,11 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lH8-nC-Qq6">
-                        <rect key="frame" x="70" y="15" width="173" height="25"/>
+                        <rect key="frame" x="70" y="15" width="165" height="25"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="YFM-ho-o7W"/>
-                            <constraint firstAttribute="width" constant="173" id="kIj-EH-Xbc"/>
+                            <constraint firstAttribute="width" constant="165" id="kIj-EH-Xbc"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -45,11 +45,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFL-7f-Uok">
-                        <rect key="frame" x="251" y="15" width="111" height="25"/>
+                        <rect key="frame" x="245" y="15" width="120" height="25"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="AxZ-iQ-guJ"/>
-                            <constraint firstAttribute="width" constant="111" id="SrM-gV-tK8"/>
+                            <constraint firstAttribute="width" constant="120" id="SrM-gV-tK8"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -58,10 +58,10 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="NiS-IU-cyr" secondAttribute="trailing" constant="5" id="5Tv-TQ-l5E"/>
-                    <constraint firstItem="UFL-7f-Uok" firstAttribute="leading" secondItem="lH8-nC-Qq6" secondAttribute="trailing" constant="8" id="EbQ-Oj-VEK"/>
+                    <constraint firstItem="UFL-7f-Uok" firstAttribute="leading" secondItem="lH8-nC-Qq6" secondAttribute="trailing" constant="10" id="EbQ-Oj-VEK"/>
                     <constraint firstItem="NiS-IU-cyr" firstAttribute="leading" secondItem="neq-Ab-C7f" secondAttribute="trailing" constant="10" id="MUA-9q-OME"/>
                     <constraint firstItem="lH8-nC-Qq6" firstAttribute="leading" secondItem="neq-Ab-C7f" secondAttribute="trailing" constant="10" id="Rs5-Es-Vit"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="UFL-7f-Uok" secondAttribute="trailing" constant="5" id="b9h-Xc-KTu"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="UFL-7f-Uok" secondAttribute="trailing" constant="2" id="b9h-Xc-KTu"/>
                     <constraint firstItem="lH8-nC-Qq6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="bNY-7P-toz"/>
                     <constraint firstItem="NiS-IU-cyr" firstAttribute="top" secondItem="UFL-7f-Uok" secondAttribute="bottom" constant="5" id="co8-lM-g5M"/>
                     <constraint firstItem="neq-Ab-C7f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="fsU-ev-Fre"/>

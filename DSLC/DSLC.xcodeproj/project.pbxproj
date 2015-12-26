@@ -16,6 +16,7 @@
 		810C76751C2D1A01000637FD /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 810C76741C2D1A01000637FD /* UserListViewController.m */; settings = {ASSET_TAGS = (); }; };
 		810C76791C2D1AAE000637FD /* UserListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 810C76771C2D1AAE000637FD /* UserListCell.m */; settings = {ASSET_TAGS = (); }; };
 		810C767A1C2D1AAE000637FD /* UserListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810C76781C2D1AAE000637FD /* UserListCell.xib */; settings = {ASSET_TAGS = (); }; };
+		810C767D1C2E40D2000637FD /* UserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 810C767C1C2E40D2000637FD /* UserList.m */; settings = {ASSET_TAGS = (); }; };
 		810D25271BC7917B00DAF83F /* CreatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 810D25261BC7917B00DAF83F /* CreatView.m */; };
 		8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */; settings = {ASSET_TAGS = (); }; };
@@ -863,6 +864,8 @@
 		810C76761C2D1AAE000637FD /* UserListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListCell.h; sourceTree = "<group>"; };
 		810C76771C2D1AAE000637FD /* UserListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListCell.m; sourceTree = "<group>"; };
 		810C76781C2D1AAE000637FD /* UserListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserListCell.xib; sourceTree = "<group>"; };
+		810C767B1C2E40D2000637FD /* UserList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserList.h; sourceTree = "<group>"; };
+		810C767C1C2E40D2000637FD /* UserList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserList.m; sourceTree = "<group>"; };
 		810D25251BC7917B00DAF83F /* CreatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatView.h; sourceTree = "<group>"; };
 		810D25261BC7917B00DAF83F /* CreatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatView.m; sourceTree = "<group>"; };
 		8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@2x.png"; sourceTree = "<group>"; };
@@ -2748,6 +2751,8 @@
 				8D20882F1C266E7900372F66 /* City.m */,
 				818D0C271C2AC58B008F7612 /* ProductO.h */,
 				818D0C281C2AC58B008F7612 /* ProductO.m */,
+				810C767B1C2E40D2000637FD /* UserList.h */,
+				810C767C1C2E40D2000637FD /* UserList.m */,
 			);
 			path = MineModel;
 			sourceTree = "<group>";
@@ -5081,6 +5086,7 @@
 				8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */,
 				81CBB7501C1AC6E9002CDE97 /* SafeProtectViewController.m in Sources */,
 				81200C1E1C031F1700F70DDD /* InviteNumReginCell.m in Sources */,
+				810C767D1C2E40D2000637FD /* UserList.m in Sources */,
 				8D0AE8041BE0ABFB00D9D50C /* RegisterOfView.m in Sources */,
 				8DD180A21BD731E000F71CEA /* GetMoneyTipTableViewCell.m in Sources */,
 				8D45187A1C00553E00FAF998 /* MD5Encryption.m in Sources */,

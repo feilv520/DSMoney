@@ -9,11 +9,13 @@
 #import "UserListViewController.h"
 #import "UserListCell.h"
 #import "ChatViewController.h"
+#import "UserList.h"
 
 @interface UserListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tableView;
+    NSMutableArray *userListArr;
 }
 
 @end
@@ -26,8 +28,10 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"用户列表"];
+    userListArr = [NSMutableArray array];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
     
-    [self tableViewShow];
+    [self getUserList];
 }
 
 - (void)tableViewShow
@@ -36,29 +40,23 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.1)];
     [_tableView registerNib:[UINib nibWithNibName:@"UserListCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
-        
-        return 0.5;
-        
-    } else {
-        
-        return 10;
-    }
+    return 0.5;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 10;
+    return userListArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.5;
+    return 10.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -75,15 +73,17 @@
 {
     UserListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
+    UserList *userlist = [userListArr objectAtIndex:indexPath.section];
+    
     cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
-    cell.labelName.text = @"张三";
+    cell.labelName.text = userlist.sendUserName;
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    cell.labelContent.text = @"你是不是饿得慌???";
+    cell.labelContent.text = userlist.msgText;
     cell.labelContent.textColor = [UIColor zitihui];
     cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
-    cell.labelTime.text = @"2015-12-26 17:25";
+    cell.labelTime.text = userlist.sendTime;
     cell.labelTime.textColor = [UIColor zitihui];
     cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
@@ -93,9 +93,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UserList *userlist = [userListArr objectAtIndex:indexPath.section];
     ChatViewController *chatVC = [[ChatViewController alloc] init];
     chatVC.userORplanner = NO;
-    chatVC.chatName = @"张三";
+    chatVC.chatName = userlist.sendUserName;
+    chatVC.IId = userlist.sendUserId;
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 
@@ -103,16 +105,34 @@
 #pragma mark --------------------------------
 - (void)getUserList
 {
-    NSDictionary *parameter = @{@"curPage":@1};
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getIndexFinPlannerList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    NSLog(@"6666666666");
+    NSDictionary *parameter = @{@"msgType":@0};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]){
             
-            
+            [self loadingWithHidden:YES];
+            NSLog(@"用户列表:::::::::::::%@", responseObject);
+            NSMutableArray *dataArr = [responseObject objectForKey:@"Msg"];
+            if (dataArr.count == 0) {
+                [self noDateWithView:@"暂无用户" height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 view:self.view];
+                _tableView.hidden = YES;
+                
+            } else {
+                [self noDataViewWithRemoveToView];
+                _tableView.hidden = NO;
+                
+                for (NSDictionary *dataDic in dataArr) {
+                    UserList *userList = [[UserList alloc] init];
+                    [userList setValuesForKeysWithDictionary:dataDic];
+                    [userListArr addObject:userList];
+                }
+                [self tableViewShow];
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"%@", error);
     }];
 }
 
