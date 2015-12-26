@@ -90,6 +90,13 @@
     [self showPictureAndTitle];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeWithImageView) name:@"exchangeWithImageView" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(diandianNonotice:) name:@"dian" object:nil];
+}
+
+- (void)diandianNonotice:(NSNotification *)notice
+{
+    [butInvitate setBackgroundImage:[UIImage imageNamed:@"UserAsk"] forState:UIControlStateNormal];
 }
 
 - (void)pushWithViewController{
@@ -182,7 +189,13 @@
         butInvitate.tag = 9092;
         
     } else {
-        [butInvitate setBackgroundImage:[UIImage imageNamed:@"121"] forState:UIControlStateNormal];
+        
+        if ([[[self.myAccountInfo objectForKey:@"chatMsgCount"] description] isEqualToString:@"0"]) {
+            [butInvitate setBackgroundImage:[UIImage imageNamed:@"121"] forState:UIControlStateNormal];
+            
+        } else {
+            [butInvitate setBackgroundImage:[UIImage imageNamed:@"椭圆-2"] forState:UIControlStateNormal];
+        }
         butInvitate.tag = 8090;
     }
     

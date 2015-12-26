@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelName;
 @property (weak, nonatomic) IBOutlet UILabel *labelContent;
 @property (weak, nonatomic) IBOutlet UILabel *labelTime;
+@property (weak, nonatomic) IBOutlet UIImageView *imageDian;
 
 @end

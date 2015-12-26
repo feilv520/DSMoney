@@ -55,6 +55,13 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eV2-pw-KuV">
+                        <rect key="frame" x="48" y="18" width="10" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="C0W-Ze-9de"/>
+                            <constraint firstAttribute="height" constant="10" id="YLW-4P-VVH"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="NiS-IU-cyr" secondAttribute="trailing" constant="5" id="5Tv-TQ-l5E"/>
@@ -64,13 +71,16 @@
                     <constraint firstAttribute="trailingMargin" secondItem="UFL-7f-Uok" secondAttribute="trailing" constant="2" id="b9h-Xc-KTu"/>
                     <constraint firstItem="lH8-nC-Qq6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="bNY-7P-toz"/>
                     <constraint firstItem="NiS-IU-cyr" firstAttribute="top" secondItem="UFL-7f-Uok" secondAttribute="bottom" constant="5" id="co8-lM-g5M"/>
+                    <constraint firstItem="eV2-pw-KuV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="dG4-iX-te5"/>
                     <constraint firstItem="neq-Ab-C7f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="fsU-ev-Fre"/>
+                    <constraint firstItem="eV2-pw-KuV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="40" id="jxe-8o-kFX"/>
                     <constraint firstItem="UFL-7f-Uok" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="ker-mQ-Gh8"/>
                     <constraint firstItem="neq-Ab-C7f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="yzo-Da-Oca"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>
+                <outlet property="imageDian" destination="eV2-pw-KuV" id="q9d-zK-n58"/>
                 <outlet property="imageHead" destination="neq-Ab-C7f" id="iW6-Gz-lKP"/>
                 <outlet property="labelContent" destination="NiS-IU-cyr" id="eVG-Ju-wVj"/>
                 <outlet property="labelName" destination="lH8-nC-Qq6" id="Mfc-zi-mPa"/>
