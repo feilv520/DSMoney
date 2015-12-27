@@ -198,6 +198,7 @@
             
         } else {
             
+            [self submitLoadingWithHidden:YES];
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
        

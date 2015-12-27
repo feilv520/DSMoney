@@ -157,6 +157,9 @@
         
         NSLog(@"getAreaListOfP = %@", responseObject);
         
+        [self loadingWithHidden:YES];
+        _tableView.hidden = NO;
+        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             NSMutableArray *bankArray = [responseObject objectForKey:@"Area"];
@@ -185,6 +188,8 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getAreaList" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"getAreaListOfP = %@", responseObject);
+        [self loadingWithHidden:YES];
+        _tableView.hidden = NO;
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
