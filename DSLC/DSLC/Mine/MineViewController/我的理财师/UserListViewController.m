@@ -92,9 +92,9 @@
     }
     
     if ([[userlist.msgStatus description] isEqualToString:@"1"]) {
-        cell.imageDian.image = [UIImage imageNamed:@"img_wd_buble_red"];
-    } else {
         cell.imageDian.image = [UIImage imageNamed:@""];
+    } else {
+        cell.imageDian.image = [UIImage imageNamed:@"reddian"];
     }
     
     cell.imageDian.tag = 590;

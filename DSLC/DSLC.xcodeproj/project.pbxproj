@@ -17,7 +17,7 @@
 		810C76791C2D1AAE000637FD /* UserListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 810C76771C2D1AAE000637FD /* UserListCell.m */; settings = {ASSET_TAGS = (); }; };
 		810C767A1C2D1AAE000637FD /* UserListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810C76781C2D1AAE000637FD /* UserListCell.xib */; settings = {ASSET_TAGS = (); }; };
 		810C767D1C2E40D2000637FD /* UserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 810C767C1C2E40D2000637FD /* UserList.m */; settings = {ASSET_TAGS = (); }; };
-		810C767F1C2EADA3000637FD /* img_wd_buble_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 810C767E1C2EADA3000637FD /* img_wd_buble_red.png */; settings = {ASSET_TAGS = (); }; };
+		810C767F1C2EADA3000637FD /* reddian.png in Resources */ = {isa = PBXBuildFile; fileRef = 810C767E1C2EADA3000637FD /* reddian.png */; settings = {ASSET_TAGS = (); }; };
 		810C76811C2EADE1000637FD /* icon_wd_buble.png in Resources */ = {isa = PBXBuildFile; fileRef = 810C76801C2EADE1000637FD /* icon_wd_buble.png */; settings = {ASSET_TAGS = (); }; };
 		810D25271BC7917B00DAF83F /* CreatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 810D25261BC7917B00DAF83F /* CreatView.m */; };
 		8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -868,7 +868,7 @@
 		810C76781C2D1AAE000637FD /* UserListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserListCell.xib; sourceTree = "<group>"; };
 		810C767B1C2E40D2000637FD /* UserList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserList.h; sourceTree = "<group>"; };
 		810C767C1C2E40D2000637FD /* UserList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserList.m; sourceTree = "<group>"; };
-		810C767E1C2EADA3000637FD /* img_wd_buble_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_wd_buble_red.png; sourceTree = "<group>"; };
+		810C767E1C2EADA3000637FD /* reddian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reddian.png; sourceTree = "<group>"; };
 		810C76801C2EADE1000637FD /* icon_wd_buble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_wd_buble.png; sourceTree = "<group>"; };
 		810D25251BC7917B00DAF83F /* CreatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatView.h; sourceTree = "<group>"; };
 		810D25261BC7917B00DAF83F /* CreatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatView.m; sourceTree = "<group>"; };
@@ -2459,7 +2459,7 @@
 				8D3942F01C2D15B500783FD0 /* welcome */,
 				810C76671C2D1210000637FD /* UserAsk@2x.png */,
 				810C76681C2D1210000637FD /* UserAsk@3x.png */,
-				810C767E1C2EADA3000637FD /* img_wd_buble_red.png */,
+				810C767E1C2EADA3000637FD /* reddian.png */,
 				810C76801C2EADE1000637FD /* icon_wd_buble.png */,
 				810C76691C2D1210000637FD /* 椭圆-2@2x.png */,
 				810C766A1C2D1210000637FD /* 椭圆-2@3x.png */,
@@ -4566,7 +4566,7 @@
 				819B52E31BFC2094002FDF1E /* 邀请@3x.png in Resources */,
 				819B52DD1BFC2094002FDF1E /* 铜元宝@3x.png in Resources */,
 				8D4343A01BFDEB0B000BA004 /* loading_middle_07.png in Resources */,
-				810C767F1C2EADA3000637FD /* img_wd_buble_red.png in Resources */,
+				810C767F1C2EADA3000637FD /* reddian.png in Resources */,
 				8D9011AC1BD6337C00E5D62A /* 02@3x.png in Resources */,
 				81ED03191BD0D429005F4B02 /* 2013123115540975@3x.png in Resources */,
 				8175BEAA1BE9F2F50044026E /* 新浪微博@2x.png in Resources */,

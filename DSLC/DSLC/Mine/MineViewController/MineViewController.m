@@ -190,9 +190,8 @@
         
     } else {
         
-        if ([[[self.myAccountInfo objectForKey:@"chatMsgCount"] description] isEqualToString:@"0"]) {
-            [butInvitate setBackgroundImage:[UIImage imageNamed:@"121"] forState:UIControlStateNormal];
-            
+        if ([[[self.myAccountInfo objectForKey:@"chatMsgCount"] description] isEqualToString:@"1"]) {
+            [butInvitate setBackgroundImage:[UIImage imageNamed:@"UserAsk"] forState:UIControlStateNormal];
         } else {
             [butInvitate setBackgroundImage:[UIImage imageNamed:@"椭圆-2"] forState:UIControlStateNormal];
         }
@@ -279,17 +278,17 @@
     middleView.labelAllMoney.alpha = 0.7;
     middleView.labelAllMoney.textAlignment = NSTextAlignmentCenter;
     
-    middleView.labelMyMoney.text = @"在投金额";
+    middleView.labelMyMoney.text = @"在投金额(元)";
     middleView.labelMyMoney.textColor = [UIColor zitihui];
     middleView.labelMyMoney.textAlignment = NSTextAlignmentCenter;
     middleView.labelMyMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-    middleView.labelData.text = @"账户余额";
+    middleView.labelData.text = @"账户余额(元)";
     middleView.labelData.textColor = [UIColor zitihui];
     middleView.labelData.textAlignment = NSTextAlignmentCenter;
     middleView.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-    middleView.labelTAllMoney.text = @"累计收益";
+    middleView.labelTAllMoney.text = @"累计收益(元)";
     middleView.labelTAllMoney.textColor = [UIColor zitihui];
     middleView.labelTAllMoney.textAlignment = NSTextAlignmentCenter;
     middleView.labelTAllMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
