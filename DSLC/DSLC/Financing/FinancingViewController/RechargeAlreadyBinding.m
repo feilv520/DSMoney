@@ -26,6 +26,11 @@
     NSDictionary *bankDic;
     
     NSString *ownerOrder;
+    
+    NSString *tranId;
+    NSString *tranCode;
+    
+    NSString *bankCardId;
 }
 
 @property (nonatomic, strong) UITextField *textFieldTag;
@@ -47,8 +52,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view
-    
-    self.orderDic = [self createOrder];
     
     self.view.backgroundColor = [UIColor huibai];
     [self.navigationItem setTitle:@"充值"];
@@ -154,26 +157,25 @@
 {
     [self.view endEditing:YES];
     CGFloat shuRu = self.textFieldTag.text.intValue;
-    
-    NSLog(@"shuRu = %.2lf",shuRu);
-    NSLog(@"textFieldTag.text = %@",self.textFieldTag.text);
-    if (self.textFieldTag.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额,充值金额最小为100元"];
-        
-    } else if (shuRu >= 100){
-//        GiveMoneyVerifyBinding *giveMVB = [[GiveMoneyVerifyBinding alloc] init];
-//        giveMVB.money = textFieldTag.text;
-//        [self.navigationController pushViewController:giveMVB animated:YES];
-
-        [self pay:nil];
-        
-    } else if ([self.textFieldTag.text isEqualToString:@"0"]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"最小金额为100元"];
-        
-    } else {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值金额最小为100元"];
-        
-    }
+    [self putOn];
+//    NSLog(@"shuRu = %.2lf",shuRu);
+//    NSLog(@"textFieldTag.text = %@",self.textFieldTag.text);
+//    if (self.textFieldTag.text.length == 0) {
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额,充值金额最小为100元"];
+//        
+//    } else if (shuRu >= 100){
+////        GiveMoneyVerifyBinding *giveMVB = [[GiveMoneyVerifyBinding alloc] init];
+////        giveMVB.money = textFieldTag.text;
+////        [self.navigationController pushViewController:giveMVB animated:YES];
+//        [self putOn];
+//        
+//    } else if ([self.textFieldTag.text isEqualToString:@"0"]) {
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"最小金额为100元"];
+//        
+//    } else {
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值金额最小为100元"];
+//        
+//    }
 }
 
 - (void)textAlreadyBinding:(UITextField *)textField
@@ -228,7 +230,9 @@
             self.dataDic = [responseObject objectForKey:@"User"];
             
             bankDic = [self.dataDic objectForKey:@"BankCard"];
-
+            
+            bankCardId = [bankDic objectForKey:@"id"];
+            
             if (![[self.dataDic objectForKey:@"realNameStatus"] isEqualToNumber:[NSNumber numberWithInt:2]]){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"为了您的账号安全,请先实名认证和绑卡" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去完善",nil];
                 // optional - add more buttons:
@@ -329,8 +333,13 @@
                 // TODO: 协议号
                 //[self.navigationController popToRootViewControllerAnimated:YES];
                 NSLog(@"putOn");
-                ownerOrder = dic[@"no_order"];
-                [self putOn];
+                
+                GiveMoneyFinish *giveMoney = [[GiveMoneyFinish alloc] init];
+                giveMoney.moneyString = self.textFieldTag.text;
+                giveMoney.bankAccount = [[self.dataDic objectForKey:@"BankCard"] objectForKey:@"bankAcc"];
+                [self.navigationController pushViewController:giveMoney animated:YES];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+                
             }
             else if ([result_pay isEqualToString:@"PROCESSING"])
             {
@@ -400,6 +409,13 @@
     [dateFormater setDateFormat:@"yyyyMMddHHmmss"];
     NSString *simOrder = [dateFormater stringFromDate:[NSDate date]];
     
+    NSString *risk_item = [NSString stringWithFormat:@"{\"frms_ware_category\":\"2009\",\"user_info_mercht_userno\":\"%@\",\"user_info_bind_phone\":\"%@\",\"user_info_dt_register\":\"%@\",\"user_info_full_name\":\"%@\",\"user_info_id_type\":\"0\",\"user_info_id_no\":\"%@\",\"user_info_identify_state\":\"1\",\"user_info_identify_type\":\"4\"}",
+                           [dicRealName objectForKey:@"id"],
+                           [DES3Util decrypt:[dicRealName objectForKey:@"userPhone"]],
+                           [dicRealName objectForKey:@"registerTime"],
+                           [dicRealName objectForKey:@"realName"],
+                           [dicRealName objectForKey:@"cardNumber"]];
+    
     // TODO: 请开发人员修改下面订单的所有信息，以匹配实际需求
     // TODO: 请开发人员修改下面订单的所有信息，以匹配实际需求
     [param setDictionary:@{
@@ -411,9 +427,10 @@
                            //商户订单时间	dt_order	是	String(14)	格式：YYYYMMDDH24MISS  14位数字，精确到秒
                            //                           @"money_order":@"0.10",
                            //交易金额	money_order	是	Number(8,2)	该笔订单的资金总额，单位为RMB-元。大于0的数字，精确到小数点后两位。 如：49.65
+//                           @"money_order" : self.textFieldTag.text,
                            @"money_order" : @"0.01",
                            
-                           @"no_order":[NSString stringWithFormat:@"%@%@",partnerPrefix,  simOrder],
+                           @"no_order":tranCode,
                            //商户唯一订单号	no_order	是	String(32)	商户系统唯一订单号
                            @"name_goods":@"订单名",
                            //商品名称	name_goods	否	String(40)
@@ -424,11 +441,11 @@
                            //                           @"shareing_data":@"201412030000035903^101001^10^分账说明1|201310102000003524^101001^11^分账说明2|201307232000003510^109001^12^分账说明3"
                            // 分账信息数据 shareing_data  否 变(1024)
                            
-                           @"notify_url":@"http://www.baidu.com",
+                           @"notify_url":[NSString stringWithFormat:@"http://web.dslc.cn/payReturn.do?tranId=%@&userId=%@&bankCardId=%@",tranId,user_id,bankCardId],
                            //服务器异步通知地址	notify_url	是	String(64)	连连钱包支付平台在用户支付成功后通知商户服务端的地址，如：http://payhttp.xiaofubao.com/back.shtml
                            
                            //                           @"risk_item":@"{\"user_info_bind_phone\":\"13958069593\",\"user_info_dt_register\":\"20131030122130\"}",
-                           @"risk_item":[NSString stringWithFormat:@"{\"user_info_bind_phone\":\"%@\"}",[dic objectForKey:@"account"]],
+                           @"risk_item":risk_item,
                            //风险控制参数 否 此字段填写风控参数，采用json串的模式传入，字段名和字段内容彼此对应好
                            //                           @"risk_item" : [LLPayUtil jsonStringOfObj:@{@"user_info_dt_register":@"20131030122130"}],
                            
@@ -477,7 +494,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     // 注意要修改
-    NSDictionary *parameter = @{@"fmoney":self.textFieldTag.text,@"userId":[dic objectForKey:@"id"],@"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==",@"serialNum":ownerOrder};
+    NSDictionary *parameter = @{@"fmoney":self.textFieldTag.text,@"token":[dic objectForKey:@"token"],@"bankCardId":bankCardId};
     
     NSLog(@"%@",parameter);
     
@@ -485,11 +502,15 @@
         
         NSLog(@"putOn = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            GiveMoneyFinish *giveMoney = [[GiveMoneyFinish alloc] init];
-            giveMoney.moneyString = self.textFieldTag.text;
-            giveMoney.bankAccount = [[self.dataDic objectForKey:@"BankCard"] objectForKey:@"bankAcc"];
-            [self.navigationController pushViewController:giveMoney animated:YES];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            
+            tranId = [responseObject objectForKey:@"tranId"];
+            tranCode = [responseObject objectForKey:@"tranCode"];
+            
+            self.orderDic = [self createOrder];
+            [self pay:nil];
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }

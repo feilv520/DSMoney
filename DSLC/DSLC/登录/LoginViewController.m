@@ -31,6 +31,8 @@
     AppDelegate *app;
     
     NSString *flagString;
+    
+    NSInteger count;
 }
 
 @property (nonatomic, strong) NSDictionary *flagLogin;
@@ -109,6 +111,8 @@
     if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]) {
         [self autoLogin];
     }
+    
+    count = 0;
     
     self.view.backgroundColor = [UIColor qianhuise];
     [self tableviewShow];
@@ -302,11 +306,20 @@
         if (![NSString validatePassword:textField2.text]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"首字母开头"];
         } else if ([NSString validateMobile:textField1.text]) {
+            if (++count == 1) {
+                [self submitLoadingWithView:self.view loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+            } else {
+                [self submitLoadingWithHidden:NO];
+            }
             NSDictionary *parameter = @{@"phone":textField1.text,@"password":textField2.text};
+            NSLog(@"%@",parameter);
             [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
                 
                 if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                     // 判断是否存在Member.plist文件
+                    [self submitLoadingWithHidden:YES];
+                    NSLog(@"%@",responseObject);
+                    
                     [MobClick profileSignInWithPUID:[[responseObject objectForKey:@"User"] objectForKey:@"id"]];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
@@ -319,7 +332,8 @@
                                              [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
-                                             [responseObject objectForKey:@"token"],@"token",nil];
+                                             [responseObject objectForKey:@"token"],@"token",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                         [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                     } else {
                         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -329,7 +343,8 @@
                                              [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
-                                             [responseObject objectForKey:@"token"],@"token",nil];
+                                             [responseObject objectForKey:@"token"],@"token",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                         [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                         NSLog(@"%@",[responseObject objectForKey:@"token"]);
                     }
@@ -353,6 +368,7 @@
                     
                 } else {
                     NSLog(@"%@",responseObject);
+                    [self submitLoadingWithHidden:YES];
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                     
                 }
@@ -415,13 +431,14 @@
             NSLog(@"AutoLogin = %@",responseObject);
             
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [DES3Util encrypt:[self.flagUserInfo objectForKey:@"password"]],@"password",
+                                 [self.flagUserInfo objectForKey:@"password"],@"password",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
-                                 [responseObject objectForKey:@"token"],@"token",nil];
+                                 [responseObject objectForKey:@"token"],@"token",
+                                 [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
             MineViewController *mineVC = [[MineViewController alloc] init];

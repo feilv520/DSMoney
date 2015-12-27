@@ -90,8 +90,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.orderDic = [self createOrder];
-    
     self.view.backgroundColor = [UIColor huibai];
     
     [self.navigationItem setTitle:@"我的资料"];

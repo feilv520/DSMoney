@@ -330,6 +330,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
             
         } else {
+            [self submitLoadingWithHidden:YES];
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
         }
         

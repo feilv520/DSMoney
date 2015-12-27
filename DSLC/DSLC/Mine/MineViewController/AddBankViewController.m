@@ -50,8 +50,14 @@
     City *cityS;
     BankName *bankName;
     
-    //第三方返回的字段
+    // 第三方返回的字段
     NSString *ownerOrder;
+    
+    // 绑定的银行卡Id
+    NSString *bankCardId;
+    // 交易记录Id
+    NSString *tranId;
+    NSString *tranCode;
 }
 
 @property (nonatomic) LLPaySdk *sdk;
@@ -190,9 +196,7 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
         
     } else {
-        self.orderDic = [self createOrder];
-        [self pay:nil];
-//        [self getBankCard];
+        [self getBankCard];
     }
 }
 
@@ -458,9 +462,9 @@
     
     NSDictionary *parmeter;
     if (textFieldFive == nil) {
-        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==", @"serialNum":ownerOrder};
+        parmeter = @{@"token":[dicRealName objectForKey:@"token"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@""};
     } else {
-        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==",@"serialNum":ownerOrder};
+        parmeter = @{@"token":[dicRealName objectForKey:@"token"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text};
     }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/addBankCard" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -468,21 +472,25 @@
         NSLog(@"7777777绑定银行卡:%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-            NSArray *viewController = [self.navigationController viewControllers];
+            bankCardId = [responseObject objectForKey:@"bankCardId"];
+            tranId = [responseObject objectForKey:@"tranId"];
+            tranCode = [responseObject objectForKey:@"tranCode"];
             
-            if (self.realNameStatus == YES) {
-                [self.navigationController popViewControllerAnimated:YES];
-                
-            } else {
-                [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
-                
-            }
+            NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushBK" object:nil];
+            //设置属性值,没有的数据就新建，已有的数据就修改。
+            [usersDic setObject:tranId forKey:@"tranId"];
+            [usersDic setObject:bankCardId forKey:@"bankCardId"];
+            //写入文件
+            [usersDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            
+            self.orderDic = [self createOrder];
+            
+            [self pay:nil];
             
         } else {
-            
+            CanNotBindingBankCard *canNot = [[CanNotBindingBankCard alloc] init];
+            [self.navigationController pushViewController:canNot animated:YES];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -542,8 +550,20 @@
                 //NSString *payBackAgreeNo = dic[@"agreementno"];
                 // TODO: 协议号
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
-                ownerOrder = dic[@"no_order"];
-                [self getBankCard];
+                NSLog(@"成功");
+                
+                NSArray *viewController = [self.navigationController viewControllers];
+                
+                if (self.realNameStatus == YES) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                } else {
+                    [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
+                    
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushBK" object:nil];
                 
             }
             else if ([result_pay isEqualToString:@"PROCESSING"])
@@ -563,8 +583,6 @@
         case kLLPayResultFail:
         {
             msg = @"支付失败";
-            CanNotBindingBankCard *canNot = [[CanNotBindingBankCard alloc] init];
-            [self.navigationController pushViewController:canNot animated:YES];
         }
             break;
         case kLLPayResultCancel:
@@ -614,6 +632,13 @@
     [dateFormater setDateFormat:@"yyyyMMddHHmmss"];
     NSString *simOrder = [dateFormater stringFromDate:[NSDate date]];
     
+    NSString *risk_item = [NSString stringWithFormat:@"{\"frms_ware_category\":\"2009\",\"user_info_mercht_userno\":\"%@\",\"user_info_bind_phone\":\"%@\",\"user_info_dt_register\":\"%@\",\"user_info_full_name\":\"%@\",\"user_info_id_type\":\"0\",\"user_info_id_no\":\"%@\",\"user_info_identify_state\":\"1\",\"user_info_identify_type\":\"4\"}",
+                           [dicRealName objectForKey:@"id"],
+                           [DES3Util decrypt:[dicRealName objectForKey:@"userPhone"]],
+                           [dicRealName objectForKey:@"registerTime"],
+                           [dicRealName objectForKey:@"realName"],
+                           [dicRealName objectForKey:@"cardNumber"]];
+    
     // TODO: 请开发人员修改下面订单的所有信息，以匹配实际需求
     // TODO: 请开发人员修改下面订单的所有信息，以匹配实际需求
     [param setDictionary:@{
@@ -627,7 +652,7 @@
                            //交易金额	money_order	是	Number(8,2)	该笔订单的资金总额，单位为RMB-元。大于0的数字，精确到小数点后两位。 如：49.65
                            @"money_order" : @"0.01",
                            
-                           @"no_order":[NSString stringWithFormat:@"%@%@",partnerPrefix,  simOrder],
+                           @"no_order":tranCode,
                            //商户唯一订单号	no_order	是	String(32)	商户系统唯一订单号
                            @"name_goods":@"订单名",
                            //商品名称	name_goods	否	String(40)
@@ -638,13 +663,11 @@
                            //                           @"shareing_data":@"201412030000035903^101001^10^分账说明1|201310102000003524^101001^11^分账说明2|201307232000003510^109001^12^分账说明3"
                            // 分账信息数据 shareing_data  否 变(1024)
                            
-                           @"notify_url":@"http://www.baidu.com",
+                           @"notify_url":[NSString stringWithFormat:@"http://web.dslc.cn/payReturn.do?tranId=%@&userId=%@&bankCardId=%@",tranId,[dicRealName objectForKey:@"id"],bankCardId],
                            //服务器异步通知地址	notify_url	是	String(64)	连连钱包支付平台在用户支付成功后通知商户服务端的地址，如：http://payhttp.xiaofubao.com/back.shtml
                            
-                           
-//                           @"risk_item":@{@"user_info_bind_phone":@"13354288036"},
+                           @"risk_item":risk_item,
                            //风险控制参数 否 此字段填写风控参数，采用json串的模式传入，字段名和字段内容彼此对应好
-                           @"risk_item" : [LLPayUtil jsonStringOfObj:@{@"user_info_dt_register":@"20131030122130"}],
                            
                            @"user_id": user_id,
                            //商户用户唯一编号 否 该用户在商户系统中的唯一编号，要求是该编号在商户系统中唯一标识该用户
