@@ -101,7 +101,7 @@
     cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.width/2;
     cell.imageHead.layer.masksToBounds = YES;
     
-    cell.labelName.text = userlist.recUserName;
+    cell.labelName.text = userlist.sendUserName;
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     cell.labelContent.text = userlist.msgText;
@@ -121,7 +121,7 @@
     UserList *userlist = [userListArr objectAtIndex:indexPath.section];
     ChatViewController *chatVC = [[ChatViewController alloc] init];
     chatVC.userORplanner = NO;
-    chatVC.chatName = userlist.recUserName;
+    chatVC.chatName = userlist.sendUserName;
     chatVC.IId = userlist.recUserId;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
     [self.navigationController pushViewController:chatVC animated:YES];
