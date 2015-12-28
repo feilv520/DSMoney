@@ -233,9 +233,9 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-            NSMutableArray *bankArray = [responseObject objectForKey:@"Area"];
+            NSMutableArray *bankArray = [responseObject objectForKey:@"cardList"];
             for (NSDictionary *dataDic in bankArray) {
-                NSString *brabank_name = [dataDic objectForKey:@"brabank_name"];
+                NSString *brabank_name = [dataDic objectForKey:@"brabankName"];
                 [bankNameArr addObject:brabank_name];
             }
             [_tableView reloadData];
