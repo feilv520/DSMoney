@@ -192,6 +192,12 @@
 - (void)getSuggestionData
 {
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    if ([dic objectForKey:@"token"] == nil) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"为了你的问题能更好的解决,请登录后再提交反馈"];
+        return;
+    }
+    
     NSDictionary *parameter = @{@"content":_textView.text, @"token":[dic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/feedback" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
