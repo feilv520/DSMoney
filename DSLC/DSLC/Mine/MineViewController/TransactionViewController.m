@@ -154,7 +154,6 @@
             break;
     }
     
-    
 }
 
 //导航返回按钮
@@ -451,19 +450,23 @@ numberOfRowsInComponent:(NSInteger)component
         [self loadingWithHidden:YES];
         if ([[[responseObject objectForKey:@"Trade"] objectAtIndex:0] count] == 0) {
             [self noDateWithView:@"暂无交易记录" height:120 view:self.view];
-            [_mainTableView setHidden:YES];
+            [self.mainTableView setHidden:YES];
         } else {
             [self loadingWithHidden:YES];
-            [self loadingWithHidden:YES];
-            [_mainTableView setHidden:NO];
+            [self.mainTableView setHidden:NO];
             for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
                 self.transactionName = [[dic allKeys] copy];
             }
-            
+            [transactionArr removeAllObjects];
+            transactionArr = nil;
+            transactionArr = [NSMutableArray array];
+            [self.transactionArray removeAllObjects];
+            self.transactionArray = nil;
+            self.transactionArray = [NSMutableArray array];
             for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
                 for (NSInteger i = 0; i < self.transactionName.count; i++) {
-                    transactionArr = [NSMutableArray array];
                     for (NSDictionary *ddic in [dic objectForKey:[self.transactionName objectAtIndex:i]]) {
+                        
                         MTransactionModel *tModel = [[MTransactionModel alloc] init];
                         [tModel setValuesForKeysWithDictionary:ddic];
                         [transactionArr addObject:tModel];
@@ -473,7 +476,9 @@ numberOfRowsInComponent:(NSInteger)component
                 }
             }
             
-            [_mainTableView reloadData];
+            NSLog(@"transactionArr = %@",self.transactionArray);
+            
+            [self.mainTableView reloadData];
 //        NSLog(@"transactionName = %@",self.transactionName);
 //        NSLog(@"transactionArray = %@",self.transactionArray);
         }

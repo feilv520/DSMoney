@@ -226,7 +226,7 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/getShareRedPacket" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享成功,红包已入帐."];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享成功,一天只能获得一个红包."];
 
         }
         

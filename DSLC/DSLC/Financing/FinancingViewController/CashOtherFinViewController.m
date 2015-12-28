@@ -235,7 +235,7 @@
         NSLog(@"%@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享成功,得到一个红包."];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享成功,一天只能获得一个红包."];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

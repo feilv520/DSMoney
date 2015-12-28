@@ -57,7 +57,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
 //    NSLog(@"%@",[NSString stringWithFormat:@"http://192.168.0.41:8080/tongjiang/product_protocol.html?userId=%@&orderId=%@&req_method=app",[dic objectForKey:@"id"],self.orderId]);
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://wap.dslc.cn/product_protocol.html?userId=%@&orderId=%@&req_method=app",[dic objectForKey:@"id"],self.orderId]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://h5t.dslc.cn/product_protocol.html?userId=%@&orderId=%@&req_method=app",[dic objectForKey:@"id"],self.orderId]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

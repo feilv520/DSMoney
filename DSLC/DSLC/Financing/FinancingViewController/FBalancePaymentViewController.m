@@ -18,7 +18,9 @@
 #import "SetDealSecret.h"
 
 
-@interface FBalancePaymentViewController () <UITextFieldDelegate>
+@interface FBalancePaymentViewController () <UITextFieldDelegate>{
+    NSInteger count;
+}
 
 @property (nonatomic, strong) UIButton *buttonSet;
 
@@ -33,6 +35,8 @@
     // Do any additional setup after loading the view from its nib.
     
     self.view.backgroundColor = [UIColor huibai];
+    
+    count = 0;
     
     self.navigationItem.title = @"支付";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -169,7 +173,11 @@
         
     } else {
 //        [self pay:nil];
-        [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+        if (++count == 1) {
+            [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+        } else {
+            [self submitLoadingWithHidden:NO];
+        }
         [self buyProduct];
         //        支付有红包
         //        ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
