@@ -28,6 +28,7 @@
     UIImageView *imageViewRight;
     UIImageView *imageRight;
     UIImageView *imageRightView;
+    UIImageView *imageRightViewZ;
     UILabel *labelChoose;
     UIButton *buttonGet;
     UIButton *buttonNext;
@@ -49,6 +50,7 @@
     City *city;
     City *cityS;
     BankName *bankName;
+    NSString *bankZ;
     
     // 第三方返回的字段
     NSString *ownerOrder;
@@ -82,6 +84,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnBankName:) name:@"bank" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnCityWithPName:) name:@"cityP" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnCityWithSName:) name:@"cityS" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnCityWithZName:) name:@"cityZ" object:nil];
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{  // 注意：只有非根控制器才有滑动返回功能，根控制器没有。  // 判断导航控制器是否只有一个子控制器，如果只有一个子控制器，肯定是根控制器
@@ -124,6 +127,12 @@
     textFieldFour.text = cityS.cityName;
 }
 
+- (void)returnCityWithZName:(NSNotification *)notice {
+    bankZ = [notice object];
+    textFieldFive = (UITextField *)[self.view viewWithTag:405];
+    textFieldFive.text = bankZ;
+}
+
 //视图内容
 - (void)showViewControllerContent
 {
@@ -143,6 +152,7 @@
     imageViewRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
     imageRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
     imageRightView = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
+    imageRightViewZ = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
     
     buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0))/2, HEIGHT_CONTROLLER_DEFAULT * (47.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (43.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [view addSubview:buttonNext];
@@ -225,17 +235,6 @@
         }
         
     }
-//    else if (textField.tag == 405) {
-//        
-//        if (range.location == 6) {
-//            
-//            return NO;
-//            
-//        } else {
-//            
-//            return YES;
-//        }
-//    }
     else {
         
         return YES;
@@ -269,16 +268,7 @@
 {
     if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
         
-        if (textField.tag == 405) {
-            
-            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                    
-                _tableView.contentOffset = CGPointMake(0, 150);
-                
-            } completion:^(BOOL finished) {
-                
-            }];
-        } else if (textField.tag == 407) {
+        if (textField.tag == 407) {
             
             [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 
@@ -368,7 +358,7 @@
     if (cell.textField.tag == 405) {
         cell.textField.text = @"";
         cell.textField.placeholder = @"请输入开户行支行";
-        cell.textField.userInteractionEnabled = YES;
+//        cell.textField.userInteractionEnabled = YES;
         cell.textField.keyboardType = UIKeyboardTypeDefault;
     }
     
@@ -405,6 +395,11 @@
             [cell addSubview:imageRightView];
             cell.textField.enabled = NO;
         }
+        
+        if (indexPath.row == 5) {
+            [cell addSubview:imageRightViewZ];
+            cell.textField.enabled = NO;
+        }
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -435,6 +430,18 @@
         chooseBank.cityCode = city.cityCode;
         
         [self.navigationController pushViewController:chooseBank animated:YES];
+    } else if (indexPath.row == 5) {
+        if (city == nil) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先选择开户行省和市"];
+            return;
+        }
+        ChooseOpenAnAccountBank *chooseBank = [[ChooseOpenAnAccountBank alloc] init];
+        chooseBank.flagSelect = @"5";
+        chooseBank.cityCode = city.cityCode;
+        chooseBank.pCode = cityS.cityCode;
+        chooseBank.bankCode = bankName.bankCode;
+        chooseBank.cityName = city.cityName;
+        [self.navigationController pushViewController:chooseBank animated:YES];
     }
 }
 
@@ -464,7 +471,7 @@
     if (textFieldFive == nil) {
         parmeter = @{@"token":[dicRealName objectForKey:@"token"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@""};
     } else {
-        parmeter = @{@"token":[dicRealName objectForKey:@"token"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text};
+        parmeter = @{@"token":[dicRealName objectForKey:@"token"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":bankZ};
     }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/addBankCard" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {

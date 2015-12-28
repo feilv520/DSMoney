@@ -37,6 +37,8 @@
         [self getAreaListOfP];
     } else if ([self.flagSelect isEqualToString:@"4"]) {
         [self getAreaListOfS];
+    } else if ([self.flagSelect isEqualToString:@"5"]) {
+        [self getAreaListOfZ];
     }
     
     if ([self.flagSelect isEqualToString:@"22"]) {
@@ -45,6 +47,8 @@
         [self getAreaListOfP];
     } else if ([self.flagSelect isEqualToString:@"44"]) {
         [self getAreaListOfS];
+    } else if ([self.flagSelect isEqualToString:@"55"]) {
+        [self getAreaListOfZ];
     }
     
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
@@ -80,6 +84,8 @@
     if ([self.flagSelect isEqualToString:@"3"] || [self.flagSelect isEqualToString:@"4"] || [self.flagSelect isEqualToString:@"33"] || [self.flagSelect isEqualToString:@"44"]) {
         City *city = [bankNameArr objectAtIndex:indexPath.row];
         cell.labelBank.text = city.cityName;
+    } else if ([self.flagSelect isEqualToString:@"5"] || [self.flagSelect isEqualToString:@"55"]){
+        cell.labelBank.text = [bankNameArr objectAtIndex:indexPath.row];
     } else {
         BankName *bank = [bankNameArr objectAtIndex:indexPath.row];
         cell.labelBank.text = bank.bankName;
@@ -98,9 +104,11 @@
         } else {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"cityS" object:city];
         }
-    } else {
+    } else if ([self.flagSelect isEqualToString:@"2"]) {
         BankName *bank = [bankNameArr objectAtIndex:indexPath.row];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"bank" object:bank];
+    } else if ([self.flagSelect isEqualToString:@"5"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"cityZ" object:[bankNameArr objectAtIndex:indexPath.row]];
     }
     
     if ([self.flagSelect isEqualToString:@"33"] || [self.flagSelect isEqualToString:@"44"]) {
@@ -110,9 +118,11 @@
         } else {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"citySR" object:city];
         }
-    } else {
+    } else if ([self.flagSelect isEqualToString:@"22"]) {
         BankName *bank = [bankNameArr objectAtIndex:indexPath.row];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"bankR" object:bank];
+    }  else if ([self.flagSelect isEqualToString:@"55"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"cityZR" object:[bankNameArr objectAtIndex:indexPath.row]];
     }
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -187,7 +197,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getAreaList" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"getAreaListOfP = %@", responseObject);
+        NSLog(@"getAreaListOfS = %@", responseObject);
         [self loadingWithHidden:YES];
         _tableView.hidden = NO;
         
@@ -198,6 +208,35 @@
                 City *bankName = [[City alloc] init];
                 [bankName setValuesForKeysWithDictionary:dataDic];
                 [bankNameArr addObject:bankName];
+            }
+            [_tableView reloadData];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@", error);
+        
+    }];
+}
+
+- (void)getAreaListOfZ {
+    NSDictionary *parameters = @{@"cardNum":@"",@"bankCode":self.bankCode,@"braBankName":self.cityName,@"cityCode":self.cityCode};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getLianPayCardList" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getAreaListOfZ = %@", responseObject);
+        [self loadingWithHidden:YES];
+        _tableView.hidden = NO;
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            NSMutableArray *bankArray = [responseObject objectForKey:@"Area"];
+            for (NSDictionary *dataDic in bankArray) {
+                NSString *brabank_name = [dataDic objectForKey:@"brabank_name"];
+                [bankNameArr addObject:brabank_name];
             }
             [_tableView reloadData];
             

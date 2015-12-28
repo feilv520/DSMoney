@@ -301,6 +301,14 @@
             
             [self submitLoadingWithHidden:YES];
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            
+            NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
+            
+            //设置属性值,没有的数据就新建，已有的数据就修改。
+            [usersDic setObject:[DES3Util encrypt:textNewDeal.text] forKey:@"dealSecret"];
+            //写入文件
+            [usersDic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
+            
 //            点击修改交易密码页的找回交易密码成功后需返回两页
             if (self.whichOne == YES) {
                 

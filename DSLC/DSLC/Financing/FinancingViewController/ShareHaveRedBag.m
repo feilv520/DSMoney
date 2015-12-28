@@ -161,6 +161,8 @@
 }
 
 - (void)shareButtonAction:(id)sender{
+    [MobClick event:@"share"];
+    [self getShareRedPacket];
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"56447cbc67e58efd78001914"
                                       shareText:@"大圣理财,金融街的新宠."
@@ -207,7 +209,6 @@
     //根据`responseCode`得到发送结果,如果分享成功
     if(response.responseCode == UMSResponseCodeSuccess)
     {
-        [self getShareRedPacket];
         //得到分享到的微博平台名
         NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
     }

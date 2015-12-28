@@ -329,6 +329,13 @@
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                 [self.navigationController popViewControllerAnimated:YES];
                 
+                NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
+                
+                //设置属性值,没有的数据就新建，已有的数据就修改。
+                [usersDic setObject:[DES3Util encrypt:textNew.text] forKey:@"dealSecret"];
+                //写入文件
+                [usersDic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
+                
             } else {
                 
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
