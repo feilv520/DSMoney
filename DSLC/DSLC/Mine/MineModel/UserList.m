@@ -11,9 +11,9 @@
 @implementation UserList
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-    if ([key isEqualToString:@"recUserId"]) {
+    if ([key isEqualToString:@"sendUserId"]) {
         
-        self.recUserId = value;
+        self.sendUserId = value;
     }
 }
 @end

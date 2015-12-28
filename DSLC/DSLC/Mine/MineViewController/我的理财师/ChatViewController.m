@@ -205,7 +205,8 @@
 - (void)getDataList
 {
     
-    NSDictionary *parameter = @{@"recUserId":self.IId, @"msgType":@0};
+    NSDictionary *parameter = @{@"sendUserId":self.IId, @"msgType":@0};
+    NSLog(@"%@", parameter);
 
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

@@ -427,8 +427,8 @@
                            //商户订单时间	dt_order	是	String(14)	格式：YYYYMMDDH24MISS  14位数字，精确到秒
                            //                           @"money_order":@"0.10",
                            //交易金额	money_order	是	Number(8,2)	该笔订单的资金总额，单位为RMB-元。大于0的数字，精确到小数点后两位。 如：49.65
-                           @"money_order" : self.textFieldTag.text,
-//                           @"money_order" : @"0.01",
+//                           @"money_order" : self.textFieldTag.text,
+                           @"money_order" : @"0.01",
                            
                            @"no_order":tranCode,
                            //商户唯一订单号	no_order	是	String(32)	商户系统唯一订单号
