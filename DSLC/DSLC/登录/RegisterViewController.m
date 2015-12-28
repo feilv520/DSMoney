@@ -1246,9 +1246,9 @@
     
     NSDictionary *parmeter;
     if (textFieldFive == nil) {
-        parmeter = @{@"token":[dicRealName objectForKey:@"token"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@""};
+        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     } else {
-        parmeter = @{@"token":[dicRealName objectForKey:@"token"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":bankZ};
+        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":bankZ, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/addBankCard" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
