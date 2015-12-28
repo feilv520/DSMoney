@@ -24,6 +24,8 @@
     NSArray *nameArray;
     
     UIButton *butCancle;
+    
+    UIButton *butShare;
 }
 
 @end
@@ -77,7 +79,7 @@
     buttonGoOn.layer.masksToBounds = YES;
     [buttonGoOn addTarget:self action:@selector(goOnButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2 + 50, 300, (WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2, 40) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"分享拿红包"];
+    butShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2 + 50, 300, (WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2, 40) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"分享拿红包"];
     [self.view addSubview:butShare];
     butShare.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     butShare.layer.cornerRadius = 3;
@@ -234,6 +236,7 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享成功,一天只能获得一个红包."];
+            butShare.titleLabel.text = @"分享";
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
