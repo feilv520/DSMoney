@@ -157,25 +157,25 @@
 {
     [self.view endEditing:YES];
     CGFloat shuRu = self.textFieldTag.text.intValue;
-    [self putOn];
-//    NSLog(@"shuRu = %.2lf",shuRu);
-//    NSLog(@"textFieldTag.text = %@",self.textFieldTag.text);
-//    if (self.textFieldTag.text.length == 0) {
-//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额,充值金额最小为100元"];
-//        
-//    } else if (shuRu >= 100){
-////        GiveMoneyVerifyBinding *giveMVB = [[GiveMoneyVerifyBinding alloc] init];
-////        giveMVB.money = textFieldTag.text;
-////        [self.navigationController pushViewController:giveMVB animated:YES];
-//        [self putOn];
-//        
-//    } else if ([self.textFieldTag.text isEqualToString:@"0"]) {
-//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"最小金额为100元"];
-//        
-//    } else {
-//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值金额最小为100元"];
-//        
-//    }
+//    [self putOn];
+    NSLog(@"shuRu = %.2lf",shuRu);
+    NSLog(@"textFieldTag.text = %@",self.textFieldTag.text);
+    if (self.textFieldTag.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额,充值金额最小为100元"];
+        
+    } else if (shuRu >= 100){
+//        GiveMoneyVerifyBinding *giveMVB = [[GiveMoneyVerifyBinding alloc] init];
+//        giveMVB.money = textFieldTag.text;
+//        [self.navigationController pushViewController:giveMVB animated:YES];
+        [self putOn];
+        
+    } else if ([self.textFieldTag.text isEqualToString:@"0"]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"最小金额为100元"];
+        
+    } else {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值金额最小为100元"];
+        
+    }
 }
 
 - (void)textAlreadyBinding:(UITextField *)textField
@@ -427,8 +427,8 @@
                            //商户订单时间	dt_order	是	String(14)	格式：YYYYMMDDH24MISS  14位数字，精确到秒
                            //                           @"money_order":@"0.10",
                            //交易金额	money_order	是	Number(8,2)	该笔订单的资金总额，单位为RMB-元。大于0的数字，精确到小数点后两位。 如：49.65
-//                           @"money_order" : self.textFieldTag.text,
-                           @"money_order" : @"0.01",
+                           @"money_order" : self.textFieldTag.text,
+//                           @"money_order" : @"0.01",
                            
                            @"no_order":tranCode,
                            //商户唯一订单号	no_order	是	String(32)	商户系统唯一订单号

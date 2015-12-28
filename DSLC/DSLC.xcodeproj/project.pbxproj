@@ -4291,7 +4291,7 @@
 				TargetAttributes = {
 					8D9356C81BC607C500BC2BFA = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = Z7J5CQFNQ3;
+						DevelopmentTeam = 7XD2FNJN7H;
 					};
 					8D9356E11BC607C500BC2BFA = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -5328,7 +5328,7 @@
 					"$(PROJECT_DIR)/DSLC/Three/LLPayUtils/crypto",
 				);
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.ds;
 				PRODUCT_NAME = "大圣理财";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -5365,7 +5365,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.ds;
 				PRODUCT_NAME = "大圣理财";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
