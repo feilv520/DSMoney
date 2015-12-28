@@ -425,7 +425,7 @@
     fieldBusness = (UITextField *)[self.view viewWithTag:605];
     fieldMoney = (UITextField *)[self.view viewWithTag:606];
     
-    if (fileldName.text.length > 0 &&fieldBank.text.length > 0 && fieldBankCard.text.length == 19 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0 && fieldBusness.text.length != 0 && fieldTime.text != 0) {
+    if (fileldName.text.length > 0 && fieldBank.text.length > 0 && fieldBankCard.text.length > 0 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0 && fieldBusness.text.length != 0 && fieldTime.text != 0) {
         
         [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
