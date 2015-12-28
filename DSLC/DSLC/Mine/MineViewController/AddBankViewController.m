@@ -30,6 +30,7 @@
     UIImageView *imageRightView;
     UIImageView *imageRightViewZ;
     UILabel *labelChoose;
+    UILabel *labelZBank;
     UIButton *buttonGet;
     UIButton *buttonNext;
     
@@ -130,7 +131,10 @@
 - (void)returnCityWithZName:(NSNotification *)notice {
     bankZ = [notice object];
     textFieldFive = (UITextField *)[self.view viewWithTag:405];
-    textFieldFive.text = bankZ;
+//    textFieldFive.font = [UIFont systemFontOfSize:10];
+    textFieldFive.hidden = YES;
+//    textFieldFive.text = bankZ;
+    labelZBank.text = bankZ;
 }
 
 //视图内容
@@ -153,6 +157,9 @@
     imageRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
     imageRightView = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
     imageRightViewZ = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
+    
+    labelZBank = [CreatView creatWithLabelFrame:CGRectMake(120, 10, WIDTH_CONTROLLER_DEFAULT * (230 / 375.0), 35) backgroundColor:Color_Clear textColor:Color_Black textAlignment:NSTextAlignmentLeft textFont:[UIFont systemFontOfSize:14] text:nil];
+    labelZBank.numberOfLines = 0;
     
     buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0))/2, HEIGHT_CONTROLLER_DEFAULT * (47.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (271.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (43.0 / 667.0)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [view addSubview:buttonNext];
@@ -398,6 +405,7 @@
         
         if (indexPath.row == 5) {
             [cell addSubview:imageRightViewZ];
+            [cell addSubview:labelZBank];
             cell.textField.enabled = NO;
         }
     }
