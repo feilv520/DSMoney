@@ -512,7 +512,7 @@
         
         if (![FileOfManage ExistOfFile:@"NewProduct.plist"]) {
             [FileOfManage createWithFile:@"NewProduct.plist"];
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"0",@"NewProduct",nil];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"0",@"NewProduct",@"0",@"dealSecret",nil];
             //设置属性值,没有的数据就新建，已有的数据就修改。
             [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
         } else {

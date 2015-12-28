@@ -241,7 +241,7 @@
                 NSDictionary *dicL = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
                 [dicL writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbar" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
             [self.navigationController popToRootViewControllerAnimated:NO];
             return ;
         }

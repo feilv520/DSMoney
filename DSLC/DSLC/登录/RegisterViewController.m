@@ -68,6 +68,7 @@
     City *city;
     City *cityS;
     BankName *bankName;
+    NSString *bankZ;
     
     // 姓名
     NSString *ownerCardName;
@@ -100,6 +101,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnBankName:) name:@"bankR" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnCityWithPName:) name:@"cityPR" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnCityWithSName:) name:@"citySR" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnCityWithZName:) name:@"cityZR" object:nil];
     
 }
 
@@ -123,6 +125,11 @@
     textFieldFour.text = cityS.cityName;
 }
 
+- (void)returnCityWithZName:(NSNotification *)notice {
+    bankZ = [notice object];
+    textFieldFive = (UITextField *)[self.view viewWithTag:405];
+    textFieldFive.text = bankZ;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -1201,6 +1208,17 @@
         chooseBank.cityCode = city.cityCode;
         
         [self.navigationController pushViewController:chooseBank animated:YES];
+    } else if (indexPath.row == 5) {
+        if (bankZ == nil) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先选择开户行省和市"];
+            return;
+        }
+        ChooseOpenAnAccountBank *chooseBank = [[ChooseOpenAnAccountBank alloc] init];
+        chooseBank.flagSelect = @"55";
+        chooseBank.cityCode = city.cityCode;
+        chooseBank.pCode = cityS.cityCode;
+        chooseBank.bankCode = bankName.bankCode;
+        chooseBank.cityName = city.cityName;
     }
 }
 
@@ -1228,9 +1246,9 @@
     
     NSDictionary *parmeter;
     if (textFieldFive == nil) {
-        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==",@"serialNum":ownerOrder};
+        parmeter = @{@"token":[dicRealName objectForKey:@"token"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@""};
     } else {
-        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":textFieldFive.text, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA==",@"serialNum":ownerOrder};
+        parmeter = @{@"token":[dicRealName objectForKey:@"token"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":bankZ};
     }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/addBankCard" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
