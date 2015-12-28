@@ -17,6 +17,8 @@
     UIButton *butSurprise;
     
     UILabel *labelGet;
+    
+    UIButton *buttonShare;
 }
 
 @property (nonatomic, strong) NSDictionary *openRedBagDic;
@@ -77,7 +79,7 @@
     buttonGOON.layer.borderWidth = 0.5;
     [buttonGOON addTarget:self action:@selector(finishLastBarPress:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *buttonShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2 + 50, 400, (WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2, 40) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"分享拿红包"];
+    buttonShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2 + 50, 400, (WIDTH_CONTROLLER_DEFAULT - 80 - 10)/2, 40) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"分享拿红包"];
     [self.scrollView addSubview:buttonShare];
     buttonShare.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     buttonShare.layer.cornerRadius = 3;
@@ -227,7 +229,7 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享成功,一天只能获得一个红包."];
-
+            buttonShare.titleLabel.text = @"分享";
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
