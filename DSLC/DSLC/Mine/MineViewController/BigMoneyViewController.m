@@ -493,14 +493,6 @@
 //申请按钮
 - (void)applyBigMoney:(UIButton *)button
 {
-    countIns ++;
-    if (countIns == 1) {
-        [self submitLoadingWithView:self.view loadingFlag:NO height:0];
-        
-    } else {
-        [self submitLoadingWithHidden:NO];
-    }
-    
     fileldName = (UITextField *)[self.view viewWithTag:600];
     fieldBank = (UITextField *)[self.view viewWithTag:601];
     fieldBankCard = (UITextField *)[self.view viewWithTag:602];
@@ -545,6 +537,14 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额"];
         
     } else {
+        
+        countIns ++;
+        if (countIns == 1) {
+            [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+            
+        } else {
+            [self submitLoadingWithHidden:NO];
+        }
         
         if ([fieldPos.text isEqualToString:@"已上传POS单照片"]) {
             

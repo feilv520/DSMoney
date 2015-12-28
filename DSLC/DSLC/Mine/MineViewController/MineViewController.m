@@ -190,10 +190,10 @@
         
     } else {
         
-        if ([[[self.myAccountInfo objectForKey:@"chatMsgCount"] description] isEqualToString:@"1"]) {
-            [butInvitate setBackgroundImage:[UIImage imageNamed:@"UserAsk"] forState:UIControlStateNormal];
-        } else {
+        if ([[[self.myAccountInfo objectForKey:@"chatMsgCount"] description] isEqualToString:@"0"]) {
             [butInvitate setBackgroundImage:[UIImage imageNamed:@"椭圆-2"] forState:UIControlStateNormal];
+        } else {
+            [butInvitate setBackgroundImage:[UIImage imageNamed:@"UserAsk"] forState:UIControlStateNormal];
         }
         butInvitate.tag = 8090;
     }

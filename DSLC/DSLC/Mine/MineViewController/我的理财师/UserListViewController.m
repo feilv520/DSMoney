@@ -84,11 +84,11 @@
     
     UserList *userlist = [userListArr objectAtIndex:indexPath.section];
     
-    if ([userlist.recAvatarImg isEqualToString:@""]) {
+    if ([userlist.sendAvatarImg isEqualToString:@""]) {
         cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
         
     } else {
-        cell.imageHead.yy_imageURL = [NSURL URLWithString:userlist.recAvatarImg];
+        cell.imageHead.yy_imageURL = [NSURL URLWithString:userlist.sendAvatarImg];
     }
     
     if ([[userlist.msgStatus description] isEqualToString:@"1"]) {
@@ -101,7 +101,7 @@
     cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.width/2;
     cell.imageHead.layer.masksToBounds = YES;
     
-    cell.labelName.text = userlist.sendUserName;
+    cell.labelName.text = userlist.recUserName;
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     cell.labelContent.text = userlist.msgText;
@@ -121,7 +121,7 @@
     UserList *userlist = [userListArr objectAtIndex:indexPath.section];
     ChatViewController *chatVC = [[ChatViewController alloc] init];
     chatVC.userORplanner = NO;
-    chatVC.chatName = userlist.sendUserName;
+    chatVC.chatName = userlist.recUserName;
     chatVC.IId = userlist.recUserId;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
     [self.navigationController pushViewController:chatVC animated:YES];
