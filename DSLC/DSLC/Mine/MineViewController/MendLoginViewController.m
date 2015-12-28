@@ -20,6 +20,7 @@
     UITextField *textField1;
     UITextField *textField2;
     UITextField *textField3;
+    NSInteger countIns;
 }
 
 @end
@@ -35,6 +36,7 @@
     [self.navigationItem setTitle:@"修改登录密码"];
     
     [self contentShow];
+    countIns = 0;
 }
 
 - (void)contentShow
@@ -175,6 +177,14 @@
         
     } else {
         
+        countIns ++;
+        if (countIns == 1) {
+            [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+            
+        } else {
+            [self submitLoadingWithHidden:NO];
+        }
+        
         [self submitLoadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
         self.flagDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
         
@@ -192,11 +202,13 @@
                 
             } else {
                 
+                [self submitLoadingWithHidden:YES];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码错误"];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
+            [self submitLoadingWithHidden:YES];
         }];
     }
 }

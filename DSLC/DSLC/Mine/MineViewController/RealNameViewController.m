@@ -18,6 +18,7 @@
     UITextField *_textField3;
     UIButton *buttonNext;
     NSInteger countNum;
+    NSInteger countIns;
 }
 
 @end
@@ -34,6 +35,7 @@
     
     [self contentShow];
     countNum = 0;
+    countIns = 0;
 }
 
 - (void)contentShow
@@ -128,7 +130,13 @@
     } else {
 //        NSArray *viewController = [self.navigationController viewControllers];
 //        [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
-        [self submitLoadingWithView:self.view loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+        countIns ++;
+        if (countIns == 1) {
+            [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+            
+        } else {
+            [self submitLoadingWithHidden:NO];
+        }
         [self authRrealName];
     }
 }
@@ -206,6 +214,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
+        [self submitLoadingWithHidden:YES];
         
     }];
 }

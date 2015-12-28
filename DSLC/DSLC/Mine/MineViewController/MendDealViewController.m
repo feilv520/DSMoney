@@ -27,6 +27,7 @@
     
     NSInteger seconds;
     NSTimer *timer;
+    NSInteger countIns;
 }
 
 @end
@@ -44,6 +45,7 @@
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:15], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
     seconds = 60;
+    countIns = 0;
     [self tableViewShow];
 }
 
@@ -315,7 +317,14 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
         
     } else {
-        [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+        
+        countIns ++;
+        if (countIns == 1) {
+            [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+            
+        } else {
+            [self submitLoadingWithHidden:NO];
+        }
         
         NSDictionary *dataDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
 
@@ -325,7 +334,7 @@
             NSLog(@"222222222222修改交易密码:%@", responseObject);
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                [self loadingWithHidden:YES];
+                [self submitLoadingWithHidden:YES];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                 [self.navigationController popViewControllerAnimated:YES];
                 
@@ -338,11 +347,14 @@
                 
             } else {
                 
+                [self submitLoadingWithHidden:YES];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
+            [self submitLoadingWithHidden:YES];
+
         }];
  
     }

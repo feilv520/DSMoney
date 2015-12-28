@@ -25,6 +25,7 @@
     
     NSInteger seconds;
     NSTimer *timer;
+    NSInteger countIns;
 }
 
 @end
@@ -39,6 +40,7 @@
     [self.navigationItem setTitle:@"找回交易密码"];
     
     seconds = 60;
+    countIns = 0;
     [self tableViewShow];
 }
 
@@ -279,7 +281,14 @@
         
     } else {
         
-        [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+        countIns ++;
+        if (countIns == 1) {
+            [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+            
+        } else {
+            [self submitLoadingWithHidden:NO];
+        }
+        
         [self getCodeData];
     }
         
@@ -321,11 +330,13 @@
             
         } else {
             
+            [self submitLoadingWithHidden:YES];
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"%@", error);
+        [self submitLoadingWithHidden:YES];
     }];
 }
 
