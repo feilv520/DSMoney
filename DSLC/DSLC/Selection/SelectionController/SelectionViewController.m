@@ -518,7 +518,8 @@
         } else {
             NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
             //设置属性值,没有的数据就新建，已有的数据就修改。
-            [dic setObject:[self.productM productId] forKey:@"NewProduct"];
+#warning asdasdasdasdasdasdasdasdasdasd
+//            [dic setObject:[self.productM productId] forKey:@"NewProduct"];
             [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
         }
         

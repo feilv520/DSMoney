@@ -54,6 +54,8 @@
     UIImageView *imageViewRight;
     UIImageView *imageRight;
     UIImageView *imageRightView;
+    UIImageView *imageRightViewZ;
+    UILabel *labelZBank;
     
     NSDictionary *dicRealName;
     
@@ -135,7 +137,10 @@
 - (void)returnCityWithZName:(NSNotification *)notice {
     bankZ = [notice object];
     textFieldFive = (UITextField *)[self.view viewWithTag:405];
-    textFieldFive.text = bankZ;
+    //    textFieldFive.font = [UIFont systemFontOfSize:10];
+    textFieldFive.hidden = YES;
+    //    textFieldFive.text = bankZ;
+    labelZBank.text = bankZ;
 }
 
 - (void)viewDidLoad {
@@ -780,7 +785,7 @@
 // 获得验证码
 - (void)getCodeButtonAction:(UIButton *)btn{
     [self.view endEditing:YES];
-    
+
     if (self.registerV.phoneNumber.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
         
@@ -1039,6 +1044,10 @@
     imageViewRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
     imageRight = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
     imageRightView = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
+    imageRightViewZ = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23, 17, 16, 16) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"arrow"]];
+    
+    labelZBank = [CreatView creatWithLabelFrame:CGRectMake(120, 10, WIDTH_CONTROLLER_DEFAULT * (230 / 375.0), 35) backgroundColor:Color_Clear textColor:Color_Black textAlignment:NSTextAlignmentLeft textFont:[UIFont systemFontOfSize:14] text:nil];
+    labelZBank.numberOfLines = 0;
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -1162,7 +1171,7 @@
     if (cell.textField.tag == 405) {
         cell.textField.text = @"";
         cell.textField.placeholder = @"请输入开户行支行";
-        cell.textField.userInteractionEnabled = YES;
+        //        cell.textField.userInteractionEnabled = YES;
         cell.textField.keyboardType = UIKeyboardTypeDefault;
     }
     
@@ -1197,6 +1206,12 @@
             [cell addSubview:imageRightView];
             cell.textField.enabled = NO;
         }
+        
+        if (indexPath.row == 5) {
+            [cell addSubview:imageRightViewZ];
+            [cell addSubview:labelZBank];
+            cell.textField.enabled = NO;
+        }
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -1228,7 +1243,7 @@
         
         [self.navigationController pushViewController:chooseBank animated:YES];
     } else if (indexPath.row == 5) {
-        if (bankZ == nil) {
+        if (city == nil) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先选择开户行省和市"];
             return;
         }
@@ -1238,6 +1253,7 @@
         chooseBank.pCode = cityS.cityCode;
         chooseBank.bankCode = bankName.bankCode;
         chooseBank.cityName = city.cityName;
+        [self.navigationController pushViewController:chooseBank animated:YES];
     }
 }
 
@@ -1270,14 +1286,20 @@
         parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":bankZ, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     }
     
+    NSLog(@"parmeter == %@",parmeter);
+    
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/addBankCard" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"7777777绑定银行卡:%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"绑卡成功"];
+            
             bankCardId = [responseObject objectForKey:@"bankCardId"];
             tranId = [responseObject objectForKey:@"tranId"];
             tranCode = [responseObject objectForKey:@"tranCode"];
+
+            self.orderDic = [self createOrder];
             
             [self pay:nil];
             
@@ -1303,23 +1325,19 @@
 #pragma mark - 订单支付
 - (void)pay:(id)sender{
     
-    [self.view endEditing:YES];
-    
     LLPayUtil *payUtil = [[LLPayUtil alloc] init];
-    
-    self.orderDic = [self createOrder];
     
     // 进行签名
     NSDictionary *signedOrder = [payUtil signedOrderDic:self.orderDic
                                              andSignKey:kLLPartnerKey];
     
     
-    //    [LLPaySdk sharedSdk].sdkDelegate = self;
+//        [LLPaySdk sharedSdk].sdkDelegate = self;
     
     // TODO: 根据需要使用特定支付方式
     
     // 快捷支付
-    //        [[LLPaySdk sharedSdk] presentQuickPaySdkInViewController:self withTraderInfo:signedOrder];
+//            [[LLPaySdk sharedSdk] presentQuickPaySdkInViewController:self withTraderInfo:signedOrder];
     
     // 认证支付
     //    [[LLPaySdk sharedSdk] presentVerifyPaySdkInViewController:self withTraderInfo:signedOrder];
@@ -1331,9 +1349,13 @@
     
     self.sdk = [[LLPaySdk alloc] init];
     self.sdk.sdkDelegate = self;
-    [self.sdk presentVerifyPaySdkInViewController:app.tabBarVC withTraderInfo:signedOrder];
+//    [self.sdk presentVerifyPaySdkInViewController:self.tabBarController withTraderInfo:signedOrder];
+    [self.sdk presentPaySdkInViewController:app.tabBarVC withTraderInfo:signedOrder];
     
+    NSLog(@"123123123123");
 }
+
+
 
 #pragma -mark 支付结果 LLPaySdkDelegate
 // 订单支付结果返回，主要是异常和成功的不同状态
@@ -1436,6 +1458,7 @@
                            //交易金额	money_order	是	Number(8,2)	该笔订单的资金总额，单位为RMB-元。大于0的数字，精确到小数点后两位。 如：49.65
                            @"money_order" : @"0.01",
                            
+//                           @"no_order":tranCode,
                            @"no_order":tranCode,
                            //商户唯一订单号	no_order	是	String(32)	商户系统唯一订单号
                            @"name_goods":@"订单名",
@@ -1453,7 +1476,7 @@
                            @"risk_item":risk_item,
                            //风险控制参数 否 此字段填写风控参数，采用json串的模式传入，字段名和字段内容彼此对应好
                            
-                           @"user_id": user_id,
+                           @"user_id": @"1233",
                            //商户用户唯一编号 否 该用户在商户系统中的唯一编号，要求是该编号在商户系统中唯一标识该用户
                            
                            
