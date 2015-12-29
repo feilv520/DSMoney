@@ -61,7 +61,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self loadingWithHidden:YES];
-//    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '80%'"];//修改百分比即可
+    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '80%'"];//修改百分比即可
 }
 
 - (void)webViewShow
