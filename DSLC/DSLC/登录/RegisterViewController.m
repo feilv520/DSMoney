@@ -19,6 +19,7 @@
 #import "BankName.h"
 #import "AddBankCell.h"
 #import "ChooseOpenAnAccountBank.h"
+#import "CanNotBindingBankCard.h"
 
 @interface RegisterViewController ()<UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>{
     NSInteger number;
@@ -75,8 +76,14 @@
     NSString *ownerCardNumber;
     NSString *ownerID;
     NSString *ownerBCard;
+    NSString *ownerRegisterTime;
+    NSString *ownerTelephoneNumber;
     
-    NSString *ownerOrder;
+    // 绑定的银行卡Id
+    NSString *bankCardId;
+    // 交易记录Id
+    NSString *tranId;
+    NSString *tranCode;
     
 }
 
@@ -580,7 +587,13 @@
                 
                 if ([[responseDic objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                     
+                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+                    NSString *dataTime = [formatter stringFromDate:[NSDate date]];
+                    
                     ownerID = [responseDic objectForKey:@"userId"];
+                    ownerRegisterTime = dataTime;
+                    ownerTelephoneNumber = self.registerV.phoneNumber.text;
                     
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
                     
@@ -640,7 +653,13 @@
                 NSLog(@"%@",responseObject);
                 if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                     
+                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+                    NSString *dataTime = [formatter stringFromDate:[NSDate date]];
+                    
                     ownerID = [responseObject objectForKey:@"userId"];
+                    ownerTelephoneNumber = self.registerV.phoneNumber.text;
+                    ownerRegisterTime = dataTime;
                     
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                     
@@ -1011,7 +1030,7 @@
     registerB.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100);
     
     [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [registerB.sureButton addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
+    [registerB.sureButton addTarget:self action:@selector(boundCardNumber:) forControlEvents:UIControlEventTouchUpInside];
     
     _tableView.tableFooterView = registerB;
     
@@ -1246,30 +1265,44 @@
     
     NSDictionary *parmeter;
     if (textFieldFive == nil) {
-        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     } else {
-        parmeter = @{@"userId":[dicRealName objectForKey:@"id"], @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":bankZ, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":bankZ, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/addBankCard" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"7777777绑定银行卡:%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            bankCardId = [responseObject objectForKey:@"bankCardId"];
+            tranId = [responseObject objectForKey:@"tranId"];
+            tranCode = [responseObject objectForKey:@"tranCode"];
+            
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
             [self.navigationController popViewControllerAnimated:YES];
             
+            [self pay:nil];
+            
         } else {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            CanNotBindingBankCard *canNot = [[CanNotBindingBankCard alloc] init];
+            [self.navigationController pushViewController:canNot animated:YES];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
     }];
+    
+    
 }
 
 #pragma mark 连连支付按钮
 #pragma mark --------------------------------
+
+- (void)boundCardNumber:(id)sender{
+    [self getBankCard];
+}
 
 #pragma mark - 订单支付
 - (void)pay:(id)sender{
@@ -1324,9 +1357,7 @@
                 //NSString *payBackAgreeNo = dic[@"agreementno"];
                 // TODO: 协议号
 //                [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
-                ownerOrder = dic[@"no_order"];
-                [self getBankCard];
-//                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
                 
             }
             else if ([result_pay isEqualToString:@"PROCESSING"])
@@ -1366,14 +1397,6 @@
         default:
             break;
     }
-    
-    NSString *showMsg = [msg stringByAppendingString:[LLPayUtil jsonStringOfObj:dic]];
-    
-    [[[UIAlertView alloc] initWithTitle:@"结果"
-                                message:showMsg
-                               delegate:nil
-                      cancelButtonTitle:@"确认"
-                      otherButtonTitles:nil] show];
 }
 
 - (NSMutableDictionary *)createOrder{
@@ -1381,14 +1404,11 @@
     NSString *partnerPrefix = @"GCCT"; // TODO: 修改成自己公司前缀
     
     NSString *signType = @"MD5";    // MD5 || RSA || HMAC
-//    dicRealName
     
-    NSString *user_id = [NSString stringWithFormat:@"gcctdslcandroid%@",ownerID];
+    NSString *user_id = ownerID; //
     // user_id，一个user_id标示一个用户
     // user_id为必传项，需要关联商户里的用户编号，一个user_id下的所有支付银行卡，身份证必须相同
     // demo中需要开发测试自己填入user_id, 可以先用自己的手机号作为标示，正式上线请使用商户内的用户编号
-    
-    NSLog(@"%@",[user_id class]);
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     
@@ -1397,6 +1417,13 @@
     NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
     [dateFormater setDateFormat:@"yyyyMMddHHmmss"];
     NSString *simOrder = [dateFormater stringFromDate:[NSDate date]];
+    
+    NSString *risk_item = [NSString stringWithFormat:@"{\"frms_ware_category\":\"2009\",\"user_info_mercht_userno\":\"%@\",\"user_info_bind_phone\":\"%@\",\"user_info_dt_register\":\"%@\",\"user_info_full_name\":\"%@\",\"user_info_id_type\":\"0\",\"user_info_id_no\":\"%@\",\"user_info_identify_state\":\"1\",\"user_info_identify_type\":\"4\"}",
+                           ownerID,
+                           ownerTelephoneNumber,
+                           ownerRegisterTime,
+                           ownerCardName,
+                           ownerCardNumber];
     
     // TODO: 请开发人员修改下面订单的所有信息，以匹配实际需求
     // TODO: 请开发人员修改下面订单的所有信息，以匹配实际需求
@@ -1411,7 +1438,7 @@
                            //交易金额	money_order	是	Number(8,2)	该笔订单的资金总额，单位为RMB-元。大于0的数字，精确到小数点后两位。 如：49.65
                            @"money_order" : @"0.01",
                            
-                           @"no_order":[NSString stringWithFormat:@"%@%@",partnerPrefix,  simOrder],
+                           @"no_order":tranCode,
                            //商户唯一订单号	no_order	是	String(32)	商户系统唯一订单号
                            @"name_goods":@"订单名",
                            //商品名称	name_goods	否	String(40)
@@ -1422,22 +1449,20 @@
                            //                           @"shareing_data":@"201412030000035903^101001^10^分账说明1|201310102000003524^101001^11^分账说明2|201307232000003510^109001^12^分账说明3"
                            // 分账信息数据 shareing_data  否 变(1024)
                            
-                           @"notify_url":@"http://www.baidu.com",
+                           @"notify_url":[NSString stringWithFormat:@"http://web.dslc.cn/payReturn.do?tranId=%@&userId=%@&bankCardId=%@",tranId,ownerID,bankCardId],
                            //服务器异步通知地址	notify_url	是	String(64)	连连钱包支付平台在用户支付成功后通知商户服务端的地址，如：http://payhttp.xiaofubao.com/back.shtml
                            
-                           
-                           //                           @"risk_item":@{@"user_info_bind_phone":@"13354288036"},
+                           @"risk_item":risk_item,
                            //风险控制参数 否 此字段填写风控参数，采用json串的模式传入，字段名和字段内容彼此对应好
-                           @"risk_item" : [LLPayUtil jsonStringOfObj:@{@"user_info_dt_register":@"20131030122130"}],
                            
-                           @"user_id": [NSString stringWithFormat:@"%@",user_id],
+                           @"user_id": user_id,
                            //商户用户唯一编号 否 该用户在商户系统中的唯一编号，要求是该编号在商户系统中唯一标识该用户
                            
                            
                            //                           @"flag_modify":@"1",
                            //修改标记 flag_modify 否 String 0-可以修改，默认为0, 1-不允许修改 与id_type,id_no,acct_name配合使用，如果该用户在商户系统已经实名认证过了，则在绑定银行卡的输入信息不能修改，否则可以修改
                            
-                           @"card_no":ownerBCard,
+                           @"card_no":textFieldOne.text,
                            //银行卡号 card_no 否 银行卡号前置，卡号可以在商户的页面输入
                            
                            //                           @"no_agree":@"2014070900123076",
@@ -1461,7 +1486,6 @@
                                           //                                          //银行账号姓名 acct_name 否 String
                                           }];
     }
-    
     
     
     

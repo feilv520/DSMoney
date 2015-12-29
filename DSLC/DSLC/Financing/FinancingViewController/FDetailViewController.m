@@ -627,17 +627,17 @@
 {
     [calendar endEditing:YES];
     
-    [UIView animateWithDuration:0.5f animations:^{
-        CGFloat margin_x = (38 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
-        CGFloat margin_y = (182 / 667.0) * HEIGHT_CONTROLLER_DEFAULT;
-        CGFloat width = (301 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
-        
-        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
-
-        }
-        
-        calendar.frame = CGRectMake(margin_x, margin_y - 40, width, 301);
-    }];
+//    [UIView animateWithDuration:0.5f animations:^{
+//        CGFloat margin_x = (38 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+//        CGFloat margin_y = (182 / 667.0) * HEIGHT_CONTROLLER_DEFAULT;
+//        CGFloat width = (301 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+//        
+//        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+//
+//        }
+//        
+//        calendar.frame = CGRectMake(margin_x, margin_y - 40, width, 301);
+//    }];
 
 }
 
