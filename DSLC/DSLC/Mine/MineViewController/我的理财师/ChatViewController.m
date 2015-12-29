@@ -98,6 +98,8 @@
     
     [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         
+        _tableView.contentOffset = CGPointMake(0, chatArray.count * 50);
+        
         viewImport.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - keyboardSize.height + 14, WIDTH_CONTROLLER_DEFAULT, 50);
         
     } completion:^(BOOL finished) {

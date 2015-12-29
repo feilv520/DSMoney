@@ -1279,10 +1279,6 @@
             tranId = [responseObject objectForKey:@"tranId"];
             tranCode = [responseObject objectForKey:@"tranCode"];
             
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
-            [self.navigationController popViewControllerAnimated:YES];
-            
             [self pay:nil];
             
         } else {
@@ -1357,6 +1353,8 @@
                 //NSString *payBackAgreeNo = dic[@"agreementno"];
                 // TODO: 协议号
 //                [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"绑卡成功,请登录"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
                 [self.navigationController popViewControllerAnimated:YES];
                 
             }
