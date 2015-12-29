@@ -39,8 +39,9 @@
 
 - (void)shifouYouDian:(NSNotification *)notice
 {
-    imageDian = (UIImageView *)[self.view viewWithTag:590];
-    imageDian.image = [UIImage imageNamed:@""];
+    [userListArr removeAllObjects];
+    userListArr = [NSMutableArray array];
+    [self getUserList];
 }
 
 - (void)tableViewShow

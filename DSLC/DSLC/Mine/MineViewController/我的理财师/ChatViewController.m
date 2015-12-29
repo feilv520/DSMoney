@@ -71,6 +71,9 @@
     timeArray = [NSMutableArray array];
     timeStr = @"";
     
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    _tableView.hidden = YES;
+    
     [self getDataList];
     [self registerForKeyboardNotifications];
 }
@@ -213,6 +216,9 @@
         NSLog(@"咨询详情:111&&&1111%@", responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            [self loadingWithHidden:YES];
+            _tableView.hidden = NO;
             
             NSMutableArray *dataArr = [responseObject objectForKey:@"Msg"];
             for (NSDictionary *dataDic in dataArr) {

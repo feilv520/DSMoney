@@ -22,6 +22,8 @@
         self.labelLeft.backgroundColor = [UIColor whiteColor];
         self.labelLeft.layer.cornerRadius = 8;
         self.labelLeft.layer.masksToBounds = YES;
+        self.labelLeft.layer.borderColor = [[UIColor clearColor] CGColor];
+        self.labelLeft.layer.borderWidth = 0.5;
         self.labelLeft.textAlignment = NSTextAlignmentCenter;
         
         self.imageContect = [[UIImageView alloc] init];
