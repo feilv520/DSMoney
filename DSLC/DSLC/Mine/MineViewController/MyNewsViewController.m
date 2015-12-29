@@ -121,7 +121,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"%@",responseObject);
+        NSLog(@"消息中心.....%@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -138,12 +138,12 @@
             return ;
         }
         
+        [self loadingWithHidden:YES];
         if ([[responseObject objectForKey:@"Msg"] count] == 0) {
-            [self noDateWithView:nil height:120 view:self.view];
+            [self noDateWithView:@"暂无消息" height:HEIGHT_CONTROLLER_DEFAULT/2 - 80 view:self.view];
             
         } else {
         
-            [self loadingWithHidden:YES];
             _tableView.hidden = NO;
             for (NSDictionary *dic in [responseObject objectForKey:@"Msg"]) {
                 MessageModel *messageM = [[MessageModel alloc] init];

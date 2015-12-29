@@ -171,10 +171,11 @@
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/sendMsg" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            NSLog(@"发送消息:vvvvvv%@", responseObject);
+//            NSLog(@"发送消息:vvvvvv%@", responseObject);
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
+                NSLog(@"发出去了");
                 chat = [[Chat alloc] init];
                 chat.sendUserId = [NSNumber numberWithInteger:[[dic objectForKey:@"id"] integerValue]];
                 chat.msgText = _textField.text;
@@ -213,12 +214,15 @@
 
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"咨询详情:111&&&1111%@", responseObject);
+//        NSLog(@"咨询详情:111&&&1111%@", responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
             [self loadingWithHidden:YES];
             _tableView.hidden = NO;
+            
+            NSLog(@"hhhhhh");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
             
             NSMutableArray *dataArr = [responseObject objectForKey:@"Msg"];
             for (NSDictionary *dataDic in dataArr) {

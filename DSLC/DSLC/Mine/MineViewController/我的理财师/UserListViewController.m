@@ -125,7 +125,6 @@
     chatVC.chatName = userlist.sendUserName;
     chatVC.IId = userlist.sendUserId;
     NSLog(@"qqqqqqqqqqq%@", userlist.sendUserId);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 

@@ -88,7 +88,7 @@
         NSData *doubi = responseObject;
         NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
         
-        NSLog(@"%@",responseString);
+//        NSLog(@"%@",responseString);
         
         NSString *character = nil;
         for (int i = 0; i < responseString.length; i ++) {
@@ -97,7 +97,7 @@
                 [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
         }
         responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
-        NSLog(@"%@",responseString);
+//        NSLog(@"%@",responseString);
         NSDictionary *responseData = [MyAfHTTPClient parseJSONStringToNSDictionary:responseString];
         success(task,responseData);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
