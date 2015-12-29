@@ -95,6 +95,7 @@
 //导航返回按钮
 - (void)buttonReturn:(UIBarButtonItem *)bar
 {
+    [self.view endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
