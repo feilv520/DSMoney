@@ -23,7 +23,7 @@
         self.labelRight.layer.cornerRadius = 8;
         self.labelRight.layer.masksToBounds = YES;
         self.labelRight.layer.borderWidth = 0.5;
-        self.labelRight.layer.borderColor = [[UIColor clearColor] CGColor];
+        self.labelRight.layer.borderColor = [[UIColor colorWithRed:154.0 / 225.0 green:154.0 / 225.0 blue:154.0 / 225.0 alpha:1.0] CGColor];
         self.labelRight.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.labelRight];
         

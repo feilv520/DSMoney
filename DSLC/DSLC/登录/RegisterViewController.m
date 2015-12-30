@@ -153,9 +153,13 @@
     
     number = 0;
     
-    userID = 0;
+    userID = @"";
     
     seconds = 60;
+    
+    ownerCardNumber = @"220204199204180655";
+    
+    ownerCardName = @"马成铭";
     
     self.scrollView.contentSize = CGSizeMake(1, 900);
     
@@ -227,6 +231,7 @@
 // 导航按钮执行方法
 - (void)buttonAction:(UIButton *)btn{
     [self.view endEditing:YES];
+
     [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         if (btn.tag == 1000) {
             if (btn.tag != buttonTag){
@@ -440,6 +445,7 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             NSLog(@"%@",responseObject);
+            
             
             
             ownerCardName = self.registerV.realName.text;
@@ -1280,10 +1286,10 @@
     NSLog(@"textFieldFive = %@",textFieldFive.text);
     
     NSDictionary *parmeter;
-    if (textFieldFive == nil) {
-        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+    if (textFieldFive == nil || [textFieldFive.text isEqualToString:@""]) {
+        parmeter = @{@"userId":userID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":@"", @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     } else {
-        parmeter = @{@"userId":ownerID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":bankZ, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
+        parmeter = @{@"userId":userID, @"cardName":textFieldTwo.text, @"cardAccount":textFieldOne.text, @"proviceCode":city.cityCode, @"cityCode":cityS.cityCode, @"bankCode":bankName.bankCode, @"phone":textFieldSeven.text, @"bankBranch":bankZ, @"checkKey":@"ckAixn8sFNhwmmCvkRgjuA=="};
     }
     
     NSLog(@"parmeter == %@",parmeter);
@@ -1330,7 +1336,7 @@
     // 进行签名
     NSDictionary *signedOrder = [payUtil signedOrderDic:self.orderDic
                                              andSignKey:kLLPartnerKey];
-    
+    NSLog(@"self.orderDic = %@",self.orderDic);
     
 //        [LLPaySdk sharedSdk].sdkDelegate = self;
     
@@ -1349,10 +1355,8 @@
     
     self.sdk = [[LLPaySdk alloc] init];
     self.sdk.sdkDelegate = self;
-//    [self.sdk presentVerifyPaySdkInViewController:self.tabBarController withTraderInfo:signedOrder];
-    [self.sdk presentPaySdkInViewController:app.tabBarVC withTraderInfo:signedOrder];
-    
-    NSLog(@"123123123123");
+    [self.sdk presentVerifyPaySdkInViewController:app.tabBarVC withTraderInfo:signedOrder];
+//    [self.sdk presentPaySdkInViewController:app.tabBarVC withTraderInfo:signedOrder];
 }
 
 
@@ -1425,25 +1429,28 @@
     
     NSString *signType = @"MD5";    // MD5 || RSA || HMAC
     
-    NSString *user_id = ownerID; //
+    NSString *user_id = [NSString stringWithFormat:@"%@",ownerID]; //
     // user_id，一个user_id标示一个用户
     // user_id为必传项，需要关联商户里的用户编号，一个user_id下的所有支付银行卡，身份证必须相同
     // demo中需要开发测试自己填入user_id, 可以先用自己的手机号作为标示，正式上线请使用商户内的用户编号
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     
-    textFieldTwo = (UITextField *)[self.view viewWithTag:402];
+    textFieldOne = (UITextField *)[self.view viewWithTag:401];
     
     NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
     [dateFormater setDateFormat:@"yyyyMMddHHmmss"];
     NSString *simOrder = [dateFormater stringFromDate:[NSDate date]];
     
     NSString *risk_item = [NSString stringWithFormat:@"{\"frms_ware_category\":\"2009\",\"user_info_mercht_userno\":\"%@\",\"user_info_bind_phone\":\"%@\",\"user_info_dt_register\":\"%@\",\"user_info_full_name\":\"%@\",\"user_info_id_type\":\"0\",\"user_info_id_no\":\"%@\",\"user_info_identify_state\":\"1\",\"user_info_identify_type\":\"4\"}",
-                           ownerID,
-                           ownerTelephoneNumber,
-                           ownerRegisterTime,
+                           user_id,
+                           textFieldOne.text,
+                           @"20151227163421",
                            ownerCardName,
                            ownerCardNumber];
+    
+    NSString *noString = [NSString stringWithFormat:@"http://web.dslc.cn/payReturn.do?tranId=%@&userId=%@&bankCardId=%@",tranId,user_id,bankCardId];
+    NSLog(@"http:// = %@",noString);
     
     // TODO: 请开发人员修改下面订单的所有信息，以匹配实际需求
     // TODO: 请开发人员修改下面订单的所有信息，以匹配实际需求
@@ -1458,7 +1465,6 @@
                            //交易金额	money_order	是	Number(8,2)	该笔订单的资金总额，单位为RMB-元。大于0的数字，精确到小数点后两位。 如：49.65
                            @"money_order" : @"0.01",
                            
-//                           @"no_order":tranCode,
                            @"no_order":tranCode,
                            //商户唯一订单号	no_order	是	String(32)	商户系统唯一订单号
                            @"name_goods":@"订单名",
@@ -1470,13 +1476,15 @@
                            //                           @"shareing_data":@"201412030000035903^101001^10^分账说明1|201310102000003524^101001^11^分账说明2|201307232000003510^109001^12^分账说明3"
                            // 分账信息数据 shareing_data  否 变(1024)
                            
-                           @"notify_url":[NSString stringWithFormat:@"http://web.dslc.cn/payReturn.do?tranId=%@&userId=%@&bankCardId=%@",tranId,ownerID,bankCardId],
+                           @"notify_url":noString,
                            //服务器异步通知地址	notify_url	是	String(64)	连连钱包支付平台在用户支付成功后通知商户服务端的地址，如：http://payhttp.xiaofubao.com/back.shtml
                            
-                           @"risk_item":risk_item,
-                           //风险控制参数 否 此字段填写风控参数，采用json串的模式传入，字段名和字段内容彼此对应好
                            
-                           @"user_id": @"1233",
+                           //                           @"risk_item":@"{\"user_info_bind_phone\":\"13958069593\",\"user_info_dt_register\":\"20131030122130\"}",
+                           //风险控制参数 否 此字段填写风控参数，采用json串的模式传入，字段名和字段内容彼此对应好
+                           @"risk_item" : risk_item,
+                           
+                           @"user_id": user_id,
                            //商户用户唯一编号 否 该用户在商户系统中的唯一编号，要求是该编号在商户系统中唯一标识该用户
                            
                            
@@ -1495,19 +1503,12 @@
     if (isIsVerifyPay) {
         
         [param addEntriesFromDictionary:@{
-                                          
                                           @"id_no":ownerCardNumber,
                                           //证件号码 id_no 否 String
                                           @"acct_name":ownerCardName,
                                           //银行账号姓名 acct_name 否 String
-                                          
-                                          //                                          @"id_no":@"140621199212052213",
-                                          //                                          //证件号码 id_no 否 String
-                                          //                                          @"acct_name":@"杨磊磊",
-                                          //                                          //银行账号姓名 acct_name 否 String
                                           }];
     }
-    
     
     
     param[@"oid_partner"] = kLLOidPartner;
