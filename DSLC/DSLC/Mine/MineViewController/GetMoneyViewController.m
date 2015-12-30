@@ -162,6 +162,9 @@
             [cell.textfield addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
             cell.textfield.delegate = self;
             cell.textfield.tag = 6721;
+            
+            _textField = cell.textfield;
+            
             return cell;
         }
     } else {
@@ -181,7 +184,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    _textField = (UITextField *)[self.view viewWithTag:6721];
+//    _textField = (UITextField *)[self.view viewWithTag:6721];
     
     if (_textField.text.length == 0) {
         
