@@ -16,6 +16,8 @@
 
 #define WIDTH_VIEW_DEFAULT   self.frame.size.width
 #define HEIGHT_VIEW_DEFAULT   self.frame.size.height
+#define WIDTH_CVIEW_DEFAULT   self.view.frame.size.width
+#define HEIGHT_CVIEW_DEFAULT  self.view.frame.size.height
 #define WIDTH_CONTROLLER_DEFAULT   [[UIScreen mainScreen] bounds].size.width
 #define HEIGHT_CONTROLLER_DEFAULT   ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0?[[UIScreen mainScreen] bounds].size.height+20:[[UIScreen mainScreen] bounds].size.height)
 //判断是否6plus 键盘高度不一样

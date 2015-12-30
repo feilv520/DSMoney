@@ -82,7 +82,7 @@
     [myPickerView removeFromSuperview];
     if ([barButtonItem.title isEqualToString:@"收起"]) {
         [UIView animateWithDuration:0.5 animations:^{
-            selectionView.frame = CGRectMake(0, -200, WIDTH_CONTROLLER_DEFAULT, 200);
+            selectionView.frame = CGRectMake(0, -200, WIDTH_CVIEW_DEFAULT, 200);
             bView.alpha = 0.0;
         } completion:^(BOOL finished) {
             
@@ -90,7 +90,7 @@
         barButtonItem.title = @"筛选";
     } else {
         [UIView animateWithDuration:0.5 animations:^{
-            selectionView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 200);
+            selectionView.frame = CGRectMake(0, 0, WIDTH_CVIEW_DEFAULT, 200);
             bView.alpha = 0.3;
             
         } completion:^(BOOL finished) {
@@ -164,7 +164,7 @@
 }
 
 - (void)showSelectionView{
-    bView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+    bView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CVIEW_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
     
     bView.backgroundColor = Color_Black;
     
@@ -179,10 +179,15 @@
     
     NSArray *nameArray = @[@"全部",@"时间",@"买入",@"兑付",@"提现",@"充值",@"大额充值"];
     
-    CGFloat marginX = WIDTH_CONTROLLER_DEFAULT * (23 / 375.0);
-    CGFloat marginY = HEIGHT_CONTROLLER_DEFAULT * (25 / 667.0);
-    CGFloat buttonX = WIDTH_CONTROLLER_DEFAULT * (90 / 375.0);
-    CGFloat buttonY = HEIGHT_CONTROLLER_DEFAULT * (37 / 667.0);
+    CGFloat marginX = WIDTH_CVIEW_DEFAULT * (23 / 375.0);
+    CGFloat marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 414.0){
+        marginX = WIDTH_CVIEW_DEFAULT * (35 / 375.0);
+        marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
+    }
+    CGFloat buttonX = WIDTH_CVIEW_DEFAULT * (90 / 375.0);
+    CGFloat buttonY = HEIGHT_CVIEW_DEFAULT * (37 / 667.0);
     
     for (NSInteger i = 0; i < nameArray.count; i++) {
         NSBundle *rootBundle = [NSBundle mainBundle];
