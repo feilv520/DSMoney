@@ -20,6 +20,7 @@
 #import "AddBankCell.h"
 #import "ChooseOpenAnAccountBank.h"
 #import "CanNotBindingBankCard.h"
+#import "sys/utsname.h"
 
 @interface RegisterViewController ()<UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>{
     NSInteger number;
@@ -86,7 +87,6 @@
     // 交易记录Id
     NSString *tranId;
     NSString *tranCode;
-    
 }
 
 @property (nonatomic) LLPaySdk *sdk;
@@ -105,6 +105,9 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     dicRealName = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSLog(@"手机型号: %@",[self deviceVersion]);
+    
     self.scrollView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 800);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnBankName:) name:@"bankR" object:nil];
@@ -179,7 +182,7 @@
     NSArray *rootArray = [rootBundle loadNibNamed:@"RegisterProcess" owner:nil options:nil];
     registerP = [rootArray lastObject];
     
-    registerP.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, (103 / 375.0) * HEIGHT_CONTROLLER_DEFAULT);
+    registerP.frame = CGRectMake(0, 0, WIDTH_CVIEW_DEFAULT, (103 / 375.0) * HEIGHT_CONTROLLER_DEFAULT);
     
     [self.scrollView addSubview:registerP];
     
@@ -312,7 +315,7 @@
 
     self.registerV = [rootArray firstObject];
     
-    self.registerV.frame = CGRectMake(0, 160, WIDTH_CONTROLLER_DEFAULT, 225);
+    self.registerV.frame = CGRectMake(0, 160, WIDTH_CVIEW_DEFAULT, 225);
     
 //    [self showViewControllerContent];
     
@@ -434,7 +437,7 @@
     
     [self.view endEditing:YES];
     
-    NSDictionary *parameter = @{@"userId":userID,@"realName":self.registerV.realName.text,@"IDCardNum":self.registerV.IDCard.text};
+    NSDictionary *parameter = @{@"userId":[NSString stringWithFormat:@"%@",userID],@"realName":self.registerV.realName.text,@"IDCardNum":self.registerV.IDCard.text};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/authRrealName" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -600,6 +603,8 @@
                     ownerRegisterTime = dataTime;
                     ownerTelephoneNumber = self.registerV.phoneNumber.text;
                     
+                    userID = [responseObject objectForKey:@"userId"];
+                    
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
                     
                     [buttonWithView removeFromSuperview];
@@ -616,15 +621,15 @@
         
                     registerR = [rootArrayOfResult lastObject];
         
-                    registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+                    registerR.frame = CGRectMake(0, 103, WIDTH_CVIEW_DEFAULT, 65);
         
                     self.registerV = [rootArrayOfView objectAtIndex:1];
         
-                    self.registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 90);
+                    self.registerV.frame = CGRectMake(0, 180, WIDTH_CVIEW_DEFAULT, 90);
         
                     registerB = [rootArrayOfPButton lastObject];
         
-                    registerB.frame = CGRectMake(0, 290, WIDTH_CONTROLLER_DEFAULT, 100);
+                    registerB.frame = CGRectMake(0, 290, WIDTH_CVIEW_DEFAULT, 100);
         
                     [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                     [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
@@ -684,15 +689,15 @@
         
                     registerR = [rootArrayOfResult lastObject];
         
-                    registerR.frame = CGRectMake(0, 103, WIDTH_CONTROLLER_DEFAULT, 65);
+                    registerR.frame = CGRectMake(0, 103, WIDTH_CVIEW_DEFAULT, 65);
         
                     self.registerV = [rootArrayOfView objectAtIndex:1];
         
-                    self.registerV.frame = CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, 90);
+                    self.registerV.frame = CGRectMake(0, 180, WIDTH_CVIEW_DEFAULT, 90);
         
                     registerB = [rootArrayOfPButton lastObject];
         
-                    registerB.frame = CGRectMake(0, 290, WIDTH_CONTROLLER_DEFAULT, 100);
+                    registerB.frame = CGRectMake(0, 290, WIDTH_CVIEW_DEFAULT, 100);
         
                     [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                     [registerB.sureButton addTarget:self action:@selector(sureButtonActionFinish:) forControlEvents:UIControlEventTouchUpInside];
@@ -1015,14 +1020,14 @@
     titleArr = @[@"持卡人", @"银行卡号", @"开户行", @"开户行省",@"开户行市", @"开户行支行",  @"支付金额", @"手机号"];
     textFieldArr = @[ownerCardName, @"请输入本人银行卡号", @"请选择开户银行", @"请选择开户所在的省", @"请选择开户所在的市", @"请输入开户行支行", @"0.01元", @"请输入预留在银行的手机号"];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 180, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 180, WIDTH_CVIEW_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
     [self.scrollView addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     
     _tableView.scrollEnabled = NO;
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (90.0 / 667.0))];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CVIEW_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (90.0 / 667.0))];
     _tableView.tableFooterView = view;
     _tableView.backgroundColor = [UIColor huibai];
     
@@ -1032,7 +1037,7 @@
     
     registerB = [rootArrayOfPButton lastObject];
     
-    registerB.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100);
+    registerB.frame = CGRectMake(0, 0, WIDTH_CVIEW_DEFAULT, 100);
     
     [registerB.passButton addTarget:self action:@selector(passButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [registerB.sureButton addTarget:self action:@selector(boundCardNumber:) forControlEvents:UIControlEventTouchUpInside];
@@ -1558,6 +1563,65 @@
         NSLog(@"401 = %@",textField.text);
         ownerBCard = textField.text;
     }
+}
+
+- (NSString*)deviceVersion
+{
+    // 需要#import "sys/utsname.h"
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *deviceString = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    
+    //CLog(@"%@",deviceString);
+    
+    if ([deviceString isEqualToString:@"iPhone1,1"])    return @"iPhone 1G";
+    if ([deviceString isEqualToString:@"iPhone1,2"])    return @"iPhone 3G";
+    if ([deviceString isEqualToString:@"iPhone2,1"])    return @"iPhone 3GS";
+    if ([deviceString isEqualToString:@"iPhone3,1"])    return @"iPhone 4";
+    if ([deviceString isEqualToString:@"iPhone3,3"])    return @"Verizon iPhone 4";
+    if ([deviceString isEqualToString:@"iPhone4,1"])    return @"iPhone 4S";
+    if ([deviceString isEqualToString:@"iPhone5,1"])    return @"iPhone 5 (GSM)";
+    if ([deviceString isEqualToString:@"iPhone5,2"])    return @"iPhone 5 (GSM+CDMA)";
+    if ([deviceString isEqualToString:@"iPhone5,3"])    return @"iPhone 5c (GSM)";
+    if ([deviceString isEqualToString:@"iPhone5,4"])    return @"iPhone 5c (GSM+CDMA)";
+    if ([deviceString isEqualToString:@"iPhone6,1"])    return @"iPhone 5s (GSM)";
+    if ([deviceString isEqualToString:@"iPhone6,2"])    return @"iPhone 5s (GSM+CDMA)";
+    if ([deviceString isEqualToString:@"iPhone7,1"])    return @"iPhone 6 Plus";
+    if ([deviceString isEqualToString:@"iPhone7,2"])    return @"iPhone 6";
+    if ([deviceString isEqualToString:@"iPhone8,1"])    return @"iPhone 6s Plus";
+    if ([deviceString isEqualToString:@"iPhone8,2"])    return @"iPhone 6s";
+    if ([deviceString isEqualToString:@"iPod1,1"])      return @"iPod Touch 1G";
+    if ([deviceString isEqualToString:@"iPod2,1"])      return @"iPod Touch 2G";
+    if ([deviceString isEqualToString:@"iPod3,1"])      return @"iPod Touch 3G";
+    if ([deviceString isEqualToString:@"iPod4,1"])      return @"iPod Touch 4G";
+    if ([deviceString isEqualToString:@"iPod5,1"])      return @"iPod Touch 5G";
+    if ([deviceString isEqualToString:@"iPad1,1"])      return @"iPad";
+    if ([deviceString isEqualToString:@"iPad2,1"])      return @"iPad 2 (WiFi)";
+    if ([deviceString isEqualToString:@"iPad2,2"])      return @"iPad 2 (GSM)";
+    if ([deviceString isEqualToString:@"iPad2,3"])      return @"iPad 2 (CDMA)";
+    if ([deviceString isEqualToString:@"iPad2,4"])      return @"iPad 2 (WiFi)";
+    if ([deviceString isEqualToString:@"iPad2,5"])      return @"iPad Mini (WiFi)";
+    if ([deviceString isEqualToString:@"iPad2,6"])      return @"iPad Mini (GSM)";
+    if ([deviceString isEqualToString:@"iPad2,7"])      return @"iPad Mini (GSM+CDMA)";
+    if ([deviceString isEqualToString:@"iPad3,1"])      return @"iPad 3 (WiFi)";
+    if ([deviceString isEqualToString:@"iPad3,2"])      return @"iPad 3 (GSM+CDMA)";
+    if ([deviceString isEqualToString:@"iPad3,3"])      return @"iPad 3 (GSM)";
+    if ([deviceString isEqualToString:@"iPad3,4"])      return @"iPad 4 (WiFi)";
+    if ([deviceString isEqualToString:@"iPad3,5"])      return @"iPad 4 (GSM)";
+    if ([deviceString isEqualToString:@"iPad3,6"])      return @"iPad 4 (GSM+CDMA)";
+    if ([deviceString isEqualToString:@"iPad4,1"])      return @"iPad Air (WiFi)";
+    if ([deviceString isEqualToString:@"iPad4,2"])      return @"iPad Air (Cellular)";
+    if ([deviceString isEqualToString:@"iPad4,4"])      return @"iPad Mini 2G (WiFi)";
+    if ([deviceString isEqualToString:@"iPad4,5"])      return @"iPad Mini 2G (Cellular)";
+    if ([deviceString isEqualToString:@"iPad5,1"])      return @"iPad Mini 4 (WiFi)";
+    if ([deviceString isEqualToString:@"iPad5,2"])      return @"iPad Mini 4 (Cellular)";
+    if ([deviceString isEqualToString:@"iPad6,8"])      return @"iPad Pro";
+    if ([deviceString isEqualToString:@"i386"])         return @"Simulator";
+    if ([deviceString isEqualToString:@"x86_64"])       return @"Simulator";
+    
+    //CLog(@"NOTE: Unknown device type: %@", deviceString);
+    
+    return deviceString;
 }
 
 - (void)didReceiveMemoryWarning {
