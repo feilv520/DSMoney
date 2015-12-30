@@ -442,7 +442,7 @@
     
     [self.view endEditing:YES];
     
-    NSDictionary *parameter = @{@"userId":[NSString stringWithFormat:@"%@",userID],@"realName":self.registerV.realName.text,@"IDCardNum":self.registerV.IDCard.text};
+    NSDictionary *parameter = @{@"userId":[NSString stringWithFormat:@"%@",ownerID],@"realName":self.registerV.realName.text,@"IDCardNum":self.registerV.IDCard.text};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/authRrealName" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
