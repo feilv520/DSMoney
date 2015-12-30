@@ -30,6 +30,10 @@
 - (void)webViewShow
 {
     webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
+    if (self.page == 2) {
+        webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
+    }
+    
     [self.view addSubview:webView];
     webView.delegate = self;
     webView.scalesPageToFit = YES;

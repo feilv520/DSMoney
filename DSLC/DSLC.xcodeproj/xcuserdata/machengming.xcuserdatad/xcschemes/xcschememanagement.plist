@@ -14,6 +14,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>MyWidget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -28,6 +33,11 @@
 			<true/>
 		</dict>
 		<key>8D9356EC1BC607C500BC2BFA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8DA086531C33894C00BC805C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

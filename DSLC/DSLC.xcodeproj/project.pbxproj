@@ -854,6 +854,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8DA086661C33894C00BC805C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		810C76671C2D1210000637FD /* UserAsk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UserAsk@2x.png"; sourceTree = "<group>"; };
 		810C76681C2D1210000637FD /* UserAsk@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UserAsk@3x.png"; sourceTree = "<group>"; };
@@ -2018,6 +2031,7 @@
 		8D9BE8E31C0EC94D003C67D3 /* YYWebImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYWebImageOperation.m; sourceTree = "<group>"; };
 		8DA060CB1C02BEBD00E3E025 /* DES3Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DES3Util.h; sourceTree = "<group>"; };
 		8DA060CC1C02BEBD00E3E025 /* DES3Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DES3Util.m; sourceTree = "<group>"; };
+		8DA086561C33894C00BC805C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		8DB744B41C1973AC0084D1A2 /* banner_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_black@2x.png"; sourceTree = "<group>"; };
 		8DB744B51C1973AC0084D1A2 /* banner_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_black@3x.png"; sourceTree = "<group>"; };
 		8DB744B61C1973AC0084D1A2 /* banner_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_red@2x.png"; sourceTree = "<group>"; };
@@ -3990,23 +4004,11 @@
 		8D9356C01BC607C500BC2BFA = {
 			isa = PBXGroup;
 			children = (
-				8D4E4D971C1E58B700AE2644 /* MobileCoreServices.framework */,
-				8D4E4D951C1E589D00AE2644 /* CoreLocation.framework */,
-				8DBC8A6F1C0D450F00378FFE /* SystemConfiguration.framework */,
-				81349D0E1BF9D73C00D845EF /* AddressBookUI.framework */,
-				81349D0C1BF9D72900D845EF /* AddressBook.framework */,
-				8D4B8C1D1BF2F63800A88285 /* libz.tbd */,
-				8D4B8C1B1BF2F62E00A88285 /* libstdc++.tbd */,
-				8D4B8C171BF2F61600A88285 /* libsqlite3.tbd */,
-				8D4B8C151BF2F5EA00A88285 /* libiconv.tbd */,
-				8D4B8C191BF2F62100A88285 /* CoreTelephony.framework */,
-				8D4B8C131BF2F5B300A88285 /* Security.framework */,
-				8DEDE2311BCD1C03008086D3 /* UIKit.framework */,
-				8DEDE22F1BCD1BFD008086D3 /* Foundation.framework */,
-				8DEDE1FA1BCD1A21008086D3 /* CoreGraphics.framework */,
+				8DA0864F1C3388F100BC805C /* Framework */,
 				8D9356CB1BC607C500BC2BFA /* DSLC */,
 				8D9356E51BC607C500BC2BFA /* DSLCTests */,
 				8D9356F01BC607C500BC2BFA /* DSLCUITests */,
+				8DA086551C33894C00BC805C /* Frameworks */,
 				8D9356CA1BC607C500BC2BFA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -4138,6 +4140,35 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		8DA0864F1C3388F100BC805C /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				8D4E4D971C1E58B700AE2644 /* MobileCoreServices.framework */,
+				8D4E4D951C1E589D00AE2644 /* CoreLocation.framework */,
+				8DBC8A6F1C0D450F00378FFE /* SystemConfiguration.framework */,
+				81349D0E1BF9D73C00D845EF /* AddressBookUI.framework */,
+				81349D0C1BF9D72900D845EF /* AddressBook.framework */,
+				8D4B8C1D1BF2F63800A88285 /* libz.tbd */,
+				8D4B8C1B1BF2F62E00A88285 /* libstdc++.tbd */,
+				8D4B8C171BF2F61600A88285 /* libsqlite3.tbd */,
+				8D4B8C151BF2F5EA00A88285 /* libiconv.tbd */,
+				8D4B8C191BF2F62100A88285 /* CoreTelephony.framework */,
+				8D4B8C131BF2F5B300A88285 /* Security.framework */,
+				8DEDE2311BCD1C03008086D3 /* UIKit.framework */,
+				8DEDE22F1BCD1BFD008086D3 /* Foundation.framework */,
+				8DEDE1FA1BCD1A21008086D3 /* CoreGraphics.framework */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		8DA086551C33894C00BC805C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8DA086561C33894C00BC805C /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8DBC8A671C0D44DA00378FFE /* TencentOpenAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -4234,6 +4265,7 @@
 				8D9356C51BC607C500BC2BFA /* Sources */,
 				8D9356C61BC607C500BC2BFA /* Frameworks */,
 				8D9356C71BC607C500BC2BFA /* Resources */,
+				8DA086661C33894C00BC805C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -4293,6 +4325,9 @@
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = Z7J5CQFNQ3;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 0;
 							};
@@ -5310,8 +5345,9 @@
 				APPLY_RULES_IN_COPY_FILES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_ENTITLEMENTS = "DSLC/大圣理财.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5335,7 +5371,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "0a368e63-baa0-4ee1-9963-403b28cdbc1c";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5346,8 +5382,9 @@
 				APPLY_RULES_IN_COPY_FILES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_ENTITLEMENTS = "DSLC/大圣理财.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5372,7 +5409,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "0a368e63-baa0-4ee1-9963-403b28cdbc1c";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

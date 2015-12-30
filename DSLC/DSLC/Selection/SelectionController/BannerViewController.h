@@ -12,4 +12,5 @@
 
 @property (nonatomic, copy) NSString *photoName;
 @property (nonatomic, copy) NSString *photoUrl;
+@property (nonatomic, assign) NSInteger page;
 @end
