@@ -135,19 +135,22 @@
     NSLog(@"6666666666");
     NSDictionary *parameter = @{@"msgType":@0};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getUserMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
+        NSLog(@"走过");
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]){
             
             [self loadingWithHidden:YES];
+            NSLog(@"走过1");
             NSLog(@"用户列表:::::::::::::%@", responseObject);
             NSMutableArray *dataArr = [responseObject objectForKey:@"Msg"];
             if (dataArr.count == 0) {
+                NSLog(@"走过2");
                 [self noDateWithView:@"暂无用户" height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 view:self.view];
                 _tableView.hidden = YES;
                 
             } else {
                 [self noDataViewWithRemoveToView];
                 _tableView.hidden = NO;
+                NSLog(@"走过3");
                 
                 for (NSDictionary *dataDic in dataArr) {
                     UserList *userList = [[UserList alloc] init];
@@ -156,6 +159,9 @@
                 }
                 [self tableViewShow];
             }
+        } else {
+            NSLog(@"%@",[responseObject objectForKey:@"resultMsg"]);
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

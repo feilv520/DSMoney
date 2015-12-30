@@ -61,6 +61,7 @@
 		81422CD81C27E2E200E515B6 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81422CD31C27E2E200E515B6 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81422CD91C27E2E200E515B6 /* MyChoosePlanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 81422CD51C27E2E200E515B6 /* MyChoosePlanner.m */; settings = {ASSET_TAGS = (); }; };
 		81422CDA1C27E2E200E515B6 /* MyPlannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81422CD71C27E2E200E515B6 /* MyPlannerViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81570D581C33D02400AF6B37 /* img_lc_jqqd.png in Resources */ = {isa = PBXBuildFile; fileRef = 81570D571C33D02400AF6B37 /* img_lc_jqqd.png */; settings = {ASSET_TAGS = (); }; };
 		815A6FCF1BEB7EFF003059A5 /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815A6FCE1BEB7EFF003059A5 /* RechargeViewController.m */; settings = {ASSET_TAGS = (); }; };
 		815A6FD21BEB89A2003059A5 /* BindingBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815A6FD11BEB89A2003059A5 /* BindingBankCardViewController.m */; settings = {ASSET_TAGS = (); }; };
 		815D27A41BE21040005410C6 /* UpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 815D27A21BE21040005410C6 /* UpCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -949,6 +950,7 @@
 		81422CD51C27E2E200E515B6 /* MyChoosePlanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyChoosePlanner.m; sourceTree = "<group>"; };
 		81422CD61C27E2E200E515B6 /* MyPlannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPlannerViewController.h; sourceTree = "<group>"; };
 		81422CD71C27E2E200E515B6 /* MyPlannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPlannerViewController.m; sourceTree = "<group>"; };
+		81570D571C33D02400AF6B37 /* img_lc_jqqd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_lc_jqqd.png; sourceTree = "<group>"; };
 		815A6FCD1BEB7EFF003059A5 /* RechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeViewController.h; sourceTree = "<group>"; };
 		815A6FCE1BEB7EFF003059A5 /* RechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeViewController.m; sourceTree = "<group>"; };
 		815A6FD01BEB89A2003059A5 /* BindingBankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingBankCardViewController.h; sourceTree = "<group>"; };
@@ -2470,6 +2472,7 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				81570D571C33D02400AF6B37 /* img_lc_jqqd.png */,
 				8D3942F01C2D15B500783FD0 /* welcome */,
 				810C76671C2D1210000637FD /* UserAsk@2x.png */,
 				810C76681C2D1210000637FD /* UserAsk@3x.png */,
@@ -4323,7 +4326,6 @@
 				TargetAttributes = {
 					8D9356C81BC607C500BC2BFA = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = Z7J5CQFNQ3;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -4827,6 +4829,7 @@
 				8DEDE1D11BCCFFA5008086D3 /* blueyuan@3x.png in Resources */,
 				8D5DBB8F1BD48F1900F556B9 /* CastDetailTableViewCell.xib in Resources */,
 				819C3AC81BD49862008D2CFD /* GrabBagCell.xib in Resources */,
+				81570D581C33D02400AF6B37 /* img_lc_jqqd.png in Resources */,
 				817E33901BD756B700D05103 /* 组-4-拷贝@3x.png in Resources */,
 				8D3F95F11BE2188500013A8E /* shouyi@3x.png in Resources */,
 				81379F1A1BEAF56F002CDB16 /* 成长@3x.png in Resources */,
@@ -5345,7 +5348,7 @@
 				APPLY_RULES_IN_COPY_FILES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "DSLC/大圣理财.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -5382,7 +5385,7 @@
 				APPLY_RULES_IN_COPY_FILES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "DSLC/大圣理财.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;

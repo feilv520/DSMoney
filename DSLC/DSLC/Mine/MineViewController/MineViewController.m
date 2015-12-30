@@ -522,7 +522,7 @@
 }
 
 #pragma mark 网络请求方法
-#pragma mark ----------
+#pragma mark ----------=====================-----------
 
 - (void)MyAccountInfo{
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
