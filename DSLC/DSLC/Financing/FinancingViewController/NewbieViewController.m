@@ -410,6 +410,19 @@
                 [self.productListArray addObject:productM];
             }
             
+            if (![FileOfManage ExistOfFile:@"NewProduct.plist"]) {
+                [FileOfManage createWithFile:@"NewProduct.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[[array objectAtIndex:0] objectForKey:@"productId"],@"NewProduct",@"0",@"dealSecret",nil];
+                //设置属性值,没有的数据就新建，已有的数据就修改。
+                [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
+            } else {
+                NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
+                //设置属性值,没有的数据就新建，已有的数据就修改。
+#warning asdasdasdasdasdasdasdasdasdasd
+                [dic setObject:[[array objectAtIndex:0] objectForKey:@"productId"] forKey:@"NewProduct"];
+                [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
+            }
+            
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
                 moreFlag = YES;
             }

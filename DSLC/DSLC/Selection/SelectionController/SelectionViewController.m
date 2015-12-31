@@ -511,19 +511,6 @@
         NSDictionary *dic = [responseObject objectForKey:@"Product"];
         [self.productM setValuesForKeysWithDictionary:dic];
         
-        if (![FileOfManage ExistOfFile:@"NewProduct.plist"]) {
-            [FileOfManage createWithFile:@"NewProduct.plist"];
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"0",@"NewProduct",@"0",@"dealSecret",nil];
-            //设置属性值,没有的数据就新建，已有的数据就修改。
-            [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
-        } else {
-            NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
-            //设置属性值,没有的数据就新建，已有的数据就修改。
-#warning asdasdasdasdasdasdasdasdasdasd
-            [dic setObject:[self.productM productId] forKey:@"NewProduct"];
-            [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
-        }
-        
         [self makeOnlyView];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
