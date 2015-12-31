@@ -98,7 +98,7 @@
     
     [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         
-        _tableView.contentOffset = CGPointMake(0, chatArray.count * 50);
+        _tableView.frame = CGRectMake(0, -(keyboardSize.height + 14), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 50 - 64);
         
         viewImport.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - keyboardSize.height + 14, WIDTH_CONTROLLER_DEFAULT, 50);
         
@@ -394,13 +394,14 @@
 }
 
 //回收键盘
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     if (scrollView.contentOffset.y != 0) {
         
         [_textField resignFirstResponder];//键盘回收
         
         [UIView animateWithDuration:0.001 animations:^{
+            
+            _tableView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 50 - 64);
             
             viewImport.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 20 - 50, WIDTH_CONTROLLER_DEFAULT, 50);
         }];

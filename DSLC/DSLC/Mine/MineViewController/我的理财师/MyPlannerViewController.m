@@ -31,6 +31,8 @@
     UIButton *butAlready;
     
     BOOL panduan;
+    
+    UILabel *labelAlert;
 }
 
 @end
@@ -61,10 +63,10 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnMineLeaf:)];
     [imageReturn addGestureRecognizer:tap];
     
+    [self tableViewShow];
     [self getMyFinPlanner];
     
     [self.navigationItem setTitle:@"我的理财师"];
-    [self tableViewShow];
 }
 
 - (void)returnMineLeaf:(UIBarButtonItem *)bar
@@ -98,7 +100,7 @@
     UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
     _tableView.tableFooterView = viewFoot;
     
-    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(20, 10, WIDTH_CONTROLLER_DEFAULT - 40, 40) backgroundColor:[UIColor huibai] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"26年专职理财顾问,私人银行级的资产配置,为客户提供中立客观的真诚服务。"];
+    labelAlert = [CreatView creatWithLabelFrame:CGRectMake(20, 10, WIDTH_CONTROLLER_DEFAULT - 40, 40) backgroundColor:[UIColor huibai] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"26年专职理财顾问,私人银行级的资产配置,为客户提供中立客观的真诚服务。"];
     [viewFoot addSubview:labelAlert];
     labelAlert.numberOfLines = 2;
     
@@ -319,6 +321,8 @@
                 [butAlready setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
                 butAlready.enabled = NO;
                 
+                labelAlert.text = [planner resume];
+                
             } else {
                 
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -346,6 +350,9 @@
                 [contentArr addObject:planner];
                 
                 [self viewHeadShow];
+                
+                labelAlert.text = [planner resume];
+                
                 NSLog(@"mmmmmmm%@", contentArr);
             } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];

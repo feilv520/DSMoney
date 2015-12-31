@@ -23,5 +23,6 @@
 @property (nonatomic) NSString *userAccount;
 @property (nonatomic) NSString *userNickname;
 @property (nonatomic) NSString *userPhone;
+@property (nonatomic) NSString *resume;
 
 @end
