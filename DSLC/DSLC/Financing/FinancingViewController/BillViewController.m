@@ -44,6 +44,8 @@
     
     BOOL moreFlag;
     BOOL newFlag;
+    
+    MJRefreshGifHeader *headerT;
 }
 
 @property (nonatomic, strong) NSMutableArray *productListArray;
@@ -230,6 +232,7 @@
             
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
                 moreFlag = YES;
+                [headerT endRefreshing];
             }
             
             [_tableView reloadData];
@@ -262,13 +265,17 @@
 }
 
 - (void)loadNewData:(MJRefreshGifHeader *)header{
+    
+    headerT = header;
+    
     [self.productListArray removeAllObjects];
     self.productListArray = nil;
     self.productListArray = [NSMutableArray array];
-    page = 1;
-    [self getProductList];
     if (newFlag) {
         [header endRefreshing];
+    } else {
+        page = 1;
+        [self getProductList];
     }
 }
 
