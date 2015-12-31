@@ -222,9 +222,11 @@
     NSLog(@"=====%@", dealDic);
     NSLog(@"zzzzzzzzz%@", [DES3Util decrypt:[dealDic objectForKey:@"dealSecret"]]);
     
-    if ([self.moneyString floatValue] > [_textField.text floatValue]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额小于100,只能一次全部提出"];
-        return;
+    if ([self.moneyString floatValue] < 100) {
+        if ([self.moneyString floatValue] > [_textField.text floatValue]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额小于100,只能一次全部提出"];
+            return;
+        }
     }
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
