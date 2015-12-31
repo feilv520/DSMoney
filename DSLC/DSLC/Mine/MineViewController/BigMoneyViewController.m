@@ -147,9 +147,11 @@
     cell.textField.tag = indexPath.row + 600;
     [cell.textField addTarget:self action:@selector(bigMoneyCashMoney:) forControlEvents:UIControlEventEditingChanged];
     
-    if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 6) {
+    if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
         
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+    } else if(indexPath.row == 6){
+        cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     }
     
     if (indexPath.row == 1) {

@@ -148,10 +148,14 @@
         cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textField.tintColor = [UIColor yuanColor];
         cell.textField.tag = 111111;
-        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
         [cell.textField addTarget:self action:@selector(textFieldLiftUpMoney:) forControlEvents:UIControlEventEditingChanged];
         
         _textField = cell.textField;
+        
+        if ([self.moneyString floatValue] < 100.0) {
+            cell.textField.text = self.moneyString;
+        }
         
         UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(cell.textField.frame.size.width - 20, 0, 15, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor yuanColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"元"];
         [cell.textField addSubview:label];

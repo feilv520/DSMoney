@@ -10,4 +10,6 @@
 
 @interface LiftupMoneyViewController : BaseViewController
 
+@property (nonatomic, copy) NSString *moneyString;
+
 @end

@@ -492,6 +492,7 @@
 //    [self.navigationController pushViewController:getMoneyVC animated:YES];
     [MobClick event:@"LiftupMoney"];
     LiftupMoneyViewController *liftupVC = [[LiftupMoneyViewController alloc] init];
+    liftupVC.moneyString = [[DES3Util decrypt: [self.myAccountInfo objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
     [self.navigationController pushViewController:liftupVC animated:YES];
 }
 

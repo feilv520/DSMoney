@@ -127,7 +127,7 @@
         cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textField.tintColor = [UIColor yuanColor];
         cell.textField.tag = 188;
-        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
         [cell.textField addTarget:self action:@selector(textAlreadyBinding:) forControlEvents:UIControlEventEditingChanged];
         
         self.textFieldTag = cell.textField;
