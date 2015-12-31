@@ -222,6 +222,11 @@
     NSLog(@"=====%@", dealDic);
     NSLog(@"zzzzzzzzz%@", [DES3Util decrypt:[dealDic objectForKey:@"dealSecret"]]);
     
+    if ([self.moneyString floatValue] > [_textField.text floatValue]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额小于100,只能一次全部提出"];
+        return;
+    }
+    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSDictionary *parmeter = @{@"bankCardId":[bankDic objectForKey:@"id"], @"fmoney":_textField.text, @"payPwd":textFieldPassword.text, @"token":[dic objectForKey:@"token"]};
