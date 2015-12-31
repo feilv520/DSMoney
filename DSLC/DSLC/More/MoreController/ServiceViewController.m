@@ -136,6 +136,9 @@
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已复制微信公众号名称"];
             
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            [pasteboard setString:@"ds-licai"];
+            
 //            butblack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
 //            AppDelegate *app = [[UIApplication sharedApplication] delegate];
 //            [app.tabBarVC.view addSubview:butblack];
@@ -153,6 +156,8 @@
         } else {
         
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已复制微博公众账号"];
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            [pasteboard setString:@"http://weibo.com/dslicai"];
         }
     }
 }
