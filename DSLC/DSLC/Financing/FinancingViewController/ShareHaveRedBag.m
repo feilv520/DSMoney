@@ -83,6 +83,7 @@
     [self.scrollView addSubview:buttonShare];
     buttonShare.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     buttonShare.layer.cornerRadius = 3;
+    buttonShare.titleLabel.textAlignment = NSTextAlignmentCenter;
     buttonShare.layer.masksToBounds = YES;
     
     [buttonShare addTarget:self action:@selector(shareButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -229,7 +230,7 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享成功,一天只能获得一个红包."];
-            buttonShare.titleLabel.text = @"分享";
+            [buttonShare setTitle:@"分享" forState:UIControlStateNormal];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

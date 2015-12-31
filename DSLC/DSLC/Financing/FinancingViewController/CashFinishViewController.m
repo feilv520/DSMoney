@@ -83,6 +83,7 @@
     [self.view addSubview:butShare];
     butShare.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     butShare.layer.cornerRadius = 3;
+    butShare.titleLabel.textAlignment = NSTextAlignmentCenter;
     butShare.layer.masksToBounds = YES;
     [butShare addTarget:self action:@selector(shareGiveRedBag:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -236,7 +237,7 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享成功,一天只能获得一个红包."];
-            butShare.titleLabel.text = @"分享";
+            [butShare setTitle:@"分享" forState:UIControlStateNormal];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

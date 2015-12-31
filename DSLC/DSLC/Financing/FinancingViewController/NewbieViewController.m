@@ -51,12 +51,17 @@
     
     [self loadingWithView:self.view loadingFlag:NO height:120.0];
     
-    self.view.backgroundColor = [UIColor huibai];
-    
     self.productListArray = [NSMutableArray array];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductList) name:@"refrushToProductList" object:nil];
+    self.view.backgroundColor = [UIColor huibai];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refrush) name:@"refrushToProductList" object:nil];
+    
+}
+
+- (void)refrush {
+    self.productListArray = [NSMutableArray array];
+    [self getProductList];
 }
 
 - (void)tableViewShow
