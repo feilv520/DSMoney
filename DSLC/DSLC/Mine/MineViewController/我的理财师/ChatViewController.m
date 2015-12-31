@@ -48,6 +48,11 @@
     viewImport.hidden = NO;
 }
 
+- (void)buttonReturn:(UIBarButtonItem *)bar{
+    [super buttonReturn:bar];
+    [_textField resignFirstResponder];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

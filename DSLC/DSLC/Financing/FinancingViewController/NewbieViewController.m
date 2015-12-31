@@ -45,13 +45,13 @@
     
     newFlag = NO;
     
+    self.productListArray = [NSMutableArray array];
+    
     [self getProductList];
     
     [self tableViewShow];
     
     [self loadingWithView:self.view loadingFlag:NO height:120.0];
-    
-    self.productListArray = [NSMutableArray array];
     
     self.view.backgroundColor = [UIColor huibai];
     
@@ -60,7 +60,7 @@
 }
 
 - (void)refrush {
-    self.productListArray = [NSMutableArray array];
+    
     [self getProductList];
 }
 
@@ -408,6 +408,13 @@
             [self loadingWithHidden:YES];
             
             NSLog(@"%@",responseObject);
+            
+            if (page == 1) {
+                NSLog(@"123");
+                [self.productListArray removeAllObjects];
+                self.productListArray = nil;
+                self.productListArray = [NSMutableArray array];
+            }
             
             NSArray *array = [responseObject objectForKey:@"Product"];
             
