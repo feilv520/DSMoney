@@ -58,7 +58,7 @@
 
 - (void)imageViewShow
 {
-    UIImageView *imageBack = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 50, (HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/3 - 50, 100, 100) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"img_lc_jqqd"]];
+    UIImageView *imageBack = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2.0 - 50, (HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/3 - 50, 80, 100) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"img_lc_jqqd"]];
     [self.view addSubview:imageBack];
     
 //    UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(0, (HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/3 + 60, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"敬 请 期 待 哟..."];
