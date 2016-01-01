@@ -421,7 +421,7 @@
 //    viewImport = nil;
     viewImport.hidden = YES;
     
-    [self.view endEditing:YES];
+    [_textField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
