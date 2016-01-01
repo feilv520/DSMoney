@@ -9,7 +9,7 @@
 #import "InvestNoticeViewController.h"
 #import "InvestNoticeCell.h"
 
-@interface InvestNoticeViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface InvestNoticeViewController () <UITableViewDataSource, UITableViewDelegate, UIWebViewDelegate>
 
 {
     UITableView *_tableView;
@@ -29,6 +29,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"投资须知"];
     
+    
+    
 //    [self tableViewShow];
     [self webViewShow];
 }
@@ -38,13 +40,20 @@
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
     [self.view addSubview:webView];
     webView.scrollView.showsVerticalScrollIndicator = NO;
+    webView.delegate = self;
     webView.scrollView.bounces = NO;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prouctInfo/product_descthree.html?productId=%@&type=2",self.productID];
+    [self loadingWithView:webView loadingFlag:NO height:self.view.center.y];
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prouctInfo/product_descthree.html?productType=%@&type=2",self.productType];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [self loadingWithHidden:YES];
 }
 
 - (void)tableViewShow

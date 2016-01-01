@@ -420,7 +420,7 @@
         } else {
             
             InvestNoticeViewController *investNotice = [[InvestNoticeViewController alloc] init];
-            investNotice.productID = self.idString;
+            investNotice.productType = [self.detailM productType];
             [self.navigationController pushViewController:investNotice animated:YES];
             
         }
