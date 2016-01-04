@@ -13,8 +13,9 @@
 #import "AddBankViewController.h"
 #import "GiveMoneyFinish.h"
 #import "RealNameViewController.h"
-#import "ChongZhiView.h"
+#import "ChongZhiZZZZView.h"
 #import "ChongZhiViewController.h"
+#import "BannerViewController.h"
 
 @interface RechargeAlreadyBinding () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
@@ -89,19 +90,20 @@
     buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
     [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
     
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    ChongZhiView *chongzhiView = [[mainBundle loadNibNamed:@"ChongZhiView" owner:nil options:nil] lastObject];
-    chongzhiView.frame = CGRectMake(0, 250, WIDTH_CVIEW_DEFAULT, 188);
+    NSBundle *rootBundle = [NSBundle mainBundle];
     
-    [self.view addSubview:chongzhiView];
+    ChongZhiZZZZView *chongZV = (ChongZhiZZZZView *)[[rootBundle loadNibNamed:@"ChongZhiZZZZView" owner:nil options:nil] lastObject];
     
-    [chongzhiView.buttonCZ addTarget:self action:@selector(buttonChongZhi) forControlEvents:UIControlEventTouchUpInside];
+    chongZV.frame = CGRectMake(0, 250, WIDTH_CVIEW_DEFAULT, 140);
     
+    [self.view addSubview:chongZV];
+    
+    [chongZV.buttonCZ addTarget:self action:@selector(buttonChongZhi) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)buttonChongZhi{
     ChongZhiViewController *czVC = [[ChongZhiViewController alloc] init];
-    [self.navigationController pushViewController:czVC animated:YES];
+    pushVC(czVC);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -249,22 +251,22 @@
             
             bankCardId = [bankDic objectForKey:@"id"];
             
-            if (![[self.dataDic objectForKey:@"realNameStatus"] isEqualToNumber:[NSNumber numberWithInt:2]]){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"为了您的账号安全,请先实名认证和绑卡" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去完善",nil];
-                // optional - add more buttons:
-                alert.tag = 9201;
-                [alert show];
-                
-            } else if (bankDic.count == 0) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先绑定银行卡,再充值" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去绑卡",nil];
-                // optional - add more buttons:
-                alert.tag = 9202;
-                [alert show];
-                
-            } else {
+//            if (![[self.dataDic objectForKey:@"realNameStatus"] isEqualToNumber:[NSNumber numberWithInt:2]]){
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"为了您的账号安全,请先实名认证和绑卡" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去完善",nil];
+//                // optional - add more buttons:
+//                alert.tag = 9201;
+//                [alert show];
+//                
+//            } else if (bankDic.count == 0) {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先绑定银行卡,再充值" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去绑卡",nil];
+//                // optional - add more buttons:
+//                alert.tag = 9202;
+//                [alert show];
+//                
+//            } else {
                 [self contentShow];
                 
-            }
+//            }
         
             [_tabelView reloadData];
         }

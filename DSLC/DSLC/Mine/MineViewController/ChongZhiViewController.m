@@ -7,7 +7,6 @@
 //
 
 #import "ChongZhiViewController.h"
-#import "define.h"
 
 @interface ChongZhiViewController () <UIWebViewDelegate>
 
@@ -30,7 +29,7 @@
 
 - (void)webViewShow
 {
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
     
     [self.view addSubview:webView];
     webView.delegate = self;

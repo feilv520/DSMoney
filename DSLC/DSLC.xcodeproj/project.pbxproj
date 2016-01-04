@@ -599,8 +599,8 @@
 		8D4518781C00553E00FAF998 /* Base64Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4518721C00553E00FAF998 /* Base64Util.m */; settings = {ASSET_TAGS = (); }; };
 		8D4518791C00553E00FAF998 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4518741C00553E00FAF998 /* GTMBase64.m */; settings = {ASSET_TAGS = (); }; };
 		8D45187A1C00553E00FAF998 /* MD5Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4518771C00553E00FAF998 /* MD5Encryption.m */; settings = {ASSET_TAGS = (); }; };
-		8D456C4F1C3A67010009F1CE /* ChongZhiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D456C4E1C3A67010009F1CE /* ChongZhiView.m */; settings = {ASSET_TAGS = (); }; };
-		8D456C511C3A671C0009F1CE /* ChongZhiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D456C501C3A671C0009F1CE /* ChongZhiView.xib */; settings = {ASSET_TAGS = (); }; };
+		8D456C4F1C3A67010009F1CE /* ChongZhiZZZZView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D456C4E1C3A67010009F1CE /* ChongZhiZZZZView.m */; settings = {ASSET_TAGS = (); }; };
+		8D456C511C3A671C0009F1CE /* ChongZhiZZZZView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D456C501C3A671C0009F1CE /* ChongZhiZZZZView.xib */; settings = {ASSET_TAGS = (); }; };
 		8D456C541C3A6F2D0009F1CE /* ChongZhiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D456C531C3A6F2D0009F1CE /* ChongZhiViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D4B8C111BF2F49400A88285 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4B8C0C1BF2F49400A88285 /* libSocialWechat.a */; settings = {ASSET_TAGS = (); }; };
 		8D4B8C121BF2F49400A88285 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4B8C0D1BF2F49400A88285 /* libWeChatSDK.a */; settings = {ASSET_TAGS = (); }; };
@@ -1682,9 +1682,9 @@
 		8D4518751C00553E00FAF998 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		8D4518761C00553E00FAF998 /* MD5Encryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5Encryption.h; sourceTree = "<group>"; };
 		8D4518771C00553E00FAF998 /* MD5Encryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5Encryption.m; sourceTree = "<group>"; };
-		8D456C4D1C3A67010009F1CE /* ChongZhiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChongZhiView.h; sourceTree = "<group>"; };
-		8D456C4E1C3A67010009F1CE /* ChongZhiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChongZhiView.m; sourceTree = "<group>"; };
-		8D456C501C3A671C0009F1CE /* ChongZhiView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChongZhiView.xib; sourceTree = "<group>"; };
+		8D456C4D1C3A67010009F1CE /* ChongZhiZZZZView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChongZhiZZZZView.h; path = ../../Mine/MineView/ChongZhiZZZZView.h; sourceTree = "<group>"; };
+		8D456C4E1C3A67010009F1CE /* ChongZhiZZZZView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChongZhiZZZZView.m; path = ../../Mine/MineView/ChongZhiZZZZView.m; sourceTree = "<group>"; };
+		8D456C501C3A671C0009F1CE /* ChongZhiZZZZView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChongZhiZZZZView.xib; path = ../../Mine/MineView/ChongZhiZZZZView.xib; sourceTree = "<group>"; };
 		8D456C521C3A6F2D0009F1CE /* ChongZhiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChongZhiViewController.h; sourceTree = "<group>"; };
 		8D456C531C3A6F2D0009F1CE /* ChongZhiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChongZhiViewController.m; sourceTree = "<group>"; };
 		8D4B8C0C1BF2F49400A88285 /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
@@ -2278,9 +2278,6 @@
 				8190A3061BD87D3E002B53F5 /* AddCardCell.h */,
 				8190A3071BD87D3E002B53F5 /* AddCardCell.m */,
 				8190A3081BD87D3E002B53F5 /* AddCardCell.xib */,
-				8D456C4D1C3A67010009F1CE /* ChongZhiView.h */,
-				8D456C4E1C3A67010009F1CE /* ChongZhiView.m */,
-				8D456C501C3A671C0009F1CE /* ChongZhiView.xib */,
 			);
 			name = "充值Cell";
 			sourceTree = "<group>";
@@ -2922,6 +2919,9 @@
 				81AC90C61BEC8C6600232404 /* BankWhichCell.h */,
 				81AC90C71BEC8C6600232404 /* BankWhichCell.m */,
 				81AC90C81BEC8C6600232404 /* BankWhichCell.xib */,
+				8D456C4D1C3A67010009F1CE /* ChongZhiZZZZView.h */,
+				8D456C4E1C3A67010009F1CE /* ChongZhiZZZZView.m */,
+				8D456C501C3A671C0009F1CE /* ChongZhiZZZZView.xib */,
 			);
 			path = FinancingView;
 			sourceTree = "<group>";
@@ -4854,7 +4854,7 @@
 				8D29F99F1C08048700D45E43 /* 已过期@3x.png in Resources */,
 				81BA1C041BD4E1ED00DBA5BE /* computer1.png in Resources */,
 				8D4343991BFDEB0B000BA004 /* loading_up_08.png in Resources */,
-				8D456C511C3A671C0009F1CE /* ChongZhiView.xib in Resources */,
+				8D456C511C3A671C0009F1CE /* ChongZhiZZZZView.xib in Resources */,
 				81B18E1A1BE7387A00D448FA /* iconfont-zhuanxiangeps@3x.png in Resources */,
 				8175BE9D1BE9E5760044026E /* 组-21-拷贝-14@3x.png in Resources */,
 				81C8BBCA1BDA2F8D005B9DFF /* yijianfankui@2x.png in Resources */,
@@ -5206,7 +5206,7 @@
 				818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */,
 				81D704001BE0B2AF0074DF30 /* BillViewController.m in Sources */,
 				81D8ADA31BC646D100A15E01 /* FinancingViewController.m in Sources */,
-				8D456C4F1C3A67010009F1CE /* ChongZhiView.m in Sources */,
+				8D456C4F1C3A67010009F1CE /* ChongZhiZZZZView.m in Sources */,
 				8D9BE8F51C0EC94D003C67D3 /* YYWebImageOperation.m in Sources */,
 				8D88D0FC1BFECCB40051D6DA /* MJRefreshAutoStateFooter.m in Sources */,
 				8D4FF5D91BE339A200BAE25F /* AFSecurityPolicy.m in Sources */,

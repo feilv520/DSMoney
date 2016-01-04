@@ -6,8 +6,8 @@
 //  Copyright © 2016年 马成铭. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ChongZhiViewController : UIViewController
+@interface ChongZhiViewController : BaseViewController
 
 @end
