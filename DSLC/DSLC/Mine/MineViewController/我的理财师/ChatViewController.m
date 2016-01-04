@@ -65,12 +65,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    if (self.userORplanner == NO) {
-        [self.navigationItem setTitle:self.chatName];
-        
-    }else {
-        [self.navigationItem setTitle:self.chatName];
-    }
+    [self.navigationItem setTitle:@"咨询理财师"];
     
     chatArray = [NSMutableArray array];
     timeArray = [NSMutableArray array];

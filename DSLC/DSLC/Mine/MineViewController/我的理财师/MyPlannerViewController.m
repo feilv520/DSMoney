@@ -117,7 +117,6 @@
 //    让子类自动布局
     imageBottom.autoresizesSubviews = YES;
     
-//    @"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658"
     imageHead = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 40, 25, 80, 80)];
     imageHead.backgroundColor = Color_Clear;
     imageHead.layer.cornerRadius = 40;
@@ -175,7 +174,7 @@
         cell.moneyAndPeople.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.moneyAndPeople.textAlignment = NSTextAlignmentRight;
         labelName.text = [DES3Util decrypt:planner.userRealname];
-        if (planner.avatarImg == nil) {
+        if (planner.avatarImg == nil || [planner.avatarImg isEqualToString:@""]) {
             imageHead.image = [UIImage imageNamed:@"默认头像"];
         } else {
             imageHead.yy_imageURL = [NSURL URLWithString:planner.avatarImg];
@@ -201,7 +200,7 @@
         cell.moneyAndPeople.textAlignment = NSTextAlignmentRight;
         labelName.text = planner.userRealname;
 
-        if (planner.avatarImg == nil) {
+        if (planner.avatarImg == nil || [planner.avatarImg isEqualToString:@""]) {
             imageHead.image = [UIImage imageNamed:@"默认头像"];
         } else {
             imageHead.yy_imageURL = [NSURL URLWithString:planner.avatarImg];
