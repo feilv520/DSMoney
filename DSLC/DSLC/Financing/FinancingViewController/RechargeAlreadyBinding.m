@@ -251,22 +251,22 @@
             
             bankCardId = [bankDic objectForKey:@"id"];
             
-//            if (![[self.dataDic objectForKey:@"realNameStatus"] isEqualToNumber:[NSNumber numberWithInt:2]]){
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"为了您的账号安全,请先实名认证和绑卡" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去完善",nil];
-//                // optional - add more buttons:
-//                alert.tag = 9201;
-//                [alert show];
-//                
-//            } else if (bankDic.count == 0) {
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先绑定银行卡,再充值" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去绑卡",nil];
-//                // optional - add more buttons:
-//                alert.tag = 9202;
-//                [alert show];
-//                
-//            } else {
+            if (![[self.dataDic objectForKey:@"realNameStatus"] isEqualToNumber:[NSNumber numberWithInt:2]]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"为了您的账号安全,请先实名认证和绑卡" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去完善",nil];
+                // optional - add more buttons:
+                alert.tag = 9201;
+                [alert show];
+                
+            } else if (bankDic.count == 0) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先绑定银行卡,再充值" delegate:self cancelButtonTitle:@"残忍拒绝" otherButtonTitles:@"去绑卡",nil];
+                // optional - add more buttons:
+                alert.tag = 9202;
+                [alert show];
+                
+            } else {
                 [self contentShow];
                 
-//            }
+            }
         
             [_tabelView reloadData];
         }
