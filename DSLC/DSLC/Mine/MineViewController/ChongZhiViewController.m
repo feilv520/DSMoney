@@ -1,14 +1,15 @@
 //
-//  BannerViewController.m
+//  ChongZhiViewController.m
 //  DSLC
 //
-//  Created by 马成铭 on 15/12/19.
-//  Copyright © 2015年 马成铭. All rights reserved.
+//  Created by 马成铭 on 16/1/4.
+//  Copyright © 2016年 马成铭. All rights reserved.
 //
 
-#import "BannerViewController.h"
+#import "ChongZhiViewController.h"
+#import "define.h"
 
-@interface BannerViewController () <UIWebViewDelegate>
+@interface ChongZhiViewController () <UIWebViewDelegate>
 
 {
     UIWebView *webView;
@@ -16,21 +17,21 @@
 
 @end
 
-@implementation BannerViewController
+@implementation ChongZhiViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navigationItem.title = self.photoName;
+    self.navigationItem.title = @"银行限额表";
     
     [self webViewShow];
 }
 
 - (void)webViewShow
 {
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
-
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
+    
     [self.view addSubview:webView];
     webView.delegate = self;
     webView.scalesPageToFit = YES;
@@ -38,9 +39,16 @@
     webView.scrollView.showsHorizontalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
-    NSURL *url = [NSURL URLWithString:self.photoUrl];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    
+    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/limit_bank.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self loadingWithHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

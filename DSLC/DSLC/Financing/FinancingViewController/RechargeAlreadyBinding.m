@@ -13,6 +13,8 @@
 #import "AddBankViewController.h"
 #import "GiveMoneyFinish.h"
 #import "RealNameViewController.h"
+#import "ChongZhiView.h"
+#import "ChongZhiViewController.h"
 
 @interface RechargeAlreadyBinding () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
@@ -86,6 +88,20 @@
     [self.view addSubview:buttonSafe];
     buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
     [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
+    
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    ChongZhiView *chongzhiView = [[mainBundle loadNibNamed:@"ChongZhiView" owner:nil options:nil] lastObject];
+    chongzhiView.frame = CGRectMake(0, 250, WIDTH_CVIEW_DEFAULT, 188);
+    
+    [self.view addSubview:chongzhiView];
+    
+    [chongzhiView.buttonCZ addTarget:self action:@selector(buttonChongZhi) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (void)buttonChongZhi{
+    ChongZhiViewController *czVC = [[ChongZhiViewController alloc] init];
+    [self.navigationController pushViewController:czVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -249,7 +265,7 @@
                 [self contentShow];
                 
             }
-            
+        
             [_tabelView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
