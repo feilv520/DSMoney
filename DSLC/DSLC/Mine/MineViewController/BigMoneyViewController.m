@@ -389,7 +389,10 @@
     if (textField.tag == 604) {
         if ([textField.text isEqualToString:@""]) {
             return YES;
-        } else {
+        } else if (textField.text.length != 14) {
+            return YES;
+            
+        }else {
             NSLog(@"0000000000%@",[textField.text substringWithRange:NSMakeRange(4, 1)]);
             NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
             if (![[textField.text substringWithRange:NSMakeRange(4, 1)] isEqualToString:@"-"]) {
@@ -403,7 +406,7 @@
                 NSLog(@"9999999999%@",str);
                 
                 if (str == nil) {
-                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入14位无符号无空格正确时间格式"];
+//                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入14位无符号无空格正确时间格式"];
                 } else {
                     textField.text = str;
                 }
@@ -439,8 +442,8 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        
+//    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+    
         if (textField.tag == 602) {
             
             [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
@@ -493,7 +496,7 @@
             }];
 
         }
-    }
+//    }
     return YES;
 }
 
@@ -535,6 +538,9 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
         
     } else if (fieldTime.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入年月日时分秒14位时间"];
+        
+    } else if (fieldTime.text.length != 19) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入年月日时分秒14位时间"];
         
     } else if (fieldBusness.text.length == 0) {

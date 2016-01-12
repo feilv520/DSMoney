@@ -216,7 +216,7 @@
 
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-//        NSLog(@"咨询详情:111&&&1111%@", responseObject);
+        NSLog(@"咨询详情:111&&&1111%@", responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             

@@ -251,6 +251,8 @@
     if (textField.tag == 604) {
         if ([textField.text isEqualToString:@""]) {
             return YES;
+        } else if (textField.text.length != 14) {
+            return YES;
         } else {
             NSLog(@"0000000000%@",[textField.text substringWithRange:NSMakeRange(4, 1)]);
             NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
@@ -319,21 +321,28 @@
 //确定按钮
 - (void)makeSureEditReturn:(UIButton *)button
 {
-    countt++;
-    if (countt == 1) {
-        [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+    [self.view endEditing:YES];
+    fieldPos = (UITextField *)[self.view viewWithTag:608];
+    fieldTime = (UITextField *)[self.view viewWithTag:604];
+    
+    if (fieldTime.text.length != 19) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入年月日时分秒14位时间"];
         
     } else {
-        [self submitLoadingWithHidden:NO];
-    }
-
-    fieldPos = (UITextField *)[self.view viewWithTag:608];
-
-    if (![fieldPos.text isEqualToString:@"已上传POS单照片"]) {
-        NSLog(@"aaaaaaaaaaaaaa");
-        [self upPosData];
-    } else {
-        [self getData];
+        countt++;
+        if (countt == 1) {
+            [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+            
+        } else {
+            [self submitLoadingWithHidden:NO];
+        }
+        
+        if ([fieldPos.text isEqualToString:@"已上传POS单照片"]) {
+            NSLog(@"aaaaaaaaaaaaaa");
+            [self upPosData];
+        } else {
+            [self getData];
+        }
     }
 }
 
