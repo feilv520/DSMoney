@@ -618,14 +618,7 @@
         default:
             break;
     }
-    
-    NSString *showMsg = [msg stringByAppendingString:[LLPayUtil jsonStringOfObj:dic]];
-    
-    [[[UIAlertView alloc] initWithTitle:@"结果"
-                                message:showMsg
-                               delegate:nil
-                      cancelButtonTitle:@"确认"
-                      otherButtonTitles:nil] show];
+
 }
 
 - (NSMutableDictionary *)createOrder{
@@ -678,7 +671,7 @@
                            //                           @"shareing_data":@"201412030000035903^101001^10^分账说明1|201310102000003524^101001^11^分账说明2|201307232000003510^109001^12^分账说明3"
                            // 分账信息数据 shareing_data  否 变(1024)
                            
-                           @"notify_url":[NSString stringWithFormat:@"http://web.dslc.cn/payReturn.do?tranId=%@&userId=%@&bankCardId=%@",tranId,[dicRealName objectForKey:@"id"],bankCardId],
+                           @"notify_url":[NSString stringWithFormat:@"http://www.dslc.cn/payReturn.do?tranId=%@&userId=%@&bankCardId=%@",tranId,[dicRealName objectForKey:@"id"],bankCardId],
                            //服务器异步通知地址	notify_url	是	String(64)	连连钱包支付平台在用户支付成功后通知商户服务端的地址，如：http://payhttp.xiaofubao.com/back.shtml
                            
                            @"risk_item":risk_item,

@@ -84,7 +84,7 @@
     NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,URLString];
     
     NSMutableDictionary *newParameters = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [newParameters setObject:@"com.gcct.dslc1" forKey:@"packageName"];
+    [newParameters setObject:@"com.gcct.dslc" forKey:@"packageName"];
     
     [self POST:URLPostString parameters:newParameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nonnull responseObject) {
         
