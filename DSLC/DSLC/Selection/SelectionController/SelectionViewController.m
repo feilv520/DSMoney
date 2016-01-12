@@ -479,6 +479,11 @@
         
         NSLog(@"AD = %@",responseObject);
         
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            return ;
+        }
+        
         for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
             AdModel *adModel = [[AdModel alloc] init];
             [adModel setValuesForKeysWithDictionary:dic];
@@ -502,6 +507,11 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getPickProduct" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"getPickProduct = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            return ;
+        }
         
         [self loadingWithHidden:YES];
         

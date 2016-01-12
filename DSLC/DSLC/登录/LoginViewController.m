@@ -446,6 +446,9 @@
             [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
         
         } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            
             [app.tabBarVC setSuppurtGestureTransition:NO];
             [app.tabBarVC setTabbarViewHidden:NO];
             [app.tabBarVC setLabelLineHidden:NO];

@@ -83,7 +83,10 @@
     
     NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,URLString];
     
-    [self POST:URLPostString parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nonnull responseObject) {
+    NSMutableDictionary *newParameters = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    [newParameters setObject:@"com.gcct.dslc1" forKey:@"packageName"];
+    
+    [self POST:URLPostString parameters:newParameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nonnull responseObject) {
         
         NSData *doubi = responseObject;
         NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];

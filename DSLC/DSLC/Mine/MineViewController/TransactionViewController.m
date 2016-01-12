@@ -470,13 +470,19 @@ numberOfRowsInComponent:(NSInteger)component
             self.transactionArray = [NSMutableArray array];
             for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
                 for (NSInteger i = 0; i < self.transactionName.count; i++) {
+                    [transactionArr removeAllObjects];
+                    transactionArr = nil;
+                    transactionArr = [NSMutableArray array];
                     for (NSDictionary *ddic in [dic objectForKey:[self.transactionName objectAtIndex:i]]) {
-                        
                         MTransactionModel *tModel = [[MTransactionModel alloc] init];
                         [tModel setValuesForKeysWithDictionary:ddic];
                         [transactionArr addObject:tModel];
                     }
-                    transactionDic = [NSDictionary dictionaryWithObject:transactionArr forKey:[self.transactionName objectAtIndex:i]];
+                    
+                    NSArray *transArray = [[NSArray arrayWithArray:transactionArr] copy];
+                    
+                    transactionDic = [NSDictionary dictionaryWithObject:transArray forKey:[self.transactionName objectAtIndex:i]];
+                    
                     [self.transactionArray addObject:transactionDic];
                 }
             }
