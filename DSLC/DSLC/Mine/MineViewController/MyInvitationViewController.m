@@ -127,9 +127,9 @@
         cell.labelHttp.text = @"邀请链接";
         cell.labelHttp.font = [UIFont systemFontOfSize:11];
         
-        cell.labelHttpNum.text = [self.dicMyInvite objectForKey:@"link"];
+        cell.labelHttpNum.text = [NSString stringWithFormat:@"http://www.dslc.cn/regist.html？inviteCode=%@",[self.dicMyInvite objectForKey:@"invitationMyCode"]];
         cell.labelHttpNum.textColor = [UIColor daohanglan];
-        cell.labelHttpNum.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.labelHttpNum.font = [UIFont fontWithName:@"CenturyGothic" size:11];
         
         [cell.buttonCopy setTitle:@"复制" forState:UIControlStateNormal];
         [cell.buttonCopy setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
@@ -162,7 +162,7 @@
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        NSMutableAttributedString *peopleNum = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@人\n邀请人数",[DES3Util decrypt:[self.dicMyInvite objectForKey:@"openRedPacketAmount"]]]];
+        NSMutableAttributedString *peopleNum = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@人\n邀请人数",[self.dicMyInvite objectForKey:@"inviteCount"]]];
         [peopleNum addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:NSMakeRange(0, [peopleNum length])];
         
         NSRange invite = NSMakeRange(0, [[peopleNum string] rangeOfString:@"人"].location);
@@ -266,8 +266,9 @@
         [pasteboard setString:[self.dicMyInvite objectForKey:@"invitationMyCode"]];
     } else if (button.tag == 1003) {
         [MobClick event:@"copyHttp"];
+        NSLog(@"?");
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        [pasteboard setString:[self.dicMyInvite objectForKey:@"link"]];
+        [pasteboard setString:[NSString stringWithFormat:@"http://www.dslc.cn/regist.html?inviteCode=%@",[self.dicMyInvite objectForKey:@"invitationMyCode"]]];
     }
 }
 

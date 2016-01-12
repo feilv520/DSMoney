@@ -253,7 +253,7 @@
         
     } else {
         
-        if (range.location < 12) {
+        if (range.location < 20) {
             
             return YES;
             
@@ -302,7 +302,7 @@
     textField1 = (UITextField *)[self.view viewWithTag:1000];
     textField2 = (UITextField *)[self.view viewWithTag:1001];
     
-    if (textField1.text.length == 11 && (textField2.text.length >= 6 && textField2.text.length <= 12)) {
+    if (textField1.text.length == 11 && (textField2.text.length >= 6 && textField2.text.length <= 20)) {
         if (![NSString validatePassword:textField2.text]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"首字母开头"];
         } else if ([NSString validateMobile:textField1.text]) {

@@ -310,7 +310,7 @@
         
         if (self.decide == NO) {
             
-            cell.textField.text = @"5000";
+            cell.textField.text = @"5100";
             cell.textField.enabled = NO;
             cell.labelOneZi.text = @"猴币";
         } else {
@@ -436,7 +436,7 @@
             [self.buttonNew setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
             self.buttonNew.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
             
-            NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"新手体验金5,000猴币"];
+            NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"新手体验金5,100猴币"];
             NSRange LeftSange = NSMakeRange([[redStr string] length] - 7, 7);
             [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:LeftSange];
             [self.buttonNew setAttributedTitle:redStr forState:UIControlStateNormal];
@@ -967,7 +967,7 @@
     NSDictionary *parameter = nil;
     
     if (self.decide == NO) {
-        parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":@"5000",@"days":[self.detailM productPeriod]};
+        parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":@"5100",@"days":[self.detailM productPeriod]};
     } else {
         parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":self.textFieldC.text,@"days":[self.detailM productPeriod]};
     }

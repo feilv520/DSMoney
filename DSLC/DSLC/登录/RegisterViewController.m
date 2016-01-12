@@ -1454,7 +1454,7 @@
                            ownerCardName,
                            ownerCardNumber];
     
-    NSString *noString = [NSString stringWithFormat:@"http://web.dslc.cn/payReturn.do?tranId=%@&userId=%@&bankCardId=%@",tranId,user_id,bankCardId];
+    NSString *noString = [NSString stringWithFormat:@"http://www.dslc.cn/payReturn.do?tranId=%@&userId=%@&bankCardId=%@",tranId,user_id,bankCardId];
     NSLog(@"http:// = %@",noString);
     
     // TODO: 请开发人员修改下面订单的所有信息，以匹配实际需求

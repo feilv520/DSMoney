@@ -428,7 +428,7 @@ numberOfRowsInComponent:(NSInteger)component
     
     NSLog(@"token = %@",[self.flagDic objectForKey:@"token"]);
     
-    if (number == 0 || number == 1) {
+    if (number == 0) {
         parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":tranBeginDate,@"tranEndDate":tranEndDate,@"tranType":@""};
     } else {
         parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":@"",@"tranEndDate":@"",@"tranType":[NSNumber numberWithInteger:number]};
