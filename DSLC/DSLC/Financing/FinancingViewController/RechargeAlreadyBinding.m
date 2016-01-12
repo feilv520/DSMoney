@@ -512,7 +512,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     // 注意要修改
-    NSDictionary *parameter = @{@"fmoney":self.textFieldTag.text,@"token":[dic objectForKey:@"token"],@"bankCardId":bankCardId};
+    NSDictionary *parameter = @{@"fmoney":self.textFieldTag.text,@"token":[dic objectForKey:@"token"],@"bankCardId":bankCardId,@"clientType":@"iOS"};
     
     NSLog(@"%@",parameter);
     
