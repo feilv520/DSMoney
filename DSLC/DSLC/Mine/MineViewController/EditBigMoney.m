@@ -19,7 +19,8 @@
     UIButton *buttonOk;
     
     NSArray *nameArray;
-    NSArray *textArray;
+    NSArray *chuanArray;
+    NSArray *meichuanArr;
     
     UITextField *fileldName;
     UITextField *fieldBank;
@@ -29,6 +30,7 @@
     UITextField *fieldBusness;
     UITextField *fieldTime;
     UITextField *fieldPos;
+    UITextField *fieldPosNum;
     
     UIImageView *imageViewR;
     BankName *bankName;
@@ -75,8 +77,16 @@
     _tabelView.backgroundColor = [UIColor huibai];
     [_tabelView registerNib:[UINib nibWithNibName:@"MendDealCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"刷卡时间", @"商户", @"充值金额", @"上传POS单照片"];
-    textArray = @[[DES3Util decrypt:self.schedule.realName], self.schedule.bankName, [DES3Util decrypt:self.schedule.account], [DES3Util decrypt:self.schedule.phone], self.schedule.posTime, self.schedule.busName, [DES3Util decrypt:self.schedule.money], @"已上传POS单照片"];
+    nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"刷卡时间", @"商户", @"POS单号", @"充值金额", @"上传POS单照片"];
+    
+    if (self.chuanFou == YES) {
+        
+        chuanArray = @[[DES3Util decrypt:self.schedule.realName], self.schedule.bankName, [DES3Util decrypt:self.schedule.account], [DES3Util decrypt:self.schedule.phone], self.schedule.posTime, self.schedule.busName, self.schedule.posNum, [DES3Util decrypt:self.schedule.money], @"已上传POS单照片"];
+        
+    } else {
+        
+        meichuanArr = @[[DES3Util decrypt:self.schedule.realName], self.schedule.bankName, [DES3Util decrypt:self.schedule.account], [DES3Util decrypt:self.schedule.phone], self.schedule.posTime, self.schedule.busName, self.schedule.posNum, [DES3Util decrypt:self.schedule.money], @"请上传POS单照片"];
+    }
     
     buttonOk = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [_tabelView.tableFooterView addSubview:buttonOk];
@@ -102,7 +112,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,7 +122,12 @@
     cell.labelLeft.text = [nameArray objectAtIndex:indexPath.row];
     cell.labelLeft.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    cell.textField.text = [textArray objectAtIndex:indexPath.row];
+    if (self.chuanFou == YES) {
+        cell.textField.text = [chuanArray objectAtIndex:indexPath.row];
+    } else {
+        cell.textField.text = [meichuanArr objectAtIndex:indexPath.row];
+    }
+    
     cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     cell.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     cell.textField.textColor = [UIColor zitihui];
@@ -133,7 +148,7 @@
         [cell addSubview:imageViewR];
     }
     
-    if (indexPath.row == 7) {
+    if (indexPath.row == 8) {
         
         [cell addSubview:imageView];
         [cell addSubview:imagePos];
@@ -205,7 +220,7 @@
      */
     // 保存图片至本地，方法见下文
     [self saveImage:image withName:@"posUpImage.png"];
-    fieldPos = (UITextField *)[self.view viewWithTag:607];
+    fieldPos = (UITextField *)[self.view viewWithTag:608];
     fieldPos.text = @"已修改POS单照片";
     
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"posUpImage.png"];
@@ -312,7 +327,7 @@
         [self submitLoadingWithHidden:NO];
     }
 
-    fieldPos = (UITextField *)[self.view viewWithTag:607];
+    fieldPos = (UITextField *)[self.view viewWithTag:608];
 
     if (![fieldPos.text isEqualToString:@"已上传POS单照片"]) {
         NSLog(@"aaaaaaaaaaaaaa");
@@ -329,18 +344,19 @@
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
     
     finaCard = [[MyAfHTTPClient sharedClient] resetSizeOfImageData:savedImage maxSize:1024 * 2];
-    
+    http://www.dslc.cn/dslchuod.html
     fileldName = (UITextField *)[self.view viewWithTag:600];
     fieldBank = (UITextField *)[self.view viewWithTag:601];
     fieldBankCard = (UITextField *)[self.view viewWithTag:602];
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
     fieldTime = (UITextField *)[self.view viewWithTag:604];
     fieldBusness = (UITextField *)[self.view viewWithTag:605];
-    fieldMoney = (UITextField *)[self.view viewWithTag:606];
-    fieldPos = (UITextField *)[self.view viewWithTag:607];
+    fieldPosNum = (UITextField *)[self.view viewWithTag:606];
+    fieldMoney = (UITextField *)[self.view viewWithTag:607];
+    fieldPos = (UITextField *)[self.view viewWithTag:608];
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    NSDictionary *parameter = @{@"id":self.schedule.Id, @"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"busName":fieldBusness.text, @"posTime":fieldTime.text, @"posImg":finaCard, @"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"id":self.schedule.Id, @"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"busName":fieldBusness.text, @"posNum":fieldPosNum.text, @"posTime":fieldTime.text, @"posImg":finaCard, @"token":[dic objectForKey:@"token"]};
     
     NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,@"app/user/updateBigPutOnSerialNum"];
     
@@ -400,11 +416,12 @@
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
     fieldTime = (UITextField *)[self.view viewWithTag:604];
     fieldBusness = (UITextField *)[self.view viewWithTag:605];
-    fieldMoney = (UITextField *)[self.view viewWithTag:606];
+    fieldPosNum = (UITextField *)[self.view viewWithTag:606];
+    fieldMoney = (UITextField *)[self.view viewWithTag:607];
 
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     NSString *money = [fieldMoney.text stringByReplacingOccurrencesOfString:@"," withString:@""];
-    NSDictionary *paremeter = @{@"id":self.schedule.Id, @"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":money, @"busName":fieldBusness.text, @"posTime":fieldTime.text, @"posImg":@"", @"token":[dic objectForKey:@"token"]};
+    NSDictionary *paremeter = @{@"id":self.schedule.Id, @"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":money, @"busName":fieldBusness.text, @"posNum":fieldPosNum.text, @"posTime":fieldTime.text, @"posImg":@"", @"token":[dic objectForKey:@"token"]};
     NSLog(@"===========%@", paremeter);
 
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateBigPutOnSerialNum" parameters:paremeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -450,6 +467,7 @@
         } completion:^(BOOL finished) {
             
         }];
+        
     } else if (textField.tag == 606) {
         
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
@@ -460,6 +478,15 @@
             
         }];
         
+    } else if (textField.tag == 607) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            _tabelView.contentOffset = CGPointMake(0, 300);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
     } 
     return YES;
 }

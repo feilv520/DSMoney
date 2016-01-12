@@ -18,6 +18,7 @@
 @property (nonatomic) NSString *busName;
 @property (nonatomic) NSString *posTime;
 @property (nonatomic) NSString *posImg;
+@property (nonatomic) NSString *posNum;
 @property (nonatomic) NSString *status;
 @property (nonatomic) NSString *createTime;
 @property (nonatomic) NSString *updateTime;

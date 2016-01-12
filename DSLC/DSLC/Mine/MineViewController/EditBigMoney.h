@@ -11,4 +11,5 @@
 
 @interface EditBigMoney : BaseViewController
 @property (nonatomic) ApplySchedule *schedule;
+@property (nonatomic) BOOL chuanFou;
 @end

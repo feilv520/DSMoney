@@ -418,6 +418,16 @@
     money.schedule = applySch;
     NSLog(@"^^^^^^^^^%@", money.schedule.Id);
     NSLog(@"kkkkkkkkk%@", applySch.busName);
+    
+    if (self.doOr == YES) {
+        
+        money.chuanFou = YES;
+        
+    } else {
+        
+        money.chuanFou = NO;
+    }
+    
     [self.navigationController pushViewController:money animated:YES];
 }
 

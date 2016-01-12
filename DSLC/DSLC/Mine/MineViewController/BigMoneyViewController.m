@@ -37,6 +37,7 @@
     UITextField *fieldBusness;
     UITextField *fieldTime;
     UITextField *fieldPos;
+    UITextField *fieldPosNum;
     
     UIImageView *imageView;
     NSData *finaCard;
@@ -47,11 +48,6 @@
 @end
 
 @implementation BigMoneyViewController
-
-//- (void)viewWillAppear:(BOOL)animated{
-//    [super viewWillAppear:animated];
-//    
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -101,8 +97,8 @@
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 130)];
     [_tableView registerNib:[UINib nibWithNibName:@"MendDealCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"刷卡时间", @"商户", @"充值金额", @"上传POS单照片"];
-    textArray = @[@"输入持卡人姓名", @"输入开户银行", @"银行卡号", @"请输入手机号", @"时间格式2016010101010", @"请选择商户", @"请输入充值金额", @"请上传POS单照片"];
+    nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"刷卡时间", @"商户", @"POS单号", @"充值金额", @"上传POS单照片"];
+    textArray = @[@"输入持卡人姓名", @"输入开户银行", @"银行卡号", @"请输入手机号", @"时间格式2016010101010", @"请选择商户", @"POS单号", @"请输入充值金额", @"请上传POS单照片"];
     
     buttonApply = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"提交申请"];
     [_tableView.tableFooterView addSubview:buttonApply];
@@ -129,7 +125,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -150,7 +146,7 @@
     if (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4) {
         
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-    } else if(indexPath.row == 6){
+    } else if(indexPath.row == 7){
         cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     }
     
@@ -167,7 +163,7 @@
 
     }
     
-    if (indexPath.row == 7) {
+    if (indexPath.row == 8) {
         
         cell.textField.enabled = NO;
         [cell addSubview:imagePos];
@@ -242,7 +238,7 @@
      */
     // 保存图片至本地，方法见下文
     [self saveImage:image withName:@"posImage.png"];
-    fieldPos = (UITextField *)[self.view viewWithTag:607];
+    fieldPos = (UITextField *)[self.view viewWithTag:608];
     fieldPos.text = @"已上传POS单照片";
     
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"posImage.png"];
@@ -282,11 +278,12 @@
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
     fieldTime = (UITextField *)[self.view viewWithTag:604];
     fieldBusness = (UITextField *)[self.view viewWithTag:605];
-    fieldMoney = (UITextField *)[self.view viewWithTag:606];
-    fieldPos = (UITextField *)[self.view viewWithTag:607];
+    fieldPosNum = (UITextField *)[self.view viewWithTag:606];
+    fieldMoney = (UITextField *)[self.view viewWithTag:607];
+    fieldPos = (UITextField *)[self.view viewWithTag:608];
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    NSDictionary *parameter = @{@"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"busName":fieldBusness.text, @"posTime":fieldTime.text, @"posImg":finaCard, @"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"busName":fieldBusness.text, @"posNum":fieldPosNum.text, @"posTime":fieldTime.text, @"posImg":finaCard, @"token":[dic objectForKey:@"token"]};
     
     NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,@"app/user/bigPutOn"];
     
@@ -425,9 +422,10 @@
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
     fieldTime = (UITextField *)[self.view viewWithTag:604];
     fieldBusness = (UITextField *)[self.view viewWithTag:605];
-    fieldMoney = (UITextField *)[self.view viewWithTag:606];
+    fieldPosNum = (UITextField *)[self.view viewWithTag:606];
+    fieldMoney = (UITextField *)[self.view viewWithTag:607];
     
-    if (fileldName.text.length > 0 && fieldBank.text.length > 0 && fieldBankCard.text.length > 0 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0 && fieldBusness.text.length != 0 && fieldTime.text != 0) {
+    if (fileldName.text.length > 0 && fieldBank.text.length > 0 && fieldBankCard.text.length > 0 && fieldPhoneNum.text.length == 11 && fieldMoney.text.length > 0 && fieldBusness.text.length != 0 && fieldPosNum.text.length > 0 && fieldTime.text != 0) {
         
         [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [buttonApply setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
@@ -474,7 +472,6 @@
             } completion:^(BOOL finished) {
                 
             }];
-//            [fieldMoney becomeFirstResponder];
             
         } else if (textField.tag == 606) {
             
@@ -485,8 +482,16 @@
             } completion:^(BOOL finished) {
                 
             }];
+        } else if (textField.tag == 607) {
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                _tableView.contentOffset = CGPointMake(0, 250);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
 
-//            [fieldTime becomeFirstResponder];
         }
     }
     return YES;
@@ -501,8 +506,8 @@
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
     fieldTime = (UITextField *)[self.view viewWithTag:604];
     fieldBusness = (UITextField *)[self.view viewWithTag:605];
-    fieldMoney = (UITextField *)[self.view viewWithTag:606];
-    fieldPos = (UITextField *)[self.view viewWithTag:607];
+    fieldMoney = (UITextField *)[self.view viewWithTag:607];
+    fieldPos = (UITextField *)[self.view viewWithTag:608];
     
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         
@@ -589,11 +594,12 @@
     fieldPhoneNum = (UITextField *)[self.view viewWithTag:603];
     fieldTime = (UITextField *)[self.view viewWithTag:604];
     fieldBusness = (UITextField *)[self.view viewWithTag:605];
-    fieldMoney = (UITextField *)[self.view viewWithTag:606];
-    fieldPos = (UITextField *)[self.view viewWithTag:607];
+    fieldPosNum = (UITextField *)[self.view viewWithTag:606];
+    fieldMoney = (UITextField *)[self.view viewWithTag:607];
+    fieldPos = (UITextField *)[self.view viewWithTag:608];
 
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    NSDictionary *parameter = @{@"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"busName":fieldBusness.text, @"posTime":fieldTime.text, @"posImg":@"", @"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"realName":fileldName.text, @"bankName":fieldBank.text, @"account":fieldBankCard.text, @"phone":fieldPhoneNum.text, @"money":fieldMoney.text, @"busName":fieldBusness.text, @"posNum":fieldPosNum.text, @"posTime":fieldTime.text, @"posImg":@"", @"token":[dic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/bigPutOn" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"zzzzzzz%@", responseObject);
