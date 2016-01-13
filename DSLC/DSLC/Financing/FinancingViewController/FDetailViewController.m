@@ -93,10 +93,10 @@
     _tableView.tableFooterView = viewFoot;
     viewFoot.backgroundColor = [UIColor huibai];
     
-    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 15, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"由中国银行保障您的账户资金安全"];
-    [viewFoot addSubview:buttonSafe];
-    buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
-    [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
+//    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 15, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"由中国银行保障您的账户资金安全"];
+//    [viewFoot addSubview:buttonSafe];
+//    buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+//    [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
     
     [_tableView registerNib:[UINib nibWithNibName:@"FixInvestCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     [_tableView registerNib:[UINib nibWithNibName:@"BasicMessageCell" bundle:nil] forCellReuseIdentifier:@"reuse2"];
@@ -454,7 +454,7 @@
     
     if (self.estimate == NO) {
         
-        [butMakeSure setTitle:@"投资(可使用5,100猴币)" forState:UIControlStateNormal];
+        [butMakeSure setTitle:@"投资(可使用5,000猴币)" forState:UIControlStateNormal];
         [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         
     } else {

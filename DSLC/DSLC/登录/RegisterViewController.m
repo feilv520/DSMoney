@@ -1316,6 +1316,7 @@
             
         } else {
             CanNotBindingBankCard *canNot = [[CanNotBindingBankCard alloc] init];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [self.navigationController pushViewController:canNot animated:YES];
         }
         

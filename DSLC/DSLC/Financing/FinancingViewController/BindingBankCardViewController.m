@@ -73,10 +73,10 @@
     [buttonGood setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     [buttonGood addTarget:self action:@selector(buttonBindingBank:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 60 + HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@"由中国银行保障您的账户资金安全"];
-    [viewFoot addSubview:buttonSafe];
-    buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
-    [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
+//    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 60 + HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@"由中国银行保障您的账户资金安全"];
+//    [viewFoot addSubview:buttonSafe];
+//    buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+//    [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

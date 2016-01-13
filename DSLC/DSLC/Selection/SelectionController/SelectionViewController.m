@@ -87,7 +87,7 @@
     [self makeBackgroundView];
     [self makeThreeButtons];
     [self makePayButton];
-    [self makeSafeView];
+//    [self makeSafeView];
     
     timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
 

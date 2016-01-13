@@ -133,7 +133,7 @@
     _tableView.tableFooterView = viewFoot;
     viewFoot.backgroundColor = [UIColor huibai];
     
-    [self makeSafeView];
+//    [self makeSafeView];
     
     [_tableView registerNib:[UINib nibWithNibName:@"MineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }

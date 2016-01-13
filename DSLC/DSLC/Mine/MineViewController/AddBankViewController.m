@@ -18,6 +18,7 @@
 #import "BankName.h"
 #import "CanNotBindingBankCard.h"
 #import "TTTTTTTBangKa.h"
+#import "ChengGongViewController.h"
 
 @interface AddBankViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -505,6 +506,7 @@
             
         } else {
             CanNotBindingBankCard *canNot = [[CanNotBindingBankCard alloc] init];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [self.navigationController pushViewController:canNot animated:YES];
         }
         
@@ -565,20 +567,11 @@
                 //NSString *payBackAgreeNo = dic[@"agreementno"];
                 // TODO: 协议号
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
-                NSLog(@"成功");
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"绑卡成功"];
                 
-                NSArray *viewController = [self.navigationController viewControllers];
-                
-                if (self.realNameStatus == YES) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                    
-                } else {
-                    [self.navigationController popToViewController:[viewController objectAtIndex:2] animated:YES];
-                    
-                }
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushBK" object:nil];
+                ChengGongViewController *chengGongVC = [[ChengGongViewController alloc] init];
+                chengGongVC.realNameString = self.realNameStatus;
+                pushVC(chengGongVC);
                 
             }
             else if ([result_pay isEqualToString:@"PROCESSING"])

@@ -63,6 +63,7 @@
 		81422CDA1C27E2E200E515B6 /* MyPlannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81422CD71C27E2E200E515B6 /* MyPlannerViewController.m */; settings = {ASSET_TAGS = (); }; };
 		814B51011C3A8463001AACC6 /* ChongZhiZZZZView.m in Sources */ = {isa = PBXBuildFile; fileRef = 814B50FF1C3A8463001AACC6 /* ChongZhiZZZZView.m */; settings = {ASSET_TAGS = (); }; };
 		814B51021C3A8463001AACC6 /* ChongZhiZZZZView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 814B51001C3A8463001AACC6 /* ChongZhiZZZZView.xib */; settings = {ASSET_TAGS = (); }; };
+		814B51141C451DC3001AACC6 /* ChengGongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 814B51131C451DC3001AACC6 /* ChengGongViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81570D581C33D02400AF6B37 /* img_lc_jqqd.png in Resources */ = {isa = PBXBuildFile; fileRef = 81570D571C33D02400AF6B37 /* img_lc_jqqd.png */; settings = {ASSET_TAGS = (); }; };
 		815A6FCF1BEB7EFF003059A5 /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815A6FCE1BEB7EFF003059A5 /* RechargeViewController.m */; settings = {ASSET_TAGS = (); }; };
 		815A6FD21BEB89A2003059A5 /* BindingBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815A6FD11BEB89A2003059A5 /* BindingBankCardViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -956,6 +957,8 @@
 		814B50FE1C3A8463001AACC6 /* ChongZhiZZZZView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChongZhiZZZZView.h; sourceTree = "<group>"; };
 		814B50FF1C3A8463001AACC6 /* ChongZhiZZZZView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChongZhiZZZZView.m; sourceTree = "<group>"; };
 		814B51001C3A8463001AACC6 /* ChongZhiZZZZView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChongZhiZZZZView.xib; sourceTree = "<group>"; };
+		814B51121C451DC3001AACC6 /* ChengGongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChengGongViewController.h; sourceTree = "<group>"; };
+		814B51131C451DC3001AACC6 /* ChengGongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChengGongViewController.m; sourceTree = "<group>"; };
 		81570D571C33D02400AF6B37 /* img_lc_jqqd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_lc_jqqd.png; sourceTree = "<group>"; };
 		815A6FCD1BEB7EFF003059A5 /* RechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeViewController.h; sourceTree = "<group>"; };
 		815A6FCE1BEB7EFF003059A5 /* RechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeViewController.m; sourceTree = "<group>"; };
@@ -3075,6 +3078,8 @@
 				81E8310D1BF0695400127EE8 /* MyAlreadyBindingBank.m */,
 				81E0CCE21C28E4D700148609 /* CanNotBindingBankCard.h */,
 				81E0CCE31C28E4D700148609 /* CanNotBindingBankCard.m */,
+				814B51121C451DC3001AACC6 /* ChengGongViewController.h */,
+				814B51131C451DC3001AACC6 /* ChengGongViewController.m */,
 				81ED031A1BD0DA35005F4B02 /* AddBankViewController.h */,
 				81ED031B1BD0DA35005F4B02 /* AddBankViewController.m */,
 				818063A91BD61A7E00E83492 /* VerifyViewController.h */,
@@ -5145,6 +5150,7 @@
 				81E54E6A1C1EB86D0007303B /* UsualQuestionViewController.m in Sources */,
 				8D5055A11BF08CA20034759B /* ProductDetailModel.m in Sources */,
 				8D5AEB3C1BC8DAA4004FBDD3 /* SelectionV.m in Sources */,
+				814B51141C451DC3001AACC6 /* ChengGongViewController.m in Sources */,
 				8DA060CD1C02BEBD00E3E025 /* DES3Util.m in Sources */,
 				81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */,
 				8D4E4E061C1E5A6A00AE2644 /* LLPRSADataSigner.m in Sources */,
@@ -5366,8 +5372,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5393,7 +5399,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "207ceeff-f6a1-4d28-b188-94dfc1a16ba5";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5405,8 +5411,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5432,7 +5438,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "207ceeff-f6a1-4d28-b188-94dfc1a16ba5";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

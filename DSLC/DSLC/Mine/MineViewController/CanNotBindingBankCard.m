@@ -34,7 +34,7 @@
     buttonAlert.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     [buttonAlert setImage:[UIImage imageNamed:@"失败"] forState:UIControlStateNormal];
     
-    UIButton *buttonNew = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 150, WIDTH_CONTROLLER_DEFAULT, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"重新绑定银行卡"];
+    UIButton *buttonNew = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 150, WIDTH_CONTROLLER_DEFAULT - 80 , 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"重新绑定银行卡"];
     [self.view addSubview:buttonNew];
     buttonNew.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonNew setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];

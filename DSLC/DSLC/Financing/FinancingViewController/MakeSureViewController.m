@@ -140,10 +140,10 @@
     [viewFoot addSubview:_makeSure];
     [_makeSure addTarget:self action:@selector(makeSureMoney:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (60.0 / 667.0) + HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0) + HEIGHT_CONTROLLER_DEFAULT * (10.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * 20.0 / 667.0) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"由中国银行保障您的账户资金安全"];
-    [viewFoot addSubview:buttonSafe];
-    buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
-    [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
+//    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (60.0 / 667.0) + HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0) + HEIGHT_CONTROLLER_DEFAULT * (10.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * 20.0 / 667.0) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"由中国银行保障您的账户资金安全"];
+//    [viewFoot addSubview:buttonSafe];
+//    buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+//    [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
     
     self.qianShu = [[UILabel alloc] init];
     self.qianShu.font = [UIFont systemFontOfSize:15];
@@ -310,7 +310,7 @@
         
         if (self.decide == NO) {
             
-            cell.textField.text = @"5100";
+            cell.textField.text = @"5000";
             cell.textField.enabled = NO;
             cell.labelOneZi.text = @"猴币";
         } else {
@@ -436,7 +436,7 @@
             [self.buttonNew setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
             self.buttonNew.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
             
-            NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"新手体验金5,100猴币"];
+            NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"新手体验金5,000猴币"];
             NSRange LeftSange = NSMakeRange([[redStr string] length] - 7, 7);
             [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:LeftSange];
             [self.buttonNew setAttributedTitle:redStr forState:UIControlStateNormal];
@@ -967,7 +967,7 @@
     NSDictionary *parameter = nil;
     
     if (self.decide == NO) {
-        parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":@"5100",@"days":[self.detailM productPeriod]};
+        parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":@"5000",@"days":[self.detailM productPeriod]};
     } else {
         parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":self.textFieldC.text,@"days":[self.detailM productPeriod]};
     }
