@@ -71,21 +71,21 @@
     [_tabelView registerNib:[UINib nibWithNibName:@"AddBankCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     [_tabelView registerNib:[UINib nibWithNibName:@"TTTTXianTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuse2"];
     
-    UIView *viewWite = [CreatView creatViewWithFrame:CGRectMake(0, 8, WIDTH_CONTROLLER_DEFAULT, 137) backgroundColor:[UIColor whiteColor]];
+    UIView *viewWite = [CreatView creatViewWithFrame:CGRectMake(0, 8, WIDTH_CONTROLLER_DEFAULT, 166) backgroundColor:[UIColor whiteColor]];
     [viewFoot addSubview:viewWite];
     
     UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, 15, WIDTH_CONTROLLER_DEFAULT - 20, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"温馨提示"];
     [viewWite addSubview:labelAlert];
     
-    everyArr = @[@"1.每天最多可提现3次", @"2.每天提现限额5万", @"3.每次提现大于100"];
+    everyArr = @[@"1.您拥有每日3次的提现机会;", @"2.提现无限额;", @"3.提现手续费为0;", @"4.若体现后账户余额低于100元,则需一次提完．"];
     
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         
         UILabel *labelEvery = [CreatView creatWithLabelFrame:CGRectMake(10, 45 + 29 * i, WIDTH_CONTROLLER_DEFAULT - 20, 29) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[everyArr objectAtIndex:i]];
         [viewWite addSubview:labelEvery];
     }
     
-    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 136.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:nil text:nil];
+    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 165.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:nil text:nil];
     [viewWite addSubview:labelLine];
     labelLine.alpha = 0.3;
     
