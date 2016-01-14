@@ -86,11 +86,11 @@
     
     UserList *userlist = [userListArr objectAtIndex:indexPath.section];
     
-    if ([[userlist.msgStatus description] isEqualToString:@"1"]) {
-        cell.imageDian.image = [UIImage imageNamed:@""];
-    } else {
-        cell.imageDian.image = [UIImage imageNamed:@"reddian"];
-    }
+//    if ([[userlist.msgStatus description] isEqualToString:@"1"]) {
+//        cell.imageDian.image = [UIImage imageNamed:@""];
+//    } else {
+//        cell.imageDian.image = [UIImage imageNamed:@"reddian"];
+//    }
     
     cell.imageDian.tag = 590;
     cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.width/2;
@@ -99,6 +99,8 @@
     if ([[dic objectForKey:@"id"] isEqualToString:[NSString stringWithFormat:@"%@",userlist.sendUserId]]) {
         
         cell.labelName.text = userlist.recUserName;
+        cell.imageDian.image = [UIImage imageNamed:@""];
+        
         if (userlist.recAvatarImg == nil || [userlist.recAvatarImg isEqualToString:@""]) {
             cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
         } else {
@@ -108,13 +110,16 @@
     } else {
         
         cell.labelName.text = userlist.sendUserName;
+        
+        if ([[userlist.msgStatus description] isEqualToString:@"0"]) {
+            cell.imageDian.image = [UIImage imageNamed:@"reddian"];
+        }
+        
         if (userlist.sendAvatarImg == nil || [userlist.sendAvatarImg isEqualToString:@""]) {
             cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
         } else {
             cell.imageHead.yy_imageURL = [NSURL URLWithString:userlist.sendAvatarImg];
         }
-
-        cell.imageHead.yy_imageURL = [NSURL URLWithString:userlist.sendAvatarImg];
     }
     
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
