@@ -173,7 +173,7 @@
         choose.flagSelect = @"2";
         [self.navigationController pushViewController:choose animated:YES];
         
-    } else if (indexPath.row == 7) {
+    } else if (indexPath.row == 8) {
         
         UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
