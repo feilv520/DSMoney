@@ -20,6 +20,7 @@
 
 {
     UITableView *_tableView;
+    NSString *imageStr;
 }
 
 @property (nonatomic, strong) NSDictionary *dicMyInvite;
@@ -111,7 +112,20 @@
         
         MyInviteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
-        cell.imageHead.image = [UIImage imageNamed:@"picture"];
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        imageStr = [dic objectForKey:@"avatarImg"];
+        
+        if ([imageStr isEqualToString:@""]) {
+            
+            cell.imageHead.image = [UIImage imageNamed:@"默认头像"];
+            
+        } else {
+
+            cell.imageHead.yy_imageURL = [NSURL URLWithString:imageStr];
+        }
+        
+        cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.width/2;
+        cell.imageHead.layer.masksToBounds = YES;
         
         cell.labelName.text = [self.dicMyInvite objectForKey:@"name"];
         cell.labelName.textAlignment = NSTextAlignmentCenter;
