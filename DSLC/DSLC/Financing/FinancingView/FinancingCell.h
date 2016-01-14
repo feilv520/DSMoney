@@ -21,5 +21,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelQiTou;
 @property (weak, nonatomic) IBOutlet UILabel *labelSurplus;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+@property (weak, nonatomic) IBOutlet UIImageView *outPay;
 
 @end

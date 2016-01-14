@@ -237,7 +237,9 @@
             cell.labelQiTou.textColor = [UIColor zitihui];
             cell.labelQiTou.font = [UIFont systemFontOfSize:12];
             
-            cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
+            CGFloat money = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
+            
+            cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%.2lf万",money / 10000.0]];
             cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
             cell.labelSurplus.textColor = [UIColor zitihui];
             cell.labelSurplus.font = [UIFont systemFontOfSize:10];
@@ -250,27 +252,28 @@
             
             if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
                 
-                cell.progressView.hidden = YES;
-                
-//                butLastTime = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(131, 9, 210, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 倒计时 12:12:65"];
-//                [cell.viewBottom addSubview:butLastTime];
-//                butLastTime.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-//                butLastTime.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-//                [butLastTime setImage:[UIImage imageNamed:@"61-拷贝"] forState:UIControlStateNormal];
+                cell.outPay.hidden = NO;
+                cell.labelQiTou.hidden = YES;
+                cell.labelMoney.hidden = YES;
                 
             } else {
-                
-                //    设置进度条的进度值 并动画展示
-                CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
-                
-                [cell.progressView setProgress:bL animated:YES];
-                //    设置进度条的颜色
-                cell.progressView.trackTintColor = [UIColor progressBackColor];
-                //    设置进度条的进度颜色
-                cell.progressView.progressTintColor = [UIColor progressColor];
+            
+                cell.outPay.hidden = YES;
+                cell.labelQiTou.hidden = NO;
+                cell.labelMoney.hidden = NO;
                 
             }
+            //    设置进度条的进度值 并动画展示
+            CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
             
+            CGFloat bLL = 1.0 - bL;
+            
+            [cell.progressView setProgress:bLL animated:YES];
+            //    设置进度条的颜色
+            cell.progressView.trackTintColor = [UIColor progressBackColor];
+            //    设置进度条的进度颜色
+            cell.progressView.progressTintColor = [UIColor progressColor];
+        
             cell.backgroundColor = [UIColor huibai];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -336,7 +339,9 @@
         cell.labelQiTou.textColor = [UIColor zitihui];
         cell.labelQiTou.font = [UIFont systemFontOfSize:12];
         
-        cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
+        CGFloat money = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
+        
+        cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%.2lf万",money / 10000.0]];
         cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
         cell.labelSurplus.textColor = [UIColor zitihui];
         cell.labelSurplus.font = [UIFont systemFontOfSize:12];
@@ -349,27 +354,28 @@
         
         if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
             
-            cell.progressView.hidden = YES;
-            
-            butLastTime = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(131, 9, 210, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 倒计时 12:12:65"];
-            [cell.viewBottom addSubview:butLastTime];
-            butLastTime.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-            butLastTime.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-            [butLastTime setImage:[UIImage imageNamed:@"61-拷贝"] forState:UIControlStateNormal];
+            cell.outPay.hidden = NO;
+            cell.labelQiTou.hidden = YES;
+            cell.labelMoney.hidden = YES;
             
         } else {
             
-            //    设置进度条的进度值 并动画展示
-            CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
-            
-            [cell.progressView setProgress:bL animated:YES];
-            //    设置进度条的颜色
-            cell.progressView.trackTintColor = [UIColor progressBackColor];
-            //    设置进度条的进度颜色
-            cell.progressView.progressTintColor = [UIColor progressColor];
+            cell.outPay.hidden = YES;
+            cell.labelQiTou.hidden = NO;
+            cell.labelMoney.hidden = NO;
             
         }
+        //    设置进度条的进度值 并动画展示
+        CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
         
+        CGFloat bLL = 1.0 - bL;
+        
+        [cell.progressView setProgress:bLL animated:YES];
+        //    设置进度条的颜色
+        cell.progressView.trackTintColor = [UIColor progressBackColor];
+        //    设置进度条的进度颜色
+        cell.progressView.progressTintColor = [UIColor progressColor];
+    
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
