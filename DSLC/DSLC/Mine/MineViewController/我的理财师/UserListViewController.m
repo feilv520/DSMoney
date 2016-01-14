@@ -82,15 +82,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UserListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     UserList *userlist = [userListArr objectAtIndex:indexPath.section];
-    
-    if (userlist.recAvatarImg == nil || [userlist.recAvatarImg isEqualToString:@""]) {
-        cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
-        
-    } else {
-        cell.imageHead.yy_imageURL = [NSURL URLWithString:userlist.recAvatarImg];
-    }
     
     if ([[userlist.msgStatus description] isEqualToString:@"1"]) {
         cell.imageDian.image = [UIImage imageNamed:@""];
@@ -102,7 +96,27 @@
     cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.width/2;
     cell.imageHead.layer.masksToBounds = YES;
     
-    cell.labelName.text = userlist.recUserName;
+    if ([[dic objectForKey:@"id"] isEqualToString:[NSString stringWithFormat:@"%@",userlist.sendUserId]]) {
+        
+        cell.labelName.text = userlist.recUserName;
+        if (userlist.recAvatarImg == nil || [userlist.recAvatarImg isEqualToString:@""]) {
+            cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
+        } else {
+            cell.imageHead.yy_imageURL = [NSURL URLWithString:userlist.recAvatarImg];
+        }
+        
+    } else {
+        
+        cell.labelName.text = userlist.sendUserName;
+        if (userlist.sendAvatarImg == nil || [userlist.sendAvatarImg isEqualToString:@""]) {
+            cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
+        } else {
+            cell.imageHead.yy_imageURL = [NSURL URLWithString:userlist.sendAvatarImg];
+        }
+
+        cell.imageHead.yy_imageURL = [NSURL URLWithString:userlist.sendAvatarImg];
+    }
+    
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
     cell.labelContent.text = userlist.msgText;
@@ -119,11 +133,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     UserList *userlist = [userListArr objectAtIndex:indexPath.section];
     ChatViewController *chatVC = [[ChatViewController alloc] init];
     chatVC.userORplanner = NO;
     chatVC.chatName = userlist.recUserName;
-    chatVC.IId = userlist.recUserId;
+    if ([[dic objectForKey:@"id"] isEqualToString:[NSString stringWithFormat:@"%@",userlist.sendUserId]]) {
+        chatVC.IId = userlist.recUserId;
+        
+    } else {
+        chatVC.IId = userlist.sendUserId;
+    }
     NSLog(@"qqqqqqqqqqq%@", userlist.recUserId);
     [self.navigationController pushViewController:chatVC animated:YES];
 }
