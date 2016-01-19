@@ -64,7 +64,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
+//    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
     
     [self exitNetwork];
     
