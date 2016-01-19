@@ -108,9 +108,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]) {
-        [self autoLogin];
-    }
+//    if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]) {
+//        [self autoLogin];
+//    }
     
     count = 0;
     

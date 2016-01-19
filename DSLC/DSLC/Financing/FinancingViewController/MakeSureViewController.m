@@ -610,7 +610,7 @@
             
             CGFloat viewWidth = self.viewBottom.frame.size.width;
             
-            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(0, 30, viewWidth, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"您的余额不足,去充值?"];
+            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(0, 30, viewWidth, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"您的余额不足,去充值？"];
             [self.viewBottom addSubview:label];
             
             UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, 90, (viewWidth - 50)/2, 40) backgroundColor:[UIColor colorWithRed:114.0 / 225.0 green:113.0 / 225.0 blue:111.0 / 225.0 alpha:1.0] textColor:[UIColor whiteColor] titleText:@"取消"];
@@ -979,7 +979,7 @@
         
         NSLog(@"getMyRedPacketList = %@",responseObject);
         
-        self.redBagArray = [responseObject objectForKey:@"RedPacket"];
+        self.redBagArray = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"RedPacket"]];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
