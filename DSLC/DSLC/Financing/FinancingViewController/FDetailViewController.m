@@ -454,8 +454,24 @@
     
     if (self.estimate == NO) {
         
-        [butMakeSure setTitle:@"投资(可使用5,000猴币)" forState:UIControlStateNormal];
-        [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        if ([self.residueMoney isEqualToString:@"0.00"]) {
+            if ([[self.detailM isOrder] isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
+                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+                butMakeSure.enabled = YES;
+                
+            } else {
+                [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
+                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+                butMakeSure.enabled = NO;
+            }
+        } else {
+            butMakeSure.enabled = YES;
+            [butMakeSure setTitle:@"投资(可使用5,000猴币)" forState:UIControlStateNormal];
+            [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        }
+        
+        
         
     } else {
         NSLog(@"%@",self.residueMoney);
