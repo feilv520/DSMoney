@@ -162,7 +162,7 @@
         cell.labelRequire.textColor = [UIColor zitihui];
         cell.labelRequire.backgroundColor = [UIColor clearColor];
         
-        cell.labelRequire.text = @"仅限购买新手专享";
+        cell.labelRequire.text = @"新手体验金";
 
         cell.labelTime.text = [NSString stringWithFormat:@"%@%@", @"有效期:截止", [redbagModel rpTime]];
         cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:11];
@@ -403,6 +403,12 @@
         cell.labelRequier.textColor = [UIColor zitihui];
         cell.labelRequier.backgroundColor = [UIColor clearColor];
         
+//        NSString *daysLimitString = [NSString stringWithFormat:@"%@",[redbagModel daysLimit]];
+//        
+//        if ([daysLimitString isEqualToString:@"0"]) {
+//            cell.labelDay.hidden = YES;
+//        }
+        
         cell.labelDay.text = [NSString stringWithFormat:@"理财期限大于%@天",[redbagModel daysLimit]];
         cell.labelDay.textColor = [UIColor zitihui];
         cell.labelDay.font = [UIFont fontWithName:@"CenturyGothic" size:12];
@@ -481,7 +487,7 @@
         
         cell.laeblRequest.hidden = YES;
         
-        cell.labelDays.text = [NSString stringWithFormat:@"累积在投金额满%@元",[redbagModel rpLimit]];
+        cell.labelDays.text = [NSString stringWithFormat:@"在投金额满%@元",[redbagModel rpLimit]];
 //        cell.labelDays.text = [NSString stringWithFormat:@"理财期限大于%@天",[redbagModel daysLimit]];
         cell.labelDays.textColor = [UIColor zitihui];
         cell.labelDays.font = [UIFont fontWithName:@"CenturyGothic" size:12];
