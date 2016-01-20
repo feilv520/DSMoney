@@ -609,7 +609,7 @@
                     ownerRegisterTime = dataTime;
                     ownerTelephoneNumber = self.registerV.phoneNumber.text;
                     
-                    userID = [responseObject objectForKey:@"userId"];
+                    userID = [responseDic objectForKey:@"userId"];
                     
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
                     
