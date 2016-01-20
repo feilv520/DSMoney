@@ -14,6 +14,9 @@
 
 {
     UITableView *_tableView;
+    NSInteger page;
+    BOOL moreFlag;
+    MJRefreshBackGifFooter *gifFooter;
 }
 
 @property (nonatomic, strong) NSMutableArray *productListArray;
@@ -31,6 +34,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"投资记录"];
     
+    page = 1;
+    moreFlag = NO;
     [self getProductBuyRecords];
 }
 
@@ -42,6 +47,7 @@
     _tableView.delegate = self;
     _tableView.tableFooterView = [UIView new];
     [_tableView registerNib:[UINib nibWithNibName:@"RecordCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [self addTableViewWithFooter:_tableView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -77,7 +83,7 @@
 
 - (void)getProductBuyRecords{
     
-    NSDictionary *parameter = @{@"productId":self.idString,@"curPage":@1};
+    NSDictionary *parameter = @{@"productId":self.idString,@"curPage":[NSNumber numberWithInteger:page]};
     
     NSLog(@"%@",parameter);
     
@@ -94,6 +100,12 @@
             [self.productListArray addObject:productBR];
         }
         
+        if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
+            moreFlag = YES;
+        }
+        
+        [gifFooter endRefreshing];
+        
         [self tableViewShow];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -104,6 +116,19 @@
     
 }
 
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer{
+    
+    gifFooter = footer;
+    
+    if (moreFlag) {
+        // 拿到当前的上拉刷新控件，结束刷新状态
+        [footer endRefreshing];
+    } else {
+        page ++;
+        [self getProductBuyRecords];
+    }
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
