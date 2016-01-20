@@ -26,6 +26,7 @@
     BOOL newFlag;
     
     MJRefreshGifHeader *headerT;
+    MJRefreshBackGifFooter *footerT;
 }
 
 @property (nonatomic, strong) NSMutableArray *productListArray;
@@ -447,8 +448,10 @@
             
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
                 moreFlag = YES;
-                [headerT endRefreshing];
             }
+            
+            [footerT endRefreshing];
+            [headerT endRefreshing];
             
             [_tableView reloadData];
         } else {
@@ -466,6 +469,8 @@
 #pragma mark --------------------------------
 
 - (void)loadMoreData:(MJRefreshBackGifFooter *)footer{
+    
+    footerT = footer;
     
     if (moreFlag) {
         // 拿到当前的上拉刷新控件，结束刷新状态
