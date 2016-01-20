@@ -33,6 +33,7 @@
     UITextField *textFieldPassword;
     
     NSDictionary *dealDic;
+    NSInteger click;
 }
 
 @property (nonatomic, strong) NSDictionary *dataDic;
@@ -55,7 +56,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"提现"];
-    
+    click = 0;
 }
 
 - (void)tabelViewShow
@@ -234,6 +235,7 @@
     NSDictionary *parmeter = @{@"bankCardId":[bankDic objectForKey:@"id"], @"fmoney":_textField.text, @"payPwd":textFieldPassword.text, @"token":[dic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/putOff" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self submitLoadingWithHidden:YES];
         NSLog(@"eeeeeeeee提现接口:%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
@@ -247,6 +249,9 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [self submitLoadingWithHidden:YES];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"网络超时,请再次提交"];
         
     }];
 }
@@ -285,6 +290,16 @@
 //        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付密码输入不正确"];
 //    }
     else if (_textField.text.length > 0) {
+        
+        click ++;
+        if (click == 1) {
+            [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+            
+        } else {
+            
+            [self submitLoadingWithHidden:NO];
+        }
+
         [self liftUpMoneyGetData];
 //        [self pay:nil];
     }
