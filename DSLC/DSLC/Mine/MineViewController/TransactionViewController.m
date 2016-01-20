@@ -31,7 +31,9 @@
     NSArray *monthArr;
     
     UIPickerView *myPickerView;
-    
+    NSInteger page;
+    BOOL morePage;
+    MJRefreshBackGifFooter *giFFooter;
 }
 @property (nonatomic, strong) NSMutableArray *transactionArray;
 @property (nonatomic, strong) NSMutableArray *transactionName;
@@ -44,6 +46,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    page = 1;
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
     
     self.view.backgroundColor = Color_Gray;
@@ -64,6 +67,8 @@
     [self showSelectionView];
     bView.hidden = YES;
     self.mainTableView.hidden = YES;
+    morePage = NO;
+    
 }
 
 //导航内容
@@ -323,6 +328,7 @@ numberOfRowsInComponent:(NSInteger)component
     
     [self.view addSubview:self.mainTableView];
 
+    [self addTableViewWithFooter:self.mainTableView];
 }
     
 #pragma mark tableview delegate and dataSource
@@ -429,7 +435,7 @@ numberOfRowsInComponent:(NSInteger)component
     NSLog(@"token = %@",[self.flagDic objectForKey:@"token"]);
     
     if (number == 0) {
-        parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":tranBeginDate,@"tranEndDate":tranEndDate,@"tranType":@""};
+        parameter = @{@"curPage":[NSNumber numberWithInteger:page],@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":tranBeginDate,@"tranEndDate":tranEndDate,@"tranType":@""};
     } else {
         parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":@"",@"tranEndDate":@"",@"tranType":[NSNumber numberWithInteger:number]};
     }
@@ -489,6 +495,12 @@ numberOfRowsInComponent:(NSInteger)component
             
             NSLog(@"transactionArr = %@",self.transactionArray);
             
+            if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
+                morePage = YES;
+            }
+            
+            [giFFooter endRefreshing];
+            
             [self.mainTableView reloadData];
 //        NSLog(@"transactionName = %@",self.transactionName);
 //        NSLog(@"transactionArray = %@",self.transactionArray);
@@ -498,6 +510,20 @@ numberOfRowsInComponent:(NSInteger)component
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer{
+    
+    giFFooter = footer;
+    
+    if (morePage) {
+        // 拿到当前的上拉刷新控件，结束刷新状态
+        [footer endRefreshing];
+    } else {
+        page ++;
+        [self getMyTradeList:0];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
