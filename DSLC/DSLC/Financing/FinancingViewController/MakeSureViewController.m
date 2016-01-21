@@ -677,7 +677,7 @@
     self.viewWhite.labelSign.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     self.viewWhite.labelSign.textColor = [UIColor zitihui];
     
-    self.viewWhite.labelKnow.text = @"本人已清除知悉该收益权产品的基础信息,并已充分了解其产品特性";
+    self.viewWhite.labelKnow.text = @"本人已清楚知悉该收益权产品的基础信息,并已充分了解其产品特性";
     self.viewWhite.labelKnow.textColor = [UIColor zitihui];
     self.viewWhite.labelKnow.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     self.viewWhite.labelKnow.numberOfLines = 0;
