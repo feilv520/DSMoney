@@ -168,7 +168,7 @@
     [self getShareRedPacket];
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"56447cbc67e58efd78001914"
-                                      shareText:@"大圣理财,金融街的新宠."
+                                      shareText:@"大圣理财,金融街的新宠.https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8"
                                      shareImage:[UIImage imageNamed:@"默认头像.png"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
