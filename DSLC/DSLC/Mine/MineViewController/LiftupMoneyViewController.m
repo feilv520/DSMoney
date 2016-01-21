@@ -17,7 +17,7 @@
 #import "AddBankViewController.h"
 #import "RSA.h"
 
-@interface LiftupMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface LiftupMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 
 {
     UITableView *_tabelView;
@@ -25,6 +25,7 @@
     UILabel *labelLineDown;
     UIButton *buttonNext;
     UITextField *_textField;
+    UITextField *textDeal;
     
     NSDictionary *bankDic;
     
@@ -149,13 +150,16 @@
         cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textField.tintColor = [UIColor yuanColor];
         cell.textField.tag = 111111;
+        cell.textField.delegate = self;
         cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
         [cell.textField addTarget:self action:@selector(textFieldLiftUpMoney:) forControlEvents:UIControlEventEditingChanged];
         
         _textField = cell.textField;
         
-        if ([self.moneyString floatValue] < 100.0) {
+        if ([self.moneyString floatValue] < 100.0 && [self.moneyString floatValue] != 0) {
             cell.textField.text = self.moneyString;
+            [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         }
         
         UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(cell.textField.frame.size.width - 20, 0, 15, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor yuanColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"元"];
@@ -176,6 +180,8 @@
             cell.setPassword.hidden = YES;
             cell.forget.hidden = NO;
             cell.password.hidden = NO;
+            cell.password.delegate = self;
+            cell.password.tag = 1290;
         }
         
         textFieldPassword = cell.password;
@@ -245,6 +251,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
             
         } else {
+            NSLog(@"66");
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
@@ -264,32 +271,61 @@
 - (void)textFieldLiftUpMoney:(UITextField *)textField
 {
     _textField = (UITextField *)[self.view viewWithTag:111111];
+    textDeal = (UITextField *)[self.view viewWithTag:1290];
 //    && [textFieldPassword.text isEqualToString:[DES3Util decrypt:[dealDic objectForKey:@"dealSecret"]]]
-    if (_textField.text.length > 0 ) {
-        
-        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        
-    } else {
+    if ([_textField.text floatValue] == 0.00) {
         
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
         [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 111111) {
+        
+        if (range.location > 9) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+        
+    } else {
+        
+        if (range.location > 19) {
+            
+            return NO;
+            
+        } else {
+            
+            return YES;
+        }
+
+    }
+    
 }
 
 //下一步按钮
 - (void)buttonNextOneStep:(UIButton *)button
 {
     _textField = (UITextField *)[self.view viewWithTag:111111];
+    textDeal = (UITextField *)[self.view viewWithTag:1290];
     
     if (_textField.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入提现金额"];
         
-    }
-//    else if ([textFieldPassword.text isEqualToString:[DES3Util decrypt:[dealDic objectForKey:@"dealSecret"]]]){
-//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付密码输入不正确"];
-//    }
-    else if (_textField.text.length > 0) {
+    } else if (textDeal.text.length == 0){
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入交易密码"];
+        
+    } else if (_textField.text.length > 0) {
         
         click ++;
         if (click == 1) {
@@ -299,7 +335,13 @@
             
             [self submitLoadingWithHidden:NO];
         }
-
+        
+        if ([_textField.text floatValue] == 0) {
+            [self submitLoadingWithHidden:YES];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"提现金额不能为0元"];
+            return;
+        }
+        
         [self liftUpMoneyGetData];
 //        [self pay:nil];
     }

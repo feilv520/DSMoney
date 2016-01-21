@@ -34,6 +34,7 @@
     NSString *tranCode;
     
     NSString *bankCardId;
+    UITextField *_textField;
 }
 
 @property (nonatomic, strong) UITextField *textFieldTag;
@@ -145,6 +146,7 @@
         cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textField.tintColor = [UIColor yuanColor];
         cell.textField.tag = 188;
+        cell.textField.delegate = self;
         cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
         [cell.textField addTarget:self action:@selector(textAlreadyBinding:) forControlEvents:UIControlEventEditingChanged];
         
@@ -159,16 +161,14 @@
     }
 }
 
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    if ([[textField.text substringFromIndex:0] isEqualToString:@"0"]) {
-//        textField.text = @"";
-//        return YES;
-//        
-//    } else {
-//        return YES;
-//    }
-//}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location > 9) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
 
 //下一步按钮
 - (void)alreadyBindingButton:(UIButton *)button
