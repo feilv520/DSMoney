@@ -13,5 +13,6 @@
 @property (nonatomic) NSString *time;
 @property (nonatomic) NSString *status;
 @property (nonatomic) NSString *money;
+@property (nonatomic) NSString *createTime;
 
 @end

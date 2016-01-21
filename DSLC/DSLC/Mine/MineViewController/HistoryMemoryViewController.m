@@ -65,7 +65,7 @@
     cell.labelBigMoney.text = @"大额充值";
     cell.labelBigMoney.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    cell.labelTime.text = bigMoney.time;
+    cell.labelTime.text = bigMoney.createTime;
     cell.labelTime.textColor = [UIColor zitihui];
     cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
