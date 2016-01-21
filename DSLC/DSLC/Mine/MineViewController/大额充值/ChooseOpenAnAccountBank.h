@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *flagSelect;
 @property (nonatomic, copy) NSString *bankCode;
+@property (nonatomic, copy) NSString *bankName;
 @property (nonatomic, copy) NSString *cityCode;
 @property (nonatomic, copy) NSString *pCode;
 @property (nonatomic, copy) NSString *cityName;
