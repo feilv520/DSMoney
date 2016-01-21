@@ -49,8 +49,8 @@
     
     NSDictionary *dicRealName;
     
-    City *city;
-    City *cityS;
+    City *city; // 省
+    City *cityS; // 市
     BankName *bankName;
     NSString *bankZ;
     
@@ -119,14 +119,25 @@
 
 - (void)returnCityWithPName:(NSNotification *)notice {
     city = [notice object];
+    cityS = nil;
+    bankZ = nil;
     textFieldThree = (UITextField *)[self.view viewWithTag:403];
     textFieldThree.text = city.cityName;
+    textFieldFour = (UITextField *)[self.view viewWithTag:404];
+    textFieldFour.text = @"";
+    textFieldFive = (UITextField *)[self.view viewWithTag:405];
+    textFieldFive.hidden = NO;
+    labelZBank.hidden = YES;
 }
 
 - (void)returnCityWithSName:(NSNotification *)notice {
     cityS = [notice object];
+    bankZ = nil;
     textFieldFour = (UITextField *)[self.view viewWithTag:404];
     textFieldFour.text = cityS.cityName;
+    textFieldFive = (UITextField *)[self.view viewWithTag:405];
+    textFieldFive.hidden = NO;
+    labelZBank.hidden = YES;
 }
 
 - (void)returnCityWithZName:(NSNotification *)notice {
@@ -136,6 +147,7 @@
     textFieldFive.hidden = YES;
 //    textFieldFive.text = bankZ;
     labelZBank.text = bankZ;
+    labelZBank.hidden = NO;
 }
 
 //视图内容
@@ -440,15 +452,16 @@
         
         [self.navigationController pushViewController:chooseBank animated:YES];
     } else if (indexPath.row == 5) {
-        if (city == nil) {
+        if (city == nil || cityS == nil) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先选择开户行省和市"];
             return;
         }
         ChooseOpenAnAccountBank *chooseBank = [[ChooseOpenAnAccountBank alloc] init];
         chooseBank.flagSelect = @"5";
-        chooseBank.cityCode = city.cityCode;
-        chooseBank.pCode = cityS.cityCode;
+        chooseBank.pCode = city.cityCode;
+        chooseBank.cityCode = cityS.cityCode;
         chooseBank.bankCode = bankName.bankCode;
+        chooseBank.bankName = bankName.bankName;
         chooseBank.cityName = city.cityName;
         [self.navigationController pushViewController:chooseBank animated:YES];
     }

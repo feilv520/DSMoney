@@ -223,7 +223,10 @@
 }
 
 - (void)getAreaListOfZ {
-    NSDictionary *parameters = @{@"cardNum":@"",@"bankCode":self.bankCode,@"braBankName":self.cityName,@"cityCode":self.cityCode};
+    
+    NSDictionary *parameters = @{@"cardNum":@"",@"bankCode":self.bankCode,@"braBankName":@"中国建设银行",@"cityCode":self.cityCode};
+    
+    NSLog(@"%@",parameters);
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getLianPayCardList" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
