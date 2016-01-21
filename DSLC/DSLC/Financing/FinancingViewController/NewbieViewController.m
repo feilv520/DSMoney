@@ -451,6 +451,7 @@
             }
             
             [footerT endRefreshing];
+            
             [headerT endRefreshing];
             
             [_tableView reloadData];
