@@ -421,6 +421,9 @@
             
             InvestNoticeViewController *investNotice = [[InvestNoticeViewController alloc] init];
             investNotice.productType = [self.detailM productType];
+            investNotice.productId = [self.detailM productId];
+            investNotice.amountMin = [self.detailM amountMin];
+            investNotice.amountMax = [self.detailM amountMax];
             [self.navigationController pushViewController:investNotice animated:YES];
             
         }

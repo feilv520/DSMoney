@@ -29,8 +29,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"投资须知"];
     
-    
-    
 //    [self tableViewShow];
     [self webViewShow];
 }
@@ -45,8 +43,8 @@
     
     [self loadingWithView:webView loadingFlag:NO height:self.view.center.y];
     
-    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prouctInfo/product_descthree.html?productType=%@&type=2",self.productType];
-    
+    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prouctInfo/product_descthree.html?productType=%@&type=2&productId=%@&amountMin=%@&amountMax=%@",self.productType,self.productId,self.amountMin,self.amountMax];
+
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];

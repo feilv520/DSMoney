@@ -133,7 +133,7 @@
     cell.labelMonth.text = lastStr;
     cell.labelMonth.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
-    cell.labelQiTou.text = [NSString stringWithFormat:@"%@起投",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]];
+    cell.labelQiTou.text = [NSString stringWithFormat:@"%@元起投",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]];
     cell.labelQiTou.textColor = [UIColor zitihui];
     cell.labelQiTou.font = [UIFont fontWithName:@"CenturyGothic" size:11];
     cell.labelQiTou.textAlignment = NSTextAlignmentRight;

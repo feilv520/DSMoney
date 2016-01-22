@@ -11,5 +11,8 @@
 @interface InvestNoticeViewController : BaseViewController
 
 @property (nonatomic) NSString *productType;
+@property (nonatomic) NSString *productId;
+@property (nonatomic) NSString *amountMax;
+@property (nonatomic) NSString *amountMin;
 
 @end
