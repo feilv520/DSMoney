@@ -147,10 +147,6 @@
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入登录密码"];
         
-    } else if (![textField1.text isEqualToString:[DES3Util decrypt:[self.flagDic objectForKeyedSubscript:@"password"] ]]) {
-        
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"原登录密码错误"];
-        
     } else if (textField2.text.length == 0) {
         
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入新登录密码"];
@@ -185,15 +181,14 @@
             [self submitLoadingWithHidden:NO];
         }
         
-        [self submitLoadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
         self.flagDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
         
         NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"optType":@1,@"oldPwd":textField1.text,@"newPwd":textField2.text,@"smsCode":@""};
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/updateUserPwd" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
+            [self submitLoadingWithHidden:YES];
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
-                [self submitLoadingWithHidden:YES];
                 [self logout];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
@@ -202,8 +197,7 @@
                 
             } else {
                 
-                [self submitLoadingWithHidden:YES];
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"密码错误"];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -236,7 +230,7 @@
         NSLog(@"asasasasasa%@", responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已退出"];
+//            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已退出"];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
