@@ -326,7 +326,7 @@
                     if (![FileOfManage ExistOfFile:@"Member.plist"]) {
                         [FileOfManage createWithFile:@"Member.plist"];
                         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                             [DES3Util encrypt:textField2.text],@"password",
+                                             [DES3Util encrypt:textField1.text],@"password",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
@@ -337,7 +337,7 @@
                         [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                     } else {
                         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                             [DES3Util encrypt:textField2.text],@"password",
+                                             [DES3Util encrypt:textField1.text],@"password",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
