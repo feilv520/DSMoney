@@ -10,4 +10,6 @@
 
 @interface RiskConditionsViewController : BaseViewController
 
+@property (nonatomic, copy) NSArray *contentArr;
+
 @end

@@ -13,7 +13,6 @@
 
 {
     UITableView *_tableView;
-    NSArray *contentArr;
     CGRect rect;
 }
 
@@ -40,17 +39,17 @@
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.separatorColor = [UIColor clearColor];
     
-    contentArr = @[
-                   @"● 债务担保，中润国盈投资有限公司出具担保函",
-                   @"● 偿还安排，江苏成安股权投资基金管理有限公司提供全额回购",
-                   @"● 公司公告，定期公告",
-                   @"● 股权控制，资产和股权抵押给中国东方资产管理公司",
-                   @"● 文艺工作者，如何成为时代风气的先觉者?"];
+//    self.contentArr = @[
+//                   @"● 债务担保，中润国盈投资有限公司出具担保函",
+//                   @"● 偿还安排，江苏成安股权投资基金管理有限公司提供全额回购",
+//                   @"● 公司公告，定期公告",
+//                   @"● 股权控制，资产和股权抵押给中国东方资产管理公司",
+//                   @"● 文艺工作者，如何成为时代风气的先觉者?"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return self.contentArr.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -67,7 +66,7 @@
         cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
     }
     
-    cell.labelContent.text = [contentArr objectAtIndex:indexPath.row];
+    cell.labelContent.text = [self.contentArr objectAtIndex:indexPath.row];
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
     rect = [cell.labelContent.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 20, 99999) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
