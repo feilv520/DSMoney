@@ -84,7 +84,7 @@
 
 - (void)tableViewShow
 {
-    titleArr = @[@"邀请码", @"共为客户赚取金额", @"以服务客户人数", @"累计投资总额"];
+    titleArr = @[@"邀请码", @"共为客户赚取金额", @"已服务客户人数", @"累计投资总额"];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
