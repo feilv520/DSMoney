@@ -393,7 +393,10 @@ numberOfRowsInComponent:(NSInteger)component
     MTransactionModel *tModel = [[[self.transactionArray objectAtIndex:indexPath.section] objectForKey:[self.transactionName objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
 
     cell.dateLabel.text = [tModel tradeTime];
-    if ([[tModel tradeStatus] isEqualToString:@"1"]) {
+    if ([[tModel tradeStatus] isEqualToString:@"-1"]) {
+        cell.stateLabel.text = @"处理中";
+        cell.stateLabel.textColor = [UIColor blackColor];
+    } else if ([[tModel tradeStatus] isEqualToString:@"1"]) {
         cell.stateLabel.text = @"成功";
         cell.stateLabel.textColor = [UIColor blueColor];
     } else {

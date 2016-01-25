@@ -290,7 +290,7 @@
     hud.yOffset = -50;
     hud.cornerRadius = 5.0f;
     hud.removeFromSuperViewOnHide = YES;
-    [hud hide:YES afterDelay:0.8];
+    [hud hide:YES afterDelay:1.0];
 }
 
 
