@@ -365,6 +365,8 @@
             
 //            风控条件
             RiskConditionsViewController *riskConVC = [[RiskConditionsViewController alloc] init];
+            NSArray *array = [NSArray arrayWithObject:[self.asset objectForKey:@"assetStockControl"]];
+            riskConVC.contentArr = array;
             [self.navigationController pushViewController:riskConVC animated:YES];
             
         } else if (indexPath.row == 4) {

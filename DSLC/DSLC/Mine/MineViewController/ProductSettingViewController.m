@@ -379,25 +379,25 @@
     
     for (NSInteger i = 0; i < 4; i ++) {
         if (GSNumber != 0.0f) {
-            NSString *nameString = [NSString stringWithFormat:@"固收理财%.0f%%",GSNumber * 100.0 / totalFloat ];
+            NSString *nameString = [NSString stringWithFormat:@"固收理财%.1f%%",GSNumber * 100.0 / totalFloat ];
 
             [self.nameMArr addObject:nameString];
             [self.slices addObject:[NSString stringWithFormat:@"%f",GSNumber]];
             GSNumber = 0.0f;
         } else if (PJNumber != 0.0f) {
-            NSString *nameString = [NSString stringWithFormat:@"票据投资%.0f%%",PJNumber * 100.0 / totalFloat];
+            NSString *nameString = [NSString stringWithFormat:@"票据投资%.1f%%",PJNumber * 100.0 / totalFloat];
 
             [self.nameMArr addObject:nameString];
             [self.slices addObject:[NSString stringWithFormat:@"%f",PJNumber]];
             PJNumber = 0.0f;
         } else if (NewNumber != 0.0f) {
-            NSString *nameString = [NSString stringWithFormat:@"新手专享%.0f%%",NewNumber * 100.0 / totalFloat];
+            NSString *nameString = [NSString stringWithFormat:@"新手专享%.1f%%",NewNumber * 100.0 / totalFloat];
 
             [self.nameMArr addObject:nameString];
             [self.slices addObject:[NSString stringWithFormat:@"%f",NewNumber]];
             NewNumber = 0.0f;
         } else if (BDNumber != 0.0f) {
-            NSString *nameString = [NSString stringWithFormat:@"标的投资%.0f%%",BDNumber * 100.0 / totalFloat];
+            NSString *nameString = [NSString stringWithFormat:@"标的投资%.1f%%",BDNumber * 100.0 / totalFloat];
 
             [self.nameMArr addObject:nameString];
             [self.slices addObject:[NSString stringWithFormat:@"%f",BDNumber]];
