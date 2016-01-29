@@ -178,10 +178,10 @@
 }
 
 - (void)bannerObject:(UITapGestureRecognizer *)tap{
-    if (pageControl.currentPage == 4) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"本连接不支持app端"];
-        return;
-    }
+//    if (pageControl.currentPage == 4) {
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"本连接不支持app端"];
+//        return;
+//    }
     BannerViewController *bannerVC = [[BannerViewController alloc] init];
     bannerVC.photoName = [[self.photoArray objectAtIndex:pageControl.currentPage] adLabel];
     bannerVC.photoUrl = [[self.photoArray objectAtIndex:pageControl.currentPage] adLink];
