@@ -177,7 +177,7 @@
         if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
             
             cell.buttonCan.hidden = NO;
-            
+            cell.buttonCan.tag = indexPath.row;
             [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
             [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
             [cell.buttonCan setTitle:@"立即使用" forState:UIControlStateNormal];
@@ -255,6 +255,7 @@
         if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
             
             cell.buttonCan.hidden = NO;
+            cell.buttonCan.tag = indexPath.row;
             [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
             [cell.buttonCan setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
             [cell.buttonCan setTitle:@"拆红包" forState:UIControlStateNormal];
@@ -289,6 +290,7 @@
         
         cell.buttonOpen.hidden = YES;
         
+        cell.buttonOpen.tag = indexPath.row;
         [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
         [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
@@ -441,6 +443,7 @@
         } else if ([[redbagModel rpStatus] isEqualToString:@"0"]) {
             cell.buttonOpen.hidden = NO;
             
+            cell.buttonOpen.tag = indexPath.row;
             [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
             [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
             [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
@@ -520,6 +523,7 @@
         } else if([[redbagModel rpStatus] isEqualToString:@"0"]){
             cell.buttonOpen.hidden = NO;
             
+            cell.buttonOpen.tag = indexPath.row;
             [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
             [cell.buttonOpen setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
             [cell.buttonOpen setTitle:@"拆红包" forState:UIControlStateNormal];
@@ -794,7 +798,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/openRedPacket" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+//        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
         
             NSLog(@"openRedPacket = %@",responseObject);
             
@@ -850,7 +854,9 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
             
             [self getMyRedPacketList];
-        }
+//        } else {
+//            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+//        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

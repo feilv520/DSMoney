@@ -252,8 +252,12 @@
             cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         
             NSString *inviteTimeString = [[self.myInviteWithPeopleNumber objectAtIndex:indexPath.row - 1] objectForKey:@"inviteTime"];
-            inviteTimeString = [inviteTimeString substringWithRange:NSMakeRange(0, 11)];
-            cell.labelTime.text = inviteTimeString;
+            if (inviteTimeString.length == 0) {
+                cell.labelTime.text = @"-";
+            } else {
+                inviteTimeString = [inviteTimeString substringWithRange:NSMakeRange(0, 11)];
+                cell.labelTime.text = inviteTimeString;
+            }
             cell.labelTime.textAlignment = NSTextAlignmentCenter;
             cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         

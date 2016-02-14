@@ -466,7 +466,7 @@ numberOfRowsInComponent:(NSInteger)component
             [self.navigationController popToRootViewControllerAnimated:NO];
             return ;
         }
-        
+//        18818006680  icemanxie0721
         NSLog(@"%@",[responseObject objectForKey:@"Trade"]);
         [self loadingWithHidden:YES];
         if ([[[responseObject objectForKey:@"Trade"] objectAtIndex:0] count] == 0) {
