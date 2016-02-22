@@ -79,7 +79,7 @@
     
     nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"刷卡时间", @"商户", @"POS单号", @"充值金额", @"上传POS单照片"];
     
-    if (self.chuanFou == YES) {
+    if (self.chuanFou) {
         
         chuanArray = @[[DES3Util decrypt:self.schedule.realName], self.schedule.bankName, [DES3Util decrypt:self.schedule.account], [DES3Util decrypt:self.schedule.phone], self.schedule.posTime, self.schedule.busName, self.schedule.posNum, [DES3Util decrypt:self.schedule.money], @"已上传POS单照片"];
         
@@ -337,7 +337,7 @@
             [self submitLoadingWithHidden:NO];
         }
         
-        if ([fieldPos.text isEqualToString:@"已上传POS单照片"]) {
+        if ([fieldPos.text isEqualToString:@"已上传POS单照片"] || [fieldPos.text isEqualToString:@"已修改POS单照片"]) {
             NSLog(@"aaaaaaaaaaaaaa");
             [self upPosData];
         } else {
@@ -353,7 +353,7 @@
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
     
     finaCard = [[MyAfHTTPClient sharedClient] resetSizeOfImageData:savedImage maxSize:1024 * 2];
-    http://www.dslc.cn/dslchuod.html
+//    http://www.dslc.cn/dslchuod.html
     fileldName = (UITextField *)[self.view viewWithTag:600];
     fieldBank = (UITextField *)[self.view viewWithTag:601];
     fieldBankCard = (UITextField *)[self.view viewWithTag:602];
@@ -402,6 +402,7 @@
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseDic objectForKey:@"resultMsg"]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"chuan" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
             
         } else {

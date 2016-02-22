@@ -618,7 +618,7 @@
             ApplyScheduleViewController *scheduleVC = [[ApplyScheduleViewController alloc] init];
             scheduleVC.ID = IDstr;
             NSLog(@"1:%@", IDstr);
-            scheduleVC.doOr = YES;
+            scheduleVC.doOr = NO;
             [self.navigationController pushViewController:scheduleVC animated:YES];
             // 刷新我的账户数据
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];

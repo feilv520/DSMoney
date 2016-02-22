@@ -77,7 +77,7 @@
     return 4;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView w:(NSIndexPath *)indexPath
 {
     NewRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     

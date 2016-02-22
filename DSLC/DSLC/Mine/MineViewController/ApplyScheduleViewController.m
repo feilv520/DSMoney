@@ -43,6 +43,7 @@
     UIButton *buttonAplly;
     UIButton *butSubmitAlert;
     UIButton *buttonShibai;
+    EditBigMoney *money;
 }
 
 @end
@@ -414,18 +415,31 @@
 //编辑
 - (void)buttonEdit:(UIButton *)button
 {
-    EditBigMoney *money = [[EditBigMoney alloc] init];
+    money = [[EditBigMoney alloc] init];
     money.schedule = applySch;
     NSLog(@"^^^^^^^^^%@", money.schedule.Id);
     NSLog(@"kkkkkkkkk%@", applySch.busName);
     
-    if (self.doOr == YES) {
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"posUpImage.png"];
+    
+    NSLog(@"mcmmcm *** %@",fullPath);
+    
+    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+    
+    if (savedImage != nil) {
         
         money.chuanFou = YES;
         
     } else {
         
-        money.chuanFou = NO;
+        if (self.doOr) {
+            
+            money.chuanFou = YES;
+            
+        } else {
+            
+            money.chuanFou = NO;
+        }
     }
     
     [self.navigationController pushViewController:money animated:YES];
