@@ -487,12 +487,16 @@
     
     headerT = header;
     
-    [self.productListArray removeAllObjects];
-    self.productListArray = nil;
-    self.productListArray = [NSMutableArray array];
     if (newFlag) {
         [header endRefreshing];
     } else {
+        
+        if (self.productListArray != nil) {
+            [self.productListArray removeAllObjects];
+            self.productListArray = nil;
+            self.productListArray = [NSMutableArray array];
+        }
+        
         page = 1;
         [self getProductList];
 
