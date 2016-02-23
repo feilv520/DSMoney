@@ -53,7 +53,7 @@
     [labelStat setAttributedText:redStr];
 
     _textView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(10, 10, viewWhite.frame.size.width - 20, viewWhite.frame.size.height - 20 - 15)];
-    _textView.placeholder = @"亲,留下您对客户端的优化意见,产品咨询问题请直接咨询“我的理财师”或者拨打客服热线:400-525-698";
+    _textView.placeholder = @"亲,留下您对客户端的优化意见,产品咨询问题请直接咨询“我的理财师”或者拨打客服热线:400-816-2283";
     _textView.tintColor = [UIColor grayColor];
     [viewWhite addSubview:_textView];
     _textView.delegate = self;
