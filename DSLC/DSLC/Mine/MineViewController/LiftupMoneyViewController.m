@@ -79,7 +79,7 @@
     UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, 15, WIDTH_CONTROLLER_DEFAULT - 20, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"温馨提示"];
     [viewWite addSubview:labelAlert];
     
-    everyArr = @[@"1.您拥有每日3次的提现机会;", @"2.提现无限额;", @"3.提现手续费为0;", @"4.若体现后账户余额低于100元,则需一次提完．"];
+    everyArr = @[@"1.您拥有每日3次的提现机会;", @"2.提现无限额;", @"3.提现手续费为0;", @"4.若提现后账户余额低于100元,则需一次提完．"];
     
     for (int i = 0; i < 4; i++) {
         
