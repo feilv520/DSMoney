@@ -30,7 +30,7 @@
 //    webView.scalesPageToFit = YES;
     
     [self.view addSubview:webView];
-    
+
     NSLog(@"%@",self.detailString);
     
 //    if ([self.detailString hasPrefix:@"&"]) {
