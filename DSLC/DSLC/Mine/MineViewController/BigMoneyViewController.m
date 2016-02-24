@@ -150,11 +150,11 @@
         cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     }
     
-    if (indexPath.row == 1) {
-        
-        [cell addSubview:imageRight];
-        cell.textField.enabled = NO;
-    }
+//    if (indexPath.row == 1) {
+//        
+//        [cell addSubview:imageRight];
+//        cell.textField.enabled = NO;
+//    }
     
     if (indexPath.row == 5) {
         
@@ -182,13 +182,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 1) {
-        
-        ChooseOpenAnAccountBank *chooseOAAB = [[ChooseOpenAnAccountBank alloc] init];
-        chooseOAAB.flagSelect = @"2";
-        [self.navigationController pushViewController:chooseOAAB animated:YES];
-        
-    } else if (indexPath.row == 8) {
+//    if (indexPath.row == 1) {
+//        
+//        ChooseOpenAnAccountBank *chooseOAAB = [[ChooseOpenAnAccountBank alloc] init];
+//        chooseOAAB.flagSelect = @"2";
+//        [self.navigationController pushViewController:chooseOAAB animated:YES];
+//        
+//    } else
+    
+    if (indexPath.row == 8) {
         
         UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
@@ -524,6 +526,9 @@
     
     if (fileldName.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入持卡人姓名"];
+        
+    } else if (fieldBank.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入开户银行"];
         
     } else if (fieldBankCard.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入银行卡号"];

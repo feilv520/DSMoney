@@ -142,11 +142,11 @@
         cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     }
     
-    if (indexPath.row == 1) {
-        
-        cell.textField.enabled = NO;
-        [cell addSubview:imageViewR];
-    }
+//    if (indexPath.row == 1) {
+//        
+//        cell.textField.enabled = NO;
+//        [cell addSubview:imageViewR];
+//    }
     
     if (indexPath.row == 8) {
         
@@ -167,13 +167,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 1) {
-        
-        ChooseOpenAnAccountBank *choose = [[ChooseOpenAnAccountBank alloc] init];
-        choose.flagSelect = @"2";
-        [self.navigationController pushViewController:choose animated:YES];
-        
-    } else if (indexPath.row == 8) {
+//    if (indexPath.row == 1) {
+//        
+//        ChooseOpenAnAccountBank *choose = [[ChooseOpenAnAccountBank alloc] init];
+//        choose.flagSelect = @"2";
+//        [self.navigationController pushViewController:choose animated:YES];
+//        
+//    } else
+    
+    if (indexPath.row == 8) {
         
         UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
