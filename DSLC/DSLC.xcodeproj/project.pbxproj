@@ -224,6 +224,14 @@
 		8182A7F41C0EECD300FA1216 /* 组-18@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8182A7EC1C0EECD300FA1216 /* 组-18@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8182A7F51C0EECD300FA1216 /* 组-19@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8182A7ED1C0EECD300FA1216 /* 组-19@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8182A7F61C0EECD300FA1216 /* 组-19@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8182A7EE1C0EECD300FA1216 /* 组-19@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F3441C7E94A7000BB93C /* MonkeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F3421C7E94A7000BB93C /* MonkeyCell.m */; settings = {ASSET_TAGS = (); }; };
+		8183F3451C7E94A7000BB93C /* MonkeyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3431C7E94A7000BB93C /* MonkeyCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8183F3481C7E97A2000BB93C /* 椭圆猴-9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3461C7E97A2000BB93C /* 椭圆猴-9@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F3491C7E97A2000BB93C /* 椭圆猴-9@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3471C7E97A2000BB93C /* 椭圆猴-9@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F34C1C7EAAFD000BB93C /* MonkeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F34B1C7EAAFD000BB93C /* MonkeyViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8183F3501C7EAFAA000BB93C /* MonkeyMakeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F34E1C7EAFAA000BB93C /* MonkeyMakeCell.m */; settings = {ASSET_TAGS = (); }; };
+		8183F3511C7EAFAA000BB93C /* MonkeyMakeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8183F34F1C7EAFAA000BB93C /* MonkeyMakeCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8183F3541C7EE55F000BB93C /* CashMonkeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F3531C7EE55F000BB93C /* CashMonkeyViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC361BCC96E1003F440D /* MakeSureViewController.m */; };
 		8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC391BCCD0FE003F440D /* ContentCell.m */; };
 		8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC3A1BCCD0FE003F440D /* ContentCell.xib */; };
@@ -1171,6 +1179,18 @@
 		8182A7ED1C0EECD300FA1216 /* 组-19@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-19@2x.png"; sourceTree = "<group>"; };
 		8182A7EE1C0EECD300FA1216 /* 组-19@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-19@3x.png"; sourceTree = "<group>"; };
 		8183F2FE1C7437F6000BB93C /* 大圣理财.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "大圣理财.entitlements"; sourceTree = "<group>"; };
+		8183F3411C7E94A6000BB93C /* MonkeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonkeyCell.h; sourceTree = "<group>"; };
+		8183F3421C7E94A7000BB93C /* MonkeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonkeyCell.m; sourceTree = "<group>"; };
+		8183F3431C7E94A7000BB93C /* MonkeyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonkeyCell.xib; sourceTree = "<group>"; };
+		8183F3461C7E97A2000BB93C /* 椭圆猴-9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆猴-9@2x.png"; sourceTree = "<group>"; };
+		8183F3471C7E97A2000BB93C /* 椭圆猴-9@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆猴-9@3x.png"; sourceTree = "<group>"; };
+		8183F34A1C7EAAFD000BB93C /* MonkeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonkeyViewController.h; sourceTree = "<group>"; };
+		8183F34B1C7EAAFD000BB93C /* MonkeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonkeyViewController.m; sourceTree = "<group>"; };
+		8183F34D1C7EAFAA000BB93C /* MonkeyMakeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonkeyMakeCell.h; sourceTree = "<group>"; };
+		8183F34E1C7EAFAA000BB93C /* MonkeyMakeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonkeyMakeCell.m; sourceTree = "<group>"; };
+		8183F34F1C7EAFAA000BB93C /* MonkeyMakeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonkeyMakeCell.xib; sourceTree = "<group>"; };
+		8183F3521C7EE55F000BB93C /* CashMonkeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashMonkeyViewController.h; sourceTree = "<group>"; };
+		8183F3531C7EE55F000BB93C /* CashMonkeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashMonkeyViewController.m; sourceTree = "<group>"; };
 		8184EC351BCC96E1003F440D /* MakeSureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeSureViewController.h; sourceTree = "<group>"; };
 		8184EC361BCC96E1003F440D /* MakeSureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeSureViewController.m; sourceTree = "<group>"; };
 		8184EC381BCCD0FE003F440D /* ContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentCell.h; sourceTree = "<group>"; };
@@ -2484,6 +2504,8 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8183F3461C7E97A2000BB93C /* 椭圆猴-9@2x.png */,
+				8183F3471C7E97A2000BB93C /* 椭圆猴-9@3x.png */,
 				81570D571C33D02400AF6B37 /* img_lc_jqqd.png */,
 				8D3942F01C2D15B500783FD0 /* welcome */,
 				810C76671C2D1210000637FD /* UserAsk@2x.png */,
@@ -2751,6 +2773,9 @@
 				8D11918E1BF1DC1C00A2DE05 /* ProductMoneyTableViewCell.h */,
 				8D11918F1BF1DC1C00A2DE05 /* ProductMoneyTableViewCell.m */,
 				8D1191901BF1DC1C00A2DE05 /* ProductMoneyTableViewCell.xib */,
+				8183F3411C7E94A6000BB93C /* MonkeyCell.h */,
+				8183F3421C7E94A7000BB93C /* MonkeyCell.m */,
+				8183F3431C7E94A7000BB93C /* MonkeyCell.xib */,
 			);
 			path = MineView;
 			sourceTree = "<group>";
@@ -2804,6 +2829,8 @@
 				8D3A2FDF1BE7100000913DEC /* FDescriptionViewController.xib */,
 				8184EC351BCC96E1003F440D /* MakeSureViewController.h */,
 				8184EC361BCC96E1003F440D /* MakeSureViewController.m */,
+				8183F34A1C7EAAFD000BB93C /* MonkeyViewController.h */,
+				8183F34B1C7EAAFD000BB93C /* MonkeyViewController.m */,
 				818F0D721C0D3DCB00319D19 /* BuyClauseViewController.h */,
 				818F0D731C0D3DCB00319D19 /* BuyClauseViewController.m */,
 				818F0D751C0D3E1100319D19 /* UsufructAssignmentViewController.h */,
@@ -2824,6 +2851,8 @@
 				8175BE8B1BE9E2430044026E /* ChooseRedBagViewController.m */,
 				81F237731BE86031009D7A67 /* CashFinishViewController.h */,
 				81F237741BE86031009D7A67 /* CashFinishViewController.m */,
+				8183F3521C7EE55F000BB93C /* CashMonkeyViewController.h */,
+				8183F3531C7EE55F000BB93C /* CashMonkeyViewController.m */,
 				81379F2A1BEB48AA002CDB16 /* CashOtherFinViewController.h */,
 				81379F2B1BEB48AA002CDB16 /* CashOtherFinViewController.m */,
 				81379F2D1BEB51E0002CDB16 /* ShareHaveRedBag.h */,
@@ -2926,6 +2955,9 @@
 				814B50FE1C3A8463001AACC6 /* ChongZhiZZZZView.h */,
 				814B50FF1C3A8463001AACC6 /* ChongZhiZZZZView.m */,
 				814B51001C3A8463001AACC6 /* ChongZhiZZZZView.xib */,
+				8183F34D1C7EAFAA000BB93C /* MonkeyMakeCell.h */,
+				8183F34E1C7EAFAA000BB93C /* MonkeyMakeCell.m */,
+				8183F34F1C7EAFAA000BB93C /* MonkeyMakeCell.xib */,
 			);
 			path = FinancingView;
 			sourceTree = "<group>";
@@ -4574,7 +4606,9 @@
 				8DEDE1D41BCCFFD8008086D3 /* iocn_saft@2x.png in Resources */,
 				817DD4921BCF547E00042B09 /* bei@2x.png in Resources */,
 				8175BEB31BE9F2F50044026E /* 人人网@3x.png in Resources */,
+				8183F3481C7E97A2000BB93C /* 椭圆猴-9@2x.png in Resources */,
 				8D3EEA161C27AB400031F7C9 /* 广发银行@2x.png in Resources */,
+				8183F3511C7EAFAA000BB93C /* MonkeyMakeCell.xib in Resources */,
 				8D43439D1BFDEB0B000BA004 /* loading_middle_04.png in Resources */,
 				8D1DB6031C7AA2E4003CFDA6 /* welcome_one.png in Resources */,
 				8162D1231BE1BD3300CACAB6 /* OtherProjectCell.xib in Resources */,
@@ -4633,6 +4667,7 @@
 				819B52DD1BFC2094002FDF1E /* 铜元宝@3x.png in Resources */,
 				8D4343A01BFDEB0B000BA004 /* loading_middle_07.png in Resources */,
 				810C767F1C2EADA3000637FD /* reddian.png in Resources */,
+				8183F3491C7E97A2000BB93C /* 椭圆猴-9@3x.png in Resources */,
 				8D9011AC1BD6337C00E5D62A /* 02@3x.png in Resources */,
 				81ED03191BD0D429005F4B02 /* 2013123115540975@3x.png in Resources */,
 				8175BEAA1BE9F2F50044026E /* 新浪微博@2x.png in Resources */,
@@ -4797,6 +4832,7 @@
 				81D72FC71BFB04890067A277 /* rightWindow@3x.png in Resources */,
 				81F237721BE8568B009D7A67 /* NewMakeSureCell.xib in Resources */,
 				8DC695C31C3503D30055EC44 /* UMSShareListController.xib in Resources */,
+				8183F3451C7E94A7000BB93C /* MonkeyCell.xib in Resources */,
 				8DEDE1E11BCD0035008086D3 /* icon_ICBC@2x.png in Resources */,
 				8D3EE9F81C27AB400031F7C9 /* 上海银行@2x.png in Resources */,
 				8D0AE7F51BE09CE500D9D50C /* iconfont-register-gantanhao001@3x.png in Resources */,
@@ -4946,6 +4982,7 @@
 				818063A01BD5D87100E83492 /* InviteNumCell.m in Sources */,
 				8D4144141C06A003002926DA /* MessageModel.m in Sources */,
 				8D4FF5DC1BE339A200BAE25F /* AFURLSessionManager.m in Sources */,
+				8183F3441C7E94A7000BB93C /* MonkeyCell.m in Sources */,
 				8162D1141BE1B47B00CACAB6 /* MoneyDetailViewController.m in Sources */,
 				8184EC451BCCD12A003F440D /* RedBagCell.m in Sources */,
 				815A6FCF1BEB7EFF003059A5 /* RechargeViewController.m in Sources */,
@@ -4991,6 +5028,7 @@
 				81C548621C08329B001CDC97 /* RedBagExplainViewController.m in Sources */,
 				819B52BE1BFC0D22002FDF1E /* TheThirdRedBagCell.m in Sources */,
 				81ED03141BD0C877005F4B02 /* MyBankViewController.m in Sources */,
+				8183F34C1C7EAAFD000BB93C /* MonkeyViewController.m in Sources */,
 				8D4FF5DA1BE339A200BAE25F /* AFURLRequestSerialization.m in Sources */,
 				81BA1BF81BD4DBAA00DBA5BE /* WinAPrizeCell.m in Sources */,
 				8D4E4E081C1E5A6A00AE2644 /* NSDataEx.m in Sources */,
@@ -5160,6 +5198,7 @@
 				81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */,
 				8D4E4E061C1E5A6A00AE2644 /* LLPRSADataSigner.m in Sources */,
 				816D15321C082638008CFBBC /* InvestNoticeCell.m in Sources */,
+				8183F3501C7EAFAA000BB93C /* MonkeyMakeCell.m in Sources */,
 				8D9BE8E51C0EC94D003C67D3 /* YYDiskCache.m in Sources */,
 				8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */,
 				8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */,
@@ -5224,6 +5263,7 @@
 				81E0CCE11C27EF6700148609 /* ChooseBusViewController.m in Sources */,
 				8D88D1071BFECCB40051D6DA /* UIView+MJExtension.m in Sources */,
 				81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */,
+				8183F3541C7EE55F000BB93C /* CashMonkeyViewController.m in Sources */,
 				8D121FE01BD4D92600B3C1FE /* SettingPieTableViewCell.m in Sources */,
 				8D3125E61BD7689200143B71 /* BaseViewController.m in Sources */,
 				81B6740D1BF0AE26007CEF51 /* ApplyScheduleViewController.m in Sources */,

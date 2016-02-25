@@ -20,6 +20,7 @@
 #import "RecordViewController.h"
 #import "InvestNoticeViewController.h"
 #import "ProductDetailModel.h"
+#import "MonkeyViewController.h"
 
 @interface FDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
@@ -507,6 +508,8 @@
 //确认投资按钮
 - (void)makeSureButton:(UIButton *)button
 {
+    NSDictionary *monkeyDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
     if ([self.residueMoney isEqualToString:@"0.00"]) {
         [self orderProduct];
         return;
@@ -530,25 +533,50 @@
 
             } else {
                 
-                MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
-                
-                if (self.estimate == YES) {
+                if ([[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@"0"] || [[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@""]) {
                     
-                    makeSureVC.decide = YES;
+                    MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
                     
-                    [MobClick event:@"makeSure"];
+                    if (self.estimate == YES) {
+                        
+                        makeSureVC.decide = YES;
+                        
+                        [MobClick event:@"makeSure"];
+                        
+                    } else {
+                        
+                        makeSureVC.decide = NO;
+                        makeSureVC.nHand = self.nHand;
+                    }
+                    makeSureVC.detailM = self.detailM;
+                    makeSureVC.residueMoney = self.residueMoney;
+                    [self submitLoadingWithHidden:YES];
+                    [self.navigationController pushViewController:makeSureVC animated:YES];
                     
                 } else {
                     
-                    makeSureVC.decide = NO;
-                    makeSureVC.nHand = self.nHand;
+                    MonkeyViewController *monkeyVC = [[MonkeyViewController alloc] init];
+                    
+                    if (self.estimate == YES) {
+                        
+                        monkeyVC.decide = YES;
+                        
+                        [MobClick event:@"makeSure"];
+                        
+                    } else {
+                        
+                        monkeyVC.decide = NO;
+                        monkeyVC.nHand = self.nHand;
+                    }
+                    
+                    monkeyVC.detailM = self.detailM;
+                    monkeyVC.residueMoney = self.residueMoney;
+                    [self submitLoadingWithHidden:YES];
+                    [self.navigationController pushViewController:monkeyVC animated:YES];
+                    
                 }
-                makeSureVC.detailM = self.detailM;
-                makeSureVC.residueMoney = self.residueMoney;
-                [self submitLoadingWithHidden:YES];
-                [self.navigationController pushViewController:makeSureVC animated:YES];
+                    
             }
-
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             

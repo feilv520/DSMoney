@@ -36,6 +36,7 @@
 #import "Planner.h"
 #import "RealNameViewController.h"
 #import "UserListViewController.h"
+#import "MonkeyCell.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -112,12 +113,13 @@
 
 - (void)showTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 52) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 52) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
     _tableView.backgroundColor = [UIColor huibai];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.showsVerticalScrollIndicator = NO;
+    _tableView.separatorColor = [UIColor whiteColor];
     
     _tableView.bounces = NO;
     
@@ -136,6 +138,7 @@
 //    [self makeSafeView];
     
     [_tableView registerNib:[UINib nibWithNibName:@"MineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [_tableView registerNib:[UINib nibWithNibName:@"MonkeyCell" bundle:nil] forCellReuseIdentifier:@"reuseMonkey"];
 }
 
 // 保障
@@ -305,134 +308,194 @@
     
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 0;
+    } else {
+        return 5;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.5;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    if (section == 0) {
+        return 1;
+    } else {
+        return 6;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    
-    cell.imageViewPic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [pictureArr objectAtIndex:indexPath.row]]];
-    
-    cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
-    cell.labelTitle.textColor = [UIColor zitihui];
-    cell.labelTitle.font = [UIFont systemFontOfSize:15];
-    
-    cell.imageRight.image = [UIImage imageNamed:@"arrow"];
-    
-    if (indexPath.row == 0) {
+    if (indexPath.section == 0) {
         
-        if (moneyLabel == nil) {
-            moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 0, WIDTH_CONTROLLER_DEFAULT - 125, 50)];
-            
-            moneyLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-            moneyLabel.textColor = [UIColor zitihui];
-            moneyLabel.textAlignment = NSTextAlignmentRight;
-            [cell addSubview:moneyLabel];
-        }
-        moneyLabel.text = [NSString stringWithFormat:@"%@元在投资金",[DES3Util decrypt:[self.myAccountInfo objectForKey:@"totalMoney"]]];
-    } else if (indexPath.row == 2) {
+        MonkeyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMonkey"];
         
-        if (myRedBagButton == nil) {
-            myRedBagButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        cell.imageName.image = [UIImage imageNamed:@"椭圆猴-9"];
+        cell.labelName.text = @"猴币";
+        cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        cell.labelName.textColor = [UIColor zitihui];
+        
+        cell.labelGeShu.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.labelGeShu.textAlignment = NSTextAlignmentRight;
+        NSMutableAttributedString *textShu = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@个", [self.myAccountInfo objectForKey:@"monkeyNum"]]];
+        NSRange geText = NSMakeRange([[textShu string] length] - 1, 1);
+        NSRange leftText = NSMakeRange(0, [[textShu string]rangeOfString:@"个"].location);
+        [textShu addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:leftText];
+        [textShu addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:geText];
+        [cell.labelGeShu setAttributedText:textShu];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    } else {
+        
+        MineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        
+        cell.imageViewPic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [pictureArr objectAtIndex:indexPath.row]]];
+        cell.labelLine.backgroundColor = [UIColor zitihui];
+        cell.labelLine.alpha = 0.3;
+        cell.labelLine.text = @"";
+        
+        cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
+        cell.labelTitle.textColor = [UIColor zitihui];
+        cell.labelTitle.font = [UIFont systemFontOfSize:15];
+        
+        cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+        
+        if (indexPath.row == 0) {
             
-            myRedBagButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60, 15, 30, 20);
+            if (moneyLabel == nil) {
+                moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 0, WIDTH_CONTROLLER_DEFAULT - 125, 50)];
+                
+                moneyLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+                moneyLabel.textColor = [UIColor zitihui];
+                moneyLabel.textAlignment = NSTextAlignmentRight;
+                [cell addSubview:moneyLabel];
+            }
+            moneyLabel.text = [NSString stringWithFormat:@"%@元在投资金",[DES3Util decrypt:[self.myAccountInfo objectForKey:@"totalMoney"]]];
+        } else if (indexPath.row == 2) {
             
-            myRedBagButton.userInteractionEnabled = NO;
+            if (myRedBagButton == nil) {
+                myRedBagButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                
+                myRedBagButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60, 15, 30, 20);
+                
+                myRedBagButton.userInteractionEnabled = NO;
+                
+                myRedBagButton.layer.masksToBounds = YES;
+                myRedBagButton.layer.cornerRadius = 8.f;
+                
+                [myRedBagButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
+                
+                myRedBagButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+                
+                [cell addSubview:myRedBagButton];
+                
+            }
+            if ([[self.myAccountInfo objectForKey:@"redPacket"] isEqualToString:@"0"]) {
+                myRedBagButton.hidden = YES;
+            } else {
+                myRedBagButton.hidden = NO;
+                [myRedBagButton setTitle:[self.myAccountInfo objectForKey:@"redPacket"] forState:UIControlStateNormal];
+            }
             
-            myRedBagButton.layer.masksToBounds = YES;
-            myRedBagButton.layer.cornerRadius = 8.f;
-            
-            [myRedBagButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
-            
-            myRedBagButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-            
-            [cell addSubview:myRedBagButton];
-            
-        }
-        if ([[self.myAccountInfo objectForKey:@"redPacket"] isEqualToString:@"0"]) {
-            myRedBagButton.hidden = YES;
-        } else {
-            myRedBagButton.hidden = NO;
-            [myRedBagButton setTitle:[self.myAccountInfo objectForKey:@"redPacket"] forState:UIControlStateNormal];
+        } else if (indexPath.row == 5) {
+            if (messageButton == nil) {
+                messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                
+                messageButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60, 15, 30, 20);
+                
+                messageButton.userInteractionEnabled = NO;
+                
+                messageButton.layer.masksToBounds = YES;
+                messageButton.layer.cornerRadius = 8.f;
+                
+                [messageButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
+                
+                messageButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+                
+                [cell addSubview:messageButton];
+                
+            }
+            if ([[self.myAccountInfo objectForKey:@"msgCount"] isEqualToString:@"0"]) {
+                messageButton.hidden = YES;
+            } else {
+                messageButton.hidden = NO;
+                [messageButton setTitle:[self.myAccountInfo objectForKey:@"msgCount"] forState:UIControlStateNormal];
+            }
         }
         
-    } else if (indexPath.row == 5) {
-        if (messageButton == nil) {
-            messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            
-            messageButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60, 15, 30, 20);
-            
-            messageButton.userInteractionEnabled = NO;
-            
-            messageButton.layer.masksToBounds = YES;
-            messageButton.layer.cornerRadius = 8.f;
-            
-            [messageButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
-
-            messageButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-            
-            [cell addSubview:messageButton];
-            
-        }
-        if ([[self.myAccountInfo objectForKey:@"msgCount"] isEqualToString:@"0"]) {
-            messageButton.hidden = YES;
-        } else {
-            messageButton.hidden = NO;
-            [messageButton setTitle:[self.myAccountInfo objectForKey:@"msgCount"] forState:UIControlStateNormal];
-        }
+        return cell;
     }
     
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 1) {
+    if (indexPath.section == 0) {
         
-        [MobClick event:@"MyInformation"];
-        MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
-        [self.navigationController pushViewController:myInformationVC animated:YES];
+        NSLog(@"猴币");
         
-    } else if (indexPath.row == 2) {
+    } else {
         
-        [MobClick event:@"ThirdRedBag"];
-        TheThirdRedBagController *myRedBagVC = [[TheThirdRedBagController alloc] init];
-        [self.navigationController pushViewController:myRedBagVC animated:YES];
+        if (indexPath.row == 1) {
+            
+            [MobClick event:@"MyInformation"];
+            MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
+            [self.navigationController pushViewController:myInformationVC animated:YES];
+            
+        } else if (indexPath.row == 2) {
+            
+            [MobClick event:@"ThirdRedBag"];
+            TheThirdRedBagController *myRedBagVC = [[TheThirdRedBagController alloc] init];
+            [self.navigationController pushViewController:myRedBagVC animated:YES];
+            
+        } else if (indexPath.row == 0) {
+            
+            [MobClick event:@"ProductSetting"];
+            ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
+            [self.navigationController pushViewController:pSettringVC animated:YES];
+            
+        } else if (indexPath.row == 5) {
+            
+            [MobClick event:@"MyNews"];
+            MyNewsViewController *myNewsVC = [[MyNewsViewController alloc] init];
+            [self.navigationController pushViewController:myNewsVC animated:YES];
+            
+        } else if (indexPath.row == 4) {
+            
+            [MobClick event:@"Transaction"];
+            TransactionViewController *transactionVC = [[TransactionViewController alloc] init];
+            [self.navigationController pushViewController:transactionVC animated:YES];
+            
+        } else if (indexPath.row == 3) {
+            
+            [MobClick event:@"MyInvitation"];
+            MyInvitationViewController *myInvitationVC = [[MyInvitationViewController alloc] init];
+            [self.navigationController pushViewController:myInvitationVC animated:YES];
+        }
         
-    } else if (indexPath.row == 0) {
-        
-        [MobClick event:@"ProductSetting"];
-        ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
-        [self.navigationController pushViewController:pSettringVC animated:YES];
-        
-    } else if (indexPath.row == 5) {
-        
-        [MobClick event:@"MyNews"];
-        MyNewsViewController *myNewsVC = [[MyNewsViewController alloc] init];
-        [self.navigationController pushViewController:myNewsVC animated:YES];
-        
-    } else if (indexPath.row == 4) {
-        
-        [MobClick event:@"Transaction"];
-        TransactionViewController *transactionVC = [[TransactionViewController alloc] init];
-        [self.navigationController pushViewController:transactionVC animated:YES];
-        
-    } else if (indexPath.row == 3) {
-        
-        [MobClick event:@"MyInvitation"];
-        MyInvitationViewController *myInvitationVC = [[MyInvitationViewController alloc] init];
-        [self.navigationController pushViewController:myInvitationVC animated:YES];
     }
+    
 }
 
 //头像按钮
@@ -562,6 +625,7 @@
             [dic setValue:[responseObject objectForKey:@"redPacket"] forKey:@"redPacket"];
             [dic setValue:[responseObject objectForKey:@"realName"] forKey:@"realName"];
             [dic setValue:[responseObject objectForKey:@"cardNumber"] forKey:@"cardNumber"];
+            [dic setValue:[responseObject objectForKey:@"monkeyNum"] forKey:@"monkeyNum"];
             
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
