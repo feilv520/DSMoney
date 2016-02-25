@@ -182,7 +182,7 @@
     [button removeFromSuperview];
     button = nil;
     
-    if ([self.monkeyString isEqualToString:@""] || [self.monkeyString isEqualToString:@"0"]) {
+    if (self.monkeyString != nil) {
         CashMonkeyViewController *cashMF = [[CashMonkeyViewController alloc] init];
         cashMF.nHand = self.nHand;
         cashMF.moneyString = self.moneyString;

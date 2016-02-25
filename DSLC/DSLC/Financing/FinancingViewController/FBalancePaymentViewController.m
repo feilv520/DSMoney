@@ -266,6 +266,7 @@
                 shareHave.syString = self.syString;
                 shareHave.endTimeString = self.endTimeString;
                 shareHave.productName = self.productName;
+                shareHave.monkeyString = self.monkeyString;
                 [self.navigationController pushViewController:shareHave animated:YES];
 //                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
             }
