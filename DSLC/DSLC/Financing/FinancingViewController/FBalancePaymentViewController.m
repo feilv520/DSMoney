@@ -11,6 +11,7 @@
 #import "CreatView.h"
 #import "define.h"
 #import "CashOtherFinViewController.h"
+#import "CashMonkeyViewController.h"
 #import "ShareHaveRedBag.h"
 #import "ForgetSecretViewController.h"
 #import "FindDealViewController.h"
@@ -238,13 +239,24 @@
             
             if ([self.redbagModel rpID] == nil) {
 //              支付没有红包
-                CashOtherFinViewController *cashOther = [[CashOtherFinViewController alloc] init];
-                cashOther.nHand = self.nHand;
-                cashOther.moneyString = self.moneyString;
-                cashOther.syString = self.syString;
-                cashOther.endTimeString = self.endTimeString;
-                cashOther.productName = self.productName;
-                [self.navigationController pushViewController:cashOther animated:YES];
+                if (self.monkeyString == nil) {
+                    CashOtherFinViewController *cashOther = [[CashOtherFinViewController alloc] init];
+                    cashOther.nHand = self.nHand;
+                    cashOther.moneyString = self.moneyString;
+                    cashOther.syString = self.syString;
+                    cashOther.endTimeString = self.endTimeString;
+                    cashOther.productName = self.productName;
+                    [self.navigationController pushViewController:cashOther animated:YES];
+                } else {
+                    CashMonkeyViewController *cashMF = [[CashMonkeyViewController alloc] init];
+                    cashMF.nHand = self.nHand;
+                    cashMF.moneyString = self.moneyString;
+                    cashMF.syString = self.syString;
+                    cashMF.endTimeString = self.endTimeString;
+                    cashMF.productName = self.productName;
+                    cashMF.monkeyString = self.monkeyString;
+                    [self.navigationController pushViewController:cashMF animated:YES];
+                }
             } else {
 //              支付有红包
                 ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];

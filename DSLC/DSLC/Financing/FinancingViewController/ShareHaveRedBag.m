@@ -8,7 +8,9 @@
 
 #import "ShareHaveRedBag.h"
 #import "CashOtherFinViewController.h"
+#import "CashMonkeyViewController.h"
 #import "define.h"
+#import "AFAutoPurgingImageCache.h"
 
 
 @interface ShareHaveRedBag () <UMSocialUIDelegate>
@@ -180,13 +182,25 @@
     [button removeFromSuperview];
     button = nil;
     
-    CashOtherFinViewController *cashOFVC = [[CashOtherFinViewController alloc] init];
-    cashOFVC.moneyString = self.moneyString;
-    cashOFVC.syString = self.syString;
-    cashOFVC.endTimeString = self.endTimeString;
-    cashOFVC.productName = self.productName;
-    cashOFVC.nHand = self.nHand;
-    [self.navigationController pushViewController:cashOFVC animated:NO];
+    if ([self.monkeyString isEqualToString:@""] || [self.monkeyString isEqualToString:@"0"]) {
+        CashMonkeyViewController *cashMF = [[CashMonkeyViewController alloc] init];
+        cashMF.nHand = self.nHand;
+        cashMF.moneyString = self.moneyString;
+        cashMF.syString = self.syString;
+        cashMF.endTimeString = self.endTimeString;
+        cashMF.productName = self.productName;
+        cashMF.monkeyString = self.monkeyString;
+        [self.navigationController pushViewController:cashMF animated:YES];
+    } else {
+        CashOtherFinViewController *cashOFVC = [[CashOtherFinViewController alloc] init];
+        cashOFVC.moneyString = self.moneyString;
+        cashOFVC.syString = self.syString;
+        cashOFVC.endTimeString = self.endTimeString;
+        cashOFVC.productName = self.productName;
+        cashOFVC.nHand = self.nHand;
+        [self.navigationController pushViewController:cashOFVC animated:NO];
+    }
+    
 }
 
 - (void)finishLastBarPress:(UIBarButtonItem *)bar

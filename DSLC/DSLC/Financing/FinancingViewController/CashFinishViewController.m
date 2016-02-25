@@ -63,7 +63,7 @@
     viewBottom.layer.borderColor = [[UIColor shurukuangBian] CGColor];
     viewBottom.layer.borderWidth = 0.5;
     
-    UILabel *labelNew = [CreatView creatWithLabelFrame:CGRectMake(0, 15, WIDTH_CONTROLLER_DEFAULT - 80, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"新手专享"];
+    UILabel *labelNew = [CreatView creatWithLabelFrame:CGRectMake(0, 15, WIDTH_CONTROLLER_DEFAULT - 80, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:self.productName];
     [viewBottom addSubview:labelNew];
     
     for (int i = 0; i < 3; i++) {

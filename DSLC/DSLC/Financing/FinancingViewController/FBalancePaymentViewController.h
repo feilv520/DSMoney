@@ -35,4 +35,6 @@
 @property (nonatomic, strong) NSString *nHand;
 @property (nonatomic, strong) NSString *dealPanDuan;
 
+@property (nonatomic, copy) NSString *monkeyString;
+
 @end

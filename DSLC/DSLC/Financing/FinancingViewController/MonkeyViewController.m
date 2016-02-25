@@ -17,6 +17,7 @@
 #import "FConfirmMoney.h"
 #import "NewMakeSureCell.h"
 #import "CashFinishViewController.h"
+#import "CashMonkeyViewController.h"
 #import "ChooseRedBagViewController.h"
 #import "FBalancePaymentViewController.h"
 #import "RechargeViewController.h"
@@ -862,13 +863,14 @@
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
                 if ([redbagModel rpID] == nil) {
                     //              支付没有红包
-                    CashFinishViewController *cashFinish = [[CashFinishViewController alloc] init];
-                    cashFinish.nHand = self.nHand;
-                    cashFinish.moneyString = self.textFieldC.text;
-                    cashFinish.endTimeString = [self.detailM endTime];
-                    cashFinish.productName = [self.detailM productName];
-                    cashFinish.syString = self.syString;
-                    [self.navigationController pushViewController:cashFinish animated:YES];
+                    CashMonkeyViewController *cashMF = [[CashMonkeyViewController alloc] init];
+                    cashMF.nHand = self.nHand;
+                    cashMF.moneyString = self.textFieldC.text;
+                    cashMF.endTimeString = [self.detailM endTime];
+                    cashMF.productName = [self.detailM productName];
+                    cashMF.syString = self.syString;
+                    cashMF.monkeyString = [NSString stringWithFormat:@"%.1lf个", self.textFieldC.text.intValue * 0.1];
+                    [self.navigationController pushViewController:cashMF animated:YES];
                 } else {
                     //              支付有红包
                     ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
@@ -902,6 +904,7 @@
         _balanceVC = [[FBalancePaymentViewController alloc] init];
         _balanceVC.productName = [self.detailM productName];
         _balanceVC.idString = [self.detailM productId];
+        _balanceVC.monkeyString = [NSString stringWithFormat:@"%.1lf", self.textFieldC.text.intValue * 0.1];
         _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textField.text floatValue]];
         _balanceVC.typeString = [self.detailM productType];
         _balanceVC.redbagModel = redbagModel;

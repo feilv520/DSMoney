@@ -48,7 +48,7 @@
 - (void)contentShow
 {
     
-    titleArr = @[[NSString stringWithFormat:@"投资金额:%@元",self.moneyString], [NSString stringWithFormat:@"预期到期收益:%@",self.syString], [NSString stringWithFormat:@"兑付日期:%@",self.endTimeString]];
+    titleArr = @[[NSString stringWithFormat:@"投资金额:%@元",self.moneyString], [NSString stringWithFormat:@"使用猴币:%@个",self.monkeyString],[NSString stringWithFormat:@"预期到期收益:%@",self.syString], [NSString stringWithFormat:@"兑付日期:%@",self.endTimeString]];
     NSLog(@"=====%@", self.syString);
     
     UIButton *butFinish = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 60, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"恭喜您投资成功"];
@@ -56,17 +56,17 @@
     butFinish.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butFinish setImage:[UIImage imageNamed:@"iconfont_complete"] forState:UIControlStateNormal];
     
-    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(40, 120, WIDTH_CONTROLLER_DEFAULT - 80, 140) backgroundColor:[UIColor shurukuangColor]];
+    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(40, 120, WIDTH_CONTROLLER_DEFAULT - 80, 170) backgroundColor:[UIColor shurukuangColor]];
     [self.view addSubview:viewBottom];
     viewBottom.layer.cornerRadius = 5;
     viewBottom.layer.masksToBounds = YES;
     viewBottom.layer.borderColor = [[UIColor shurukuangBian] CGColor];
     viewBottom.layer.borderWidth = 0.5;
     
-    UILabel *labelNew = [CreatView creatWithLabelFrame:CGRectMake(0, 15, WIDTH_CONTROLLER_DEFAULT - 80, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"新手专享"];
+    UILabel *labelNew = [CreatView creatWithLabelFrame:CGRectMake(0, 15, WIDTH_CONTROLLER_DEFAULT - 80, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:self.productName];
     [viewBottom addSubview:labelNew];
     
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         
         UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(0, 45 + 20 * i + 10 * i, WIDTH_CONTROLLER_DEFAULT - 80, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:[titleArr objectAtIndex:i]];
         [viewBottom addSubview:label];
