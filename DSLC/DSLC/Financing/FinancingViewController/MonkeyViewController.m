@@ -329,7 +329,7 @@
         cell.textField.font = [UIFont systemFontOfSize:14];
         cell.textField.textColor = [UIColor zitihui];
         cell.textField.delegate = self;
-        cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
+        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.textField.layer.cornerRadius = 4;
         cell.textField.backgroundColor = [UIColor shurukuangColor];
         cell.textField.layer.borderWidth = 0.5;

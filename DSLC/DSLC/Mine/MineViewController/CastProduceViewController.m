@@ -9,6 +9,7 @@
 #import "CastProduceViewController.h"
 #import "define.h"
 #import "CastUpTableViewCell.h"
+#import "CastUpMonkeyTableViewCell.h"
 #import "CastDownTableViewCell.h"
 #import "CastDetailTableViewCell.h"
 #import "CreatView.h"
@@ -21,6 +22,8 @@
 @property (nonatomic, strong) UITableView *mainTV;
 
 @property (nonatomic, strong) NSDictionary *castDic;
+
+@property (nonatomic, strong) NSString *monkeyNumber;
 
 @end
 
@@ -46,6 +49,7 @@
     [self.mainTV registerNib:[UINib nibWithNibName:@"CastUpTableViewCell" bundle:nil] forCellReuseIdentifier:@"castUp"];
     [self.mainTV registerNib:[UINib nibWithNibName:@"CastDownTableViewCell" bundle:nil] forCellReuseIdentifier:@"castDown"];
     [self.mainTV registerNib:[UINib nibWithNibName:@"CastDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"castDetail"];
+    [self.mainTV registerNib:[UINib nibWithNibName:@"CastUpMonkeyTableViewCell" bundle:nil] forCellReuseIdentifier:@"castUpMonkey"];
     
     [self.view addSubview:self.mainTV];
     
@@ -111,21 +115,44 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            CastUpTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"castUp"];
-            cell.productName.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productName"];
-            cell.productType.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productType"];
-            cell.productNumber.text = [NSString stringWithFormat:@"%@%%",[[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"]];
             
-            cell.productMoney.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[[self.castDic objectForKey:@"Product"] objectForKey:@"money"]]];
-
-            NSString *moneyString = [DES3Util decrypt:[[self.castDic objectForKey:@"Product"] objectForKey:@"money"]];
-            moneyString = [moneyString stringByReplacingOccurrencesOfString:@"," withString:@""];
-            
-            cell.productProfit.text = [NSString stringWithFormat:@"%.2lf元",[moneyString floatValue] * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"] floatValue] * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productPeriod"] floatValue] / 36500.0];
-            
-            cell.productDate.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"dueDate"];
-            
-            return cell;
+            if ([self.monkeyNumber isEqualToString:@""] || [self.monkeyNumber isEqualToString:@"0"]) {
+                CastUpTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"castUp"];
+                
+                cell.productName.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productName"];
+                cell.productType.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productType"];
+                cell.productNumber.text = [NSString stringWithFormat:@"%@%%",[[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"]];
+                
+                cell.productMoney.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[[self.castDic objectForKey:@"Product"] objectForKey:@"money"]]];
+                
+                NSString *moneyString = [DES3Util decrypt:[[self.castDic objectForKey:@"Product"] objectForKey:@"money"]];
+                moneyString = [moneyString stringByReplacingOccurrencesOfString:@"," withString:@""];
+                
+                cell.productProfit.text = [NSString stringWithFormat:@"%.2lf元",[moneyString floatValue] * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"] floatValue] * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productPeriod"] floatValue] / 36500.0];
+                
+                cell.productDate.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"dueDate"];
+                
+                return cell;
+            } else {
+                CastUpMonkeyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"castUpMonkey"];
+                
+                cell.productName.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productName"];
+                cell.productType.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"productType"];
+                cell.productNumber.text = [NSString stringWithFormat:@"%@%%",[[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"]];
+                
+                cell.productMoney.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[[self.castDic objectForKey:@"Product"] objectForKey:@"money"]]];
+                
+                cell.productMonkeyNumber.text = [NSString stringWithFormat:@"%@个",self.monkeyNumber];
+                
+                NSString *moneyString = [DES3Util decrypt:[[self.castDic objectForKey:@"Product"] objectForKey:@"money"]];
+                moneyString = [moneyString stringByReplacingOccurrencesOfString:@"," withString:@""];
+                
+                cell.productProfit.text = [NSString stringWithFormat:@"%.2lf元",[moneyString floatValue] * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"] floatValue] * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productPeriod"] floatValue] / 36500.0];
+                
+                cell.productDate.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"dueDate"];
+                
+                return cell;
+            }
         } else {
             return nil;
         }
@@ -207,6 +234,8 @@
         
             self.castDic = [NSDictionary dictionary];
             self.castDic = responseObject;
+            
+            self.monkeyNumber = [[self.castDic objectForKey:@"Product"] objectForKey:@"userMonkeyNum"];
             
             [self.mainTV reloadData];
         } else {
