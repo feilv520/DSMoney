@@ -32,19 +32,22 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61c-GU-oUI">
-                        <rect key="frame" x="137" y="0.0" width="185" height="44"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61c-GU-oUI">
+                        <rect key="frame" x="132" y="12" width="185" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="185" id="8t8-da-V9l"/>
+                            <constraint firstAttribute="height" constant="20" id="VPN-nd-vPe"/>
+                        </constraints>
                         <state key="normal" title="Button"/>
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="2F0-n9-ncD" firstAttribute="leading" secondItem="61c-GU-oUI" secondAttribute="trailing" constant="8" id="3le-B7-tK0"/>
                     <constraint firstItem="2F0-n9-ncD" firstAttribute="baseline" secondItem="MeM-Ub-La7" secondAttribute="baseline" id="4Cl-jy-tVF"/>
                     <constraint firstItem="2F0-n9-ncD" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Ic9-42-dfh"/>
                     <constraint firstItem="MeM-Ub-La7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="MhK-GD-vdW"/>
-                    <constraint firstItem="2F0-n9-ncD" firstAttribute="leading" secondItem="61c-GU-oUI" secondAttribute="trailing" constant="3" id="Py8-B4-o9W"/>
                     <constraint firstItem="MeM-Ub-La7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="aEz-Od-WgQ"/>
-                    <constraint firstItem="61c-GU-oUI" firstAttribute="leading" secondItem="MeM-Ub-La7" secondAttribute="trailing" constant="47" id="eaj-G1-8Po"/>
-                    <constraint firstItem="61c-GU-oUI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="s3S-I3-GgB"/>
+                    <constraint firstItem="61c-GU-oUI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="b6J-4O-Kf6"/>
                     <constraint firstItem="2F0-n9-ncD" firstAttribute="firstBaseline" secondItem="MeM-Ub-La7" secondAttribute="firstBaseline" id="xYP-kb-xOm"/>
                 </constraints>
             </tableViewCellContentView>

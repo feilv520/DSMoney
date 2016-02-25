@@ -533,10 +533,9 @@
 
             } else {
                 
-                if ([[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@"0"] || [[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@""]) {
+                if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"1"]) {
                     
                     MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
-                    
                     if (self.estimate == YES) {
                         
                         makeSureVC.decide = YES;
@@ -555,27 +554,51 @@
                     
                 } else {
                     
-                    MonkeyViewController *monkeyVC = [[MonkeyViewController alloc] init];
-                    
-                    if (self.estimate == YES) {
+                    if ([[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@"0"] || [[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@""]) {
                         
-                        monkeyVC.decide = YES;
+                        MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
                         
-                        [MobClick event:@"makeSure"];
+                        if (self.estimate == YES) {
+                            
+                            makeSureVC.decide = YES;
+                            
+                            [MobClick event:@"makeSure"];
+                            
+                        } else {
+                            
+                            makeSureVC.decide = NO;
+                            makeSureVC.nHand = self.nHand;
+                        }
+                        makeSureVC.detailM = self.detailM;
+                        makeSureVC.residueMoney = self.residueMoney;
+                        [self submitLoadingWithHidden:YES];
+                        [self.navigationController pushViewController:makeSureVC animated:YES];
                         
                     } else {
                         
-                        monkeyVC.decide = NO;
-                        monkeyVC.nHand = self.nHand;
+                        MonkeyViewController *monkeyVC = [[MonkeyViewController alloc] init];
+                        
+                        if (self.estimate == YES) {
+                            
+                            monkeyVC.decide = YES;
+                            
+                            [MobClick event:@"makeSure"];
+                            
+                        } else {
+                            
+                            monkeyVC.decide = NO;
+                            monkeyVC.nHand = self.nHand;
+                        }
+                        
+                        monkeyVC.detailM = self.detailM;
+                        monkeyVC.residueMoney = self.residueMoney;
+                        [self submitLoadingWithHidden:YES];
+                        [self.navigationController pushViewController:monkeyVC animated:YES];
+                        
                     }
                     
-                    monkeyVC.detailM = self.detailM;
-                    monkeyVC.residueMoney = self.residueMoney;
-                    [self submitLoadingWithHidden:YES];
-                    [self.navigationController pushViewController:monkeyVC animated:YES];
-                    
                 }
-                    
+                
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
