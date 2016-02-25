@@ -12,6 +12,7 @@
             <string>CenturyGothic</string>
             <string>CenturyGothic</string>
             <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -58,7 +59,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10000元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GpB-mR-7Pm">
-                        <rect key="frame" x="234" y="39" width="128" height="21"/>
+                        <rect key="frame" x="234" y="24" width="128" height="21"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="3xM-mp-Cqg"/>
@@ -79,17 +80,30 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100猴币" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmK-1n-YUq">
+                        <rect key="frame" x="234" y="40" width="128" height="21"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="bUG-Hu-T9z"/>
+                            <constraint firstAttribute="width" constant="128" id="lSH-uq-xip"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="11"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <animations/>
                 <constraints>
                     <constraint firstItem="4RU-55-Urp" firstAttribute="top" secondItem="gcu-L3-S3i" secondAttribute="bottom" constant="20" id="96w-AY-tkx"/>
-                    <constraint firstItem="GpB-mR-7Pm" firstAttribute="top" secondItem="gcu-L3-S3i" secondAttribute="bottom" constant="14" id="aTg-bu-D5d"/>
+                    <constraint firstItem="GpB-mR-7Pm" firstAttribute="top" secondItem="gcu-L3-S3i" secondAttribute="bottom" constant="-1" id="aTg-bu-D5d"/>
                     <constraint firstItem="gcu-L3-S3i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="fzD-s8-HdK"/>
+                    <constraint firstItem="SmK-1n-YUq" firstAttribute="centerY" secondItem="4RU-55-Urp" secondAttribute="centerY" id="gom-Eg-Sm2"/>
                     <constraint firstItem="ZXQ-Vi-hpt" firstAttribute="top" secondItem="gcu-L3-S3i" secondAttribute="bottom" id="gq1-Cu-J7D"/>
                     <constraint firstAttribute="trailingMargin" secondItem="GpB-mR-7Pm" secondAttribute="trailing" constant="5" id="j22-0F-TNP"/>
                     <constraint firstAttribute="trailingMargin" secondItem="EMn-CV-6Z3" secondAttribute="trailing" constant="5" id="jrE-PA-csr"/>
                     <constraint firstItem="ZXQ-Vi-hpt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="u1t-r3-CFH"/>
                     <constraint firstItem="4RU-55-Urp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="uB2-w8-gAl"/>
+                    <constraint firstItem="SmK-1n-YUq" firstAttribute="leading" secondItem="GpB-mR-7Pm" secondAttribute="leading" id="udU-7D-saR"/>
                     <constraint firstItem="EMn-CV-6Z3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="ykO-Pd-eoS"/>
                     <constraint firstItem="gcu-L3-S3i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="z0E-NW-31p"/>
                 </constraints>
@@ -98,6 +112,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>
+                <outlet property="MonkeyLabel" destination="SmK-1n-YUq" id="31z-eP-OYG"/>
                 <outlet property="dateLabel" destination="4RU-55-Urp" id="XXh-ds-Y8g"/>
                 <outlet property="moneyLabel" destination="GpB-mR-7Pm" id="gyk-Tf-vWq"/>
                 <outlet property="productName" destination="ZXQ-Vi-hpt" id="bm2-lS-Ngb"/>

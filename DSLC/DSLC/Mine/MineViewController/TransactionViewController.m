@@ -401,7 +401,7 @@ numberOfRowsInComponent:(NSInteger)component
             cell.stateLabel.textColor = [UIColor blackColor];
         } else if ([[tModel tradeStatus] isEqualToString:@"1"]) {
             cell.stateLabel.text = @"成功";
-            cell.stateLabel.textColor = [UIColor blueColor];
+            cell.stateLabel.textColor = [UIColor chongzhiColor];
         } else {
             cell.stateLabel.text = @"失败";
             cell.stateLabel.textColor = [UIColor zitihui];
@@ -409,7 +409,7 @@ numberOfRowsInComponent:(NSInteger)component
     } else {
         if ([[tModel tradeStatus] isEqualToString:@"1"]) {
             cell.stateLabel.text = @"成功";
-            cell.stateLabel.textColor = [UIColor blueColor];
+            cell.stateLabel.textColor = [UIColor chongzhiColor];
         } else {
             cell.stateLabel.text = @"失败";
             cell.stateLabel.textColor = [UIColor zitihui];
@@ -418,7 +418,37 @@ numberOfRowsInComponent:(NSInteger)component
     
     
     cell.typeLabel.text = [tModel tradeTypeName];
-    cell.moneyLabel.text = [DES3Util decrypt:[tModel tradeMoney]];
+    
+    NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[tModel tradeMoney]]]];
+    //    ,号前面是指起始位置 ,号后面是指到%这个位置截止的总长度
+    NSRange redRange = NSMakeRange(0, [[textString string] rangeOfString:@"元"].location);
+    [textString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
+    [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:redRange];
+    //    此句意思是指起始位置 是8.02%这个字符串的总长度减掉1 就是指起始位置是% 长度只有1
+    NSRange symbol = NSMakeRange([[textString string] length] - 1, 1);
+    [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:symbol];
+    [cell.moneyLabel setAttributedText:textString];
+    
+    NSMutableAttributedString *monkeyString;
+    if ([[tModel userMonkeyNum] isEqualToString:@""]) {
+        monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"0猴币"]];
+        cell.MonkeyLabel.hidden = YES;
+    } else {
+        monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@猴币",[tModel userMonkeyNum]]];
+        cell.MonkeyLabel.hidden = NO;
+    }
+    
+    //    ,号前面是指起始位置 ,号后面是指到%这个位置截止的总长度
+    NSRange redMonkeyRange = NSMakeRange(0, [[monkeyString string] rangeOfString:@"猴"].location);
+    [monkeyString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redMonkeyRange];
+    [monkeyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:redMonkeyRange];
+    //    此句意思是指起始位置 是8.02%这个字符串的总长度减掉1 就是指起始位置是% 长度只有1
+    NSRange symbolMonkey = NSMakeRange([[monkeyString string] length] - 2, 2);
+    [monkeyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:symbolMonkey];
+    [cell.MonkeyLabel setAttributedText:monkeyString];
+    
+    
+    
     cell.productName.text = [tModel tradeProductName];
     
     return cell;
