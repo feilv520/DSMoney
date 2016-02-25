@@ -62,6 +62,8 @@
     // 交易记录Id
     NSString *tranId;
     NSString *tranCode;
+    
+//    BOOL chooseBankName;
 }
 
 @property (nonatomic) LLPaySdk *sdk;
@@ -77,6 +79,8 @@
     
     seconds = 60;
     dicRealName = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+//    chooseBankName = NO;
     
     self.view.backgroundColor = [UIColor huibai];
     
@@ -328,6 +332,7 @@
         if (bankName == nil) {
             return 5;
         } else if ([bankName.bankName isEqualToString:@"工商银行"] || [bankName.bankName isEqualToString:@"农业银行"] || [bankName.bankName isEqualToString:@"中国银行"] || [bankName.bankName isEqualToString:@"招商银行"] ||[bankName.bankName isEqualToString:@"光大银行"]) {
+//            chooseBankName = YES;
             return 5;
         } else {
             return 6;
@@ -488,6 +493,12 @@
     textFieldSeven = (UITextField *)[self.view viewWithTag:407];
     
     NSLog(@"textFieldFive = %@",textFieldFive.text);
+    
+    // 支行的方法
+//    if (!chooseBankName) {
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请填写银行支行"];
+//        return;
+//    }
     
     NSDictionary *parmeter;
     if (bankZ == nil) {

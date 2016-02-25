@@ -510,7 +510,7 @@
     if ([self.residueMoney isEqualToString:@"0.00"]) {
         [self orderProduct];
         return;
-    } else if ([self.residueMoney floatValue] <= [[self.detailM amountMin] floatValue]) {
+    } else if ([self.residueMoney floatValue] < [[self.detailM amountMin] floatValue]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"剩余金额已小于起投金额,不能投资此产品"];
         return;
     }

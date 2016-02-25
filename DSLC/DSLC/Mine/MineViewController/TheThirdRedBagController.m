@@ -326,6 +326,7 @@
         cell.labelRequier.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.labelRequier.textColor = [UIColor zitihui];
         cell.labelRequier.backgroundColor = [UIColor clearColor];
+        cell.labelRequier.hidden = YES;
         
         cell.labelDay.text = [NSString stringWithFormat:@"理财期限大于%@天",[redbagModel daysLimit]];
         cell.labelDay.textColor = [UIColor zitihui];
