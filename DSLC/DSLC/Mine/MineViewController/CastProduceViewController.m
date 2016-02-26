@@ -235,7 +235,7 @@
             self.castDic = [NSDictionary dictionary];
             self.castDic = responseObject;
             
-            self.monkeyNumber = [[self.castDic objectForKey:@"Product"] objectForKey:@"userMonkeyNum"];
+            self.monkeyNumber = [[self.castDic objectForKey:@"Product"] objectForKey:@"usedMonkeyNum"];
             
             [self.mainTV reloadData];
         } else {

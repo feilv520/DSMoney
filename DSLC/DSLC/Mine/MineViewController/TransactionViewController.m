@@ -430,11 +430,11 @@ numberOfRowsInComponent:(NSInteger)component
     [cell.moneyLabel setAttributedText:textString];
     
     NSMutableAttributedString *monkeyString;
-    if ([[tModel userMonkeyNum] isEqualToString:@""]) {
+    if ([[tModel usedMonkeyNum] isEqualToString:@""]) {
         monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"0猴币"]];
         cell.MonkeyLabel.hidden = YES;
     } else {
-        monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@猴币",[tModel userMonkeyNum]]];
+        monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@猴币",[tModel usedMonkeyNum]]];
         cell.MonkeyLabel.hidden = NO;
     }
     

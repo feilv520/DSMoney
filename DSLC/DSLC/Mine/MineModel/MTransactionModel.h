@@ -19,6 +19,6 @@
 @property (nonatomic, copy) NSString *tradeTime;
 @property (nonatomic, copy) NSString *tradeType;
 @property (nonatomic, copy) NSString *tradeTypeName;
-@property (nonatomic, copy) NSString *userMonkeyNum;
+@property (nonatomic, copy) NSString *usedMonkeyNum;
 
 @end
