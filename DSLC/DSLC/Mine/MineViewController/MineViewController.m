@@ -348,7 +348,7 @@
         MonkeyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMonkey"];
         
         cell.imageName.image = [UIImage imageNamed:@"椭圆猴-9"];
-        cell.labelName.text = @"猴币";
+        cell.labelName.text = @"体验金";
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.labelName.textColor = [UIColor zitihui];
         

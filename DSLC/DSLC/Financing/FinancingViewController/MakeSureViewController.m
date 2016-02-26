@@ -312,7 +312,7 @@
             
             cell.textField.text = @"5000";
             cell.textField.enabled = NO;
-            cell.labelOneZi.text = @"猴币";
+            cell.labelOneZi.text = @"体验金";
         } else {
             
             cell.textField.placeholder = @"请输入投资金额";
@@ -436,7 +436,7 @@
             [self.buttonNew setImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
             self.buttonNew.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
             
-            NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"新手体验金5,000猴币"];
+            NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"新手体验金5,000体验金"];
             NSRange LeftSange = NSMakeRange([[redStr string] length] - 7, 7);
             [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:LeftSange];
             [self.buttonNew setAttributedTitle:redStr forState:UIControlStateNormal];

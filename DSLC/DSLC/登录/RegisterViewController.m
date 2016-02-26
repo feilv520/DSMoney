@@ -580,7 +580,7 @@
             
             finaCard = [[MyAfHTTPClient sharedClient] resetSizeOfImageData:savedImage maxSize:1024 * 2];
         
-            parameters = @{@"phone":self.registerV.phoneNumber.text,@"smsCode":self.registerV.smsCode.text,@"password":self.registerV.loginPassword.text,@"invitationCode":@"",@"ImgData":finaCard};
+            parameters = @{@"phone":self.registerV.phoneNumber.text,@"smsCode":self.registerV.smsCode.text,@"password":self.registerV.loginPassword.text,@"invitationCode":@"",@"ImgData":finaCard,@"clientType":@"iOS"};
             
             NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,@"app/register"];
             
@@ -674,7 +674,7 @@
             
             NSLog(@"普通注册");
             
-            parameters = @{@"phone":self.registerV.phoneNumber.text,@"smsCode":self.registerV.smsCode.text,@"password":self.registerV.loginPassword.text,@"invitationCode":self.registerV.sandMyselfIDCard.text,@"finaCard":@""};
+            parameters = @{@"phone":self.registerV.phoneNumber.text,@"smsCode":self.registerV.smsCode.text,@"password":self.registerV.loginPassword.text,@"invitationCode":self.registerV.sandMyselfIDCard.text,@"finaCard":@"",@"clientType":@"iOS"};
             
             [[MyAfHTTPClient sharedClient] postWithURLString:@"app/register" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
                 
