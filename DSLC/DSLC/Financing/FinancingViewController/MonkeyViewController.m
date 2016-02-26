@@ -435,7 +435,7 @@
         
         NSDictionary *monkeyDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
         
-        cell.labelGong.text = [NSString stringWithFormat:@"共%@个体验金", [monkeyDic objectForKey:@"monkeyNum"]];
+        cell.labelGong.text = [NSString stringWithFormat:@"共%@个猴币", [monkeyDic objectForKey:@"monkeyNum"]];
         cell.labelGong.font = [UIFont fontWithName:@"CenturyGothic" size:10];
         cell.labelGong.textColor = [UIColor zitihui];
         
@@ -948,6 +948,8 @@
     NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:4];
     NSIndexPath *path2 = [NSIndexPath indexPathForItem:0 inSection:3];
     
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
     MoneyCell *cell = (MoneyCell *)[self.tableView cellForRowAtIndexPath:path];
     CashMoneyCell *cell1 = (CashMoneyCell *)[self.tableView cellForRowAtIndexPath:path1];
     cell.labelYuan.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
@@ -958,7 +960,18 @@
     
     if (textField.text.length == 0) {
         
+        [cell2.buttonGe setImage:[UIImage imageNamed:@"iconfont"] forState:UIControlStateNormal];
         NSMutableAttributedString *buttonText = [[NSMutableAttributedString alloc] initWithString:@"0个"];
+        NSRange shuZi = NSMakeRange(0, [[buttonText string] rangeOfString:@"个"].location);
+        NSRange ge = NSMakeRange([[buttonText string] length] - 1, 1);
+        [buttonText addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
+        [buttonText addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:ge];
+        [cell2.buttonGe setAttributedTitle:buttonText forState:UIControlStateNormal];
+        
+    } else if ([[dic objectForKey:@"monkeyNum"] intValue] <= textField.text.intValue * 0.1) {
+        
+        [cell2.buttonGe setImage:[UIImage imageNamed:@"iconfont"] forState:UIControlStateNormal];
+        NSMutableAttributedString *buttonText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@个", [dic objectForKey:@"monkeyNum"]]];
         NSRange shuZi = NSMakeRange(0, [[buttonText string] rangeOfString:@"个"].location);
         NSRange ge = NSMakeRange([[buttonText string] length] - 1, 1);
         [buttonText addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:shuZi];
