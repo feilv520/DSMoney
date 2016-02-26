@@ -430,12 +430,14 @@ numberOfRowsInComponent:(NSInteger)component
     [cell.moneyLabel setAttributedText:textString];
     
     NSMutableAttributedString *monkeyString;
-    if ([[tModel usedMonkeyNum] isEqualToString:@""]) {
-        monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"0猴币"]];
-        cell.MonkeyLabel.hidden = YES;
-    } else {
-        monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@猴币",[tModel usedMonkeyNum]]];
-        cell.MonkeyLabel.hidden = NO;
+    if ([[tModel tradeType] isEqualToString:@"1"]) {
+        if ([[tModel usedMonkeyNum] isEqualToString:@""] || [[tModel usedMonkeyNum] isEqualToString:@"0"]) {
+            monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"0猴币"]];
+            cell.MonkeyLabel.hidden = YES;
+        } else {
+            monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@猴币",[tModel usedMonkeyNum]]];
+            cell.MonkeyLabel.hidden = NO;
+        }
     }
     
     //    ,号前面是指起始位置 ,号后面是指到%这个位置截止的总长度
