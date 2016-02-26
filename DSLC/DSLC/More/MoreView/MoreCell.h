@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewHead;
 @property (weak, nonatomic) IBOutlet UIImageView *imageRight;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
+@property (weak, nonatomic) IBOutlet UILabel *banbenhao;
 
 @end

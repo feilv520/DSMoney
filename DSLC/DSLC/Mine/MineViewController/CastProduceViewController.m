@@ -147,7 +147,7 @@
                 NSString *moneyString = [DES3Util decrypt:[[self.castDic objectForKey:@"Product"] objectForKey:@"money"]];
                 moneyString = [moneyString stringByReplacingOccurrencesOfString:@"," withString:@""];
                 
-                cell.productProfit.text = [NSString stringWithFormat:@"%.2lf元",[moneyString floatValue] * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"] floatValue] * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productPeriod"] floatValue] / 36500.0];
+                cell.productProfit.text = [NSString stringWithFormat:@"%.2lf元",([moneyString floatValue] + [moneyString floatValue] * 0.10) * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productAnnualYield"] floatValue] * [[[self.castDic objectForKey:@"Product"] objectForKey:@"productPeriod"] floatValue] / 36500.0];
                 
                 cell.productDate.text = [[self.castDic objectForKey:@"Product"] objectForKey:@"dueDate"];
                 

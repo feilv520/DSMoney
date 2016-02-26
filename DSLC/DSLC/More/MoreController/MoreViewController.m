@@ -62,7 +62,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"MoreCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 
     imageArr = @[@"bangzhu", @"lianxikefu", @"yijianfankui", @"guanyu"];
-    titleArr = @[@"帮助中心", @"联系客服", @"意见反馈", @"关于大圣理财"];
+    titleArr = @[@"帮助中心", @"联系客服", @"意见反馈", @"关于大圣理财", @"当前版本"];
     
 }
 
@@ -78,22 +78,40 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MoreCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    
-    if (cell == nil) {
+    if (indexPath.row == 4) {
+        MoreCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
-        cell = [[MoreCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
+        cell.imageViewHead.image = [UIImage imageNamed:[NSString stringWithFormat:@"iconfont-mima.png"]];
+//        cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+        
+        cell.imageRight.hidden = YES;
+        
+        cell.banbenhao.hidden = NO;
+        
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        
+        cell.banbenhao.text = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+        
+        cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
+        cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+
+    } else {
+        MoreCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        
+        cell.imageViewHead.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageArr objectAtIndex:indexPath.row]]];
+        cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+        
+        cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
+        cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
     }
-    
-    cell.imageViewHead.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", [imageArr objectAtIndex:indexPath.row]]];
-    cell.imageRight.image = [UIImage imageNamed:@"arrow"];
-    
-    cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
-    cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,7 +133,7 @@
         SuggestionViewController *suggestVC = [[SuggestionViewController alloc] init];
         [self.navigationController pushViewController:suggestVC animated:YES];
         
-    } else {
+    } else if (indexPath.row == 3){
         
         AboutViewController *aboutVC = [[AboutViewController alloc] init];
         [self.navigationController pushViewController:aboutVC animated:YES];
