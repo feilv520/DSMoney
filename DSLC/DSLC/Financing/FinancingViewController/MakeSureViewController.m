@@ -588,12 +588,35 @@
         }
     
     } else {
-        
+
         AppDelegate *app = [[UIApplication sharedApplication] delegate];
         
         self.textFieldC = (UITextField *)[self.view viewWithTag:199];
         CGFloat numberInt = [[[DES3Util decrypt:[self.accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
-        CGFloat shuRuInt = self.textFieldC.text.floatValue;
+        NSInteger shuRuInt = self.textFieldC.text.integerValue;
+        NSInteger qiTouMoney = self.detailM.amountMin.integerValue;
+        NSInteger diZengMoney = self.detailM.amountIncrease.integerValue;
+        NSInteger money = shuRuInt % diZengMoney;
+        
+        if (shuRuInt > qiTouMoney) {
+            
+            if (money == 0) {
+                
+//                _makeSure.enabled = YES;
+                [self getMyRedPacketList];
+                
+            } else {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请按照起投金额和递增金额条件输入"];
+//                _makeSure.enabled = NO;
+                return ;
+            }
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"投资金额大于起投金额"];
+            return ;
+        }
         
 //        当输入的值大于余额值 提示余额不足 是否充值
         if (shuRuInt > numberInt && shuRuInt != 0) {
