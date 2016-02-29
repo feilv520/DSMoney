@@ -598,17 +598,19 @@
         NSInteger diZengMoney = self.detailM.amountIncrease.integerValue;
         NSInteger money = shuRuInt % diZengMoney;
         
-        if (shuRuInt > qiTouMoney) {
-            
+        if (shuRuInt == qiTouMoney) {
+
+            [self getMyRedPacketList];
+    
+        } else if (shuRuInt > qiTouMoney) {
+    
             if (money == 0) {
-                
-//                _makeSure.enabled = YES;
+    
                 [self getMyRedPacketList];
-                
+    
             } else {
-                
+    
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请按照起投金额和递增金额条件输入"];
-//                _makeSure.enabled = NO;
                 return ;
             }
             
@@ -942,35 +944,35 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    self.textFieldC = (UITextField *)[self.view viewWithTag:199];
-    
-    NSInteger shuruMoney = self.textFieldC.text.integerValue;
-    NSInteger qiTouMoney = self.detailM.amountMin.integerValue;
-    NSInteger diZengMoney = self.detailM.amountIncrease.integerValue;
-    NSInteger money = shuruMoney % diZengMoney;
-    NSLog(@"==============%ld", (long)money);
-    
-    if (shuruMoney == qiTouMoney) {
-        _makeSure.enabled = YES;
-        [self getMyRedPacketList];
-        
-    } else if (shuruMoney > qiTouMoney) {
-        
-        if (money == 0) {
-            
-            _makeSure.enabled = YES;
-            [self getMyRedPacketList];
-            
-        } else {
-            
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请按照起投金额和递增金额条件输入"];
-            _makeSure.enabled = NO;
-        }
-        
-    } else {
-        
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"投资金额大于起投金额"];
-    }
+//    self.textFieldC = (UITextField *)[self.view viewWithTag:199];
+//    
+//    NSInteger shuruMoney = self.textFieldC.text.integerValue;
+//    NSInteger qiTouMoney = self.detailM.amountMin.integerValue;
+//    NSInteger diZengMoney = self.detailM.amountIncrease.integerValue;
+//    NSInteger money = shuruMoney % diZengMoney;
+//    NSLog(@"==============%ld", (long)money);
+//    
+//    if (shuruMoney == qiTouMoney) {
+//        _makeSure.enabled = YES;
+//        [self getMyRedPacketList];
+//        
+//    } else if (shuruMoney > qiTouMoney) {
+//        
+//        if (money == 0) {
+//            
+//            _makeSure.enabled = YES;
+//            [self getMyRedPacketList];
+//            
+//        } else {
+//            
+//            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请按照起投金额和递增金额条件输入"];
+//            _makeSure.enabled = NO;
+//        }
+//        
+//    } else {
+//        
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"投资金额大于起投金额"];
+//    }
     
 }
 
