@@ -91,7 +91,7 @@
         [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             NSLog(@"%u",response.responseCode);
             if (response.responseCode == UMSResponseCodeSuccess) {
-                [self getShareRedPacket];
+//                [self getShareRedPacket];
                 NSLog(@"邀请成功！");
             }
         }];
@@ -101,7 +101,7 @@
         [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             NSLog(@"%u",response.responseCode);
             if (response.responseCode == UMSResponseCodeSuccess) {
-                [self getShareRedPacket];
+//                [self getShareRedPacket];
                 NSLog(@"邀请成功！");
             }
         }];
@@ -111,7 +111,7 @@
         [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
             NSLog(@"shareResponse = %u",shareResponse.responseCode);
             if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-                [self getShareRedPacket];
+//                [self getShareRedPacket];
                 NSLog(@"邀请成功！");
             }
         }];
@@ -121,7 +121,7 @@
         [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToRenren] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             NSLog(@"%u",response.responseCode);
             if (response.responseCode == UMSResponseCodeSuccess) {
-                [self getShareRedPacket];
+//                [self getShareRedPacket];
                 NSLog(@"邀请成功！");
             }
         }];
@@ -131,7 +131,7 @@
         [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             NSLog(@"%u",response.responseCode);
             if (response.responseCode == UMSResponseCodeSuccess) {
-                [self getShareRedPacket];
+//                [self getShareRedPacket];
                 NSLog(@"邀请成功！");
             }
         }];
