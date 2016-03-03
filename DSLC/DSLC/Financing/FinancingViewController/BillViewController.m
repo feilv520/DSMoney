@@ -167,7 +167,7 @@
     [rightString addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:rightR];
     [cell.butRightUp setAttributedTitle:rightString forState:UIControlStateNormal];
     
-    cell.labelLeftDown.text = @"年化收益率";
+    cell.labelLeftDown.text = @"预期年化收益率";
     cell.labelLeftDown.textColor = [UIColor zitihui];
     cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
