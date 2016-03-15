@@ -252,6 +252,8 @@
 		8183F40F1C97CD4E000BB93C /* messageNew@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F40B1C97CD4E000BB93C /* messageNew@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8183F4101C97CD4E000BB93C /* messageOld@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F40C1C97CD4E000BB93C /* messageOld@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8183F4111C97CD4E000BB93C /* messageOld@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F40D1C97CD4E000BB93C /* messageOld@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F4121C97CE09000BB93C /* TDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3A41C969766000BB93C /* TDescriptionCell.xib */; };
+		8183F4131C97CF29000BB93C /* TDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F3A31C969766000BB93C /* TDescriptionCell.m */; };
 		8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC361BCC96E1003F440D /* MakeSureViewController.m */; };
 		8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC391BCCD0FE003F440D /* ContentCell.m */; };
 		8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC3A1BCCD0FE003F440D /* ContentCell.xib */; };
@@ -4502,6 +4504,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8183F4121C97CE09000BB93C /* TDescriptionCell.xib in Resources */,
 				8D43439A1BFDEB0B000BA004 /* loading_middle_01.png in Resources */,
 				8D968A791C96A9FD00C9A6A1 /* mylicaishi@2x.png in Resources */,
 				8D9011B01BD6337C00E5D62A /* 04@3x.png in Resources */,
@@ -5042,6 +5045,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8183F4131C97CF29000BB93C /* TDescriptionCell.m in Sources */,
 				8D968A8F1C97AEFD00C9A6A1 /* TSignInViewController.m in Sources */,
 				8D968A8E1C97AEF400C9A6A1 /* TRankinglistViewController.m in Sources */,
 				8D968A8D1C97AEDE00C9A6A1 /* TBigTurntableViewController.m in Sources */,
