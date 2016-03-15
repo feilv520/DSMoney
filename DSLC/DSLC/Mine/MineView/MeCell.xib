@@ -5,6 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="CenturyGothic.TTF">
+            <string>CenturyGothic</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,11 +36,22 @@
                             <constraint firstAttribute="width" constant="16" id="sdZ-Ah-Aeh"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATk-hq-u6g">
-                        <rect key="frame" x="60" y="10" width="257" height="30"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdm-my-SR7">
+                        <rect key="frame" x="60" y="25" width="257" height="21"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="2z6-ow-dph"/>
+                            <constraint firstAttribute="width" constant="257" id="Ft2-sX-GaS"/>
+                            <constraint firstAttribute="height" constant="21" id="muq-Ns-Ns7"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATk-hq-u6g">
+                        <rect key="frame" x="60" y="6" width="257" height="23"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="2z6-ow-dph"/>
                             <constraint firstAttribute="width" constant="257" id="7un-GK-0RG"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -45,11 +61,14 @@
                 </subviews>
                 <animations/>
                 <constraints>
+                    <constraint firstItem="Hdm-my-SR7" firstAttribute="leading" secondItem="OPo-oz-ScW" secondAttribute="trailing" constant="10" id="0lU-dj-vFI"/>
                     <constraint firstItem="OPo-oz-ScW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-3" id="93x-QO-Wlm"/>
-                    <constraint firstItem="ATk-hq-u6g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="ApF-KQ-5m9"/>
+                    <constraint firstItem="ATk-hq-u6g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="ApF-KQ-5m9"/>
+                    <constraint firstItem="Hdm-my-SR7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="L38-TM-QID"/>
                     <constraint firstAttribute="trailingMargin" secondItem="XIw-3C-C2e" secondAttribute="trailing" constant="2" id="ZY0-zN-9hy"/>
                     <constraint firstItem="ATk-hq-u6g" firstAttribute="leading" secondItem="OPo-oz-ScW" secondAttribute="trailing" constant="10" id="dBD-RN-3wl"/>
                     <constraint firstItem="OPo-oz-ScW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="gg9-H8-zRB"/>
+                    <constraint firstItem="XIw-3C-C2e" firstAttribute="leading" secondItem="Hdm-my-SR7" secondAttribute="trailing" constant="32" id="sh8-gr-k4M"/>
                     <constraint firstItem="XIw-3C-C2e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="9" id="yOI-ne-SqD"/>
                 </constraints>
             </tableViewCellContentView>
@@ -58,6 +77,7 @@
             <connections>
                 <outlet property="imageHeadPic" destination="OPo-oz-ScW" id="nOd-u9-X6g"/>
                 <outlet property="imageRight" destination="XIw-3C-C2e" id="gMs-hw-4Rs"/>
+                <outlet property="labelInviteNumber" destination="Hdm-my-SR7" id="IZZ-dl-OmO"/>
                 <outlet property="labelName" destination="ATk-hq-u6g" id="26T-aM-Ryf"/>
             </connections>
             <point key="canvasLocation" x="272.5" y="145"/>

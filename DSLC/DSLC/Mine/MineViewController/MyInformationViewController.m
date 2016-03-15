@@ -25,6 +25,7 @@
 #import "MyAlreadyBindingBank.h"
 #import "AddBankViewController.h"
 #import "BankName.h"
+#import "MoreViewController.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -108,7 +109,7 @@
 {
     titleArr = @[@[@"我的银行卡"],
                  @[@"更换手机", @"绑定邮箱", @"实名认证"],
-                 @[@"登录密码", @"交易密码", @"手势密码", @"修改手势密码"]];
+                 @[@"登录密码", @"交易密码", @"更多", @"手势密码", @"修改手势密码"]];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
@@ -183,7 +184,7 @@
         
     } else {
         
-        return 2;
+        return 3;
     }
 }
 
@@ -206,6 +207,9 @@
         
         cell.labelName.text = [DES3Util decrypt:[self.dataDic objectForKey:@"userRealname"]];
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        
+        cell.labelInviteNumber.text = [NSString stringWithFormat:@"邀请码   %@",[self.dataDic objectForKey:@"invitationMyCode"]];
+        cell.labelInviteNumber.textColor = [UIColor zitihui];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -370,6 +374,9 @@
                 [self.navigationController pushViewController:setDeal animated:YES];
 
             }
+        } else {
+            MoreViewController *moreVC = [[MoreViewController alloc] init];
+            [self.navigationController pushViewController:moreVC animated:YES];
         }
     }
 }

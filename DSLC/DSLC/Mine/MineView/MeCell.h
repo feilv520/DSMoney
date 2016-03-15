@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelName;
 @property (weak, nonatomic) IBOutlet YYAnimatedImageView *imageHeadPic;
 @property (weak, nonatomic) IBOutlet UIImageView *imageRight;
+@property (weak, nonatomic) IBOutlet UILabel *labelInviteNumber;
 
 @end
