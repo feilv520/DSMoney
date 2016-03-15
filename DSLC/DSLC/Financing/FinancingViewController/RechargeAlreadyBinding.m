@@ -79,7 +79,7 @@
     [_tabelView registerNib:[UINib nibWithNibName:@"BankWhichCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tabelView registerNib:[UINib nibWithNibName:@"AddBankCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     
-    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 160, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
+    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 320, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
     [self.view addSubview:buttonNext];
     buttonNext.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
@@ -95,7 +95,7 @@
     
     ChongZhiZZZZView *chongZV = (ChongZhiZZZZView *)[[rootBundle loadNibNamed:@"ChongZhiZZZZView" owner:nil options:nil] lastObject];
     
-    chongZV.frame = CGRectMake(0, 250, WIDTH_CVIEW_DEFAULT, 140);
+    chongZV.frame = CGRectMake(0, 120, WIDTH_CVIEW_DEFAULT, 150);
     
     [self.view addSubview:chongZV];
     

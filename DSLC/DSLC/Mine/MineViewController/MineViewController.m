@@ -107,8 +107,8 @@
 
 - (void)showPictureAndTitle
 {
-    titleArr = @[@"账户资产", @"我的资料", @"我的红包", @"好友邀请", @"交易记录", @"消息中心"];
-    pictureArr = @[@"zhanghu", @"ziliao", @"hongbao", @"haoyou", @"jiaoyi", @"xiaoxi"];
+    titleArr = @[@"我的投资", @"个人信息", @"我的红包", @"账单", @"好友邀请"];
+    pictureArr = @[@"zhanghu", @"ziliao", @"hongbao", @"jiaoyi", @"haoyou"];
 }
 
 - (void)showTableView
@@ -185,37 +185,19 @@
     
 //    我的理财师/咨询按钮
     butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - (85 / 375.0) * WIDTH_CONTROLLER_DEFAULT, 31, (75 / 375.0) * WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (25 / 667.0)) backgroundColor:nil textColor:[UIColor whiteColor] titleText:nil];
-    if ([[[self.myAccountInfo objectForKey:@"inviteType"] description] isEqualToString:@"0"]) {
-
-        [butInvitate setBackgroundImage:[UIImage imageNamed:@"anniu"] forState:UIControlStateNormal];
-        [butInvitate setTitle:@"我的理财师" forState:UIControlStateNormal];
-        butInvitate.tag = 9092;
-        
-    } else {
-        
-        if ([[[self.myAccountInfo objectForKey:@"chatMsgCount"] description] isEqualToString:@"0"]) {
-            [butInvitate setBackgroundImage:[UIImage imageNamed:@"UserAsk"] forState:UIControlStateNormal];
-        } else {
-            [butInvitate setBackgroundImage:[UIImage imageNamed:@"椭圆-2"] forState:UIControlStateNormal];
-        }
-        butInvitate.tag = 8090;
-    }
-    
-//    我的理财师按钮
+//    [butInvitate setBackgroundImage:[UIImage imageNamed:@"anniu"] forState:UIControlStateNormal];
+    [butInvitate setTitle:@"消息中心" forState:UIControlStateNormal];
+    butInvitate.titleLabel.font = [UIFont systemFontOfSize:12];
+    butInvitate.tag = 9092;
+    [butInvitate addTarget:self action:@selector(inviteButton:) forControlEvents:UIControlEventTouchUpInside];
     [imageRedBG addSubview:butInvitate];
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        butInvitate.titleLabel.font = [UIFont systemFontOfSize:11];
+    
+    if ([[self.myAccountInfo objectForKey:@"msgCount"] isEqualToString:@"0"]) {
+        [butInvitate setBackgroundImage:[UIImage imageNamed:@"messageOld"] forState:UIControlStateNormal];
     } else {
-        butInvitate.titleLabel.font = [UIFont systemFontOfSize:13];
+        [butInvitate setBackgroundImage:[UIImage imageNamed:@"messageNew"] forState:UIControlStateNormal];
     }
     
-    if (butInvitate.tag == 9092) {
-        
-        [butInvitate addTarget:self action:@selector(inviteButton:) forControlEvents:UIControlEventTouchUpInside];
-    } else {
-        [butInvitate addTarget:self action:@selector(userListButton:) forControlEvents:UIControlEventTouchUpInside];
-    }
-
 //    昨日收益钱数
     UILabel *labelNum = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT)/2, HEIGHT_CONTROLLER_DEFAULT * (63.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (200.0 / 375.0), 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     
@@ -263,35 +245,35 @@
     middleView.viewLLine.backgroundColor = [UIColor grayColor];
     middleView.viewLLine.alpha = 0.3;
     
-    middleView.labelWanYuan.text = [[DES3Util decrypt: [self.myAccountInfo objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
-    middleView.labelWanYuan.font = [UIFont systemFontOfSize:[self sizeOfLength:middleView.labelWanYuan.text]];
-    middleView.labelWanYuan.textColor = Color_Black;
-    middleView.labelWanYuan.alpha = 0.7;
-    middleView.labelWanYuan.textAlignment = NSTextAlignmentCenter;
-
     middleView.labelYuan.text = [[DES3Util decrypt: [self.myAccountInfo objectForKey:@"totalMoney"]]  stringByReplacingOccurrencesOfString:@"," withString:@""];
     middleView.labelYuan.font = [UIFont systemFontOfSize:[self sizeOfLength:middleView.labelWanYuan.text]];
     middleView.labelYuan.textColor = Color_Black;
     middleView.labelYuan.alpha = 0.7;
     middleView.labelYuan.textAlignment = NSTextAlignmentCenter;
     
-    middleView.labelAllMoney.text = [[DES3Util decrypt: [self.myAccountInfo objectForKey:@"totalProfit"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
+    middleView.labelWanYuan.text = [[DES3Util decrypt: [self.myAccountInfo objectForKey:@"totalProfit"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
+    middleView.labelWanYuan.font = [UIFont systemFontOfSize:[self sizeOfLength:middleView.labelWanYuan.text]];
+    middleView.labelWanYuan.textColor = Color_Black;
+    middleView.labelWanYuan.alpha = 0.7;
+    middleView.labelWanYuan.textAlignment = NSTextAlignmentCenter;
+    
+    middleView.labelAllMoney.text = [self.myAccountInfo objectForKey:@"monkeyNum"];
     middleView.labelAllMoney.font = [UIFont systemFontOfSize:[self sizeOfLength:middleView.labelWanYuan.text]];
     middleView.labelAllMoney.textColor = Color_Black;
     middleView.labelAllMoney.alpha = 0.7;
     middleView.labelAllMoney.textAlignment = NSTextAlignmentCenter;
     
-    middleView.labelMyMoney.text = @"在投金额(元)";
+    middleView.labelMyMoney.text = @"账户余额(元)";
     middleView.labelMyMoney.textColor = [UIColor zitihui];
     middleView.labelMyMoney.textAlignment = NSTextAlignmentCenter;
     middleView.labelMyMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-    middleView.labelData.text = @"账户余额(元)";
+    middleView.labelData.text = @"累计收益(元)";
     middleView.labelData.textColor = [UIColor zitihui];
     middleView.labelData.textAlignment = NSTextAlignmentCenter;
     middleView.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-    middleView.labelTAllMoney.text = @"累计收益(元)";
+    middleView.labelTAllMoney.text = @"猴币(个)";
     middleView.labelTAllMoney.textColor = [UIColor zitihui];
     middleView.labelTAllMoney.textAlignment = NSTextAlignmentCenter;
     middleView.labelTAllMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
@@ -329,43 +311,39 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 1;
-    } else {
-        return 6;
-    }
+    return titleArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        
-        MonkeyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMonkey"];
-        
-        cell.imageName.image = [UIImage imageNamed:@"椭圆猴-9"];
-        cell.labelName.text = @"猴币";
-        cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        cell.labelName.textColor = [UIColor zitihui];
-        
-        cell.labelGeShu.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-        cell.labelGeShu.textAlignment = NSTextAlignmentRight;
-        NSMutableAttributedString *textShu = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@个", [self.myAccountInfo objectForKey:@"monkeyNum"]]];
-        NSRange geText = NSMakeRange([[textShu string] length] - 1, 1);
-        NSRange leftText = NSMakeRange(0, [[textShu string]rangeOfString:@"个"].location);
-        [textShu addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:leftText];
-        [textShu addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:geText];
-        [cell.labelGeShu setAttributedText:textShu];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-        
-    } else {
-        
+//    if (indexPath.section == 0) {
+//        
+//        MonkeyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMonkey"];
+//        
+//        cell.imageName.image = [UIImage imageNamed:@"椭圆猴-9"];
+//        cell.labelName.text = @"猴币";
+//        cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+//        cell.labelName.textColor = [UIColor zitihui];
+//        
+//        cell.labelGeShu.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+//        cell.labelGeShu.textAlignment = NSTextAlignmentRight;
+//        NSMutableAttributedString *textShu = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@个", [self.myAccountInfo objectForKey:@"monkeyNum"]]];
+//        NSRange geText = NSMakeRange([[textShu string] length] - 1, 1);
+//        NSRange leftText = NSMakeRange(0, [[textShu string]rangeOfString:@"个"].location);
+//        [textShu addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:leftText];
+//        [textShu addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:geText];
+//        [cell.labelGeShu setAttributedText:textShu];
+//        
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        return cell;
+//        
+//    } else {
+    
         MineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
         cell.imageViewPic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [pictureArr objectAtIndex:indexPath.row]]];
@@ -443,57 +421,73 @@
         }
         
         return cell;
-    }
+//    }
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+    if (indexPath.row == 1) {
+        
+        [MobClick event:@"MyInformation"];
+        MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
+        [self.navigationController pushViewController:myInformationVC animated:YES];
+        
+    } else if (indexPath.row == 2) {
+        
+        [MobClick event:@"ThirdRedBag"];
+        TheThirdRedBagController *myRedBagVC = [[TheThirdRedBagController alloc] init];
+        [self.navigationController pushViewController:myRedBagVC animated:YES];
+        
+    } else if (indexPath.row == 0) {
+        
+        [MobClick event:@"ProductSetting"];
+        ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
+        [self.navigationController pushViewController:pSettringVC animated:YES];
+        
+    } else if (indexPath.row == 5) {
+        
+        [MobClick event:@"MyPlanner"];
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            butInvitate.titleLabel.font = [UIFont systemFontOfSize:11];
+        } else {
+            butInvitate.titleLabel.font = [UIFont systemFontOfSize:13];
+        }
     
-    if (indexPath.section == 0) {
+        if ([[[self.myAccountInfo objectForKey:@"inviteType"] description] isEqualToString:@"0"]) {
+            
+            if ([[[self.myAccountInfo objectForKey:@"myFinPlanner"] description] isEqualToString:@"0"]) {
         
-        NSLog(@"猴币");
+        //      如果还没有自己的理财师 跳转到理财师列表的页面
+                MyChoosePlanner *myChoose = [[MyChoosePlanner alloc] init];
+                [self.navigationController pushViewController:myChoose animated:YES];
         
-    } else {
+            } else {
         
-        if (indexPath.row == 1) {
-            
-            [MobClick event:@"MyInformation"];
-            MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
-            [self.navigationController pushViewController:myInformationVC animated:YES];
-            
-        } else if (indexPath.row == 2) {
-            
-            [MobClick event:@"ThirdRedBag"];
-            TheThirdRedBagController *myRedBagVC = [[TheThirdRedBagController alloc] init];
-            [self.navigationController pushViewController:myRedBagVC animated:YES];
-            
-        } else if (indexPath.row == 0) {
-            
-            [MobClick event:@"ProductSetting"];
-            ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
-            [self.navigationController pushViewController:pSettringVC animated:YES];
-            
-        } else if (indexPath.row == 5) {
-            
-            [MobClick event:@"MyNews"];
-            MyNewsViewController *myNewsVC = [[MyNewsViewController alloc] init];
-            [self.navigationController pushViewController:myNewsVC animated:YES];
-            
-        } else if (indexPath.row == 4) {
-            
-            [MobClick event:@"Transaction"];
-            TransactionViewController *transactionVC = [[TransactionViewController alloc] init];
-            [self.navigationController pushViewController:transactionVC animated:YES];
-            
-        } else if (indexPath.row == 3) {
-            
-            [MobClick event:@"MyInvitation"];
-            MyInvitationViewController *myInvitationVC = [[MyInvitationViewController alloc] init];
-            [self.navigationController pushViewController:myInvitationVC animated:YES];
+        //      如果已经有自己的理财师直接跳转到我的理财师
+                MyPlannerViewController *myPlannerVC = [[MyPlannerViewController alloc] init];
+                myPlannerVC.design = 1;
+                [self.navigationController pushViewController:myPlannerVC animated:YES];        
+            }
+        } else {
+            UserListViewController *userList = [[UserListViewController alloc] init];
+            [self.navigationController pushViewController:userList animated:YES];
         }
         
+    } else if (indexPath.row == 3) {
+        
+        [MobClick event:@"Transaction"];
+        TransactionViewController *transactionVC = [[TransactionViewController alloc] init];
+        [self.navigationController pushViewController:transactionVC animated:YES];
+        
+    } else if (indexPath.row == 4) {
+        
+        [MobClick event:@"MyInvitation"];
+        MyInvitationViewController *myInvitationVC = [[MyInvitationViewController alloc] init];
+        [self.navigationController pushViewController:myInvitationVC animated:YES];
     }
     
 }
@@ -516,20 +510,26 @@
 //我的理财师按钮
 - (void)inviteButton:(UIButton *)button
 {
-    [MobClick event:@"MyPlanner"];
-    if ([[[self.myAccountInfo objectForKey:@"myFinPlanner"] description] isEqualToString:@"0"]) {
-        
-//      如果还没有自己的理财师 跳转到理财师列表的页面
-        MyChoosePlanner *myChoose = [[MyChoosePlanner alloc] init];
-        [self.navigationController pushViewController:myChoose animated:YES];
-        
-    } else {
-        
-//      如果已经有自己的理财师直接跳转到我的理财师
-        MyPlannerViewController *myPlannerVC = [[MyPlannerViewController alloc] init];
-        myPlannerVC.design = 1;
-        [self.navigationController pushViewController:myPlannerVC animated:YES];        
-    }
+    [MobClick event:@"MyNews"];
+    
+    MyNewsViewController *myNewsVC = [[MyNewsViewController alloc] init];
+    [self.navigationController pushViewController:myNewsVC animated:YES];
+
+    
+    // 理财师判断,, 这地方一定要记住
+//    if ([[[self.myAccountInfo objectForKey:@"myFinPlanner"] description] isEqualToString:@"0"]) {
+//        
+////      如果还没有自己的理财师 跳转到理财师列表的页面
+//        MyChoosePlanner *myChoose = [[MyChoosePlanner alloc] init];
+//        [self.navigationController pushViewController:myChoose animated:YES];
+//        
+//    } else {
+//        
+////      如果已经有自己的理财师直接跳转到我的理财师
+//        MyPlannerViewController *myPlannerVC = [[MyPlannerViewController alloc] init];
+//        myPlannerVC.design = 1;
+//        [self.navigationController pushViewController:myPlannerVC animated:YES];        
+//    }
 }
 
 //充值按钮
@@ -620,6 +620,8 @@
             
             NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
             
+            [dic setValue:[responseObject objectForKey:@"inviteType"] forKey:@"inviteType"];
+            [dic setValue:[responseObject objectForKey:@"myFinPlanner"] forKey:@"myFinPlanner"];
             [dic setValue:[responseObject objectForKey:@"invitationMyCode"] forKey:@"invitationMyCode"];
             [dic setValue:[responseObject objectForKey:@"accBalance"] forKey:@"accBalance"];
             [dic setValue:[responseObject objectForKey:@"redPacket"] forKey:@"redPacket"];
