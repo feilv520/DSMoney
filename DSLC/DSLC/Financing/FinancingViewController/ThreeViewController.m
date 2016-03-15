@@ -59,25 +59,25 @@
     scrollView = [CreatView creatWithScrollViewFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 45) backgroundColor:[UIColor whiteColor] contentSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT/3, 0) contentOffSet:CGPointMake(0, 0)];
     [self.view addSubview:scrollView];
     
-    button1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:@"火爆专区"];
+    button1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/2, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] titleText:@"火爆专区"];
     [scrollView addSubview:button1];
     button1.tag = 101;
     button1.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [button1 addTarget:self action:@selector(button1Press:) forControlEvents:UIControlEventTouchUpInside];
     
-    button2 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"固收理财"];
+    button2 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 0, WIDTH_CONTROLLER_DEFAULT/2, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"固收理财"];
     [scrollView addSubview:button2];
     button2.tag = 201;
     button2.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [button2 addTarget:self action:@selector(button2Press:) forControlEvents:UIControlEventTouchUpInside];
     
-    button3 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"银行票据"];
-    [scrollView addSubview:button3];
-    button3.tag = 301;
-    button3.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [button3 addTarget:self action:@selector(button3Press:) forControlEvents:UIControlEventTouchUpInside];
+//    button3 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 0, WIDTH_CONTROLLER_DEFAULT/3, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"银行票据"];
+//    [scrollView addSubview:button3];
+//    button3.tag = 301;
+//    button3.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+//    [button3 addTarget:self action:@selector(button3Press:) forControlEvents:UIControlEventTouchUpInside];
     
-    labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/3, 2) backgroundColor:[UIColor daohanglan] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/2, 2) backgroundColor:[UIColor daohanglan] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     [self.view addSubview:labelLine];
     
     newbieVC = [[NewbieViewController alloc] init];
@@ -112,7 +112,7 @@
     
     [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         
-        labelLine.frame = CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
+        labelLine.frame = CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/2, 2);
         
     } completion:^(BOOL finished) {
         
@@ -149,7 +149,7 @@
     
     [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         
-        labelLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
+        labelLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 43, WIDTH_CONTROLLER_DEFAULT/2, 2);
         
     } completion:^(BOOL finished) {
         
@@ -160,37 +160,37 @@
     [button3 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
 }
 
-- (void)button3Press:(UIButton *)button
-{
-    NSLog(@"3");
-    
-    [MobClick event:@"bankZone"];
-    
-    [newbieVC removeFromParentViewController];
-    [newbieVC.view removeFromSuperview];
-    newbieVC = nil;
-    
-    [billVC removeFromParentViewController];
-    [billVC.view removeFromSuperview];
-    billVC = nil;
-    
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        
-        labelLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    financingVC = [[FinancingViewController alloc] init];
-    [self addChildViewController:financingVC];
-    [self.view addSubview:financingVC.view];
-    financingVC.view.frame = CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53);
-    
-    [button3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button1 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-    [button2 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-}
+//- (void)button3Press:(UIButton *)button
+//{
+//    NSLog(@"3");
+//    
+//    [MobClick event:@"bankZone"];
+//    
+//    [newbieVC removeFromParentViewController];
+//    [newbieVC.view removeFromSuperview];
+//    newbieVC = nil;
+//    
+//    [billVC removeFromParentViewController];
+//    [billVC.view removeFromSuperview];
+//    billVC = nil;
+//    
+//    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+//        
+//        labelLine.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/3 * 2, 43, WIDTH_CONTROLLER_DEFAULT/3, 2);
+//        
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+//    
+//    financingVC = [[FinancingViewController alloc] init];
+//    [self addChildViewController:financingVC];
+//    [self.view addSubview:financingVC.view];
+//    financingVC.view.frame = CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53);
+//    
+//    [button3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [button1 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+//    [button2 setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

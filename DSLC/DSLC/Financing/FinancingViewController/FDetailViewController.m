@@ -21,6 +21,8 @@
 #import "InvestNoticeViewController.h"
 #import "ProductDetailModel.h"
 #import "MonkeyViewController.h"
+#import "TDescriptionCell.h"
+#import "TRiskGradeViewController.h"
 
 @interface FDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
@@ -76,7 +78,7 @@
     
     self.view.backgroundColor = [UIColor huibai];
 
-    titleArr = @[@"产品描述", @"投资须知", @"投资记录"];
+    titleArr = @[@"投资记录", @"风险等级"];
     
     [self.navigationItem setTitle:@"产品详情"];
     
@@ -86,35 +88,35 @@
 //头部分区的tableView展示
 - (void)showTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 49) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 28) style:UITableViewStyleGrouped]; //49
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     UIView *viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 53)];
     _tableView.tableFooterView = viewFoot;
     viewFoot.backgroundColor = [UIColor huibai];
-    
-//    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 15, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"由中国银行保障您的账户资金安全"];
-//    [viewFoot addSubview:buttonSafe];
-//    buttonSafe.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
-//    [buttonSafe setImage:[UIImage imageNamed:@"iocn_saft"] forState:UIControlStateNormal];
+    _tableView.separatorColor = [UIColor qianhuise];
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.1)];
     
     [_tableView registerNib:[UINib nibWithNibName:@"FixInvestCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     [_tableView registerNib:[UINib nibWithNibName:@"BasicMessageCell" bundle:nil] forCellReuseIdentifier:@"reuse2"];
     [_tableView registerNib:[UINib nibWithNibName:@"PlanCell" bundle:nil] forCellReuseIdentifier:@"reuse3"];
     [_tableView registerNib:[UINib nibWithNibName:@"ThreeCell" bundle:nil] forCellReuseIdentifier:@"reuse4"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TDescriptionCell" bundle:nil] forCellReuseIdentifier:@"reuseTwo"];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        
         return 0;
-        
     } else {
-        
-        return 11;
+        return 10;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -125,9 +127,13 @@
         
     } else if (indexPath.section == 1) {
         
-        return 273;
+        return 160;
         
     } else if (indexPath.section == 2) {
+        
+        return 165;
+        
+    } else if (indexPath.section == 3) {
         
         return 154;
     }
@@ -137,15 +143,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 3) {
-        
-        return 3;
-    }
     return 1;
 }
 
@@ -170,34 +172,26 @@
         
         cell.labelMonth.font = [UIFont systemFontOfSize:15];
         
-        cell.labelBuyNum.text = [NSString stringWithFormat:@"已有%@人购买",self.buyNumber];
+//        cell.labelBuyNum.text = [NSString stringWithFormat:@"已有%@人购买",self.buyNumber];
         cell.labelBuyNum.textAlignment = NSTextAlignmentRight;
         cell.labelBuyNum.font = [UIFont systemFontOfSize:12];
         cell.labelBuyNum.textColor = [UIColor zitihui];
+        cell.labelBuyNum.text = @"投资须知";
         
-        NSMutableAttributedString *redString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[self.detailM productAnnualYield]]];
-        NSRange redLocation = NSMakeRange(0, [[redString string] rangeOfString:@"%"].location);
-        [redString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redLocation];
-        [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:redLocation];
-        NSRange percent = NSMakeRange([[redString string] length] - 1, 1);
-        [redString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:percent];
-        [cell.labelPercentage setAttributedText:redString];
+        cell.labelPercentage.text = [self.detailM productAnnualYield];
+        cell.labelPercentage.textColor = [UIColor daohanglan];
+        cell.labelPercentage.font = [UIFont fontWithName:@"ArialMT" size:23];
         
-        NSMutableAttributedString *dayString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[self.detailM productPeriod]]];
-        NSRange dayRange = NSMakeRange(0, [[dayString string] rangeOfString:@"天"].location);
-        [dayString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:dayRange];
-        NSRange tianRange = NSMakeRange([[dayString string] length] - 1, 1);
-        [dayString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:tianRange];
-        [cell.labelDayNum setAttributedText:dayString];
-        cell.labelDayNum.textAlignment = NSTextAlignmentCenter;
+        cell.labelDayNum.text = [self.detailM productPeriod];
+        cell.labelDayNum.font = [UIFont fontWithName:@"ArialMT" size:23];
         
         cell.viewDiSe.backgroundColor = [UIColor qianhuise];
         
-        cell.labelIncome.text = @"预期年化收益率";
+        cell.labelIncome.text = @"预期年化收益率(%)";
         cell.labelIncome.textColor = [UIColor zitihui];
         cell.labelIncome.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.labelDeadline.text = @"理财期限";
+        cell.labelDeadline.text = @"理财期限(天)";
         cell.labelDeadline.textColor = [UIColor zitihui];
         cell.labelDeadline.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelDeadline.textAlignment = NSTextAlignmentCenter;
@@ -228,7 +222,7 @@
                 [cell.butCountDown setImage:[UIImage imageNamed:@"61-拷贝"] forState:UIControlStateNormal];
                 [cell.butCountDown setTitle:[NSString stringWithFormat:@" %@ %@", @"倒计时", @"12:12:12"] forState:UIControlStateNormal];
                 
-//                火爆专区非新手专享没剩余时要隐藏
+//            火爆专区非新手专享没剩余时要隐藏
             } else {
                 
                 cell.butCountDown.hidden = YES;
@@ -260,73 +254,40 @@
         cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.alpha = 0.7;
         
-        cell.labelName.text = @"产品名称";
-        cell.labelName.textColor = [UIColor zitihui];
-        cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        cell.imageOne.image = [UIImage imageNamed:@"iconfont-jixifangshi"];
+        cell.imageTwo.image = [UIImage imageNamed:@"iconfont-shijian"];
+        cell.imageThree.image = [UIImage imageNamed:@"iconfont-fenpei"];
         
-        cell.nameContent.text = [self.detailM productName];
-        cell.nameContent.textColor = [UIColor zitihui];
-        cell.nameContent.textAlignment = NSTextAlignmentRight;
-        cell.nameContent.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        cell.labelOne.textColor = [UIColor zitihui];
+        cell.labelOne.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+        cell.labelOne.text = [self.detailM productInterestTypeName];
         
-        cell.labelNumber.text = @"产品编号";
-        cell.labelNumber.textColor = [UIColor zitihui];
-        cell.labelNumber.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        cell.labelTwo.textColor = [UIColor zitihui];
+        cell.labelTwo.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+        cell.labelTwo.text = [self.detailM productToaccountTypeName];
         
-        cell.numberContent.text = [self.detailM productCode];
-        cell.numberContent.textColor = [UIColor zitihui];
-        cell.numberContent.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        cell.numberContent.textAlignment = NSTextAlignmentRight;
-        
-        cell.labelInvestor.text = @"预期年化收益率";
-        cell.labelInvestor.textColor = [UIColor zitihui];
-        cell.labelInvestor.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        
-        cell.InvestorContent.text = [NSString stringWithFormat:@"%@%%",[self.detailM productAnnualYield]];
-        cell.InvestorContent.textColor = [UIColor zitihui];
-        cell.InvestorContent.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        cell.InvestorContent.textAlignment = NSTextAlignmentRight;
-        
-        cell.labelData.text = @"理财期限";
-        cell.labelData.textColor = [UIColor zitihui];
-        cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        
-        cell.labelIntraday.text = [NSString stringWithFormat:@"%@天",[self.detailM productPeriod]];
-        cell.labelIntraday.textColor = [UIColor zitihui];
-        cell.labelIntraday.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        cell.labelIntraday.textAlignment = NSTextAlignmentRight;
-        
-        cell.labelStyle.text = @"计息方式";
-        cell.labelStyle.textColor = [UIColor zitihui];
-        cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        
-        cell.labelIncome.text = [self.detailM productInterestTypeName];
-        cell.labelIncome.textColor = [UIColor zitihui];
-        cell.labelIncome.font = [UIFont systemFontOfSize:15];
-        cell.labelIncome.textAlignment = NSTextAlignmentRight;
-        
-        cell.labelComeTime.text = @"预计到账时间";
-        cell.labelComeTime.textColor = [UIColor zitihui];
-        cell.labelComeTime.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        
-        cell.ComeTime.text = [self.detailM productToaccountTypeName];
-        cell.ComeTime.textColor = [UIColor zitihui];
-        cell.ComeTime.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        
-        cell.labelEarnings.text = @"收益分配方式";
-        cell.labelEarnings.textColor = [UIColor zitihui];
-        cell.labelEarnings.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-            
-        cell.labelLast.text = [self.detailM productYieldDistribTypeName];
-        
-        cell.labelLast.textColor = [UIColor zitihui];
-        cell.labelLast.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        cell.labelThree.textColor = [UIColor zitihui];
+        cell.labelThree.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+        cell.labelThree.text = [self.detailM productYieldDistribTypeName];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
         
     } else if (indexPath.section == 2) {
+        
+        TDescriptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseTwo"];
+        
+        cell.labelDescription.text = @"产品描述";
+        cell.labelDescription.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        
+        cell.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        cell.labelLine.alpha = 0.7;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    } else if (indexPath.section == 3) {
         
         PlanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse3"];
         
@@ -390,11 +351,12 @@
         cell = [[ThreeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse4"];
     }
     
-    cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
+    cell.labelTitle.text = [titleArr objectAtIndex:indexPath.section - 4];
     cell.labelTitle.font = [UIFont systemFontOfSize:15];
         
     cell.imageRight.image = [UIImage imageNamed:@"7501111"];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 
     }
@@ -404,31 +366,41 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 3) {
+    if (indexPath.section == 4) {
         
-        if (indexPath.row == 0) {
-            
-            FDescriptionViewController *fDes = [[FDescriptionViewController alloc] init];
-            fDes.detailString = [self.detailM productDetail];
-            [self.navigationController pushViewController:fDes animated:YES];
-            
-        } else if (indexPath.row == 2) {
-            
-            RecordViewController *recordVC = [[RecordViewController alloc] init];
-            recordVC.idString = self.idString;
-            [self.navigationController pushViewController:recordVC animated:YES];
-            
-        } else {
-            
-            InvestNoticeViewController *investNotice = [[InvestNoticeViewController alloc] init];
-            investNotice.productType = [self.detailM productType];
-            investNotice.productId = [self.detailM productId];
-            investNotice.amountMin = [self.detailM amountMin];
-            investNotice.amountMax = [self.detailM amountMax];
-            [self.navigationController pushViewController:investNotice animated:YES];
-            
-        }
+        RecordViewController *recordVC = [[RecordViewController alloc] init];
+        recordVC.idString = self.idString;
+        [self.navigationController pushViewController:recordVC animated:YES];
+        
+    } else if (indexPath.section == 5) {
+        
+        TRiskGradeViewController *riskGrade = [[TRiskGradeViewController alloc] init];
+        [self.navigationController pushViewController:riskGrade animated:YES];
+        
     }
+    
+//        if (indexPath.row == 0) {
+//            
+//            FDescriptionViewController *fDes = [[FDescriptionViewController alloc] init];
+//            fDes.detailString = [self.detailM productDetail];
+//            [self.navigationController pushViewController:fDes animated:YES];
+//            
+//        } else if (indexPath.row == 2) {
+//
+//            RecordViewController *recordVC = [[RecordViewController alloc] init];
+//            recordVC.idString = self.idString;
+//            [self.navigationController pushViewController:recordVC animated:YES];
+//
+//        } else {
+//
+//            InvestNoticeViewController *investNotice = [[InvestNoticeViewController alloc] init];
+//            investNotice.productType = [self.detailM productType];
+//            investNotice.productId = [self.detailM productId];
+//            investNotice.amountMin = [self.detailM amountMin];
+//            investNotice.amountMax = [self.detailM amountMax];
+//            [self.navigationController pushViewController:investNotice animated:YES];
+//
+//        }
 }
 
 - (void)returnBackBar:(UIBarButtonItem *)bar
@@ -456,6 +428,15 @@
     [self.viewBotton addSubview:butMakeSure];
     butMakeSure.tag = 9080;
     
+//    勾选协议
+    UIButton *buttonXuan = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 5, WIDTH_CONTROLLER_DEFAULT - 20, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 我已阅读并同意相关协议《其他协议》"];
+    [_tableView.tableFooterView addSubview:buttonXuan];
+    buttonXuan.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    buttonXuan.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    buttonXuan.tag = 2000;
+    [buttonXuan setImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+    [buttonXuan addTarget:self action:@selector(shifouGouXuan:) forControlEvents:UIControlEventTouchUpInside];
+    
     if (self.estimate == NO) {
         
         if ([self.residueMoney isEqualToString:@"0.00"]) {
@@ -474,8 +455,6 @@
             [butMakeSure setTitle:@"投资(可使用5,000体验金)" forState:UIControlStateNormal];
             [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
         }
-        
-        
         
     } else {
         NSLog(@"%@",self.residueMoney);
@@ -503,6 +482,26 @@
     butMakeSure.titleLabel.font = [UIFont systemFontOfSize:15];
     
     [butMakeSure addTarget:self action:@selector(makeSureButton:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//勾选协议按钮
+- (void)shifouGouXuan:(UIButton *)button
+{
+    if (button.tag == 2000) {
+        
+        [button setImage:[UIImage imageNamed:@"iconfont-dui-2111"] forState:UIControlStateNormal];
+        button.tag = 3000;
+        butMakeSure.enabled = NO;
+        [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        
+    } else {
+        
+        butMakeSure.enabled = YES;
+        [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+        button.tag = 2000;
+        
+    }
 }
 
 //确认投资按钮

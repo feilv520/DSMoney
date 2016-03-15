@@ -159,15 +159,15 @@
     cell.labelQiTou.textColor = [UIColor zitihui];
     cell.labelQiTou.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-    cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
-    cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
-    cell.labelSurplus.textColor = [UIColor zitihui];
-    cell.labelSurplus.font = [UIFont fontWithName:@"CenturyGothic" size:10];
-    cell.labelSurplus.backgroundColor = [UIColor clearColor];
+//    cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
+//    cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
+//    cell.labelSurplus.textColor = [UIColor zitihui];
+//    cell.labelSurplus.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+//    cell.labelSurplus.backgroundColor = [UIColor clearColor];
     
     if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
         
-        cell.progressView.hidden = YES;
+//        cell.progressView.hidden = YES;
         
 //        butLastTime = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 240, 9, 210, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 倒计时 12:12:65"];
 //        [cell.viewBottom addSubview:butLastTime];
@@ -180,15 +180,15 @@
         //    设置进度条的进度值 并动画展示
         CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
         
-        [cell.progressView setProgress:bL animated:YES];
-        //    设置进度条的颜色
-        cell.progressView.trackTintColor = [UIColor progressBackColor];
-        //    设置进度条的进度颜色
-        cell.progressView.progressTintColor = [UIColor progressColor];
+//        [cell.progressView setProgress:bL animated:YES];
+//        //    设置进度条的颜色
+//        cell.progressView.trackTintColor = [UIColor progressBackColor];
+//        //    设置进度条的进度颜色
+//        cell.progressView.progressTintColor = [UIColor progressColor];
         
     }
     
-    cell.viewBottom.backgroundColor = [UIColor qianhuise];
+//    cell.viewBottom.backgroundColor = [UIColor qianhuise];
     
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     

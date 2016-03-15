@@ -35,6 +35,7 @@
     NSArray *butRedArray;
     
     UIImageView *imageView;
+    UIImageView *imageActivit;
     
     NSInteger flag;
     
@@ -94,8 +95,14 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor huibai];
+    
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
+    _tableView.tableHeaderView.backgroundColor = [UIColor greenColor];
+    [self activityShowGuShou];
+    
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     _tableView.tableFooterView.backgroundColor = [UIColor huibai];
+    
     [_tableView setSeparatorColor:[UIColor colorWithRed:246 / 255.0 green:247 / 255.0 blue:249 / 255.0 alpha:1.0]];
     [_tableView registerNib:[UINib nibWithNibName:@"BillCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
@@ -103,6 +110,13 @@
     [self addTableViewWithFooter:_tableView];
     
     butRedArray = @[@"3", @"6", @"9", @"12", @"7", @"9", @"1", @"5", @"6", @"8"];
+}
+
+//固收活动展示
+- (void)activityShowGuShou
+{
+    imageActivit = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"shouyebanner"]];
+    [_tableView.tableHeaderView addSubview:imageActivit];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -141,43 +155,37 @@
     cell.viewLine1.backgroundColor = [UIColor grayColor];
     cell.viewLine1.alpha = 0.2;
     
-    NSMutableAttributedString *leftString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[[self.productListArray objectAtIndex:indexPath.row] productAnnualYield]]];
-    NSRange left = NSMakeRange(0, [[leftString string] rangeOfString:@"%"].location);
-    [leftString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:left];
-    [leftString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:left];
-    NSRange right = NSMakeRange([[leftString string] length] - 1, 1);
-    [leftString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:right];
-    [leftString addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:right];
-    [cell.labelLeftUp setAttributedText:leftString];
+//    预期年化收益率
+    cell.labelLeftUp.text = [[self.productListArray objectAtIndex:indexPath.row] productAnnualYield];
+    cell.labelLeftUp.textColor = [UIColor daohanglan];
+    cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:23];
     
-    NSMutableAttributedString *midString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[[self.productListArray objectAtIndex:indexPath.row] productPeriod]]];
-    NSRange leftMid = NSMakeRange(0, [[midString string] rangeOfString:@"天"].location);
-    [midString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:leftMid];
-    NSRange rightMid = NSMakeRange([[midString string] length] - 1, 1);
-    [midString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:rightMid];
-    [midString addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:rightMid];
-    [cell.labelMidUp setAttributedText:midString];
+//    理财期限
+    cell.labelMidUp.text = [[self.productListArray objectAtIndex:indexPath.row] productPeriod];
+    cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:23];
     
-    [cell.butRightUp setImage:[UIImage imageNamed:@"组-14"] forState:UIControlStateNormal];
-    NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
-    NSRange rightLeft = NSMakeRange(0, [[rightString string] rangeOfString:@"元"].location);
-    [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:[self sizeOfLength:[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]] range:rightLeft];
-    NSRange rightR = NSMakeRange([[rightString string] length] - 1, 1);
-    [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:rightR];
-    [rightString addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:rightR];
-    [cell.butRightUp setAttributedTitle:rightString forState:UIControlStateNormal];
+//    剩余总额
+//    [cell.butRightUp setImage:[UIImage imageNamed:@"组-14"] forState:UIControlStateNormal];
+//    NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
+//    NSRange rightLeft = NSMakeRange(0, [[rightString string] rangeOfString:@"元"].location);
+//    [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:[self sizeOfLength:[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]] range:rightLeft];
+//    NSRange rightR = NSMakeRange([[rightString string] length] - 1, 1);
+//    [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:rightR];
+//    [rightString addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:rightR];
+//    [cell.butRightUp setAttributedTitle:rightString forState:UIControlStateNormal];
+//    cell.butRightUp.backgroundColor = [UIColor yellowColor];
     
-    cell.labelLeftDown.text = @"预期年化收益率";
+    cell.labelLeftDown.text = @"预期年化收益率(%)";
     cell.labelLeftDown.textColor = [UIColor zitihui];
     cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-    cell.labelMidDown.text = @"理财期限";
+    cell.labelMidDown.text = @"理财期限(天)";
     cell.labelMidDown.textColor = [UIColor zitihui];
     cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-    cell.labelRightDown.text = @"剩余总额";
-    cell.labelRightDown.textColor = [UIColor zitihui];
-    cell.labelRightDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+//    cell.labelRightDown.text = @"剩余总额";
+//    cell.labelRightDown.textColor = [UIColor zitihui];
+//    cell.labelRightDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
     if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"4"]) {
         cell.saleOut.hidden = NO;

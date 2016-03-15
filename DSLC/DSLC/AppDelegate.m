@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "SelectionViewController.h"
+#import "TSelectionViewController.h"
 #import "MineViewController.h"
 #import "MoreViewController.h"
 #import "MyHandViewController.h"
@@ -85,7 +85,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     if ([flag isEqualToString:@"NO"]) {
-        SelectionViewController *selectionVC = [[SelectionViewController alloc] init];
+        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
         UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
         
         ThreeViewController *threeVC = [[ThreeViewController alloc] init];

@@ -11,20 +11,10 @@
 @interface BasicMessageCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *labelBaseMess;
 @property (weak, nonatomic) IBOutlet UIView *viewLine;
-@property (weak, nonatomic) IBOutlet UILabel *labelName;
-@property (weak, nonatomic) IBOutlet UILabel *nameContent;
-@property (weak, nonatomic) IBOutlet UILabel *labelNumber;
-@property (weak, nonatomic) IBOutlet UILabel *numberContent;
-@property (weak, nonatomic) IBOutlet UILabel *labelInvestor;
-@property (weak, nonatomic) IBOutlet UILabel *InvestorContent;
-@property (weak, nonatomic) IBOutlet UILabel *labelData;
-@property (weak, nonatomic) IBOutlet UILabel *labelIntraday;
-@property (weak, nonatomic) IBOutlet UILabel *labelStyle;
-@property (weak, nonatomic) IBOutlet UILabel *labelIncome;
-@property (weak, nonatomic) IBOutlet UILabel *labelComeTime;
-@property (weak, nonatomic) IBOutlet UILabel *ComeTime;
-@property (weak, nonatomic) IBOutlet UILabel *labelEarnings;
-@property (weak, nonatomic) IBOutlet UILabel *labelLast;
-
-
+@property (weak, nonatomic) IBOutlet UIImageView *imageOne;
+@property (weak, nonatomic) IBOutlet UIImageView *imageTwo;
+@property (weak, nonatomic) IBOutlet UIImageView *imageThree;
+@property (weak, nonatomic) IBOutlet UILabel *labelOne;
+@property (weak, nonatomic) IBOutlet UILabel *labelTwo;
+@property (weak, nonatomic) IBOutlet UILabel *labelThree;
 @end

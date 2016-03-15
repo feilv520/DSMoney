@@ -10,7 +10,6 @@
 
 @interface NewBieCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageLeftUp;
 @property (weak, nonatomic) IBOutlet UILabel *labelShouYiLv;
 @property (weak, nonatomic) IBOutlet UILabel *labelPercent;
 @property (weak, nonatomic) IBOutlet UIView *viewLine;

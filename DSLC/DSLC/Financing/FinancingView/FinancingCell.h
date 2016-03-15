@@ -15,12 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelPercentage;
 @property (weak, nonatomic) IBOutlet UILabel *labelDayNum;
 @property (weak, nonatomic) IBOutlet UILabel *labelMoney;
-@property (weak, nonatomic) IBOutlet UIView *viewBottom;
 @property (weak, nonatomic) IBOutlet UILabel *labelYear;
 @property (weak, nonatomic) IBOutlet UILabel *labelData;
 @property (weak, nonatomic) IBOutlet UILabel *labelQiTou;
-@property (weak, nonatomic) IBOutlet UILabel *labelSurplus;
-@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UIImageView *outPay;
 
 @end
