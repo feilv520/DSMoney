@@ -241,6 +241,22 @@
 		8183F3C31C97A62F000BB93C /* TSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F3C21C97A62F000BB93C /* TSignInViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8183F3C61C97A812000BB93C /* TBigTurntableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F3C51C97A812000BB93C /* TBigTurntableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8183F3C91C97A83C000BB93C /* TRankinglistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F3C81C97A83C000BB93C /* TRankinglistViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8183F3FA1C97CC4F000BB93C /* icon1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3EA1C97CC4F000BB93C /* icon1@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F3FB1C97CC4F000BB93C /* icon1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3EB1C97CC4F000BB93C /* icon1@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F3FC1C97CC4F000BB93C /* icon3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3EC1C97CC4F000BB93C /* icon3@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F3FD1C97CC4F000BB93C /* icon3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3ED1C97CC4F000BB93C /* icon3@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F3FE1C97CC4F000BB93C /* iconfont-dui-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3EE1C97CC4F000BB93C /* iconfont-dui-2@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F3FF1C97CC4F000BB93C /* iconfont-dui-2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3EF1C97CC4F000BB93C /* iconfont-dui-2@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F4001C97CC4F000BB93C /* iconfont-dui-2111@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3F01C97CC4F000BB93C /* iconfont-dui-2111@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F4011C97CC4F000BB93C /* iconfont-dui-2111@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3F11C97CC4F000BB93C /* iconfont-dui-2111@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F4021C97CC4F000BB93C /* iconfont-fenpei@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3F21C97CC4F000BB93C /* iconfont-fenpei@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F4031C97CC4F000BB93C /* iconfont-fenpei@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3F31C97CC4F000BB93C /* iconfont-fenpei@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F4041C97CC4F000BB93C /* iconfont-jixifangshi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3F41C97CC4F000BB93C /* iconfont-jixifangshi@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F4051C97CC4F000BB93C /* iconfont-jixifangshi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3F51C97CC4F000BB93C /* iconfont-jixifangshi@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F4061C97CC4F000BB93C /* iconfont-shijian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3F61C97CC4F000BB93C /* iconfont-shijian@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F4071C97CC4F000BB93C /* iconfont-shijian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3F71C97CC4F000BB93C /* iconfont-shijian@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F4081C97CC4F000BB93C /* target-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3F81C97CC4F000BB93C /* target-arrow@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8183F4091C97CC4F000BB93C /* target-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8183F3F91C97CC4F000BB93C /* target-arrow@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC361BCC96E1003F440D /* MakeSureViewController.m */; };
 		8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC391BCCD0FE003F440D /* ContentCell.m */; };
 		8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC3A1BCCD0FE003F440D /* ContentCell.xib */; };
@@ -1217,6 +1233,22 @@
 		8183F3C51C97A812000BB93C /* TBigTurntableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBigTurntableViewController.m; sourceTree = "<group>"; };
 		8183F3C71C97A83C000BB93C /* TRankinglistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRankinglistViewController.h; sourceTree = "<group>"; };
 		8183F3C81C97A83C000BB93C /* TRankinglistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRankinglistViewController.m; sourceTree = "<group>"; };
+		8183F3EA1C97CC4F000BB93C /* icon1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon1@2x.png"; sourceTree = "<group>"; };
+		8183F3EB1C97CC4F000BB93C /* icon1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon1@3x.png"; sourceTree = "<group>"; };
+		8183F3EC1C97CC4F000BB93C /* icon3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon3@2x.png"; sourceTree = "<group>"; };
+		8183F3ED1C97CC4F000BB93C /* icon3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon3@3x.png"; sourceTree = "<group>"; };
+		8183F3EE1C97CC4F000BB93C /* iconfont-dui-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-dui-2@2x.png"; sourceTree = "<group>"; };
+		8183F3EF1C97CC4F000BB93C /* iconfont-dui-2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-dui-2@3x.png"; sourceTree = "<group>"; };
+		8183F3F01C97CC4F000BB93C /* iconfont-dui-2111@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-dui-2111@2x.png"; sourceTree = "<group>"; };
+		8183F3F11C97CC4F000BB93C /* iconfont-dui-2111@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-dui-2111@3x.png"; sourceTree = "<group>"; };
+		8183F3F21C97CC4F000BB93C /* iconfont-fenpei@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-fenpei@2x.png"; sourceTree = "<group>"; };
+		8183F3F31C97CC4F000BB93C /* iconfont-fenpei@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-fenpei@3x.png"; sourceTree = "<group>"; };
+		8183F3F41C97CC4F000BB93C /* iconfont-jixifangshi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-jixifangshi@2x.png"; sourceTree = "<group>"; };
+		8183F3F51C97CC4F000BB93C /* iconfont-jixifangshi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-jixifangshi@3x.png"; sourceTree = "<group>"; };
+		8183F3F61C97CC4F000BB93C /* iconfont-shijian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-shijian@2x.png"; sourceTree = "<group>"; };
+		8183F3F71C97CC4F000BB93C /* iconfont-shijian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-shijian@3x.png"; sourceTree = "<group>"; };
+		8183F3F81C97CC4F000BB93C /* target-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "target-arrow@2x.png"; sourceTree = "<group>"; };
+		8183F3F91C97CC4F000BB93C /* target-arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "target-arrow@3x.png"; sourceTree = "<group>"; };
 		8184EC351BCC96E1003F440D /* MakeSureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeSureViewController.h; sourceTree = "<group>"; };
 		8184EC361BCC96E1003F440D /* MakeSureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeSureViewController.m; sourceTree = "<group>"; };
 		8184EC381BCCD0FE003F440D /* ContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentCell.h; sourceTree = "<group>"; };
@@ -2533,6 +2565,22 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8183F3EA1C97CC4F000BB93C /* icon1@2x.png */,
+				8183F3EB1C97CC4F000BB93C /* icon1@3x.png */,
+				8183F3EC1C97CC4F000BB93C /* icon3@2x.png */,
+				8183F3ED1C97CC4F000BB93C /* icon3@3x.png */,
+				8183F3EE1C97CC4F000BB93C /* iconfont-dui-2@2x.png */,
+				8183F3EF1C97CC4F000BB93C /* iconfont-dui-2@3x.png */,
+				8183F3F01C97CC4F000BB93C /* iconfont-dui-2111@2x.png */,
+				8183F3F11C97CC4F000BB93C /* iconfont-dui-2111@3x.png */,
+				8183F3F21C97CC4F000BB93C /* iconfont-fenpei@2x.png */,
+				8183F3F31C97CC4F000BB93C /* iconfont-fenpei@3x.png */,
+				8183F3F41C97CC4F000BB93C /* iconfont-jixifangshi@2x.png */,
+				8183F3F51C97CC4F000BB93C /* iconfont-jixifangshi@3x.png */,
+				8183F3F61C97CC4F000BB93C /* iconfont-shijian@2x.png */,
+				8183F3F71C97CC4F000BB93C /* iconfont-shijian@3x.png */,
+				8183F3F81C97CC4F000BB93C /* target-arrow@2x.png */,
+				8183F3F91C97CC4F000BB93C /* target-arrow@3x.png */,
 				8183F3461C7E97A2000BB93C /* 椭圆猴-9@2x.png */,
 				8183F3471C7E97A2000BB93C /* 椭圆猴-9@3x.png */,
 				81570D571C33D02400AF6B37 /* img_lc_jqqd.png */,
@@ -4476,6 +4524,7 @@
 			files = (
 				8D43439A1BFDEB0B000BA004 /* loading_middle_01.png in Resources */,
 				8D9011B01BD6337C00E5D62A /* 04@3x.png in Resources */,
+				8183F4031C97CC4F000BB93C /* iconfont-fenpei@3x.png in Resources */,
 				81B520A31BF9746400D8E8D1 /* AddressBookCell.xib in Resources */,
 				8D3EEA0A1C27AB400031F7C9 /* 北京银行@2x.png in Resources */,
 				817DD4AB1BCF547E00042B09 /* zhanghu@3x.png in Resources */,
@@ -4638,10 +4687,13 @@
 				8D3EEA011C27AB400031F7C9 /* 交通银行@3x.png in Resources */,
 				819B52C71BFC127E002FDF1E /* NotSeparateCell.xib in Resources */,
 				8D3EEA1A1C27AB400031F7C9 /* 成都银行@2x.png in Resources */,
+				8183F4001C97CC4F000BB93C /* iconfont-dui-2111@2x.png in Resources */,
 				819B52E01BFC2094002FDF1E /* 金元宝@2x.png in Resources */,
 				8175BEB41BE9F2F50044026E /* 朋友圈@2x.png in Resources */,
+				8183F4071C97CC4F000BB93C /* iconfont-shijian@3x.png in Resources */,
 				8D3EE9F91C27AB400031F7C9 /* 上海银行@3x.png in Resources */,
 				8D0AE7FA1BE09CE500D9D50C /* register-3@2x.png in Resources */,
+				8183F4011C97CC4F000BB93C /* iconfont-dui-2111@3x.png in Resources */,
 				8175BEAD1BE9F2F50044026E /* 微信@3x.png in Resources */,
 				817DD49F1BCF547E00042B09 /* jiaoyi@3x.png in Resources */,
 				8DEDE1EC1BCD05C7008086D3 /* Calendar.xib in Resources */,
@@ -4667,6 +4719,7 @@
 				8D0AE7F81BE09CE500D9D50C /* register-2@2x.png in Resources */,
 				8D3EEA0C1C27AB400031F7C9 /* 华夏银行@2x.png in Resources */,
 				81B6741F1BF0AFEB007CEF51 /* 蓝色完成@2x.png in Resources */,
+				8183F4081C97CC4F000BB93C /* target-arrow@2x.png in Resources */,
 				819B52DE1BFC2094002FDF1E /* 钻石@2x.png in Resources */,
 				8191E22E1BDE00DC000A6E8C /* cuo@2x.png in Resources */,
 				8DEDE1D01BCCFFA5008086D3 /* blueyuan@2x.png in Resources */,
@@ -4722,6 +4775,7 @@
 				8175BEAA1BE9F2F50044026E /* 新浪微博@2x.png in Resources */,
 				8D3EEA251C27AB400031F7C9 /* 邮政储蓄银行@3x.png in Resources */,
 				817E33791BD7303200D05103 /* MyPlannerCell.xib in Resources */,
+				8183F4061C97CC4F000BB93C /* iconfont-shijian@2x.png in Resources */,
 				81B674201BF0AFEB007CEF51 /* 蓝色完成@3x.png in Resources */,
 				819B52E71BFC222B002FDF1E /* 钻石@3x.png in Resources */,
 				818523AF1BE3125D002FC653 /* BillCell.xib in Resources */,
@@ -4798,9 +4852,11 @@
 				8DEDE1B51BCCFEB5008086D3 /* btn_red@2x.png in Resources */,
 				81BA1BF91BD4DBAA00DBA5BE /* WinAPrizeCell.xib in Resources */,
 				8D3942F61C2D15CE00783FD0 /* welcome_three.png in Resources */,
+				8183F4091C97CC4F000BB93C /* target-arrow@3x.png in Resources */,
 				8DEDE1E91BCD00B0008086D3 /* btn_gray@2x.png in Resources */,
 				817E33A01BD77F6D00D05103 /* ChooseStyleCell.xib in Resources */,
 				8DB744BA1C1973AC0084D1A2 /* banner_red@2x.png in Resources */,
+				8183F3FC1C97CC4F000BB93C /* icon3@2x.png in Resources */,
 				819B52DB1BFC2094002FDF1E /* 新手体验金@3x.png in Resources */,
 				8D43439C1BFDEB0B000BA004 /* loading_middle_03.png in Resources */,
 				81B18E191BE7387A00D448FA /* iconfont-zhuanxiangeps@2x.png in Resources */,
@@ -4827,8 +4883,10 @@
 				8D3EEA231C27AB400031F7C9 /* 渤海银行@3x.png in Resources */,
 				81B520AB1BF9A71100D8E8D1 /* iconfont-sousuo@3x.png in Resources */,
 				8175BECF1BEA1B290044026E /* 分享失败@2x.png in Resources */,
+				8183F3FB1C97CC4F000BB93C /* icon1@3x.png in Resources */,
 				8DD1809E1BD730E100F71CEA /* GetMoneyNumberTableViewCell.xib in Resources */,
 				81701C111BE703F200B45BAA /* MendDeal2Cell.xib in Resources */,
+				8183F3FA1C97CC4F000BB93C /* icon1@2x.png in Resources */,
 				8D9011AE1BD6337C00E5D62A /* 03@3x.png in Resources */,
 				8D9011B91BD6337C00E5D62A /* 09@2x.png in Resources */,
 				817DD4991BCF547E00042B09 /* haoyou@3x.png in Resources */,
@@ -4844,6 +4902,7 @@
 				8D3EEA1F1C27AB400031F7C9 /* 民生银行@3x.png in Resources */,
 				8D9011B71BD6337C00E5D62A /* 08@2x.png in Resources */,
 				8D3EE9FD1C27AB400031F7C9 /* 中信银行@3x.png in Resources */,
+				8183F4021C97CC4F000BB93C /* iconfont-fenpei@2x.png in Resources */,
 				8D3EEA211C27AB400031F7C9 /* 浦发银行@3x.png in Resources */,
 				8191E2291BDDF5F0000A6E8C /* lianxikefu@3x.png in Resources */,
 				818523B91BE31B80002FC653 /* 已售罄@2x.png in Resources */,
@@ -4879,6 +4938,7 @@
 				817DD4A81BCF547E00042B09 /* xiaoxi@2x.png in Resources */,
 				8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */,
 				8D4343971BFDEB0B000BA004 /* loading_up_06.png in Resources */,
+				8183F3FD1C97CC4F000BB93C /* icon3@3x.png in Resources */,
 				81D72FC71BFB04890067A277 /* rightWindow@3x.png in Resources */,
 				81F237721BE8568B009D7A67 /* NewMakeSureCell.xib in Resources */,
 				8DC695C31C3503D30055EC44 /* UMSShareListController.xib in Resources */,
@@ -4927,6 +4987,7 @@
 				81C8BBD01BDA3535005B9DFF /* HelpCell.xib in Resources */,
 				817DD4B21BCF5B3900042B09 /* MiddleView.xib in Resources */,
 				817DD4971BCF547E00042B09 /* dae@3x.png in Resources */,
+				8183F4041C97CC4F000BB93C /* iconfont-jixifangshi@2x.png in Resources */,
 				8D121FDC1BD4D83600B3C1FE /* SettingGetMoneyTableViewCell.xib in Resources */,
 				819B52F01BFC51AD002FDF1E /* 钻石红包@2x.png in Resources */,
 				816F1ED31BF5C61C00DB6B65 /* InviteSocilPlatFormCell.xib in Resources */,
@@ -4943,6 +5004,7 @@
 				81570D581C33D02400AF6B37 /* img_lc_jqqd.png in Resources */,
 				817E33901BD756B700D05103 /* 组-4-拷贝@3x.png in Resources */,
 				8D3F95F11BE2188500013A8E /* shouyi@3x.png in Resources */,
+				8183F3FF1C97CC4F000BB93C /* iconfont-dui-2@3x.png in Resources */,
 				81379F1A1BEAF56F002CDB16 /* 成长@3x.png in Resources */,
 				8DB744B91C1973AC0084D1A2 /* banner_black@3x.png in Resources */,
 				811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */,
@@ -4960,6 +5022,7 @@
 				81FAAA2E1C256AC40020E9DD /* 审核通过@2x.png in Resources */,
 				8183F3941C966669000BB93C /* liwu@2x.png in Resources */,
 				81BA1C141BD5000700DBA5BE /* icon05@2x.png in Resources */,
+				8183F4051C97CC4F000BB93C /* iconfont-jixifangshi@3x.png in Resources */,
 				8182A7F01C0EECD300FA1216 /* 组-16@3x.png in Resources */,
 				8DEDE1C41BCCFF01008086D3 /* iconfont_graycuo@2x.png in Resources */,
 				8D121FE11BD4D92600B3C1FE /* SettingPieTableViewCell.xib in Resources */,
@@ -4974,6 +5037,7 @@
 				817E33AF1BD78ED500D05103 /* yuan@2x.png in Resources */,
 				81C1381F1BDF6D5E0088E792 /* iconfont-mima@3x.png in Resources */,
 				813D3FD11C26933C0042DB88 /* Pos@3x.png in Resources */,
+				8183F3FE1C97CC4F000BB93C /* iconfont-dui-2@2x.png in Resources */,
 				8DEDE1EA1BCD00B0008086D3 /* btn_gray@3x.png in Resources */,
 				8D3A2FD11BE70F5500913DEC /* lianggeren@2x.png in Resources */,
 				8D6692871BD0E53000CD2CAF /* gesture_node_highlighted@2x.png in Resources */,
