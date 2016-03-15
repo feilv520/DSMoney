@@ -740,10 +740,6 @@
 		8D9356DC1BC607C500BC2BFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D9356DA1BC607C500BC2BFA /* LaunchScreen.storyboard */; };
 		8D9356E71BC607C500BC2BFA /* DSLCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356E61BC607C500BC2BFA /* DSLCTests.m */; };
 		8D9356F21BC607C500BC2BFA /* DSLCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356F11BC607C500BC2BFA /* DSLCUITests.m */; };
-		8D968A731C966F4F00C9A6A1 /* messageNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A6F1C966F4F00C9A6A1 /* messageNew@2x.png */; settings = {ASSET_TAGS = (); }; };
-		8D968A741C966F4F00C9A6A1 /* messageNew@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A701C966F4F00C9A6A1 /* messageNew@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8D968A751C966F4F00C9A6A1 /* messageOld@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A711C966F4F00C9A6A1 /* messageOld@2x.png */; settings = {ASSET_TAGS = (); }; };
-		8D968A761C966F4F00C9A6A1 /* messageOld@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A721C966F4F00C9A6A1 /* messageOld@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D968A791C96A9FD00C9A6A1 /* mylicaishi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A771C96A9FD00C9A6A1 /* mylicaishi@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D968A7A1C96A9FD00C9A6A1 /* mylicaishi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A781C96A9FD00C9A6A1 /* mylicaishi@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D968A831C96C0E100C9A6A1 /* iconfont-iconfuzhi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A7B1C96C0E100C9A6A1 /* iconfont-iconfuzhi@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -2014,10 +2010,6 @@
 		8D9356ED1BC607C500BC2BFA /* DSLCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DSLCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9356F11BC607C500BC2BFA /* DSLCUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLCUITests.m; sourceTree = "<group>"; };
 		8D9356F31BC607C500BC2BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D968A6F1C966F4F00C9A6A1 /* messageNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageNew@2x.png"; sourceTree = "<group>"; };
-		8D968A701C966F4F00C9A6A1 /* messageNew@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageNew@3x.png"; sourceTree = "<group>"; };
-		8D968A711C966F4F00C9A6A1 /* messageOld@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageOld@2x.png"; sourceTree = "<group>"; };
-		8D968A721C966F4F00C9A6A1 /* messageOld@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageOld@3x.png"; sourceTree = "<group>"; };
 		8D968A771C96A9FD00C9A6A1 /* mylicaishi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mylicaishi@2x.png"; sourceTree = "<group>"; };
 		8D968A781C96A9FD00C9A6A1 /* mylicaishi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mylicaishi@3x.png"; sourceTree = "<group>"; };
 		8D968A7B1C96C0E100C9A6A1 /* iconfont-iconfuzhi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-iconfuzhi@2x.png"; sourceTree = "<group>"; };
@@ -2518,7 +2510,6 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				8D968A6E1C966F4F00C9A6A1 /* message */,
 				8183F3461C7E97A2000BB93C /* 椭圆猴-9@2x.png */,
 				8183F3471C7E97A2000BB93C /* 椭圆猴-9@3x.png */,
 				81570D571C33D02400AF6B37 /* img_lc_jqqd.png */,
@@ -4106,17 +4097,6 @@
 			path = DSLCUITests;
 			sourceTree = "<group>";
 		};
-		8D968A6E1C966F4F00C9A6A1 /* message */ = {
-			isa = PBXGroup;
-			children = (
-				8D968A6F1C966F4F00C9A6A1 /* messageNew@2x.png */,
-				8D968A701C966F4F00C9A6A1 /* messageNew@3x.png */,
-				8D968A711C966F4F00C9A6A1 /* messageOld@2x.png */,
-				8D968A721C966F4F00C9A6A1 /* messageOld@3x.png */,
-			);
-			path = message;
-			sourceTree = "<group>";
-		};
 		8D9BE8BB1C0EC94D003C67D3 /* YYWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -4583,7 +4563,6 @@
 				8D0CB48F1BE75DB20039D826 /* SimpleDetailViewController.xib in Resources */,
 				8D9011B21BD6337C00E5D62A /* 05@3x.png in Resources */,
 				8D3125DF1BD763F900143B71 /* GetMoneyVerifyViewController.xib in Resources */,
-				8D968A761C966F4F00C9A6A1 /* messageOld@3x.png in Resources */,
 				8D9011801BD61B3400E5D62A /* TranctionTableViewCell.xib in Resources */,
 				8D0CB4A11BE761C80039D826 /* TeamDescriptionsViewController.xib in Resources */,
 				8D3EE9FF1C27AB400031F7C9 /* 中国银行@3x.png in Resources */,
@@ -4654,7 +4633,6 @@
 				81B6741F1BF0AFEB007CEF51 /* 蓝色完成@2x.png in Resources */,
 				819B52DE1BFC2094002FDF1E /* 钻石@2x.png in Resources */,
 				8191E22E1BDE00DC000A6E8C /* cuo@2x.png in Resources */,
-				8D968A731C966F4F00C9A6A1 /* messageNew@2x.png in Resources */,
 				8DEDE1D01BCCFFA5008086D3 /* blueyuan@2x.png in Resources */,
 				8175BEB01BE9F2F50044026E /* QQ空间@2x.png in Resources */,
 				81F343861C0584EB001EF374 /* 圆角矩形-3@3x.png in Resources */,
@@ -4792,7 +4770,6 @@
 				81E0CCE81C28EC7400148609 /* 失败@3x.png in Resources */,
 				81D72FB71BFACA800067A277 /* add@3x.png in Resources */,
 				81ED030C1BD09BC8005F4B02 /* MyInformationCell.xib in Resources */,
-				8D968A741C966F4F00C9A6A1 /* messageNew@3x.png in Resources */,
 				81D72FBE1BFAD63B0067A277 /* right@2x.png in Resources */,
 				8D121FE61BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.xib in Resources */,
 				8D3EE9FA1C27AB400031F7C9 /* 东亚银行@2x.png in Resources */,
@@ -4901,7 +4878,6 @@
 				8DC695BA1C3503D30055EC44 /* UMSocialLocalizable.strings in Resources */,
 				8D3EEA151C27AB400031F7C9 /* 平安银行@3x.png in Resources */,
 				81B6741D1BF0AFEB007CEF51 /* 流程@2x.png in Resources */,
-				8D968A751C966F4F00C9A6A1 /* messageOld@2x.png in Resources */,
 				81B6741C1BF0AFEB007CEF51 /* 红框@3x.png in Resources */,
 				817E33AE1BD78ED500D05103 /* iconfont@3x.png in Resources */,
 				8DBC8A6E1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
