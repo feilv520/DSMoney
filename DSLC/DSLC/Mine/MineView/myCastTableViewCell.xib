@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="CenturyGothic.TTF">
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCastTVC" rowHeight="200" id="KGk-i7-Jjw" customClass="myCastTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="标的001" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSA-93-fOn">
+                        <rect key="frame" x="10" y="10" width="357" height="20"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="投资日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2I-6m-BXu">
+                        <rect key="frame" x="10" y="50" width="68" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="兑付日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aP-bX-6Kk">
+                        <rect key="frame" x="10" y="90" width="68" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="投资金额(元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNb-5E-q7f">
+                        <rect key="frame" x="10" y="130" width="97" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="预期收益(元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ug5-fe-Zyl">
+                        <rect key="frame" x="10" y="170" width="97" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xWV-NG-5Kr">
+                        <rect key="frame" x="10" y="40" width="357" height="1"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Irc-78-weE"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNq-Rc-3Ib">
+                        <rect key="frame" x="10" y="81" width="357" height="1"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="e7S-SQ-4uQ"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TsM-Qr-r7O">
+                        <rect key="frame" x="10" y="121" width="357" height="1"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="EGc-g5-cwU"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOA-FN-sqx">
+                        <rect key="frame" x="10" y="161" width="357" height="1"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="nlY-Wz-A1E"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-12-12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pa-pp-HJ9">
+                        <rect key="frame" x="108" y="50" width="259" height="21"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="259" id="bdK-YK-8mP"/>
+                            <constraint firstAttribute="height" constant="21" id="rWx-zz-2oJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-12-12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D99-ca-aDs">
+                        <rect key="frame" x="108" y="90" width="259" height="21"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="CWe-94-5qn"/>
+                            <constraint firstAttribute="width" constant="259" id="xnk-UP-rDS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1g-lp-YXB">
+                        <rect key="frame" x="108" y="130" width="259" height="21"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="259" id="84o-Jg-m48"/>
+                            <constraint firstAttribute="height" constant="21" id="His-nu-vwJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2y3-3t-xOf">
+                        <rect key="frame" x="108" y="170" width="259" height="21"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="259" id="6ZH-zq-AvH"/>
+                            <constraint firstAttribute="height" constant="21" id="KK3-0t-o3h"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <animations/>
+                <constraints>
+                    <constraint firstItem="RNq-Rc-3Ib" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="81" id="2GI-w4-cqA"/>
+                    <constraint firstAttribute="trailing" secondItem="j1g-lp-YXB" secondAttribute="trailing" constant="8" id="7z1-jH-84f"/>
+                    <constraint firstItem="xWV-NG-5Kr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Aqu-RH-ecr"/>
+                    <constraint firstItem="TsM-Qr-r7O" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="121" id="Ggo-qr-MGM"/>
+                    <constraint firstItem="TsM-Qr-r7O" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="JbH-Ys-VgU"/>
+                    <constraint firstAttribute="trailing" secondItem="2y3-3t-xOf" secondAttribute="trailing" constant="8" id="JpW-G0-I2P"/>
+                    <constraint firstItem="IOA-FN-sqx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="161" id="Mpz-gn-1GK"/>
+                    <constraint firstItem="j1g-lp-YXB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="130" id="PwS-ik-zmS"/>
+                    <constraint firstItem="xWV-NG-5Kr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="32" id="S2o-ED-FKw"/>
+                    <constraint firstItem="D99-ca-aDs" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="TlN-6G-3Ut"/>
+                    <constraint firstAttribute="trailing" secondItem="RNq-Rc-3Ib" secondAttribute="trailing" constant="8" id="VRv-n7-eo5"/>
+                    <constraint firstItem="2y3-3t-xOf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="170" id="Vkr-t6-ihh"/>
+                    <constraint firstAttribute="trailing" secondItem="TsM-Qr-r7O" secondAttribute="trailing" constant="8" id="YY9-sJ-NpC"/>
+                    <constraint firstAttribute="trailing" secondItem="0pa-pp-HJ9" secondAttribute="trailing" constant="8" id="bVI-0V-Am1"/>
+                    <constraint firstItem="IOA-FN-sqx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="cbC-tD-KBk"/>
+                    <constraint firstAttribute="trailing" secondItem="IOA-FN-sqx" secondAttribute="trailing" constant="8" id="dBI-oR-41T"/>
+                    <constraint firstAttribute="trailing" secondItem="xWV-NG-5Kr" secondAttribute="trailing" constant="8" id="dIm-4F-13o"/>
+                    <constraint firstItem="RNq-Rc-3Ib" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="h70-1I-CZF"/>
+                    <constraint firstItem="0pa-pp-HJ9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="50" id="kfc-92-nCj"/>
+                    <constraint firstItem="D99-ca-aDs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="82" id="xnN-ML-O2q"/>
+                </constraints>
+            </tableViewCellContentView>
+            <animations/>
+            <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+            <connections>
+                <outlet property="dfLabel" destination="D99-ca-aDs" id="E0b-cK-eS4"/>
+                <outlet property="syLabel" destination="2y3-3t-xOf" id="Ydw-bd-ejo"/>
+                <outlet property="titleLabel" destination="kSA-93-fOn" id="1mI-AB-h24"/>
+                <outlet property="tzLabel" destination="0pa-pp-HJ9" id="bgl-9H-X1Q"/>
+                <outlet property="tzMLabel" destination="j1g-lp-YXB" id="czw-2O-6bc"/>
+            </connections>
+            <point key="canvasLocation" x="180.5" y="437"/>
+        </tableViewCell>
+    </objects>
+</document>
