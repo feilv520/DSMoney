@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="InviteNewView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r75-SA-Msz">
+                    <rect key="frame" x="31" y="8" width="60" height="60"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="KCC-SY-Q3a"/>
+                        <constraint firstAttribute="height" constant="60" id="TAf-NG-ixq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <state key="normal" image="微信.png">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4N-bC-7BU">
+                    <rect key="frame" x="31" y="82" width="60" height="60"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="0zB-r0-ZMw"/>
+                        <constraint firstAttribute="width" constant="60" id="LAS-mP-jAN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <state key="normal" image="人人网.png">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PKM-2z-r7v">
+                    <rect key="frame" x="157" y="8" width="60" height="60"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="1RE-Y2-CIl"/>
+                        <constraint firstAttribute="height" constant="60" id="xOm-QP-aMu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <state key="normal" image="新浪微博.png">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P1B-Hi-hMy">
+                    <rect key="frame" x="157" y="82" width="60" height="60"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="TO4-O6-256"/>
+                        <constraint firstAttribute="width" constant="60" id="f5d-vX-aqf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <state key="normal" image="QQ空间.png">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPx-uy-fTu">
+                    <rect key="frame" x="274" y="8" width="60" height="60"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="1cT-Pa-LZR"/>
+                        <constraint firstAttribute="height" constant="60" id="KMX-Ka-NoE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <state key="normal" image="朋友圈.png">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJJ-xK-XAm">
+                    <rect key="frame" x="0.0" y="167" width="375" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="8YI-eo-cgO"/>
+                        <constraint firstAttribute="width" constant="375" id="IaF-fz-Tzh"/>
+                    </constraints>
+                    <state key="normal" title="取消">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9DQ-CC-kOy">
+                    <rect key="frame" x="0.0" y="161" width="375" height="1"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.81960784310000001" green="0.81960784310000001" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="5OS-0h-v2z"/>
+                        <constraint firstAttribute="width" constant="375" id="Ecr-Ut-bYP"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKO-Sy-lsH">
+                    <rect key="frame" x="31" y="60" width="60" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="MxA-2N-nO5"/>
+                        <constraint firstAttribute="height" constant="30" id="cPD-iQ-v3L"/>
+                    </constraints>
+                    <state key="normal" title="微信好友">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMe-bq-Zgk">
+                    <rect key="frame" x="39" y="132" width="45" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="45" id="5RG-5g-Vo6"/>
+                        <constraint firstAttribute="height" constant="30" id="ETR-Dw-ZjJ"/>
+                    </constraints>
+                    <state key="normal" title="人人网">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0s-WS-YJZ">
+                    <rect key="frame" x="161" y="132" width="53" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="53" id="dov-z4-t13"/>
+                        <constraint firstAttribute="height" constant="30" id="spv-VA-9kl"/>
+                    </constraints>
+                    <state key="normal" title="QQ空间">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ts-9E-Et8">
+                    <rect key="frame" x="157" y="60" width="60" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="UhP-P5-sw3"/>
+                        <constraint firstAttribute="width" constant="60" id="ghr-CQ-WsF"/>
+                    </constraints>
+                    <state key="normal" title="新浪微博">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrM-lO-JOO">
+                    <rect key="frame" x="282" y="60" width="45" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="7Np-qA-CMN"/>
+                        <constraint firstAttribute="width" constant="45" id="uMm-b9-YEP"/>
+                    </constraints>
+                    <state key="normal" title="朋友圈">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="RPx-uy-fTu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="01v-1Q-orv"/>
+                <constraint firstItem="dMe-bq-Zgk" firstAttribute="top" secondItem="eKO-Sy-lsH" secondAttribute="bottom" constant="42" id="2WK-aS-Rv1"/>
+                <constraint firstItem="m0s-WS-YJZ" firstAttribute="top" secondItem="7ts-9E-Et8" secondAttribute="bottom" constant="42" id="37B-xD-kDc"/>
+                <constraint firstItem="m0s-WS-YJZ" firstAttribute="leading" secondItem="U4N-bC-7BU" secondAttribute="trailing" constant="70" id="5uP-BO-002"/>
+                <constraint firstItem="r75-SA-Msz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="6Fa-Nh-UWp"/>
+                <constraint firstItem="PKM-2z-r7v" firstAttribute="leading" secondItem="eKO-Sy-lsH" secondAttribute="trailing" constant="66" id="ATa-WF-NDR"/>
+                <constraint firstAttribute="trailing" secondItem="pJJ-xK-XAm" secondAttribute="trailing" id="D5g-RP-2ot"/>
+                <constraint firstItem="eKO-Sy-lsH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="31" id="FfH-yk-L8q"/>
+                <constraint firstAttribute="trailing" secondItem="9DQ-CC-kOy" secondAttribute="trailing" id="Inz-YM-IcH"/>
+                <constraint firstItem="U4N-bC-7BU" firstAttribute="top" secondItem="r75-SA-Msz" secondAttribute="bottom" constant="14" id="KSV-en-5XP"/>
+                <constraint firstItem="9DQ-CC-kOy" firstAttribute="top" secondItem="P1B-Hi-hMy" secondAttribute="bottom" constant="19" id="LoB-FM-5pd"/>
+                <constraint firstItem="7ts-9E-Et8" firstAttribute="leading" secondItem="eKO-Sy-lsH" secondAttribute="trailing" constant="66" id="NDs-Li-wKY"/>
+                <constraint firstItem="zrM-lO-JOO" firstAttribute="leading" secondItem="P1B-Hi-hMy" secondAttribute="trailing" constant="65" id="NF7-QE-lej"/>
+                <constraint firstItem="RPx-uy-fTu" firstAttribute="leading" secondItem="7ts-9E-Et8" secondAttribute="trailing" constant="57" id="O1N-Pd-7VZ"/>
+                <constraint firstItem="9DQ-CC-kOy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ppm-5p-F9q"/>
+                <constraint firstItem="P1B-Hi-hMy" firstAttribute="top" secondItem="PKM-2z-r7v" secondAttribute="bottom" constant="14" id="Su4-z3-1Rt"/>
+                <constraint firstItem="eKO-Sy-lsH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="TIR-Zu-29Z"/>
+                <constraint firstItem="PKM-2z-r7v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Vvm-d2-YkC"/>
+                <constraint firstItem="pJJ-xK-XAm" firstAttribute="top" secondItem="m0s-WS-YJZ" secondAttribute="bottom" constant="5" id="Zao-Hz-7Ur"/>
+                <constraint firstItem="P1B-Hi-hMy" firstAttribute="leading" secondItem="eKO-Sy-lsH" secondAttribute="trailing" constant="66" id="ZxB-Oi-Gia"/>
+                <constraint firstAttribute="trailing" secondItem="RPx-uy-fTu" secondAttribute="trailing" constant="41" id="bKW-ai-oku"/>
+                <constraint firstItem="zrM-lO-JOO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="eml-Ta-QYt"/>
+                <constraint firstItem="pJJ-xK-XAm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eyD-h7-19f"/>
+                <constraint firstAttribute="trailing" secondItem="m0s-WS-YJZ" secondAttribute="trailing" constant="161" id="ffK-FV-3Du"/>
+                <constraint firstItem="7ts-9E-Et8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="l7i-jQ-3eB"/>
+                <constraint firstAttribute="trailing" secondItem="zrM-lO-JOO" secondAttribute="trailing" constant="48" id="ld4-Do-KO0"/>
+                <constraint firstItem="U4N-bC-7BU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="31" id="mSf-NW-Q8Q"/>
+                <constraint firstItem="r75-SA-Msz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="31" id="nnL-86-Y2N"/>
+                <constraint firstItem="dMe-bq-Zgk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="39" id="q43-aG-cQC"/>
+                <constraint firstItem="RPx-uy-fTu" firstAttribute="leading" secondItem="PKM-2z-r7v" secondAttribute="trailing" constant="57" id="wbP-Wl-Y6v"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="PButton" destination="zrM-lO-JOO" id="8z3-bP-dwZ"/>
+                <outlet property="QButton" destination="m0s-WS-YJZ" id="H3i-Eu-Nxa"/>
+                <outlet property="RButton" destination="dMe-bq-Zgk" id="Rvi-GT-gIO"/>
+                <outlet property="WButton" destination="eKO-Sy-lsH" id="QeA-az-U3p"/>
+                <outlet property="XButton" destination="7ts-9E-Et8" id="xxl-ff-bhh"/>
+                <outlet property="cancelButton" destination="pJJ-xK-XAm" id="gAj-YW-La0"/>
+                <outlet property="pButton" destination="RPx-uy-fTu" id="6Dt-b0-Lin"/>
+                <outlet property="qButton" destination="P1B-Hi-hMy" id="jkD-Hi-0e1"/>
+                <outlet property="rButton" destination="U4N-bC-7BU" id="jaL-09-41b"/>
+                <outlet property="wButton" destination="r75-SA-Msz" id="44k-kQ-8SP"/>
+                <outlet property="xButton" destination="PKM-2z-r7v" id="Z6R-vQ-lPg"/>
+            </connections>
+            <point key="canvasLocation" x="272.5" y="501"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="QQ空间.png" width="59" height="59"/>
+        <image name="人人网.png" width="59" height="59"/>
+        <image name="微信.png" width="59" height="59"/>
+        <image name="新浪微博.png" width="59" height="59"/>
+        <image name="朋友圈.png" width="59" height="59"/>
+    </resources>
+</document>

@@ -644,6 +644,8 @@
 		8D4B8C1E1BF2F63800A88285 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4B8C1D1BF2F63800A88285 /* libz.tbd */; };
 		8D4B8C211BF328A000A88285 /* MyAccountProductView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B8C201BF328A000A88285 /* MyAccountProductView.m */; settings = {ASSET_TAGS = (); }; };
 		8D4B8C231BF328B400A88285 /* MyAccountProductView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4B8C221BF328B400A88285 /* MyAccountProductView.xib */; settings = {ASSET_TAGS = (); }; };
+		8D4C4F9E1C97D866002229AE /* ZFPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C4F9D1C97D866002229AE /* ZFPassword.m */; settings = {ASSET_TAGS = (); }; };
+		8D4C4FA01C97D87E002229AE /* ZFPassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D4C4F9F1C97D87E002229AE /* ZFPassword.xib */; settings = {ASSET_TAGS = (); }; };
 		8D4E4D961C1E589D00AE2644 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4E4D951C1E589D00AE2644 /* CoreLocation.framework */; };
 		8D4E4D981C1E58B700AE2644 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4E4D971C1E58B700AE2644 /* MobileCoreServices.framework */; };
 		8D4E4DFF1C1E5A6A00AE2644 /* CHANGELIST.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8D4E4D9A1C1E5A6A00AE2644 /* CHANGELIST.txt */; settings = {ASSET_TAGS = (); }; };
@@ -701,6 +703,18 @@
 		8D6692831BD0D8A600CD2CAF /* MyHandButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6692821BD0D8A600CD2CAF /* MyHandButton.m */; };
 		8D6692851BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6692841BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png */; };
 		8D6692871BD0E53000CD2CAF /* gesture_node_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6692861BD0E53000CD2CAF /* gesture_node_highlighted@2x.png */; };
+		8D6E46621C98FC2800F0F5B7 /* InviteNewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46611C98FC2800F0F5B7 /* InviteNewView.xib */; settings = {ASSET_TAGS = (); }; };
+		8D6E46651C98FC3B00F0F5B7 /* InviteNewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E46641C98FC3B00F0F5B7 /* InviteNewView.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E46681C99295F00F0F5B7 /* NewCastProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E46671C99295F00F0F5B7 /* NewCastProductViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E466B1C992AD700F0F5B7 /* myCastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E466A1C992AD700F0F5B7 /* myCastViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E466E1C992B3D00F0F5B7 /* myHadCastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E466D1C992B3D00F0F5B7 /* myHadCastViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E46721C9932AA00F0F5B7 /* myCastTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E46701C9932AA00F0F5B7 /* myCastTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E46731C9932AA00F0F5B7 /* myCastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46711C9932AA00F0F5B7 /* myCastTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8D6E46771C9936C600F0F5B7 /* myHadCastTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E46751C9936C600F0F5B7 /* myHadCastTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E46781C9936C600F0F5B7 /* myHadCastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46761C9936C600F0F5B7 /* myHadCastTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8D6E467B1C9936F600F0F5B7 /* 已兑付@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46791C9936F600F0F5B7 /* 已兑付@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D6E467C1C9936F600F0F5B7 /* 已兑付@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E467A1C9936F600F0F5B7 /* 已兑付@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D6E467F1C99635E00F0F5B7 /* myCastModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E467E1C99635E00F0F5B7 /* myCastModel.m */; settings = {ASSET_TAGS = (); }; };
 		8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */; };
 		8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFBA21BC78B02009FE101 /* shouyeqiepian7500_28highlight.png */; };
 		8D878CE11BC754AD00844575 /* e.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CE01BC754AD00844575 /* e.m */; };
@@ -1795,6 +1809,9 @@
 		8D4B8C1F1BF328A000A88285 /* MyAccountProductView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountProductView.h; sourceTree = "<group>"; };
 		8D4B8C201BF328A000A88285 /* MyAccountProductView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountProductView.m; sourceTree = "<group>"; };
 		8D4B8C221BF328B400A88285 /* MyAccountProductView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyAccountProductView.xib; sourceTree = "<group>"; };
+		8D4C4F9C1C97D866002229AE /* ZFPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPassword.h; sourceTree = "<group>"; };
+		8D4C4F9D1C97D866002229AE /* ZFPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPassword.m; sourceTree = "<group>"; };
+		8D4C4F9F1C97D87E002229AE /* ZFPassword.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZFPassword.xib; sourceTree = "<group>"; };
 		8D4E4D951C1E589D00AE2644 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		8D4E4D971C1E58B700AE2644 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		8D4E4D9A1C1E5A6A00AE2644 /* CHANGELIST.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELIST.txt; sourceTree = "<group>"; };
@@ -1966,6 +1983,25 @@
 		8D6692821BD0D8A600CD2CAF /* MyHandButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHandButton.m; sourceTree = "<group>"; };
 		8D6692841BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture_node_highlighted@3x.png"; sourceTree = "<group>"; };
 		8D6692861BD0E53000CD2CAF /* gesture_node_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture_node_highlighted@2x.png"; sourceTree = "<group>"; };
+		8D6E46611C98FC2800F0F5B7 /* InviteNewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteNewView.xib; sourceTree = "<group>"; };
+		8D6E46631C98FC3B00F0F5B7 /* InviteNewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteNewView.h; sourceTree = "<group>"; };
+		8D6E46641C98FC3B00F0F5B7 /* InviteNewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteNewView.m; sourceTree = "<group>"; };
+		8D6E46661C99295F00F0F5B7 /* NewCastProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewCastProductViewController.h; sourceTree = "<group>"; };
+		8D6E46671C99295F00F0F5B7 /* NewCastProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCastProductViewController.m; sourceTree = "<group>"; };
+		8D6E46691C992AD700F0F5B7 /* myCastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myCastViewController.h; sourceTree = "<group>"; };
+		8D6E466A1C992AD700F0F5B7 /* myCastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myCastViewController.m; sourceTree = "<group>"; };
+		8D6E466C1C992B3D00F0F5B7 /* myHadCastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myHadCastViewController.h; sourceTree = "<group>"; };
+		8D6E466D1C992B3D00F0F5B7 /* myHadCastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myHadCastViewController.m; sourceTree = "<group>"; };
+		8D6E466F1C9932AA00F0F5B7 /* myCastTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myCastTableViewCell.h; sourceTree = "<group>"; };
+		8D6E46701C9932AA00F0F5B7 /* myCastTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myCastTableViewCell.m; sourceTree = "<group>"; };
+		8D6E46711C9932AA00F0F5B7 /* myCastTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = myCastTableViewCell.xib; sourceTree = "<group>"; };
+		8D6E46741C9936C600F0F5B7 /* myHadCastTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myHadCastTableViewCell.h; sourceTree = "<group>"; };
+		8D6E46751C9936C600F0F5B7 /* myHadCastTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myHadCastTableViewCell.m; sourceTree = "<group>"; };
+		8D6E46761C9936C600F0F5B7 /* myHadCastTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = myHadCastTableViewCell.xib; sourceTree = "<group>"; };
+		8D6E46791C9936F600F0F5B7 /* 已兑付@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已兑付@2x.png"; sourceTree = "<group>"; };
+		8D6E467A1C9936F600F0F5B7 /* 已兑付@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已兑付@3x.png"; sourceTree = "<group>"; };
+		8D6E467D1C99635E00F0F5B7 /* myCastModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myCastModel.h; sourceTree = "<group>"; };
+		8D6E467E1C99635E00F0F5B7 /* myCastModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myCastModel.m; sourceTree = "<group>"; };
 		8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian750_28.png; sourceTree = "<group>"; };
 		8D6EFBA21BC78B02009FE101 /* shouyeqiepian7500_28highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian7500_28highlight.png; sourceTree = "<group>"; };
 		8D878CDF1BC754AD00844575 /* e.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e.h; sourceTree = "<group>"; };
@@ -2567,6 +2603,8 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8D6E46791C9936F600F0F5B7 /* 已兑付@2x.png */,
+				8D6E467A1C9936F600F0F5B7 /* 已兑付@3x.png */,
 				8183F40A1C97CD4E000BB93C /* messageNew@2x.png */,
 				8183F40B1C97CD4E000BB93C /* messageNew@3x.png */,
 				8183F40C1C97CD4E000BB93C /* messageOld@2x.png */,
@@ -2898,6 +2936,8 @@
 				818D0C281C2AC58B008F7612 /* ProductO.m */,
 				810C767B1C2E40D2000637FD /* UserList.h */,
 				810C767C1C2E40D2000637FD /* UserList.m */,
+				8D6E467D1C99635E00F0F5B7 /* myCastModel.h */,
+				8D6E467E1C99635E00F0F5B7 /* myCastModel.m */,
 			);
 			path = MineModel;
 			sourceTree = "<group>";
@@ -3226,6 +3266,12 @@
 		8D3125CC1BD7428200143B71 /* 账户资产 */ = {
 			isa = PBXGroup;
 			children = (
+				8D6E46661C99295F00F0F5B7 /* NewCastProductViewController.h */,
+				8D6E46671C99295F00F0F5B7 /* NewCastProductViewController.m */,
+				8D6E46691C992AD700F0F5B7 /* myCastViewController.h */,
+				8D6E466A1C992AD700F0F5B7 /* myCastViewController.m */,
+				8D6E466C1C992B3D00F0F5B7 /* myHadCastViewController.h */,
+				8D6E466D1C992B3D00F0F5B7 /* myHadCastViewController.m */,
 				8D5DBB7C1BD4819C00F556B9 /* CastProduceViewController.h */,
 				8D5DBB7D1BD4819C00F556B9 /* CastProduceViewController.m */,
 				8D5DBB7E1BD4819C00F556B9 /* CastProduceViewController.xib */,
@@ -3361,6 +3407,12 @@
 				8164BBC21C05D5F700023461 /* ProjectSimpleCell.m */,
 				8164BBC41C05DD2C00023461 /* ProjectContentCell.h */,
 				8164BBC51C05DD2C00023461 /* ProjectContentCell.m */,
+				8D6E466F1C9932AA00F0F5B7 /* myCastTableViewCell.h */,
+				8D6E46701C9932AA00F0F5B7 /* myCastTableViewCell.m */,
+				8D6E46711C9932AA00F0F5B7 /* myCastTableViewCell.xib */,
+				8D6E46741C9936C600F0F5B7 /* myHadCastTableViewCell.h */,
+				8D6E46751C9936C600F0F5B7 /* myHadCastTableViewCell.m */,
+				8D6E46761C9936C600F0F5B7 /* myHadCastTableViewCell.xib */,
 			);
 			name = "账户资产";
 			sourceTree = "<group>";
@@ -3442,6 +3494,9 @@
 				81B5209F1BF9746400D8E8D1 /* AddressBookCell.h */,
 				81B520A01BF9746400D8E8D1 /* AddressBookCell.m */,
 				81B520A11BF9746400D8E8D1 /* AddressBookCell.xib */,
+				8D6E46631C98FC3B00F0F5B7 /* InviteNewView.h */,
+				8D6E46641C98FC3B00F0F5B7 /* InviteNewView.m */,
+				8D6E46611C98FC2800F0F5B7 /* InviteNewView.xib */,
 			);
 			name = "好友邀请";
 			sourceTree = "<group>";
@@ -3484,6 +3539,9 @@
 				8D18B29F1C2982D100754C13 /* TTTTXianTableViewCell.h */,
 				8D18B2A01C2982D100754C13 /* TTTTXianTableViewCell.m */,
 				8D18B2A11C2982D100754C13 /* TTTTXianTableViewCell.xib */,
+				8D4C4F9C1C97D866002229AE /* ZFPassword.h */,
+				8D4C4F9D1C97D866002229AE /* ZFPassword.m */,
+				8D4C4F9F1C97D87E002229AE /* ZFPassword.xib */,
 			);
 			name = "提现";
 			sourceTree = "<group>";
@@ -4563,6 +4621,7 @@
 				81C8BBC51BDA2F8D005B9DFF /* bangzhu@3x.png in Resources */,
 				81D703FD1BE073730074DF30 /* ForgetSecret2Cell.xib in Resources */,
 				8175BEAC1BE9F2F50044026E /* 微信@2x.png in Resources */,
+				8D6E46621C98FC2800F0F5B7 /* InviteNewView.xib in Resources */,
 				8D3EEA181C27AB400031F7C9 /* 建设银行@2x.png in Resources */,
 				8DC695BD1C3503D30055EC44 /* UMSCommentInputController.xib in Resources */,
 				8D4343951BFDEB0B000BA004 /* loading_up_04.png in Resources */,
@@ -4590,6 +4649,7 @@
 				81BA1C101BD4FE2600DBA5BE /* MyNewsCell.xib in Resources */,
 				8D9011A41BD6337C00E5D62A /* 10@3x.png in Resources */,
 				81B674191BF0AFEB007CEF51 /* 蓝框@2x.png in Resources */,
+				8D6E467B1C9936F600F0F5B7 /* 已兑付@2x.png in Resources */,
 				8D3A2FE11BE7100000913DEC /* FDescriptionViewController.xib in Resources */,
 				8D3F95EA1BE2188500013A8E /* yueyuesheng@2x.png in Resources */,
 				81C8BBC81BDA2F8D005B9DFF /* lianxikefuG@2x.png in Resources */,
@@ -4791,6 +4851,7 @@
 				81AC90BC1BEC7F9900232404 /* 提示@3x.png in Resources */,
 				8D3F95EF1BE2188500013A8E /* filefile@3x.png in Resources */,
 				81F343881C0584EB001EF374 /* iconfont-complete-拷贝-3@3x.png in Resources */,
+				8D6E46781C9936C600F0F5B7 /* myHadCastTableViewCell.xib in Resources */,
 				817DD4A11BCF547E00042B09 /* quebao@3x.png in Resources */,
 				8175BEAE1BE9F2F50044026E /* 腾讯微博@2x.png in Resources */,
 				8D3125EB1BD7798000143B71 /* ForgetPasswordViewController.xib in Resources */,
@@ -4844,6 +4905,7 @@
 				817E33851BD733D100D05103 /* b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658@3x.png in Resources */,
 				810C76711C2D1210000637FD /* 椭圆-9@2x.png in Resources */,
 				8D29F9811C08047D00D45E43 /* 已打开@2x.png in Resources */,
+				8D6E46731C9932AA00F0F5B7 /* myCastTableViewCell.xib in Resources */,
 				8D3EEA1D1C27AB400031F7C9 /* 招商银行@3x.png in Resources */,
 				8DC695BF1C3503D30055EC44 /* UMShareEditViewController.xib in Resources */,
 				818063A61BD5D89000E83492 /* InviteNameCell.xib in Resources */,
@@ -4919,6 +4981,7 @@
 				819B52EE1BFC5198002FDF1E /* 钻石红包@3x.png in Resources */,
 				81B18E171BE7387A00D448FA /* iconfont-liwu@2x.png in Resources */,
 				813D3FCC1C2683420042DB88 /* 审核失败@2x.png in Resources */,
+				8D6E467C1C9936F600F0F5B7 /* 已兑付@3x.png in Resources */,
 				8DC695C21C3503D30055EC44 /* UMSnsAccountViewController.xib in Resources */,
 				817E33951BD7576600D05103 /* MeCell.xib in Resources */,
 				8175BE781BE9A2490044026E /* 61-拷贝@2x.png in Resources */,
@@ -4968,6 +5031,7 @@
 				8D9011B51BD6337C00E5D62A /* 07@2x.png in Resources */,
 				8183F4111C97CD4E000BB93C /* messageOld@3x.png in Resources */,
 				8D9011BB1BD6337C00E5D62A /* anniuS@2x.png in Resources */,
+				8D4C4FA01C97D87E002229AE /* ZFPassword.xib in Resources */,
 				814B51021C3A8463001AACC6 /* ChongZhiZZZZView.xib in Resources */,
 				817DD4A31BCF547E00042B09 /* shape-29@3x.png in Resources */,
 				81C8BBC71BDA2F8D005B9DFF /* guanyuG@3x.png in Resources */,
@@ -5130,6 +5194,7 @@
 				817E33A71BD7840000D05103 /* ChooseCell.m in Sources */,
 				8D4FF5E41BE339A200BAE25F /* UIRefreshControl+AFNetworking.m in Sources */,
 				8D9356CE1BC607C500BC2BFA /* main.m in Sources */,
+				8D6E466B1C992AD700F0F5B7 /* myCastViewController.m in Sources */,
 				8184EF4A1BFDBC5600496989 /* OneCell.m in Sources */,
 				8182A7E61C0E97EA00FA1216 /* ApplySchedule.m in Sources */,
 				8183F41F1C97FDA1000BB93C /* TMakeSureViewController.m in Sources */,
@@ -5144,12 +5209,15 @@
 				81D703F31BE06BD60074DF30 /* ForgetSecretViewController.m in Sources */,
 				817E33981BD772A700D05103 /* BigMoneyViewController.m in Sources */,
 				810C76751C2D1A01000637FD /* UserListViewController.m in Sources */,
+				8D6E46651C98FC3B00F0F5B7 /* InviteNewView.m in Sources */,
 				8D4FF5D71BE339A200BAE25F /* AFHTTPSessionManager.m in Sources */,
 				8162D1271BE1BD9C00CACAB6 /* DownFourCell.m in Sources */,
+				8D6E46721C9932AA00F0F5B7 /* myCastTableViewCell.m in Sources */,
 				8D878CE11BC754AD00844575 /* e.m in Sources */,
 				81701C101BE703F200B45BAA /* MendDeal2Cell.m in Sources */,
 				8D4FF5E51BE339A200BAE25F /* UIWebView+AFNetworking.m in Sources */,
 				811F9E071BC7D29900CAD6F5 /* UIColor+AddColor.m in Sources */,
+				8D4C4F9E1C97D866002229AE /* ZFPassword.m in Sources */,
 				81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */,
 				812F6BE81BD8DDE10000D8E9 /* BindingPhoneViewController.m in Sources */,
 				816F1ECB1BF58B4D00DB6B65 /* RiskAlertBookViewController.m in Sources */,
@@ -5274,6 +5342,7 @@
 				8D0CB4891BE75C860039D826 /* SimpleDescriptionsViewController.m in Sources */,
 				8D4518791C00553E00FAF998 /* GTMBase64.m in Sources */,
 				818523C21BE35BDB002FC653 /* MendLoginViewController.m in Sources */,
+				8D6E46771C9936C600F0F5B7 /* myHadCastTableViewCell.m in Sources */,
 				812F6BEE1BD8ED310000D8E9 /* MessageViewController.m in Sources */,
 				8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */,
 				8162D1221BE1BD3300CACAB6 /* OtherProjectCell.m in Sources */,
@@ -5333,6 +5402,7 @@
 				8183F3501C7EAFAA000BB93C /* MonkeyMakeCell.m in Sources */,
 				8D9BE8E51C0EC94D003C67D3 /* YYDiskCache.m in Sources */,
 				8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */,
+				8D6E466E1C992B3D00F0F5B7 /* myHadCastViewController.m in Sources */,
 				8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */,
 				81CBB7501C1AC6E9002CDE97 /* SafeProtectViewController.m in Sources */,
 				81200C1E1C031F1700F70DDD /* InviteNumReginCell.m in Sources */,
@@ -5379,6 +5449,7 @@
 				81ED02C51BD08CFD005F4B02 /* MyInformationViewController.m in Sources */,
 				81701C071BE6FEA300B45BAA /* MendDealViewController.m in Sources */,
 				8D5DBB7F1BD4819C00F556B9 /* CastProduceViewController.m in Sources */,
+				8D6E46681C99295F00F0F5B7 /* NewCastProductViewController.m in Sources */,
 				8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */,
 				8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */,
 				8D9BE8F11C0EC94D003C67D3 /* YYImageCoder.m in Sources */,
@@ -5394,6 +5465,7 @@
 				8D4FF5D91BE339A200BAE25F /* AFSecurityPolicy.m in Sources */,
 				81E0CCE11C27EF6700148609 /* ChooseBusViewController.m in Sources */,
 				8D88D1071BFECCB40051D6DA /* UIView+MJExtension.m in Sources */,
+				8D6E467F1C99635E00F0F5B7 /* myCastModel.m in Sources */,
 				81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */,
 				8183F3541C7EE55F000BB93C /* CashMonkeyViewController.m in Sources */,
 				8D121FE01BD4D92600B3C1FE /* SettingPieTableViewCell.m in Sources */,

@@ -84,7 +84,6 @@
     
     financingVC = [[FinancingViewController alloc] init];
     
-    newbieVC = [[NewbieViewController alloc] init];
     [self addChildViewController:newbieVC];
     [self.view addSubview:newbieVC.view];
     newbieVC.view.frame = CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 45);
