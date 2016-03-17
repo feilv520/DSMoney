@@ -9,6 +9,10 @@
 #import "TMakeSureViewController.h"
 #import "UIColor+AddColor.h"
 #import "TChooseRedBagCell.h"
+#import "TRedBagModel.h"
+#import "CashFinishViewController.h"
+#import "ShareHaveRedBag.h"
+#import "FBalancePaymentViewController.h"
 
 @interface TMakeSureViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -22,6 +26,10 @@
     UIButton *butBlackAlert;
     UIView *viewBottomD;
     UITableView *_tableView;
+    NSMutableArray *chooseBagArr;
+    NSString *syString;
+    TRedBagModel *redbagModel;
+    FBalancePaymentViewController *_balanceVC;
 }
 
 @end
@@ -35,11 +43,12 @@
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"确认投资"];
     
+//    redBagArray是红包的数组 里面是以字典形式存放一个个的红包 chooseBagArr里面存放对象
     redBagArray = [NSMutableArray array];
+    chooseBagArr = [NSMutableArray array];
     accountDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     [self contentShow];
-//    [self getMyRedPacketList];
 }
 
 - (void)contentShow
@@ -122,73 +131,7 @@
         
     }];
     
-//   numberInt是起投金额
-    CGFloat numberInt = [[[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
-    NSInteger shuRuInt = textFieldShu.text.integerValue;
-    NSInteger qiTouMoney = self.detailM.amountMin.integerValue;
-    NSInteger diZengMoney = self.detailM.amountIncrease.integerValue;
-    NSInteger money = shuRuInt % diZengMoney;
-    
-    if (shuRuInt == qiTouMoney) {
-        
-        NSLog(@"1.shuRuInt == qiTouMoney");
-        if (redBagArray == nil) {
-            NSLog(@"下一页");
-        } else {
-            [self getMyRedPacketList];
-        }
-        
-    } else if (shuRuInt > qiTouMoney) {
-        
-        if (money == 0) {
-            
-            if (redBagArray == nil) {
-                NSLog(@"下一页");
-            } else {
-                [self getMyRedPacketList];
-            }
-            
-        } else {
-            
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请按照起投金额和递增金额条件输入"];
-            return ;
-        }
-        
-    } else if (textFieldShu.text.length == 0) {
-        
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入投资金额"];
-        
-    } else {
-        
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"投资金额大于起投金额"];
-        return ;
-        
-    }
-    
-//    判断输入的金额是否大于余额
-    if (shuRuInt > numberInt && shuRuInt != 0) {
-        
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足,请充值"];
-        
-    } else if (shuRuInt <= numberInt && shuRuInt != 0) {
-        if (shuRuInt >= [[self.detailM amountMin] floatValue]) {
-            
-//            [self redBagListShow];
-//            if ([redbagModel rpID] != nil) {
-//                [self showSureView:app];
-//            } else {
-//                if (self.redBagArray.count == 0) {
-//                    [self showSureView:app];
-//                } else {
-//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你还有未使用的红包,要不要去看看?" delegate:self cancelButtonTitle:@"拒绝去看" otherButtonTitles:@"去看看",nil];
-//                    // optional - add more buttons:
-//                    [alert show];
-//                }
-//            }
-        } else {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"投资金额要大于起投金额"];
-        }
-    }
+    [self getMyRedPacketList];
 }
 
 //红包展示
@@ -200,7 +143,7 @@
     butBlackAlert.alpha = 0.3;
     [butBlackAlert addTarget:self action:@selector(buttonDisappear:) forControlEvents:UIControlEventTouchUpInside];
     
-    viewBottomD = [CreatView creatViewWithFrame:CGRectMake(30, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 180, WIDTH_CONTROLLER_DEFAULT - 60, 360) backgroundColor:[UIColor whiteColor]];
+    viewBottomD = [CreatView creatViewWithFrame:CGRectMake(30, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 110, WIDTH_CONTROLLER_DEFAULT - 60, 220) backgroundColor:[UIColor whiteColor]];
     [app.tabBarVC.view addSubview:viewBottomD];
     viewBottomD.layer.cornerRadius = 5;
     viewBottomD.layer.masksToBounds = YES;
@@ -245,7 +188,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return redBagArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -271,7 +214,43 @@
     cell.butSend.layer.cornerRadius = 3;
     cell.butSend.layer.masksToBounds = YES;
     
+    TRedBagModel *redModel = [chooseBagArr objectAtIndex:indexPath.row];
     cell.labelRedBag.backgroundColor = [UIColor clearColor];
+    
+//    红包金额
+    if ([redModel.rpTop isEqualToString:redModel.rpFloor]) {
+        NSMutableAttributedString *redBagStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", redModel.rpTop]];
+        NSRange range = NSMakeRange(0, [[redBagStr string] rangeOfString:@"元"].location);
+        [redBagStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"ArialMT" size:30] range:range];
+        NSRange rangeY = NSMakeRange([[redBagStr string] length] - 1, 1);
+        [redBagStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:10] range:rangeY];
+        [cell.labelRedBag setAttributedText:redBagStr];
+        
+    } else {
+        
+        NSMutableAttributedString *redBagStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@~%@元", redModel.rpFloor, redModel.rpTop]];
+        NSRange range = NSMakeRange(0, [[redBagStr string] rangeOfString:@"元"].location);
+        [redBagStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"ArialMT" size:30] range:range];
+        NSRange rangeY = NSMakeRange([[redBagStr string] length] - 1, 1);
+        [redBagStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:10] range:rangeY];
+        [cell.labelRedBag setAttributedText:redBagStr];
+    }
+    
+    cell.labelRedBag.textColor = [UIColor daohanglan];
+    
+//    红包时间
+    cell.labelTime.backgroundColor = [UIColor clearColor];
+    cell.labelTime.text = [NSString stringWithFormat:@"有效期:截止%@", redModel.rpTime];
+    cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:9];
+    cell.labelTime.textColor = [UIColor zitihui];
+    
+//    红包类型
+    cell.labelStyle.text = redModel.rpTypeName;
+    cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    
+    cell.labelContent.text = [NSString stringWithFormat:@"单笔投资金额满%@元", redModel.rpLimit];
+    cell.labelContent.textColor = [UIColor zitihui];
+    cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:10];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -279,7 +258,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 80;
 }
 
 //勾选红包按钮
@@ -301,6 +280,73 @@
 - (void)buttonRightNowUse:(UIButton *)button
 {
     NSLog(@"用了");
+    if (self.decide == NO) {
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        NSDictionary *parameter;
+        if ([redbagModel rpID] == nil) {
+            parameter = @{@"productId":[self.detailM productId],@"packetId":@"",@"orderMoney":[NSNumber numberWithFloat:[textFieldShu.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"],@"clientType":@"iOS"};
+        } else {
+            parameter = @{@"productId":[self.detailM productId],@"packetId":[redbagModel rpID],@"orderMoney":[NSNumber numberWithFloat:[textFieldShu.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"],@"clientType":@"iOS"};
+        }
+        
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"buyProduct = %@",responseObject);
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                if ([redbagModel rpID] == nil) {
+                    //              支付没有红包
+                    CashFinishViewController *cashFinish = [[CashFinishViewController alloc] init];
+                    cashFinish.nHand = self.nHand;
+                    cashFinish.moneyString = textFieldShu.text;
+                    cashFinish.endTimeString = [self.detailM endTime];
+                    cashFinish.productName = [self.detailM productName];
+                    cashFinish.syString = syString;
+                    [self.navigationController pushViewController:cashFinish animated:YES];
+                } else {
+                    //              支付有红包
+                    ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
+                    shareHave.redbagModel = redbagModel;
+                    shareHave.nHand = self.nHand;
+                    shareHave.moneyString = textFieldShu.text;
+                    shareHave.endTimeString = [self.detailM endTime];
+                    shareHave.productName = [self.detailM productName];
+                    shareHave.syString = syString;
+                    [self.navigationController pushViewController:shareHave animated:YES];
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+                
+            } else {
+                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            
+        }];
+        
+    } else {
+        
+        [self buttonDisappear:nil];
+        
+        _balanceVC = [[FBalancePaymentViewController alloc] init];
+        _balanceVC.productName = [self.detailM productName];
+        _balanceVC.idString = [self.detailM productId];
+        _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textFieldShu.text floatValue]];
+        _balanceVC.typeString = [self.detailM productType];
+        _balanceVC.redbagModel = redbagModel;
+        _balanceVC.nHand = self.nHand;
+        _balanceVC.syString = syString;
+        _balanceVC.endTimeString = [self.detailM endTime];
+        [self.navigationController pushViewController:_balanceVC animated:YES];
+        
+    }
+
 }
 
 //黑色遮罩层消失方法
@@ -332,9 +378,8 @@
 //textField绑定方法
 - (void)textFieldEditChanged:(UITextField *)textField
 {
-    NSLog(@"666666666");
-    
     labelCoin.text = [NSString stringWithFormat:@"%.2f元", textFieldShu.text.floatValue];
+    syString = labelCoin.text;
     labelYJmoney.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
 }
 
@@ -377,8 +422,67 @@
         NSLog(@"获取红包列表 = %@",responseObject);
         
         redBagArray = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"RedPacket"]];
-        NSLog(@"===========%@", redBagArray);
-        [self redBagListShow];
+        NSLog(@"我是个红包===========%@", redBagArray);
+        for (NSDictionary *dataDic in redBagArray) {
+            redbagModel = [[TRedBagModel alloc] init];
+            [redbagModel setValuesForKeysWithDictionary:dataDic];
+            [chooseBagArr addObject:redbagModel];
+        }
+        
+        NSLog(@"本数组中有对象:::%@", chooseBagArr);
+        
+        //   numberInt是可用余额
+        CGFloat numberInt = [[[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
+        NSInteger shuRuInt = textFieldShu.text.integerValue;
+        NSInteger qiTouMoney = self.detailM.amountMin.integerValue;
+        NSInteger diZengMoney = self.detailM.amountIncrease.integerValue;
+        NSInteger money = shuRuInt % diZengMoney;
+        
+//        外层判断 输入的金额与账户余额的判断
+        if (shuRuInt > numberInt && shuRuInt != 0) {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足,请充值"];
+            
+        } else {
+            
+//            内层判断 输入的金额与起投金额的判断
+            if (shuRuInt == qiTouMoney) {
+                
+                if (redBagArray.count == 0) {
+                    NSLog(@"下一页");
+                } else {
+                    [self redBagListShow];
+                }
+                
+            } else if (shuRuInt > qiTouMoney) {
+                
+                if (money == 0) {
+                    
+                    if (redBagArray.count == 0) {
+                        NSLog(@"下一页");
+                    } else {
+                        [self redBagListShow];
+                    }
+                    
+                } else {
+                    
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请按照起投金额和递增金额条件输入"];
+                    return ;
+                }
+                
+            } else if (textFieldShu.text.length == 0) {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入投资金额"];
+                
+            } else {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"投资金额大于起投金额"];
+                return ;
+            }
+            
+        }
+        
+        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

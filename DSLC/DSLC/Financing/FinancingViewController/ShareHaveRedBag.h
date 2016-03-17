@@ -7,11 +7,11 @@
 //
 
 #import "BaseViewController.h"
-#import "RedBagModel.h"
+#import "TRedBagModel.h"
 
 @interface ShareHaveRedBag : BaseViewController
 
-@property (nonatomic, strong) RedBagModel *redbagModel;
+@property (nonatomic, strong) TRedBagModel *redbagModel;
 
 @property (nonatomic, strong) NSString *nHand;
 

@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "RedBagModel.h"
+#import "TRedBagModel.h"
 
 @interface FBalancePaymentViewController : BaseViewController
 
@@ -30,7 +30,7 @@
 @property (nonatomic, copy) NSString *typeString;
 @property (nonatomic, copy) NSString *syString;
 @property (nonatomic, copy) NSString *endTimeString;
-@property (nonatomic, strong) RedBagModel *redbagModel;
+@property (nonatomic, strong) TRedBagModel *redbagModel;
 
 @property (nonatomic, strong) NSString *nHand;
 @property (nonatomic, strong) NSString *dealPanDuan;

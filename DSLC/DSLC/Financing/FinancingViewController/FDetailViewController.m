@@ -39,6 +39,7 @@
     NSInteger isOrder;
     
     UIButton *butCountDown;
+    UILabel *labelRisk;
 }
 @property (nonatomic, strong) UIControl *viewBotton;
 @property (nonatomic, strong) ProductDetailModel *detailM;
@@ -84,6 +85,15 @@
     [self.navigationItem setTitle:@"产品详情"];
     
     butCountDown = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((self.view.frame.size.width - 20)/2, 0, (self.view.frame.size.width - 20)/2, 29) backgroundColor:[UIColor greenColor] textColor:[UIColor zitihui] titleText:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(whatRisk:) name:@"risk" object:nil];
+    
+    labelRisk = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 25 - 60, 10, 60, 25) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
+}
+
+- (void)whatRisk:(NSNotification *)notice
+{
+    labelRisk.text = [notice object];
 }
 
 //头部分区的tableView展示
@@ -132,7 +142,7 @@
         
     } else if (indexPath.section == 2) {
         
-        return 165;
+        return 120;
         
     } else if (indexPath.section == 3) {
         
@@ -285,6 +295,11 @@
         cell.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.labelLine.alpha = 0.7;
         
+        cell.labelContent.text = @"大圣理财目前所有固定收益类产品收益权全部来自四大国有资产管理公司，资产安全，收益稳健。自购买当日起T+1日起息到期后兑付本金收益T+1日到账。";
+        cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        cell.labelContent.numberOfLines = 0;
+        cell.labelContent.textColor = [UIColor zitihui];
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
@@ -356,6 +371,11 @@
     cell.labelTitle.font = [UIFont systemFontOfSize:15];
         
     cell.imageRight.image = [UIImage imageNamed:@"7501111"];
+        
+        if (indexPath.section == 5) {
+            
+            [cell addSubview:labelRisk];
+        }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

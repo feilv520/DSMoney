@@ -261,6 +261,9 @@
 		8183F41F1C97FDA1000BB93C /* TMakeSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F41E1C97FDA1000BB93C /* TMakeSureViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8183F4231C994240000BB93C /* TChooseRedBagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F4211C994240000BB93C /* TChooseRedBagCell.m */; settings = {ASSET_TAGS = (); }; };
 		8183F4241C994240000BB93C /* TChooseRedBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8183F4221C994240000BB93C /* TChooseRedBagCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8183F42E1C9A7C28000BB93C /* TRedBagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F42C1C9A7BD4000BB93C /* TRedBagModel.m */; };
+		8183F4321C9A8F93000BB93C /* TRiskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F4301C9A8F93000BB93C /* TRiskCell.m */; settings = {ASSET_TAGS = (); }; };
+		8183F4331C9A8F93000BB93C /* TRiskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8183F4311C9A8F93000BB93C /* TRiskCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC361BCC96E1003F440D /* MakeSureViewController.m */; };
 		8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC391BCCD0FE003F440D /* ContentCell.m */; };
 		8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC3A1BCCD0FE003F440D /* ContentCell.xib */; };
@@ -1280,6 +1283,11 @@
 		8183F4201C994240000BB93C /* TChooseRedBagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TChooseRedBagCell.h; sourceTree = "<group>"; };
 		8183F4211C994240000BB93C /* TChooseRedBagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TChooseRedBagCell.m; sourceTree = "<group>"; };
 		8183F4221C994240000BB93C /* TChooseRedBagCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TChooseRedBagCell.xib; sourceTree = "<group>"; };
+		8183F42B1C9A7BD4000BB93C /* TRedBagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRedBagModel.h; sourceTree = "<group>"; };
+		8183F42C1C9A7BD4000BB93C /* TRedBagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRedBagModel.m; sourceTree = "<group>"; };
+		8183F42F1C9A8F93000BB93C /* TRiskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRiskCell.h; sourceTree = "<group>"; };
+		8183F4301C9A8F93000BB93C /* TRiskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRiskCell.m; sourceTree = "<group>"; };
+		8183F4311C9A8F93000BB93C /* TRiskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRiskCell.xib; sourceTree = "<group>"; };
 		8184EC351BCC96E1003F440D /* MakeSureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeSureViewController.h; sourceTree = "<group>"; };
 		8184EC361BCC96E1003F440D /* MakeSureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeSureViewController.m; sourceTree = "<group>"; };
 		8184EC381BCCD0FE003F440D /* ContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentCell.h; sourceTree = "<group>"; };
@@ -3093,6 +3101,9 @@
 				8183F4201C994240000BB93C /* TChooseRedBagCell.h */,
 				8183F4211C994240000BB93C /* TChooseRedBagCell.m */,
 				8183F4221C994240000BB93C /* TChooseRedBagCell.xib */,
+				8183F42F1C9A8F93000BB93C /* TRiskCell.h */,
+				8183F4301C9A8F93000BB93C /* TRiskCell.m */,
+				8183F4311C9A8F93000BB93C /* TRiskCell.xib */,
 			);
 			path = FinancingView;
 			sourceTree = "<group>";
@@ -3100,6 +3111,8 @@
 		81D8ADA01BC646C400A15E01 /* FinancingModel */ = {
 			isa = PBXGroup;
 			children = (
+				8183F42B1C9A7BD4000BB93C /* TRedBagModel.h */,
+				8183F42C1C9A7BD4000BB93C /* TRedBagModel.m */,
 				8D50559C1BF082780034759B /* ProductListModel.h */,
 				8D50559D1BF082780034759B /* ProductListModel.m */,
 				8D50559F1BF08CA20034759B /* ProductDetailModel.h */,
@@ -4996,6 +5009,7 @@
 				81BA1C131BD5000700DBA5BE /* icon04@2x.png in Resources */,
 				8175BE9B1BE9E5760044026E /* 组-21-拷贝-13@3x.png in Resources */,
 				8D9011BA1BD6337C00E5D62A /* 09@3x.png in Resources */,
+				8183F4331C9A8F93000BB93C /* TRiskCell.xib in Resources */,
 				816CCCF01C182A71006FA6F2 /* BankListCell.xib in Resources */,
 				810C766E1C2D1210000637FD /* UserAsk@3x.png in Resources */,
 				817DD4AD1BCF547E00042B09 /* ziliao@3x.png in Resources */,
@@ -5136,6 +5150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8183F42E1C9A7C28000BB93C /* TRedBagModel.m in Sources */,
 				8183F4131C97CF29000BB93C /* TDescriptionCell.m in Sources */,
 				8D968A8F1C97AEFD00C9A6A1 /* TSignInViewController.m in Sources */,
 				8D968A8E1C97AEF400C9A6A1 /* TRankinglistViewController.m in Sources */,
@@ -5247,6 +5262,7 @@
 				8D0CB4A41BE7806D0039D826 /* MyAfHTTPClient.m in Sources */,
 				8D90117F1BD61B3400E5D62A /* TranctionTableViewCell.m in Sources */,
 				818063AB1BD61A7E00E83492 /* VerifyViewController.m in Sources */,
+				8183F4321C9A8F93000BB93C /* TRiskCell.m in Sources */,
 				812F6BEB1BD8ED240000D8E9 /* PhoneViewController.m in Sources */,
 				818523AE1BE3125D002FC653 /* BillCell.m in Sources */,
 				8D88D1011BFECCB40051D6DA /* MJRefreshNormalHeader.m in Sources */,
