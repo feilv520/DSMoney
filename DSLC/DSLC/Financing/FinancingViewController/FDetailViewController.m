@@ -14,7 +14,7 @@
 #import "ThreeCell.h"
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
-#import "MakeSureViewController.h"
+#import "TMakeSureViewController.h"
 #import "Calendar.h"
 #import "FDescriptionViewController.h"
 #import "RecordViewController.h"
@@ -23,6 +23,7 @@
 #import "MonkeyViewController.h"
 #import "TDescriptionCell.h"
 #import "TRiskGradeViewController.h"
+#import "TMakeSureViewController.h"
 
 @interface FDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
@@ -531,10 +532,10 @@
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先登录,然后再投资"];
 
             } else {
-                
+            
                 if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"1"]) {
                     
-                    MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
+                    TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
                     if (self.estimate == YES) {
                         
                         makeSureVC.decide = YES;
@@ -555,7 +556,7 @@
                     
                     if ([[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@"0"] || [[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@""]) {
                         
-                        MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
+                        TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
                         
                         if (self.estimate == YES) {
                             
@@ -752,7 +753,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"ppppppppppppppp%@",responseObject);
+        NSLog(@"产品详情ppppppppppppppp%@",responseObject);
         
         [self loadingWithHidden:YES];
         

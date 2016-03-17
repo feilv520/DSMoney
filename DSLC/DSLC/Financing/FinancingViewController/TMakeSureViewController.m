@@ -1,0 +1,405 @@
+//
+//  TMakeSureViewController.m
+//  DSLC
+//
+//  Created by ios on 16/3/15.
+//  Copyright © 2016年 马成铭. All rights reserved.
+//
+
+#import "TMakeSureViewController.h"
+#import "UIColor+AddColor.h"
+#import "TChooseRedBagCell.h"
+
+@interface TMakeSureViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
+
+{
+    UITextField *textFieldShu;
+    UIButton *buttonMake;
+    NSMutableArray *redBagArray;
+    UILabel *labelCoin;
+    UILabel *labelYJmoney;
+    NSDictionary *accountDic;
+    UIButton *butBlackAlert;
+    UIView *viewBottomD;
+    UITableView *_tableView;
+}
+
+@end
+
+@implementation TMakeSureViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor qianhuise];
+    [self.navigationItem setTitle:@"确认投资"];
+    
+    redBagArray = [NSMutableArray array];
+    accountDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    [self contentShow];
+//    [self getMyRedPacketList];
+}
+
+- (void)contentShow
+{
+    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 144) backgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:viewBottom];
+    
+    UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(10, 7, WIDTH_CONTROLLER_DEFAULT - 20, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"投资金额"];
+    [viewBottom addSubview:labelMoney];
+    
+    textFieldShu = [CreatView creatWithfFrame:CGRectMake(10, 43, WIDTH_CONTROLLER_DEFAULT - 20, 40) setPlaceholder:[NSString stringWithFormat:@"%@元起投,每递增%@元", [self.detailM amountMin],[self.detailM amountIncrease]] setTintColor:[UIColor grayColor]];
+    [viewBottom addSubview:textFieldShu];
+    textFieldShu.backgroundColor = [UIColor shurukuangColor];
+    textFieldShu.keyboardType = UIKeyboardTypeNumberPad;
+    textFieldShu.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    textFieldShu.delegate = self;
+    textFieldShu.layer.cornerRadius = 5;
+    textFieldShu.layer.masksToBounds = YES;
+    textFieldShu.layer.borderColor = [[UIColor shurukuangBian] CGColor];
+    textFieldShu.layer.borderWidth = 1;
+    textFieldShu.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
+    textFieldShu.leftView.backgroundColor = [UIColor shurukuangColor];
+    textFieldShu.leftViewMode = UITextFieldViewModeAlways;
+    [textFieldShu addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+    
+    UILabel *labelYuan = [CreatView creatWithLabelFrame:CGRectMake(textFieldShu.frame.size.width - 25, 5, 20, 30) backgroundColor:[UIColor shurukuangColor] textColor:[UIColor yuanColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"元"];
+    [textFieldShu addSubview:labelYuan];
+    
+    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(10, 95, WIDTH_CONTROLLER_DEFAULT - 20, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:nil text:nil];
+    [viewBottom addSubview:labelLine];
+    labelLine.alpha = 0.2;
+    
+    UILabel *labelYuJi = [CreatView creatWithLabelFrame:CGRectMake(10, 96, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"预计到期收益"];
+    [viewBottom addSubview:labelYuJi];
+    
+    labelYJmoney = [CreatView creatWithLabelFrame:CGRectMake(10 + (WIDTH_CONTROLLER_DEFAULT - 20)/2, 96, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"0.00元"];
+    [viewBottom addSubview:labelYJmoney];
+    
+    UILabel *labelLineD = [CreatView creatWithLabelFrame:CGRectMake(0, 145, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [viewBottom addSubview:labelLineD];
+    labelLineD.alpha = 0.2;
+    
+    UIView *viewCash = [CreatView creatViewWithFrame:CGRectMake(0, 154, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:viewCash];
+    
+    UILabel *labelLineUp = [CreatView creatWithLabelFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [viewCash addSubview:labelLineUp];
+    labelLineUp.alpha = 0.2;
+    
+    UILabel *labelLineDown = [CreatView creatWithLabelFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [viewCash addSubview:labelLineDown];
+    labelLineDown.alpha = 0.2;
+    
+    UILabel *labelCash = [CreatView creatWithLabelFrame:CGRectMake(10, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"支付金额"];
+    [viewCash addSubview:labelCash];
+    
+    labelCoin = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 20)/2, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:[NSString stringWithFormat:@"%@元", @"0.00"]];
+    [viewCash addSubview:labelCoin];
+    
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, 210, WIDTH_CONTROLLER_DEFAULT - 20, 20) backgroundColor:[UIColor qianhuise] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"提示:购买产品成功后,可拆开选择的红包"];
+    [self.view addSubview:labelAlert];
+    
+    buttonMake = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 20 - 120 - 40 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确认投资"];
+    [self.view addSubview:buttonMake];
+    buttonMake.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+    [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+    [buttonMake addTarget:self action:@selector(buttonMakeSureCash:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//确认投资按钮
+- (void)buttonMakeSureCash:(UIButton *)button
+{
+    [self.view endEditing:NO];
+    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        
+        buttonMake.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 20 - 120 - 40 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+//   numberInt是起投金额
+    CGFloat numberInt = [[[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
+    NSInteger shuRuInt = textFieldShu.text.integerValue;
+    NSInteger qiTouMoney = self.detailM.amountMin.integerValue;
+    NSInteger diZengMoney = self.detailM.amountIncrease.integerValue;
+    NSInteger money = shuRuInt % diZengMoney;
+    
+    if (shuRuInt == qiTouMoney) {
+        
+        NSLog(@"1.shuRuInt == qiTouMoney");
+        if (redBagArray == nil) {
+            NSLog(@"下一页");
+        } else {
+            [self getMyRedPacketList];
+        }
+        
+    } else if (shuRuInt > qiTouMoney) {
+        
+        if (money == 0) {
+            
+            if (redBagArray == nil) {
+                NSLog(@"下一页");
+            } else {
+                [self getMyRedPacketList];
+            }
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请按照起投金额和递增金额条件输入"];
+            return ;
+        }
+        
+    } else if (textFieldShu.text.length == 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入投资金额"];
+        
+    } else {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"投资金额大于起投金额"];
+        return ;
+        
+    }
+    
+//    判断输入的金额是否大于余额
+    if (shuRuInt > numberInt && shuRuInt != 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足,请充值"];
+        
+    } else if (shuRuInt <= numberInt && shuRuInt != 0) {
+        if (shuRuInt >= [[self.detailM amountMin] floatValue]) {
+            
+//            [self redBagListShow];
+//            if ([redbagModel rpID] != nil) {
+//                [self showSureView:app];
+//            } else {
+//                if (self.redBagArray.count == 0) {
+//                    [self showSureView:app];
+//                } else {
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你还有未使用的红包,要不要去看看?" delegate:self cancelButtonTitle:@"拒绝去看" otherButtonTitles:@"去看看",nil];
+//                    // optional - add more buttons:
+//                    [alert show];
+//                }
+//            }
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"投资金额要大于起投金额"];
+        }
+    }
+}
+
+//红包展示
+- (void)redBagListShow
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    butBlackAlert = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    [app.tabBarVC.view addSubview:butBlackAlert];
+    butBlackAlert.alpha = 0.3;
+    [butBlackAlert addTarget:self action:@selector(buttonDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    viewBottomD = [CreatView creatViewWithFrame:CGRectMake(30, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 180, WIDTH_CONTROLLER_DEFAULT - 60, 360) backgroundColor:[UIColor whiteColor]];
+    [app.tabBarVC.view addSubview:viewBottomD];
+    viewBottomD.layer.cornerRadius = 5;
+    viewBottomD.layer.masksToBounds = YES;
+    
+    CGFloat viewWidth = viewBottomD.frame.size.width;
+    CGFloat viewHeight = viewBottomD.frame.size.height;
+    
+    UILabel *labelChoose = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewWidth, 35) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"选择红包"];
+    [viewBottomD addSubview:labelChoose];
+    
+    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 34.5, viewWidth, 0.5) backgroundColor:[UIColor daohanglan] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [labelChoose addSubview:labelLine];
+    
+//    放立即使用按钮的view
+    UIView *viewMake = [CreatView creatViewWithFrame:CGRectMake(0, viewHeight - 70, viewWidth, 70) backgroundColor:[UIColor whiteColor]];
+    [viewBottomD addSubview:viewMake];
+    
+    UIButton *butRiNowUse = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, 15, viewMake.frame.size.width - 40, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"立即使用"];
+    [viewMake addSubview:butRiNowUse];
+    butRiNowUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+    [butRiNowUse setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+    [butRiNowUse setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+    [butRiNowUse addTarget:self action:@selector(buttonRightNowUse:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 0, viewMake.frame.size.width, 0.5) backgroundColor:[UIColor grayColor]];
+    [viewMake addSubview:viewLine];
+    viewLine.alpha = 0.2;
+    
+    [self tableViewRedBagShow];
+}
+
+//选择红包展示
+- (void)tableViewRedBagShow
+{
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 35, viewBottomD.frame.size.width, viewBottomD.frame.size.height - 35 - 70) style:UITableViewStylePlain];
+    [viewBottomD addSubview:_tableView];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    _tableView.separatorColor = [UIColor clearColor];
+    [_tableView registerNib:[UINib nibWithNibName:@"TChooseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TChooseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    
+    if (indexPath.row == 0) {
+        
+        cell.butChoose.tag = 8000;
+        [cell.butChoose setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+        
+    } else {
+        
+        cell.butChoose.tag = 9000;
+        [cell.butChoose setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2111"] forState:UIControlStateNormal];
+    }
+    
+    [cell.butChoose addTarget:self action:@selector(buttonChooseOrNo:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [cell.butSend setTitle:@"送" forState:UIControlStateNormal];
+    cell.butSend.backgroundColor = [UIColor daohanglan];
+    cell.butSend.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    cell.butSend.layer.cornerRadius = 3;
+    cell.butSend.layer.masksToBounds = YES;
+    
+    cell.labelRedBag.backgroundColor = [UIColor clearColor];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
+}
+
+//勾选红包按钮
+- (void)buttonChooseOrNo:(UIButton *)button
+{
+    if (button.tag == 8000) {
+        
+        [button setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2111"] forState:UIControlStateNormal];
+        button.tag = 9000;
+        
+    } else {
+        
+        button.tag = 8000;
+        [button setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+    }
+}
+
+//立即使用按钮
+- (void)buttonRightNowUse:(UIButton *)button
+{
+    NSLog(@"用了");
+}
+
+//黑色遮罩层消失方法
+- (void)buttonDisappear:(UIButton *)button
+{
+    [butBlackAlert removeFromSuperview];
+    [viewBottomD removeFromSuperview];
+    
+    butBlackAlert = nil;
+    viewBottomD = nil;
+}
+
+//textField代理方法
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    NSLog(@"11111111111");
+    if (WIDTH_CONTROLLER_DEFAULT == 375) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            buttonMake.frame = CGRectMake(40, 290, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+}
+
+//textField绑定方法
+- (void)textFieldEditChanged:(UITextField *)textField
+{
+    NSLog(@"666666666");
+    
+    labelCoin.text = [NSString stringWithFormat:@"%.2f元", textFieldShu.text.floatValue];
+    labelYJmoney.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
+}
+
+//回收键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:NO];
+    
+    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        
+        buttonMake.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 20 - 120 - 40 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)getMyRedPacketList{
+    
+    if (redBagArray.count > 0) {
+        [redBagArray removeAllObjects];
+        redBagArray = nil;
+        redBagArray = [NSMutableArray array];
+    }
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = nil;
+    
+    if (self.decide == NO) {
+        parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":@"5000",@"days":[self.detailM productPeriod]};
+    } else {
+        parameter = @{@"token":[dic objectForKey:@"token"],@"buyMoney":textFieldShu.text,@"days":[self.detailM productPeriod]};
+    }
+    
+    NSLog(@"getMyRedPacketList parameter = %@",parameter);
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/redpacket/getUserRedPacketRandList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"获取红包列表 = %@",responseObject);
+        
+        redBagArray = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"RedPacket"]];
+        NSLog(@"===========%@", redBagArray);
+        [self redBagListShow];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

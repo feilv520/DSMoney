@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,25 +15,47 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="164"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGY-lA-a0v">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGY-lA-a0v">
                         <rect key="frame" x="10" y="9" width="355" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="355" id="Nkx-3l-T0q"/>
+                            <constraint firstAttribute="height" constant="21" id="kJw-O1-EHi"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSZ-FU-JKY">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSZ-FU-JKY">
                         <rect key="frame" x="10" y="38" width="355" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="355" id="89f-hr-ZdW"/>
+                            <constraint firstAttribute="height" constant="1" id="Igh-fi-3Gu"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsN-td-JZ5">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsN-td-JZ5">
                         <rect key="frame" x="10" y="50" width="355" height="105"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="105" id="L0Z-WQ-q5g"/>
+                            <constraint firstAttribute="width" constant="355" id="rND-Eo-Xhi"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="PGY-lA-a0v" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="1RI-F5-9dC"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ZSZ-FU-JKY" secondAttribute="trailing" constant="2" id="91X-U3-W11"/>
+                    <constraint firstItem="ZSZ-FU-JKY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="DJO-rK-49e"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="BsN-td-JZ5" secondAttribute="trailing" constant="2" id="MEN-YH-rVL"/>
+                    <constraint firstItem="BsN-td-JZ5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="pyc-vD-wGu"/>
+                    <constraint firstItem="PGY-lA-a0v" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="tfB-J6-OIV"/>
+                    <constraint firstItem="BsN-td-JZ5" firstAttribute="top" secondItem="ZSZ-FU-JKY" secondAttribute="bottom" constant="11" id="uNn-kX-z9v"/>
+                    <constraint firstItem="ZSZ-FU-JKY" firstAttribute="top" secondItem="PGY-lA-a0v" secondAttribute="bottom" constant="8" id="yM3-A8-vYf"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="labelContent" destination="BsN-td-JZ5" id="JLg-Nn-EjL"/>

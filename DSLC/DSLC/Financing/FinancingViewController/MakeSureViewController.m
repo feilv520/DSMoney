@@ -931,7 +931,6 @@
     cell.labelYuan.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
     self.syString = cell.labelYuan.text;
     cell1.labelYuanShu.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue]];
-    
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

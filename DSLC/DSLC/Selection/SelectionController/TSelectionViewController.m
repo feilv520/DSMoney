@@ -18,6 +18,11 @@
 #import "TSignInViewController.h"
 #import "TBigTurntableViewController.h"
 #import "TRankinglistViewController.h"
+#import "TthreeRunCell.h"
+#import "SafeProtectViewController.h"
+#import "MillionsAndMillionsRiskMoney.h"
+#import "NewHandGuide.h"
+#import "BillCell.h"
 
 @interface TSelectionViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -31,6 +36,8 @@
     ProductListModel *productM;
     UIButton *butActivity;
     UIButton *buttonAct;
+    NSMutableArray *newArray;
+    NSDictionary *tempDic;
 }
 
 @end
@@ -48,6 +55,7 @@
     // Do any additional setup after loading the view.
     
     photoArray = [NSMutableArray array];
+    newArray = [NSMutableArray array];
     
     timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
     
@@ -60,8 +68,7 @@
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPickProduct) name:@"refrushToPickProduct" object:nil];
 //    backgroundScrollView.hidden = YES;
     
-    [self tableViewShow];
-    [self viewHeadShow];
+    [self getPickProduct];
 //    [self getAdvList];
 }
 
@@ -72,38 +79,42 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor qianhuise];
+    _tableView.separatorColor = [UIColor clearColor];
     
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 260)];
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 270)];
     _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
-    
-    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
-    _tableView.tableFooterView.backgroundColor = [UIColor magentaColor];
+    [self viewHeadShow];
     
     [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuseNew"];
-    [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuse000"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TthreeRunCell" bundle:nil] forCellReuseIdentifier:@"reuseThree"];
+    [_tableView registerNib:[UINib nibWithNibName:@"BillCell" bundle:nil] forCellReuseIdentifier:@"reuse000"];
 }
 
 - (void)viewHeadShow
 {
-    CGFloat widthPlus = self.view.frame.size.width - 60;
-    CGFloat butWidth = (widthPlus - 80)/3;
+    CGFloat widthPlus = self.view.frame.size.width - 80;
+    CGFloat butWidth = (widthPlus - 100)/3;
     NSArray *butImageArr = @[@"icon1", @"target-arrow", @"icon3"];
     NSArray *butWiteArr = @[@"签到", @"大转盘", @"排行榜"];
     
     for (int i = 0; i < 3; i++) {
         
-        butActivity = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30 + butWidth * i + 40 * i, 150, butWidth, butWidth) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        butActivity = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40 + butWidth * i + 50 * i, 185, butWidth, butWidth) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
         [_tableView.tableHeaderView addSubview:butActivity];
         [butActivity setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butImageArr objectAtIndex:i]]] forState:UIControlStateNormal];
         butActivity.tag = 6000 + i;
         [butActivity addTarget:self action:@selector(buttonActivityShow:) forControlEvents:UIControlEventTouchUpInside];
         
-        buttonAct = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30 + butWidth * i + 40 * i, 150 + butWidth, butWidth, 40) backgroundColor:[UIColor qianhuise] textColor:[UIColor zitihui] titleText:[butWiteArr objectAtIndex:i]];
+        buttonAct = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40 + butWidth * i + 50 * i, 185 + butWidth, butWidth, 25) backgroundColor:[UIColor qianhuise] textColor:[UIColor zitihui] titleText:[butWiteArr objectAtIndex:i]];
         [_tableView.tableHeaderView addSubview:buttonAct];
         buttonAct.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         buttonAct.tag = 7000 + i;
         [buttonAct addTarget:self action:@selector(buttonActivityShow:) forControlEvents:UIControlEventTouchUpInside];
     }
+    
+//    轮播位置
+    UIView *viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 170) backgroundColor:[UIColor orangeColor]];
+    [_tableView.tableHeaderView addSubview:viewScroll];
 }
 
 //活动三个按钮 签到 大转盘 排行榜
@@ -132,20 +143,31 @@
         
         return 209;
         
+    } else if (indexPath.section == 3) {
+        
+        return 90;
+        
     } else {
         
-        return 110;
+        return 126;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 10;
+    return 0.1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.5;
+    if (section == 2) {
+        
+        return 10;
+        
+    } else {
+        
+        return 0.5;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -163,13 +185,170 @@
     if (indexPath.section == 0) {
         
         NewBieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNew"];
+        cell.backgroundColor = [UIColor qianhuise];
+        
+        cell.viewBottom.layer.cornerRadius = 5;
+        cell.viewBottom.layer.masksToBounds = YES;
+        cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+        cell.viewBottom.layer.borderWidth = 1;
+        cell.viewBottom.backgroundColor = [UIColor whiteColor];
+        
+        cell.viewLine.backgroundColor = [UIColor grayColor];
+        cell.viewLine.alpha = 0.1;
+        
+        productM = [newArray objectAtIndex:indexPath.section];
+        
+        cell.labelPercent.textColor = [UIColor daohanglan];
+        cell.labelPercent.font = [UIFont fontWithName:@"ArialMT" size:45];
+        cell.labelPercent.text = productM.productAnnualYield;
+        
+        cell.labelShouYiLv.text = @"预期年化收益率(%)";
+        cell.labelShouYiLv.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        
+        [cell.buttonImage setImage:[UIImage imageNamed:@"liwu"] forState:UIControlStateNormal];
+        [cell.buttonImage setTitle:@" 新手专享" forState:UIControlStateNormal];
+        [cell.buttonImage setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+        cell.buttonImage.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        cell.buttonImage.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        
+        cell.labelLeftUp.text = productM.productPeriod;
+        cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        
+        cell.labelLeftRight.text = @"理财期限(天)";
+        cell.labelLeftRight.textColor = [UIColor zitihui];
+        cell.labelLeftRight.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        
+        cell.labelMidUp.text = productM.residueMoney;
+        cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        
+        cell.labelMidDOwn.text = @"剩余总额(万元)";
+        cell.labelMidDOwn.textColor = [UIColor zitihui];
+        cell.labelMidDOwn.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        
+        cell.labelRightUp.text = productM.productAmountMin;
+        cell.labelRightUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        
+        cell.labelDownRight.text = @"起投资金(元)";
+        cell.labelDownRight.textColor = [UIColor zitihui];
+        cell.labelDownRight.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    } else if (indexPath.section == 3) {
+        
+        TthreeRunCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseThree"];
+        cell.backgroundColor = [UIColor qianhuise];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.viewBottom.layer.cornerRadius = 5;
+        cell.viewBottom.layer.masksToBounds = YES;
+        cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+        cell.viewBottom.layer.borderWidth = 1;
+        
+        [cell.buttonSafe setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_03"] forState:UIControlStateNormal];
+        [cell.buttonSafe setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_03"] forState:UIControlStateHighlighted];
+        cell.buttonSafe.tag = 900;
+        [cell.buttonSafe addTarget:self action:@selector(buttonRunClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.butRiskMoney setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_05"] forState:UIControlStateNormal];
+        [cell.butRiskMoney setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_05"] forState:UIControlStateHighlighted];
+        cell.butRiskMoney.tag = 910;
+        [cell.butRiskMoney addTarget:self action:@selector(buttonRunClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.buttonNew setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_07"] forState:UIControlStateNormal];
+        [cell.buttonNew setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_07"] forState:UIControlStateHighlighted];
+        cell.buttonNew.tag = 920;
+        [cell.buttonNew addTarget:self action:@selector(buttonRunClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.buttonOne setTitle:@"安全保障" forState:UIControlStateNormal];
+        [cell.buttonOne setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+        cell.buttonOne.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        cell.buttonOne.tag = 930;
+        [cell.buttonOne addTarget:self action:@selector(buttonRunClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.buttonTwo setTitle:@"千万风险金" forState:UIControlStateNormal];
+        [cell.buttonTwo setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+        cell.buttonTwo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        cell.buttonTwo.tag = 940;
+        [cell.buttonTwo addTarget:self action:@selector(buttonRunClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.buttonThree setTitle:@"新手指南" forState:UIControlStateNormal];
+        [cell.buttonThree setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+        cell.buttonThree.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        cell.buttonThree.tag = 950;
+        [cell.buttonThree addTarget:self action:@selector(buttonRunClick:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
         
     } else {
         
-        FinancingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse000"];
+        BillCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse000"];
+        cell.backgroundColor = [UIColor qianhuise];
+        
+//        cell.viewGiPian.layer.cornerRadius = 5;
+//        cell.viewGiPian.layer.masksToBounds = YES;
+//        cell.viewGiPian.layer.borderWidth = 1;
+//        cell.viewGiPian.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+        
+        cell.viewLine1.backgroundColor = [UIColor grayColor];
+        cell.viewLine1.alpha = 0.1;
+        
+        cell.labelLeftDown.text = @"年化收益率(%)";
+        cell.labelLeftDown.textColor = [UIColor zitihui];
+        cell.labelLeftDown.textAlignment = NSTextAlignmentCenter;
+        cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        
+        productM = [newArray objectAtIndex:indexPath.section];
+        
+        NSString *monthStr = [productM.productName substringWithRange:NSMakeRange(0, [productM.productName rangeOfString:@"个"].location)];
+        
+        [cell.buttonRed setTitle:monthStr forState:UIControlStateNormal];
+        [cell.buttonRed setBackgroundImage:[UIImage imageNamed:@"圆角矩形-2"] forState:UIControlStateNormal];
+        
+        NSString *lastStr = [productM.productName substringWithRange:NSMakeRange([productM.productName rangeOfString:@"个"].location, productM.productName.length - monthStr.length)];
+        
+        cell.labelMonth.text = lastStr;
+        cell.labelMonth.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        
+        cell.labelQiTou.text = [NSString stringWithFormat:@"%@元起投", productM.productAmountMin];
+        cell.labelQiTou.textColor = [UIColor zitihui];
+        cell.labelQiTou.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+        cell.labelQiTou.textAlignment = NSTextAlignmentRight;
+        
+        cell.labelLeftUp.text = productM.productAnnualYield;
+        cell.labelLeftUp.textColor = [UIColor daohanglan];
+        cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        
+        cell.labelMidDown.text = @"理财期限(天)";
+        cell.labelMidDown.textAlignment = NSTextAlignmentCenter;
+        cell.labelMidDown.textColor = [UIColor zitihui];
+        cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        
+        cell.labelMidUp.text = productM.productPeriod;
+        cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
+    }
+}
+
+- (void)buttonRunClick:(UIButton *)button
+{
+    if (button.tag == 900 || button.tag == 930) {
+        
+        SafeProtectViewController *safeVC = [[SafeProtectViewController alloc] init];
+        [self.navigationController pushViewController:safeVC animated:YES];
+        
+    } else if (button.tag == 910 || button.tag == 940) {
+        
+        MillionsAndMillionsRiskMoney *millionVC = [[MillionsAndMillionsRiskMoney alloc] init];
+        [self.navigationController pushViewController:millionVC animated:YES];
+        
+    } else {
+        
+        NewHandGuide *newHand = [[NewHandGuide alloc] init];
+        [self.navigationController pushViewController:newHand animated:YES];
     }
 }
 
@@ -369,33 +548,37 @@
     }];
 }
 
-//- (void)getPickProduct{
-//    
-//    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getPickProduct" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-//        
-//        NSLog(@"getPickProduct = %@",responseObject);
-//        
-//        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
-//            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-//            return ;
-//        }
-//        
-//        [self loadingWithHidden:YES];
-//        
-//        backgroundScrollView.hidden = NO;
-//        
-//        productM = [[ProductListModel alloc] init];
-//        NSDictionary *dic = [responseObject objectForKey:@"Product"];
-//        [productM setValuesForKeysWithDictionary:dic];
-//        
-//        [self makeOnlyView];
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        
-//        NSLog(@"%@", error);
-//        
-//    }];
-//}
+- (void)getPickProduct{
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getPickProduct" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"首页%@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            return ;
+        }
+        
+        [self loadingWithHidden:YES];
+        
+        backgroundScrollView.hidden = NO;
+        
+        NSArray *dataArr = [responseObject objectForKey:@"Product"];
+        for (tempDic in dataArr) {
+            
+            productM = [[ProductListModel alloc] init];
+            [productM setValuesForKeysWithDictionary:tempDic];
+            [newArray addObject:productM];
+        }
+        
+        [self tableViewShow];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
