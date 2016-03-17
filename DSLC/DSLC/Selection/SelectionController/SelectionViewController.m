@@ -76,14 +76,6 @@
   
     self.photoArray = [NSMutableArray array];
     
-    // 加密解密
-    NSString* encrypt = @"T5+VBpjWOWNqKlfP5PGRIw==";
-//    NSString* decrypt = [self decryptUseDES:encrypt];
-//    NSString *encrypt = [DES3Util encrypt:@"11111111"];
-    NSString *decrypt = [DES3Util decrypt:encrypt];
-    
-    NSLog(@"123123-12-3-123-12-3-123--- %@ ==== %@",encrypt,decrypt);
-    
     [self makeBackgroundView];
     [self makeThreeButtons];
     [self makePayButton];

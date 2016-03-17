@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -20,6 +20,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2TK-yd-KDT">
                                 <rect key="frame" x="40" y="10" width="50" height="50"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="9JO-bc-4GN"/>
                                     <constraint firstAttribute="width" constant="50" id="Tf4-mE-5CH"/>
@@ -27,6 +28,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mpt-ry-wmo">
                                 <rect key="frame" x="152" y="8" width="50" height="50"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="2Qn-HD-5w9"/>
                                     <constraint firstAttribute="height" constant="50" id="LMR-a3-VzF"/>
@@ -34,6 +36,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QuP-Zi-51o">
                                 <rect key="frame" x="30" y="63" width="70" height="17"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="24j-4I-x6n"/>
                                     <constraint firstAttribute="height" constant="17" id="IcA-59-gcU"/>
@@ -42,6 +45,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyM-RS-Cpo">
                                 <rect key="frame" x="135" y="63" width="85" height="17"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="7GG-KH-Aro"/>
                                     <constraint firstAttribute="width" constant="85" id="o74-fy-4K3"/>
@@ -50,6 +54,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cr-P9-RS5">
                                 <rect key="frame" x="265" y="10" width="50" height="50"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="5df-rB-LnT"/>
                                     <constraint firstAttribute="width" constant="50" id="rzA-Bx-YE7"/>
@@ -57,6 +62,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5w-UZ-MuE">
                                 <rect key="frame" x="253" y="63" width="75" height="17"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="axk-6g-vAW"/>
                                     <constraint firstAttribute="height" constant="17" id="ebB-Pd-Fb1"/>
@@ -64,6 +70,7 @@
                                 <state key="normal" title="Button"/>
                             </button>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6cr-P9-RS5" secondAttribute="trailing" constant="40" id="1U1-Zn-HuG"/>
@@ -85,11 +92,13 @@
                         </constraints>
                     </view>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="gYv-iJ-7xr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="3eJ-2P-u66"/>
                     <constraint firstItem="gYv-iJ-7xr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="Rwz-kv-pl5"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="butRiskMoney" destination="Mpt-ry-wmo" id="dpM-L4-VHa"/>
                 <outlet property="buttonNew" destination="6cr-P9-RS5" id="Urn-ZH-qG6"/>

@@ -8,11 +8,16 @@
 
 #import "myHadCastViewController.h"
 #import "myHadCastTableViewCell.h"
+#import "myHadCastDetailViewController.h"
+#import "myCastModel.h"
 
 @interface myHadCastViewController () <UITableViewDelegate, UITableViewDataSource>
 
 {
     UITableView *mainTableView;
+    
+    NSMutableArray *mainArray;
+    
 }
 
 @end
@@ -22,7 +27,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    mainArray = [NSMutableArray array];
+    
     [self showTableView];
+    [self getUserAssetsList];
     
 }
 
@@ -49,7 +57,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 10;
+    return mainArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -64,7 +72,49 @@
     
     myHadCastTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myHadCTVC"];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    myCastModel *model = [mainArray objectAtIndex:indexPath.section];
+    
+    cell.titleLabel.text = model.productName;
+    
+    cell.moneyLabel.text = [DES3Util decrypt:model.totalProfit];
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    myHadCastDetailViewController *myHadCDVC = [[myHadCastDetailViewController alloc] init];
+    myHadCDVC.model = [mainArray objectAtIndex:indexPath.section];
+    pushVC(myHadCDVC);
+}
+
+- (void)getUserAssetsList{
+    NSDictionary *parameters = @{@"curPage":@1,@"status":@"3",@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserAssetsList" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            NSArray *productArray = [responseObject objectForKey:@"Product"];
+            
+            for (NSDictionary *dic in productArray) {
+                myCastModel *model = [[myCastModel alloc] init];
+                [model setValuesForKeysWithDictionary:dic];
+                [mainArray addObject:model];
+            }
+            
+            [mainTableView reloadData];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"无数据"];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

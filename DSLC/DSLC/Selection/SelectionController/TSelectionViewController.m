@@ -23,6 +23,8 @@
 #import "MillionsAndMillionsRiskMoney.h"
 #import "NewHandGuide.h"
 #import "BillCell.h"
+#import "MDRadialProgressTheme.h"
+#import "FDetailViewController.h"
 
 @interface TSelectionViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -38,6 +40,9 @@
     UIButton *buttonAct;
     NSMutableArray *newArray;
     NSDictionary *tempDic;
+    
+    UIView *viewScroll;
+    
 }
 
 @end
@@ -57,7 +62,7 @@
     photoArray = [NSMutableArray array];
     newArray = [NSMutableArray array];
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
     
     // 修改timer的优先级与控件一致
     // 获取当前的消息循环对象
@@ -65,11 +70,11 @@
     // 更改timer对象的优先级
     [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPickProduct) name:@"refrushToPickProduct" object:nil];
-//    backgroundScrollView.hidden = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPickProduct) name:@"refrushToPickProduct" object:nil];
+    backgroundScrollView.hidden = YES;
     
     [self getPickProduct];
-//    [self getAdvList];
+    
 }
 
 - (void)tableViewShow
@@ -113,7 +118,7 @@
     }
     
 //    轮播位置
-    UIView *viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 170) backgroundColor:[UIColor orangeColor]];
+    viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 170) backgroundColor:[UIColor qianhuise]];
     [_tableView.tableHeaderView addSubview:viewScroll];
 }
 
@@ -206,7 +211,11 @@
         cell.labelShouYiLv.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         
         [cell.buttonImage setImage:[UIImage imageNamed:@"liwu"] forState:UIControlStateNormal];
-        [cell.buttonImage setTitle:@" 新手专享" forState:UIControlStateNormal];
+        if ([productM.productType isEqualToString:@"3"]) {
+            [cell.buttonImage setTitle:@" 新手专享" forState:UIControlStateNormal];
+        } else {
+            [cell.buttonImage setTitle:[NSString stringWithFormat:@" %@",productM.productName] forState:UIControlStateNormal];
+        }
         [cell.buttonImage setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
         cell.buttonImage.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         cell.buttonImage.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
@@ -328,9 +337,21 @@
         cell.labelMidUp.text = productM.productPeriod;
         cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:20];
         
+        cell.quanView.progressTotal = [productM.productInitLimit floatValue];
+        cell.quanView.progressCounter = [productM.productInitLimit floatValue] - [productM.residueMoney floatValue];
+        cell.quanView.theme.sliceDividerHidden = YES;
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    FDetailViewController *detailVC = [[FDetailViewController alloc] init];
+    detailVC.estimate = YES;
+    detailVC.pandaun = YES;
+    detailVC.idString = [[newArray objectAtIndex:indexPath.section] productId];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)buttonRunClick:(UIButton *)button
@@ -359,26 +380,12 @@
     pageControl.currentPage += 1;
 }
 
-// 添加控件
-- (void)makeBackgroundView{
-    backgroundScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
-    backgroundScrollView.backgroundColor = mainColor;
-    backgroundScrollView.scrollEnabled = NO;
-    
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        backgroundScrollView.scrollEnabled = YES;
-        backgroundScrollView.contentSize = CGSizeMake(1, 667);
-    }
-    
-    [self.view addSubview:backgroundScrollView];
-}
-
 // 广告滚动控件
 - (void)makeScrollView{
     NSInteger photoIndex = photoArray.count + 2;
     
-    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180)];
-    bannerScrollView.backgroundColor = Color_White;
+    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 170)];
+    bannerScrollView.backgroundColor = Color_Clear;
     bannerScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * photoIndex,0);
     bannerScrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
     bannerScrollView.showsHorizontalScrollIndicator = NO;
@@ -387,7 +394,7 @@
     
     bannerScrollView.delegate = self;
     
-    [backgroundScrollView addSubview:bannerScrollView];
+    [viewScroll addSubview:bannerScrollView];
     
     YYAnimatedImageView *bannerFirst = [YYAnimatedImageView new];
     bannerFirst.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:0] adImg]];
@@ -425,7 +432,7 @@
     
     [self changePageControlImage];
     
-    [backgroundScrollView addSubview:pageControl];
+    [viewScroll addSubview:pageControl];
     
 }
 
@@ -572,7 +579,7 @@
         }
         
         [self tableViewShow];
-        
+        [self getAdvList];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
