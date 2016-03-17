@@ -715,6 +715,13 @@
 		8D6E467B1C9936F600F0F5B7 /* 已兑付@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46791C9936F600F0F5B7 /* 已兑付@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D6E467C1C9936F600F0F5B7 /* 已兑付@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E467A1C9936F600F0F5B7 /* 已兑付@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D6E467F1C99635E00F0F5B7 /* myCastModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E467E1C99635E00F0F5B7 /* myCastModel.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E46861C9A44F200F0F5B7 /* myHadCastDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E46841C9A44F200F0F5B7 /* myHadCastDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E46871C9A44F200F0F5B7 /* myHadCastDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46851C9A44F200F0F5B7 /* myHadCastDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D6E468A1C9A482A00F0F5B7 /* iconfont-icondzje@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46881C9A482A00F0F5B7 /* iconfont-icondzje@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D6E468B1C9A482A00F0F5B7 /* iconfont-icondzje@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46891C9A482A00F0F5B7 /* iconfont-icondzje@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D6E46921C9A782100F0F5B7 /* MDRadialProgressLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E468D1C9A782000F0F5B7 /* MDRadialProgressLabel.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E46931C9A782100F0F5B7 /* MDRadialProgressTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E468F1C9A782100F0F5B7 /* MDRadialProgressTheme.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E46941C9A782100F0F5B7 /* MDRadialProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E46911C9A782100F0F5B7 /* MDRadialProgressView.m */; settings = {ASSET_TAGS = (); }; };
 		8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */; };
 		8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFBA21BC78B02009FE101 /* shouyeqiepian7500_28highlight.png */; };
 		8D878CE11BC754AD00844575 /* e.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CE01BC754AD00844575 /* e.m */; };
@@ -2002,6 +2009,17 @@
 		8D6E467A1C9936F600F0F5B7 /* 已兑付@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已兑付@3x.png"; sourceTree = "<group>"; };
 		8D6E467D1C99635E00F0F5B7 /* myCastModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myCastModel.h; sourceTree = "<group>"; };
 		8D6E467E1C99635E00F0F5B7 /* myCastModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myCastModel.m; sourceTree = "<group>"; };
+		8D6E46831C9A44F200F0F5B7 /* myHadCastDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myHadCastDetailViewController.h; sourceTree = "<group>"; };
+		8D6E46841C9A44F200F0F5B7 /* myHadCastDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myHadCastDetailViewController.m; sourceTree = "<group>"; };
+		8D6E46851C9A44F200F0F5B7 /* myHadCastDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = myHadCastDetailViewController.xib; sourceTree = "<group>"; };
+		8D6E46881C9A482A00F0F5B7 /* iconfont-icondzje@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-icondzje@2x.png"; sourceTree = "<group>"; };
+		8D6E46891C9A482A00F0F5B7 /* iconfont-icondzje@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-icondzje@3x.png"; sourceTree = "<group>"; };
+		8D6E468C1C9A782000F0F5B7 /* MDRadialProgressLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDRadialProgressLabel.h; sourceTree = "<group>"; };
+		8D6E468D1C9A782000F0F5B7 /* MDRadialProgressLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDRadialProgressLabel.m; sourceTree = "<group>"; };
+		8D6E468E1C9A782000F0F5B7 /* MDRadialProgressTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDRadialProgressTheme.h; sourceTree = "<group>"; };
+		8D6E468F1C9A782100F0F5B7 /* MDRadialProgressTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDRadialProgressTheme.m; sourceTree = "<group>"; };
+		8D6E46901C9A782100F0F5B7 /* MDRadialProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDRadialProgressView.h; sourceTree = "<group>"; };
+		8D6E46911C9A782100F0F5B7 /* MDRadialProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDRadialProgressView.m; sourceTree = "<group>"; };
 		8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian750_28.png; sourceTree = "<group>"; };
 		8D6EFBA21BC78B02009FE101 /* shouyeqiepian7500_28highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian7500_28highlight.png; sourceTree = "<group>"; };
 		8D878CDF1BC754AD00844575 /* e.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e.h; sourceTree = "<group>"; };
@@ -2559,6 +2577,12 @@
 		81C2DAA51BC755F10007AC48 /* Three */ = {
 			isa = PBXGroup;
 			children = (
+				8D6E468C1C9A782000F0F5B7 /* MDRadialProgressLabel.h */,
+				8D6E468D1C9A782000F0F5B7 /* MDRadialProgressLabel.m */,
+				8D6E468E1C9A782000F0F5B7 /* MDRadialProgressTheme.h */,
+				8D6E468F1C9A782100F0F5B7 /* MDRadialProgressTheme.m */,
+				8D6E46901C9A782100F0F5B7 /* MDRadialProgressView.h */,
+				8D6E46911C9A782100F0F5B7 /* MDRadialProgressView.m */,
 				8DC6959F1C3503D30055EC44 /* UMSocial_Sdk_4.4 */,
 				8D18B2A41C29B02300754C13 /* RSA.h */,
 				8D18B2A51C29B02300754C13 /* RSA.m */,
@@ -2603,6 +2627,8 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8D6E46881C9A482A00F0F5B7 /* iconfont-icondzje@2x.png */,
+				8D6E46891C9A482A00F0F5B7 /* iconfont-icondzje@3x.png */,
 				8D6E46791C9936F600F0F5B7 /* 已兑付@2x.png */,
 				8D6E467A1C9936F600F0F5B7 /* 已兑付@3x.png */,
 				8183F40A1C97CD4E000BB93C /* messageNew@2x.png */,
@@ -3272,6 +3298,9 @@
 				8D6E466A1C992AD700F0F5B7 /* myCastViewController.m */,
 				8D6E466C1C992B3D00F0F5B7 /* myHadCastViewController.h */,
 				8D6E466D1C992B3D00F0F5B7 /* myHadCastViewController.m */,
+				8D6E46831C9A44F200F0F5B7 /* myHadCastDetailViewController.h */,
+				8D6E46841C9A44F200F0F5B7 /* myHadCastDetailViewController.m */,
+				8D6E46851C9A44F200F0F5B7 /* myHadCastDetailViewController.xib */,
 				8D5DBB7C1BD4819C00F556B9 /* CastProduceViewController.h */,
 				8D5DBB7D1BD4819C00F556B9 /* CastProduceViewController.m */,
 				8D5DBB7E1BD4819C00F556B9 /* CastProduceViewController.xib */,
@@ -4946,6 +4975,7 @@
 				8D3EEA041C27AB400031F7C9 /* 兴业银行@2x.png in Resources */,
 				8D9011B11BD6337C00E5D62A /* 05@2x.png in Resources */,
 				8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */,
+				8D6E468B1C9A482A00F0F5B7 /* iconfont-icondzje@3x.png in Resources */,
 				8D3EEA231C27AB400031F7C9 /* 渤海银行@3x.png in Resources */,
 				81B520AB1BF9A71100D8E8D1 /* iconfont-sousuo@3x.png in Resources */,
 				8175BECF1BEA1B290044026E /* 分享失败@2x.png in Resources */,
@@ -4959,6 +4989,7 @@
 				8D968A831C96C0E100C9A6A1 /* iconfont-iconfuzhi@2x.png in Resources */,
 				8D3F95D71BE1C90C00013A8E /* RegisterOfPassButton.xib in Resources */,
 				8D4343981BFDEB0B000BA004 /* loading_up_07.png in Resources */,
+				8D6E46871C9A44F200F0F5B7 /* myHadCastDetailViewController.xib in Resources */,
 				817DD4A01BCF547E00042B09 /* quebao@2x.png in Resources */,
 				817DD4951BCF547E00042B09 /* chongzhi@3x.png in Resources */,
 				8D9011A61BD6337C00E5D62A /* 11@3x.png in Resources */,
@@ -5032,6 +5063,7 @@
 				8183F4111C97CD4E000BB93C /* messageOld@3x.png in Resources */,
 				8D9011BB1BD6337C00E5D62A /* anniuS@2x.png in Resources */,
 				8D4C4FA01C97D87E002229AE /* ZFPassword.xib in Resources */,
+				8D6E468A1C9A482A00F0F5B7 /* iconfont-icondzje@2x.png in Resources */,
 				814B51021C3A8463001AACC6 /* ChongZhiZZZZView.xib in Resources */,
 				817DD4A31BCF547E00042B09 /* shape-29@3x.png in Resources */,
 				81C8BBC71BDA2F8D005B9DFF /* guanyuG@3x.png in Resources */,
@@ -5138,6 +5170,7 @@
 			files = (
 				8183F4131C97CF29000BB93C /* TDescriptionCell.m in Sources */,
 				8D968A8F1C97AEFD00C9A6A1 /* TSignInViewController.m in Sources */,
+				8D6E46941C9A782100F0F5B7 /* MDRadialProgressView.m in Sources */,
 				8D968A8E1C97AEF400C9A6A1 /* TRankinglistViewController.m in Sources */,
 				8D968A8D1C97AEDE00C9A6A1 /* TBigTurntableViewController.m in Sources */,
 				8D968A8C1C97AE7000C9A6A1 /* TSelectionViewController.m in Sources */,
@@ -5338,6 +5371,7 @@
 				818F0D741C0D3DCB00319D19 /* BuyClauseViewController.m in Sources */,
 				81898B781BDF180600DD4E44 /* UIPlaceHolderTextView.m in Sources */,
 				819C3ABA1BD483C4008D2CFD /* MyRedBagCell.m in Sources */,
+				8D6E46931C9A782100F0F5B7 /* MDRadialProgressTheme.m in Sources */,
 				811F0B0B1BF33D42001F6AA4 /* BindingTwoCell.m in Sources */,
 				8D0CB4891BE75C860039D826 /* SimpleDescriptionsViewController.m in Sources */,
 				8D4518791C00553E00FAF998 /* GTMBase64.m in Sources */,
@@ -5348,6 +5382,7 @@
 				8162D1221BE1BD3300CACAB6 /* OtherProjectCell.m in Sources */,
 				819B52C61BFC127E002FDF1E /* NotSeparateCell.m in Sources */,
 				8D0CB48E1BE75DB20039D826 /* SimpleDetailViewController.m in Sources */,
+				8D6E46921C9A782100F0F5B7 /* MDRadialProgressLabel.m in Sources */,
 				8D4FF5E31BE339A200BAE25F /* UIProgressView+AFNetworking.m in Sources */,
 				819B52F31BFC5D54002FDF1E /* NSString+Characters.m in Sources */,
 				8D4518651C00410100FAF998 /* RedBagModel.m in Sources */,
@@ -5402,6 +5437,7 @@
 				8183F3501C7EAFAA000BB93C /* MonkeyMakeCell.m in Sources */,
 				8D9BE8E51C0EC94D003C67D3 /* YYDiskCache.m in Sources */,
 				8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */,
+				8D6E46861C9A44F200F0F5B7 /* myHadCastDetailViewController.m in Sources */,
 				8D6E466E1C992B3D00F0F5B7 /* myHadCastViewController.m in Sources */,
 				8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */,
 				81CBB7501C1AC6E9002CDE97 /* SafeProtectViewController.m in Sources */,

@@ -139,25 +139,10 @@
     [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:dayText];
     [cell.labelDayNum setAttributedText:textYear];
     
-    cell.labelMoney.textAlignment = NSTextAlignmentCenter;
-    cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:22];
-    
-    NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]]];
-    NSRange moneyNum = NSMakeRange(0, [[moneyText string] rangeOfString:@"元"].location);
-    [moneyText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:moneyNum];
-    NSRange yuanStr = NSMakeRange([[moneyText string] length] - 1, 1);
-    [moneyText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:yuanStr];
-    [cell.labelMoney setAttributedText:moneyText];
-    
     cell.labelData.text = @"理财期限";
     cell.labelData.textAlignment = NSTextAlignmentCenter;
     cell.labelData.textColor = [UIColor zitihui];
     cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-    
-    cell.labelQiTou.text = @"起投资金";
-    cell.labelQiTou.textAlignment = NSTextAlignmentCenter;
-    cell.labelQiTou.textColor = [UIColor zitihui];
-    cell.labelQiTou.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
 //    cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]];
 //    cell.labelSurplus.textAlignment = NSTextAlignmentCenter;

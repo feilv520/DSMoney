@@ -196,7 +196,7 @@
     butHeadPic.layer.masksToBounds = YES;
     [butHeadPic addTarget:self action:@selector(headPictureButton:) forControlEvents:UIControlEventTouchUpInside];
     
-//    我的理财师/咨询按钮
+//    消息中心
     butInvitate = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - (85 / 375.0) * WIDTH_CONTROLLER_DEFAULT, 31, (75 / 375.0) * WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (25 / 667.0)) backgroundColor:nil textColor:[UIColor whiteColor] titleText:nil];
 //    [butInvitate setBackgroundImage:[UIImage imageNamed:@"anniu"] forState:UIControlStateNormal];
     [butInvitate setTitle:@"消息中心" forState:UIControlStateNormal];
@@ -258,7 +258,7 @@
     middleView.viewLLine.backgroundColor = [UIColor grayColor];
     middleView.viewLLine.alpha = 0.3;
     
-    middleView.labelYuan.text = [[DES3Util decrypt: [self.myAccountInfo objectForKey:@"totalMoney"]]  stringByReplacingOccurrencesOfString:@"," withString:@""];
+    middleView.labelYuan.text = [[DES3Util decrypt: [self.myAccountInfo objectForKey:@"accBalance"]]  stringByReplacingOccurrencesOfString:@"," withString:@""];
     middleView.labelYuan.font = [UIFont systemFontOfSize:[self sizeOfLength:middleView.labelWanYuan.text]];
     middleView.labelYuan.textColor = Color_Black;
     middleView.labelYuan.alpha = 0.7;

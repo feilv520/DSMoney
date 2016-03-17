@@ -12,6 +12,9 @@
 #import "NewBieCell.h"
 #import "FDetailViewController.h"
 #import "ProductListModel.h"
+#import "MDRadialProgressTheme.h"
+#import "AdModel.h"
+#import "BannerViewController.h"
 
 @interface NewbieViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -19,7 +22,7 @@
     UITableView *_tableView;
     UIImageView *imageView;
     UIButton *butLastTime;
-    UIImageView *imageActivity;
+    UIView *imageActivity;
     
     NSInteger page;
     
@@ -28,6 +31,12 @@
     
     MJRefreshGifHeader *headerT;
     MJRefreshBackGifFooter *footerT;
+    
+    // 广告位
+    NSMutableArray *photoArray;
+    UIPageControl *pageControl;
+    NSTimer *timer;
+    UIScrollView *bannerScrollView;
 }
 
 @property (nonatomic, strong) NSMutableArray *productListArray;
@@ -49,6 +58,8 @@
     
     self.productListArray = [NSMutableArray array];
     
+    photoArray = [NSMutableArray array];
+    
     [self getProductList];
     
     [self tableViewShow];
@@ -59,6 +70,15 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refrush) name:@"refrushToProductList" object:nil];
     
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+    
+    // 修改timer的优先级与控件一致
+    // 获取当前的消息循环对象
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    // 更改timer对象的优先级
+    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    
+    [self getAdvList];
 }
 
 - (void)refrush {
@@ -79,7 +99,7 @@
     _tableView.tableHeaderView.backgroundColor = [UIColor greenColor];
     [self activityShowViewHead];
     
-    [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuseNNN"];
     [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     
     [self addTableViewWithHeader:_tableView];
@@ -89,7 +109,7 @@
 //火爆专区活动展示
 - (void)activityShowViewHead
 {
-    imageActivity = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"shouyebanner"]];
+    imageActivity = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100) backgroundColor:[UIColor whiteColor]];
     [_tableView.tableHeaderView addSubview:imageActivity];
 }
 
@@ -179,7 +199,7 @@
             
         } else {
             
-            FinancingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+            FinancingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNNN"];
             cell.backgroundColor = [UIColor qianhuise];
             
             cell.viewGiPian.layer.cornerRadius = 4;
@@ -212,36 +232,26 @@
             cell.labelData.textColor = [UIColor zitihui];
             cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
             
-//            CGFloat money = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
-            
-//            cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%.2lf万",money / 10000.0]];
-//            cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
-//            cell.labelSurplus.textColor = [UIColor zitihui];
-//            cell.labelSurplus.font = [UIFont systemFontOfSize:10];
-//            cell.labelSurplus.backgroundColor = [UIColor clearColor];
-            
-            //        imageView = [CreatView creatImageViewWithFrame:CGRectMake(131, 15, 210, 8) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"bar-full"]];
-            //        cell.progressView.hidden = YES;
-            //        [cell.viewBottom addSubview:imageView];
-//            cell.viewBottom.backgroundColor = [UIColor qianhuise];
+            NSLog(@"88888888-%ld",(long)indexPath.row);
             
             if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
                 
                 cell.outPay.hidden = NO;
-                cell.labelQiTou.hidden = YES;
-                cell.labelMoney.hidden = YES;
-                
+                cell.quanView.hidden = YES;
             } else {
             
                 cell.outPay.hidden = YES;
-                cell.labelQiTou.hidden = NO;
-                cell.labelMoney.hidden = NO;
+                cell.quanView.hidden = NO;
+                cell.quanView.progressTotal = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
+                cell.quanView.progressCounter = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
+                NSLog(@"--00-%lf",[[[self.productListArray objectAtIndex:indexPath.row]productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue]);
+                cell.quanView.theme.sliceDividerHidden = YES;
                 
             }
             //    设置进度条的进度值 并动画展示
-            CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
-            
-            CGFloat bLL = 1.0 - bL;
+//            CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
+//            
+//            CGFloat bLL = 1.0 - bL;
             
 //            [cell.progressView setProgress:bLL animated:YES];
 //            //    设置进度条的颜色
@@ -255,7 +265,7 @@
         }
     } else {
         
-        FinancingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        FinancingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNNN"];
         
         cell.viewGiPian.layer.cornerRadius = 4;
         cell.viewGiPian.layer.masksToBounds = YES;
@@ -294,56 +304,31 @@
         [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:dayText];
         [cell.labelDayNum setAttributedText:textYear];
         
-        cell.labelMoney.textAlignment = NSTextAlignmentCenter;
-        cell.labelMoney.font = [UIFont systemFontOfSize:22];
-        
-        NSMutableAttributedString *moneyText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]]];
-        NSRange moneyNum = NSMakeRange(0, [[moneyText string] rangeOfString:@"元"].location);
-        [moneyText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:moneyNum];
-        NSRange yuanStr = NSMakeRange([[moneyText string] length] - 1, 1);
-        [moneyText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:yuanStr];
-        [cell.labelMoney setAttributedText:moneyText];
-        
         cell.labelData.text = @"理财期限(天)";
         cell.labelData.textAlignment = NSTextAlignmentCenter;
         cell.labelData.textColor = [UIColor zitihui];
         cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.labelQiTou.text = @"起投资金";
-        cell.labelQiTou.textAlignment = NSTextAlignmentCenter;
-        cell.labelQiTou.textColor = [UIColor zitihui];
-        cell.labelQiTou.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        NSLog(@"88888888-%ld",(long)indexPath.row);
         
-        CGFloat money = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
+//        if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
+//            
+//            cell.outPay.hidden = NO;
+//            cell.quanView.hidden = YES;
+//            
+//        } else {
         
-//        cell.labelSurplus.text = [NSString stringWithFormat:@"%@%@", @"剩余总额:", [NSString stringWithFormat:@"%.2lf万",money / 10000.0]];
-//        cell.labelSurplus.textAlignment = NSTextAlignmentCenter;
-//        cell.labelSurplus.textColor = [UIColor zitihui];
-//        cell.labelSurplus.font = [UIFont systemFontOfSize:12];
-//        cell.labelSurplus.backgroundColor = [UIColor clearColor];
-//        
-        //        imageView = [CreatView creatImageViewWithFrame:CGRectMake(131, 15, 210, 8) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"bar-full"]];
-        //        cell.progressView.hidden = YES;
-        //        [cell.viewBottom addSubview:imageView];
-//        cell.viewBottom.backgroundColor = [UIColor qianhuise];
-        
-        if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
-            
-            cell.outPay.hidden = NO;
-            cell.labelQiTou.hidden = YES;
-            cell.labelMoney.hidden = YES;
-            
-        } else {
-            
             cell.outPay.hidden = YES;
-            cell.labelQiTou.hidden = NO;
-            cell.labelMoney.hidden = NO;
-            
-        }
+            cell.quanView.hidden = NO;
+            cell.quanView.progressTotal = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
+            cell.quanView.progressCounter = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
+            cell.quanView.theme.sliceDividerHidden = YES;
+//            
+//        }
         //    设置进度条的进度值 并动画展示
-        CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
-        
-        CGFloat bLL = 1.0 - bL;
+//        CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
+//        
+//        CGFloat bLL = 1.0 - bL;
         
 //        [cell.progressView setProgress:bLL animated:YES];
 //        //    设置进度条的颜色
@@ -474,6 +459,191 @@
         page = 1;
         [self getProductList];
 
+    }
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getAdvList{
+    
+    NSDictionary *parmeter = @{@"adType":@"2"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"AD = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            return ;
+        }
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
+            AdModel *adModel = [[AdModel alloc] init];
+            [adModel setValuesForKeysWithDictionary:dic];
+            [photoArray addObject:adModel];
+        }
+        
+        [self makeScrollView];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+// 广告滚动控件
+- (void)makeScrollView{
+    NSInteger photoIndex = photoArray.count + 2;
+    
+    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
+    bannerScrollView.backgroundColor = Color_Gray;
+    bannerScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * photoIndex,0);
+    bannerScrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
+    bannerScrollView.showsHorizontalScrollIndicator = NO;
+    bannerScrollView.showsVerticalScrollIndicator = NO;
+    bannerScrollView.pagingEnabled = YES;
+    
+    bannerScrollView.delegate = self;
+    
+    [imageActivity addSubview:bannerScrollView];
+    
+    YYAnimatedImageView *bannerFirst = [YYAnimatedImageView new];
+    bannerFirst.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:0] adImg]];
+    bannerFirst.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 100);
+    
+    YYAnimatedImageView *bannerLast = [YYAnimatedImageView new];
+    bannerLast.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:photoArray.count - 1] adImg]];
+    bannerLast.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100);
+    
+    for (NSInteger i = 0; i < photoArray.count; i++) {
+        YYAnimatedImageView *bannerObject = [YYAnimatedImageView new];
+        bannerObject.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:i] adImg]];
+        bannerObject.tag = i;
+        bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 100);
+        UITapGestureRecognizer *tapLeft = [[UITapGestureRecognizer alloc] init];
+        [bannerObject addGestureRecognizer:tapLeft];
+        [tapLeft addTarget:self action:@selector(bannerObject:)];
+        bannerObject.userInteractionEnabled = YES;
+        
+        //手指数
+        tapLeft.numberOfTouchesRequired = 1;
+        //点击次数
+        tapLeft.numberOfTapsRequired = 1;
+        
+        [bannerScrollView addSubview:bannerObject];
+    }
+    
+    [bannerScrollView addSubview:bannerFirst];
+    [bannerScrollView addSubview:bannerLast];
+    
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 70, WIDTH_CONTROLLER_DEFAULT, 30)];
+    
+    pageControl.numberOfPages = photoArray.count;
+    pageControl.currentPage = 0;
+    
+    [self changePageControlImage];
+    
+    [imageActivity addSubview:pageControl];
+    
+}
+
+//改变pagecontrol中圆点样式
+- (void)changePageControlImage
+{
+    static UIImage *imgCurrent = nil;
+    static UIImage *imgOther = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        imgCurrent = [UIImage imageNamed:@"banner_red"];
+        imgOther = [UIImage imageNamed:@"banner_black"];
+    });
+    
+    
+    if (iOS7) {
+        [pageControl setValue:imgCurrent forKey:@"_currentPageImage"];
+        [pageControl setValue:imgOther forKey:@"_pageImage"];
+    } else {
+        for (int i = 0;i < 3; i++) {
+            UIImageView *imageVieW = [pageControl.subviews objectAtIndex:i];
+            imageVieW.frame = CGRectMake(imageVieW.frame.origin.x, imageVieW.frame.origin.y, 20, 20);
+            imageVieW.image = pageControl.currentPage == i ? imgCurrent : imgOther;
+        }
+    }
+}
+
+- (void)bannerObject:(UITapGestureRecognizer *)tap
+{
+    //    if (pageControl.currentPage == 4) {
+    //        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"本连接不支持app端"];
+    //        return;
+    //    }
+    BannerViewController *bannerVC = [[BannerViewController alloc] init];
+    bannerVC.photoName = [[photoArray objectAtIndex:pageControl.currentPage] adLabel];
+    bannerVC.photoUrl = [[photoArray objectAtIndex:pageControl.currentPage] adLink];
+    bannerVC.page = pageControl.currentPage;
+    pushVC(bannerVC);
+}
+
+- (void)scrollViewFuction{
+    
+    [bannerScrollView setContentOffset:CGPointMake((pageControl.currentPage + 2) * WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
+    
+    pageControl.currentPage += 1;
+}
+
+// 滚动后的执行方法
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    if (bannerScrollView == scrollView) {
+        CGPoint offset = [scrollView contentOffset];
+        
+        //更新UIPageControl的当前页
+        CGRect bounds = scrollView.frame;
+        [pageControl setCurrentPage:offset.x / bounds.size.width - 1];
+        
+        if (offset.x == WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1)) {
+            //        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+            pageControl.currentPage = 0;
+        } else if (offset.x == 0) {
+            [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
+            pageControl.currentPage = photoArray.count - 1;
+        }
+    }
+}
+
+// 准备滚动时候的执行方法
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    [timer invalidate];
+    // 调用invalidate方法后,对象已经无法使用,所以要指向nil.
+    timer = nil;
+}
+
+// 拖住完成的执行方法
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+    
+    // 修改timer的优先级与控件一致
+    // 获取当前的消息循环对象
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    // 更改timer对象的优先级
+    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    CGPoint offset = [scrollView contentOffset];
+    
+    if (offset.x == WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1)) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+        pageControl.currentPage = 0;
+    } else if (offset.x == 0) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
+        pageControl.currentPage = photoArray.count - 1;
     }
 }
 
