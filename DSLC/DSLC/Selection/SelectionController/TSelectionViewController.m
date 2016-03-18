@@ -72,6 +72,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPickProduct) name:@"refrushToPickProduct" object:nil];
     backgroundScrollView.hidden = YES;
+    [self loadingWithView:self.view loadingFlag:NO height:self.view.frame.size.height/2];
     
     [self getPickProduct];
     
@@ -546,6 +547,7 @@
             [photoArray addObject:adModel];
         }
         
+        [self loadingWithHidden:YES];
         [self makeScrollView];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

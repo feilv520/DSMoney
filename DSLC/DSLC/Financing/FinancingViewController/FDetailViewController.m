@@ -14,7 +14,7 @@
 #import "ThreeCell.h"
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
-#import "TMakeSureViewController.h"
+#import "MakeSureViewController.h"
 #import "Calendar.h"
 #import "FDescriptionViewController.h"
 #import "RecordViewController.h"
@@ -30,7 +30,7 @@
     UITableView *_tableView;
     NSArray *titleArr;
     Calendar *calendar;
-    UIView *bView;
+    UIButton *bView;
     UIView *viewSuan;
     
     UIButton *butMakeSure;
@@ -397,31 +397,7 @@
         
         TRiskGradeViewController *riskGrade = [[TRiskGradeViewController alloc] init];
         [self.navigationController pushViewController:riskGrade animated:YES];
-        
     }
-    
-//        if (indexPath.row == 0) {
-//            
-//            FDescriptionViewController *fDes = [[FDescriptionViewController alloc] init];
-//            fDes.detailString = [self.detailM productDetail];
-//            [self.navigationController pushViewController:fDes animated:YES];
-//            
-//        } else if (indexPath.row == 2) {
-//
-//            RecordViewController *recordVC = [[RecordViewController alloc] init];
-//            recordVC.idString = self.idString;
-//            [self.navigationController pushViewController:recordVC animated:YES];
-//
-//        } else {
-//
-//            InvestNoticeViewController *investNotice = [[InvestNoticeViewController alloc] init];
-//            investNotice.productType = [self.detailM productType];
-//            investNotice.productId = [self.detailM productId];
-//            investNotice.amountMin = [self.detailM amountMin];
-//            investNotice.amountMax = [self.detailM amountMax];
-//            [self.navigationController pushViewController:investNotice animated:YES];
-//
-//        }
 }
 
 - (void)returnBackBar:(UIBarButtonItem *)bar
@@ -555,44 +531,56 @@
             
                 if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"1"]) {
                     
-                    TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
                     if (self.estimate == YES) {
                         
+                        TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
                         makeSureVC.decide = YES;
+                        makeSureVC.detailM = self.detailM;
+                        makeSureVC.residueMoney = self.residueMoney;
+                        [self.navigationController pushViewController:makeSureVC animated:YES];
                         
                         [MobClick event:@"makeSure"];
                         
                     } else {
                         
-                        makeSureVC.decide = NO;
-                        makeSureVC.nHand = self.nHand;
+                        MakeSureViewController *tmakeVC = [[MakeSureViewController alloc] init];
+                        tmakeVC.decide = NO;
+                        tmakeVC.nHand = self.nHand;
+                        tmakeVC.detailM = self.detailM;
+                        tmakeVC.residueMoney = self.residueMoney;
+                        [self.navigationController pushViewController:tmakeVC animated:YES];
                     }
-                    makeSureVC.detailM = self.detailM;
-                    makeSureVC.residueMoney = self.residueMoney;
+//                    makeSureVC.detailM = self.detailM;
+//                    makeSureVC.residueMoney = self.residueMoney;
                     [self submitLoadingWithHidden:YES];
-                    [self.navigationController pushViewController:makeSureVC animated:YES];
                     
                 } else {
                     
                     if ([[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@"0"] || [[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@""]) {
                         
-                        TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
                         
                         if (self.estimate == YES) {
                             
+                            TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
                             makeSureVC.decide = YES;
+                            makeSureVC.detailM = self.detailM;
+                            makeSureVC.residueMoney = self.residueMoney;
+                            [self.navigationController pushViewController:makeSureVC animated:YES];
                             
                             [MobClick event:@"makeSure"];
                             
                         } else {
                             
+                            MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
                             makeSureVC.decide = NO;
                             makeSureVC.nHand = self.nHand;
+                            makeSureVC.detailM = self.detailM;
+                            makeSureVC.residueMoney = self.residueMoney;
+                            [self.navigationController pushViewController:makeSureVC animated:YES];
                         }
-                        makeSureVC.detailM = self.detailM;
-                        makeSureVC.residueMoney = self.residueMoney;
+//                        makeSureVC.detailM = self.detailM;
+//                        makeSureVC.residueMoney = self.residueMoney;
                         [self submitLoadingWithHidden:YES];
-                        [self.navigationController pushViewController:makeSureVC animated:YES];
                         
                     } else {
                         
@@ -614,11 +602,8 @@
                         monkeyVC.residueMoney = self.residueMoney;
                         [self submitLoadingWithHidden:YES];
                         [self.navigationController pushViewController:monkeyVC animated:YES];
-                        
                     }
-                    
                 }
-                
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -634,7 +619,8 @@
 }
 
 // 计算收益图层
-- (void)calendarView{
+- (void)calendarView
+{
     
     [bView removeFromSuperview];
     [calendar removeFromSuperview];
@@ -645,10 +631,10 @@
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     
     if (bView == nil) {
-        bView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+        bView = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:Color_Black textColor:nil titleText:nil];
         
-        bView.backgroundColor = Color_Black;
         bView.alpha = 0.3;
+        [bView addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
         
         [app.tabBarVC.view addSubview:bView];
         
@@ -667,15 +653,16 @@
             margin_y -= 30;
         }
         
-        calendar.frame = CGRectMake(margin_x, margin_y, width, 301);
+        calendar.frame = CGRectMake(margin_x, margin_y, width, 246);
         calendar.layer.masksToBounds = YES;
         calendar.layer.cornerRadius = 4.0;
         
+//        calendar.inputMoney.tag = 888;
         calendar.inputMoney.delegate = self;
         [calendar.closeButton addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
-        [calendar.calButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [calendar.calButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        [calendar.calButton addTarget:self action:@selector(calButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [calendar.calButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+//        [calendar.calButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+//        [calendar.calButton addTarget:self action:@selector(calButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         calendar.viewDown.backgroundColor = [UIColor shurukuangColor];
         calendar.viewDown.layer.cornerRadius = 4;
@@ -686,6 +673,7 @@
         calendar.inputMoney.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
         calendar.inputMoney.leftViewMode = UITextFieldViewModeAlways;
         calendar.inputMoney.tintColor = [UIColor grayColor];
+        [calendar.inputMoney addTarget:self action:@selector(textFiledEditChange:) forControlEvents:UIControlEventEditingChanged];
         
         calendar.yearLv.text = [NSString stringWithFormat:@"%@%%",[self.detailM productAnnualYield]];
         
@@ -711,6 +699,11 @@
         
         [app.tabBarVC.view addSubview:calendar];
     }
+}
+
+- (void)textFiledEditChange:(UITextField *)textField
+{
+    calendar.totalLabel.text = [NSString stringWithFormat:@"%.2f元",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
 }
 
 - (void)returnKeyboard:(UITapGestureRecognizer *)tap
@@ -761,7 +754,7 @@
             margin_y -= 30;
         }
         
-        calendar.frame = CGRectMake(margin_x, margin_y - 40, width, 301);
+        calendar.frame = CGRectMake(margin_x, margin_y - 40, width, 246);
     }];
 }
 

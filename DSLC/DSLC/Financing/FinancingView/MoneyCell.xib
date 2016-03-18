@@ -74,13 +74,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STk-7m-ij1">
-                        <rect key="frame" x="313" y="58" width="40" height="21"/>
+                        <rect key="frame" x="303" y="58" width="50" height="21"/>
                         <animations/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="7an-a1-CKa"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="21" id="QVV-SM-IIs"/>
-                            <constraint firstAttribute="width" constant="40" id="TDc-Zi-jSW"/>
+                            <constraint firstAttribute="width" constant="50" id="TDc-Zi-jSW"/>
                             <constraint firstAttribute="height" constant="21" id="m7G-hZ-sw8"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -123,7 +123,7 @@
                 <outlet property="textField" destination="dsr-64-Rxg" id="E7o-ZK-HJb"/>
                 <outlet property="viewLine1" destination="vrw-sv-MwN" id="Kf9-Go-8TY"/>
             </connections>
-            <point key="canvasLocation" x="54.5" y="283"/>
+            <point key="canvasLocation" x="351.5" y="294"/>
         </tableViewCell>
     </objects>
 </document>

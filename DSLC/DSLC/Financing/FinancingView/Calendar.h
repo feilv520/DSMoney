@@ -12,7 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (weak, nonatomic) IBOutlet UITextField *inputMoney;
-@property (weak, nonatomic) IBOutlet UIButton *calButton;
 @property (weak, nonatomic) IBOutlet UILabel *yearLv;
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;

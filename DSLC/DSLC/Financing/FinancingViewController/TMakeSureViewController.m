@@ -450,6 +450,20 @@
                 
                 if (redBagArray.count == 0) {
                     NSLog(@"下一页");
+                    
+                    [self buttonDisappear:nil];
+                    
+                    _balanceVC = [[FBalancePaymentViewController alloc] init];
+                    _balanceVC.productName = [self.detailM productName];
+                    _balanceVC.idString = [self.detailM productId];
+                    _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textFieldShu.text floatValue]];
+                    _balanceVC.typeString = [self.detailM productType];
+                    _balanceVC.redbagModel = redbagModel;
+                    _balanceVC.nHand = self.nHand;
+                    _balanceVC.syString = syString;
+                    _balanceVC.endTimeString = [self.detailM endTime];
+                    [self.navigationController pushViewController:_balanceVC animated:YES];
+                    
                 } else {
                     [self redBagListShow];
                 }
@@ -460,6 +474,20 @@
                     
                     if (redBagArray.count == 0) {
                         NSLog(@"下一页");
+                        
+                        [self buttonDisappear:nil];
+                        
+                        _balanceVC = [[FBalancePaymentViewController alloc] init];
+                        _balanceVC.productName = [self.detailM productName];
+                        _balanceVC.idString = [self.detailM productId];
+                        _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textFieldShu.text floatValue]];
+                        _balanceVC.typeString = [self.detailM productType];
+                        _balanceVC.redbagModel = redbagModel;
+                        _balanceVC.nHand = self.nHand;
+                        _balanceVC.syString = syString;
+                        _balanceVC.endTimeString = [self.detailM endTime];
+                        [self.navigationController pushViewController:_balanceVC animated:YES];
+                        
                     } else {
                         [self redBagListShow];
                     }
