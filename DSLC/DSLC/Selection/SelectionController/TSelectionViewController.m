@@ -71,6 +71,9 @@
     [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPickProduct) name:@"refrushToPickProduct" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLoginView) name:@"showLoginView" object:nil];
+    
     backgroundScrollView.hidden = YES;
     
     [self getPickProduct];
@@ -378,6 +381,7 @@
     [bannerScrollView setContentOffset:CGPointMake((pageControl.currentPage + 2) * WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
     
     pageControl.currentPage += 1;
+    
 }
 
 // 广告滚动控件
@@ -447,7 +451,7 @@
         [pageControl setCurrentPage:offset.x / bounds.size.width - 1];
         
         if (offset.x == WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1)) {
-            //        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+            [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
             pageControl.currentPage = 0;
         } else if (offset.x == 0) {
             [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
@@ -585,6 +589,13 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+#pragma mark 显示登录界面
+#pragma mark --------------------------------
+
+- (void)showLoginView{
+    [self ifLoginView];
 }
 
 - (void)didReceiveMemoryWarning {

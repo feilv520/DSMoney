@@ -8,8 +8,9 @@
 
 #import "UIViewController+Loading.h"
 #import "AppDelegate.h"
+#import "newLoginView.h"
 
-@implementation UIViewController (Loading)
+@implementation UIViewController (Loading) 
 
 #pragma mark tableview添加上拉加载下拉刷新
 #pragma mark --------------------------------
@@ -123,7 +124,13 @@
 {
     NSMutableArray *imgArray = [NSMutableArray array];
     
-    UIImageView *loadingImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    UIImageView *loadingImgView ;
+    
+    if (loadingImgView == nil) {
+        loadingImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    } else {
+        [self loadingWithHidden:NO];
+    }
     
     loadingImgView.tag = 1989;
     
@@ -293,5 +300,412 @@
     [hud hide:YES afterDelay:1.0];
 }
 
+#pragma mark 登陆界面是否显示出来
+#pragma mark --------------------------------
+
+- (void)ifLoginView{
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    UIView *viewGray;
+    
+    if (viewGray == nil) {
+        viewGray = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor]];
+    } else {
+        viewGray.hidden = NO;
+    }
+    
+    viewGray.alpha = 0.3;
+    
+    viewGray.tag = 99999;
+    
+    UITapGestureRecognizer *pan = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeView:)];
+    
+    [viewGray addGestureRecognizer:pan];
+    
+    NSBundle *rootBundle = [NSBundle mainBundle];
+    
+    newLoginView *newLView = (newLoginView *)[[rootBundle loadNibNamed:@"newLoginView" owner:nil options:nil] lastObject];
+    
+    newLView.inviteNumber.delegate = self;
+    newLView.phoneNumber.delegate = self;
+    
+    newLView.tag = 6654;
+    
+    newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, (HEIGHT_CVIEW_DEFAULT - 300) / 2.0, 300, 300);
+    
+    newLView.layer.masksToBounds = YES;
+    newLView.layer.cornerRadius = 5;
+    
+    [newLView.oneLogin addTarget:self action:@selector(exchangeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [newLView.twoLogin addTarget:self action:@selector(exchangeAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    newLView.getEnsureNumber.layer.masksToBounds = YES;
+    newLView.getEnsureNumber.layer.borderWidth = 1.f;
+    newLView.getEnsureNumber.tag = 9080;
+    newLView.getEnsureNumber.layer.borderColor = [UIColor daohanglan].CGColor;
+    [newLView.getEnsureNumber setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
+    newLView.getEnsureNumber.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    
+    newLView.getEnsureNumber.layer.cornerRadius = 4.f;
+    
+    [newLView.getEnsureNumber addTarget:self action:@selector(getCodeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [newLView.loginButton addTarget:self action:@selector(tLoginAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [app.tabBarVC.view addSubview:viewGray];
+    [app.tabBarVC.view addSubview:newLView];
+    
+}
+
+- (void)exchangeAction:(UIButton *)sender{
+    
+    newLoginView *newLView = (newLoginView *)sender.superview;
+    
+    if (sender == newLView.oneLogin) {
+        
+        newLView.backImageView.image = [UIImage imageNamed:@"loginViewP"];
+        
+        newLView.oneLogin.tintColor = Color_White;
+        newLView.twoLogin.tintColor = Color_Black;
+        
+        newLView.getEnsureNumber.hidden = NO;
+        newLView.ensureNumber.hidden = NO;
+        newLView.threeLineView.hidden = NO;
+        newLView.ensureNumberLabel.hidden = NO;
+        
+        newLView.inviteNumberLabel.hidden = NO;
+        newLView.phoneNumberLabel.hidden = NO;
+        
+        newLView.selectLabel.hidden = NO;
+        
+        newLView.tPhoneNumberLabel.hidden = YES;
+        newLView.tPasswordNumberLabel.hidden = YES;
+        newLView.mimaLabel.hidden = YES;
+        newLView.phoneLabel.hidden = YES;
+        
+        newLView.inviteNumber.placeholder = @"请输入邀请码";
+        newLView.phoneNumber.placeholder = @"请输入手机号";
+        
+        newLView.phoneNumber.secureTextEntry = NO;
+        
+        newLView.inviteNumber.text = @"";
+        newLView.phoneNumber.text = @"";
+        
+        [newLView.loginButton removeTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
+        [newLView.loginButton addTarget:self action:@selector(tLoginAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+    } else {
+    
+        newLView.backImageView.image = [UIImage imageNamed:@"loginViewUP"];
+        
+        newLView.twoLogin.tintColor = Color_White;
+        newLView.oneLogin.tintColor = Color_Black;
+        
+        newLView.getEnsureNumber.hidden = YES;
+        newLView.ensureNumber.hidden = YES;
+        newLView.threeLineView.hidden = YES;
+        newLView.ensureNumberLabel.hidden = YES;
+        
+        newLView.inviteNumberLabel.hidden = YES;
+        newLView.phoneNumberLabel.hidden = YES;
+        
+        newLView.selectLabel.hidden = YES;
+        
+        newLView.tPhoneNumberLabel.hidden = NO;
+        newLView.tPasswordNumberLabel.hidden = NO;
+        newLView.mimaLabel.hidden = NO;
+        newLView.phoneLabel.hidden = NO;
+        
+        newLView.inviteNumber.placeholder = @"请输入手机号";
+        newLView.phoneNumber.placeholder = @"请输入密码";
+        
+        newLView.phoneNumber.secureTextEntry = YES;
+        
+        newLView.inviteNumber.text = @"";
+        newLView.phoneNumber.text = @"";
+        
+        [newLView.loginButton removeTarget:self action:@selector(tLoginAction:) forControlEvents:UIControlEventTouchUpInside];
+        [newLView.loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+}
+
+// 获得验证码
+- (void)getCodeButtonAction:(UIButton *)btn{
+    [self.view endEditing:YES];
+    
+    newLoginView *newLView = (newLoginView *)btn.superview;
+    
+    if (newLView.phoneNumber.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if (![NSString validateMobile:newLView.phoneNumber.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
+    } else {
+        
+        NSDictionary *parameters = @{@"phone":newLView.phoneNumber.text,@"msgType":@"1"};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/getSmsCode" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            NSLog(@"%@",responseObject);
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"系统异常"];
+            NSLog(@"%@",error);
+        }];
+    }
+}
+
+- (void)closeView:(UIPanGestureRecognizer *)pan{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    newLoginView *newLView = [app.tabBarVC.view.subviews lastObject];
+    NSMutableArray *array = [app.tabBarVC.view.subviews mutableCopy];
+    [array removeLastObject];
+    UIView *viewGray = [array lastObject];
+    [viewGray removeFromSuperview];
+    [newLView removeFromSuperview];
+}
+
+// 登录按钮执行方法
+- (void)loginAction:(UIButton *)sender{
+    
+    newLoginView *newLView = (newLoginView *)sender.superview;
+    
+    [self.view endEditing:YES];
+    UITextField *textField1 = newLView.inviteNumber;
+    UITextField *textField2 = newLView.phoneNumber;
+    
+    if (textField1.text.length == 11 && (textField2.text.length >= 6 && textField2.text.length <= 20)) {
+        if (![NSString validatePassword:textField2.text]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"首字母开头"];
+        } else if ([NSString validateMobile:textField1.text]) {
+            [self submitLoadingWithView:self.view loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+            NSDictionary *parameter = @{@"phone":textField1.text,@"password":textField2.text};
+            NSLog(@"%@",parameter);
+            [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+                
+                if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    // 判断是否存在Member.plist文件
+                    [self submitLoadingWithHidden:YES];
+                    NSLog(@"%@",responseObject);
+                    
+                    NSMutableArray *array = [newLView.superview.subviews mutableCopy];
+                    [array removeLastObject];
+                    UIView *viewGray = [array lastObject];
+                    [viewGray removeFromSuperview];
+                    [newLView removeFromSuperview];
+                    
+                    [MobClick profileSignInWithPUID:[[responseObject objectForKey:@"User"] objectForKey:@"id"]];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+                    if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+                        [FileOfManage createWithFile:@"Member.plist"];
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                             [DES3Util encrypt:textField1.text],@"password",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                             [responseObject objectForKey:@"token"],@"token",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                    } else {
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                             [DES3Util encrypt:textField1.text],@"password",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                             [responseObject objectForKey:@"token"],@"token",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                        NSLog(@"token  -=-  %@",[responseObject objectForKey:@"token"]);
+                    }
+                    // 判断是否存在isLogin.plist文件
+                    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                        [FileOfManage createWithFile:@"isLogin.plist"];
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                    } else {
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                    }
+                    
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
+                    
+                    textField1.text = @"";
+                    textField2.text = @"";
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
+                    
+                } else {
+                    NSLog(@"%@",responseObject);
+                    [self submitLoadingWithHidden:YES];
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                    
+                }
+                
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"%@",error);
+            }];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        }
+        
+    } else if(textField1.text.length == 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if(textField1.text.length < 11) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
+    } else if (textField2.text.length == 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入密码"];
+        
+    } else if (textField2.text.length < 6) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位字符，至少包含字母和数字两种"];
+        
+    }
+    
+}
+
+- (void)tLoginAction:(UIButton *)sender{
+    newLoginView *newLView = (newLoginView *)sender.superview;
+    
+    [self.view endEditing:YES];
+    UITextField *textField1 = newLView.inviteNumber;
+    UITextField *textField2 = newLView.phoneNumber;
+    UITextField *textField3 = newLView.ensureNumber;
+    
+    if (textField2.text.length == 11) {
+        if ([NSString validateMobile:textField2.text]) {
+            [self submitLoadingWithView:self.view loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+            NSDictionary *parameter;
+            if ([textField2.text isEqualToString:@""]) {
+                parameter = @{@"phone":textField2.text,@"smsCode":textField3.text,@"invitationCode":@"",@"clientType":@"iOS"};
+            } else {
+                parameter = @{@"phone":textField2.text,@"smsCode":textField3.text,@"invitationCode":textField1.text,@"clientType":@"iOS"};
+            }
+            NSLog(@"%@",parameter);
+            [[MyAfHTTPClient sharedClient] postWithURLString:@"app/registerTwo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+                
+                if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    // 判断是否存在Member.plist文件
+                    [self submitLoadingWithHidden:YES];
+                    NSLog(@"%@",responseObject);
+                    
+                    UIView *viewGray = [newLView.superview.subviews objectAtIndex:3];
+                    [viewGray removeFromSuperview];
+                    [newLView removeFromSuperview];
+                    
+                    [MobClick profileSignInWithPUID:[[responseObject objectForKey:@"User"] objectForKey:@"id"]];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+                    if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+                        [FileOfManage createWithFile:@"Member.plist"];
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                             [DES3Util encrypt:textField1.text],@"password",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                             [responseObject objectForKey:@"token"],@"token",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                    } else {
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                             [DES3Util encrypt:textField1.text],@"password",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                             [responseObject objectForKey:@"token"],@"token",
+                                             [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                        NSLog(@"token  -=-  %@",[responseObject objectForKey:@"token"]);
+                    }
+                    // 判断是否存在isLogin.plist文件
+                    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                        [FileOfManage createWithFile:@"isLogin.plist"];
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                    } else {
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+                    }
+                    
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
+                    
+                    textField1.text = @"";
+                    textField2.text = @"";
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
+                    
+                } else {
+                    NSLog(@"%@",responseObject);
+                    [self submitLoadingWithHidden:YES];
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                    
+                }
+                
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"%@",error);
+            }];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        }
+        
+    } else if(textField2.text.length == 0) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入手机号"];
+        
+    } else if(textField2.text.length < 11) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手机号格式错误"];
+        
+    }
+
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    newLoginView *newLView = [app.tabBarVC.view.subviews lastObject];
+
+    if (textField == newLView.inviteNumber) {
+        
+        if (range.location < 11) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+        
+    } else if(textField == newLView.phoneNumber){
+        
+        if (range.location < 20) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+    } else {
+        return NO;
+    }
+}
 
 @end

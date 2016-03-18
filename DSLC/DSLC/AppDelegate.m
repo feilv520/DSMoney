@@ -64,7 +64,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-//    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
+    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
     
     [self exitNetwork];
     
@@ -91,9 +91,9 @@
         ThreeViewController *threeVC = [[ThreeViewController alloc] init];
         UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
         
-//        MineViewController *mineVC = [[MineViewController alloc] init];
-        LoginViewController *loginVC = [[LoginViewController alloc] init];
-        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        MineViewController *mineVC = [[MineViewController alloc] init];
+//        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
 
         self.viewControllerArr = @[navigation1, navigation2, navigation3];
         
@@ -208,6 +208,16 @@ void UncaughtExceptionHandler(NSException *exception){
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+        [FileOfManage createWithFile:@"isLogin.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    } else {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    }
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -229,6 +239,17 @@ void UncaughtExceptionHandler(NSException *exception){
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    // 判断是否存在isLogin.plist文件
+    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+        [FileOfManage createWithFile:@"isLogin.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    } else {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    }
+    
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url

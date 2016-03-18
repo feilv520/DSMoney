@@ -232,8 +232,6 @@
             cell.labelData.textColor = [UIColor zitihui];
             cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
             
-            NSLog(@"88888888-%ld",(long)indexPath.row);
-            
             if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
                 
                 cell.outPay.hidden = NO;
@@ -244,7 +242,6 @@
                 cell.quanView.hidden = NO;
                 cell.quanView.progressTotal = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
                 cell.quanView.progressCounter = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
-                NSLog(@"--00-%lf",[[[self.productListArray objectAtIndex:indexPath.row]productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue]);
                 cell.quanView.theme.sliceDividerHidden = YES;
                 
             }
@@ -605,7 +602,7 @@
         [pageControl setCurrentPage:offset.x / bounds.size.width - 1];
         
         if (offset.x == WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1)) {
-            //        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+            [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
             pageControl.currentPage = 0;
         } else if (offset.x == 0) {
             [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];

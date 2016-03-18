@@ -19,9 +19,29 @@
 @property (nonatomic, assign) CGFloat pageHeight;
 @property (nonatomic, strong) UIView *tabbarView;
 
+@property (nonatomic, strong) NSDictionary *flagLogin;
+
 @end
 
 @implementation KKTabBarViewController
+
+//    if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]) {
+//        [self autoLogin];
+//    }
+
+// 登录标识文件
+- (NSDictionary *)flagLogin{
+    if (_flagLogin == nil) {
+        if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+            [FileOfManage createWithFile:@"isLogin.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+        }
+    }
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    self.flagLogin = dic;
+    return _flagLogin;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -177,7 +197,11 @@
 - (void)tabAction:(UIButton *)button
 {
     if (button.tag == 2) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbarView" object:indexButton];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbarView" object:indexButton];
+        if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+            return ;
+        }
     } else {
         indexButton = button;
     }
