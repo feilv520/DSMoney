@@ -525,7 +525,7 @@
             
             if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
                 
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先登录,然后再投资"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
 
             } else {
             

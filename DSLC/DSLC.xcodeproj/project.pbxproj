@@ -725,6 +725,12 @@
 		8D6E46921C9A782100F0F5B7 /* MDRadialProgressLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E468D1C9A782000F0F5B7 /* MDRadialProgressLabel.m */; settings = {ASSET_TAGS = (); }; };
 		8D6E46931C9A782100F0F5B7 /* MDRadialProgressTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E468F1C9A782100F0F5B7 /* MDRadialProgressTheme.m */; settings = {ASSET_TAGS = (); }; };
 		8D6E46941C9A782100F0F5B7 /* MDRadialProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E46911C9A782100F0F5B7 /* MDRadialProgressView.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E46971C9B9DB300F0F5B7 /* newLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E46961C9B9DB300F0F5B7 /* newLoginView.m */; settings = {ASSET_TAGS = (); }; };
+		8D6E46991C9B9DD200F0F5B7 /* newLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46981C9B9DD200F0F5B7 /* newLoginView.xib */; settings = {ASSET_TAGS = (); }; };
+		8D6E469E1C9B9ECA00F0F5B7 /* loginViewP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E469A1C9B9ECA00F0F5B7 /* loginViewP@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D6E469F1C9B9ECA00F0F5B7 /* loginViewP@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E469B1C9B9ECA00F0F5B7 /* loginViewP@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D6E46A01C9B9ECA00F0F5B7 /* loginViewUP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E469C1C9B9ECA00F0F5B7 /* loginViewUP@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D6E46A11C9B9ECA00F0F5B7 /* loginViewUP@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E469D1C9B9ECA00F0F5B7 /* loginViewUP@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */; };
 		8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFBA21BC78B02009FE101 /* shouyeqiepian7500_28highlight.png */; };
 		8D878CE11BC754AD00844575 /* e.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CE01BC754AD00844575 /* e.m */; };
@@ -2028,6 +2034,13 @@
 		8D6E468F1C9A782100F0F5B7 /* MDRadialProgressTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDRadialProgressTheme.m; sourceTree = "<group>"; };
 		8D6E46901C9A782100F0F5B7 /* MDRadialProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDRadialProgressView.h; sourceTree = "<group>"; };
 		8D6E46911C9A782100F0F5B7 /* MDRadialProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDRadialProgressView.m; sourceTree = "<group>"; };
+		8D6E46951C9B9DB300F0F5B7 /* newLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newLoginView.h; sourceTree = "<group>"; };
+		8D6E46961C9B9DB300F0F5B7 /* newLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newLoginView.m; sourceTree = "<group>"; };
+		8D6E46981C9B9DD200F0F5B7 /* newLoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = newLoginView.xib; sourceTree = "<group>"; };
+		8D6E469A1C9B9ECA00F0F5B7 /* loginViewP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginViewP@2x.png"; sourceTree = "<group>"; };
+		8D6E469B1C9B9ECA00F0F5B7 /* loginViewP@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginViewP@3x.png"; sourceTree = "<group>"; };
+		8D6E469C1C9B9ECA00F0F5B7 /* loginViewUP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginViewUP@2x.png"; sourceTree = "<group>"; };
+		8D6E469D1C9B9ECA00F0F5B7 /* loginViewUP@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginViewUP@3x.png"; sourceTree = "<group>"; };
 		8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian750_28.png; sourceTree = "<group>"; };
 		8D6EFBA21BC78B02009FE101 /* shouyeqiepian7500_28highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian7500_28highlight.png; sourceTree = "<group>"; };
 		8D878CDF1BC754AD00844575 /* e.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e.h; sourceTree = "<group>"; };
@@ -2635,6 +2648,10 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8D6E469A1C9B9ECA00F0F5B7 /* loginViewP@2x.png */,
+				8D6E469B1C9B9ECA00F0F5B7 /* loginViewP@3x.png */,
+				8D6E469C1C9B9ECA00F0F5B7 /* loginViewUP@2x.png */,
+				8D6E469D1C9B9ECA00F0F5B7 /* loginViewUP@3x.png */,
 				8D6E46881C9A482A00F0F5B7 /* iconfont-icondzje@2x.png */,
 				8D6E46891C9A482A00F0F5B7 /* iconfont-icondzje@3x.png */,
 				8D6E46791C9936F600F0F5B7 /* 已兑付@2x.png */,
@@ -3215,6 +3232,9 @@
 				8D3F95D31BE1C8FC00013A8E /* RegisterOfPassButton.h */,
 				8D3F95D41BE1C8FC00013A8E /* RegisterOfPassButton.m */,
 				8D3F95D61BE1C90C00013A8E /* RegisterOfPassButton.xib */,
+				8D6E46951C9B9DB300F0F5B7 /* newLoginView.h */,
+				8D6E46961C9B9DB300F0F5B7 /* newLoginView.m */,
+				8D6E46981C9B9DD200F0F5B7 /* newLoginView.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -4236,9 +4256,9 @@
 			isa = PBXGroup;
 			children = (
 				8183F2FE1C7437F6000BB93C /* 大圣理财.entitlements */,
-				81C1380F1BDF61F30088E792 /* 登录 */,
-				810D25241BC7916C00DAF83F /* Base */,
 				81C2DAB01BC757A60007AC48 /* Image */,
+				810D25241BC7916C00DAF83F /* Base */,
+				81C1380F1BDF61F30088E792 /* 登录 */,
 				81C2DAA51BC755F10007AC48 /* Three */,
 				8D878CCC1BC74F3200844575 /* Other */,
 				8D878CC91BC74E9700844575 /* appDelegate */,
@@ -4842,6 +4862,7 @@
 				8175BEC51BEA052E0044026E /* 分享成功@3x.png in Resources */,
 				81B674211BF0AFEB007CEF51 /* yuan@2x.png in Resources */,
 				8D0CB4941BE75E370039D826 /* RiskConditionsViewController.xib in Resources */,
+				8D6E469E1C9B9ECA00F0F5B7 /* loginViewP@2x.png in Resources */,
 				8175BEBA1BE9F7160044026E /* ShareEveryCell.xib in Resources */,
 				81D703F81BE06D1F0074DF30 /* ForgetSecretCell.xib in Resources */,
 				8D9011B61BD6337C00E5D62A /* 07@3x.png in Resources */,
@@ -4859,6 +4880,7 @@
 				8D11918D1BF1D25A00A2DE05 /* YesterdayViewController.xib in Resources */,
 				8D9011A91BD6337C00E5D62A /* 01@2x.png in Resources */,
 				8D3EEA121C27AB400031F7C9 /* 工商银行@2x.png in Resources */,
+				8D6E46A11C9B9ECA00F0F5B7 /* loginViewUP@3x.png in Resources */,
 				8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */,
 				8DEDE1CD1BCCFF44008086D3 /* iconfont_complete@3x.png in Resources */,
 				810C76701C2D1210000637FD /* 椭圆-2@3x.png in Resources */,
@@ -4898,6 +4920,7 @@
 				8175BEAE1BE9F2F50044026E /* 腾讯微博@2x.png in Resources */,
 				8D3125EB1BD7798000143B71 /* ForgetPasswordViewController.xib in Resources */,
 				81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */,
+				8D6E46991C9B9DD200F0F5B7 /* newLoginView.xib in Resources */,
 				81FAAA331C256AC40020E9DD /* 充值成功@3x.png in Resources */,
 				81AC90CA1BEC8C6600232404 /* BankWhichCell.xib in Resources */,
 				819B52D61BFC2094002FDF1E /* 银元宝@2x.png in Resources */,
@@ -5092,6 +5115,7 @@
 				8175BEB21BE9F2F50044026E /* 人人网@2x.png in Resources */,
 				8DC695BA1C3503D30055EC44 /* UMSocialLocalizable.strings in Resources */,
 				8D3EEA151C27AB400031F7C9 /* 平安银行@3x.png in Resources */,
+				8D6E469F1C9B9ECA00F0F5B7 /* loginViewP@3x.png in Resources */,
 				81B6741D1BF0AFEB007CEF51 /* 流程@2x.png in Resources */,
 				81B6741C1BF0AFEB007CEF51 /* 红框@3x.png in Resources */,
 				817E33AE1BD78ED500D05103 /* iconfont@3x.png in Resources */,
@@ -5133,6 +5157,7 @@
 				8D4343991BFDEB0B000BA004 /* loading_up_08.png in Resources */,
 				81B18E1A1BE7387A00D448FA /* iconfont-zhuanxiangeps@3x.png in Resources */,
 				8175BE9D1BE9E5760044026E /* 组-21-拷贝-14@3x.png in Resources */,
+				8D6E46A01C9B9ECA00F0F5B7 /* loginViewUP@2x.png in Resources */,
 				81C8BBCA1BDA2F8D005B9DFF /* yijianfankui@2x.png in Resources */,
 				816CDF2B1BF19A63007785FC /* 组-15@3x.png in Resources */,
 				81B520A61BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@2x.png in Resources */,
@@ -5455,6 +5480,7 @@
 				8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */,
 				8D6E46861C9A44F200F0F5B7 /* myHadCastDetailViewController.m in Sources */,
 				8D6E466E1C992B3D00F0F5B7 /* myHadCastViewController.m in Sources */,
+				8D6E46971C9B9DB300F0F5B7 /* newLoginView.m in Sources */,
 				8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */,
 				81CBB7501C1AC6E9002CDE97 /* SafeProtectViewController.m in Sources */,
 				81200C1E1C031F1700F70DDD /* InviteNumReginCell.m in Sources */,

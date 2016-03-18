@@ -39,6 +39,7 @@
 #import "MonkeyCell.h"
 #import "InviteNewView.h"
 #import "NewCastProductViewController.h"
+#import "newLoginView.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate, UMSocialUIDelegate>
 
@@ -59,6 +60,8 @@
     UIView *viewGray;
     
     InviteNewView *inviteNV;
+    
+    newLoginView *newLView;
 }
 
 @property (nonatomic, strong) NSString *imgString;
@@ -106,6 +109,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeWithImageView) name:@"exchangeWithImageView" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(diandianNonotice:) name:@"dian" object:nil];
+    
 }
 
 - (void)diandianNonotice:(NSNotification *)notice
@@ -588,6 +592,8 @@
     self.imgString = [dic objectForKey:@"avatarImg"];
     
     NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+    
+    NSLog(@"parameter -=- %@",parameter);
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

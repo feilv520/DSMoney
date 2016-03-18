@@ -10,7 +10,7 @@
 #import "define.h"
 
 
-@interface UIViewController (Loading)
+@interface UIViewController (Loading) <UITextFieldDelegate>
 
 // 给tableview添加上拉加载,下拉刷新
 - (void)addTableViewWithHeader:(UITableView *)tableview;
@@ -45,5 +45,8 @@
 
 - (void)submitLoadingWithView:(UIView *)view loadingFlag:(BOOL)loadingFlag height:(CGFloat)height;
 - (void)submitLoadingWithHidden:(BOOL)hidden;
+
+// 判断是否登录,没有登录就显示登录界面
+- (void)ifLoginView;
 
 @end

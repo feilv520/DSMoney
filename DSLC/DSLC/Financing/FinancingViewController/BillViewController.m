@@ -22,7 +22,6 @@
 @interface BillViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
-    UIScrollView *scrollView;
     UIButton *butThree;
     NSArray *butThrArr;
     UILabel *labelLine;
@@ -464,7 +463,7 @@
         [pageControl setCurrentPage:offset.x / bounds.size.width - 1];
         
         if (offset.x == WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1)) {
-            //        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+            [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
             pageControl.currentPage = 0;
         } else if (offset.x == 0) {
             [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
