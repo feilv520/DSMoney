@@ -40,6 +40,8 @@
     
     UIButton *butCountDown;
     UILabel *labelRisk;
+    
+    BOOL flagTwo;
 }
 @property (nonatomic, strong) UIControl *viewBotton;
 @property (nonatomic, strong) ProductDetailModel *detailM;
@@ -73,6 +75,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    flagTwo = NO;
     
     [self getProductDetail];
     
@@ -141,8 +145,11 @@
         return 160;
         
     } else if (indexPath.section == 2) {
-        
-        return 120;
+        if (flagTwo) {
+            return 35;
+        } else {
+            return 120;
+        }
         
     } else if (indexPath.section == 3) {
         
@@ -188,6 +195,8 @@
         cell.labelBuyNum.font = [UIFont systemFontOfSize:12];
         cell.labelBuyNum.textColor = [UIColor zitihui];
         cell.labelBuyNum.text = @"投资须知";
+        
+        [cell.butTouZi addTarget:self action:@selector(touzixuzhi:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.labelPercentage.text = [self.detailM productAnnualYield];
         cell.labelPercentage.textColor = [UIColor daohanglan];
@@ -292,6 +301,12 @@
         cell.labelDescription.text = @"产品描述";
         cell.labelDescription.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
+        if (flagTwo) {
+            cell.labelContent.hidden = YES;
+        } else {
+            cell.labelContent.hidden = NO;
+        }
+        
         cell.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.labelLine.alpha = 0.7;
         
@@ -386,6 +401,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 2) {
+        
+        flagTwo = !flagTwo;
+        [_tableView reloadData];
+    }
     
     if (indexPath.section == 4) {
         
@@ -504,7 +525,6 @@
 //确认投资按钮
 - (void)makeSureButton:(UIButton *)button
 {
-    NSDictionary *monkeyDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     if ([self.residueMoney isEqualToString:@"0.00"]) {
         [self orderProduct];
@@ -529,91 +549,39 @@
 
             } else {
             
-                if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"1"]) {
+                if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"3"]) {
+                        
+                    TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
+                    makeSureVC.decide = YES;
+                    makeSureVC.detailM = self.detailM;
+                    makeSureVC.residueMoney = self.residueMoney;
+                    [self.navigationController pushViewController:makeSureVC animated:YES];
                     
-                    if (self.estimate == YES) {
-                        
-                        TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
-                        makeSureVC.decide = YES;
-                        makeSureVC.detailM = self.detailM;
-                        makeSureVC.residueMoney = self.residueMoney;
-                        [self.navigationController pushViewController:makeSureVC animated:YES];
-                        
-                        [MobClick event:@"makeSure"];
-                        
-                    } else {
-                        
-                        MakeSureViewController *tmakeVC = [[MakeSureViewController alloc] init];
-                        tmakeVC.decide = NO;
-                        tmakeVC.nHand = self.nHand;
-                        tmakeVC.detailM = self.detailM;
-                        tmakeVC.residueMoney = self.residueMoney;
-                        [self.navigationController pushViewController:tmakeVC animated:YES];
-                    }
-//                    makeSureVC.detailM = self.detailM;
-//                    makeSureVC.residueMoney = self.residueMoney;
+                    [MobClick event:@"makeSure"];
+
                     [self submitLoadingWithHidden:YES];
                     
                 } else {
-                    
-                    if ([[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@"0"] || [[monkeyDic objectForKey:@"monkeyNum"] isEqualToString:@""]) {
+                            
+                    MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
+                    makeSureVC.decide = NO;
+                    makeSureVC.nHand = self.nHand;
+                    makeSureVC.detailM = self.detailM;
+                    makeSureVC.residueMoney = self.residueMoney;
+                    [self.navigationController pushViewController:makeSureVC animated:YES];
+                
+                    [self submitLoadingWithHidden:YES];
                         
-                        
-                        if (self.estimate == YES) {
-                            
-                            TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
-                            makeSureVC.decide = YES;
-                            makeSureVC.detailM = self.detailM;
-                            makeSureVC.residueMoney = self.residueMoney;
-                            [self.navigationController pushViewController:makeSureVC animated:YES];
-                            
-                            [MobClick event:@"makeSure"];
-                            
-                        } else {
-                            
-                            MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
-                            makeSureVC.decide = NO;
-                            makeSureVC.nHand = self.nHand;
-                            makeSureVC.detailM = self.detailM;
-                            makeSureVC.residueMoney = self.residueMoney;
-                            [self.navigationController pushViewController:makeSureVC animated:YES];
-                        }
-//                        makeSureVC.detailM = self.detailM;
-//                        makeSureVC.residueMoney = self.residueMoney;
-                        [self submitLoadingWithHidden:YES];
-                        
-                    } else {
-                        
-                        MonkeyViewController *monkeyVC = [[MonkeyViewController alloc] init];
-                        
-                        if (self.estimate == YES) {
-                            
-                            monkeyVC.decide = YES;
-                            
-                            [MobClick event:@"makeSure"];
-                            
-                        } else {
-                            
-                            monkeyVC.decide = NO;
-                            monkeyVC.nHand = self.nHand;
-                        }
-                        
-                        monkeyVC.detailM = self.detailM;
-                        monkeyVC.residueMoney = self.residueMoney;
-                        [self submitLoadingWithHidden:YES];
-                        [self.navigationController pushViewController:monkeyVC animated:YES];
                     }
                 }
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             NSLog(@"%@", error);
             
         }];
     } else {
         [self submitLoadingWithHidden:YES];
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请先登录,然后再投资"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
     }
     
 }
@@ -814,6 +782,15 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
     }];
+}
+
+- (void)touzixuzhi:(UITapGestureRecognizer *)tap{
+    InvestNoticeViewController *investNVC = [[InvestNoticeViewController alloc] init];
+    investNVC.productId = [self.detailM productId];
+    investNVC.productType = [self.detailM productType];
+    investNVC.amountMax = [self.detailM amountMax];
+    investNVC.amountMin = [self.detailM amountMin];
+    pushVC(investNVC);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,7 +7,6 @@
 //
 
 #import "MyHandViewController.h"
-#import "SelectionViewController.h"
 #import "FinancingViewController.h"
 #import "MineViewController.h"
 #import "MoreViewController.h"
@@ -15,6 +14,8 @@
 #import "MyHandButton.h"
 #import "define.h"
 #import "AppDelegate.h"
+#import "TSelectionViewController.h"
+#import "ThreeViewController.h"
 
 @interface MyHandViewController () <MyHandButtonDelegate>{
     NSArray *viewControllerArr;
@@ -41,25 +42,23 @@
 
 - (void)lockView:(MyHandButton *)lockView didFinishPath:(NSString *)path{
     if ([path isEqualToString:@"012"]) {
-        SelectionViewController *selectionVC = [[SelectionViewController alloc] init];
+        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
         UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
         
-        FinancingViewController *financingVC = [[FinancingViewController alloc] init];
-        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:financingVC];
+        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
+        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
         
         MineViewController *mineVC = [[MineViewController alloc] init];
+        //        LoginViewController *loginVC = [[LoginViewController alloc] init];
         UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
         
-        MoreViewController *moreVC = [[MoreViewController alloc] init];
-        UINavigationController *navigation4 = [[UINavigationController alloc] initWithRootViewController:moreVC];
+        viewControllerArr = @[navigation1, navigation2, navigation3];
         
-        viewControllerArr = @[navigation1, navigation2, navigation3, navigation4];
-        
-        butGrayArr = @[@"shouyeqiepian7500_25", @"shouyeqiepian750_28", @"shouyeqiepian750_30", @"shouyeqiepian750_32"];
-        butColorArr = @[@"shouyeqiepian750_25_highlight", @"shouyeqiepian7500_28highlight", @"shouyeqiepian7500_30highlight", @"shouyeqiepian7500_32highlight"];
+        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
+        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
         
         buttonArr = [NSMutableArray array];
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改

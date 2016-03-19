@@ -95,8 +95,11 @@
     
     [self loadingWithView:self.view loadingFlag:NO height:self.view.center.y];
     
-    [self MyAccountInfo];
-
+    if ([FileOfManage ExistOfFile:@"Member.plist"]) {
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        if ([dic objectForKey:@"token"] != nil)
+            [self MyAccountInfo];
+    } 
     [self showPictureAndTitle];
     
     viewGray = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor]];

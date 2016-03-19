@@ -21,5 +21,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelSurplus;
 @property (weak, nonatomic) IBOutlet UILabel *labelLine;
 @property (weak, nonatomic) IBOutlet UIButton *butCountDown;
+@property (weak, nonatomic) IBOutlet UIButton *butTouZi;
 
 @end

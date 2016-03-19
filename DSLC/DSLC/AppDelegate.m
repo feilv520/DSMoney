@@ -97,7 +97,7 @@
 
         self.viewControllerArr = @[navigation1, navigation2, navigation3];
         
-        butGrayArr = @[@"iconfont-jingxuan-2", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
+        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
         butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
         
         buttonArr = [NSMutableArray array];

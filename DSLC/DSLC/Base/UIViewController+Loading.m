@@ -162,12 +162,20 @@
     loadingImgView.alpha = 1;
 }
 
-- (void)submitLoadingWithHidden:(BOOL)hidden
-{
+- (void)submitLoadingWithHidden:(BOOL)hidden{
     UIView *viewDisappear = (UIView *)[self.view viewWithTag:690];
     viewDisappear.hidden = hidden;
     
     UIImageView *loadingImg = (UIImageView *)[self.view viewWithTag:1989];
+    loadingImg.hidden = hidden;
+}
+
+- (void)submitLoadingWithHidden:(BOOL)hidden view:(UIView *)view
+{
+    UIView *viewDisappear = (UIView *)[view viewWithTag:690];
+    viewDisappear.hidden = hidden;
+    
+    UIImageView *loadingImg = (UIImageView *)[view viewWithTag:1989];
     loadingImg.hidden = hidden;
 }
 
@@ -297,7 +305,7 @@
     hud.yOffset = -50;
     hud.cornerRadius = 5.0f;
     hud.removeFromSuperViewOnHide = YES;
-    [hud hide:YES afterDelay:1.0];
+    [hud hide:YES afterDelay:2.0];
 }
 
 #pragma mark 登陆界面是否显示出来
@@ -332,7 +340,7 @@
     
     newLView.tag = 6654;
     
-    newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, (HEIGHT_CVIEW_DEFAULT - 300) / 2.0, 300, 300);
+    newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, 115, 300, 300);
     
     newLView.layer.masksToBounds = YES;
     newLView.layer.cornerRadius = 5;
@@ -480,14 +488,14 @@
         if (![NSString validatePassword:textField2.text]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"首字母开头"];
         } else if ([NSString validateMobile:textField1.text]) {
-            [self submitLoadingWithView:self.view loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+            [self submitLoadingWithView:newLView loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
             NSDictionary *parameter = @{@"phone":textField1.text,@"password":textField2.text};
             NSLog(@"%@",parameter);
             [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
                 
+                [self submitLoadingWithHidden:YES view:newLView];
                 if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                     // 判断是否存在Member.plist文件
-                    [self submitLoadingWithHidden:YES];
                     NSLog(@"%@",responseObject);
                     
                     NSMutableArray *array = [newLView.superview.subviews mutableCopy];
@@ -544,7 +552,6 @@
                     
                 } else {
                     NSLog(@"%@",responseObject);
-                    [self submitLoadingWithHidden:YES];
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                     
                 }
@@ -631,7 +638,6 @@
                                              [responseObject objectForKey:@"token"],@"token",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                         [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
-                        NSLog(@"token  -=-  %@",[responseObject objectForKey:@"token"]);
                     }
                     // 判断是否存在isLogin.plist文件
                     if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
@@ -643,7 +649,7 @@
                         [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
                     }
                     
-                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"为了您的账户安全请务必在个人信息里设置登录密码"];
                     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideWithTabbarView" object:nil];
                     
                     textField1.text = @"";
@@ -682,25 +688,33 @@
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     newLoginView *newLView = [app.tabBarVC.view.subviews lastObject];
 
-    if (textField == newLView.inviteNumber) {
-        
-        if (range.location < 11) {
+    if (![newLView isKindOfClass:[newLoginView class]]) {
+        return YES;
+    }
+    
+    if (textField == newLView.phoneNumber || textField == newLView.inviteNumber || textField == newLView.ensureNumber) {
+        if (textField == newLView.inviteNumber) {
             
-            return YES;
+            if (range.location < 11) {
+                
+                return YES;
+                
+            } else {
+                
+                return NO;
+            }
             
+        } else if(textField == newLView.phoneNumber){
+            
+            if (range.location < 20) {
+                
+                return YES;
+                
+            } else {
+                
+                return NO;
+            }
         } else {
-            
-            return NO;
-        }
-        
-    } else if(textField == newLView.phoneNumber){
-        
-        if (range.location < 20) {
-            
-            return YES;
-            
-        } else {
-            
             return NO;
         }
     } else {

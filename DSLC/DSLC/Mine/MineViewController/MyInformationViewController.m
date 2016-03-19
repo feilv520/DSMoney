@@ -26,6 +26,7 @@
 #import "AddBankViewController.h"
 #import "BankName.h"
 #import "MoreViewController.h"
+#import "SetLoginPasswordViewController.h"
 
 @interface MyInformationViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -48,6 +49,8 @@
     
     UILabel *labelPhone;
     NSMutableArray *bankArray;
+    
+    NSString *setPwd;
 }
 
 @property (nonatomic, strong) NSDictionary *dataDic;
@@ -355,8 +358,14 @@
         
         if (indexPath.row == 0) {
             
-            MendLoginViewController *mendLoginVC = [[MendLoginViewController alloc] init];
-            [self.navigationController pushViewController:mendLoginVC animated:YES];
+            if ([[self.dataDic objectForKey:@"setPwd"] isEqualToNumber:[NSNumber numberWithInteger:1]]) {
+                MendLoginViewController *mendLoginVC = [[MendLoginViewController alloc] init];
+                [self.navigationController pushViewController:mendLoginVC animated:YES];
+            } else {
+                SetLoginPasswordViewController *setLoginPassword = [[SetLoginPasswordViewController alloc] init];
+                pushVC(setLoginPassword);
+            }
+            
             
         } else if (indexPath.row == 1) {
             

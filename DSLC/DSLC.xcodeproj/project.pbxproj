@@ -20,6 +20,14 @@
 		810C767F1C2EADA3000637FD /* reddian.png in Resources */ = {isa = PBXBuildFile; fileRef = 810C767E1C2EADA3000637FD /* reddian.png */; settings = {ASSET_TAGS = (); }; };
 		810C76811C2EADE1000637FD /* icon_wd_buble.png in Resources */ = {isa = PBXBuildFile; fileRef = 810C76801C2EADE1000637FD /* icon_wd_buble.png */; settings = {ASSET_TAGS = (); }; };
 		810D25271BC7917B00DAF83F /* CreatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 810D25261BC7917B00DAF83F /* CreatView.m */; };
+		810EBC001C9CFB3D008FB51D /* iconfont-jingxuan-highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 810EBBFE1C9CFB3D008FB51D /* iconfont-jingxuan-highlight.png */; settings = {ASSET_TAGS = (); }; };
+		810EBC011C9CFB3D008FB51D /* iconfont-jingxuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 810EBBFF1C9CFB3D008FB51D /* iconfont-jingxuan.png */; settings = {ASSET_TAGS = (); }; };
+		810EBC041C9CFB55008FB51D /* iconfont-iconfuzhi-highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 810EBC021C9CFB55008FB51D /* iconfont-iconfuzhi-highlight.png */; settings = {ASSET_TAGS = (); }; };
+		810EBC051C9CFB55008FB51D /* iconfont-iconfuzhi.png in Resources */ = {isa = PBXBuildFile; fileRef = 810EBC031C9CFB55008FB51D /* iconfont-iconfuzhi.png */; settings = {ASSET_TAGS = (); }; };
+		810EBC081C9CFE67008FB51D /* SetLoginPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 810EBC071C9CFE67008FB51D /* SetLoginPasswordViewController.m */; settings = {ASSET_TAGS = (); }; };
+		810EBC0C1C9CFEFB008FB51D /* SetPasswordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 810EBC0A1C9CFEFB008FB51D /* SetPasswordTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		810EBC0D1C9CFEFB008FB51D /* SetPasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810EBC0B1C9CFEFB008FB51D /* SetPasswordTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		810EBC101C9CFFD6008FB51D /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 810EBC0F1C9CFFD6008FB51D /* SelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */; settings = {ASSET_TAGS = (); }; };
 		811F0AFC1BF318F6001F6AA4 /* GiveMoneyFinish.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F0AFB1BF318F6001F6AA4 /* GiveMoneyFinish.m */; settings = {ASSET_TAGS = (); }; };
@@ -264,6 +272,7 @@
 		8183F42E1C9A7C28000BB93C /* TRedBagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F42C1C9A7BD4000BB93C /* TRedBagModel.m */; };
 		8183F4321C9A8F93000BB93C /* TRiskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F4301C9A8F93000BB93C /* TRiskCell.m */; settings = {ASSET_TAGS = (); }; };
 		8183F4331C9A8F93000BB93C /* TRiskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8183F4311C9A8F93000BB93C /* TRiskCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8183F4351C9CF232000BB93C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8183F4341C9CF232000BB93C /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC361BCC96E1003F440D /* MakeSureViewController.m */; };
 		8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC391BCCD0FE003F440D /* ContentCell.m */; };
 		8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC3A1BCCD0FE003F440D /* ContentCell.xib */; };
@@ -405,7 +414,6 @@
 		81C138201BDF6D5E0088E792 /* iconfont-phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C1381C1BDF6D5E0088E792 /* iconfont-phone@2x.png */; settings = {ASSET_TAGS = (); }; };
 		81C138211BDF6D5E0088E792 /* iconfont-phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C1381D1BDF6D5E0088E792 /* iconfont-phone@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */; };
-		81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAB1BC7563A0007AC48 /* SelectionViewController.m */; };
 		81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAE1BC756630007AC48 /* MoreViewController.m */; };
 		81C548621C08329B001CDC97 /* RedBagExplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C548611C08329B001CDC97 /* RedBagExplainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C8BBC41BDA2F8D005B9DFF /* bangzhu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C8BBBC1BDA2F8D005B9DFF /* bangzhu@2x.png */; };
@@ -801,14 +809,6 @@
 		8D9356F21BC607C500BC2BFA /* DSLCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9356F11BC607C500BC2BFA /* DSLCUITests.m */; };
 		8D968A791C96A9FD00C9A6A1 /* mylicaishi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A771C96A9FD00C9A6A1 /* mylicaishi@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D968A7A1C96A9FD00C9A6A1 /* mylicaishi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A781C96A9FD00C9A6A1 /* mylicaishi@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8D968A831C96C0E100C9A6A1 /* iconfont-iconfuzhi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A7B1C96C0E100C9A6A1 /* iconfont-iconfuzhi@2x.png */; settings = {ASSET_TAGS = (); }; };
-		8D968A841C96C0E100C9A6A1 /* iconfont-iconfuzhi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A7C1C96C0E100C9A6A1 /* iconfont-iconfuzhi@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8D968A851C96C0E100C9A6A1 /* iconfont-iconfuzhi-highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A7D1C96C0E100C9A6A1 /* iconfont-iconfuzhi-highlight@2x.png */; settings = {ASSET_TAGS = (); }; };
-		8D968A861C96C0E100C9A6A1 /* iconfont-iconfuzhi-highlight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A7E1C96C0E100C9A6A1 /* iconfont-iconfuzhi-highlight@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8D968A871C96C0E100C9A6A1 /* iconfont-jingxuan-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A7F1C96C0E100C9A6A1 /* iconfont-jingxuan-2@2x.png */; settings = {ASSET_TAGS = (); }; };
-		8D968A881C96C0E100C9A6A1 /* iconfont-jingxuan-2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A801C96C0E100C9A6A1 /* iconfont-jingxuan-2@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8D968A891C96C0E100C9A6A1 /* iconfont-jingxuan-highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A811C96C0E100C9A6A1 /* iconfont-jingxuan-highlight@2x.png */; settings = {ASSET_TAGS = (); }; };
-		8D968A8A1C96C0E100C9A6A1 /* iconfont-jingxuan-highlight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D968A821C96C0E100C9A6A1 /* iconfont-jingxuan-highlight@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D968A8B1C97AE5800C9A6A1 /* TRiskGradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F3B01C96B599000BB93C /* TRiskGradeViewController.m */; };
 		8D968A8C1C97AE7000C9A6A1 /* TSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F3B31C96B71A000BB93C /* TSelectionViewController.m */; };
 		8D968A8D1C97AEDE00C9A6A1 /* TBigTurntableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F3C51C97A812000BB93C /* TBigTurntableViewController.m */; };
@@ -869,7 +869,6 @@
 		8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE61D9E1BDF284E0031A5CE /* ProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
 		8DEACD051C17D00700548166 /* 默认头像.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEACD041C17D00700548166 /* 默认头像.png */; settings = {ASSET_TAGS = (); }; };
 		8DEACD081C1805BC00548166 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEACD071C1805BC00548166 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */; };
 		8DEDE1B31BCCFEB5008086D3 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1AD1BCCFEB5008086D3 /* arrow@2x.png */; };
 		8DEDE1B41BCCFEB5008086D3 /* arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1AE1BCCFEB5008086D3 /* arrow@3x.png */; };
 		8DEDE1B51BCCFEB5008086D3 /* btn_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDE1AF1BCCFEB5008086D3 /* btn_red@2x.png */; };
@@ -960,6 +959,17 @@
 		810C76801C2EADE1000637FD /* icon_wd_buble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_wd_buble.png; sourceTree = "<group>"; };
 		810D25251BC7917B00DAF83F /* CreatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatView.h; sourceTree = "<group>"; };
 		810D25261BC7917B00DAF83F /* CreatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatView.m; sourceTree = "<group>"; };
+		810EBBFE1C9CFB3D008FB51D /* iconfont-jingxuan-highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-jingxuan-highlight.png"; sourceTree = "<group>"; };
+		810EBBFF1C9CFB3D008FB51D /* iconfont-jingxuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-jingxuan.png"; sourceTree = "<group>"; };
+		810EBC021C9CFB55008FB51D /* iconfont-iconfuzhi-highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-iconfuzhi-highlight.png"; sourceTree = "<group>"; };
+		810EBC031C9CFB55008FB51D /* iconfont-iconfuzhi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-iconfuzhi.png"; sourceTree = "<group>"; };
+		810EBC061C9CFE67008FB51D /* SetLoginPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetLoginPasswordViewController.h; sourceTree = "<group>"; };
+		810EBC071C9CFE67008FB51D /* SetLoginPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetLoginPasswordViewController.m; sourceTree = "<group>"; };
+		810EBC091C9CFEFB008FB51D /* SetPasswordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPasswordTableViewCell.h; sourceTree = "<group>"; };
+		810EBC0A1C9CFEFB008FB51D /* SetPasswordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPasswordTableViewCell.m; sourceTree = "<group>"; };
+		810EBC0B1C9CFEFB008FB51D /* SetPasswordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetPasswordTableViewCell.xib; sourceTree = "<group>"; };
+		810EBC0E1C9CFFD6008FB51D /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
+		810EBC0F1C9CFFD6008FB51D /* SelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewController.m; sourceTree = "<group>"; };
 		8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@2x.png"; sourceTree = "<group>"; };
 		8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@3x.png"; sourceTree = "<group>"; };
 		811F0AFA1BF318F6001F6AA4 /* GiveMoneyFinish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiveMoneyFinish.h; sourceTree = "<group>"; };
@@ -1301,6 +1311,7 @@
 		8183F42F1C9A8F93000BB93C /* TRiskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRiskCell.h; sourceTree = "<group>"; };
 		8183F4301C9A8F93000BB93C /* TRiskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRiskCell.m; sourceTree = "<group>"; };
 		8183F4311C9A8F93000BB93C /* TRiskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRiskCell.xib; sourceTree = "<group>"; };
+		8183F4341C9CF232000BB93C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8184EC351BCC96E1003F440D /* MakeSureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeSureViewController.h; sourceTree = "<group>"; };
 		8184EC361BCC96E1003F440D /* MakeSureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeSureViewController.m; sourceTree = "<group>"; };
 		8184EC381BCCD0FE003F440D /* ContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentCell.h; sourceTree = "<group>"; };
@@ -1506,8 +1517,6 @@
 		81C1381D1BDF6D5E0088E792 /* iconfont-phone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-phone@3x.png"; sourceTree = "<group>"; };
 		81C2DAA71BC755FF0007AC48 /* KKTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKTabBarViewController.h; sourceTree = "<group>"; };
 		81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKTabBarViewController.m; sourceTree = "<group>"; };
-		81C2DAAA1BC7563A0007AC48 /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
-		81C2DAAB1BC7563A0007AC48 /* SelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewController.m; sourceTree = "<group>"; };
 		81C2DAAD1BC756630007AC48 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		81C2DAAE1BC756630007AC48 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		81C548601C08329B001CDC97 /* RedBagExplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBagExplainViewController.h; sourceTree = "<group>"; };
@@ -2144,14 +2153,6 @@
 		8D9356F31BC607C500BC2BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D968A771C96A9FD00C9A6A1 /* mylicaishi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mylicaishi@2x.png"; sourceTree = "<group>"; };
 		8D968A781C96A9FD00C9A6A1 /* mylicaishi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mylicaishi@3x.png"; sourceTree = "<group>"; };
-		8D968A7B1C96C0E100C9A6A1 /* iconfont-iconfuzhi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-iconfuzhi@2x.png"; sourceTree = "<group>"; };
-		8D968A7C1C96C0E100C9A6A1 /* iconfont-iconfuzhi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-iconfuzhi@3x.png"; sourceTree = "<group>"; };
-		8D968A7D1C96C0E100C9A6A1 /* iconfont-iconfuzhi-highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-iconfuzhi-highlight@2x.png"; sourceTree = "<group>"; };
-		8D968A7E1C96C0E100C9A6A1 /* iconfont-iconfuzhi-highlight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-iconfuzhi-highlight@3x.png"; sourceTree = "<group>"; };
-		8D968A7F1C96C0E100C9A6A1 /* iconfont-jingxuan-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-jingxuan-2@2x.png"; sourceTree = "<group>"; };
-		8D968A801C96C0E100C9A6A1 /* iconfont-jingxuan-2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-jingxuan-2@3x.png"; sourceTree = "<group>"; };
-		8D968A811C96C0E100C9A6A1 /* iconfont-jingxuan-highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-jingxuan-highlight@2x.png"; sourceTree = "<group>"; };
-		8D968A821C96C0E100C9A6A1 /* iconfont-jingxuan-highlight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-jingxuan-highlight@3x.png"; sourceTree = "<group>"; };
 		8D9BE8BD1C0EC94D003C67D3 /* YYCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCache.h; sourceTree = "<group>"; };
 		8D9BE8BE1C0EC94D003C67D3 /* YYCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYCache.m; sourceTree = "<group>"; };
 		8D9BE8BF1C0EC94D003C67D3 /* YYDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYDiskCache.h; sourceTree = "<group>"; };
@@ -2251,7 +2252,6 @@
 		8DEACD041C17D00700548166 /* 默认头像.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "默认头像.png"; sourceTree = "<group>"; };
 		8DEACD061C1805BC00548166 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		8DEACD071C1805BC00548166 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DEDE1AD1BCCFEB5008086D3 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
 		8DEDE1AE1BCCFEB5008086D3 /* arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@3x.png"; sourceTree = "<group>"; };
 		8DEDE1AF1BCCFEB5008086D3 /* btn_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_red@2x.png"; sourceTree = "<group>"; };
@@ -2829,14 +2829,10 @@
 				8D55DB051BC7BE91004649CE /* shouyebanner.png */,
 				8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */,
 				8D6EFBA21BC78B02009FE101 /* shouyeqiepian7500_28highlight.png */,
-				8D968A7B1C96C0E100C9A6A1 /* iconfont-iconfuzhi@2x.png */,
-				8D968A7C1C96C0E100C9A6A1 /* iconfont-iconfuzhi@3x.png */,
-				8D968A7D1C96C0E100C9A6A1 /* iconfont-iconfuzhi-highlight@2x.png */,
-				8D968A7E1C96C0E100C9A6A1 /* iconfont-iconfuzhi-highlight@3x.png */,
-				8D968A7F1C96C0E100C9A6A1 /* iconfont-jingxuan-2@2x.png */,
-				8D968A801C96C0E100C9A6A1 /* iconfont-jingxuan-2@3x.png */,
-				8D968A811C96C0E100C9A6A1 /* iconfont-jingxuan-highlight@2x.png */,
-				8D968A821C96C0E100C9A6A1 /* iconfont-jingxuan-highlight@3x.png */,
+				810EBBFF1C9CFB3D008FB51D /* iconfont-jingxuan.png */,
+				810EBBFE1C9CFB3D008FB51D /* iconfont-jingxuan-highlight.png */,
+				810EBC031C9CFB55008FB51D /* iconfont-iconfuzhi.png */,
+				810EBC021C9CFB55008FB51D /* iconfont-iconfuzhi-highlight.png */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -3318,6 +3314,8 @@
 				81B18E1C1BE756F300D448FA /* EmailViewController.m */,
 				81E0CCE91C28ED3400148609 /* BindingEmailFailed.h */,
 				81E0CCEA1C28ED3400148609 /* BindingEmailFailed.m */,
+				810EBC061C9CFE67008FB51D /* SetLoginPasswordViewController.h */,
+				810EBC071C9CFE67008FB51D /* SetLoginPasswordViewController.m */,
 			);
 			name = "我的资料";
 			sourceTree = "<group>";
@@ -3509,6 +3507,9 @@
 				8D65AE111C294AD900FAEFF3 /* TTTTTTTBangKa.h */,
 				8D65AE121C294AD900FAEFF3 /* TTTTTTTBangKa.m */,
 				8D65AE0F1C294ABF00FAEFF3 /* TTTTTTTBangKa.xib */,
+				810EBC091C9CFEFB008FB51D /* SetPasswordTableViewCell.h */,
+				810EBC0A1C9CFEFB008FB51D /* SetPasswordTableViewCell.m */,
+				810EBC0B1C9CFEFB008FB51D /* SetPasswordTableViewCell.xib */,
 			);
 			name = "我的资料";
 			sourceTree = "<group>";
@@ -3824,8 +3825,8 @@
 		8D4DE1441BC64BD900F031D8 /* SelectionController */ = {
 			isa = PBXGroup;
 			children = (
-				81C2DAAA1BC7563A0007AC48 /* SelectionViewController.h */,
-				81C2DAAB1BC7563A0007AC48 /* SelectionViewController.m */,
+				810EBC0E1C9CFFD6008FB51D /* SelectionViewController.h */,
+				810EBC0F1C9CFFD6008FB51D /* SelectionViewController.m */,
 				8183F3B21C96B71A000BB93C /* TSelectionViewController.h */,
 				8183F3B31C96B71A000BB93C /* TSelectionViewController.m */,
 				8183F3C11C97A62F000BB93C /* TSignInViewController.h */,
@@ -4274,7 +4275,7 @@
 		8D9356CC1BC607C500BC2BFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8DEDE11A1BCCE40F008086D3 /* Assets.xcassets */,
+				8183F4341C9CF232000BB93C /* Assets.xcassets */,
 				8D5AEB481BC8F560004FBDD3 /* CenturyGothic.TTF */,
 				8D9356DD1BC607C500BC2BFA /* Info.plist */,
 				8D9356D51BC607C500BC2BFA /* Main.storyboard */,
@@ -4598,7 +4599,6 @@
 				TargetAttributes = {
 					8D9356C81BC607C500BC2BFA = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = Z7J5CQFNQ3;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -4662,7 +4662,6 @@
 				8D3EE9FB1C27AB400031F7C9 /* 东亚银行@3x.png in Resources */,
 				8D90117B1BD5D8FA00E5D62A /* TransactionViewController.xib in Resources */,
 				8D3EEA051C27AB400031F7C9 /* 兴业银行@3x.png in Resources */,
-				8D968A851C96C0E100C9A6A1 /* iconfont-iconfuzhi-highlight@2x.png in Resources */,
 				8183F4101C97CD4E000BB93C /* messageOld@2x.png in Resources */,
 				81379F261BEB01CA002CDB16 /* NewRedBagCell.xib in Resources */,
 				8DEDE1B71BCCFEB5008086D3 /* fan@2x.png in Resources */,
@@ -4722,6 +4721,7 @@
 				8D3EEA001C27AB400031F7C9 /* 交通银行@2x.png in Resources */,
 				8DEDE1C91BCCFF21008086D3 /* iconfont_greencuo@3x.png in Resources */,
 				819B52EC1BFC4462002FDF1E /* NewHandCSSCell.xib in Resources */,
+				810EBC0D1C9CFEFB008FB51D /* SetPasswordTableViewCell.xib in Resources */,
 				8D88D1031BFECCB40051D6DA /* MJRefresh.bundle in Resources */,
 				8DEDE1C01BCCFEF8008086D3 /* iocn@2x.png in Resources */,
 				8162D11E1BE1BCC900CACAB6 /* XinXiCell.xib in Resources */,
@@ -4782,7 +4782,6 @@
 				8D3EEA071C27AB400031F7C9 /* 农业银行@3x.png in Resources */,
 				817DD4AA1BCF547E00042B09 /* zhanghu@2x.png in Resources */,
 				8D3942F41C2D15C900783FD0 /* welcome_two.png in Resources */,
-				8D968A8A1C96C0E100C9A6A1 /* iconfont-jingxuan-highlight@3x.png in Resources */,
 				819B52DC1BFC2094002FDF1E /* 铜元宝@2x.png in Resources */,
 				8D968A7A1C96A9FD00C9A6A1 /* mylicaishi@3x.png in Resources */,
 				8D3F95DB1BE20C1A00013A8E /* zuorishouyi-678@3x.png in Resources */,
@@ -4830,6 +4829,7 @@
 				8179883C1BC9403A007C8C3E /* ThreeCell.xib in Resources */,
 				8DC695BE1C3503D30055EC44 /* UMSCommentInputControlleriPad.xib in Resources */,
 				8191E2281BDDF5F0000A6E8C /* lianxikefu@2x.png in Resources */,
+				810EBC051C9CFB55008FB51D /* iconfont-iconfuzhi.png in Resources */,
 				8DB744BB1C1973AC0084D1A2 /* banner_red@3x.png in Resources */,
 				8DEDE1D41BCCFFD8008086D3 /* iocn_saft@2x.png in Resources */,
 				817DD4921BCF547E00042B09 /* bei@2x.png in Resources */,
@@ -4927,6 +4927,7 @@
 				81B6741E1BF0AFEB007CEF51 /* 流程@3x.png in Resources */,
 				8DEDE1C51BCCFF01008086D3 /* iconfont_graycuo@3x.png in Resources */,
 				8D6692801BD0D82100CD2CAF /* Home_refresh_bg.png in Resources */,
+				810EBC001C9CFB3D008FB51D /* iconfont-jingxuan-highlight.png in Resources */,
 				8D3F95D21BE1C28A00013A8E /* RegisterOfResult.xib in Resources */,
 				8DEACD051C17D00700548166 /* 默认头像.png in Resources */,
 				8175BEAF1BE9F2F50044026E /* 腾讯微博@3x.png in Resources */,
@@ -4989,7 +4990,6 @@
 				8183F3FC1C97CC4F000BB93C /* icon3@2x.png in Resources */,
 				819B52DB1BFC2094002FDF1E /* 新手体验金@3x.png in Resources */,
 				8D43439C1BFDEB0B000BA004 /* loading_middle_03.png in Resources */,
-				8D968A881C96C0E100C9A6A1 /* iconfont-jingxuan-2@3x.png in Resources */,
 				81B18E191BE7387A00D448FA /* iconfont-zhuanxiangeps@2x.png in Resources */,
 				8D66927B1BD0D27D00CD2CAF /* gesture_node_normal.png in Resources */,
 				8D0AE7F41BE09CE500D9D50C /* iconfont-register-gantanhao001@2x.png in Resources */,
@@ -4997,6 +4997,7 @@
 				81D72FB71BFACA800067A277 /* add@3x.png in Resources */,
 				81ED030C1BD09BC8005F4B02 /* MyInformationCell.xib in Resources */,
 				81D72FBE1BFAD63B0067A277 /* right@2x.png in Resources */,
+				8183F4351C9CF232000BB93C /* Assets.xcassets in Resources */,
 				8D121FE61BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.xib in Resources */,
 				8D3EE9FA1C27AB400031F7C9 /* 东亚银行@2x.png in Resources */,
 				8DEDE1DF1BCD0035008086D3 /* icon_CCB@2x.png in Resources */,
@@ -5007,6 +5008,7 @@
 				810C76811C2EADE1000637FD /* icon_wd_buble.png in Resources */,
 				8D3EEA031C27AB400031F7C9 /* 光大银行@3x.png in Resources */,
 				8D1DB6081C7EE6F4003CFDA6 /* CastUpMonkeyTableViewCell.xib in Resources */,
+				810EBC011C9CFB3D008FB51D /* iconfont-jingxuan.png in Resources */,
 				816F1ED71BF5CA3D00DB6B65 /* PhoneNum@3x.png in Resources */,
 				8D3EEA041C27AB400031F7C9 /* 兴业银行@2x.png in Resources */,
 				8D9011B11BD6337C00E5D62A /* 05@2x.png in Resources */,
@@ -5022,7 +5024,6 @@
 				8D9011AE1BD6337C00E5D62A /* 03@3x.png in Resources */,
 				8D9011B91BD6337C00E5D62A /* 09@2x.png in Resources */,
 				817DD4991BCF547E00042B09 /* haoyou@3x.png in Resources */,
-				8D968A831C96C0E100C9A6A1 /* iconfont-iconfuzhi@2x.png in Resources */,
 				8D3F95D71BE1C90C00013A8E /* RegisterOfPassButton.xib in Resources */,
 				8D4343981BFDEB0B000BA004 /* loading_up_07.png in Resources */,
 				8D6E46871C9A44F200F0F5B7 /* myHadCastDetailViewController.xib in Resources */,
@@ -5085,15 +5086,14 @@
 				8D0AE7F51BE09CE500D9D50C /* iconfont-register-gantanhao001@3x.png in Resources */,
 				819B52D81BFC2094002FDF1E /* 阶梯@2x.png in Resources */,
 				81ED03211BD0DDAD005F4B02 /* AddBankCell.xib in Resources */,
-				8D968A861C96C0E100C9A6A1 /* iconfont-iconfuzhi-highlight@3x.png in Resources */,
 				817DD49C1BCF547E00042B09 /* jiantou@2x.png in Resources */,
 				8D3EEA111C27AB400031F7C9 /* 宁波银行@3x.png in Resources */,
 				810C76721C2D1210000637FD /* 椭圆-9@3x.png in Resources */,
-				8D968A841C96C0E100C9A6A1 /* iconfont-iconfuzhi@3x.png in Resources */,
 				8D9011BC1BD6337C00E5D62A /* anniuS@3x.png in Resources */,
 				817988371BC94014007C8C3E /* PlanCell.xib in Resources */,
 				8D121FD71BD4D4CE00B3C1FE /* SettingTitleTableViewCell.xib in Resources */,
 				8D29F99E1C08048700D45E43 /* 已过期@2x.png in Resources */,
+				810EBC041C9CFB55008FB51D /* iconfont-iconfuzhi-highlight.png in Resources */,
 				81FAAA2D1C256AC40020E9DD /* 提交申请@3x.png in Resources */,
 				8D3F95ED1BE2188500013A8E /* moneymoney@3x.png in Resources */,
 				8D9011B51BD6337C00E5D62A /* 07@2x.png in Resources */,
@@ -5143,15 +5143,12 @@
 				8D5DBB8F1BD48F1900F556B9 /* CastDetailTableViewCell.xib in Resources */,
 				819C3AC81BD49862008D2CFD /* GrabBagCell.xib in Resources */,
 				81570D581C33D02400AF6B37 /* img_lc_jqqd.png in Resources */,
-				8D968A871C96C0E100C9A6A1 /* iconfont-jingxuan-2@2x.png in Resources */,
 				817E33901BD756B700D05103 /* 组-4-拷贝@3x.png in Resources */,
 				8D3F95F11BE2188500013A8E /* shouyi@3x.png in Resources */,
 				8183F3FF1C97CC4F000BB93C /* iconfont-dui-2@3x.png in Resources */,
-				8D968A891C96C0E100C9A6A1 /* iconfont-jingxuan-highlight@2x.png in Resources */,
 				81379F1A1BEAF56F002CDB16 /* 成长@3x.png in Resources */,
 				8DB744B91C1973AC0084D1A2 /* banner_black@3x.png in Resources */,
 				811F9E031BC7A13800CAD6F5 /* FinancingCell.xib in Resources */,
-				8DEDE11B1BCCE40F008086D3 /* Assets.xcassets in Resources */,
 				817DD4A91BCF547E00042B09 /* xiaoxi@3x.png in Resources */,
 				8D29F99F1C08048700D45E43 /* 已过期@3x.png in Resources */,
 				8D4343991BFDEB0B000BA004 /* loading_up_08.png in Resources */,
@@ -5208,6 +5205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8183F42E1C9A7C28000BB93C /* TRedBagModel.m in Sources */,
+				810EBC101C9CFFD6008FB51D /* SelectionViewController.m in Sources */,
 				8183F4131C97CF29000BB93C /* TDescriptionCell.m in Sources */,
 				8D968A8F1C97AEFD00C9A6A1 /* TSignInViewController.m in Sources */,
 				8D6E46941C9A782100F0F5B7 /* MDRadialProgressView.m in Sources */,
@@ -5254,6 +5252,7 @@
 				815A6FCF1BEB7EFF003059A5 /* RechargeViewController.m in Sources */,
 				8D11918C1BF1D25A00A2DE05 /* YesterdayViewController.m in Sources */,
 				8DE59AB61BFC191500741149 /* CJNavigationController.m in Sources */,
+				810EBC0C1C9CFEFB008FB51D /* SetPasswordTableViewCell.m in Sources */,
 				81AC90CD1BEC981100232404 /* GiveMoneyVerifyBinding.m in Sources */,
 				8D0AE80C1BE0C1A700D9D50C /* RegisterViewController.m in Sources */,
 				8164BBC31C05D5F700023461 /* ProjectSimpleCell.m in Sources */,
@@ -5441,6 +5440,7 @@
 				8D9BE8EF1C0EC94D003C67D3 /* YYFrameImage.m in Sources */,
 				817E339B1BD77A8800D05103 /* ChooseStyleViewController.m in Sources */,
 				8D4FF5E01BE339A200BAE25F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				810EBC081C9CFE67008FB51D /* SetLoginPasswordViewController.m in Sources */,
 				8D4FF5DF1BE339A200BAE25F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				8D4E4E071C1E5A6A00AE2644 /* base64.m in Sources */,
 				817B16121C0C2F1100EEB937 /* ChooseOpenAnAccountBank.m in Sources */,
@@ -5544,7 +5544,6 @@
 				81E0CCE11C27EF6700148609 /* ChooseBusViewController.m in Sources */,
 				8D88D1071BFECCB40051D6DA /* UIView+MJExtension.m in Sources */,
 				8D6E467F1C99635E00F0F5B7 /* myCastModel.m in Sources */,
-				81C2DAAC1BC7563A0007AC48 /* SelectionViewController.m in Sources */,
 				8183F3541C7EE55F000BB93C /* CashMonkeyViewController.m in Sources */,
 				8D121FE01BD4D92600B3C1FE /* SettingPieTableViewCell.m in Sources */,
 				8D3125E61BD7689200143B71 /* BaseViewController.m in Sources */,
@@ -5730,7 +5729,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "cd7883a0-3988-4984-9ddc-b69e5369e072";
+				PROVISIONING_PROFILE = "bead23e8-6e7b-4f5e-bdcb-80941d19b4c8";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5769,7 +5768,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "cd7883a0-3988-4984-9ddc-b69e5369e072";
+				PROVISIONING_PROFILE = "bead23e8-6e7b-4f5e-bdcb-80941d19b4c8";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

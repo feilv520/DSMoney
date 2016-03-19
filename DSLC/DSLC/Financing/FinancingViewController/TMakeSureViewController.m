@@ -13,6 +13,12 @@
 #import "CashFinishViewController.h"
 #import "ShareHaveRedBag.h"
 #import "FBalancePaymentViewController.h"
+#import "ZFPassword.h"
+#import "CashOtherFinViewController.h"
+#import "SetDealSecret.h"
+#import "FindDealViewController.h"
+#import "RealNameViewController.h"
+#import "RechargeAlreadyBinding.h"
 
 @interface TMakeSureViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -30,6 +36,13 @@
     NSString *syString;
     TRedBagModel *redbagModel;
     FBalancePaymentViewController *_balanceVC;
+    
+    ZFPassword *ZFPView;
+    NSInteger click;
+    
+    NSDictionary *dataDic;
+    
+    UIView *viewGray;
 }
 
 @end
@@ -40,15 +53,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    click = 0;
+    
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"确认投资"];
+    
+    viewGray = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor]];
+    viewGray.alpha = 0.3;
     
 //    redBagArray是红包的数组 里面是以字典形式存放一个个的红包 chooseBagArr里面存放对象
     redBagArray = [NSMutableArray array];
     chooseBagArr = [NSMutableArray array];
     accountDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:@"getData" object:nil];
+    
     [self contentShow];
+    [self getData];
 }
 
 - (void)contentShow
@@ -280,74 +301,168 @@
 - (void)buttonRightNowUse:(UIButton *)button
 {
     NSLog(@"用了");
-    if (self.decide == NO) {
-        
-        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-        NSDictionary *parameter;
-        if ([redbagModel rpID] == nil) {
-            parameter = @{@"productId":[self.detailM productId],@"packetId":@"",@"orderMoney":[NSNumber numberWithFloat:[textFieldShu.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"],@"clientType":@"iOS"};
-        } else {
-            parameter = @{@"productId":[self.detailM productId],@"packetId":[redbagModel rpID],@"orderMoney":[NSNumber numberWithFloat:[textFieldShu.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"],@"clientType":@"iOS"};
-        }
-        
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-            
-            NSLog(@"buyProduct = %@",responseObject);
-            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-                if ([redbagModel rpID] == nil) {
-                    //              支付没有红包
-                    CashFinishViewController *cashFinish = [[CashFinishViewController alloc] init];
-                    cashFinish.nHand = self.nHand;
-                    cashFinish.moneyString = textFieldShu.text;
-                    cashFinish.endTimeString = [self.detailM endTime];
-                    cashFinish.productName = [self.detailM productName];
-                    cashFinish.syString = syString;
-                    [self.navigationController pushViewController:cashFinish animated:YES];
-                } else {
-                    //              支付有红包
-                    ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
-                    shareHave.redbagModel = redbagModel;
-                    shareHave.nHand = self.nHand;
-                    shareHave.moneyString = textFieldShu.text;
-                    shareHave.endTimeString = [self.detailM endTime];
-                    shareHave.productName = [self.detailM productName];
-                    shareHave.syString = syString;
-                    [self.navigationController pushViewController:shareHave animated:YES];
-                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
-                }
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
-                
-            } else {
-                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-            NSLog(@"%@", error);
-            
-        }];
-        
-    } else {
-        
+//    if (self.decide == NO) {
+//        
+//        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+//        NSDictionary *parameter;
+//        if ([redbagModel rpID] == nil) {
+//            parameter = @{@"productId":[self.detailM productId],@"packetId":@"",@"orderMoney":[NSNumber numberWithFloat:[textFieldShu.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"],@"clientType":@"iOS"};
+//        } else {
+//            parameter = @{@"productId":[self.detailM productId],@"packetId":[redbagModel rpID],@"orderMoney":[NSNumber numberWithFloat:[textFieldShu.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":@"",@"token":[dic objectForKey:@"token"],@"clientType":@"iOS"};
+//        }
+//        
+//        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+//            
+//            NSLog(@"buyProduct = %@",responseObject);
+//            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+//                if ([redbagModel rpID] == nil) {
+//                    //              支付没有红包
+//                    CashFinishViewController *cashFinish = [[CashFinishViewController alloc] init];
+//                    cashFinish.nHand = self.nHand;
+//                    cashFinish.moneyString = textFieldShu.text;
+//                    cashFinish.endTimeString = [self.detailM endTime];
+//                    cashFinish.productName = [self.detailM productName];
+//                    cashFinish.syString = syString;
+//                    [self.navigationController pushViewController:cashFinish animated:YES];
+//                } else {
+//                    //              支付有红包
+//                    ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
+//                    shareHave.redbagModel = redbagModel;
+//                    shareHave.nHand = self.nHand;
+//                    shareHave.moneyString = textFieldShu.text;
+//                    shareHave.endTimeString = [self.detailM endTime];
+//                    shareHave.productName = [self.detailM productName];
+//                    shareHave.syString = syString;
+//                    [self.navigationController pushViewController:shareHave animated:YES];
+//                    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
+//                }
+//                
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+//                
+//            } else {
+//                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+//            }
+//            
+//        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//            
+//            NSLog(@"%@", error);
+//            
+//        }];
+//        
+//    } else {
+    
         [self buttonDisappear:nil];
+
+        [self ziFuPasswordView];
         
-        _balanceVC = [[FBalancePaymentViewController alloc] init];
-        _balanceVC.productName = [self.detailM productName];
-        _balanceVC.idString = [self.detailM productId];
-        _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textFieldShu.text floatValue]];
-        _balanceVC.typeString = [self.detailM productType];
-        _balanceVC.redbagModel = redbagModel;
-        _balanceVC.nHand = self.nHand;
-        _balanceVC.syString = syString;
-        _balanceVC.endTimeString = [self.detailM endTime];
-        [self.navigationController pushViewController:_balanceVC animated:YES];
+//        _balanceVC = [[FBalancePaymentViewController alloc] init];
+//        _balanceVC.productName = [self.detailM productName];
+//        _balanceVC.idString = [self.detailM productId];
+//        _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textFieldShu.text floatValue]];
+//        _balanceVC.typeString = [self.detailM productType];
+//        _balanceVC.redbagModel = redbagModel;
+//        _balanceVC.nHand = self.nHand;
+//        _balanceVC.syString = syString;
+//        _balanceVC.endTimeString = [self.detailM endTime];
+//        [self.navigationController pushViewController:_balanceVC animated:YES];
         
+//    }
+
+}
+
+- (void)ziFuPasswordView{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    [app.tabBarVC.view addSubview:viewGray];
+    
+    if (viewGray != nil) {
+        viewGray.hidden = NO;
+    }
+    
+    NSBundle *rootBundle = [NSBundle mainBundle];
+    
+    ZFPView = [[rootBundle loadNibNamed:@"ZFPassword" owner:nil options:nil] lastObject];
+    
+    [ZFPView setFrame:CGRectMake((self.view.frame.size.width - 300) / 2.0, 200, 300, 200)];
+    
+    [app.tabBarVC.view addSubview:ZFPView];
+    
+    [ZFPView.closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [ZFPView.sureButton addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [ZFPView.setDealButton addTarget:self action:@selector(setDealSecret:) forControlEvents:UIControlEventTouchUpInside];
+    [ZFPView.forgetButton addTarget:self action:@selector(ForgetSecretButton:) forControlEvents:UIControlEventTouchUpInside];
+    [ZFPView.worrySureButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    ZFPView.moneyLabel.text = [NSString stringWithFormat:@"¥%@",textFieldShu.text];
+    
+    if ([[dataDic objectForKey:@"setPayPwd"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        ZFPView.setDealButton.hidden = YES;
+        ZFPView.forgetButton.hidden = NO;
+        ZFPView.moneyTF.hidden = NO;
+        ZFPView.moneyTF.delegate = self;
     }
 
 }
+
+- (void)closeAction:(id)sender{
+    
+    viewGray.hidden = YES;
+    ZFPView.hidden = YES;
+    [ZFPView.moneyTF resignFirstResponder];
+    
+}
+
+- (void)sureAction:(id)sender{
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    if (ZFPView.moneyTF.text.length == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付密码不能为空"];
+    } else {
+        click ++;
+        if (click == 1) {
+            [self submitLoadingWithView:app.tabBarVC.view loadingFlag:NO height:0];
+            
+        } else {
+            
+            [self submitLoadingWithHidden:NO view:app.tabBarVC.view];
+        }
+        
+        [self buyProduct];
+    }
+    [ZFPView.moneyTF resignFirstResponder];
+}
+
+//设置交易密码
+- (void)setDealSecret:(UIButton *)button
+{
+    [self closeAction:nil];
+    SetDealSecret *deal = [[SetDealSecret alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hiddenWithCell:) name:@"hiddenWithCell" object:nil];
+    [self.navigationController pushViewController:deal animated:YES];
+}
+
+- (void)hiddenWithCell:(NSNotification *)not{
+    UIButton *forgetB = (UIButton *)[self.view viewWithTag:9873];
+    UIButton *setPWord = (UIButton *)[self.view viewWithTag:9871];
+    
+    forgetB.hidden = NO;
+    setPWord.hidden = YES;
+    ZFPView.moneyTF.hidden = NO;
+}
+
+//忘记密码?按钮
+- (void)ForgetSecretButton:(UIButton *)button
+{
+    [self closeAction:nil];
+    FindDealViewController *findSecretVC = [[FindDealViewController alloc] init];
+    findSecretVC.whichOne = NO;
+    [self.navigationController pushViewController:findSecretVC animated:YES];
+}
+
 
 //黑色遮罩层消失方法
 - (void)buttonDisappear:(UIButton *)button
@@ -397,6 +512,9 @@
     }];
 }
 
+#pragma mark 获取红包
+#pragma mark --------------------------------
+
 - (void)getMyRedPacketList{
     
     if (redBagArray.count > 0) {
@@ -423,9 +541,9 @@
         
         redBagArray = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"RedPacket"]];
         NSLog(@"我是个红包===========%@", redBagArray);
-        for (NSDictionary *dataDic in redBagArray) {
+        for (NSDictionary *dataDic1 in redBagArray) {
             redbagModel = [[TRedBagModel alloc] init];
-            [redbagModel setValuesForKeysWithDictionary:dataDic];
+            [redbagModel setValuesForKeysWithDictionary:dataDic1];
             [chooseBagArr addObject:redbagModel];
         }
         
@@ -441,7 +559,18 @@
 //        外层判断 输入的金额与账户余额的判断
         if (shuRuInt > numberInt && shuRuInt != 0) {
             
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足,请充值"];
+//            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足,请充值"];
+            NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+            if ([[dic objectForKey:@"realName"] isEqualToString:@""]) {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值必须先通过实名认证"];
+                RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
+                realNameVC.realNamePan = YES;
+                [self.navigationController pushViewController:realNameVC animated:YES];
+            } else {
+                RechargeAlreadyBinding *recharge = [[RechargeAlreadyBinding alloc] init];
+                [self.navigationController pushViewController:recharge animated:YES];
+                
+            }
             
         } else {
             
@@ -453,16 +582,17 @@
                     
                     [self buttonDisappear:nil];
                     
-                    _balanceVC = [[FBalancePaymentViewController alloc] init];
-                    _balanceVC.productName = [self.detailM productName];
-                    _balanceVC.idString = [self.detailM productId];
-                    _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textFieldShu.text floatValue]];
-                    _balanceVC.typeString = [self.detailM productType];
-                    _balanceVC.redbagModel = redbagModel;
-                    _balanceVC.nHand = self.nHand;
-                    _balanceVC.syString = syString;
-                    _balanceVC.endTimeString = [self.detailM endTime];
-                    [self.navigationController pushViewController:_balanceVC animated:YES];
+                    [self ziFuPasswordView];
+//                    _balanceVC = [[FBalancePaymentViewController alloc] init];
+//                    _balanceVC.productName = [self.detailM productName];
+//                    _balanceVC.idString = [self.detailM productId];
+//                    _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textFieldShu.text floatValue]];
+//                    _balanceVC.typeString = [self.detailM productType];
+//                    _balanceVC.redbagModel = redbagModel;
+//                    _balanceVC.nHand = self.nHand;
+//                    _balanceVC.syString = syString;
+//                    _balanceVC.endTimeString = [self.detailM endTime];
+//                    [self.navigationController pushViewController:_balanceVC animated:YES];
                     
                 } else {
                     [self redBagListShow];
@@ -477,16 +607,17 @@
                         
                         [self buttonDisappear:nil];
                         
-                        _balanceVC = [[FBalancePaymentViewController alloc] init];
-                        _balanceVC.productName = [self.detailM productName];
-                        _balanceVC.idString = [self.detailM productId];
-                        _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textFieldShu.text floatValue]];
-                        _balanceVC.typeString = [self.detailM productType];
-                        _balanceVC.redbagModel = redbagModel;
-                        _balanceVC.nHand = self.nHand;
-                        _balanceVC.syString = syString;
-                        _balanceVC.endTimeString = [self.detailM endTime];
-                        [self.navigationController pushViewController:_balanceVC animated:YES];
+                        [self ziFuPasswordView];
+//                        _balanceVC = [[FBalancePaymentViewController alloc] init];
+//                        _balanceVC.productName = [self.detailM productName];
+//                        _balanceVC.idString = [self.detailM productId];
+//                        _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[textFieldShu.text floatValue]];
+//                        _balanceVC.typeString = [self.detailM productType];
+//                        _balanceVC.redbagModel = redbagModel;
+//                        _balanceVC.nHand = self.nHand;
+//                        _balanceVC.syString = syString;
+//                        _balanceVC.endTimeString = [self.detailM endTime];
+//                        [self.navigationController pushViewController:_balanceVC animated:YES];
                         
                     } else {
                         [self redBagListShow];
@@ -518,6 +649,89 @@
         
     }];
 }
+
+#pragma mark 网络请求方法(立即购买)
+#pragma mark --------------------------------
+
+- (void)buyProduct{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter;
+    
+    if ([redbagModel rpID] == nil){
+        parameter = @{@"productId":[self.detailM productId],@"packetId":@"",@"orderMoney":[NSNumber numberWithFloat:[textFieldShu.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":ZFPView.moneyTF.text,@"token":[dic objectForKey:@"token"],@"clientType":@"iOS"};
+    } else {
+        parameter = @{@"productId":[self.detailM productId],@"packetId":[redbagModel rpID],@"orderMoney":[NSNumber numberWithFloat:[textFieldShu.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":ZFPView.moneyTF.text,@"token":[dic objectForKey:@"token"],@"clientType":@"iOS"};
+    }
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"buyProduct = %@",responseObject);
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        [self submitLoadingWithHidden:YES view:app.tabBarVC.view];
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self closeAction:nil];
+            [self buttonDisappear:nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+            
+            if ([redbagModel rpID] == nil) {
+                //支付没有红包
+                CashOtherFinViewController *cashOther = [[CashOtherFinViewController alloc] init];
+                cashOther.nHand = self.nHand;
+                cashOther.moneyString = textFieldShu.text;
+                cashOther.syString = syString;
+                cashOther.endTimeString = [self.detailM endTime];
+                cashOther.productName = [self.detailM productName];
+                [self.navigationController pushViewController:cashOther animated:YES];
+            } else {
+                //支付有红包
+                ShareHaveRedBag *shareHave = [[ShareHaveRedBag alloc] init];
+                shareHave.nHand = self.nHand;
+                shareHave.redbagModel = redbagModel;
+                shareHave.moneyString = textFieldShu.text;
+                shareHave.syString = syString;
+                shareHave.endTimeString = [self.detailM endTime];
+                shareHave.productName = [self.detailM productName];
+                [self.navigationController pushViewController:shareHave animated:YES];
+                //                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
+            }
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            [self submitLoadingWithHidden:YES view:app.tabBarVC.view];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+#pragma mark 网络请求获得我的绑定的银行卡号
+#pragma mark --------------------------------
+
+- (void)getData
+{
+    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+            
+        dataDic = [NSDictionary dictionary];
+        dataDic = [responseObject objectForKey:@"User"];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

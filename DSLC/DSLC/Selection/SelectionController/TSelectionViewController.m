@@ -42,7 +42,6 @@
     NSDictionary *tempDic;
     
     UIView *viewScroll;
-    
 }
 
 @end
@@ -78,25 +77,30 @@
     [self loadingWithView:self.view loadingFlag:NO height:self.view.frame.size.height/2];
     
     [self getPickProduct];
-    
 }
 
 - (void)tableViewShow
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50) style:UITableViewStyleGrouped];
-    [self.view addSubview:_tableView];
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    _tableView.backgroundColor = [UIColor qianhuise];
-    _tableView.separatorColor = [UIColor clearColor];
-    
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 270)];
-    _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
-    [self viewHeadShow];
-    
-    [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuseNew"];
-    [_tableView registerNib:[UINib nibWithNibName:@"TthreeRunCell" bundle:nil] forCellReuseIdentifier:@"reuseThree"];
-    [_tableView registerNib:[UINib nibWithNibName:@"BillCell" bundle:nil] forCellReuseIdentifier:@"reuse000"];
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50) style:UITableViewStyleGrouped];
+        [self.view addSubview:_tableView];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.backgroundColor = [UIColor qianhuise];
+        _tableView.separatorColor = [UIColor clearColor];
+        
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 270)];
+        _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
+        
+        [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuseNew"];
+        [_tableView registerNib:[UINib nibWithNibName:@"TthreeRunCell" bundle:nil] forCellReuseIdentifier:@"reuseThree"];
+        [_tableView registerNib:[UINib nibWithNibName:@"BillCell" bundle:nil] forCellReuseIdentifier:@"reuse000"];
+
+        [self viewHeadShow];
+        
+        [self getAdvList];
+        
+    }
 }
 
 - (void)viewHeadShow
@@ -328,6 +332,7 @@
         cell.labelQiTou.textColor = [UIColor zitihui];
         cell.labelQiTou.font = [UIFont fontWithName:@"CenturyGothic" size:11];
         cell.labelQiTou.textAlignment = NSTextAlignmentRight;
+        cell.labelQiTou.hidden = YES;
         
         cell.labelLeftUp.text = productM.productAnnualYield;
         cell.labelLeftUp.textColor = [UIColor daohanglan];
@@ -381,7 +386,11 @@
     
     [bannerScrollView setContentOffset:CGPointMake((pageControl.currentPage + 2) * WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
     
-    pageControl.currentPage += 1;
+    if (pageControl == nil) {
+        pageControl.currentPage = 0;
+    } else {
+        pageControl.currentPage += 1;
+    }
     
 }
 
@@ -545,6 +554,16 @@
             return ;
         }
         
+        pageControl.numberOfPages = [[responseObject objectForKey:@"Advertise"] count];
+        
+        if (photoArray != nil) {
+            [photoArray removeAllObjects];
+            photoArray = nil;
+            photoArray = [NSMutableArray array];
+        }
+        
+        
+        
         for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
             AdModel *adModel = [[AdModel alloc] init];
             [adModel setValuesForKeysWithDictionary:dic];
@@ -585,7 +604,6 @@
         }
         
         [self tableViewShow];
-        [self getAdvList];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);

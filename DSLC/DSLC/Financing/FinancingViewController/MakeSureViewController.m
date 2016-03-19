@@ -80,6 +80,8 @@
     [self.navigationItem setTitle:@"确认投资"];
     [self showTableView];
     
+    self.decide = NO;
+    
 //    if (self.decide == NO) {
 //        
 //        [self getMyRedPacketList];
@@ -318,7 +320,7 @@
             [cell.labelSheng setAttributedText:moneyStr];
             cell.labelSheng.textColor = [UIColor zitihui];
             
-            NSMutableAttributedString *moneyS = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@元起投,每%@元递增", @"起投资金", [self.detailM amountMin],[self.detailM amountIncrease]]];
+            NSMutableAttributedString *moneyS = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@元起投", @"起投资金", [self.detailM amountMin]]];
             NSRange Range = NSMakeRange(0, [[moneyS string] length]);
             [moneyS addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:Range];
             [cell.labelMoney setAttributedText:moneyS];
@@ -471,7 +473,7 @@
                 self.buttonNew.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
                 
                 NSMutableAttributedString *redStr = [[NSMutableAttributedString alloc] initWithString:@"新手体验金5,000体验金"];
-                NSRange LeftSange = NSMakeRange([[redStr string] length] - 7, 7);
+                NSRange LeftSange = NSMakeRange([[redStr string] length] - 8, 8);
                 [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:LeftSange];
                 [self.buttonNew setAttributedTitle:redStr forState:UIControlStateNormal];
                 
@@ -833,16 +835,15 @@
 //                [self showSureView:app];
 //            }
         } else {
-            _balanceVC = [[FBalancePaymentViewController alloc] init];
-            _balanceVC.productName = [self.detailM productName];
-            _balanceVC.idString = [self.detailM productId];
-            _balanceVC.moneyString = [NSString stringWithFormat:@"%.2f",[self.textFieldC.text floatValue]];
-            _balanceVC.typeString = [self.detailM productType];
-            _balanceVC.redbagModel = redbagModel;
-            _balanceVC.nHand = self.nHand;
-            _balanceVC.syString = self.syString;
-            _balanceVC.endTimeString = [self.detailM endTime];
-            [self.navigationController pushViewController:_balanceVC animated:YES];        }
+            //支付没有红包
+            CashFinishViewController *cashFinish = [[CashFinishViewController alloc] init];
+            cashFinish.nHand = self.nHand;
+            cashFinish.moneyString = @"5000";
+            cashFinish.endTimeString = [self.detailM endTime];
+            cashFinish.productName = [self.detailM productName];
+            cashFinish.syString = self.syString;
+            [self.navigationController pushViewController:cashFinish animated:YES];
+        }
     
     } else {
 

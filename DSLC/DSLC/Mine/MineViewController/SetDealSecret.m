@@ -196,6 +196,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"setDeal" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"hiddenWithCell" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getData" object:nil];
             
             [self.navigationController popViewControllerAnimated:YES];
             

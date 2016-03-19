@@ -44,6 +44,7 @@
 - (void)showTanKuangWithMode:(MBProgressHUDMode)mode Text:(NSString *)text;
 
 - (void)submitLoadingWithView:(UIView *)view loadingFlag:(BOOL)loadingFlag height:(CGFloat)height;
+- (void)submitLoadingWithHidden:(BOOL)hidden view:(UIView *)view;
 - (void)submitLoadingWithHidden:(BOOL)hidden;
 
 // 判断是否登录,没有登录就显示登录界面
