@@ -45,6 +45,8 @@
     UIView *viewGray;
 }
 
+@property (nonatomic) UIView *viewBottom;
+
 @end
 
 @implementation TMakeSureViewController
@@ -138,6 +140,18 @@
     [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
     [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     [buttonMake addTarget:self action:@selector(buttonMakeSureCash:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location >9) {
+        
+        return NO;
+        
+    } else {
+        
+        return YES;
+    }
 }
 
 //确认投资按钮
@@ -469,20 +483,31 @@
 {
     [butBlackAlert removeFromSuperview];
     [viewBottomD removeFromSuperview];
+    [self.viewBottom removeFromSuperview];
     
     butBlackAlert = nil;
     viewBottomD = nil;
+    self.viewBottom = nil;
 }
 
 //textField代理方法
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    NSLog(@"11111111111");
     if (WIDTH_CONTROLLER_DEFAULT == 375) {
         
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             
             buttonMake.frame = CGRectMake(40, 290, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            buttonMake.frame = CGRectMake(40, 320, WIDTH_CONTROLLER_DEFAULT - 80, 40);
             
         } completion:^(BOOL finished) {
             
@@ -555,22 +580,52 @@
         NSInteger qiTouMoney = self.detailM.amountMin.integerValue;
         NSInteger diZengMoney = self.detailM.amountIncrease.integerValue;
         NSInteger money = shuRuInt % diZengMoney;
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
         
 //        外层判断 输入的金额与账户余额的判断
         if (shuRuInt > numberInt && shuRuInt != 0) {
             
 //            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足,请充值"];
-            NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-            if ([[dic objectForKey:@"realName"] isEqualToString:@""]) {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值必须先通过实名认证"];
-                RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
-                realNameVC.realNamePan = YES;
-                [self.navigationController pushViewController:realNameVC animated:YES];
-            } else {
-                RechargeAlreadyBinding *recharge = [[RechargeAlreadyBinding alloc] init];
-                [self.navigationController pushViewController:recharge animated:YES];
-                
-            }
+            
+            butBlackAlert = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+            [app.tabBarVC.view addSubview:butBlackAlert];
+            butBlackAlert.alpha = 0.3;
+            [butBlackAlert addTarget:self action:@selector(buttonDisappear:) forControlEvents:UIControlEventTouchUpInside];
+            
+            self.viewBottom = [CreatView creatViewWithFrame:CGRectMake(50, (HEIGHT_CONTROLLER_DEFAULT - 20)/2 - 80, WIDTH_CONTROLLER_DEFAULT - 100, 160) backgroundColor:[UIColor whiteColor]];
+            [app.tabBarVC.view addSubview:self.viewBottom];
+            self.viewBottom.layer.cornerRadius = 3;
+            self.viewBottom.layer.masksToBounds = YES;
+            
+            CGFloat viewWidth = self.viewBottom.frame.size.width;
+            
+            UILabel *label = [CreatView creatWithLabelFrame:CGRectMake(0, 30, viewWidth, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"您的余额不足,去充值？"];
+            [self.viewBottom addSubview:label];
+            
+            UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20, 90, (viewWidth - 50)/2, 40) backgroundColor:[UIColor colorWithRed:114.0 / 225.0 green:113.0 / 225.0 blue:111.0 / 225.0 alpha:1.0] textColor:[UIColor whiteColor] titleText:@"取消"];
+            [self.viewBottom addSubview:butCancle];
+            butCancle.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+            butCancle.layer.cornerRadius = 3;
+            butCancle.layer.masksToBounds = YES;
+            [butCancle addTarget:self action:@selector(buttonDisappear:) forControlEvents:UIControlEventTouchUpInside];
+            
+            UIButton *butDecide = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butCancle.frame.size.width + 30, 90, (viewWidth - 50)/2, 40) backgroundColor:[UIColor daohanglan] textColor:[UIColor whiteColor] titleText:@"确定"];
+            [self.viewBottom addSubview:butDecide];
+            butDecide.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+            butDecide.layer.cornerRadius = 3;
+            butDecide.layer.masksToBounds = YES;
+            [butDecide addTarget:self action:@selector(buttonMakeSureGoToCashMoney:) forControlEvents:UIControlEventTouchUpInside];
+            
+//            NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+//            if ([[dic objectForKey:@"realName"] isEqualToString:@""]) {
+//                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值必须先通过实名认证"];
+//                RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
+//                realNameVC.realNamePan = YES;
+//                [self.navigationController pushViewController:realNameVC animated:YES];
+//            } else {
+//                RechargeAlreadyBinding *recharge = [[RechargeAlreadyBinding alloc] init];
+//                [self.navigationController pushViewController:recharge animated:YES];
+//            }
             
         } else {
             
@@ -648,6 +703,13 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+//确认充值按钮
+- (void)buttonMakeSureGoToCashMoney:(UIButton *)button
+{
+    RechargeAlreadyBinding *recharge = [[RechargeAlreadyBinding alloc] init];
+    [self.navigationController pushViewController:recharge animated:YES];
 }
 
 #pragma mark 网络请求方法(立即购买)
@@ -732,6 +794,16 @@
     }];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [butBlackAlert removeFromSuperview];
+    [viewBottomD removeFromSuperview];
+    [self.viewBottom removeFromSuperview];
+    
+    butBlackAlert = nil;
+    viewBottomD = nil;
+    self.viewBottom = nil;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -89,7 +89,7 @@
         _tableView.backgroundColor = [UIColor qianhuise];
         _tableView.separatorColor = [UIColor clearColor];
         
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 270)];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 185 + ((WIDTH_CONTROLLER_DEFAULT - 80) - 100)/3 + 25)];
         _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
         
         [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuseNew"];
@@ -105,7 +105,7 @@
 
 - (void)viewHeadShow
 {
-    CGFloat widthPlus = self.view.frame.size.width - 80;
+    CGFloat widthPlus = WIDTH_CONTROLLER_DEFAULT - 80;
     CGFloat butWidth = (widthPlus - 100)/3;
     NSArray *butImageArr = @[@"icon1", @"target-arrow", @"icon3"];
     NSArray *butWiteArr = @[@"签到", @"大转盘", @"排行榜"];
@@ -128,6 +128,8 @@
 //    轮播位置
     viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 170) backgroundColor:[UIColor qianhuise]];
     [_tableView.tableHeaderView addSubview:viewScroll];
+    
+//    _tableView.tableHeaderView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 185 + butWidth + 35);
 }
 
 //活动三个按钮 签到 大转盘 排行榜
@@ -303,11 +305,6 @@
         BillCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse000"];
         cell.backgroundColor = [UIColor qianhuise];
         
-//        cell.viewGiPian.layer.cornerRadius = 5;
-//        cell.viewGiPian.layer.masksToBounds = YES;
-//        cell.viewGiPian.layer.borderWidth = 1;
-//        cell.viewGiPian.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
-        
         cell.viewLine1.backgroundColor = [UIColor grayColor];
         cell.viewLine1.alpha = 0.1;
         
@@ -324,6 +321,12 @@
         [cell.buttonRed setBackgroundImage:[UIImage imageNamed:@"圆角矩形-2"] forState:UIControlStateNormal];
         
         NSString *lastStr = [productM.productName substringWithRange:NSMakeRange([productM.productName rangeOfString:@"个"].location, productM.productName.length - monthStr.length)];
+        
+        cell.labelQiTou.text = [NSString stringWithFormat:@"%@元起投",productM.productAmountMin];
+        cell.labelQiTou.textColor = [UIColor zitihui];
+        cell.labelQiTou.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+        cell.labelQiTou.textAlignment = NSTextAlignmentRight;
+        cell.labelQiTou.backgroundColor = [UIColor greenColor];
         
         cell.labelMonth.text = lastStr;
         cell.labelMonth.font = [UIFont fontWithName:@"CenturyGothic" size:14];

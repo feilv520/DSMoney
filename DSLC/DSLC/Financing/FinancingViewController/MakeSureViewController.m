@@ -813,9 +813,11 @@
 {
     [butBlackAlert removeFromSuperview];
     [viewBottomD removeFromSuperview];
+    [self.viewBottom removeFromSuperview];
     
     butBlackAlert = nil;
     viewBottomD = nil;
+    self.viewBottom = nil;
 }
 
 //确认投资按钮

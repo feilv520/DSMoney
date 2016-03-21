@@ -215,22 +215,35 @@
             cell.labelPercentage.text = [[self.productListArray objectAtIndex:indexPath.row] productAnnualYield];
             cell.labelPercentage.textColor = [UIColor daohanglan];
             cell.labelPercentage.textAlignment = NSTextAlignmentCenter;
-            cell.labelPercentage.font = [UIFont fontWithName:@"ArialMT" size:23];
             
             cell.labelYear.text = @"预期年化收益率(%)";
             cell.labelYear.textColor = [UIColor zitihui];
             cell.labelYear.textAlignment = NSTextAlignmentCenter;
-            cell.labelYear.font = [UIFont fontWithName:@"CenturyGothic" size:12];
             
 //            理财期限
             cell.labelDayNum.textAlignment = NSTextAlignmentCenter;
             cell.labelDayNum.text = [[self.productListArray objectAtIndex:indexPath.row] productPeriod];
-            cell.labelDayNum.font = [UIFont fontWithName:@"ArialMT" size:23];
             
             cell.labelData.text = @"理财期限(天)";
             cell.labelData.textAlignment = NSTextAlignmentCenter;
             cell.labelData.textColor = [UIColor zitihui];
-            cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+            
+            if (WIDTH_CONTROLLER_DEFAULT == 320) {
+                
+                cell.labelPercentage.font = [UIFont fontWithName:@"ArialMT" size:20];
+                cell.labelYear.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+                
+                cell.labelDayNum.font = [UIFont fontWithName:@"ArialMT" size:20];
+                cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+                
+            } else {
+                
+                cell.labelPercentage.font = [UIFont fontWithName:@"ArialMT" size:23];
+                cell.labelYear.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+                
+                cell.labelDayNum.font = [UIFont fontWithName:@"ArialMT" size:23];
+                cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+            }
             
             if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
                 

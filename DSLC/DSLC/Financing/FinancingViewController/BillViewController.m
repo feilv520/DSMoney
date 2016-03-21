@@ -178,11 +178,9 @@
 //    预期年化收益率
     cell.labelLeftUp.text = [[self.productListArray objectAtIndex:indexPath.row] productAnnualYield];
     cell.labelLeftUp.textColor = [UIColor daohanglan];
-    cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:23];
     
 //    理财期限
     cell.labelMidUp.text = [[self.productListArray objectAtIndex:indexPath.row] productPeriod];
-    cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:23];
     
 //    剩余总额
 //    [cell.butRightUp setImage:[UIImage imageNamed:@"组-14"] forState:UIControlStateNormal];
@@ -197,11 +195,26 @@
     
     cell.labelLeftDown.text = @"预期年化收益率(%)";
     cell.labelLeftDown.textColor = [UIColor zitihui];
-    cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
     cell.labelMidDown.text = @"理财期限(天)";
     cell.labelMidDown.textColor = [UIColor zitihui];
-    cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        
+        cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        
+    } else {
+        
+        cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:23];
+        cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:23];
+        
+        cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    }
     
 //    cell.labelRightDown.text = @"剩余总额";
 //    cell.labelRightDown.textColor = [UIColor zitihui];

@@ -280,15 +280,15 @@
         
         cell.labelOne.textColor = [UIColor zitihui];
         cell.labelOne.font = [UIFont fontWithName:@"CenturyGothic" size:11];
-        cell.labelOne.text = [self.detailM productInterestTypeName];
+        cell.labelOne.text = @"T+1计算";
         
         cell.labelTwo.textColor = [UIColor zitihui];
         cell.labelTwo.font = [UIFont fontWithName:@"CenturyGothic" size:11];
-        cell.labelTwo.text = [self.detailM productToaccountTypeName];
+        cell.labelTwo.text = @"到期日T+1到账";
         
         cell.labelThree.textColor = [UIColor zitihui];
         cell.labelThree.font = [UIFont fontWithName:@"CenturyGothic" size:11];
-        cell.labelThree.text = [self.detailM productYieldDistribTypeName];
+        cell.labelThree.text = @"兑付本金加收益";
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -641,6 +641,7 @@
         calendar.inputMoney.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
         calendar.inputMoney.leftViewMode = UITextFieldViewModeAlways;
         calendar.inputMoney.tintColor = [UIColor grayColor];
+        calendar.inputMoney.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         [calendar.inputMoney addTarget:self action:@selector(textFiledEditChange:) forControlEvents:UIControlEventEditingChanged];
         
         calendar.yearLv.text = [NSString stringWithFormat:@"%@%%",[self.detailM productAnnualYield]];
@@ -666,6 +667,18 @@
         [tap addTarget:self action:@selector(returnKeyboard:)];
         
         [app.tabBarVC.view addSubview:calendar];
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location > 9) {
+        
+        return NO;
+        
+    } else {
+        
+        return YES;
     }
 }
 
