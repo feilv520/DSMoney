@@ -11,7 +11,9 @@
 @implementation TRedBagModel
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key{
-    
+    if ([key isEqualToString:@"id"]) {
+        self.rpID = value;
+    }
 }
 
 @end

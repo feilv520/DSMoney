@@ -129,13 +129,15 @@
     if (loadingImgView == nil) {
         loadingImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     } else {
-        [self loadingWithHidden:NO];
+        [self submitLoadingWithHidden:NO view:view];
     }
     
     loadingImgView.tag = 1989;
-    
-    loadingImgView.center = CGPointMake(self.view.center.x, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 60);
-    
+    if ([view isKindOfClass:[newLoginView class]]) {
+        loadingImgView.center = CGPointMake(160, view.frame.size.height / 2.0);
+    } else {
+        loadingImgView.center = CGPointMake(view.center.x, view.frame.size.height / 2.0);
+    }
     for (NSInteger i = 1; i <= 8; i++) {
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_middle_0%ld",(long)i]];
         [imgArray addObject:image];
@@ -153,7 +155,7 @@
     UIView *viewGray = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor]];
     viewGray.alpha = 0.3;
     
-    UILabel *labelRoad = [CreatView creatWithLabelFrame:CGRectMake(0, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2 - 20, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"取经路漫漫,请耐心..."];
+    UILabel *labelRoad = [CreatView creatWithLabelFrame:CGRectMake(0, CGRectGetMaxY(loadingImgView.frame) + 20, view.frame.size.width, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"取经路漫漫,请耐心..."];
     [viewGray addSubview:labelRoad];
     
     [view addSubview:viewGray];
@@ -305,7 +307,7 @@
     hud.yOffset = -50;
     hud.cornerRadius = 5.0f;
     hud.removeFromSuperViewOnHide = YES;
-    [hud hide:YES afterDelay:2.0];
+    [hud hide:YES afterDelay:1.6];
 }
 
 #pragma mark 登陆界面是否显示出来
@@ -370,6 +372,8 @@
     
     newLoginView *newLView = (newLoginView *)sender.superview;
     
+    newLView.ensureNumber.keyboardType = UIKeyboardTypeNumberPad;
+    
     if (sender == newLView.oneLogin) {
         
         newLView.backImageView.image = [UIImage imageNamed:@"loginViewP"];
@@ -391,6 +395,9 @@
         newLView.tPasswordNumberLabel.hidden = YES;
         newLView.mimaLabel.hidden = YES;
         newLView.phoneLabel.hidden = YES;
+        
+        newLView.inviteNumber.keyboardType = UIKeyboardTypeDefault;
+        newLView.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
         
         newLView.inviteNumber.placeholder = @"请输入邀请码";
         newLView.phoneNumber.placeholder = @"请输入手机号";
@@ -424,6 +431,9 @@
         newLView.tPasswordNumberLabel.hidden = NO;
         newLView.mimaLabel.hidden = NO;
         newLView.phoneLabel.hidden = NO;
+        
+        newLView.inviteNumber.keyboardType = UIKeyboardTypeNumberPad;
+        newLView.phoneNumber.keyboardType = UIKeyboardTypeDefault;
         
         newLView.inviteNumber.placeholder = @"请输入手机号";
         newLView.phoneNumber.placeholder = @"请输入密码";
@@ -530,7 +540,6 @@
                                              [responseObject objectForKey:@"token"],@"token",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                         [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
-                        NSLog(@"token  -=-  %@",[responseObject objectForKey:@"token"]);
                     }
                     // 判断是否存在isLogin.plist文件
                     if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
@@ -593,9 +602,9 @@
     
     if (textField2.text.length == 11) {
         if ([NSString validateMobile:textField2.text]) {
-            [self submitLoadingWithView:self.view loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+            [self submitLoadingWithView:newLView loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
             NSDictionary *parameter;
-            if ([textField2.text isEqualToString:@""]) {
+            if ([textField1.text isEqualToString:@""]) {
                 parameter = @{@"phone":textField2.text,@"smsCode":textField3.text,@"invitationCode":@"",@"clientType":@"iOS"};
             } else {
                 parameter = @{@"phone":textField2.text,@"smsCode":textField3.text,@"invitationCode":textField1.text,@"clientType":@"iOS"};
@@ -605,10 +614,12 @@
                 
                 if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                     // 判断是否存在Member.plist文件
-                    [self submitLoadingWithHidden:YES];
+                    [self submitLoadingWithHidden:YES view:newLView];
                     NSLog(@"%@",responseObject);
                     
-                    UIView *viewGray = [newLView.superview.subviews objectAtIndex:3];
+                    NSMutableArray *array = [newLView.superview.subviews mutableCopy];
+                    [array removeLastObject];
+                    UIView *viewGray = [array lastObject];
                     [viewGray removeFromSuperview];
                     [newLView removeFromSuperview];
                     
@@ -659,7 +670,6 @@
                     
                 } else {
                     NSLog(@"%@",responseObject);
-                    [self submitLoadingWithHidden:YES];
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                     
                 }
