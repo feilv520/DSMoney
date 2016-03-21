@@ -40,8 +40,6 @@
     
     UIButton *butCountDown;
     UILabel *labelRisk;
-    
-    BOOL flagTwo;
 }
 @property (nonatomic, strong) UIControl *viewBotton;
 @property (nonatomic, strong) ProductDetailModel *detailM;
@@ -75,8 +73,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    flagTwo = NO;
     
     [self getProductDetail];
     
@@ -145,11 +141,8 @@
         return 160;
         
     } else if (indexPath.section == 2) {
-        if (flagTwo) {
-            return 35;
-        } else {
-            return 120;
-        }
+        
+        return 120;
         
     } else if (indexPath.section == 3) {
         
@@ -301,12 +294,6 @@
         cell.labelDescription.text = @"产品描述";
         cell.labelDescription.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        if (flagTwo) {
-            cell.labelContent.hidden = YES;
-        } else {
-            cell.labelContent.hidden = NO;
-        }
-        
         cell.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.labelLine.alpha = 0.7;
         
@@ -401,12 +388,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.section == 2) {
-        
-        flagTwo = !flagTwo;
-        [_tableView reloadData];
-    }
     
     if (indexPath.section == 4) {
         

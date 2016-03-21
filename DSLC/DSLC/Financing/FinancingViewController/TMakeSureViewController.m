@@ -230,17 +230,17 @@
 {
     TChooseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    if (indexPath.row == 0) {
-        
-        cell.butChoose.tag = 8000;
-        [cell.butChoose setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
-        
-    } else {
-        
-        cell.butChoose.tag = 9000;
+//    if (indexPath.row == 0) {
+//        
+//        cell.butChoose.tag = 8000;
+//        [cell.butChoose setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+//        
+//    } else {
+//        
+//        cell.butChoose.tag = 9000;
         [cell.butChoose setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2111"] forState:UIControlStateNormal];
-    }
-    
+//    }
+
     [cell.butChoose addTarget:self action:@selector(buttonChooseOrNo:) forControlEvents:UIControlEventTouchUpInside];
     
     [cell.butSend setTitle:@"送" forState:UIControlStateNormal];
@@ -256,7 +256,7 @@
     if ([redModel.rpTop isEqualToString:redModel.rpFloor]) {
         NSMutableAttributedString *redBagStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", redModel.rpTop]];
         NSRange range = NSMakeRange(0, [[redBagStr string] rangeOfString:@"元"].location);
-        [redBagStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"ArialMT" size:30] range:range];
+        [redBagStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"ArialMT" size:20] range:range];
         NSRange rangeY = NSMakeRange([[redBagStr string] length] - 1, 1);
         [redBagStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:10] range:rangeY];
         [cell.labelRedBag setAttributedText:redBagStr];
@@ -265,7 +265,7 @@
         
         NSMutableAttributedString *redBagStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@~%@元", redModel.rpFloor, redModel.rpTop]];
         NSRange range = NSMakeRange(0, [[redBagStr string] rangeOfString:@"元"].location);
-        [redBagStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"ArialMT" size:30] range:range];
+        [redBagStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"ArialMT" size:20] range:range];
         NSRange rangeY = NSMakeRange([[redBagStr string] length] - 1, 1);
         [redBagStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:10] range:rangeY];
         [cell.labelRedBag setAttributedText:redBagStr];
@@ -294,6 +294,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 80;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    redbagModel = [chooseBagArr objectAtIndex:indexPath.row];
+    NSLog(@"%@",[chooseBagArr objectAtIndex:indexPath.row] );
 }
 
 //勾选红包按钮
@@ -567,9 +572,9 @@
         redBagArray = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"RedPacket"]];
         NSLog(@"我是个红包===========%@", redBagArray);
         for (NSDictionary *dataDic1 in redBagArray) {
-            redbagModel = [[TRedBagModel alloc] init];
-            [redbagModel setValuesForKeysWithDictionary:dataDic1];
-            [chooseBagArr addObject:redbagModel];
+            TRedBagModel *redbagModel1 = [[TRedBagModel alloc] init];
+            [redbagModel1 setValuesForKeysWithDictionary:dataDic1];
+            [chooseBagArr addObject:redbagModel1];
         }
         
         NSLog(@"本数组中有对象:::%@", chooseBagArr);
