@@ -24,6 +24,7 @@
 #import "TDescriptionCell.h"
 #import "TRiskGradeViewController.h"
 #import "TMakeSureViewController.h"
+#import "UsufructAssignmentViewController.h"
 
 @interface FDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
@@ -428,13 +429,21 @@
     butMakeSure.tag = 9080;
     
 //    勾选协议
-    UIButton *buttonXuan = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 5, WIDTH_CONTROLLER_DEFAULT - 20, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] titleText:@" 我已阅读并同意相关协议《其他协议》"];
+    
+    UIButton *buttonGou = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 8, 12, 12) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    [_tableView.tableFooterView addSubview:buttonGou];
+    [buttonGou setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+    buttonGou.tag = 2000;
+    [buttonGou addTarget:self action:@selector(shifouGouXuan:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *labelFront = [CreatView creatWithLabelFrame:CGRectMake(22, 0, 116, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:10] text:@" 我已阅读并同意相关协议"];
+    [_tableView.tableFooterView addSubview:labelFront];
+    
+    UIButton *buttonXuan = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(138, 0, WIDTH_CONTROLLER_DEFAULT - 20, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor chongzhiColor] titleText:@"《产品收益权转让及服务协议》"];
     [_tableView.tableFooterView addSubview:buttonXuan];
-    buttonXuan.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    buttonXuan.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
     buttonXuan.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    buttonXuan.tag = 2000;
-    [buttonXuan setImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
-    [buttonXuan addTarget:self action:@selector(shifouGouXuan:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonXuan addTarget:self action:@selector(buttonCheck:) forControlEvents:UIControlEventTouchUpInside];
     
     if (self.estimate == NO) {
         
@@ -481,6 +490,13 @@
     butMakeSure.titleLabel.font = [UIFont systemFontOfSize:15];
     
     [butMakeSure addTarget:self action:@selector(makeSureButton:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//查看协议
+- (void)buttonCheck:(UIButton *)button
+{
+    UsufructAssignmentViewController *usufruct = [[UsufructAssignmentViewController alloc] init];
+    [self.navigationController pushViewController:usufruct animated:YES];
 }
 
 //勾选协议按钮
