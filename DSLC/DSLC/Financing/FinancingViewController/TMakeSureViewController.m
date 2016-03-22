@@ -43,6 +43,8 @@
     NSDictionary *dataDic;
     
     UIView *viewGray;
+    
+    NSIndexPath *currentIndexPath;
 }
 
 @property (nonatomic) UIView *viewBottom;
@@ -56,6 +58,8 @@
     // Do any additional setup after loading the view.
     
     click = 0;
+    
+    currentIndexPath = nil;
     
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"确认投资"];
@@ -230,16 +234,16 @@
 {
     TChooseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-//    if (indexPath.row == 0) {
-//        
+    if (currentIndexPath != nil && indexPath.row == currentIndexPath.row) {
+
 //        cell.butChoose.tag = 8000;
-//        [cell.butChoose setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
-//        
-//    } else {
-//        
+        [cell.butChoose setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+
+    } else {
+
 //        cell.butChoose.tag = 9000;
         [cell.butChoose setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2111"] forState:UIControlStateNormal];
-//    }
+    }
 
     [cell.butChoose addTarget:self action:@selector(buttonChooseOrNo:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -299,6 +303,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     redbagModel = [chooseBagArr objectAtIndex:indexPath.row];
     NSLog(@"%@",[chooseBagArr objectAtIndex:indexPath.row] );
+    
+    currentIndexPath = indexPath;
+    [tableView reloadData];
 }
 
 //勾选红包按钮
@@ -740,6 +747,7 @@
             
             [self closeAction:nil];
             [self buttonDisappear:nil];
+            [self submitLoadingWithHidden:YES view:app.tabBarVC.view];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];

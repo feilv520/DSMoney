@@ -126,11 +126,7 @@
     
     UIImageView *loadingImgView ;
     
-    if (loadingImgView == nil) {
-        loadingImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    } else {
-        [self submitLoadingWithHidden:NO view:view];
-    }
+    loadingImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     
     loadingImgView.tag = 1989;
     if ([view isKindOfClass:[newLoginView class]]) {
@@ -490,6 +486,8 @@
     
     newLoginView *newLView = (newLoginView *)sender.superview;
     
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"]];
+    
     [self.view endEditing:YES];
     UITextField *textField1 = newLView.inviteNumber;
     UITextField *textField2 = newLView.phoneNumber;
@@ -498,15 +496,22 @@
         if (![NSString validatePassword:textField2.text]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"首字母开头"];
         } else if ([NSString validateMobile:textField1.text]) {
-            [self submitLoadingWithView:newLView loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+            
             NSDictionary *parameter = @{@"phone":textField1.text,@"password":textField2.text};
             NSLog(@"%@",parameter);
+            
+            if ([[dic objectForKey:@"ifFrg"] isEqualToString:@"YES"]) {
+                [self submitLoadingWithHidden:NO view:newLView];
+            } else {
+                [self submitLoadingWithView:newLView loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+            }
+            
             [[MyAfHTTPClient sharedClient] postWithURLString:@"app/login" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
                 
-                [self submitLoadingWithHidden:YES view:newLView];
                 if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                     // 判断是否存在Member.plist文件
                     NSLog(@"%@",responseObject);
+                    [self submitLoadingWithHidden:YES view:newLView];
                     
                     NSMutableArray *array = [newLView.superview.subviews mutableCopy];
                     [array removeLastObject];
@@ -560,9 +565,19 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
                     
                 } else {
-                    NSLog(@"%@",responseObject);
-                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                    // 判断是否存在sumbitWithFrg.plist文件
+                    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
+                        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"ifFrg",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+                    } else {
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"ifFrg",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+                    }
                     
+                    NSLog(@"%@",responseObject);
+                    [self submitLoadingWithHidden:YES view:newLView];
+                    [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                 }
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -595,6 +610,8 @@
 - (void)tLoginAction:(UIButton *)sender{
     newLoginView *newLView = (newLoginView *)sender.superview;
     
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"]];
+    
     [self.view endEditing:YES];
     UITextField *textField1 = newLView.inviteNumber;
     UITextField *textField2 = newLView.phoneNumber;
@@ -602,7 +619,13 @@
     
     if (textField2.text.length == 11) {
         if ([NSString validateMobile:textField2.text]) {
-            [self submitLoadingWithView:newLView loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+
+            if ([[dic objectForKey:@"ifFrg"] isEqualToString:@"YES"]) {
+                [self submitLoadingWithHidden:NO view:newLView];
+            } else {
+                [self submitLoadingWithView:newLView loadingFlag:0 height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+            }
+            
             NSDictionary *parameter;
             if ([textField1.text isEqualToString:@""]) {
                 parameter = @{@"phone":textField2.text,@"smsCode":textField3.text,@"invitationCode":@"",@"clientType":@"iOS"};
@@ -612,10 +635,11 @@
             NSLog(@"%@",parameter);
             [[MyAfHTTPClient sharedClient] postWithURLString:@"app/registerTwo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
                 
+                
                 if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                     // 判断是否存在Member.plist文件
-                    [self submitLoadingWithHidden:YES view:newLView];
                     NSLog(@"%@",responseObject);
+                    [self submitLoadingWithHidden:YES view:newLView];
                     
                     NSMutableArray *array = [newLView.superview.subviews mutableCopy];
                     [array removeLastObject];
@@ -669,7 +693,18 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
                     
                 } else {
+                    // 判断是否存在sumbitWithFrg.plist文件
+                    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
+                        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+                    } else {
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"ifFrg",nil];
+                        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+                    }
+                    
                     NSLog(@"%@",responseObject);
+                    [self submitLoadingWithHidden:YES view:newLView];
                     [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
                     
                 }
