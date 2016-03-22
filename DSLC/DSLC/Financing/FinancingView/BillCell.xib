@@ -81,16 +81,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wm-06-ezw">
-                                <rect key="frame" x="118" y="65" width="1" height="30"/>
-                                <animations/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sU8-Uc-Nq5">
-                                <rect key="frame" x="237" y="65" width="1" height="30"/>
-                                <animations/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dg-8J-H1c">
                                 <rect key="frame" x="1" y="85" width="117" height="20"/>
                                 <animations/>
@@ -159,12 +149,6 @@
                             <constraint firstItem="IE7-mF-u5C" firstAttribute="top" secondItem="zA5-wE-bvn" secondAttribute="bottom" constant="10" id="pep-tA-1xE"/>
                             <constraint firstAttribute="trailing" secondItem="zA5-wE-bvn" secondAttribute="trailing" constant="10" id="w3V-Tz-aOO"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="9wm-06-ezw"/>
-                                <exclude reference="sU8-Uc-Nq5"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
                 <animations/>
@@ -186,8 +170,6 @@
                 <outlet property="quanView" destination="Hix-6p-rdk" id="Ohy-jy-pab"/>
                 <outlet property="saleOut" destination="yca-ZO-WZG" id="ryr-Fv-CaC"/>
                 <outlet property="viewLine1" destination="zA5-wE-bvn" id="MgW-Ns-Lkv"/>
-                <outlet property="viewLine2" destination="9wm-06-ezw" id="tNW-EK-11b"/>
-                <outlet property="viewLine3" destination="sU8-Uc-Nq5" id="Vai-QV-PhD"/>
             </connections>
             <point key="canvasLocation" x="-121.5" y="298"/>
         </tableViewCell>

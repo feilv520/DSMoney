@@ -311,7 +311,6 @@
         cell.labelLeftDown.text = @"年化收益率(%)";
         cell.labelLeftDown.textColor = [UIColor zitihui];
         cell.labelLeftDown.textAlignment = NSTextAlignmentCenter;
-        cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         productM = [newArray objectAtIndex:indexPath.section];
         
@@ -344,7 +343,6 @@
         cell.labelMidDown.text = @"理财期限(天)";
         cell.labelMidDown.textAlignment = NSTextAlignmentCenter;
         cell.labelMidDown.textColor = [UIColor zitihui];
-        cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.labelMidUp.text = productM.productPeriod;
         cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:20];
@@ -352,6 +350,17 @@
         cell.quanView.progressTotal = [productM.productInitLimit floatValue];
         cell.quanView.progressCounter = [productM.productInitLimit floatValue] - [productM.residueMoney floatValue];
         cell.quanView.theme.sliceDividerHidden = YES;
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            
+            cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+            cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+            
+        } else {
+            
+            cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+            cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
