@@ -218,6 +218,15 @@ void UncaughtExceptionHandler(NSException *exception){
         [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
     }
     
+    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
+        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+    } else {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+    }
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -248,6 +257,15 @@ void UncaughtExceptionHandler(NSException *exception){
     } else {
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
         [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    }
+    
+    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
+        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+    } else {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
     }
     
 }
