@@ -136,7 +136,7 @@
 //        } else{
 //            buttonY = _pageHeight - buttonHeight;
 //        }
-        [tabButton setFrame:CGRectMake(40 + _pageWidth / [_controllerArray count] * i, 5, buttonWidth, buttonHeight)];
+        [tabButton setFrame:CGRectMake(35 + _pageWidth / [_controllerArray count] * i, 5, buttonWidth, buttonHeight)];
         [tabButton setTag:i];
         [tabButton addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchDown];
         [tabButton setHidden:self.tabBarHidden];
