@@ -338,13 +338,24 @@
     
     newLView.tag = 6654;
     
-    newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, 115, 300, 300);
+//    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+//        newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, 0, 300, 255);
+//    } else {
+        newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, 115, 300, 255);
+//    }
     
     newLView.layer.masksToBounds = YES;
     newLView.layer.cornerRadius = 5;
     
     [newLView.oneLogin addTarget:self action:@selector(exchangeAction:) forControlEvents:UIControlEventTouchUpInside];
     [newLView.twoLogin addTarget:self action:@selector(exchangeAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    newLView.inviteNumber.keyboardType = UIKeyboardTypeDefault;
+    newLView.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
+    
+    newLView.inviteNumber.delegate = self;
+    newLView.phoneNumber.delegate = self;
+    newLView.ensureNumber.delegate = self;
     
     newLView.getEnsureNumber.layer.masksToBounds = YES;
     newLView.getEnsureNumber.layer.borderWidth = 1.f;
@@ -764,6 +775,22 @@
         }
     } else {
         return NO;
+    }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    newLoginView *newLView = [app.tabBarVC.view.subviews lastObject];
+    
+    if (![newLView isKindOfClass:[newLoginView class]]) {
+        return ;
+    }
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        [UIView animateWithDuration:0.5 animations:^{
+           newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, 0, 300, 255);
+        }];
     }
 }
 
