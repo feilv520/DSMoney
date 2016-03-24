@@ -27,16 +27,17 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    if ([self.disign isEqualToString:@"registerOfP"]) {
+//    if ([self.disign isEqualToString:@"registerOfP"]) {
         [self.navigationItem setTitle:@"大圣理财平台用户服务协议"];
-    } else {
-        [self.navigationItem setTitle:@"大圣理财平台理财师服务协议"];
-    }
-    if ([self.disign isEqualToString:@"registerOfP"] || [self.disign isEqualToString:@"registerOfL"]) {
+//    } else {
+//        [self.navigationItem setTitle:@"大圣理财平台理财师服务协议"];
+//    }
+//    if ([self.disign isEqualToString:@"registerOfP"]) {
+//        || [self.disign isEqualToString:@"registerOfL"]
         [self webViewShow];
-    } else {
-        [self show];
-    }
+//    } else {
+//        [self show];
+//    }
     
 }
 
@@ -75,9 +76,9 @@
     webView.scrollView.bounces = NO;
     
     NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/protoco_userServes.html"];
-    if ([self.disign isEqualToString:@"registerOfL"]) {
-        url = [NSURL URLWithString:@"http://wap.dslc.cn/protoco_financialServes.html"];
-    }
+//    if ([self.disign isEqualToString:@"registerOfL"]) {
+//        url = [NSURL URLWithString:@"http://wap.dslc.cn/protoco_financialServes.html"];
+//    }
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];

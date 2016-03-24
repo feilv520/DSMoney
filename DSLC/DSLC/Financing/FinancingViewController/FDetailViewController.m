@@ -46,10 +46,24 @@
 @property (nonatomic, strong) ProductDetailModel *detailM;
 @property (nonatomic, strong) NSString *residueMoney;
 @property (nonatomic, strong) NSString *buyNumber;
+@property (nonatomic, strong) NSDictionary *flagLogin;
 
 @end
 
 @implementation FDetailViewController
+
+- (NSDictionary *)flagLogin{
+    if (_flagLogin == nil) {
+        if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+            [FileOfManage createWithFile:@"isLogin.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+        }
+    }
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    self.flagLogin = dic;
+    return _flagLogin;
+}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -522,6 +536,10 @@
 //确认投资按钮
 - (void)makeSureButton:(UIButton *)button
 {
+    if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+        return ;
+    }
     
     if ([self.residueMoney isEqualToString:@"0.00"]) {
         [self orderProduct];

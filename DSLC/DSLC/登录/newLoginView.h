@@ -28,5 +28,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *tPasswordNumberLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *mimaLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *phoneLabel;
+@property (weak, nonatomic) IBOutlet UIButton *forgetButton;
+@property (weak, nonatomic) IBOutlet UIButton *xieyiButton;
+@property (weak, nonatomic) IBOutlet UIButton *gouxuanButton;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end

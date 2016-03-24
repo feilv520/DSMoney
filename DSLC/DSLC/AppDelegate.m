@@ -227,6 +227,15 @@ void UncaughtExceptionHandler(NSException *exception){
         [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
     }
     
+    if (![FileOfManage ExistOfFile:@"productWithFrg.plist"]) {
+        [FileOfManage createWithFile:@"productWithFrg.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
+    } else {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
+    }
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -266,6 +275,15 @@ void UncaughtExceptionHandler(NSException *exception){
     } else {
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
         [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+    }
+    
+    if (![FileOfManage ExistOfFile:@"productWithFrg.plist"]) {
+        [FileOfManage createWithFile:@"productWithFrg.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
+    } else {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
     }
     
 }

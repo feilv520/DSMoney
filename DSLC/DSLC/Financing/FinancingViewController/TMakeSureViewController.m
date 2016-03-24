@@ -285,10 +285,12 @@
     
 //    红包类型
     cell.labelStyle.text = redModel.rpTypeName;
+    cell.labelStyle.backgroundColor = Color_Clear;
     cell.labelStyle.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
     cell.labelContent.text = [NSString stringWithFormat:@"单笔投资金额满%@元", redModel.rpLimit];
     cell.labelContent.textColor = [UIColor zitihui];
+    cell.labelContent.backgroundColor = Color_Clear;
     cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:10];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -401,7 +403,7 @@
 - (void)ziFuPasswordView{
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     
-    [app.tabBarVC.view addSubview:viewGray];
+    [self.view addSubview:viewGray];
     
     if (viewGray != nil) {
         viewGray.hidden = NO;
@@ -413,7 +415,7 @@
     
     [ZFPView setFrame:CGRectMake((self.view.frame.size.width - 300) / 2.0, 200, 300, 200)];
     
-    [app.tabBarVC.view addSubview:ZFPView];
+    [self.view addSubview:ZFPView];
     
     [ZFPView.closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
     [ZFPView.sureButton addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -443,19 +445,28 @@
 
 - (void)sureAction:(id)sender{
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+//    AppDelegate *app = [[UIApplication sharedApplication] delegate];
     
     if (ZFPView.moneyTF.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付密码不能为空"];
     } else {
+        
+//        NSDictionary *frgDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"productWithFrg.plist"]];
         click ++;
+//        if ([[frgDic objectForKey:@"ifFrg"] isEqualToString:@"NO"]) {
         if (click == 1) {
-            [self submitLoadingWithView:app.tabBarVC.view loadingFlag:NO height:0];
+            
+            [self submitLoadingWithView:self.view loadingFlag:NO height:0];
             
         } else {
             
-            [self submitLoadingWithHidden:NO view:app.tabBarVC.view];
+            [self submitLoadingWithHidden:NO view:self.view];
+            
         }
+        
+//        } else {
+//
+//        }
         
         [self buyProduct];
     }
@@ -738,16 +749,17 @@
         parameter = @{@"productId":[self.detailM productId],@"packetId":[redbagModel rpID],@"orderMoney":[NSNumber numberWithFloat:[textFieldShu.text floatValue]],@"payMoney":@0,@"payType":@1,@"payPwd":ZFPView.moneyTF.text,@"token":[dic objectForKey:@"token"],@"clientType":@"iOS"};
     }
     
+//    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/buyProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"buyProduct = %@",responseObject);
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        [self submitLoadingWithHidden:YES view:app.tabBarVC.view];
+        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
+            [self submitLoadingWithHidden:YES view:self.view];
             [self closeAction:nil];
             [self buttonDisappear:nil];
-            [self submitLoadingWithHidden:YES view:app.tabBarVC.view];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
@@ -774,9 +786,19 @@
                 [self.navigationController pushViewController:shareHave animated:YES];
                 //                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
             }
+            
+            if (![FileOfManage ExistOfFile:@"productWithFrg.plist"]) {
+                [FileOfManage createWithFile:@"productWithFrg.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"ifFrg",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"ifFrg",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
+            }
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            [self submitLoadingWithHidden:YES view:app.tabBarVC.view];
+            [self submitLoadingWithHidden:YES view:self.view];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

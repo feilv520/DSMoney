@@ -83,7 +83,7 @@
 #pragma mark 网络请求方法
 #pragma mark --------------------------------
 - (void)getUserAssetsList{
-    NSDictionary *parameters = @{@"curPage":@1,@"status":@"1",@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parameters = @{@"curPage":@1,@"status":@"1,2",@"token":[self.flagDic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserAssetsList" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         NSLog(@"%@",responseObject);
         

@@ -9,6 +9,8 @@
 #import "UIViewController+Loading.h"
 #import "AppDelegate.h"
 #import "newLoginView.h"
+#import "ForgetSecretViewController.h"
+#import "RiskAlertBookViewController.h"
 
 @implementation UIViewController (Loading) 
 
@@ -370,6 +372,12 @@
     
     [newLView.loginButton addTarget:self action:@selector(tLoginAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    [newLView.forgetButton addTarget:self action:@selector(forgetAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [newLView.gouxuanButton addTarget:self action:@selector(checkChooseButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [newLView.xieyiButton addTarget:self action:@selector(bookButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     [app.tabBarVC.view addSubview:viewGray];
     [app.tabBarVC.view addSubview:newLView];
     
@@ -409,10 +417,16 @@
         newLView.inviteNumber.placeholder = @"请输入邀请码";
         newLView.phoneNumber.placeholder = @"请输入手机号";
         
+        newLView.forgetButton.hidden = YES;
+        
         newLView.phoneNumber.secureTextEntry = NO;
         
         newLView.inviteNumber.text = @"";
         newLView.phoneNumber.text = @"";
+        
+        newLView.gouxuanButton.hidden = NO;
+        newLView.titleLabel.hidden = NO;
+        newLView.xieyiButton.hidden = NO;
         
         [newLView.loginButton removeTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
         [newLView.loginButton addTarget:self action:@selector(tLoginAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -445,10 +459,16 @@
         newLView.inviteNumber.placeholder = @"请输入手机号";
         newLView.phoneNumber.placeholder = @"请输入密码";
         
+        newLView.forgetButton.hidden = NO;
+        
         newLView.phoneNumber.secureTextEntry = YES;
         
         newLView.inviteNumber.text = @"";
         newLView.phoneNumber.text = @"";
+        
+        newLView.gouxuanButton.hidden = YES;
+        newLView.titleLabel.hidden = YES;
+        newLView.xieyiButton.hidden = YES;
         
         [newLView.loginButton removeTarget:self action:@selector(tLoginAction:) forControlEvents:UIControlEventTouchUpInside];
         [newLView.loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -707,7 +727,7 @@
                     // 判断是否存在sumbitWithFrg.plist文件
                     if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
                         [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
-                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"ifFrg",nil];
                         [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
                     } else {
                         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"ifFrg",nil];
@@ -776,6 +796,59 @@
     } else {
         return NO;
     }
+}
+
+- (void)forgetAction:(UIButton *)but{
+    [self closeView:nil];
+    
+    ForgetSecretViewController *forgetPVC = [[ForgetSecretViewController alloc] init];
+    pushVC(forgetPVC);
+}
+
+//勾选按钮
+- (void)checkChooseButton:(UIButton *)button
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    newLoginView *newLView = [app.tabBarVC.view.subviews lastObject];
+    
+    if (newLView.gouxuanButton.tag == 9876) {
+        
+        button.tintColor = [UIColor grayColor];
+        [button setImage:[UIImage imageNamed:@"圆角矩形-3"] forState:UIControlStateNormal];
+        button.tag = 88888888;
+        
+        [newLView.loginButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        [newLView.loginButton setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        
+        newLView.loginButton.enabled = NO;
+        
+    } else {
+        
+        button.tintColor = [UIColor whiteColor];
+        [button setImage:[UIImage imageNamed:@"iconfont-complete-拷贝-3"] forState:UIControlStateNormal];
+        button.tag = 9876;
+        
+        [newLView.loginButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+        [newLView.loginButton setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+     
+        newLView.loginButton.enabled = YES;
+        
+    }
+}
+
+// 风险提示书
+- (void)bookButtonAction:(UIButton *)btn
+{
+    [self closeView:nil];
+    
+    RiskAlertBookViewController *riskVC = [[RiskAlertBookViewController alloc] init];
+    
+//    if (self.flag)
+        riskVC.disign = @"registerOfP";
+//    else
+//        riskVC.disign = @"registerOfL";
+    
+    [self.navigationController pushViewController:riskVC animated:YES];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
