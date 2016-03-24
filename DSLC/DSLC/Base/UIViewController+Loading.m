@@ -771,7 +771,7 @@
                 return NO;
             }
         } else {
-            return NO;
+            return YES;
         }
     } else {
         return NO;

@@ -386,6 +386,9 @@
         rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dicF context:nil];
         
         [cell.imageRight setImage:[UIImage imageNamed:@"right"]];
+        
+        cell.imageContect.image = [UIImage imageNamed:@"rightWindow@3x"];
+        
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         

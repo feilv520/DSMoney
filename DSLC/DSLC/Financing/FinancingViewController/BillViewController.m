@@ -333,9 +333,6 @@
 #pragma mark 网络请求方法
 #pragma mark --------------------------------
 
-#pragma mark 网络请求方法
-#pragma mark --------------------------------
-
 - (void)getAdvList{
     
     NSDictionary *parmeter = @{@"adType":@"2"};
