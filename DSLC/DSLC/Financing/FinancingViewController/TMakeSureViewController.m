@@ -542,8 +542,8 @@
 - (void)textFieldEditChanged:(UITextField *)textField
 {
     labelCoin.text = [NSString stringWithFormat:@"%.2f元", textFieldShu.text.floatValue];
-    syString = labelCoin.text;
     labelYJmoney.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
+    syString = labelYJmoney.text;
 }
 
 //回收键盘

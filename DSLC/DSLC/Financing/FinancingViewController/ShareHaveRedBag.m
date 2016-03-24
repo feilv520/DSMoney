@@ -166,14 +166,16 @@
 }
 
 - (void)shareButtonAction:(id)sender{
-    [MobClick event:@"share"];
+    
     [self getShareRedPacket];
+    [MobClick event:@"share"];
     [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:@"56447cbc67e58efd78001914"
+                                         appKey:@"5642ad7e67e58e8463006218"
                                       shareText:@"大圣理财,金融街的新宠.https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8"
                                      shareImage:[UIImage imageNamed:@"默认头像.png"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
+    
 }
 
 //打开钻石红包按钮
