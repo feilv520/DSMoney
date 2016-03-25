@@ -23,6 +23,8 @@
     NSArray *butGrayArr;
     NSArray *butColorArr;
     NSMutableArray *buttonArr;
+    
+    NSNumber *result;
 }
 @property (nonatomic, strong) NSDictionary *flagDic;
 @property (nonatomic, strong) NSDictionary *flagLogin;
@@ -67,6 +69,8 @@
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
     
     [self exitNetwork];
+    
+    [self versionAlertView];
     
     [UMSocialData setAppKey:@"5642ad7e67e58e8463006218"];
     
@@ -227,15 +231,6 @@ void UncaughtExceptionHandler(NSException *exception){
         [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
     }
     
-    if (![FileOfManage ExistOfFile:@"productWithFrg.plist"]) {
-        [FileOfManage createWithFile:@"productWithFrg.plist"];
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
-    } else {
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
-    }
-    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -277,21 +272,44 @@ void UncaughtExceptionHandler(NSException *exception){
         [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
     }
     
-    if (![FileOfManage ExistOfFile:@"productWithFrg.plist"]) {
-        [FileOfManage createWithFile:@"productWithFrg.plist"];
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
-    } else {
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
-    }
+}
+
+// 版本提示框 200 开启 400 没开
+- (void)versionAlertView{
     
+    NSDictionary *parameters = @{@"appType":@"2"};
+    
+    NSLog(@"12");
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getAppVersion" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"----===%@",responseObject);
+        result = [responseObject objectForKey:@"result"];
+        
+        if ([result isEqualToNumber:@200]) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本请更新" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去更新", nil];
+            alertView.delegate = self;
+            [alertView show];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        NSString *url = @"https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     return  [UMSocialSnsService handleOpenURL:url];
 }
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication

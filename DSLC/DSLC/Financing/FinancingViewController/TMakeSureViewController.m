@@ -787,15 +787,6 @@
                 //                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"支付成功"];
             }
             
-            if (![FileOfManage ExistOfFile:@"productWithFrg.plist"]) {
-                [FileOfManage createWithFile:@"productWithFrg.plist"];
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"ifFrg",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
-            } else {
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"ifFrg",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"productWithFrg.plist"] atomically:YES];
-            }
-            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             [self submitLoadingWithHidden:YES view:self.view];
