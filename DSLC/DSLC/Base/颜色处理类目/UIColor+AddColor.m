@@ -192,4 +192,8 @@
     return [UIColor colorFromHexCode:@"#1ba7f7"];
 }
 
++ (UIColor *) jinse {
+    return [UIColor colorFromHexCode:@"#c8a779"];
+}
+
 @end

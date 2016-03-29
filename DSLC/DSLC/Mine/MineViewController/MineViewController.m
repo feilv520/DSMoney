@@ -127,8 +127,8 @@
 
 - (void)showPictureAndTitle
 {
-    titleArr = @[@"我的投资", @"个人信息", @"我的红包", @"账单", @"好友邀请"];
-    pictureArr = @[@"zhanghu", @"ziliao", @"hongbao", @"jiaoyi", @"haoyou"];
+    titleArr = @[@"我的投资", @"个人信息", @"我的红包", @"账单", @"好友邀请", @"金斗云购买权兑换"];
+    pictureArr = @[@"zhanghu", @"ziliao", @"hongbao", @"jiaoyi", @"haoyou", @"haoyou"];
 }
 
 - (void)showTableView
@@ -415,29 +415,29 @@
             }
             
         } else if (indexPath.row == 5) {
-            if (messageButton == nil) {
-                messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-                
-                messageButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60, 15, 30, 20);
-                
-                messageButton.userInteractionEnabled = NO;
-                
-                messageButton.layer.masksToBounds = YES;
-                messageButton.layer.cornerRadius = 8.f;
-                
-                [messageButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
-                
-                messageButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-                
-                [cell addSubview:messageButton];
-                
-            }
-            if ([[self.myAccountInfo objectForKey:@"msgCount"] isEqualToString:@"0"]) {
-                messageButton.hidden = YES;
-            } else {
-                messageButton.hidden = NO;
-                [messageButton setTitle:[self.myAccountInfo objectForKey:@"msgCount"] forState:UIControlStateNormal];
-            }
+//            if (messageButton == nil) {
+//                messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//                
+//                messageButton.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60, 15, 30, 20);
+//                
+//                messageButton.userInteractionEnabled = NO;
+//                
+//                messageButton.layer.masksToBounds = YES;
+//                messageButton.layer.cornerRadius = 8.f;
+//                
+//                [messageButton setBackgroundImage:[UIImage imageNamed:@"shouyeqiepian_17"] forState:UIControlStateNormal];
+//                
+//                messageButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+//                
+//                [cell addSubview:messageButton];
+//                
+//            }
+//            if ([[self.myAccountInfo objectForKey:@"msgCount"] isEqualToString:@"0"]) {
+//                messageButton.hidden = YES;
+//            } else {
+//                messageButton.hidden = NO;
+//                [messageButton setTitle:[self.myAccountInfo objectForKey:@"msgCount"] forState:UIControlStateNormal];
+//            }
         }
         
         return cell;

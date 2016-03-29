@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TRiskCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *labelLine;
 @property (weak, nonatomic) IBOutlet UILabel *labelName;
 @property (weak, nonatomic) IBOutlet UILabel *labelStyle;
 @end
