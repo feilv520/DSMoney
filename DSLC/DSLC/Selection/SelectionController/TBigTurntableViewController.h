@@ -10,4 +10,6 @@
 
 @interface TBigTurntableViewController : BaseViewController
 
+@property (nonatomic, strong) NSString *tokenString;
+
 @end
