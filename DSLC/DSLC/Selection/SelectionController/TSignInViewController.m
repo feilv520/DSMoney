@@ -8,7 +8,11 @@
 
 #import "TSignInViewController.h"
 
-@interface TSignInViewController ()
+@interface TSignInViewController () <UIWebViewDelegate>
+
+{
+    UIWebView *webView;
+}
 
 @end
 
@@ -20,6 +24,24 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"签到"];
+    
+    [self contentShow];
+    
+}
+
+- (void)contentShow
+{
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
+    [self.view addSubview:webView];
+    webView.scalesPageToFit = YES;
+    
+    webView.scrollView.showsHorizontalScrollIndicator = NO;
+    webView.scrollView.bounces = NO;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/activity/enterRotate.html?token=%@",self.tokenString];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
 }
 
 - (void)didReceiveMemoryWarning {

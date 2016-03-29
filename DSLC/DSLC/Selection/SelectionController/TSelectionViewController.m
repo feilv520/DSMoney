@@ -42,6 +42,9 @@
     NSDictionary *tempDic;
     
     UIView *viewScroll;
+    
+    NSDictionary *flagDic;
+    NSDictionary *myDic;
 }
 
 @end
@@ -77,6 +80,7 @@
     [self loadingWithView:self.view loadingFlag:NO height:self.view.frame.size.height/2];
     
     [self getPickProduct];
+    
 }
 
 - (void)tableViewShow
@@ -135,14 +139,24 @@
 //活动三个按钮 签到 大转盘 排行榜
 - (void)buttonActivityShow:(UIButton *)button
 {
+    flagDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    myDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+        return ;
+    }
+    
     if (button.tag == 6000 || button.tag == 7000) {
         
         TSignInViewController *signInVC = [[TSignInViewController alloc] init];
+        signInVC.tokenString = [myDic objectForKey:@"token"];
         [self.navigationController pushViewController:signInVC animated:YES];
         
     } else if (button.tag == 6001 || button.tag == 7001) {
         
         TBigTurntableViewController *bigTurntable = [[TBigTurntableViewController alloc] init];
+        bigTurntable.tokenString = [myDic objectForKey:@"token"];
         [self.navigationController pushViewController:bigTurntable animated:YES];
         
     } else {

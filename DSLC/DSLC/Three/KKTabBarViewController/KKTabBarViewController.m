@@ -157,9 +157,9 @@
 {
     _tabBarHeight = tabBarHeight;
 //    NSLog(@"height %f",self.view.frame.size.height);
-    self.labelLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 53, self.view.frame.size.width, 2)];
-    [self.view addSubview:self.labelLine];
-    self.labelLine.backgroundColor = [UIColor redColor];
+//    self.labelLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 53, self.view.frame.size.width, 2)];
+//    [self.view addSubview:self.labelLine];
+//    self.labelLine.backgroundColor = [UIColor redColor];
     
     for (UIButton *button in _tabButtonArray) {
         

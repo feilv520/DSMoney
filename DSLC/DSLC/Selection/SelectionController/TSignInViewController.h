@@ -10,4 +10,6 @@
 
 @interface TSignInViewController : BaseViewController
 
+@property (nonatomic, strong) NSString *tokenString;
+
 @end
