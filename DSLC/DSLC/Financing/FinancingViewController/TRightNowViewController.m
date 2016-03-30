@@ -19,7 +19,13 @@
     NSArray *scoresArr;
     CGRect rect;
     CGFloat sumNumber;
+    
     NSIndexPath *curruntIndex;
+    NSIndexPath *curruntIndex1;
+    NSIndexPath *curruntIndex2;
+    NSIndexPath *curruntIndex3;
+    NSIndexPath *curruntIndex4;
+    
     UIButton *buttonLast;
     CGFloat scoreOne;
     CGFloat scoreTwo;
@@ -169,31 +175,144 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TQuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    
-    if (cell == nil) {
-        cell = [[TQuestionCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"reuse"];
-    }
-    
-    cell.labelQuestion.text = [[contentArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:12], NSFontAttributeName, nil];
-    rect = [cell.labelQuestion.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 40, 900000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
-    cell.labelQuestion.numberOfLines = 0;
-    
-    if (curruntIndex != nil && curruntIndex.row == indexPath.row) {
+    if (indexPath.section == 0) {
         
-        cell.butChoose.image = [UIImage imageNamed:@"椭圆-3-拷贝-7"];
+        TQuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        
+        if (!cell) {
+            cell = [[TQuestionCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"reuse"];
+        }
+        
+        cell.labelQuestion.text = [[contentArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:12], NSFontAttributeName, nil];
+        rect = [cell.labelQuestion.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 40, 900000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        cell.labelQuestion.numberOfLines = 0;
+        
+        if (curruntIndex != nil && curruntIndex.row == indexPath.row) {
+            
+            cell.butChoose.image = [UIImage imageNamed:@"椭圆-3-拷贝-7"];
+            
+        } else {
+            
+            cell.butChoose.image = [UIImage imageNamed:@"椭圆-3"];
+        }
+        cell.tag = 1989;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    } else if (indexPath.section == 1) {
+        
+        TQuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse1"];
+        
+        if (!cell) {
+            cell = [[TQuestionCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"reuse1"];
+        }
+        
+        cell.labelQuestion.text = [[contentArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:12], NSFontAttributeName, nil];
+        rect = [cell.labelQuestion.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 40, 900000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        cell.labelQuestion.numberOfLines = 0;
+        
+        if (curruntIndex1 != nil && curruntIndex1.row == indexPath.row) {
+            
+            cell.butChoose.image = [UIImage imageNamed:@"椭圆-3-拷贝-7"];
+            
+        } else {
+            
+            cell.butChoose.image = [UIImage imageNamed:@"椭圆-3"];
+        }
+        cell.tag = 1989;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    } else if (indexPath.section == 2) {
+        
+        TQuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse2"];
+        
+        if (!cell) {
+            cell = [[TQuestionCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"reuse2"];
+        }
+        
+        cell.labelQuestion.text = [[contentArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:12], NSFontAttributeName, nil];
+        rect = [cell.labelQuestion.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 40, 900000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        cell.labelQuestion.numberOfLines = 0;
+        
+        if (curruntIndex2 != nil && curruntIndex2.row == indexPath.row) {
+            
+            cell.butChoose.image = [UIImage imageNamed:@"椭圆-3-拷贝-7"];
+            
+        } else {
+            
+            cell.butChoose.image = [UIImage imageNamed:@"椭圆-3"];
+        }
+        cell.tag = 1989;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+        
+    } else if (indexPath.section == 3) {
+        
+        TQuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse3"];
+        
+        if (!cell) {
+            cell = [[TQuestionCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"reuse3"];
+        }
+        
+        cell.labelQuestion.text = [[contentArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:12], NSFontAttributeName, nil];
+        rect = [cell.labelQuestion.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 40, 900000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        cell.labelQuestion.numberOfLines = 0;
+        
+        if (curruntIndex3 != nil && curruntIndex3.row == indexPath.row) {
+            
+            cell.butChoose.image = [UIImage imageNamed:@"椭圆-3-拷贝-7"];
+            
+        } else {
+            
+            cell.butChoose.image = [UIImage imageNamed:@"椭圆-3"];
+        }
+        cell.tag = 1989;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
         
     } else {
         
-        cell.butChoose.image = [UIImage imageNamed:@"椭圆-3"];
+        TQuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse4"];
+        
+        if (!cell) {
+            cell = [[TQuestionCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"reuse4"];
+        }
+        
+        cell.labelQuestion.text = [[contentArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:12], NSFontAttributeName, nil];
+        rect = [cell.labelQuestion.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 40, 900000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+        cell.labelQuestion.numberOfLines = 0;
+        
+        if (curruntIndex4 != nil && curruntIndex4.row == indexPath.row) {
+            
+            cell.butChoose.image = [UIImage imageNamed:@"椭圆-3-拷贝-7"];
+            
+        } else {
+            
+            cell.butChoose.image = [UIImage imageNamed:@"椭圆-3"];
+        }
+        cell.tag = 1989;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
     }
-    
-    cell.tag = 1989;
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+
 }
 
 //选择答案
@@ -209,40 +328,37 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    curruntIndex = indexPath;
-    NSIndexSet *curruntSet = [[NSIndexSet alloc] initWithIndex:indexPath.section];
-    [tableView reloadSections:curruntSet withRowAnimation:UITableViewRowAnimationNone];
     
     if (indexPath.section == 0) {
-        
+        curruntIndex = indexPath;
         CGFloat score = [[[scoresArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] floatValue];
         if (scoreOne != score) {
             scoreOne = score;
         }
         
     } else if (indexPath.section == 1) {
-        
+        curruntIndex1 = indexPath;
         CGFloat score = [[[scoresArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] floatValue];
         if (scoreTwo != score) {
             scoreTwo = score;
         }
         
     } else if (indexPath.section == 2) {
-        
+        curruntIndex2 = indexPath;
         CGFloat score = [[[scoresArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] floatValue];
         if (scoreThree != score) {
             scoreThree = score;
         }
 
     } else if (indexPath.section == 3) {
-        
+        curruntIndex3 = indexPath;
         CGFloat score = [[[scoresArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] floatValue];
         if (scoreFour != score) {
             scoreFour = score;
         }
         
     } else {
-        
+        curruntIndex4 = indexPath;
         CGFloat score = [[[scoresArr objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] floatValue];
         if (scoreFive != score) {
             scoreFive = score;
@@ -250,6 +366,10 @@
     }
     
     sumNumber = scoreOne + scoreTwo + scoreThree + scoreFour + scoreFive;
+    
+    NSIndexSet *curruntSet = [[NSIndexSet alloc] initWithIndex:indexPath.section];
+    [tableView reloadSections:curruntSet withRowAnimation:UITableViewRowAnimationNone];
+    
 }
 
 - (void)didReceiveMemoryWarning {

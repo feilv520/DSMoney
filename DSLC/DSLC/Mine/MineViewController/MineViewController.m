@@ -78,7 +78,7 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.tabBarVC setSuppurtGestureTransition:NO];
     [app.tabBarVC setTabbarViewHidden:NO];
     [app.tabBarVC setLabelLineHidden:NO];
@@ -739,7 +739,7 @@
     
     inviteNV.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 200);
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [app.window addSubview:viewGray];
     

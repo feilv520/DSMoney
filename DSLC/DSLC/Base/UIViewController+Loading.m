@@ -294,8 +294,7 @@
 
 - (void)showTanKuangWithMode:(MBProgressHUDMode)mode Text:(NSString *)text
 {
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:app.tabBarVC.view animated:YES];
     hud.mode = mode;
     hud.labelText = text;
@@ -313,7 +312,7 @@
 
 - (void)ifLoginView{
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     UIView *viewGray;
     
