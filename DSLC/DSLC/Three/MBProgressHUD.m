@@ -573,9 +573,10 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		yPos += kPadding;
 	}
 	CGRect labelF;
-	labelF.origin.y = yPos;
-	labelF.origin.x = round((bounds.size.width - labelSize.width) / 2) + xPos;
+	labelF.origin.y = yPos - 6.0;
+    labelF.origin.x = round((bounds.size.width - labelSize.width) / 2) + xPos;
 	labelF.size = labelSize;
+    labelF.size = CGSizeMake(labelF.size.width, labelF.size.height * 2);
 	label.frame = labelF;
 	yPos += labelF.size.height;
 	
