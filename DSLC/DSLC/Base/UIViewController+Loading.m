@@ -294,13 +294,13 @@
 
 - (void)showTanKuangWithMode:(MBProgressHUDMode)mode Text:(NSString *)text
 {
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:app.tabBarVC.view animated:YES];
     hud.mode = mode;
     hud.labelText = text;
     hud.labelFont = [UIFont systemFontOfSize:12];
-    hud.minSize = CGSizeMake(0, 55);
+    hud.minSize = CGSizeMake(0, 60);
     hud.margin = 10;
     hud.yOffset = -50;
     hud.cornerRadius = 5.0f;
@@ -313,7 +313,7 @@
 
 - (void)ifLoginView{
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     UIView *viewGray;
     

@@ -40,6 +40,7 @@
 #import "InviteNewView.h"
 #import "NewCastProductViewController.h"
 #import "newLoginView.h"
+#import "TBuyViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate, UMSocialUIDelegate>
 
@@ -112,7 +113,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeWithImageView) name:@"exchangeWithImageView" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(diandianNonotice:) name:@"dian" object:nil];
-    
 }
 
 - (void)diandianNonotice:(NSNotification *)notice
@@ -128,7 +128,7 @@
 - (void)showPictureAndTitle
 {
     titleArr = @[@"我的投资", @"个人信息", @"我的红包", @"账单", @"好友邀请", @"金斗云购买权兑换"];
-    pictureArr = @[@"zhanghu", @"ziliao", @"hongbao", @"jiaoyi", @"haoyou", @"haoyou"];
+    pictureArr = @[@"zhanghu", @"ziliao", @"hongbao", @"jiaoyi", @"haoyou", @"iconfont-duihuan"];
 }
 
 - (void)showTableView
@@ -489,8 +489,11 @@
             inviteNV.frame = CGRectMake(0, self.view.frame.size.height - 200, self.view.frame.size.width, 200);
         }];
         
+    } else if (indexPath.row == 5) {
+        
+        TBuyViewController *buyVC = [[TBuyViewController alloc] init];
+        [self.navigationController pushViewController:buyVC animated:YES];
     }
-    
 }
 
 //头像按钮

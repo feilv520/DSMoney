@@ -394,6 +394,11 @@
 		81C138211BDF6D5E0088E792 /* iconfont-phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C1381D1BDF6D5E0088E792 /* iconfont-phone@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */; };
 		81C2DAAF1BC756630007AC48 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C2DAAE1BC756630007AC48 /* MoreViewController.m */; };
+		81C376651CAA8AB6004644C0 /* iconfont-duihuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C376631CAA8AB6004644C0 /* iconfont-duihuan@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C376661CAA8AB6004644C0 /* iconfont-duihuan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C376641CAA8AB6004644C0 /* iconfont-duihuan@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C376691CAA8C41004644C0 /* TBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C376681CAA8C41004644C0 /* TBuyViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81C3766D1CAB883F004644C0 /* 矢量智能对象@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C3766B1CAB883F004644C0 /* 矢量智能对象@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C3766E1CAB883F004644C0 /* 矢量智能对象@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C3766C1CAB883F004644C0 /* 矢量智能对象@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81C548621C08329B001CDC97 /* RedBagExplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C548611C08329B001CDC97 /* RedBagExplainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C8BBC41BDA2F8D005B9DFF /* bangzhu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C8BBBC1BDA2F8D005B9DFF /* bangzhu@2x.png */; };
 		81C8BBC51BDA2F8D005B9DFF /* bangzhu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C8BBBD1BDA2F8D005B9DFF /* bangzhu@3x.png */; };
@@ -1467,6 +1472,12 @@
 		81C2DAA81BC755FF0007AC48 /* KKTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKTabBarViewController.m; sourceTree = "<group>"; };
 		81C2DAAD1BC756630007AC48 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		81C2DAAE1BC756630007AC48 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		81C376631CAA8AB6004644C0 /* iconfont-duihuan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-duihuan@2x.png"; sourceTree = "<group>"; };
+		81C376641CAA8AB6004644C0 /* iconfont-duihuan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-duihuan@3x.png"; sourceTree = "<group>"; };
+		81C376671CAA8C41004644C0 /* TBuyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBuyViewController.h; sourceTree = "<group>"; };
+		81C376681CAA8C41004644C0 /* TBuyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBuyViewController.m; sourceTree = "<group>"; };
+		81C3766B1CAB883F004644C0 /* 矢量智能对象@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象@2x.png"; sourceTree = "<group>"; };
+		81C3766C1CAB883F004644C0 /* 矢量智能对象@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象@3x.png"; sourceTree = "<group>"; };
 		81C548601C08329B001CDC97 /* RedBagExplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBagExplainViewController.h; sourceTree = "<group>"; };
 		81C548611C08329B001CDC97 /* RedBagExplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedBagExplainViewController.m; sourceTree = "<group>"; };
 		81C8BBBC1BDA2F8D005B9DFF /* bangzhu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bangzhu@2x.png"; sourceTree = "<group>"; };
@@ -2575,6 +2586,10 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				81C3766B1CAB883F004644C0 /* 矢量智能对象@2x.png */,
+				81C3766C1CAB883F004644C0 /* 矢量智能对象@3x.png */,
+				81C376631CAA8AB6004644C0 /* iconfont-duihuan@2x.png */,
+				81C376641CAA8AB6004644C0 /* iconfont-duihuan@3x.png */,
 				8106AA811CAA23F700AB6753 /* 椭圆-3-拷贝-7.png */,
 				8106AA821CAA23F700AB6753 /* 椭圆-3.png */,
 				8D6E469A1C9B9ECA00F0F5B7 /* loginViewP@2x.png */,
@@ -2746,6 +2761,15 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		81C3766A1CAA8C68004644C0 /* 购买权兑换 */ = {
+			isa = PBXGroup;
+			children = (
+				81C376671CAA8C41004644C0 /* TBuyViewController.h */,
+				81C376681CAA8C41004644C0 /* TBuyViewController.m */,
+			);
+			name = "购买权兑换";
+			sourceTree = "<group>";
+		};
 		81C8BBBB1BDA2F8D005B9DFF /* 更多切图 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2798,6 +2822,7 @@
 				8D3125CB1BD7427900143B71 /* 我的资料 */,
 				8D3125CA1BD7411300143B71 /* 红包活动 */,
 				8D3125C91BD740D400143B71 /* 充值 */,
+				81C3766A1CAA8C68004644C0 /* 购买权兑换 */,
 				81D8AD981BC6427800A15E01 /* MineViewController.h */,
 				81D8AD991BC6427800A15E01 /* MineViewController.m */,
 				818063AC1BD6437D00E83492 /* PayMoneyViewController.h */,
@@ -4680,6 +4705,7 @@
 				8D968A7A1C96A9FD00C9A6A1 /* mylicaishi@3x.png in Resources */,
 				8D3F95DB1BE20C1A00013A8E /* zuorishouyi-678@3x.png in Resources */,
 				8D0CB4991BE760C00039D826 /* RiskDisclosureViewController.xib in Resources */,
+				81C3766E1CAB883F004644C0 /* 矢量智能对象@3x.png in Resources */,
 				81A6EB121BE784BD00F9FDD1 /* NewBieCell.xib in Resources */,
 				8D3EEA1C1C27AB400031F7C9 /* 招商银行@2x.png in Resources */,
 				8D4343931BFDEB0B000BA004 /* loading_up_02.png in Resources */,
@@ -4791,6 +4817,7 @@
 				8183F3491C7E97A2000BB93C /* 椭圆猴-9@3x.png in Resources */,
 				8D9011AC1BD6337C00E5D62A /* 02@3x.png in Resources */,
 				8175BEAA1BE9F2F50044026E /* 新浪微博@2x.png in Resources */,
+				81C376661CAA8AB6004644C0 /* iconfont-duihuan@3x.png in Resources */,
 				8D3EEA251C27AB400031F7C9 /* 邮政储蓄银行@3x.png in Resources */,
 				817E33791BD7303200D05103 /* MyPlannerCell.xib in Resources */,
 				8183F4061C97CC4F000BB93C /* iconfont-shijian@2x.png in Resources */,
@@ -4810,6 +4837,7 @@
 				8175BEAE1BE9F2F50044026E /* 腾讯微博@2x.png in Resources */,
 				8D3125EB1BD7798000143B71 /* ForgetPasswordViewController.xib in Resources */,
 				81E90EF81BCB430B004BA8A5 /* 750chanpin.png in Resources */,
+				81C376651CAA8AB6004644C0 /* iconfont-duihuan@2x.png in Resources */,
 				8D6E46991C9B9DD200F0F5B7 /* newLoginView.xib in Resources */,
 				81FAAA331C256AC40020E9DD /* 充值成功@3x.png in Resources */,
 				81AC90CA1BEC8C6600232404 /* BankWhichCell.xib in Resources */,
@@ -4879,6 +4907,7 @@
 				8D43439C1BFDEB0B000BA004 /* loading_middle_03.png in Resources */,
 				8D66927B1BD0D27D00CD2CAF /* gesture_node_normal.png in Resources */,
 				8D0AE7F41BE09CE500D9D50C /* iconfont-register-gantanhao001@2x.png in Resources */,
+				81C3766D1CAB883F004644C0 /* 矢量智能对象@2x.png in Resources */,
 				81E0CCE81C28EC7400148609 /* 失败@3x.png in Resources */,
 				81ED030C1BD09BC8005F4B02 /* MyInformationCell.xib in Resources */,
 				81D72FBE1BFAD63B0067A277 /* right@2x.png in Resources */,
@@ -5161,6 +5190,7 @@
 				81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */,
 				812F6BE81BD8DDE10000D8E9 /* BindingPhoneViewController.m in Sources */,
 				816F1ECB1BF58B4D00DB6B65 /* RiskAlertBookViewController.m in Sources */,
+				81C376691CAA8C41004644C0 /* TBuyViewController.m in Sources */,
 				81E831121BF06AFB00127EE8 /* MyAlreadyCell.m in Sources */,
 				81BA1C081BD4F4AB00DBA5BE /* CheckViewController.m in Sources */,
 				81C548621C08329B001CDC97 /* RedBagExplainViewController.m in Sources */,
