@@ -178,7 +178,7 @@
         [cell.labelRightUp setAttributedText:monthStr];
         cell.labelRightUp.textAlignment = NSTextAlignmentCenter;
         
-        cell.labelLeftDown.text = @"预期年化收益率",
+        cell.labelLeftDown.text = @"预期年化",
         cell.labelLeftDown.textAlignment = NSTextAlignmentCenter;
         cell.labelLeftDown.textColor = [UIColor zitihui];
         cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];

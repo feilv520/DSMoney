@@ -299,7 +299,7 @@
         [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:symbol];
         [cell.labelPercentage setAttributedText:textString];
         
-        cell.labelYear.text = @"预期年化收益率(%)";
+        cell.labelYear.text = @"预期年化(%)";
         cell.labelYear.textColor = [UIColor zitihui];
         cell.labelYear.textAlignment = NSTextAlignmentCenter;
         cell.labelYear.font = [UIFont fontWithName:@"CenturyGothic" size:12];
