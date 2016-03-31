@@ -222,7 +222,7 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-            labelNum.text = [responseObject objectForKey:@"uMonkeyNum"];
+            labelNum.text = [NSString stringWithFormat:@"%@个", [responseObject objectForKey:@"uMonkeyNum"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
