@@ -10,4 +10,6 @@
 
 @interface TRankinglistViewController : BaseViewController
 
+@property (nonatomic, strong) NSString *tokenString;
+
 @end

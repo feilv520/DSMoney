@@ -75,7 +75,7 @@
     cell.tzLabel.text = model.buyTime;
     cell.dfLabel.text = model.dueDate;
     cell.tzMLabel.text = [DES3Util decrypt:model.money];
-    cell.syLabel.text = [DES3Util decrypt:model.totalProfit];
+    cell.syLabel.text = [DES3Util decrypt:model.exceptedYield];
     
     return cell;
 }

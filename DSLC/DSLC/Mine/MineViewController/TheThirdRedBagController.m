@@ -52,6 +52,8 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"红包说明" style:UIBarButtonItemStylePlain target:self action:@selector(barRightItem:)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyRedPacketList) name:@"refrushMyRedPacketList" object:nil];
+    
     [self getMyRedPacketList];
     [self viewShow];
     [self tableViewShow];
@@ -774,6 +776,8 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
             [self.navigationController popToRootViewControllerAnimated:NO];
             return ;
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         [_tableView reloadData];
         

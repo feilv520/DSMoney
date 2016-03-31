@@ -142,18 +142,23 @@
     flagDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
     myDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
-        return ;
-    }
+    
     
     if (button.tag == 6000 || button.tag == 7000) {
+        if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+            return ;
+        }
         
         TSignInViewController *signInVC = [[TSignInViewController alloc] init];
         signInVC.tokenString = [myDic objectForKey:@"token"];
         [self.navigationController pushViewController:signInVC animated:YES];
         
     } else if (button.tag == 6001 || button.tag == 7001) {
+        if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+            return ;
+        }
         
         TBigTurntableViewController *bigTurntable = [[TBigTurntableViewController alloc] init];
         bigTurntable.tokenString = [myDic objectForKey:@"token"];

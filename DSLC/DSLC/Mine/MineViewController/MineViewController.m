@@ -571,6 +571,7 @@
     if ([[[self.myAccountInfo objectForKey:@"bigId"] description] isEqualToString:@"0"]) {
     
         BigMoneyViewController *bigMoneyVC = [[BigMoneyViewController alloc] init];
+        bigMoneyVC.big = NO;
         [self.navigationController pushViewController:bigMoneyVC animated:YES];
         
     } else {
