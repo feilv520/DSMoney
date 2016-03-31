@@ -76,15 +76,11 @@
 
 - (void)buttonReturn:(UIBarButtonItem *)bar
 {
-    if (self.big == NO) {
-        
-        NSArray *arr = [self.navigationController viewControllers];
-        [self.navigationController popToViewController:[arr objectAtIndex:1] animated:YES];
-        
-    } else {
-        
+//    if (self.big == NO) {
+//
+//        NSArray *arr = [self.navigationController viewControllers];
+//        [self.navigationController popToViewController:[arr objectAtIndex:1] animated:YES];
         [self.navigationController popViewControllerAnimated:YES];
-    }
 }
 
 - (void)tableViewShow

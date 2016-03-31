@@ -149,7 +149,7 @@
     
     _makeSure.titleLabel.font = [UIFont systemFontOfSize:15];
     [viewFoot addSubview:_makeSure];
-    [_makeSure addTarget:self action:@selector(makeSureMoney:) forControlEvents:UIControlEventTouchUpInside];
+    [_makeSure addTarget:self action:@selector(buttonAffirmMoney:) forControlEvents:UIControlEventTouchUpInside];
     
 //    UIButton *buttonSafe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (60.0 / 667.0) + HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0) + HEIGHT_CONTROLLER_DEFAULT * (10.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * 20.0 / 667.0) backgroundColor:[UIColor clearColor] textColor:[UIColor blackColor] titleText:@"由中国银行保障您的账户资金安全"];
 //    [viewFoot addSubview:buttonSafe];
@@ -1128,6 +1128,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushMyRedPacketList" object:nil];
                 
             } else {
                 [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
