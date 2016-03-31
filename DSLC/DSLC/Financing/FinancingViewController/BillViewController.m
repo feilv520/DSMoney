@@ -193,7 +193,7 @@
 //    [cell.butRightUp setAttributedTitle:rightString forState:UIControlStateNormal];
 //    cell.butRightUp.backgroundColor = [UIColor yellowColor];
     
-    cell.labelLeftDown.text = @"预期年化收益率(%)";
+    cell.labelLeftDown.text = @"预期年化(%)";
     cell.labelLeftDown.textColor = [UIColor zitihui];
     
     cell.labelMidDown.text = @"理财期限(天)";

@@ -145,7 +145,7 @@
             cell.viewBottom.layer.cornerRadius = 3;
             cell.viewBottom.layer.masksToBounds = YES;
             
-            cell.labelShouYiLv.text = @"预期年化收益率(%)";
+            cell.labelShouYiLv.text = @"预期年化(%)";
             cell.labelShouYiLv.font = [UIFont fontWithName:@"CenturyGothic" size:13];
             
             cell.labelPercent.textAlignment = NSTextAlignmentCenter;
@@ -216,7 +216,7 @@
             cell.labelPercentage.textColor = [UIColor daohanglan];
             cell.labelPercentage.textAlignment = NSTextAlignmentCenter;
             
-            cell.labelYear.text = @"预期年化收益率(%)";
+            cell.labelYear.text = @"预期年化(%)";
             cell.labelYear.textColor = [UIColor zitihui];
             cell.labelYear.textAlignment = NSTextAlignmentCenter;
             

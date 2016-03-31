@@ -236,7 +236,7 @@
         cell.labelPercent.font = [UIFont fontWithName:@"ArialMT" size:45];
         cell.labelPercent.text = productM.productAnnualYield;
         
-        cell.labelShouYiLv.text = @"预期年化收益率(%)";
+        cell.labelShouYiLv.text = @"预期年化(%)";
         cell.labelShouYiLv.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         
         [cell.buttonImage setImage:[UIImage imageNamed:@"liwu"] forState:UIControlStateNormal];
@@ -327,7 +327,7 @@
         cell.viewLine1.backgroundColor = [UIColor grayColor];
         cell.viewLine1.alpha = 0.1;
         
-        cell.labelLeftDown.text = @"年化收益率(%)";
+        cell.labelLeftDown.text = @"预期年化(%)";
         cell.labelLeftDown.textColor = [UIColor zitihui];
         cell.labelLeftDown.textAlignment = NSTextAlignmentCenter;
         
