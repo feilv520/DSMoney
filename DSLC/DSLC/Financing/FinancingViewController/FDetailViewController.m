@@ -215,7 +215,7 @@
         
         cell.viewDiSe.backgroundColor = [UIColor qianhuise];
         
-        cell.labelIncome.text = @"预期年化收益率(%)";
+        cell.labelIncome.text = @"预期年化(%)";
         cell.labelIncome.textColor = [UIColor zitihui];
         cell.labelIncome.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
