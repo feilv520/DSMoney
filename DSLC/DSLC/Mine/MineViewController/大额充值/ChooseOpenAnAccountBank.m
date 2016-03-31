@@ -161,7 +161,7 @@
 
 - (void)getAreaListOfP {
     
-    NSDictionary *parameters = @{@"type":@"1",@"proviceCode":@""};
+    NSDictionary *parameters = @{@"type":@1,@"proviceCode":@""};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getAreaList" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -224,7 +224,7 @@
 
 - (void)getAreaListOfZ {
     
-    NSDictionary *parameters = @{@"cardNum":@"",@"bankCode":self.bankCode,@"braBankName":@"中国建设银行",@"cityCode":self.cityCode};
+    NSDictionary *parameters = @{@"cardNum":@"",@"bankCode":self.bankCode,@"braBankName":self.bankName,@"cityCode":self.cityCode};
     
     NSLog(@"%@",parameters);
     

@@ -117,7 +117,7 @@
 {
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"recUserId":[dic objectForKey:@"id"], @"msgType":@1};
+    NSDictionary *parameter = @{@"recUserId":[dic objectForKey:@"id"], @"msgType":@1, @"token":[dic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

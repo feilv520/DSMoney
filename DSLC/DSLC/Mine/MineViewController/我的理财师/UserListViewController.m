@@ -157,8 +157,9 @@
 #pragma mark --------------------------------------------------------------------------------------------
 - (void)getUserList
 {
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     NSLog(@"6666666666");
-    NSDictionary *parameter = @{@"msgType":@0};
+    NSDictionary *parameter = @{@"msgType":@0, @"token":[dic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getUserMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         NSLog(@"走过");
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]){

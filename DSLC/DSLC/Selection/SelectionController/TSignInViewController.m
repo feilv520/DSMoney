@@ -38,7 +38,7 @@
     webView.scrollView.showsHorizontalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/activity/signIn.html?token=%@",self.tokenString];
+    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/activity/signIn.html?token=%@",self.tokenString];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];

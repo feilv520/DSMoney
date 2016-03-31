@@ -169,7 +169,7 @@
         NSString *textString = _textField.text;
         textString = [textString stringByReplacingOccurrencesOfString:@"\"" withString:@"^"];
         
-        NSDictionary *parameter = @{@"recUserId":self.IId, @"msgContent":textString};
+        NSDictionary *parameter = @{@"recUserId":self.IId, @"msgContent":textString, @"token":[dic objectForKey:@"token"]};
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/sendMsg" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
@@ -211,7 +211,7 @@
 - (void)getDataList
 {
     
-    NSDictionary *parameter = @{@"sendUserId":self.IId, @"msgType":@0};
+    NSDictionary *parameter = @{@"sendUserId":self.IId, @"msgType":@0, @"token":[dic objectForKey:@"token"]};
     NSLog(@"%@", parameter);
 
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
