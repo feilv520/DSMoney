@@ -37,6 +37,8 @@
     UIPageControl *pageControl;
     NSTimer *timer;
     UIScrollView *bannerScrollView;
+    
+    
 }
 
 @property (nonatomic, strong) NSMutableArray *productListArray;
@@ -95,9 +97,8 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = [UIColor huibai];
     
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
-    _tableView.tableHeaderView.backgroundColor = [UIColor greenColor];
-    [self activityShowViewHead];
+//    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
+//    _tableView.tableHeaderView.backgroundColor = [UIColor greenColor];
     
     [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuseNNN"];
     [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
@@ -110,7 +111,8 @@
 - (void)activityShowViewHead
 {
     imageActivity = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100) backgroundColor:[UIColor whiteColor]];
-    [_tableView.tableHeaderView addSubview:imageActivity];
+//    [_tableView.tableHeaderView addSubview:imageActivity];
+    _tableView.tableHeaderView = imageActivity;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -477,7 +479,7 @@
 
 - (void)getAdvList{
     
-    NSDictionary *parmeter = @{@"adType":@"2"};
+    NSDictionary *parmeter = @{@"adType":@"5"};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -494,7 +496,10 @@
             [photoArray addObject:adModel];
         }
         
-        [self makeScrollView];
+        if (photoArray.count != 0) {
+            [self activityShowViewHead];
+            [self makeScrollView];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

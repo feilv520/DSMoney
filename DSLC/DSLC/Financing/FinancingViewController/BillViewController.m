@@ -116,10 +116,6 @@
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor huibai];
     
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
-    _tableView.tableHeaderView.backgroundColor = [UIColor greenColor];
-    [self activityShowViewHead];
-    
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     _tableView.tableFooterView.backgroundColor = [UIColor huibai];
     
@@ -136,7 +132,7 @@
 - (void)activityShowViewHead
 {
     imageActivit = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100) backgroundColor:[UIColor whiteColor]];
-    [_tableView.tableHeaderView addSubview:imageActivit];
+    _tableView.tableHeaderView = imageActivit;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -335,7 +331,7 @@
 
 - (void)getAdvList{
     
-    NSDictionary *parmeter = @{@"adType":@"2"};
+    NSDictionary *parmeter = @{@"adType":@"5"};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -352,7 +348,10 @@
             [photoArray addObject:adModel];
         }
         
-        [self makeScrollView];
+        if (photoArray.count != 0) {
+            [self activityShowViewHead];
+            [self makeScrollView];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
