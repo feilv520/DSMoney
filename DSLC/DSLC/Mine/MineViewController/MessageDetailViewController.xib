@@ -37,10 +37,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015.09.09" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEU-Cc-rk7">
-                    <rect key="frame" x="10" y="42" width="87" height="21"/>
+                    <rect key="frame" x="10" y="42" width="355" height="21"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="87" id="alx-hP-Pdu"/>
+                        <constraint firstAttribute="width" constant="355" id="alx-hP-Pdu"/>
                         <constraint firstAttribute="height" constant="21" id="wRS-Ju-Vm1"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>

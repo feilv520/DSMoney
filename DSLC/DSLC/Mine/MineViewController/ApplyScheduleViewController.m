@@ -73,8 +73,7 @@
 
 - (void)buttonReturn:(UIBarButtonItem *)bar
 {
-    NSArray *viewController = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
+    popVC;
 }
 
 - (void)reloadData:(NSNotification *)notice
@@ -448,8 +447,7 @@
 //导航完成按钮
 - (void)finishBarButton:(UIButton *)button
 {
-    NSArray *viewController = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
+    popVC;
 }
 
 //取消申请
@@ -497,8 +495,7 @@
 //完成按钮
 - (void)finishApplyButton:(UIButton *)button
 {
-    NSArray *viewControllers = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewControllers objectAtIndex:1] animated:YES];
+    popVC;
 }
 
 //黑色遮罩取消

@@ -31,7 +31,9 @@
 // 获取消息详情
 - (void)getDataList
 {
-    NSDictionary *parameter = @{@"msgTextId":self.idString, @"msgType":@1};
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"msgTextId":self.idString, @"msgType":@1, @"token":[dic objectForKey:@"token"]};
     
     NSLog(@"%@",parameter);
     
@@ -50,6 +52,8 @@
             self.textLabel.text = [messageModel msgText];
             
             self.titleLabel.text = [messageModel msgTitle];
+            
+            self.dataLabel.text = [messageModel sendTime];
             
             [self noDataViewWithRemoveToView];
         } else {
