@@ -5629,7 +5629,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "749da470-e3b5-48bf-ae01-4c581ed981e1";
+				PROVISIONING_PROFILE = "0262b2f0-a201-4518-bb28-fed28941b725";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5668,7 +5668,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "749da470-e3b5-48bf-ae01-4c581ed981e1";
+				PROVISIONING_PROFILE = "0262b2f0-a201-4518-bb28-fed28941b725";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
