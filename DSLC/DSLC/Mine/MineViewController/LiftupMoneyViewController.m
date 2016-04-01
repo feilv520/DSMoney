@@ -261,6 +261,8 @@
                [ZFPView setFrame:CGRectMake((self.view.frame.size.width - 300) / 2.0, 200, 300, 150)];
                 ZFPView.sureButton.hidden = YES;
                 ZFPView.moneyLabel.text = [responseObject objectForKey:@"resultMsg"];
+                ZFPView.moneyLabel.numberOfLines = 0;
+                ZFPView.moneyLabel.font = [UIFont systemFontOfSize:12];
                 ZFPView.closeButton.hidden = YES;
                 ZFPView.moneyTF.hidden = YES;
                 ZFPView.worrySureButton.hidden = NO;
@@ -336,10 +338,10 @@
     
     _textField = (UITextField *)[self.view viewWithTag:111111];
     
-    if ([_textField.text floatValue] < [[DES3Util decrypt:[self.flagDic objectForKey:@"totalMoney"]] floatValue]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足"];
-    } else if ([_textField.text floatValue] == 0.00) {
+    if ([_textField.text floatValue] == 0.00) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"不可以提现0元"];
+    } else if ([_textField.text floatValue] > [[[DES3Util decrypt:[self.flagDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足"];
     } else {
         
         viewGray.hidden = NO;
@@ -353,6 +355,10 @@
         [ZFPView setFrame:CGRectMake((self.view.frame.size.width - 300) / 2.0, 200, 300, 200)];
         
         [self.view addSubview:ZFPView];
+        
+        ZFPView.moneyLabel.text = [NSString stringWithFormat:@"¥%@",_textField.text];
+        
+        ZFPView.moneyTF.tag = 9898;
         
         [ZFPView.closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
         [ZFPView.sureButton addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
