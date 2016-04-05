@@ -19,6 +19,8 @@
 @property (nonatomic, copy) NSString *moneyString;
 @property (nonatomic, copy) NSString *syString;
 @property (nonatomic, copy) NSString *endTimeString;
+@property (nonatomic, copy) NSString *haveGhouProduct;
+@property (nonatomic, copy) NSString *haveOrderId;
 
 @property (nonatomic, copy) NSString *monkeyString;
 

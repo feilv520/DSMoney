@@ -197,6 +197,8 @@
         CashOtherFinViewController *cashOFVC = [[CashOtherFinViewController alloc] init];
         cashOFVC.moneyString = self.moneyString;
         cashOFVC.syString = self.syString;
+        cashOFVC.guShou = self.haveGhouProduct;
+        cashOFVC.orderId = self.haveOrderId;
         cashOFVC.endTimeString = self.endTimeString;
         cashOFVC.productName = self.productName;
         cashOFVC.nHand = self.nHand;

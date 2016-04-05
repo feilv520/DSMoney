@@ -169,7 +169,7 @@
             cell.labelLeftUp.text = [[self.productListArray objectAtIndex:indexPath.row] productPeriod];
             cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:[self sizeOfLength:residueString]];
             
-            cell.labelMidUp.text = [[self.productListArray objectAtIndex:indexPath.row] residueMoney];
+            cell.labelMidUp.text = [NSString stringWithFormat:@"%.1lf",[[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / 10000];
             cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:[self sizeOfLength:residueString]];
             
 //            NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]]];

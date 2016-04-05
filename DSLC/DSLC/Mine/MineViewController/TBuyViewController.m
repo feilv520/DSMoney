@@ -19,6 +19,7 @@
     UIView *viewWhite;
     UIButton *buttonBuy;
     UILabel *labelNum;
+    NSInteger countIns;
 }
 
 @end
@@ -31,6 +32,8 @@
     
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"购买权兑换"];
+    
+    countIns = 0;
     
     [self contentShow];
     [self getmonkeyNumber];
@@ -154,6 +157,14 @@
         
     } else {
         
+        countIns ++;
+        if (countIns == 1) {
+            [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+            
+        } else {
+            [self submitLoadingWithHidden:NO];
+        }
+        
         [self getDataList];
     }
 }
@@ -239,6 +250,8 @@
         NSLog(@"兑换>>>>>>>>:%@", responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self submitLoadingWithHidden:YES];
             [self getmonkeyNumber];
             [self tanKaungShow];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];

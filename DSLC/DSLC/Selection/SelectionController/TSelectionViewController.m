@@ -256,7 +256,7 @@
         cell.labelLeftRight.textColor = [UIColor zitihui];
         cell.labelLeftRight.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.labelMidUp.text = productM.residueMoney;
+        cell.labelMidUp.text = [NSString stringWithFormat:@"%.1lf",[productM.residueMoney floatValue] / 10000];
         cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:20];
         
         cell.labelMidDOwn.text = @"剩余总额(万元)";

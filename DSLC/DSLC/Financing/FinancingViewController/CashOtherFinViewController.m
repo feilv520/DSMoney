@@ -26,6 +26,15 @@
     UIButton *butCancle;
     
     UIButton *buttonShare;
+    UIButton *butHeiSe;
+    UIView *viewBaiSe;
+    UIImageView *imageViewDuiH;
+    UIButton *butCuo;
+    UITextField *_textField;
+    UIButton *butOK;
+    UILabel *labelAlert;
+    NSInteger monkeyNum;
+    NSInteger countIns;
 }
 
 @end
@@ -45,10 +54,156 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(buttonNull:)];
     
+    countIns = 0;
+    
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(finishBarPress:)];
 //    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     
-    [self contentShow];
+    if ([self.guShou isEqualToString:@"1"]) {
+        
+        [self getmonkeyNumber];
+        
+    } else {
+        
+        [self contentShow];
+    }
+}
+
+//兑换受益弹窗
+- (void)showImputMonkey
+{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    butHeiSe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    [self.view addSubview:butHeiSe];
+    butHeiSe.alpha = 0.3;
+    [butHeiSe addTarget:self action:@selector(buttonMoneyDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    imageViewDuiH = [CreatView creatImageViewWithFrame:CGRectMake(30, (HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 - 200, WIDTH_CONTROLLER_DEFAULT - 60, 300) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"兑换受益弹窗22"]];
+    imageViewDuiH.userInteractionEnabled = YES;
+    [self.view addSubview:imageViewDuiH];
+    
+    butCuo = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(imageViewDuiH.frame.size.width - 25, imageViewDuiH.frame.size.height/4 + 10, 20, 20) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    [imageViewDuiH addSubview:butCuo];
+    [butCuo setBackgroundImage:[UIImage imageNamed:@"cuo"] forState:UIControlStateNormal];
+    [butCuo setBackgroundImage:[UIImage imageNamed:@"cuo"] forState:UIControlStateHighlighted];
+    [butCuo addTarget:self action:@selector(buttonMoneyDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _textField = [CreatView creatWithfFrame:CGRectMake(10, imageViewDuiH.frame.size.height - imageViewDuiH.frame.size.height/3 + 10, imageViewDuiH.frame.size.width/3 * 2, 40) setPlaceholder:@"请输入兑换数量" setTintColor:[UIColor grayColor]];
+    [imageViewDuiH addSubview:_textField];
+    _textField.layer.cornerRadius = 3;
+    _textField.layer.masksToBounds = YES;
+    _textField.layer.borderColor = [[UIColor daohanglan] CGColor];
+    _textField.layer.borderWidth = 1;
+    _textField.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    _textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
+    _textField.leftViewMode = UITextFieldViewModeAlways;
+    _textField.keyboardType = UIKeyboardTypeNumberPad;
+    
+    butOK = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20 + _textField.frame.size.width, imageViewDuiH.frame.size.height - imageViewDuiH.frame.size.height/3 + 10, imageViewDuiH.frame.size.width - 30 - _textField.frame.size.width, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    [imageViewDuiH addSubview:butOK];
+    [butOK setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+    [butOK setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+    butOK.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    butOK.layer.cornerRadius = 3;
+    butOK.layer.masksToBounds = YES;
+    [butOK addTarget:self action:@selector(buttonMakeSureOk:) forControlEvents:UIControlEventTouchUpInside];
+    
+    labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, imageViewDuiH.frame.size.height - 45, imageViewDuiH.frame.size.width - 20, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"注:兑换数量不能大于投资金额"];
+    [imageViewDuiH addSubview:labelAlert];
+}
+
+- (void)buttonMakeSureOk:(UIButton *)button
+{
+    NSLog(@"确定");
+    if ([_textField.text integerValue] > [self.moneyString integerValue]) {
+        labelAlert.text = @"注:兑换数量不能大于投资金额";
+        labelAlert.textColor = [UIColor daohanglan];
+        
+    } else {
+        
+        labelAlert.textColor = [UIColor zitihui];
+        if ([_textField.text integerValue] > monkeyNum ) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"猴币不足，请确认账户猴币数量"];
+        } else {
+            
+            countIns ++;
+            if (countIns == 1) {
+                [self submitLoadingWithView:self.view loadingFlag:NO height:0];
+                
+            } else {
+                
+                [self submitLoadingWithHidden:NO];
+            }
+            
+            [self getMakeSure];
+        }
+    }
+}
+
+//遮罩层消失
+- (void)buttonMoneyDisappear:(UIButton *)button
+{
+    [self.view endEditing:YES];
+    [butHeiSe removeFromSuperview];
+    [imageViewDuiH removeFromSuperview];
+    
+    butHeiSe = nil;
+    imageViewDuiH = nil;
+}
+
+- (void)getMakeSure
+{   
+    NSLog(@"siao");
+    
+    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"], @"orderId":self.orderId, @"cashMonkeyNumber":_textField.text};
+
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/saveUserCashMonkey" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"%@~~~~~~~~~~~", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self submitLoadingWithHidden:YES view:self.view];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            
+            [self.view endEditing:YES];
+            [butHeiSe removeFromSuperview];
+            [imageViewDuiH removeFromSuperview];
+            
+            butHeiSe = nil;
+            imageViewDuiH = nil;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//获取猴币可用数量
+- (void)getmonkeyNumber
+{
+    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserMonkeyNumber" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"//////////%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self contentShow];
+            [self showImputMonkey];
+            
+            monkeyNum = [[responseObject objectForKey:@"uMonkeyNum"] integerValue];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)contentShow
@@ -206,7 +361,7 @@
     butBlack = nil;
     viewTanKuang = nil;
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.tabBarVC setSuppurtGestureTransition:NO];
     [app.tabBarVC setTabbarViewHidden:NO];
     [app.tabBarVC setLabelLineHidden:NO];

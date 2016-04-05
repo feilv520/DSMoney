@@ -399,6 +399,8 @@
 		81C376691CAA8C41004644C0 /* TBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C376681CAA8C41004644C0 /* TBuyViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C3766D1CAB883F004644C0 /* 矢量智能对象@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C3766B1CAB883F004644C0 /* 矢量智能对象@2x.png */; settings = {ASSET_TAGS = (); }; };
 		81C3766E1CAB883F004644C0 /* 矢量智能对象@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C3766C1CAB883F004644C0 /* 矢量智能对象@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C376701CAE7CFB004644C0 /* 兑换受益弹窗.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C3766F1CAE7CFB004644C0 /* 兑换受益弹窗.png */; settings = {ASSET_TAGS = (); }; };
+		81C376721CAE83F0004644C0 /* 兑换受益弹窗22.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C376711CAE83F0004644C0 /* 兑换受益弹窗22.png */; settings = {ASSET_TAGS = (); }; };
 		81C548621C08329B001CDC97 /* RedBagExplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C548611C08329B001CDC97 /* RedBagExplainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81C8BBC41BDA2F8D005B9DFF /* bangzhu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C8BBBC1BDA2F8D005B9DFF /* bangzhu@2x.png */; };
 		81C8BBC51BDA2F8D005B9DFF /* bangzhu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C8BBBD1BDA2F8D005B9DFF /* bangzhu@3x.png */; };
@@ -1478,6 +1480,8 @@
 		81C376681CAA8C41004644C0 /* TBuyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBuyViewController.m; sourceTree = "<group>"; };
 		81C3766B1CAB883F004644C0 /* 矢量智能对象@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象@2x.png"; sourceTree = "<group>"; };
 		81C3766C1CAB883F004644C0 /* 矢量智能对象@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矢量智能对象@3x.png"; sourceTree = "<group>"; };
+		81C3766F1CAE7CFB004644C0 /* 兑换受益弹窗.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "兑换受益弹窗.png"; sourceTree = "<group>"; };
+		81C376711CAE83F0004644C0 /* 兑换受益弹窗22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "兑换受益弹窗22.png"; sourceTree = "<group>"; };
 		81C548601C08329B001CDC97 /* RedBagExplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBagExplainViewController.h; sourceTree = "<group>"; };
 		81C548611C08329B001CDC97 /* RedBagExplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedBagExplainViewController.m; sourceTree = "<group>"; };
 		81C8BBBC1BDA2F8D005B9DFF /* bangzhu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bangzhu@2x.png"; sourceTree = "<group>"; };
@@ -2586,6 +2590,8 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				81C376711CAE83F0004644C0 /* 兑换受益弹窗22.png */,
+				81C3766F1CAE7CFB004644C0 /* 兑换受益弹窗.png */,
 				81C3766B1CAB883F004644C0 /* 矢量智能对象@2x.png */,
 				81C3766C1CAB883F004644C0 /* 矢量智能对象@3x.png */,
 				81C376631CAA8AB6004644C0 /* iconfont-duihuan@2x.png */,
@@ -4751,6 +4757,7 @@
 				8191E2281BDDF5F0000A6E8C /* lianxikefu@2x.png in Resources */,
 				810EBC051C9CFB55008FB51D /* iconfont-iconfuzhi.png in Resources */,
 				8DB744BB1C1973AC0084D1A2 /* banner_red@3x.png in Resources */,
+				81C376721CAE83F0004644C0 /* 兑换受益弹窗22.png in Resources */,
 				8DEDE1D41BCCFFD8008086D3 /* iocn_saft@2x.png in Resources */,
 				817DD4921BCF547E00042B09 /* bei@2x.png in Resources */,
 				8175BEB31BE9F2F50044026E /* 人人网@3x.png in Resources */,
@@ -4822,6 +4829,7 @@
 				817E33791BD7303200D05103 /* MyPlannerCell.xib in Resources */,
 				8183F4061C97CC4F000BB93C /* iconfont-shijian@2x.png in Resources */,
 				81B674201BF0AFEB007CEF51 /* 蓝色完成@3x.png in Resources */,
+				81C376701CAE7CFB004644C0 /* 兑换受益弹窗.png in Resources */,
 				819B52E71BFC222B002FDF1E /* 钻石@3x.png in Resources */,
 				818523AF1BE3125D002FC653 /* BillCell.xib in Resources */,
 				8D4343A11BFDEB0B000BA004 /* loading_middle_08.png in Resources */,

@@ -769,6 +769,8 @@
                 cashOther.nHand = self.nHand;
                 cashOther.moneyString = textFieldShu.text;
                 cashOther.syString = syString;
+                cashOther.guShou = self.detailM.productType;
+                cashOther.orderId = [responseObject objectForKey:@"orderId"];
                 cashOther.endTimeString = [self.detailM endTime];
                 cashOther.productName = [self.detailM productName];
                 [self.navigationController pushViewController:cashOther animated:YES];
@@ -779,6 +781,8 @@
                 shareHave.redbagModel = redbagModel;
                 shareHave.moneyString = textFieldShu.text;
                 shareHave.syString = syString;
+                shareHave.haveGhouProduct = self.detailM.productType;
+                shareHave.haveOrderId = [responseObject objectForKey:@"orderId"];
                 shareHave.endTimeString = [self.detailM endTime];
                 shareHave.productName = [self.detailM productName];
                 [self.navigationController pushViewController:shareHave animated:YES];
