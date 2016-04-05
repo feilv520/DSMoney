@@ -138,6 +138,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.productListArray.count == 0) {
+        return nil;
+    }
+    
     if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
         if (indexPath.row == 0) {
             
@@ -479,11 +483,11 @@
 
 - (void)getAdvList{
     
-    NSDictionary *parmeter = @{@"adType":@"5"};
+    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"5"};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"AD = %@",responseObject);
+        NSLog(@"ADProduct = %@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];

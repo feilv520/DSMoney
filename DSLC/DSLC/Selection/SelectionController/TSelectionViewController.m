@@ -574,7 +574,7 @@
 
 - (void)getAdvList{
     
-    NSDictionary *parmeter = @{@"adType":@"2"};
+    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"3"};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
