@@ -17,6 +17,9 @@
     UITableView *_tableView;
     NSMutableArray *detailArray;
     UILabel *labelMonkeyShu;
+    NSInteger curruntPage;
+    MJRefreshBackGifFooter *reFooter;
+    BOOL moreFlag;
 }
 
 @end
@@ -30,8 +33,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的猴币"];
     detailArray = [NSMutableArray array];
+    curruntPage = 1;
+    moreFlag = NO;
     
     [self getMonkeyDetail];
+    [self tableViewShow];
 }
 
 - (void)tableViewShow
@@ -48,6 +54,8 @@
     _tableView.tableFooterView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [_tableView registerNib:[UINib nibWithNibName:@"MyMonkeyNumCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    
+    [self addTableViewWithFooter:_tableView];
 }
 
 //头部内容
@@ -152,7 +160,7 @@
 //获取数据
 - (void)getMonkeyDetail
 {
-    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSNumber numberWithInteger:curruntPage]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"/app/user/getUserMonkeyDetail" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"获取猴币详情:~~~~~%@", responseObject);
@@ -165,8 +173,12 @@
                 [detailArray addObject:model];
             }
             
+            if ([[responseObject objectForKey:@"curPage"] isEqualToNumber:[responseObject objectForKey:@"totalPage"]]) {
+                moreFlag = YES;
+            }
+            
+            [reFooter endRefreshing];
             [_tableView reloadData];
-            [self tableViewShow];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -179,6 +191,20 @@
 {
     MonkeyRulesViewController *monkeyRule = [[MonkeyRulesViewController alloc] init];
     [self.navigationController pushViewController:monkeyRule animated:YES];
+}
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
+{
+    reFooter = footer;
+    
+    if (moreFlag) {
+        // 拿到当前的上拉刷新控件，结束刷新状态
+        [footer endRefreshing];
+    } else {
+        curruntPage ++;
+        [self getMonkeyDetail];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="CenturyGothic.TTF">
@@ -23,8 +24,8 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBN-mP-CF4">
                         <rect key="frame" x="15" y="10" width="157" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="LpN-xR-xMk"/>
-                            <constraint firstAttribute="width" constant="157" id="wRl-yd-Z8S"/>
+                            <constraint firstAttribute="height" constant="30" id="4dh-ke-7gM"/>
+                            <constraint firstAttribute="width" constant="157" id="aVb-hB-c4S"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -32,10 +33,6 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7L-CK-XYu">
                         <rect key="frame" x="210" y="10" width="154" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="154" id="06G-li-hpE"/>
-                            <constraint firstAttribute="height" constant="30" id="v7e-83-RTi"/>
-                        </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -43,8 +40,8 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQt-3Q-lCN">
                         <rect key="frame" x="187" y="0.0" width="1" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="JIg-MI-7rg"/>
-                            <constraint firstAttribute="width" constant="1" id="gdb-M7-Ne8"/>
+                            <constraint firstAttribute="height" constant="50" id="Tve-xH-ziF"/>
+                            <constraint firstAttribute="width" constant="1" id="vVP-7q-eUP"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -52,13 +49,20 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="R7L-CK-XYu" secondAttribute="trailing" constant="11" id="5tT-uW-9JX"/>
-                    <constraint firstItem="RQt-3Q-lCN" firstAttribute="leading" secondItem="WBN-mP-CF4" secondAttribute="trailing" constant="15" id="DWM-ja-Ab7"/>
-                    <constraint firstItem="WBN-mP-CF4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="E20-A1-zvn"/>
-                    <constraint firstItem="R7L-CK-XYu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="amy-6n-Rih"/>
-                    <constraint firstItem="WBN-mP-CF4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ipe-3F-ZAW"/>
-                    <constraint firstItem="RQt-3Q-lCN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kBR-u0-aKt"/>
-                    <constraint firstItem="R7L-CK-XYu" firstAttribute="leading" secondItem="RQt-3Q-lCN" secondAttribute="trailing" constant="22" id="vqg-Ob-ixO"/>
+                    <constraint firstItem="WBN-mP-CF4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="0I0-9o-wde"/>
+                    <constraint firstItem="R7L-CK-XYu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="7NN-lY-hMa"/>
+                    <constraint firstItem="WBN-mP-CF4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="9Aa-9v-uI7"/>
+                    <constraint firstItem="RQt-3Q-lCN" firstAttribute="leading" secondItem="WBN-mP-CF4" secondAttribute="trailing" constant="15" id="J9M-9M-Pmp"/>
+                    <constraint firstItem="R7L-CK-XYu" firstAttribute="height" secondItem="WBN-mP-CF4" secondAttribute="height" id="KeF-HY-hC5"/>
+                    <constraint firstItem="RQt-3Q-lCN" firstAttribute="leading" secondItem="WBN-mP-CF4" secondAttribute="trailing" constant="15" id="LmD-0z-zat"/>
+                    <constraint firstItem="RQt-3Q-lCN" firstAttribute="centerY" secondItem="WBN-mP-CF4" secondAttribute="centerY" id="Mxv-hp-oph"/>
+                    <constraint firstItem="RQt-3Q-lCN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZBx-jI-L9q"/>
+                    <constraint firstItem="RQt-3Q-lCN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="a6t-Mq-ICd"/>
+                    <constraint firstItem="RQt-3Q-lCN" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="fUQ-tl-nUL"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="R7L-CK-XYu" secondAttribute="trailing" constant="3" id="taN-ad-Cn8"/>
+                    <constraint firstItem="WBN-mP-CF4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="u56-W5-CiH"/>
+                    <constraint firstItem="R7L-CK-XYu" firstAttribute="width" secondItem="WBN-mP-CF4" secondAttribute="width" constant="-3" id="vzb-ws-GhX"/>
+                    <constraint firstItem="R7L-CK-XYu" firstAttribute="leading" secondItem="RQt-3Q-lCN" secondAttribute="trailing" constant="22" id="yHJ-40-nts"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
@@ -67,7 +71,7 @@
                 <outlet property="labelName" destination="WBN-mP-CF4" id="111-eV-HYF"/>
                 <outlet property="labelStyle" destination="R7L-CK-XYu" id="9Hr-hy-2kQ"/>
             </connections>
-            <point key="canvasLocation" x="313.5" y="217"/>
+            <point key="canvasLocation" x="464.5" y="533"/>
         </tableViewCell>
     </objects>
 </document>

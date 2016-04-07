@@ -324,7 +324,7 @@
     // 预授权
     //  [self.sdk presentPreAuthPaySdkInViewController:self withTraderInfo:signedOrder];
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.sdk = [[LLPaySdk alloc] init];
     self.sdk.sdkDelegate = self;
