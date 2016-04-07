@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIView *viewDiBu;
 @property (weak, nonatomic) IBOutlet UILabel *labelAllMoney;
 @property (weak, nonatomic) IBOutlet UILabel *labelTAllMoney;
+@property (weak, nonatomic) IBOutlet UIButton *buttonMonkey;
+@property (weak, nonatomic) IBOutlet UIButton *buttonSanJiao;
 
 
 @end

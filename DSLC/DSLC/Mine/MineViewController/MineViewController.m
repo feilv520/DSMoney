@@ -41,6 +41,7 @@
 #import "NewCastProductViewController.h"
 #import "newLoginView.h"
 #import "TBuyViewController.h"
+#import "MyMonkeyNumViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate, UMSocialUIDelegate>
 
@@ -277,9 +278,10 @@
     middleView.labelWanYuan.alpha = 0.7;
     middleView.labelWanYuan.textAlignment = NSTextAlignmentCenter;
     
+//    猴币
     middleView.labelAllMoney.text = [self.myAccountInfo objectForKey:@"monkeyNum"];
     middleView.labelAllMoney.font = [UIFont systemFontOfSize:[self sizeOfLength:middleView.labelWanYuan.text]];
-    middleView.labelAllMoney.textColor = Color_Black;
+    middleView.labelAllMoney.textColor = [UIColor daohanglan];
     middleView.labelAllMoney.alpha = 0.7;
     middleView.labelAllMoney.textAlignment = NSTextAlignmentCenter;
     
@@ -298,6 +300,12 @@
     middleView.labelTAllMoney.textAlignment = NSTextAlignmentCenter;
     middleView.labelTAllMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
+    [middleView.buttonSanJiao setBackgroundImage:[UIImage imageNamed:@"图层-678-拷贝"] forState:UIControlStateNormal];
+    [middleView.buttonSanJiao setBackgroundImage:[UIImage imageNamed:@"图层-678-拷贝"] forState:UIControlStateHighlighted];
+    
+    [middleView.buttonMonkey addTarget:self action:@selector(buttonMonkeyClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [middleView.buttonSanJiao addTarget:self action:@selector(buttonMonkeyClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     middleView.viewDiBu.backgroundColor = [UIColor huibai];
         
     middleView.butCashMoney.backgroundColor = [UIColor colorWithRed:221.0 / 255.0 green:75.0 / 255.0 blue:72.0 / 255.0 alpha:1.0];
@@ -308,6 +316,15 @@
     [middleView.butWithdrawal addTarget:self action:@selector(withdrawMoney:) forControlEvents:UIControlEventTouchUpInside];
     [middleView.butBigMoney addTarget:self action:@selector(bigMoneyRecharge:) forControlEvents:UIControlEventTouchUpInside];
     
+}
+
+//我的猴币点击按钮
+- (void)buttonMonkeyClicked:(UIButton *)button
+{
+    NSLog(@"333333333");
+    MyMonkeyNumViewController *monkeyNum = [[MyMonkeyNumViewController alloc] init];
+    monkeyNum.monkeyNumber = [self.myAccountInfo objectForKey:@"monkeyNum"];
+    [self.navigationController pushViewController:monkeyNum animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

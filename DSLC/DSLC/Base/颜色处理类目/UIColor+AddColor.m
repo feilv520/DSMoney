@@ -196,4 +196,12 @@
     return [UIColor colorFromHexCode:@"#c8a779"];
 }
 
++ (UIColor *) monkeyRules {
+    return [UIColor colorFromHexCode:@"#7f97b1"];
+}
+
++ (UIColor *) profitGreen {
+    return [UIColor colorFromHexCode:@"#df4a43"];
+}
+
 @end

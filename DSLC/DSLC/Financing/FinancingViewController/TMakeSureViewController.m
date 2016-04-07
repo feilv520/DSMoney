@@ -74,11 +74,24 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:@"getData" object:nil];
     
-    [self contentShow];
+    if (![self.detailM.productType isEqualToString:@"1"]) {
+        
+        [self contentShow];
+        
+    } else {
+        
+        [self gushoucontentShow];
+    }
+    
     [self getData];
 }
 
-- (void)contentShow
+- (void)getJinDouYunBuyData
+{
+    
+}
+
+- (void)gushoucontentShow
 {
     UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 144) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewBottom];
@@ -136,6 +149,85 @@
     [viewCash addSubview:labelCoin];
     
     UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, 210, WIDTH_CONTROLLER_DEFAULT - 20, 20) backgroundColor:[UIColor qianhuise] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"提示:购买产品成功后,可拆开选择的红包"];
+    [self.view addSubview:labelAlert];
+    
+    buttonMake = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 20 - 120 - 40 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确认投资"];
+    [self.view addSubview:buttonMake];
+    buttonMake.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+    [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+    [buttonMake addTarget:self action:@selector(buttonMakeSureCash:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)contentShow
+{
+    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 144) backgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:viewBottom];
+    
+    UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(10, 7, WIDTH_CONTROLLER_DEFAULT - 20, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"投资金额"];
+    [viewBottom addSubview:labelMoney];
+    
+    textFieldShu = [CreatView creatWithfFrame:CGRectMake(10, 43, WIDTH_CONTROLLER_DEFAULT - 20, 40) setPlaceholder:[NSString stringWithFormat:@"%@元起投,每递增%@元", [self.detailM amountMin],[self.detailM amountIncrease]] setTintColor:[UIColor grayColor]];
+    [viewBottom addSubview:textFieldShu];
+    textFieldShu.backgroundColor = [UIColor shurukuangColor];
+    textFieldShu.keyboardType = UIKeyboardTypeNumberPad;
+    textFieldShu.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    textFieldShu.delegate = self;
+    textFieldShu.layer.cornerRadius = 5;
+    textFieldShu.layer.masksToBounds = YES;
+    textFieldShu.layer.borderColor = [[UIColor shurukuangBian] CGColor];
+    textFieldShu.layer.borderWidth = 1;
+    textFieldShu.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
+    textFieldShu.leftView.backgroundColor = [UIColor shurukuangColor];
+    textFieldShu.leftViewMode = UITextFieldViewModeAlways;
+    [textFieldShu addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+    
+    UILabel *labelYuan = [CreatView creatWithLabelFrame:CGRectMake(textFieldShu.frame.size.width - 25, 5, 20, 30) backgroundColor:[UIColor shurukuangColor] textColor:[UIColor yuanColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"元"];
+    [textFieldShu addSubview:labelYuan];
+    
+    UILabel *labelShengYu = [CreatView creatWithLabelFrame:CGRectMake(10, 85, 100, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"产品可购额仅剩"];
+    [viewBottom addSubview:labelShengYu];
+    
+    UILabel *labelShuYu = [CreatView creatWithLabelFrame:CGRectMake(120, 85, WIDTH_CONTROLLER_DEFAULT - 210, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"20000元"];
+    [viewBottom addSubview:labelShuYu];
+    
+    UIButton *buttonLift = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20 + labelShengYu.frame.size.width + labelShuYu.frame.size.width, 85, WIDTH_CONTROLLER_DEFAULT - 30 - labelShengYu.frame.size.width - labelShuYu.frame.size.width, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor chongzhiColor] titleText:@"去提升>"];
+    [viewBottom addSubview:buttonLift];
+    buttonLift.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    buttonLift.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    
+    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(10, 130.5, WIDTH_CONTROLLER_DEFAULT - 20, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:nil text:nil];
+    [viewBottom addSubview:labelLine];
+    labelLine.alpha = 0.2;
+    
+    UILabel *labelYuJi = [CreatView creatWithLabelFrame:CGRectMake(10, 131, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"预计到期收益"];
+    [viewBottom addSubview:labelYuJi];
+    
+    labelYJmoney = [CreatView creatWithLabelFrame:CGRectMake(10 + (WIDTH_CONTROLLER_DEFAULT - 20)/2, 131, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 50) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"0.00元"];
+    [viewBottom addSubview:labelYJmoney];
+    
+    UILabel *labelLineD = [CreatView creatWithLabelFrame:CGRectMake(0, 182.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [viewBottom addSubview:labelLineD];
+    labelLineD.alpha = 0.2;
+    
+    UIView *viewCash = [CreatView creatViewWithFrame:CGRectMake(0, 193, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:viewCash];
+    
+    UILabel *labelLineUp = [CreatView creatWithLabelFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [viewCash addSubview:labelLineUp];
+    labelLineUp.alpha = 0.2;
+    
+    UILabel *labelLineDown = [CreatView creatWithLabelFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [viewCash addSubview:labelLineDown];
+    labelLineDown.alpha = 0.2;
+    
+    UILabel *labelCash = [CreatView creatWithLabelFrame:CGRectMake(10, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"支付金额"];
+    [viewCash addSubview:labelCash];
+    
+    labelCoin = [CreatView creatWithLabelFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 20)/2, 10, (WIDTH_CONTROLLER_DEFAULT - 20)/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:[NSString stringWithFormat:@"%@元", @"0.00"]];
+    [viewCash addSubview:labelCoin];
+    
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, 250, WIDTH_CONTROLLER_DEFAULT - 20, 20) backgroundColor:[UIColor qianhuise] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"提示:购买产品成功后,可拆开选择的红包"];
     [self.view addSubview:labelAlert];
     
     buttonMake = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 20 - 120 - 40 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"确认投资"];
@@ -401,7 +493,7 @@
 }
 
 - (void)ziFuPasswordView{
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [self.view addSubview:viewGray];
     
@@ -603,7 +695,7 @@
         NSInteger qiTouMoney = self.detailM.amountMin.integerValue;
         NSInteger diZengMoney = self.detailM.amountIncrease.integerValue;
         NSInteger money = shuRuInt % diZengMoney;
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
 //        外层判断 输入的金额与账户余额的判断
         if (shuRuInt > numberInt && shuRuInt != 0) {

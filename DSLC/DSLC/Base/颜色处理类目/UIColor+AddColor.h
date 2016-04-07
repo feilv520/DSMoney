@@ -51,5 +51,7 @@
 + (UIColor *) yuanColor;//元字颜色
 + (UIColor *) chongzhiColor;//充值颜色
 + (UIColor *) jinse;//金色
++ (UIColor *) monkeyRules;//猴币细则色
++ (UIColor *) profitGreen;//收益绿色
 
 @end

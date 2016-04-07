@@ -10,6 +10,7 @@
 #import "ShareEveryCell.h"
 #import "ShareFailureViewController.h"
 #import "define.h"
+#import "MonkeyRulesViewController.h"
 
 @interface CashOtherFinViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UMSocialUIDelegate>
 
@@ -32,8 +33,9 @@
     UIButton *butCuo;
     UITextField *_textField;
     UIButton *butOK;
-    UILabel *labelAlert;
+    UILabel *labelMonkeynum;
     NSInteger monkeyNum;
+    NSString *monkey;
     NSInteger countIns;
 }
 
@@ -72,13 +74,12 @@
 //兑换受益弹窗
 - (void)showImputMonkey
 {
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     butHeiSe = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
     [self.view addSubview:butHeiSe];
     butHeiSe.alpha = 0.3;
     [butHeiSe addTarget:self action:@selector(buttonMoneyDisappear:) forControlEvents:UIControlEventTouchUpInside];
     
-    imageViewDuiH = [CreatView creatImageViewWithFrame:CGRectMake(30, (HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 - 200, WIDTH_CONTROLLER_DEFAULT - 60, 300) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"兑换受益弹窗22"]];
+    imageViewDuiH = [CreatView creatImageViewWithFrame:CGRectMake(30, (HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 - 260, WIDTH_CONTROLLER_DEFAULT - 60, 310) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"兑换受益弹窗22"]];
     imageViewDuiH.userInteractionEnabled = YES;
     [self.view addSubview:imageViewDuiH];
     
@@ -88,56 +89,43 @@
     [butCuo setBackgroundImage:[UIImage imageNamed:@"cuo"] forState:UIControlStateHighlighted];
     [butCuo addTarget:self action:@selector(buttonMoneyDisappear:) forControlEvents:UIControlEventTouchUpInside];
     
-    _textField = [CreatView creatWithfFrame:CGRectMake(10, imageViewDuiH.frame.size.height - imageViewDuiH.frame.size.height/3 + 10, imageViewDuiH.frame.size.width/3 * 2, 40) setPlaceholder:@"请输入兑换数量" setTintColor:[UIColor grayColor]];
-    [imageViewDuiH addSubview:_textField];
-    _textField.layer.cornerRadius = 3;
-    _textField.layer.masksToBounds = YES;
-    _textField.layer.borderColor = [[UIColor daohanglan] CGColor];
-    _textField.layer.borderWidth = 1;
-    _textField.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-    _textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
-    _textField.leftViewMode = UITextFieldViewModeAlways;
-    _textField.keyboardType = UIKeyboardTypeNumberPad;
+    labelMonkeynum = [CreatView creatWithLabelFrame:CGRectMake(0, imageViewDuiH.frame.size.height - imageViewDuiH.frame.size.height/3, imageViewDuiH.frame.size.width, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+    [imageViewDuiH addSubview:labelMonkeynum];
     
-    butOK = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20 + _textField.frame.size.width, imageViewDuiH.frame.size.height - imageViewDuiH.frame.size.height/3 + 10, imageViewDuiH.frame.size.width - 30 - _textField.frame.size.width, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    butOK = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(80, imageViewDuiH.frame.size.height - imageViewDuiH.frame.size.height/3 + labelMonkeynum.frame.size.height + 10, imageViewDuiH.frame.size.width - 160, 30) backgroundColor:[UIColor jinse] textColor:[UIColor whiteColor] titleText:@"确定"];
     [imageViewDuiH addSubview:butOK];
-    [butOK setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-    [butOK setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     butOK.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     butOK.layer.cornerRadius = 3;
     butOK.layer.masksToBounds = YES;
     [butOK addTarget:self action:@selector(buttonMakeSureOk:) forControlEvents:UIControlEventTouchUpInside];
     
-    labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, imageViewDuiH.frame.size.height - 45, imageViewDuiH.frame.size.width - 20, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"注:兑换数量不能大于投资金额"];
-    [imageViewDuiH addSubview:labelAlert];
+    UIButton *buttonRules = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, imageViewDuiH.frame.size.height - 25, imageViewDuiH.frame.size.width, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor monkeyRules] titleText:@" 猴币玩法"];
+    [imageViewDuiH addSubview:buttonRules];
+    buttonRules.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:8];
+    [buttonRules setImage:[UIImage imageNamed:@"houbixize"] forState:UIControlStateNormal];
+    [buttonRules setImage:[UIImage imageNamed:@"houbixize"] forState:UIControlStateHighlighted];
+    [buttonRules addTarget:self action:@selector(buttonMonkeyRules:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//猴币玩法
+- (void)buttonMonkeyRules:(UIButton *)button
+{
+    MonkeyRulesViewController *monkeyRules = [[MonkeyRulesViewController alloc] init];
+    [self.navigationController pushViewController:monkeyRules animated:YES];
 }
 
 - (void)buttonMakeSureOk:(UIButton *)button
 {
-    NSLog(@"确定");
-    if ([_textField.text integerValue] > [self.moneyString integerValue]) {
-        labelAlert.text = @"注:兑换数量不能大于投资金额";
-        labelAlert.textColor = [UIColor daohanglan];
+    countIns ++;
+    if (countIns == 1) {
+        [self submitLoadingWithView:self.view loadingFlag:NO height:0];
         
     } else {
         
-        labelAlert.textColor = [UIColor zitihui];
-        if ([_textField.text integerValue] > monkeyNum ) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"猴币不足，请确认账户猴币数量"];
-        } else {
-            
-            countIns ++;
-            if (countIns == 1) {
-                [self submitLoadingWithView:self.view loadingFlag:NO height:0];
-                
-            } else {
-                
-                [self submitLoadingWithHidden:NO];
-            }
-            
-            [self getMakeSure];
-        }
+        [self submitLoadingWithHidden:NO];
     }
+    
+    [self getMakeSure];
 }
 
 //遮罩层消失
@@ -152,36 +140,72 @@
 }
 
 - (void)getMakeSure
-{   
+{
     NSLog(@"siao");
     
-    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"], @"orderId":self.orderId, @"cashMonkeyNumber":_textField.text};
+    if (monkeyNum > self.moneyString.integerValue) {
+        
+        NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"], @"orderId":self.orderId, @"cashMonkeyNumber":self.moneyString};
+        
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/saveUserCashMonkey" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"%@~~~~~~~~~~~", responseObject);
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                
+                [self submitLoadingWithHidden:YES view:self.view];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                
+                [self.view endEditing:YES];
+                [butHeiSe removeFromSuperview];
+                [imageViewDuiH removeFromSuperview];
+                
+                butHeiSe = nil;
+                imageViewDuiH = nil;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+                
+            } else {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@", error);
+        }];
+        
+    } else {
+        
+        NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"], @"orderId":self.orderId, @"cashMonkeyNumber":monkey};
+        
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/saveUserCashMonkey" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"%@~~~~~~~~~~~", responseObject);
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                
+                [self submitLoadingWithHidden:YES view:self.view];
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                
+                [self.view endEditing:YES];
+                [butHeiSe removeFromSuperview];
+                [imageViewDuiH removeFromSuperview];
+                
+                butHeiSe = nil;
+                imageViewDuiH = nil;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
+                
+            } else {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@", error);
+        }];
 
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/saveUserCashMonkey" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
-        NSLog(@"%@~~~~~~~~~~~", responseObject);
-        
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-            
-            [self submitLoadingWithHidden:YES view:self.view];
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            
-            [self.view endEditing:YES];
-            [butHeiSe removeFromSuperview];
-            [imageViewDuiH removeFromSuperview];
-            
-            butHeiSe = nil;
-            imageViewDuiH = nil;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"exchangeWithImageView" object:nil];
-            
-        } else {
-            
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-    }];
+    }
+    
+
 }
 
 //获取猴币可用数量
@@ -198,7 +222,32 @@
             [self showImputMonkey];
             
             monkeyNum = [[responseObject objectForKey:@"uMonkeyNum"] integerValue];
+            monkey = [responseObject objectForKey:@"uMonkeyNum"];
             
+            if (monkeyNum > self.moneyString.integerValue) {
+                
+                NSMutableAttributedString *amountStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"兑换数量:%@个", self.moneyString]];
+                NSRange geShuRange = NSMakeRange(0, [[amountStr string] rangeOfString:@":"].location);
+                [amountStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:geShuRange];
+                NSRange geStr = NSMakeRange([[amountStr string] length] - 1, 1);
+                [amountStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:geStr];
+                NSRange shuliang = NSMakeRange(4, [[amountStr string] rangeOfString:@"个"].location - 4);
+                [amountStr addAttribute:NSForegroundColorAttributeName value:[UIColor jinse] range:shuliang];
+                [amountStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:shuliang];
+                [labelMonkeynum setAttributedText:amountStr];
+                
+            } else {
+                
+                NSMutableAttributedString *amountStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"兑换数量:%@个", monkey]];
+                NSRange geShuRange = NSMakeRange(0, [[amountStr string] rangeOfString:@":"].location);
+                [amountStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:geShuRange];
+                NSRange geStr = NSMakeRange([[amountStr string] length] - 1, 1);
+                [amountStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:geStr];
+                NSRange shuliang = NSMakeRange(4, [[amountStr string] rangeOfString:@"个"].location - 4);
+                [amountStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:shuliang];
+                [amountStr addAttribute:NSForegroundColorAttributeName value:[UIColor jinse] range:shuliang];
+                [labelMonkeynum setAttributedText:amountStr];
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
