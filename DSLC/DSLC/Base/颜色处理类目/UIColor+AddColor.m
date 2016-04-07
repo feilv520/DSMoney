@@ -201,7 +201,7 @@
 }
 
 + (UIColor *) profitGreen {
-    return [UIColor colorFromHexCode:@"#df4a43"];
+    return [UIColor colorFromHexCode:@"#87d196"];
 }
 
 @end

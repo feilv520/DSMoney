@@ -94,7 +94,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"MendDealCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     nameArray = @[@"真实姓名", @"开户银行", @"银行卡号", @"手机号码", @"刷卡时间", @"商户", @"POS单号", @"充值金额", @"上传POS单照片"];
-    textArray = @[@"输入持卡人姓名", @"输入开户银行", @"银行卡号", @"请输入手机号", @"时间格式2016010101010", @"请选择商户", @"POS单号", @"请输入充值金额", @"请上传POS单照片"];
+    textArray = @[@"输入持卡人姓名", @"输入开户银行", @"银行卡号", @"请输入银行预留手机号", @"时间格式2016010101010", @"请选择商户", @"POS单号", @"请输入充值金额", @"请上传POS单照片"];
     
     buttonApply = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 60, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"提交申请"];
     [_tableView.tableFooterView addSubview:buttonApply];

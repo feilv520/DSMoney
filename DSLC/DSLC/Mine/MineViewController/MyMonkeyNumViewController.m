@@ -44,7 +44,8 @@
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 200)];
     _tableView.tableHeaderView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self tableViewHeadShow];
-    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.1)];
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
+    _tableView.tableFooterView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [_tableView registerNib:[UINib nibWithNibName:@"MyMonkeyNumCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
@@ -127,6 +128,11 @@
         cell.labelMoney.textColor = [UIColor profitGreen];
         cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
         
+        NSMutableAttributedString *incomeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"预期额外收益%@元", model.preIncome]];
+        NSRange redRange = NSMakeRange(6, [[incomeStr string] rangeOfString:@"元"].location - 6);
+        [incomeStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
+        [cell.labelProfit setAttributedText:incomeStr];
+        
     } else if ([[model.useType description] isEqualToString:@"4"]) {
         cell.labelName.text = @"抽奖消耗";
         cell.labelMoney.textColor = [UIColor profitGreen];
@@ -136,11 +142,6 @@
         cell.labelName.text = @"兑换金斗云";
         cell.labelMoney.textColor = [UIColor profitGreen];
         cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
-        
-        NSMutableAttributedString *incomeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"预期额外收益%@元", model.preIncome]];
-        NSRange redRange = NSMakeRange(6, [[incomeStr string] rangeOfString:@"元"].location - 6);
-        [incomeStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
-        [cell.labelProfit setAttributedText:incomeStr];
     }
     
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
