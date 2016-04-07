@@ -137,8 +137,8 @@
         cell.labelMoney.textColor = [UIColor profitGreen];
         cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
         
-        NSMutableAttributedString *incomeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"预期额外收益%@个", model.preIncome]];
-        NSRange redRange = NSMakeRange(5, [[incomeStr string] rangeOfString:@"元"].location - 5);
+        NSMutableAttributedString *incomeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"预期额外收益%@元", model.preIncome]];
+        NSRange redRange = NSMakeRange(6, [[incomeStr string] rangeOfString:@"元"].location - 6);
         [incomeStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
         [cell.labelProfit setAttributedText:incomeStr];
     }

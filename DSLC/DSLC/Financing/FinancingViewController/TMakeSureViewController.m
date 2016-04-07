@@ -19,6 +19,7 @@
 #import "FindDealViewController.h"
 #import "RealNameViewController.h"
 #import "RechargeAlreadyBinding.h"
+#import "TBuyViewController.h"
 
 @interface TMakeSureViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -45,6 +46,7 @@
     UIView *viewGray;
     
     NSIndexPath *currentIndexPath;
+    UILabel *labelShuYu;
 }
 
 @property (nonatomic) UIView *viewBottom;
@@ -76,7 +78,7 @@
     
     if (![self.detailM.productType isEqualToString:@"1"]) {
         
-        [self contentShow];
+        [self getJinDouYunBuyData];
         
     } else {
         
@@ -86,9 +88,28 @@
     [self getData];
 }
 
+//获取金斗云购买权接口
 - (void)getJinDouYunBuyData
 {
-    
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"/app/user/getJDYCashPower" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"pp获取金斗云剩余:%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self contentShow];
+            labelShuYu.text = [[responseObject objectForKey:@"userJDYCashPower"] description];
+            NSLog(@"~~~~~~~~~~%@", labelShuYu.text);
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)gushoucontentShow
@@ -188,13 +209,14 @@
     UILabel *labelShengYu = [CreatView creatWithLabelFrame:CGRectMake(10, 85, 100, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"产品可购额仅剩"];
     [viewBottom addSubview:labelShengYu];
     
-    UILabel *labelShuYu = [CreatView creatWithLabelFrame:CGRectMake(120, 85, WIDTH_CONTROLLER_DEFAULT - 210, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"20000元"];
+    labelShuYu = [CreatView creatWithLabelFrame:CGRectMake(120, 85, WIDTH_CONTROLLER_DEFAULT - 210, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:nil];
     [viewBottom addSubview:labelShuYu];
     
     UIButton *buttonLift = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20 + labelShengYu.frame.size.width + labelShuYu.frame.size.width, 85, WIDTH_CONTROLLER_DEFAULT - 30 - labelShengYu.frame.size.width - labelShuYu.frame.size.width, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor chongzhiColor] titleText:@"去提升>"];
     [viewBottom addSubview:buttonLift];
     buttonLift.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     buttonLift.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [buttonLift addTarget:self action:@selector(buttonLiftUp:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(10, 130.5, WIDTH_CONTROLLER_DEFAULT - 20, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:nil text:nil];
     [viewBottom addSubview:labelLine];
@@ -236,6 +258,13 @@
     [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
     [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     [buttonMake addTarget:self action:@selector(buttonMakeSureCash:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//去提升按钮
+- (void)buttonLiftUp:(UIButton *)button
+{
+    TBuyViewController *buyVC = [[TBuyViewController alloc] init];
+    [self.navigationController pushViewController:buyVC animated:YES];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -561,6 +590,7 @@
 //        }
         
         [self buyProduct];
+
     }
     [ZFPView.moneyTF resignFirstResponder];
 }
