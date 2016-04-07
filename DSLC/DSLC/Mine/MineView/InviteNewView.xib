@@ -15,8 +15,8 @@
                     <rect key="frame" x="31" y="8" width="60" height="60"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="KCC-SY-Q3a"/>
-                        <constraint firstAttribute="height" constant="60" id="TAf-NG-ixq"/>
+                        <constraint firstAttribute="height" constant="60" id="MRf-g8-Cit"/>
+                        <constraint firstAttribute="width" constant="60" id="ZzJ-hQ-45y"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     <state key="normal" image="微信.png">
@@ -27,8 +27,8 @@
                     <rect key="frame" x="31" y="82" width="60" height="60"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="0zB-r0-ZMw"/>
-                        <constraint firstAttribute="width" constant="60" id="LAS-mP-jAN"/>
+                        <constraint firstAttribute="height" constant="60" id="7dS-sg-B2y"/>
+                        <constraint firstAttribute="width" constant="60" id="D5Y-QF-gjr"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     <state key="normal" image="人人网.png">
@@ -39,8 +39,8 @@
                     <rect key="frame" x="157" y="8" width="60" height="60"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="1RE-Y2-CIl"/>
-                        <constraint firstAttribute="height" constant="60" id="xOm-QP-aMu"/>
+                        <constraint firstAttribute="width" constant="60" id="XcE-j9-jXh"/>
+                        <constraint firstAttribute="height" constant="60" id="yF1-bp-UiY"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     <state key="normal" image="新浪微博.png">
@@ -51,8 +51,8 @@
                     <rect key="frame" x="157" y="82" width="60" height="60"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="TO4-O6-256"/>
-                        <constraint firstAttribute="width" constant="60" id="f5d-vX-aqf"/>
+                        <constraint firstAttribute="width" constant="60" id="K7v-kG-r2K"/>
+                        <constraint firstAttribute="height" constant="60" id="Xpo-O6-kZz"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     <state key="normal" image="QQ空间.png">
@@ -63,8 +63,8 @@
                     <rect key="frame" x="274" y="8" width="60" height="60"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="1cT-Pa-LZR"/>
-                        <constraint firstAttribute="height" constant="60" id="KMX-Ka-NoE"/>
+                        <constraint firstAttribute="width" constant="60" id="UPB-or-zwe"/>
+                        <constraint firstAttribute="height" constant="60" id="cDK-o0-fYE"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     <state key="normal" image="朋友圈.png">
@@ -75,8 +75,8 @@
                     <rect key="frame" x="0.0" y="167" width="375" height="30"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="8YI-eo-cgO"/>
-                        <constraint firstAttribute="width" constant="375" id="IaF-fz-Tzh"/>
+                        <constraint firstAttribute="height" constant="30" id="K3H-OG-ING"/>
+                        <constraint firstAttribute="width" constant="375" id="V7M-RA-8P5"/>
                     </constraints>
                     <state key="normal" title="取消">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -87,38 +87,27 @@
                     <animations/>
                     <color key="backgroundColor" red="0.81960784310000001" green="0.81960784310000001" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="5OS-0h-v2z"/>
-                        <constraint firstAttribute="width" constant="375" id="Ecr-Ut-bYP"/>
+                        <constraint firstAttribute="height" constant="1" id="fkY-4W-dRV"/>
+                        <constraint firstAttribute="width" constant="375" id="jYf-AT-ZL9"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKO-Sy-lsH">
                     <rect key="frame" x="31" y="60" width="60" height="30"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="MxA-2N-nO5"/>
-                        <constraint firstAttribute="height" constant="30" id="cPD-iQ-v3L"/>
+                        <constraint firstAttribute="height" constant="30" id="9ky-gN-s2f"/>
+                        <constraint firstAttribute="width" constant="60" id="glF-lR-VAw"/>
                     </constraints>
                     <state key="normal" title="微信好友">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMe-bq-Zgk">
-                    <rect key="frame" x="39" y="132" width="45" height="30"/>
-                    <animations/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="45" id="5RG-5g-Vo6"/>
-                        <constraint firstAttribute="height" constant="30" id="ETR-Dw-ZjJ"/>
-                    </constraints>
-                    <state key="normal" title="人人网">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0s-WS-YJZ">
-                    <rect key="frame" x="161" y="132" width="53" height="30"/>
+                    <rect key="frame" x="157" y="132" width="63" height="30"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="53" id="dov-z4-t13"/>
-                        <constraint firstAttribute="height" constant="30" id="spv-VA-9kl"/>
+                        <constraint firstAttribute="width" constant="63" id="Ddn-HA-s70"/>
+                        <constraint firstAttribute="height" constant="30" id="rcH-ko-UZs"/>
                     </constraints>
                     <state key="normal" title="QQ空间">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -128,21 +117,32 @@
                     <rect key="frame" x="157" y="60" width="60" height="30"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="UhP-P5-sw3"/>
-                        <constraint firstAttribute="width" constant="60" id="ghr-CQ-WsF"/>
+                        <constraint firstAttribute="width" constant="60" id="CMu-jd-An9"/>
+                        <constraint firstAttribute="height" constant="30" id="gzy-7V-5vn"/>
                     </constraints>
                     <state key="normal" title="新浪微博">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrM-lO-JOO">
-                    <rect key="frame" x="282" y="60" width="45" height="30"/>
+                    <rect key="frame" x="278" y="60" width="52" height="30"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="7Np-qA-CMN"/>
-                        <constraint firstAttribute="width" constant="45" id="uMm-b9-YEP"/>
+                        <constraint firstAttribute="width" constant="52" id="Gbf-F2-8rH"/>
+                        <constraint firstAttribute="height" constant="30" id="mVH-95-7oT"/>
                     </constraints>
                     <state key="normal" title="朋友圈">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMe-bq-Zgk">
+                    <rect key="frame" x="31" y="132" width="60" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="pqp-v9-lfq"/>
+                        <constraint firstAttribute="width" constant="60" id="yNk-W1-75F"/>
+                    </constraints>
+                    <state key="normal" title="人人网">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
@@ -150,36 +150,40 @@
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="RPx-uy-fTu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="01v-1Q-orv"/>
-                <constraint firstItem="dMe-bq-Zgk" firstAttribute="top" secondItem="eKO-Sy-lsH" secondAttribute="bottom" constant="42" id="2WK-aS-Rv1"/>
-                <constraint firstItem="m0s-WS-YJZ" firstAttribute="top" secondItem="7ts-9E-Et8" secondAttribute="bottom" constant="42" id="37B-xD-kDc"/>
-                <constraint firstItem="m0s-WS-YJZ" firstAttribute="leading" secondItem="U4N-bC-7BU" secondAttribute="trailing" constant="70" id="5uP-BO-002"/>
-                <constraint firstItem="r75-SA-Msz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="6Fa-Nh-UWp"/>
-                <constraint firstItem="PKM-2z-r7v" firstAttribute="leading" secondItem="eKO-Sy-lsH" secondAttribute="trailing" constant="66" id="ATa-WF-NDR"/>
-                <constraint firstAttribute="trailing" secondItem="pJJ-xK-XAm" secondAttribute="trailing" id="D5g-RP-2ot"/>
-                <constraint firstItem="eKO-Sy-lsH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="31" id="FfH-yk-L8q"/>
-                <constraint firstAttribute="trailing" secondItem="9DQ-CC-kOy" secondAttribute="trailing" id="Inz-YM-IcH"/>
-                <constraint firstItem="U4N-bC-7BU" firstAttribute="top" secondItem="r75-SA-Msz" secondAttribute="bottom" constant="14" id="KSV-en-5XP"/>
-                <constraint firstItem="9DQ-CC-kOy" firstAttribute="top" secondItem="P1B-Hi-hMy" secondAttribute="bottom" constant="19" id="LoB-FM-5pd"/>
-                <constraint firstItem="7ts-9E-Et8" firstAttribute="leading" secondItem="eKO-Sy-lsH" secondAttribute="trailing" constant="66" id="NDs-Li-wKY"/>
-                <constraint firstItem="zrM-lO-JOO" firstAttribute="leading" secondItem="P1B-Hi-hMy" secondAttribute="trailing" constant="65" id="NF7-QE-lej"/>
-                <constraint firstItem="RPx-uy-fTu" firstAttribute="leading" secondItem="7ts-9E-Et8" secondAttribute="trailing" constant="57" id="O1N-Pd-7VZ"/>
-                <constraint firstItem="9DQ-CC-kOy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ppm-5p-F9q"/>
-                <constraint firstItem="P1B-Hi-hMy" firstAttribute="top" secondItem="PKM-2z-r7v" secondAttribute="bottom" constant="14" id="Su4-z3-1Rt"/>
-                <constraint firstItem="eKO-Sy-lsH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="TIR-Zu-29Z"/>
-                <constraint firstItem="PKM-2z-r7v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Vvm-d2-YkC"/>
-                <constraint firstItem="pJJ-xK-XAm" firstAttribute="top" secondItem="m0s-WS-YJZ" secondAttribute="bottom" constant="5" id="Zao-Hz-7Ur"/>
-                <constraint firstItem="P1B-Hi-hMy" firstAttribute="leading" secondItem="eKO-Sy-lsH" secondAttribute="trailing" constant="66" id="ZxB-Oi-Gia"/>
-                <constraint firstAttribute="trailing" secondItem="RPx-uy-fTu" secondAttribute="trailing" constant="41" id="bKW-ai-oku"/>
-                <constraint firstItem="zrM-lO-JOO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="eml-Ta-QYt"/>
-                <constraint firstItem="pJJ-xK-XAm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eyD-h7-19f"/>
-                <constraint firstAttribute="trailing" secondItem="m0s-WS-YJZ" secondAttribute="trailing" constant="161" id="ffK-FV-3Du"/>
-                <constraint firstItem="7ts-9E-Et8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="l7i-jQ-3eB"/>
-                <constraint firstAttribute="trailing" secondItem="zrM-lO-JOO" secondAttribute="trailing" constant="48" id="ld4-Do-KO0"/>
-                <constraint firstItem="U4N-bC-7BU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="31" id="mSf-NW-Q8Q"/>
-                <constraint firstItem="r75-SA-Msz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="31" id="nnL-86-Y2N"/>
-                <constraint firstItem="dMe-bq-Zgk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="39" id="q43-aG-cQC"/>
-                <constraint firstItem="RPx-uy-fTu" firstAttribute="leading" secondItem="PKM-2z-r7v" secondAttribute="trailing" constant="57" id="wbP-Wl-Y6v"/>
+                <constraint firstItem="pJJ-xK-XAm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0qL-v5-SzH"/>
+                <constraint firstItem="PKM-2z-r7v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="2Rq-an-e9I"/>
+                <constraint firstItem="PKM-2z-r7v" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="157" id="2yI-AP-ceQ"/>
+                <constraint firstItem="P1B-Hi-hMy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="82" id="8LN-FH-yTf"/>
+                <constraint firstItem="9DQ-CC-kOy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="BRI-Ju-Yi1"/>
+                <constraint firstItem="zrM-lO-JOO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="JFn-Cq-Hzl"/>
+                <constraint firstItem="pJJ-xK-XAm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="167" id="N6p-dw-O7l"/>
+                <constraint firstItem="eKO-Sy-lsH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="NEO-IF-0ed"/>
+                <constraint firstItem="m0s-WS-YJZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="132" id="QMK-M5-Sw5"/>
+                <constraint firstItem="r75-SA-Msz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="31" id="RNq-58-C1G"/>
+                <constraint firstAttribute="trailing" secondItem="9DQ-CC-kOy" secondAttribute="trailing" id="TIE-vE-yCG"/>
+                <constraint firstItem="9DQ-CC-kOy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="161" id="TTb-SR-Vfk"/>
+                <constraint firstItem="7ts-9E-Et8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="Tza-m3-HEt"/>
+                <constraint firstItem="RPx-uy-fTu" firstAttribute="height" secondItem="r75-SA-Msz" secondAttribute="height" id="VHu-BK-J0W"/>
+                <constraint firstItem="P1B-Hi-hMy" firstAttribute="leading" secondItem="eKO-Sy-lsH" secondAttribute="trailing" constant="66" id="YJB-EN-cSg"/>
+                <constraint firstItem="RPx-uy-fTu" firstAttribute="width" secondItem="r75-SA-Msz" secondAttribute="width" id="ZMS-E3-mcs"/>
+                <constraint firstItem="U4N-bC-7BU" firstAttribute="width" secondItem="r75-SA-Msz" secondAttribute="width" id="a1T-VX-f8m"/>
+                <constraint firstItem="r75-SA-Msz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="bAU-1r-1GQ"/>
+                <constraint firstItem="eKO-Sy-lsH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="31" id="bE2-dH-Rpf"/>
+                <constraint firstItem="P1B-Hi-hMy" firstAttribute="height" secondItem="r75-SA-Msz" secondAttribute="height" id="fRp-2c-rir"/>
+                <constraint firstItem="U4N-bC-7BU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="31" id="gru-Pq-hDc"/>
+                <constraint firstItem="7ts-9E-Et8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="157" id="hku-oT-Xyy"/>
+                <constraint firstItem="RPx-uy-fTu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="274" id="i9N-hC-WMW"/>
+                <constraint firstAttribute="trailing" secondItem="pJJ-xK-XAm" secondAttribute="trailing" id="loy-gs-f8L"/>
+                <constraint firstItem="dMe-bq-Zgk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="31" id="m91-yV-H0O"/>
+                <constraint firstItem="dMe-bq-Zgk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="132" id="mXd-nw-jq3"/>
+                <constraint firstItem="P1B-Hi-hMy" firstAttribute="width" secondItem="r75-SA-Msz" secondAttribute="width" id="pZW-N6-6Qy"/>
+                <constraint firstItem="U4N-bC-7BU" firstAttribute="height" secondItem="r75-SA-Msz" secondAttribute="height" id="pc1-gv-3Kx"/>
+                <constraint firstItem="RPx-uy-fTu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="rhL-22-aTq"/>
+                <constraint firstItem="U4N-bC-7BU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="82" id="rsj-vd-b7U"/>
+                <constraint firstItem="PKM-2z-r7v" firstAttribute="height" secondItem="r75-SA-Msz" secondAttribute="height" id="tXM-r8-AwR"/>
+                <constraint firstItem="PKM-2z-r7v" firstAttribute="width" secondItem="r75-SA-Msz" secondAttribute="width" id="te9-0v-6iT"/>
+                <constraint firstItem="m0s-WS-YJZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="157" id="ul6-2Y-1KF"/>
+                <constraint firstItem="zrM-lO-JOO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="278" id="zPq-Fl-gWj"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
