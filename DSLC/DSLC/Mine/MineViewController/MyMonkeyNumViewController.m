@@ -113,20 +113,26 @@
         cell.labelName.text = @"历史记录";
         cell.labelMoney.textColor = [UIColor profitGreen];
         
+        cell.labelProfit.hidden = YES;
+        
     } else if ([[model.useType description] isEqualToString:@"1"]) {
         cell.labelName.text = @"投资获取";
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.text = [NSString stringWithFormat:@"+%@", model.MonkeyNumber.description];
         
+        cell.labelProfit.hidden = YES;
     } else if ([[model.useType description] isEqualToString:@"2"]) {
         cell.labelName.text = @"活动获取";
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.text = [NSString stringWithFormat:@"+%@", model.MonkeyNumber.description];
         
+        cell.labelProfit.hidden = YES;
     } else if ([[model.useType description] isEqualToString:@"3"]) {
         cell.labelName.text = @"兑换收益";
         cell.labelMoney.textColor = [UIColor profitGreen];
         cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
+        
+        cell.labelProfit.hidden = NO;
         
         NSMutableAttributedString *incomeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"预期额外收益%@元", model.preIncome]];
         NSRange redRange = NSMakeRange(6, [[incomeStr string] rangeOfString:@"元"].location - 6);
@@ -138,10 +144,13 @@
         cell.labelMoney.textColor = [UIColor profitGreen];
         cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
         
+        cell.labelProfit.hidden = YES;
     } else {
         cell.labelName.text = @"兑换金斗云";
         cell.labelMoney.textColor = [UIColor profitGreen];
         cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
+        
+        cell.labelProfit.hidden = YES;
     }
     
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
