@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -142,16 +142,27 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpe-48-fSb">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpe-48-fSb">
                     <rect key="frame" x="257" y="12" width="100" height="39"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="T64-6X-zxA"/>
+                        <constraint firstAttribute="height" constant="39" id="jjB-BM-GcZ"/>
+                    </constraints>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbo-9M-Wz1">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbo-9M-Wz1">
                     <rect key="frame" x="349" y="44" width="10" height="10"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="EMc-K4-mXw"/>
+                        <constraint firstAttribute="width" constant="10" id="sWY-t7-a4s"/>
+                    </constraints>
                 </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="Wpe-48-fSb" secondAttribute="trailing" constant="18" id="1MA-Vx-E3y"/>
                 <constraint firstItem="eb7-Ob-6tG" firstAttribute="leading" secondItem="RhA-4W-wGp" secondAttribute="trailing" constant="8" id="1ZA-c4-OwJ"/>
                 <constraint firstItem="ND7-Ea-yPq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="39" id="2Ww-BY-Az5"/>
                 <constraint firstAttribute="trailing" secondItem="Kcg-PG-Iy3" secondAttribute="trailing" constant="18" id="67y-2z-GPI"/>
@@ -175,6 +186,7 @@
                 <constraint firstItem="Jaf-vb-D1H" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="SP1-Ln-0OL"/>
                 <constraint firstItem="8vI-9e-8AN" firstAttribute="width" secondItem="Jaf-vb-D1H" secondAttribute="width" id="TAh-Va-skO"/>
                 <constraint firstItem="ayT-gk-NKG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="U5s-y5-eEY"/>
+                <constraint firstItem="Wpe-48-fSb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="Z4t-PI-JWS"/>
                 <constraint firstItem="I4a-7L-eT5" firstAttribute="leading" secondItem="ND7-Ea-yPq" secondAttribute="trailing" constant="11" id="bRv-vr-lhc"/>
                 <constraint firstItem="sZR-aw-Ijr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="fto-WL-Kk4"/>
                 <constraint firstAttribute="trailing" secondItem="ayT-gk-NKG" secondAttribute="trailing" id="iG6-Xl-EiH"/>
@@ -186,6 +198,8 @@
                 <constraint firstItem="eb7-Ob-6tG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="19" id="r9C-35-cWf"/>
                 <constraint firstItem="ND7-Ea-yPq" firstAttribute="leading" secondItem="eb7-Ob-6tG" secondAttribute="trailing" constant="10" id="tWA-gg-MIl"/>
                 <constraint firstItem="sZR-aw-Ijr" firstAttribute="leading" secondItem="eb7-Ob-6tG" secondAttribute="trailing" constant="10" id="u1G-QH-hhM"/>
+                <constraint firstItem="gbo-9M-Wz1" firstAttribute="top" secondItem="Kcg-PG-Iy3" secondAttribute="bottom" constant="8" id="vd9-Dc-7Xb"/>
+                <constraint firstAttribute="trailing" secondItem="gbo-9M-Wz1" secondAttribute="trailing" constant="16" id="zzo-Ba-Bge"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
