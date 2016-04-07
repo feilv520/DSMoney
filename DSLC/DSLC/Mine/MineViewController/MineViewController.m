@@ -246,7 +246,7 @@
     
     [imageRedBG addSubview:labelZi];
     
-    UIButton *yesterdayButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 25, HEIGHT_CONTROLLER_DEFAULT * (128.0 / 667.0), 20, 20) backgroundColor:nil textColor:nil titleText:nil];
+    UIButton *yesterdayButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 25, HEIGHT_CONTROLLER_DEFAULT * (120.0 / 667.0), 20, 20) backgroundColor:nil textColor:nil titleText:nil];
     [yesterdayButton setImage:[UIImage imageNamed:@"zuorishouyi-678"] forState:UIControlStateNormal];
     [yesterdayButton addTarget:self action:@selector(yesterdayButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
