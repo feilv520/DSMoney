@@ -110,7 +110,7 @@
 //火爆专区活动展示
 - (void)activityShowViewHead
 {
-    imageActivity = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100) backgroundColor:[UIColor whiteColor]];
+    imageActivity = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 140) backgroundColor:[UIColor whiteColor]];
 //    [_tableView.tableHeaderView addSubview:imageActivity];
     _tableView.tableHeaderView = imageActivity;
 }
@@ -334,11 +334,17 @@
 //            
 //        } else {
         
-            cell.outPay.hidden = YES;
-            cell.quanView.hidden = NO;
-            cell.quanView.progressTotal = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
+        cell.outPay.hidden = YES;
+        cell.quanView.hidden = NO;
+        cell.quanView.progressTotal = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
+        if ([[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] isEqualToString:[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]) {
+            
+            cell.quanView.progressCounter = 1;
+        } else {
+            
             cell.quanView.progressCounter = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
-            cell.quanView.theme.sliceDividerHidden = YES;
+        }
+        cell.quanView.theme.sliceDividerHidden = YES;
 //            
 //        }
         //    设置进度条的进度值 并动画展示
@@ -516,7 +522,7 @@
 - (void)makeScrollView{
     NSInteger photoIndex = photoArray.count + 2;
     
-    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
+    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 140)];
     bannerScrollView.backgroundColor = Color_Gray;
     bannerScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * photoIndex,0);
     bannerScrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
@@ -530,17 +536,17 @@
     
     YYAnimatedImageView *bannerFirst = [YYAnimatedImageView new];
     bannerFirst.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:0] adImg]];
-    bannerFirst.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 100);
+    bannerFirst.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 140);
     
     YYAnimatedImageView *bannerLast = [YYAnimatedImageView new];
     bannerLast.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:photoArray.count - 1] adImg]];
-    bannerLast.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100);
+    bannerLast.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 140);
     
     for (NSInteger i = 0; i < photoArray.count; i++) {
         YYAnimatedImageView *bannerObject = [YYAnimatedImageView new];
         bannerObject.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:i] adImg]];
         bannerObject.tag = i;
-        bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 100);
+        bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 140);
         UITapGestureRecognizer *tapLeft = [[UITapGestureRecognizer alloc] init];
         [bannerObject addGestureRecognizer:tapLeft];
         [tapLeft addTarget:self action:@selector(bannerObject:)];
@@ -557,7 +563,7 @@
     [bannerScrollView addSubview:bannerFirst];
     [bannerScrollView addSubview:bannerLast];
     
-    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 70, WIDTH_CONTROLLER_DEFAULT, 30)];
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 110, WIDTH_CONTROLLER_DEFAULT, 30)];
     
     pageControl.numberOfPages = photoArray.count;
     pageControl.currentPage = 0;

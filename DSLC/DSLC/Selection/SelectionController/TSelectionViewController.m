@@ -367,7 +367,11 @@
         cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:20];
         
         cell.quanView.progressTotal = [productM.productInitLimit floatValue];
-        cell.quanView.progressCounter = [productM.productInitLimit floatValue] - [productM.residueMoney floatValue];
+        if ([productM.productInitLimit isEqualToString:productM.residueMoney]) {
+            cell.quanView.progressCounter = 1;
+        } else {
+            cell.quanView.progressCounter = [productM.productInitLimit floatValue] - [productM.residueMoney floatValue];
+        }
         cell.quanView.theme.sliceDividerHidden = YES;
         
         if (WIDTH_CONTROLLER_DEFAULT == 320) {
