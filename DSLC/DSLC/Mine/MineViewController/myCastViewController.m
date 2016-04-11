@@ -14,6 +14,12 @@
 {
     UITableView *mainTableView;
     NSMutableArray *mainArray;
+    
+    NSInteger page;
+    
+    MJRefreshBackGifFooter *footerT;
+    
+    BOOL moreFlag;
 }
 
 @end
@@ -23,7 +29,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    page = 1;
+    
     mainArray = [NSMutableArray array];
+    
+    moreFlag = NO;
     
     [self showTableView];
     [self getUserAssetsList];
@@ -44,6 +54,8 @@
     
     [mainTableView setSeparatorColor:[UIColor colorWithRed:246 / 255.0 green:247 / 255.0 blue:249 / 255.0 alpha:1.0]];
 
+    [self addTableViewWithFooter:mainTableView];
+    
     [self.view addSubview:mainTableView];
 }
 
@@ -83,7 +95,7 @@
 #pragma mark 网络请求方法
 #pragma mark --------------------------------
 - (void)getUserAssetsList{
-    NSDictionary *parameters = @{@"curPage":@1,@"status":@"1,2",@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parameters = @{@"curPage":[NSNumber numberWithInteger:page],@"status":@"1,2",@"token":[self.flagDic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserAssetsList" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         NSLog(@"%@",responseObject);
         
@@ -97,7 +109,13 @@
                 [mainArray addObject:model];
             }
             
+            if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
+                moreFlag = YES;
+            }
+            
             [mainTableView reloadData];
+            
+            [footerT endRefreshing];
             
         } else {
             
@@ -108,6 +126,20 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
+}
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer{
+    
+    footerT = footer;
+    
+    if (moreFlag) {
+        // 拿到当前的上拉刷新控件，结束刷新状态
+        [footer endRefreshing];
+    } else {
+        page ++;
+        [self getUserAssetsList];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
