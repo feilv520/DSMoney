@@ -99,7 +99,7 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             [self contentShow];
-            labelShuYu.text = [[responseObject objectForKey:@"userJDYCashPower"] description];
+            labelShuYu.text = [NSString stringWithFormat:@"%@元", [[responseObject objectForKey:@"userJDYCashPower"] description]];
             NSLog(@"~~~~~~~~~~%@", labelShuYu.text);
             
         } else {
@@ -182,7 +182,7 @@
 
 - (void)contentShow
 {
-    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 144) backgroundColor:[UIColor whiteColor]];
+    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 181) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewBottom];
     
     UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(10, 7, WIDTH_CONTROLLER_DEFAULT - 20, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"投资金额"];
@@ -297,7 +297,7 @@
 //红包展示
 - (void)redBagListShow
 {
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     butBlackAlert = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
     [app.tabBarVC.view addSubview:butBlackAlert];
     butBlackAlert.alpha = 0.3;
