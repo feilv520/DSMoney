@@ -37,7 +37,7 @@
     webView.scrollView.showsVerticalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
-    NSURL *url = [NSURL URLWithString:@"http://192.168.0.161:8088/zhongxin/monkeyRules.html"];
+    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/monkeyRules.html"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

@@ -142,7 +142,7 @@
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
                                       shareText:@"大圣理财,金融街的新宠.https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8"
-                                     shareImage:[UIImage imageNamed:@"b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658@3x"]
+                                     shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
 }

@@ -686,6 +686,7 @@
 		8D5AEB491BC8F560004FBDD3 /* CenturyGothic.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB481BC8F560004FBDD3 /* CenturyGothic.TTF */; };
 		8D5AEB4B1BC8FCA3004FBDD3 /* SelectionOfSafe.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5AEB4A1BC8FCA3004FBDD3 /* SelectionOfSafe.xib */; };
 		8D5AEB4E1BC8FCBC004FBDD3 /* SelectionOfSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AEB4D1BC8FCBC004FBDD3 /* SelectionOfSafe.m */; };
+		8D5B47491CB7AB3D0046AA76 /* fenxiangtouxiang.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B47481CB7AB3D0046AA76 /* fenxiangtouxiang.png */; settings = {ASSET_TAGS = (); }; };
 		8D5DBB7F1BD4819C00F556B9 /* CastProduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5DBB7D1BD4819C00F556B9 /* CastProduceViewController.m */; };
 		8D5DBB801BD4819C00F556B9 /* CastProduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5DBB7E1BD4819C00F556B9 /* CastProduceViewController.xib */; };
 		8D5DBB841BD4838200F556B9 /* CastUpTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5DBB821BD4838200F556B9 /* CastUpTableViewCell.m */; };
@@ -1970,6 +1971,7 @@
 		8D5AEB4A1BC8FCA3004FBDD3 /* SelectionOfSafe.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionOfSafe.xib; sourceTree = "<group>"; };
 		8D5AEB4C1BC8FCBC004FBDD3 /* SelectionOfSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionOfSafe.h; sourceTree = "<group>"; };
 		8D5AEB4D1BC8FCBC004FBDD3 /* SelectionOfSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionOfSafe.m; sourceTree = "<group>"; };
+		8D5B47481CB7AB3D0046AA76 /* fenxiangtouxiang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fenxiangtouxiang.png; sourceTree = "<group>"; };
 		8D5DBB7C1BD4819C00F556B9 /* CastProduceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastProduceViewController.h; sourceTree = "<group>"; };
 		8D5DBB7D1BD4819C00F556B9 /* CastProduceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastProduceViewController.m; sourceTree = "<group>"; };
 		8D5DBB7E1BD4819C00F556B9 /* CastProduceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CastProduceViewController.xib; sourceTree = "<group>"; };
@@ -2616,6 +2618,7 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8D5B47481CB7AB3D0046AA76 /* fenxiangtouxiang.png */,
 				81600A641CB4E83D0075CD45 /* monkeyNumber@2x.png */,
 				81600A651CB4E83D0075CD45 /* monkeyNumber@3x.png */,
 				81600A5B1CB4E0280075CD45 /* 图层-678-拷贝@2x.png */,
@@ -4575,6 +4578,7 @@
 				TargetAttributes = {
 					8D9356C81BC607C500BC2BFA = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = Z7J5CQFNQ3;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -4839,6 +4843,7 @@
 				8D9011B61BD6337C00E5D62A /* 07@3x.png in Resources */,
 				8DD180A31BD731E000F71CEA /* GetMoneyTipTableViewCell.xib in Resources */,
 				8D121FBE1BD4D0CB00B3C1FE /* ProductSettingViewController.xib in Resources */,
+				8D5B47491CB7AB3D0046AA76 /* fenxiangtouxiang.png in Resources */,
 				8D9011BD1BD6337C00E5D62A /* 矩形-10@2x.png in Resources */,
 				819B52BF1BFC0D22002FDF1E /* TheThirdRedBagCell.xib in Resources */,
 				81379F1C1BEAF56F002CDB16 /* 使用@3x.png in Resources */,
@@ -5662,8 +5667,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "DSLC/大圣理财.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5689,7 +5694,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "0262b2f0-a201-4518-bb28-fed28941b725";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5701,8 +5706,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "DSLC/大圣理财.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5728,7 +5733,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "0262b2f0-a201-4518-bb28-fed28941b725";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

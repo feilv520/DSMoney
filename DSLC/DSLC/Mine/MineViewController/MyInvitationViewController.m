@@ -416,13 +416,16 @@
 
 
 - (void)wAction{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"大圣理财,金融街的新宠." image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         NSLog(@"%u",response.responseCode);
         if (response.responseCode == UMSResponseCodeSuccess) {
             //                [self getShareRedPacket];
             NSLog(@"邀请成功！");
         }
     }];
+    
+    // 需要修改
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://wap.dslc.cn";
 }
 
 - (void)xAction{
@@ -436,13 +439,16 @@
 }
 
 - (void)pAction{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"大圣理财,金融街的新宠." image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         NSLog(@"%u",response.responseCode);
         if (response.responseCode == UMSResponseCodeSuccess) {
             //                [self getShareRedPacket];
             NSLog(@"邀请成功！");
         }
     }];
+    
+    // 需要修改
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"http://wap.dslc.cn";
 }
 
 - (void)rAction{
