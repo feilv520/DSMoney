@@ -213,23 +213,23 @@ void UncaughtExceptionHandler(NSException *exception){
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     
-    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
-        [FileOfManage createWithFile:@"isLogin.plist"];
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-    } else {
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-    }
-    
-    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
-        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
-    } else {
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
-    }
+//    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+//        [FileOfManage createWithFile:@"isLogin.plist"];
+//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+//        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+//    } else {
+//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+//        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+//    }
+//    
+//    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
+//        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
+//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+//        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+//    } else {
+//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+//        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+//    }
     
 }
 
