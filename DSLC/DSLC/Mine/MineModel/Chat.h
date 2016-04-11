@@ -13,5 +13,7 @@
 @property (nonatomic) NSString *msgText;
 @property (nonatomic) NSString *sendTime;
 @property (nonatomic) NSNumber *sendUserId;
+@property (nonatomic) NSString *sendAvatarImg;
 @property (nonatomic) NSNumber *recUserId;
+@property (nonatomic) NSString *recAvatarImg;
 @end

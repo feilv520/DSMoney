@@ -102,7 +102,7 @@
         cell.imageDian.image = [UIImage imageNamed:@""];
         
         if (userlist.recAvatarImg == nil || [userlist.recAvatarImg isEqualToString:@""]) {
-            cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
+            cell.imageHead.image = [UIImage imageNamed:@"默认头像"];
         } else {
             cell.imageHead.yy_imageURL = [NSURL URLWithString:userlist.recAvatarImg];
         }
@@ -116,7 +116,7 @@
         }
         
         if (userlist.sendAvatarImg == nil || [userlist.sendAvatarImg isEqualToString:@""]) {
-            cell.imageHead.image = [UIImage imageNamed:@"组-4-拷贝"];
+            cell.imageHead.image = [UIImage imageNamed:@"默认头像"];
         } else {
             cell.imageHead.yy_imageURL = [NSURL URLWithString:userlist.sendAvatarImg];
         }

@@ -355,8 +355,17 @@
         msgTextString = [msgTextString stringByReplacingOccurrencesOfString:@"^" withString:@"\""];
         
         [cell.labelLeft setText:msgTextString];
-        [cell.imageLeft setImage:[UIImage imageNamed:@"left"]];
-
+        if ([chat.sendAvatarImg isEqualToString:@""] || chat.sendAvatarImg == nil) {
+            
+            [cell.imageLeft setImage:[UIImage imageNamed:@"默认头像"]];
+        } else {
+        
+            cell.imageLeft.yy_imageURL = [NSURL URLWithString:chat.sendAvatarImg];
+        }
+        
+        cell.imageLeft.layer.masksToBounds = YES;
+        cell.imageLeft.layer.cornerRadius = 20.0f;
+        
         NSDictionary *dicF = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
         rect = [cell.labelLeft.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dicF context:nil];
         cell.labelLeft.numberOfLines = 0;
@@ -385,7 +394,10 @@
         
         rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dicF context:nil];
         
-        [cell.imageRight setImage:[UIImage imageNamed:@"right"]];
+        [cell.imageRight setImage:[UIImage imageNamed:@"默认头像"]];
+    
+        cell.imageRight.layer.masksToBounds = YES;
+        cell.imageRight.layer.cornerRadius = 20.0f;
         
         cell.imageContect.image = [UIImage imageNamed:@"rightWindow@3x"];
         
