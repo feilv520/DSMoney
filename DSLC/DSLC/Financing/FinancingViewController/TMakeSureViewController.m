@@ -76,7 +76,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:@"getData" object:nil];
     
-    if (![self.detailM.productType isEqualToString:@"1"]) {
+    if (![self.detailM.productType isEqualToString:@"1"] && ![self.detailM.productName containsString:@"美猴王"]) {
         
         [self getJinDouYunBuyData];
         

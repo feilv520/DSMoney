@@ -166,6 +166,7 @@
                 
             } else {
                 
+                [self submitLoadingWithHidden:YES view:self.view];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
             
