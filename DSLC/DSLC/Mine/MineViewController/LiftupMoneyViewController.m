@@ -94,21 +94,21 @@
     [_tabelView registerNib:[UINib nibWithNibName:@"AddBankCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     [_tabelView registerNib:[UINib nibWithNibName:@"TTTTXianTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuse2"];
     
-    UIView *viewWite = [CreatView creatViewWithFrame:CGRectMake(0, 8, WIDTH_CONTROLLER_DEFAULT, 166) backgroundColor:[UIColor whiteColor]];
+    UIView *viewWite = [CreatView creatViewWithFrame:CGRectMake(0, 8, WIDTH_CONTROLLER_DEFAULT, 195) backgroundColor:[UIColor whiteColor]];
     [viewFoot addSubview:viewWite];
     
     UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, 15, WIDTH_CONTROLLER_DEFAULT - 20, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"温馨提示"];
     [viewWite addSubview:labelAlert];
     
-    everyArr = @[@"1.您拥有每日3次的提现机会;", @"2.提现无限额;", @"3.提现手续费为0;", @"4.若提现后账户余额低于100元,则需一次提完．"];
+    everyArr = @[@"1.您投资本金金额≥100元时,方可进行提现;", @"2.您每日只可提现三次;", @"3.您每日可获取三次免手续费的提现机会;", @"4.账户余额低于100元时,须一次性提完;",@"5.提现后您的账户低于100元时,须一次性提完。"];
     
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++) {
         
         UILabel *labelEvery = [CreatView creatWithLabelFrame:CGRectMake(10, 45 + 29 * i, WIDTH_CONTROLLER_DEFAULT - 20, 29) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[everyArr objectAtIndex:i]];
         [viewWite addSubview:labelEvery];
     }
     
-    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 165.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:nil text:nil];
+    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 194.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:nil text:nil];
     [viewWite addSubview:labelLine];
     labelLine.alpha = 0.3;
     
@@ -119,7 +119,7 @@
     
     labelLineDown = [CreatView creatWithLabelFrame:CGRectMake(0, 49.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:nil text:nil];
     
-    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 197, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
+    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 236, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
     [viewFoot addSubview:buttonNext];
     buttonNext.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonNext setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];

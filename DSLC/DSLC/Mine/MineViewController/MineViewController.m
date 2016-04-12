@@ -98,8 +98,10 @@
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
         if ([dic objectForKey:@"token"] != nil)
             [self MyAccountInfo];
-    } 
+    }
+    
     [self showPictureAndTitle];
+    [self showTableView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeWithImageView) name:@"exchangeWithImageView" object:nil];
     
@@ -124,32 +126,34 @@
 
 - (void)showTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 52) style:UITableViewStyleGrouped];
-    [self.view addSubview:_tableView];
-    _tableView.backgroundColor = [UIColor huibai];
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    _tableView.showsVerticalScrollIndicator = NO;
-    _tableView.separatorColor = [UIColor whiteColor];
-    
-    _tableView.bounces = NO;
-    
-    if (HEIGHT_CONTROLLER_DEFAULT == 500 || HEIGHT_CONTROLLER_DEFAULT == 480) {
-        viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (320.0 / 667.0))];
-    } else {
-        viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (291.0 / 667.0))];
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 52) style:UITableViewStyleGrouped];
+        [self.view addSubview:_tableView];
+        _tableView.backgroundColor = [UIColor huibai];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.showsVerticalScrollIndicator = NO;
+        _tableView.separatorColor = [UIColor whiteColor];
+        
+        _tableView.bounces = NO;
+        
+        if (HEIGHT_CONTROLLER_DEFAULT == 500 || HEIGHT_CONTROLLER_DEFAULT == 480) {
+            viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (320.0 / 667.0))];
+        } else {
+            viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (291.0 / 667.0))];
+        }
+        _tableView.tableHeaderView = viewHead;
+        viewHead.backgroundColor = [UIColor huibai];
+        
+        viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 60)];
+        _tableView.tableFooterView = viewFoot;
+        viewFoot.backgroundColor = [UIColor huibai];
+        
+    //    [self makeSafeView];
+        
+        [_tableView registerNib:[UINib nibWithNibName:@"MineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+        [_tableView registerNib:[UINib nibWithNibName:@"MonkeyCell" bundle:nil] forCellReuseIdentifier:@"reuseMonkey"];
     }
-    _tableView.tableHeaderView = viewHead;
-    viewHead.backgroundColor = [UIColor huibai];
-    
-    viewFoot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 60)];
-    _tableView.tableFooterView = viewFoot;
-    viewFoot.backgroundColor = [UIColor huibai];
-    
-//    [self makeSafeView];
-    
-    [_tableView registerNib:[UINib nibWithNibName:@"MineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
-    [_tableView registerNib:[UINib nibWithNibName:@"MonkeyCell" bundle:nil] forCellReuseIdentifier:@"reuseMonkey"];
 }
 
 // 保障
@@ -392,8 +396,8 @@
                 moneyLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
                 moneyLabel.textColor = [UIColor zitihui];
                 moneyLabel.textAlignment = NSTextAlignmentRight;
+                [cell addSubview:moneyLabel];
             }
-            [cell addSubview:moneyLabel];
             moneyLabel.text = [NSString stringWithFormat:@"%@元在投资金",[DES3Util decrypt:[self.myAccountInfo objectForKey:@"totalMoney"]]];
         } else if (indexPath.row == 2) {
             
@@ -411,8 +415,8 @@
                 
                 myRedBagButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
                 
+                [cell addSubview:myRedBagButton];
             }
-            [cell addSubview:myRedBagButton];
             if ([[self.myAccountInfo objectForKey:@"redPacket"] isEqualToString:@"0"]) {
                 myRedBagButton.hidden = YES;
             } else {
@@ -640,7 +644,6 @@
             
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
-            [self showTableView];
             [self viewHeadContent];
             [_tableView reloadData];
         }
