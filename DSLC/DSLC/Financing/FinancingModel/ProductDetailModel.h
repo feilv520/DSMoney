@@ -50,4 +50,6 @@
 
 @property (nonatomic, copy) NSString *productDaysLimit;
 
+@property (nonatomic, copy) NSString *productInitLimit;
+
 @end

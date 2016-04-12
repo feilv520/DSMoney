@@ -234,12 +234,18 @@
             
             if ([self.residueMoney isEqualToString:@"0.00"]) {
                 
+                cell.progressView.hidden = YES;
+                
                 [cell.butCountDown setImage:[UIImage imageNamed:@"61-拷贝"] forState:UIControlStateNormal];
                 [cell.butCountDown setTitle:[NSString stringWithFormat:@" %@ %@", @"倒计时", @"12:12:12"] forState:UIControlStateNormal];
                 
             } else {
                 
+                cell.progressView.hidden = NO;
                 cell.butCountDown.hidden = YES;
+                
+                [cell.progressView setProgress:1 - [self.residueMoney floatValue] / [self.detailM.productInitLimit floatValue] animated:NO];
+                
             }
             
 //            新手专享倒计时
@@ -247,6 +253,8 @@
             
             if ([self.residueMoney isEqualToString:@"0.00"]) {
             
+                cell.progressView.hidden = YES;
+                
                 [cell.butCountDown setImage:[UIImage imageNamed:@"61-拷贝"] forState:UIControlStateNormal];
                 [cell.butCountDown setTitle:[NSString stringWithFormat:@" %@ %@", @"倒计时", @"12:12:12"] forState:UIControlStateNormal];
                 
@@ -254,12 +262,18 @@
             } else {
                 
                 cell.butCountDown.hidden = YES;
+                cell.progressView.hidden = NO;
+                
+                [cell.progressView setProgress:1 - [self.residueMoney floatValue] / [self.detailM.productInitLimit floatValue] animated:NO];
             }
            
 //            其他不用显示倒计时要隐藏
         } else {
             
+            cell.progressView.hidden = NO;
             cell.butCountDown.hidden = YES;
+            
+            [cell.progressView setProgress:1 - [self.residueMoney floatValue] / [self.detailM.productInitLimit floatValue] animated:NO];
         }
         
         [cell.butCountDown setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];

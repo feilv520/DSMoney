@@ -22,5 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelLine;
 @property (weak, nonatomic) IBOutlet UIButton *butCountDown;
 @property (weak, nonatomic) IBOutlet UIButton *butTouZi;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
 @end

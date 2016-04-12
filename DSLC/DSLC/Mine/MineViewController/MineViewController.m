@@ -392,8 +392,8 @@
                 moneyLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
                 moneyLabel.textColor = [UIColor zitihui];
                 moneyLabel.textAlignment = NSTextAlignmentRight;
-                [cell addSubview:moneyLabel];
             }
+            [cell addSubview:moneyLabel];
             moneyLabel.text = [NSString stringWithFormat:@"%@元在投资金",[DES3Util decrypt:[self.myAccountInfo objectForKey:@"totalMoney"]]];
         } else if (indexPath.row == 2) {
             
@@ -411,9 +411,8 @@
                 
                 myRedBagButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
                 
-                [cell addSubview:myRedBagButton];
-                
             }
+            [cell addSubview:myRedBagButton];
             if ([[self.myAccountInfo objectForKey:@"redPacket"] isEqualToString:@"0"]) {
                 myRedBagButton.hidden = YES;
             } else {

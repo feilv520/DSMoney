@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -129,30 +129,43 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0a-LC-iPk">
                                 <rect key="frame" x="216" y="-1" width="145" height="30"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="145" id="Wqb-V0-rAu"/>
                                     <constraint firstAttribute="height" constant="30" id="mYV-WY-nok"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hUh-xG-OhP">
+                                <rect key="frame" x="198" y="13" width="162" height="2"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="CYw-1j-k4G"/>
+                                    <constraint firstAttribute="width" constant="162" id="a3r-DB-z7N"/>
+                                </constraints>
+                                <color key="progressTintColor" red="1" green="0.10735453714666221" blue="0.22192277321660947" alpha="1" colorSpace="calibratedRGB"/>
+                            </progressView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="375" id="9e7-Fd-Odp"/>
+                            <constraint firstItem="hUh-xG-OhP" firstAttribute="centerY" secondItem="mG4-rG-KBG" secondAttribute="centerY" constant="-1" id="CWc-xS-kUx"/>
                             <constraint firstItem="q0a-LC-iPk" firstAttribute="top" secondItem="mG4-rG-KBG" secondAttribute="top" constant="-1" id="HGY-4u-HhC"/>
                             <constraint firstAttribute="height" constant="30" id="T6v-eu-MGk"/>
                             <constraint firstAttribute="trailing" secondItem="g4I-wH-04o" secondAttribute="trailing" id="Twu-8n-gg6"/>
                             <constraint firstAttribute="bottom" secondItem="g4I-wH-04o" secondAttribute="bottom" id="UUR-lI-md6"/>
                             <constraint firstItem="kjs-3h-Mqv" firstAttribute="leading" secondItem="mG4-rG-KBG" secondAttribute="leading" constant="9" id="a7f-ux-vfW"/>
                             <constraint firstItem="kjs-3h-Mqv" firstAttribute="top" secondItem="mG4-rG-KBG" secondAttribute="top" id="g0r-sf-8Z6"/>
+                            <constraint firstItem="hUh-xG-OhP" firstAttribute="centerX" secondItem="mG4-rG-KBG" secondAttribute="centerX" constant="92" id="gEq-wv-zdM"/>
                             <constraint firstItem="g4I-wH-04o" firstAttribute="leading" secondItem="mG4-rG-KBG" secondAttribute="leading" id="iAF-V1-16k"/>
                             <constraint firstItem="q0a-LC-iPk" firstAttribute="leading" secondItem="kjs-3h-Mqv" secondAttribute="trailing" constant="3" id="iPW-Uw-ySb"/>
                             <constraint firstAttribute="trailing" secondItem="q0a-LC-iPk" secondAttribute="trailing" constant="14" id="ian-Ix-uWH"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SP8-Yl-BnE">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SP8-Yl-BnE">
                         <rect key="frame" x="293" y="2" width="72" height="30"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="5zT-U2-jAO"/>
                             <constraint firstAttribute="width" constant="72" id="Wsy-DV-rSu"/>
@@ -186,6 +199,11 @@
                     <constraint firstAttribute="trailingMargin" secondItem="1Wt-cK-Qal" secondAttribute="trailing" constant="-3" id="oYq-57-3VN"/>
                     <constraint firstAttribute="trailingMargin" secondItem="glJ-oO-JcJ" secondAttribute="trailing" constant="2" id="rju-AR-fcs"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="WVj-m3-y5u"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <animations/>
             <connections>
@@ -199,6 +217,7 @@
                 <outlet property="labelMonth" destination="lst-Ul-bDw" id="Jr1-tY-yx9"/>
                 <outlet property="labelPercentage" destination="E3o-aV-Jaq" id="9tn-oT-2nD"/>
                 <outlet property="labelSurplus" destination="kjs-3h-Mqv" id="vih-oO-Wjg"/>
+                <outlet property="progressView" destination="hUh-xG-OhP" id="AGQ-eD-2Ql"/>
                 <outlet property="viewDiSe" destination="mG4-rG-KBG" id="M58-og-RdP"/>
                 <outlet property="viewLine" destination="1Wt-cK-Qal" id="IAI-Mc-rbi"/>
             </connections>
