@@ -41,6 +41,7 @@
 #import "newLoginView.h"
 #import "TBuyViewController.h"
 #import "MyMonkeyNumViewController.h"
+#import "NewInviteViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate, UMSocialUIDelegate>
 
@@ -491,8 +492,9 @@
         
         [MobClick event:@"MyInvitation"];
         //好友邀请界面
-        MyInvitationViewController *myInvitationVC = [[MyInvitationViewController alloc] init];
-        [self.navigationController pushViewController:myInvitationVC animated:YES];
+//        MyInvitationViewController *myInvitationVC = [[MyInvitationViewController alloc] init];
+        NewInviteViewController *newInvite = [[NewInviteViewController alloc] init];
+        [self.navigationController pushViewController:newInvite animated:YES];
         
     } else if (indexPath.row == 5) {
         
