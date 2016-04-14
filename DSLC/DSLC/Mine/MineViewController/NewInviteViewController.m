@@ -8,12 +8,17 @@
 
 #import "NewInviteViewController.h"
 #import "InviteRecordViewController.h"
+#import "InviteNewView.h"
 
 @interface NewInviteViewController ()
 
 {
     UIButton *butReceive;
     UIScrollView *scrollview;
+    
+    InviteNewView *inviteNV;
+    
+    UIView *viewGray;
 }
 
 @end
@@ -34,6 +39,14 @@
     self.navigationItem.rightBarButtonItem = rightButItem;
     
     [self contentShow];
+    
+    viewGray = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor]];
+    viewGray.alpha = 0.3;
+    
+    [self shareWithView];
+    
+    viewGray.hidden = YES;
+    
 }
 
 - (void)contentShow
@@ -124,13 +137,129 @@
 //发送邀请按钮
 - (void)buttonSendInvite:(UIButton *)button
 {
-    NSLog(@"8888888888888888888888");
+    [UIView animateWithDuration:0.5f animations:^{
+        viewGray.hidden = NO;
+        inviteNV.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 200 - 20, self.view.frame.size.width, 200);
+    }];
 }
 
 - (void)inviteRecordButton:(UIBarButtonItem *)button
 {
     InviteRecordViewController *InviteRecord = [[InviteRecordViewController alloc] init];
     [self.navigationController pushViewController:InviteRecord animated:YES];
+}
+
+/**
+ *  分享界面搭建
+ */
+
+- (void)shareWithView{
+    NSBundle *rootBundle = [NSBundle mainBundle];
+    
+    viewGray.hidden = NO;
+    
+    inviteNV = (InviteNewView *)[[rootBundle loadNibNamed:@"InviteNewView" owner:nil options:nil]lastObject];
+    
+    inviteNV.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, self.view.frame.size.width, 200);
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [app.window addSubview:viewGray];
+    
+    [app.window addSubview:inviteNV];
+    
+    [inviteNV.wButton addTarget:self action:@selector(wAction) forControlEvents:UIControlEventTouchUpInside];
+    [inviteNV.WButton addTarget:self action:@selector(wAction) forControlEvents:UIControlEventTouchUpInside];
+    [inviteNV.xButton addTarget:self action:@selector(xAction) forControlEvents:UIControlEventTouchUpInside];
+    [inviteNV.XButton addTarget:self action:@selector(xAction) forControlEvents:UIControlEventTouchUpInside];
+    [inviteNV.pButton addTarget:self action:@selector(pAction) forControlEvents:UIControlEventTouchUpInside];
+    [inviteNV.PButton addTarget:self action:@selector(pAction) forControlEvents:UIControlEventTouchUpInside];
+    [inviteNV.rButton addTarget:self action:@selector(rAction) forControlEvents:UIControlEventTouchUpInside];
+    [inviteNV.RButton addTarget:self action:@selector(rAction) forControlEvents:UIControlEventTouchUpInside];
+    [inviteNV.qButton addTarget:self action:@selector(qAction) forControlEvents:UIControlEventTouchUpInside];
+    [inviteNV.QButton addTarget:self action:@selector(qAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    [inviteNV.cancelButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark 分享成功回调方法
+#pragma mark --------------------------------
+
+- (void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的微博平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
+}
+/**
+ *  分享实现的方法
+ */
+
+
+- (void)wAction{
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"大圣理财,金融街的新宠." image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        NSLog(@"%u",response.responseCode);
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            //                [self getShareRedPacket];
+            NSLog(@"邀请成功！");
+        }
+    }];
+    
+    // 需要修改
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://wap.dslc.cn";
+}
+
+- (void)xAction{
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+        NSLog(@"shareResponse = %u",shareResponse.responseCode);
+        if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+            //                [self getShareRedPacket];
+            NSLog(@"邀请成功！");
+        }
+    }];
+}
+
+- (void)pAction{
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"大圣理财,金融街的新宠." image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        NSLog(@"%u",response.responseCode);
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            //                [self getShareRedPacket];
+            NSLog(@"邀请成功！");
+        }
+    }];
+    
+    // 需要修改
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"http://wap.dslc.cn";
+}
+
+- (void)rAction{
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToRenren] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        NSLog(@"%u",response.responseCode);
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            //                [self getShareRedPacket];
+            NSLog(@"邀请成功！");
+        }
+    }];
+}
+
+- (void)qAction{
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        NSLog(@"%u",response.responseCode);
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            //                [self getShareRedPacket];
+            NSLog(@"邀请成功！");
+        }
+    }];
+}
+
+- (void)closeAction:(id)sender{
+    [UIView animateWithDuration:0.5f animations:^{
+        inviteNV.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, self.view.frame.size.width, 200);
+        
+        viewGray.hidden = YES;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
