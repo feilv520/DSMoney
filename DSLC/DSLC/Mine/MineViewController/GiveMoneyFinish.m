@@ -103,7 +103,7 @@
 - (void)finishReturn:(UIBarButtonItem *)bar
 {
     NSArray *viewController = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
