@@ -155,8 +155,13 @@
         
         cell.labelHttpNum.text = [NSString stringWithFormat:@"http://www.dslc.cn/regist.html？inviteCode=%@",[self.dicMyInvite objectForKey:@"invitationMyCode"]];
         cell.labelHttpNum.textColor = [UIColor daohanglan];
-        cell.labelHttpNum.font = [UIFont fontWithName:@"CenturyGothic" size:11];
-        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            
+            cell.labelHttpNum.font = [UIFont fontWithName:@"CenturyGothic" size:8];
+        } else {
+            
+            cell.labelHttpNum.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        }
         [cell.buttonCopy setTitle:@"复制" forState:UIControlStateNormal];
         [cell.buttonCopy setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
         cell.buttonCopy.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
