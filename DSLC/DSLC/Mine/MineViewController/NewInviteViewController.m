@@ -9,6 +9,7 @@
 #import "NewInviteViewController.h"
 #import "InviteRecordViewController.h"
 #import "InviteNewView.h"
+#import "AdModel.h"
 
 @interface NewInviteViewController ()
 
@@ -19,6 +20,8 @@
     InviteNewView *inviteNV;
     
     UIView *viewGray;
+    
+    NSMutableArray *adModelArray;
 }
 
 @end
@@ -31,6 +34,8 @@
     
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"我的邀请"];
+    
+    adModelArray = [NSMutableArray array];
     
     butReceive = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, 60, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"邀请记录"];
     butReceive.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
@@ -267,6 +272,35 @@
         inviteNV.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, self.view.frame.size.width, 200);
         
         viewGray.hidden = YES;
+    }];
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getAdvList{
+    
+    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"6"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"ADProduct = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            return ;
+        }
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
+            AdModel *adModel = [[AdModel alloc] init];
+            [adModel setValuesForKeysWithDictionary:dic];
+            [adModelArray addObject:adModel];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
     }];
 }
 
