@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface NewInviteViewController : BaseViewController
-
+@property (nonatomic) NSString *inviteCode;
 @end

@@ -36,6 +36,19 @@
     UIImageView *imageViewNo = [CreatView creatImageViewWithFrame:CGRectMake(75, (HEIGHT_CONTROLLER_DEFAULT- 20 - 64)/2 - 100 - 50, WIDTH_CONTROLLER_DEFAULT - 150, 200) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"NoRecord"]];
     [self.view addSubview:imageViewNo];
     
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        imageViewNo.frame = CGRectMake(75, (HEIGHT_CONTROLLER_DEFAULT- 20 - 64)/2 - 100 - 50, WIDTH_CONTROLLER_DEFAULT - 150, 200);
+        
+    } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+        
+        imageViewNo.frame = CGRectMake(85, (HEIGHT_CONTROLLER_DEFAULT- 20 - 64)/2 - 120 - 50, WIDTH_CONTROLLER_DEFAULT - 170, 240);
+        
+    } else {
+        
+        imageViewNo.frame = CGRectMake(95, (HEIGHT_CONTROLLER_DEFAULT- 20 - 64)/2 - 140 - 50, WIDTH_CONTROLLER_DEFAULT - 190, 280);
+    }
+    
     UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, (HEIGHT_CONTROLLER_DEFAULT- 20 - 64)/2 - 120 - 50 + imageViewNo.frame.size.height + 30, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"您还没有邀请过好友,快去邀请拿好礼吧!"];
     [self.view addSubview:labelAlert];
 }
