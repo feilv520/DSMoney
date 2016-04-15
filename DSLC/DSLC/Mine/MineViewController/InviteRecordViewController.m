@@ -8,12 +8,17 @@
 
 #import "InviteRecordViewController.h"
 #import "InviteRecordCell.h"
+#import "InviteRecordModel.h"
 
 @interface InviteRecordViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tabelView;
     NSMutableArray *contentArr;
+    NSInteger curruntPage;
+    NSDictionary *dataDic;
+    MJRefreshBackGifFooter *reFooter;
+    BOOL moreFlag;
 }
 
 @end
@@ -27,6 +32,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"邀请记录"];
     contentArr = [NSMutableArray array];
+    curruntPage = 1;
+    moreFlag = NO;
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2];
     
     [self getRecordData];
 }
@@ -55,13 +63,14 @@
 
 - (void)tabelViewShow
 {
-    _tabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStylePlain];
+    _tabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
     [self.view addSubview:_tabelView];
     _tabelView.dataSource = self;
     _tabelView.delegate = self;
     _tabelView.backgroundColor = [UIColor qianhuise];
     _tabelView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.1)];
     [_tabelView registerNib:[UINib nibWithNibName:@"InviteRecordCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [self addTableViewWithFooter:_tabelView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -71,7 +80,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return contentArr.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,6 +96,21 @@
         
     } else {
         
+        InviteRecordModel *inviteModel = [contentArr objectAtIndex:indexPath.row - 1];
+        cell.labelPhoneNum.text = inviteModel.phone;
+        cell.labelTime.text = inviteModel.inviteTime;
+        
+        if ([inviteModel.realNameStatus isEqualToString:@"2"]) {
+            cell.labelRealName.text = @"是";
+        } else {
+            cell.labelRealName.text = @"否";
+        }
+        
+        if ([inviteModel.isInvest isEqualToString:@"0"]) {
+            cell.labelMoney.text = @"否";
+        } else {
+            cell.labelMoney.text = @"是";
+        }
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -95,11 +119,65 @@
 
 - (void)getRecordData
 {
-    if (contentArr.count == 0) {
-        [self noHaveInviteRecord];
+     NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSNumber numberWithInteger:curruntPage], @"invitationMyCode":self.inviteCode};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"/app/user/getMyInviteList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"邀请记录:========&&&=======%@", responseObject);
+        [self loadingWithHidden:YES];
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            NSMutableArray *userArray = [responseObject objectForKey:@"User"];
+            
+            if (userArray.count == 0 && contentArr.count == 0) {
+                
+                [self noHaveInviteRecord];
+                
+            } else {
+                
+                for (dataDic in userArray) {
+                    
+                    InviteRecordModel *recordModel = [[InviteRecordModel alloc] init];
+                    [recordModel setValuesForKeysWithDictionary:dataDic];
+                    [contentArr addObject:recordModel];
+                }
+                
+                if (curruntPage == 1) {
+                    [self tabelViewShow];
+                } else {
+                    [_tabelView reloadData];
+                }
+                
+                if ([[responseObject objectForKey:@"curPage"] isEqualToNumber:[responseObject objectForKey:@"totalPage"]]) {
+                    moreFlag = YES;
+                }
+                
+                [reFooter endRefreshing];
+            }
+            
+        } else {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
+{
+    reFooter = footer;
+    
+    if (moreFlag) {
+        // 拿到当前的上拉刷新控件，结束刷新状态
+        [footer endRefreshing];
     } else {
-        [self tabelViewShow];
+        curruntPage ++;
+        [self getRecordData];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning {

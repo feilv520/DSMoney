@@ -352,6 +352,8 @@
 		81A233541CBF65BC009D43D3 /* InviteRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A233521CBF65BC009D43D3 /* InviteRecordCell.m */; settings = {ASSET_TAGS = (); }; };
 		81A233551CBF65BC009D43D3 /* InviteRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A233531CBF65BC009D43D3 /* InviteRecordCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81A233571CBF6D1E009D43D3 /* NoRecord@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A233561CBF6D1E009D43D3 /* NoRecord@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81A2335D1CC0E6CA009D43D3 /* InviteRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A2335C1CC0E6CA009D43D3 /* InviteRecordModel.m */; settings = {ASSET_TAGS = (); }; };
+		81A233631CC0F814009D43D3 /* 1460714506.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A233621CC0F814009D43D3 /* 1460714506.png */; settings = {ASSET_TAGS = (); }; };
 		81A6EB111BE784BD00F9FDD1 /* NewBieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A6EB0F1BE784BD00F9FDD1 /* NewBieCell.m */; settings = {ASSET_TAGS = (); }; };
 		81A6EB121BE784BD00F9FDD1 /* NewBieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A6EB101BE784BD00F9FDD1 /* NewBieCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81AC90B71BEC55D200232404 /* BindingBankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AC90B51BEC55D200232404 /* BindingBankCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -1430,6 +1432,9 @@
 		81A233521CBF65BC009D43D3 /* InviteRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteRecordCell.m; sourceTree = "<group>"; };
 		81A233531CBF65BC009D43D3 /* InviteRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteRecordCell.xib; sourceTree = "<group>"; };
 		81A233561CBF6D1E009D43D3 /* NoRecord@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NoRecord@2x.png"; sourceTree = "<group>"; };
+		81A2335B1CC0E6CA009D43D3 /* InviteRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteRecordModel.h; sourceTree = "<group>"; };
+		81A2335C1CC0E6CA009D43D3 /* InviteRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteRecordModel.m; sourceTree = "<group>"; };
+		81A233621CC0F814009D43D3 /* 1460714506.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1460714506.png; sourceTree = "<group>"; };
 		81A6EB0E1BE784BD00F9FDD1 /* NewBieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewBieCell.h; sourceTree = "<group>"; };
 		81A6EB0F1BE784BD00F9FDD1 /* NewBieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewBieCell.m; sourceTree = "<group>"; };
 		81A6EB101BE784BD00F9FDD1 /* NewBieCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewBieCell.xib; sourceTree = "<group>"; };
@@ -2631,6 +2636,7 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				81A233621CC0F814009D43D3 /* 1460714506.png */,
 				81A233561CBF6D1E009D43D3 /* NoRecord@2x.png */,
 				8D5B47481CB7AB3D0046AA76 /* fenxiangtouxiang.png */,
 				81600A641CB4E83D0075CD45 /* monkeyNumber@2x.png */,
@@ -2981,6 +2987,8 @@
 				8D6E467E1C99635E00F0F5B7 /* myCastModel.m */,
 				81600A681CB4FBE60075CD45 /* MyMonkeyModel.h */,
 				81600A691CB4FBE60075CD45 /* MyMonkeyModel.m */,
+				81A2335B1CC0E6CA009D43D3 /* InviteRecordModel.h */,
+				81A2335C1CC0E6CA009D43D3 /* InviteRecordModel.m */,
 			);
 			path = MineModel;
 			sourceTree = "<group>";
@@ -5057,6 +5065,7 @@
 				8D0AE80D1BE0C1A700D9D50C /* RegisterViewController.xib in Resources */,
 				8183F4181C97D4E6000BB93C /* TthreeRunCell.xib in Resources */,
 				8179882D1BC93DDE007C8C3E /* FixInvestCell.xib in Resources */,
+				81A233631CC0F814009D43D3 /* 1460714506.png in Resources */,
 				8D4343971BFDEB0B000BA004 /* loading_up_06.png in Resources */,
 				8183F3FD1C97CC4F000BB93C /* icon3@3x.png in Resources */,
 				81D72FC71BFB04890067A277 /* rightWindow@3x.png in Resources */,
@@ -5261,6 +5270,7 @@
 				8D9BE8F01C0EC94D003C67D3 /* YYImage.m in Sources */,
 				81D703F31BE06BD60074DF30 /* ForgetSecretViewController.m in Sources */,
 				817E33981BD772A700D05103 /* BigMoneyViewController.m in Sources */,
+				81A2335D1CC0E6CA009D43D3 /* InviteRecordModel.m in Sources */,
 				810C76751C2D1A01000637FD /* UserListViewController.m in Sources */,
 				8D6E46651C98FC3B00F0F5B7 /* InviteNewView.m in Sources */,
 				8D4FF5D71BE339A200BAE25F /* AFHTTPSessionManager.m in Sources */,

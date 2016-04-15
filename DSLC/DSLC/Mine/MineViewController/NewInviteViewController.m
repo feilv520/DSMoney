@@ -65,6 +65,13 @@
     UIView *viewTwo = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 90, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT), 180, 180) backgroundColor:[UIColor whiteColor]];
     [scrollview addSubview:viewTwo];
     
+    CGFloat viewTwoW = viewTwo.frame.size.width;
+    CGFloat viewTwoH = viewTwo.frame.size.height;
+    
+//    二维码图片
+    UIImageView *imageViewTwo = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, viewTwoW, viewTwoH) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"1460714506"]];
+    [viewTwo addSubview:imageViewTwo];
+    
     UILabel *labelCode = [CreatView creatWithLabelFrame:CGRectMake(0, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180, WIDTH_CONTROLLER_DEFAULT, 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor clearColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:nil];
     [scrollview addSubview:labelCode];
     NSMutableAttributedString *codeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"我的邀请码: %@", self.inviteCode]];
@@ -146,6 +153,7 @@
 - (void)inviteRecordButton:(UIBarButtonItem *)button
 {
     InviteRecordViewController *InviteRecord = [[InviteRecordViewController alloc] init];
+    InviteRecord.inviteCode = self.inviteCode;
     [self.navigationController pushViewController:InviteRecord animated:YES];
 }
 
