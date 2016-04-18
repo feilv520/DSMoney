@@ -493,9 +493,23 @@
         [MobClick event:@"MyInvitation"];
         //好友邀请界面
 //        MyInvitationViewController *myInvitationVC = [[MyInvitationViewController alloc] init];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        
         NewInviteViewController *newInvite = [[NewInviteViewController alloc] init];
         newInvite.inviteCode = [self.myAccountInfo objectForKey:@"invitationMyCode"];
-        newInvite.realName = [self.myAccountInfo objectForKey:@"realName"];
+        
+        if ([[dic objectForKey:@"userPhone"] isEqualToString:@""]) {
+            newInvite.phoneNum = [dic objectForKey:@"userPhone"];
+            newInvite.nameOrPhone = NO;
+            NSLog(@"aaaaaaaaaaaa%@", [dic objectForKey:@"userPhone"]);
+            
+        } else {
+            NSLog(@"nnnnnnnnnnn%@", [self.myAccountInfo objectForKey:@"realName"]);
+            newInvite.nameOrPhone = YES;
+            newInvite.realName = [self.myAccountInfo objectForKey:@"realName"];
+        }
+        
         [self.navigationController pushViewController:newInvite animated:YES];
         
     } else if (indexPath.row == 5) {

@@ -11,4 +11,6 @@
 @interface NewInviteViewController : BaseViewController
 @property (nonatomic) NSString *inviteCode;
 @property (nonatomic) NSString *realName;
+@property (nonatomic) NSString *phoneNum;
+@property (nonatomic) BOOL nameOrPhone;
 @end

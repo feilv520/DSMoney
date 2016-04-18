@@ -221,20 +221,45 @@
     }];
     
     // 需要修改
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode];
+    
+    if (self.nameOrPhone == YES) {
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode];
+        
+    } else {
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.phoneNum, @"&inviteCode=", self.inviteCode];
+    }
+    
 }
 
 - (void)xAction{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode] image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
-        NSLog(@"shareResponse = %u",shareResponse.responseCode);
-        if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-            //                [self getShareRedPacket];
-            NSLog(@"邀请成功！");
-        }
-    }];
+    
+    if (self.nameOrPhone == YES) {
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode] image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+            NSLog(@"shareResponse = %u",shareResponse.responseCode);
+            if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+                //                [self getShareRedPacket];
+                NSLog(@"邀请成功！");
+            }
+        }];
+        
+    } else {
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.phoneNum, self.inviteCode] image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+            NSLog(@"shareResponse = %u",shareResponse.responseCode);
+            if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+                //                [self getShareRedPacket];
+                NSLog(@"邀请成功！");
+            }
+        }];
+    }
+    
 }
 
 - (void)pAction{
+    
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"大圣理财,金融街的新宠." image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         NSLog(@"%u",response.responseCode);
         if (response.responseCode == UMSResponseCodeSuccess) {
@@ -244,27 +269,65 @@
     }];
     
     // 需要修改
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode];
+    
+    if (self.nameOrPhone == YES) {
+        
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode];
+        
+    } else {
+        
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.phoneNum, @"&inviteCode=", self.inviteCode];
+    }
 }
 
 - (void)rAction{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToRenren] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        NSLog(@"%u",response.responseCode);
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            //                [self getShareRedPacket];
-            NSLog(@"邀请成功！");
-        }
-    }];
+    
+    if (self.nameOrPhone == YES) {
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToRenren] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            NSLog(@"%u",response.responseCode);
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                //                [self getShareRedPacket];
+                NSLog(@"邀请成功！");
+            }
+        }];
+        
+    } else {
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToRenren] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.phoneNum, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            NSLog(@"%u",response.responseCode);
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                //                [self getShareRedPacket];
+                NSLog(@"邀请成功！");
+            }
+        }];
+    }
+    
 }
 
 - (void)qAction{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        NSLog(@"%u",response.responseCode);
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            //                [self getShareRedPacket];
-            NSLog(@"邀请成功！");
-        }
-    }];
+    
+    if (self.nameOrPhone == YES) {
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            NSLog(@"%u",response.responseCode);
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                //                [self getShareRedPacket];
+                NSLog(@"邀请成功！");
+            }
+        }];
+        
+    } else {
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.phoneNum, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            NSLog(@"%u",response.responseCode);
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                //                [self getShareRedPacket];
+                NSLog(@"邀请成功！");
+            }
+        }];
+    }
+    
 }
 
 - (void)closeAction:(id)sender{

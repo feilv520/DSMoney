@@ -93,7 +93,7 @@
         _tableView.backgroundColor = [UIColor qianhuise];
         _tableView.separatorColor = [UIColor clearColor];
         
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 185 + ((WIDTH_CONTROLLER_DEFAULT - 80) - 100)/3 + 25)];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 185 + ((WIDTH_CONTROLLER_DEFAULT - 80) - 100)/3 + 15)];
         _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
         
         [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuseNew"];
@@ -110,23 +110,28 @@
 - (void)viewHeadShow
 {
     CGFloat widthPlus = WIDTH_CONTROLLER_DEFAULT - 80;
-    CGFloat butWidth = (widthPlus - 100)/3;
-    NSArray *butImageArr = @[@"icon1", @"target-arrow", @"icon3"];
-    NSArray *butWiteArr = @[@"签到", @"大转盘", @"排行榜"];
+    CGFloat butWidth = (widthPlus - 100)/4;
+    NSArray *butImageArr = @[@"icon1", @"target-arrow", @"icon3", @"icon3"];
+    NSArray *butWiteArr = @[@"签到", @"大转盘", @"排行榜", @"大奖池"];
     
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         
-        butActivity = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40 + butWidth * i + 50 * i, 185, butWidth, butWidth) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        butActivity = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30 + butWidth * i + 40 * i, 185, butWidth, butWidth) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
         [_tableView.tableHeaderView addSubview:butActivity];
         [butActivity setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butImageArr objectAtIndex:i]]] forState:UIControlStateNormal];
         butActivity.tag = 6000 + i;
         [butActivity addTarget:self action:@selector(buttonActivityShow:) forControlEvents:UIControlEventTouchUpInside];
         
-        buttonAct = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40 + butWidth * i + 50 * i, 185 + butWidth, butWidth, 25) backgroundColor:[UIColor qianhuise] textColor:[UIColor zitihui] titleText:[butWiteArr objectAtIndex:i]];
+        buttonAct = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30 + butWidth * i + 40 * i, 185 + butWidth, butWidth, 25) backgroundColor:[UIColor qianhuise] textColor:[UIColor zitihui] titleText:[butWiteArr objectAtIndex:i]];
         [_tableView.tableHeaderView addSubview:buttonAct];
         buttonAct.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         buttonAct.tag = 7000 + i;
         [buttonAct addTarget:self action:@selector(buttonActivityShow:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            
+            buttonAct.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+        }
     }
     
 //    轮播位置
@@ -141,8 +146,6 @@
 {
     flagDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
     myDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    
-    
     
     if (button.tag == 6000 || button.tag == 7000) {
         if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
