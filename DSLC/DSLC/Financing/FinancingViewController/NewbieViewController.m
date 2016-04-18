@@ -262,7 +262,7 @@
                 cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
             }
             
-            if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
+            if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"4"]) {
                 
                 cell.outPay.hidden = NO;
                 cell.quanView.hidden = YES;
@@ -345,7 +345,7 @@
         
         NSLog(@"88888888-%ld",(long)indexPath.row);
         
-        if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
+        if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"4"]) {
             
             cell.outPay.hidden = NO;
             cell.quanView.hidden = YES;
