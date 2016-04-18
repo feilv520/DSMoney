@@ -225,11 +225,12 @@
 }
 
 - (void)xAction{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode] image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+
+    NSString *fString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode];
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@",fString] image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
         NSLog(@"shareResponse = %u",shareResponse.responseCode);
         if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-            //                [self getShareRedPacket];
-            NSLog(@"邀请成功！");
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已分享到新浪微博."];
         }
     }];
 }
@@ -248,20 +249,21 @@
 }
 
 - (void)rAction{
+    
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToRenren] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         NSLog(@"%u",response.responseCode);
         if (response.responseCode == UMSResponseCodeSuccess) {
-            //                [self getShareRedPacket];
-            NSLog(@"邀请成功！");
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已分享到人人网."];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享失败."];
         }
     }];
 }
 
 - (void)qAction{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode] image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         NSLog(@"%u",response.responseCode);
         if (response.responseCode == UMSResponseCodeSuccess) {
-            //                [self getShareRedPacket];
             NSLog(@"邀请成功！");
         }
     }];
