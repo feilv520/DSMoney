@@ -10,4 +10,5 @@
 
 @interface NewInviteViewController : BaseViewController
 @property (nonatomic) NSString *inviteCode;
+@property (nonatomic) NSString *realName;
 @end

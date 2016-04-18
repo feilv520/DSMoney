@@ -495,6 +495,7 @@
 //        MyInvitationViewController *myInvitationVC = [[MyInvitationViewController alloc] init];
         NewInviteViewController *newInvite = [[NewInviteViewController alloc] init];
         newInvite.inviteCode = [self.myAccountInfo objectForKey:@"invitationMyCode"];
+        newInvite.realName = [self.myAccountInfo objectForKey:@"realName"];
         [self.navigationController pushViewController:newInvite animated:YES];
         
     } else if (indexPath.row == 5) {

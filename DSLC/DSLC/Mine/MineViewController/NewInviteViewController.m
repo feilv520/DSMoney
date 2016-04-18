@@ -61,7 +61,7 @@
     scrollview.backgroundColor = [UIColor qianhuise];
     scrollview.contentSize = CGSizeMake(0, 1000.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
     
-    UIImageView *imageViewBanner = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 150.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backGroundColor:[UIColor orangeColor] setImage:nil];
+    UIImageView *imageViewBanner = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 150.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backGroundColor:[UIColor qianhuise] setImage:nil];
     [scrollview addSubview:imageViewBanner];
     
     UILabel *labelSao = [CreatView creatWithLabelFrame:CGRectMake(0, imageViewBanner.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, (20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT)) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"扫二维码下载大圣理财"];
@@ -221,11 +221,11 @@
     }];
     
     // 需要修改
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://wap.dslc.cn";
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode];
 }
 
 - (void)xAction{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode] image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
         NSLog(@"shareResponse = %u",shareResponse.responseCode);
         if (shareResponse.responseCode == UMSResponseCodeSuccess) {
             //                [self getShareRedPacket];
@@ -244,11 +244,11 @@
     }];
     
     // 需要修改
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"http://wap.dslc.cn";
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode];
 }
 
 - (void)rAction{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToRenren] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToRenren] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         NSLog(@"%u",response.responseCode);
         if (response.responseCode == UMSResponseCodeSuccess) {
             //                [self getShareRedPacket];
@@ -258,7 +258,7 @@
 }
 
 - (void)qAction{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"大圣理财,金融街的新宠.大圣理财链接:https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         NSLog(@"%u",response.responseCode);
         if (response.responseCode == UMSResponseCodeSuccess) {
             //                [self getShareRedPacket];
