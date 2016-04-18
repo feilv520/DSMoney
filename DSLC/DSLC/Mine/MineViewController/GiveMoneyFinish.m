@@ -82,7 +82,7 @@
     NSLog(@"充值");
     
     NSArray *viewController = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewController objectAtIndex:1] animated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
     
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];

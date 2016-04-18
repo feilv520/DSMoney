@@ -48,6 +48,17 @@
 
 @implementation NewbieViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -255,12 +266,19 @@
                 
                 cell.outPay.hidden = NO;
                 cell.quanView.hidden = YES;
+                
             } else {
-            
+                
                 cell.outPay.hidden = YES;
                 cell.quanView.hidden = NO;
                 cell.quanView.progressTotal = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
-                cell.quanView.progressCounter = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
+                if ([[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] isEqualToString:[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]) {
+                    
+                    cell.quanView.progressCounter = 1;
+                } else {
+                    
+                    cell.quanView.progressCounter = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
+                }
                 cell.quanView.theme.sliceDividerHidden = YES;
                 
             }
@@ -327,12 +345,12 @@
         
         NSLog(@"88888888-%ld",(long)indexPath.row);
         
-//        if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
-//            
-//            cell.outPay.hidden = NO;
-//            cell.quanView.hidden = YES;
-//            
-//        } else {
+        if ([[[self.productListArray objectAtIndex:indexPath.row] residueMoney] isEqualToString:@"0.00"]) {
+            
+            cell.outPay.hidden = NO;
+            cell.quanView.hidden = YES;
+            
+        } else {
         
         cell.outPay.hidden = YES;
         cell.quanView.hidden = NO;
@@ -345,8 +363,8 @@
             cell.quanView.progressCounter = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
         }
         cell.quanView.theme.sliceDividerHidden = YES;
-//            
-//        }
+            
+        }
         //    设置进度条的进度值 并动画展示
 //        CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
 //        
