@@ -42,7 +42,7 @@ static const int kMaxFontSize = 12;
 		self.sliceDividerThickness = 2;
 		
 		// Label
-		self.labelColor = [UIColor blackColor];
+		self.labelColor = [UIColor zitihui];
 		self.dropLabelShadow = YES;
 		self.labelShadowColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
 		self.labelShadowOffset = CGSizeMake(1, 1);

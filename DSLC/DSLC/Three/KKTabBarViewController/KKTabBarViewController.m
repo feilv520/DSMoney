@@ -121,13 +121,13 @@
 - (void)initTabBar
 {
 //    CGFloat buttonWidth = _pageWidth / [_controllerArray count];
-    CGFloat buttonWidth = 40;
+    CGFloat buttonWidth = 35;
     for (int i = 0 ; i < [_tabButtonArray count]; i ++) {
         CGFloat buttonHeight;
         
         UIButton *tabButton = [_tabButtonArray objectAtIndex:i];
 //        if (tabButton.frame.size.height == 0) {
-            buttonHeight = 40;
+            buttonHeight = 35;
 //        } else{
 //            buttonHeight = tabButton.frame.size.height;
 //        }
@@ -136,7 +136,7 @@
 //        } else{
 //            buttonY = _pageHeight - buttonHeight;
 //        }
-        [tabButton setFrame:CGRectMake(40 + _pageWidth / [_controllerArray count] * i, 5, buttonWidth, buttonHeight)];
+        [tabButton setFrame:CGRectMake(40 + _pageWidth / [_controllerArray count] * i, 10, buttonWidth, buttonHeight)];
         [tabButton setTag:i];
         [tabButton addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchDown];
         [tabButton setHidden:self.tabBarHidden];

@@ -50,7 +50,7 @@
     viewGray = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor]];
     viewGray.alpha = 0.3;
     
-//    [self shareWithView];
+    [self getAdvList];
     
     viewGray.hidden = YES;
     
@@ -167,10 +167,13 @@
     
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
-                                      shareText:[NSString stringWithFormat:@"大圣理财,金融街的新宠.  %@", fString]
+                                      shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:只要邀请好友注册,你就有可以和好友一起共享星巴克咖啡,免费领取5000元体验金!投资更有猴币翻倍送!  %@", fString]
                                      shareImage:[UIImage imageNamed:@"默认头像"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
+    
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"《好友邀你来大圣理财，领5000元红包，更有机会免费畅饮星巴克》";
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"《好友邀你来大圣理财，领5000元红包，更有机会免费畅饮星巴克》";
     
     [UMSocialData defaultData].extConfig.wechatSessionData.url = fString;
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = fString;
