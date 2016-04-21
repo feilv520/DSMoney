@@ -273,6 +273,8 @@
 		8183F4241C994240000BB93C /* TChooseRedBagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8183F4221C994240000BB93C /* TChooseRedBagCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8183F42E1C9A7C28000BB93C /* TRedBagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8183F42C1C9A7BD4000BB93C /* TRedBagModel.m */; };
 		8183F4351C9CF232000BB93C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8183F4341C9CF232000BB93C /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
+		8184192B1CC613D40038C7B3 /* icon1-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818419291CC613D40038C7B3 /* icon1-@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8184192C1CC613D40038C7B3 /* icon1-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8184192A1CC613D40038C7B3 /* icon1-@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8184EC371BCC96E1003F440D /* MakeSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC361BCC96E1003F440D /* MakeSureViewController.m */; };
 		8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8184EC391BCCD0FE003F440D /* ContentCell.m */; };
 		8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8184EC3A1BCCD0FE003F440D /* ContentCell.xib */; };
@@ -1313,6 +1315,8 @@
 		8183F42B1C9A7BD4000BB93C /* TRedBagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRedBagModel.h; sourceTree = "<group>"; };
 		8183F42C1C9A7BD4000BB93C /* TRedBagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRedBagModel.m; sourceTree = "<group>"; };
 		8183F4341C9CF232000BB93C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		818419291CC613D40038C7B3 /* icon1-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon1-@2x.png"; sourceTree = "<group>"; };
+		8184192A1CC613D40038C7B3 /* icon1-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon1-@3x.png"; sourceTree = "<group>"; };
 		8184EC351BCC96E1003F440D /* MakeSureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeSureViewController.h; sourceTree = "<group>"; };
 		8184EC361BCC96E1003F440D /* MakeSureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeSureViewController.m; sourceTree = "<group>"; };
 		8184EC381BCCD0FE003F440D /* ContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentCell.h; sourceTree = "<group>"; };
@@ -2636,6 +2640,8 @@
 		81C2DAB01BC757A60007AC48 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				818419291CC613D40038C7B3 /* icon1-@2x.png */,
+				8184192A1CC613D40038C7B3 /* icon1-@3x.png */,
 				81A233621CC0F814009D43D3 /* 1460714506.png */,
 				81A233561CBF6D1E009D43D3 /* NoRecord@2x.png */,
 				8D5B47481CB7AB3D0046AA76 /* fenxiangtouxiang.png */,
@@ -4817,6 +4823,7 @@
 				8D3EEA011C27AB400031F7C9 /* 交通银行@3x.png in Resources */,
 				819B52C71BFC127E002FDF1E /* NotSeparateCell.xib in Resources */,
 				8D3EEA1A1C27AB400031F7C9 /* 成都银行@2x.png in Resources */,
+				8184192B1CC613D40038C7B3 /* icon1-@2x.png in Resources */,
 				8183F4001C97CC4F000BB93C /* iconfont-dui-2111@2x.png in Resources */,
 				819B52E01BFC2094002FDF1E /* 金元宝@2x.png in Resources */,
 				8175BEB41BE9F2F50044026E /* 朋友圈@2x.png in Resources */,
@@ -5050,6 +5057,7 @@
 				81C1381E1BDF6D5E0088E792 /* iconfont-mima@2x.png in Resources */,
 				81A233571CBF6D1E009D43D3 /* NoRecord@2x.png in Resources */,
 				8DFA5C951BCE64D900AED2B2 /* FQuickPayViewController.xib in Resources */,
+				8184192C1CC613D40038C7B3 /* icon1-@3x.png in Resources */,
 				815D27A51BE21040005410C6 /* UpCell.xib in Resources */,
 				8D0CB48A1BE75C860039D826 /* SimpleDescriptionsViewController.xib in Resources */,
 				8175BEB51BE9F2F50044026E /* 朋友圈@3x.png in Resources */,

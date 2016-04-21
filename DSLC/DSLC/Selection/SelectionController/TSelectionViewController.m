@@ -111,8 +111,8 @@
 {
     CGFloat widthPlus = WIDTH_CONTROLLER_DEFAULT - 80;
     CGFloat butWidth = (widthPlus - 100)/4;
-    NSArray *butImageArr = @[@"icon1", @"target-arrow", @"icon3", @"icon3"];
-    NSArray *butWiteArr = @[@"签到", @"大转盘", @"排行榜", @"大奖池"];
+    NSArray *butImageArr = @[@"icon1", @"target-arrow", @"icon3", @"icon1-"];
+    NSArray *butWiteArr = @[@"签到", @"大转盘", @"排行榜", @"爆击抽奖"];
     
     for (int i = 0; i < 4; i++) {
         
@@ -124,13 +124,13 @@
         
         buttonAct = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30 + butWidth * i + 40 * i, 185 + butWidth, butWidth, 25) backgroundColor:[UIColor qianhuise] textColor:[UIColor zitihui] titleText:[butWiteArr objectAtIndex:i]];
         [_tableView.tableHeaderView addSubview:buttonAct];
-        buttonAct.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        buttonAct.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         buttonAct.tag = 7000 + i;
         [buttonAct addTarget:self action:@selector(buttonActivityShow:) forControlEvents:UIControlEventTouchUpInside];
         
         if (WIDTH_CONTROLLER_DEFAULT == 320) {
             
-            buttonAct.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+            buttonAct.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
         }
     }
     
