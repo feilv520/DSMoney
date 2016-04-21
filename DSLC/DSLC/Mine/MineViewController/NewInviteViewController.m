@@ -22,6 +22,8 @@
     UIView *viewGray;
     
     NSMutableArray *adModelArray;
+    
+    NSString *fString;
 }
 
 @end
@@ -149,17 +151,30 @@
 //发送邀请按钮
 - (void)buttonSendInvite:(UIButton *)button
 {
-//    [UIView animateWithDuration:0.5f animations:^{
-//        viewGray.hidden = NO;
-//        inviteNV.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 200 - 20, self.view.frame.size.width, 200);
-//    }];
+    
+    if (self.nameOrPhone == YES) {
+        
+        fString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode];
+        
+    } else {
+        
+        fString = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.phoneNum, @"&inviteCode=", self.inviteCode];
+    }
+    
+    fString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode];
+    
+    fString = [fString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
-                                      shareText:@"大圣理财,金融街的新宠.https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8"
-                                     shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
+                                      shareText:[NSString stringWithFormat:@"大圣理财,金融街的新宠.  %@", fString]
+                                     shareImage:[UIImage imageNamed:@"默认头像"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
+    
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = fString;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = fString;
+    
 }
 
 - (void)inviteRecordButton:(UIBarButtonItem *)button
