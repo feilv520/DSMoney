@@ -167,7 +167,7 @@
     
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
-                                      shareText:[NSString stringWithFormat:@"大圣理财,金融街的新宠.  %@", fString]
+                                      shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:只要邀请好友注册,你就有可以和好友一起共享星巴克咖啡,免费领取5000元体验金!投资更有猴币翻倍送!  %@", fString]
                                      shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
