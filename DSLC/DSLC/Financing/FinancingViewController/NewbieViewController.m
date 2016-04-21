@@ -168,7 +168,7 @@
             cell.labelPercent.textAlignment = NSTextAlignmentCenter;
             cell.labelPercent.text = [[self.productListArray objectAtIndex:indexPath.row] productAnnualYield];
             cell.labelPercent.textColor = [UIColor daohanglan];
-            cell.labelPercent.font = [UIFont fontWithName:@"ArialMT" size:45];
+            cell.labelPercent.font = [UIFont fontWithName:@"CenturyGothic" size:40];
             
             cell.viewLine.backgroundColor = [UIColor grayColor];
             cell.viewLine.alpha = 0.1;
@@ -182,10 +182,10 @@
             NSString *residueString = [[self.productListArray objectAtIndex:indexPath.row] residueMoney];
             
             cell.labelLeftUp.text = [[self.productListArray objectAtIndex:indexPath.row] productPeriod];
-            cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:[self sizeOfLength:residueString]];
+            cell.labelLeftUp.font = [UIFont fontWithName:@"CenturyGothic" size:17];
             
             cell.labelMidUp.text = [NSString stringWithFormat:@"%.1lf",[[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / 10000];
-            cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:[self sizeOfLength:residueString]];
+            cell.labelMidUp.font = [UIFont fontWithName:@"CenturyGothic" size:17];
             
 //            NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]]];
 //            NSRange threeRange = NSMakeRange(0, [[rightString string] rangeOfString:@"元"].location);
@@ -223,7 +223,7 @@
             cell.viewGiPian.layer.masksToBounds = YES;
             
             cell.labelMonth.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
-            cell.labelMonth.font = [UIFont systemFontOfSize:15];
+            cell.labelMonth.font = [UIFont fontWithName:@"CenturyGothic" size:15];
             
             cell.viewLine.alpha = 0.7;
             cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -247,18 +247,18 @@
             
             if (WIDTH_CONTROLLER_DEFAULT == 320) {
                 
-                cell.labelPercentage.font = [UIFont fontWithName:@"ArialMT" size:20];
+                cell.labelPercentage.font = [UIFont fontWithName:@"CenturyGothic" size:22];
                 cell.labelYear.font = [UIFont fontWithName:@"CenturyGothic" size:10];
                 
-                cell.labelDayNum.font = [UIFont fontWithName:@"ArialMT" size:20];
+                cell.labelDayNum.font = [UIFont fontWithName:@"CenturyGothic" size:17];
                 cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:10];
                 
             } else {
                 
-                cell.labelPercentage.font = [UIFont fontWithName:@"ArialMT" size:23];
+                cell.labelPercentage.font = [UIFont fontWithName:@"CenturyGothic" size:22];
                 cell.labelYear.font = [UIFont fontWithName:@"CenturyGothic" size:12];
                 
-                cell.labelDayNum.font = [UIFont fontWithName:@"ArialMT" size:23];
+                cell.labelDayNum.font = [UIFont fontWithName:@"CenturyGothic" size:17];
                 cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
             }
             

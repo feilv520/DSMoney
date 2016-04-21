@@ -236,7 +236,7 @@
         productM = [newArray objectAtIndex:indexPath.section];
         
         cell.labelPercent.textColor = [UIColor daohanglan];
-        cell.labelPercent.font = [UIFont fontWithName:@"ArialMT" size:45];
+        cell.labelPercent.font = [UIFont fontWithName:@"CenturyGothic" size:40];
         cell.labelPercent.text = productM.productAnnualYield;
         
         cell.labelShouYiLv.text = @"预期年化(%)";
@@ -253,21 +253,21 @@
         cell.buttonImage.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         
         cell.labelLeftUp.text = productM.productPeriod;
-        cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        cell.labelLeftUp.font = [UIFont fontWithName:@"CenturyGothic" size:17];
         
         cell.labelLeftRight.text = @"理财期限(天)";
         cell.labelLeftRight.textColor = [UIColor zitihui];
         cell.labelLeftRight.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.labelMidUp.text = [NSString stringWithFormat:@"%.1lf",[productM.residueMoney floatValue] / 10000];
-        cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        cell.labelMidUp.font = [UIFont fontWithName:@"CenturyGothic" size:17];
         
         cell.labelMidDOwn.text = @"剩余总额(万元)";
         cell.labelMidDOwn.textColor = [UIColor zitihui];
         cell.labelMidDOwn.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.labelRightUp.text = productM.productAmountMin;
-        cell.labelRightUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        cell.labelRightUp.font = [UIFont fontWithName:@"CenturyGothic" size:17];
         
         cell.labelDownRight.text = @"起投资金(元)";
         cell.labelDownRight.textColor = [UIColor zitihui];
@@ -360,14 +360,14 @@
         
         cell.labelLeftUp.text = productM.productAnnualYield;
         cell.labelLeftUp.textColor = [UIColor daohanglan];
-        cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        cell.labelLeftUp.font = [UIFont fontWithName:@"CenturyGothic" size:22];
         
         cell.labelMidDown.text = @"理财期限(天)";
         cell.labelMidDown.textAlignment = NSTextAlignmentCenter;
         cell.labelMidDown.textColor = [UIColor zitihui];
         
         cell.labelMidUp.text = productM.productPeriod;
-        cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        cell.labelMidUp.font = [UIFont fontWithName:@"CenturyGothic" size:17];
         
         cell.quanView.progressTotal = [productM.productInitLimit floatValue];
         CGFloat hadSellNumber = [productM.productInitLimit floatValue] - [productM.residueMoney floatValue];
@@ -390,13 +390,13 @@
         
         if (WIDTH_CONTROLLER_DEFAULT == 320) {
             
-            cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
-            cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+            cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+            cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
             
         } else {
             
-            cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
-            cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+            cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+            cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

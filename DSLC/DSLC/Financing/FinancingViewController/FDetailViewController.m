@@ -208,10 +208,10 @@
         
         cell.labelPercentage.text = [self.detailM productAnnualYield];
         cell.labelPercentage.textColor = [UIColor daohanglan];
-        cell.labelPercentage.font = [UIFont fontWithName:@"ArialMT" size:23];
+        cell.labelPercentage.font = [UIFont fontWithName:@"CenturyGothic" size:17];
         
         cell.labelDayNum.text = [self.detailM productPeriod];
-        cell.labelDayNum.font = [UIFont fontWithName:@"ArialMT" size:23];
+        cell.labelDayNum.font = [UIFont fontWithName:@"CenturyGothic" size:17];
         
         cell.viewDiSe.backgroundColor = [UIColor qianhuise];
         

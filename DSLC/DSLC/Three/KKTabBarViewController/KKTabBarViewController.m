@@ -121,13 +121,13 @@
 - (void)initTabBar
 {
 //    CGFloat buttonWidth = _pageWidth / [_controllerArray count];
-    CGFloat buttonWidth = 40;
+    CGFloat buttonWidth = 35;
     for (int i = 0 ; i < [_tabButtonArray count]; i ++) {
         CGFloat buttonHeight;
         
         UIButton *tabButton = [_tabButtonArray objectAtIndex:i];
 //        if (tabButton.frame.size.height == 0) {
-            buttonHeight = 40;
+            buttonHeight = 35;
 //        } else{
 //            buttonHeight = tabButton.frame.size.height;
 //        }
@@ -136,7 +136,7 @@
 //        } else{
 //            buttonY = _pageHeight - buttonHeight;
 //        }
-        [tabButton setFrame:CGRectMake(40 + _pageWidth / [_controllerArray count] * i, 5, buttonWidth, buttonHeight)];
+        [tabButton setFrame:CGRectMake(40 + _pageWidth / [_controllerArray count] * i, 10, buttonWidth, buttonHeight)];
         [tabButton setTag:i];
         [tabButton addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchDown];
         [tabButton setHidden:self.tabBarHidden];
@@ -157,9 +157,10 @@
 {
     _tabBarHeight = tabBarHeight;
 //    NSLog(@"height %f",self.view.frame.size.height);
-//    self.labelLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 53, self.view.frame.size.width, 2)];
-//    [self.view addSubview:self.labelLine];
-//    self.labelLine.backgroundColor = [UIColor redColor];
+    self.labelLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 51, self.view.frame.size.width, 1)];
+    [self.view addSubview:self.labelLine];
+    self.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.labelLine.alpha = 0.8;
     
     for (UIButton *button in _tabButtonArray) {
         

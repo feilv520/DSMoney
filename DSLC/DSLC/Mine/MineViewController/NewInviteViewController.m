@@ -168,7 +168,7 @@
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
                                       shareText:[NSString stringWithFormat:@"大圣理财,金融街的新宠.  %@", fString]
-                                     shareImage:[UIImage imageNamed:@"默认头像"]
+                                     shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
     

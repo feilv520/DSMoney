@@ -203,16 +203,16 @@
     
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         
-        cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:20];
-        cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:20];
+        cell.labelLeftUp.font = [UIFont fontWithName:@"CenturyGothic" size:22];
+        cell.labelMidUp.font = [UIFont fontWithName:@"CenturyGothic" size:17];
         
         cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
         cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:10];
         
     } else {
         
-        cell.labelLeftUp.font = [UIFont fontWithName:@"ArialMT" size:23];
-        cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:23];
+        cell.labelLeftUp.font = [UIFont fontWithName:@"CenturyGothic" size:22];
+        cell.labelMidUp.font = [UIFont fontWithName:@"CenturyGothic" size:17];
         
         cell.labelLeftDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         cell.labelMidDown.font = [UIFont fontWithName:@"CenturyGothic" size:12];
