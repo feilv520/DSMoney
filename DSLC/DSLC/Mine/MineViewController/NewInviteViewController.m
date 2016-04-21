@@ -50,7 +50,7 @@
     viewGray = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor]];
     viewGray.alpha = 0.3;
     
-//    [self shareWithView];
+    [self getAdvList];
     
     viewGray.hidden = YES;
     
@@ -171,6 +171,9 @@
                                      shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
+    
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"《好友邀你来大圣理财，领5000元红包，更有机会免费畅饮星巴克》";
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"《好友邀你来大圣理财，领5000元红包，更有机会免费畅饮星巴克》";
     
     [UMSocialData defaultData].extConfig.wechatSessionData.url = fString;
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = fString;
