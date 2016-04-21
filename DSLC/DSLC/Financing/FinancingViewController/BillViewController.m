@@ -230,12 +230,21 @@
         cell.quanView.hidden = NO;
         cell.quanView.progressTotal = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
         
-        if ([[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] isEqualToString:[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]) {
+        CGFloat hadSellNumber = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
+        
+        CGFloat onePriceNumber = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] * 0.01;
+        
+        CGFloat ninetyPriceNumber = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] * 0.99;
+
+        if (hadSellNumber < onePriceNumber){
             
-            cell.quanView.progressCounter = 1;
+            cell.quanView.progressCounter = onePriceNumber;
+        } else if(hadSellNumber > ninetyPriceNumber){
+            
+            cell.quanView.progressCounter = ninetyPriceNumber;
         } else {
             
-            cell.quanView.progressCounter = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
+            cell.quanView.progressCounter = hadSellNumber;
         }
         
         cell.quanView.theme.sliceDividerHidden = YES;

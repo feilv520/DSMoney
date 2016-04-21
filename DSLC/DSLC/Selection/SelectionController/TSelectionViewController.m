@@ -370,10 +370,21 @@
         cell.labelMidUp.font = [UIFont fontWithName:@"ArialMT" size:20];
         
         cell.quanView.progressTotal = [productM.productInitLimit floatValue];
-        if ([productM.productInitLimit isEqualToString:productM.residueMoney]) {
-            cell.quanView.progressCounter = 1;
+        CGFloat hadSellNumber = [productM.productInitLimit floatValue] - [productM.residueMoney floatValue];
+        
+        CGFloat onePriceNumber = [productM.productInitLimit floatValue] * 0.01;
+        
+        CGFloat ninetyPriceNumber = [productM.productInitLimit floatValue] * 0.99;
+
+        if (hadSellNumber < onePriceNumber){
+            
+            cell.quanView.progressCounter = onePriceNumber;
+        } else if(hadSellNumber > ninetyPriceNumber){
+            
+            cell.quanView.progressCounter = ninetyPriceNumber;
         } else {
-            cell.quanView.progressCounter = [productM.productInitLimit floatValue] - [productM.residueMoney floatValue];
+            
+            cell.quanView.progressCounter = hadSellNumber;
         }
         cell.quanView.theme.sliceDividerHidden = YES;
         
