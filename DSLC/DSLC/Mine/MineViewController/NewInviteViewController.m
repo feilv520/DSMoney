@@ -101,7 +101,7 @@
     CGFloat viewRuleW = viewRule.frame.size.width;
     CGFloat viewRuleH = viewRule.frame.size.height;
     
-    UILabel *labelRule = [CreatView creatWithLabelFrame:CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"邀请规则:\n1. 注册即赠送5000元体验金和现金红包 ;\n2. 完成任意投资激活现金红包;\n3. 当您邀请的好友成功注册并完成投资后，您将获得的邀请红包:\n① 好友投资金额累计达到1000元（含），您即获得10元现金红包 ;\n② 好友投资金额累计达到10000元（含），您即获得20元现金红包 ;\n③ 邀请每位好友获得的现金红包金额封顶30元，邀请好友人数不限 。"];
+    UILabel *labelRule = [CreatView creatWithLabelFrame:CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"邀请规则:\n1. 注册即赠送5000元体验金和现金红包;\n2. 完成任意投资激活现金红包;\n3. 当您邀请的好友成功注册并完成投资后,您将获得的邀请红包:\n①好友投资金额累计达到1000元(含),您即获得10元现金红包;\n②好友投资金额累计达到10000元(含),您即获得20元现金红包;\n③邀请每位好友获得的现金红包金额封顶30元,邀请好友人数不限。"];
     [viewRule addSubview:labelRule];
     labelRule.numberOfLines = 0;
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
