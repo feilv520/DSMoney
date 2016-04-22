@@ -173,8 +173,6 @@
         fString = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.phoneNum, @"&inviteCode=", self.inviteCode];
     }
     
-    fString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode];
-    
     fString = [fString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     [UMSocialSnsService presentSnsIconSheetView:self

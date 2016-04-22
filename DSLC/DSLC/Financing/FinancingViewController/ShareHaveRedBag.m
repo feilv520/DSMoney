@@ -21,6 +21,8 @@
     UILabel *labelGet;
     
     UIButton *buttonShare;
+    
+    NSString *fString;
 }
 
 @property (nonatomic, strong) NSDictionary *openRedBagDic;
@@ -169,12 +171,25 @@
     
     [self getShareRedPacket];
     [MobClick event:@"share"];
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    fString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", [dic objectForKey:@"realName"], [dic objectForKey:@"invitationMyCode"]];
+    
+    fString = [fString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
-                                      shareText:@"大圣理财,金融街的新宠.https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8"
+                                      shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:喝咖啡,领红包,赚猴币多重惊喜等着你!  %@", fString]
                                      shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
+    
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"邀请好友一起，免费共享星巴克";
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"邀请好友一起，免费共享星巴克";
+    
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = fString;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = fString;
     
 }
 
