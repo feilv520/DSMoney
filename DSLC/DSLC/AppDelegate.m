@@ -288,7 +288,7 @@ void UncaughtExceptionHandler(NSException *exception){
         result = [responseObject objectForKey:@"result"];
         
         if ([result isEqualToNumber:@200]) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本请更新" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去更新", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本请更新(已更新请忽略)" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去更新", nil];
             alertView.delegate = self;
             [alertView show];
             

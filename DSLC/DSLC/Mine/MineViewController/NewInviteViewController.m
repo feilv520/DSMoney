@@ -10,6 +10,7 @@
 #import "InviteRecordViewController.h"
 #import "InviteNewView.h"
 #import "AdModel.h"
+#import "YYAnimatedImageView.h"
 
 @interface NewInviteViewController () <UMSocialUIDelegate>
 
@@ -24,6 +25,8 @@
     NSMutableArray *adModelArray;
     
     NSString *fString;
+    
+    YYAnimatedImageView *imageViewBanner;
 }
 
 @end
@@ -45,8 +48,6 @@
     [butReceive addTarget:self action:@selector(inviteRecordButton:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = rightButItem;
     
-    [self contentShow];
-    
     viewGray = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor]];
     viewGray.alpha = 0.3;
     
@@ -63,7 +64,10 @@
     scrollview.backgroundColor = [UIColor qianhuise];
     scrollview.contentSize = CGSizeMake(0, 1000.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
     
-    UIImageView *imageViewBanner = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 150.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backGroundColor:[UIColor qianhuise] setImage:nil];
+    imageViewBanner = [[YYAnimatedImageView alloc] init];
+    imageViewBanner.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 150.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+    imageViewBanner.backgroundColor = [UIColor qianhuise];
+    imageViewBanner.yy_imageURL = [NSURL URLWithString:[[adModelArray firstObject] adImg]];
     [scrollview addSubview:imageViewBanner];
     
     UILabel *labelSao = [CreatView creatWithLabelFrame:CGRectMake(0, imageViewBanner.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, (20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT)) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"扫二维码下载大圣理财"];
@@ -175,13 +179,13 @@
     
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
-                                      shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:只要邀请好友注册,你就有可以和好友一起共享星巴克咖啡,免费领取5000元体验金!投资更有猴币翻倍送!  %@", fString]
+                                      shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:喝咖啡,领红包,赚猴币多重惊喜等着你!  %@", fString]
                                      shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
     
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"《好友邀你来大圣理财，领5000元红包，更有机会免费畅饮星巴克》";
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"《好友邀你来大圣理财，领5000元红包，更有机会免费畅饮星巴克》";
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"邀请好友一起，免费共享星巴克";
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"邀请好友一起，免费共享星巴克";
     
     [UMSocialData defaultData].extConfig.wechatSessionData.url = fString;
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = fString;
@@ -409,6 +413,8 @@
             [adModel setValuesForKeysWithDictionary:dic];
             [adModelArray addObject:adModel];
         }
+        
+        [self contentShow];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
