@@ -49,7 +49,7 @@
     UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 60, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"您是否需要进行风险等级评测"];
     [_tableView.tableFooterView addSubview:labelAlert];
     
-    UIButton *butonPing = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 85, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"立即测评"];
+    UIButton *butonPing = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 85, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor huibai] textColor:[UIColor whiteColor] titleText:@"立即测评"];
     [_tableView.tableFooterView addSubview:butonPing];
     butonPing.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butonPing setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
