@@ -121,7 +121,7 @@
 - (void)initTabBar
 {
 //    CGFloat buttonWidth = _pageWidth / [_controllerArray count];
-    CGFloat buttonWidth = 40;
+    CGFloat buttonWidth = 35;
     for (int i = 0 ; i < [_tabButtonArray count]; i ++) {
         CGFloat buttonHeight;
         
