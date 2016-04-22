@@ -343,7 +343,7 @@
 //    if (WIDTH_CONTROLLER_DEFAULT == 320) {
 //        newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, 0, 300, 255);
 //    } else {
-        newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, 115, 300, 255);
+        newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, self.view.center.y - 128.0, 300, 255);
 //    }
     
     newLView.layer.masksToBounds = YES;
@@ -863,6 +863,10 @@
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         [UIView animateWithDuration:0.5 animations:^{
            newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, 0, 300, 255);
+        }];
+    } else {
+        [UIView animateWithDuration:0.5 animations:^{
+            newLView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 300) / 2.0, self.view.center.y - 200, 300, 255);
         }];
     }
 }

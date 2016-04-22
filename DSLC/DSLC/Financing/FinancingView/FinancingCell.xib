@@ -84,7 +84,7 @@
                                 <animations/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6r0-5k-WhC" customClass="MDRadialProgressView">
-                                <rect key="frame" x="270" y="40" width="60" height="60"/>
+                                <rect key="frame" x="270" y="36" width="60" height="60"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -111,7 +111,7 @@
                             <constraint firstItem="1TV-l6-aez" firstAttribute="top" secondItem="aYy-Pf-uuY" secondAttribute="bottom" constant="6" id="K2W-ZU-J81"/>
                             <constraint firstItem="1TV-l6-aez" firstAttribute="leading" secondItem="Taf-Lh-40H" secondAttribute="leading" constant="15" id="N3e-le-IYE"/>
                             <constraint firstItem="aYy-Pf-uuY" firstAttribute="leading" secondItem="Taf-Lh-40H" secondAttribute="leading" constant="15" id="ORu-IX-DSt"/>
-                            <constraint firstItem="6r0-5k-WhC" firstAttribute="top" secondItem="1TV-l6-aez" secondAttribute="bottom" constant="11" id="SDH-dm-3wD"/>
+                            <constraint firstItem="6r0-5k-WhC" firstAttribute="top" secondItem="1TV-l6-aez" secondAttribute="bottom" constant="7" id="SDH-dm-3wD"/>
                             <constraint firstAttribute="trailing" secondItem="cNi-pg-O9k" secondAttribute="trailing" constant="24" id="SDh-Je-KX0"/>
                             <constraint firstItem="aYy-Pf-uuY" firstAttribute="top" secondItem="Taf-Lh-40H" secondAttribute="top" constant="6" id="Y3z-tz-78s"/>
                             <constraint firstAttribute="height" constant="100" id="Z5A-xH-Iv5"/>
