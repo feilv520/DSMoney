@@ -12,6 +12,7 @@
 
 @interface BillCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIView *viewBottom;
 @property (weak, nonatomic) IBOutlet UIButton *buttonRed;
 @property (weak, nonatomic) IBOutlet UILabel *labelMonth;
 @property (weak, nonatomic) IBOutlet UILabel *labelQiTou;

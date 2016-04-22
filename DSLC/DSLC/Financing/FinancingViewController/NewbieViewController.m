@@ -131,7 +131,7 @@
     if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
         if (indexPath.row == 0) {
         
-            return 209;
+            return 170;
         
         } else {
             return 110;
@@ -159,8 +159,10 @@
             NewBieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse1"];
             
             cell.viewBottom.backgroundColor = [UIColor whiteColor];
-            cell.viewBottom.layer.cornerRadius = 3;
+            cell.viewBottom.layer.cornerRadius = 5;
             cell.viewBottom.layer.masksToBounds = YES;
+            cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+            cell.viewBottom.layer.borderWidth = 1;
             
             cell.labelShouYiLv.text = @"预期年化";
             cell.labelShouYiLv.font = [UIFont fontWithName:@"CenturyGothic" size:13];
@@ -225,6 +227,8 @@
             
             cell.viewGiPian.layer.cornerRadius = 4;
             cell.viewGiPian.layer.masksToBounds = YES;
+            cell.viewGiPian.layer.borderWidth = 1;
+            cell.viewGiPian.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
             
             cell.labelMonth.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
             cell.labelMonth.font = [UIFont fontWithName:@"CenturyGothic" size:15];

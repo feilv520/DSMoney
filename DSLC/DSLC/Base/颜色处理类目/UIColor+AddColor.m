@@ -204,4 +204,12 @@
     return [UIColor colorFromHexCode:@"#87d196"];
 }
 
++ (UIColor *) jisuanqiHui {
+    return [UIColor colorFromHexCode:@"#4e5863"];
+}
+
++ (UIColor *) biankuangse {
+    return [UIColor colorFromHexCode:@"#e1e3e5"];
+}
+
 @end

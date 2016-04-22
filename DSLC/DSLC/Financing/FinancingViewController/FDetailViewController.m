@@ -208,7 +208,7 @@
         
         cell.labelPercentage.text = [self.detailM productAnnualYield];
         cell.labelPercentage.textColor = [UIColor daohanglan];
-        cell.labelPercentage.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+        cell.labelPercentage.font = [UIFont fontWithName:@"CenturyGothic" size:22];
         
         cell.labelDayNum.text = [self.detailM productPeriod];
         cell.labelDayNum.font = [UIFont fontWithName:@"CenturyGothic" size:17];
@@ -339,7 +339,6 @@
         PlanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse3"];
         
         cell.labelPlan.text = @"投资计划";
-        cell.labelPlan.textColor = [UIColor zitihui];
         cell.labelPlan.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
         cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -447,7 +446,7 @@
     buttonCal.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/4, 49);
     [buttonCal setImage:[UIImage imageNamed:@"750产品详111"] forState:UIControlStateNormal];
     [buttonCal setImageEdgeInsets:UIEdgeInsetsMake(10, 30, 10, 30)];
-    buttonCal.backgroundColor = [UIColor colorWithRed:78/255 green:88/255 blue:97/255 alpha:1.0];
+    buttonCal.backgroundColor = [UIColor jisuanqiHui];
     [buttonCal addTarget:self action:@selector(calendarView) forControlEvents:UIControlEventTouchUpInside];
     [self.viewBotton addSubview:buttonCal];
     
@@ -478,18 +477,21 @@
         if ([self.residueMoney isEqualToString:@"0.00"]) {
             if ([[self.detailM isOrder] isEqualToNumber:[NSNumber numberWithInt:0]]) {
                 [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
-                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+//                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+                [butMakeSure setBackgroundColor:[UIColor daohanglan]];
                 butMakeSure.enabled = YES;
                 
             } else {
                 [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
-                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+//                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+                butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
                 butMakeSure.enabled = NO;
             }
         } else {
             butMakeSure.enabled = YES;
             [butMakeSure setTitle:@"投资(可使用5,000体验金)" forState:UIControlStateNormal];
-            [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+//            [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            [butMakeSure setBackgroundColor:[UIColor daohanglan]];
         }
         
     } else {
@@ -498,20 +500,24 @@
             if ([[self.detailM productType] isEqualToString:@"1"]) {
                 if ([[self.detailM isOrder] isEqualToNumber:[NSNumber numberWithInt:0]]) {
                     [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
-                    [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+//                    [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+                    butMakeSure.backgroundColor = [UIColor daohanglan];
                 } else {
                     [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
-                    [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+//                    [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+                    butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
                 }
             } else {
 //                [butMakeSure setTitle:[NSString stringWithFormat:@"%@%@%@", @"投资(",[dataDic objectForKey:@"amountMin"], @"元起投)"] forState:UIControlStateNormal];
                 [butMakeSure setTitle:@"已售罄" forState:UIControlStateNormal];
-                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+//                [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+                butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
                 [butMakeSure setUserInteractionEnabled:NO];
             }
         } else {
             [butMakeSure setTitle:[NSString stringWithFormat:@"%@%@%@", @"投资(",[dataDic objectForKey:@"amountMin"], @"元起投)"] forState:UIControlStateNormal];
-            [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+//            [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            butMakeSure.backgroundColor = [UIColor daohanglan];
         }
     }
     
@@ -530,20 +536,35 @@
 //勾选协议按钮
 - (void)shifouGouXuan:(UIButton *)button
 {
-    if (button.tag == 2000) {
+    if ([butMakeSure.titleLabel.text isEqualToString:@"已售罄"] || [butMakeSure.titleLabel.text isEqualToString:@"已预约"]) {
         
-        [button setImage:[UIImage imageNamed:@"iconfont-dui-2111"] forState:UIControlStateNormal];
-        button.tag = 3000;
-        butMakeSure.enabled = NO;
-        [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+        if (button.tag == 2000) {
+            button.tag = 3000;
+            [button setImage:[UIImage imageNamed:@"iconfont-dui-2111"] forState:UIControlStateNormal];
+        } else {
+            [button setImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+            button.tag = 2000;
+        }
         
     } else {
         
-        butMakeSure.enabled = YES;
-        [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
-        button.tag = 2000;
-        
+        if (button.tag == 2000) {
+            
+            [button setImage:[UIImage imageNamed:@"iconfont-dui-2111"] forState:UIControlStateNormal];
+            button.tag = 3000;
+            butMakeSure.enabled = NO;
+            butMakeSure.backgroundColor = [UIColor whiteColor];
+            //        [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+            butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
+            
+        } else {
+            
+            butMakeSure.enabled = YES;
+            //        [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            butMakeSure.backgroundColor = [UIColor daohanglan];
+            [button setImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+            button.tag = 2000;
+        }
     }
 }
 
@@ -625,7 +646,7 @@
     bView = nil;
     calendar = nil;
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (bView == nil) {
         bView = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:Color_Black textColor:nil titleText:nil];
@@ -817,7 +838,8 @@
             
             butMakeSure.userInteractionEnabled = NO;
             [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
-            [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+//            [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+            butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
         } else {
             [ProgressHUD showMessage:@"请先登录,然后再预约" Width:100 High:20];
         }

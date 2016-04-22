@@ -86,14 +86,15 @@
 - (void)tableViewShow
 {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 45) style:UITableViewStyleGrouped];
         [self.view addSubview:_tableView];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = [UIColor qianhuise];
         _tableView.separatorColor = [UIColor clearColor];
         
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 185 + ((WIDTH_CONTROLLER_DEFAULT - 80) - 100)/3 + 15)];
+//        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 185 + ((WIDTH_CONTROLLER_DEFAULT - 80) - 100)/3 + 15)];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 250)];
         _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
         
         [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuseNew"];
@@ -103,7 +104,6 @@
         [self viewHeadShow];
         
         [self getAdvList];
-        
     }
 }
 
@@ -116,13 +116,13 @@
     
     for (int i = 0; i < 4; i++) {
         
-        butActivity = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30 + butWidth * i + 40 * i, 185, butWidth, butWidth) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        butActivity = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30 + butWidth * i + 40 * i, 183, butWidth, butWidth) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
         [_tableView.tableHeaderView addSubview:butActivity];
         [butActivity setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butImageArr objectAtIndex:i]]] forState:UIControlStateNormal];
         butActivity.tag = 6000 + i;
         [butActivity addTarget:self action:@selector(buttonActivityShow:) forControlEvents:UIControlEventTouchUpInside];
         
-        buttonAct = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30 + butWidth * i + 40 * i, 185 + butWidth, butWidth, 25) backgroundColor:[UIColor qianhuise] textColor:[UIColor zitihui] titleText:[butWiteArr objectAtIndex:i]];
+        buttonAct = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30 + butWidth * i + 40 * i, 185 + butWidth, butWidth, 17) backgroundColor:[UIColor qianhuise] textColor:[UIColor zitihui] titleText:[butWiteArr objectAtIndex:i]];
         [_tableView.tableHeaderView addSubview:buttonAct];
         buttonAct.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         buttonAct.tag = 7000 + i;
@@ -178,7 +178,7 @@
 {
     if (indexPath.section == 0) {
         
-        return 209;
+        return 170;
         
     } else if (indexPath.section == 3) {
         
@@ -197,14 +197,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 2) {
-        
-        return 10;
-        
-    } else {
-        
-        return 0.5;
-    }
+    return 0.5;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -330,6 +323,11 @@
         
         BillCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse000"];
         cell.backgroundColor = [UIColor qianhuise];
+        
+        cell.viewBottom.layer.cornerRadius = 5;
+        cell.viewBottom.layer.masksToBounds = YES;
+        cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+        cell.viewBottom.layer.borderWidth = 1;
         
         cell.viewLine1.backgroundColor = [UIColor grayColor];
         cell.viewLine1.alpha = 0.1;

@@ -138,7 +138,9 @@
 - (void)activityShowViewHead
 {
     imageActivit = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 140) backgroundColor:[UIColor whiteColor]];
-    _tableView.tableHeaderView = imageActivit;
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 152)];
+    _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
+    [_tableView.tableHeaderView addSubview:imageActivit];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -154,8 +156,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BillCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    
     cell.backgroundColor = [UIColor huibai];
+    
+    cell.viewBottom.layer.cornerRadius = 5;
+    cell.viewBottom.layer.masksToBounds = YES;
+    cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+    cell.viewBottom.layer.borderWidth = 1;
     
     ProductListModel *proModel = [self.productListArray objectAtIndex:indexPath.row];
     
