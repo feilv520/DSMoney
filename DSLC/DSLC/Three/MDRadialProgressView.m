@@ -69,7 +69,7 @@
 	[self addSubview:self.label];
 	
 	// Private properties
-	self.internalPadding = 2;
+	self.internalPadding = 6;
 	
 	// Accessibility
 	self.isAccessibilityElement = YES;

@@ -141,7 +141,7 @@
         if (HEIGHT_CONTROLLER_DEFAULT == 500 || HEIGHT_CONTROLLER_DEFAULT == 480) {
             viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (320.0 / 667.0))];
         } else {
-            viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (291.0 / 667.0))];
+            viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (288.0 / 667.0))];
         }
         _tableView.tableHeaderView = viewHead;
         viewHead.backgroundColor = [UIColor huibai];
@@ -253,7 +253,7 @@
     
     [viewHead addSubview:middleView];
     middleView.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (156.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (127 / 667.0));
-    middleView.backgroundColor = [UIColor whiteColor];
+    middleView.backgroundColor = [UIColor qianhuise];
     
     middleView.viewLine.backgroundColor = [UIColor grayColor];
     middleView.viewLine.alpha = 0.3;

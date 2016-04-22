@@ -25,6 +25,7 @@
 #import "BillCell.h"
 #import "MDRadialProgressTheme.h"
 #import "FDetailViewController.h"
+#import "TBaoJiViewController.h"
 
 @interface TSelectionViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -45,6 +46,8 @@
     
     NSDictionary *flagDic;
     NSDictionary *myDic;
+    
+    BOOL flagOpen;
 }
 
 @end
@@ -60,6 +63,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    flagOpen = NO;
+    
+    [self ifOpenKey];
     
     photoArray = [NSMutableArray array];
     newArray = [NSMutableArray array];
@@ -135,7 +142,7 @@
     }
     
 //    轮播位置
-    viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 170) backgroundColor:[UIColor qianhuise]];
+    viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 180) backgroundColor:[UIColor qianhuise]];
     [_tableView.tableHeaderView addSubview:viewScroll];
     
 //    _tableView.tableHeaderView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 185 + butWidth + 35);
@@ -167,10 +174,20 @@
         bigTurntable.tokenString = [myDic objectForKey:@"token"];
         [self.navigationController pushViewController:bigTurntable animated:YES];
         
-    } else {
+    } else if (button.tag == 6002 || button.tag == 7002){
         
         TRankinglistViewController *rankinglist = [[TRankinglistViewController alloc] init];
         [self.navigationController pushViewController:rankinglist animated:YES];
+    } else {
+        
+        if (!flagOpen) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"敬请期待..."];
+            return;
+        }
+        
+        TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
+        baoji.webUrl = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",[myDic objectForKey:@"token"]];
+        pushVC(baoji);
     }
 }
 
@@ -451,7 +468,7 @@
 - (void)makeScrollView{
     NSInteger photoIndex = photoArray.count + 2;
     
-    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 170)];
+    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180)];
     bannerScrollView.backgroundColor = Color_Clear;
     bannerScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * photoIndex,0);
     bannerScrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
@@ -657,6 +674,25 @@
         }
         
         [self tableViewShow];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+- (void)ifOpenKey{
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"lottery/getLotteryOnOff" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"首页爆击抽奖%@",responseObject);
+        
+        if ([[responseObject objectForKey:@"onOff"] isEqualToString:@"1"]) {
+            flagOpen = YES;
+        } else {
+            flagOpen = NO;
+        }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
