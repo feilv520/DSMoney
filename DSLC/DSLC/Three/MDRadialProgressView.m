@@ -69,7 +69,7 @@
 	[self addSubview:self.label];
 	
 	// Private properties
-	self.internalPadding = 6;
+	self.internalPadding = 5;
 	
 	// Accessibility
 	self.isAccessibilityElement = YES;
@@ -108,10 +108,10 @@
     
 	CGContextRef contextRef = UIGraphicsGetCurrentContext();
 	CGSize viewSize = self.bounds.size;
-	CGPoint center = CGPointMake(viewSize.width / 2, viewSize.height / 2);
+	CGPoint center = CGPointMake(viewSize.width / 2.0, viewSize.height / 2.0);
 	
     // Draw the slices.
-	CGFloat radius = viewSize.width / 2 - self.internalPadding;
+	CGFloat radius = viewSize.width / 2.0 - self.internalPadding;
     [self drawSlices:self.progressTotal
 		   completed:self.progressCounter
 			  radius:radius
@@ -212,9 +212,9 @@
 - (void)drawSlicesSeparators:(CGContextRef)contextRef withViewSize:(CGSize)viewSize andCenter:(CGPoint)center
 {
 	int outerDiameter = viewSize.width;
-    float outerRadius = outerDiameter / 2 - self.internalPadding;
+    float outerRadius = outerDiameter / 2.0 - self.internalPadding;
     int innerDiameter = outerDiameter - self.theme.thickness;
-    float innerRadius = innerDiameter / 2;
+    float innerRadius = innerDiameter / 2.0;
     
     if (! self.theme.sliceDividerHidden) {
         int sliceCount = self.progressTotal;
