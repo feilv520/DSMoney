@@ -101,7 +101,18 @@
         _tableView.separatorColor = [UIColor clearColor];
         
 //        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 185 + ((WIDTH_CONTROLLER_DEFAULT - 80) - 100)/3 + 15)];
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 250)];
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            
+            _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 238)];
+            
+        } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+            
+            _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 250)];
+            
+        } else {
+            
+            _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 261)];
+        }
         _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
         
         [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuseNew"];
@@ -137,12 +148,12 @@
         
         if (WIDTH_CONTROLLER_DEFAULT == 320) {
             
-            buttonAct.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+            buttonAct.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:8];
         }
     }
     
 //    轮播位置
-    viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 180) backgroundColor:[UIColor qianhuise]];
+    viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 170) backgroundColor:[UIColor qianhuise]];
     [_tableView.tableHeaderView addSubview:viewScroll];
     
 //    _tableView.tableHeaderView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 185 + butWidth + 35);
@@ -466,7 +477,7 @@
 - (void)makeScrollView{
     NSInteger photoIndex = photoArray.count + 2;
     
-    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180)];
+    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 170)];
     bannerScrollView.backgroundColor = Color_Clear;
     bannerScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * photoIndex,0);
     bannerScrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
