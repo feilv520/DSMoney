@@ -121,13 +121,13 @@
 - (void)initTabBar
 {
 //    CGFloat buttonWidth = _pageWidth / [_controllerArray count];
-    CGFloat buttonWidth = 35;
+    CGFloat buttonWidth = 40;
     for (int i = 0 ; i < [_tabButtonArray count]; i ++) {
         CGFloat buttonHeight;
         
         UIButton *tabButton = [_tabButtonArray objectAtIndex:i];
 //        if (tabButton.frame.size.height == 0) {
-            buttonHeight = 35;
+            buttonHeight = 30;
 //        } else{
 //            buttonHeight = tabButton.frame.size.height;
 //        }

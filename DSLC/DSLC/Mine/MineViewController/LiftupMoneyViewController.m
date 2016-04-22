@@ -167,7 +167,7 @@
         cell.labelTitle.text = @"提现金额(元)";
         cell.labelTitle.font = [UIFont systemFontOfSize:15];
         
-        cell.textField.placeholder = [NSString stringWithFormat:@"本次最多可提现%@元",[DES3Util decrypt:[self.flagDic objectForKey:@"totalMoney"]]];
+        cell.textField.placeholder = [NSString stringWithFormat:@"本次最多可提现%@元",[DES3Util decrypt:[self.flagDic objectForKey:@"accBalance"]]];
         cell.textField.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textField.tintColor = [UIColor yuanColor];
         cell.textField.tag = 111111;
