@@ -162,13 +162,17 @@
             cell.viewBottom.layer.cornerRadius = 3;
             cell.viewBottom.layer.masksToBounds = YES;
             
-            cell.labelShouYiLv.text = @"预期年化(%)";
+            cell.labelShouYiLv.text = @"预期年化";
             cell.labelShouYiLv.font = [UIFont fontWithName:@"CenturyGothic" size:13];
             
+            NSMutableAttributedString *percenString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [[self.productListArray objectAtIndex:indexPath.row] productAnnualYield]]];
+            NSRange leftRange = NSMakeRange(0, [[percenString string] rangeOfString:@"%"].location);
+            [percenString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
+            NSRange rightRange = NSMakeRange([[percenString string] length] - 1, 1);
+            [percenString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:rightRange];
             cell.labelPercent.textAlignment = NSTextAlignmentCenter;
-            cell.labelPercent.text = [[self.productListArray objectAtIndex:indexPath.row] productAnnualYield];
             cell.labelPercent.textColor = [UIColor daohanglan];
-            cell.labelPercent.font = [UIFont fontWithName:@"CenturyGothic" size:40];
+            [cell.labelPercent setAttributedText:percenString];
             
             cell.viewLine.backgroundColor = [UIColor grayColor];
             cell.viewLine.alpha = 0.1;

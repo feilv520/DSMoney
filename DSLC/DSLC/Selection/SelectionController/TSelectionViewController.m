@@ -235,11 +235,15 @@
         
         productM = [newArray objectAtIndex:indexPath.section];
         
+        NSMutableAttributedString *percenString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", productM.productAnnualYield]];
+        NSRange leftRange = NSMakeRange(0, [[percenString string] rangeOfString:@"%"].location);
+        [percenString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
+        NSRange rightRange = NSMakeRange([[percenString string] length] - 1, 1);
+        [percenString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:rightRange];
         cell.labelPercent.textColor = [UIColor daohanglan];
-        cell.labelPercent.font = [UIFont fontWithName:@"CenturyGothic" size:40];
-        cell.labelPercent.text = productM.productAnnualYield;
+        [cell.labelPercent setAttributedText:percenString];
         
-        cell.labelShouYiLv.text = @"预期年化(%)";
+        cell.labelShouYiLv.text = @"预期年化";
         cell.labelShouYiLv.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         
         [cell.buttonImage setImage:[UIImage imageNamed:@"liwu"] forState:UIControlStateNormal];

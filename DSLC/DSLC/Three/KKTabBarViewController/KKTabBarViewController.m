@@ -127,7 +127,7 @@
         
         UIButton *tabButton = [_tabButtonArray objectAtIndex:i];
 //        if (tabButton.frame.size.height == 0) {
-            buttonHeight = 35;
+            buttonHeight = 30;
 //        } else{
 //            buttonHeight = tabButton.frame.size.height;
 //        }
@@ -136,7 +136,7 @@
 //        } else{
 //            buttonY = _pageHeight - buttonHeight;
 //        }
-        [tabButton setFrame:CGRectMake(40 + _pageWidth / [_controllerArray count] * i, 10, buttonWidth, buttonHeight)];
+        [tabButton setFrame:CGRectMake(40 + _pageWidth / [_controllerArray count] * i, 20, buttonWidth, buttonHeight)];
         [tabButton setTag:i];
         [tabButton addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchDown];
         [tabButton setHidden:self.tabBarHidden];
@@ -160,14 +160,14 @@
     self.labelLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 51, self.view.frame.size.width, 1)];
     [self.view addSubview:self.labelLine];
     self.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.labelLine.alpha = 0.8;
+    self.labelLine.alpha = 0.7;
     
     for (UIButton *button in _tabButtonArray) {
         
         CGRect buttonFrame = button.frame;
         buttonFrame.size.height = _tabBarHeight;
 //        if (_tabBarPosition == kTabBarPositionTop) {
-            buttonFrame.origin.y = 5;
+            buttonFrame.origin.y = 10;
 //        } else{
 //            buttonFrame.origin.y = self.view.frame.size.height - _tabBarHeight;
 //        }

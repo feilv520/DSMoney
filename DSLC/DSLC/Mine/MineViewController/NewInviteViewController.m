@@ -103,47 +103,55 @@
     CGFloat viewRuleW = viewRule.frame.size.width;
     CGFloat viewRuleH = viewRule.frame.size.height;
     
-    UILabel *labelRule = [CreatView creatWithLabelFrame:CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"邀请规则:\n1. 注册即赠送5000元体验金和现金红包;\n2. 完成任意投资激活现金红包;\n3. 当您邀请的好友成功注册并完成投资后,您将获得的邀请红包:\n①好友投资金额累计达到1000元(含),您即获得10元现金红包;\n②好友投资金额累计达到10000元(含),您即获得20元现金红包;\n③邀请每位好友获得的现金红包金额封顶30元,邀请好友人数不限。"];
+    UILabel *labelRule = [CreatView creatWithLabelFrame:CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"邀请规则:\n\n1. 注册即赠送5000元体验金和现金红包;\n2. 完成任意投资激活现金红包;\n3. 当您邀请的好友成功注册并完成投资后,您将获得的邀请红包:\n  ① 好友投资金额累计达到1000元(含),您即获得10元现金红包;\n  ② 好友投资金额累计达到10000元(含),您即获得20元现金红包;\n  ③ 邀请每位好友获得的现金红包金额封顶30元,邀请好友人数不限。"];
     [viewRule addSubview:labelRule];
     labelRule.numberOfLines = 0;
+    
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
 
-        viewRule.frame = CGRectMake(10, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 20, 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 20);
+        viewRule.frame = CGRectMake(10, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 20, 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 60);
         
         CGFloat viewRuleW = viewRule.frame.size.width;
         CGFloat viewRuleH = viewRule.frame.size.height;
         labelRule.frame = CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10);
         
-        butSend.frame = CGRectMake(40, 40 + imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        butSend.frame = CGRectMake(40, 80 + imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        scrollview.contentSize = CGSizeMake(0, 1060.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
         
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
         
-        butSend.frame = CGRectMake(40, 25 + imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
-        scrollview.contentSize = CGSizeMake(0, 920.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
-        
-    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 667) {
-        
-        viewRule.frame = CGRectMake(10, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 20, 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT - 60);
+        viewRule.frame = CGRectMake(10, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 20, 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 30);
         
         CGFloat viewRuleW = viewRule.frame.size.width;
         CGFloat viewRuleH = viewRule.frame.size.height;
         labelRule.frame = CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10);
         
-        butSend.frame = CGRectMake(40, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT - 20, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        butSend.frame = CGRectMake(40, 60 + imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        scrollview.contentSize = CGSizeMake(0, 980.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 667) {
+        
+        viewRule.frame = CGRectMake(10, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 20, 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        
+        CGFloat viewRuleW = viewRule.frame.size.width;
+        CGFloat viewRuleH = viewRule.frame.size.height;
+        labelRule.frame = CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10);
+        
+        butSend.frame = CGRectMake(40, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 10, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
 
         scrollview.contentSize = CGSizeMake(0, 850.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
         
     } else {
         
-        viewRule.frame = CGRectMake(10, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 20, 110.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        viewRule.frame = CGRectMake(10, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 20, 110.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 100);
         
         CGFloat viewRuleW = viewRule.frame.size.width;
         CGFloat viewRuleH = viewRule.frame.size.height;
         labelRule.frame = CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10);
         
-        butSend.frame = CGRectMake(40, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 150.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT - 20, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        butSend.frame = CGRectMake(40, 100 + imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 150.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT - 20, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
         
-        scrollview.contentSize = CGSizeMake(0, 750.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        scrollview.contentSize = CGSizeMake(0, 830.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
     }
     
 }
