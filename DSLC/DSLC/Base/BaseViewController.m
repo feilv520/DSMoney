@@ -35,7 +35,7 @@
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC setSuppurtGestureTransition:NO];
     [app.tabBarVC setTabbarViewHidden:YES];
-    [app.tabBarVC setLabelLineHidden:YES];
+    [app.tabBarVC setLabelLineHidden:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

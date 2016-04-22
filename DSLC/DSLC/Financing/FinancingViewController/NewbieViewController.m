@@ -74,7 +74,7 @@
     photoArray = [NSMutableArray array];
     
     [self getProductList];
-    
+
     [self tableViewShow];
     
     [self loadingWithView:self.view loadingFlag:NO height:120.0];

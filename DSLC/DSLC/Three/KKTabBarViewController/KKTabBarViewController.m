@@ -108,7 +108,7 @@
         
     }
     
-    self.tabbarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 51, self.view.frame.size.width, 51)];
+    self.tabbarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 53, self.view.frame.size.width, 53)];
     self.tabbarView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:_tabScrollView];
@@ -157,7 +157,7 @@
 {
     _tabBarHeight = tabBarHeight;
 //    NSLog(@"height %f",self.view.frame.size.height);
-    self.labelLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 51, self.view.frame.size.width, 1)];
+    self.labelLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 53, self.view.frame.size.width, 1)];
     [self.view addSubview:self.labelLine];
     self.labelLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.labelLine.alpha = 0.7;

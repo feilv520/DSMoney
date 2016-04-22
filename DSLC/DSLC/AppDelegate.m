@@ -125,7 +125,7 @@
         //    设置tabBar的高度 默认为50
         [self.tabBarVC setTabBarHeight:35];
         //    设置是否可以手势滑动切换模块 默认为YES
-        [self.tabBarVC setSuppurtGestureTransition:YES];
+        [self.tabBarVC setSuppurtGestureTransition:NO];
         //    设置点击按钮有无翻页效果 默认有
         [self.tabBarVC setTransitionAnimated:NO];
         

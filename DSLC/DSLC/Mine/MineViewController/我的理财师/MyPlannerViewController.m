@@ -46,8 +46,8 @@
     
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:YES];
-    [app.tabBarVC setLabelLineHidden:YES];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
 }
 
 - (void)viewDidLoad {

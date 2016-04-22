@@ -124,8 +124,8 @@
     flagString = [not object];
     
     [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:YES];
-    [app.tabBarVC setLabelLineHidden:YES];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
 }
 
 - (void)addWithNotifiacationCenter:(NSNotification *)not{
@@ -137,8 +137,8 @@
     indexButton = [not object];
     
     [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:YES];
-    [app.tabBarVC setLabelLineHidden:YES];
+    [app.tabBarVC setTabbarViewHidden:NO];
+    [app.tabBarVC setLabelLineHidden:NO];
 }
 
 - (void)navigationControllerShow
