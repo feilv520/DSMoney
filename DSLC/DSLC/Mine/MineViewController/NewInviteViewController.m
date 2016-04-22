@@ -11,6 +11,7 @@
 #import "InviteNewView.h"
 #import "AdModel.h"
 #import "YYAnimatedImageView.h"
+#import "BannerViewController.h"
 
 @interface NewInviteViewController () <UMSocialUIDelegate>
 
@@ -54,7 +55,6 @@
     [self getAdvList];
     
     viewGray.hidden = YES;
-    
 }
 
 - (void)contentShow
@@ -69,6 +69,9 @@
     imageViewBanner.backgroundColor = [UIColor qianhuise];
     imageViewBanner.yy_imageURL = [NSURL URLWithString:[[adModelArray firstObject] adImg]];
     [scrollview addSubview:imageViewBanner];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClickedImageView:)];
+    [imageViewBanner addGestureRecognizer:tap];
+    imageViewBanner.userInteractionEnabled = YES;
     
     UILabel *labelSao = [CreatView creatWithLabelFrame:CGRectMake(0, imageViewBanner.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, (20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT)) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"扫二维码下载大圣理财"];
     [scrollview addSubview:labelSao];
@@ -158,6 +161,20 @@
         scrollview.contentSize = CGSizeMake(0, 830.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
     }
     
+}
+
+- (void)tapClickedImageView:(UITapGestureRecognizer *)tap
+{
+    NSLog(@"33333333333333");
+    BannerViewController *bannerVC = [[BannerViewController alloc] init];
+    
+    if (adModelArray.count == 0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"暂未开启,敬请期待"];
+    }else {
+        bannerVC.photoName = [[adModelArray objectAtIndex:0] adLabel];
+        bannerVC.photoUrl = [[adModelArray objectAtIndex:0] adLink];
+        pushVC(bannerVC);
+    }
 }
 
 //发送邀请按钮
