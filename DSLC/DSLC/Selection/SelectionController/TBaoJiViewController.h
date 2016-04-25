@@ -10,6 +10,6 @@
 
 @interface TBaoJiViewController : BaseViewController
 
-@property (nonatomic, copy) NSString *webUrl;
+@property (nonatomic, copy) NSString *tokenString;
 
 @end

@@ -11,7 +11,7 @@
 @interface TRankinglistViewController ()<UIWebViewDelegate>
 
 {
-    UIWebView *webView;
+    UIWebView *myWebView;
 }
 
 @end
@@ -30,17 +30,54 @@
 
 - (void)contentShow
 {
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
-    [self.view addSubview:webView];
-    webView.scalesPageToFit = YES;
+    myWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
+    [self.view addSubview:myWebView];
+    myWebView.scalesPageToFit = YES;
+    myWebView.delegate = self;
     
-    webView.scrollView.showsHorizontalScrollIndicator = NO;
-    webView.scrollView.bounces = NO;
+    myWebView.scrollView.showsHorizontalScrollIndicator = NO;
+    myWebView.scrollView.bounces = NO;
     
     NSString *urlString = @"http://wap.dslc.cn/activity/rankList.html";
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:request];
+    [myWebView loadRequest:request];
+}
+
+//用苹果自带的返回键按钮处理如下(自定义的返回按钮)
+- (void)buttonReturn:(UIBarButtonItem *)btn
+{
+    if ([myWebView canGoBack]) {
+        [myWebView goBack];
+        
+    }else{
+        [self.view resignFirstResponder];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+
+//如果是H5页面里面自带的返回按钮处理如下:
+#pragma mark - webViewDelegate
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSString * requestString = [[request URL] absoluteString];
+    requestString = [requestString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    //获取H5页面里面按钮的操作方法,根据这个进行判断返回是内部的还是push的上一级页面
+    if ([requestString hasPrefix:@"goback:"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [webView goBack];
+    }
+    return YES;
+}
+
+//获取当前页面的title和url
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSString * title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];//获取当前页面的title
+    self.title = title;
+    
+    NSLog(@"%@",self.title);
 }
 
 - (void)didReceiveMemoryWarning {
