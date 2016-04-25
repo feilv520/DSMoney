@@ -178,6 +178,11 @@
     [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
     [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     [buttonMake addTarget:self action:@selector(buttonMakeSureCash:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        buttonMake.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 120 - 40 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+    }
 }
 
 - (void)contentShow
@@ -258,6 +263,11 @@
     [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
     [buttonMake setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
     [buttonMake addTarget:self action:@selector(buttonMakeSureCash:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        buttonMake.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 120 - 20 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+    }
 }
 
 //去提升按钮
@@ -657,6 +667,7 @@
         } completion:^(BOOL finished) {
             
         }];
+        
     }
 }
 
@@ -673,13 +684,16 @@
 {
     [self.view endEditing:NO];
     
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+    if (WIDTH_CONTROLLER_DEFAULT == 375 || WIDTH_CONTROLLER_DEFAULT == 414) {
         
-        buttonMake.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 20 - 120 - 40 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
+        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            buttonMake.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 20 - 120 - 40 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
 #pragma mark 获取红包
