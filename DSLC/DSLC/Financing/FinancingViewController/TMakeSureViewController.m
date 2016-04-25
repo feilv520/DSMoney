@@ -546,6 +546,7 @@
     [ZFPView.worrySureButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
     
     ZFPView.moneyLabel.text = [NSString stringWithFormat:@"¥%@",textFieldShu.text];
+    ZFPView.moneyTF.delegate = self;
     
     if ([[dataDic objectForKey:@"setPayPwd"] isEqualToNumber:[NSNumber numberWithInt:1]]) {
         ZFPView.setDealButton.hidden = YES;
@@ -658,7 +659,17 @@
             
         }];
     }
-}
+    
+    if (textField == ZFPView.moneyTF) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            ZFPView.frame = CGRectMake((self.view.frame.size.width - 300) / 2.0, 5, 300, 200);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }}
 
 //textField绑定方法
 - (void)textFieldEditChanged:(UITextField *)textField

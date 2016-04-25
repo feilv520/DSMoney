@@ -196,8 +196,13 @@
             return;
         }
         
+        if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+            return ;
+        }
+        
         TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
-        baoji.webUrl = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",[myDic objectForKey:@"token"]];
+        baoji.tokenString = [myDic objectForKey:@"token"];
         pushVC(baoji);
     }
 }

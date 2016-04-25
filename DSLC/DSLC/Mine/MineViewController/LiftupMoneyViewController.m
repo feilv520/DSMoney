@@ -359,6 +359,7 @@
         ZFPView.moneyLabel.text = [NSString stringWithFormat:@"¥%@",_textField.text];
         
         ZFPView.moneyTF.tag = 9898;
+        ZFPView.moneyTF.delegate = self;
         
         [ZFPView.closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
         [ZFPView.sureButton addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -413,6 +414,7 @@
 }
 
 - (void)closeAction:(id)sender{
+    [self.view endEditing:YES];
     viewGray.hidden = YES;
     ZFPView.hidden = YES;
     
@@ -493,6 +495,40 @@
             popVC;
         }
         
+    }
+}
+
+//textField代理方法
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (WIDTH_CONTROLLER_DEFAULT == 375) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            ZFPView.frame = CGRectMake((self.view.frame.size.width - 300) / 2.0, 64, 300, 200);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            ZFPView.frame = CGRectMake((self.view.frame.size.width - 300) / 2.0, 64, 300, 200);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            ZFPView.frame = CGRectMake((self.view.frame.size.width - 300) / 2.0, 5, 300, 200);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
     }
 }
 
