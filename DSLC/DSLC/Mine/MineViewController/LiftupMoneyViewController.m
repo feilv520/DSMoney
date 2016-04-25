@@ -335,6 +335,7 @@
 //下一步按钮
 - (void)buttonNextOneStep:(UIButton *)button
 {
+    [self.view endEditing:YES];
     
     _textField = (UITextField *)[self.view viewWithTag:111111];
     

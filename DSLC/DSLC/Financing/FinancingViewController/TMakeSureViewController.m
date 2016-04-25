@@ -293,13 +293,13 @@
 - (void)buttonMakeSureCash:(UIButton *)button
 {
     [self.view endEditing:NO];
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        
-        buttonMake.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 20 - 120 - 40 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
+//    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+//        
+//        buttonMake.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 20 - 120 - 40 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+//        
+//    } completion:^(BOOL finished) {
+//        
+//    }];
     
     [self getMyRedPacketList];
 }
@@ -649,38 +649,61 @@
 //textField代理方法
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (WIDTH_CONTROLLER_DEFAULT == 375) {
-        
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            
-            buttonMake.frame = CGRectMake(40, 290, WIDTH_CONTROLLER_DEFAULT - 80, 40);
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-        
-    } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
-        
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            
-            buttonMake.frame = CGRectMake(40, 320, WIDTH_CONTROLLER_DEFAULT - 80, 40);
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-        
-    }
-    
     if (textField == ZFPView.moneyTF) {
         
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        if (WIDTH_CONTROLLER_DEFAULT == 375) {
             
-            ZFPView.frame = CGRectMake((self.view.frame.size.width - 300) / 2.0, 5, 300, 200);
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                ZFPView.frame = CGRectMake((self.view.frame.size.width - 300) / 2.0, 100, 300, 200);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
             
-        } completion:^(BOOL finished) {
+        } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
             
-        }];
-    }}
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                ZFPView.frame = CGRectMake((self.view.frame.size.width - 300) / 2.0, 100, 300, 200);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        } else {
+        
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                ZFPView.frame = CGRectMake((self.view.frame.size.width - 300) / 2.0, 5, 300, 200);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    } else {
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 375) {
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                buttonMake.frame = CGRectMake(40, 290, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+        } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                buttonMake.frame = CGRectMake(40, 320, WIDTH_CONTROLLER_DEFAULT - 80, 40);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    }
+}
 
 //textField绑定方法
 - (void)textFieldEditChanged:(UITextField *)textField
@@ -695,16 +718,6 @@
 {
     [self.view endEditing:NO];
     
-    if (WIDTH_CONTROLLER_DEFAULT == 375 || WIDTH_CONTROLLER_DEFAULT == 414) {
-        
-        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            
-            buttonMake.frame = CGRectMake(40, HEIGHT_CONTROLLER_DEFAULT - 20 - 120 - 40 - 64, WIDTH_CONTROLLER_DEFAULT - 80, 40);
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-    }
 }
 
 #pragma mark 获取红包
