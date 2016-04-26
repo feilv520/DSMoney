@@ -191,15 +191,15 @@
         [self.navigationController pushViewController:rankinglist animated:YES];
     } else {
         
-        if (!flagOpen) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"敬请期待..."];
-            return;
-        }
-        
-        if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
-            return ;
-        }
+//        if (!flagOpen) {
+//            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"敬请期待..."];
+//            return;
+//        }
+//        
+//        if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+//            return ;
+//        }
         
         TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
         baoji.tokenString = [myDic objectForKey:@"token"];
