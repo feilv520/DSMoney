@@ -56,7 +56,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (range.location < 11) {
+    if (range.location < 20) {
         
         return YES;
         
