@@ -47,6 +47,7 @@
     
     NSIndexPath *currentIndexPath;
     UILabel *labelShuYu;
+    NSMutableArray *menusArr;
 }
 
 @property (nonatomic) UIView *viewBottom;
@@ -78,6 +79,7 @@
     
     if (![self.detailM.productType isEqualToString:@"1"] && ![self.detailM.productName containsString:@"美猴王"]) {
         
+        [self getList];
         [self getJinDouYunBuyData];
         
     } else {
@@ -94,7 +96,7 @@
     NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"/app/user/getJDYCashPower" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"pp获取金斗云剩余:%@", responseObject);
+        NSLog(@"2pp获取金斗云剩余:%@", responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
@@ -187,6 +189,7 @@
 
 - (void)contentShow
 {
+    NSLog(@"3");
     UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 181) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewBottom];
     
@@ -217,11 +220,16 @@
     labelShuYu = [CreatView creatWithLabelFrame:CGRectMake(120, 85, WIDTH_CONTROLLER_DEFAULT - 210, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor daohanglan] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:nil];
     [viewBottom addSubview:labelShuYu];
     
-    UIButton *buttonLift = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20 + labelShengYu.frame.size.width + labelShuYu.frame.size.width, 85, WIDTH_CONTROLLER_DEFAULT - 30 - labelShengYu.frame.size.width - labelShuYu.frame.size.width, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor chongzhiColor] titleText:@"去提升>"];
-    [viewBottom addSubview:buttonLift];
-    buttonLift.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-    buttonLift.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [buttonLift addTarget:self action:@selector(buttonLiftUp:) forControlEvents:UIControlEventTouchUpInside];
+    if (menusArr.count == 0) {
+        
+    } else {
+        
+        UIButton *buttonLift = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(20 + labelShengYu.frame.size.width + labelShuYu.frame.size.width, 85, WIDTH_CONTROLLER_DEFAULT - 30 - labelShengYu.frame.size.width - labelShuYu.frame.size.width, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor chongzhiColor] titleText:@"去提升>"];
+        [viewBottom addSubview:buttonLift];
+        buttonLift.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        buttonLift.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [buttonLift addTarget:self action:@selector(buttonLiftUp:) forControlEvents:UIControlEventTouchUpInside];
+    }
     
     UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(10, 130.5, WIDTH_CONTROLLER_DEFAULT - 20, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentLeft textFont:nil text:nil];
     [viewBottom addSubview:labelLine];
@@ -717,7 +725,24 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:NO];
-    
+}
+
+- (void)getList
+{
+    NSDictionary *parameter = @{@"menuCode":@"buyJDYPower", @"menuType":@""};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/sys/getSysMenuList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"1*_*_*_*_*%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            menusArr = [responseObject objectForKey:@"Menus"];
+            NSLog(@"##########%@", menusArr);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"wwwwwwwwwwwwwwwwwwwwwwwwww%@", error);
+    }];
 }
 
 #pragma mark 获取红包

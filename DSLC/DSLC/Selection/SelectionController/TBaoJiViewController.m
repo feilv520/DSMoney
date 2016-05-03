@@ -66,11 +66,18 @@
             return;
         }
         
-        NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-        //设置属性值,没有的数据就新建，已有的数据就修改。
-        [usersDic setObject:[NSString stringWithFormat:@"%@",tokenString] forKey:@"token"];
-        //写入文件
-        [usersDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+        if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+            [FileOfManage createWithFile:@"Member.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSString stringWithFormat:@"%@",tokenString],@"token",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+        } else {
+            NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+            //设置属性值,没有的数据就新建，已有的数据就修改。
+            [usersDic setObject:[NSString stringWithFormat:@"%@",tokenString] forKey:@"token"];
+            //写入文件
+            [usersDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+        }
         
         if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
             [FileOfManage createWithFile:@"isLogin.plist"];

@@ -62,6 +62,7 @@
     UIView *viewGray;
     
     newLoginView *newLView;
+    NSMutableArray *menusArr;
 }
 
 @property (nonatomic, strong) NSString *imgString;
@@ -101,8 +102,7 @@
             [self MyAccountInfo];
     }
     
-    [self showPictureAndTitle];
-    [self showTableView];
+    [self getDataOpen];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeWithImageView) name:@"exchangeWithImageView" object:nil];
     
@@ -121,8 +121,8 @@
 
 - (void)showPictureAndTitle
 {
-    titleArr = @[@"我的投资", @"个人信息", @"我的红包", @"账单", @"好友邀请", @"金斗云购买权兑换"];
-    pictureArr = @[@"zhanghu", @"ziliao", @"hongbao", @"jiaoyi", @"haoyou", @"iconfont-duihuan"];
+    titleArr = @[@"我的投资", @"个人信息", @"我的红包", @"账单", @"好友邀请"];
+    pictureArr = @[@"zhanghu", @"ziliao", @"hongbao", @"jiaoyi", @"haoyou"];
 }
 
 - (void)showTableView
@@ -517,10 +517,16 @@
         
         [self.navigationController pushViewController:newInvite animated:YES];
         
-    } else if (indexPath.row == 5) {
+    }
+    
+    if (menusArr.count == 0) {
         
-        TBuyViewController *buyVC = [[TBuyViewController alloc] init];
-        [self.navigationController pushViewController:buyVC animated:YES];
+    } else {
+        
+        if (indexPath.row == 5) {
+            TBuyViewController *buyVC = [[TBuyViewController alloc] init];
+            [self.navigationController pushViewController:buyVC animated:YES];
+        }
     }
 }
 
@@ -616,6 +622,34 @@
     [MobClick event:@"Yesterday"];
     YesterdayViewController *yesterdayVC = [[YesterdayViewController alloc] init];
     [self.navigationController pushViewController:yesterdayVC animated:YES];
+}
+
+//获取系统菜单列表
+- (void)getDataOpen
+{
+    NSDictionary *parameter = @{@"menuCode":@"buyJDYPower", @"menuType":@""};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/sys/getSysMenuList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"&*&*&*&*&*&*%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self showTableView];
+
+            menusArr = [responseObject objectForKey:@"Menus"];
+            NSLog(@"====+====%@", menusArr);
+            
+            if (menusArr.count == 0) {
+                [self showPictureAndTitle];
+            } else {
+                titleArr = @[@"我的投资", @"个人信息", @"我的红包", @"账单", @"好友邀请", @"金斗云购买权兑换"];
+                pictureArr = @[@"zhanghu", @"ziliao", @"hongbao", @"jiaoyi", @"haoyou", @"iconfont-duihuan"];
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"wwwwwwwwwwwwwwwwwwwwwwwwww%@", error);
+    }];
 }
 
 #pragma mark 网络请求方法
