@@ -249,12 +249,15 @@
     
 //    中间部分xib
     NSBundle *root = [NSBundle mainBundle];
+    
     middleView = (MiddleView *)[[root loadNibNamed:@"MiddleView" owner:nil options:nil] lastObject];
     
     [viewHead addSubview:middleView];
+    
     middleView.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (156.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (124 / 667.0));
     
-    if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+    if (WIDTH_CONTROLLER_DEFAULT == 320.0 && (HEIGHT_CONTROLLER_DEFAULT == 500.0 || HEIGHT_CONTROLLER_DEFAULT == 480.0)) {
+        
         middleView.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT * (156.0 / 667.0), WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT * (160 / 667.0));
     }
     
