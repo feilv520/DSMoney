@@ -38,8 +38,8 @@
     myWebView.scrollView.showsHorizontalScrollIndicator = NO;
     myWebView.scrollView.bounces = NO;
     
-//    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",self.tokenString];
-    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/prize/index.html?token=%@",self.tokenString];
+    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",self.tokenString];
+//    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/prize/index.html?token=%@",self.tokenString];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];

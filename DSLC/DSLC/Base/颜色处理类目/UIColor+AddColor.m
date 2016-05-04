@@ -212,4 +212,12 @@
     return [UIColor colorFromHexCode:@"#e1e3e5"];
 }
 
++ (UIColor *) blackZiTi {
+    return [UIColor colorFromHexCode:@"#434a54"];
+}
+
++ (UIColor *) ZiTiColor {
+    return [UIColor colorFromHexCode:@"#626571"];
+}
+
 @end

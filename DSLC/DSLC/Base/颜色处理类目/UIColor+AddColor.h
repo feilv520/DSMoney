@@ -55,5 +55,7 @@
 + (UIColor *) profitGreen;//收益绿色
 + (UIColor *) jisuanqiHui;//计算器灰色
 + (UIColor *) biankuangse;//边框灰色
++ (UIColor *) blackZiTi;//字体黑
++ (UIColor *) ZiTiColor;//数字颜色
 
 @end

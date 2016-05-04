@@ -16,7 +16,7 @@
 #import "define.h"
 #import "LoginViewController.h"
 #import "WelcomeViewController.h"
-
+#import "TWOSelectionViewController.h"
 
 @interface AppDelegate ()
 {
@@ -89,8 +89,14 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     if ([flag isEqualToString:@"NO"]) {
-        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
-        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
+        
+//        2.0首页
+        TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
+        UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
+        
+//        1.0首页
+//        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
+//        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
         
         ThreeViewController *threeVC = [[ThreeViewController alloc] init];
         UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
@@ -99,7 +105,10 @@
 //        LoginViewController *loginVC = [[LoginViewController alloc] init];
         UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
 
-        self.viewControllerArr = @[navigation1, navigation2, navigation3];
+//        2.0
+        self.viewControllerArr = @[twoNavigation1, navigation2, navigation3];
+//        1.0
+//        self.viewControllerArr = @[navigation1, navigation2, navigation3];
         
         butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
         butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
