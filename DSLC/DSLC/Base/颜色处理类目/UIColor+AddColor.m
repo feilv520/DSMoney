@@ -220,4 +220,8 @@
     return [UIColor colorFromHexCode:@"#626571"];
 }
 
++ (UIColor *) profitColor {
+    return [UIColor colorFromHexCode:@"#2493e7"];
+}
+
 @end

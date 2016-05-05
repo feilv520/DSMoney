@@ -17,6 +17,7 @@
 #import "LoginViewController.h"
 #import "WelcomeViewController.h"
 #import "TWOSelectionViewController.h"
+#import "TWOMineViewController.h"
 
 @interface AppDelegate ()
 {
@@ -101,12 +102,17 @@
         ThreeViewController *threeVC = [[ThreeViewController alloc] init];
         UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
         
-        MineViewController *mineVC = [[MineViewController alloc] init];
-//        LoginViewController *loginVC = [[LoginViewController alloc] init];
-        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
+//        2.0我的
+        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
+        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
+        
+//        1.0我的
+//        MineViewController *mineVC = [[MineViewController alloc] init];
+////        LoginViewController *loginVC = [[LoginViewController alloc] init];
+//        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
 
 //        2.0
-        self.viewControllerArr = @[twoNavigation1, navigation2, navigation3];
+        self.viewControllerArr = @[twoNavigation1, navigation2, navigationTwoMine];
 //        1.0
 //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
         

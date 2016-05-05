@@ -57,5 +57,6 @@
 + (UIColor *) biankuangse;//边框灰色
 + (UIColor *) blackZiTi;//字体黑
 + (UIColor *) ZiTiColor;//数字颜色
++ (UIColor *) profitColor;//收益蓝颜色
 
 @end

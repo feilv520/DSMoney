@@ -35,6 +35,8 @@
     
     self.view.backgroundColor = [UIColor qianhuise];
     [self contentShow];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLoginView) name:@"showLoginView" object:nil];
 }
 
 - (void)contentShow
@@ -52,6 +54,11 @@
     [self.view addSubview:viewNotice];
     viewNotice.backgroundColor = [UIColor whiteColor];
     
+//    公告图标
+    UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(6, 6, viewNotice.frame.size.height - 12, viewNotice.frame.size.height - 12) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"公告"]];
+    [viewNotice addSubview:imageNotice];
+    
+//    公告view分界线
     UIView *viewLineNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewNotice.frame.size.height - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
     [viewNotice addSubview:viewLineNotice];
     viewLineNotice.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -68,6 +75,7 @@
         [buttonClick addTarget:self action:@selector(buttonClickedChoose:) forControlEvents:UIControlEventTouchUpInside];
     }
     
+//    最高收益的view
     UIView *viewBottom = [[UIView alloc] initWithFrame:CGRectMake(9, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT - 18, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     [self.view addSubview:viewBottom];
     viewBottom.backgroundColor = [UIColor whiteColor];
@@ -84,11 +92,27 @@
     UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(14, 14, viewWidth - 50 - 14, 25) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackZiTi] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"美猴王001期"];
     [viewBottom addSubview:labelName];
     
-    UIImageView *imageLeft = [CreatView creatImageViewWithFrame:CGRectMake(19, 0, 0, 0) backGroundColor:[UIColor yellowColor] setImage:[UIImage imageNamed:@"首页左箭头"]];
-    [viewBottom addSubview:imageLeft];
+    UIButton *buttonLeft = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(19, 101, 30, 30) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    [viewBottom addSubview:buttonLeft];
+    [buttonLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateNormal];
+    [buttonLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateHighlighted];
+    [buttonLeft addTarget:self action:@selector(buttonLeftClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *buttonRight = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewWidth - 19 - 30, 101, 30, 30) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    [viewBottom addSubview:buttonRight];
+    [buttonRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateNormal];
+    [buttonRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateHighlighted];
+    [buttonRight addTarget:self action:@selector(buttonRightClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *imageProfit = [CreatView creatImageViewWithFrame:CGRectMake(97.5, 47, viewWidth - 97.5 * 2, viewWidth - 97.5 * 2 - 25) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"产品圈圈"]];
     [viewBottom addSubview:imageProfit];
+    
+    UILabel *labelProfit = [CreatView creatWithLabelFrame:CGRectMake(12, imageProfit.frame.size.height/2 - 20, imageProfit.frame.size.width - 24, 50) backgroundColor:[UIColor clearColor] textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:22] text:nil];
+    [imageProfit addSubview:labelProfit];
+    NSMutableAttributedString *profitString = [[NSMutableAttributedString alloc] initWithString:@"11.50%"];
+    NSRange leftRange = NSMakeRange(0, [[profitString string] rangeOfString:@"%"].location);
+    [profitString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
+    [labelProfit setAttributedText:profitString];
     
     UILabel *labelYuQi = [CreatView creatWithLabelFrame:CGRectMake(0, imageProfit.frame.size.height - 10, imageProfit.frame.size.width, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"预期年化收益率"];
     [imageProfit addSubview:labelYuQi];
@@ -132,6 +156,7 @@
     [viewBottom addSubview:buttonQiang];
     [buttonQiang setBackgroundImage:[UIImage imageNamed:@"立即抢购"] forState:UIControlStateNormal];
     [buttonQiang setBackgroundImage:[UIImage imageNamed:@"立即抢购"] forState:UIControlStateHighlighted];
+    [buttonQiang addTarget:self action:@selector(rightQiangGou:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 //每日一摇和邀请好友点击方法
@@ -146,10 +171,33 @@
     }
 }
 
+//左按钮点击方法
+- (void)buttonLeftClicked:(UIButton *)button
+{
+    NSLog(@"zuo");
+}
+
+//有按钮点击方法
+- (void)buttonRightClicked:(UIButton *)button
+{
+    NSLog(@"you");
+}
+
+//立即抢购按钮
+- (void)rightQiangGou:(UIButton *)button
+{
+    NSLog(@"qiang");
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)showLoginView
+{
+    [self ifLoginView];
 }
 
 - (void)didReceiveMemoryWarning {
