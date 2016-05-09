@@ -18,6 +18,7 @@
 #import "WelcomeViewController.h"
 #import "TWOSelectionViewController.h"
 #import "TWOMineViewController.h"
+#import "TWOProductViewController.h"
 #import "TWOFindViewController.h"
 
 @interface AppDelegate ()
@@ -107,7 +108,6 @@
 //        1.0产品
 //        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
 //        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
-        
 //        2.0发现
         TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
         UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
@@ -122,6 +122,7 @@
 //        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
 
 //        2.0
+//        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
         self.viewControllerArr = @[twoNavigation1, navigation2, navigationFind, navigationTwoMine];
 //        1.0
 //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
