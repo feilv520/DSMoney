@@ -14,5 +14,7 @@
 @property (nonatomic) NSString *useType;
 @property (nonatomic) NSString *createTime;
 @property (nonatomic) NSString *preIncome;
+@property (nonatomic) NSString *useTypeChinese;
+@property (nonatomic) NSString *useTypeSymbol;
 
 @end

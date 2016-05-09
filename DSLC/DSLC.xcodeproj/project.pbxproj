@@ -891,6 +891,8 @@
 		8D9BE8F41C0EC94D003C67D3 /* YYWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8E11C0EC94D003C67D3 /* YYWebImageManager.m */; settings = {ASSET_TAGS = (); }; };
 		8D9BE8F51C0EC94D003C67D3 /* YYWebImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8E31C0EC94D003C67D3 /* YYWebImageOperation.m */; settings = {ASSET_TAGS = (); }; };
 		8DA060CD1C02BEBD00E3E025 /* DES3Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA060CC1C02BEBD00E3E025 /* DES3Util.m */; settings = {ASSET_TAGS = (); }; };
+		8DA7E16A1CDC6ECD00D5D016 /* TWOBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7E1691CDC6ECD00D5D016 /* TWOBillViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8DA7E16D1CDC6F4000D5D016 /* TWONewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7E16C1CDC6F4000D5D016 /* TWONewViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8DB744B81C1973AC0084D1A2 /* banner_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DB744B41C1973AC0084D1A2 /* banner_black@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8DB744B91C1973AC0084D1A2 /* banner_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DB744B51C1973AC0084D1A2 /* banner_black@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8DB744BA1C1973AC0084D1A2 /* banner_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DB744B61C1973AC0084D1A2 /* banner_red@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -2324,6 +2326,10 @@
 		8DA060CB1C02BEBD00E3E025 /* DES3Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DES3Util.h; sourceTree = "<group>"; };
 		8DA060CC1C02BEBD00E3E025 /* DES3Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DES3Util.m; sourceTree = "<group>"; };
 		8DA086561C33894C00BC805C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		8DA7E1681CDC6ECD00D5D016 /* TWOBillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOBillViewController.h; sourceTree = "<group>"; };
+		8DA7E1691CDC6ECD00D5D016 /* TWOBillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOBillViewController.m; sourceTree = "<group>"; };
+		8DA7E16B1CDC6F4000D5D016 /* TWONewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWONewViewController.h; sourceTree = "<group>"; };
+		8DA7E16C1CDC6F4000D5D016 /* TWONewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWONewViewController.m; sourceTree = "<group>"; };
 		8DB744B41C1973AC0084D1A2 /* banner_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_black@2x.png"; sourceTree = "<group>"; };
 		8DB744B51C1973AC0084D1A2 /* banner_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_black@3x.png"; sourceTree = "<group>"; };
 		8DB744B61C1973AC0084D1A2 /* banner_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_red@2x.png"; sourceTree = "<group>"; };
@@ -2704,6 +2710,10 @@
 			children = (
 				8143FD6F1CDB18AC00B65A2F /* TWOProductViewController.h */,
 				8143FD701CDB18AC00B65A2F /* TWOProductViewController.m */,
+				8DA7E1681CDC6ECD00D5D016 /* TWOBillViewController.h */,
+				8DA7E1691CDC6ECD00D5D016 /* TWOBillViewController.m */,
+				8DA7E16B1CDC6F4000D5D016 /* TWONewViewController.h */,
+				8DA7E16C1CDC6F4000D5D016 /* TWONewViewController.m */,
 			);
 			path = TWOProductViewController;
 			sourceTree = "<group>";
@@ -5678,6 +5688,7 @@
 				8D4C4F9E1C97D866002229AE /* ZFPassword.m in Sources */,
 				81C2DAA91BC755FF0007AC48 /* KKTabBarViewController.m in Sources */,
 				812F6BE81BD8DDE10000D8E9 /* BindingPhoneViewController.m in Sources */,
+				8DA7E16D1CDC6F4000D5D016 /* TWONewViewController.m in Sources */,
 				816F1ECB1BF58B4D00DB6B65 /* RiskAlertBookViewController.m in Sources */,
 				81C376691CAA8C41004644C0 /* TBuyViewController.m in Sources */,
 				81E831121BF06AFB00127EE8 /* MyAlreadyCell.m in Sources */,
@@ -5694,6 +5705,7 @@
 				8D4B8C211BF328A000A88285 /* MyAccountProductView.m in Sources */,
 				819423251C04B0EF006B1377 /* ProductBuyRecords.m in Sources */,
 				8143FD771CDB18D400B65A2F /* jjjjjjjjjjjjjjjjjjjjj.m in Sources */,
+				8DA7E16A1CDC6ECD00D5D016 /* TWOBillViewController.m in Sources */,
 				8D1921D11BD4FC840038195E /* MessageDetailViewController.m in Sources */,
 				8D3F95D51BE1C8FC00013A8E /* RegisterOfPassButton.m in Sources */,
 				8179883B1BC9403A007C8C3E /* ThreeCell.m in Sources */,

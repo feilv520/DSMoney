@@ -18,6 +18,7 @@
 #import "WelcomeViewController.h"
 #import "TWOSelectionViewController.h"
 #import "TWOMineViewController.h"
+#import "TWOProductViewController.h"
 
 @interface AppDelegate ()
 {
@@ -99,8 +100,13 @@
 //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
 //        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
         
-        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
-        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
+//        2.0产品
+        TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
+        UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
+        
+//        1.0产品
+//        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
+//        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
         
 //        2.0我的
         TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
@@ -112,7 +118,7 @@
 //        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
 
 //        2.0
-        self.viewControllerArr = @[twoNavigation1, navigation2, navigationTwoMine];
+        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
 //        1.0
 //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
         
