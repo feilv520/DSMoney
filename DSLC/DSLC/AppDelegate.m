@@ -18,6 +18,7 @@
 #import "WelcomeViewController.h"
 #import "TWOSelectionViewController.h"
 #import "TWOMineViewController.h"
+#import "TWOFindViewController.h"
 
 @interface AppDelegate ()
 {
@@ -102,6 +103,10 @@
         ThreeViewController *threeVC = [[ThreeViewController alloc] init];
         UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
         
+//        2.0发现
+        TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
+        UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
+        
 //        2.0我的
         TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
         UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
@@ -112,15 +117,21 @@
 //        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
 
 //        2.0
-        self.viewControllerArr = @[twoNavigation1, navigation2, navigationTwoMine];
+        self.viewControllerArr = @[twoNavigation1, navigation2, navigationFind, navigationTwoMine];
 //        1.0
 //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
         
-        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
-        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
+//        2.0
+        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
+        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
         
+//        1.0
+//        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
+//        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
+        
+//        for循环4要改成3***********************************
         buttonArr = [NSMutableArray array];
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改

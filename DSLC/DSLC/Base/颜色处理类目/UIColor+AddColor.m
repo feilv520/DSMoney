@@ -224,4 +224,12 @@
     return [UIColor colorFromHexCode:@"#2493e7"];
 }
 
++ (UIColor *) tequanColor {
+    return [UIColor colorFromHexCode:@"#fbc34a"];
+}
+
++ (UIColor *) findZiTiColor {
+    return [UIColor colorFromHexCode:@"#8c909d"];
+}
+
 @end

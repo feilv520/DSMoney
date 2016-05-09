@@ -1,5 +1,5 @@
 //
-//  TWOFindViewController.h
+//  TwoFindActCell.h
 //  DSLC
 //
 //  Created by ios on 16/5/6.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TWOFindViewController : UIViewController
+@interface TwoFindActCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UIImageView *imagePicture;
 
 @end

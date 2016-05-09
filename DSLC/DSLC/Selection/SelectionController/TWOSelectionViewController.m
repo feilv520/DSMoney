@@ -12,11 +12,14 @@
 #import "TWOYaoYiYaoViewController.h"
 #import "define.h"
 #import "CreatView.h"
+#import "TWOFindViewController.h"
 
 @interface TWOSelectionViewController ()
 
 {
     UIButton *buttonClick;
+    UIScrollView *scrollView;
+    UIView *viewBottom;
 }
 
 @end
@@ -75,9 +78,29 @@
         [buttonClick addTarget:self action:@selector(buttonClickedChoose:) forControlEvents:UIControlEventTouchUpInside];
     }
     
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+    [self.view addSubview:scrollView];
+    scrollView.pagingEnabled = YES;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * 3, 0);
+    
+    NSArray *nameArr = @[@"美猴王001期", @"丁颖", @"马成精"];
+    NSArray *profitArr = @[@"11.5", @"13.9", @"5.2"];
+    NSArray *dayArr = @[@"3", @"6", @"5"];
+    NSArray *moneyArr = @[@"24.3", @"78.2", @"89.3"];
+    NSArray *qitouArr = @[@"1,000", @"6,000", @"8,000"];
+    
+    for (int i = 0; i < 3; i++) {
+        
+        [self contentMostProfitWithWidth:i name:[nameArr objectAtIndex:i] profit:[profitArr objectAtIndex:i] day:[dayArr objectAtIndex:i] shengyu:[moneyArr objectAtIndex:i] qitouMoney:[qitouArr objectAtIndex:i]];
+    }
+}
+
+- (void)contentMostProfitWithWidth:(CGFloat)width name:(NSString *)productName profit:(NSString *)profit day:(NSString *)dayNum shengyu:(NSString *)shengMoney qitouMoney:(NSString *)qitouMoney
+{
 //    最高收益的view
-    UIView *viewBottom = [[UIView alloc] initWithFrame:CGRectMake(9, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT - 18, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
-    [self.view addSubview:viewBottom];
+    viewBottom = [[UIView alloc] initWithFrame:CGRectMake(9 + WIDTH_CONTROLLER_DEFAULT * width, 0, WIDTH_CONTROLLER_DEFAULT - 18, scrollView.frame.size.height)];
+    [scrollView addSubview:viewBottom];
     viewBottom.backgroundColor = [UIColor whiteColor];
     viewBottom.layer.cornerRadius = 5;
     viewBottom.layer.masksToBounds = YES;
@@ -89,7 +112,7 @@
     UIImageView *imageHotSell = [CreatView creatImageViewWithFrame:CGRectMake(viewWidth - 50, 0, 50, 50) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"热卖"]];
     [viewBottom addSubview:imageHotSell];
     
-    UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(14, 14, viewWidth - 50 - 14, 25) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackZiTi] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"美猴王001期"];
+    UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(14, 14, viewWidth - 50 - 14, 25) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackZiTi] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:productName];
     [viewBottom addSubview:labelName];
     
     UIButton *buttonLeft = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(19, 101, 30, 30) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
@@ -109,7 +132,7 @@
     
     UILabel *labelProfit = [CreatView creatWithLabelFrame:CGRectMake(12, imageProfit.frame.size.height/2 - 20, imageProfit.frame.size.width - 24, 50) backgroundColor:[UIColor clearColor] textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:22] text:nil];
     [imageProfit addSubview:labelProfit];
-    NSMutableAttributedString *profitString = [[NSMutableAttributedString alloc] initWithString:@"11.50%"];
+    NSMutableAttributedString *profitString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", profit]];
     NSRange leftRange = NSMakeRange(0, [[profitString string] rangeOfString:@"%"].location);
     [profitString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
     [labelProfit setAttributedText:profitString];
@@ -117,36 +140,35 @@
     UILabel *labelYuQi = [CreatView creatWithLabelFrame:CGRectMake(0, imageProfit.frame.size.height - 10, imageProfit.frame.size.width, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"预期年化收益率"];
     [imageProfit addSubview:labelYuQi];
     
-    CGFloat labelWidth = viewBottom.frame.size.width/3;
-    NSArray *shuZiArr = @[@"3天", @"24.3万元", @"1,000元"];
+//    NSArray *shuZiArr = @[@"3", @"24.3", @"1,000"];
+    CGFloat labelWidth = (WIDTH_CONTROLLER_DEFAULT - 18)/3;
+//    理财期限的天数
+    UILabel *labelShuZi = [CreatView creatWithLabelFrame:CGRectMake(0, 47 + imageProfit.frame.size.height + 18, labelWidth, 22) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
+    [viewBottom addSubview:labelShuZi];
+    NSMutableAttributedString *leftStriing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天", @"3"]];
+    NSRange leftrange = NSMakeRange(0, [[leftStriing string] rangeOfString:@"天"].location);
+    [leftStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:leftrange];
+    [labelShuZi setAttributedText:leftStriing];
+    
+//    剩余可投的钱数
+    UILabel *labelShengYuM = [CreatView creatWithLabelFrame:CGRectMake(labelWidth, 47 + imageProfit.frame.size.height + 18, labelWidth, 22) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
+    [viewBottom addSubview:labelShengYuM];
+    NSMutableAttributedString *moneyStriing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万元", @"24.3"]];
+    NSRange money = NSMakeRange(0, [[moneyStriing string] rangeOfString:@"万"].location);
+    [moneyStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:money];
+    [labelShengYuM setAttributedText:moneyStriing];
+    
+//    起投资金的钱数
+    UILabel *labelQiTouM = [CreatView creatWithLabelFrame:CGRectMake(labelWidth * 2, 47 + imageProfit.frame.size.height + 18, labelWidth, 22) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
+    [viewBottom addSubview:labelQiTouM];
+    NSMutableAttributedString *qiTouStriing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"1000"]];
+    NSRange qiTouMoney = NSMakeRange(0, [[qiTouStriing string] rangeOfString:@"元"].location);
+    [qiTouStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:qiTouMoney];
+    [labelQiTouM setAttributedText:qiTouStriing];
+    
     NSArray *wenZiArr = @[@"理财期限", @"剩余可投", @"起投资金"];
     
     for (int i = 0; i < 3; i++) {
-        
-        UILabel *labelShuZi = [CreatView creatWithLabelFrame:CGRectMake(labelWidth * i, 47 + imageProfit.frame.size.height + 18, labelWidth, 22) backgroundColor:[UIColor whiteColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:[shuZiArr objectAtIndex:i]];
-        [viewBottom addSubview:labelShuZi];
-        
-        if (i == 0) {
-            
-            NSMutableAttributedString *leftStriing = [[NSMutableAttributedString alloc] initWithString:[shuZiArr objectAtIndex:0]];
-            NSRange leftRange = NSMakeRange(0, [[leftStriing string] rangeOfString:@"天"].location);
-            [leftStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:leftRange];
-            [labelShuZi setAttributedText:leftStriing];
-            
-        } else if (i == 1) {
-            
-            NSMutableAttributedString *leftStriing = [[NSMutableAttributedString alloc] initWithString:[shuZiArr objectAtIndex:1]];
-            NSRange leftRange = NSMakeRange(0, [[leftStriing string] rangeOfString:@"万"].location);
-            [leftStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:leftRange];
-            [labelShuZi setAttributedText:leftStriing];
-            
-        } else {
-            
-            NSMutableAttributedString *leftStriing = [[NSMutableAttributedString alloc] initWithString:[shuZiArr objectAtIndex:2]];
-            NSRange leftRange = NSMakeRange(0, [[leftStriing string] rangeOfString:@"元"].location);
-            [leftStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:leftRange];
-            [labelShuZi setAttributedText:leftStriing];
-        }
         
         UILabel *labelWenZi = [CreatView creatWithLabelFrame:CGRectMake(labelWidth * i, 47 + imageProfit.frame.size.height + 18 + 22 + 9, labelWidth, 12) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:[wenZiArr objectAtIndex:i]];
         [viewBottom addSubview:labelWenZi];
@@ -175,12 +197,35 @@
 - (void)buttonLeftClicked:(UIButton *)button
 {
     NSLog(@"zuo");
+    if (viewBottom.frame.origin.x == 9) {
+        
+    } else {
+        
+        
+    }
 }
 
 //有按钮点击方法
 - (void)buttonRightClicked:(UIButton *)button
 {
     NSLog(@"you");
+    if (viewBottom.frame.origin.x == 9) {
+        
+    } else {
+        
+        
+    }
+    
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        
+        NSLog(@"666666666");
+        for (int i = 0; i < 3; i++) {
+            scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * i, 0);
+        }
+        
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 //立即抢购按钮
