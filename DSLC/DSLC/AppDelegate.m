@@ -100,8 +100,13 @@
 //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
 //        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
         
-        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
-        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
+//        2.0产品
+        TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
+        UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
+        
+//        1.0产品
+//        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
+//        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
         
 //        2.0发现
         TWOFindViewController *findVC = [[TWOFindViewController alloc] init];

@@ -31,6 +31,14 @@
     NSArray *monthArr;
     
     UIPickerView *myPickerView;
+    
+    NSInteger number;
+    
+    NSInteger page;
+    
+    MJRefreshBackGifFooter *footerT;
+    
+    BOOL moreFlag;
 }
 @property (nonatomic, strong) NSMutableArray *transactionArray;
 @property (nonatomic, strong) NSMutableArray *transactionName;
@@ -47,6 +55,7 @@
     
     self.view.backgroundColor = Color_Gray;
     
+    transactionArr = [NSMutableArray array];
     self.transactionArray = [NSMutableArray array];
     self.transactionName = [NSMutableArray array];
     
@@ -55,6 +64,8 @@
     
     tranBeginDate = @"";
     tranEndDate = @"";
+    
+    page = 1;
     
     [self getMyTradeList:0];
     
@@ -103,7 +114,7 @@
 
 - (void)buttonAction:(UIButton *)btn{
     
-    NSInteger number = btn.tag;
+    number = btn.tag;
     
     if (number == 0 || number == 2 || number == 3 || number == 4 || number == 5 || number == 6) {
         [UIView animateWithDuration:0.5 animations:^{
@@ -216,8 +227,8 @@
 - (void)setPickerView{
     myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 217, WIDTH_CONTROLLER_DEFAULT, 200)];
     
-//    [self.view addSubview:pickerView];
-
+    //    [self.view addSubview:pickerView];
+    
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.window addSubview:myPickerView];
     
@@ -267,15 +278,15 @@ numberOfRowsInComponent:(NSInteger)component
 (NSInteger)row inComponent:(NSInteger)component
 {
     NSArray* tmp  = component == 0 ? yearArr: monthArr;
-//    NSString* tip = component == 0 ? @"年": @"月";
-//    // 使用一个UIAlertView来显示用户选中的列表项
-//    UIAlertView* alert = [[UIAlertView alloc]
-//                          initWithTitle:@"提示"
-//                          message:[NSString stringWithFormat:@"你选中的%@是：%@，"
-//                                   , tip , [tmp objectAtIndex:row]]
-//                          delegate:nil
-//                          cancelButtonTitle:@"确定"
-//                          otherButtonTitles:nil];
+    //    NSString* tip = component == 0 ? @"年": @"月";
+    //    // 使用一个UIAlertView来显示用户选中的列表项
+    //    UIAlertView* alert = [[UIAlertView alloc]
+    //                          initWithTitle:@"提示"
+    //                          message:[NSString stringWithFormat:@"你选中的%@是：%@，"
+    //                                   , tip , [tmp objectAtIndex:row]]
+    //                          delegate:nil
+    //                          cancelButtonTitle:@"确定"
+    //                          otherButtonTitles:nil];
     if (component == 0) {
         tranBeginDate = [tranBeginDate stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:[tmp objectAtIndex:row]];
         tranEndDate = [tranEndDate stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:[tmp objectAtIndex:row]];
@@ -295,7 +306,7 @@ numberOfRowsInComponent:(NSInteger)component
     
     NSLog(@"%@--%@",tranBeginDate,tranEndDate);
     
-//    [alert show];
+    //    [alert show];
 }
 // UIPickerViewDelegate中定义的方法，该方法返回的NSString将作为
 // UIPickerView中指定列的宽度
@@ -303,11 +314,11 @@ numberOfRowsInComponent:(NSInteger)component
     widthForComponent:(NSInteger)component
 {
     // 如果是第二列，宽度为90
-//    if (component == 1) {
-        return WIDTH_CONTROLLER_DEFAULT / 2.0;
-//    }
+    //    if (component == 1) {
+    return WIDTH_CONTROLLER_DEFAULT / 2.0;
+    //    }
     // 如果是其他列（只有第一列），宽度为210
-//    return 210;
+    //    return 210;
 }
 
 // 创建TableView
@@ -321,9 +332,11 @@ numberOfRowsInComponent:(NSInteger)component
     
     [self.mainTableView registerNib:[UINib nibWithNibName:@"TranctionTableViewCell" bundle:nil] forCellReuseIdentifier:@"tranction"];
     
+    [self addTableViewWithFooter:self.mainTableView];
+    
     [self.view addSubview:self.mainTableView];
 }
-    
+
 #pragma mark tableview delegate and dataSource
 #pragma mark --------------------------------
 
@@ -391,7 +404,7 @@ numberOfRowsInComponent:(NSInteger)component
     cell.contentView.layer.cornerRadius = 8.0;
     
     MTransactionModel *tModel = [[[self.transactionArray objectAtIndex:indexPath.section] objectForKey:[self.transactionName objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-
+    
     cell.dateLabel.text = [tModel tradeTime];
     
     if ([[tModel tradeType] isEqualToString:@"3"]) {
@@ -472,14 +485,16 @@ numberOfRowsInComponent:(NSInteger)component
 #pragma mark 网络请求方法
 #pragma mark --------------------------------
 
-- (void)getMyTradeList:(NSInteger)number{
+- (void)getMyTradeList:(NSInteger)numberType{
+    
+    __block NSInteger beforeCount = 0;
     
     NSLog(@"token = %@",[self.flagDic objectForKey:@"token"]);
     
     if (number == 0) {
-        parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":tranBeginDate,@"tranEndDate":tranEndDate,@"tranType":@""};
+        parameter = @{@"curPage":[NSNumber numberWithInteger:page],@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":tranBeginDate,@"tranEndDate":tranEndDate,@"tranType":@""};
     } else {
-        parameter = @{@"curPage":@1,@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":@"",@"tranEndDate":@"",@"tranType":[NSNumber numberWithInteger:number]};
+        parameter = @{@"curPage":[NSNumber numberWithInteger:page],@"token":[self.flagDic objectForKey:@"token"],@"tranBeginDate":@"",@"tranEndDate":@"",@"tranType":[NSNumber numberWithInteger:numberType]};
     }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/trade/getMyTradeRecords" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -498,7 +513,7 @@ numberOfRowsInComponent:(NSInteger)component
             [self.navigationController popToRootViewControllerAnimated:NO];
             return ;
         }
-//        18818006680  icemanxie0721
+        //        18818006680  icemanxie0721
         NSLog(@"%@",[responseObject objectForKey:@"Trade"]);
         [self loadingWithHidden:YES];
         if ([[[responseObject objectForKey:@"Trade"] objectAtIndex:0] count] == 0) {
@@ -508,16 +523,22 @@ numberOfRowsInComponent:(NSInteger)component
             [self loadingWithHidden:YES];
             [self.mainTableView setHidden:NO];
             for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
-                self.transactionName = [[dic allKeys] copy];
+                if (self.transactionName.count == 0) {
+                    
+                    self.transactionName = [[dic allKeys] mutableCopy];
+                } else {
+                    beforeCount = self.transactionName.count;
+                    [self.transactionName addObjectsFromArray:[[dic allKeys] mutableCopy]];
+                }
             }
-            [transactionArr removeAllObjects];
-            transactionArr = nil;
-            transactionArr = [NSMutableArray array];
-            [self.transactionArray removeAllObjects];
-            self.transactionArray = nil;
-            self.transactionArray = [NSMutableArray array];
+//            [transactionArr removeAllObjects];
+//            transactionArr = nil;
+//            transactionArr = [NSMutableArray array];
+//            [self.transactionArray removeAllObjects];
+//            self.transactionArray = nil;
+//            self.transactionArray = [NSMutableArray array];
             for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
-                for (NSInteger i = 0; i < self.transactionName.count; i++) {
+                for (NSInteger i = beforeCount; i < self.transactionName.count; i++) {
                     [transactionArr removeAllObjects];
                     transactionArr = nil;
                     transactionArr = [NSMutableArray array];
@@ -537,15 +558,51 @@ numberOfRowsInComponent:(NSInteger)component
             
             NSLog(@"transactionArr = %@",self.transactionArray);
             
+            if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
+                moreFlag = YES;
+            }
+            
             [self.mainTableView reloadData];
-//        NSLog(@"transactionName = %@",self.transactionName);
-//        NSLog(@"transactionArray = %@",self.transactionArray);
+            
+            [footerT endRefreshing];
+            
+            NSLog(@"transactionName = %@",self.transactionName);
+            //        NSLog(@"transactionArray = %@",self.transactionArray);
+            
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
         
     }];
+}
+
+// 加载更多
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer{
+    
+    footerT = footer;
+    
+    if (moreFlag) {
+        // 拿到当前的上拉刷新控件，结束刷新状态
+        [footer endRefreshing];
+    } else {
+        page ++;
+        [self getMyTradeList:number];
+    }
+    
+}
+
+- (NSArray *)arrayWithMemberIsOnly:(NSArray *)array
+{
+    NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+    for (unsigned i = 0; i < [array count]; i++) {
+        @autoreleasepool {
+            if ([categoryArray containsObject:[array objectAtIndex:i]] == NO) {
+                [categoryArray addObject:[array objectAtIndex:i]];
+            }
+        }
+    }
+    return categoryArray;
 }
 
 - (void)didReceiveMemoryWarning {

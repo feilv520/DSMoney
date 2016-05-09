@@ -170,6 +170,7 @@
 - (void)getMonkeyDetail
 {
     NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSNumber numberWithInteger:curruntPage]};
+    // getUserMonkeyDetailForChinese
     [[MyAfHTTPClient sharedClient] postWithURLString:@"/app/user/getUserMonkeyDetail" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"获取猴币详情:~~~~~%@", responseObject);
