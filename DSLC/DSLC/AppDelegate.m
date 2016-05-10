@@ -93,51 +93,52 @@
     
     if ([flag isEqualToString:@"NO"]) {
         
-//        2.0首页
-        TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
-        UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
-        
 //        1.0首页
 //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
 //        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
         
-//        2.0产品
-        TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
-        UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
-        
 //        1.0产品
 //        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
 //        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
-//        2.0发现
-        TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
-        UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
-        
-//        2.0我的
-        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
         
 //        1.0我的
 //        MineViewController *mineVC = [[MineViewController alloc] init];
 ////        LoginViewController *loginVC = [[LoginViewController alloc] init];
 //        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
 
+        //        2.0首页
+        TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
+        UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
+        
+        //        2.0产品
+        TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
+        UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
+        
+        //        2.0发现
+        TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
+        UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
+
+        //        2.0我的
+        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
+        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
+        
 //        2.0
-//        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
-        self.viewControllerArr = @[twoNavigation1, navigation2, navigationFind, navigationTwoMine];
+        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
+//        self.viewControllerArr = @[twoNavigation1, navigation2, navigationFind, navigationTwoMine];
 //        1.0
 //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
         
 //        2.0
-        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
-        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
+//        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
+//        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
         
 //        1.0
-//        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
-//        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
+        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
+        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
         
 //        for循环4要改成3***********************************
         buttonArr = [NSMutableArray array];
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
