@@ -232,4 +232,8 @@
     return [UIColor colorFromHexCode:@"#8c909d"];
 }
 
++ (UIColor *) moneyColor {
+    return [UIColor colorFromHexCode:@"#5f6d7b"];
+}
+
 @end

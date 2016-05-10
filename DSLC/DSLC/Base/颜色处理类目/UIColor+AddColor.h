@@ -60,5 +60,6 @@
 + (UIColor *) profitColor;//收益蓝颜色
 + (UIColor *) tequanColor;//特权本金颜色
 + (UIColor *) findZiTiColor;//发现字体颜色
++ (UIColor *) moneyColor;//资产颜色
 
 @end

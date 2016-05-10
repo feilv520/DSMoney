@@ -9,6 +9,8 @@
 #import "TWOMineViewController.h"
 #import "define.h"
 #import "TWOMineCell.h"
+#import "TWOAddIncomeViewController.h"
+#import "TWOMyMoneyViewController.h"
 
 @interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
@@ -335,11 +337,16 @@
 - (void)checkMoneyButton:(UIButton *)button
 {
     if (button.tag == 665) {
-        NSLog(@"总资产");
+        
+        TWOMyMoneyViewController *myMoneyVC = [[TWOMyMoneyViewController alloc] init];
+        [self.navigationController pushViewController:myMoneyVC animated:YES];
+        
     } else if (button.tag == 666) {
         NSLog(@"可用余额");
     } else {
-        NSLog(@"累计收益");
+        
+        TWOAddIncomeViewController *addIncomeVC = [[TWOAddIncomeViewController alloc] init];
+        [self.navigationController pushViewController:addIncomeVC animated:YES];
     }
 }
 

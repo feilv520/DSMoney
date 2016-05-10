@@ -319,6 +319,20 @@
 		818063AB1BD61A7E00E83492 /* VerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818063AA1BD61A7E00E83492 /* VerifyViewController.m */; };
 		818063AE1BD6437D00E83492 /* PayMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818063AD1BD6437D00E83492 /* PayMoneyViewController.m */; };
 		818102761CE031B00038B64E /* TWOgameCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818102751CE031B00038B64E /* TWOgameCenterViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8181027A1CE0390E0038B64E /* TWOGameCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 818102781CE0390E0038B64E /* TWOGameCenterCell.m */; settings = {ASSET_TAGS = (); }; };
+		8181027B1CE0390E0038B64E /* TWOGameCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818102791CE0390E0038B64E /* TWOGameCenterCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8181027E1CE03D470038B64E /* gameBanner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8181027C1CE03D470038B64E /* gameBanner@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8181027F1CE03D470038B64E /* gameBanner@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8181027D1CE03D470038B64E /* gameBanner@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8181028A1CE043BB0038B64E /* 拔鸡毛@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818102841CE043BB0038B64E /* 拔鸡毛@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8181028B1CE043BB0038B64E /* 拔鸡毛@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818102851CE043BB0038B64E /* 拔鸡毛@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8181028C1CE043BB0038B64E /* 大圣解密@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818102861CE043BB0038B64E /* 大圣解密@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8181028D1CE043BB0038B64E /* 大圣解密@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818102871CE043BB0038B64E /* 大圣解密@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8181028E1CE043BB0038B64E /* 大圣酷跑@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818102881CE043BB0038B64E /* 大圣酷跑@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8181028F1CE043BB0038B64E /* 大圣酷跑@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818102891CE043BB0038B64E /* 大圣酷跑@3x.png */; settings = {ASSET_TAGS = (); }; };
+		818102941CE05A7C0038B64E /* gameScore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818102901CE05A7C0038B64E /* gameScore@2x.png */; settings = {ASSET_TAGS = (); }; };
+		818102951CE05A7C0038B64E /* gameScore@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818102911CE05A7C0038B64E /* gameScore@3x.png */; settings = {ASSET_TAGS = (); }; };
+		818102961CE05A7C0038B64E /* gameStrategy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818102921CE05A7C0038B64E /* gameStrategy@2x.png */; settings = {ASSET_TAGS = (); }; };
+		818102971CE05A7C0038B64E /* gameStrategy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 818102931CE05A7C0038B64E /* gameStrategy@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8182A7E61C0E97EA00FA1216 /* ApplySchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8182A7E51C0E97EA00FA1216 /* ApplySchedule.m */; settings = {ASSET_TAGS = (); }; };
 		8182A7EF1C0EECD300FA1216 /* 组-16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8182A7E71C0EECD300FA1216 /* 组-16@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8182A7F01C0EECD300FA1216 /* 组-16@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8182A7E81C0EECD300FA1216 /* 组-16@3x.png */; settings = {ASSET_TAGS = (); }; };
@@ -395,6 +409,13 @@
 		81898B781BDF180600DD4E44 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81898B771BDF180600DD4E44 /* UIPlaceHolderTextView.m */; settings = {ASSET_TAGS = (); }; };
 		818A39E21BF42F4D00F01CAA /* LiftUpMoneyFinish.m in Sources */ = {isa = PBXBuildFile; fileRef = 818A39E11BF42F4D00F01CAA /* LiftUpMoneyFinish.m */; settings = {ASSET_TAGS = (); }; };
 		818A39E51BF475A800F01CAA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 818A39E41BF475A800F01CAA /* MBProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
+		818C8C211CE06C9E00A14D37 /* TWOMyGameScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818C8C201CE06C9E00A14D37 /* TWOMyGameScoreViewController.m */; settings = {ASSET_TAGS = (); }; };
+		818C8C241CE0708800A14D37 /* TWOAddIncomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818C8C231CE0708800A14D37 /* TWOAddIncomeViewController.m */; settings = {ASSET_TAGS = (); }; };
+		818C8C281CE0759100A14D37 /* TWOAddIncomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 818C8C261CE0759100A14D37 /* TWOAddIncomeCell.m */; settings = {ASSET_TAGS = (); }; };
+		818C8C291CE0759100A14D37 /* TWOAddIncomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818C8C271CE0759100A14D37 /* TWOAddIncomeCell.xib */; settings = {ASSET_TAGS = (); }; };
+		818C8C2C1CE093D200A14D37 /* TWOMyMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 818C8C2B1CE093D200A14D37 /* TWOMyMoneyViewController.m */; settings = {ASSET_TAGS = (); }; };
+		818C8C301CE1814400A14D37 /* TWOMyGameScoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 818C8C2E1CE1814400A14D37 /* TWOMyGameScoreCell.m */; settings = {ASSET_TAGS = (); }; };
+		818C8C311CE1814400A14D37 /* TWOMyGameScoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818C8C2F1CE1814400A14D37 /* TWOMyGameScoreCell.xib */; settings = {ASSET_TAGS = (); }; };
 		818D0C291C2AC58B008F7612 /* ProductO.m in Sources */ = {isa = PBXBuildFile; fileRef = 818D0C281C2AC58B008F7612 /* ProductO.m */; settings = {ASSET_TAGS = (); }; };
 		818DEDFC1BCDF13500454A0E /* FConfirmMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 818DEDFB1BCDF13500454A0E /* FConfirmMoney.m */; };
 		818DEDFE1BCDF15B00454A0E /* FConfirmMoney.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818DEDFD1BCDF15B00454A0E /* FConfirmMoney.xib */; };
@@ -1449,6 +1470,21 @@
 		818063AD1BD6437D00E83492 /* PayMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMoneyViewController.m; sourceTree = "<group>"; };
 		818102741CE031B00038B64E /* TWOgameCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOgameCenterViewController.h; sourceTree = "<group>"; };
 		818102751CE031B00038B64E /* TWOgameCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOgameCenterViewController.m; sourceTree = "<group>"; };
+		818102771CE0390E0038B64E /* TWOGameCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOGameCenterCell.h; sourceTree = "<group>"; };
+		818102781CE0390E0038B64E /* TWOGameCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOGameCenterCell.m; sourceTree = "<group>"; };
+		818102791CE0390E0038B64E /* TWOGameCenterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOGameCenterCell.xib; sourceTree = "<group>"; };
+		8181027C1CE03D470038B64E /* gameBanner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameBanner@2x.png"; sourceTree = "<group>"; };
+		8181027D1CE03D470038B64E /* gameBanner@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameBanner@3x.png"; sourceTree = "<group>"; };
+		818102841CE043BB0038B64E /* 拔鸡毛@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "拔鸡毛@2x.png"; sourceTree = "<group>"; };
+		818102851CE043BB0038B64E /* 拔鸡毛@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "拔鸡毛@3x.png"; sourceTree = "<group>"; };
+		818102861CE043BB0038B64E /* 大圣解密@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "大圣解密@2x.png"; sourceTree = "<group>"; };
+		818102871CE043BB0038B64E /* 大圣解密@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "大圣解密@3x.png"; sourceTree = "<group>"; };
+		818102881CE043BB0038B64E /* 大圣酷跑@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "大圣酷跑@2x.png"; sourceTree = "<group>"; };
+		818102891CE043BB0038B64E /* 大圣酷跑@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "大圣酷跑@3x.png"; sourceTree = "<group>"; };
+		818102901CE05A7C0038B64E /* gameScore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameScore@2x.png"; sourceTree = "<group>"; };
+		818102911CE05A7C0038B64E /* gameScore@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameScore@3x.png"; sourceTree = "<group>"; };
+		818102921CE05A7C0038B64E /* gameStrategy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameStrategy@2x.png"; sourceTree = "<group>"; };
+		818102931CE05A7C0038B64E /* gameStrategy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameStrategy@3x.png"; sourceTree = "<group>"; };
 		8182A7E41C0E97EA00FA1216 /* ApplySchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplySchedule.h; sourceTree = "<group>"; };
 		8182A7E51C0E97EA00FA1216 /* ApplySchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplySchedule.m; sourceTree = "<group>"; };
 		8182A7E71C0EECD300FA1216 /* 组-16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-16@2x.png"; sourceTree = "<group>"; };
@@ -1560,6 +1596,18 @@
 		818A39E11BF42F4D00F01CAA /* LiftUpMoneyFinish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiftUpMoneyFinish.m; sourceTree = "<group>"; };
 		818A39E31BF475A800F01CAA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		818A39E41BF475A800F01CAA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		818C8C1F1CE06C9E00A14D37 /* TWOMyGameScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMyGameScoreViewController.h; sourceTree = "<group>"; };
+		818C8C201CE06C9E00A14D37 /* TWOMyGameScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMyGameScoreViewController.m; sourceTree = "<group>"; };
+		818C8C221CE0708800A14D37 /* TWOAddIncomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOAddIncomeViewController.h; sourceTree = "<group>"; };
+		818C8C231CE0708800A14D37 /* TWOAddIncomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOAddIncomeViewController.m; sourceTree = "<group>"; };
+		818C8C251CE0759100A14D37 /* TWOAddIncomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOAddIncomeCell.h; sourceTree = "<group>"; };
+		818C8C261CE0759100A14D37 /* TWOAddIncomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOAddIncomeCell.m; sourceTree = "<group>"; };
+		818C8C271CE0759100A14D37 /* TWOAddIncomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOAddIncomeCell.xib; sourceTree = "<group>"; };
+		818C8C2A1CE093D200A14D37 /* TWOMyMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMyMoneyViewController.h; sourceTree = "<group>"; };
+		818C8C2B1CE093D200A14D37 /* TWOMyMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMyMoneyViewController.m; sourceTree = "<group>"; };
+		818C8C2D1CE1814400A14D37 /* TWOMyGameScoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMyGameScoreCell.h; sourceTree = "<group>"; };
+		818C8C2E1CE1814400A14D37 /* TWOMyGameScoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMyGameScoreCell.m; sourceTree = "<group>"; };
+		818C8C2F1CE1814400A14D37 /* TWOMyGameScoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOMyGameScoreCell.xib; sourceTree = "<group>"; };
 		818D0C271C2AC58B008F7612 /* ProductO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductO.h; sourceTree = "<group>"; };
 		818D0C281C2AC58B008F7612 /* ProductO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductO.m; sourceTree = "<group>"; };
 		818DEDFA1BCDF13500454A0E /* FConfirmMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FConfirmMoney.h; sourceTree = "<group>"; };
@@ -2742,6 +2790,18 @@
 				810F9C691CDC823800BF39B5 /* renwuzhongxinicon@3x.png */,
 				810F9C641CDC68E000BF39B5 /* 敬请期待@2x.png */,
 				810F9C651CDC68E000BF39B5 /* 敬请期待@3x.png */,
+				8181027C1CE03D470038B64E /* gameBanner@2x.png */,
+				8181027D1CE03D470038B64E /* gameBanner@3x.png */,
+				818102841CE043BB0038B64E /* 拔鸡毛@2x.png */,
+				818102851CE043BB0038B64E /* 拔鸡毛@3x.png */,
+				818102861CE043BB0038B64E /* 大圣解密@2x.png */,
+				818102871CE043BB0038B64E /* 大圣解密@3x.png */,
+				818102881CE043BB0038B64E /* 大圣酷跑@2x.png */,
+				818102891CE043BB0038B64E /* 大圣酷跑@3x.png */,
+				818102901CE05A7C0038B64E /* gameScore@2x.png */,
+				818102911CE05A7C0038B64E /* gameScore@3x.png */,
+				818102921CE05A7C0038B64E /* gameStrategy@2x.png */,
+				818102931CE05A7C0038B64E /* gameStrategy@3x.png */,
 			);
 			path = TWOImage;
 			sourceTree = "<group>";
@@ -2759,6 +2819,9 @@
 				8143FD2A1CDAE6E200B65A2F /* TWOMineCell.h */,
 				8143FD2B1CDAE6E200B65A2F /* TWOMineCell.m */,
 				8143FD2C1CDAE6E200B65A2F /* TWOMineCell.xib */,
+				818C8C251CE0759100A14D37 /* TWOAddIncomeCell.h */,
+				818C8C261CE0759100A14D37 /* TWOAddIncomeCell.m */,
+				818C8C271CE0759100A14D37 /* TWOAddIncomeCell.xib */,
 			);
 			path = TWOMineView;
 			sourceTree = "<group>";
@@ -2768,6 +2831,10 @@
 			children = (
 				8143FD271CDAE54F00B65A2F /* TWOMineViewController.h */,
 				8143FD281CDAE54F00B65A2F /* TWOMineViewController.m */,
+				818C8C2A1CE093D200A14D37 /* TWOMyMoneyViewController.h */,
+				818C8C2B1CE093D200A14D37 /* TWOMyMoneyViewController.m */,
+				818C8C221CE0708800A14D37 /* TWOAddIncomeViewController.h */,
+				818C8C231CE0708800A14D37 /* TWOAddIncomeViewController.m */,
 			);
 			path = TWOMineViewController;
 			sourceTree = "<group>";
@@ -2791,6 +2858,12 @@
 				810F9C461CDC4DEC00BF39B5 /* TwoActivityCell.h */,
 				810F9C471CDC4DEC00BF39B5 /* TwoActivityCell.m */,
 				810F9C481CDC4DEC00BF39B5 /* TwoActivityCell.xib */,
+				818102771CE0390E0038B64E /* TWOGameCenterCell.h */,
+				818102781CE0390E0038B64E /* TWOGameCenterCell.m */,
+				818102791CE0390E0038B64E /* TWOGameCenterCell.xib */,
+				818C8C2D1CE1814400A14D37 /* TWOMyGameScoreCell.h */,
+				818C8C2E1CE1814400A14D37 /* TWOMyGameScoreCell.m */,
+				818C8C2F1CE1814400A14D37 /* TWOMyGameScoreCell.xib */,
 			);
 			path = TWOFindView;
 			sourceTree = "<group>";
@@ -2802,6 +2875,8 @@
 				810F9C271CDC3CEA00BF39B5 /* TWOFindViewController.m */,
 				818102741CE031B00038B64E /* TWOgameCenterViewController.h */,
 				818102751CE031B00038B64E /* TWOgameCenterViewController.m */,
+				818C8C1F1CE06C9E00A14D37 /* TWOMyGameScoreViewController.h */,
+				818C8C201CE06C9E00A14D37 /* TWOMyGameScoreViewController.m */,
 			);
 			path = TWOFindViewController;
 			sourceTree = "<group>";
@@ -5134,6 +5209,7 @@
 				8D9011B01BD6337C00E5D62A /* 04@3x.png in Resources */,
 				8183F4031C97CC4F000BB93C /* iconfont-fenpei@3x.png in Resources */,
 				81B520A31BF9746400D8E8D1 /* AddressBookCell.xib in Resources */,
+				8181028A1CE043BB0038B64E /* 拔鸡毛@2x.png in Resources */,
 				8D3EEA0A1C27AB400031F7C9 /* 北京银行@2x.png in Resources */,
 				817DD4AB1BCF547E00042B09 /* zhanghu@3x.png in Resources */,
 				8D3EEA101C27AB400031F7C9 /* 宁波银行@2x.png in Resources */,
@@ -5194,6 +5270,7 @@
 				8D5AEB491BC8F560004FBDD3 /* CenturyGothic.TTF in Resources */,
 				81B6740A1BF0A780007CEF51 /* HistoryMemoryCell.xib in Resources */,
 				8D5AEB4B1BC8FCA3004FBDD3 /* SelectionOfSafe.xib in Resources */,
+				818102971CE05A7C0038B64E /* gameStrategy@3x.png in Resources */,
 				8D88A4DE1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib in Resources */,
 				8D9011A71BD6337C00E5D62A /* 12@2x.png in Resources */,
 				8143FD311CDAEFA600B65A2F /* 我的理财@2x.png in Resources */,
@@ -5230,6 +5307,7 @@
 				817E33891BD733D100D05103 /* huangguan@3x.png in Resources */,
 				8143FCFB1CD9CA6C00B65A2F /* 邀请好友@2x.png in Resources */,
 				8D5DBB851BD4838200F556B9 /* CastUpTableViewCell.xib in Resources */,
+				8181028D1CE043BB0038B64E /* 大圣解密@3x.png in Resources */,
 				8D3F95EE1BE2188500013A8E /* filefile@2x.png in Resources */,
 				8106AA831CAA23F700AB6753 /* 椭圆-3-拷贝-7.png in Resources */,
 				810F9C5E1CDC65C800BF39B5 /* youxi@3x.png in Resources */,
@@ -5257,6 +5335,7 @@
 				81600A531CB4BD750075CD45 /* houbixize@2x.png in Resources */,
 				818DEDFE1BCDF15B00454A0E /* FConfirmMoney.xib in Resources */,
 				8DEDE1E61BCD0040008086D3 /* greenyuan@3x.png in Resources */,
+				818C8C311CE1814400A14D37 /* TWOMyGameScoreCell.xib in Resources */,
 				8162D1281BE1BD9C00CACAB6 /* DownFourCell.xib in Resources */,
 				817DD49A1BCF547E00042B09 /* hongbao@2x.png in Resources */,
 				8D3EEA0B1C27AB400031F7C9 /* 北京银行@3x.png in Resources */,
@@ -5294,6 +5373,7 @@
 				8180639C1BD5D7E500E83492 /* MyInviteCell.xib in Resources */,
 				81D72FC41BFB04890067A277 /* LeftWindow@2x.png in Resources */,
 				818523BC1BE31B80002FC653 /* 组-14@3x.png in Resources */,
+				8181028B1CE043BB0038B64E /* 拔鸡毛@3x.png in Resources */,
 				8D9356DC1BC607C500BC2BFA /* LaunchScreen.storyboard in Resources */,
 				8D3EE9FC1C27AB400031F7C9 /* 中信银行@2x.png in Resources */,
 				8183F40F1C97CD4E000BB93C /* messageNew@3x.png in Resources */,
@@ -5355,6 +5435,7 @@
 				8D0AE7F81BE09CE500D9D50C /* register-2@2x.png in Resources */,
 				8D3EEA0C1C27AB400031F7C9 /* 华夏银行@2x.png in Resources */,
 				81B6741F1BF0AFEB007CEF51 /* 蓝色完成@2x.png in Resources */,
+				8181027E1CE03D470038B64E /* gameBanner@2x.png in Resources */,
 				8183F4081C97CC4F000BB93C /* target-arrow@2x.png in Resources */,
 				819B52DE1BFC2094002FDF1E /* 钻石@2x.png in Resources */,
 				8191E22E1BDE00DC000A6E8C /* cuo@2x.png in Resources */,
@@ -5382,6 +5463,7 @@
 				819B52BF1BFC0D22002FDF1E /* TheThirdRedBagCell.xib in Resources */,
 				81379F1C1BEAF56F002CDB16 /* 使用@3x.png in Resources */,
 				81E90EFA1BCB4312004BA8A5 /* 750产品详情.png in Resources */,
+				8181028C1CE043BB0038B64E /* 大圣解密@2x.png in Resources */,
 				8D3EEA0E1C27AB400031F7C9 /* 南京银行@2x.png in Resources */,
 				81AC90BB1BEC7F9900232404 /* 提示@2x.png in Resources */,
 				8143FD4B1CDAF22600B65A2F /* 充值@2x.png in Resources */,
@@ -5482,6 +5564,7 @@
 				810F9C351CDC40A800BF39B5 /* TwoFindActCell.xib in Resources */,
 				8D3EEA131C27AB400031F7C9 /* 工商银行@3x.png in Resources */,
 				8143FD3F1CDAEFC100B65A2F /* 我的猴币@2x.png in Resources */,
+				818102941CE05A7C0038B64E /* gameScore@2x.png in Resources */,
 				8143FD631CDAFD9300B65A2F /* email@2x.png in Resources */,
 				817E33861BD733D100D05103 /* duigou@2x.png in Resources */,
 				8D9011B31BD6337C00E5D62A /* 06@2x.png in Resources */,
@@ -5522,6 +5605,7 @@
 				810F9C251CDC38B400BF39B5 /* baisanjiao@3x.png in Resources */,
 				81ED030C1BD09BC8005F4B02 /* MyInformationCell.xib in Resources */,
 				81D72FBE1BFAD63B0067A277 /* right@2x.png in Resources */,
+				818102961CE05A7C0038B64E /* gameStrategy@2x.png in Resources */,
 				8183F4351C9CF232000BB93C /* Assets.xcassets in Resources */,
 				8D121FE61BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.xib in Resources */,
 				8D3EE9FA1C27AB400031F7C9 /* 东亚银行@2x.png in Resources */,
@@ -5562,6 +5646,7 @@
 				8D6E46871C9A44F200F0F5B7 /* myHadCastDetailViewController.xib in Resources */,
 				817DD4951BCF547E00042B09 /* chongzhi@3x.png in Resources */,
 				8D9011A61BD6337C00E5D62A /* 11@3x.png in Resources */,
+				8181027B1CE0390E0038B64E /* TWOGameCenterCell.xib in Resources */,
 				817DD49B1BCF547E00042B09 /* hongbao@3x.png in Resources */,
 				8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */,
 				8D3EEA1B1C27AB400031F7C9 /* 成都银行@3x.png in Resources */,
@@ -5600,6 +5685,7 @@
 				81BA1C131BD5000700DBA5BE /* icon04@2x.png in Resources */,
 				8175BE9B1BE9E5760044026E /* 组-21-拷贝-13@3x.png in Resources */,
 				8D9011BA1BD6337C00E5D62A /* 09@3x.png in Resources */,
+				818C8C291CE0759100A14D37 /* TWOAddIncomeCell.xib in Resources */,
 				810F9C3C1CDC438B00BF39B5 /* 大扫描@2x.png in Resources */,
 				816CCCF01C182A71006FA6F2 /* BankListCell.xib in Resources */,
 				817DD4AD1BCF547E00042B09 /* ziliao@3x.png in Resources */,
@@ -5612,6 +5698,7 @@
 				8D4343971BFDEB0B000BA004 /* loading_up_06.png in Resources */,
 				8183F3FD1C97CC4F000BB93C /* icon3@3x.png in Resources */,
 				81D72FC71BFB04890067A277 /* rightWindow@3x.png in Resources */,
+				8181027F1CE03D470038B64E /* gameBanner@3x.png in Resources */,
 				81F237721BE8568B009D7A67 /* NewMakeSureCell.xib in Resources */,
 				8DC695C31C3503D30055EC44 /* UMSShareListController.xib in Resources */,
 				8183F3451C7E94A7000BB93C /* MonkeyCell.xib in Resources */,
@@ -5637,6 +5724,7 @@
 				8D4C4FA01C97D87E002229AE /* ZFPassword.xib in Resources */,
 				810F9C521CDC657700BF39B5 /* tequan@3x.png in Resources */,
 				8D6E468A1C9A482A00F0F5B7 /* iconfont-icondzje@2x.png in Resources */,
+				8181028E1CE043BB0038B64E /* 大圣酷跑@2x.png in Resources */,
 				814B51021C3A8463001AACC6 /* ChongZhiZZZZView.xib in Resources */,
 				81C8BBC71BDA2F8D005B9DFF /* guanyuG@3x.png in Resources */,
 				8175BE991BE9E5760044026E /* 组-21-拷贝-2@3x.png in Resources */,
@@ -5666,6 +5754,7 @@
 				819B52E11BFC2094002FDF1E /* 金元宝@3x.png in Resources */,
 				817988321BC93FF6007C8C3E /* BasicMessageCell.xib in Resources */,
 				81C8BBD01BDA3535005B9DFF /* HelpCell.xib in Resources */,
+				818102951CE05A7C0038B64E /* gameScore@3x.png in Resources */,
 				817DD4B21BCF5B3900042B09 /* MiddleView.xib in Resources */,
 				817DD4971BCF547E00042B09 /* dae@3x.png in Resources */,
 				8143FD091CD9DD0600B65A2F /* 热卖@2x.png in Resources */,
@@ -5702,6 +5791,7 @@
 				810F9C581CDC65B500BF39B5 /* 大转盘@3x.png in Resources */,
 				8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */,
 				81FAAA2E1C256AC40020E9DD /* 审核通过@2x.png in Resources */,
+				8181028F1CE043BB0038B64E /* 大圣酷跑@3x.png in Resources */,
 				81BA1C141BD5000700DBA5BE /* icon05@2x.png in Resources */,
 				8183F4051C97CC4F000BB93C /* iconfont-jixifangshi@3x.png in Resources */,
 				8182A7F01C0EECD300FA1216 /* 组-16@3x.png in Resources */,
@@ -5748,6 +5838,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				818C8C241CE0708800A14D37 /* TWOAddIncomeViewController.m in Sources */,
 				8183F42E1C9A7C28000BB93C /* TRedBagModel.m in Sources */,
 				810EBC101C9CFFD6008FB51D /* SelectionViewController.m in Sources */,
 				8183F4131C97CF29000BB93C /* TDescriptionCell.m in Sources */,
@@ -5791,6 +5882,7 @@
 				816F1ECE1BF5B30F00DB6B65 /* SocialPlatformViewController.m in Sources */,
 				818063A01BD5D87100E83492 /* InviteNumCell.m in Sources */,
 				8D4144141C06A003002926DA /* MessageModel.m in Sources */,
+				818C8C211CE06C9E00A14D37 /* TWOMyGameScoreViewController.m in Sources */,
 				8D4FF5DC1BE339A200BAE25F /* AFURLSessionManager.m in Sources */,
 				8183F3441C7E94A7000BB93C /* MonkeyCell.m in Sources */,
 				8162D1141BE1B47B00CACAB6 /* MoneyDetailViewController.m in Sources */,
@@ -5893,6 +5985,7 @@
 				8D88D1051BFECCB40051D6DA /* UIScrollView+MJExtension.m in Sources */,
 				81B674041BF0A608007CEF51 /* HistoryMemoryViewController.m in Sources */,
 				81E0CCEB1C28ED3400148609 /* BindingEmailFailed.m in Sources */,
+				818C8C301CE1814400A14D37 /* TWOMyGameScoreCell.m in Sources */,
 				8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */,
 				817DD4B01BCF5B2400042B09 /* MiddleView.m in Sources */,
 				8D90117A1BD5D8FA00E5D62A /* TransactionViewController.m in Sources */,
@@ -5915,6 +6008,7 @@
 				81CBB74D1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m in Sources */,
 				81422CD81C27E2E200E515B6 /* ChatViewController.m in Sources */,
 				81F237711BE8568B009D7A67 /* NewMakeSureCell.m in Sources */,
+				8181027A1CE0390E0038B64E /* TWOGameCenterCell.m in Sources */,
 				8D88D1041BFECCB40051D6DA /* MJRefreshConst.m in Sources */,
 				8175BE801BE9B50D0044026E /* RecordCell.m in Sources */,
 				8D4FF5D81BE339A200BAE25F /* AFNetworkReachabilityManager.m in Sources */,
@@ -6045,10 +6139,12 @@
 				8D6E46861C9A44F200F0F5B7 /* myHadCastDetailViewController.m in Sources */,
 				8D6E466E1C992B3D00F0F5B7 /* myHadCastViewController.m in Sources */,
 				8D6E46971C9B9DB300F0F5B7 /* newLoginView.m in Sources */,
+				818C8C2C1CE093D200A14D37 /* TWOMyMoneyViewController.m in Sources */,
 				8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */,
 				81CBB7501C1AC6E9002CDE97 /* SafeProtectViewController.m in Sources */,
 				81200C1E1C031F1700F70DDD /* InviteNumReginCell.m in Sources */,
 				810C767D1C2E40D2000637FD /* UserList.m in Sources */,
+				818C8C281CE0759100A14D37 /* TWOAddIncomeCell.m in Sources */,
 				8D0AE8041BE0ABFB00D9D50C /* RegisterOfView.m in Sources */,
 				8DD180A21BD731E000F71CEA /* GetMoneyTipTableViewCell.m in Sources */,
 				8D45187A1C00553E00FAF998 /* MD5Encryption.m in Sources */,

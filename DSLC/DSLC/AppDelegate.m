@@ -123,7 +123,7 @@
 
 //        2.0
 //        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
-        self.viewControllerArr = @[twoNavigation1, navigation2, navigationFind, navigationTwoMine];
+        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
 //        1.0
 //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
         

@@ -12,6 +12,7 @@
 #import "TwoFindActCell.h"
 #import "TwoActivityCell.h"
 #import "PleaseExpectCell.h"
+#import "TWOgameCenterViewController.h"
 
 @interface TWOFindViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -150,6 +151,15 @@
         cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         return cell;
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.item == 4) {
+        
+        TWOgameCenterViewController *gameVC = [[TWOgameCenterViewController alloc] init];
+        [self.navigationController pushViewController:gameVC animated:YES];
     }
 }
 
