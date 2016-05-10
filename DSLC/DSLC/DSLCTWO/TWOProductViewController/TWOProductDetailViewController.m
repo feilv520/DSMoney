@@ -1,0 +1,592 @@
+//
+//  TWOProductDetailViewController.m
+//  DSLC
+//
+//  Created by 马成铭 on 16/5/9.
+//  Copyright © 2016年 马成铭. All rights reserved.
+//
+
+#import "TWOProductDetailViewController.h"
+#import "TWOProductDetailTableViewCell.h"
+#import "ProductDetailModel.h"
+#import "Calendar.h"
+#import "TMakeSureViewController.h"
+#import "MakeSureViewController.h"
+#import "UsufructAssignmentViewController.h"
+
+@interface TWOProductDetailViewController () <UITableViewDataSource, UITableViewDelegate>{
+    UITableView *_tableView;
+    NSArray *titleArr;
+    Calendar *calendar;
+    UIButton *bView;
+    UIView *viewSuan;
+    
+    UIButton *butMakeSure;
+    NSDictionary *dataDic;
+    
+    NSInteger isOrder;
+    
+    NSArray *titleArray;
+}
+
+@property (nonatomic, strong) UIControl *viewBotton;
+@property (nonatomic, strong) ProductDetailModel *detailM;
+@property (nonatomic, strong) NSString *residueMoney;
+@property (nonatomic, strong) NSString *buyNumber;
+@property (nonatomic, strong) NSDictionary *flagLogin;
+
+@property (nonatomic, strong) UITableView *mainTableView;
+
+@end
+
+@implementation TWOProductDetailViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor profitColor];
+
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:0];
+    
+    self.navigationController.navigationBar.shadowImage=[UIImage new];
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (self.viewBotton == nil) {
+        self.viewBotton = [[UIControl alloc] initWithFrame:CGRectMake(0, app.tabBarVC.view.frame.size.height - 49, WIDTH_CONTROLLER_DEFAULT, app.tabBarVC.view.frame.size.height)];
+        [app.tabBarVC.view addSubview:self.viewBotton];
+        self.viewBotton.backgroundColor = [UIColor huibai];
+    } else {
+        self.viewBotton.hidden = NO;
+    }
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.view.backgroundColor = Color_White;
+    
+    titleArray = [NSArray array];
+    
+    titleArray = @[@"收益方式",@"计息起始日",@"投资限额"];
+    
+    [self getProductDetail];
+    
+}
+
+- (NSDictionary *)flagLogin{
+    if (_flagLogin == nil) {
+        if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+            [FileOfManage createWithFile:@"isLogin.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+        }
+    }
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    self.flagLogin = dic;
+    return _flagLogin;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [_viewBotton setHidden:YES];
+}
+
+// 创建TableView
+- (void)showTableView{
+    self.mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 84 - 49) style:UITableViewStyleGrouped];
+    
+    self.mainTableView.backgroundColor = Color_Gray;
+    
+    self.mainTableView.delegate = self;
+    self.mainTableView.dataSource = self;
+    
+    [self.mainTableView registerNib:[UINib nibWithNibName:@"TWOProductDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    
+    [self tableViewHeadShow];
+    
+    [self.view addSubview:self.mainTableView];
+}
+
+//底部计算器+投资视图
+- (void)showBottonView
+{
+    viewSuan = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/4, 49)];
+    [self.viewBotton addSubview:viewSuan];
+    viewSuan.backgroundColor = [UIColor colorWithRed:78/255 green:88/255 blue:97/255 alpha:1.0];
+    
+    UIButton *buttonCal = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonCal.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/4, 49);
+    [buttonCal setImage:[UIImage imageNamed:@"750产品详111"] forState:UIControlStateNormal];
+    [buttonCal setImageEdgeInsets:UIEdgeInsetsMake(10, 30, 10, 30)];
+    buttonCal.backgroundColor = [UIColor jisuanqiHui];
+    [buttonCal addTarget:self action:@selector(calendarView) forControlEvents:UIControlEventTouchUpInside];
+    [self.viewBotton addSubview:buttonCal];
+    
+    butMakeSure = [UIButton buttonWithType:UIButtonTypeCustom];
+    butMakeSure.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/4, 0, WIDTH_CONTROLLER_DEFAULT/4*3, 49);
+    [self.viewBotton addSubview:butMakeSure];
+    butMakeSure.tag = 9080;
+    
+    //    勾选协议
+    
+    UIButton *buttonGou = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 8, 12, 12) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    [_tableView.tableFooterView addSubview:buttonGou];
+    [buttonGou setBackgroundImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+    buttonGou.tag = 2000;
+    [buttonGou addTarget:self action:@selector(shifouGouXuan:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *labelFront = [CreatView creatWithLabelFrame:CGRectMake(22, 0, 116, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:10] text:@" 我已阅读并同意相关协议"];
+    [_tableView.tableFooterView addSubview:labelFront];
+    
+    UIButton *buttonXuan = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(138, 0, WIDTH_CONTROLLER_DEFAULT - 20, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor chongzhiColor] titleText:@"《产品收益权转让及服务协议》"];
+    [_tableView.tableFooterView addSubview:buttonXuan];
+    buttonXuan.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+    buttonXuan.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [buttonXuan addTarget:self action:@selector(buttonCheck:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (self.estimate == NO) {
+        
+        if ([self.residueMoney isEqualToString:@"0.00"]) {
+            if ([[self.detailM isOrder] isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
+                [butMakeSure setBackgroundColor:[UIColor profitColor]];
+                butMakeSure.enabled = YES;
+                
+            } else {
+                [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
+                butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
+                butMakeSure.enabled = NO;
+            }
+        } else {
+            butMakeSure.enabled = YES;
+            [butMakeSure setTitle:@"投资(可使用5,000体验金)" forState:UIControlStateNormal];
+            [butMakeSure setBackgroundColor:[UIColor profitColor]];
+        }
+        
+    } else {
+        NSLog(@"%@",self.residueMoney);
+        if ([self.residueMoney isEqualToString:@"0.00"]) {
+            if ([[self.detailM productType] isEqualToString:@"1"]) {
+                if ([[self.detailM isOrder] isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                    [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
+                    butMakeSure.backgroundColor = [UIColor profitColor];
+                } else {
+                    [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
+                    butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
+                }
+            } else {
+                [butMakeSure setTitle:@"已售罄" forState:UIControlStateNormal];
+                butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
+                [butMakeSure setUserInteractionEnabled:NO];
+            }
+        } else {
+            [butMakeSure setTitle:[NSString stringWithFormat:@"%@%@%@", @"投资(",[dataDic objectForKey:@"amountMin"], @"元起投)"] forState:UIControlStateNormal];
+            butMakeSure.backgroundColor = [UIColor profitColor];
+        }
+    }
+    
+    butMakeSure.titleLabel.font = [UIFont systemFontOfSize:15];
+    
+    [butMakeSure addTarget:self action:@selector(makeSureButton:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//头部内容
+- (void)tableViewHeadShow
+{
+    UIImageView *headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 166)];
+    headImageView.image = [UIImage imageNamed:@"productDetailBackground"];
+    self.mainTableView.tableHeaderView = headImageView;
+    
+    __block UIImageView *monkeyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 96, 18, 30)];
+    monkeyImageView.image = [UIImage imageNamed:@"productMonkey"];
+    [headImageView addSubview:monkeyImageView];
+    
+    [UIView animateWithDuration:2.f animations:^{
+        monkeyImageView.frame = CGRectMake(100, 76, 18, 30);
+    }];
+    
+    UILabel *profitLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, WIDTH_CONTROLLER_DEFAULT, 40)];
+    profitLabel.textAlignment = NSTextAlignmentCenter;
+    [profitLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:38]];
+    profitLabel.textColor = Color_White;
+    
+    NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17%"];
+    [redStringM replaceCharactersInRange:NSMakeRange(0, [[redStringM string] rangeOfString:@"%"].location) withString:[NSString stringWithFormat:@"%@ ",[dataDic objectForKey:@"productAnnualYield"]]];
+    NSRange numString = NSMakeRange(0, [[redStringM string] rangeOfString:@"%"].location);
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:32] range:numString];
+        NSRange oneString = NSMakeRange([[redStringM string] length] - 1, 1);
+        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:oneString];
+        
+    } else {
+        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:35] range:numString];
+        NSRange oneString = NSMakeRange([[redStringM string] length] - 1, 1);
+        [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:oneString];
+    }
+    [profitLabel setAttributedText:redStringM];
+    [headImageView addSubview:profitLabel];
+    
+    UILabel *profitTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(profitLabel.frame) + 10, WIDTH_CONTROLLER_DEFAULT, 20)];
+    profitTitleLabel.text = @"预期年化收益率";
+    [profitTitleLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:15]];
+    profitTitleLabel.textColor = Color_White;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (section == 0) {
+        return 3;
+    } else if(section == 1){
+        return 1;
+    } else {
+        return 3;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 0.1;
+    } else {
+        return 5;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 9;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50.0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    TWOProductDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    
+    cell.titleLabel.text = titleArray[indexPath.row];
+    
+    cell.valueLabel.text = @"无";
+    
+    if (indexPath.section != 0) {
+        cell.valueLabel.hidden = YES;
+        if (indexPath.row != 0) {
+            cell.rightButton.hidden = NO;
+        }
+    }
+    
+    return cell;
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y < 0) {
+        self.mainTableView.scrollEnabled = NO;
+    } else {
+        self.mainTableView.scrollEnabled = YES;
+    }
+}
+
+// 计算收益图层
+- (void)calendarView
+{
+    
+    [bView removeFromSuperview];
+    [calendar removeFromSuperview];
+    
+    bView = nil;
+    calendar = nil;
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (bView == nil) {
+        bView = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:Color_Black textColor:nil titleText:nil];
+        
+        bView.alpha = 0.3;
+        [bView addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [app.tabBarVC.view addSubview:bView];
+        
+    }
+    
+    if (calendar == nil) {
+        NSBundle *rootBundle = [NSBundle mainBundle];
+        
+        calendar = (Calendar *)[[rootBundle loadNibNamed:@"Calendar" owner:nil options:nil] lastObject];
+        
+        CGFloat margin_x = (38 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+        CGFloat margin_y = (182 / 667.0) * HEIGHT_CONTROLLER_DEFAULT;
+        CGFloat width = (301 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+            margin_y -= 30;
+        }
+        
+        calendar.frame = CGRectMake(margin_x, margin_y, width, 246);
+        calendar.layer.masksToBounds = YES;
+        calendar.layer.cornerRadius = 4.0;
+        
+        calendar.inputMoney.delegate = self;
+        [calendar.closeButton addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
+        
+        calendar.viewDown.backgroundColor = [UIColor shurukuangColor];
+        calendar.viewDown.layer.cornerRadius = 4;
+        calendar.viewDown.layer.masksToBounds = YES;
+        calendar.viewDown.layer.borderColor = [[UIColor shurukuangBian] CGColor];
+        calendar.viewDown.layer.borderWidth = 0.5;
+        
+        calendar.inputMoney.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+        calendar.inputMoney.leftViewMode = UITextFieldViewModeAlways;
+        calendar.inputMoney.tintColor = [UIColor grayColor];
+        calendar.inputMoney.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [calendar.inputMoney addTarget:self action:@selector(textFiledEditChange:) forControlEvents:UIControlEventEditingChanged];
+        
+        calendar.yearLv.text = [NSString stringWithFormat:@"%@%%",[self.detailM productAnnualYield]];
+        
+        NSString *daysLimitString = @"0";
+        NSString *daysPeriodString = @"0";
+        
+        if (![[self.detailM productDaysLimit] isEqualToString:@"0"]) {
+            daysLimitString = [self.detailM productDaysLimit];
+        }
+        
+        if (![[self.detailM productPeriod] isEqualToString:@"0"]) {
+            daysPeriodString = [self.detailM productPeriod];
+        }
+        
+        if ([[self.detailM productType] isEqualToString:@"2"])
+            calendar.dayLabel.text = [NSString stringWithFormat:@"%@天",daysLimitString];
+        else
+            calendar.dayLabel.text = [NSString stringWithFormat:@"%@天",daysPeriodString];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+        [calendar addGestureRecognizer:tap];
+        [tap addTarget:self action:@selector(returnKeyboard:)];
+        
+        [app.tabBarVC.view addSubview:calendar];
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location > 9) {
+        
+        return NO;
+        
+    } else {
+        
+        return YES;
+    }
+}
+
+//自动计算
+- (void)textFiledEditChange:(UITextField *)textField
+{
+    calendar.totalLabel.text = [NSString stringWithFormat:@"%.2f元",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
+}
+
+//return按钮
+- (void)returnKeyboard:(UITapGestureRecognizer *)tap
+{
+    
+    [calendar endEditing:YES];
+}
+
+//关闭按钮
+- (void)closeButton:(UIButton *)but{
+    
+    [bView removeFromSuperview];
+    [calendar removeFromSuperview];
+    
+    bView = nil;
+    calendar = nil;
+}
+
+//确认投资按钮
+- (void)makeSureButton:(UIButton *)button
+{
+    if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+        return ;
+    }
+    
+    if ([self.residueMoney isEqualToString:@"0.00"]) {
+        [self orderProduct];
+        return;
+    } else if ([self.residueMoney floatValue] < [[self.detailM amountMin] floatValue]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"剩余金额已小于起投金额,不能投资此产品"];
+        return;
+    }
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    if ([dic objectForKey:@"token"] != nil) {
+        
+        NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+        
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            
+            if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+                
+            } else {
+                
+                if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"3"]) {
+                    
+                    TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
+                    makeSureVC.decide = YES;
+                    makeSureVC.detailM = self.detailM;
+                    makeSureVC.residueMoney = self.residueMoney;
+                    [self.navigationController pushViewController:makeSureVC animated:YES];
+                    
+                    [MobClick event:@"makeSure"];
+                    
+                    [self submitLoadingWithHidden:YES];
+                    
+                } else {
+                    
+                    MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
+                    makeSureVC.decide = NO;
+                    makeSureVC.nHand = self.nHand;
+                    makeSureVC.detailM = self.detailM;
+                    makeSureVC.residueMoney = self.residueMoney;
+                    [self.navigationController pushViewController:makeSureVC animated:YES];
+                    
+                    [self submitLoadingWithHidden:YES];
+                    
+                }
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            
+        }];
+    } else {
+        [self submitLoadingWithHidden:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+    }
+    
+}
+
+//查看协议
+- (void)buttonCheck:(UIButton *)button
+{
+    UsufructAssignmentViewController *usufruct = [[UsufructAssignmentViewController alloc] init];
+    [self.navigationController pushViewController:usufruct animated:YES];
+}
+
+//勾选协议按钮
+- (void)shifouGouXuan:(UIButton *)button
+{
+    if ([butMakeSure.titleLabel.text isEqualToString:@"已售罄"] || [butMakeSure.titleLabel.text isEqualToString:@"已预约"]) {
+        
+        if (button.tag == 2000) {
+            button.tag = 3000;
+            [button setImage:[UIImage imageNamed:@"iconfont-dui-2111"] forState:UIControlStateNormal];
+        } else {
+            [button setImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+            button.tag = 2000;
+        }
+        
+    } else {
+        
+        if (button.tag == 2000) {
+            
+            [button setImage:[UIImage imageNamed:@"iconfont-dui-2111"] forState:UIControlStateNormal];
+            button.tag = 3000;
+            butMakeSure.enabled = NO;
+            butMakeSure.backgroundColor = [UIColor whiteColor];
+            //        [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+            butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
+            
+        } else {
+            
+            butMakeSure.enabled = YES;
+            //        [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
+            butMakeSure.backgroundColor = [UIColor daohanglan];
+            [button setImage:[UIImage imageNamed:@"iconfont-dui-2"] forState:UIControlStateNormal];
+            button.tag = 2000;
+        }
+    }
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+// 预定产品
+- (void)orderProduct{
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameters = @{@"productId":[self.detailM productId],@"productType":[self.detailM productType],@"token":[dic objectForKey:@"token"]};
+    
+    NSLog(@"%@",parameters);
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/orderProduct" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"orderProduct = %@",responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已预约"];
+            
+            butMakeSure.userInteractionEnabled = NO;
+            [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
+            //            [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
+            butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
+        } else {
+            [ProgressHUD showMessage:@"请先登录,然后再预约" Width:100 High:20];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
+
+- (void)getProductDetail{
+    NSDictionary *parameter = @{@"productId":self.idString};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"产品详情ppppppppppppppp%@",responseObject);
+        
+        [self loadingWithHidden:YES];
+        
+        self.residueMoney = [responseObject objectForKey:@"residueMoney"];
+        self.buyNumber = [responseObject objectForKey:@"buyCount"];
+        
+        self.detailM = [[ProductDetailModel alloc] init];
+        dataDic = [responseObject objectForKey:@"Product"];
+        [self.detailM setValuesForKeysWithDictionary:dataDic];
+        
+        [self showTableView];
+        [self showBottonView];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

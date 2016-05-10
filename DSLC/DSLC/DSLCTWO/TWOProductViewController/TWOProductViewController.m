@@ -34,10 +34,22 @@
     [self setMyScrollView];
 }
 
-- (void)showNavigationBar
-{
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    navigationView.hidden = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    navigationView.hidden = NO;
+    
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor profitColor];
+    
+}
+
+- (void)showNavigationBar
+{
     
 //    self.navigationItem.title = @"理财产品";
 //    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:[UIColor whiteColor]}];

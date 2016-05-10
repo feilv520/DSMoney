@@ -18,6 +18,7 @@
 #import "MDRadialProgressTheme.h"
 #import "AdModel.h"
 #import "BannerViewController.h"
+#import "TWOProductDetailViewController.h"
 
 @interface TWOBillViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -263,12 +264,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    TWOProductDetailViewController *twoPDVC = [[TWOProductDetailViewController alloc] init];
     
-    FDetailViewController *detailVC = [[FDetailViewController alloc] init];
-    detailVC.estimate = YES;
-    detailVC.pandaun = YES;
-    detailVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
-    [self.navigationController pushViewController:detailVC animated:YES];
+    twoPDVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
+    
+    pushVC(twoPDVC);
+    
+    
+//    FDetailViewController *detailVC = [[FDetailViewController alloc] init];
+//    detailVC.estimate = YES;
+//    detailVC.pandaun = YES;
+//    detailVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
+//    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark 网络请求方法
