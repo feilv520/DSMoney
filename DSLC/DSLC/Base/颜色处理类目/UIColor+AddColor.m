@@ -236,4 +236,8 @@
     return [UIColor colorFromHexCode:@"#5f6d7b"];
 }
 
++ (UIColor *) orangecolor {
+    return [UIColor colorFromHexCode:@"#ff721f"];
+}
+
 @end

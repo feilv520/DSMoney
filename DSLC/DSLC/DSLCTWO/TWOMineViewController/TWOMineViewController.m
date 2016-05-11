@@ -11,6 +11,8 @@
 #import "TWOMineCell.h"
 #import "TWOAddIncomeViewController.h"
 #import "TWOMyMoneyViewController.h"
+#import "TWOMyTidyMoneyViewController.h"
+#import "TWOMyPrerogativeMoneyViewController.h"
 
 @interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
@@ -170,9 +172,12 @@
     [buttonEye setBackgroundImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateNormal];
     [buttonEye setBackgroundImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateHighlighted];
     
-    UILabel *labelZZC = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 25, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 50, 14) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"总资产"];
-    [imageBackGround addSubview:labelZZC];
-    labelZZC.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+//    总资产按钮
+    UIButton *buttonZZC = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 25, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 50, 14) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"总资产"];
+    [imageBackGround addSubview:buttonZZC];
+    buttonZZC.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+    buttonZZC.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    [buttonZZC addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    总资产右下角黄色三角按钮
     UIButton *butYellowJiao = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 25 + 52, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 15.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 12, 12) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
@@ -301,6 +306,20 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20);
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            TWOMyTidyMoneyViewController *tidyMoneyVC = [[TWOMyTidyMoneyViewController alloc] init];
+            [self.navigationController pushViewController:tidyMoneyVC animated:YES];
+            
+        } else {
+            TWOMyPrerogativeMoneyViewController *myPrerogativeMoneyVC = [[TWOMyPrerogativeMoneyViewController alloc] init];
+            [self.navigationController pushViewController:myPrerogativeMoneyVC animated:YES];
+        }
+    }
 }
 
 //充值按钮

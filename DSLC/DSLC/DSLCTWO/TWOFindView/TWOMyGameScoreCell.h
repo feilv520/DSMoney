@@ -10,4 +10,8 @@
 
 @interface TWOMyGameScoreCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *labelName;
+@property (weak, nonatomic) IBOutlet UILabel *labelTime;
+@property (weak, nonatomic) IBOutlet UILabel *labelScore;
+
 @end

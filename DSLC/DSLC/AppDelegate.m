@@ -129,16 +129,16 @@
 //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
         
 //        2.0
-//        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
-//        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
+        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
+        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
         
-//        1.0
-        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
-        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
+////        1.0
+//        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
+//        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
         
 //        for循环4要改成3***********************************
         buttonArr = [NSMutableArray array];
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改

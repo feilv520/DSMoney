@@ -9,10 +9,11 @@
 #import "TWOMyGameScoreViewController.h"
 #import "TWOMyGameScoreCell.h"
 
-@interface TWOMyGameScoreViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TWOMyGameScoreViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 {
     UITableView *_tableView;
+    UIView *viewHead;
 }
 
 @end
@@ -46,7 +47,7 @@
     _tableView.delegate = self;
     _tableView.tableFooterView = [UIView new];
     
-    UIView *viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 177.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+    viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 177.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     _tableView.tableHeaderView = viewHead;
     viewHead.backgroundColor = [UIColor orangeColor];
     
@@ -57,24 +58,65 @@
 
 - (void)viewHeadShow
 {
+    UIImageView *imageBottom = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _tableView.tableHeaderView.frame.size.height) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"productDetailBackground"]];
+    [viewHead addSubview:imageBottom];
     
+    UILabel *labelZongScore = [CreatView creatWithLabelFrame:CGRectMake(0, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
+    [viewHead addSubview:labelZongScore];
+    
+    NSMutableAttributedString *scoreString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@分", @"100098"]];
+    NSRange shuziRange = NSMakeRange(0, [[scoreString string] rangeOfString:@"分"].location);
+    [scoreString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:shuziRange];
+    [labelZongScore setAttributedText:scoreString];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWOMyGameScoreCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
+    cell.labelName.text = @"大圣酷跑";
+    cell.labelName.textColor = [UIColor blackZiTi];
+    cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    
+    cell.labelTime.text = @"2016-05-02 12:00";
+    cell.labelTime.textColor = [UIColor findZiTiColor];
+    cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    
+    if (indexPath.row == 5) {
+        
+        cell.labelScore.text = @"-10,000分";
+        cell.labelName.text = @"兑换猴币";
+        cell.labelScore.textColor = [UIColor daohanglan];
+        
+    } else {
+        
+        cell.labelScore.text = @"+10,000分";
+        cell.labelScore.textColor = [UIColor profitColor];
+    }
+    
+    cell.labelScore.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y < 0) {
+        _tableView.scrollEnabled = NO;
+    } else {
+        _tableView.scrollEnabled = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

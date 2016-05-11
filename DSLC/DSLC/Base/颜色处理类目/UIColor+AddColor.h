@@ -61,5 +61,6 @@
 + (UIColor *) tequanColor;//特权本金颜色
 + (UIColor *) findZiTiColor;//发现字体颜色
 + (UIColor *) moneyColor;//资产颜色
++ (UIColor *) orangecolor;//橙颜色
 
 @end
