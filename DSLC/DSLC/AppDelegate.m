@@ -93,15 +93,15 @@
     
     if ([flag isEqualToString:@"NO"]) {
         
-//        1.0首页
+////        1.0首页
 //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
 //        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
-        
-//        1.0产品
+//        
+////        1.0产品
 //        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
 //        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
-        
-//        1.0我的
+//        
+////        1.0我的
 //        MineViewController *mineVC = [[MineViewController alloc] init];
 ////        LoginViewController *loginVC = [[LoginViewController alloc] init];
 //        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
@@ -123,8 +123,8 @@
         UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
         
 //        2.0
-//        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
-        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
+        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
+//        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
 //        1.0
 //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
         

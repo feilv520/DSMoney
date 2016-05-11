@@ -112,9 +112,11 @@
 {
     NSString *URLPostString = [NSString stringWithFormat:@"%@%@",MYAFHTTP_BASEURL,@"app/user/upUserHeader"];
 
+    NSDictionary *dicMine = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
     NSData *data = [self resetSizeOfImageData:img maxSize:1024 * 2];
     
-    NSDictionary *dic = @{@"ImgData":data};
+    NSDictionary *dic = @{@"ImgData":data,@"token":[dicMine objectForKey:@"token"]};
     
     [self POST:URLPostString parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         

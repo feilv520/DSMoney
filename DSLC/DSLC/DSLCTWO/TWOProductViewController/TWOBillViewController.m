@@ -265,7 +265,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     TWOProductDetailViewController *twoPDVC = [[TWOProductDetailViewController alloc] init];
-    
+    twoPDVC.estimate = YES;
+    twoPDVC.pandaun = YES;
     twoPDVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
     
     pushVC(twoPDVC);
