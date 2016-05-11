@@ -38,6 +38,7 @@
     myWebView.scrollView.showsHorizontalScrollIndicator = NO;
     myWebView.scrollView.bounces = NO;
     
+//    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/activity/enterRotate.html?token=%@",self.tokenString];
     NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/activity/enterRotate.html?token=%@",self.tokenString];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -65,8 +66,6 @@
     //获取H5页面里面按钮的操作方法,根据这个进行判断返回是内部的还是push的上一级页面
     if ([requestString hasPrefix:@"goback:"]) {
         [self.navigationController popViewControllerAnimated:YES];
-    }else{
-        [webView goBack];
     }
     return YES;
 }

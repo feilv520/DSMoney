@@ -13,6 +13,8 @@
 #import "TMakeSureViewController.h"
 #import "MakeSureViewController.h"
 #import "UsufructAssignmentViewController.h"
+#import "TWOProductMoneyView.h"
+#import "TWORecordViewController.h"
 
 @interface TWOProductDetailViewController () <UITableViewDataSource, UITableViewDelegate>{
     UITableView *_tableView;
@@ -50,6 +52,10 @@
     
     self.navigationController.navigationBar.shadowImage=[UIImage new];
     
+    self.navigationController.navigationItem.title = self.productName;
+    
+    [self.navigationItem setTitle:self.productName];
+    
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (self.viewBotton == nil) {
@@ -68,7 +74,7 @@
     
     titleArray = [NSArray array];
     
-    titleArray = @[@"收益方式",@"计息起始日",@"投资限额"];
+    titleArray = @[@"收益方式",@"计息起始日&到账日",@"投资限额"];
     
     [self getProductDetail];
     
@@ -120,7 +126,7 @@
     buttonCal.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/4, 49);
     [buttonCal setImage:[UIImage imageNamed:@"750产品详111"] forState:UIControlStateNormal];
     [buttonCal setImageEdgeInsets:UIEdgeInsetsMake(10, 30, 10, 30)];
-    buttonCal.backgroundColor = [UIColor jisuanqiHui];
+    buttonCal.backgroundColor = [UIColor colorWithRed:112 / 255.0 green:192 / 255.0 blue:252 / 255.0 alpha:1.0];
     [buttonCal addTarget:self action:@selector(calendarView) forControlEvents:UIControlEventTouchUpInside];
     [self.viewBotton addSubview:buttonCal];
     
@@ -182,7 +188,7 @@
                 [butMakeSure setUserInteractionEnabled:NO];
             }
         } else {
-            [butMakeSure setTitle:[NSString stringWithFormat:@"%@%@%@", @"投资(",[dataDic objectForKey:@"amountMin"], @"元起投)"] forState:UIControlStateNormal];
+            [butMakeSure setTitle:@"立即投资" forState:UIControlStateNormal];
             butMakeSure.backgroundColor = [UIColor profitColor];
         }
     }
@@ -195,17 +201,9 @@
 //头部内容
 - (void)tableViewHeadShow
 {
-    UIImageView *headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 166)];
+    UIImageView *headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 196)];
     headImageView.image = [UIImage imageNamed:@"productDetailBackground"];
     self.mainTableView.tableHeaderView = headImageView;
-    
-    __block UIImageView *monkeyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 96, 18, 30)];
-    monkeyImageView.image = [UIImage imageNamed:@"productMonkey"];
-    [headImageView addSubview:monkeyImageView];
-    
-    [UIView animateWithDuration:2.f animations:^{
-        monkeyImageView.frame = CGRectMake(100, 76, 18, 30);
-    }];
     
     UILabel *profitLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, WIDTH_CONTROLLER_DEFAULT, 40)];
     profitLabel.textAlignment = NSTextAlignmentCenter;
@@ -213,7 +211,7 @@
     profitLabel.textColor = Color_White;
     
     NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17%"];
-    [redStringM replaceCharactersInRange:NSMakeRange(0, [[redStringM string] rangeOfString:@"%"].location) withString:[NSString stringWithFormat:@"%@ ",[dataDic objectForKey:@"productAnnualYield"]]];
+    [redStringM replaceCharactersInRange:NSMakeRange(0, [[redStringM string] rangeOfString:@"%"].location) withString:[NSString stringWithFormat:@"%@",[dataDic objectForKey:@"productAnnualYield"]]];
     NSRange numString = NSMakeRange(0, [[redStringM string] rangeOfString:@"%"].location);
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:32] range:numString];
@@ -228,10 +226,94 @@
     [profitLabel setAttributedText:redStringM];
     [headImageView addSubview:profitLabel];
     
-    UILabel *profitTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(profitLabel.frame) + 10, WIDTH_CONTROLLER_DEFAULT, 20)];
+    UILabel *profitTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(profitLabel.frame), WIDTH_CONTROLLER_DEFAULT, 20)];
     profitTitleLabel.text = @"预期年化收益率";
+    profitTitleLabel.textAlignment = NSTextAlignmentCenter;
     [profitTitleLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:15]];
     profitTitleLabel.textColor = Color_White;
+    [headImageView addSubview:profitTitleLabel];
+    
+    CGFloat bfNumber = ([[self.detailM productInitLimit] floatValue] - [self.residueMoney floatValue]) / [[self.detailM productInitLimit] floatValue];
+    
+    //小猴子
+    UIImageView *monkeyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40, 86, 18, 30)];
+    monkeyImageView.image = [UIImage imageNamed:@"productMonkey"];
+    [headImageView addSubview:monkeyImageView];
+    
+    //百分比
+    UILabel *bfLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 93, 50, 20)];
+    bfLabel.textAlignment = NSTextAlignmentCenter;
+    [bfLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:14]];
+    bfLabel.text = @"0%";
+    bfLabel.textColor = Color_White;
+    [headImageView addSubview:bfLabel];
+    
+    // 进度条
+    UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(-WIDTH_CONTROLLER_DEFAULT, 116, WIDTH_CONTROLLER_DEFAULT, 2)];
+    whiteView.backgroundColor = Color_White;
+    [headImageView addSubview:whiteView];
+    
+    UIView *lightBlue = [[UIView alloc] initWithFrame:CGRectMake(0, 116, WIDTH_CONTROLLER_DEFAULT, 2)];
+    lightBlue.backgroundColor = [UIColor colorFromHexCode:@"#3cb6f5"];
+    [headImageView addSubview:lightBlue];
+    
+    [UIView animateWithDuration:2.f animations:^{
+        
+        bfLabel.text = [NSString stringWithFormat:@"%.0lf%%",bfNumber * 100];
+        
+        if ([bfLabel.text floatValue] >= 10 && [bfLabel.text floatValue] < 94) {
+            
+            monkeyImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * bfNumber, 86, 18, 30);
+            bfLabel.frame = CGRectMake(CGRectGetMinX(monkeyImageView.frame) - 50, 93, 50, 20);
+        } else if ([bfLabel.text floatValue] >= 94){
+            
+            monkeyImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.94, 86, 18, 30);
+            bfLabel.frame = CGRectMake(CGRectGetMinX(monkeyImageView.frame) - 50, 93, 50, 20);
+        }
+        
+        whiteView.frame = CGRectMake(-WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT * bfNumber, 116, WIDTH_CONTROLLER_DEFAULT, 2);
+        lightBlue.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * bfNumber, 116, WIDTH_CONTROLLER_DEFAULT, 2);
+    }];
+    
+    // 下方剩余可投的view
+    NSBundle *rootBundle = [NSBundle mainBundle];
+    
+    TWOProductMoneyView *pMoneyView = (TWOProductMoneyView *)[[rootBundle loadNibNamed:@"TWOProductMoneyView" owner:nil options:nil] lastObject];
+    
+    pMoneyView.frame = CGRectMake(0, 110, WIDTH_CONTROLLER_DEFAULT, 80);
+    
+    NSMutableAttributedString *resdStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17元"];
+    [resdStringM replaceCharactersInRange:NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%@",self.residueMoney]];
+    NSRange numYString = NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location);
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:21] range:numYString];
+        NSRange oneString = NSMakeRange([[resdStringM string] length] - 1, 1);
+        [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:oneString];
+        
+    } else {
+        [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:numYString];
+        NSRange oneString = NSMakeRange([[resdStringM string] length] - 1, 1);
+        [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:oneString];
+    }
+    [pMoneyView.moneyLabel setAttributedText:resdStringM];
+    
+    NSMutableAttributedString *resdStringD = [[NSMutableAttributedString alloc] initWithString:@"13.17天"];
+    [resdStringD replaceCharactersInRange:NSMakeRange(0, [[resdStringD string] rangeOfString:@"天"].location) withString:[NSString stringWithFormat:@"%@",[self.detailM productPeriod]]];
+    NSRange numDString = NSMakeRange(0, [[resdStringD string] rangeOfString:@"天"].location);
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        [resdStringD addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:21] range:numDString];
+        NSRange oneString = NSMakeRange([[resdStringD string] length] - 1, 1);
+        [resdStringD addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:oneString];
+        
+    } else {
+        [resdStringD addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:numDString];
+        NSRange oneString = NSMakeRange([[resdStringD string] length] - 1, 1);
+        [resdStringD addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:oneString];
+    }
+    [pMoneyView.dayLabel setAttributedText:resdStringD];
+    
+    [headImageView addSubview:pMoneyView];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -270,9 +352,36 @@
     
     TWOProductDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    cell.titleLabel.text = titleArray[indexPath.row];
-    
-    cell.valueLabel.text = @"无";
+    if (indexPath.section == 0) {
+        cell.titleLabel.text = titleArray[indexPath.row];
+        if (indexPath.row == 0) {
+            
+            cell.valueLabel.text = [self.detailM productYieldDistribTypeName];
+        } else if (indexPath.row == 1) {
+            
+            cell.valueLabel.text = [self.detailM productToaccountTypeName];
+        } else {
+            
+        }
+        
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            
+            cell.titleLabel.text = @"资产详情";
+            
+        }
+    } else if(indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            
+            cell.titleLabel.text = @"产品介绍";
+        } else if (indexPath.row == 1) {
+            
+            cell.titleLabel.text = @"投资记录";
+        } else {
+            
+            cell.titleLabel.text = @"产品安全等级";
+        }
+    }
     
     if (indexPath.section != 0) {
         cell.valueLabel.hidden = YES;
@@ -282,6 +391,21 @@
     }
     
     return cell;
+    
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 2) {
+        if (indexPath.row == 1) {
+            TWORecordViewController *recordVC = [[TWORecordViewController alloc] init];
+            recordVC.idString = self.idString;
+            pushVC(recordVC);
+        } else if (indexPath.row == 2){
+            
+        }
+    }
     
 }
 
@@ -388,7 +512,7 @@
 //自动计算
 - (void)textFiledEditChange:(UITextField *)textField
 {
-    calendar.totalLabel.text = [NSString stringWithFormat:@"%.2f元",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
+    calendar.totalLabel.text = [NSString stringWithFormat:@"¥%.2f元",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
 }
 
 //return按钮

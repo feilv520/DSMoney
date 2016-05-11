@@ -65,8 +65,6 @@
     //获取H5页面里面按钮的操作方法,根据这个进行判断返回是内部的还是push的上一级页面
     if ([requestString hasPrefix:@"goback:"]) {
         [self.navigationController popViewControllerAnimated:YES];
-    }else{
-        [webView goBack];
     }
     return YES;
 }

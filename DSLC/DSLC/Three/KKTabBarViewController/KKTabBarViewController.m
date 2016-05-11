@@ -202,6 +202,8 @@
         if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
             return ;
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
         }
     } else {
         indexButton = button;

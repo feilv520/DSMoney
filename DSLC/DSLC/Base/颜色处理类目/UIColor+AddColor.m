@@ -177,11 +177,11 @@
 }
 
 + (UIColor *) shurukuangColor {
-    return [UIColor colorFromHexCode:@"#eaf4fb"];
+    return [UIColor colorFromHexCode:@"#f9f9f9"];
 }
 
 + (UIColor *) shurukuangBian {
-    return [UIColor colorFromHexCode:@"#bcdee9"];
+    return [UIColor colorFromHexCode:@"#2493e7"];
 }
 
 + (UIColor *) yuanColor {
@@ -235,5 +235,6 @@
 + (UIColor *) moneyColor {
     return [UIColor colorFromHexCode:@"#5f6d7b"];
 }
+
 
 @end

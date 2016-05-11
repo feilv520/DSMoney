@@ -38,6 +38,7 @@
     NSTimer *timer;
     UIScrollView *bannerScrollView;
     
+    CGFloat bfFloat;
     
 }
 
@@ -298,6 +299,7 @@
                     cell.quanView.progressCounter = hadSellNumber;
                 }
                 
+                bfFloat = cell.quanView.progressCounter;
                 cell.quanView.theme.sliceDividerHidden = YES;
                 
             }
