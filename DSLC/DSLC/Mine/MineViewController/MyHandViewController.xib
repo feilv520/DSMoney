@@ -16,23 +16,37 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Home_refresh_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="2L7-Wo-LbP">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TWOHandImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="2L7-Wo-LbP">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="668"/>
                     <animations/>
                 </imageView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Jq-v6-U6r" customClass="MyHandButton">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Jq-v6-U6r" customClass="MyHandButton">
                     <rect key="frame" x="8" y="162" width="359" height="343"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="359" id="Rya-lx-qtE"/>
+                        <constraint firstAttribute="height" constant="343" id="wqh-nA-Oou"/>
+                    </constraints>
                 </view>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="2L7-Wo-LbP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4EW-Zn-2pa"/>
+                <constraint firstAttribute="trailing" secondItem="2L7-Wo-LbP" secondAttribute="trailing" id="IcQ-Lw-F3h"/>
+                <constraint firstAttribute="bottom" secondItem="1Jq-v6-U6r" secondAttribute="bottom" constant="162" id="Ozd-pw-AkH"/>
+                <constraint firstItem="1Jq-v6-U6r" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="162" id="Pro-9F-9OD"/>
+                <constraint firstAttribute="bottom" secondItem="2L7-Wo-LbP" secondAttribute="bottom" constant="-1" id="QEs-Sh-1kf"/>
+                <constraint firstAttribute="trailing" secondItem="1Jq-v6-U6r" secondAttribute="trailing" constant="8" id="ef7-YF-YnX"/>
+                <constraint firstItem="2L7-Wo-LbP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fXg-Dn-Jgz"/>
+                <constraint firstItem="1Jq-v6-U6r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="xfM-Tr-Hkw"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="218.5" y="288.5"/>
+            <point key="canvasLocation" x="-194.5" y="328.5"/>
         </view>
     </objects>
     <resources>
-        <image name="Home_refresh_bg.png" width="640" height="1008"/>
+        <image name="TWOHandImage.png" width="750" height="1334"/>
     </resources>
 </document>

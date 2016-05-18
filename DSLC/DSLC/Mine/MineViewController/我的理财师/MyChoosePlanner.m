@@ -138,7 +138,7 @@
             
             if (userArr.count == 0) {
                 
-                [self noDateWithView:@"暂无理财师" height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 view:self.view];
+                [self noDateWithHeight:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 view:self.view];
                 _tableView.hidden = YES;
                 
             } else {

@@ -13,6 +13,7 @@
 #import "TWOMyMoneyViewController.h"
 #import "TWOMyTidyMoneyViewController.h"
 #import "TWOMyPrerogativeMoneyViewController.h"
+#import "TWOMessageCenterViewController.h"
 
 @interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
@@ -343,7 +344,8 @@
 //信封按钮
 - (void)buttonEmailClicked:(UIButton *)button
 {
-    NSLog(@"xin");
+    TWOMessageCenterViewController *messageCenterVC = [[TWOMessageCenterViewController alloc] init];
+    pushVC(messageCenterVC);
 }
 
 //设置按钮

@@ -15,6 +15,7 @@
 #import "MDRadialProgressTheme.h"
 #import "AdModel.h"
 #import "BannerViewController.h"
+#import "TWOProductDetailViewController.h"
 
 @interface TWONewViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -422,18 +423,25 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    FDetailViewController *detailVC = [[FDetailViewController alloc] init];
+    ProductListModel *productM = [self.productListArray objectAtIndex:indexPath.row];
+    
+    TWOProductDetailViewController *twoPDVC = [[TWOProductDetailViewController alloc] init];
+    twoPDVC.productName = productM.productName;
     if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
         if (indexPath.row == 0) {
-            detailVC.estimate = NO;
+            twoPDVC.estimate = NO;
         } else {
-            detailVC.estimate = YES;
+            twoPDVC.estimate = YES;
         }
     } else {
-        detailVC.estimate = YES;
+        twoPDVC.estimate = YES;
     }
-    detailVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
-    [self.navigationController pushViewController:detailVC animated:YES];
+
+    twoPDVC.pandaun = YES;
+    twoPDVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
+    
+    pushVC(twoPDVC);
+    
 }
 
 #pragma mark 网络请求方法

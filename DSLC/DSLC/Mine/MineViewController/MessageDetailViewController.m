@@ -57,7 +57,7 @@
             
             [self noDataViewWithRemoveToView];
         } else {
-            [self noDateWithView:@"无数据" height:330 view:self.view];
+            [self noDateWithHeight:330 view:self.view];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

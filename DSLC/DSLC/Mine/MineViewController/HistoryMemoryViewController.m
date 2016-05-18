@@ -125,7 +125,7 @@
         
         if (dataArr.count == 0) {
             
-            [self noDateWithView:@"无历史记录" height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 view:self.view];
+            [self noDateWithHeight:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20)/2 view:self.view];
             _tabelView.hidden = YES;
             
         } else {

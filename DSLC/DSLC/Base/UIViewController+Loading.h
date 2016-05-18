@@ -33,7 +33,7 @@
 - (NSString *)encryptUseDES:(NSString *)clearText;
 
 // 无数据
-- (void)noDateWithView:(NSString *)nameString height:(CGFloat)height view:(UIView *)view;
+- (void)noDateWithHeight:(CGFloat)height view:(UIView *)view;
 
 // 隐藏无数据
 - (void)noDataViewWithRemoveToView;

@@ -356,7 +356,7 @@
         NSLog(@"========%@", self.myInviteWithPeopleNumber);
         
         if (self.myInviteWithPeopleNumber.count == 0) {
-            [self noDateWithView:@"无数据" height:330 view:_tableView];
+            [self noDateWithHeight:330 view:_tableView];
             
         } else {
             [self noDataViewWithRemoveToView];
