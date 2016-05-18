@@ -140,7 +140,7 @@
         
         [self loadingWithHidden:YES];
         if ([[responseObject objectForKey:@"Msg"] count] == 0) {
-            [self noDateWithView:@"暂无消息" height:HEIGHT_CONTROLLER_DEFAULT/2 - 80 view:self.view];
+            [self noDateWithHeight:HEIGHT_CONTROLLER_DEFAULT/2 - 80 view:self.view];
             
         } else {
         

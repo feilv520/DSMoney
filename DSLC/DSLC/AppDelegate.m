@@ -91,7 +91,7 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     
-    if ([flag isEqualToString:@"NO"]) {
+    if ([flag isEqualToString:@"YES"]) {
         
 ////        1.0首页
 //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
@@ -165,13 +165,13 @@
         self.window.rootViewController = self.tabBarVC;
         
     } else {
-        // 手势
-//        MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
-//        self.window.rootViewController = myHandVC;
+//         手势
+        MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
+        self.window.rootViewController = myHandVC;
         
         // 欢迎页
-        WelcomeViewController *welcome = [[WelcomeViewController alloc] init];
-        self.window.rootViewController = welcome;
+//        WelcomeViewController *welcome = [[WelcomeViewController alloc] init];
+//        self.window.rootViewController = welcome;
     }
     
     

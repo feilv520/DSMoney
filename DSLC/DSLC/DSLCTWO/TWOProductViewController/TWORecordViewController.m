@@ -54,6 +54,7 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.tableFooterView = [UIView new];
+    _tableView.backgroundColor = [UIColor colorFromHexCode:@"#F5F6F7"];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOProductRecordTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -116,7 +117,8 @@
         NSArray *array = [responseObject objectForKey:@"Transaction"];
         
         if (array.count == 0) {
-            [self noDateWithView:@"已显示全部" height:100 view:self.view];
+            [self noDateWithHeight:100 view:self.view];
+            _tableView.hidden = YES;
             return ;
         }
         
@@ -128,7 +130,7 @@
         
         if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
             moreFlag = YES;
-            [moreButton setTitle:@"没有更多啦" forState:UIControlStateNormal];
+            [moreButton setTitle:@"已显示全部" forState:UIControlStateNormal];
             moreButton.enabled = NO;
         }
         [_tableView reloadData];

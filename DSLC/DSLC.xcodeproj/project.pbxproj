@@ -969,6 +969,37 @@
 		8D840C4C1CE30394005A17F9 /* TWORecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D840C4B1CE30394005A17F9 /* TWORecordViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D840C501CE30625005A17F9 /* TWOProductRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D840C4E1CE30625005A17F9 /* TWOProductRecordTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		8D840C511CE30625005A17F9 /* TWOProductRecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D840C4F1CE30625005A17F9 /* TWOProductRecordTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8D840C591CE31B80005A17F9 /* ATWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D840C581CE31B80005A17F9 /* ATWViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D840C5E1CE31D18005A17F9 /* TWOMakeSureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D840C5C1CE31D18005A17F9 /* TWOMakeSureTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		8D840C5F1CE31D18005A17F9 /* TWOMakeSureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D840C5D1CE31D18005A17F9 /* TWOMakeSureTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8D840C631CE32A9C005A17F9 /* TWOProductMakeSureHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D840C621CE32A9C005A17F9 /* TWOProductMakeSureHeadView.m */; settings = {ASSET_TAGS = (); }; };
+		8D840C651CE32AB6005A17F9 /* TWOProductMakeSureHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D840C641CE32AB6005A17F9 /* TWOProductMakeSureHeadView.xib */; settings = {ASSET_TAGS = (); }; };
+		8D840C691CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D840C671CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		8D840C6A1CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D840C681CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8D840C6E1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D840C6C1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		8D840C6F1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D840C6D1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8D840C721CE46626005A17F9 /* paysuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D840C701CE46626005A17F9 /* paysuccess@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D840C731CE46626005A17F9 /* paysuccess@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D840C711CE46626005A17F9 /* paysuccess@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D840C771CE46760005A17F9 /* TWOProductPaySuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D840C761CE46760005A17F9 /* TWOProductPaySuccessViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D840C7A1CE5C0FE005A17F9 /* TWOProductMMakeSureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D840C791CE5C0FE005A17F9 /* TWOProductMMakeSureView.m */; settings = {ASSET_TAGS = (); }; };
+		8D840C801CE5D54B005A17F9 /* TWOProductMMakeSureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D840C7F1CE5D54B005A17F9 /* TWOProductMMakeSureView.xib */; settings = {ASSET_TAGS = (); }; };
+		8D840C841CE5D9F9005A17F9 /* TWOProductMakeSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D840C831CE5D9F9005A17F9 /* TWOProductMakeSureViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D855A511CE95AD7007A4B22 /* noWithData@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A4F1CE95AD7007A4B22 /* noWithData@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D855A521CE95AD7007A4B22 /* noWithData@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A501CE95AD7007A4B22 /* noWithData@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D855A551CE96A8C007A4B22 /* TWOProductMonkeyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D855A541CE96A8C007A4B22 /* TWOProductMonkeyView.m */; settings = {ASSET_TAGS = (); }; };
+		8D855A571CE96A96007A4B22 /* TWOProductMonkeyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A561CE96A96007A4B22 /* TWOProductMonkeyView.xib */; settings = {ASSET_TAGS = (); }; };
+		8D855A5B1CE99B40007A4B22 /* TWOMessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D855A5A1CE99B40007A4B22 /* TWOMessageCenterViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D855A5E1CE99D59007A4B22 /* TWOGMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D855A5D1CE99D59007A4B22 /* TWOGMessageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D855A611CE99D67007A4B22 /* TWOMMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D855A601CE99D67007A4B22 /* TWOMMessageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D855A661CE9C48B007A4B22 /* TWOMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D855A641CE9C48B007A4B22 /* TWOMessageTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		8D855A671CE9C48B007A4B22 /* TWOMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A651CE9C48B007A4B22 /* TWOMessageTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8D855A6B1CE9C558007A4B22 /* messagePoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A691CE9C558007A4B22 /* messagePoint@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D855A6C1CE9C558007A4B22 /* messagePoint@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A6A1CE9C558007A4B22 /* messagePoint@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D855A751CE9CF51007A4B22 /* TWOMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D855A731CE9CF51007A4B22 /* TWOMessageDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D855A761CE9CF51007A4B22 /* TWOMessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A741CE9CF51007A4B22 /* TWOMessageDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D855A781CEAF633007A4B22 /* TWOHandImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A771CEAF633007A4B22 /* TWOHandImage.png */; settings = {ASSET_TAGS = (); }; };
+		8D855A7B1CEB0441007A4B22 /* TWOHandImageDian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A791CEB0441007A4B22 /* TWOHandImageDian@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D855A7C1CEB0441007A4B22 /* TWOHandImageDian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A7A1CEB0441007A4B22 /* TWOHandImageDian@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D878CE11BC754AD00844575 /* e.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CE01BC754AD00844575 /* e.m */; };
 		8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D88A4DB1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m */; };
 		8D88A4DE1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D88A4DC1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib */; };
@@ -2583,6 +2614,51 @@
 		8D840C4D1CE30625005A17F9 /* TWOProductRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductRecordTableViewCell.h; sourceTree = "<group>"; };
 		8D840C4E1CE30625005A17F9 /* TWOProductRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductRecordTableViewCell.m; sourceTree = "<group>"; };
 		8D840C4F1CE30625005A17F9 /* TWOProductRecordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOProductRecordTableViewCell.xib; sourceTree = "<group>"; };
+		8D840C571CE31B80005A17F9 /* ATWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATWViewController.h; sourceTree = "<group>"; };
+		8D840C581CE31B80005A17F9 /* ATWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATWViewController.m; sourceTree = "<group>"; };
+		8D840C5B1CE31D18005A17F9 /* TWOMakeSureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMakeSureTableViewCell.h; sourceTree = "<group>"; };
+		8D840C5C1CE31D18005A17F9 /* TWOMakeSureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMakeSureTableViewCell.m; sourceTree = "<group>"; };
+		8D840C5D1CE31D18005A17F9 /* TWOMakeSureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOMakeSureTableViewCell.xib; sourceTree = "<group>"; };
+		8D840C611CE32A9C005A17F9 /* TWOProductMakeSureHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductMakeSureHeadView.h; sourceTree = "<group>"; };
+		8D840C621CE32A9C005A17F9 /* TWOProductMakeSureHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductMakeSureHeadView.m; sourceTree = "<group>"; };
+		8D840C641CE32AB6005A17F9 /* TWOProductMakeSureHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOProductMakeSureHeadView.xib; sourceTree = "<group>"; };
+		8D840C661CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductMakeSureTwoTableViewCell.h; sourceTree = "<group>"; };
+		8D840C671CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductMakeSureTwoTableViewCell.m; sourceTree = "<group>"; };
+		8D840C681CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOProductMakeSureTwoTableViewCell.xib; sourceTree = "<group>"; };
+		8D840C6B1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductMakeSureThreeTableViewCell.h; sourceTree = "<group>"; };
+		8D840C6C1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductMakeSureThreeTableViewCell.m; sourceTree = "<group>"; };
+		8D840C6D1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOProductMakeSureThreeTableViewCell.xib; sourceTree = "<group>"; };
+		8D840C701CE46626005A17F9 /* paysuccess@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paysuccess@2x.png"; sourceTree = "<group>"; };
+		8D840C711CE46626005A17F9 /* paysuccess@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paysuccess@3x.png"; sourceTree = "<group>"; };
+		8D840C751CE46760005A17F9 /* TWOProductPaySuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductPaySuccessViewController.h; sourceTree = "<group>"; };
+		8D840C761CE46760005A17F9 /* TWOProductPaySuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductPaySuccessViewController.m; sourceTree = "<group>"; };
+		8D840C781CE5C0FE005A17F9 /* TWOProductMMakeSureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductMMakeSureView.h; sourceTree = "<group>"; };
+		8D840C791CE5C0FE005A17F9 /* TWOProductMMakeSureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductMMakeSureView.m; sourceTree = "<group>"; };
+		8D840C7F1CE5D54B005A17F9 /* TWOProductMMakeSureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOProductMMakeSureView.xib; sourceTree = "<group>"; };
+		8D840C821CE5D9F9005A17F9 /* TWOProductMakeSureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductMakeSureViewController.h; sourceTree = "<group>"; };
+		8D840C831CE5D9F9005A17F9 /* TWOProductMakeSureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductMakeSureViewController.m; sourceTree = "<group>"; };
+		8D855A4F1CE95AD7007A4B22 /* noWithData@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noWithData@2x.png"; sourceTree = "<group>"; };
+		8D855A501CE95AD7007A4B22 /* noWithData@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noWithData@3x.png"; sourceTree = "<group>"; };
+		8D855A531CE96A8C007A4B22 /* TWOProductMonkeyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductMonkeyView.h; sourceTree = "<group>"; };
+		8D855A541CE96A8C007A4B22 /* TWOProductMonkeyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductMonkeyView.m; sourceTree = "<group>"; };
+		8D855A561CE96A96007A4B22 /* TWOProductMonkeyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOProductMonkeyView.xib; sourceTree = "<group>"; };
+		8D855A591CE99B40007A4B22 /* TWOMessageCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMessageCenterViewController.h; sourceTree = "<group>"; };
+		8D855A5A1CE99B40007A4B22 /* TWOMessageCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMessageCenterViewController.m; sourceTree = "<group>"; };
+		8D855A5C1CE99D59007A4B22 /* TWOGMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOGMessageViewController.h; sourceTree = "<group>"; };
+		8D855A5D1CE99D59007A4B22 /* TWOGMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOGMessageViewController.m; sourceTree = "<group>"; };
+		8D855A5F1CE99D67007A4B22 /* TWOMMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMMessageViewController.h; sourceTree = "<group>"; };
+		8D855A601CE99D67007A4B22 /* TWOMMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMMessageViewController.m; sourceTree = "<group>"; };
+		8D855A631CE9C48B007A4B22 /* TWOMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMessageTableViewCell.h; sourceTree = "<group>"; };
+		8D855A641CE9C48B007A4B22 /* TWOMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMessageTableViewCell.m; sourceTree = "<group>"; };
+		8D855A651CE9C48B007A4B22 /* TWOMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOMessageTableViewCell.xib; sourceTree = "<group>"; };
+		8D855A691CE9C558007A4B22 /* messagePoint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messagePoint@2x.png"; sourceTree = "<group>"; };
+		8D855A6A1CE9C558007A4B22 /* messagePoint@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messagePoint@3x.png"; sourceTree = "<group>"; };
+		8D855A721CE9CF51007A4B22 /* TWOMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMessageDetailViewController.h; sourceTree = "<group>"; };
+		8D855A731CE9CF51007A4B22 /* TWOMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMessageDetailViewController.m; sourceTree = "<group>"; };
+		8D855A741CE9CF51007A4B22 /* TWOMessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOMessageDetailViewController.xib; sourceTree = "<group>"; };
+		8D855A771CEAF633007A4B22 /* TWOHandImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWOHandImage.png; sourceTree = "<group>"; };
+		8D855A791CEB0441007A4B22 /* TWOHandImageDian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWOHandImageDian@2x.png"; sourceTree = "<group>"; };
+		8D855A7A1CEB0441007A4B22 /* TWOHandImageDian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWOHandImageDian@3x.png"; sourceTree = "<group>"; };
 		8D878CDF1BC754AD00844575 /* e.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e.h; sourceTree = "<group>"; };
 		8D878CE01BC754AD00844575 /* e.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = e.m; sourceTree = "<group>"; };
 		8D88A4DA1BCDFED400EE22F5 /* FSelectionPayTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSelectionPayTypeViewController.h; sourceTree = "<group>"; };
@@ -3041,6 +3117,10 @@
 		8143FCE81CD9C25300B65A2F /* TWOImage */ = {
 			isa = PBXGroup;
 			children = (
+				8D855A771CEAF633007A4B22 /* TWOHandImage.png */,
+				8D855A791CEB0441007A4B22 /* TWOHandImageDian@2x.png */,
+				8D855A7A1CEB0441007A4B22 /* TWOHandImageDian@3x.png */,
+				8D855A681CE9C54F007A4B22 /* mineImage */,
 				8DA7E1751CE0428200D5D016 /* productImage */,
 				8143FD1D1CD9F1B600B65A2F /* 首页banner@2x.png */,
 				8143FD1E1CD9F1B600B65A2F /* 首页banner@3x.png */,
@@ -3276,10 +3356,9 @@
 		8143FCF01CD9C5FD00B65A2F /* TWOProductView */ = {
 			isa = PBXGroup;
 			children = (
+				8D840C601CE32A3F005A17F9 /* 立即投资 */,
+				8D840C5A1CE31CEE005A17F9 /* 产品详情 */,
 				8D840C521CE3062B005A17F9 /* 投资记录 */,
-				8DA7E17A1CE076B700D5D016 /* TWOProductDetailTableViewCell.h */,
-				8DA7E17B1CE076B700D5D016 /* TWOProductDetailTableViewCell.m */,
-				8DA7E17C1CE076B700D5D016 /* TWOProductDetailTableViewCell.xib */,
 				8D840C441CE2D45B005A17F9 /* TWOProductMoneyView.h */,
 				8D840C451CE2D45B005A17F9 /* TWOProductMoneyView.m */,
 				8D840C421CE2D444005A17F9 /* TWOProductMoneyView.xib */,
@@ -3290,6 +3369,8 @@
 		8143FCF11CD9C61900B65A2F /* TWOProductViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8D840C741CE4663D005A17F9 /* 投资成功 */,
+				8D840C531CE31B06005A17F9 /* 立即投资 */,
 				8D840C491CE302C0005A17F9 /* 投资记录 */,
 				8D840C471CE302A6005A17F9 /* 产品详情 */,
 				8143FD6F1CDB18AC00B65A2F /* TWOProductViewController.h */,
@@ -3298,10 +3379,6 @@
 				8DA7E1691CDC6ECD00D5D016 /* TWOBillViewController.m */,
 				8DA7E16B1CDC6F4000D5D016 /* TWONewViewController.h */,
 				8DA7E16C1CDC6F4000D5D016 /* TWONewViewController.m */,
-				8DA7E16E1CE03CE200D5D016 /* TWOProductDetailViewController.h */,
-				8DA7E16F1CE03CE200D5D016 /* TWOProductDetailViewController.m */,
-				81B84BE01CE30D7600A867B9 /* TWOBottomMoneyDetailViewController.h */,
-				81B84BE11CE30D7600A867B9 /* TWOBottomMoneyDetailViewController.m */,
 			);
 			path = TWOProductViewController;
 			sourceTree = "<group>";
@@ -5309,6 +5386,94 @@
 			name = "投资记录";
 			sourceTree = "<group>";
 		};
+		8D840C531CE31B06005A17F9 /* 立即投资 */ = {
+			isa = PBXGroup;
+			children = (
+				8D840C821CE5D9F9005A17F9 /* TWOProductMakeSureViewController.h */,
+				8D840C831CE5D9F9005A17F9 /* TWOProductMakeSureViewController.m */,
+			);
+			name = "立即投资";
+			sourceTree = "<group>";
+		};
+		8D840C5A1CE31CEE005A17F9 /* 产品详情 */ = {
+			isa = PBXGroup;
+			children = (
+				8DA7E17A1CE076B700D5D016 /* TWOProductDetailTableViewCell.h */,
+				8DA7E17B1CE076B700D5D016 /* TWOProductDetailTableViewCell.m */,
+				8DA7E17C1CE076B700D5D016 /* TWOProductDetailTableViewCell.xib */,
+			);
+			name = "产品详情";
+			sourceTree = "<group>";
+		};
+		8D840C601CE32A3F005A17F9 /* 立即投资 */ = {
+			isa = PBXGroup;
+			children = (
+				8D840C611CE32A9C005A17F9 /* TWOProductMakeSureHeadView.h */,
+				8D840C621CE32A9C005A17F9 /* TWOProductMakeSureHeadView.m */,
+				8D840C641CE32AB6005A17F9 /* TWOProductMakeSureHeadView.xib */,
+				8D840C5B1CE31D18005A17F9 /* TWOMakeSureTableViewCell.h */,
+				8D840C5C1CE31D18005A17F9 /* TWOMakeSureTableViewCell.m */,
+				8D840C5D1CE31D18005A17F9 /* TWOMakeSureTableViewCell.xib */,
+				8D840C661CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.h */,
+				8D840C671CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.m */,
+				8D840C681CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.xib */,
+				8D840C6B1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.h */,
+				8D840C6C1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.m */,
+				8D840C6D1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.xib */,
+				8D840C781CE5C0FE005A17F9 /* TWOProductMMakeSureView.h */,
+				8D840C791CE5C0FE005A17F9 /* TWOProductMMakeSureView.m */,
+				8D840C7F1CE5D54B005A17F9 /* TWOProductMMakeSureView.xib */,
+				8D855A531CE96A8C007A4B22 /* TWOProductMonkeyView.h */,
+				8D855A541CE96A8C007A4B22 /* TWOProductMonkeyView.m */,
+				8D855A561CE96A96007A4B22 /* TWOProductMonkeyView.xib */,
+			);
+			name = "立即投资";
+			sourceTree = "<group>";
+		};
+		8D840C741CE4663D005A17F9 /* 投资成功 */ = {
+			isa = PBXGroup;
+			children = (
+				8D840C751CE46760005A17F9 /* TWOProductPaySuccessViewController.h */,
+				8D840C761CE46760005A17F9 /* TWOProductPaySuccessViewController.m */,
+			);
+			name = "投资成功";
+			sourceTree = "<group>";
+		};
+		8D855A581CE99A7B007A4B22 /* 消息中心 */ = {
+			isa = PBXGroup;
+			children = (
+				8D855A591CE99B40007A4B22 /* TWOMessageCenterViewController.h */,
+				8D855A5A1CE99B40007A4B22 /* TWOMessageCenterViewController.m */,
+				8D855A5C1CE99D59007A4B22 /* TWOGMessageViewController.h */,
+				8D855A5D1CE99D59007A4B22 /* TWOGMessageViewController.m */,
+				8D855A5F1CE99D67007A4B22 /* TWOMMessageViewController.h */,
+				8D855A601CE99D67007A4B22 /* TWOMMessageViewController.m */,
+				8D855A721CE9CF51007A4B22 /* TWOMessageDetailViewController.h */,
+				8D855A731CE9CF51007A4B22 /* TWOMessageDetailViewController.m */,
+				8D855A741CE9CF51007A4B22 /* TWOMessageDetailViewController.xib */,
+			);
+			name = "消息中心";
+			sourceTree = "<group>";
+		};
+		8D855A621CE9C451007A4B22 /* 消息中心 */ = {
+			isa = PBXGroup;
+			children = (
+				8D855A631CE9C48B007A4B22 /* TWOMessageTableViewCell.h */,
+				8D855A641CE9C48B007A4B22 /* TWOMessageTableViewCell.m */,
+				8D855A651CE9C48B007A4B22 /* TWOMessageTableViewCell.xib */,
+			);
+			name = "消息中心";
+			sourceTree = "<group>";
+		};
+		8D855A681CE9C54F007A4B22 /* mineImage */ = {
+			isa = PBXGroup;
+			children = (
+				8D855A691CE9C558007A4B22 /* messagePoint@2x.png */,
+				8D855A6A1CE9C558007A4B22 /* messagePoint@3x.png */,
+			);
+			name = mineImage;
+			sourceTree = "<group>";
+		};
 		8D878CC91BC74E9700844575 /* appDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -5630,6 +5795,8 @@
 		8DA7E1751CE0428200D5D016 /* productImage */ = {
 			isa = PBXGroup;
 			children = (
+				8D855A4F1CE95AD7007A4B22 /* noWithData@2x.png */,
+				8D855A501CE95AD7007A4B22 /* noWithData@3x.png */,
 				8D840C3C1CE2CCDB005A17F9 /* product-cuo@2x.png */,
 				8D840C3D1CE2CCDB005A17F9 /* product-cuo@3x.png */,
 				8DA7E17F1CE0943000D5D016 /* productMonkey.png */,
@@ -5638,6 +5805,8 @@
 				8D376A091CE1786B00D44844 /* productDetailBackground@3x.png */,
 				8D376A0C1CE17F8E00D44844 /* productSureButton@2x.png */,
 				8D376A0D1CE17F8E00D44844 /* productSureButton@3x.png */,
+				8D840C701CE46626005A17F9 /* paysuccess@2x.png */,
+				8D840C711CE46626005A17F9 /* paysuccess@3x.png */,
 			);
 			name = productImage;
 			sourceTree = "<group>";
@@ -5887,6 +6056,7 @@
 				8143FD5D1CDAFBFA00B65A2F /* Reddian@2x.png in Resources */,
 				8DA7E1821CE0943000D5D016 /* productMonkey@3x.png in Resources */,
 				8D43439A1BFDEB0B000BA004 /* loading_middle_01.png in Resources */,
+				8D840C6F1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.xib in Resources */,
 				8D968A791C96A9FD00C9A6A1 /* mylicaishi@2x.png in Resources */,
 				8D9011B01BD6337C00E5D62A /* 04@3x.png in Resources */,
 				8183F4031C97CC4F000BB93C /* iconfont-fenpei@3x.png in Resources */,
@@ -5922,6 +6092,7 @@
 				8182A7F11C0EECD300FA1216 /* 组-17@2x.png in Resources */,
 				81FAAA321C256AC40020E9DD /* 充值成功@2x.png in Resources */,
 				8D376A0E1CE17F8E00D44844 /* productSureButton@2x.png in Resources */,
+				8D855A511CE95AD7007A4B22 /* noWithData@2x.png in Resources */,
 				8191E2231BDDF202000A6E8C /* ServiceCell.xib in Resources */,
 				810F9C511CDC657700BF39B5 /* tequan@2x.png in Resources */,
 				81B84C2B1CE4650A00A867B9 /* mingxi@3x.png in Resources */,
@@ -5947,6 +6118,7 @@
 				81D72FBC1BFAD63B0067A277 /* left@2x.png in Resources */,
 				812201351CE5D20D00159A74 /* TWOPersonalSetCell.xib in Resources */,
 				8DD180991BD72E5900F71CEA /* GetMoneyTableViewCell.xib in Resources */,
+				8D855A571CE96A96007A4B22 /* TWOProductMonkeyView.xib in Resources */,
 				8DEDE1CC1BCCFF44008086D3 /* iconfont_complete@2x.png in Resources */,
 				8D9011B41BD6337C00E5D62A /* 06@3x.png in Resources */,
 				81F5FA121BDA1C2E008C38BF /* MoreCell.xib in Resources */,
@@ -6016,6 +6188,7 @@
 				8182A7F61C0EECD300FA1216 /* 组-19@3x.png in Resources */,
 				813FD5001BCE71110050E884 /* FBalancePaymentViewController.xib in Resources */,
 				81FAAA2F1C256AC40020E9DD /* 审核通过@3x.png in Resources */,
+				8D840C651CE32AB6005A17F9 /* TWOProductMakeSureHeadView.xib in Resources */,
 				81600A631CB4E22B0075CD45 /* MyMonkeyNumCell.xib in Resources */,
 				8D3EEA1E1C27AB400031F7C9 /* 民生银行@2x.png in Resources */,
 				8D3A2FDA1BE70FBF00913DEC /* PhotoTableViewCell.xib in Resources */,
@@ -6071,6 +6244,7 @@
 				81C3766E1CAB883F004644C0 /* 矢量智能对象@3x.png in Resources */,
 				81A6EB121BE784BD00F9FDD1 /* NewBieCell.xib in Resources */,
 				8D3EEA1C1C27AB400031F7C9 /* 招商银行@2x.png in Resources */,
+				8D855A671CE9C48B007A4B22 /* TWOMessageTableViewCell.xib in Resources */,
 				8D4343931BFDEB0B000BA004 /* loading_up_02.png in Resources */,
 				817DD4A41BCF547E00042B09 /* tixian@2x.png in Resources */,
 				8180639C1BD5D7E500E83492 /* MyInviteCell.xib in Resources */,
@@ -6101,6 +6275,7 @@
 				8D9011AB1BD6337C00E5D62A /* 02@2x.png in Resources */,
 				811F0B071BF33D30001F6AA4 /* BindingOneCell.xib in Resources */,
 				8D3EEA011C27AB400031F7C9 /* 交通银行@3x.png in Resources */,
+				8D840C5F1CE31D18005A17F9 /* TWOMakeSureTableViewCell.xib in Resources */,
 				819B52C71BFC127E002FDF1E /* NotSeparateCell.xib in Resources */,
 				8D3EEA1A1C27AB400031F7C9 /* 成都银行@2x.png in Resources */,
 				8184192B1CC613D40038C7B3 /* icon1-@2x.png in Resources */,
@@ -6129,6 +6304,7 @@
 				8DA7E17E1CE076B700D5D016 /* TWOProductDetailTableViewCell.xib in Resources */,
 				8143FD511CDAF26500B65A2F /* biyan@2x.png in Resources */,
 				810EBC051C9CFB55008FB51D /* iconfont-iconfuzhi.png in Resources */,
+				8D855A781CEAF633007A4B22 /* TWOHandImage.png in Resources */,
 				8DB744BB1C1973AC0084D1A2 /* banner_red@3x.png in Resources */,
 				81C376721CAE83F0004644C0 /* 兑换受益弹窗22.png in Resources */,
 				8DEDE1D41BCCFFD8008086D3 /* iocn_saft@2x.png in Resources */,
@@ -6239,6 +6415,7 @@
 				8143FD561CDAF2B900B65A2F /* yellowSanJiao@3x.png in Resources */,
 				81C376651CAA8AB6004644C0 /* iconfont-duihuan@2x.png in Resources */,
 				8D6E46991C9B9DD200F0F5B7 /* newLoginView.xib in Resources */,
+				8D840C801CE5D54B005A17F9 /* TWOProductMMakeSureView.xib in Resources */,
 				81FAAA331C256AC40020E9DD /* 充值成功@3x.png in Resources */,
 				81AC90CA1BEC8C6600232404 /* BankWhichCell.xib in Resources */,
 				819B52D61BFC2094002FDF1E /* 银元宝@2x.png in Resources */,
@@ -6255,6 +6432,7 @@
 				8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */,
 				8DEDE1B31BCCFEB5008086D3 /* arrow@2x.png in Resources */,
 				819B52E21BFC2094002FDF1E /* 邀请@2x.png in Resources */,
+				8D840C6A1CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.xib in Resources */,
 				81B520A71BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png in Resources */,
 				8179EB2F1CEB169300BD7054 /* setbiyan@3x.png in Resources */,
 				817E33821BD733D100D05103 /* 9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝@2x.png in Resources */,
@@ -6281,6 +6459,7 @@
 				8DEDE1D51BCCFFD8008086D3 /* iocn_saft@3x.png in Resources */,
 				8DB744B81C1973AC0084D1A2 /* banner_black@2x.png in Resources */,
 				8175BE9A1BE9E5760044026E /* 组-21-拷贝-13@2x.png in Resources */,
+				8D855A521CE95AD7007A4B22 /* noWithData@3x.png in Resources */,
 				810F9C411CDC438B00BF39B5 /* 排行榜@3x.png in Resources */,
 				81D72FC51BFB04890067A277 /* LeftWindow@3x.png in Resources */,
 				8175BED01BEA1B290044026E /* 分享失败@3x.png in Resources */,
@@ -6320,6 +6499,7 @@
 				8DEDE1B51BCCFEB5008086D3 /* btn_red@2x.png in Resources */,
 				81BA1BF91BD4DBAA00DBA5BE /* WinAPrizeCell.xib in Resources */,
 				8D3942F61C2D15CE00783FD0 /* welcome_three.png in Resources */,
+				8D855A7C1CEB0441007A4B22 /* TWOHandImageDian@3x.png in Resources */,
 				8183F4091C97CC4F000BB93C /* target-arrow@3x.png in Resources */,
 				8DEDE1E91BCD00B0008086D3 /* btn_gray@2x.png in Resources */,
 				817E33A01BD77F6D00D05103 /* ChooseStyleCell.xib in Resources */,
@@ -6349,14 +6529,17 @@
 				810F9C6E1CDCA10700BF39B5 /* faxian@2x.png in Resources */,
 				810F9C401CDC438B00BF39B5 /* 排行榜@2x.png in Resources */,
 				8D1DB6081C7EE6F4003CFDA6 /* CastUpMonkeyTableViewCell.xib in Resources */,
+				8D840C721CE46626005A17F9 /* paysuccess@2x.png in Resources */,
 				810EBC011C9CFB3D008FB51D /* iconfont-jingxuan.png in Resources */,
 				816F1ED71BF5CA3D00DB6B65 /* PhoneNum@3x.png in Resources */,
 				8D3EEA041C27AB400031F7C9 /* 兴业银行@2x.png in Resources */,
 				8D9011B11BD6337C00E5D62A /* 05@2x.png in Resources */,
 				8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */,
 				8143FD201CD9F1B600B65A2F /* 首页banner@3x.png in Resources */,
+				8D855A761CE9CF51007A4B22 /* TWOMessageDetailViewController.xib in Resources */,
 				8D6E468B1C9A482A00F0F5B7 /* iconfont-icondzje@3x.png in Resources */,
 				810F9C451CDC4AB200BF39B5 /* findbanner@3x.png in Resources */,
+				8D855A6C1CE9C558007A4B22 /* messagePoint@3x.png in Resources */,
 				8143FD101CD9E08200B65A2F /* 产品圈圈@3x.png in Resources */,
 				8143FD411CDAEFC100B65A2F /* myInvite@2x.png in Resources */,
 				8143FD0A1CD9DD0600B65A2F /* 热卖@3x.png in Resources */,
@@ -6392,8 +6575,10 @@
 				8D3EE9FD1C27AB400031F7C9 /* 中信银行@3x.png in Resources */,
 				8183F4021C97CC4F000BB93C /* iconfont-fenpei@2x.png in Resources */,
 				8D3EEA211C27AB400031F7C9 /* 浦发银行@3x.png in Resources */,
+				8D855A7B1CEB0441007A4B22 /* TWOHandImageDian@2x.png in Resources */,
 				8191E2291BDDF5F0000A6E8C /* lianxikefu@3x.png in Resources */,
 				818523B91BE31B80002FC653 /* 已售罄@2x.png in Resources */,
+				8D855A6B1CE9C558007A4B22 /* messagePoint@2x.png in Resources */,
 				8175BEC21BEA052E0044026E /* 拆红包@2x.png in Resources */,
 				8190A30A1BD87D3E002B53F5 /* AddCardCell.xib in Resources */,
 				8143FD521CDAF26500B65A2F /* biyan@3x.png in Resources */,
@@ -6446,6 +6631,7 @@
 				8D3EE9F81C27AB400031F7C9 /* 上海银行@2x.png in Resources */,
 				8143FD1C1CD9E9F400B65A2F /* 首页左箭头@3x.png in Resources */,
 				8D0AE7F51BE09CE500D9D50C /* iconfont-register-gantanhao001@3x.png in Resources */,
+				8D840C731CE46626005A17F9 /* paysuccess@3x.png in Resources */,
 				81600A541CB4BD750075CD45 /* houbixize@3x.png in Resources */,
 				819B52D81BFC2094002FDF1E /* 阶梯@2x.png in Resources */,
 				81ED03211BD0DDAD005F4B02 /* AddBankCell.xib in Resources */,
@@ -6618,6 +6804,7 @@
 				8D5DBB891BD4839B00F556B9 /* CastDownTableViewCell.m in Sources */,
 				8175BE901BE9E3730044026E /* ChooseRedBagCell.m in Sources */,
 				8DD1809D1BD730E100F71CEA /* GetMoneyNumberTableViewCell.m in Sources */,
+				8D855A551CE96A8C007A4B22 /* TWOProductMonkeyView.m in Sources */,
 				8183F4171C97D4E6000BB93C /* TthreeRunCell.m in Sources */,
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
 				8D4FF5E21BE339A200BAE25F /* UIImageView+AFNetworking.m in Sources */,
@@ -6632,6 +6819,8 @@
 				8D3A2FE01BE7100000913DEC /* FDescriptionViewController.m in Sources */,
 				8D3125EA1BD7798000143B71 /* ForgetPasswordViewController.m in Sources */,
 				8D9356D41BC607C500BC2BFA /* ViewController.m in Sources */,
+				8D840C6E1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.m in Sources */,
+				8D840C771CE46760005A17F9 /* TWOProductPaySuccessViewController.m in Sources */,
 				8D88D0FF1BFECCB40051D6DA /* MJRefreshBackStateFooter.m in Sources */,
 				8179EB251CEB066700BD7054 /* TWOSetLoginSecretViewController.m in Sources */,
 				818A39E21BF42F4D00F01CAA /* LiftUpMoneyFinish.m in Sources */,
@@ -6656,6 +6845,7 @@
 				8D88D0F61BFECCB40051D6DA /* MJRefreshBackFooter.m in Sources */,
 				81B674091BF0A780007CEF51 /* HistoryMemoryCell.m in Sources */,
 				8143FD711CDB18AC00B65A2F /* TWOProductViewController.m in Sources */,
+				8D855A661CE9C48B007A4B22 /* TWOMessageTableViewCell.m in Sources */,
 				811F0B0F1BF344EC001F6AA4 /* LiftUpMoneyCheck.m in Sources */,
 				8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */,
 				8D9BE8E71C0EC94D003C67D3 /* YYMemoryCache.m in Sources */,
@@ -6684,6 +6874,7 @@
 				810C76751C2D1A01000637FD /* UserListViewController.m in Sources */,
 				8D6E46651C98FC3B00F0F5B7 /* InviteNewView.m in Sources */,
 				8D4FF5D71BE339A200BAE25F /* AFHTTPSessionManager.m in Sources */,
+				8D855A5E1CE99D59007A4B22 /* TWOGMessageViewController.m in Sources */,
 				8162D1271BE1BD9C00CACAB6 /* DownFourCell.m in Sources */,
 				8D6E46721C9932AA00F0F5B7 /* myCastTableViewCell.m in Sources */,
 				8D878CE11BC754AD00844575 /* e.m in Sources */,
@@ -6720,6 +6911,7 @@
 				819B52EB1BFC4462002FDF1E /* NewHandCSSCell.m in Sources */,
 				81D703FC1BE073730074DF30 /* ForgetSecret2Cell.m in Sources */,
 				816CCCF31C1832FD006FA6F2 /* BankName.m in Sources */,
+				8D840C7A1CE5C0FE005A17F9 /* TWOProductMMakeSureView.m in Sources */,
 				81B18E201BE761B600D448FA /* LastEmailViewController.m in Sources */,
 				8122012F1CE5CCE900159A74 /* TWOPersonalSetViewController.m in Sources */,
 				8D9BE8E91C0EC94D003C67D3 /* CALayer+YYWebImage.m in Sources */,
@@ -6804,6 +6996,7 @@
 				817988281BC93C64007C8C3E /* FDetailViewController.m in Sources */,
 				8175BE8C1BE9E2430044026E /* ChooseRedBagViewController.m in Sources */,
 				8D88D1061BFECCB40051D6DA /* UIScrollView+MJRefresh.m in Sources */,
+				8D855A5B1CE99B40007A4B22 /* TWOMessageCenterViewController.m in Sources */,
 				8D18B2A21C2982D100754C13 /* TTTTXianTableViewCell.m in Sources */,
 				8179EB131CEAF20000BD7054 /* TWOBindingEmailOverViewController.m in Sources */,
 				8D3125DE1BD763F900143B71 /* GetMoneyVerifyViewController.m in Sources */,
@@ -6811,6 +7004,7 @@
 				8D0CB4931BE75E370039D826 /* RiskConditionsViewController.m in Sources */,
 				818C8C341CE194C000A14D37 /* TWOMyTidyMoneyViewController.m in Sources */,
 				81379F251BEB01CA002CDB16 /* NewRedBagCell.m in Sources */,
+				8D840C631CE32A9C005A17F9 /* TWOProductMakeSureHeadView.m in Sources */,
 				81ED031C1BD0DA35005F4B02 /* AddBankViewController.m in Sources */,
 				8175BE7C1BE9B4250044026E /* RecordViewController.m in Sources */,
 				8D18B2A61C29B02300754C13 /* RSA.m in Sources */,
@@ -6893,6 +7087,7 @@
 				8D9BE8ED1C0EC94D003C67D3 /* UIImageView+YYWebImage.m in Sources */,
 				8D9BE8EC1C0EC94D003C67D3 /* UIImage+YYWebImage.m in Sources */,
 				81B674011BF0873B007CEF51 /* InviteNameViewController.m in Sources */,
+				8D855A751CE9CF51007A4B22 /* TWOMessageDetailViewController.m in Sources */,
 				8D31DF221C04874700B676AF /* MTransactionModel.m in Sources */,
 				815D27A41BE21040005410C6 /* UpCell.m in Sources */,
 				8DD955CC1BF6D5EB00C17A65 /* NSString+Check.m in Sources */,
@@ -6907,6 +7102,7 @@
 				8184EC401BCCD113003F440D /* MoneyCell.m in Sources */,
 				8DEACD081C1805BC00548166 /* JSONKit.m in Sources */,
 				8D456C541C3A6F2D0009F1CE /* ChongZhiViewController.m in Sources */,
+				8D840C591CE31B80005A17F9 /* ATWViewController.m in Sources */,
 				81E54E6A1C1EB86D0007303B /* UsualQuestionViewController.m in Sources */,
 				8106AA7A1CA91A0400AB6753 /* TRightNowViewController.m in Sources */,
 				81CBE7E01CE9BE1B004FE1D4 /* TWOGetCodeCell.m in Sources */,
@@ -7007,6 +7203,7 @@
 				8D88D0FC1BFECCB40051D6DA /* MJRefreshAutoStateFooter.m in Sources */,
 				8D4FF5D91BE339A200BAE25F /* AFSecurityPolicy.m in Sources */,
 				81E0CCE11C27EF6700148609 /* ChooseBusViewController.m in Sources */,
+				8D855A611CE99D67007A4B22 /* TWOMMessageViewController.m in Sources */,
 				8D88D1071BFECCB40051D6DA /* UIView+MJExtension.m in Sources */,
 				8D6E467F1C99635E00F0F5B7 /* myCastModel.m in Sources */,
 				8183F3541C7EE55F000BB93C /* CashMonkeyViewController.m in Sources */,

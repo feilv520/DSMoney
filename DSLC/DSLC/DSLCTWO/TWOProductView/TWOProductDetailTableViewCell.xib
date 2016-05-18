@@ -8,6 +8,7 @@
         <mutableArray key="CenturyGothic.TTF">
             <string>CenturyGothic</string>
             <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -38,15 +39,28 @@
                         <color key="textColor" red="0.54901960780000003" green="0.56470588239999997" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GXY-Me-kOf">
-                        <rect key="frame" x="338" y="14" width="29" height="22"/>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GXY-Me-kOf">
+                        <rect key="frame" x="336" y="13" width="29" height="22"/>
                         <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="dZY-EN-eMh"/>
+                            <constraint firstAttribute="width" constant="29" id="hGN-48-MdS"/>
+                        </constraints>
                         <state key="normal" image="clickRightjiantou.png"/>
                     </button>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="暂无可使用红包" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8Y-pM-RRN">
+                        <rect key="frame" x="166" y="14" width="175" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
+                        <color key="textColor" red="0.54901960780000003" green="0.56470588239999997" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <animations/>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="GXY-Me-kOf" secondAttribute="trailing" constant="10" id="44y-Q1-Zao"/>
                     <constraint firstAttribute="trailing" secondItem="fFa-DW-od4" secondAttribute="trailing" constant="10" id="wON-Mh-bAn"/>
+                    <constraint firstItem="GXY-Me-kOf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="wRX-Hv-oD0"/>
                     <constraint firstItem="fFa-DW-od4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="yxF-zd-W5P"/>
                 </constraints>
             </tableViewCellContentView>
@@ -54,10 +68,11 @@
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>
                 <outlet property="rightButton" destination="GXY-Me-kOf" id="Zzk-BD-ExU"/>
+                <outlet property="rjLabel" destination="z8Y-pM-RRN" id="auo-js-wG2"/>
                 <outlet property="titleLabel" destination="rFk-jp-4fP" id="GUZ-GE-zh0"/>
                 <outlet property="valueLabel" destination="fFa-DW-od4" id="abL-ub-Xh3"/>
             </connections>
-            <point key="canvasLocation" x="50.5" y="337"/>
+            <point key="canvasLocation" x="-114.5" y="304"/>
         </tableViewCell>
     </objects>
     <resources>

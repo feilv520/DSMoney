@@ -62,7 +62,7 @@ NSInteger const columnCount = 3;
         button.tag = i;
         button.userInteractionEnabled = NO;
         
-        [button setBackgroundImage:[UIImage imageNamed:@"gesture_node_highlighted"] forState:UIControlStateSelected];
+        [button setBackgroundImage:[UIImage imageNamed:@"TWOHandImageDian"] forState:UIControlStateSelected];
         
         NSInteger row = i / columnCount;//第几行
         NSInteger column = i % columnCount;//第几列
@@ -170,7 +170,7 @@ NSInteger const columnCount = 3;
     UIBezierPath *path = [UIBezierPath bezierPath];
     path.lineWidth = 8;
     path.lineJoinStyle = kCGLineJoinRound;
-    [[UIColor colorWithRed:211 / 255.0 green:75 / 255.0 blue:72 / 255.0 alpha:0.5] set];
+    [[UIColor colorWithRed:36 / 255.0 green:147 / 255.0 blue:231 / 255.0 alpha:0.5] set];
     for (NSInteger i = 0; i < self.selectBtns.count; i++) {
         UIButton *button = self.selectBtns[i];
         if (i == 0) {

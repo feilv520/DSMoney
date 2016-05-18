@@ -15,6 +15,7 @@
 #import "UsufructAssignmentViewController.h"
 #import "TWOProductMoneyView.h"
 #import "TWORecordViewController.h"
+#import "TWOProductMakeSureViewController.h"
 
 @interface TWOProductDetailViewController () <UITableViewDataSource, UITableViewDelegate>{
     UITableView *_tableView;
@@ -259,8 +260,15 @@
     
     [UIView animateWithDuration:2.f animations:^{
         
-        bfLabel.text = [NSString stringWithFormat:@"%.0lf%%",bfNumber * 100];
+        CGFloat flagNumber = bfNumber * 100;
         
+        if (flagNumber < 1) {
+         
+            bfLabel.text = @"1%";
+        } else {
+        
+            bfLabel.text = [NSString stringWithFormat:@"%.0lf%%",bfNumber * 100];
+        }
         if ([bfLabel.text floatValue] >= 10 && [bfLabel.text floatValue] < 94) {
             
             monkeyImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * bfNumber, 86, 18, 30);
@@ -352,6 +360,8 @@
     
     TWOProductDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     if (indexPath.section == 0) {
         cell.titleLabel.text = titleArray[indexPath.row];
         if (indexPath.row == 0) {
@@ -361,7 +371,7 @@
             
             cell.valueLabel.text = [self.detailM productToaccountTypeName];
         } else {
-            
+            cell.valueLabel.text = @"无限投";
         }
         
     } else if (indexPath.section == 1) {
@@ -556,7 +566,6 @@
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            
             if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
@@ -565,7 +574,14 @@
                 
                 if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"3"]) {
                     
-                    TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
+//                    TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
+//                    makeSureVC.decide = YES;
+//                    makeSureVC.detailM = self.detailM;
+//                    makeSureVC.residueMoney = self.residueMoney;
+//                    [self.navigationController pushViewController:makeSureVC animated:YES];
+                    
+                    TWOProductMakeSureViewController *makeSureVC = [[TWOProductMakeSureViewController alloc] init];
+                    
                     makeSureVC.decide = YES;
                     makeSureVC.detailM = self.detailM;
                     makeSureVC.residueMoney = self.residueMoney;
@@ -577,9 +593,9 @@
                     
                 } else {
                     
-                    MakeSureViewController *makeSureVC = [[MakeSureViewController alloc] init];
+                    TWOProductMakeSureViewController *makeSureVC = [[TWOProductMakeSureViewController alloc] init];
+                    
                     makeSureVC.decide = NO;
-                    makeSureVC.nHand = self.nHand;
                     makeSureVC.detailM = self.detailM;
                     makeSureVC.residueMoney = self.residueMoney;
                     [self.navigationController pushViewController:makeSureVC animated:YES];

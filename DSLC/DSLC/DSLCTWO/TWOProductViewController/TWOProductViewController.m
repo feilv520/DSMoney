@@ -78,14 +78,6 @@
 - (void)setMyScrollView{
     
     myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)];
-
-//    UIView *navigationView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
-//    navigationView1.backgroundColor = [UIColor grayColor];
-//    [myScrollView addSubview:navigationView1];
-//    
-//    UIView *navigationView2 = [[UIView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
-//    navigationView2.backgroundColor = [UIColor greenColor];
-//    [myScrollView addSubview:navigationView2];
     
     myScrollView.backgroundColor = [UIColor blackColor];
     myScrollView.delegate = self;
@@ -116,7 +108,7 @@
 {
     //    NSLog(@" scrollViewDidScroll");
 //    NSLog(@"ContentOffset  x is  %f,yis %f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-    if (scrollView.contentOffset.x == 375.0) {
+    if (scrollView.contentOffset.x == WIDTH_CONTROLLER_DEFAULT) {
         [self goToTwoView:nil];
         NSLog(@"123");
     } else if (scrollView.contentOffset.x == 0) {

@@ -409,7 +409,8 @@
 //信封按钮
 - (void)buttonEmailClicked:(UIButton *)button
 {
-    NSLog(@"xin");
+    TWOMessageCenterViewController *messageCenterVC = [[TWOMessageCenterViewController alloc] init];
+    pushVC(messageCenterVC);
 }
 
 //设置按钮
