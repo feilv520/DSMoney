@@ -116,6 +116,7 @@
     [self.view addSubview:_scrollView];
     _scrollView.delegate = self;
     _scrollView.pagingEnabled = YES;
+    _scrollView.showsHorizontalScrollIndicator = NO;
     
     _tableViewProfit = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _scrollView.frame.size.height) style:UITableViewStylePlain];
     [_scrollView addSubview:_tableViewProfit];
@@ -317,9 +318,22 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"1");
-    if (scrollView.contentOffset.x > WIDTH_CONTROLLER_DEFAULT) {
+    NSLog(@"%lf",scrollView.contentOffset.x);
+    if (scrollView.contentOffset.x > 0 && scrollView.contentOffset.x <= WIDTH_CONTROLLER_DEFAULT) {
         NSLog(@"2");
+        
+        viewLineRight.backgroundColor = [UIColor profitColor];
+        viewLineRight.alpha = 1.0;
+        [buttonCash setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+        
+        viewLineLeft.backgroundColor = [UIColor grayColor];
+        viewLineLeft.alpha = 0.3;
+        [butProfit setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+        
+    } else {
+        
+        NSLog(@"3");
+        
         
         viewLineLeft.backgroundColor = [UIColor profitColor];
         viewLineLeft.alpha = 1.0;
@@ -328,17 +342,6 @@
         viewLineRight.backgroundColor = [UIColor grayColor];
         viewLineRight.alpha = 0.3;
         [buttonCash setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-        
-    } else {
-        
-        NSLog(@"3");
-        viewLineRight.backgroundColor = [UIColor profitColor];
-        viewLineRight.alpha = 1.0;
-        [buttonCash setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
-        
-        viewLineLeft.backgroundColor = [UIColor grayColor];
-        viewLineLeft.alpha = 0.3;
-        [butProfit setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
     }
 }
 

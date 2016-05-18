@@ -13,6 +13,7 @@
 #import "TwoActivityCell.h"
 #import "PleaseExpectCell.h"
 #import "TWOgameCenterViewController.h"
+#import "TWOMyPrerogativeMoneyViewController.h"
 
 @interface TWOFindViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -160,6 +161,12 @@
         
         TWOgameCenterViewController *gameVC = [[TWOgameCenterViewController alloc] init];
         [self.navigationController pushViewController:gameVC animated:YES];
+        
+    } else if (indexPath.item == 1) {
+        
+        TWOMyPrerogativeMoneyViewController *myPrerogativeMoney = [[TWOMyPrerogativeMoneyViewController alloc] init];
+        myPrerogativeMoney.activity = NO;
+        [self.navigationController pushViewController:myPrerogativeMoney animated:YES];
     }
 }
 

@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOMyPrerogativeMoneyViewController : BaseViewController
-
+@property (nonatomic) BOOL activity;
 @end

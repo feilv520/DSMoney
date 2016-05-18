@@ -14,6 +14,15 @@
 
 @implementation TWOMyMoneyViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor profitColor];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:0];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

@@ -460,7 +460,7 @@
 - (void)cancleBigMoneyApply
 {
     buttonHei = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.tabBarVC.view addSubview:buttonHei];
     buttonHei.alpha = 0.3;
     [buttonHei addTarget:self action:@selector(buttonChooseDisappear:) forControlEvents:UIControlEventTouchUpInside];

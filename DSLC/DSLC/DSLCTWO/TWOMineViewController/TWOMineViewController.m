@@ -13,6 +13,10 @@
 #import "TWOMyMoneyViewController.h"
 #import "TWOMyTidyMoneyViewController.h"
 #import "TWOMyPrerogativeMoneyViewController.h"
+#import "TWOJobCenterViewController.h"
+#import "TWOMyMonkeyCoinViewController.h"
+#import "NewInviteViewController.h"
+#import "TWOPersonalSetViewController.h"
 
 @interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
@@ -24,6 +28,7 @@
     UIImageView *imageBackGround;
     CGFloat height;
     UIButton *butWenZi;
+    UILabel *labelTestShu;
 }
 
 @end
@@ -51,7 +56,19 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 330.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+    
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 360.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+        
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 345.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+        
+    } else {
+        
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 330.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+    }
     _tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
     [self tableViewHeadShow];
                                                                           
@@ -89,23 +106,33 @@
     [buttonSet addTarget:self action:@selector(buttonSetClicked:) forControlEvents:UIControlEventTouchUpInside];
     
 //    任务中心
-    UIView *viewAlpha = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 23 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor colorWithRed:33.0 / 225.0 green:125.0 / 225.0 blue:226.0 / 225.0 alpha:1.0]];
+    UIView *viewAlpha = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 23 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 48.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor colorWithRed:33.0 / 225.0 green:125.0 / 225.0 blue:226.0 / 225.0 alpha:1.0]];
     [imageBackGround addSubview:viewAlpha];
     viewAlpha.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     viewAlpha.layer.cornerRadius = 15;
     viewAlpha.layer.masksToBounds = YES;
     
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        viewAlpha.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 23 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 62.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        viewAlpha.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 23 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 57.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
+        viewAlpha.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 23 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 43.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    }
+    
     UIButton *butTask = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(71/2 - 16, 0, 30, 30) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [viewAlpha addSubview:butTask];
     [butTask setBackgroundImage:[UIImage imageNamed:@"renwuzhongxinicon"] forState:UIControlStateNormal];
     [butTask setBackgroundImage:[UIImage imageNamed:@"renwuzhongxinicon"] forState:UIControlStateHighlighted];
+    [butTask addTarget:self action:@selector(jobCenterButton:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *butTastWen = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 30, 71, 12) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"任务中心"];
     [viewAlpha addSubview:butTastWen];
     butTastWen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    [butTastWen addTarget:self action:@selector(jobCenterButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    任务中心数字显示
-    UILabel *labelTestShu = [CreatView creatWithLabelFrame:CGRectMake(butTask.frame.size.width - 3, 3, 13, 13) backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:9] text:@"38"];
+    labelTestShu = [CreatView creatWithLabelFrame:CGRectMake(butTask.frame.size.width - 3, 3, 13, 13) backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:9] text:@"38"];
     [butTask addSubview:labelTestShu];
     labelTestShu.layer.cornerRadius = 13 / 2;
     labelTestShu.layer.masksToBounds = YES;
@@ -145,7 +172,7 @@
     [butHeadImage addTarget:self action:@selector(buttonChangeHeadImage:) forControlEvents:UIControlEventTouchUpInside];
     
 //    总资产底层view
-    UIView *viewMoney = [CreatView creatViewWithFrame:CGRectMake(0, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor clearColor]];
+    UIView *viewMoney = [CreatView creatViewWithFrame:CGRectMake(0, 143.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30.0) backgroundColor:[UIColor clearColor]];
     [imageBackGround addSubview:viewMoney];
     viewMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
@@ -169,9 +196,11 @@
 //    睁眼闭眼按钮
     UIButton *buttonEye = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - moneyWidth.size.width) * 0.5 + moneyWidth.size.width, viewMoney.frame.size.height - 15, 20, 20) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [viewMoney addSubview:buttonEye];
+    buttonEye.tag = 10;
     [buttonEye setBackgroundImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateNormal];
     [buttonEye setBackgroundImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateHighlighted];
-    
+    [buttonEye addTarget:self action:@selector(openEyeOrCloseEye:) forControlEvents:UIControlEventTouchUpInside];
+
 //    总资产按钮
     UIButton *buttonZZC = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 25, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 50, 14) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"总资产"];
     [imageBackGround addSubview:buttonZZC];
@@ -203,6 +232,8 @@
     [butMoneyStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:yuanRange];
     [butMoneyYu setAttributedTitle:butMoneyStr forState:UIControlStateNormal];
     [butMoneyYu addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     
 //    累计收益钱数
     UIButton *butAddMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 16) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
@@ -295,7 +326,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 53.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20);
+    return 53.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -319,6 +350,41 @@
             TWOMyPrerogativeMoneyViewController *myPrerogativeMoneyVC = [[TWOMyPrerogativeMoneyViewController alloc] init];
             [self.navigationController pushViewController:myPrerogativeMoneyVC animated:YES];
         }
+    } else {
+        if (indexPath.row == 1) {
+            TWOMyMonkeyCoinViewController *myMonkeyCoinVC = [[TWOMyMonkeyCoinViewController alloc] init];
+            [self.navigationController pushViewController:myMonkeyCoinVC animated:YES];
+            
+        } else if (indexPath.row == 2) {
+            NewInviteViewController *inviteVC = [[NewInviteViewController alloc] init];
+            [self.navigationController pushViewController:inviteVC animated:YES];
+            
+        }
+    }
+}
+
+//任务中心按钮
+- (void)jobCenterButton:(UIButton *)button
+{
+    labelTestShu.hidden = YES;
+    TWOJobCenterViewController *jobCenterVC = [[TWOJobCenterViewController alloc] init];
+    pushVC(jobCenterVC);
+}
+
+//睁眼或闭眼按钮
+- (void)openEyeOrCloseEye:(UIButton *)button
+{
+    if (button.tag == 10) {
+       
+        [button setBackgroundImage:[UIImage imageNamed:@"biyan"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"biyan"] forState:UIControlStateHighlighted];
+        button.tag = 20;
+        
+    } else {
+        
+        [button setBackgroundImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateHighlighted];
+        button.tag = 10;
     }
 }
 
@@ -349,7 +415,8 @@
 //设置按钮
 - (void)buttonSetClicked:(UIButton *)button
 {
-    NSLog(@"set");
+    TWOPersonalSetViewController *personalSetVC = [[TWOPersonalSetViewController alloc] init];
+    [self.navigationController pushViewController:personalSetVC animated:YES];
 }
 
 //总资产&可用余额&累计收益查看
