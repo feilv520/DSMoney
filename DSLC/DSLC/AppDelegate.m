@@ -91,7 +91,7 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     
-    if ([flag isEqualToString:@"YES"]) {
+    if ([flag isEqualToString:@"NO"]) {
         
 ////        1.0首页
 //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];

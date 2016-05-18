@@ -3277,6 +3277,7 @@
 				8122012B1CE5C9DC00159A74 /* 累计收益 */,
 				81B84C1E1CE45C2200A867B9 /* 我的猴币 */,
 				81B84BFE1CE42DA900A867B9 /* 任务中心 */,
+				8D855A621CE9C451007A4B22 /* 消息中心 */,
 				81B84BE71CE3182D00A867B9 /* 我的特权本金 */,
 				8107E41F1CE1DBC80086BF9B /* 我的理财 */,
 				8143FD2A1CDAE6E200B65A2F /* TWOMineCell.h */,
@@ -3294,6 +3295,7 @@
 				81B84BFA1CE42C6C00A867B9 /* 任务中心 */,
 				81B84BF91CE3365B00A867B9 /* 累计收益 */,
 				81B84BF81CE3363100A867B9 /* 总资产 */,
+				8D855A581CE99A7B007A4B22 /* 消息中心 */,
 				81B84BE31CE3153E00A867B9 /* 我的特权本金 */,
 				818C8C351CE1A9D200A14D37 /* 我的理财 */,
 				8143FD271CDAE54F00B65A2F /* TWOMineViewController.h */,
@@ -5363,6 +5365,12 @@
 		8D840C471CE302A6005A17F9 /* 产品详情 */ = {
 			isa = PBXGroup;
 			children = (
+				8DA7E16E1CE03CE200D5D016 /* TWOProductDetailViewController.h */,
+				8DA7E16F1CE03CE200D5D016 /* TWOProductDetailViewController.m */,
+				8D840C571CE31B80005A17F9 /* ATWViewController.h */,
+				8D840C581CE31B80005A17F9 /* ATWViewController.m */,
+				81B84BE01CE30D7600A867B9 /* TWOBottomMoneyDetailViewController.h */,
+				81B84BE11CE30D7600A867B9 /* TWOBottomMoneyDetailViewController.m */,
 			);
 			name = "产品详情";
 			sourceTree = "<group>";
@@ -6784,6 +6792,7 @@
 				81CBE7C21CE99EDE004FE1D4 /* TWOAlreadyRealNameCell.m in Sources */,
 				8D968A8F1C97AEFD00C9A6A1 /* TSignInViewController.m in Sources */,
 				81CBE7EF1CEABA65004FE1D4 /* TWOImputNewPhoneNumViewController.m in Sources */,
+				8D840C841CE5D9F9005A17F9 /* TWOProductMakeSureViewController.m in Sources */,
 				8D6E46941C9A782100F0F5B7 /* MDRadialProgressView.m in Sources */,
 				8D968A8E1C97AEF400C9A6A1 /* TRankinglistViewController.m in Sources */,
 				8D968A8D1C97AEDE00C9A6A1 /* TBigTurntableViewController.m in Sources */,
@@ -6945,6 +6954,7 @@
 				8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */,
 				812201341CE5D20D00159A74 /* TWOPersonalSetCell.m in Sources */,
 				81CBE7CE1CE9AAF4004FE1D4 /* TWOChooseChangeStyleViewController.m in Sources */,
+				8D840C5E1CE31D18005A17F9 /* TWOMakeSureTableViewCell.m in Sources */,
 				817DD4B01BCF5B2400042B09 /* MiddleView.m in Sources */,
 				8D90117A1BD5D8FA00E5D62A /* TransactionViewController.m in Sources */,
 				81B84C221CE45C4700A867B9 /* TWOMyMonkeyCoinCell.m in Sources */,
@@ -7147,6 +7157,7 @@
 				8DD180981BD72E5900F71CEA /* GetMoneyTableViewCell.m in Sources */,
 				81AC90B71BEC55D200232404 /* BindingBankCell.m in Sources */,
 				81CBE7A41CE9626F004FE1D4 /* TWOAlreadyBankCardViewController.m in Sources */,
+				8D840C691CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.m in Sources */,
 				8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */,
 				8D4FF5DD1BE339A200BAE25F /* AFAutoPurgingImageCache.m in Sources */,
 				8D1191951BF1E59300A2DE05 /* productMoneyModel.m in Sources */,

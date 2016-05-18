@@ -17,6 +17,7 @@
 #import "TWOMyMonkeyCoinViewController.h"
 #import "NewInviteViewController.h"
 #import "TWOPersonalSetViewController.h"
+#import "TWOMessageCenterViewController.h"
 
 @interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
