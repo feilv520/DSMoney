@@ -83,9 +83,9 @@
     
     [MobClick startWithAppkey:@"5642ad7e67e58e8463006218" reportPolicy:BATCH   channelId:@""];
     
-    NSDictionary *dic = self.flagDic;
+    NSMutableDictionary *handDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
     
-    NSString *flag = [dic objectForKey:@"FristOpen"];
+    NSString *flag = [handDic objectForKey:@"handFlag"];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
@@ -96,11 +96,11 @@
 ////        1.0首页
 //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
 //        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
-//        
+        
 ////        1.0产品
 //        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
 //        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
-//        
+//
 ////        1.0我的
 //        MineViewController *mineVC = [[MineViewController alloc] init];
 ////        LoginViewController *loginVC = [[LoginViewController alloc] init];

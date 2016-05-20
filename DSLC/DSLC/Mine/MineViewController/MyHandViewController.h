@@ -10,4 +10,6 @@
 
 @interface MyHandViewController : UIViewController
 
+@property (nonatomic, strong) NSString *flagString;
+
 @end
