@@ -157,12 +157,12 @@
             
         } else if (indexPath.row == 1) {
 //            未实名认证页面
-//            TWONoRealNameViewController *noRealNameVC = [[TWONoRealNameViewController alloc] init];
-//            [self.navigationController pushViewController:noRealNameVC animated:YES];
+            TWONoRealNameViewController *noRealNameVC = [[TWONoRealNameViewController alloc] init];
+            [self.navigationController pushViewController:noRealNameVC animated:YES];
             
 //            已经实名认证页面
-            TWORealNameIngViewController *realNameIng = [[TWORealNameIngViewController alloc] init];
-            [self.navigationController pushViewController:realNameIng animated:YES];
+//            TWORealNameIngViewController *realNameIng = [[TWORealNameIngViewController alloc] init];
+//            [self.navigationController pushViewController:realNameIng animated:YES];
             
         } else if (indexPath.row == 2) {
 //            手机号

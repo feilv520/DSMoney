@@ -1,5 +1,5 @@
 //
-//  TWOAboutDSLCCell.h
+//  TWOHelpCenterCell.h
 //  DSLC
 //
 //  Created by ios on 16/5/18.
@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TWOAboutDSLCCell : UITableViewCell
+@interface TWOHelpCenterCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *imagePic;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
-@property (weak, nonatomic) IBOutlet UILabel *labelState;
+@property (weak, nonatomic) IBOutlet UIImageView *imageRight;
 
 @end

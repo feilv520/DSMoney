@@ -62,5 +62,6 @@
 + (UIColor *) findZiTiColor;//发现字体颜色
 + (UIColor *) moneyColor;//资产颜色
 + (UIColor *) orangecolor;//橙颜色
++ (UIColor *) fastZhuCeolor;//快速注册字体颜色
 
 @end

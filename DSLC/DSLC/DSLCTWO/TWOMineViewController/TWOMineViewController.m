@@ -18,6 +18,8 @@
 #import "NewInviteViewController.h"
 #import "TWOPersonalSetViewController.h"
 #import "TWOMessageCenterViewController.h"
+#import "TWOUsableMoneyViewController.h"
+#import "TWOLoginAPPViewController.h"
 
 @interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
@@ -234,8 +236,6 @@
     [butMoneyYu setAttributedTitle:butMoneyStr forState:UIControlStateNormal];
     [butMoneyYu addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    
 //    累计收益钱数
     UIButton *butAddMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 16) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [imageBackGround addSubview:butAddMoney];
@@ -393,6 +393,8 @@
 - (void)buttonFullMoney:(UIButton *)button
 {
     NSLog(@"chong");
+    TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+    [self.navigationController pushViewController:loginAPPVC animated:YES];
 }
 
 //提现按钮
@@ -430,7 +432,10 @@
         [self.navigationController pushViewController:myMoneyVC animated:YES];
         
     } else if (button.tag == 666) {
-        NSLog(@"可用余额");
+        
+        TWOUsableMoneyViewController *usableMoneyVC = [[TWOUsableMoneyViewController alloc] init];
+        pushVC(usableMoneyVC);
+        
     } else {
         
         TWOAddIncomeViewController *addIncomeVC = [[TWOAddIncomeViewController alloc] init];

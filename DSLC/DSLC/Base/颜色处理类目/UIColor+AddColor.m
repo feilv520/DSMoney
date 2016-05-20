@@ -240,4 +240,8 @@
     return [UIColor colorFromHexCode:@"#ff721f"];
 }
 
++ (UIColor *) fastZhuCeolor {
+    return [UIColor colorFromHexCode:@"#d5edff"];
+}
+
 @end

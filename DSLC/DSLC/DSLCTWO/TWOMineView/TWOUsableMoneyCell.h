@@ -1,5 +1,5 @@
 //
-//  TWOAboutDSLCCell.h
+//  TWOUsableMoneyCell.h
 //  DSLC
 //
 //  Created by ios on 16/5/18.
@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TWOAboutDSLCCell : UITableViewCell
+@interface TWOUsableMoneyCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
-@property (weak, nonatomic) IBOutlet UILabel *labelState;
+@property (weak, nonatomic) IBOutlet UILabel *labelSate;
+@property (weak, nonatomic) IBOutlet UIImageView *imageRight;
 
 @end

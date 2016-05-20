@@ -20,6 +20,7 @@
 #import "TWOMineViewController.h"
 #import "TWOProductViewController.h"
 #import "TWOFindViewController.h"
+#import "TWOLoginAPPViewController.h"
 
 @interface AppDelegate ()
 {
@@ -96,11 +97,11 @@
 ////        1.0首页
 //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
 //        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
-//        
+//
 ////        1.0产品
 //        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
 //        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
-//        
+//
 ////        1.0我的
 //        MineViewController *mineVC = [[MineViewController alloc] init];
 ////        LoginViewController *loginVC = [[LoginViewController alloc] init];
@@ -119,8 +120,9 @@
         UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
 
         //        2.0我的
-        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
+//        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
+        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:loginAPPVC];
         
 //        2.0
 //        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];

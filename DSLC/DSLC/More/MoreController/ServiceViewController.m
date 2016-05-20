@@ -118,7 +118,7 @@
     if (indexPath.section == 0) {
         
         buttonBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         [app.tabBarVC.view addSubview:buttonBlack];
         buttonBlack.alpha = 0.3;
         [buttonBlack addTarget:self action:@selector(buttonDisappearFromView:) forControlEvents:UIControlEventTouchUpInside];
