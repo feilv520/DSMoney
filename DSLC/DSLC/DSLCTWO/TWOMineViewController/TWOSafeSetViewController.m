@@ -10,6 +10,7 @@
 #import "TWOPersonalSetCell.h"
 #import "TWOSetDealSecretViewController.h"
 #import "TWOMendLoginViewController.h"
+#import "TWOHandSettingViewController.h"
 
 @interface TWOSafeSetViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -87,6 +88,10 @@
 //        如已设置登录密码 跳转修改登录密码
         TWOMendLoginViewController *mendLogin = [[TWOMendLoginViewController alloc] init];
         pushVC(mendLogin);
+    } else {
+        
+        TWOHandSettingViewController *handSettingVC = [[TWOHandSettingViewController alloc] init];
+        pushVC(handSettingVC);
     }
 }
 

@@ -1055,6 +1055,13 @@
 		8D855A781CEAF633007A4B22 /* TWOHandImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A771CEAF633007A4B22 /* TWOHandImage.png */; settings = {ASSET_TAGS = (); }; };
 		8D855A7B1CEB0441007A4B22 /* TWOHandImageDian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A791CEB0441007A4B22 /* TWOHandImageDian@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D855A7C1CEB0441007A4B22 /* TWOHandImageDian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A7A1CEB0441007A4B22 /* TWOHandImageDian@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D855B011CEC1078007A4B22 /* TWOHandSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D855B001CEC1078007A4B22 /* TWOHandSettingViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D855B051CEC12B1007A4B22 /* TWOHandSetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D855B031CEC12B1007A4B22 /* TWOHandSetTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		8D855B061CEC12B1007A4B22 /* TWOHandSetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D855B041CEC12B1007A4B22 /* TWOHandSetTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8D855B0A1CEC3AAB007A4B22 /* TWOFixHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D855B081CEC3AAB007A4B22 /* TWOFixHandViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D855B0B1CEC3AAB007A4B22 /* TWOFixHandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D855B091CEC3AAB007A4B22 /* TWOFixHandViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		8D855B0E1CEDB20F007A4B22 /* TWOForgetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D855B0D1CEDB20F007A4B22 /* TWOForgetView.m */; settings = {ASSET_TAGS = (); }; };
+		8D855B101CEDB4EE007A4B22 /* TWOForgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D855B0F1CEDB4EE007A4B22 /* TWOForgetView.xib */; settings = {ASSET_TAGS = (); }; };
 		8D878CE11BC754AD00844575 /* e.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D878CE01BC754AD00844575 /* e.m */; };
 		8D88A4DD1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D88A4DB1BCDFED400EE22F5 /* FSelectionPayTypeViewController.m */; };
 		8D88A4DE1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D88A4DC1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib */; };
@@ -2781,6 +2788,17 @@
 		8D855A771CEAF633007A4B22 /* TWOHandImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWOHandImage.png; sourceTree = "<group>"; };
 		8D855A791CEB0441007A4B22 /* TWOHandImageDian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWOHandImageDian@2x.png"; sourceTree = "<group>"; };
 		8D855A7A1CEB0441007A4B22 /* TWOHandImageDian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWOHandImageDian@3x.png"; sourceTree = "<group>"; };
+		8D855AFF1CEC1078007A4B22 /* TWOHandSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOHandSettingViewController.h; sourceTree = "<group>"; };
+		8D855B001CEC1078007A4B22 /* TWOHandSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOHandSettingViewController.m; sourceTree = "<group>"; };
+		8D855B021CEC12B1007A4B22 /* TWOHandSetTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOHandSetTableViewCell.h; sourceTree = "<group>"; };
+		8D855B031CEC12B1007A4B22 /* TWOHandSetTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOHandSetTableViewCell.m; sourceTree = "<group>"; };
+		8D855B041CEC12B1007A4B22 /* TWOHandSetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOHandSetTableViewCell.xib; sourceTree = "<group>"; };
+		8D855B071CEC3AAB007A4B22 /* TWOFixHandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOFixHandViewController.h; sourceTree = "<group>"; };
+		8D855B081CEC3AAB007A4B22 /* TWOFixHandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOFixHandViewController.m; sourceTree = "<group>"; };
+		8D855B091CEC3AAB007A4B22 /* TWOFixHandViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOFixHandViewController.xib; sourceTree = "<group>"; };
+		8D855B0C1CEDB20F007A4B22 /* TWOForgetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOForgetView.h; sourceTree = "<group>"; };
+		8D855B0D1CEDB20F007A4B22 /* TWOForgetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOForgetView.m; sourceTree = "<group>"; };
+		8D855B0F1CEDB4EE007A4B22 /* TWOForgetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOForgetView.xib; sourceTree = "<group>"; };
 		8D878CDF1BC754AD00844575 /* e.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e.h; sourceTree = "<group>"; };
 		8D878CE01BC754AD00844575 /* e.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = e.m; sourceTree = "<group>"; };
 		8D88A4DA1BCDFED400EE22F5 /* FSelectionPayTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSelectionPayTypeViewController.h; sourceTree = "<group>"; };
@@ -3575,6 +3593,11 @@
 				8179EB311CEB16B300BD7054 /* TWOMendLoginViewController.m */,
 				8179EB201CEB02AC00BD7054 /* TWOChangeLoginFinishViewController.h */,
 				8179EB211CEB02AC00BD7054 /* TWOChangeLoginFinishViewController.m */,
+				8D855AFF1CEC1078007A4B22 /* TWOHandSettingViewController.h */,
+				8D855B001CEC1078007A4B22 /* TWOHandSettingViewController.m */,
+				8D855B071CEC3AAB007A4B22 /* TWOFixHandViewController.h */,
+				8D855B081CEC3AAB007A4B22 /* TWOFixHandViewController.m */,
+				8D855B091CEC3AAB007A4B22 /* TWOFixHandViewController.xib */,
 			);
 			name = "安全设置";
 			sourceTree = "<group>";
@@ -3582,6 +3605,9 @@
 		8179EB1C1CEAFA7C00BD7054 /* 安全设置 */ = {
 			isa = PBXGroup;
 			children = (
+				8D855B021CEC12B1007A4B22 /* TWOHandSetTableViewCell.h */,
+				8D855B031CEC12B1007A4B22 /* TWOHandSetTableViewCell.m */,
+				8D855B041CEC12B1007A4B22 /* TWOHandSetTableViewCell.xib */,
 			);
 			name = "安全设置";
 			sourceTree = "<group>";
@@ -4212,6 +4238,9 @@
 				812201311CE5D20D00159A74 /* TWOPersonalSetCell.h */,
 				812201321CE5D20D00159A74 /* TWOPersonalSetCell.m */,
 				812201331CE5D20D00159A74 /* TWOPersonalSetCell.xib */,
+				8D855B0C1CEDB20F007A4B22 /* TWOForgetView.h */,
+				8D855B0D1CEDB20F007A4B22 /* TWOForgetView.m */,
+				8D855B0F1CEDB4EE007A4B22 /* TWOForgetView.xib */,
 			);
 			name = "账户设置";
 			sourceTree = "<group>";
@@ -6391,6 +6420,7 @@
 				8D88A4DE1BCDFED400EE22F5 /* FSelectionPayTypeViewController.xib in Resources */,
 				8D376A0F1CE17F8E00D44844 /* productSureButton@3x.png in Resources */,
 				8179EB0C1CEAE84300BD7054 /* youxiang@3x.png in Resources */,
+				8D855B0B1CEC3AAB007A4B22 /* TWOFixHandViewController.xib in Resources */,
 				8D9011A71BD6337C00E5D62A /* 12@2x.png in Resources */,
 				8143FD311CDAEFA600B65A2F /* 我的理财@2x.png in Resources */,
 				81BA1C101BD4FE2600DBA5BE /* MyNewsCell.xib in Resources */,
@@ -6401,6 +6431,7 @@
 				8D3A2FE11BE7100000913DEC /* FDescriptionViewController.xib in Resources */,
 				81C8BBC81BDA2F8D005B9DFF /* lianxikefuG@2x.png in Resources */,
 				8D66927C1BD0D27D00CD2CAF /* gesture_node_normal@2x.png in Resources */,
+				8D855B061CEC12B1007A4B22 /* TWOHandSetTableViewCell.xib in Resources */,
 				8D88A4E21BCE087400EE22F5 /* emptyyuan@3x.png in Resources */,
 				8D18B2A31C2982D100754C13 /* TTTTXianTableViewCell.xib in Resources */,
 				817DD4931BCF547E00042B09 /* bei@3x.png in Resources */,
@@ -6835,6 +6866,7 @@
 				8D3F95D71BE1C90C00013A8E /* RegisterOfPassButton.xib in Resources */,
 				8D4343981BFDEB0B000BA004 /* loading_up_07.png in Resources */,
 				8143FD6D1CDB0E6300B65A2F /* 我的背景图@2x.png in Resources */,
+				8D855B101CEDB4EE007A4B22 /* TWOForgetView.xib in Resources */,
 				8D6E46871C9A44F200F0F5B7 /* myHadCastDetailViewController.xib in Resources */,
 				817DD4951BCF547E00042B09 /* chongzhi@3x.png in Resources */,
 				8D9011A61BD6337C00E5D62A /* 11@3x.png in Resources */,
@@ -7201,6 +7233,7 @@
 				8D3F95D51BE1C8FC00013A8E /* RegisterOfPassButton.m in Sources */,
 				8179883B1BC9403A007C8C3E /* ThreeCell.m in Sources */,
 				8184EC4A1BCCD13C003F440D /* CashMoneyCell.m in Sources */,
+				8D855B0A1CEC3AAB007A4B22 /* TWOFixHandViewController.m in Sources */,
 				819B52EB1BFC4462002FDF1E /* NewHandCSSCell.m in Sources */,
 				81D703FC1BE073730074DF30 /* ForgetSecret2Cell.m in Sources */,
 				816CCCF31C1832FD006FA6F2 /* BankName.m in Sources */,
@@ -7350,6 +7383,7 @@
 				819B52C61BFC127E002FDF1E /* NotSeparateCell.m in Sources */,
 				8D0CB48E1BE75DB20039D826 /* SimpleDetailViewController.m in Sources */,
 				81600A6D1CBF2E770075CD45 /* NewInviteViewController.m in Sources */,
+				8D855B0E1CEDB20F007A4B22 /* TWOForgetView.m in Sources */,
 				8D6E46921C9A782100F0F5B7 /* MDRadialProgressLabel.m in Sources */,
 				8D4FF5E31BE339A200BAE25F /* UIProgressView+AFNetworking.m in Sources */,
 				819B52F31BFC5D54002FDF1E /* NSString+Characters.m in Sources */,
@@ -7447,6 +7481,7 @@
 				8DD180981BD72E5900F71CEA /* GetMoneyTableViewCell.m in Sources */,
 				81AC90B71BEC55D200232404 /* BindingBankCell.m in Sources */,
 				81CBE7A41CE9626F004FE1D4 /* TWOAlreadyBankCardViewController.m in Sources */,
+				8D855B051CEC12B1007A4B22 /* TWOHandSetTableViewCell.m in Sources */,
 				8D840C691CE42B18005A17F9 /* TWOProductMakeSureTwoTableViewCell.m in Sources */,
 				8DE61D9F1BDF284E0031A5CE /* ProgressHUD.m in Sources */,
 				8D4FF5DD1BE339A200BAE25F /* AFAutoPurgingImageCache.m in Sources */,
@@ -7506,6 +7541,7 @@
 				8D88D0FC1BFECCB40051D6DA /* MJRefreshAutoStateFooter.m in Sources */,
 				8D4FF5D91BE339A200BAE25F /* AFSecurityPolicy.m in Sources */,
 				81E0CCE11C27EF6700148609 /* ChooseBusViewController.m in Sources */,
+				8D855B011CEC1078007A4B22 /* TWOHandSettingViewController.m in Sources */,
 				8D855A611CE99D67007A4B22 /* TWOMMessageViewController.m in Sources */,
 				8D88D1071BFECCB40051D6DA /* UIView+MJExtension.m in Sources */,
 				8D6E467F1C99635E00F0F5B7 /* myCastModel.m in Sources */,

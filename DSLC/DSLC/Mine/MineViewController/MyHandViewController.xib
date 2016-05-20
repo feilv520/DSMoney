@@ -4,10 +4,21 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="CenturyGothic.TTF">
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyHandViewController">
             <connections>
+                <outlet property="backgroundImageView" destination="2L7-Wo-LbP" id="lf7-vp-Ssp"/>
+                <outlet property="forgetButton" destination="Rp1-Rq-o5C" id="rcT-X8-Qri"/>
                 <outlet property="myHandBtn" destination="1Jq-v6-U6r" id="epC-lJ-jo6"/>
+                <outlet property="otherUserButton" destination="YA9-aF-Jgc" id="yyR-AC-v12"/>
+                <outlet property="titleLabel" destination="1vs-u3-KM2" id="jhJ-Ah-Y2V"/>
+                <outlet property="userPhone" destination="c8Y-Mg-sfg" id="ji8-Na-kt7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,21 +40,75 @@
                         <constraint firstAttribute="height" constant="343" id="wqh-nA-Oou"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vs-u3-KM2">
+                    <rect key="frame" x="97" y="120" width="181" height="21"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="181" id="FEO-PM-tHj"/>
+                        <constraint firstAttribute="height" constant="21" id="buc-ck-IfQ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8Y-Mg-sfg">
+                    <rect key="frame" x="97" y="57" width="181" height="21"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="181" id="PMM-2r-ejU"/>
+                        <constraint firstAttribute="height" constant="21" id="haC-Zb-bbU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rp1-Rq-o5C">
+                    <rect key="frame" x="18" y="612" width="90" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="jno-tp-Vsu"/>
+                        <constraint firstAttribute="height" constant="30" id="l36-Rk-sqk"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="忘记手势密码">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YA9-aF-Jgc">
+                    <rect key="frame" x="246" y="612" width="120" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="1hA-uV-q85"/>
+                        <constraint firstAttribute="height" constant="30" id="CLG-9h-yWz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="使用其他账号登录">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="2L7-Wo-LbP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4EW-Zn-2pa"/>
+                <constraint firstItem="1vs-u3-KM2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Fhf-cK-k4N"/>
                 <constraint firstAttribute="trailing" secondItem="2L7-Wo-LbP" secondAttribute="trailing" id="IcQ-Lw-F3h"/>
+                <constraint firstItem="Rp1-Rq-o5C" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="293" id="Lut-nh-KNm"/>
                 <constraint firstAttribute="bottom" secondItem="1Jq-v6-U6r" secondAttribute="bottom" constant="162" id="Ozd-pw-AkH"/>
                 <constraint firstItem="1Jq-v6-U6r" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="162" id="Pro-9F-9OD"/>
                 <constraint firstAttribute="bottom" secondItem="2L7-Wo-LbP" secondAttribute="bottom" constant="-1" id="QEs-Sh-1kf"/>
+                <constraint firstItem="c8Y-Mg-sfg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Tic-Hv-syh"/>
+                <constraint firstItem="1vs-u3-KM2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="120" id="Zjp-Tx-E9o"/>
+                <constraint firstItem="c8Y-Mg-sfg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="57" id="cfn-gd-2y0"/>
+                <constraint firstItem="YA9-aF-Jgc" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="293" id="djK-LE-bpx"/>
                 <constraint firstAttribute="trailing" secondItem="1Jq-v6-U6r" secondAttribute="trailing" constant="8" id="ef7-YF-YnX"/>
                 <constraint firstItem="2L7-Wo-LbP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fXg-Dn-Jgz"/>
+                <constraint firstItem="Rp1-Rq-o5C" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="-124" id="hWx-ac-24x"/>
+                <constraint firstItem="YA9-aF-Jgc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="118" id="qtN-lq-mDf"/>
                 <constraint firstItem="1Jq-v6-U6r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="xfM-Tr-Hkw"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="-194.5" y="328.5"/>
+            <point key="canvasLocation" x="-462.5" y="319.5"/>
         </view>
     </objects>
     <resources>

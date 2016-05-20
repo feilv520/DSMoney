@@ -84,9 +84,9 @@
     
     [MobClick startWithAppkey:@"5642ad7e67e58e8463006218" reportPolicy:BATCH   channelId:@""];
     
-    NSDictionary *dic = self.flagDic;
+    NSMutableDictionary *handDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
     
-    NSString *flag = [dic objectForKey:@"FristOpen"];
+    NSString *flag = [handDic objectForKey:@"handFlag"];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
