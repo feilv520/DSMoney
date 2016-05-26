@@ -132,6 +132,19 @@
     }
     self.navigationItem.rightBarButtonItem.title = @"筛选";
     NSLog(@"%ld",(long)number);
+    
+    moreFlag = NO;
+    page = 1;
+    
+    [transactionArr removeAllObjects];
+    transactionArr = nil;
+    transactionArr = [NSMutableArray array];
+    [self.transactionName removeAllObjects];
+    self.transactionName = nil;
+    self.transactionName = [NSMutableArray array];
+    [self.transactionArray removeAllObjects];
+    self.transactionArray = nil;
+    self.transactionArray = [NSMutableArray array];
     switch (number) {
         case 0:
             tranBeginDate = @"";

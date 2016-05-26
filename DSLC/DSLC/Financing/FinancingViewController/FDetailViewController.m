@@ -688,6 +688,8 @@
         calendar.viewDown.layer.borderColor = [[UIColor shurukuangBian] CGColor];
         calendar.viewDown.layer.borderWidth = 0.5;
         
+        calendar.lineView.backgroundColor = [UIColor shurukuangBian];
+        
         calendar.inputMoney.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
         calendar.inputMoney.leftViewMode = UITextFieldViewModeAlways;
         calendar.inputMoney.tintColor = [UIColor grayColor];

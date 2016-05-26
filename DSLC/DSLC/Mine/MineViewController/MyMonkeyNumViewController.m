@@ -117,49 +117,82 @@
     cell.labelTime.text = model.createTime;
     cell.labelTime.textColor = [UIColor zitihui];
     
-    if ([[model.useType description] isEqualToString:@"0"]) {
-        cell.labelName.text = @"历史记录";
-        cell.labelMoney.textColor = [UIColor profitGreen];
+    if ([model.useTypeSymbol isEqualToString:@"-"]) {
         
-        cell.labelProfit.hidden = YES;
+        if ([[model.useType description] isEqualToString:@"3"]) {
+            cell.labelName.text = @"兑换收益";
+            cell.labelMoney.textColor = [UIColor profitGreen];
+            cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
+            
+            cell.labelProfit.hidden = NO;
+            
+            NSMutableAttributedString *incomeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"预期额外收益%@元", model.preIncome]];
+            NSRange redRange = NSMakeRange(6, [[incomeStr string] rangeOfString:@"元"].location - 6);
+            [incomeStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
+            [cell.labelProfit setAttributedText:incomeStr];
+        } else {
         
-    } else if ([[model.useType description] isEqualToString:@"1"]) {
-        cell.labelName.text = @"投资获取";
+            cell.labelName.text = model.useTypeChinese;
+            cell.labelMoney.textColor = [UIColor profitGreen];
+            cell.labelMoney.text = [NSString stringWithFormat:@"%@%@",model.useTypeSymbol,model.MonkeyNumber.description];
+        }
+    } else if ([model.useTypeSymbol isEqualToString:@"+"]){
+        cell.labelName.text =model.useTypeChinese;
         cell.labelMoney.textColor = [UIColor daohanglan];
         cell.labelMoney.text = [NSString stringWithFormat:@"+%@", model.MonkeyNumber.description];
-        
-        cell.labelProfit.hidden = YES;
-    } else if ([[model.useType description] isEqualToString:@"2"]) {
-        cell.labelName.text = @"活动获取";
-        cell.labelMoney.textColor = [UIColor daohanglan];
-        cell.labelMoney.text = [NSString stringWithFormat:@"+%@", model.MonkeyNumber.description];
-        
-        cell.labelProfit.hidden = YES;
-    } else if ([[model.useType description] isEqualToString:@"3"]) {
-        cell.labelName.text = @"兑换收益";
-        cell.labelMoney.textColor = [UIColor profitGreen];
-        cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
-        
-        cell.labelProfit.hidden = NO;
-        
-        NSMutableAttributedString *incomeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"预期额外收益%@元", model.preIncome]];
-        NSRange redRange = NSMakeRange(6, [[incomeStr string] rangeOfString:@"元"].location - 6);
-        [incomeStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
-        [cell.labelProfit setAttributedText:incomeStr];
-        
-    } else if ([[model.useType description] isEqualToString:@"4"]) {
-        cell.labelName.text = @"抽奖消耗";
-        cell.labelMoney.textColor = [UIColor profitGreen];
-        cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
         
         cell.labelProfit.hidden = YES;
     } else {
-        cell.labelName.text = @"兑换金斗云";
-        cell.labelMoney.textColor = [UIColor profitGreen];
-        cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
+        cell.labelName.text =model.useTypeChinese;
+        cell.labelMoney.textColor = [UIColor daohanglan];
+        cell.labelMoney.text = [NSString stringWithFormat:@"%@%@", model.useTypeSymbol,model.MonkeyNumber.description];
         
         cell.labelProfit.hidden = YES;
     }
+    
+//    if ([[model.useType description] isEqualToString:@"0"]) {
+//        cell.labelName.text = @"历史记录";
+//        cell.labelMoney.textColor = [UIColor profitGreen];
+//        
+//        cell.labelProfit.hidden = YES;
+//        
+//    } else if ([[model.useType description] isEqualToString:@"1"]) {
+//        cell.labelName.text = @"投资获取";
+//        cell.labelMoney.textColor = [UIColor daohanglan];
+//        cell.labelMoney.text = [NSString stringWithFormat:@"+%@", model.MonkeyNumber.description];
+//        
+//        cell.labelProfit.hidden = YES;
+//    } else if ([[model.useType description] isEqualToString:@"2"]) {
+//        cell.labelName.text = @"活动获取";
+//        cell.labelMoney.textColor = [UIColor daohanglan];
+//        cell.labelMoney.text = [NSString stringWithFormat:@"+%@", model.MonkeyNumber.description];
+//        
+//        cell.labelProfit.hidden = YES;
+//    } else if ([[model.useType description] isEqualToString:@"3"]) {
+//        cell.labelName.text = @"兑换收益";
+//        cell.labelMoney.textColor = [UIColor profitGreen];
+//        cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
+//        
+//        cell.labelProfit.hidden = NO;
+//        
+//        NSMutableAttributedString *incomeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"预期额外收益%@元", model.preIncome]];
+//        NSRange redRange = NSMakeRange(6, [[incomeStr string] rangeOfString:@"元"].location - 6);
+//        [incomeStr addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
+//        [cell.labelProfit setAttributedText:incomeStr];
+//        
+//    } else if ([[model.useType description] isEqualToString:@"4"]) {
+//        cell.labelName.text = @"抽奖消耗";
+//        cell.labelMoney.textColor = [UIColor profitGreen];
+//        cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
+//        
+//        cell.labelProfit.hidden = YES;
+//    } else {
+//        cell.labelName.text = @"兑换金斗云";
+//        cell.labelMoney.textColor = [UIColor profitGreen];
+//        cell.labelMoney.text = [NSString stringWithFormat:@"-%@", model.MonkeyNumber.description];
+//        
+//        cell.labelProfit.hidden = YES;
+//    }
     
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -171,7 +204,7 @@
 {
     NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSNumber numberWithInteger:curruntPage]};
     // getUserMonkeyDetailForChinese
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"/app/user/getUserMonkeyDetail" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"/app/user/getUserMonkeyDetailForChinese" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"获取猴币详情:~~~~~%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {

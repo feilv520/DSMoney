@@ -46,6 +46,8 @@
 
 #define ZT @"冬青黑体"
 
+#define PIE_HEIGHT 280
+
 #import "FileOfManage.h"                     // 文件管理类
 #import "ProgressHUD.h"                      // 提示框的第三方
 #import "UIColor+AddColor.h"                 // 颜色类目

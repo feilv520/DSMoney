@@ -10,6 +10,7 @@
 #import "TWOUsableMoneyCell.h"
 #import "TWOLiftMoneyViewController.h"
 #import "TWOMoneyMoreViewController.h"
+#import "TWOUsableAllMoneyViewController.h"
 
 @interface TWOUsableMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -30,6 +31,9 @@
     self.navigationController.navigationBar.barTintColor = [UIColor profitColor];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:0];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
+    [butChongZhi setHidden:NO];
+    [butLiftMoney setHidden:NO];
 }
 
 - (void)viewDidLoad {
@@ -52,7 +56,6 @@
     _tableView.backgroundColor = [UIColor qianhuise];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 159)];
-    _tableView.tableHeaderView.backgroundColor = [UIColor yellowColor];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOUsableMoneyCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
@@ -130,6 +133,33 @@
     return 56;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0) {
+        
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+        
+        UIButton *indexButton = [app.tabBarVC.tabButtonArray objectAtIndex:1];
+        
+        for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+            
+            if (indexButton.tag != tempButton.tag) {
+                NSLog(@"%ld",(long)tempButton.tag);
+                [tempButton setSelected:NO];
+            }
+        }
+        
+        [indexButton setSelected:YES];
+        
+    } else {
+        TWOUsableAllMoneyViewController *usableAllMVC = [[TWOUsableAllMoneyViewController alloc] init];
+        pushVC(usableAllMVC);
+    }
+}
+
 //提现按钮
 - (void)liftMoneyButton:(UIButton *)button
 {
@@ -155,11 +185,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [butChongZhi removeFromSuperview];
-    [butLiftMoney removeFromSuperview];
+    [super viewWillDisappear:animated];
     
-    butLiftMoney = nil;
-    butChongZhi = nil;
+    [butChongZhi setHidden:YES];
+    [butLiftMoney setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

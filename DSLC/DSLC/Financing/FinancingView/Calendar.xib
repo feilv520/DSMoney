@@ -165,6 +165,7 @@
                 <outlet property="closeButton" destination="ntb-uR-Pgs" id="aJV-gk-b1P"/>
                 <outlet property="dayLabel" destination="UvV-67-1di" id="AqZ-7x-vjW"/>
                 <outlet property="inputMoney" destination="0xc-Lh-nPM" id="KS1-pN-m6B"/>
+                <outlet property="lineView" destination="rxM-1d-kYb" id="Gk4-ql-Ski"/>
                 <outlet property="totalLabel" destination="ncH-Xr-9RR" id="cVE-gZ-UQQ"/>
                 <outlet property="viewDown" destination="0iT-dZ-0tf" id="SUM-vh-eFJ"/>
                 <outlet property="yearLv" destination="NjP-vj-L8M" id="PvQ-AY-FIb"/>
