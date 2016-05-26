@@ -17,6 +17,7 @@
 #import "TWORecordViewController.h"
 #import "TWOProductMakeSureViewController.h"
 #import "TWOProductSafeTestViewController.h"
+#import "TWOProductDDetailViewController.h"
 
 @interface TWOProductDetailViewController () <UITableViewDataSource, UITableViewDelegate>{
     UITableView *_tableView;
