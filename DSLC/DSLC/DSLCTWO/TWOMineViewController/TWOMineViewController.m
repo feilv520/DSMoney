@@ -20,6 +20,7 @@
 #import "TWOMessageCenterViewController.h"
 #import "TWOUsableMoneyViewController.h"
 #import "TWOLoginAPPViewController.h"
+#import "TWOMoneyMoreFinishViewController.h"
 
 @interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
@@ -207,6 +208,7 @@
 //    总资产按钮
     UIButton *buttonZZC = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 25, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 50, 14) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"总资产"];
     [imageBackGround addSubview:buttonZZC];
+    buttonZZC.tag = 665;
     buttonZZC.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     buttonZZC.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     [buttonZZC addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -392,9 +394,8 @@
 //充值按钮
 - (void)buttonFullMoney:(UIButton *)button
 {
-    NSLog(@"chong");
-    TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
-    [self.navigationController pushViewController:loginAPPVC animated:YES];
+    TWOMoneyMoreFinishViewController *finishVC = [[TWOMoneyMoreFinishViewController alloc] init];
+    [self.navigationController pushViewController:finishVC animated:YES];
 }
 
 //提现按钮
@@ -434,6 +435,7 @@
     } else if (button.tag == 666) {
         
         TWOUsableMoneyViewController *usableMoneyVC = [[TWOUsableMoneyViewController alloc] init];
+        usableMoneyVC.whichOne = YES;
         pushVC(usableMoneyVC);
         
     } else {

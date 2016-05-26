@@ -202,6 +202,7 @@
             }
         } else {
             NSString *handString = [dic objectForKey:@"handString"];
+            NSLog(@"%@",handString);
             if ([path isEqualToString:handString]) {
                 
                 [UIView animateWithDuration:1.0 animations:^{

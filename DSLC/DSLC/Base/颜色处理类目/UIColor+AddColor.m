@@ -244,4 +244,8 @@
     return [UIColor colorFromHexCode:@"#d5edff"];
 }
 
++ (UIColor *) quanColor {
+    return [UIColor colorFromHexCode:@"#e5e5e5"];
+}
+
 @end

@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOUsableMoneyViewController : BaseViewController
-
+@property (nonatomic) BOOL whichOne;
 @end

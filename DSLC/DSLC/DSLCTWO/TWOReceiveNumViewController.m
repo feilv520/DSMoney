@@ -160,7 +160,8 @@
 //已有账号,立即登录方法
 - (void)buttonRightNowLogin:(UIButton *)button
 {
-    NSLog(@"login");
+    NSArray *viewControllers = [self.navigationController viewControllers];
+    [self.navigationController popToViewController:[viewControllers objectAtIndex:0] animated:YES];
 }
 
 //左上角x按钮

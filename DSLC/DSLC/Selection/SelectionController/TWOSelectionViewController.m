@@ -20,6 +20,9 @@
     UIButton *buttonClick;
     UIScrollView *scrollView;
     UIView *viewBottom;
+    UIButton *buttonHei;
+    UILabel *labelMonkey;
+    UIImageView *imageSign;
 }
 
 @end
@@ -37,9 +40,26 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor qianhuise];
+    [self signFinish];
     [self contentShow];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLoginView) name:@"showLoginView" object:nil];
+}
+
+//签到成功
+- (void)signFinish
+{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    buttonHei = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.view.frame.size.height) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    [app.tabBarVC.view addSubview:buttonHei];
+    buttonHei.alpha = 0.6;
+    [buttonHei addTarget:self action:@selector(clickedBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    labelMonkey = [CreatView creatWithLabelFrame:CGRectMake(0, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:27] text:[NSString stringWithFormat:@"%@猴币", @"+66"]];
+    [app.tabBarVC.view addSubview:labelMonkey];
+    
+    imageSign = [CreatView creatImageViewWithFrame:CGRectMake(40, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30, WIDTH_CONTROLLER_DEFAULT - 80, 230) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"doSign"]];
+    [app.tabBarVC.view addSubview:imageSign];
 }
 
 - (void)contentShow
@@ -75,6 +95,7 @@
         buttonClick.backgroundColor = [UIColor qianhuise];
         buttonClick.tag = 1000 + i;
         [buttonClick setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [imageArr objectAtIndex:i]]] forState:UIControlStateNormal];
+        [buttonClick setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [imageArr objectAtIndex:i]]] forState:UIControlStateHighlighted];
         [buttonClick addTarget:self action:@selector(buttonClickedChoose:) forControlEvents:UIControlEventTouchUpInside];
     }
     
@@ -179,6 +200,18 @@
     [buttonQiang setBackgroundImage:[UIImage imageNamed:@"立即抢购"] forState:UIControlStateNormal];
     [buttonQiang setBackgroundImage:[UIImage imageNamed:@"立即抢购"] forState:UIControlStateHighlighted];
     [buttonQiang addTarget:self action:@selector(rightQiangGou:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//黑色遮罩层消失
+- (void)clickedBlackDisappear:(UIButton *)button
+{
+    [buttonHei removeFromSuperview];
+    [labelMonkey removeFromSuperview];
+    [imageSign removeFromSuperview];
+    
+    buttonHei = nil;
+    labelMonkey = nil;
+    imageSign = nil;
 }
 
 //每日一摇和邀请好友点击方法

@@ -16,6 +16,7 @@
 #import "TWOProductMoneyView.h"
 #import "TWORecordViewController.h"
 #import "TWOProductMakeSureViewController.h"
+#import "TWOProductSafeTestViewController.h"
 
 @interface TWOProductDetailViewController () <UITableViewDataSource, UITableViewDelegate>{
     UITableView *_tableView;
@@ -413,7 +414,8 @@
             recordVC.idString = self.idString;
             pushVC(recordVC);
         } else if (indexPath.row == 2){
-            
+            TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
+            pushVC(safeTestVC);
         }
     }
     

@@ -14,6 +14,8 @@
 #import "PleaseExpectCell.h"
 #import "TWOgameCenterViewController.h"
 #import "TWOMyPrerogativeMoneyViewController.h"
+#import "TWODSPublicBenefitViewController.h"
+#import "TWOFindActivityCenterViewController.h"
 
 @interface TWOFindViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -101,6 +103,15 @@
     return 100.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20);
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1) {
+//        大圣公益行
+        TWODSPublicBenefitViewController *publicBenefit = [[TWODSPublicBenefitViewController alloc] init];
+        pushVC(publicBenefit);
+    }
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 6;
@@ -167,6 +178,11 @@
         TWOMyPrerogativeMoneyViewController *myPrerogativeMoney = [[TWOMyPrerogativeMoneyViewController alloc] init];
         myPrerogativeMoney.activity = NO;
         [self.navigationController pushViewController:myPrerogativeMoney animated:YES];
+        
+    } else if (indexPath.item == 0) {
+        
+        TWOFindActivityCenterViewController *findActivityVC = [[TWOFindActivityCenterViewController alloc] init];
+        pushVC(findActivityVC);
     }
 }
 

@@ -92,7 +92,7 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     
-    if ([flag isEqualToString:@"NO"]) {
+    if ([flag isEqualToString:@"NO"] || flag == nil) {
         
 ////        1.0首页
 //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
@@ -120,9 +120,9 @@
         UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
 
         //        2.0我的
-//        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
-        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:loginAPPVC];
+        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
+//        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
         
 //        2.0
 //        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];

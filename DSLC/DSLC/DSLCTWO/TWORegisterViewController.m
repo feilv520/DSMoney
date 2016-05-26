@@ -78,6 +78,13 @@
     UIButton *butRightLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 170.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 40*2 + 40.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 40 + 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"已有账号,立即登录"];
     [imageBigPic addSubview:butRightLogin];
     butRightLogin.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [butRightLogin addTarget:self action:@selector(haveNumberRightNowLogin:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//已有账号,立即登录按钮
+- (void)haveNumberRightNowLogin:(UIButton *)button
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //验证手机号按钮
