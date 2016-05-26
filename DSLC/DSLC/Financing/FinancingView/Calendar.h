@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UIView *viewDown;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 
 @end

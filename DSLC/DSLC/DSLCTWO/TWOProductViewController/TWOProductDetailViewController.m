@@ -333,7 +333,7 @@
     if (section == 0) {
         return 3;
     } else if(section == 1){
-        return 1;
+        return 2;
     } else {
         return 3;
     }
@@ -350,7 +350,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 9;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -380,6 +380,9 @@
             
             cell.titleLabel.text = @"资产详情";
             
+        } else {
+            
+            cell.titleLabel.text = @"产品详情";
         }
     } else if(indexPath.section == 2) {
         if (indexPath.row == 0) {
@@ -416,6 +419,11 @@
         } else if (indexPath.row == 2){
             TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
             pushVC(safeTestVC);
+        }
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 1) {
+            TWOProductDDetailViewController *productDDetailVC = [[TWOProductDDetailViewController alloc] init];
+            pushVC(productDDetailVC);
         }
     }
     

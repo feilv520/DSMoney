@@ -12,17 +12,16 @@
 #import "SettingGetDetailTableViewCell.h"
 #import "SettingGetMoneyTableViewCell.h"
 #import "SettingPieTableViewCell.h"
-#import "XYPieChart.h"
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
 #import "CastProduceViewController.h"
 #import "MyAccountProductView.h"
 
-@interface ProductSettingViewController () <UITableViewDataSource, UITableViewDelegate, XYPieChartDataSource, XYPieChartDelegate>
+@interface ProductSettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *mainTableView;
 
-@property (nonatomic, strong) XYPieChart *pieChartLeft;
+//@property (nonatomic, strong) XYPieChart *pieChartLeft;
 @property(nonatomic, strong) NSMutableArray *slices;
 @property(nonatomic, strong) NSArray        *sliceColors;
 
@@ -37,7 +36,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.pieChartLeft reloadData];
+//    [self.pieChartLeft reloadData];
 }
 
 - (void)viewDidLoad {
@@ -72,19 +71,19 @@
                        [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:1],
                        [UIColor colorWithRed:0/255.0 green:1 blue:1 alpha:1],nil];
     
-    self.pieChartLeft = [[XYPieChart alloc] initWithFrame:CGRectMake((150 / 375.0) * WIDTH_CONTROLLER_DEFAULT , 0, (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT, (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT)];
-    
-    [self.pieChartLeft setDelegate:self];
-    [self.pieChartLeft setDataSource:self];
-    [self.pieChartLeft setStartPieAngle:M_PI_2];
-    [self.pieChartLeft setAnimationSpeed:1.0];
-    [self.pieChartLeft setLabelFont:[UIFont fontWithName:@"DBLCDTempBlack" size:15]];
-    [self.pieChartLeft setLabelRadius:50];
-    [self.pieChartLeft setShowPercentage:YES];
-    [self.pieChartLeft setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
-    [self.pieChartLeft setPieCenter:CGPointMake(100, 100)];
-    [self.pieChartLeft setUserInteractionEnabled:NO];
-    [self.pieChartLeft setLabelShadowColor:[UIColor blackColor]];
+//    self.pieChartLeft = [[XYPieChart alloc] initWithFrame:CGRectMake((150 / 375.0) * WIDTH_CONTROLLER_DEFAULT , 0, (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT, (200 / 375.0) * WIDTH_CONTROLLER_DEFAULT)];
+//    
+//    [self.pieChartLeft setDelegate:self];
+//    [self.pieChartLeft setDataSource:self];
+//    [self.pieChartLeft setStartPieAngle:M_PI_2];
+//    [self.pieChartLeft setAnimationSpeed:1.0];
+//    [self.pieChartLeft setLabelFont:[UIFont fontWithName:@"DBLCDTempBlack" size:15]];
+//    [self.pieChartLeft setLabelRadius:50];
+//    [self.pieChartLeft setShowPercentage:YES];
+//    [self.pieChartLeft setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
+//    [self.pieChartLeft setPieCenter:CGPointMake(100, 100)];
+//    [self.pieChartLeft setUserInteractionEnabled:NO];
+//    [self.pieChartLeft setLabelShadowColor:[UIColor blackColor]];
     
     [self.navigationItem setTitle:@"账户资产"];
     
@@ -220,7 +219,7 @@
                 
             }
             
-            [cell addSubview:self.pieChartLeft];
+//            [cell addSubview:self.pieChartLeft];
             
             return cell;
             }
@@ -305,40 +304,40 @@
 #pragma mark - XYPieChart Data Source
 #pragma mark --------------------------------
 
-- (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
-{
-    return [self.slices count];
-}
-
-- (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index
-{
-//    NSLog(@"%ld",[[self.slices objectAtIndex:index] floatValue]);
-    return [[self.slices objectAtIndex:index] floatValue];
-}
-
-- (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
-{
-    return [self.sliceColors objectAtIndex:(index % self.sliceColors.count)];
-}
+//- (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
+//{
+//    return [self.slices count];
+//}
+//
+//- (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index
+//{
+////    NSLog(@"%ld",[[self.slices objectAtIndex:index] floatValue]);
+//    return [[self.slices objectAtIndex:index] floatValue];
+//}
+//
+//- (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
+//{
+//    return [self.sliceColors objectAtIndex:(index % self.sliceColors.count)];
+//}
 
 #pragma mark - XYPieChart Delegate
 #pragma mark --------------------------------
-- (void)pieChart:(XYPieChart *)pieChart willSelectSliceAtIndex:(NSUInteger)index
-{
-    NSLog(@"will select slice at index %ld",(unsigned long)index);
-}
-- (void)pieChart:(XYPieChart *)pieChart willDeselectSliceAtIndex:(NSUInteger)index
-{
-    NSLog(@"will deselect slice at index %ld",(unsigned long)index);
-}
-- (void)pieChart:(XYPieChart *)pieChart didDeselectSliceAtIndex:(NSUInteger)index
-{
-    NSLog(@"did deselect slice at index %ld",(unsigned long)index);
-}
-- (void)pieChart:(XYPieChart *)pieChart didSelectSliceAtIndex:(NSUInteger)index
-{
-    NSLog(@"did select slice at index %ld",(unsigned long)index);
-}
+//- (void)pieChart:(XYPieChart *)pieChart willSelectSliceAtIndex:(NSUInteger)index
+//{
+//    NSLog(@"will select slice at index %ld",(unsigned long)index);
+//}
+//- (void)pieChart:(XYPieChart *)pieChart willDeselectSliceAtIndex:(NSUInteger)index
+//{
+//    NSLog(@"will deselect slice at index %ld",(unsigned long)index);
+//}
+//- (void)pieChart:(XYPieChart *)pieChart didDeselectSliceAtIndex:(NSUInteger)index
+//{
+//    NSLog(@"did deselect slice at index %ld",(unsigned long)index);
+//}
+//- (void)pieChart:(XYPieChart *)pieChart didSelectSliceAtIndex:(NSUInteger)index
+//{
+//    NSLog(@"did select slice at index %ld",(unsigned long)index);
+//}
 
 //        totalMoney
 - (void)totalWithMoney{

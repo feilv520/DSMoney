@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -23,6 +23,7 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBN-mP-CF4">
                         <rect key="frame" x="15" y="10" width="157" height="30"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="4dh-ke-7gM"/>
                             <constraint firstAttribute="width" constant="157" id="aVb-hB-c4S"/>
@@ -33,12 +34,14 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7L-CK-XYu">
                         <rect key="frame" x="210" y="10" width="154" height="30"/>
+                        <animations/>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQt-3Q-lCN">
                         <rect key="frame" x="187" y="0.0" width="1" height="50"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="Tve-xH-ziF"/>
                             <constraint firstAttribute="width" constant="1" id="vVP-7q-eUP"/>
@@ -48,6 +51,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="WBN-mP-CF4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="0I0-9o-wde"/>
                     <constraint firstItem="R7L-CK-XYu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="7NN-lY-hMa"/>
@@ -65,6 +69,7 @@
                     <constraint firstItem="R7L-CK-XYu" firstAttribute="leading" secondItem="RQt-3Q-lCN" secondAttribute="trailing" constant="22" id="yHJ-40-nts"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>
                 <outlet property="labelLine" destination="RQt-3Q-lCN" id="mb9-id-h33"/>
