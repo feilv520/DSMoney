@@ -10,7 +10,6 @@
 
 @interface MCMPieChartView()
 @property (nonatomic,strong) MCMRotatedView *rotatedView;
-@property (nonatomic,strong) UIButton *centerView;
 @property (nonatomic,strong) UILabel *amountLabel;
 @property (nonatomic, strong) UILabel *title;
 @end

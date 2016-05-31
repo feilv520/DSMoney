@@ -271,7 +271,7 @@
         
             bfLabel.text = [NSString stringWithFormat:@"%.0lf%%",bfNumber * 100];
         }
-        if ([bfLabel.text floatValue] >= 10 && [bfLabel.text floatValue] < 94) {
+        if ([bfLabel.text floatValue] > 10 && [bfLabel.text floatValue] < 94) {
             
             monkeyImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * bfNumber, 86, 18, 30);
             bfLabel.frame = CGRectMake(CGRectGetMinX(monkeyImageView.frame) - 50, 93, 50, 20);

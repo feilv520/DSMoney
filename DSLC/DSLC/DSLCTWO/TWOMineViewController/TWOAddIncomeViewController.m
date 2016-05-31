@@ -8,12 +8,17 @@
 
 #import "TWOAddIncomeViewController.h"
 #import "TWOAddIncomeCell.h"
+#import "MCMPieChartView.h"
 
-@interface TWOAddIncomeViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TWOAddIncomeViewController () <UITableViewDataSource, UITableViewDelegate, PieChartDelegate>
 
 {
     UITableView *_tableView;
 }
+
+@property (nonatomic,strong) NSMutableArray *valueArray;
+@property (nonatomic,strong) NSMutableArray *colorArray;
+@property (nonatomic,strong) MCMPieChartView *pieChartView;
 
 @end
 
@@ -35,7 +40,26 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"累计收益"];
     
+    self.valueArray = [[NSMutableArray alloc] initWithObjects:
+                       [NSNumber numberWithInt:2],
+                       [NSNumber numberWithInt:3],
+                       [NSNumber numberWithInt:2],
+                       [NSNumber numberWithInt:3],
+                       nil];
+    
+    self.colorArray = [NSMutableArray arrayWithObjects:
+                       [UIColor colorWithRed:63.0 / 225.0 green:166.0 / 225.0 blue:252.0 / 225.0 alpha:1.0],
+                       [UIColor colorWithRed:124.0 / 225.0 green:207.0 / 225.0 blue:253.0 / 225.0 alpha:1.0],
+                       [UIColor colorWithRed:93.0 / 225.0 green:203.0 / 225.0 blue:224.0 / 225.0 alpha:1.0],
+                       [UIColor colorWithRed:180.0 / 225.0 green:228.0 / 225.0 blue:254.0 / 225.0 alpha:1.0],
+                       nil];
+    
     [self tableViewShow];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.pieChartView reloadChart];
 }
 
 - (void)tableViewShow
@@ -63,9 +87,24 @@
     UIView *viewUp = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 286.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor]];
     [_tableView.tableHeaderView addSubview:viewUp];
     
+    //add shadow img
+    CGRect pieFrame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 258.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) * 0.5, 10, 258.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 258.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    
+//    UIImage *shadowImg = [UIImage imageNamed:@"shadow.png"];
+//    UIImageView *shadowImgView = [[UIImageView alloc]initWithImage:shadowImg];
+//    shadowImgView.frame = CGRectMake(0, pieFrame.origin.y + PIE_HEIGHT*0.92, shadowImg.size.width/2, shadowImg.size.height/2);
+//    [viewUp addSubview:shadowImgView];
+    
+    self.pieChartView = [[MCMPieChartView alloc]initWithFrame:pieFrame withValue:self.valueArray withColor:self.colorArray];
+    self.pieChartView.delegate = self;
+    [viewUp addSubview:self.pieChartView];
+    [self.pieChartView setTitleText:@"在投资金"];
+    [self.pieChartView setAmountText:@"0元"];
+    self.pieChartView.centerView.hidden = YES;
+    
     UIView *viewUpLine = [CreatView creatViewWithFrame:CGRectMake(0, viewUp.frame.size.height - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
     [viewUp addSubview:viewUpLine];
-    viewUp.alpha = 0.3;
+    viewUpLine.alpha = 0.3;
     
     UIView *viewGray = [CreatView creatViewWithFrame:CGRectMake(0, viewUp.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 12.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor qianhuise]];
     [_tableView.tableHeaderView addSubview:viewGray];
@@ -131,6 +170,11 @@
     
     
     
+}
+
+- (void)selectedFinish:(MCMPieChartView *)pieChartView index:(NSInteger)index percent:(float)per
+{
+    NSLog(@"123");
 }
 
 - (void)didReceiveMemoryWarning {

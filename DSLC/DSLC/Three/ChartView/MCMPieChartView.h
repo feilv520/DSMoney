@@ -17,6 +17,7 @@
 @end
 
 @interface MCMPieChartView : UIView <RotatedViewDelegate>
+@property (nonatomic,strong) UIButton *centerView;
 @property(nonatomic, assign) id<PieChartDelegate> delegate;
 - (id)initWithFrame:(CGRect)frame withValue:(NSMutableArray *)valueArr withColor:(NSMutableArray *)colorArr;
 - (void)reloadChart;
