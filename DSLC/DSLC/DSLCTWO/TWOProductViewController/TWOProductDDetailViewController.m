@@ -10,6 +10,7 @@
 #import "TWOProductDetailTableViewCell.h"
 #import "TRankinglistViewController.h"
 #import "TWOProductDDDetailView.h"
+#import "TWOProductJinDuTableViewCell.h"
 
 @interface TWOProductDDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate> {
     UIButton *button1;
@@ -23,6 +24,13 @@
     UIView *firstView;
     UIScrollView *photoScrollView;
     UIPageControl *mainPageControl;
+    
+    CGSize size;
+    NSIndexPath *path;
+    
+    CGRect cellRect;
+    
+    BOOL moreOpenFlag;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -39,6 +47,8 @@
     
     openFlag = YES;
     
+    moreOpenFlag = NO;
+    
     titleArray = @[@"产品名称",@"产品类型",@"资产总额",@"预期年化收益率",@"开售时间",@"起息日",@"结息日",@"预计到账日",@"收益分配方式",@"融资方名称",@"项目定向用途",@"还款来源",@"抵押资产"];
     
     [self tableViewShow];
@@ -53,6 +63,7 @@
     _tableView.tableFooterView = [UIView new];
     _tableView.backgroundColor = [UIColor colorFromHexCode:@"#F5F6F7"];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOProductDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TWOProductJinDuTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuseJinDu"];
     
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
@@ -76,7 +87,23 @@
         }
     } else if (indexPath.section == 1) {
         
-        return 50;
+        if (indexPath.row == 0) {
+            return 50;
+        } else {
+            if (!openFlag) {
+                if (indexPath.row == path.row) {
+                    if (moreOpenFlag) {
+                        return 80 + size.height;
+                    } else {
+                        return 120;
+                    }
+                } else {
+                    return 120;
+                }
+            } else {
+                return 50;
+            }
+        }
     } else {
         if (indexPath.row == 0) {
             return 50;
@@ -91,7 +118,11 @@
     if (section == 0) {
         return 1;
     } else if (section == 1) {
-        return 14;
+        if (!openFlag) {
+            return 3;
+        } else {
+            return 14;
+        }
     } else {
         return 2;
     }
@@ -103,7 +134,6 @@
         
         return 0.1;
     } else if (section == 1) {
-        
         return 45;
     } else {
         
@@ -211,7 +241,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     TWOProductDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
     if (indexPath.section == 0) {
@@ -232,7 +261,7 @@
             cell.titleLabel.text = [titleArray objectAtIndex:indexPath.row - 1];
             cell.valueLabel.hidden = NO;
             cell.titleLabel.hidden = NO;
-        
+            
         }
     } else {
         if (indexPath.row == 0) {
@@ -243,8 +272,30 @@
         }
     }
     
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        } else {
+            if (!openFlag) {
+                TWOProductJinDuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseJinDu"];
+            
+                [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+                
+                if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+                    cell.lineView.frame = CGRectMake(cell.bianImageView.center.x, CGRectGetMaxY(cell.bianImageView.frame), 2, 65);
+                }
+                
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                return cell;
+            }
+        }
+    }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+    
 }
 
 - (void)button1Press:(id)sender{
@@ -321,6 +372,66 @@
 - (void)pushWithController:(UITapGestureRecognizer *)tap{
     TRankinglistViewController *rankingVC = [TRankinglistViewController new];
     pushVC(rankingVC);
+}
+
+- (void)moreAction:(id)sender{
+    
+    moreOpenFlag = YES;
+    
+    TWOProductJinDuTableViewCell *oldCell = (TWOProductJinDuTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+    
+    oldCell.valueLabel.numberOfLines = 3;
+    
+    oldCell.valueLabel.frame = cellRect;
+    
+    [oldCell.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
+    oldCell.fuhaoImage.image = [UIImage imageNamed:@"TWOPDown"];
+    [oldCell.moreButton removeTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
+    [oldCell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    TWOProductJinDuTableViewCell * cell = (TWOProductJinDuTableViewCell *)[[sender superview] superview];
+    path = [self.tableView indexPathForCell:cell];
+    
+    cellRect = cell.valueLabel.frame;
+    
+    [cell.moreButton setTitle:@"收起" forState:UIControlStateNormal];
+    cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPUp"];
+    [cell.moreButton removeTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.moreButton addTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.valueLabel.text = @"本店于十一期间特推出一系列优惠，限时限量敬请选购！沙发：钻石品质，首领风范！床垫：华贵典雅，彰显时尚！尊贵而不失奢华，典雅却不失自然！温馨和浪漫的生活，我们与你一同创造！本店于十一期间特推出一系列优惠，限时限量敬请选购！沙发：钻石品质，首领风范！床垫：华贵典雅，彰显时尚！尊贵而不失奢华，典雅却不失自然！温馨和浪漫的生活，我们与你一同创造！";
+    
+    cell.valueLabel.numberOfLines = 0;
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
+    
+    size = [cell.valueLabel.text boundingRectWithSize:CGSizeMake(cell.valueLabel.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+
+    cell.valueLabel.frame = CGRectMake(cell.valueLabel.frame.origin.x, cell.valueLabel.frame.origin.y, cell.valueLabel.frame.size.width, size.height + 10);
+    
+    [self.tableView reloadData];
+}
+
+- (void)sMoreAction:(id)sender{
+    
+    moreOpenFlag = NO;
+    
+    TWOProductJinDuTableViewCell *cell = (TWOProductJinDuTableViewCell *)[[sender superview] superview];
+    
+    path = [self.tableView indexPathForCell:cell];
+    
+    [cell.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
+    cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPDown"];
+    [cell.moreButton removeTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.valueLabel.text = @"本店于十一期间特推出一系列优惠，限时限量敬请选购！沙发：钻石品质，首领风范！床垫：华贵典雅，彰显时尚！尊贵而不失奢华，典雅却不失自然！温馨和浪漫的生活，我们与你一同创造！";
+    
+    cell.valueLabel.numberOfLines = 3;
+    
+    cell.valueLabel.frame = cellRect;
+    
+    [self.tableView reloadData];
+
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,6 +8,7 @@
 
 #import "TWOMyGameScoreViewController.h"
 #import "TWOMyGameScoreCell.h"
+#import "PNChart.h"
 
 @interface TWOMyGameScoreViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -47,7 +48,7 @@
     _tableView.delegate = self;
     _tableView.tableFooterView = [UIView new];
     
-    viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 177.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+    viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 247.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     _tableView.tableHeaderView = viewHead;
     viewHead.backgroundColor = [UIColor orangeColor];
     
@@ -68,6 +69,13 @@
     NSRange shuziRange = NSMakeRange(0, [[scoreString string] rangeOfString:@"分"].location);
     [scoreString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:shuziRange];
     [labelZongScore setAttributedText:scoreString];
+    
+    PNChart * lineChart = [[PNChart alloc] initWithFrame:CGRectMake(0, 60.0, WIDTH_CONTROLLER_DEFAULT, 180.0)];
+    lineChart.backgroundColor = [UIColor clearColor];
+    [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5"]];
+    [lineChart setYValues:@[@"1",@"8",@"2",@"6",@"3"]];
+    [lineChart strokeChart];
+    [viewHead addSubview:lineChart];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

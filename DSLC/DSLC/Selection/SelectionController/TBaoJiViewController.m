@@ -12,6 +12,7 @@
 
 {
     UIWebView *myWebView;
+    UIButton *closeItem;
 }
 
 @end
@@ -24,6 +25,24 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"爆击抽奖"];
+    
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
+    UIButton * backItem = [[UIButton alloc]initWithFrame:CGRectMake(0, 8, 20, 20)];
+    [backItem setImage:[UIImage imageNamed:@"750产品111"] forState:UIControlStateNormal];
+    [backItem setImage:[UIImage imageNamed:@"750产品111"] forState:UIControlStateSelected];
+    [backItem addTarget:self action:@selector(buttonReturn:) forControlEvents:UIControlEventTouchUpInside];
+    [backView addSubview:backItem];
+    
+    closeItem = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 40, 36)];
+    [closeItem setTitle:@"关闭" forState:UIControlStateNormal];
+    [closeItem setTitleColor:Color_White forState:UIControlStateNormal];
+    [closeItem addTarget:self action:@selector(clickedCloseItem:) forControlEvents:UIControlEventTouchUpInside];
+    closeItem.hidden = YES;
+    [backView addSubview:closeItem];
+    
+    UIBarButtonItem * leftItemBar = [[UIBarButtonItem alloc]initWithCustomView:backView];
+    self.navigationItem.leftBarButtonItem = leftItemBar;
+
     
     [self contentShow];
 }
@@ -38,8 +57,8 @@
     myWebView.scrollView.showsHorizontalScrollIndicator = NO;
     myWebView.scrollView.bounces = NO;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",self.tokenString];
-//    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/prize/index.html?token=%@",self.tokenString];
+//    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",self.tokenString];
+    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/prize/index.html?token=%@",self.tokenString];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -53,7 +72,7 @@
     
     if ([myWebView canGoBack]) {
         [myWebView goBack];
-        
+        closeItem.hidden = NO;
     }else{
         
         NSString *tokenString = [wView stringByEvaluatingJavaScriptFromString:@"jsLayout();"];
@@ -165,6 +184,10 @@
     }];
 }
 
+#pragma mark - clickedCloseItem
+- (void)clickedCloseItem:(UIButton *)btn{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
