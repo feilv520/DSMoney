@@ -16,6 +16,8 @@
 #import "TWOProductPaySuccessViewController.h"
 #import "TWOProductMMakeSureView.h"
 #import "TWOProductMonkeyView.h"
+#import "TWOUseRedBagViewController.h"
+#import "TWOUseTicketViewController.h"
 
 @interface TWOProductMakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>{
     
@@ -342,6 +344,15 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            TWOUseRedBagViewController *useRedBagVC = [[TWOUseRedBagViewController alloc] init];
+            pushVC(useRedBagVC);
+        } else {
+            TWOUseTicketViewController *useTicketVC = [[TWOUseTicketViewController alloc] init];
+            pushVC(useTicketVC);
+        }
+    }
 }
 
 // 充值按钮

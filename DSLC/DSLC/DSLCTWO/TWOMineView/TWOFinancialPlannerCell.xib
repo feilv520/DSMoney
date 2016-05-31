@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="CenturyGothic.TTF">
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="KGk-i7-Jjw" customClass="TWOFinancialPlannerCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XgA-HT-NJb">
+                        <rect key="frame" x="9" y="25" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="7DS-fQ-K5I"/>
+                            <constraint firstAttribute="height" constant="40" id="7ty-Ki-t5e"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZD-xZ-l9O">
+                        <rect key="frame" x="60" y="27" width="252" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="P5S-kb-PUU"/>
+                            <constraint firstAttribute="width" constant="252" id="bB7-YB-wpS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" red="0.2627450980392157" green="0.29019607843137252" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xor-wp-nsq">
+                        <rect key="frame" x="60" y="50" width="252" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="5D2-zH-Ol5"/>
+                            <constraint firstAttribute="width" constant="252" id="eV3-kn-UrH"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
+                        <color key="textColor" red="0.14117647058823529" green="0.57647058823529407" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Inn-E3-dV0">
+                        <rect key="frame" x="353" y="37" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="MDL-Km-vbu"/>
+                            <constraint firstAttribute="height" constant="16" id="O9v-ap-ncc"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="kZD-xZ-l9O" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="19" id="0ww-ZP-0vZ"/>
+                    <constraint firstItem="Inn-E3-dV0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="29" id="CbM-gr-Vk1"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Xor-wp-nsq" secondAttribute="trailing" constant="55" id="Ga3-qe-OZM"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Inn-E3-dV0" secondAttribute="trailing" constant="-2" id="Oxi-13-hRH"/>
+                    <constraint firstItem="XgA-HT-NJb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="R8e-J0-b4i"/>
+                    <constraint firstItem="Xor-wp-nsq" firstAttribute="leading" secondItem="XgA-HT-NJb" secondAttribute="trailing" constant="11" id="dCY-41-2Fw"/>
+                    <constraint firstItem="Inn-E3-dV0" firstAttribute="leading" secondItem="kZD-xZ-l9O" secondAttribute="trailing" constant="41" id="dyq-am-EEM"/>
+                    <constraint firstItem="Xor-wp-nsq" firstAttribute="top" secondItem="kZD-xZ-l9O" secondAttribute="bottom" constant="3" id="fqz-dP-RCg"/>
+                    <constraint firstItem="kZD-xZ-l9O" firstAttribute="leading" secondItem="XgA-HT-NJb" secondAttribute="trailing" constant="11" id="jTR-Dj-JDh"/>
+                    <constraint firstItem="XgA-HT-NJb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="17" id="nse-dp-qeF"/>
+                </constraints>
+            </tableViewCellContentView>
+            <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+            <connections>
+                <outlet property="imageHead" destination="XgA-HT-NJb" id="Tv4-v1-tbp"/>
+                <outlet property="imageRight" destination="Inn-E3-dV0" id="peX-ay-MQj"/>
+                <outlet property="labelInviteCode" destination="Xor-wp-nsq" id="Ld2-BQ-OKJ"/>
+                <outlet property="labelName" destination="kZD-xZ-l9O" id="RTV-dO-1ZC"/>
+            </connections>
+            <point key="canvasLocation" x="733.5" y="394"/>
+        </tableViewCell>
+    </objects>
+</document>

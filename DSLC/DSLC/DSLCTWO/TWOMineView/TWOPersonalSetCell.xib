@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -25,8 +25,8 @@
                         <rect key="frame" x="9" y="20" width="90" height="16"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="90" id="7wZ-JC-vgK"/>
-                            <constraint firstAttribute="height" constant="16" id="TdC-si-rMD"/>
+                            <constraint firstAttribute="width" constant="90" id="ViY-sA-wHs"/>
+                            <constraint firstAttribute="height" constant="16" id="kqq-0Z-YY3"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <color key="textColor" red="0.38431372549019605" green="0.396078431372549" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
@@ -36,16 +36,16 @@
                         <rect key="frame" x="355" y="20" width="16" height="16"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="16" id="AaF-7b-z3l"/>
-                            <constraint firstAttribute="height" constant="16" id="BL4-s4-Msf"/>
+                            <constraint firstAttribute="height" constant="16" id="74V-Aw-pu4"/>
+                            <constraint firstAttribute="width" constant="16" id="KKR-hk-tjJ"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pms-pB-FXU">
                         <rect key="frame" x="100" y="13" width="249" height="30"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="5ED-z7-hpi"/>
-                            <constraint firstAttribute="width" constant="249" id="S0b-tB-Vor"/>
+                            <constraint firstAttribute="height" constant="30" id="0md-pd-7PC"/>
+                            <constraint firstAttribute="width" constant="249" id="Dmo-kO-Z54"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
                         <color key="textColor" red="0.5490196078431373" green="0.56470588235294117" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
@@ -55,23 +55,22 @@
                         <rect key="frame" x="291" y="20" width="16" height="16"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="16" id="XCX-gY-8gN"/>
-                            <constraint firstAttribute="height" constant="16" id="wkO-jW-MS4"/>
+                            <constraint firstAttribute="width" constant="16" id="2wy-9b-ml5"/>
+                            <constraint firstAttribute="height" constant="16" id="zSr-Op-ZoM"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <animations/>
                 <constraints>
-                    <constraint firstItem="Umy-7Y-Gcq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="8Bb-mm-Ppj"/>
-                    <constraint firstItem="ego-Z7-48i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="BiO-1j-ybo"/>
-                    <constraint firstItem="Umy-7Y-Gcq" firstAttribute="leading" secondItem="ego-Z7-48i" secondAttribute="trailing" constant="192" id="Hbz-fd-iED"/>
-                    <constraint firstItem="G2E-z4-uI2" firstAttribute="leading" secondItem="Umy-7Y-Gcq" secondAttribute="trailing" constant="48" id="Kaq-RG-f7h"/>
-                    <constraint firstItem="G2E-z4-uI2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="OcN-0B-gwc"/>
-                    <constraint firstItem="pms-pB-FXU" firstAttribute="leading" secondItem="ego-Z7-48i" secondAttribute="trailing" constant="1" id="VNx-jI-iYo"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="G2E-z4-uI2" secondAttribute="trailing" constant="-4" id="WKa-GO-mN9"/>
-                    <constraint firstItem="pms-pB-FXU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="f5i-Q7-wjQ"/>
-                    <constraint firstItem="ego-Z7-48i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="fbT-jA-A3L"/>
-                    <constraint firstItem="G2E-z4-uI2" firstAttribute="leading" secondItem="pms-pB-FXU" secondAttribute="trailing" constant="6" id="scR-U3-EXo"/>
+                    <constraint firstItem="G2E-z4-uI2" firstAttribute="leading" secondItem="Umy-7Y-Gcq" secondAttribute="trailing" constant="48" id="9MO-oa-0fU"/>
+                    <constraint firstItem="ego-Z7-48i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="Egr-qN-4OT"/>
+                    <constraint firstItem="pms-pB-FXU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="FUQ-KD-ykg"/>
+                    <constraint firstItem="G2E-z4-uI2" firstAttribute="leading" secondItem="pms-pB-FXU" secondAttribute="trailing" constant="6" id="LXU-Hv-RXT"/>
+                    <constraint firstItem="Umy-7Y-Gcq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="RgY-1m-ydM"/>
+                    <constraint firstItem="pms-pB-FXU" firstAttribute="leading" secondItem="ego-Z7-48i" secondAttribute="trailing" constant="1" id="asy-h4-D3r"/>
+                    <constraint firstItem="G2E-z4-uI2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="dLA-ZC-ygO"/>
+                    <constraint firstItem="ego-Z7-48i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="fpt-TM-E32"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="G2E-z4-uI2" secondAttribute="trailing" constant="-4" id="u7B-zs-xwW"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>

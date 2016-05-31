@@ -16,6 +16,9 @@
 #import "TWOEmailViewController.h"
 #import "TWOSafeSetViewController.h"
 #import "TWOAboutDSLCViewController.h"
+#import "TWOFinancialPlannerListViewController.h"
+#import "TWOMyOwnerPlannerViewController.h"
+#import "TWOMyClientViewController.h"
 
 @interface TWOPersonalSetViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -183,7 +186,17 @@
         }
     } else {
         if (indexPath.row == 0) {
+//            我的理财师
+//            TWOMyOwnerPlannerViewController *myOwnerPlanner = [[TWOMyOwnerPlannerViewController alloc] init];
+//            pushVC(myOwnerPlanner);
             
+//            理财师列表页
+//            TWOFinancialPlannerListViewController *financialPlannerVC = [[TWOFinancialPlannerListViewController alloc] init];
+//            pushVC(financialPlannerVC);
+            
+//            我的客户列表
+            TWOMyClientViewController *myClientVC = [[TWOMyClientViewController alloc] init];
+            pushVC(myClientVC);
         } else {
 //            关于大圣理财
             TWOAboutDSLCViewController *aboutDSLC = [[TWOAboutDSLCViewController alloc] init];

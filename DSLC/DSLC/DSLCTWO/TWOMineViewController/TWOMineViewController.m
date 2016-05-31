@@ -21,6 +21,7 @@
 #import "TWOUsableMoneyViewController.h"
 #import "TWOLoginAPPViewController.h"
 #import "TWOMoneyMoreFinishViewController.h"
+#import "TWORedBagViewController.h"
 
 @interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
@@ -362,6 +363,9 @@
             NewInviteViewController *inviteVC = [[NewInviteViewController alloc] init];
             [self.navigationController pushViewController:inviteVC animated:YES];
             
+        } else {
+            TWORedBagViewController *redBagVC = [[TWORedBagViewController alloc] init];
+            pushVC(redBagVC);
         }
     }
 }

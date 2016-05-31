@@ -23,7 +23,7 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V2c-ed-1OU">
-                        <rect key="frame" x="291" y="13" width="82" height="30"/>
+                        <rect key="frame" x="293" y="13" width="82" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Q2N-C9-BO6"/>
                             <constraint firstAttribute="width" constant="82" id="pKN-uN-yBN"/>
@@ -42,21 +42,20 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VBR-Rm-m6f">
                         <rect key="frame" x="142" y="26" width="90" height="90"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="90" id="gAN-ql-hRB"/>
-                            <constraint firstAttribute="height" constant="90" id="jDn-yq-92f"/>
+                            <constraint firstAttribute="width" constant="90" id="S28-80-mQs"/>
+                            <constraint firstAttribute="height" constant="90" id="YYH-DL-ygX"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="V2c-ed-1OU" secondAttribute="trailing" constant="-6" id="142-PF-ncd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="V2c-ed-1OU" secondAttribute="trailing" constant="-8" id="142-PF-ncd"/>
                     <constraint firstItem="l5C-Dk-TJI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="3SW-dq-BtV"/>
-                    <constraint firstItem="V2c-ed-1OU" firstAttribute="leading" secondItem="VBR-Rm-m6f" secondAttribute="trailing" constant="59" id="7Dj-bo-7eG"/>
-                    <constraint firstItem="VBR-Rm-m6f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="18" id="Adw-oN-nXF"/>
-                    <constraint firstItem="VBR-Rm-m6f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="134" id="Aeb-rv-lcM"/>
                     <constraint firstItem="l5C-Dk-TJI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="Lmq-Lm-cSg"/>
                     <constraint firstItem="nju-NC-aNM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="VgW-N7-mDJ"/>
                     <constraint firstItem="nju-NC-aNM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="dD6-sF-8TK"/>
                     <constraint firstItem="V2c-ed-1OU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="j7b-Mw-cFl"/>
+                    <constraint firstItem="V2c-ed-1OU" firstAttribute="leading" secondItem="VBR-Rm-m6f" secondAttribute="trailing" constant="61" id="rEJ-Pr-8Mk"/>
+                    <constraint firstItem="VBR-Rm-m6f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="18" id="rm9-Na-IOZ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="nju-NC-aNM" secondAttribute="trailing" constant="1" id="sXZ-LE-8Bl"/>
                     <constraint firstAttribute="trailingMargin" secondItem="l5C-Dk-TJI" secondAttribute="trailing" constant="1" id="wyi-qE-Jdl"/>
                 </constraints>

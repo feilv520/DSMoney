@@ -16,6 +16,7 @@
 #import "TWOMyPrerogativeMoneyViewController.h"
 #import "TWODSPublicBenefitViewController.h"
 #import "TWOFindActivityCenterViewController.h"
+#import "TWOMoneySweepViewController.h"
 
 @interface TWOFindViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -100,7 +101,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20);
+    return 100.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -109,6 +110,10 @@
 //        大圣公益行
         TWODSPublicBenefitViewController *publicBenefit = [[TWODSPublicBenefitViewController alloc] init];
         pushVC(publicBenefit);
+    } else {
+//        投资大扫描
+        TWOMoneySweepViewController *moneySweepVC = [[TWOMoneySweepViewController alloc] init];
+        pushVC(moneySweepVC);
     }
 }
 

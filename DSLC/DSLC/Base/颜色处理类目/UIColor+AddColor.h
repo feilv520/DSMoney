@@ -64,5 +64,6 @@
 + (UIColor *) orangecolor;//橙颜色
 + (UIColor *) fastZhuCeolor;//快速注册字体颜色
 + (UIColor *) quanColor;//圈颜色
++ (UIColor *) redBagBankColor;//使用红包背景颜色
 
 @end

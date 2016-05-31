@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,10 +15,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MdB-b8-g8r">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MdB-b8-g8r">
                         <rect key="frame" x="9" y="0.0" width="357" height="95"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="357" id="dNk-ke-w8z"/>
+                            <constraint firstAttribute="height" constant="95" id="r8T-vA-DxU"/>
+                        </constraints>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="MdB-b8-g8r" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="30S-cw-iSW"/>
+                    <constraint firstItem="MdB-b8-g8r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="AMi-oJ-pBk"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="MdB-b8-g8r" secondAttribute="trailing" constant="1" id="LGf-ao-TLT"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="imagePicture" destination="MdB-b8-g8r" id="rUQ-Yd-bqe"/>

@@ -33,8 +33,8 @@
                         <rect key="frame" x="82" y="19" width="285" height="20"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="3Ax-xh-ra0"/>
-                            <constraint firstAttribute="width" constant="285" id="Pz0-fj-6AU"/>
+                            <constraint firstAttribute="height" constant="20" id="DPK-13-anH"/>
+                            <constraint firstAttribute="width" constant="285" id="emw-lc-fLp"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
                         <color key="textColor" red="0.38431372549019605" green="0.396078431372549" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,12 +63,12 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="6Py-Tg-nmp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="4EE-t0-XHF"/>
-                    <constraint firstItem="Y8D-4e-AaN" firstAttribute="top" secondItem="vfO-Vm-NAu" secondAttribute="bottom" constant="6" id="C2Z-Jl-kEA"/>
+                    <constraint firstItem="zo2-IR-tPr" firstAttribute="top" secondItem="vfO-Vm-NAu" secondAttribute="bottom" constant="11" id="AyP-HQ-oG0"/>
                     <constraint firstItem="Y8D-4e-AaN" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-2" id="Fa1-Za-uML"/>
-                    <constraint firstItem="zo2-IR-tPr" firstAttribute="top" secondItem="vfO-Vm-NAu" secondAttribute="bottom" constant="11" id="Jsw-N0-LHV"/>
+                    <constraint firstItem="vfO-Vm-NAu" firstAttribute="leading" secondItem="6Py-Tg-nmp" secondAttribute="trailing" constant="7" id="JjF-PY-Qm0"/>
+                    <constraint firstItem="vfO-Vm-NAu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="K0H-w9-M2R"/>
                     <constraint firstItem="zo2-IR-tPr" firstAttribute="leading" secondItem="6Py-Tg-nmp" secondAttribute="trailing" constant="7" id="hU5-B3-kiH"/>
-                    <constraint firstItem="vfO-Vm-NAu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="i2w-40-Ava"/>
-                    <constraint firstItem="vfO-Vm-NAu" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="pPy-kt-YdV"/>
+                    <constraint firstItem="zo2-IR-tPr" firstAttribute="centerY" secondItem="Y8D-4e-AaN" secondAttribute="centerY" id="oLS-Q5-IPU"/>
                     <constraint firstItem="Y8D-4e-AaN" firstAttribute="leading" secondItem="zo2-IR-tPr" secondAttribute="trailing" constant="1" id="sBG-Qc-Q9f"/>
                     <constraint firstItem="6Py-Tg-nmp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="wM4-AN-pwm"/>
                 </constraints>

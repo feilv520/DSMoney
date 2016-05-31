@@ -74,6 +74,8 @@
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         butSubmit.layer.cornerRadius = 15;
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
+        butSubmit.layer.cornerRadius = 25;
     }
 }
 

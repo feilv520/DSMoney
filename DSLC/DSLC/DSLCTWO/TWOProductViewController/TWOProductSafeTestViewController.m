@@ -122,6 +122,10 @@
     viewWhite = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 214.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewWhite];
     
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        viewWhite.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 234.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    }
+    
     UIView *viewMiddle = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 0, 0.5, viewWhite.frame.size.height) backgroundColor:[UIColor grayColor]];
     [viewWhite addSubview:viewMiddle];
     viewMiddle.alpha = 0.3;
@@ -134,10 +138,14 @@
     UIView *viewAlert = [CreatView creatViewWithFrame:CGRectMake(0, viewWhite.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 101.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewAlert];
     
-    UILabel *labelResult = [CreatView creatWithLabelFrame:CGRectMake(10, 19.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 20, 16) backgroundColor:[UIColor whiteColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"匹配结果:"];
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        viewAlert.frame = CGRectMake(0, viewWhite.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 131.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    }
+    
+    UILabel *labelResult = [CreatView creatWithLabelFrame:CGRectMake(10, 19.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 20, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"匹配结果:"];
     [viewAlert addSubview:labelResult];
     
-    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, 19.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16 + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 20, viewAlert.frame.size.height - (19.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16 + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) - 10) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"您的投资倾向与本产品安全等级相吻合,可以购买此款产品"];
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, 19.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16 + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 20, viewAlert.frame.size.height - (19.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16 + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) - 10) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"您的投资倾向与本产品安全等级相吻合,可以购买此款产品"];
     [viewAlert addSubview:labelAlert];
     labelAlert.numberOfLines = 0;
     

@@ -248,4 +248,8 @@
     return [UIColor colorFromHexCode:@"#e5e5e5"];
 }
 
++ (UIColor *) redBagBankColor {
+    return [UIColor colorFromHexCode:@"#dbf0ff"];
+}
+
 @end
