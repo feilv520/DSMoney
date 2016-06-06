@@ -15,6 +15,7 @@
 #import "MDRadialProgressTheme.h"
 #import "AdModel.h"
 #import "BannerViewController.h"
+#import "TWOProductDemoTableViewCell.h"
 #import "TWOProductDetailViewController.h"
 
 @interface TWONewViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -115,6 +116,7 @@
     
     [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuseNNN"];
     [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TWOProductDemoTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuseNNew"];
     
     [self addTableViewWithHeader:_tableView];
     [self addTableViewWithFooter:_tableView];
@@ -140,7 +142,7 @@
         }
     } else {
         
-        return 145;
+        return 110;
     }
 }
 
@@ -224,53 +226,41 @@
             
         } else {
             
-            FinancingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNNN"];
-            cell.backgroundColor = [UIColor qianhuise];
+            TWOProductDemoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNNew"];
             
-            cell.viewGiPian.layer.cornerRadius = 4;
             cell.viewGiPian.layer.masksToBounds = YES;
-            cell.viewGiPian.layer.borderWidth = 1;
-            cell.viewGiPian.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+            cell.viewGiPian.layer.cornerRadius = 4;
             
-            cell.labelMonth.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
-            cell.labelMonth.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+            cell.labelproductName.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
+            cell.labelproductName.font = [UIFont systemFontOfSize:15];
             
             cell.viewLine.alpha = 0.7;
             cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
             
-            //            预期年化收益率
-            cell.labelPercentage.text = [[self.productListArray objectAtIndex:indexPath.row] productAnnualYield];
-            cell.labelPercentage.textColor = [UIColor daohanglan];
+            cell.labelPercentage.textColor = [UIColor blackColor];
             cell.labelPercentage.textAlignment = NSTextAlignmentCenter;
             
-            cell.labelYear.text = @"预期年化(%)";
-            cell.labelYear.textColor = [UIColor zitihui];
-            cell.labelYear.textAlignment = NSTextAlignmentCenter;
+            NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[[self.productListArray objectAtIndex:indexPath.row] productAnnualYield]]];
+            //    ,号前面是指起始位置 ,号后面是指到%这个位置截止的总长度
+            NSRange redRange = NSMakeRange(0, [[textString string] rangeOfString:@"%"].location + 1);
+            [textString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:redRange];
+            [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:redRange];
+            //    此句意思是指起始位置 是8.02%这个字符串的总长度减掉1 就是指起始位置是% 长度只有1
+            NSRange symbol = NSMakeRange([[textString string] length] - 1, 1);
+            [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:symbol];
+            [cell.labelPercentage setAttributedText:textString];
             
-            //            理财期限
             cell.labelDayNum.textAlignment = NSTextAlignmentCenter;
-            cell.labelDayNum.text = [[self.productListArray objectAtIndex:indexPath.row] productPeriod];
+            cell.labelDayNum.font = [UIFont systemFontOfSize:22];
             
-            cell.labelData.text = @"理财期限(天)";
-            cell.labelData.textAlignment = NSTextAlignmentCenter;
-            cell.labelData.textColor = [UIColor zitihui];
+            NSMutableAttributedString *textYear = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[[self.productListArray objectAtIndex:indexPath.row] productPeriod]]];
+            NSRange numText = NSMakeRange(0, [[textYear string] rangeOfString:@"天"].location);
+            [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:numText];
+            NSRange dayText = NSMakeRange([[textYear string] length] - 1, 1);
+            [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:dayText];
+            [cell.labelDayNum setAttributedText:textYear];
             
-            if (WIDTH_CONTROLLER_DEFAULT == 320) {
-                
-                cell.labelPercentage.font = [UIFont fontWithName:@"CenturyGothic" size:22];
-                cell.labelYear.font = [UIFont fontWithName:@"CenturyGothic" size:10];
-                
-                cell.labelDayNum.font = [UIFont fontWithName:@"CenturyGothic" size:17];
-                cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:10];
-                
-            } else {
-                
-                cell.labelPercentage.font = [UIFont fontWithName:@"CenturyGothic" size:22];
-                cell.labelYear.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-                
-                cell.labelDayNum.font = [UIFont fontWithName:@"CenturyGothic" size:17];
-                cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-            }
+//            NSLog(@"88888888-%ld",(long)indexPath.row);
             
             if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"4"]) {
                 
@@ -288,7 +278,10 @@
                 CGFloat onePriceNumber = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] * 0.01;
                 
                 CGFloat ninetyPriceNumber = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] * 0.99;
-                
+                //        if ([[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] isEqualToString:[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]) {
+                //
+                //            cell.quanView.progressCounter = 1;
+                //        } else
                 if (hadSellNumber < onePriceNumber){
                     
                     cell.quanView.progressCounter = onePriceNumber;
@@ -300,35 +293,34 @@
                     cell.quanView.progressCounter = hadSellNumber;
                 }
                 
-                bfFloat = cell.quanView.progressCounter;
                 cell.quanView.theme.sliceDividerHidden = YES;
                 
             }
-            
             //    设置进度条的进度值 并动画展示
-            //            CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
+            //        CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
             //
-            //            CGFloat bLL = 1.0 - bL;
+            //        CGFloat bLL = 1.0 - bL;
             
-            //            [cell.progressView setProgress:bLL animated:YES];
-            //            //    设置进度条的颜色
-            //            cell.progressView.trackTintColor = [UIColor progressBackColor];
-            //            //    设置进度条的进度颜色
-            //            cell.progressView.progressTintColor = [UIColor progressColor];
+            //        [cell.progressView setProgress:bLL animated:YES];
+            //        //    设置进度条的颜色
+            //        cell.progressView.trackTintColor = [UIColor progressBackColor];
+            //        //    设置进度条的进度颜色
+            //        cell.progressView.progressTintColor = [UIColor progressColor];
             
             cell.backgroundColor = [UIColor huibai];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
+
         }
     } else {
         
-        FinancingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNNN"];
+        TWOProductDemoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNNew"];
         
         cell.viewGiPian.layer.cornerRadius = 4;
         cell.viewGiPian.layer.masksToBounds = YES;
         
-        cell.labelMonth.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
-        cell.labelMonth.font = [UIFont systemFontOfSize:15];
+        cell.labelproductName.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
+        cell.labelproductName.font = [UIFont systemFontOfSize:15];
         
         cell.viewLine.alpha = 0.7;
         cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -339,17 +331,12 @@
         NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[[self.productListArray objectAtIndex:indexPath.row] productAnnualYield]]];
         //    ,号前面是指起始位置 ,号后面是指到%这个位置截止的总长度
         NSRange redRange = NSMakeRange(0, [[textString string] rangeOfString:@"%"].location);
-        [textString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:redRange];
+        [textString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:redRange];
         [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:redRange];
         //    此句意思是指起始位置 是8.02%这个字符串的总长度减掉1 就是指起始位置是% 长度只有1
         NSRange symbol = NSMakeRange([[textString string] length] - 1, 1);
         [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:symbol];
         [cell.labelPercentage setAttributedText:textString];
-        
-        cell.labelYear.text = @"预期年化(%)";
-        cell.labelYear.textColor = [UIColor zitihui];
-        cell.labelYear.textAlignment = NSTextAlignmentCenter;
-        cell.labelYear.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.labelDayNum.textAlignment = NSTextAlignmentCenter;
         cell.labelDayNum.font = [UIFont systemFontOfSize:22];
@@ -360,11 +347,6 @@
         NSRange dayText = NSMakeRange([[textYear string] length] - 1, 1);
         [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:dayText];
         [cell.labelDayNum setAttributedText:textYear];
-        
-        cell.labelData.text = @"理财期限(天)";
-        cell.labelData.textAlignment = NSTextAlignmentCenter;
-        cell.labelData.textColor = [UIColor zitihui];
-        cell.labelData.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         NSLog(@"88888888-%ld",(long)indexPath.row);
         

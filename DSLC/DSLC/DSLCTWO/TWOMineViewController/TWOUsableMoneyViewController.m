@@ -154,6 +154,13 @@
         
         [indexButton setSelected:YES];
         
+        butLiftMoney.hidden = YES;
+        butChongZhi.hidden = YES;
+        
+        [app.tabBarVC setSuppurtGestureTransition:NO];
+        [app.tabBarVC setTabbarViewHidden:NO];
+        [self.navigationController popViewControllerAnimated:YES];
+        
     } else {
         TWOUsableAllMoneyViewController *usableAllMVC = [[TWOUsableAllMoneyViewController alloc] init];
         pushVC(usableAllMVC);

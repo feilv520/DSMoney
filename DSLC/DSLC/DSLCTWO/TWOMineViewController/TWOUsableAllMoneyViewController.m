@@ -80,42 +80,44 @@
 
 - (void)showSelectionView{
     
-    selectionView = [[UIView alloc] initWithFrame:CGRectMake(0, -150, WIDTH_CONTROLLER_DEFAULT, 150)];
-    
-    selectionView.backgroundColor = Color_White;
-    [self.view addSubview:selectionView];
-    
-    NSArray *nameArray = @[@"充值",@"提现",@"投资",@"回款",@"收益",@"红包"];
-    
-    CGFloat marginX = WIDTH_CVIEW_DEFAULT * (23 / 375.0);
-    CGFloat marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
-    
-    if (WIDTH_CONTROLLER_DEFAULT == 414.0){
-        marginX = WIDTH_CVIEW_DEFAULT * (35 / 375.0);
-        marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
-    }
-    CGFloat buttonX = WIDTH_CVIEW_DEFAULT * (90 / 375.0);
-    CGFloat buttonY = HEIGHT_CVIEW_DEFAULT * (37 / 667.0);
-    
-    for (NSInteger i = 0; i < nameArray.count; i++) {
-        NSBundle *rootBundle = [NSBundle mainBundle];
-        MSelectionView *buttonView = [[rootBundle loadNibNamed:@"MSelectionView" owner:nil options:nil] lastObject];
+    if (selectionView == nil) {
+        selectionView = [[UIView alloc] initWithFrame:CGRectMake(0, -150, WIDTH_CONTROLLER_DEFAULT, (150 / 667.0) * HEIGHT_CONTROLLER_DEFAULT)];
         
-        CGFloat bVX = marginX + (i % 3) * (marginX + buttonX);
-        CGFloat bVY = marginY + (i / 3) * (marginY + buttonY);
+        selectionView.backgroundColor = Color_White;
+        [self.view addSubview:selectionView];
         
-        buttonView.frame = CGRectMake(bVX, bVY, buttonX, buttonY);
+        NSArray *nameArray = @[@"全部",@"充值",@"提现",@"投资",@"兑付",@"加息收益"];
         
-        [buttonView.selectionButton setTitle:[nameArray objectAtIndex:i] forState:UIControlStateNormal];
+        CGFloat marginX = WIDTH_CVIEW_DEFAULT * (23 / 375.0);
+        CGFloat marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
         
-        [buttonView.selectionButton setBackgroundImage:[UIImage imageNamed:@"矩形-10"] forState:UIControlStateNormal];
-        [buttonView.selectionButton setBackgroundImage:[UIImage imageNamed:@"anniuS"] forState:UIControlStateSelected];
+        if (WIDTH_CONTROLLER_DEFAULT == 414.0){
+            marginX = WIDTH_CVIEW_DEFAULT * (35 / 375.0);
+            marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
+        }
+        CGFloat buttonX = WIDTH_CVIEW_DEFAULT * (90 / 375.0);
+        CGFloat buttonY = HEIGHT_CVIEW_DEFAULT * (37 / 667.0);
         
-        buttonView.selectionButton.tag = i;
-        
-        [buttonView.selectionButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [selectionView addSubview:buttonView];
+        for (NSInteger i = 0; i < nameArray.count; i++) {
+            NSBundle *rootBundle = [NSBundle mainBundle];
+            MSelectionView *buttonView = [[rootBundle loadNibNamed:@"MSelectionView" owner:nil options:nil] lastObject];
+            
+            CGFloat bVX = marginX + (i % 3) * (marginX + buttonX);
+            CGFloat bVY = marginY + (i / 3) * (marginY + buttonY);
+            
+            buttonView.frame = CGRectMake(bVX, bVY, buttonX, buttonY);
+            
+            [buttonView.selectionButton setTitle:[nameArray objectAtIndex:i] forState:UIControlStateNormal];
+            
+            [buttonView.selectionButton setBackgroundImage:[UIImage imageNamed:@"矩形-10"] forState:UIControlStateNormal];
+            [buttonView.selectionButton setBackgroundImage:[UIImage imageNamed:@"anniuS"] forState:UIControlStateSelected];
+            
+            buttonView.selectionButton.tag = i;
+            
+            [buttonView.selectionButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [selectionView addSubview:buttonView];
+        }
     }
     
 }

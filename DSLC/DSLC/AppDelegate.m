@@ -84,16 +84,16 @@
     
     [MobClick startWithAppkey:@"5642ad7e67e58e8463006218" reportPolicy:BATCH   channelId:@""];
     
-    NSMutableDictionary *handDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
-    
-    NSString *flag = [handDic objectForKey:@"handFlag"];
+//    NSMutableDictionary *handDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
+//    
+//    NSString *flag = [handDic objectForKey:@"handFlag"];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.window.backgroundColor = [UIColor whiteColor];
     
-    if ([flag isEqualToString:@"NO"] || flag == nil) {
-        
+    if ([[self.flagDic objectForKey:@"FristOpen"] isEqualToString:@"NO"]) {
+    
 ////        1.0首页
 //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
 //        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
@@ -125,12 +125,12 @@
         UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:loginAPPVC];
         
 //        2.0
-//        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
+        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
         self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
 //        1.0
 //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
         
-//        2.0
+////        2.0
         butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
         butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
         
@@ -168,14 +168,14 @@
         
     } else {
 //         手势
-        MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
-        self.window.rootViewController = myHandVC;
+//        MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
+//        self.window.rootViewController = myHandVC;
         
         // 欢迎页
-//        WelcomeViewController *welcome = [[WelcomeViewController alloc] init];
-//        self.window.rootViewController = welcome;
+        WelcomeViewController *welcome = [[WelcomeViewController alloc] init];
+        self.window.rootViewController = welcome;
     }
-    
+
     
     return YES;
 }

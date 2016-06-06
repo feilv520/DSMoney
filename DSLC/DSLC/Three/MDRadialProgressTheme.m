@@ -32,7 +32,7 @@ static const int kMaxFontSize = 12;
 	self = [super init];
 	if (self) {
 		// View
-		self.completedColor = [UIColor daohanglan];
+		self.completedColor = [UIColor colorFromHexCode:@"2493e7"];
 //		self.incompletedColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
         self.incompletedColor = [UIColor huiseColor];
 		self.sliceDividerColor = [UIColor whiteColor];

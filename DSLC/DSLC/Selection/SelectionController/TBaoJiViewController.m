@@ -33,7 +33,7 @@
     [backItem addTarget:self action:@selector(buttonReturn:) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:backItem];
     
-    closeItem = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 40, 36)];
+    closeItem = [[UIButton alloc]initWithFrame:CGRectMake(30, 0, 40, 36)];
     [closeItem setTitle:@"关闭" forState:UIControlStateNormal];
     [closeItem setTitleColor:Color_White forState:UIControlStateNormal];
     [closeItem addTarget:self action:@selector(clickedCloseItem:) forControlEvents:UIControlEventTouchUpInside];
@@ -57,8 +57,8 @@
     myWebView.scrollView.showsHorizontalScrollIndicator = NO;
     myWebView.scrollView.bounces = NO;
     
-//    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",self.tokenString];
-    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/prize/index.html?token=%@",self.tokenString];
+    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",self.tokenString];
+//    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/prize/index.html?token=%@",self.tokenString];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -186,7 +186,45 @@
 
 #pragma mark - clickedCloseItem
 - (void)clickedCloseItem:(UIButton *)btn{
+    UIWebView *wView = (UIWebView *)[self.view viewWithTag:9092];
+    
+    NSString *tokenString = [wView stringByEvaluatingJavaScriptFromString:@"jsLayout();"];
+    
+    NSLog(@"%@",tokenString);
+    
+    if ([tokenString isEqualToString:@""]) {
+        [self.view resignFirstResponder];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
+    if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+        [FileOfManage createWithFile:@"Member.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSString stringWithFormat:@"%@",tokenString],@"token",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+    } else {
+        NSMutableDictionary *usersDic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        //设置属性值,没有的数据就新建，已有的数据就修改。
+        [usersDic setObject:[NSString stringWithFormat:@"%@",tokenString] forKey:@"token"];
+        //写入文件
+        [usersDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+    }
+    
+    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+        [FileOfManage createWithFile:@"isLogin.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    } else {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    }
+    
+    [self getData];
+    
+    [self.view resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {
