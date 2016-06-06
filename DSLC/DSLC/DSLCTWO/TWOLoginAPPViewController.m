@@ -213,6 +213,7 @@
 //    短信验证码输入框
     textFieldMessage = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageMessage.frame.size.width - 64 - 10, 20) setPlaceholder:@"短信验证码" setTintColor:[UIColor whiteColor]];
     [imageMessage addSubview:textFieldMessage];
+    textFieldMessage.backgroundColor = [UIColor greenColor];
     textFieldMessage.textColor = [UIColor whiteColor];
     textFieldMessage.keyboardType = UIKeyboardTypeNumberPad;
     textFieldMessage.delegate = self;
@@ -229,6 +230,13 @@
     [imageGet addSubview:buttonGet];
     buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonGet addTarget:self action:@selector(getMessageYanZhengMa:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        [textFieldMessage setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+        [textFieldMessage setValue:[UIFont systemFontOfSize:13] forKeyPath:@"_placeholderLabel.font"];
+    }
 }
 
 - (void)textFieldClicked:(UITextField *)textField

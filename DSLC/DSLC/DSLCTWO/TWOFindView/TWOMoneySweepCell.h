@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelAlpha;
 @property (weak, nonatomic) IBOutlet UILabel *labelContent;
 @property (weak, nonatomic) IBOutlet UIButton *buttonSee;
+@property (weak, nonatomic) IBOutlet UIButton *buttonPlay;
 
 @end

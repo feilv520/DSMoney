@@ -19,6 +19,8 @@
 #import "TWOFinancialPlannerListViewController.h"
 #import "TWOMyOwnerPlannerViewController.h"
 #import "TWOMyClientViewController.h"
+#import "TWOAddressManageViewController.h"
+#import "TWOAddressAlreadySetViewController.h"
 
 @interface TWOPersonalSetViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -81,7 +83,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 5;
+        return 6;
     } else {
         return 2;
     }
@@ -91,7 +93,7 @@
 {
     TWOPersonalSetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    NSArray *titleArray = @[@[@"银行卡", @"实名认证", @"手机号", @"邮箱绑定", @"安全设置"], @[@"我的理财师", @"关于大圣理财"]];
+    NSArray *titleArray = @[@[@"银行卡", @"实名认证", @"手机号", @"邮箱绑定", @"安全设置", @"地址设置"], @[@"我的理财师", @"关于大圣理财"]];
     cell.labelTitle.text = [[titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell.imageRight.image = [UIImage imageNamed:@"arrow"];
     
@@ -119,6 +121,8 @@
                 cell.labelStates.text = @"159****2599";
             } else if (indexPath.row == 3) {
                 cell.labelStates.text = @"1032865506@qq.com";
+            } else if (indexPath.row == 5) {
+                cell.labelStates.hidden = YES;
             }
         }
     }
@@ -178,11 +182,21 @@
             TWOEmailViewController *emailVC = [[TWOEmailViewController alloc] init];
             [self.navigationController pushViewController:emailVC animated:YES];
             
-        } else {
+        } else if (indexPath.row == 4) {
             
 //            安全设置
             TWOSafeSetViewController *safeSetVC = [[TWOSafeSetViewController alloc] init];
             [self.navigationController pushViewController:safeSetVC animated:YES];
+            
+        } else {
+            
+//            地址设置
+//            TWOAddressManageViewController *addressManager = [[TWOAddressManageViewController alloc] init];
+//            pushVC(addressManager);
+            
+//            已设置页面
+            TWOAddressAlreadySetViewController *addAlreadySet = [[TWOAddressAlreadySetViewController alloc] init];
+            pushVC(addAlreadySet);
         }
     } else {
         if (indexPath.row == 0) {

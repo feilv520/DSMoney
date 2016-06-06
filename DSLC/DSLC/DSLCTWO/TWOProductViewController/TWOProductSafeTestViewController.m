@@ -82,7 +82,7 @@
         viewDown.frame = CGRectMake(0, viewWhite.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     }
     
-    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, 0, WIDTH_CONTROLLER_DEFAULT - 20, viewDown.frame.size.height) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"您还没有参加过安全测评,快去测测您的投资倾向吧!"];
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(10, 0, WIDTH_CONTROLLER_DEFAULT - 20, viewDown.frame.size.height) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"先求知,再投资,少损失。快来测试吧!"];
     [viewDown addSubview:labelAlert];
     labelAlert.numberOfLines = 0;
     

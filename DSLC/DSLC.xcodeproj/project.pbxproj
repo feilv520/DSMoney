@@ -69,6 +69,17 @@
 		810F9C731CDCA14800BF39B5 /* faxianclick@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 810F9C711CDCA14800BF39B5 /* faxianclick@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */; settings = {ASSET_TAGS = (); }; };
+		811B628C1CFE8B9D00B6F17E /* 每日一摇@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 811B62881CFE8B9D00B6F17E /* 每日一摇@2x.png */; settings = {ASSET_TAGS = (); }; };
+		811B628D1CFE8B9D00B6F17E /* 每日一摇@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 811B62891CFE8B9D00B6F17E /* 每日一摇@3x.png */; settings = {ASSET_TAGS = (); }; };
+		811B628E1CFE8B9D00B6F17E /* 邀请好友@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 811B628A1CFE8B9D00B6F17E /* 邀请好友@2x.png */; settings = {ASSET_TAGS = (); }; };
+		811B628F1CFE8B9D00B6F17E /* 邀请好友@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 811B628B1CFE8B9D00B6F17E /* 邀请好友@3x.png */; settings = {ASSET_TAGS = (); }; };
+		811B62931CFEB98700B6F17E /* TWOHomePageProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 811B62911CFEB98700B6F17E /* TWOHomePageProductCell.m */; settings = {ASSET_TAGS = (); }; };
+		811B62941CFEB98700B6F17E /* TWOHomePageProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811B62921CFEB98700B6F17E /* TWOHomePageProductCell.xib */; settings = {ASSET_TAGS = (); }; };
+		811B62981CFFCA8300B6F17E /* TWOAddressManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 811B62971CFFCA8300B6F17E /* TWOAddressManageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		811B629B1CFFD36400B6F17E /* TWOAddressAlreadySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 811B629A1CFFD36400B6F17E /* TWOAddressAlreadySetViewController.m */; settings = {ASSET_TAGS = (); }; };
+		811B629D1CFFDDBB00B6F17E /* setAddress.png in Resources */ = {isa = PBXBuildFile; fileRef = 811B629C1CFFDDBB00B6F17E /* setAddress.png */; settings = {ASSET_TAGS = (); }; };
+		811B62A01D00254E00B6F17E /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 811B629E1D00254E00B6F17E /* play@2x.png */; settings = {ASSET_TAGS = (); }; };
+		811B62A11D00254E00B6F17E /* play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 811B629F1D00254E00B6F17E /* play@3x.png */; settings = {ASSET_TAGS = (); }; };
 		811F0AFC1BF318F6001F6AA4 /* GiveMoneyFinish.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F0AFB1BF318F6001F6AA4 /* GiveMoneyFinish.m */; settings = {ASSET_TAGS = (); }; };
 		811F0AFF1BF32798001F6AA4 /* LiftupMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F0AFE1BF32798001F6AA4 /* LiftupMoneyViewController.m */; settings = {ASSET_TAGS = (); }; };
 		811F0B021BF33421001F6AA4 /* BindingBankCardLiftUpMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 811F0B011BF33421001F6AA4 /* BindingBankCardLiftUpMoney.m */; settings = {ASSET_TAGS = (); }; };
@@ -121,10 +132,6 @@
 		81422CD91C27E2E200E515B6 /* MyChoosePlanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 81422CD51C27E2E200E515B6 /* MyChoosePlanner.m */; settings = {ASSET_TAGS = (); }; };
 		81422CDA1C27E2E200E515B6 /* MyPlannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81422CD71C27E2E200E515B6 /* MyPlannerViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8143FCE11CD99CE300B65A2F /* TWOSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8143FCE01CD99CE300B65A2F /* TWOSelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
-		8143FCF91CD9CA6C00B65A2F /* 每日一摇@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FCF51CD9CA6C00B65A2F /* 每日一摇@2x.png */; settings = {ASSET_TAGS = (); }; };
-		8143FCFA1CD9CA6C00B65A2F /* 每日一摇@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FCF61CD9CA6C00B65A2F /* 每日一摇@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8143FCFB1CD9CA6C00B65A2F /* 邀请好友@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FCF71CD9CA6C00B65A2F /* 邀请好友@2x.png */; settings = {ASSET_TAGS = (); }; };
-		8143FCFC1CD9CA6C00B65A2F /* 邀请好友@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FCF81CD9CA6C00B65A2F /* 邀请好友@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8143FD021CD9D28C00B65A2F /* TWOYaoYiYaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8143FD011CD9D28C00B65A2F /* TWOYaoYiYaoViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8143FD051CD9DCF600B65A2F /* 立即抢购@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FD031CD9DCF600B65A2F /* 立即抢购@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8143FD061CD9DCF600B65A2F /* 立即抢购@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FD041CD9DCF600B65A2F /* 立即抢购@3x.png */; settings = {ASSET_TAGS = (); }; };
@@ -607,8 +614,8 @@
 		81B674201BF0AFEB007CEF51 /* 蓝色完成@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674161BF0AFEB007CEF51 /* 蓝色完成@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81B674211BF0AFEB007CEF51 /* yuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674171BF0AFEB007CEF51 /* yuan@2x.png */; settings = {ASSET_TAGS = (); }; };
 		81B674221BF0AFEB007CEF51 /* yuan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B674181BF0AFEB007CEF51 /* yuan@3x.png */; settings = {ASSET_TAGS = (); }; };
-		81B84BD31CE2D61B00A867B9 /* 已兑付@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B84BD11CE2D61B00A867B9 /* 已兑付@2x.png */; settings = {ASSET_TAGS = (); }; };
-		81B84BD41CE2D61B00A867B9 /* 已兑付@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B84BD21CE2D61B00A867B9 /* 已兑付@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81B84BD31CE2D61B00A867B9 /* 已经兑付@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B84BD11CE2D61B00A867B9 /* 已经兑付@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81B84BD41CE2D61B00A867B9 /* 已经兑付@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B84BD21CE2D61B00A867B9 /* 已经兑付@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81B84BD71CE2DCA200A867B9 /* TWOAlreayCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B84BD61CE2DCA200A867B9 /* TWOAlreayCashViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81B84BDA1CE2DCC000A867B9 /* TWOProfitingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B84BD91CE2DCC000A867B9 /* TWOProfitingViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81B84BDE1CE2E09100A867B9 /* TWOProfitingEveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B84BDC1CE2E09100A867B9 /* TWOProfitingEveryCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -1471,6 +1478,20 @@
 		810F9C711CDCA14800BF39B5 /* faxianclick@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faxianclick@3x.png"; sourceTree = "<group>"; };
 		8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@2x.png"; sourceTree = "<group>"; };
 		8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@3x.png"; sourceTree = "<group>"; };
+		811B62881CFE8B9D00B6F17E /* 每日一摇@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "每日一摇@2x.png"; sourceTree = "<group>"; };
+		811B62891CFE8B9D00B6F17E /* 每日一摇@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "每日一摇@3x.png"; sourceTree = "<group>"; };
+		811B628A1CFE8B9D00B6F17E /* 邀请好友@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请好友@2x.png"; sourceTree = "<group>"; };
+		811B628B1CFE8B9D00B6F17E /* 邀请好友@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请好友@3x.png"; sourceTree = "<group>"; };
+		811B62901CFEB98700B6F17E /* TWOHomePageProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOHomePageProductCell.h; sourceTree = "<group>"; };
+		811B62911CFEB98700B6F17E /* TWOHomePageProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOHomePageProductCell.m; sourceTree = "<group>"; };
+		811B62921CFEB98700B6F17E /* TWOHomePageProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOHomePageProductCell.xib; sourceTree = "<group>"; };
+		811B62961CFFCA8300B6F17E /* TWOAddressManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOAddressManageViewController.h; sourceTree = "<group>"; };
+		811B62971CFFCA8300B6F17E /* TWOAddressManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOAddressManageViewController.m; sourceTree = "<group>"; };
+		811B62991CFFD36400B6F17E /* TWOAddressAlreadySetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOAddressAlreadySetViewController.h; sourceTree = "<group>"; };
+		811B629A1CFFD36400B6F17E /* TWOAddressAlreadySetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOAddressAlreadySetViewController.m; sourceTree = "<group>"; };
+		811B629C1CFFDDBB00B6F17E /* setAddress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setAddress.png; sourceTree = "<group>"; };
+		811B629E1D00254E00B6F17E /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
+		811B629F1D00254E00B6F17E /* play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@3x.png"; sourceTree = "<group>"; };
 		811F0AFA1BF318F6001F6AA4 /* GiveMoneyFinish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiveMoneyFinish.h; sourceTree = "<group>"; };
 		811F0AFB1BF318F6001F6AA4 /* GiveMoneyFinish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiveMoneyFinish.m; sourceTree = "<group>"; };
 		811F0AFD1BF32798001F6AA4 /* LiftupMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiftupMoneyViewController.h; sourceTree = "<group>"; };
@@ -1551,10 +1572,6 @@
 		81422CD71C27E2E200E515B6 /* MyPlannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPlannerViewController.m; sourceTree = "<group>"; };
 		8143FCDF1CD99CE300B65A2F /* TWOSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWOSelectionViewController.h; path = ../../Selection/SelectionController/TWOSelectionViewController.h; sourceTree = "<group>"; };
 		8143FCE01CD99CE300B65A2F /* TWOSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWOSelectionViewController.m; path = ../../Selection/SelectionController/TWOSelectionViewController.m; sourceTree = "<group>"; };
-		8143FCF51CD9CA6C00B65A2F /* 每日一摇@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "每日一摇@2x.png"; sourceTree = "<group>"; };
-		8143FCF61CD9CA6C00B65A2F /* 每日一摇@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "每日一摇@3x.png"; sourceTree = "<group>"; };
-		8143FCF71CD9CA6C00B65A2F /* 邀请好友@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请好友@2x.png"; sourceTree = "<group>"; };
-		8143FCF81CD9CA6C00B65A2F /* 邀请好友@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请好友@3x.png"; sourceTree = "<group>"; };
 		8143FD001CD9D28C00B65A2F /* TWOYaoYiYaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOYaoYiYaoViewController.h; sourceTree = "<group>"; };
 		8143FD011CD9D28C00B65A2F /* TWOYaoYiYaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOYaoYiYaoViewController.m; sourceTree = "<group>"; };
 		8143FD031CD9DCF600B65A2F /* 立即抢购@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "立即抢购@2x.png"; sourceTree = "<group>"; };
@@ -2214,8 +2231,8 @@
 		81B674161BF0AFEB007CEF51 /* 蓝色完成@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝色完成@3x.png"; sourceTree = "<group>"; };
 		81B674171BF0AFEB007CEF51 /* yuan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yuan@2x.png"; sourceTree = "<group>"; };
 		81B674181BF0AFEB007CEF51 /* yuan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yuan@3x.png"; sourceTree = "<group>"; };
-		81B84BD11CE2D61B00A867B9 /* 已兑付@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已兑付@2x.png"; sourceTree = "<group>"; };
-		81B84BD21CE2D61B00A867B9 /* 已兑付@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已兑付@3x.png"; sourceTree = "<group>"; };
+		81B84BD11CE2D61B00A867B9 /* 已经兑付@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已经兑付@2x.png"; sourceTree = "<group>"; };
+		81B84BD21CE2D61B00A867B9 /* 已经兑付@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已经兑付@3x.png"; sourceTree = "<group>"; };
 		81B84BD51CE2DCA200A867B9 /* TWOAlreayCashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOAlreayCashViewController.h; sourceTree = "<group>"; };
 		81B84BD61CE2DCA200A867B9 /* TWOAlreayCashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOAlreayCashViewController.m; sourceTree = "<group>"; };
 		81B84BD81CE2DCC000A867B9 /* TWOProfitingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProfitingViewController.h; sourceTree = "<group>"; };
@@ -3445,6 +3462,17 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		811B62951CFFCA1900B6F17E /* 地址管理 */ = {
+			isa = PBXGroup;
+			children = (
+				811B62961CFFCA8300B6F17E /* TWOAddressManageViewController.h */,
+				811B62971CFFCA8300B6F17E /* TWOAddressManageViewController.m */,
+				811B62991CFFD36400B6F17E /* TWOAddressAlreadySetViewController.h */,
+				811B629A1CFFD36400B6F17E /* TWOAddressAlreadySetViewController.m */,
+			);
+			name = "地址管理";
+			sourceTree = "<group>";
+		};
 		811F9E041BC7D29900CAD6F5 /* 颜色处理类目 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3467,6 +3495,7 @@
 		8122012C1CE5CC3300159A74 /* 设置 */ = {
 			isa = PBXGroup;
 			children = (
+				811B62951CFFCA1900B6F17E /* 地址管理 */,
 				81F02E621CFC2397002F3135 /* 我的理财师 */,
 				8179EB351CEC016200BD7054 /* 关于大圣理财 */,
 				8179EB181CEAF8F100BD7054 /* 安全设置 */,
@@ -3572,10 +3601,10 @@
 				8DA7E1751CE0428200D5D016 /* productImage */,
 				8143FD1D1CD9F1B600B65A2F /* 首页banner@2x.png */,
 				8143FD1E1CD9F1B600B65A2F /* 首页banner@3x.png */,
-				8143FCF51CD9CA6C00B65A2F /* 每日一摇@2x.png */,
-				8143FCF61CD9CA6C00B65A2F /* 每日一摇@3x.png */,
-				8143FCF71CD9CA6C00B65A2F /* 邀请好友@2x.png */,
-				8143FCF81CD9CA6C00B65A2F /* 邀请好友@3x.png */,
+				811B62881CFE8B9D00B6F17E /* 每日一摇@2x.png */,
+				811B62891CFE8B9D00B6F17E /* 每日一摇@3x.png */,
+				811B628A1CFE8B9D00B6F17E /* 邀请好友@2x.png */,
+				811B628B1CFE8B9D00B6F17E /* 邀请好友@3x.png */,
 				8143FD031CD9DCF600B65A2F /* 立即抢购@2x.png */,
 				8143FD041CD9DCF600B65A2F /* 立即抢购@3x.png */,
 				8143FD071CD9DD0600B65A2F /* 热卖@2x.png */,
@@ -3616,8 +3645,8 @@
 				8143FD581CDAF98900B65A2F /* clickRightjiantou@3x.png */,
 				8143FD611CDAFD9300B65A2F /* email@2x.png */,
 				8143FD621CDAFD9300B65A2F /* email@3x.png */,
-				81B84BD11CE2D61B00A867B9 /* 已兑付@2x.png */,
-				81B84BD21CE2D61B00A867B9 /* 已兑付@3x.png */,
+				81B84BD11CE2D61B00A867B9 /* 已经兑付@2x.png */,
+				81B84BD21CE2D61B00A867B9 /* 已经兑付@3x.png */,
 				8143FD671CDAFDC300B65A2F /* myset@2x.png */,
 				8143FD681CDAFDC300B65A2F /* myset@3x.png */,
 				8143FD6B1CDB0E6300B65A2F /* 我的背景图@2x.png */,
@@ -3762,6 +3791,9 @@
 				81F02E601CFC2200002F3135 /* 加息券已兑付@2x.png */,
 				81F02E6C1CFC2AD1002F3135 /* myhoutou@2x.png */,
 				81F02E6D1CFC2AD1002F3135 /* myhoutou@3x.png */,
+				811B629C1CFFDDBB00B6F17E /* setAddress.png */,
+				811B629E1D00254E00B6F17E /* play@2x.png */,
+				811B629F1D00254E00B6F17E /* play@3x.png */,
 				8177A0371CF3EE630057AA7B /* 产品安全等级图片 */,
 			);
 			path = TWOImage;
@@ -3927,6 +3959,9 @@
 		8143FCF31CD9C68600B65A2F /* TWOHomePageView */ = {
 			isa = PBXGroup;
 			children = (
+				811B62901CFEB98700B6F17E /* TWOHomePageProductCell.h */,
+				811B62911CFEB98700B6F17E /* TWOHomePageProductCell.m */,
+				811B62921CFEB98700B6F17E /* TWOHomePageProductCell.xib */,
 				8177A0261CF2FB610057AA7B /* TWOWinPrizeRecordCell.h */,
 				8177A0271CF2FB610057AA7B /* TWOWinPrizeRecordCell.m */,
 				8177A0281CF2FB610057AA7B /* TWOWinPrizeRecordCell.xib */,
@@ -3937,8 +3972,16 @@
 		8143FCF41CD9C68D00B65A2F /* TWOHomePageViewController */ = {
 			isa = PBXGroup;
 			children = (
+				816AA1491CFE6FB5009038E9 /* 摇一摇 */,
 				8143FCDF1CD99CE300B65A2F /* TWOSelectionViewController.h */,
 				8143FCE01CD99CE300B65A2F /* TWOSelectionViewController.m */,
+			);
+			path = TWOHomePageViewController;
+			sourceTree = "<group>";
+		};
+		816AA1491CFE6FB5009038E9 /* 摇一摇 */ = {
+			isa = PBXGroup;
+			children = (
 				8143FD001CD9D28C00B65A2F /* TWOYaoYiYaoViewController.h */,
 				8143FD011CD9D28C00B65A2F /* TWOYaoYiYaoViewController.m */,
 				8177A0181CF2DE120057AA7B /* TWOActivityRulesViewController.h */,
@@ -3946,7 +3989,7 @@
 				8177A01B1CF2E06C0057AA7B /* TWOWinPrizeRecordViewController.h */,
 				8177A01C1CF2E06C0057AA7B /* TWOWinPrizeRecordViewController.m */,
 			);
-			path = TWOHomePageViewController;
+			name = "摇一摇";
 			sourceTree = "<group>";
 		};
 		8177A02F1CF3E61D0057AA7B /* 红包加息券 */ = {
@@ -6924,7 +6967,6 @@
 				8D0AE8011BE09F6800D9D50C /* RegisterProcess.xib in Resources */,
 				81701C0C1BE701C300B45BAA /* MendDealCell.xib in Resources */,
 				8143FD141CD9E10500B65A2F /* 公告@3x.png in Resources */,
-				8143FCFA1CD9CA6C00B65A2F /* 每日一摇@3x.png in Resources */,
 				8D3EE9FB1C27AB400031F7C9 /* 东亚银行@3x.png in Resources */,
 				8D90117B1BD5D8FA00E5D62A /* TransactionViewController.xib in Resources */,
 				8143FD5A1CDAF98900B65A2F /* clickRightjiantou@3x.png in Resources */,
@@ -6939,7 +6981,6 @@
 				8177A02D1CF301E90057AA7B /* winRecord@2x.png in Resources */,
 				810F9C211CDB558E00BF39B5 /* openEye@3x.png in Resources */,
 				81ADB2A61CF5766900E044BC /* TWOFindActivityCenterCell.xib in Resources */,
-				8143FCF91CD9CA6C00B65A2F /* 每日一摇@2x.png in Resources */,
 				81DEC8451CEEE358005E9D9F /* beijing@2x.png in Resources */,
 				8183F4101C97CD4E000BB93C /* messageOld@2x.png in Resources */,
 				8143FD5E1CDAFBFA00B65A2F /* Reddian@3x.png in Resources */,
@@ -6948,6 +6989,8 @@
 				817DD4A51BCF547E00042B09 /* tixian@3x.png in Resources */,
 				8143FD321CDAEFA600B65A2F /* 我的理财@3x.png in Resources */,
 				812201221CE4824700159A74 /* duihuanshouyi@3x.png in Resources */,
+				811B628E1CFE8B9D00B6F17E /* 邀请好友@2x.png in Resources */,
+				811B62941CFEB98700B6F17E /* TWOHomePageProductCell.xib in Resources */,
 				8D3EEA201C27AB400031F7C9 /* 浦发银行@2x.png in Resources */,
 				8D29F9821C08047D00D45E43 /* 已打开@3x.png in Resources */,
 				8DEDE1C11BCCFEF8008086D3 /* iocn@3x.png in Resources */,
@@ -6983,6 +7026,7 @@
 				8D43439E1BFDEB0B000BA004 /* loading_middle_05.png in Resources */,
 				81D72FBC1BFAD63B0067A277 /* left@2x.png in Resources */,
 				812201351CE5D20D00159A74 /* TWOPersonalSetCell.xib in Resources */,
+				811B629D1CFFDDBB00B6F17E /* setAddress.png in Resources */,
 				81DEC7E21CED530C005E9D9F /* blueicon@2x.png in Resources */,
 				8DD180991BD72E5900F71CEA /* GetMoneyTableViewCell.xib in Resources */,
 				81F02E5F1CFBD6E5002F3135 /* quanTwo@2x.png in Resources */,
@@ -7042,6 +7086,7 @@
 				8D3A2FDC1BE70FBF00913DEC /* TextTableViewCell.xib in Resources */,
 				8D3EE9FE1C27AB400031F7C9 /* 中国银行@2x.png in Resources */,
 				81CBE7AB1CE970B9004FE1D4 /* TWOBankCardCell.xib in Resources */,
+				811B628C1CFE8B9D00B6F17E /* 每日一摇@2x.png in Resources */,
 				81DEC82E1CEED3A9005E9D9F /* zhongxing@2x.png in Resources */,
 				817E33A81BD7840000D05103 /* ChooseCell.xib in Resources */,
 				8D98CC4A1CF69D0700E34ADE /* TWOProductJinDu@2x.png in Resources */,
@@ -7054,7 +7099,6 @@
 				8D43439F1BFDEB0B000BA004 /* loading_middle_06.png in Resources */,
 				817E33891BD733D100D05103 /* huangguan@3x.png in Resources */,
 				8177A0121CF2B63E0057AA7B /* 充值成功～@2x.png in Resources */,
-				8143FCFB1CD9CA6C00B65A2F /* 邀请好友@2x.png in Resources */,
 				81B84C081CE432E500A867B9 /* renwujindu1@2x.png in Resources */,
 				8D5DBB851BD4838200F556B9 /* CastUpTableViewCell.xib in Resources */,
 				8181028D1CE043BB0038B64E /* 大圣解密@3x.png in Resources */,
@@ -7117,7 +7161,7 @@
 				8143FD0F1CD9E08200B65A2F /* 产品圈圈@2x.png in Resources */,
 				8D0CB4A11BE761C80039D826 /* TeamDescriptionsViewController.xib in Resources */,
 				8D3EE9FF1C27AB400031F7C9 /* 中国银行@3x.png in Resources */,
-				81B84BD31CE2D61B00A867B9 /* 已兑付@2x.png in Resources */,
+				81B84BD31CE2D61B00A867B9 /* 已经兑付@2x.png in Resources */,
 				8143FD1A1CD9E9F400B65A2F /* 首页右箭头@3x.png in Resources */,
 				81F02E5D1CFBD665002F3135 /* historyQuan@3x.png in Resources */,
 				81600A5D1CB4E0280075CD45 /* 图层-678-拷贝@2x.png in Resources */,
@@ -7132,6 +7176,7 @@
 				81CBE7C31CE99EDE004FE1D4 /* TWOAlreadyRealNameCell.xib in Resources */,
 				8D968A7A1C96A9FD00C9A6A1 /* mylicaishi@3x.png in Resources */,
 				81CBE7C61CE9A5EC004FE1D4 /* 手机号绑定.png in Resources */,
+				811B62A11D00254E00B6F17E /* play@3x.png in Resources */,
 				8D35DA531CF5498700C6409F /* TWOMoreImage@3x.png in Resources */,
 				8143FD191CD9E9F400B65A2F /* 首页右箭头@2x.png in Resources */,
 				8D3F95DB1BE20C1A00013A8E /* zuorishouyi-678@3x.png in Resources */,
@@ -7197,6 +7242,7 @@
 				8D0AE7FA1BE09CE500D9D50C /* register-3@2x.png in Resources */,
 				8183F4011C97CC4F000BB93C /* iconfont-dui-2111@3x.png in Resources */,
 				8175BEAD1BE9F2F50044026E /* 微信@3x.png in Resources */,
+				811B628F1CFE8B9D00B6F17E /* 邀请好友@3x.png in Resources */,
 				817DD49F1BCF547E00042B09 /* jiaoyi@3x.png in Resources */,
 				8DEDE1EC1BCD05C7008086D3 /* Calendar.xib in Resources */,
 				8143FD591CDAF98900B65A2F /* clickRightjiantou@2x.png in Resources */,
@@ -7360,6 +7406,7 @@
 				81B520A71BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png in Resources */,
 				8179EB2F1CEB169300BD7054 /* setbiyan@3x.png in Resources */,
 				817E33821BD733D100D05103 /* 9c1ccc47da95fed87b249e2557a28dbef422aec3edee-qv7sue_fw658-拷贝@2x.png in Resources */,
+				811B62A01D00254E00B6F17E /* play@2x.png in Resources */,
 				81B84BEF1CE324CA00A867B9 /* wenhao@2x.png in Resources */,
 				817DD4901BCF547E00042B09 /* anniu@2x.png in Resources */,
 				8D4E4DFF1C1E5A6A00AE2644 /* CHANGELIST.txt in Resources */,
@@ -7377,12 +7424,12 @@
 				81B84C191CE44AB200A867B9 /* touzis@3x.png in Resources */,
 				8175BEAB1BE9F2F50044026E /* 新浪微博@3x.png in Resources */,
 				8DEDE1BE1BCCFEF8008086D3 /* calendar@2x.png in Resources */,
-				8143FCFC1CD9CA6C00B65A2F /* 邀请好友@3x.png in Resources */,
 				8143FD2E1CDAE6E200B65A2F /* TWOMineCell.xib in Resources */,
 				8179EB471CEC072300BD7054 /* aboutDSLC@3x.png in Resources */,
 				81B84C2A1CE4650A00A867B9 /* mingxi@2x.png in Resources */,
 				8DEDE1BF1BCCFEF8008086D3 /* calendar@3x.png in Resources */,
 				8D3F95F01BE2188500013A8E /* shouyi@2x.png in Resources */,
+				811B628D1CFE8B9D00B6F17E /* 每日一摇@3x.png in Resources */,
 				8DEDE1D51BCCFFD8008086D3 /* iocn_saft@3x.png in Resources */,
 				8DB744B81C1973AC0084D1A2 /* banner_black@2x.png in Resources */,
 				8175BE9A1BE9E5760044026E /* 组-21-拷贝-13@2x.png in Resources */,
@@ -7673,7 +7720,7 @@
 				8D3EEA221C27AB400031F7C9 /* 渤海银行@2x.png in Resources */,
 				81379F1B1BEAF56F002CDB16 /* 使用@2x.png in Resources */,
 				81DEC81B1CED96A5005E9D9F /* phoneNumber@3x.png in Resources */,
-				81B84BD41CE2D61B00A867B9 /* 已兑付@3x.png in Resources */,
+				81B84BD41CE2D61B00A867B9 /* 已经兑付@3x.png in Resources */,
 				8DEDE1D11BCCFFA5008086D3 /* blueyuan@3x.png in Resources */,
 				8D5DBB8F1BD48F1900F556B9 /* CastDetailTableViewCell.xib in Resources */,
 				819C3AC81BD49862008D2CFD /* GrabBagCell.xib in Resources */,
@@ -7815,6 +7862,7 @@
 				816F1ECE1BF5B30F00DB6B65 /* SocialPlatformViewController.m in Sources */,
 				818063A01BD5D87100E83492 /* InviteNumCell.m in Sources */,
 				8D4144141C06A003002926DA /* MessageModel.m in Sources */,
+				811B62981CFFCA8300B6F17E /* TWOAddressManageViewController.m in Sources */,
 				818C8C211CE06C9E00A14D37 /* TWOMyGameScoreViewController.m in Sources */,
 				8D4FF5DC1BE339A200BAE25F /* AFURLSessionManager.m in Sources */,
 				8183F3441C7E94A7000BB93C /* MonkeyCell.m in Sources */,
@@ -7992,6 +8040,7 @@
 				81AC90C21BEC82BD00232404 /* BindingBankSucceController.m in Sources */,
 				81D703F71BE06D1F0074DF30 /* ForgetSecretCell.m in Sources */,
 				811F0B021BF33421001F6AA4 /* BindingBankCardLiftUpMoney.m in Sources */,
+				811B62931CFEB98700B6F17E /* TWOHomePageProductCell.m in Sources */,
 				8D0CB4981BE760C00039D826 /* RiskDisclosureViewController.m in Sources */,
 				8D1DB6071C7EE6F4003CFDA6 /* CastUpMonkeyTableViewCell.m in Sources */,
 				81F237751BE86031009D7A67 /* CashFinishViewController.m in Sources */,
@@ -8152,6 +8201,7 @@
 				81CBB7501C1AC6E9002CDE97 /* SafeProtectViewController.m in Sources */,
 				81200C1E1C031F1700F70DDD /* InviteNumReginCell.m in Sources */,
 				810C767D1C2E40D2000637FD /* UserList.m in Sources */,
+				811B629B1CFFD36400B6F17E /* TWOAddressAlreadySetViewController.m in Sources */,
 				818C8C281CE0759100A14D37 /* TWOAddIncomeCell.m in Sources */,
 				8D72ED851CFC0B6C00436C32 /* PNBar.m in Sources */,
 				81B84BDA1CE2DCC000A867B9 /* TWOProfitingViewController.m in Sources */,

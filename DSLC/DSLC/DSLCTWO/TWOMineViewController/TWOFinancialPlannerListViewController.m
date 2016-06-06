@@ -8,6 +8,7 @@
 
 #import "TWOFinancialPlannerListViewController.h"
 #import "TWOFinancialPlannerCell.h"
+#import "ChatViewController.h"
 
 @interface TWOFinancialPlannerListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -69,6 +70,12 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ChatViewController *chatVC = [[ChatViewController alloc] init];
+    pushVC(chatVC);
 }
 
 - (void)didReceiveMemoryWarning {

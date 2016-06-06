@@ -68,6 +68,9 @@
     [cell.buttonSee setImage:[UIImage imageNamed:@"seewhite"] forState:UIControlStateNormal];
     cell.buttonSee.backgroundColor = [UIColor clearColor];
     
+    [cell.buttonPlay setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    [cell.buttonPlay setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateHighlighted];
+    
     return cell;
 }
 

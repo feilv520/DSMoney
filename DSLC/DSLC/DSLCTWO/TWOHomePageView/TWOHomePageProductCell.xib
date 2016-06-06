@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="CenturyGothic.TTF">
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TWOHomePageProductCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JhS-9r-Ql8">
+                        <rect key="frame" x="9" y="0.0" width="357" height="308"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6J-wp-DCl">
+                                <rect key="frame" x="8" y="8" width="225" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="AKQ-G1-T8M"/>
+                                    <constraint firstAttribute="width" constant="225" id="rys-qX-yhm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                <color key="textColor" red="0.2627450980392157" green="0.29019607843137252" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z1Y-pY-TPy">
+                                <rect key="frame" x="307" y="0.0" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="8MP-Qo-J7v"/>
+                                    <constraint firstAttribute="width" constant="50" id="BgY-1G-xYC"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syk-eY-C2o">
+                                <rect key="frame" x="116" y="163" width="125" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="9UQ-bQ-mPJ"/>
+                                    <constraint firstAttribute="height" constant="21" id="k3v-B0-2tS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
+                                <color key="textColor" red="0.5490196078431373" green="0.56470588235294117" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhv-lp-Bq3">
+                                <rect key="frame" x="0.0" y="200" width="119" height="23"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="22"/>
+                                <color key="textColor" red="0.2627450980392157" green="0.29019607843137252" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T62-WR-BZy">
+                                <rect key="frame" x="119" y="200" width="119" height="23"/>
+                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="22"/>
+                                <color key="textColor" red="0.2627450980392157" green="0.29019607843137252" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AiS-pa-ka8">
+                                <rect key="frame" x="238" y="200" width="119" height="20"/>
+                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="22"/>
+                                <color key="textColor" red="0.2627450980392157" green="0.29019607843137252" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XW-Gb-oFd">
+                                <rect key="frame" x="0.0" y="225" width="119" height="20"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
+                                <color key="textColor" red="0.5490196078431373" green="0.56470588235294117" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOF-mt-yz4">
+                                <rect key="frame" x="119" y="225" width="119" height="20"/>
+                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
+                                <color key="textColor" red="0.5490196078431373" green="0.56470588235294117" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcW-WK-Rb1">
+                                <rect key="frame" x="238" y="225" width="119" height="20"/>
+                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
+                                <color key="textColor" red="0.5490196078431373" green="0.56470588235294117" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZj-Ux-YR2">
+                                <rect key="frame" x="9" y="255" width="339" height="40"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzv-dD-aHH">
+                                <rect key="frame" x="18" y="100" width="25" height="25"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="2me-0W-PV2"/>
+                                    <constraint firstAttribute="height" constant="25" id="lLz-gv-ouh"/>
+                                </constraints>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smd-Mf-Yuq">
+                                <rect key="frame" x="314" y="100" width="25" height="25"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="3L5-ML-e9y"/>
+                                    <constraint firstAttribute="width" constant="25" id="nOX-ri-EEM"/>
+                                </constraints>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAb-HS-cgc">
+                                <rect key="frame" x="101" y="40" width="155" height="134"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="134" id="Gdn-cy-Hvj"/>
+                                    <constraint firstAttribute="width" constant="155" id="VIM-NB-fHi"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.14117647058823529" green="0.57647058823529407" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Z1Y-pY-TPy" secondAttribute="trailing" id="16b-sd-IU4"/>
+                            <constraint firstItem="smd-Mf-Yuq" firstAttribute="top" secondItem="Z1Y-pY-TPy" secondAttribute="bottom" constant="50" id="EPr-bA-c30"/>
+                            <constraint firstItem="zzv-dD-aHH" firstAttribute="top" secondItem="K6J-wp-DCl" secondAttribute="bottom" constant="67" id="FJz-il-Bq4"/>
+                            <constraint firstAttribute="trailing" secondItem="syk-eY-C2o" secondAttribute="trailing" constant="116" id="Fny-Pd-8gx"/>
+                            <constraint firstItem="PAb-HS-cgc" firstAttribute="top" secondItem="K6J-wp-DCl" secondAttribute="bottom" constant="7" id="KdW-Re-Ich"/>
+                            <constraint firstItem="zzv-dD-aHH" firstAttribute="leading" secondItem="JhS-9r-Ql8" secondAttribute="leading" constant="18" id="M2v-aS-7Mj"/>
+                            <constraint firstAttribute="height" constant="308" id="U6h-gP-1p4"/>
+                            <constraint firstItem="K6J-wp-DCl" firstAttribute="leading" secondItem="JhS-9r-Ql8" secondAttribute="leading" constant="8" id="U94-D2-O0x"/>
+                            <constraint firstItem="K6J-wp-DCl" firstAttribute="top" secondItem="JhS-9r-Ql8" secondAttribute="top" constant="8" id="ViR-IS-zPO"/>
+                            <constraint firstItem="Z1Y-pY-TPy" firstAttribute="leading" secondItem="PAb-HS-cgc" secondAttribute="trailing" constant="51" id="Yhn-lZ-Ayp"/>
+                            <constraint firstItem="syk-eY-C2o" firstAttribute="top" secondItem="K6J-wp-DCl" secondAttribute="bottom" constant="130" id="ddJ-lr-wuq"/>
+                            <constraint firstAttribute="width" constant="357" id="e0p-PV-x2E"/>
+                            <constraint firstAttribute="trailing" secondItem="smd-Mf-Yuq" secondAttribute="trailing" constant="18" id="emz-Xh-BXI"/>
+                            <constraint firstItem="PAb-HS-cgc" firstAttribute="leading" secondItem="zzv-dD-aHH" secondAttribute="trailing" constant="58" id="gUb-f0-Dkg"/>
+                            <constraint firstItem="Z1Y-pY-TPy" firstAttribute="top" secondItem="JhS-9r-Ql8" secondAttribute="top" id="gb9-tA-I2y"/>
+                            <constraint firstItem="syk-eY-C2o" firstAttribute="leading" secondItem="JhS-9r-Ql8" secondAttribute="leading" constant="116" id="rRr-dY-6Wi"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="JhS-9r-Ql8" secondAttribute="trailing" constant="9" id="MXR-dz-CRQ"/>
+                <constraint firstItem="JhS-9r-Ql8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jD1-Az-ybZ"/>
+                <constraint firstItem="JhS-9r-Ql8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="9" id="vnS-c6-n3g"/>
+            </constraints>
+            <size key="customSize" width="375" height="308"/>
+            <connections>
+                <outlet property="butLeft" destination="zzv-dD-aHH" id="QVN-aK-RnJ"/>
+                <outlet property="butQuanQuan" destination="PAb-HS-cgc" id="lDO-ho-nvr"/>
+                <outlet property="butRight" destination="smd-Mf-Yuq" id="y2G-3e-O3I"/>
+                <outlet property="butRightNow" destination="WZj-Ux-YR2" id="AW1-Jj-fBl"/>
+                <outlet property="imageBuying" destination="Z1Y-pY-TPy" id="jfh-C0-m3O"/>
+                <outlet property="labelData" destination="Lhv-lp-Bq3" id="6DM-Sg-sOB"/>
+                <outlet property="labelDownMid" destination="iOF-mt-yz4" id="I3r-5J-XRV"/>
+                <outlet property="labelDownONe" destination="6XW-Gb-oFd" id="u2E-NE-n2w"/>
+                <outlet property="labelDownRight" destination="gcW-WK-Rb1" id="hCd-eP-SN0"/>
+                <outlet property="labelLastMoney" destination="T62-WR-BZy" id="HnB-dG-Fuh"/>
+                <outlet property="labelName" destination="K6J-wp-DCl" id="6Er-OW-QZX"/>
+                <outlet property="labelQiTou" destination="AiS-pa-ka8" id="t3A-w5-qPT"/>
+                <outlet property="labelYuQi" destination="syk-eY-C2o" id="inE-Pq-a3i"/>
+                <outlet property="viewBottom" destination="JhS-9r-Ql8" id="2jQ-oy-Uzk"/>
+            </connections>
+            <point key="canvasLocation" x="421.5" y="381"/>
+        </collectionViewCell>
+    </objects>
+</document>

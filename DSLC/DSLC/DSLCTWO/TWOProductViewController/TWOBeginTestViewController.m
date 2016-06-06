@@ -34,9 +34,9 @@
     UIImageView *imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 70.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 140.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 140.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"monkeyHead"]];
     [imageBackGround addSubview:imageHead];
     
-    UILabel *labelContent = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 130, 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 140.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 260, 90) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"投资有风险,不同承受能力和风险偏好的\n客户,应该选择不同的投资产品或投资组\n合。安全测评,可帮助您更好的了解自己\n的风险偏好和风险承受能力。"];
+    UILabel *labelContent = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 130, 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 140.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 260, 90) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"投资有风险, 理财需谨慎。安全测评, 多\n一分谨慎, 少一分风险; 多一分了解, 少\n一分损失。"];
     [imageBackGround addSubview:labelContent];
-    labelContent.numberOfLines = 4;
+    labelContent.numberOfLines = 3;
     
     UIButton *butBegin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 130, 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 140.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 90 + 80.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 260, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor profitColor] titleText:@"开始测评吧"];
     [imageBackGround addSubview:butBegin];

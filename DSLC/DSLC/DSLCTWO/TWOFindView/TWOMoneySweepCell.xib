@@ -60,6 +60,13 @@
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
                         <state key="normal" title="Button"/>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEv-5i-H4j">
+                        <rect key="frame" x="162" y="35" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="hyW-ee-4u2"/>
+                            <constraint firstAttribute="width" constant="50" id="qBd-72-sOk"/>
+                        </constraints>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="hW8-c8-KX5" secondAttribute="trailing" constant="6" id="2FN-ik-Ue4"/>
@@ -69,12 +76,15 @@
                     <constraint firstItem="hW8-c8-KX5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="103" id="K1n-Cl-FM7"/>
                     <constraint firstItem="Inh-j9-YRD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="KIs-hc-PiG"/>
                     <constraint firstAttribute="trailingMargin" secondItem="EF2-mo-wCS" secondAttribute="trailing" constant="1" id="MUZ-6b-tw3"/>
+                    <constraint firstItem="vEv-5i-H4j" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Wgg-Oi-fv6"/>
+                    <constraint firstItem="vEv-5i-H4j" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-12" id="bTz-y3-dhy"/>
                     <constraint firstItem="Egr-YJ-YYR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="kdv-wb-fdz"/>
                     <constraint firstItem="EF2-mo-wCS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="twe-fB-QH5"/>
                     <constraint firstItem="EF2-mo-wCS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="umo-g6-hYq"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="buttonPlay" destination="vEv-5i-H4j" id="Vob-QO-m6u"/>
                 <outlet property="buttonSee" destination="hW8-c8-KX5" id="H1f-6d-lFq"/>
                 <outlet property="imageBackGround" destination="EF2-mo-wCS" id="0hk-d9-Abf"/>
                 <outlet property="labelAlpha" destination="Egr-YJ-YYR" id="lQl-cq-yCI"/>

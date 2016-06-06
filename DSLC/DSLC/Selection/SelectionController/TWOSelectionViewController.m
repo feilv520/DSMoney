@@ -13,8 +13,9 @@
 #import "define.h"
 #import "CreatView.h"
 #import "TWOFindViewController.h"
+#import "TWOHomePageProductCell.h"
 
-@interface TWOSelectionViewController ()
+@interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
 {
     UIButton *buttonClick;
@@ -23,6 +24,9 @@
     UIButton *buttonHei;
     UILabel *labelMonkey;
     UIImageView *imageSign;
+    UIView *viewBanner;
+    UIView *viewNotice;
+    UICollectionView *_collection;
 }
 
 @end
@@ -40,8 +44,10 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor qianhuise];
+    
     [self signFinish];
-    [self contentShow];
+    [self upContentShow];
+    [self collectionViewShow];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLoginView) name:@"showLoginView" object:nil];
 }
@@ -62,10 +68,11 @@
     [app.tabBarVC.view addSubview:imageSign];
 }
 
-- (void)contentShow
+//上半部分的视图
+- (void)upContentShow
 {
 //    轮播banner的位置
-    UIView *viewBanner = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+    viewBanner = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     [self.view addSubview:viewBanner];
     viewBanner.backgroundColor = [UIColor qianhuise];
     
@@ -73,7 +80,7 @@
     [viewBanner addSubview:imageBanner];
     
 //    公告位置
-    UIView *viewNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 32.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+    viewNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 32.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     [self.view addSubview:viewNotice];
     viewNotice.backgroundColor = [UIColor whiteColor];
     
@@ -98,108 +105,92 @@
         [buttonClick setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [imageArr objectAtIndex:i]]] forState:UIControlStateHighlighted];
         [buttonClick addTarget:self action:@selector(buttonClickedChoose:) forControlEvents:UIControlEventTouchUpInside];
     }
-    
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
-    [self.view addSubview:scrollView];
-    scrollView.pagingEnabled = YES;
-    scrollView.showsHorizontalScrollIndicator = NO;
-    scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * 3, 0);
-    
-    NSArray *nameArr = @[@"美猴王001期", @"丁颖", @"马成精"];
-    NSArray *profitArr = @[@"11.5", @"13.9", @"5.2"];
-    NSArray *dayArr = @[@"3", @"6", @"5"];
-    NSArray *moneyArr = @[@"24.3", @"78.2", @"89.3"];
-    NSArray *qitouArr = @[@"1,000", @"6,000", @"8,000"];
-    
-    for (int i = 0; i < 3; i++) {
-        
-        [self contentMostProfitWithWidth:i name:[nameArr objectAtIndex:i] profit:[profitArr objectAtIndex:i] day:[dayArr objectAtIndex:i] shengyu:[moneyArr objectAtIndex:i] qitouMoney:[qitouArr objectAtIndex:i]];
-    }
 }
 
-- (void)contentMostProfitWithWidth:(CGFloat)width name:(NSString *)productName profit:(NSString *)profit day:(NSString *)dayNum shengyu:(NSString *)shengMoney qitouMoney:(NSString *)qitouMoney
+- (void)collectionViewShow
 {
-//    最高收益的view
-    viewBottom = [[UIView alloc] initWithFrame:CGRectMake(9 + WIDTH_CONTROLLER_DEFAULT * width, 0, WIDTH_CONTROLLER_DEFAULT - 18, scrollView.frame.size.height)];
-    [scrollView addSubview:viewBottom];
-    viewBottom.backgroundColor = [UIColor whiteColor];
-    viewBottom.layer.cornerRadius = 5;
-    viewBottom.layer.masksToBounds = YES;
-    viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
-    viewBottom.layer.borderWidth = 1;
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.itemSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    flowLayout.minimumInteritemSpacing = 0;
+    flowLayout.minimumLineSpacing = 0;
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
-    CGFloat viewWidth = viewBottom.frame.size.width;
+    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) collectionViewLayout:flowLayout];
+    [self.view addSubview:_collection];
+    _collection.dataSource = self;
+    _collection.delegate = self;
+    _collection.bounces = NO;
+    _collection.showsHorizontalScrollIndicator = NO;
+    _collection.pagingEnabled = YES;
+    _collection.backgroundColor = [UIColor whiteColor];
+    [_collection registerNib:[UINib nibWithNibName:@"TWOHomePageProductCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 3;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    TWOHomePageProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuse" forIndexPath:indexPath];
     
-    UIImageView *imageHotSell = [CreatView creatImageViewWithFrame:CGRectMake(viewWidth - 50, 0, 50, 50) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"热卖"]];
-    [viewBottom addSubview:imageHotSell];
+    cell.imageBuying.image = [UIImage imageNamed:@"热卖"];
+    cell.viewBottom.layer.cornerRadius = 5;
+    cell.viewBottom.layer.masksToBounds = YES;
+    cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+    cell.viewBottom.layer.borderWidth = 1;
     
-    UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(14, 14, viewWidth - 50 - 14, 25) backgroundColor:[UIColor whiteColor] textColor:[UIColor blackZiTi] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:productName];
-    [viewBottom addSubview:labelName];
+    NSArray *nameArray = @[@"美猴王001期", @"金斗云77期", @"3个月齐系列"];
+    cell.labelName.text = [nameArray objectAtIndex:indexPath.item];
     
-    UIButton *buttonLeft = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(19, 101, 30, 30) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
-    [viewBottom addSubview:buttonLeft];
-    [buttonLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateNormal];
-    [buttonLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateHighlighted];
-    [buttonLeft addTarget:self action:@selector(buttonLeftClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateNormal];
+    cell.butQuanQuan.backgroundColor = [UIColor clearColor];
+    NSMutableAttributedString *butString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"11.5"]];
+    NSRange leftRange = NSMakeRange(0, [[butString string] rangeOfString:@"%"].location);
+    [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
+    [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:leftRange];
+    NSRange rightRange = NSMakeRange([[butString string] length] - 1, 1);
+    [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:rightRange];
+    [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:rightRange];
+    [cell.butQuanQuan setAttributedTitle:butString forState:UIControlStateNormal];
     
-    UIButton *buttonRight = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewWidth - 19 - 30, 101, 30, 30) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
-    [viewBottom addSubview:buttonRight];
-    [buttonRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateNormal];
-    [buttonRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateHighlighted];
-    [buttonRight addTarget:self action:@selector(buttonRightClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateNormal];
+    [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateHighlighted];
+    [cell.butLeft addTarget:self action:@selector(buttonLeftClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageView *imageProfit = [CreatView creatImageViewWithFrame:CGRectMake(97.5, 47, viewWidth - 97.5 * 2, viewWidth - 97.5 * 2 - 25) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"产品圈圈"]];
-    [viewBottom addSubview:imageProfit];
+    [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateNormal];
+    [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateHighlighted];
+    [cell.butRight addTarget:self action:@selector(buttonRightClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *labelProfit = [CreatView creatWithLabelFrame:CGRectMake(12, imageProfit.frame.size.height/2 - 20, imageProfit.frame.size.width - 24, 50) backgroundColor:[UIColor clearColor] textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:22] text:nil];
-    [imageProfit addSubview:labelProfit];
-    NSMutableAttributedString *profitString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", profit]];
-    NSRange leftRange = NSMakeRange(0, [[profitString string] rangeOfString:@"%"].location);
-    [profitString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
-    [labelProfit setAttributedText:profitString];
+    [self changeColorAndSize:@"3天" label:cell.labelData length:1];
+    [self changeColorAndSize:@"24.3万元" label:cell.labelLastMoney length:2];
+    [self changeColorAndSize:@"1,000元" label:cell.labelQiTou length:1];
     
-    UILabel *labelYuQi = [CreatView creatWithLabelFrame:CGRectMake(0, imageProfit.frame.size.height - 10, imageProfit.frame.size.width, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"预期年化收益率"];
-    [imageProfit addSubview:labelYuQi];
+    cell.labelYuQi.text = @"预期年化收益率";
+    cell.labelDownONe.text = @"理财期限";
+    cell.labelDownMid.text = @"剩余可投";
+    cell.labelDownRight.text = @"起投资金";
     
-//    NSArray *shuZiArr = @[@"3", @"24.3", @"1,000"];
-    CGFloat labelWidth = (WIDTH_CONTROLLER_DEFAULT - 18)/3;
-//    理财期限的天数
-    UILabel *labelShuZi = [CreatView creatWithLabelFrame:CGRectMake(0, 47 + imageProfit.frame.size.height + 18, labelWidth, 22) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
-    [viewBottom addSubview:labelShuZi];
-    NSMutableAttributedString *leftStriing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天", @"3"]];
-    NSRange leftrange = NSMakeRange(0, [[leftStriing string] rangeOfString:@"天"].location);
-    [leftStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:leftrange];
-    [labelShuZi setAttributedText:leftStriing];
+    [cell.butRightNow setBackgroundColor:[UIColor profitColor]];
+    cell.butRightNow.layer.cornerRadius = 20;
+    cell.butRightNow.layer.masksToBounds = YES;
+    [cell.butRightNow setTitle:@"立即抢购" forState:UIControlStateNormal];
+    cell.butRightNow.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [cell.butRightNow addTarget:self action:@selector(rightQiangGou:) forControlEvents:UIControlEventTouchUpInside];
     
-//    剩余可投的钱数
-    UILabel *labelShengYuM = [CreatView creatWithLabelFrame:CGRectMake(labelWidth, 47 + imageProfit.frame.size.height + 18, labelWidth, 22) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
-    [viewBottom addSubview:labelShengYuM];
-    NSMutableAttributedString *moneyStriing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@万元", @"24.3"]];
-    NSRange money = NSMakeRange(0, [[moneyStriing string] rangeOfString:@"万"].location);
-    [moneyStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:money];
-    [labelShengYuM setAttributedText:moneyStriing];
-    
-//    起投资金的钱数
-    UILabel *labelQiTouM = [CreatView creatWithLabelFrame:CGRectMake(labelWidth * 2, 47 + imageProfit.frame.size.height + 18, labelWidth, 22) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
-    [viewBottom addSubview:labelQiTouM];
-    NSMutableAttributedString *qiTouStriing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"1000"]];
-    NSRange qiTouMoney = NSMakeRange(0, [[qiTouStriing string] rangeOfString:@"元"].location);
-    [qiTouStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:qiTouMoney];
-    [labelQiTouM setAttributedText:qiTouStriing];
-    
-    NSArray *wenZiArr = @[@"理财期限", @"剩余可投", @"起投资金"];
-    
-    for (int i = 0; i < 3; i++) {
-        
-        UILabel *labelWenZi = [CreatView creatWithLabelFrame:CGRectMake(labelWidth * i, 47 + imageProfit.frame.size.height + 18 + 22 + 9, labelWidth, 12) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:[wenZiArr objectAtIndex:i]];
-        [viewBottom addSubview:labelWenZi];
-    }
-    
-    UIButton *buttonQiang = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, 47 + imageProfit.frame.size.height + 18 + 22 + 32, viewWidth - 18, 40) backgroundColor:[UIColor whiteColor] textColor:nil titleText:nil];
-    [viewBottom addSubview:buttonQiang];
-    [buttonQiang setBackgroundImage:[UIImage imageNamed:@"立即抢购"] forState:UIControlStateNormal];
-    [buttonQiang setBackgroundImage:[UIImage imageNamed:@"立即抢购"] forState:UIControlStateHighlighted];
-    [buttonQiang addTarget:self action:@selector(rightQiangGou:) forControlEvents:UIControlEventTouchUpInside];
+    cell.backgroundColor = [UIColor qianhuise];
+    return cell;
+}
+
+//封装改变字体大小
+- (void)changeColorAndSize:(NSString *)string label:(UILabel *)label length:(NSInteger)num
+{
+    NSMutableAttributedString *changeString = [[NSMutableAttributedString alloc] initWithString:string];
+    NSRange leftRange = NSMakeRange([[changeString string] length] - num, num);
+    [changeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:leftRange];
+    [changeString addAttribute:NSForegroundColorAttributeName value:[UIColor findZiTiColor] range:leftRange];
+    [label setAttributedText:changeString];
 }
 
 //黑色遮罩层消失
@@ -229,36 +220,21 @@
 //左按钮点击方法
 - (void)buttonLeftClicked:(UIButton *)button
 {
-    NSLog(@"zuo");
-    if (viewBottom.frame.origin.x == 9) {
-        
+    CGFloat pageNumber = _collection.contentOffset.x / WIDTH_CONTROLLER_DEFAULT;
+    if (_collection.contentOffset.x == 0) {
     } else {
-        
-        
+        [_collection setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * (pageNumber - 1), 1) animated:YES];
     }
 }
 
-//有按钮点击方法
+//右按钮点击方法
 - (void)buttonRightClicked:(UIButton *)button
 {
-    NSLog(@"you");
-    if (viewBottom.frame.origin.x == 9) {
-        
+    CGFloat pageNumber = _collection.contentOffset.x / WIDTH_CONTROLLER_DEFAULT;
+    if (_collection.contentOffset.x == WIDTH_CONTROLLER_DEFAULT * 2) {
     } else {
-        
-        
+        [_collection setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * (pageNumber + 1), 1) animated:YES];
     }
-    
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        
-        NSLog(@"666666666");
-        for (int i = 0; i < 3; i++) {
-            scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * i, 0);
-        }
-        
-    } completion:^(BOOL finished) {
-        
-    }];
 }
 
 //立即抢购按钮

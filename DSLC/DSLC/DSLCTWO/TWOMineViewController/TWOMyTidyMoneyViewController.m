@@ -96,7 +96,7 @@
     [butProfit addSubview:viewLineLeft];
     
 //    已兑付按钮
-    buttonCash = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, viewBottom.frame.size.height - 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"已兑付"];
+    buttonCash = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, viewBottom.frame.size.height - 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor] textColor:[UIColor zitihui] titleText:@"已经兑付"];
     [viewBottom addSubview:buttonCash];
     buttonCash.tag = 123;
     buttonCash.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -111,9 +111,10 @@
 - (void)tableViewProfitShow
 {
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, viewBottom.frame.size.height, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - viewBottom.frame.size.height - 64 - 20)];
-    _scrollView.backgroundColor = [UIColor greenColor];
+    _scrollView.backgroundColor = [UIColor whiteColor];
     _scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * 2, 0);
     [self.view addSubview:_scrollView];
+    _scrollView.bounces = NO;
     _scrollView.delegate = self;
     _scrollView.pagingEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;

@@ -8,6 +8,7 @@
 
 #import "TWOMyClientViewController.h"
 #import "TWOMyClientCell.h"
+#import "ChatViewController.h"
 
 @interface TWOMyClientViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -73,6 +74,12 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ChatViewController *chatVC = [[ChatViewController alloc] init];
+    pushVC(chatVC);
 }
 
 - (void)didReceiveMemoryWarning {

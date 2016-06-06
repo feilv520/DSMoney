@@ -120,9 +120,9 @@
         UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
 
         //        2.0我的
-        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-//        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
-        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
+//        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
+        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:loginAPPVC];
         
 //        2.0
 //        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];

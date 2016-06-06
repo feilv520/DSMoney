@@ -27,6 +27,7 @@
     NSArray *titleArr;
     NSArray *imagePicArray;
     NSArray *contentArr;
+    UIImageView *imageDian;
 }
 
 @end
@@ -81,6 +82,10 @@
     _collection.contentInset = UIEdgeInsetsMake(6.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 9, 5.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 9);
     [_collection registerNib:[UINib nibWithNibName:@"TwoActivityCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
     [_collection registerNib:[UINib nibWithNibName:@"PleaseExpectCell" bundle:nil] forCellWithReuseIdentifier:@"reuse5"];
+    
+//    金箍棒
+    imageDian = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    imageDian.image = [UIImage imageNamed:@"Reddian"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -110,7 +115,7 @@
 //        大圣公益行
         TWODSPublicBenefitViewController *publicBenefit = [[TWODSPublicBenefitViewController alloc] init];
         pushVC(publicBenefit);
-    } else {
+    } else if (indexPath.row == 0) {
 //        投资大扫描
         TWOMoneySweepViewController *moneySweepVC = [[TWOMoneySweepViewController alloc] init];
         pushVC(moneySweepVC);
@@ -134,7 +139,7 @@
         cell.layer.borderWidth = 1;
         
         cell.imageExpect.image = [UIImage imageNamed:@"敬请期待"];
-        cell.labelName.text = @"敬请期待";
+        cell.labelName.text = @"更多精彩,敬请期待";
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.labelName.textColor = [UIColor profitColor];
         
@@ -151,17 +156,22 @@
         
         imagePicArray = @[@"huodong", @"tequan", @"大转盘", @"baojichoujiang", @"youxi"];
         titleArr = @[@"活动中心", @"特权本金", @"大转盘", @"爆击抽奖", @"游戏中心"];
-        contentArr = @[@"月月活动玩不停", @"玩high朋友圈", @"好运气快快来", @"中奖王就是你", @"玩游戏转猴币"];
+        contentArr = @[@"月月活动玩不停", @"零花钱赚不停", @"猴币转出大礼来", @"实物猴彩等你来", @"玩游戏赚猴币"];
         NSArray *colorArray = @[[UIColor daohanglan], [UIColor tequanColor], [UIColor profitColor], [UIColor daohanglan], [UIColor tequanColor]];
         
         cell.imagePIC.image = [UIImage imageNamed:[imagePicArray objectAtIndex:indexPath.item]];
         cell.labelTitle.text = [titleArr objectAtIndex:indexPath.item];
         cell.labelTitle.textColor = [colorArray objectAtIndex:indexPath.item];
         cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-//        cell.labelTitle.backgroundColor = [UIColor greenColor];
         
-        CGRect rect = [cell.labelTitle.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:15]} context:nil];
-        cell.labelTitle.frame = CGRectMake(69, 15, rect.size.width, 15);
+        if (indexPath.item == 2) {
+            imageDian.frame = CGRectMake(cell.labelTitle.text.length * 15, 3, 11, 11);
+            [cell.labelTitle addSubview:imageDian];
+            
+        } else if (indexPath.item == 3) {
+            imageDian.frame = CGRectMake(cell.labelTitle.text.length * 15, 3, 11, 11);
+            [cell.labelTitle addSubview:imageDian];
+        }
         
         cell.labelContent.text = [contentArr objectAtIndex:indexPath.item];
         cell.labelContent.textColor = [UIColor findZiTiColor];

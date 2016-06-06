@@ -29,19 +29,23 @@
 {
     [super viewWillAppear:animated];    
     butShare.hidden = NO;
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor profitColor];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:0];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor yellowColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"摇一摇"];
     
 //    [self haveNoChanceShow];
     [self haveChanceContentShow];
     [self commonHaveShow];
-    [self tanKuangeShow];
+//    [self tanKuangeShow];
 }
 
 - (void)haveNoChanceShow
@@ -51,12 +55,20 @@
     imageBack.userInteractionEnabled = YES;
     
 //    显示还有几次摇一摇机会
-    UILabel *labelChance = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 391.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:19] text:nil];
+    UILabel *labelChance = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 391.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:19] text:nil];
     [imageBack addSubview:labelChance];
     NSMutableAttributedString *zeroString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"您还有%@次机会", @"0"]];
     NSRange zeroRange = NSMakeRange(3, 1);
     [zeroString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:zeroRange];
     [labelChance setAttributedText:zeroString];
+    
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 369.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 381.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
+        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 396.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+    }
 }
 
 - (void)haveChanceContentShow
@@ -66,7 +78,7 @@
     imageBack.userInteractionEnabled = YES;
     
 //    显示还有几次摇一摇机会
-    UILabel *labelChance = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 391.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:22] text:nil];
+    UILabel *labelChance = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 391.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:22] text:nil];
     [imageBack addSubview:labelChance];
     NSMutableAttributedString *shuZiString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"您还有%@次机会", @"2"]];
     NSRange leftRange = NSMakeRange(0, 3);
@@ -76,6 +88,14 @@
     [shuZiString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:19] range:rightRange];
     [shuZiString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:rightRange];
     [labelChance setAttributedText:shuZiString];
+    
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 369.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 382.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
+        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 396.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+    }
 }
 
 - (void)commonHaveShow
@@ -125,6 +145,11 @@
     butShuZi.layer.cornerRadius = 8;
     butShuZi.layer.masksToBounds = YES;
     [butShuZi addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        butYaoLeft.frame = CGRectMake(9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
+        butYaoRight.frame = CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
+    }
 }
 
 - (void)tanKuangeShow
@@ -140,8 +165,8 @@
     viewBottom.layer.cornerRadius = 5;
     viewBottom.layer.masksToBounds = YES;
     
-    [self haveNoWinPrize];
-//    [self winPrizeShow];
+//    [self haveNoWinPrize];
+    [self winPrizeShow];
 }
 
 //没有中奖的弹框
