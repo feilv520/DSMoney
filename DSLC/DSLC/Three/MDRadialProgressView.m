@@ -10,6 +10,7 @@
 #import "MDRadialProgressView.h"
 #import "MDRadialProgressLabel.h"
 #import "MDRadialProgressTheme.h"
+#import "define.h"
 
 
 @interface MDRadialProgressView ()
@@ -67,9 +68,10 @@
 	// Init the progress label, even if not visible.
 	self.label = [[MDRadialProgressLabel alloc] initWithFrame:self.bounds andTheme:self.theme];
 	[self addSubview:self.label];
+    self.label.textColor = [UIColor colorFromHexCode:@"2493e7"];
 	
 	// Private properties
-	self.internalPadding = 5;
+	self.internalPadding = 2;
 	
 	// Accessibility
 	self.isAccessibilityElement = YES;
@@ -243,7 +245,7 @@
 - (void)drawCenter:(CGContextRef)contextRef withViewSize:(CGSize)viewSize andCenter:(CGPoint)center
 {
 	int innerDiameter = viewSize.width - self.theme.thickness;
-    float innerRadius = innerDiameter / 2;
+    float innerRadius = innerDiameter / 2.0;
 	
 	CGContextSetLineWidth(contextRef, self.theme.thickness);
 	CGRect innerCircle = CGRectMake(center.x - innerRadius, center.y - innerRadius,
@@ -272,7 +274,7 @@
     self.accessibilityValue = [NSString stringWithFormat:@"%.2f", percentageCompleted];
     
 	self.label.text = [NSString stringWithFormat:@"%.0f%%", percentageCompleted];
-	
+    
 	NSString *notificationText = [NSString stringWithFormat:@"%@ %@",
 								  NSLocalizedString(@"Progress changed to:", nil),
 								  self.accessibilityValue];

@@ -74,6 +74,8 @@
     // 设置正在刷新状态的动画图片
     [footer setImages:refreshingImages forState:MJRefreshStateRefreshing];
     
+//    footer.stateLabel.hidden = YES;
+    
     // 设置尾部
     tableview.mj_footer.automaticallyHidden = NO;
     tableview.mj_footer = footer;

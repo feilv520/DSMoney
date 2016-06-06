@@ -7,6 +7,7 @@
 //
 
 #import "MJRefreshBackGifFooter.h"
+#import "define.h"
 
 @interface MJRefreshBackGifFooter()
 @property (weak, nonatomic) UIImageView *gifView;
@@ -25,6 +26,15 @@
         [self addSubview:_gifView = gifView];
     }
     return _gifView;
+}
+
+- (UIImageView *)jtImageView{
+    if (!_jtImageView) {
+        self.jtImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TWOPUp"]];
+        self.jtImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 50, 20, 20, 20);
+//        [self addSubview:self.jtImageView];
+    }
+    return _jtImageView;
 }
 
 - (NSMutableDictionary *)stateImages
@@ -93,6 +103,12 @@
 - (void)setState:(MJRefreshState)state
 {
     MJRefreshCheckState
+    
+    if (state == MJRefreshStatePulling) {
+        self.jtImageView.image = [UIImage imageNamed:@"TWOPDown"];
+    } else if (state == MJRefreshStateIdle) {
+        self.jtImageView.image = [UIImage imageNamed:@"TWOPUp"];
+    }
     
     // 根据状态做事情
     if (state == MJRefreshStatePulling || state == MJRefreshStateRefreshing) {
