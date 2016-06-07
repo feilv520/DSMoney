@@ -255,6 +255,24 @@
     [self ifLoginView];
 }
 
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getAdvList{
+    
+    NSDictionary *parmeter = @{@"adType":@"2"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"AD = %@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -128,7 +128,7 @@
     UIButton *buttonCal = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonCal.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/4, 49);
     [buttonCal setImage:[UIImage imageNamed:@"750产品详111"] forState:UIControlStateNormal];
-    [buttonCal setImageEdgeInsets:UIEdgeInsetsMake(10, 30, 10, 30)];
+    [buttonCal setImageEdgeInsets:UIEdgeInsetsMake(10, 32 / 93.0 * (WIDTH_CONTROLLER_DEFAULT / 4), 10, 32 / 93.0 * (WIDTH_CONTROLLER_DEFAULT / 4))];
     buttonCal.backgroundColor = [UIColor colorWithRed:112 / 255.0 green:192 / 255.0 blue:252 / 255.0 alpha:1.0];
     [buttonCal addTarget:self action:@selector(calendarView) forControlEvents:UIControlEventTouchUpInside];
     [self.viewBotton addSubview:buttonCal];
@@ -239,7 +239,7 @@
     CGFloat bfNumber = ([[self.detailM productInitLimit] floatValue] - [self.residueMoney floatValue]) / [[self.detailM productInitLimit] floatValue];
     
     //小猴子
-    UIImageView *monkeyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40, 86, 18, 30)];
+    UIImageView *monkeyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40, 86, 20, 30)];
     monkeyImageView.image = [UIImage imageNamed:@"productMonkey"];
     [headImageView addSubview:monkeyImageView];
     
@@ -384,6 +384,7 @@
         } else {
             
             cell.titleLabel.text = @"产品详情";
+            cell.titleLabel.textColor = [UIColor findZiTiColor];
         }
     } else if(indexPath.section == 2) {
         if (indexPath.row == 0) {
@@ -392,9 +393,11 @@
         } else if (indexPath.row == 1) {
             
             cell.titleLabel.text = @"投资记录";
+            cell.titleLabel.textColor = [UIColor findZiTiColor];
         } else {
             
             cell.titleLabel.text = @"产品安全等级";
+            cell.titleLabel.textColor = [UIColor findZiTiColor];
         }
     }
     

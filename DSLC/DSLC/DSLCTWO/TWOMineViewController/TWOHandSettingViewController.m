@@ -30,7 +30,7 @@
     // 判断是否存在isLogin.plist文件
     if (![FileOfManage ExistOfFile:@"handOpen.plist"]) {
         [FileOfManage createWithFile:@"handOpen.plist"];
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",nil];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
         [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
     }
     

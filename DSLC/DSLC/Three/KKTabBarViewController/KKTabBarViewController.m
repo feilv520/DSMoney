@@ -197,17 +197,17 @@
 //切换页面按钮点击事件
 - (void)tabAction:(UIButton *)button
 {
-    if (button.tag == 2) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbarView" object:indexButton];
-        if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
-            return ;
-        } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
-        }
-    } else {
-        indexButton = button;
-    }
+//    if (button.tag == 2) {
+////        [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbarView" object:indexButton];
+//        if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+//            return ;
+//        } else {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
+//        }
+//    } else {
+    indexButton = button;
+//    }
     
     [_tabScrollView setContentOffset:CGPointMake(button.tag * _pageWidth, 0) animated:_transitionAnimated];
     for (UIButton *tempButton in _tabButtonArray) {

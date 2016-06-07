@@ -17,6 +17,7 @@
 #import "BannerViewController.h"
 #import "TWOProductDemoTableViewCell.h"
 #import "TWOProductDetailViewController.h"
+#import "TWOProductNewHotTableViewCell.h"
 
 @interface TWONewViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -114,9 +115,8 @@
     //    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
     //    _tableView.tableHeaderView.backgroundColor = [UIColor greenColor];
     
-    [_tableView registerNib:[UINib nibWithNibName:@"FinancingCell" bundle:nil] forCellReuseIdentifier:@"reuseNNN"];
-    [_tableView registerNib:[UINib nibWithNibName:@"NewBieCell" bundle:nil] forCellReuseIdentifier:@"reuse1"];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOProductDemoTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuseNNew"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TWOProductNewHotTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuseNN"];
     
     [self addTableViewWithHeader:_tableView];
     [self addTableViewWithFooter:_tableView];
@@ -135,7 +135,7 @@
     if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
         if (indexPath.row == 0) {
             
-            return 170;
+            return 260;
             
         } else {
             return 110;
@@ -160,68 +160,38 @@
     if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
         if (indexPath.row == 0) {
             
-            NewBieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse1"];
+            TWOProductNewHotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNN"];
             
-            cell.viewBottom.backgroundColor = [UIColor whiteColor];
+            cell.imageBuying.image = [UIImage imageNamed:@"热卖"];
             cell.viewBottom.layer.cornerRadius = 5;
             cell.viewBottom.layer.masksToBounds = YES;
             cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
             cell.viewBottom.layer.borderWidth = 1;
             
-            cell.labelShouYiLv.text = @"预期年化";
-            cell.labelShouYiLv.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+            cell.labelName.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
             
-            NSMutableAttributedString *percenString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [[self.productListArray objectAtIndex:indexPath.row] productAnnualYield]]];
-            NSRange leftRange = NSMakeRange(0, [[percenString string] rangeOfString:@"%"].location);
-            [percenString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
-            NSRange rightRange = NSMakeRange([[percenString string] length] - 1, 1);
-            [percenString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:rightRange];
-            cell.labelPercent.textAlignment = NSTextAlignmentCenter;
-            cell.labelPercent.textColor = [UIColor daohanglan];
-            [cell.labelPercent setAttributedText:percenString];
+            [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateNormal];
+            cell.butQuanQuan.backgroundColor = [UIColor clearColor];
+            cell.butQuanQuan.enabled = NO;
+            NSMutableAttributedString *butString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"11.5"]];
+            NSRange leftRange = NSMakeRange(0, [[butString string] rangeOfString:@"%"].location);
+            [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
+            [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:leftRange];
+            NSRange rightRange = NSMakeRange([[butString string] length] - 1, 1);
+            [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:rightRange];
+            [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:rightRange];
+            [cell.butQuanQuan setAttributedTitle:butString forState:UIControlStateNormal];
             
-            cell.viewLine.backgroundColor = [UIColor grayColor];
-            cell.viewLine.alpha = 0.1;
+            [self changeColorAndSize:@"3天" label:cell.labelData length:1];
+            [self changeColorAndSize:@"24.3万元" label:cell.labelLastMoney length:2];
+            [self changeColorAndSize:@"1,000元" label:cell.labelQiTou length:1];
             
-            [cell.buttonImage setImage:[UIImage imageNamed:@"liwu"] forState:UIControlStateNormal];
-            [cell.buttonImage setTitle:@" 新手专享" forState:UIControlStateNormal];
-            [cell.buttonImage setTitleColor:[UIColor daohanglan] forState:UIControlStateNormal];
-            cell.buttonImage.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-            cell.buttonImage.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+            cell.labelYuQi.text = @"预期年化收益率";
+            cell.labelDownONe.text = @"理财期限";
+            cell.labelDownMid.text = @"剩余可投";
+            cell.labelDownRight.text = @"起投资金";
             
-            NSString *residueString = [[self.productListArray objectAtIndex:indexPath.row] residueMoney];
-            
-            cell.labelLeftUp.text = [[self.productListArray objectAtIndex:indexPath.row] productPeriod];
-            cell.labelLeftUp.font = [UIFont fontWithName:@"CenturyGothic" size:17];
-            
-            cell.labelMidUp.text = [NSString stringWithFormat:@"%.1lf",[[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / 10000];
-            cell.labelMidUp.font = [UIFont fontWithName:@"CenturyGothic" size:17];
-            
-            //            NSMutableAttributedString *rightString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[[self.productListArray objectAtIndex:indexPath.row] productAmountMin]]];
-            //            NSRange threeRange = NSMakeRange(0, [[rightString string] rangeOfString:@"元"].location);
-            //            [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:[self sizeOfLength:residueString]] range:threeRange];
-            //            NSRange three = NSMakeRange([[rightString string] length] - 1, 1);
-            //            [rightString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:three];
-            //            [cell.labelRightUp setAttributedText:rightString];
-            
-            cell.labelRightUp.text = [[self.productListArray objectAtIndex:indexPath.row] productAmountMin];
-            cell.labelRightUp.font = [UIFont fontWithName:@"ArialMT" size:[self sizeOfLength:residueString]];
-            
-            cell.labelLeftRight.text = @"理财期限(天)";
-            cell.labelLeftRight.textColor = [UIColor zitihui];
-            cell.labelLeftRight.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-            
-            cell.labelMidDOwn.text = @"剩余总额(万元)";
-            cell.labelMidDOwn.textColor = [UIColor zitihui];
-            cell.labelMidDOwn.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-            
-            cell.labelDownRight.text = @"起投资金(元)";
-            cell.labelDownRight.textColor = [UIColor zitihui];
-            cell.labelDownRight.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-            
-            cell.backgroundColor = [UIColor huibai];
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor qianhuise];
             return cell;
             
         } else {
@@ -433,7 +403,7 @@
     
     NSDictionary *parameter = @{@"productType":@3,@"curPage":[NSNumber numberWithInteger:page]};
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
@@ -533,33 +503,46 @@
 
 - (void)getAdvList{
     
-    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"5"};
+//    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"5"};
+//    
+//    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+//        
+//        NSLog(@"ADProduct = %@",responseObject);
+//        
+//        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
+//            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+//            return ;
+//        }
+//        
+//        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
+//            AdModel *adModel = [[AdModel alloc] init];
+//            [adModel setValuesForKeysWithDictionary:dic];
+//            [photoArray addObject:adModel];
+//        }
+//        
+//        if (photoArray.count != 0) {
+//            [self activityShowViewHead];
+//            [self makeScrollView];
+//        }
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        
+//        NSLog(@"%@", error);
+//        
+//    }];
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    NSDictionary *parmeter = @{@"phone":@"13354288036",@"msgType":@"1"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"three/getSmsCode" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"ADProduct = %@",responseObject);
-        
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            return ;
-        }
-        
-        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
-            AdModel *adModel = [[AdModel alloc] init];
-            [adModel setValuesForKeysWithDictionary:dic];
-            [photoArray addObject:adModel];
-        }
-        
-        if (photoArray.count != 0) {
-            [self activityShowViewHead];
-            [self makeScrollView];
-        }
+        NSLog(@"getSmsCode = %@",responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
         
     }];
+
 }
 
 // 广告滚动控件
@@ -714,6 +697,16 @@
         [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
         pageControl.currentPage = photoArray.count - 1;
     }
+}
+
+//封装改变字体大小
+- (void)changeColorAndSize:(NSString *)string label:(UILabel *)label length:(NSInteger)num
+{
+    NSMutableAttributedString *changeString = [[NSMutableAttributedString alloc] initWithString:string];
+    NSRange leftRange = NSMakeRange([[changeString string] length] - num, num);
+    [changeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:leftRange];
+    [changeString addAttribute:NSForegroundColorAttributeName value:[UIColor findZiTiColor] range:leftRange];
+    [label setAttributedText:changeString];
 }
 
 - (void)didReceiveMemoryWarning {

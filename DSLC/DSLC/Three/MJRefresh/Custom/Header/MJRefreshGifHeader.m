@@ -84,6 +84,8 @@
     if (self.gifView.constraints.count) return;
     
     self.gifView.frame = self.bounds;
+    self.stateLabel.hidden = YES;
+    self.lastUpdatedTimeLabel.hidden = YES;
     if (self.stateLabel.hidden && self.lastUpdatedTimeLabel.hidden) {
         self.gifView.contentMode = UIViewContentModeCenter;
     } else {
