@@ -132,27 +132,19 @@
             UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
 
         //        2.0我的
-        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-//        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
-        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
-        
-//        2.0
-        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
-        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
-//        1.0
-//        self.viewControllerArr = @[navigation1, navigation2, navigation3];
-        
-////        2.0
-        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
-        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
-        
-////        1.0
-//        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
-//        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
-        
-//        for循环4要改成3***********************************
-        buttonArr = [NSMutableArray array];
-        for (int i = 0; i < 4; i++) {
+            TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
+    //        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+            UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
+            
+    //        2.0
+//            self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
+            self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
+    //        1.0
+    //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
+            
+    ////        2.0
+            butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
+            butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
             
     ////        1.0
     //        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
