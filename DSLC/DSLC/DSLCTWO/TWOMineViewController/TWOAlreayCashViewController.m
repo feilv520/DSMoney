@@ -50,7 +50,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"TWOProfitingEveryCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
 //    已兑付图片
-    UIImageView *imageViewCash = [CreatView creatImageViewWithFrame:CGRectMake(233, 209.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 105, 105) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"已兑付"]];
+    UIImageView *imageViewCash = [CreatView creatImageViewWithFrame:CGRectMake(233, 209.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 105, 105) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"已经兑付"]];
     [_tableView addSubview:imageViewCash];
     
     [self tableViewHeadShow];
@@ -74,12 +74,13 @@
     [imageViewHead addSubview:labelTouZi];
     
     NSArray *topArray = @[@"40.00", @"72", @"8"];
-    NSArray *downArray = @[@"预期收益", @"理财期限", @"预期年化"];
-    CGFloat width = WIDTH_CONTROLLER_DEFAULT/3;
+    NSArray *downArray = @[@"兑付收益", @"理财期限", @"预期年化"];
+    CGFloat width = (WIDTH_CONTROLLER_DEFAULT - 24)/3;
+    CGFloat marginLeft = 12;
     
     for (int n = 0; n < 3; n++) {
         
-        UILabel *labelTop = [CreatView creatWithLabelFrame:CGRectMake(0 + width * n, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[topArray objectAtIndex:n]];
+        UILabel *labelTop = [CreatView creatWithLabelFrame:CGRectMake(marginLeft + width * n, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[topArray objectAtIndex:n]];
         [imageViewHead addSubview:labelTop];
         
         if (n == 0) {
@@ -88,6 +89,7 @@
             NSRange oneRange = NSMakeRange(0, [[oneString string] rangeOfString:@"元"].location);
             [oneString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:oneRange];
             [labelTop setAttributedText:oneString];
+            labelTop.textAlignment = NSTextAlignmentLeft;
             
         } else if (n == 1) {
             
@@ -102,10 +104,17 @@
             NSRange threeRange = NSMakeRange(0, [[threeString string] rangeOfString:@"%"].location);
             [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:threeRange];
             [labelTop setAttributedText:threeString];
+            labelTop.textAlignment = NSTextAlignmentRight;
         }
         
-        UILabel *labelDown = [CreatView creatWithLabelFrame:CGRectMake(0 + width * n, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelTop.frame.size.height + 5, width, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[downArray objectAtIndex:n]];
+        UILabel *labelDown = [CreatView creatWithLabelFrame:CGRectMake(marginLeft + width * n, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelTop.frame.size.height + 5, width, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[downArray objectAtIndex:n]];
         [imageViewHead addSubview:labelDown];
+        
+        if (n == 0) {
+            labelDown.textAlignment = NSTextAlignmentLeft;
+        } else if (n == 2) {
+            labelDown.textAlignment = NSTextAlignmentRight;
+        }
     }
 }
 

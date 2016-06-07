@@ -18,6 +18,12 @@
 
 @implementation TWOBindingEmailOverViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -30,16 +36,24 @@
 
 - (void)contentShow
 {
-    UIView *viewBlue = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 215) backgroundColor:[UIColor profitColor]];
+    UIView *viewBlue = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 280) backgroundColor:[UIColor profitColor]];
     [self.view addSubview:viewBlue];
     
-    UIImageView *imagePicture = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 50, 10, 100, 120) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"恭喜您"]];
+    UILabel *labelTitle = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 34, 28, 68, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:17] text:@"邮箱绑定"];
+    [viewBlue addSubview:labelTitle];
+    
+    UIButton *butFinishEmail = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 30, 30, 30, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"完成"];
+    [viewBlue addSubview:butFinishEmail];
+    butFinishEmail.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [butFinishEmail addTarget:self action:@selector(navigationBarButtonFinish:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImageView *imagePicture = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 268/2.9/2, 75, 268/2.9, 346/2.9) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"恭喜您"]];
     [viewBlue addSubview:imagePicture];
     
-    UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(9, 10 + imagePicture.frame.size.height + 10, WIDTH_CONTROLLER_DEFAULT - 18, 0.5) backgroundColor:[UIColor whiteColor]];
+    UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(9, viewBlue.frame.size.height - 68, WIDTH_CONTROLLER_DEFAULT - 18, 0.5) backgroundColor:[UIColor whiteColor]];
     [viewBlue addSubview:viewLine];
     
-    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 10 + imagePicture.frame.size.height + 10 + 18, WIDTH_CONTROLLER_DEFAULT, 35) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"邮箱绑定邮件已发送,请登录您的邮箱验证\n本邮件30分钟以内有效"];
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, viewBlue.frame.size.height - 55, WIDTH_CONTROLLER_DEFAULT, 35) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"邮箱绑定邮件已发送,请登录您的邮箱验证\n本邮件30分钟以内有效"];
     [viewBlue addSubview:labelAlert];
     labelAlert.numberOfLines = 2;
     
@@ -56,8 +70,9 @@
     [self.navigationController popToViewController:[viewControllers objectAtIndex:1] animated:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     butFinish.hidden = YES;
 }
 

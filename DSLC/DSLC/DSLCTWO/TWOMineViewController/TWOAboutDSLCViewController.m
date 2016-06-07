@@ -38,13 +38,12 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
     [self tableViewShow];
 }
 
 - (void)tableViewShow
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 53) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -67,10 +66,10 @@
     imagePicture.autoresizesSubviews = YES;
     
 //    返回按钮
-    UIButton *butReturn = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(15, 27, 20, 20) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    UIButton *butReturn = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 27, 20, 20) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [imagePicture addSubview:butReturn];
-    [butReturn setBackgroundImage:[UIImage imageNamed:@"750产品111"] forState:UIControlStateNormal];
-    [butReturn setBackgroundImage:[UIImage imageNamed:@"750产品111"] forState:UIControlStateHighlighted];
+    [butReturn setBackgroundImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateNormal];
+    [butReturn setBackgroundImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateHighlighted];
     butReturn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     [butReturn addTarget:self action:@selector(buttonReturnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -112,7 +111,7 @@
         
         NSArray *oneArray = @[@"帮助中心", @"意见反馈", @"去评分", @"关于我们"];
         cell.labelTitle.text = [oneArray objectAtIndex:indexPath.row];
-        cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+        cell.imageRight.image = [UIImage imageNamed:@"righticon"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;

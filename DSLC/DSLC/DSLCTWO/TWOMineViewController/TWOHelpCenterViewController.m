@@ -60,7 +60,7 @@
     cell.imagePic.image = [UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]];
     NSArray *titleArray = @[@"新手指南", @"常见问题"];
     cell.labelTitle.text = [titleArray objectAtIndex:indexPath.row];
-    cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+    cell.imageRight.image = [UIImage imageNamed:@"righticon"];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

@@ -45,7 +45,7 @@
 //    [self haveNoChanceShow];
     [self haveChanceContentShow];
     [self commonHaveShow];
-//    [self tanKuangeShow];
+    [self tanKuangeShow];
 }
 
 - (void)haveNoChanceShow
@@ -108,7 +108,7 @@
     [butShare addTarget:self action:@selector(buttonShareYaoYiYao:) forControlEvents:UIControlEventTouchUpInside];
     
 //    摇动的图片
-    UIImageView *imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 85, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 170.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 170.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
+    UIImageView *imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 417.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)/2/2, 181.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 417.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)/2, 174.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
     [imageBack addSubview:imageHandYao];
     
 //    下面蓝色按钮宽度

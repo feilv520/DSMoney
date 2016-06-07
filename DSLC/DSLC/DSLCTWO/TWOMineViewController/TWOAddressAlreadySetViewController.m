@@ -46,7 +46,7 @@
     UILabel *labelAbout = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 45, 33, 90, 25) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:17] text:@"地址设置"];
     [viewBlue addSubview:labelAbout];
     
-    UIImageView *imageViewSet = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 50, 75, 100, 140) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"setAddress"]];
+    UIImageView *imageViewSet = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 181/2.1/2, 75, 181/2.1, 279/2.1) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"setAddress"]];
     [viewBlue addSubview:imageViewSet];
     
     UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(10, 75 + 140 + 14, WIDTH_CONTROLLER_DEFAULT - 20, 0.5) backgroundColor:[UIColor whiteColor]];

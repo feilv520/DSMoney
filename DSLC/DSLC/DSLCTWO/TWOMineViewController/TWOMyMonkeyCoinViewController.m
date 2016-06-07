@@ -244,7 +244,6 @@
 //兑换猴币按钮
 - (void)cashMonkeyCoinButton:(UIButton *)button
 {
-    NSLog(@"兑换");
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
 //    黑色遮罩层透明
@@ -271,7 +270,7 @@
     labelMakeSure.userInteractionEnabled = YES;
     
 //    x按钮
-    UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(labelMakeSure.frame.size.width - 22 - 5, 9, 22, 22) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(labelMakeSure.frame.size.width - 22 - 5, 12, 18, 18) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [labelMakeSure addSubview:butCancle];
     [butCancle setBackgroundImage:[UIImage imageNamed:@"product-cuo"] forState:UIControlStateNormal];
     [butCancle addTarget:self action:@selector(buttonBlackAlphaDisappear:) forControlEvents:UIControlEventTouchUpInside];

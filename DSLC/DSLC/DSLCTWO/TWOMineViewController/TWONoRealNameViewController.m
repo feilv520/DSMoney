@@ -35,7 +35,7 @@
 
 - (void)contentShow
 {
-    UIImageView *imagePic = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 60, 15, 120, 120) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noRealName"]];
+    UIImageView *imagePic = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 261/2.5/2, 15, 261/2.5, 315/2.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noRealName"]];
     [self.view addSubview:imagePic];
     
     UILabel *labelWenZi = [CreatView creatWithLabelFrame:CGRectMake(0, 150, WIDTH_CONTROLLER_DEFAULT, 40) backgroundColor:[UIColor whiteColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"您还未实名认证,\n实名认证后才可以投资哦"];

@@ -26,6 +26,7 @@
     UITextField *textFieldPhone;
     UITextField *textFieldSecret;
     UITextField *textFieldMessage;
+    UIScrollView *_scrollview;
 }
 
 @end
@@ -54,7 +55,7 @@
 - (void)loginContent
 {
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, self.view.frame.size.height)];
-    _scrollView.contentSize = CGSizeMake(0, self.view.frame.size.height + self.view.frame.size.height/2 - 50);
+//    _scrollView.contentSize = CGSizeMake(0, self.view.frame.size.height + self.view.frame.size.height/2 - 50);
     [self.view addSubview:_scrollView];
     
 //    大背景
@@ -300,9 +301,10 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"打印");
-    [textFieldPhone resignFirstResponder];
-    [textFieldSecret resignFirstResponder];
-    [textFieldMessage resignFirstResponder];
+//    [textFieldPhone resignFirstResponder];
+//    [textFieldSecret resignFirstResponder];
+//    [textFieldMessage resignFirstResponder];
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -95,7 +95,7 @@
     
     NSArray *titleArray = @[@[@"银行卡", @"实名认证", @"手机号", @"邮箱绑定", @"安全设置", @"地址设置"], @[@"我的理财师", @"关于大圣理财"]];
     cell.labelTitle.text = [[titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+    cell.imageRight.image = [UIImage imageNamed:@"righticon"];
     
     if (indexPath.section == 1) {
         cell.labelStates.hidden = YES;
@@ -191,12 +191,12 @@
         } else {
             
 //            地址设置
-//            TWOAddressManageViewController *addressManager = [[TWOAddressManageViewController alloc] init];
-//            pushVC(addressManager);
+            TWOAddressManageViewController *addressManager = [[TWOAddressManageViewController alloc] init];
+            pushVC(addressManager);
             
 //            已设置页面
-            TWOAddressAlreadySetViewController *addAlreadySet = [[TWOAddressAlreadySetViewController alloc] init];
-            pushVC(addAlreadySet);
+//            TWOAddressAlreadySetViewController *addAlreadySet = [[TWOAddressAlreadySetViewController alloc] init];
+//            pushVC(addAlreadySet);
         }
     } else {
         if (indexPath.row == 0) {
