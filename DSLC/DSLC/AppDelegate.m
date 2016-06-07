@@ -33,6 +33,7 @@
 @property (nonatomic, strong) NSDictionary *flagDic;
 @property (nonatomic, strong) NSDictionary *flagLogin;
 @property (nonatomic, strong) NSDictionary *flagUserInfo;
+@property (nonatomic, strong) NSDictionary *handDic;
 @end
 
 @implementation AppDelegate
@@ -67,6 +68,19 @@
     return _flagLogin;
 }
 
+- (NSDictionary *)handDic{
+    if (_handDic == nil) {
+        if (![FileOfManage ExistOfFile:@"handOpen.plist"]) {
+            [FileOfManage createWithFile:@"handOpen.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+        }
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
+        self.handDic = dic;
+    }
+    return _handDic;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
@@ -84,92 +98,92 @@
     
     [MobClick startWithAppkey:@"5642ad7e67e58e8463006218" reportPolicy:BATCH   channelId:@""];
     
-//    NSMutableDictionary *handDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
-//    
-//    NSString *flag = [handDic objectForKey:@"handFlag"];
+    NSString *handFlag = [self.handDic objectForKey:@"handFlag"];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.window.backgroundColor = [UIColor whiteColor];
     
     if ([[self.flagDic objectForKey:@"FristOpen"] isEqualToString:@"NO"]) {
-    
-////        1.0首页
-//        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
-//        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
-//        
-////        1.0产品
-//        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
-//        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
-//
-////        1.0我的
-//        MineViewController *mineVC = [[MineViewController alloc] init];
-////        LoginViewController *loginVC = [[LoginViewController alloc] init];
-//        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
+        if ([handFlag isEqualToString:@"NO"]) {
+    ////        1.0首页
+    //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
+    //        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
+    //        
+    ////        1.0产品
+    //        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
+    //        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
+    //
+    ////        1.0我的
+    //        MineViewController *mineVC = [[MineViewController alloc] init];
+    ////        LoginViewController *loginVC = [[LoginViewController alloc] init];
+    //        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
 
-        //        2.0首页
-        TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
-        UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
-        
-        //        2.0产品
-        TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
-        UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
-        
-        //        2.0发现
-        TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
-        UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
-
-        //        2.0我的
-//        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
-        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:loginAPPVC];
-        
-//        2.0
-        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
-        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
-//        1.0
-//        self.viewControllerArr = @[navigation1, navigation2, navigation3];
-        
-////        2.0
-        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
-        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
-        
-////        1.0
-//        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
-//        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
-        
-//        for循环4要改成3***********************************
-        buttonArr = [NSMutableArray array];
-        for (int i = 0; i < 4; i++) {
+            //        2.0首页
+            TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
+            UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
             
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
-            //        button.imageView.backgroundColor = [UIColor whiteColor];
-            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butGrayArr objectAtIndex:i]]] forState:UIControlStateNormal];
-            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butColorArr objectAtIndex:i]]] forState:UIControlStateSelected];
-            //       点击保持高亮状态,没有闪动的效果
-            [button setShowsTouchWhenHighlighted:YES];
-            [buttonArr addObject:button];
+            //        2.0产品
+            TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
+            UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
+            
+            //        2.0发现
+            TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
+            UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
+
+            //        2.0我的
+            TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
+    //        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+            UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
+            
+    //        2.0
+            self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
+            self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
+    //        1.0
+    //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
+            
+    ////        2.0
+            butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
+            butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
+            
+    ////        1.0
+    //        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
+    //        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
+            
+    //        for循环4要改成3***********************************
+            buttonArr = [NSMutableArray array];
+            for (int i = 0; i < 4; i++) {
+                
+                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+                //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
+                //        button.imageView.backgroundColor = [UIColor whiteColor];
+                [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butGrayArr objectAtIndex:i]]] forState:UIControlStateNormal];
+                [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butColorArr objectAtIndex:i]]] forState:UIControlStateSelected];
+                //       点击保持高亮状态,没有闪动的效果
+                [button setShowsTouchWhenHighlighted:YES];
+                [buttonArr addObject:button];
+            }
+            
+            self.tabBarVC = [[KKTabBarViewController alloc] init];
+            //    存放试图控制器
+            [self.tabBarVC setControllerArray:self.viewControllerArr];
+            //    存放tabBar上的按钮
+            [self.tabBarVC setTabButtonArray:buttonArr];
+            //    设置tabBar的高度 默认为50
+            [self.tabBarVC setTabBarHeight:35];
+            //    设置是否可以手势滑动切换模块 默认为YES
+            [self.tabBarVC setSuppurtGestureTransition:NO];
+            //    设置点击按钮有无翻页效果 默认有
+            [self.tabBarVC setTransitionAnimated:NO];
+            
+            self.window.rootViewController = self.tabBarVC;
+        } else {
+            //         手势
+            MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
+            self.window.rootViewController = myHandVC;
         }
         
-        self.tabBarVC = [[KKTabBarViewController alloc] init];
-        //    存放试图控制器
-        [self.tabBarVC setControllerArray:self.viewControllerArr];
-        //    存放tabBar上的按钮
-        [self.tabBarVC setTabButtonArray:buttonArr];
-        //    设置tabBar的高度 默认为50
-        [self.tabBarVC setTabBarHeight:35];
-        //    设置是否可以手势滑动切换模块 默认为YES
-        [self.tabBarVC setSuppurtGestureTransition:NO];
-        //    设置点击按钮有无翻页效果 默认有
-        [self.tabBarVC setTransitionAnimated:NO];
-        
-        self.window.rootViewController = self.tabBarVC;
-        
     } else {
-//         手势
-//        MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
-//        self.window.rootViewController = myHandVC;
         
         // 欢迎页
         WelcomeViewController *welcome = [[WelcomeViewController alloc] init];

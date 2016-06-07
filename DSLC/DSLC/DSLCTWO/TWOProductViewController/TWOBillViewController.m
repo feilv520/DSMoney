@@ -272,7 +272,7 @@
     
     NSDictionary *parameter = @{@"productType":@1,@"curPage":@1};
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             [self loadingWithHidden:YES];

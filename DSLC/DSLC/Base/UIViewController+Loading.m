@@ -22,23 +22,29 @@
     MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData:)];
     
     NSMutableArray *images = [NSMutableArray array];
-    for (NSUInteger i = 1; i<=4; i++) {
+    for (NSUInteger i = 1; i<=2; i++) {
         UIImage *image = [[UIImage alloc] init];
-        image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_up_0%zd", i]];
+        image = [UIImage imageNamed:[NSString stringWithFormat:@"Two_Loading_Down0%zd", i]];
         [images addObject:image];
     }
     
     [header setImages:images forState:MJRefreshStateIdle];
-    // 设置即将刷新状态的动画图片（一松开就会刷新的状态）
+    // 设置即将刷新 状态的动画图片（一松开就会刷新的状态）
     
-    NSMutableArray *refreshingImages = [NSMutableArray array];
-    for (NSUInteger i = 1; i<=8; i++) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_up_0%zd", i]];
-        [refreshingImages addObject:image];
+    NSMutableArray *refreshImages = [NSMutableArray array];
+    for (NSUInteger i = 1; i<=2; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"Two_Update_Down0%zd", i]];
+        [refreshImages addObject:image];
     }
     
-    [header setImages:refreshingImages forState:MJRefreshStatePulling];
+    [header setImages:refreshImages forState:MJRefreshStatePulling];
     // 设置正在刷新状态的动画图片
+    
+    NSMutableArray *refreshingImages = [NSMutableArray array];
+    for (NSUInteger i = 1; i<=2; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"Two_Loading_Refrush0%zd", i]];
+        [refreshingImages addObject:image];
+    }
     [header setImages:refreshingImages forState:MJRefreshStateRefreshing];
     // 设置header
     tableview.mj_header = header;
@@ -56,21 +62,27 @@
     MJRefreshBackGifFooter *footer = [MJRefreshBackGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData:)];
     
     NSMutableArray *images = [NSMutableArray array];
-    for (NSUInteger i = 1; i<=4; i++) {
+    for (NSUInteger i = 1; i<=2; i++) {
         UIImage *image = [[UIImage alloc] init];
-        image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_up_0%zd", i]];
+        image = [UIImage imageNamed:[NSString stringWithFormat:@"Two_Loading_Up0%zd", i]];
         [images addObject:image];
     }
     // 设置普通状态的动画图片
     [footer setImages:images forState:MJRefreshStateIdle];
     
-    NSMutableArray *refreshingImages = [NSMutableArray array];
-    for (NSUInteger i = 1; i<=8; i++) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_up_0%zd", i]];
-        [refreshingImages addObject:image];
+    NSMutableArray *refreshImages = [NSMutableArray array];
+    for (NSUInteger i = 1; i<=2; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"Two_Update_Up0%zd", i]];
+        [refreshImages addObject:image];
     }
     // 设置即将刷新状态的动画图片（一松开就会刷新的状态）
-    [footer setImages:refreshingImages forState:MJRefreshStatePulling];
+    [footer setImages:refreshImages forState:MJRefreshStatePulling];
+    
+    NSMutableArray *refreshingImages = [NSMutableArray array];
+    for (NSUInteger i = 1; i<=2; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"Two_Loading_Refrush0%zd", i]];
+        [refreshingImages addObject:image];
+    }
     // 设置正在刷新状态的动画图片
     [footer setImages:refreshingImages forState:MJRefreshStateRefreshing];
     
