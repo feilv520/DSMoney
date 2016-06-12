@@ -137,14 +137,13 @@
             UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
             
     //        2.0
-//            self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
             self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
     //        1.0
     //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
             
     ////        2.0
-            butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
-            butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
+            butGrayArr = @[@"selection_gray", @"production_gray", @"found_gray", @"mine_gray"];
+            butColorArr = @[@"selection", @"production", @"found", @"mine"];
             
     ////        1.0
     //        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];

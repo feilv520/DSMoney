@@ -16,6 +16,7 @@
 #import "TWOFindViewController.h"
 #import "TWOMineViewController.h"
 #import "TWOForgetView.h"
+#import "TWOLoginAPPViewController.h"
 
 @interface MyHandViewController () <MyHandButtonDelegate>{
     NSArray *viewControllerArr;
@@ -37,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userPhone;
 @property (weak, nonatomic) IBOutlet UIButton *forgetButton;
 @property (weak, nonatomic) IBOutlet UIButton *otherUserButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end
 
@@ -74,15 +76,18 @@
     if (handFlag) {
         
         self.titleLabel.text = @"请设置手势密码";
+        self.cancelButton.hidden = NO;
     } else {
         
         self.titleLabel.text = @"请输入解锁图案";
         self.otherUserButton.hidden = NO;
         self.forgetButton.hidden = NO;
+        self.cancelButton.hidden = YES;
         
     }
     
     [self.forgetButton addTarget:self action:@selector(forgetAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
     
     count = 5;
 }
@@ -226,17 +231,17 @@
                     
                     //        2.0我的
                     TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
+                    //        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
                     UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
                     
                     //        2.0
-                    //        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
                     viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
                     //        1.0
                     //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
                     
-                    //        2.0
-                    butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
-                    butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
+                    ////        2.0
+                    butGrayArr = @[@"selection_gray", @"production_gray", @"found_gray", @"mine_gray"];
+                    butColorArr = @[@"selection", @"production", @"found", @"mine"];
                     
                     ////        1.0
                     //        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
@@ -275,13 +280,7 @@
                 }];
             } else {
                 
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"密码错误" message:nil preferredStyle:UIAlertControllerStyleAlert];
-                
-                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
-                //            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-                [self presentViewController:alert animated:YES completion:^{
-                    
-                }];
+                [ProgressHUD showMessage:@"密码错误" Width:100 High:20];
             }
             
         }
@@ -305,11 +304,14 @@
     
     forgetView = (TWOForgetView *)[[rootBundle loadNibNamed:@"TWOForgetView" owner:nil options:nil] lastObject];
     
+    forgetView.layer.masksToBounds = YES;
+    forgetView.layer.cornerRadius = 4.f;
+    
     forgetView.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 330) * 0.5, (HEIGHT_CONTROLLER_DEFAULT - 200) * 0.5, 330, 200);
     
     [forgetView.closeButton addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    [forgetView.sureButton addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
+    [forgetView.sureButton addTarget:self action:@selector(sureButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [app.window addSubview:forgetView];
 }
@@ -322,6 +324,26 @@
     
     bView = nil;
     forgetView = nil;
+}
+
+- (void)sureButton:(UIButton *)but{
+    TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+    [self presentViewController:loginAPPVC animated:YES completion:^{
+        
+    }];
+    
+    [bView removeFromSuperview];
+    [forgetView removeFromSuperview];
+    
+    bView = nil;
+    forgetView = nil;
+}
+
+- (void)cancelAction:(id)sender{
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"switchButton" object:nil];
+    popVC;
+    
 }
 
 - (void)didReceiveMemoryWarning {

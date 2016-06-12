@@ -54,17 +54,17 @@
 
 - (void)loginContent
 {
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, self.view.frame.size.height)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
 //    _scrollView.contentSize = CGSizeMake(0, self.view.frame.size.height + self.view.frame.size.height/2 - 50);
     [self.view addSubview:_scrollView];
     
 //    大背景
-    imageViewBeiJing = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.view.frame.size.height) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"bigpicture"]];
+    imageViewBeiJing = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"bigpicture"]];
     [_scrollView addSubview:imageViewBeiJing];
     imageViewBeiJing.userInteractionEnabled = YES;
     
 //    左上角x按钮
-    UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 30, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 40, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [imageViewBeiJing addSubview:butCancle];
     [butCancle setBackgroundImage:[UIImage imageNamed:@"logincuo"] forState:UIControlStateNormal];
     [butCancle setBackgroundImage:[UIImage imageNamed:@"logincuo"] forState:UIControlStateHighlighted];
@@ -249,7 +249,9 @@
 //左上角x按钮
 - (void)buttonCancleClicked:(UIButton *)button
 {
-    NSLog(@"x");
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 //密码登录按钮

@@ -50,7 +50,7 @@
     self.firstHandButton.delegate = self;
     self.secondHandButton.delegate = self;
     
-    self.titleLabel.text = @"请输入解锁图案";
+    self.titleLabel.text = @"请输入原手势密码";
     
     [self.passButton addTarget:self action:@selector(passAction:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -64,7 +64,7 @@
     if (lockView == self.handButton) {
         if ([path isEqualToString:handString]) {
 
-            self.titleLabel.text = @"请输入新的解锁图案";
+            self.titleLabel.text = @"请输入新手势密码";
             self.handButton.hidden = YES;
             
             self.firstHandButton.hidden = NO;
@@ -74,7 +74,7 @@
         }
     } else if (lockView == self.firstHandButton) {
         
-        self.titleLabel.text = @"请再次输入解锁图案";
+        self.titleLabel.text = @"请再次输入新手势密码";
         
         newString = path;
         
