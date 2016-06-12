@@ -14,7 +14,6 @@
 #import "CreatView.h"
 #import "TWOFindViewController.h"
 #import "TWOHomePageProductCell.h"
-#import "TWOHomePageFiveCell.h"
 
 @interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
@@ -28,6 +27,7 @@
     UIView *viewBanner;
     UIView *viewNotice;
     UICollectionView *_collection;
+    UIScrollView *_scrollView;
 }
 
 @end
@@ -65,13 +65,23 @@
     labelMonkey = [CreatView creatWithLabelFrame:CGRectMake(0, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:27] text:[NSString stringWithFormat:@"%@猴币", @"+66"]];
     [app.tabBarVC.view addSubview:labelMonkey];
     
-    imageSign = [CreatView creatImageViewWithFrame:CGRectMake(40, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30, WIDTH_CONTROLLER_DEFAULT - 80, 230) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"doSign"]];
+    imageSign = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 530/2/2, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30, 530/2, 397/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"doSign"]];
     [app.tabBarVC.view addSubview:imageSign];
 }
 
 //上半部分的视图
 - (void)upContentShow
 {
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+        [self.view addSubview:_scrollView];
+        
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT + 150)];
+        [self.view addSubview:_scrollView];
+    }
+    
 //    轮播banner的位置
     viewBanner = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     [self.view addSubview:viewBanner];
@@ -106,30 +116,32 @@
         [buttonClick setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [imageArr objectAtIndex:i]]] forState:UIControlStateNormal];
         [buttonClick setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [imageArr objectAtIndex:i]]] forState:UIControlStateHighlighted];
         [buttonClick addTarget:self action:@selector(buttonClickedChoose:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            [_scrollView addSubview:buttonClick];
+        }
+    }
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        [_scrollView addSubview:viewBanner];
+        [_scrollView addSubview:viewNotice];
     }
 }
 
 - (void)collectionViewShow
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-//    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 667) {
-        flowLayout.itemSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
-//    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
-//        flowLayout.itemSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 295.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
-//    }
+    flowLayout.itemSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 308);
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.minimumLineSpacing = 0;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
-//    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 667) {
-    
-        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) collectionViewLayout:flowLayout];
-        
-//    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
-//        
-//        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 295.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) collectionViewLayout:flowLayout];
-//    }
-    [self.view addSubview:_collection];
+    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 308) collectionViewLayout:flowLayout];
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        [_scrollView addSubview:_collection];
+    } else {
+        [self.view addSubview:_collection];
+    }
     _collection.dataSource = self;
     _collection.delegate = self;
     _collection.bounces = NO;
@@ -139,6 +151,12 @@
     
     [_collection registerNib:[UINib nibWithNibName:@"TWOHomePageFiveCell" bundle:nil] forCellWithReuseIdentifier:@"reuse5"];
     [_collection registerNib:[UINib nibWithNibName:@"TWOHomePageProductCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
+    
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        _scrollView.contentSize = CGSizeMake(0, 586);
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        _scrollView.contentSize = CGSizeMake(0, 777);
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -148,73 +166,58 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 667) {
+    TWOHomePageProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuse" forIndexPath:indexPath];
     
-        TWOHomePageProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuse" forIndexPath:indexPath];
+    cell.imageBuying.image = [UIImage imageNamed:@"热卖"];
+    cell.viewBottom.layer.cornerRadius = 5;
+    cell.viewBottom.layer.masksToBounds = YES;
+    cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+    cell.viewBottom.layer.borderWidth = 1;
+    
+    NSArray *nameArray = @[@"美猴王001期", @"金斗云77期", @"3个月齐系列"];
+    cell.labelName.text = [nameArray objectAtIndex:indexPath.item];
+    
+    [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateNormal];
+    [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateHighlighted];
+    cell.butQuanQuan.backgroundColor = [UIColor clearColor];
+    NSMutableAttributedString *butString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"11.5"]];
+    NSRange leftRange = NSMakeRange(0, [[butString string] rangeOfString:@"%"].location);
+    [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
+    [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:leftRange];
+    NSRange rightRange = NSMakeRange([[butString string] length] - 1, 1);
+    [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:rightRange];
+    [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:rightRange];
+    [cell.butQuanQuan setAttributedTitle:butString forState:UIControlStateNormal];
+    
+    [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateNormal];
+    [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateHighlighted];
+    [cell.butLeft addTarget:self action:@selector(buttonLeftClicked:) forControlEvents:UIControlEventTouchUpInside];
         
-        cell.imageBuying.image = [UIImage imageNamed:@"热卖"];
-        cell.viewBottom.layer.cornerRadius = 5;
-        cell.viewBottom.layer.masksToBounds = YES;
-        cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
-        cell.viewBottom.layer.borderWidth = 1;
+    [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateNormal];
+    [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateHighlighted];
+    [cell.butRight addTarget:self action:@selector(buttonRightClicked:) forControlEvents:UIControlEventTouchUpInside];
         
-        NSArray *nameArray = @[@"美猴王001期", @"金斗云77期", @"3个月齐系列"];
-        cell.labelName.text = [nameArray objectAtIndex:indexPath.item];
+    [self changeColorAndSize:@"3天" label:cell.labelData length:1];
+    [self changeColorAndSize:@"24.3万元" label:cell.labelLastMoney length:2];
+    [self changeColorAndSize:@"1,000元" label:cell.labelQiTou length:1];
         
-        [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateNormal];
-        cell.butQuanQuan.backgroundColor = [UIColor clearColor];
-        NSMutableAttributedString *butString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"11.5"]];
-        NSRange leftRange = NSMakeRange(0, [[butString string] rangeOfString:@"%"].location);
-        [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
-        [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:leftRange];
-        NSRange rightRange = NSMakeRange([[butString string] length] - 1, 1);
-        [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:rightRange];
-        [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:rightRange];
-        [cell.butQuanQuan setAttributedTitle:butString forState:UIControlStateNormal];
+    cell.labelYuQi.text = @"预期年化收益率";
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        cell.labelYuQi.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    }
+    cell.labelDownONe.text = @"理财期限";
+    cell.labelDownMid.text = @"剩余可投";
+    cell.labelDownRight.text = @"起投资金";
+    
+    [cell.butRightNow setBackgroundColor:[UIColor profitColor]];
+    cell.butRightNow.layer.cornerRadius = 20;
+    cell.butRightNow.layer.masksToBounds = YES;
+    [cell.butRightNow setTitle:@"立即抢购" forState:UIControlStateNormal];
+    cell.butRightNow.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [cell.butRightNow addTarget:self action:@selector(rightQiangGou:) forControlEvents:UIControlEventTouchUpInside];
         
-        [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateNormal];
-        [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateHighlighted];
-        [cell.butLeft addTarget:self action:@selector(buttonLeftClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateNormal];
-        [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateHighlighted];
-        [cell.butRight addTarget:self action:@selector(buttonRightClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self changeColorAndSize:@"3天" label:cell.labelData length:1];
-        [self changeColorAndSize:@"24.3万元" label:cell.labelLastMoney length:2];
-        [self changeColorAndSize:@"1,000元" label:cell.labelQiTou length:1];
-        
-        cell.labelYuQi.text = @"预期年化收益率";
-        cell.labelDownONe.text = @"理财期限";
-        cell.labelDownMid.text = @"剩余可投";
-        cell.labelDownRight.text = @"起投资金";
-        
-        [cell.butRightNow setBackgroundColor:[UIColor profitColor]];
-        cell.butRightNow.layer.cornerRadius = 20;
-        cell.butRightNow.layer.masksToBounds = YES;
-        [cell.butRightNow setTitle:@"立即抢购" forState:UIControlStateNormal];
-        cell.butRightNow.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        [cell.butRightNow addTarget:self action:@selector(rightQiangGou:) forControlEvents:UIControlEventTouchUpInside];
-        
-        cell.backgroundColor = [UIColor qianhuise];
-        return cell;
-        
-//    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
-//        
-//        TWOHomePageFiveCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuse5" forIndexPath:indexPath];
-//        
-//        cell.viewBottom.layer.cornerRadius = 5;
-//        cell.viewBottom.layer.masksToBounds = YES;
-//        cell.viewBottom.layer.borderColor = [[UIColor orangeColor] CGColor];
-//        cell.viewBottom.layer.borderWidth = 1;
-//        
-//        cell.backgroundColor = [UIColor greenColor];
-//        return cell;
-//        
-//    } else {
-//        TWOHomePageFiveCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuse5" forIndexPath:indexPath];
-//        return cell;
-//    }
+    cell.backgroundColor = [UIColor qianhuise];
+    return cell;
 }
 
 //封装改变字体大小

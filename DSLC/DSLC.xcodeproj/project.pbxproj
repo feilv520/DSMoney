@@ -186,8 +186,6 @@
 		81446E6C1D069A1400A7E9BC /* righticon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81446E6A1D069A1400A7E9BC /* righticon@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81446E6F1D069B2100A7E9BC /* 导航返回@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81446E6D1D069B2100A7E9BC /* 导航返回@2x.png */; settings = {ASSET_TAGS = (); }; };
 		81446E701D069B2100A7E9BC /* 导航返回@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81446E6E1D069B2100A7E9BC /* 导航返回@3x.png */; settings = {ASSET_TAGS = (); }; };
-		81446E741D0CFFF500A7E9BC /* TWOHomePageFiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81446E721D0CFFF500A7E9BC /* TWOHomePageFiveCell.m */; settings = {ASSET_TAGS = (); }; };
-		81446E751D0CFFF500A7E9BC /* TWOHomePageFiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81446E731D0CFFF500A7E9BC /* TWOHomePageFiveCell.xib */; settings = {ASSET_TAGS = (); }; };
 		814B51011C3A8463001AACC6 /* ChongZhiZZZZView.m in Sources */ = {isa = PBXBuildFile; fileRef = 814B50FF1C3A8463001AACC6 /* ChongZhiZZZZView.m */; settings = {ASSET_TAGS = (); }; };
 		814B51021C3A8463001AACC6 /* ChongZhiZZZZView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 814B51001C3A8463001AACC6 /* ChongZhiZZZZView.xib */; settings = {ASSET_TAGS = (); }; };
 		814B51141C451DC3001AACC6 /* ChengGongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 814B51131C451DC3001AACC6 /* ChengGongViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -1691,9 +1689,6 @@
 		81446E6A1D069A1400A7E9BC /* righticon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "righticon@3x.png"; sourceTree = "<group>"; };
 		81446E6D1D069B2100A7E9BC /* 导航返回@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "导航返回@2x.png"; sourceTree = "<group>"; };
 		81446E6E1D069B2100A7E9BC /* 导航返回@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "导航返回@3x.png"; sourceTree = "<group>"; };
-		81446E711D0CFFF500A7E9BC /* TWOHomePageFiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOHomePageFiveCell.h; sourceTree = "<group>"; };
-		81446E721D0CFFF500A7E9BC /* TWOHomePageFiveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOHomePageFiveCell.m; sourceTree = "<group>"; };
-		81446E731D0CFFF500A7E9BC /* TWOHomePageFiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOHomePageFiveCell.xib; sourceTree = "<group>"; };
 		814B50FE1C3A8463001AACC6 /* ChongZhiZZZZView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChongZhiZZZZView.h; sourceTree = "<group>"; };
 		814B50FF1C3A8463001AACC6 /* ChongZhiZZZZView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChongZhiZZZZView.m; sourceTree = "<group>"; };
 		814B51001C3A8463001AACC6 /* ChongZhiZZZZView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChongZhiZZZZView.xib; sourceTree = "<group>"; };
@@ -4101,9 +4096,6 @@
 				8177A0261CF2FB610057AA7B /* TWOWinPrizeRecordCell.h */,
 				8177A0271CF2FB610057AA7B /* TWOWinPrizeRecordCell.m */,
 				8177A0281CF2FB610057AA7B /* TWOWinPrizeRecordCell.xib */,
-				81446E711D0CFFF500A7E9BC /* TWOHomePageFiveCell.h */,
-				81446E721D0CFFF500A7E9BC /* TWOHomePageFiveCell.m */,
-				81446E731D0CFFF500A7E9BC /* TWOHomePageFiveCell.xib */,
 			);
 			path = TWOHomePageView;
 			sourceTree = "<group>";
@@ -7529,7 +7521,6 @@
 				81C138211BDF6D5E0088E792 /* iconfont-phone@3x.png in Resources */,
 				8162D1191BE1BC2500CACAB6 /* ProjectNameCell.xib in Resources */,
 				8175BEC51BEA052E0044026E /* 分享成功@3x.png in Resources */,
-				81446E751D0CFFF500A7E9BC /* TWOHomePageFiveCell.xib in Resources */,
 				81B674211BF0AFEB007CEF51 /* yuan@2x.png in Resources */,
 				8D0CB4941BE75E370039D826 /* RiskConditionsViewController.xib in Resources */,
 				8D6E469E1C9B9ECA00F0F5B7 /* loginViewP@2x.png in Resources */,
@@ -8361,7 +8352,6 @@
 				81AC90C51BEC88C100232404 /* RechargeAlreadyBinding.m in Sources */,
 				8191E2111BDDB9DE000A6E8C /* NewHandViewController.m in Sources */,
 				8D35DA411CF3F44300C6409F /* TWOProductDDetailTableViewCell.m in Sources */,
-				81446E741D0CFFF500A7E9BC /* TWOHomePageFiveCell.m in Sources */,
 				811F0AFC1BF318F6001F6AA4 /* GiveMoneyFinish.m in Sources */,
 				818F0D741C0D3DCB00319D19 /* BuyClauseViewController.m in Sources */,
 				81DEC7C31CEC391E005E9D9F /* TWOHelpCenterCell.m in Sources */,
