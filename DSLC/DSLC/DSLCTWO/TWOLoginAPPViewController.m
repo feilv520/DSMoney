@@ -37,10 +37,6 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setHidden:YES];
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:YES];
-    [app.tabBarVC setLabelLineHidden:YES];
 }
 
 - (void)viewDidLoad {
@@ -49,13 +45,21 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsnotice:) name:@"login" object:nil];
     [self loginContent];
+}
+
+- (void)nsnotice:(NSNotification *)notice
+{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.tabBarVC setSuppurtGestureTransition:NO];
+    [app.tabBarVC setTabbarViewHidden:YES];
+    [app.tabBarVC setLabelLineHidden:YES];
 }
 
 - (void)loginContent
 {
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, self.view.frame.size.height)];
-//    _scrollView.contentSize = CGSizeMake(0, self.view.frame.size.height + self.view.frame.size.height/2 - 50);
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, self.view.frame.size.height + 20)];
     [self.view addSubview:_scrollView];
     
 //    大背景
@@ -107,12 +111,9 @@
     textFieldPhone = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"手机号" setTintColor:[UIColor whiteColor]];
     [imageTwo addSubview:textFieldPhone];
     textFieldPhone.textColor = [UIColor whiteColor];
-    textFieldPhone.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     textFieldPhone.keyboardType = UIKeyboardTypeNumberPad;
-    textFieldMessage.delegate = self;
+    textFieldPhone.delegate = self;
     [textFieldPhone setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [textFieldPhone setValue:[UIFont systemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
-    [textFieldPhone addTarget:self action:@selector(textFieldClicked:) forControlEvents:UIControlEventEditingChanged];
     
 //    输入密码框
     imageThree = [CreatView creatImageViewWithFrame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuang"]];
@@ -130,11 +131,8 @@
     textFieldSecret = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageThree.frame.size.width - 64 - 10, 20) setPlaceholder:@"登录密码" setTintColor:[UIColor whiteColor]];
     [imageThree addSubview:textFieldSecret];
     textFieldSecret.textColor = [UIColor whiteColor];
-    textFieldMessage.delegate = self;
-    textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    textFieldSecret.delegate = self;
     [textFieldSecret setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [textFieldSecret setValue:[UIFont systemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
-    [textFieldSecret addTarget:self action:@selector(textFieldClicked:) forControlEvents:UIControlEventEditingChanged];
     
 //    忘记密码?按钮
     butForeget = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60 - 30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 9, 60, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"忘记密码?"];
@@ -148,12 +146,37 @@
     butLogin.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butLogin setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
     [butLogin setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateHighlighted];
+    [butLogin addTarget:self action:@selector(loginAppButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    快速注册按钮
-    UIButton *butFastRegist = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*4 + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor fastZhuCeolor] titleText:@"快速注册"];
+    UIButton *butFastRegist = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*4 + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 60, 20) backgroundColor:[UIColor magentaColor] textColor:[UIColor fastZhuCeolor] titleText:@"快速注册"];
     [imageViewBeiJing addSubview:butFastRegist];
-    butFastRegist.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butFastRegist addTarget:self action:@selector(buttonFastRegister:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        textFieldPhone.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        buttonLeft.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        buttonRight.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        butLogin.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        butFastRegist.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    } else {
+        textFieldPhone.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        buttonLeft.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        buttonRight.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        butLogin.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        butFastRegist.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    }
+    
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        imageOne.frame = CGRectMake(30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 60, 40);
+        imageTwo.frame = CGRectMake(30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 40, WIDTH_CONTROLLER_DEFAULT - 60, 40);
+        imageThree.frame = CGRectMake(30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60, 40);
+        butForeget.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60 - 30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 9, 60, 20);
+        butLogin.frame = CGRectMake(30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 60, 40);
+        butFastRegist.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*4 + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 60, 20);
+    }
 }
 
 //密码登录
@@ -180,16 +203,26 @@
     textFieldSecret = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageThree.frame.size.width - 64 - 10, 20) setPlaceholder:@"登录密码" setTintColor:[UIColor whiteColor]];
     [imageThree addSubview:textFieldSecret];
     textFieldSecret.textColor = [UIColor whiteColor];
-    textFieldMessage.delegate = self;
+    textFieldSecret.delegate = self;
+    [textFieldSecret becomeFirstResponder];
     textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [textFieldSecret setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [textFieldSecret setValue:[UIFont systemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    }
     
 //    忘记密码?按钮
     butForeget = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60 - 30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 9, 60, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"忘记密码?"];
     [imageViewBeiJing addSubview:butForeget];
     butForeget.titleLabel.font = [UIFont systemFontOfSize:12];
     [butForeget addTarget:self action:@selector(buttonClickedForget:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        imageThree.frame = CGRectMake(30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60, 40);
+        butForeget.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60 - 30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 9, 60, 20);
+    }
+    
+    [textFieldPhone becomeFirstResponder];
 }
 
 //验证码登录
@@ -214,13 +247,16 @@
 //    短信验证码输入框
     textFieldMessage = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageMessage.frame.size.width - 64 - 10, 20) setPlaceholder:@"短信验证码" setTintColor:[UIColor whiteColor]];
     [imageMessage addSubview:textFieldMessage];
-    textFieldMessage.backgroundColor = [UIColor greenColor];
+    [textFieldMessage becomeFirstResponder];
     textFieldMessage.textColor = [UIColor whiteColor];
     textFieldMessage.keyboardType = UIKeyboardTypeNumberPad;
     textFieldMessage.delegate = self;
-    textFieldMessage.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [textFieldMessage setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [textFieldMessage setValue:[UIFont systemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        textFieldMessage.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    } else {
+        textFieldMessage.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    }
     
 //    获取验证码框
     imageGet = [CreatView creatImageViewWithFrame:CGRectMake(30 + WIDTH_CONTROLLER_DEFAULT/2 + 10, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60 - 10 - imageMessage.frame.size.width, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuangyan"]];
@@ -233,17 +269,34 @@
     [buttonGet addTarget:self action:@selector(getMessageYanZhengMa:) forControlEvents:UIControlEventTouchUpInside];
     
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        
         buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-        [textFieldMessage setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
-        [textFieldMessage setValue:[UIFont systemFontOfSize:13] forKeyPath:@"_placeholderLabel.font"];
     }
+    
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        imageMessage.frame = CGRectMake(30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT/2, 40);
+        imageGet.frame = CGRectMake(30 + WIDTH_CONTROLLER_DEFAULT/2 + 10, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60 - 10 - imageMessage.frame.size.width, 40);
+    }
+    
+    [textFieldPhone becomeFirstResponder];
 }
 
-- (void)textFieldClicked:(UITextField *)textField
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    NSLog(@"rrppppppp");
-    _scrollView.contentOffset = CGPointMake(0, self.view.frame.size.height/2);
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 667) {
+
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            _scrollView.contentOffset = CGPointMake(0, self.view.frame.size.height/4 + 20);
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            _scrollView.contentOffset = CGPointMake(0, self.view.frame.size.height/4 + 25);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
 //左上角x按钮
@@ -284,9 +337,16 @@
     NSLog(@"message");
 }
 
+//登录按钮
+- (void)loginAppButton:(UIButton *)button
+{
+    [self scrollviewContentOffSet];
+}
+
 //忘记密码?按钮
 - (void)buttonClickedForget:(UIButton *)button
 {
+    [self scrollviewContentOffSet];
     TWOForgetSecretViewController *forgetVC = [[TWOForgetSecretViewController alloc] init];
     [self.navigationController pushViewController:forgetVC animated:YES];
 }
@@ -294,16 +354,25 @@
 //快速注册
 - (void)buttonFastRegister:(UIButton *)button
 {
+    [self scrollviewContentOffSet];
     TWORegisterViewController *registerVC = [[TWORegisterViewController alloc] init];
     [self.navigationController pushViewController:registerVC animated:YES];
+}
+
+//封装偏移量归0
+- (void)scrollviewContentOffSet
+{
+    [self.view endEditing:YES];
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        _scrollView.contentOffset = CGPointMake(0, -20);
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"打印");
-//    [textFieldPhone resignFirstResponder];
-//    [textFieldSecret resignFirstResponder];
-//    [textFieldMessage resignFirstResponder];
     [self.view endEditing:YES];
 }
 

@@ -27,7 +27,7 @@
 
 - (void)contentShow
 {
-    UIImageView *imageBack = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 40, 15, 80, 105) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"手机号绑定"]];
+    UIImageView *imageBack = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 222/2.5/2, 15, 222/2.5, 300/2.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"手机号绑定"]];
     [self.view addSubview:imageBack];
     
     UILabel *labelState = [CreatView creatWithLabelFrame:CGRectMake(0, 15 + imageBack.frame.size.height + 15, WIDTH_CONTROLLER_DEFAULT, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"已绑定"];

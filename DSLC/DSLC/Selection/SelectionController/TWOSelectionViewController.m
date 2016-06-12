@@ -14,6 +14,7 @@
 #import "CreatView.h"
 #import "TWOFindViewController.h"
 #import "TWOHomePageProductCell.h"
+#import "TWOHomePageFiveCell.h"
 
 @interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
@@ -111,12 +112,23 @@
 - (void)collectionViewShow
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+//    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 667) {
+        flowLayout.itemSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+//    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+//        flowLayout.itemSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 295.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+//    }
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.minimumLineSpacing = 0;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
-    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) collectionViewLayout:flowLayout];
+//    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 667) {
+    
+        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 308.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) collectionViewLayout:flowLayout];
+        
+//    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+//        
+//        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 295.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) collectionViewLayout:flowLayout];
+//    }
     [self.view addSubview:_collection];
     _collection.dataSource = self;
     _collection.delegate = self;
@@ -124,6 +136,8 @@
     _collection.showsHorizontalScrollIndicator = NO;
     _collection.pagingEnabled = YES;
     _collection.backgroundColor = [UIColor whiteColor];
+    
+    [_collection registerNib:[UINib nibWithNibName:@"TWOHomePageFiveCell" bundle:nil] forCellWithReuseIdentifier:@"reuse5"];
     [_collection registerNib:[UINib nibWithNibName:@"TWOHomePageProductCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
 }
 
@@ -134,54 +148,73 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    TWOHomePageProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuse" forIndexPath:indexPath];
+//    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 667) {
     
-    cell.imageBuying.image = [UIImage imageNamed:@"热卖"];
-    cell.viewBottom.layer.cornerRadius = 5;
-    cell.viewBottom.layer.masksToBounds = YES;
-    cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
-    cell.viewBottom.layer.borderWidth = 1;
-    
-    NSArray *nameArray = @[@"美猴王001期", @"金斗云77期", @"3个月齐系列"];
-    cell.labelName.text = [nameArray objectAtIndex:indexPath.item];
-    
-    [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateNormal];
-    cell.butQuanQuan.backgroundColor = [UIColor clearColor];
-    NSMutableAttributedString *butString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"11.5"]];
-    NSRange leftRange = NSMakeRange(0, [[butString string] rangeOfString:@"%"].location);
-    [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
-    [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:leftRange];
-    NSRange rightRange = NSMakeRange([[butString string] length] - 1, 1);
-    [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:rightRange];
-    [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:rightRange];
-    [cell.butQuanQuan setAttributedTitle:butString forState:UIControlStateNormal];
-    
-    [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateNormal];
-    [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateHighlighted];
-    [cell.butLeft addTarget:self action:@selector(buttonLeftClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateNormal];
-    [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateHighlighted];
-    [cell.butRight addTarget:self action:@selector(buttonRightClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self changeColorAndSize:@"3天" label:cell.labelData length:1];
-    [self changeColorAndSize:@"24.3万元" label:cell.labelLastMoney length:2];
-    [self changeColorAndSize:@"1,000元" label:cell.labelQiTou length:1];
-    
-    cell.labelYuQi.text = @"预期年化收益率";
-    cell.labelDownONe.text = @"理财期限";
-    cell.labelDownMid.text = @"剩余可投";
-    cell.labelDownRight.text = @"起投资金";
-    
-    [cell.butRightNow setBackgroundColor:[UIColor profitColor]];
-    cell.butRightNow.layer.cornerRadius = 20;
-    cell.butRightNow.layer.masksToBounds = YES;
-    [cell.butRightNow setTitle:@"立即抢购" forState:UIControlStateNormal];
-    cell.butRightNow.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [cell.butRightNow addTarget:self action:@selector(rightQiangGou:) forControlEvents:UIControlEventTouchUpInside];
-    
-    cell.backgroundColor = [UIColor qianhuise];
-    return cell;
+        TWOHomePageProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuse" forIndexPath:indexPath];
+        
+        cell.imageBuying.image = [UIImage imageNamed:@"热卖"];
+        cell.viewBottom.layer.cornerRadius = 5;
+        cell.viewBottom.layer.masksToBounds = YES;
+        cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+        cell.viewBottom.layer.borderWidth = 1;
+        
+        NSArray *nameArray = @[@"美猴王001期", @"金斗云77期", @"3个月齐系列"];
+        cell.labelName.text = [nameArray objectAtIndex:indexPath.item];
+        
+        [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateNormal];
+        cell.butQuanQuan.backgroundColor = [UIColor clearColor];
+        NSMutableAttributedString *butString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"11.5"]];
+        NSRange leftRange = NSMakeRange(0, [[butString string] rangeOfString:@"%"].location);
+        [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
+        [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:leftRange];
+        NSRange rightRange = NSMakeRange([[butString string] length] - 1, 1);
+        [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:rightRange];
+        [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:rightRange];
+        [cell.butQuanQuan setAttributedTitle:butString forState:UIControlStateNormal];
+        
+        [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateNormal];
+        [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateHighlighted];
+        [cell.butLeft addTarget:self action:@selector(buttonLeftClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateNormal];
+        [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateHighlighted];
+        [cell.butRight addTarget:self action:@selector(buttonRightClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self changeColorAndSize:@"3天" label:cell.labelData length:1];
+        [self changeColorAndSize:@"24.3万元" label:cell.labelLastMoney length:2];
+        [self changeColorAndSize:@"1,000元" label:cell.labelQiTou length:1];
+        
+        cell.labelYuQi.text = @"预期年化收益率";
+        cell.labelDownONe.text = @"理财期限";
+        cell.labelDownMid.text = @"剩余可投";
+        cell.labelDownRight.text = @"起投资金";
+        
+        [cell.butRightNow setBackgroundColor:[UIColor profitColor]];
+        cell.butRightNow.layer.cornerRadius = 20;
+        cell.butRightNow.layer.masksToBounds = YES;
+        [cell.butRightNow setTitle:@"立即抢购" forState:UIControlStateNormal];
+        cell.butRightNow.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [cell.butRightNow addTarget:self action:@selector(rightQiangGou:) forControlEvents:UIControlEventTouchUpInside];
+        
+        cell.backgroundColor = [UIColor qianhuise];
+        return cell;
+        
+//    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+//        
+//        TWOHomePageFiveCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuse5" forIndexPath:indexPath];
+//        
+//        cell.viewBottom.layer.cornerRadius = 5;
+//        cell.viewBottom.layer.masksToBounds = YES;
+//        cell.viewBottom.layer.borderColor = [[UIColor orangeColor] CGColor];
+//        cell.viewBottom.layer.borderWidth = 1;
+//        
+//        cell.backgroundColor = [UIColor greenColor];
+//        return cell;
+//        
+//    } else {
+//        TWOHomePageFiveCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuse5" forIndexPath:indexPath];
+//        return cell;
+//    }
 }
 
 //封装改变字体大小

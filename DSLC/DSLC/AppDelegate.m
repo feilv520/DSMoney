@@ -133,7 +133,7 @@
 
         //        2.0我的
             TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-    //        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+//            TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
             UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
             
     //        2.0

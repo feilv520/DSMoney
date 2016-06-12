@@ -59,7 +59,7 @@
     
     NSArray *titleArr = @[@"登录密码", @"手势密码"];
     cell.labelTitle.text = [titleArr objectAtIndex:indexPath.row];
-    cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+    cell.imageRight.image = [UIImage imageNamed:@"righticon"];
     cell.imagePic.hidden = YES;
     
     if (indexPath.row == 1) {

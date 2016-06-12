@@ -48,8 +48,8 @@
     //    左上角返回按钮
     UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 30, 20, 20) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [imageBigPic addSubview:butCancle];
-    [butCancle setBackgroundImage:[UIImage imageNamed:@"750产品111"] forState:UIControlStateNormal];
-    [butCancle setBackgroundImage:[UIImage imageNamed:@"750产品111"] forState:UIControlStateHighlighted];
+    [butCancle setBackgroundImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateNormal];
+    [butCancle setBackgroundImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateHighlighted];
     [butCancle addTarget:self action:@selector(buttonReturnCancleClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *labelTitle = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 54, 30, 108, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"找回登录密码"];
