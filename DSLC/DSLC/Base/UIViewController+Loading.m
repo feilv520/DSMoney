@@ -118,8 +118,8 @@
         loadingImgView.center = CGPointMake(self.view.center.x, height);
     }
     
-    for (NSInteger i = 1; i <= 8; i++) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_middle_0%ld",(long)i]];
+    for (NSInteger i = 1; i <= 7; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"TWO_Loading_Middle_0%ld",(long)i]];
         [imgArray addObject:image];
     }
     

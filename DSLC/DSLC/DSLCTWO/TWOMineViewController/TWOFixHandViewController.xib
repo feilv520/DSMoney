@@ -25,24 +25,33 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TWOHandImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vlq-qw-iRi">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TWOHandImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vlq-qw-iRi">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="668"/>
                     <animations/>
                 </imageView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X6f-QZ-cEU" customClass="MyHandButton">
-                    <rect key="frame" x="8" y="149" width="359" height="343"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6f-QZ-cEU" customClass="MyHandButton">
+                    <rect key="frame" x="8" y="217" width="359" height="343"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="343" id="CCI-PH-qKc"/>
+                    </constraints>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZLw-sX-XxT" customClass="MyHandButton">
-                    <rect key="frame" x="8" y="149" width="359" height="343"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZLw-sX-XxT" customClass="MyHandButton">
+                    <rect key="frame" x="8" y="217" width="359" height="343"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="343" id="ITS-M5-SgM"/>
+                    </constraints>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSF-Hl-O6q" customClass="MyHandButton">
-                    <rect key="frame" x="8" y="149" width="359" height="343"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nSF-Hl-O6q" customClass="MyHandButton">
+                    <rect key="frame" x="8" y="217" width="359" height="343"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="343" id="WI4-OD-sm4"/>
+                    </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNr-cR-gMp">
                     <rect key="frame" x="87" y="97" width="200" height="21"/>
@@ -56,14 +65,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhz-it-2a8">
-                    <rect key="frame" x="172" y="510" width="30" height="30"/>
+                    <rect key="frame" x="172" y="593" width="30" height="30"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Rzi-kF-mya"/>
                         <constraint firstAttribute="width" constant="30" id="prL-eF-LDr"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="跳出">
+                    <state key="normal" title="取消">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -71,9 +80,22 @@
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Yhz-it-2a8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="510" id="SP9-qF-Yn5"/>
+                <constraint firstItem="Vlq-qw-iRi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4op-aD-FM8"/>
+                <constraint firstItem="Vlq-qw-iRi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6ll-lU-Fc6"/>
+                <constraint firstItem="ZLw-sX-XxT" firstAttribute="top" secondItem="fNr-cR-gMp" secondAttribute="bottom" constant="99" id="DXw-HU-UVv"/>
+                <constraint firstItem="X6f-QZ-cEU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="KMb-hC-jrz"/>
+                <constraint firstAttribute="bottom" secondItem="Vlq-qw-iRi" secondAttribute="bottom" constant="-1" id="NpI-1B-X8s"/>
+                <constraint firstAttribute="trailing" secondItem="nSF-Hl-O6q" secondAttribute="trailing" constant="8" id="Otv-60-TYE"/>
+                <constraint firstItem="Yhz-it-2a8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="593" id="SP9-qF-Yn5"/>
                 <constraint firstItem="Yhz-it-2a8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Ut0-UR-U59"/>
+                <constraint firstItem="nSF-Hl-O6q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="ZQ6-sI-qd6"/>
+                <constraint firstAttribute="trailing" secondItem="Vlq-qw-iRi" secondAttribute="trailing" id="jwk-hF-gfN"/>
+                <constraint firstItem="X6f-QZ-cEU" firstAttribute="top" secondItem="fNr-cR-gMp" secondAttribute="bottom" constant="99" id="mUi-y3-xNI"/>
+                <constraint firstAttribute="trailing" secondItem="X6f-QZ-cEU" secondAttribute="trailing" constant="8" id="pUj-1W-V8o"/>
+                <constraint firstAttribute="trailing" secondItem="ZLw-sX-XxT" secondAttribute="trailing" constant="8" id="pum-ne-00m"/>
+                <constraint firstItem="nSF-Hl-O6q" firstAttribute="top" secondItem="fNr-cR-gMp" secondAttribute="bottom" constant="99" id="qKO-US-KdD"/>
                 <constraint firstItem="fNr-cR-gMp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="97" id="qzc-CM-qbC"/>
+                <constraint firstItem="ZLw-sX-XxT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="sbj-y5-HE4"/>
                 <constraint firstItem="fNr-cR-gMp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="w1R-oO-PBf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

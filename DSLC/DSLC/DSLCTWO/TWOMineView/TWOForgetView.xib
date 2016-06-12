@@ -27,7 +27,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LUL-fz-mXA">
-                    <rect key="frame" x="10" y="145" width="355" height="41"/>
+                    <rect key="frame" x="25" y="145" width="325" height="41"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="41" id="a6A-95-63v"/>
@@ -54,10 +54,10 @@
                         <constraint firstAttribute="width" constant="92" id="ivo-BY-BKV"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.38431372549019605" green="0.396078431372549" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忘记收拾密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7x7-bN-a9k">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忘记手势密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7x7-bN-a9k">
                     <rect key="frame" x="136" y="17" width="102" height="21"/>
                     <animations/>
                     <constraints>
@@ -65,7 +65,7 @@
                         <constraint firstAttribute="width" constant="102" id="Qmi-C0-P40"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
-                    <color key="textColor" red="0.38431372549999998" green="0.39607843139999999" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.26274509800000001" green="0.2901960784" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
@@ -79,11 +79,11 @@
                 <constraint firstAttribute="trailing" secondItem="ivh-G3-dRf" secondAttribute="trailing" id="Nzf-7u-tLh"/>
                 <constraint firstItem="hBy-iR-kr2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ow7-qG-aVe"/>
                 <constraint firstItem="hBy-iR-kr2" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-6" id="bn4-MU-2Rr"/>
-                <constraint firstAttribute="trailing" secondItem="LUL-fz-mXA" secondAttribute="trailing" constant="10" id="f8o-gV-1h3"/>
+                <constraint firstAttribute="trailing" secondItem="LUL-fz-mXA" secondAttribute="trailing" constant="25" id="f8o-gV-1h3"/>
                 <constraint firstAttribute="trailing" secondItem="Qww-m1-Sou" secondAttribute="trailing" constant="15" id="nSE-Gn-7FC"/>
                 <constraint firstItem="Qww-m1-Sou" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="17" id="pk4-kv-nCc"/>
                 <constraint firstItem="ivh-G3-dRf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="q8E-p4-nOS"/>
-                <constraint firstItem="LUL-fz-mXA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="zcF-VO-JLR"/>
+                <constraint firstItem="LUL-fz-mXA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="zcF-VO-JLR"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

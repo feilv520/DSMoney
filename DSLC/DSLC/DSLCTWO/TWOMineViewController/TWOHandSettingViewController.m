@@ -40,6 +40,8 @@
     
     [self tableViewShow];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchButtonAction:) name:@"switchButton" object:nil];
+    
 }
 
 - (void)tableViewShow
@@ -79,6 +81,8 @@
         
         [cell.switchButton setOn:flag];
         
+        cell.switchButton.tag = 5020;
+        
         cell.titleLabel.text = @"手势密码";
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -113,7 +117,7 @@
 
 -(void)switchAction:(id)sender
 {
-    UISwitch *switchButton = (UISwitch*)sender;
+    UISwitch *switchButton = (UISwitch *)sender;
     BOOL isButtonOn = [switchButton isOn];
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
@@ -136,6 +140,13 @@
         pushVC(myHandVC);
         
     }
+    [self.tableView reloadData];
+}
+
+- (void)switchButtonAction:(NSNotification *)not{
+    UISwitch *switchButton = (UISwitch *)[self.view viewWithTag:5020];
+    flag = NO;
+    [switchButton setOn:flag];
     [self.tableView reloadData];
 }
 
