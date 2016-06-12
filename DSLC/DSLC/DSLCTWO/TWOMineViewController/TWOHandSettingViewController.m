@@ -146,6 +146,9 @@
 - (void)switchButtonAction:(NSNotification *)not{
     UISwitch *switchButton = (UISwitch *)[self.view viewWithTag:5020];
     flag = NO;
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
+    [dic setValue:@"NO" forKey:@"handFlag"];
+    [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
     [switchButton setOn:flag];
     [self.tableView reloadData];
 }
