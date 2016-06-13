@@ -252,4 +252,12 @@
     return [UIColor colorFromHexCode:@"#dbf0ff"];
 }
 
++ (UIColor *) lineColor {
+    return [UIColor colorFromHexCode:@"#e1e3e5"];
+}
+
++ (UIColor *) changeColor {
+    return [UIColor colorFromHexCode:@"#d6edff"];
+}
+
 @end

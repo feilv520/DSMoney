@@ -54,6 +54,17 @@
     [buttonSave addTarget:self action:@selector(buttonSaveAddress:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+//字数限制
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (range.location < 60) {
+        return YES;
+    } else {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"输入字数不能超过60"];
+        return NO;
+    }
+}
+
 //保存地址的按钮方法
 - (void)buttonSaveAddress:(UIButton *)button
 {

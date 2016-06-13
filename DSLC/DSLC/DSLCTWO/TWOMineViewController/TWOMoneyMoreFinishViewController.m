@@ -26,7 +26,6 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor qianhuise];
-    [self.navigationItem setTitle:@"充值完成"];
     
     [self viewContentShow];
 }

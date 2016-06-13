@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		810018551D0E4AB500696CF5 /* lineXu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 810018531D0E4AB500696CF5 /* lineXu@2x.png */; settings = {ASSET_TAGS = (); }; };
+		810018561D0E4AB500696CF5 /* lineXu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 810018541D0E4AB500696CF5 /* lineXu@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8106AA761CA90C9300AB6753 /* TRiskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106AA741CA90C9300AB6753 /* TRiskCell.m */; settings = {ASSET_TAGS = (); }; };
 		8106AA771CA90C9300AB6753 /* TRiskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8106AA751CA90C9300AB6753 /* TRiskCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8106AA7A1CA91A0400AB6753 /* TRightNowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106AA791CA91A0400AB6753 /* TRightNowViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -1458,6 +1460,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		810018531D0E4AB500696CF5 /* lineXu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineXu@2x.png"; sourceTree = "<group>"; };
+		810018541D0E4AB500696CF5 /* lineXu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineXu@3x.png"; sourceTree = "<group>"; };
 		8106AA731CA90C9300AB6753 /* TRiskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRiskCell.h; sourceTree = "<group>"; };
 		8106AA741CA90C9300AB6753 /* TRiskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRiskCell.m; sourceTree = "<group>"; };
 		8106AA751CA90C9300AB6753 /* TRiskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRiskCell.xib; sourceTree = "<group>"; };
@@ -3919,6 +3923,8 @@
 				81446E6A1D069A1400A7E9BC /* righticon@3x.png */,
 				81446E6D1D069B2100A7E9BC /* 导航返回@2x.png */,
 				81446E6E1D069B2100A7E9BC /* 导航返回@3x.png */,
+				810018531D0E4AB500696CF5 /* lineXu@2x.png */,
+				810018541D0E4AB500696CF5 /* lineXu@3x.png */,
 				8177A0371CF3EE630057AA7B /* 产品安全等级图片 */,
 			);
 			path = TWOImage;
@@ -7158,6 +7164,7 @@
 				81B520A31BF9746400D8E8D1 /* AddressBookCell.xib in Resources */,
 				8181028A1CE043BB0038B64E /* 拔鸡毛@2x.png in Resources */,
 				8177A0251CF2F47C0057AA7B /* winPrize@3x.png in Resources */,
+				810018551D0E4AB500696CF5 /* lineXu@2x.png in Resources */,
 				8D3EEA0A1C27AB400031F7C9 /* 北京银行@2x.png in Resources */,
 				8D06001F1D05761400C0C97C /* Two_Loading_Down02@2x.png in Resources */,
 				817DD4AB1BCF547E00042B09 /* zhanghu@3x.png in Resources */,
@@ -7528,6 +7535,7 @@
 				81D703F81BE06D1F0074DF30 /* ForgetSecretCell.xib in Resources */,
 				8177A00F1CF2B1F60057AA7B /* blueYao@3x.png in Resources */,
 				8143FD421CDAEFC100B65A2F /* myInvite@3x.png in Resources */,
+				810018561D0E4AB500696CF5 /* lineXu@3x.png in Resources */,
 				81CBE7E81CE9C231004FE1D4 /* yanzhenma@2x.png in Resources */,
 				8D9011B61BD6337C00E5D62A /* 07@3x.png in Resources */,
 				8DD180A31BD731E000F71CEA /* GetMoneyTipTableViewCell.xib in Resources */,

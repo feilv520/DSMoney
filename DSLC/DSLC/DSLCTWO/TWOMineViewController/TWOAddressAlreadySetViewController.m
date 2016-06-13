@@ -53,8 +53,9 @@
     [viewBlue addSubview:viewLine];
     
 //    展示地址的label
-    UILabel *labelAddress = [CreatView creatWithLabelFrame:CGRectMake(0, 75 + 140 + 14 + 33, WIDTH_CONTROLLER_DEFAULT, 18) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:self.addressString];
+    UILabel *labelAddress = [CreatView creatWithLabelFrame:CGRectMake(15, 75 + 140 + 14 + 10, WIDTH_CONTROLLER_DEFAULT - 30, viewBlue.frame.size.height - (75 + 140 + 14 + 20)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:self.addressString];
     [viewBlue addSubview:labelAddress];
+    labelAddress.numberOfLines = 0;
     
     UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, viewBlue.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 47.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"您的所有活动奖品都将寄到这个地址哦"];
     [self.view addSubview:labelAlert];

@@ -65,5 +65,7 @@
 + (UIColor *) fastZhuCeolor;//快速注册字体颜色
 + (UIColor *) quanColor;//圈颜色
 + (UIColor *) redBagBankColor;//使用红包背景颜色
++ (UIColor *) lineColor;//列表线颜色
++ (UIColor *) changeColor;//切换颜色
 
 @end

@@ -97,7 +97,7 @@
     
     CGFloat noticeHeight = 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20);
 //    公告图标
-    UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(6, (viewNotice.frame.size.height - noticeHeight)/2, noticeHeight, noticeHeight) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"公告"]];
+    UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(9, (viewNotice.frame.size.height - noticeHeight)/2, noticeHeight, noticeHeight) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"公告"]];
     [viewNotice addSubview:imageNotice];
     
 //    公告view分界线

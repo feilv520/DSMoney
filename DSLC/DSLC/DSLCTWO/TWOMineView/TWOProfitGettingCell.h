@@ -13,12 +13,11 @@
 @property (weak, nonatomic) IBOutlet UIView *viewBottom;
 @property (weak, nonatomic) IBOutlet UILabel *labelName;
 @property (weak, nonatomic) IBOutlet UILabel *labelTime;
-@property (weak, nonatomic) IBOutlet UIView *viewLine;
 @property (weak, nonatomic) IBOutlet UILabel *labelTouZiMoney;
 @property (weak, nonatomic) IBOutlet UILabel *labelProfit;
 @property (weak, nonatomic) IBOutlet UILabel *labelTouZi;
 @property (weak, nonatomic) IBOutlet UILabel *labelShouYi;
-@property (weak, nonatomic) IBOutlet UIImageView *imageCash;
 @property (weak, nonatomic) IBOutlet UIView *viewLineS;
+@property (weak, nonatomic) IBOutlet UIImageView *imageCash;
 
 @end

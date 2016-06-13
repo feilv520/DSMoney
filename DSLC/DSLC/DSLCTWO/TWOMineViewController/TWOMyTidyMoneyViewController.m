@@ -168,9 +168,6 @@
         cell.labelTime.textColor = [UIColor zitihui];
         cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.viewLine.backgroundColor = [UIColor grayColor];
-        cell.viewLine.alpha = 0.2;
-        
         cell.labelTouZiMoney.textColor = [UIColor orangecolor];
         cell.labelTouZiMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"200,00.00"]];
@@ -217,9 +214,6 @@
         cell.labelTime.text = [NSString stringWithFormat:@"%@到期", @"2015-09-10"];
         cell.labelTime.textColor = [UIColor zitihui];
         cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-        
-        cell.viewLine.backgroundColor = [UIColor grayColor];
-        cell.viewLine.alpha = 0.2;
         
         cell.labelTouZiMoney.textColor = [UIColor zitihui];
         cell.labelTouZiMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
@@ -319,30 +313,31 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"%lf",scrollView.contentOffset.x);
-    if (scrollView.contentOffset.x > 0 && scrollView.contentOffset.x <= WIDTH_CONTROLLER_DEFAULT) {
-        NSLog(@"2");
+    if (scrollView == _scrollView) {
         
-        viewLineRight.backgroundColor = [UIColor profitColor];
-        viewLineRight.alpha = 1.0;
-        [buttonCash setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
-        
-        viewLineLeft.backgroundColor = [UIColor grayColor];
-        viewLineLeft.alpha = 0.3;
-        [butProfit setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
-        
-    } else {
-        
-        NSLog(@"3");
-        
-        
-        viewLineLeft.backgroundColor = [UIColor profitColor];
-        viewLineLeft.alpha = 1.0;
-        [butProfit setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
-        
-        viewLineRight.backgroundColor = [UIColor grayColor];
-        viewLineRight.alpha = 0.3;
-        [buttonCash setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+        if (scrollView.contentOffset.x > 30) {
+            
+            viewLineRight.backgroundColor = [UIColor profitColor];
+            viewLineRight.alpha = 1.0;
+            [buttonCash setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+            
+            viewLineLeft.backgroundColor = [UIColor grayColor];
+            viewLineLeft.alpha = 0.3;
+            [butProfit setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+            
+        } else {
+            
+            if (scrollView.contentOffset.x == 0) {
+                
+                viewLineLeft.backgroundColor = [UIColor profitColor];
+                viewLineLeft.alpha = 1.0;
+                [butProfit setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+                
+                viewLineRight.backgroundColor = [UIColor grayColor];
+                viewLineRight.alpha = 0.3;
+                [buttonCash setTitleColor:[UIColor zitihui] forState:UIControlStateNormal];
+            }
+        }
     }
 }
 

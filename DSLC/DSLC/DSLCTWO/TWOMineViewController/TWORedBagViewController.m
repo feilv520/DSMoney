@@ -62,15 +62,17 @@
 {
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
     [self.view addSubview:_scrollView];
+    _scrollView.delegate = self;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.pagingEnabled = YES;
     _scrollView.bounces = NO;
-    _scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT*2, 0);
+    _scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT*2, 1);
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64 - 72) style:UITableViewStylePlain];
     [_scrollView addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.tag = 700;
     _tableView.separatorColor = [UIColor clearColor];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 60)];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
@@ -79,6 +81,7 @@
     [_scrollView addSubview:_tableViewJia];
     _tableViewJia.dataSource = self;
     _tableViewJia.delegate = self;
+    _tableViewJia.tag = 800;
     _tableViewJia.separatorColor = [UIColor clearColor];
     _tableViewJia.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 60)];
     [_tableViewJia registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
@@ -328,7 +331,9 @@
 //红包按钮
 - (void)redBagButtonClicked:(UIButton *)button
 {
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
+    [buttonJiaXi setTitleColor:[UIColor changeColor] forState:UIControlStateNormal];
     buttonJiaXi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
     
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
@@ -341,7 +346,9 @@
 //加息券按钮
 - (void)jiaXiQuanButtonClicked:(UIButton *)button
 {
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
+    [butRedBag setTitleColor:[UIColor changeColor] forState:UIControlStateNormal];
     butRedBag.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
     
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
@@ -378,6 +385,29 @@
     } else {
         TWOHistoryRedBagViewController *historyRedBag = [[TWOHistoryRedBagViewController alloc] init];
         pushVC(historyRedBag);
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == _scrollView) {
+        
+        if (scrollView.contentOffset.x == WIDTH_CONTROLLER_DEFAULT) {
+            
+            [buttonJiaXi setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            buttonJiaXi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
+            [butRedBag setTitleColor:[UIColor changeColor] forState:UIControlStateNormal];
+            butRedBag.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+            
+        } else {
+            
+            if (scrollView.contentOffset.x == 0) {
+                [butRedBag setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                butRedBag.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
+                [buttonJiaXi setTitleColor:[UIColor changeColor] forState:UIControlStateNormal];
+                buttonJiaXi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+            }
+        }
     }
 }
 
