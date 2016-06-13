@@ -54,6 +54,8 @@
     
     [self getAdvList];
     
+    [self contentShow];
+    
     viewGray.hidden = YES;
 }
 
@@ -103,8 +105,8 @@
     UIButton *butSend = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, scrollview.frame.size.height, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"发送邀请"];
     [self.view addSubview:butSend];
     butSend.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [butSend setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-    [butSend setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
+    [butSend setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateNormal];
+    [butSend setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateHighlighted];
     [butSend addTarget:self action:@selector(buttonSendInvite:) forControlEvents:UIControlEventTouchUpInside];
     
     CGFloat viewRuleW = viewRule.frame.size.width;
@@ -423,7 +425,7 @@
             [adModelArray addObject:adModel];
         }
         
-        [self contentShow];
+//        [self contentShow];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

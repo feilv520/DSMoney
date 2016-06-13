@@ -71,12 +71,12 @@
     [self.view addSubview:viewUp];
     
     //add shadow img
-    CGRect pieFrame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 258.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) * 0.5, 10, 258.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 258.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    CGRect pieFrame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 258.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) * 0.5, 10, 250.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 250.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     
-    UIImage *shadowImg = [UIImage imageNamed:@"shadow.png"];
-    UIImageView *shadowImgView = [[UIImageView alloc]initWithImage:shadowImg];
-    shadowImgView.frame = CGRectMake(0, pieFrame.origin.y + PIE_HEIGHT*0.92, shadowImg.size.width/2, shadowImg.size.height/2);
-    [self.view addSubview:shadowImgView];
+//    UIImage *shadowImg = [UIImage imageNamed:@"shadow.png"];
+//    UIImageView *shadowImgView = [[UIImageView alloc]initWithImage:shadowImg];
+//    shadowImgView.frame = CGRectMake(0, pieFrame.origin.y + PIE_HEIGHT*0.92, shadowImg.size.width/2, shadowImg.size.height/2);
+//    [self.view addSubview:shadowImgView];
     
     self.pieChartView = [[MCMPieChartView alloc]initWithFrame:pieFrame withValue:self.valueArray withColor:self.colorArray];
     self.pieChartView.delegate = self;

@@ -41,7 +41,7 @@
         UIImage *centerImage = [UIImage imageNamed:@"center.png"];
         [self.centerView setBackgroundImage:centerImage forState:UIControlStateNormal];
         [self.centerView setBackgroundImage:centerImage forState:UIControlStateHighlighted];
-        self.centerView.frame = CGRectMake((frame.size.width - centerImage.size.width/1.2)/2, (frame.size.height - centerImage.size.height/1.2)/2, centerImage.size.width/1.2, centerImage.size.height/1.2);
+        self.centerView.frame = CGRectMake((frame.size.width - centerImage.size.width/1.3)/2, (frame.size.height - centerImage.size.height/1.3)/2, centerImage.size.width/1.3, centerImage.size.height/1.3);
         self.title = [[UILabel alloc]initWithFrame:CGRectMake(0, (centerImage.size.width - 22) * 0.33, self.centerView.frame.size.width , 22)];
         self.title.backgroundColor = [UIColor clearColor];
         self.title.textAlignment = NSTextAlignmentCenter;

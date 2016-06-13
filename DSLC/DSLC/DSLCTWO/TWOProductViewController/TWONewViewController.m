@@ -95,7 +95,7 @@
     // 更改timer对象的优先级
     [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
     
-    [self getAdvList];
+//    [self getAdvList];
 }
 
 - (void)refrush {
