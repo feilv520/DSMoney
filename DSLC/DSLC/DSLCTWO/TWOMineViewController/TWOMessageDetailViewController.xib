@@ -54,7 +54,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="aTZ-qE-hc0"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
+                            <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
                             <color key="textColor" red="0.54901960780000003" green="0.56470588239999997" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>

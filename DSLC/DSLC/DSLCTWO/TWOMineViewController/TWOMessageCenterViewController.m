@@ -116,17 +116,21 @@
 #pragma mark 导航栏按钮的方法
 #pragma mark --------------------------------
 
-// 转换成火爆专区
+// 转换成消息
 - (void)goToOneView:(id)sender{
     buttonOne.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
     buttonTwo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+    [buttonTwo setTitleColor:[UIColor colorFromHexCode:@"d6edff"] forState:UIControlStateNormal];
+    [buttonOne setTitleColor:Color_White forState:UIControlStateNormal];
     [myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
-// 转换成固收理财
+// 转换成公告
 - (void)goToTwoView:(id)sender{
     buttonOne.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
     buttonTwo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
+    [buttonOne setTitleColor:[UIColor colorFromHexCode:@"d6edff"] forState:UIControlStateNormal];
+    [buttonTwo setTitleColor:Color_White forState:UIControlStateNormal];
     [myScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
 }
 
