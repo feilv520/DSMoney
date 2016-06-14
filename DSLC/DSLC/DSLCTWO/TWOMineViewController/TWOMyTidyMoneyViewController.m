@@ -105,6 +105,19 @@
     viewLineRight = [CreatView creatViewWithFrame:CGRectMake(0, buttonCash.frame.size.height - 0.5, buttonCash.frame.size.width, 0.5) backgroundColor:[UIColor grayColor]];
     [buttonCash addSubview:viewLineRight];
     viewLineRight.alpha = 0.3;
+    
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        labelMoney.frame = CGRectMake(0, 5, WIDTH_CONTROLLER_DEFAULT, 40);
+        labelWaitGet.frame = CGRectMake(0, 5 + labelMoney.frame.size.height + 5, WIDTH_CONTROLLER_DEFAULT, 15);
+        labelTouZi.frame = CGRectMake(0, labelMoney.frame.size.height + labelWaitGet.frame.size.height + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 24);
+        labelInvestZong.frame = CGRectMake(0, labelMoney.frame.size.height + labelWaitGet.frame.size.height + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelTouZi.frame.size.height + 7, WIDTH_CONTROLLER_DEFAULT, 15);
+        
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        labelMoney.frame = CGRectMake(0, 13, WIDTH_CONTROLLER_DEFAULT, 40);
+        labelWaitGet.frame = CGRectMake(0, 13 + labelMoney.frame.size.height + 5, WIDTH_CONTROLLER_DEFAULT, 15);
+        labelTouZi.frame = CGRectMake(0, 13 + labelMoney.frame.size.height + labelWaitGet.frame.size.height + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 24);
+        labelInvestZong.frame = CGRectMake(0, 13 + labelMoney.frame.size.height + labelWaitGet.frame.size.height + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelTouZi.frame.size.height + 7, WIDTH_CONTROLLER_DEFAULT, 15);
+    }
 }
 
 //收益中的tableView
@@ -313,6 +326,14 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    if (scrollView.contentOffset.y < 0) {
+        _tabelViewCash.scrollEnabled = NO;
+        _tableViewProfit.scrollEnabled = NO;
+    } else {
+        _tabelViewCash.scrollEnabled = YES;
+        _tableViewProfit.scrollEnabled = YES;
+    }
+    
     if (scrollView == _scrollView) {
         
         if (scrollView.contentOffset.x > 30) {

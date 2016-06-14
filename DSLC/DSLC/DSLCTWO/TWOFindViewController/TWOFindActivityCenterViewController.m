@@ -136,6 +136,8 @@
         cell.labelAlpha.hidden = NO;
         cell.imageActivity.image = [UIImage imageNamed:@"gameBanner"];
         cell.labelAlpha.backgroundColor = [UIColor blackColor];
+        cell.labelAlpha.layer.cornerRadius = 4;
+        cell.labelAlpha.layer.masksToBounds = YES;
         cell.labelAlpha.alpha = 0.4;
         cell.imageOver.image = [UIImage imageNamed:@"over"];
     }

@@ -38,6 +38,7 @@
     // 头像元素
     UIView *viewDown;
     UIButton *butBlack;
+    UIView *viewHateLine;
 }
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -67,6 +68,9 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+//    _tableView.separatorColor = [UIColor clearColor];
+//    _tableView.backgroundView=[[UIView alloc] init];    //改变表的背景视图
+//    _tableView.backgroundColor = [UIColor whiteColor];
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         
@@ -82,7 +86,8 @@
     }
     _tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
     [self tableViewHeadShow];
-                                                                          
+//    _tableView.separatorColor = [UIColor magentaColor];
+    
     [_tableView registerNib:[UINib nibWithNibName:@"TWOMineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     titleArray = @[@[@"我的理财", @"我的特权本金"], @[@"红包卡券", @"我的猴币", @"我的邀请"]];
@@ -177,6 +182,8 @@
     [butFillMoney setImage:[UIImage imageNamed:@"提现"] forState:UIControlStateNormal];
     butFillMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     [butFillMoney addTarget:self action:@selector(buttonFillMoney:) forControlEvents:UIControlEventTouchUpInside];
+    
+    viewHateLine = [CreatView creatViewWithFrame:CGRectMake(0, -1, WIDTH_CONTROLLER_DEFAULT, 10) backgroundColor:[UIColor greenColor]];
     
     UIButton *butHeadImage = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2)) backgroundColor:[UIColor greenColor] textColor:nil titleText:nil];
     [imageBackGround addSubview:butHeadImage];

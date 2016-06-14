@@ -9,6 +9,7 @@
 #import "TWOAlreayCashViewController.h"
 #import "TWOProfitingEveryCell.h"
 #import "TWOBottomMoneyDetailViewController.h"
+#import "TWOMoneyGoWhereCell.h"
 
 @interface TWOAlreayCashViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -48,9 +49,10 @@
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 175.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     _tableView.tableHeaderView.backgroundColor = [UIColor clearColor];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOProfitingEveryCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TWOMoneyGoWhereCell" bundle:nil] forCellReuseIdentifier:@"reuseMoney"];
     
 //    已兑付图片
-    UIImageView *imageViewCash = [CreatView creatImageViewWithFrame:CGRectMake(233, 209.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 105, 105) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"已经兑付"]];
+    UIImageView *imageViewCash = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 105.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT - 40.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 209.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 105.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 105.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"已经兑付"]];
     [_tableView addSubview:imageViewCash];
     
     [self tableViewHeadShow];
@@ -61,8 +63,8 @@
     UIImageView *imageViewHead = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _tableView.tableHeaderView.frame.size.height) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"productDetailBackground"]];
     [_tableView.tableHeaderView addSubview:imageViewHead];
     
-    //    投资金额的钱数
-    UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
+//    投资金额的钱数
+    UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
     [imageViewHead addSubview:labelMoney];
     NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"400,000.00"]];
     NSRange moneyRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"元"].location);
@@ -115,6 +117,16 @@
         } else if (n == 2) {
             labelDown.textAlignment = NSTextAlignmentRight;
         }
+        
+        if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+            labelTop.frame = CGRectMake(marginLeft + width * n, labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), width, 23);
+            labelDown.frame = CGRectMake(marginLeft + width * n, labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelTop.frame.size.height + 5, width, 15);
+        }
+    }
+    
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        labelMoney.frame = CGRectMake(0, 5, WIDTH_CONTROLLER_DEFAULT, 30);
+        labelTouZi.frame = CGRectMake(0, 5 + labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 15);
     }
 }
 
@@ -134,33 +146,49 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TWOProfitingEveryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    
-    NSArray *titleArray = @[@[@"到期日", @"投资日", @"计息起始日", @"收益方式"], @[@"成安基金国富通亿丰商城项目"]];
-    NSArray *timeArray = @[@[@"2016-09-09", @"2016-09-09", @"2016-09-09", @"到期还本付息"], @[[NSString stringWithFormat:@"%@元﹥", @"4000"]]];
-    
-    cell.labelName.text = [[titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    cell.labelName.textColor = [UIColor ZiTiColor];
-    
-    cell.labelRight.text = [[timeArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.labelRight.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-    
     if (indexPath.section == 1) {
         
-        if (indexPath.row == 0) {
-            NSMutableAttributedString *leftString = [[NSMutableAttributedString alloc] initWithString:[[timeArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
-            NSRange leftRange = NSMakeRange(0, [[leftString string] rangeOfString:@"﹥"].location);
-            [leftString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:leftRange];
-            [cell.labelRight setAttributedText:leftString];
+        TWOMoneyGoWhereCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMoney"];
+        
+        cell.labelTitle.text = @"成安基金国富通亿丰商城项目";
+        cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        cell.labelTitle.textColor = [UIColor ZiTiColor];
+        
+        cell.labelMoney.text = [NSString stringWithFormat:@"%@元", @"4000"];
+        cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        cell.labelMoney.textColor = [UIColor orangecolor];
+        
+        cell.imageRight.image = [UIImage imageNamed:@"clickRightjiantou"];
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         }
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
     } else {
+        
+        TWOProfitingEveryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        
+        NSArray *titleArray = @[@[@"到期日", @"投资日", @"计息起始日", @"收益方式"]];
+        NSArray *timeArray = @[@[@"2016-09-09", @"2016-09-09", @"2016-09-09", @"到期还本付息"]];
+        
+        cell.labelName.text = [[titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        cell.labelName.textColor = [UIColor ZiTiColor];
+        
+        cell.labelRight.text = [[timeArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        cell.labelRight.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         cell.labelRight.textColor = [UIColor zitihui];
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        }
+                
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
     }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -191,7 +219,7 @@
     if (section == 0) {
         return 36;
     } else {
-        return 0.1;
+        return 20;
     }
 }
 

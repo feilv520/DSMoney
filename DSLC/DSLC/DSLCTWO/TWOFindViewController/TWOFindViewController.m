@@ -20,7 +20,7 @@
 #import "AdModel.h"
 #import "BannerViewController.h"
 
-@interface TWOFindViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface TWOFindViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
 {
     UITableView *_tableView;
@@ -46,7 +46,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     [self tabelViewShow];
 }
@@ -67,18 +67,18 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.separatorColor = [UIColor clearColor];
-//    402.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)
+
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 390.0)];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 220)];
         
     } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
         
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 402.0)];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 400)];
         
     } else {
         
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 413.0)];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 413)];
     }
     
     _tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
@@ -100,17 +100,17 @@
     }
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake((WIDTH_CONTROLLER_DEFAULT - 18 - 5)/2, 66.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    flowLayout.itemSize = CGSizeMake((WIDTH_CONTROLLER_DEFAULT - 18 - 5)/2, 66);
     flowLayout.minimumInteritemSpacing = 5;
 //    纵向间距
     flowLayout.minimumLineSpacing = 5;
-    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 220.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) collectionViewLayout:flowLayout];
+    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 220) collectionViewLayout:flowLayout];
     [_tableView.tableHeaderView addSubview:_collection];
     _collection.dataSource = self;
     _collection.delegate = self;
     _collection.scrollEnabled = NO;
     _collection.backgroundColor = [UIColor whiteColor];
-    _collection.contentInset = UIEdgeInsetsMake(6.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 9, 5.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 9);
+    _collection.contentInset = UIEdgeInsetsMake(6, 9, 6, 9);
     [_collection registerNib:[UINib nibWithNibName:@"TwoActivityCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
     [_collection registerNib:[UINib nibWithNibName:@"PleaseExpectCell" bundle:nil] forCellWithReuseIdentifier:@"reuse5"];
     
@@ -174,6 +174,10 @@
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.labelName.textColor = [UIColor profitColor];
         
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        }
+        
         return cell;
         
     } else {
@@ -207,6 +211,11 @@
         cell.labelContent.text = [contentArr objectAtIndex:indexPath.item];
         cell.labelContent.textColor = [UIColor findZiTiColor];
         cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        }
         
         return cell;
     }

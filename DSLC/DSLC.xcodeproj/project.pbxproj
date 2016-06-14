@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		810018551D0E4AB500696CF5 /* lineXu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 810018531D0E4AB500696CF5 /* lineXu@2x.png */; settings = {ASSET_TAGS = (); }; };
 		810018561D0E4AB500696CF5 /* lineXu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 810018541D0E4AB500696CF5 /* lineXu@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8100185A1D0FAB7000696CF5 /* TWOMoneyGoWhereCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 810018581D0FAB7000696CF5 /* TWOMoneyGoWhereCell.m */; settings = {ASSET_TAGS = (); }; };
+		8100185B1D0FAB7000696CF5 /* TWOMoneyGoWhereCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810018591D0FAB7000696CF5 /* TWOMoneyGoWhereCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8106AA761CA90C9300AB6753 /* TRiskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106AA741CA90C9300AB6753 /* TRiskCell.m */; settings = {ASSET_TAGS = (); }; };
 		8106AA771CA90C9300AB6753 /* TRiskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8106AA751CA90C9300AB6753 /* TRiskCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8106AA7A1CA91A0400AB6753 /* TRightNowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106AA791CA91A0400AB6753 /* TRightNowViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -1462,6 +1464,9 @@
 /* Begin PBXFileReference section */
 		810018531D0E4AB500696CF5 /* lineXu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineXu@2x.png"; sourceTree = "<group>"; };
 		810018541D0E4AB500696CF5 /* lineXu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineXu@3x.png"; sourceTree = "<group>"; };
+		810018571D0FAB7000696CF5 /* TWOMoneyGoWhereCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMoneyGoWhereCell.h; sourceTree = "<group>"; };
+		810018581D0FAB7000696CF5 /* TWOMoneyGoWhereCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMoneyGoWhereCell.m; sourceTree = "<group>"; };
+		810018591D0FAB7000696CF5 /* TWOMoneyGoWhereCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOMoneyGoWhereCell.xib; sourceTree = "<group>"; };
 		8106AA731CA90C9300AB6753 /* TRiskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRiskCell.h; sourceTree = "<group>"; };
 		8106AA741CA90C9300AB6753 /* TRiskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRiskCell.m; sourceTree = "<group>"; };
 		8106AA751CA90C9300AB6753 /* TRiskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRiskCell.xib; sourceTree = "<group>"; };
@@ -3551,6 +3556,9 @@
 				81B84BDB1CE2E09100A867B9 /* TWOProfitingEveryCell.h */,
 				81B84BDC1CE2E09100A867B9 /* TWOProfitingEveryCell.m */,
 				81B84BDD1CE2E09100A867B9 /* TWOProfitingEveryCell.xib */,
+				810018571D0FAB7000696CF5 /* TWOMoneyGoWhereCell.h */,
+				810018581D0FAB7000696CF5 /* TWOMoneyGoWhereCell.m */,
+				810018591D0FAB7000696CF5 /* TWOMoneyGoWhereCell.xib */,
 			);
 			name = "我的理财";
 			sourceTree = "<group>";
@@ -7295,6 +7303,7 @@
 				81B84C181CE44AB200A867B9 /* touzis@2x.png in Resources */,
 				8DEDE1C91BCCFF21008086D3 /* iconfont_greencuo@3x.png in Resources */,
 				819B52EC1BFC4462002FDF1E /* NewHandCSSCell.xib in Resources */,
+				8100185B1D0FAB7000696CF5 /* TWOMoneyGoWhereCell.xib in Resources */,
 				810EBC0D1C9CFEFB008FB51D /* SetPasswordTableViewCell.xib in Resources */,
 				8D88D1031BFECCB40051D6DA /* MJRefresh.bundle in Resources */,
 				8DEDE1C01BCCFEF8008086D3 /* iocn@2x.png in Resources */,
@@ -8304,6 +8313,7 @@
 				8179EB1B1CEAF95A00BD7054 /* TWOSafeSetViewController.m in Sources */,
 				8DEDE26D1BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				81AC90C21BEC82BD00232404 /* BindingBankSucceController.m in Sources */,
+				8100185A1D0FAB7000696CF5 /* TWOMoneyGoWhereCell.m in Sources */,
 				81D703F71BE06D1F0074DF30 /* ForgetSecretCell.m in Sources */,
 				811F0B021BF33421001F6AA4 /* BindingBankCardLiftUpMoney.m in Sources */,
 				811B62931CFEB98700B6F17E /* TWOHomePageProductCell.m in Sources */,

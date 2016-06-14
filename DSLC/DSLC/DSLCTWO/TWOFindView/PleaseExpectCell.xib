@@ -13,13 +13,21 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="176" height="66"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gtq-9q-PzX">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gtq-9q-PzX">
                         <rect key="frame" x="36" y="21" width="104" height="7"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="104" id="CMi-B1-eBa"/>
+                            <constraint firstAttribute="height" constant="7" id="XEG-H6-jRt"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKM-Zb-aPz">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKM-Zb-aPz">
                         <rect key="frame" x="8" y="37" width="160" height="15"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="160" id="8Dq-zC-76Y"/>
+                            <constraint firstAttribute="height" constant="15" id="EdI-Ra-to0"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -27,6 +35,14 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <constraints>
+                <constraint firstItem="Gtq-9q-PzX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="21" id="Bhv-h0-uQk"/>
+                <constraint firstItem="zKM-Zb-aPz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="FIc-4H-hu9"/>
+                <constraint firstItem="Gtq-9q-PzX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="36" id="Prc-cM-dPp"/>
+                <constraint firstAttribute="trailing" secondItem="zKM-Zb-aPz" secondAttribute="trailing" constant="8" id="c5x-wm-1oe"/>
+                <constraint firstAttribute="trailing" secondItem="Gtq-9q-PzX" secondAttribute="trailing" constant="36" id="cc9-V5-jwb"/>
+                <constraint firstItem="zKM-Zb-aPz" firstAttribute="top" secondItem="Gtq-9q-PzX" secondAttribute="bottom" constant="9" id="y8F-Ev-AJM"/>
+            </constraints>
             <size key="customSize" width="176" height="66"/>
             <connections>
                 <outlet property="imageExpect" destination="Gtq-9q-PzX" id="2sn-8f-hEd"/>

@@ -20,7 +20,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationItem.title = @"红包说明";
+    self.navigationItem.title = @"红包使用说明";
     [self VIEWsHOW];
 }
 
