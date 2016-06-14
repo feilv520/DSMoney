@@ -29,10 +29,6 @@
 {
     [super viewWillAppear:animated];    
     butShare.hidden = NO;
-    
-    self.navigationController.navigationBar.barTintColor = [UIColor profitColor];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:0];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
 }
 
 - (void)viewDidLoad {

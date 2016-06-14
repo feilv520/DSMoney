@@ -152,9 +152,9 @@
     cell.labelMoney.text = @"+10000";
     
     if (indexPath.row % 2 == 0) {
-        cell.labelMoney.textColor = [UIColor redColor];
+        cell.labelMoney.textColor = [UIColor profitColor];
     } else {
-        cell.labelMoney.textColor = [UIColor greenColor];
+        cell.labelMoney.textColor = [UIColor orangecolor];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

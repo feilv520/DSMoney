@@ -45,23 +45,16 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsnotice:) name:@"login" object:nil];
     [self loginContent];
 }
 
-- (void)nsnotice:(NSNotification *)notice
-{
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [app.tabBarVC setSuppurtGestureTransition:NO];
-    [app.tabBarVC setTabbarViewHidden:YES];
-    [app.tabBarVC setLabelLineHidden:YES];
-}
 
 - (void)loginContent
 {
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
 //    _scrollView.contentSize = CGSizeMake(0, self.view.frame.size.height + self.view.frame.size.height/2 - 50);
     [self.view addSubview:_scrollView];
+    _scrollView.userInteractionEnabled = YES;
     
 //    大背景
     imageViewBeiJing = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"bigpicture"]];
@@ -69,7 +62,7 @@
     imageViewBeiJing.userInteractionEnabled = YES;
     
 //    左上角x按钮
-    UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 40, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 30, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [imageViewBeiJing addSubview:butCancle];
     [butCancle setBackgroundImage:[UIImage imageNamed:@"logincuo"] forState:UIControlStateNormal];
     [butCancle setBackgroundImage:[UIImage imageNamed:@"logincuo"] forState:UIControlStateHighlighted];
@@ -286,14 +279,14 @@
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 667) {
 
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            _scrollView.contentOffset = CGPointMake(0, self.view.frame.size.height/4 + 20);
+            _scrollView.contentOffset = CGPointMake(0, self.view.frame.size.height/4.0 + 20);
         } completion:^(BOOL finished) {
             
         }];
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            _scrollView.contentOffset = CGPointMake(0, self.view.frame.size.height/4 + 25);
+            _scrollView.contentOffset = CGPointMake(0, self.view.frame.size.height/4.0 + 25);
         } completion:^(BOOL finished) {
             
         }];
@@ -375,8 +368,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"打印");
-    [self.view endEditing:YES];
+    [self scrollviewContentOffSet];
 }
 
 - (void)didReceiveMemoryWarning {

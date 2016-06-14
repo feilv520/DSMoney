@@ -81,7 +81,7 @@
     
     [self tableViewShow];
     
-    [self loadingWithView:self.view loadingFlag:NO height:120.0];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
     
     self.view.backgroundColor = [UIColor huibai];
     

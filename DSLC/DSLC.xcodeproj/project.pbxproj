@@ -971,6 +971,7 @@
 		8D1591181D0CF91D00A4353D /* selection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1591081D0CF91D00A4353D /* selection@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D1591191D0CF91D00A4353D /* selection_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1591091D0CF91D00A4353D /* selection_gray@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D15911A1D0CF91D00A4353D /* selection_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D15910A1D0CF91D00A4353D /* selection_gray@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D15911D1D0FDA1600A4353D /* UIScrollView+UITouchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D15911C1D0FDA1600A4353D /* UIScrollView+UITouchEvent.m */; settings = {ASSET_TAGS = (); }; };
 		8D18B2A21C2982D100754C13 /* TTTTXianTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D18B2A01C2982D100754C13 /* TTTTXianTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		8D18B2A31C2982D100754C13 /* TTTTXianTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D18B2A11C2982D100754C13 /* TTTTXianTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8D18B2A61C29B02300754C13 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D18B2A51C29B02300754C13 /* RSA.m */; settings = {ASSET_TAGS = (); }; };
@@ -2767,6 +2768,8 @@
 		8D1591081D0CF91D00A4353D /* selection@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selection@3x.png"; sourceTree = "<group>"; };
 		8D1591091D0CF91D00A4353D /* selection_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selection_gray@2x.png"; sourceTree = "<group>"; };
 		8D15910A1D0CF91D00A4353D /* selection_gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selection_gray@3x.png"; sourceTree = "<group>"; };
+		8D15911B1D0FDA1600A4353D /* UIScrollView+UITouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+UITouchEvent.h"; sourceTree = "<group>"; };
+		8D15911C1D0FDA1600A4353D /* UIScrollView+UITouchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+UITouchEvent.m"; sourceTree = "<group>"; };
 		8D18B29F1C2982D100754C13 /* TTTTXianTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTTXianTableViewCell.h; sourceTree = "<group>"; };
 		8D18B2A01C2982D100754C13 /* TTTTXianTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTTXianTableViewCell.m; sourceTree = "<group>"; };
 		8D18B2A11C2982D100754C13 /* TTTTXianTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TTTTXianTableViewCell.xib; sourceTree = "<group>"; };
@@ -3588,6 +3591,8 @@
 				8DA060CC1C02BEBD00E3E025 /* DES3Util.m */,
 				8D3942ED1C2D14B200783FD0 /* WelcomeViewController.h */,
 				8D3942EE1C2D14B200783FD0 /* WelcomeViewController.m */,
+				8D15911B1D0FDA1600A4353D /* UIScrollView+UITouchEvent.h */,
+				8D15911C1D0FDA1600A4353D /* UIScrollView+UITouchEvent.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -8394,6 +8399,7 @@
 				8D855B0E1CEDB20F007A4B22 /* TWOForgetView.m in Sources */,
 				8D6E46921C9A782100F0F5B7 /* MDRadialProgressLabel.m in Sources */,
 				8D4FF5E31BE339A200BAE25F /* UIProgressView+AFNetworking.m in Sources */,
+				8D15911D1D0FDA1600A4353D /* UIScrollView+UITouchEvent.m in Sources */,
 				819B52F31BFC5D54002FDF1E /* NSString+Characters.m in Sources */,
 				8D4518651C00410100FAF998 /* RedBagModel.m in Sources */,
 				8D840C461CE2D45B005A17F9 /* TWOProductMoneyView.m in Sources */,

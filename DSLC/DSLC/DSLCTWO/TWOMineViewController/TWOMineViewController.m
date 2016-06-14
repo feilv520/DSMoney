@@ -518,7 +518,7 @@
     
     pickerImage.delegate = self;
     
-    pickerImage.navigationBar.barTintColor = [UIColor colorWithRed:223.0/255 green:74.0/255 blue:67.0/255 alpha:1];
+    pickerImage.navigationBar.barTintColor = [UIColor profitColor];
     
     pickerImage.allowsEditing = NO;
     [self presentViewController:pickerImage animated:YES completion:nil];
@@ -557,7 +557,7 @@
     
     NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
     // 获取沙盒目录
-    
+
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
     // 将图片写入文件
     
