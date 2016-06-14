@@ -88,7 +88,8 @@
     
     [self exitNetwork];
     
-    [self versionAlertView];
+    // 版本控制接口
+//    [self versionAlertView];
     
     [UMSocialData setAppKey:@"5642ad7e67e58e8463006218"];
     

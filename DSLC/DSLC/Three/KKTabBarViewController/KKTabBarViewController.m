@@ -9,6 +9,7 @@
 #import "KKTabBarViewController.h"
 #import "define.h"
 #import "LoginViewController.h"
+#import "TWOLoginAPPViewController.h"
 
 @interface KKTabBarViewController (){
     UIButton *indexButton;
@@ -205,9 +206,16 @@
 //        } else {
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
 //        }
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"login" object:nil];
+        TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+        
+        UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+        [nvc setNavigationBarHidden:YES animated:YES];
+        
+        [self presentViewController:nvc animated:YES completion:^{
+            
+        }];
     } else {
-    indexButton = button;
+        indexButton = button;
     }
     
     [_tabScrollView setContentOffset:CGPointMake(button.tag * _pageWidth, 0) animated:_transitionAnimated];
