@@ -45,6 +45,7 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.separatorColor = [UIColor lineColor];
     _tableView.backgroundColor = [UIColor qianhuise];
     _tableView.tableFooterView = [UIView new];
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 150.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
@@ -136,6 +137,7 @@
     } else {
         cell.imageProfiting.image = [UIImage imageNamed:@"收益中"];
     }
+    cell.imageProfiting.backgroundColor = [UIColor clearColor];
     
     cell.labelMoney.textColor = [UIColor profitColor];
     cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:24];
@@ -162,6 +164,12 @@
     
     cell.viewLine.backgroundColor = [UIColor grayColor];
     cell.viewLine.alpha = 0.2;
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        cell.labelFriend.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        cell.labelBegin.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+        cell.labelCash.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+    }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

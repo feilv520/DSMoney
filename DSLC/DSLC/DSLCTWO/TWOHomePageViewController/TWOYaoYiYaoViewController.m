@@ -19,6 +19,7 @@
     
     UIButton *butBlack;
     UIView *viewBottom;
+    UIImageView *imageYellow;
 }
 
 @end
@@ -38,44 +39,34 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"摇一摇"];
     
-//    [self haveNoChanceShow];
-    [self haveChanceContentShow];
     [self commonHaveShow];
-    [self tanKuangeShow];
+//    [self tanKuangeShow];
 }
 
 - (void)haveNoChanceShow
 {
-    imageBack = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"yaonot"]];
-    [self.view addSubview:imageBack];
-    imageBack.userInteractionEnabled = YES;
-    
 //    显示还有几次摇一摇机会
-    UILabel *labelChance = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 391.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:19] text:nil];
-    [imageBack addSubview:labelChance];
+    UILabel *labelChance = [CreatView creatWithLabelFrame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:19] text:nil];
+    [imageYellow addSubview:labelChance];
     NSMutableAttributedString *zeroString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"您还有%@次机会", @"0"]];
     NSRange zeroRange = NSMakeRange(3, 1);
     [zeroString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:zeroRange];
     [labelChance setAttributedText:zeroString];
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
-        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 369.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+        labelChance.frame = CGRectMake(0, 4, imageYellow.frame.size.width, 23);
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
-        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 381.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+        labelChance.frame = CGRectMake(0, 6, imageYellow.frame.size.width, 23);
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
-        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 396.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+        labelChance.frame = CGRectMake(0, 12, imageYellow.frame.size.width, 23);
     }
 }
 
 - (void)haveChanceContentShow
 {
-    imageBack = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"yao"]];
-    [self.view addSubview:imageBack];
-    imageBack.userInteractionEnabled = YES;
-    
 //    显示还有几次摇一摇机会
-    UILabel *labelChance = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 391.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:22] text:nil];
-    [imageBack addSubview:labelChance];
+    UILabel *labelChance = [CreatView creatWithLabelFrame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:22] text:nil];
+    [imageYellow addSubview:labelChance];
     NSMutableAttributedString *shuZiString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"您还有%@次机会", @"2"]];
     NSRange leftRange = NSMakeRange(0, 3);
     [shuZiString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:19] range:leftRange];
@@ -86,16 +77,21 @@
     [labelChance setAttributedText:shuZiString];
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
-        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 369.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+        labelChance.frame = CGRectMake(0, 4, imageYellow.frame.size.width, 23);
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
-        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 382.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+        labelChance.frame = CGRectMake(0, 6, imageYellow.frame.size.width, 23);
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
-        labelChance.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 80, 396.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 160, 20);
+        labelChance.frame = CGRectMake(0, 12, imageYellow.frame.size.width, 23);
     }
 }
 
+//公共的部分
 - (void)commonHaveShow
 {
+    imageBack = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"yao"]];
+    [self.view addSubview:imageBack];
+    imageBack.userInteractionEnabled = YES;
+    
 //    分享按钮
     butShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 25, 10, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [self.navigationController.navigationBar addSubview:butShare];
@@ -104,8 +100,12 @@
     [butShare addTarget:self action:@selector(buttonShareYaoYiYao:) forControlEvents:UIControlEventTouchUpInside];
     
 //    摇动的图片
-    UIImageView *imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 417.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)/2/2, 181.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 417.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)/2, 174.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
+    UIImageView *imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
     [imageBack addSubview:imageHandYao];
+    
+//    显示还有几次摇动机会的背景图
+    imageYellow = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 380.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 71.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yellow"]];
+    [imageBack addSubview:imageYellow];
     
 //    下面蓝色按钮宽度
     CGFloat butWidth = (WIDTH_CONTROLLER_DEFAULT - 27)/2;
@@ -146,6 +146,9 @@
         butYaoLeft.frame = CGRectMake(9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
         butYaoRight.frame = CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
     }
+    
+    [self haveChanceContentShow];
+//    [self haveNoChanceShow];
 }
 
 - (void)tanKuangeShow

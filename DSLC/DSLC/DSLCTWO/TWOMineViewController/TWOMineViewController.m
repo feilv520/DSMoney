@@ -30,6 +30,7 @@
     NSArray *titleArray;
     NSArray *imageArray;
     NSArray *contentArr;
+    NSArray *contentXingArr;
     UIImageView *imageBackGround;
     CGFloat height;
     UIButton *butWenZi;
@@ -39,6 +40,16 @@
     UIView *viewDown;
     UIButton *butBlack;
     UIView *viewHateLine;
+    
+//    总资产钱数
+    UIButton *buttMoney;
+    UIButton *butMoneyYu;
+    UIButton *butAddMoney;
+    UIView *viewMoney;
+    UIButton *buttonEye;
+    
+    UILabel *labelMoneyZhong;
+    UILabel *labelTeQuan;
 }
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -68,9 +79,6 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-//    _tableView.separatorColor = [UIColor clearColor];
-//    _tableView.backgroundView=[[UIView alloc] init];    //改变表的背景视图
-//    _tableView.backgroundColor = [UIColor whiteColor];
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         
@@ -86,10 +94,14 @@
     }
     _tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
     [self tableViewHeadShow];
-//    _tableView.separatorColor = [UIColor magentaColor];
     
     [_tableView registerNib:[UINib nibWithNibName:@"TWOMineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
+    [self arrayShow];
+}
+
+- (void)arrayShow
+{
     titleArray = @[@[@"我的理财", @"我的特权本金"], @[@"红包卡券", @"我的猴币", @"我的邀请"]];
     imageArray = @[@[@"我的理财", @"tequanbenjin"], @[@"红包卡券", @"我的猴币", @"myInvite"]];
     contentArr = @[@[@"13600元在投", @"300000元"], @[@"2张", @"3000.00猴币", @"邀请好友送星巴克券"]];
@@ -195,12 +207,12 @@
     [butHeadImage addTarget:self action:@selector(buttonChangeHeadImage:) forControlEvents:UIControlEventTouchUpInside];
     
 //    总资产底层view
-    UIView *viewMoney = [CreatView creatViewWithFrame:CGRectMake(0, 143.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor]];
+    viewMoney = [CreatView creatViewWithFrame:CGRectMake(0, 143.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor]];
     [imageBackGround addSubview:viewMoney];
     viewMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
 //    总资产钱数
-    UIButton *buttMoney = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttMoney = [UIButton buttonWithType:UIButtonTypeCustom];
     [viewMoney addSubview:buttMoney];
     buttMoney.backgroundColor = [UIColor clearColor];
     buttMoney.tag = 665;
@@ -219,7 +231,7 @@
     buttMoney.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - moneyButWidth.size.width) * 0.5, 0, moneyButWidth.size.width, viewMoney.frame.size.height);
     
 //    睁眼闭眼按钮
-    UIButton *buttonEye = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - moneyButWidth.size.width) * 0.5 + moneyButWidth.size.width, viewMoney.frame.size.height - 19, 21, 21) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    buttonEye = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - moneyButWidth.size.width) * 0.5 + moneyButWidth.size.width, viewMoney.frame.size.height - 19, 21, 21) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [viewMoney addSubview:buttonEye];
     buttonEye.tag = 10;
     buttonEye.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
@@ -244,12 +256,12 @@
     [butYellowJiao addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    可用余额钱数
-    UIButton *butMoneyYu = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:nil];
+    butMoneyYu = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:nil];
     [imageBackGround addSubview:butMoneyYu];
     butMoneyYu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     butMoneyYu.tag = 666;
     
-    NSMutableAttributedString *butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2"]];
+    NSMutableAttributedString *butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2,789,681.00"]];
     NSRange shuRange = NSMakeRange(0, [[butMoneyStr string] rangeOfString:@"元"].location);
     [butMoneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:shuRange];
     [butMoneyStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:shuRange];
@@ -260,12 +272,12 @@
     [butMoneyYu addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    累计收益钱数
-    UIButton *butAddMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 16) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    butAddMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 16) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [imageBackGround addSubview:butAddMoney];
     butAddMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     butAddMoney.tag = 667;
     
-    NSMutableAttributedString *butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"119,324.56"]];
+    NSMutableAttributedString *butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2,909.00"]];
     NSRange frontRange = NSMakeRange(0, [[butAddStr string] rangeOfString:@"元"].location);
     [butAddStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:frontRange];
     [butAddStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:frontRange];
@@ -334,6 +346,14 @@
     cell.labelContent.textColor = [UIColor zitihui];
     cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            cell.labelContent.tag = 10;
+        } else {
+            cell.labelContent.tag = 90;
+        }
+    }
+    
 //    if (indexPath.section == 0) {
 //        if (indexPath.row == 1) {
 //            cell.imageRedDian.image = [UIImage imageNamed:@"Reddian"];
@@ -401,18 +421,100 @@
 //睁眼或闭眼按钮
 - (void)openEyeOrCloseEye:(UIButton *)button
 {
+    labelMoneyZhong = (UILabel *)[self.view viewWithTag:10];
+    labelTeQuan = (UILabel *)[self.view viewWithTag:90];
+    
     if (button.tag == 10) {
        
+        [self closeEyesButton:buttMoney];
+        buttMoney.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 60) * 0.5, viewMoney.frame.size.height - viewMoney.frame.size.height/3 - 3, 60, viewMoney.frame.size.height/3);
+//    闭眼眼睛的frame
+        buttonEye.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 60) * 0.5 + 60, viewMoney.frame.size.height - 22, 21, 21);
+        
+        [self closeEyesButton:butMoneyYu];
+        [self closeEyesButton:butAddMoney];
+        
+        labelMoneyZhong.text = @"****";
+        labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+        
+        labelTeQuan.text = @"****";
+        labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+        
         [button setImage:[UIImage imageNamed:@"biyan"] forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:@"biyan"] forState:UIControlStateHighlighted];
         button.tag = 20;
         
     } else {
         
+        [self zongMoney];
+        [self canMakeMoney];
+        [self addMoney];
+        
+        labelMoneyZhong.text = @"13600元在投";
+        labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        
+        labelTeQuan.text = @"300000元";
+        labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        
         [button setImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateHighlighted];
         button.tag = 10;
     }
+}
+
+//总资产方法
+- (void)zongMoney
+{
+    NSMutableAttributedString *addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2,273,457.00"]];
+    NSRange leftrange = NSMakeRange(0, [[addMoneyString string] rangeOfString:@"元"].location);
+    [addMoneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:leftrange];
+    [addMoneyString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:leftrange];
+    NSRange rightrange = NSMakeRange([[addMoneyString string] length] - 1, 1);
+    [addMoneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:rightrange];
+    [addMoneyString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:rightrange];
+    [buttMoney setAttributedTitle:addMoneyString forState:UIControlStateNormal];
+    
+    CGRect moneyButWidth = [buttMoney.titleLabel.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT, viewMoney.frame.size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:28]} context:nil];
+//        睁眼钱数的frame
+    buttMoney.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - moneyButWidth.size.width) * 0.5, 0, moneyButWidth.size.width, viewMoney.frame.size.height);
+//        眼睛的frame
+    buttonEye.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - moneyButWidth.size.width) * 0.5 + moneyButWidth.size.width, viewMoney.frame.size.height - 19, 21, 21);
+}
+
+//可用余额
+- (void)canMakeMoney
+{
+    NSMutableAttributedString *butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2,789,681.00"]];
+    NSRange shuRange = NSMakeRange(0, [[butMoneyStr string] rangeOfString:@"元"].location);
+    [butMoneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:shuRange];
+    [butMoneyStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:shuRange];
+    NSRange yuanRange = NSMakeRange([[butMoneyStr string] length] - 1, 1);
+    [butMoneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:yuanRange];
+    [butMoneyStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:yuanRange];
+    [butMoneyYu setAttributedTitle:butMoneyStr forState:UIControlStateNormal];
+}
+
+//累计收益
+- (void)addMoney
+{
+    NSMutableAttributedString *butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2,909.00"]];
+    NSRange frontRange = NSMakeRange(0, [[butAddStr string] rangeOfString:@"元"].location);
+    [butAddStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:frontRange];
+    [butAddStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:frontRange];
+    NSRange afterRange = NSMakeRange([[butAddStr string] length] - 1, 1);
+    [butAddStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:afterRange];
+    [butAddStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:afterRange];
+    [butAddMoney setAttributedTitle:butAddStr forState:UIControlStateNormal];
+}
+
+//封装闭眼
+- (void)closeEyesButton:(UIButton *)button
+{
+    NSMutableAttributedString *addMoneyString = [[NSMutableAttributedString alloc] initWithString:@"****"];
+    NSRange allRange = NSMakeRange(0, 4);
+    [addMoneyString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:allRange];
+    [addMoneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:30] range:allRange];
+    [button setAttributedTitle:addMoneyString forState:UIControlStateNormal];
 }
 
 //充值按钮
@@ -432,7 +534,7 @@
 - (void)buttonChangeHeadImage:(UIButton *)button
 {
     butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.tabBarVC.view addSubview:butBlack];
     butBlack.alpha = 0.3;
     [butBlack addTarget:self action:@selector(buttonBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
@@ -630,6 +732,12 @@
         frame.origin.y = offSet;
         frame.size.height = height - offSet;
         imageBackGround.frame = frame;
+    }
+    
+    if (scrollView.contentOffset.y < -20) {
+        _tableView.scrollEnabled = NO;
+    } else {
+        _tableView.scrollEnabled = YES;
     }
 }
 

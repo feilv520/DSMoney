@@ -28,6 +28,10 @@
     UIView *viewNotice;
     UICollectionView *_collection;
     UIScrollView *_scrollView;
+    
+    UIButton *buttonLeft;
+    UIButton *buttonRight;
+    NSInteger numberItem;
 }
 
 @end
@@ -74,11 +78,13 @@
 {
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+        _scrollView.delegate = self;
         [self.view addSubview:_scrollView];
         
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
         
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT + 150)];
+        _scrollView.delegate = self;
         [self.view addSubview:_scrollView];
     }
     
@@ -89,6 +95,14 @@
     
     UIImageView *imageBanner = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, viewBanner.frame.size.height) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"首页banner"]];
     [viewBanner addSubview:imageBanner];
+    imageBanner.userInteractionEnabled = YES;
+    
+//    签到记录按钮
+    UIButton *buttonSign = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 20, 71.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 53.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    [imageBanner addSubview:buttonSign];
+    [buttonSign setBackgroundImage:[UIImage imageNamed:@"signrecord"] forState:UIControlStateNormal];
+    [buttonSign setBackgroundImage:[UIImage imageNamed:@"signrecord"] forState:UIControlStateHighlighted];
+    [buttonSign addTarget:self action:@selector(signRecordButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    公告位置
     viewNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 32.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
@@ -148,8 +162,9 @@
     _collection.showsHorizontalScrollIndicator = NO;
     _collection.pagingEnabled = YES;
     _collection.backgroundColor = [UIColor whiteColor];
+//    默认显示中间
+    _collection.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
     
-    [_collection registerNib:[UINib nibWithNibName:@"TWOHomePageFiveCell" bundle:nil] forCellWithReuseIdentifier:@"reuse5"];
     [_collection registerNib:[UINib nibWithNibName:@"TWOHomePageProductCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
@@ -189,13 +204,27 @@
     [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:rightRange];
     [cell.butQuanQuan setAttributedTitle:butString forState:UIControlStateNormal];
     
+    cell.butLeft.tag = indexPath.item + 20;
     [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateNormal];
     [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateHighlighted];
     [cell.butLeft addTarget:self action:@selector(buttonLeftClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
+    
+    cell.butRight.tag = indexPath.item + 30;
     [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateNormal];
     [cell.butRight setBackgroundImage:[UIImage imageNamed:@"首页右箭头"] forState:UIControlStateHighlighted];
     [cell.butRight addTarget:self action:@selector(buttonRightClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (indexPath.item == 0) {
+        cell.butLeft.hidden = YES;
+    } else {
+        cell.butLeft.hidden = NO;
+    }
+    
+    if (indexPath.item == 2) {
+        cell.butRight.hidden = YES;
+    } else {
+        cell.butRight.hidden = NO;
+    }
         
     [self changeColorAndSize:@"3天" label:cell.labelData length:1];
     [self changeColorAndSize:@"24.3万元" label:cell.labelLastMoney length:2];
@@ -242,6 +271,12 @@
     imageSign = nil;
 }
 
+//签到记录
+- (void)signRecordButton:(UIButton *)button
+{
+    NSLog(@"签到记录");
+}
+
 //每日一摇和邀请好友点击方法
 - (void)buttonClickedChoose:(UIButton *)button
 {
@@ -258,9 +293,10 @@
 - (void)buttonLeftClicked:(UIButton *)button
 {
     CGFloat pageNumber = _collection.contentOffset.x / WIDTH_CONTROLLER_DEFAULT;
+    
     if (_collection.contentOffset.x == 0) {
     } else {
-        [_collection setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * (pageNumber - 1), 1) animated:YES];
+        [_collection setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * (pageNumber - 1), 0) animated:YES];
     }
 }
 
@@ -268,9 +304,10 @@
 - (void)buttonRightClicked:(UIButton *)button
 {
     CGFloat pageNumber = _collection.contentOffset.x / WIDTH_CONTROLLER_DEFAULT;
+    
     if (_collection.contentOffset.x == WIDTH_CONTROLLER_DEFAULT * 2) {
     } else {
-        [_collection setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * (pageNumber + 1), 1) animated:YES];
+        [_collection setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * (pageNumber + 1), 0) animated:YES];
     }
 }
 
@@ -307,6 +344,15 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (_scrollView.contentOffset.y < -20) {
+        _scrollView.scrollEnabled = NO;
+    } else {
+        _scrollView.scrollEnabled = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

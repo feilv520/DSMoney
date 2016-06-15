@@ -47,8 +47,6 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
-    [self tabelViewShow];
 }
 
 - (void)viewDidLoad {
@@ -58,6 +56,7 @@
     timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    [self tabelViewShow];
 }
 
 - (void)tabelViewShow
@@ -128,7 +127,7 @@
 {
     TwoFindActCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    imageArray = @[@"大扫描", @"公益行", @"排行榜"];
+    imageArray = @[@"排行榜", @"公益行", @"大扫描"];
     cell.imagePicture.image = [UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -146,7 +145,7 @@
 //        大圣公益行
         TWODSPublicBenefitViewController *publicBenefit = [[TWODSPublicBenefitViewController alloc] init];
         pushVC(publicBenefit);
-    } else if (indexPath.row == 0) {
+    } else if (indexPath.row == 2) {
 //        投资大扫描
         TWOMoneySweepViewController *moneySweepVC = [[TWOMoneySweepViewController alloc] init];
         pushVC(moneySweepVC);
@@ -397,6 +396,15 @@
     } else if (offset.x == 0) {
         [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
         pageControl.currentPage = photoArray.count - 1;
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y < -20) {
+        _tableView.scrollEnabled = NO;
+    } else {
+        _tableView.scrollEnabled = YES;
     }
 }
 

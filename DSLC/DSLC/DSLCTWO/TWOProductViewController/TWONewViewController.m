@@ -77,7 +77,7 @@
     
     photoArray = [NSMutableArray array];
     
-    [self getProductList];
+//    [self getProductList];
     
     [self tableViewShow];
     
