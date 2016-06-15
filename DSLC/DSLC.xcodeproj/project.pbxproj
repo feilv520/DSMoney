@@ -1428,6 +1428,7 @@
 		8DEDE26D1BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEDE2681BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DEDE26E1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEDE26A1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEDE26C1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8DFA58211D1138F000FE9565 /* LYCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA58201D1138F000FE9565 /* LYCircleView.m */; settings = {ASSET_TAGS = (); }; };
 		8DFA5C941BCE64D900AED2B2 /* FQuickPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA5C921BCE64D900AED2B2 /* FQuickPayViewController.m */; };
 		8DFA5C951BCE64D900AED2B2 /* FQuickPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DFA5C931BCE64D900AED2B2 /* FQuickPayViewController.xib */; };
 /* End PBXBuildFile section */
@@ -3496,6 +3497,8 @@
 		8DEDE26A1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
 		8DEDE26B1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingSampleAppDelegate.h; sourceTree = "<group>"; };
 		8DEDE26C1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingSampleAppDelegate.m; sourceTree = "<group>"; };
+		8DFA581F1D1138F000FE9565 /* LYCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYCircleView.h; sourceTree = "<group>"; };
+		8DFA58201D1138F000FE9565 /* LYCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYCircleView.m; sourceTree = "<group>"; };
 		8DFA5C911BCE64D900AED2B2 /* FQuickPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQuickPayViewController.h; sourceTree = "<group>"; };
 		8DFA5C921BCE64D900AED2B2 /* FQuickPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQuickPayViewController.m; sourceTree = "<group>"; };
 		8DFA5C931BCE64D900AED2B2 /* FQuickPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FQuickPayViewController.xib; sourceTree = "<group>"; };
@@ -4554,6 +4557,8 @@
 		81C2DAA51BC755F10007AC48 /* Three */ = {
 			isa = PBXGroup;
 			children = (
+				8DFA581F1D1138F000FE9565 /* LYCircleView.h */,
+				8DFA58201D1138F000FE9565 /* LYCircleView.m */,
 				8D72ED781CFC0B6C00436C32 /* PNChart */,
 				8DCE98561CF2DD3E0067CBCD /* ChartView */,
 				8D6E468C1C9A782000F0F5B7 /* MDRadialProgressLabel.h */,
@@ -8287,6 +8292,7 @@
 				8DE61D9B1BDF20D70031A5CE /* FileOfManage.m in Sources */,
 				81CBE7AA1CE970B9004FE1D4 /* TWOBankCardCell.m in Sources */,
 				8D5DBB841BD4838200F556B9 /* CastUpTableViewCell.m in Sources */,
+				8DFA58211D1138F000FE9565 /* LYCircleView.m in Sources */,
 				818523C91BE35E75002FC653 /* MendLoginCell.m in Sources */,
 				81B84BD71CE2DCA200A867B9 /* TWOAlreayCashViewController.m in Sources */,
 				81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */,

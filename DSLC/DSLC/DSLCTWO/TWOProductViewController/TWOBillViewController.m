@@ -89,11 +89,11 @@
     
     [self getProductList];
     
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
+    
     [self tableViewShow];
     
     _tableView.hidden = YES;
-    
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
     
     self.view.backgroundColor = [UIColor huibai];
     
@@ -112,7 +112,7 @@
     // 更改timer对象的优先级
     [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
     
-    [self getAdvList];
+//    [self getAdvList];
     
 }
 
@@ -273,37 +273,6 @@
     NSDictionary *parameter = @{@"productType":@1,@"curPage":@1};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            [self loadingWithHidden:YES];
-            
-            newFlag = YES;
-            
-            _tableView.hidden = NO;
-            
-            NSLog(@"%@",responseObject);
-            
-            NSArray *array = [responseObject objectForKey:@"Product"];
-            
-            for (NSDictionary *dic in array) {
-                [flagArray addObject:[dic objectForKey:@"productStatus"]];
-                ProductListModel *productM = [[ProductListModel alloc] init];
-                [productM setValuesForKeysWithDictionary:dic];
-                [self.productListArray addObject:productM];
-            }
-            
-            if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
-                moreFlag = YES;
-            }
-            
-            [footerT endRefreshing];
-            [headerT endRefreshing];
-            
-            [_tableView reloadData];
-            
-        } else {
-            
-        }
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

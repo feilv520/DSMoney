@@ -10,4 +10,6 @@
 
 @interface TWOReceiveNumViewController : UIViewController
 
+@property (nonatomic, strong) NSString *phoneString;
+
 @end

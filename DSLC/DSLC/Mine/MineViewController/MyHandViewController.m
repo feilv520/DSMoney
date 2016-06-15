@@ -210,7 +210,7 @@
             NSLog(@"%@",handString);
             if ([path isEqualToString:handString]) {
                 
-                [UIView animateWithDuration:1.0 animations:^{
+                [UIView animateWithDuration:0.5 animations:^{
                     
                     self.backgroundImageView.alpha = 0.0;
                     self.myHandBtn.alpha = 0.0;

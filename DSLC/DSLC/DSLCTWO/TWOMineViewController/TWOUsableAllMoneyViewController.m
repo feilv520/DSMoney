@@ -8,7 +8,7 @@
 
 #import "TWOUsableAllMoneyViewController.h"
 #import "MSelectionView.h"
-#import "MyMonkeyNumCell.h"
+#import "TWOMonkeyRecordCell.h"
 
 @interface TWOUsableAllMoneyViewController () <UITableViewDataSource, UITableViewDelegate> {
     UIButton *bView;
@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.navigationItem setTitle:@"全部"];
+    [self.navigationItem setTitle:@"账单"];
     
     self.view.backgroundColor = Color_White;
     
@@ -44,7 +44,7 @@
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
     
-    [self.mainTableView registerNib:[UINib nibWithNibName:@"MyMonkeyNumCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [self.mainTableView registerNib:[UINib nibWithNibName:@"TWOMonkeyRecordCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     [self.view addSubview:self.mainTableView];
 }
@@ -69,7 +69,7 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         selectionView.hidden = NO;
-        selectionView.frame = CGRectMake(0, 0, WIDTH_CVIEW_DEFAULT, 150);
+        selectionView.frame = CGRectMake(0, 0, WIDTH_CVIEW_DEFAULT, (125 / 667.0) * HEIGHT_CONTROLLER_DEFAULT);
         bView.alpha = 0.3;
         
     } completion:^(BOOL finished) {
@@ -81,12 +81,12 @@
 - (void)showSelectionView{
     
     if (selectionView == nil) {
-        selectionView = [[UIView alloc] initWithFrame:CGRectMake(0, -150, WIDTH_CONTROLLER_DEFAULT, (150 / 667.0) * HEIGHT_CONTROLLER_DEFAULT)];
+        selectionView = [[UIView alloc] initWithFrame:CGRectMake(0, -125, WIDTH_CONTROLLER_DEFAULT, (125 / 667.0) * HEIGHT_CONTROLLER_DEFAULT)];
         
         selectionView.backgroundColor = Color_White;
         [self.view addSubview:selectionView];
         
-        NSArray *nameArray = @[@"全部",@"充值",@"提现",@"投资",@"兑付",@"加息收益"];
+        NSArray *nameArray = @[@"全部",@"充值",@"提现",@"投资",@"兑付",@"加息"];
         
         CGFloat marginX = WIDTH_CVIEW_DEFAULT * (23 / 375.0);
         CGFloat marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
@@ -96,7 +96,7 @@
             marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
         }
         CGFloat buttonX = WIDTH_CVIEW_DEFAULT * (90 / 375.0);
-        CGFloat buttonY = HEIGHT_CVIEW_DEFAULT * (37 / 667.0);
+        CGFloat buttonY = HEIGHT_CVIEW_DEFAULT * (34 / 667.0);
         
         for (NSInteger i = 0; i < nameArray.count; i++) {
             NSBundle *rootBundle = [NSBundle mainBundle];
@@ -109,8 +109,12 @@
             
             [buttonView.selectionButton setTitle:[nameArray objectAtIndex:i] forState:UIControlStateNormal];
             
-            [buttonView.selectionButton setBackgroundImage:[UIImage imageNamed:@"矩形-10"] forState:UIControlStateNormal];
-            [buttonView.selectionButton setBackgroundImage:[UIImage imageNamed:@"anniuS"] forState:UIControlStateSelected];
+            buttonView.selectionButton.layer.masksToBounds = YES;
+            buttonView.selectionButton.layer.cornerRadius = 4.0f;
+            buttonView.selectionButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+            buttonView.selectionButton.layer.borderWidth = 1.0;
+            
+            [buttonView.selectionButton setBackgroundImage:[UIImage imageNamed:@"productSureButton"] forState:UIControlStateHighlighted];
             
             buttonView.selectionButton.tag = i;
             
@@ -145,16 +149,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    MyMonkeyNumCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    TWOMonkeyRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    cell.labelName.text = @"充值";
+    cell.labelTitle.text = @"充值";
     cell.labelTime.text = @"2016-01-01";
-    cell.labelMoney.text = @"+10000";
+    cell.labelNumber.text = @"+10000元";
+    
+    cell.labelMiddle.hidden = YES;
     
     if (indexPath.row % 2 == 0) {
-        cell.labelMoney.textColor = [UIColor profitColor];
+        cell.labelNumber.textColor = [UIColor profitColor];
     } else {
-        cell.labelMoney.textColor = [UIColor orangecolor];
+        cell.labelNumber.textColor = [UIColor orangecolor];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

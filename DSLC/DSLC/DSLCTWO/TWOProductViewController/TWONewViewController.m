@@ -81,7 +81,7 @@
     
     [self tableViewShow];
     
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
     self.view.backgroundColor = [UIColor huibai];
     
@@ -405,54 +405,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            
-            [self loadingWithHidden:YES];
-            
-            NSLog(@"%@",responseObject);
-            
-            if (page == 1) {
-                NSLog(@"123");
-                [self.productListArray removeAllObjects];
-                self.productListArray = nil;
-                self.productListArray = [NSMutableArray array];
-            }
-            
-            NSArray *array = [responseObject objectForKey:@"Product"];
-            
-            for (NSDictionary *dic in array) {
-                ProductListModel *productM = [[ProductListModel alloc] init];
-                [productM setValuesForKeysWithDictionary:dic];
-                [self.productListArray addObject:productM];
-            }
-            
-            if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
-                if (![FileOfManage ExistOfFile:@"NewProduct.plist"]) {
-                    [FileOfManage createWithFile:@"NewProduct.plist"];
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[[array objectAtIndex:0] objectForKey:@"productId"],@"NewProduct",@"0",@"dealSecret",nil];
-                    //设置属性值,没有的数据就新建，已有的数据就修改。
-                    [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
-                } else {
-                    NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
-                    //设置属性值,没有的数据就新建，已有的数据就修改。
-#warning asdasdasdasdasdasdasdasdasdasd
-                    [dic setObject:[[array objectAtIndex:0] objectForKey:@"productId"] forKey:@"NewProduct"];
-                    [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
-                }
-            }
-            
-            if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
-                moreFlag = YES;
-            }
-            
-            [footerT endRefreshing];
-            
-            [headerT endRefreshing];
-            
-            [_tableView reloadData];
-        } else {
-            
-        }
+        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

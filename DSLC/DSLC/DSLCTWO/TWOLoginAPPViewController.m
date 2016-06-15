@@ -104,6 +104,8 @@
 //    输入手机号
     textFieldPhone = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"手机号" setTintColor:[UIColor whiteColor]];
     [imageTwo addSubview:textFieldPhone];
+    textFieldPhone.text = @"";
+    textFieldPhone.clearButtonMode = UITextFieldViewModeAlways;
     textFieldPhone.textColor = [UIColor whiteColor];
     textFieldPhone.keyboardType = UIKeyboardTypeNumberPad;
     textFieldPhone.delegate = self;
@@ -124,6 +126,9 @@
 //    输入密码
     textFieldSecret = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageThree.frame.size.width - 64 - 10, 20) setPlaceholder:@"登录密码" setTintColor:[UIColor whiteColor]];
     [imageThree addSubview:textFieldSecret];
+    textFieldSecret.text = @"";
+    textFieldSecret.clearButtonMode = UITextFieldViewModeAlways;
+    textFieldSecret.secureTextEntry = YES;
     textFieldSecret.textColor = [UIColor whiteColor];
     textFieldSecret.delegate = self;
     [textFieldSecret setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -143,7 +148,7 @@
     [butLogin addTarget:self action:@selector(loginAppButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    快速注册按钮
-    UIButton *butFastRegist = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*4 + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 60, 20) backgroundColor:[UIColor magentaColor] textColor:[UIColor fastZhuCeolor] titleText:@"快速注册"];
+    UIButton *butFastRegist = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*4 + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 60, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor fastZhuCeolor] titleText:@"快速注册"];
     [imageViewBeiJing addSubview:butFastRegist];
     [butFastRegist addTarget:self action:@selector(buttonFastRegister:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -176,6 +181,10 @@
 //密码登录
 - (void)secretLoginShow
 {
+    [self scrollviewContentOffSet];
+    
+    textFieldPhone.text = @"";
+    
     [imageMessage removeFromSuperview];
     [imageGet removeFromSuperview];
     imageMessage = nil;
@@ -196,9 +205,10 @@
 //    输入密码
     textFieldSecret = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageThree.frame.size.width - 64 - 10, 20) setPlaceholder:@"登录密码" setTintColor:[UIColor whiteColor]];
     [imageThree addSubview:textFieldSecret];
+    textFieldSecret.text = @"";
+    textFieldSecret.clearButtonMode = UITextFieldViewModeAlways;
     textFieldSecret.textColor = [UIColor whiteColor];
     textFieldSecret.delegate = self;
-    [textFieldSecret becomeFirstResponder];
     textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [textFieldSecret setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
@@ -215,13 +225,15 @@
         imageThree.frame = CGRectMake(30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60, 40);
         butForeget.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60 - 30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 9, 60, 20);
     }
-    
-    [textFieldPhone becomeFirstResponder];
 }
 
 //验证码登录
 - (void)messageLoginShow
 {
+    [self scrollviewContentOffSet];
+    
+    textFieldPhone.text = @"";
+    
     [imageThree removeFromSuperview];
     [butForeget removeFromSuperview];
     imageThree = nil;
@@ -241,7 +253,8 @@
 //    短信验证码输入框
     textFieldMessage = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageMessage.frame.size.width - 64 - 10, 20) setPlaceholder:@"短信验证码" setTintColor:[UIColor whiteColor]];
     [imageMessage addSubview:textFieldMessage];
-    [textFieldMessage becomeFirstResponder];
+    textFieldMessage.text = @"";
+    textFieldMessage.clearButtonMode = UITextFieldViewModeWhileEditing;
     textFieldMessage.textColor = [UIColor whiteColor];
     textFieldMessage.keyboardType = UIKeyboardTypeNumberPad;
     textFieldMessage.delegate = self;
@@ -270,8 +283,6 @@
         imageMessage.frame = CGRectMake(30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT/2, 40);
         imageGet.frame = CGRectMake(30 + WIDTH_CONTROLLER_DEFAULT/2 + 10, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60 - 10 - imageMessage.frame.size.width, 40);
     }
-    
-    [textFieldPhone becomeFirstResponder];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -337,6 +348,7 @@
 - (void)loginAppButton:(UIButton *)button
 {
     [self scrollviewContentOffSet];
+    [self loginFuction];
 }
 
 //忘记密码?按钮
@@ -369,6 +381,63 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self scrollviewContentOffSet];
+}
+
+#pragma mark 对接登录接口
+#pragma mark --------------------------------
+
+- (void)loginFuction{
+    NSDictionary *parmeter = @{@"phone":textFieldPhone.text,@"password":textFieldSecret.text};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"login" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"register = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            
+            if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+                [FileOfManage createWithFile:@"Member.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     textFieldSecret.text,@"password",
+                                     textFieldPhone.text,@"phone",
+                                     [responseObject objectForKey:@"key"],@"key",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [responseObject objectForKey:@"token"],@"token",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     textFieldSecret.text,@"password",
+                                     textFieldPhone.text,@"phone",
+                                     [responseObject objectForKey:@"key"],@"key",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [responseObject objectForKey:@"token"],@"token",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                NSLog(@"%@",[responseObject objectForKey:@"token"]);
+            }
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

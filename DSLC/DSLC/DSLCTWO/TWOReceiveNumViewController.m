@@ -14,6 +14,11 @@
 {
     UIButton *butGouXuan;
     UIScrollView *_scrollView;
+
+    //    邀请码输入框
+    UITextField *textFieldInvite;
+    //    输入验证码输入框
+    UITextField *textFieldYan;
 }
 
 @end
@@ -45,7 +50,9 @@
     [butCancle setBackgroundImage:[UIImage imageNamed:@"logincuo"] forState:UIControlStateHighlighted];
     [butCancle addTarget:self action:@selector(CancleClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *labelPhone = [CreatView creatWithLabelFrame:CGRectMake(0, 270.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"已向%@发送短信", @"158****2456"]];
+    NSString *phoneRString = [self.phoneString stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    
+    UILabel *labelPhone = [CreatView creatWithLabelFrame:CGRectMake(0, 270.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"已向%@发送短信", phoneRString]];
     [imageBigPic addSubview:labelPhone];
     
     UIImageView *imageTwo = [CreatView creatImageViewWithFrame:CGRectMake(30, 270.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 10 + 20, WIDTH_CONTROLLER_DEFAULT/2, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"zhongxing"]];
@@ -59,7 +66,7 @@
     [imageTwo addSubview:viewLine];
     
 //    输入验证码输入框
-    UITextField *textFieldYan = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"短信验证码" setTintColor:[UIColor whiteColor]];
+    textFieldYan = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"短信验证码" setTintColor:[UIColor whiteColor]];
     [imageTwo addSubview:textFieldYan];
     textFieldYan.textColor = [UIColor whiteColor];
     textFieldYan.delegate = self;
@@ -85,7 +92,7 @@
     [imageThree addSubview:viewLine2];
     
 //    输入邀请码输入框
-    UITextField *textFieldInvite = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"邀请码(选填)" setTintColor:[UIColor whiteColor]];
+    textFieldInvite = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"邀请码(选填)" setTintColor:[UIColor whiteColor]];
     [imageThree addSubview:textFieldInvite];
     textFieldInvite.delegate = self;
     textFieldInvite.textColor = [UIColor whiteColor];
@@ -186,6 +193,7 @@
     [self.view endEditing:YES];
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         _scrollView.contentOffset = CGPointMake(0, -20);
+        [self registerFuction];
     } completion:^(BOOL finished) {
         
     }];
@@ -212,6 +220,29 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [_scrollView endEditing:YES];
+}
+
+#pragma mark 对接接口
+#pragma mark --------------------------------
+
+- (void)registerFuction{
+    NSDictionary *parmeter = @{@"phone":self.phoneString,@"smsCode":textFieldYan.text,@"invitationCode":textFieldInvite.text,@"clientType":@"iOS"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"reg/register" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"register = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
+            
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
