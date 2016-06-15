@@ -31,6 +31,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self.navigationController setTitle:@"消息详情"];
+    
     self.titleLabel.text = @"喜大普奔,大圣理财APP2.0版本上线啦!";
     
     self.dateLabel.text = @"2016-09-09 8:30";

@@ -206,6 +206,7 @@ void UncaughtExceptionHandler(NSException *exception){
     
 }
 
+// 检测网络状况
 - (void)exitNetwork{
     
     // 如果要检测网络状态的变化,必须用检测管理器的单例的startMonitoring
@@ -221,7 +222,7 @@ void UncaughtExceptionHandler(NSException *exception){
              case AFNetworkReachabilityStatusNotReachable:
              {
                  NSLog(@"无网络");
-                 [ProgressHUD showMessage:@"无网络" Width:100 High:20];
+//                 [ProgressHUD showMessage:@"无网络" Width:100 High:20];
                  network = NO;
                  change = YES;
                  break;
@@ -230,7 +231,7 @@ void UncaughtExceptionHandler(NSException *exception){
              case AFNetworkReachabilityStatusReachableViaWiFi:
              {
                  NSLog(@"WiFi网络");
-                 [ProgressHUD showMessage:@"WiFi网络" Width:100 High:20];
+//                 [ProgressHUD showMessage:@"WiFi网络" Width:100 High:20];
                  network = YES;
                  change = YES;
                  break;
@@ -239,7 +240,7 @@ void UncaughtExceptionHandler(NSException *exception){
              case AFNetworkReachabilityStatusReachableViaWWAN:
              {
                  NSLog(@"无线网络");
-                 [ProgressHUD showMessage:@"无线网络" Width:100 High:20];
+//                 [ProgressHUD showMessage:@"无线网络" Width:100 High:20];
                  network = YES;
                  change = YES;
                  break;
@@ -250,14 +251,6 @@ void UncaughtExceptionHandler(NSException *exception){
          }
      }];
 }
-
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-//    BOOL result = [UMSocialSnsService handleOpenURL:url];
-//    if (result == FALSE) {
-//        //调用其他SDK，例如支付宝SDK等
-//    }
-//    return result;
-//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

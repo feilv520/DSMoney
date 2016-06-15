@@ -89,11 +89,11 @@
     
 //    [self getProductList];
     
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
+    
     [self tableViewShow];
     
     _tableView.hidden = YES;
-    
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
     
     self.view.backgroundColor = [UIColor huibai];
     
@@ -112,7 +112,7 @@
     // 更改timer对象的优先级
     [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
     
-    [self getAdvList];
+//    [self getAdvList];
     
 }
 

@@ -11,8 +11,11 @@
 #import "define.h"
 #import "TWOReceiveNumViewController.h"
 
-@interface TWORegisterViewController ()
-
+@interface TWORegisterViewController () <UITextFieldDelegate>
+{
+    //手机号textField
+    UITextField *textFieldPhone;
+}
 @end
 
 @implementation TWORegisterViewController
@@ -60,9 +63,11 @@
     [imageTwo addSubview:viewLine];
     
     //    输入手机号
-    UITextField *textFieldPhone = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"手机号" setTintColor:[UIColor whiteColor]];
+    textFieldPhone = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"手机号" setTintColor:[UIColor whiteColor]];
     [imageTwo addSubview:textFieldPhone];
     textFieldPhone.textColor = [UIColor whiteColor];
+    textFieldPhone.delegate = self;
+    textFieldPhone.tag = 1000;
     textFieldPhone.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     textFieldPhone.keyboardType = UIKeyboardTypeNumberPad;
     [textFieldPhone setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -85,13 +90,13 @@
 - (void)haveNumberRightNowLogin:(UIButton *)button
 {
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 //验证手机号按钮
 - (void)buttonCheckPhoneNum:(UIButton *)button
 {
-    TWOReceiveNumViewController *receiveNum = [[TWOReceiveNumViewController alloc] init];
-    [self.navigationController pushViewController:receiveNum animated:YES];
+    [self checkPhone];
 }
 
 //左上角x按钮
@@ -103,6 +108,53 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
+}
+
+#pragma mark 加限制
+#pragma mark --------------------------------
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 1000) {
+        
+        if (range.location < 11) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+        
+    } else {
+        return YES;
+    }
+}
+
+#pragma mark 对接接口
+#pragma mark --------------------------------
+
+
+- (void)checkPhone{
+    NSDictionary *parmeter = @{@"phone":textFieldPhone.text};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"check/checkPhone" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getSmsCode = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@302]){
+            TWOReceiveNumViewController *receiveNum = [[TWOReceiveNumViewController alloc] init];
+            receiveNum.phoneString = textFieldPhone.text;
+            [self.navigationController pushViewController:receiveNum animated:YES];
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
