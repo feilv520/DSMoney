@@ -1435,6 +1435,10 @@
 		8DEDE26E1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEDE26A1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEDE26C1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DFA58211D1138F000FE9565 /* LYCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA58201D1138F000FE9565 /* LYCircleView.m */; settings = {ASSET_TAGS = (); }; };
+		8DFA58241D1239B000FE9565 /* TWO_BackgroundView.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DFA58231D1239B000FE9565 /* TWO_BackgroundView.png */; settings = {ASSET_TAGS = (); }; };
+		8DFA58271D123B2E00FE9565 /* TWO_NewBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DFA58251D123B2E00FE9565 /* TWO_NewBackground@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8DFA58281D123B2E00FE9565 /* TWO_NewBackground@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DFA58261D123B2E00FE9565 /* TWO_NewBackground@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8DFA582B1D124A8E00FE9565 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA582A1D124A8E00FE9565 /* UICountingLabel.m */; settings = {ASSET_TAGS = (); }; };
 		8DFA5C941BCE64D900AED2B2 /* FQuickPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA5C921BCE64D900AED2B2 /* FQuickPayViewController.m */; };
 		8DFA5C951BCE64D900AED2B2 /* FQuickPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DFA5C931BCE64D900AED2B2 /* FQuickPayViewController.xib */; };
 /* End PBXBuildFile section */
@@ -3511,6 +3515,11 @@
 		8DEDE26C1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingSampleAppDelegate.m; sourceTree = "<group>"; };
 		8DFA581F1D1138F000FE9565 /* LYCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYCircleView.h; sourceTree = "<group>"; };
 		8DFA58201D1138F000FE9565 /* LYCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYCircleView.m; sourceTree = "<group>"; };
+		8DFA58231D1239B000FE9565 /* TWO_BackgroundView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWO_BackgroundView.png; sourceTree = "<group>"; };
+		8DFA58251D123B2E00FE9565 /* TWO_NewBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWO_NewBackground@2x.png"; sourceTree = "<group>"; };
+		8DFA58261D123B2E00FE9565 /* TWO_NewBackground@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWO_NewBackground@3x.png"; sourceTree = "<group>"; };
+		8DFA58291D124A8E00FE9565 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
+		8DFA582A1D124A8E00FE9565 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
 		8DFA5C911BCE64D900AED2B2 /* FQuickPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FQuickPayViewController.h; sourceTree = "<group>"; };
 		8DFA5C921BCE64D900AED2B2 /* FQuickPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FQuickPayViewController.m; sourceTree = "<group>"; };
 		8DFA5C931BCE64D900AED2B2 /* FQuickPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FQuickPayViewController.xib; sourceTree = "<group>"; };
@@ -3743,6 +3752,7 @@
 		8143FCE81CD9C25300B65A2F /* TWOImage */ = {
 			isa = PBXGroup;
 			children = (
+				8DFA58221D1239A000FE9565 /* appdelegateImage */,
 				8D1590FA1D0CF91C00A4353D /* tabbar_icon */,
 				8D0600351D06C15A00C0C97C /* 中间动画ios */,
 				8D06000C1D05761400C0C97C /* iosloading切图 */,
@@ -4575,6 +4585,8 @@
 		81C2DAA51BC755F10007AC48 /* Three */ = {
 			isa = PBXGroup;
 			children = (
+				8DFA58291D124A8E00FE9565 /* UICountingLabel.h */,
+				8DFA582A1D124A8E00FE9565 /* UICountingLabel.m */,
 				8DFA581F1D1138F000FE9565 /* LYCircleView.h */,
 				8DFA58201D1138F000FE9565 /* LYCircleView.m */,
 				8D72ED781CFC0B6C00436C32 /* PNChart */,
@@ -7070,6 +7082,16 @@
 			name = "银行图标";
 			sourceTree = "<group>";
 		};
+		8DFA58221D1239A000FE9565 /* appdelegateImage */ = {
+			isa = PBXGroup;
+			children = (
+				8DFA58251D123B2E00FE9565 /* TWO_NewBackground@2x.png */,
+				8DFA58261D123B2E00FE9565 /* TWO_NewBackground@3x.png */,
+				8DFA58231D1239B000FE9565 /* TWO_BackgroundView.png */,
+			);
+			name = appdelegateImage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -7399,6 +7421,7 @@
 				810F9C201CDB558E00BF39B5 /* openEye@2x.png in Resources */,
 				81600A531CB4BD750075CD45 /* houbixize@2x.png in Resources */,
 				818DEDFE1BCDF15B00454A0E /* FConfirmMoney.xib in Resources */,
+				8DFA58271D123B2E00FE9565 /* TWO_NewBackground@2x.png in Resources */,
 				8DEDE1E61BCD0040008086D3 /* greenyuan@3x.png in Resources */,
 				818C8C311CE1814400A14D37 /* TWOMyGameScoreCell.xib in Resources */,
 				8162D1281BE1BD9C00CACAB6 /* DownFourCell.xib in Resources */,
@@ -7649,6 +7672,7 @@
 				81DEC83F1CEEDCDB005E9D9F /* weixuan@3x.png in Resources */,
 				8D3F95EF1BE2188500013A8E /* filefile@3x.png in Resources */,
 				81460C7D1D1133CF00A81703 /* signrecord@3x.png in Resources */,
+				8DFA58281D123B2E00FE9565 /* TWO_NewBackground@3x.png in Resources */,
 				8177A0031CF2ADA10057AA7B /* icon_share@3x.png in Resources */,
 				81F343881C0584EB001EF374 /* iconfont-complete-拷贝-3@3x.png in Resources */,
 				8177A0171CF2DC9D0057AA7B /* yaonot@3x.png in Resources */,
@@ -8072,6 +8096,7 @@
 				817DD4981BCF547E00042B09 /* haoyou@2x.png in Resources */,
 				8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */,
 				81460C8D1D11504D00A81703 /* huisechance@3x.png in Resources */,
+				8DFA58241D1239B000FE9565 /* TWO_BackgroundView.png in Resources */,
 				8D9011A31BD6337C00E5D62A /* 10@2x.png in Resources */,
 				81B84C141CE44A9A00A867B9 /* xintouzi@2x.png in Resources */,
 				81B84C091CE432E500A867B9 /* renwujindu1@3x.png in Resources */,
@@ -8177,6 +8202,7 @@
 				8183F3441C7E94A7000BB93C /* MonkeyCell.m in Sources */,
 				81CBE7BC1CE99A79004FE1D4 /* TWORealNameIngViewController.m in Sources */,
 				8162D1141BE1B47B00CACAB6 /* MoneyDetailViewController.m in Sources */,
+				8DFA582B1D124A8E00FE9565 /* UICountingLabel.m in Sources */,
 				8184EC451BCCD12A003F440D /* RedBagCell.m in Sources */,
 				8179EB381CEC018B00BD7054 /* TWOAboutDSLCViewController.m in Sources */,
 				815A6FCF1BEB7EFF003059A5 /* RechargeViewController.m in Sources */,

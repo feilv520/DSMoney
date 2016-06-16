@@ -92,7 +92,7 @@
         CGFloat marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
         
         if (WIDTH_CONTROLLER_DEFAULT == 414.0){
-            marginX = WIDTH_CVIEW_DEFAULT * (35 / 375.0);
+            marginX = WIDTH_CVIEW_DEFAULT * (36 / 375.0);
             marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
         }
         CGFloat buttonX = WIDTH_CVIEW_DEFAULT * (90 / 375.0);

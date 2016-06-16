@@ -107,6 +107,7 @@
     
     if ([[self.flagDic objectForKey:@"FristOpen"] isEqualToString:@"NO"]) {
         if ([handFlag isEqualToString:@"NO"]) {
+            
     ////        1.0首页
     //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
     //        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
@@ -177,10 +178,47 @@
             [self.tabBarVC setTransitionAnimated:NO];
             
             self.window.rootViewController = self.tabBarVC;
+            
+            self.window.rootViewController.view.alpha = 0.0;
+            
+            UIImageView *backgroundImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TWO_BackgroundView"]];
+            backgroundImgView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.window.frame.size.height);
+            [self.window addSubview:backgroundImgView];
+            
+            UIImageView *newImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TWO_NewBackground"]];
+            newImageView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.window.frame.size.height - 117);
+            newImageView.alpha = 0;
+            [backgroundImgView addSubview:newImageView];
+            
+            [UIView animateWithDuration:2.0f animations:^{
+                newImageView.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                self.window.rootViewController.view.alpha = 1.0;
+                [backgroundImgView removeFromSuperview];
+            }];
+            
         } else {
             //         手势
             MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
             self.window.rootViewController = myHandVC;
+            
+            self.window.rootViewController.view.alpha = 0.0;
+            
+            UIImageView *backgroundImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TWO_BackgroundView"]];
+            backgroundImgView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.window.frame.size.height);
+            [self.window addSubview:backgroundImgView];
+            
+            UIImageView *newImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TWO_NewBackground"]];
+            newImageView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.window.frame.size.height - 117);
+            newImageView.alpha = 0;
+            [backgroundImgView addSubview:newImageView];
+            
+            [UIView animateWithDuration:2.0f animations:^{
+                newImageView.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                self.window.rootViewController.view.alpha = 1.0;
+                [backgroundImgView removeFromSuperview];
+            }];
         }
         
     } else {
@@ -296,24 +334,24 @@ void UncaughtExceptionHandler(NSException *exception){
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
-    // 判断是否存在isLogin.plist文件
-    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
-        [FileOfManage createWithFile:@"isLogin.plist"];
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-    } else {
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-    }
-    
-    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
-        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
-    } else {
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
-    }
+//    // 判断是否存在isLogin.plist文件
+//    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+//        [FileOfManage createWithFile:@"isLogin.plist"];
+//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+//        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+//    } else {
+//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+//        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+//    }
+//    
+//    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
+//        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
+//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+//        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+//    } else {
+//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+//        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+//    }
     
 }
 

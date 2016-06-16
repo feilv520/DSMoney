@@ -210,13 +210,13 @@
             NSLog(@"%@",handString);
             if ([path isEqualToString:handString]) {
                 
-                [UIView animateWithDuration:0.5 animations:^{
-                    
-                    self.backgroundImageView.alpha = 0.0;
-                    self.myHandBtn.alpha = 0.0;
-                    
-                } completion:^(BOOL finished) {
-                    
+//                [UIView animateWithDuration:0.5 animations:^{
+//                    
+//                    self.backgroundImageView.alpha = 0.0;
+//                    self.myHandBtn.alpha = 0.0;
+//                    
+//                } completion:^(BOOL finished) {
+                
                     //        2.0首页
                     TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
                     UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
@@ -277,7 +277,7 @@
                     app.tabBarVC = self.tabBarVC;
                     app.window.rootViewController = self.tabBarVC;
                     
-                }];
+//                }];
             } else {
                 
                 [ProgressHUD showMessage:@"密码错误" Width:100 High:20];
