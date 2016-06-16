@@ -90,11 +90,19 @@
     [_tableView.tableHeaderView addSubview:viewUp];
     
     //add shadow img
-    CGRect pieFrame = CGRectMake(0, 10, WIDTH_CONTROLLER_DEFAULT, 300.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    CGRect pieFrame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 258.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) * 0.5, 10, 258.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 258.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     
-    circle = [[LYCircleView alloc]initWithFrame:pieFrame];
-    circle.dataSource = self;
-    [viewUp addSubview:circle];
+    //    UIImage *shadowImg = [UIImage imageNamed:@"shadow.png"];
+    //    UIImageView *shadowImgView = [[UIImageView alloc]initWithImage:shadowImg];
+    //    shadowImgView.frame = CGRectMake(0, pieFrame.origin.y + PIE_HEIGHT*0.92, shadowImg.size.width/2, shadowImg.size.height/2);
+    //    [viewUp addSubview:shadowImgView];
+    
+    self.pieChartView = [[MCMPieChartView alloc]initWithFrame:pieFrame withValue:self.valueArray withColor:self.colorArray];
+    self.pieChartView.delegate = self;
+    [viewUp addSubview:self.pieChartView];
+    [self.pieChartView setTitleText:@"在投资金"];
+    [self.pieChartView setAmountText:@"0元"];
+    self.pieChartView.centerView.hidden = YES;
     
     UIView *viewUpLine = [CreatView creatViewWithFrame:CGRectMake(0, viewUp.frame.size.height - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
     [viewUp addSubview:viewUpLine];

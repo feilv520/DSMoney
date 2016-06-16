@@ -244,7 +244,7 @@
     [imageViewBeiJing addSubview:imageMessage];
     imageMessage.userInteractionEnabled = YES;
     
-    UIImageView *imageSuo = [CreatView creatImageViewWithFrame:CGRectMake(22, 9, 22, 22) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"loginSecret"]];
+    UIImageView *imageSuo = [CreatView creatImageViewWithFrame:CGRectMake(22, 10, 20, 20) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"loginSecret"]];
     [imageMessage addSubview:imageSuo];
     
     UIView *viewLine1 = [CreatView creatViewWithFrame:CGRectMake(22 + 22 + 10, 8, 0.5, 24) backgroundColor:[UIColor whiteColor]];
