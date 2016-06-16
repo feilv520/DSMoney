@@ -52,4 +52,6 @@
 
 @property (nonatomic, copy) NSString *productInitLimit;
 
+@property (nonatomic, copy) NSString *saleProgress;
+
 @end

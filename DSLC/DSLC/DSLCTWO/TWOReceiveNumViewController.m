@@ -233,10 +233,45 @@
         NSLog(@"register = %@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
             
+            if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+                [FileOfManage createWithFile:@"Member.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"",@"password",
+                                     self.phoneString,@"phone",
+                                     [responseObject objectForKey:@"key"],@"key",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [responseObject objectForKey:@"token"],@"token",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"",@"password",
+                                     self.phoneString,@"phone",
+                                     [responseObject objectForKey:@"key"],@"key",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [responseObject objectForKey:@"token"],@"token",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                NSLog(@"%@",[responseObject objectForKey:@"token"]);
+            }
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
+
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

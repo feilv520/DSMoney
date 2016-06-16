@@ -87,7 +87,7 @@
     
     newFlag = NO;
     
-//    [self getProductList];
+    [self getProductList];
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
@@ -253,6 +253,7 @@
     twoPDVC.productName = productM.productName;
     twoPDVC.estimate = YES;
     twoPDVC.pandaun = YES;
+    twoPDVC.residueMoney = [productM residueMoney];
     twoPDVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
     
     pushVC(twoPDVC);
@@ -268,50 +269,50 @@
 #pragma mark 网络请求方法
 #pragma mark --------------------------------
 
-//- (void)getProductList{
-//    
-//    NSDictionary *parameter = @{@"productType":@1,@"curPage":@1};
-//    
-//    [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-//        
-//        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-//            [self loadingWithHidden:YES];
-//            
-//            newFlag = YES;
-//            
-//            _tableView.hidden = NO;
-//            
-//            NSLog(@"%@",responseObject);
-//            
-//            NSArray *array = [responseObject objectForKey:@"Product"];
-//            
-//            for (NSDictionary *dic in array) {
-//                [flagArray addObject:[dic objectForKey:@"productStatus"]];
-//                ProductListModel *productM = [[ProductListModel alloc] init];
-//                [productM setValuesForKeysWithDictionary:dic];
-//                [self.productListArray addObject:productM];
-//            }
-//            
-//            if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
-//                moreFlag = YES;
-//            }
-//            
-//            [footerT endRefreshing];
-//            [headerT endRefreshing];
-//            
-//            [_tableView reloadData];
-//            
-//        } else {
-//            
-//        }
-//        
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        
-//        NSLog(@"%@", error);
-//        
-//    }];
-//}
+- (void)getProductList{
+    
+    NSDictionary *parameter = @{@"productType":@1,@"curPage":@1};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            [self loadingWithHidden:YES];
+            
+            newFlag = YES;
+            
+            _tableView.hidden = NO;
+            
+            NSLog(@"%@",responseObject);
+            
+            NSArray *array = [responseObject objectForKey:@"Product"];
+            
+            for (NSDictionary *dic in array) {
+                ProductListModel *productM = [[ProductListModel alloc] init];
+                [productM setValuesForKeysWithDictionary:dic];
+                [self.productListArray addObject:productM];
+            }
+            
+            if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
+                moreFlag = YES;
+            }
+            
+            [footerT endRefreshing];
+            [headerT endRefreshing];
+            
+            [_tableView reloadData];
+            
+        } else {
+            
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 
 #pragma mark 判断是否还要加载更多
 #pragma mark --------------------------------
@@ -325,7 +326,7 @@
         [footer endRefreshing];
     } else {
         page ++;
-//        [self getProductList];
+        [self getProductList];
     }
     
 }
@@ -345,7 +346,7 @@
         }
         
         page = 1;
-//        [self getProductList];
+        [self getProductList];
     }
 }
 
