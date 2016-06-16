@@ -198,6 +198,7 @@
 //切换页面按钮点击事件
 - (void)tabAction:(UIButton *)button
 {
+    NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     if (button.tag == 3) {
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"hideWithTabbarView" object:indexButton];
 //        if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
@@ -206,14 +207,16 @@
 //        } else {
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
 //        }
-        TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
-        
-        UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
-        [nvc setNavigationBarHidden:YES animated:YES];
-        
-        [self presentViewController:nvc animated:YES completion:^{
+        if ([memberDic objectForKey:@"token"] == nil) {
+            TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
             
-        }];
+            UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+            [nvc setNavigationBarHidden:YES animated:YES];
+            
+            [self presentViewController:nvc animated:YES completion:^{
+                
+            }];
+        }
     } else {
         indexButton = button;
     }

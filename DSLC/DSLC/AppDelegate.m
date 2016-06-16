@@ -29,6 +29,12 @@
     NSMutableArray *buttonArr;
     
     NSNumber *result;
+    
+    //签到猴子需要的控件
+    UIButton *buttonHei;
+    UIView *viewDown;
+    UILabel *labelMonkey;
+    UIImageView *imageSign;
 }
 @property (nonatomic, strong) NSDictionary *flagDic;
 @property (nonatomic, strong) NSDictionary *flagLogin;
@@ -66,6 +72,20 @@
         self.flagLogin = dic;
     }
     return _flagLogin;
+}
+
+- (NSDictionary *)flagUserInfo{
+    if (_flagUserInfo == nil) {
+        if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+            [FileOfManage createWithFile:@"Member.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"123",@"password",
+                                 @"123",@"phone",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+        }
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        self.flagUserInfo = dic;
+    }
+    return _flagUserInfo;
 }
 
 - (NSDictionary *)handDic{
@@ -195,6 +215,11 @@
             } completion:^(BOOL finished) {
                 self.window.rootViewController.view.alpha = 1.0;
                 [backgroundImgView removeFromSuperview];
+                
+                if ([self.flagUserInfo objectForKey:@"token"] != nil && ![[self.flagUserInfo objectForKey:@"token"] isEqualToString:@""]){
+                    [self loginFuction];
+                }
+                
             }];
             
         } else {
@@ -397,6 +422,120 @@ void UncaughtExceptionHandler(NSException *exception){
          annotation:(id)annotation
 {
     return  [UMSocialSnsService handleOpenURL:url];
+}
+
+- (void)loginFuction{
+
+    NSDictionary *parmeter = @{@"phone":[self.flagUserInfo objectForKey:@"phone"],@"password":[self.flagUserInfo objectForKey:@"password"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"login" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"register = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
+//            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            
+            if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+                [FileOfManage createWithFile:@"Member.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     [self.flagUserInfo objectForKey:@"password"],@"password",
+                                     [self.flagUserInfo objectForKey:@"phone"],@"phone",
+                                     [responseObject objectForKey:@"key"],@"key",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [responseObject objectForKey:@"token"],@"token",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     [self.flagUserInfo objectForKey:@"password"],@"password",
+                                     [self.flagUserInfo objectForKey:@"phone"],@"phone",
+                                     [responseObject objectForKey:@"key"],@"key",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [responseObject objectForKey:@"token"],@"token",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                NSLog(@"%@",[responseObject objectForKey:@"token"]);
+            }
+            [self signFinish];
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+//签到成功
+- (void)signFinish
+{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    buttonHei = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.window.frame.size.height) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    [app.tabBarVC.view addSubview:buttonHei];
+    buttonHei.alpha = 0.6;
+    [buttonHei addTarget:self action:@selector(clickedBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    viewDown = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 530/2/2, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 530/2, 397/2 + 30) backgroundColor:[UIColor clearColor]];
+    [app.tabBarVC.view addSubview:viewDown];
+    viewDown.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAddClicked:)];
+    [viewDown addGestureRecognizer:tapView];
+    
+    labelMonkey = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewDown.frame.size.width, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:27] text:[NSString stringWithFormat:@"%@猴币", @"+66"]];
+    [viewDown addSubview:labelMonkey];
+    
+    imageSign = [CreatView creatImageViewWithFrame:CGRectMake(0, 30, viewDown.frame.size.width, viewDown.frame.size.height - 30) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"doSign"]];
+    [viewDown addSubview:imageSign];
+    imageSign.userInteractionEnabled = YES;
+    
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.5;
+    
+    NSMutableArray *values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    [viewDown.layer addAnimation:animation forKey:nil];
+}
+
+//黑色遮罩层消失
+- (void)clickedBlackDisappear:(UIButton *)button
+{
+    [buttonHei removeFromSuperview];
+    [viewDown removeFromSuperview];
+    [labelMonkey removeFromSuperview];
+    [imageSign removeFromSuperview];
+    
+    buttonHei = nil;
+    viewDown = nil;
+    labelMonkey = nil;
+    imageSign = nil;
+}
+
+//点击猴子
+- (void)tapAddClicked:(UITapGestureRecognizer *)tap
+{
+    [buttonHei removeFromSuperview];
+    [viewDown removeFromSuperview];
+    [labelMonkey removeFromSuperview];
+    [imageSign removeFromSuperview];
+    
+    buttonHei = nil;
+    viewDown = nil;
+    labelMonkey = nil;
+    imageSign = nil;
 }
 
 @end

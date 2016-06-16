@@ -43,6 +43,8 @@
     
     [self navigationTitleShow];
     [self tableViewShow];
+    [self getMyRedPacketListFuction];
+    [self getMyIncreaseListFuction];
 }
 
 - (void)navigationTitleShow
@@ -416,6 +418,37 @@
     [super viewWillDisappear:animated];
     butRedBag.hidden = YES;
     buttonJiaXi.hidden = YES;
+}
+
+#pragma mark 对接接口
+#pragma mark --------------------------------
+
+- (void)getMyRedPacketListFuction{
+    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getMyRedPacketList = %@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+- (void)getMyIncreaseListFuction{
+    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getMyIncreaseList = %@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

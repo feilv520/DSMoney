@@ -11,7 +11,13 @@
 @implementation ProductDetailModel
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key{
-    
+    if ([key isEqualToString:@"annualYield"]) {
+        self.productAnnualYield = value;
+    } else if ([key isEqualToString:@"period"]) {
+        self.productPeriod = value;
+    } else if ([key isEqualToString:@"yieldDistribTypeName"]) {
+        self.productYieldDistribTypeName = value;
+    }
 }
 
 @end

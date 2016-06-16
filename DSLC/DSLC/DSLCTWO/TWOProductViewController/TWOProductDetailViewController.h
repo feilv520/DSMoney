@@ -20,4 +20,6 @@
 
 @property (nonatomic) BOOL pandaun;
 
+@property (nonatomic, strong) NSString *residueMoney;
+
 @end

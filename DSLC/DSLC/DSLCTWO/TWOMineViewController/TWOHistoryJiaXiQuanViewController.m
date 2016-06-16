@@ -28,6 +28,7 @@
     [self.navigationItem setTitle:@"历史加息券"];
     
     [self tableViewShow];
+    [self getMyIncreaseListFuction];
 }
 
 - (void)tableViewShow
@@ -154,6 +155,20 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+}
+
+- (void)getMyIncreaseListFuction{
+    NSDictionary *parmeter = @{@"curPage":@1,@"status":@"1,2,3",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getMyIncreaseList = %@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

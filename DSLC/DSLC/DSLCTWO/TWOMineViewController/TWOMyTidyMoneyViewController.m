@@ -47,6 +47,8 @@
     [self contentShow];
     [self tableViewProfitShow];
     [self tableViewAlredyCashShow];
+    [self getUserAssetsListOneFuction];
+    [self getUserAssetsListTwoFuction];
 }
 
 - (void)contentShow
@@ -360,6 +362,40 @@
             }
         }
     }
+}
+
+#pragma mark 对接接口
+#pragma mark --------------------------------
+
+
+- (void)getUserAssetsListOneFuction{
+    
+    NSDictionary *parmeter = @{@"phone":[self.flagDic objectForKey:@"phone"],@"curPage":@1,@"status":@"1,2",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserAssetsList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getUserAssetsListOne = %@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+- (void)getUserAssetsListTwoFuction{
+    
+    NSDictionary *parmeter = @{@"phone":[self.flagDic objectForKey:@"phone"],@"curPage":@1,@"status":@3,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserAssetsList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getUserAssetsListThree = %@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

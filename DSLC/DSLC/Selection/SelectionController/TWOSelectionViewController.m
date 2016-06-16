@@ -51,7 +51,7 @@
     
     self.view.backgroundColor = [UIColor qianhuise];
     
-    [self signFinish];
+//    [self signFinish];
     [self upContentShow];
     [self collectionViewShow];
     

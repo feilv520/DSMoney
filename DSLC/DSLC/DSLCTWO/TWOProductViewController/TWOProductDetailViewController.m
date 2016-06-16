@@ -36,7 +36,6 @@
 
 @property (nonatomic, strong) UIControl *viewBotton;
 @property (nonatomic, strong) ProductDetailModel *detailM;
-@property (nonatomic, strong) NSString *residueMoney;
 @property (nonatomic, strong) NSString *buyNumber;
 @property (nonatomic, strong) NSDictionary *flagLogin;
 
@@ -214,7 +213,7 @@
     profitLabel.textColor = Color_White;
     
     NSMutableAttributedString *redStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17%"];
-    [redStringM replaceCharactersInRange:NSMakeRange(0, [[redStringM string] rangeOfString:@"%"].location) withString:[NSString stringWithFormat:@"%@",[dataDic objectForKey:@"productAnnualYield"]]];
+    [redStringM replaceCharactersInRange:NSMakeRange(0, [[redStringM string] rangeOfString:@"%"].location) withString:[NSString stringWithFormat:@"%@",[self.detailM productAnnualYield]]];
     NSRange numString = NSMakeRange(0, [[redStringM string] rangeOfString:@"%"].location);
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         [redStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:32] range:numString];
@@ -236,7 +235,7 @@
     profitTitleLabel.textColor = Color_White;
     [headImageView addSubview:profitTitleLabel];
     
-    CGFloat bfNumber = ([[self.detailM productInitLimit] floatValue] - [self.residueMoney floatValue]) / [[self.detailM productInitLimit] floatValue];
+    CGFloat bfNumber = [[self.detailM saleProgress] floatValue] / 100.0;
     
     //小猴子
     UIImageView *monkeyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40, 86, 20, 30)];
@@ -371,7 +370,7 @@
             cell.valueLabel.text = [self.detailM productYieldDistribTypeName];
         } else if (indexPath.row == 1) {
             
-            cell.valueLabel.text = [self.detailM productToaccountTypeName];
+            cell.valueLabel.text = [NSString stringWithFormat:@"%@&%@",[self.detailM beginTime],[self.detailM endTime]];
         } else {
             cell.valueLabel.text = @"无限投";
         }
@@ -705,14 +704,11 @@
 - (void)getProductDetail{
     NSDictionary *parameter = @{@"productId":self.idString};
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"产品详情ppppppppppppppp%@",responseObject);
         
         [self loadingWithHidden:YES];
-        
-        self.residueMoney = [responseObject objectForKey:@"residueMoney"];
-        self.buyNumber = [responseObject objectForKey:@"buyCount"];
         
         self.detailM = [[ProductDetailModel alloc] init];
         dataDic = [responseObject objectForKey:@"Product"];
