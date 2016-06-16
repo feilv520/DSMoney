@@ -39,24 +39,25 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VBR-Rm-m6f">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VBR-Rm-m6f">
                         <rect key="frame" x="142" y="26" width="90" height="90"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="90" id="4tw-eU-YNk"/>
+                            <constraint firstAttribute="height" constant="90" id="7BB-0d-lMc"/>
+                        </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="nju-NC-aNM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="5fA-To-tIL"/>
+                    <constraint firstItem="VBR-Rm-m6f" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-4" id="6CF-nT-xeW"/>
                     <constraint firstItem="nju-NC-aNM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="8oO-kr-cgB"/>
-                    <constraint firstItem="VBR-Rm-m6f" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-8" id="Dse-YZ-b05"/>
                     <constraint firstAttribute="trailingMargin" secondItem="V2c-ed-1OU" secondAttribute="trailing" constant="-8" id="JFf-ZM-UyZ"/>
+                    <constraint firstItem="VBR-Rm-m6f" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Qbb-mH-gli"/>
                     <constraint firstItem="l5C-Dk-TJI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="V7f-yc-P9p"/>
                     <constraint firstItem="V2c-ed-1OU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="Ycj-1n-GGR"/>
-                    <constraint firstItem="VBR-Rm-m6f" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ZE1-sO-c1b"/>
                     <constraint firstAttribute="trailingMargin" secondItem="nju-NC-aNM" secondAttribute="trailing" constant="1" id="iNm-Ud-MsC"/>
-                    <constraint firstItem="VBR-Rm-m6f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="134" id="jk4-El-VGM"/>
                     <constraint firstItem="l5C-Dk-TJI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="neH-jH-osG"/>
-                    <constraint firstItem="V2c-ed-1OU" firstAttribute="leading" secondItem="VBR-Rm-m6f" secondAttribute="trailing" constant="56" id="oMd-RR-ZA4"/>
                     <constraint firstAttribute="trailingMargin" secondItem="l5C-Dk-TJI" secondAttribute="trailing" constant="1" id="ooj-4P-GzR"/>
-                    <constraint firstItem="VBR-Rm-m6f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="18" id="vwx-X7-odx"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

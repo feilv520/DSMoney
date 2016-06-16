@@ -142,6 +142,7 @@
         cell.imageOver.image = [UIImage imageNamed:@"over"];
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

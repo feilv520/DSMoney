@@ -61,7 +61,7 @@
 
 - (void)contentShow
 {
-    scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 40.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 10)];
+    scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 30 - 40.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 10)];
     [self.view addSubview:scrollview];
     scrollview.backgroundColor = [UIColor qianhuise];
     scrollview.contentSize = CGSizeMake(0, 1000.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
@@ -94,7 +94,7 @@
     NSRange leftRange = NSMakeRange(0, [[codeString string] rangeOfString:@" "].location);
     [codeString addAttribute:NSForegroundColorAttributeName value:[UIColor zitihui] range:leftRange];
     NSRange rightRange = NSMakeRange([[codeString string] length] - 7, 7);
-    [codeString addAttribute:NSForegroundColorAttributeName value:[UIColor daohanglan] range:rightRange];
+    [codeString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:rightRange];
     [labelCode setAttributedText:codeString];
     
     UIView *viewRule = [CreatView creatViewWithFrame:CGRectMake(10, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 20, 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor whiteColor]];
@@ -102,8 +102,15 @@
     viewRule.layer.cornerRadius = 5;
     viewRule.layer.masksToBounds = YES;
     
-    UIButton *butSend = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, scrollview.frame.size.height, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"发送邀请"];
-    [self.view addSubview:butSend];
+    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, scrollview.frame.size.height, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - scrollview.frame.size.height) backgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:viewBottom];
+    
+    UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
+    [viewBottom addSubview:viewLine];
+    viewLine.alpha = 0.3;
+    
+    UIButton *butSend = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 10, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"发送邀请"];
+    [viewBottom addSubview:butSend];
     butSend.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butSend setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateNormal];
     [butSend setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateHighlighted];

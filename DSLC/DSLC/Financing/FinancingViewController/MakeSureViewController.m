@@ -849,7 +849,7 @@
     
     } else {
 
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
         self.textFieldC = (UITextField *)[self.view viewWithTag:199];
         CGFloat numberInt = [[[DES3Util decrypt:[self.accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
