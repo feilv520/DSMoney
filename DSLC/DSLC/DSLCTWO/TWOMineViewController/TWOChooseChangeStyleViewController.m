@@ -66,7 +66,7 @@
     buttonTwo.titleEdgeInsets = UIEdgeInsetsMake(0, 9, 0, 0);
     [buttonTwo addTarget:self action:@selector(changeLoginSecret:) forControlEvents:UIControlEventTouchUpInside];
     
-    NSMutableAttributedString *loginString = [[NSMutableAttributedString alloc] initWithString:@"通过“验证码登录密码”更换"];
+    NSMutableAttributedString *loginString = [[NSMutableAttributedString alloc] initWithString:@"通过“验证登录密码”更换"];
     NSRange loginRange = NSMakeRange(2, 9);
     [loginString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:loginRange];
     NSRange leftRange = NSMakeRange(0, 2);

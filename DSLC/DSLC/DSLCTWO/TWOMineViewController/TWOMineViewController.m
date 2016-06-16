@@ -79,6 +79,7 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.separatorColor = [UIColor lineColor];
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         
@@ -364,7 +365,7 @@
 //        }
 //    }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -385,6 +386,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             TWOMyTidyMoneyViewController *tidyMoneyVC = [[TWOMyTidyMoneyViewController alloc] init];

@@ -20,6 +20,8 @@
     UIButton *butBlack;
     UIView *viewBottom;
     UIImageView *imageYellow;
+    CABasicAnimation *momAnimation;
+    UIImageView *imageHandYao;
 }
 
 @end
@@ -32,6 +34,11 @@
     butShare.hidden = NO;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self canBecomeFirstResponder];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -40,7 +47,13 @@
     [self.navigationItem setTitle:@"摇一摇"];
     
     [self commonHaveShow];
-//    [self tanKuangeShow];
+    [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:YES];
+    [self becomeFirstResponder];
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
 }
 
 - (void)haveNoChanceShow
@@ -100,7 +113,7 @@
     [butShare addTarget:self action:@selector(buttonShareYaoYiYao:) forControlEvents:UIControlEventTouchUpInside];
     
 //    摇动的图片
-    UIImageView *imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
+    imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
     [imageBack addSubview:imageHandYao];
     
 //    显示还有几次摇动机会的背景图
@@ -163,6 +176,17 @@
     [app.tabBarVC.view addSubview:viewBottom];
     viewBottom.layer.cornerRadius = 5;
     viewBottom.layer.masksToBounds = YES;
+    
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.5;
+    
+    NSMutableArray *values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    [viewBottom.layer addAnimation:animation forKey:nil];
     
 //    [self haveNoWinPrize];
     [self winPrizeShow];
@@ -241,6 +265,40 @@
     [viewBottom removeFromSuperview];
     butBlack = nil;
     viewBottom = nil;
+}
+
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+//    开始摇动
+    NSLog(@"开始摇动");
+    
+    momAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+//    改变摇动的幅度
+    momAnimation.fromValue = [NSNumber numberWithFloat:-0.5];
+    momAnimation.toValue = [NSNumber numberWithFloat:0.5];
+//    改变摇动的速度
+    momAnimation.duration = 0.5;
+//    控制摇摆的时间
+    momAnimation.repeatDuration = 1.7;
+    momAnimation.autoreverses = YES;
+    momAnimation.delegate = self;
+    [imageHandYao.layer addAnimation:momAnimation forKey:@"animateLayer"];
+}
+
+- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+//    取消摇动
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+//    摇动结束
+    if (motion != UIEventSubtypeMotionShake) {
+        NSLog(@"其他事件");
+    } else {
+        NSLog(@"摇一摇结束");
+        [self tanKuangeShow];
+    }
 }
 
 //分享按钮

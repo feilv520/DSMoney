@@ -258,6 +258,17 @@
     viewBottom.layer.cornerRadius = 5;
     viewBottom.layer.masksToBounds = YES;
     
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.5;
+    
+    NSMutableArray *values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    [viewBottom.layer addAnimation:animation forKey:nil];
+    
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         viewBottom.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 280)/2, HEIGHT_CONTROLLER_DEFAULT/2 - 138, 280, 236);
     }
