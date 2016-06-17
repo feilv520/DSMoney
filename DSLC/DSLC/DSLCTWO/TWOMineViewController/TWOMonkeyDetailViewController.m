@@ -9,11 +9,20 @@
 #import "TWOMonkeyDetailViewController.h"
 #import "MyMonkeyNumCell.h"
 #import "TWOMonkeyRecordCell.h"
+#import "TWOMyMonkeyModel.h"
+
 
 @interface TWOMonkeyDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tableView;
+    
+    NSMutableArray *monkeyArray;
+    
+    UIButton *butMore;
+    
+    NSInteger page;
+    BOOL moreFlag;
 }
 
 @end
@@ -36,7 +45,12 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"猴币记录"];
     
-    [self tableViewSHOW];
+    page = 1;
+    
+    monkeyArray = [NSMutableArray array];
+    
+    [self getUserMonkeyDetailFuction];
+    
 }
 
 - (void)tableViewSHOW
@@ -60,7 +74,7 @@
     [_tableView.tableFooterView addSubview:viewLineDown];
     viewLineDown.alpha = 0.3;
     
-    UIButton *butMore = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _tableView.tableFooterView.frame.size.height - 0.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"点击查看更多"];
+    butMore = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _tableView.tableFooterView.frame.size.height - 0.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"点击查看更多"];
     [_tableView.tableFooterView addSubview:butMore];
     butMore.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butMore addTarget:self action:@selector(buttonCheckMore:) forControlEvents:UIControlEventTouchUpInside];
@@ -75,18 +89,19 @@
 {
     TWOMonkeyRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    NSArray *titleArray = @[@"投资获取", @"活动获取", @"抽奖消耗", @"兑换金斗云", @"兑换收益"];
-    cell.labelTitle.text = [titleArray objectAtIndex:indexPath.row];
+    TWOMyMonkeyModel *model = [monkeyArray objectAtIndex:indexPath.row];
+    
+    cell.labelTitle.text = [model getTypeName];
     cell.labelTitle.textColor = [UIColor ZiTiColor];
     
-    cell.labelTime.text = @"2016-01-01";
+    cell.labelTime.text = [model getDate];
     cell.labelTime.textColor = [UIColor findZiTiColor];
     
     cell.labelMiddle.hidden = YES;
     cell.labelMiddle.textColor = [UIColor profitColor];
     cell.labelMiddle.font = [UIFont fontWithName:@"CenturyGothic" size:16];
     
-    if (indexPath.row == 3) {
+    if ([[model getTypeName] isEqualToString:@"兑换金斗云"]) {
         
         cell.labelMiddle.hidden = NO;
         
@@ -99,10 +114,9 @@
         [cell.labelMiddle setAttributedText:profitString];
     }
     
-    NSArray *numberArr = @[@"+5000", @"+5000", @"-500", @"-200", @"-200"];
-    cell.labelNumber.text = [numberArr objectAtIndex:indexPath.row];
+    cell.labelNumber.text = [NSString stringWithFormat:@"%@%@",[model mark],[model monkeyNum]];
     
-    if (indexPath.row == 0 || indexPath.row == 1) {
+    if ([[model mark] isEqualToString:@"+"]) {
         cell.labelNumber.textColor = [UIColor profitColor];
     } else {
         cell.labelNumber.textColor = [UIColor orangecolor];
@@ -120,7 +134,50 @@
 //点击查看更多
 - (void)buttonCheckMore:(UIButton *)button
 {
-    NSLog(@"more");
+    if (!moreFlag) {
+        page ++;
+        [self getUserMonkeyDetailFuction];
+    }
+}
+
+#pragma mark 我的猴币详情
+#pragma mark --------------------------------
+
+//获取数据
+- (void)getUserMonkeyDetailFuction
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"],@"curPage":[NSNumber numberWithInteger:page],@"startDate":@"",@"endDate":@""};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"monkey/getUserMonkeyDetail" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"获取猴币详情:~~~~~%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            NSMutableArray *dataArr = [responseObject objectForKey:@"Monkey"];
+            
+            if (dataArr.count == 0) {
+                [self noDateWithHeight:100 view:self.view];
+            } else {
+                [self tableViewSHOW];
+            }
+            
+            for (NSDictionary *dataDic in dataArr) {
+                TWOMyMonkeyModel *model = [[TWOMyMonkeyModel alloc] init];
+                [model setValuesForKeysWithDictionary:dataDic];
+                [monkeyArray addObject:model];
+            }
+            
+            if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
+                moreFlag = YES;
+                [butMore setTitle:@"已显示全部" forState:UIControlStateNormal];
+                butMore.enabled = NO;
+            }
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

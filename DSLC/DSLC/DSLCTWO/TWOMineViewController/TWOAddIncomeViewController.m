@@ -56,7 +56,9 @@
                        [UIColor colorWithRed:180.0 / 225.0 green:228.0 / 225.0 blue:254.0 / 225.0 alpha:1.0],
                        nil];
     
-    [self tableViewShow];
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
+    
+    [self getMyProfitFuction];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -174,6 +176,39 @@
 - (void)selectedFinish:(MCMPieChartView *)pieChartView index:(NSInteger)index percent:(float)per
 {
     NSLog(@"123");
+}
+
+#pragma mark 累计收益
+#pragma mark --------------------------------
+
+- (void)getMyProfitFuction{
+    
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyProfit" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"responseObject = %@",responseObject);
+        
+        [self loadingWithHidden:YES];
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            if ([[responseObject objectForKey:@"Profit"] count] == 0) {
+                [self noDateWithHeight:100 view:self.view];
+            } else {
+                [self tableViewShow];
+            }
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

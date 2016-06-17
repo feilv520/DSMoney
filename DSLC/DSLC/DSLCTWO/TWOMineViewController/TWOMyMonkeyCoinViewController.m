@@ -10,6 +10,8 @@
 #import "TWOMyMonkeyCoinCell.h"
 #import "TWOMonkeyDetailViewController.h"
 #import "MonkeyRulesViewController.h"
+#import "MyMonkeyModel.h"
+#import "PNChart.h"
 
 @interface TWOMyMonkeyCoinViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -18,6 +20,8 @@
     UIImageView *imagePicture;
     UIButton *butBlackAlpha;
     UIView *viewBottom;
+    
+    NSMutableArray *monkeyArr;
 }
 
 @end
@@ -40,7 +44,9 @@
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"我的猴币"];
     
-    [self tableViewShow];
+    monkeyArr = [NSMutableArray array];
+    
+    [self getUserMonkeyInfosFuction];
 }
 
 - (void)tableViewShow
@@ -51,7 +57,7 @@
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor qianhuise];
     
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 248.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 328.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.1)];
     
@@ -62,7 +68,7 @@
 
 - (void)tableViewHeadShow
 {
-    imagePicture = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 156.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor qianhuise] setImage:[UIImage imageNamed:@"productDetailBackground"]];
+    imagePicture = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 236.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor qianhuise] setImage:[UIImage imageNamed:@"productDetailBackground"]];
     [_tableView.tableHeaderView addSubview:imagePicture];
     
     UILabel *labelMonkeyCoin = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
@@ -78,6 +84,13 @@
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
         labelMonkeyCoin.frame = CGRectMake(0, 12.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30);
     }
+    
+    PNChart * lineChart = [[PNChart alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(labelMonkeyCoin.frame) - 10.0, SCREEN_WIDTH, 200.0)];
+    lineChart.backgroundColor = [UIColor clearColor];
+    [lineChart setXLabels:@[[[monkeyArr objectAtIndex:0] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:1] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:2] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:3] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:4] objectForKey:@"getDate"]]];
+    [lineChart setYValues:@[[[monkeyArr objectAtIndex:0] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:1] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:2] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:3] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:4] objectForKey:@"monkeyNum"]]];
+    [lineChart strokeChart];
+    [imagePicture addSubview:lineChart];
     
     [self monkeyCoinDetail];
     [self playMonkeyCoin];
@@ -370,6 +383,32 @@
     } else {
         _tableView.scrollEnabled = YES;
     }
+}
+
+#pragma mark 我的猴币
+#pragma mark --------------------------------
+
+//获取数据
+- (void)getUserMonkeyInfosFuction
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"monkey/getUserMonkeyInfos" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"获取猴币详情:~~~~~%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            monkeyArr = [responseObject objectForKey:@"Monkey"];
+            
+            [self tableViewShow];
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

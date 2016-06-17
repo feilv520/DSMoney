@@ -1353,6 +1353,7 @@
 		8D9BE8F51C0EC94D003C67D3 /* YYWebImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8E31C0EC94D003C67D3 /* YYWebImageOperation.m */; settings = {ASSET_TAGS = (); }; };
 		8DA060CD1C02BEBD00E3E025 /* DES3Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA060CC1C02BEBD00E3E025 /* DES3Util.m */; settings = {ASSET_TAGS = (); }; };
 		8DA5ABC31D13BCAE00A10467 /* TWOMyAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5ABC21D13BCAE00A10467 /* TWOMyAccountModel.m */; settings = {ASSET_TAGS = (); }; };
+		8DA5ABC61D13F5C600A10467 /* TWOMyMonkeyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5ABC51D13F5C600A10467 /* TWOMyMonkeyModel.m */; settings = {ASSET_TAGS = (); }; };
 		8DA7E16A1CDC6ECD00D5D016 /* TWOBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7E1691CDC6ECD00D5D016 /* TWOBillViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8DA7E16D1CDC6F4000D5D016 /* TWONewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7E16C1CDC6F4000D5D016 /* TWONewViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8DA7E1701CE03CE200D5D016 /* TWOProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7E16F1CE03CE200D5D016 /* TWOProductDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -3401,6 +3402,8 @@
 		8DA086561C33894C00BC805C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		8DA5ABC11D13BCAE00A10467 /* TWOMyAccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWOMyAccountModel.h; path = DSLC/Base/TWOMyAccountModel.h; sourceTree = SOURCE_ROOT; };
 		8DA5ABC21D13BCAE00A10467 /* TWOMyAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWOMyAccountModel.m; path = DSLC/Base/TWOMyAccountModel.m; sourceTree = SOURCE_ROOT; };
+		8DA5ABC41D13F5C600A10467 /* TWOMyMonkeyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMyMonkeyModel.h; sourceTree = "<group>"; };
+		8DA5ABC51D13F5C600A10467 /* TWOMyMonkeyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMyMonkeyModel.m; sourceTree = "<group>"; };
 		8DA7E1681CDC6ECD00D5D016 /* TWOBillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOBillViewController.h; sourceTree = "<group>"; };
 		8DA7E1691CDC6ECD00D5D016 /* TWOBillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOBillViewController.m; sourceTree = "<group>"; };
 		8DA7E16B1CDC6F4000D5D016 /* TWONewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWONewViewController.h; sourceTree = "<group>"; };
@@ -3987,6 +3990,8 @@
 				8122C9541D13AC7B00070EAA /* TWOPersonalSetModel.m */,
 				8DA5ABC11D13BCAE00A10467 /* TWOMyAccountModel.h */,
 				8DA5ABC21D13BCAE00A10467 /* TWOMyAccountModel.m */,
+				8DA5ABC41D13F5C600A10467 /* TWOMyMonkeyModel.h */,
+				8DA5ABC51D13F5C600A10467 /* TWOMyMonkeyModel.m */,
 			);
 			path = TWOMineModel;
 			sourceTree = "<group>";
@@ -8393,6 +8398,7 @@
 				8D1DB6071C7EE6F4003CFDA6 /* CastUpMonkeyTableViewCell.m in Sources */,
 				81F237751BE86031009D7A67 /* CashFinishViewController.m in Sources */,
 				8D88D1001BFECCB40051D6DA /* MJRefreshGifHeader.m in Sources */,
+				8DA5ABC61D13F5C600A10467 /* TWOMyMonkeyModel.m in Sources */,
 				8177A01D1CF2E06C0057AA7B /* TWOWinPrizeRecordViewController.m in Sources */,
 				8179EB101CEAEA9300BD7054 /* TWOEmailViewController.m in Sources */,
 				8175BE841BE9CE850044026E /* InvestNoticeViewController.m in Sources */,

@@ -108,13 +108,13 @@
     
     NSLog(@"%@",parameter);
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/product/getProductBuyRecords" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductBuyRecords" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         [self loadingWithHidden:YES];
         
         NSLog(@"%@",responseObject);
         
-        NSArray *array = [responseObject objectForKey:@"Transaction"];
+        NSArray *array = [responseObject objectForKey:@"Record"];
         
         if (array.count == 0) {
             [self noDateWithHeight:100 view:self.view];

@@ -268,9 +268,9 @@
     [view addSubview:noDateView];
     
     UIImageView *noDateImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"noWithData"]];
-    noDateImgV.frame = CGRectMake(0, 0, 58, 58);
+    noDateImgV.frame = CGRectMake(0, 0, 200, 200);
 
-    noDateImgV.center = CGPointMake(view.center.x, 0);
+    noDateImgV.center = CGPointMake(noDateView.center.x, noDateView.center.y - 100);
 
     
     [noDateView addSubview:noDateImgV];
