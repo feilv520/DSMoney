@@ -74,6 +74,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyAccountInfoFuction) name:@"getMyAccountInfo" object:nil];
     
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self tabelViewShow];
@@ -81,7 +83,7 @@
 
 - (void)tabelViewShow
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 53) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 53) style:UITableViewStyleGrouped];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -103,6 +105,8 @@
     
     [_tableView registerNib:[UINib nibWithNibName:@"TWOMineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
+    [self tableViewHeadShow];
+    
     [self arrayShow];
 }
 
@@ -110,13 +114,13 @@
 {
     titleArray = @[@[@"我的理财", @"我的特权本金"], @[@"红包卡券", @"我的猴币", @"我的邀请"]];
     imageArray = @[@[@"我的理财", @"tequanbenjin"], @[@"红包卡券", @"我的猴币", @"myInvite"]];
-    contentArr = @[@[@"0元在投", @"0元"], @[@"2张", @"3000.00猴币", @"邀请好友送星巴克券"]];
+    contentArr = @[@[@"0元在投", @"0元"], @[@"0张", @"0猴币", @"邀请好友送星巴克券"]];
 }
 
 //tableView头部
 - (void)tableViewHeadShow
 {
-    imageBackGround = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 281.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor greenColor] setImage:[UIImage imageNamed:@"我的背景图"]];
+    imageBackGround = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 281.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"我的背景图"]];
     [_tableView.tableHeaderView addSubview:imageBackGround];
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
         imageBackGround.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 295.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
@@ -172,6 +176,9 @@
     
 //    任务中心数字显示
     labelTestShu = [CreatView creatWithLabelFrame:CGRectMake(butTask.frame.size.width - 3, 3, 13, 13) backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:9] text:[DES3Util decrypt:[myAccount taskNum]]];
+    if ([[myAccount taskNum] isEqualToString:@""] || [[myAccount taskNum] isEqualToString:@"0"]) {
+        labelTestShu.hidden = YES;
+    }
     [butTask addSubview:labelTestShu];
     labelTestShu.layer.cornerRadius = 13 / 2;
     labelTestShu.layer.masksToBounds = YES;
@@ -201,7 +208,7 @@
     butFillMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     [butFillMoney addTarget:self action:@selector(buttonFillMoney:) forControlEvents:UIControlEventTouchUpInside];
     
-    viewHateLine = [CreatView creatViewWithFrame:CGRectMake(0, -1, WIDTH_CONTROLLER_DEFAULT, 10) backgroundColor:[UIColor greenColor]];
+    viewHateLine = [CreatView creatViewWithFrame:CGRectMake(0, -1, WIDTH_CONTROLLER_DEFAULT, 10) backgroundColor:[UIColor clearColor]];
     
     UIButton *butHeadImage = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2)) backgroundColor:[UIColor greenColor] textColor:nil titleText:nil];
     [imageBackGround addSubview:butHeadImage];
@@ -408,6 +415,7 @@
             
         } else if (indexPath.row == 2) {
             NewInviteViewController *inviteVC = [[NewInviteViewController alloc] init];
+            inviteVC.inviteCode = [myAccount invitationMyCode];
             [self.navigationController pushViewController:inviteVC animated:YES];
             
         } else {
@@ -730,27 +738,28 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat offSet = scrollView.contentOffset.y;
+//    CGFloat offSet = scrollView.contentOffset.y;
     
-    if (offSet < 0) {
-        
-        imageBackGround.contentMode = UIViewContentModeScaleAspectFill;
-        CGRect frame = imageBackGround.frame;
-        frame.origin.y = offSet;
-        frame.size.height = height - offSet;
-        imageBackGround.frame = frame;
-    }
+//    if (offSet < 0) {
+//        
+//        imageBackGround.contentMode = UIViewContentModeScaleAspectFill;
+//        CGRect frame = imageBackGround.frame;
+//        frame.origin.y = offSet;
+//        frame.size.height = height - offSet;
+//        imageBackGround.frame = frame;
+//    }
     
-    if (scrollView.contentOffset.y < -20) {
+    if (scrollView.contentOffset.y < 0) {
         _tableView.scrollEnabled = NO;
     } else {
         _tableView.scrollEnabled = YES;
     }
 }
 
+#pragma mark 我的账户详情
+#pragma mark --------------------------------
+
 - (void)getMyAccountInfoFuction{
-    
-    NSLog(@"123");
     
     NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
@@ -767,9 +776,13 @@
             
             NSMutableArray *newContentArr = [contentArr mutableCopy];
             NSMutableArray *contentArray = [NSMutableArray array];
-            [contentArray addObject:[NSString stringWithFormat:@"%@张",[DES3Util decrypt:[myAccount redPacketNum]]]];
+            if ([[myAccount redPacketNum] isEqualToString:@""] || [[myAccount redPacketNum] isEqualToString:@"0"]) {
+                [contentArray addObject:[NSString stringWithFormat:@"0张"]];
+            } else {
+                [contentArray addObject:[NSString stringWithFormat:@"%@张",[DES3Util decrypt:[myAccount redPacketNum]]]];
+            }
             [contentArray addObject:[NSString stringWithFormat:@"%@猴币",[DES3Util decrypt:[myAccount monkeyNum]]]];
-            [contentArray addObject:[DES3Util decrypt:[myAccount redPacketNum]]];
+            [contentArray addObject:@"邀请好友送星巴克券"];
             [newContentArr replaceObjectAtIndex:1 withObject:contentArray];
             contentArr = newContentArr;
             
@@ -777,6 +790,10 @@
             
             [_tableView reloadData];
 
+            [self loadingWithHidden:YES];
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
      
      

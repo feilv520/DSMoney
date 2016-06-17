@@ -59,10 +59,13 @@
                        [UIColor colorWithRed:180.0 / 225.0 green:228.0 / 225.0 blue:254.0 / 225.0 alpha:1.0],
                        nil];
     
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
+    
     kindsArray = @[@"账户余额", @"在投资金", @"未结算预期收益", @"提现中"];
     moneyArray = @[@"1000.00元", @"10000.00元", @"500.00元", @"1000.00元"];
     
-    [self contentShow];
+    [self getMyAccountInfoFuction];
+
 }
 
 - (void)contentShow
@@ -168,6 +171,40 @@
 {
     [self.pieChartView setTitleText:[kindsArray objectAtIndex:index]];
     [self.pieChartView setAmountText:[moneyArray objectAtIndex:index]];
+}
+
+#pragma mark 我的资产详情
+#pragma mark --------------------------------
+
+- (void)getMyAccountInfoFuction{
+    
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAssetInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"responseObject = %@",responseObject);
+        
+        [self loadingWithHidden:YES];
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            if ([[responseObject objectForKey:@"Asset"] count] == 0) {
+                [self noDateWithHeight:100 view:self.view];
+            } else {
+                [self contentShow];
+            }
+            
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

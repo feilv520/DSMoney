@@ -345,6 +345,8 @@
             
             [indexButton setSelected:YES];
             
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
