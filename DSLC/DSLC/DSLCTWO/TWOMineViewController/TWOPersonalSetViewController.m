@@ -29,6 +29,7 @@
     UITableView *_tableView;
     NSDictionary *userDic;
     NSMutableArray *informationArray;
+    UIButton *indexButton;
 }
 
 @end

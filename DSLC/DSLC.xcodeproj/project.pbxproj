@@ -3985,6 +3985,8 @@
 			children = (
 				8122C9531D13AC7B00070EAA /* TWOPersonalSetModel.h */,
 				8122C9541D13AC7B00070EAA /* TWOPersonalSetModel.m */,
+				8DA5ABC11D13BCAE00A10467 /* TWOMyAccountModel.h */,
+				8DA5ABC21D13BCAE00A10467 /* TWOMyAccountModel.m */,
 			);
 			path = TWOMineModel;
 			sourceTree = "<group>";
