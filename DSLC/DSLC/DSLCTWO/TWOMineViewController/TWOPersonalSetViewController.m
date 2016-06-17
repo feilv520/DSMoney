@@ -236,7 +236,80 @@
 //退出登录按钮方法
 - (void)buttonExitLoginClicked:(UIButton *)button
 {
-    NSLog(@"exit");
+    [self logoutFuction];
+}
+
+#pragma mark 对接退出接口
+#pragma mark --------------------------------
+
+- (void)logoutFuction{
+    NSDictionary *parmeter = @{@"userId":[self.flagDic objectForKey:@"phone"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"logout" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"register = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            
+            if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+                [FileOfManage createWithFile:@"Member.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"1",@"password",
+                                     @"1",@"phone",
+                                     @"",@"key",
+                                     @"",@"id",
+                                     @"",@"userNickname",
+                                     @"",@"avatarImg",
+                                     @"",@"userAccount",
+                                     @"",@"userPhone",
+                                     @"",@"token",
+                                     @"",@"registerTime",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"1",@"password",
+                                     @"1",@"phone",
+                                     @"",@"key",
+                                     @"",@"id",
+                                     @"",@"userNickname",
+                                     @"",@"avatarImg",
+                                     @"",@"userAccount",
+                                     @"",@"userPhone",
+                                     @"",@"token",
+                                     @"",@"registerTime",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                NSLog(@"%@",[responseObject objectForKey:@"token"]);
+            }
+            
+            AppDelegate *app = [[UIApplication sharedApplication] delegate];
+            [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+            
+            [app.tabBarVC setSuppurtGestureTransition:NO];
+            [app.tabBarVC setTabbarViewHidden:NO];
+            [app.tabBarVC setLabelLineHidden:NO];
+            
+            indexButton = app.tabBarVC.tabButtonArray[0];
+            
+            for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+                
+                if (indexButton.tag != tempButton.tag) {
+                    NSLog(@"%ld",(long)tempButton.tag);
+                    [tempButton setSelected:NO];
+                }
+            }
+            
+            [indexButton setSelected:YES];
+            
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

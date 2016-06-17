@@ -146,6 +146,29 @@
             TWOReceiveNumViewController *receiveNum = [[TWOReceiveNumViewController alloc] init];
             receiveNum.phoneString = textFieldPhone.text;
             [self.navigationController pushViewController:receiveNum animated:YES];
+            [self sendToMessage];
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+- (void)sendToMessage{
+    NSDictionary *parmeter = @{@"phone":textFieldPhone.text,@"msgType":@"1"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"three/getSmsCode" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getSmsCode = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@302]){
+            TWOReceiveNumViewController *receiveNum = [[TWOReceiveNumViewController alloc] init];
+            receiveNum.phoneString = textFieldPhone.text;
+            [self.navigationController pushViewController:receiveNum animated:YES];
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }

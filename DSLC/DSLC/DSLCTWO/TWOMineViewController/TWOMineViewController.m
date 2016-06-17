@@ -22,6 +22,7 @@
 #import "TWOLoginAPPViewController.h"
 #import "TWOMoneyMoreFinishViewController.h"
 #import "TWORedBagViewController.h"
+#import "TWOMyAccountModel.h"
 
 @interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIImagePickerControllerDelegate>
 
@@ -50,6 +51,9 @@
     
     UILabel *labelMoneyZhong;
     UILabel *labelTeQuan;
+    
+    //详情model
+    TWOMyAccountModel *myAccount;
 }
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -67,6 +71,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyAccountInfoFuction) name:@"getMyAccountInfo" object:nil];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -94,7 +100,6 @@
         _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 330.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     }
     _tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
-    [self tableViewHeadShow];
     
     [_tableView registerNib:[UINib nibWithNibName:@"TWOMineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
@@ -105,7 +110,7 @@
 {
     titleArray = @[@[@"我的理财", @"我的特权本金"], @[@"红包卡券", @"我的猴币", @"我的邀请"]];
     imageArray = @[@[@"我的理财", @"tequanbenjin"], @[@"红包卡券", @"我的猴币", @"myInvite"]];
-    contentArr = @[@[@"13600元在投", @"300000元"], @[@"2张", @"3000.00猴币", @"邀请好友送星巴克券"]];
+    contentArr = @[@[@"0元在投", @"0元"], @[@"2张", @"3000.00猴币", @"邀请好友送星巴克券"]];
 }
 
 //tableView头部
@@ -166,7 +171,7 @@
     [butTastWen addTarget:self action:@selector(jobCenterButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    任务中心数字显示
-    labelTestShu = [CreatView creatWithLabelFrame:CGRectMake(butTask.frame.size.width - 3, 3, 13, 13) backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:9] text:@"38"];
+    labelTestShu = [CreatView creatWithLabelFrame:CGRectMake(butTask.frame.size.width - 3, 3, 13, 13) backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:9] text:[DES3Util decrypt:[myAccount taskNum]]];
     [butTask addSubview:labelTestShu];
     labelTestShu.layer.cornerRadius = 13 / 2;
     labelTestShu.layer.masksToBounds = YES;
@@ -218,7 +223,7 @@
     buttMoney.backgroundColor = [UIColor clearColor];
     buttMoney.tag = 665;
     
-    NSMutableAttributedString *addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2,273,457.00"]];
+    NSMutableAttributedString *addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount totalMoney]]]];
     NSRange leftrange = NSMakeRange(0, [[addMoneyString string] rangeOfString:@"元"].location);
     [addMoneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:leftrange];
     [addMoneyString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:leftrange];
@@ -262,7 +267,7 @@
     butMoneyYu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     butMoneyYu.tag = 666;
     
-    NSMutableAttributedString *butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2,789,681.00"]];
+    NSMutableAttributedString *butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount accBalance]]]];
     NSRange shuRange = NSMakeRange(0, [[butMoneyStr string] rangeOfString:@"元"].location);
     [butMoneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:shuRange];
     [butMoneyStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:shuRange];
@@ -278,7 +283,7 @@
     butAddMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     butAddMoney.tag = 667;
     
-    NSMutableAttributedString *butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2,909.00"]];
+    NSMutableAttributedString *butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount totalProfit]]]];
     NSRange frontRange = NSMakeRange(0, [[butAddStr string] rangeOfString:@"元"].location);
     [butAddStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:frontRange];
     [butAddStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:frontRange];
@@ -452,10 +457,10 @@
         [self canMakeMoney];
         [self addMoney];
         
-        labelMoneyZhong.text = @"13600元在投";
+        labelMoneyZhong.text = [NSString stringWithFormat:@"%@元在投",[DES3Util decrypt:[myAccount investMoney]]];
         labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         
-        labelTeQuan.text = @"300000元";
+        labelTeQuan.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount prlMoney]]];
         labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         
         [button setImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateNormal];
@@ -467,7 +472,7 @@
 //总资产方法
 - (void)zongMoney
 {
-    NSMutableAttributedString *addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2,273,457.00"]];
+    NSMutableAttributedString *addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount totalMoney]]]];
     NSRange leftrange = NSMakeRange(0, [[addMoneyString string] rangeOfString:@"元"].location);
     [addMoneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:leftrange];
     [addMoneyString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:leftrange];
@@ -486,7 +491,7 @@
 //可用余额
 - (void)canMakeMoney
 {
-    NSMutableAttributedString *butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2,789,681.00"]];
+    NSMutableAttributedString *butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount accBalance]]]];
     NSRange shuRange = NSMakeRange(0, [[butMoneyStr string] rangeOfString:@"元"].location);
     [butMoneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:shuRange];
     [butMoneyStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:shuRange];
@@ -499,7 +504,7 @@
 //累计收益
 - (void)addMoney
 {
-    NSMutableAttributedString *butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"2,909.00"]];
+    NSMutableAttributedString *butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount totalProfit]]]];
     NSRange frontRange = NSMakeRange(0, [[butAddStr string] rangeOfString:@"元"].location);
     [butAddStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:frontRange];
     [butAddStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:frontRange];
@@ -742,6 +747,61 @@
         _tableView.scrollEnabled = YES;
     }
 }
+
+- (void)getMyAccountInfoFuction{
+    
+    NSLog(@"123");
+    
+    NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getSmsCode = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqual:@"200"]) {
+            
+            myAccount = [[TWOMyAccountModel alloc] init];
+            [myAccount setValuesForKeysWithDictionary:responseObject];
+            
+            NSMutableArray *newContentArr = [contentArr mutableCopy];
+            NSMutableArray *contentArray = [NSMutableArray array];
+            [contentArray addObject:[NSString stringWithFormat:@"%@张",[DES3Util decrypt:[myAccount redPacketNum]]]];
+            [contentArray addObject:[NSString stringWithFormat:@"%@猴币",[DES3Util decrypt:[myAccount monkeyNum]]]];
+            [contentArray addObject:[DES3Util decrypt:[myAccount redPacketNum]]];
+            [newContentArr replaceObjectAtIndex:1 withObject:contentArray];
+            contentArr = newContentArr;
+            
+            [self tableViewHeadShow];
+            
+            [_tableView reloadData];
+
+        }
+     
+     
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+//pwd/updateUserLoginPwd
+//- (void)aaa{
+//    NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+//    
+//    NSDictionary *parmeter = @{@"newPwd":@"a123123",@"token":[memberDic objectForKey:@"token"]};
+//    
+//    [[MyAfHTTPClient sharedClient] postWithURLString:@"pwd/updateUserLoginPwd" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+//        
+//        NSLog(@"getSmsCode = %@",responseObject);
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        
+//        NSLog(@"%@", error);
+//        
+//    }];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
