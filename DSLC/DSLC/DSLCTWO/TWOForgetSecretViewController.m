@@ -110,8 +110,11 @@
 //下一步按钮
 - (void)nextOneStepButton:(UIButton *)button
 {
-    TWOForgetSecretERViewController *twoForgetVC = [[TWOForgetSecretERViewController alloc] init];
-    [self.navigationController pushViewController:twoForgetVC animated:YES];
+    [self.view endEditing:YES];
+    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"找回密码成功"];
+    
+    NSArray *viewControllers = [self.navigationController viewControllers];
+    [self.navigationController popToViewController:[viewControllers objectAtIndex:0] animated:YES];
 }
 
 //左上角x按钮

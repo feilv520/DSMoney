@@ -9,6 +9,7 @@
 #import "TWOForgetSecretERViewController.h"
 #import "AppDelegate.h"
 #import "define.h"
+#import "TWOForgetSecretViewController.h"
 
 @interface TWOForgetSecretERViewController ()
 
@@ -124,11 +125,8 @@
 //下一步按钮
 - (void)clickedNextOneStep:(UIButton *)button
 {
-    [self.view endEditing:YES];
-    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"找回密码成功"];
-    
-    NSArray *viewControllers = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewControllers objectAtIndex:0] animated:YES];
+    TWOForgetSecretViewController *twoForgetVC = [[TWOForgetSecretViewController alloc] init];
+    [self.navigationController pushViewController:twoForgetVC animated:YES];
 }
 
 //左上角x按钮

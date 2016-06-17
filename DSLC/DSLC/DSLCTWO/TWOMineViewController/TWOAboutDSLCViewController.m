@@ -113,7 +113,6 @@
         cell.labelTitle.text = [oneArray objectAtIndex:indexPath.row];
         cell.imageRight.image = [UIImage imageNamed:@"righticon"];
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     } else {
@@ -131,7 +130,6 @@
             cell.labelState.textColor = [UIColor orangecolor];
         }
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 }
@@ -157,6 +155,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
 //            帮助中心
@@ -209,6 +209,17 @@
     viewTanKuang.center = app.tabBarVC.view.center;
     viewTanKuang.layer.cornerRadius = 5;
     viewTanKuang.layer.masksToBounds = YES;
+    
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.5;
+    
+    NSMutableArray *values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    [viewTanKuang.layer addAnimation:animation forKey:nil];
     
     CGFloat viewWidth = viewTanKuang.frame.size.width;
     

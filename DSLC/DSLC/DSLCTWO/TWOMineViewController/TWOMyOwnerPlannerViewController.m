@@ -134,7 +134,6 @@
         cell.labelContent.textColor = [UIColor orangecolor];
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

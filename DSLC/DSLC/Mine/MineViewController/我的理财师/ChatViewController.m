@@ -130,7 +130,7 @@
 - (void)importWindow
 {
     viewImport = [CreatView creatViewWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 20 - 50, WIDTH_CONTROLLER_DEFAULT, 50) backgroundColor:[UIColor whiteColor]];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.tabBarVC.view addSubview:viewImport];
     
     _textField = [CreatView creatWithfFrame:CGRectMake(15, 10, WIDTH_CONTROLLER_DEFAULT - 100, 30) setPlaceholder:nil setTintColor:[UIColor grayColor]];
@@ -210,57 +210,56 @@
 //获取消息列表
 - (void)getDataList
 {
-    
-    NSDictionary *parameter = @{@"sendUserId":self.IId, @"msgType":@0, @"token":[dic objectForKey:@"token"]};
-    NSLog(@"%@", parameter);
-
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
-        NSLog(@"咨询详情:111&&&1111%@", responseObject);
-        
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            
-            [self loadingWithHidden:YES];
-            _tableView.hidden = NO;
-            
-            NSLog(@"hhhhhh");
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
-            
-            NSMutableArray *dataArr = [responseObject objectForKey:@"Msg"];
-            for (NSDictionary *dataDic in dataArr) {
-                
-                chat = [[Chat alloc] init];
-                [chat setValuesForKeysWithDictionary:dataDic];
-                [chatArray addObject:chat];
-                
-                NSDictionary *dicF = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
-                
-                rect = [[chat msgText] boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dicF context:nil];
-                
-                heightSum += rect.size.height;
-            }
-
-            [self importWindow];
-            [self tableViewShow];
-            
-        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
-                [FileOfManage createWithFile:@"isLogin.plist"];
-                NSDictionary *dicL = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-                [dicL writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-            } else {
-                NSDictionary *dicL = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-                [dicL writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-            }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
-            [self.navigationController popToRootViewControllerAnimated:NO];
-            return ;
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-    }];
+//    NSDictionary *parameter = @{@"sendUserId":self.IId, @"msgType":@0, @"token":[dic objectForKey:@"token"]};
+//    NSLog(@"%@", parameter);
+//
+//    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+//        
+//        NSLog(@"咨询详情:111&&&1111%@", responseObject);
+//        
+//        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+//            
+//            [self loadingWithHidden:YES];
+//            _tableView.hidden = NO;
+//            
+//            NSLog(@"hhhhhh");
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
+//            
+//            NSMutableArray *dataArr = [responseObject objectForKey:@"Msg"];
+//            for (NSDictionary *dataDic in dataArr) {
+//                
+//                chat = [[Chat alloc] init];
+//                [chat setValuesForKeysWithDictionary:dataDic];
+//                [chatArray addObject:chat];
+//                
+//                NSDictionary *dicF = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
+//                
+//                rect = [[chat msgText] boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dicF context:nil];
+//                
+//                heightSum += rect.size.height;
+//            }
+//
+//            [self importWindow];
+//            [self tableViewShow];
+//            
+//        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]] || responseObject == nil) {
+//            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+//            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+//                [FileOfManage createWithFile:@"isLogin.plist"];
+//                NSDictionary *dicL = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+//                [dicL writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+//            } else {
+//                NSDictionary *dicL = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+//                [dicL writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+//            }
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"beforeWithView" object:@"MCM"];
+//            [self.navigationController popToRootViewControllerAnimated:NO];
+//            return ;
+//        }
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"%@", error);
+//    }];
 }
 
 //textField绑定的点击方法

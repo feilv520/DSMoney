@@ -111,6 +111,7 @@
 		8122013D1CE5DDDA00159A74 /* renzheng@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8122013B1CE5DDDA00159A74 /* renzheng@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8122C9511D12A91600070EAA /* 热卖@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8122C94F1D12A91600070EAA /* 热卖@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8122C9521D12A91600070EAA /* 热卖@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8122C9501D12A91600070EAA /* 热卖@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8122C9551D13AC7B00070EAA /* TWOPersonalSetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8122C9541D13AC7B00070EAA /* TWOPersonalSetModel.m */; settings = {ASSET_TAGS = (); }; };
 		812F6BE81BD8DDE10000D8E9 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BE71BD8DDE10000D8E9 /* BindingPhoneViewController.m */; };
 		812F6BEB1BD8ED240000D8E9 /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BEA1BD8ED240000D8E9 /* PhoneViewController.m */; };
 		812F6BEE1BD8ED310000D8E9 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BED1BD8ED310000D8E9 /* MessageViewController.m */; };
@@ -1612,6 +1613,8 @@
 		8122013B1CE5DDDA00159A74 /* renzheng@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "renzheng@3x.png"; sourceTree = "<group>"; };
 		8122C94F1D12A91600070EAA /* 热卖@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "热卖@2x.png"; sourceTree = "<group>"; };
 		8122C9501D12A91600070EAA /* 热卖@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "热卖@3x.png"; sourceTree = "<group>"; };
+		8122C9531D13AC7B00070EAA /* TWOPersonalSetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOPersonalSetModel.h; sourceTree = "<group>"; };
+		8122C9541D13AC7B00070EAA /* TWOPersonalSetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOPersonalSetModel.m; sourceTree = "<group>"; };
 		812F6BE61BD8DDE10000D8E9 /* BindingPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingPhoneViewController.h; sourceTree = "<group>"; };
 		812F6BE71BD8DDE10000D8E9 /* BindingPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingPhoneViewController.m; sourceTree = "<group>"; };
 		812F6BE91BD8ED240000D8E9 /* PhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneViewController.h; sourceTree = "<group>"; };
@@ -3977,6 +3980,8 @@
 		8143FCE91CD9C4E300B65A2F /* TWOMineModel */ = {
 			isa = PBXGroup;
 			children = (
+				8122C9531D13AC7B00070EAA /* TWOPersonalSetModel.h */,
+				8122C9541D13AC7B00070EAA /* TWOPersonalSetModel.m */,
 			);
 			path = TWOMineModel;
 			sourceTree = "<group>";
@@ -8586,6 +8591,7 @@
 				812201291CE5B65700159A74 /* TWOMonkeyRecordCell.m in Sources */,
 				8D3942EF1C2D14B200783FD0 /* WelcomeViewController.m in Sources */,
 				81CBE7F31CEAC7A4004FE1D4 /* TWOImputPhoneNumCell.m in Sources */,
+				8122C9551D13AC7B00070EAA /* TWOPersonalSetModel.m in Sources */,
 				8162D11D1BE1BCC900CACAB6 /* XinXiCell.m in Sources */,
 				8D840C4C1CE30394005A17F9 /* TWORecordViewController.m in Sources */,
 				8143FD021CD9D28C00B65A2F /* TWOYaoYiYaoViewController.m in Sources */,

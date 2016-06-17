@@ -72,12 +72,12 @@
         cell.labelName.hidden = YES;
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ChatViewController *chatVC = [[ChatViewController alloc] init];
     pushVC(chatVC);
 }

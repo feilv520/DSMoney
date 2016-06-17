@@ -95,8 +95,6 @@
         cell.imageRight.image = [UIImage imageNamed:@"arrow"];
         cell.labelTitle.text = @"修改手势密码";
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
         return cell;
     }
 }
@@ -106,8 +104,9 @@
     return 56;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 1) {
         
         TWOFixHandViewController *fixHandVC = [[TWOFixHandViewController alloc] init];

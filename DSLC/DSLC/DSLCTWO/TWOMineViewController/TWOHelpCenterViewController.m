@@ -62,7 +62,6 @@
     cell.labelTitle.text = [titleArray objectAtIndex:indexPath.row];
     cell.imageRight.image = [UIImage imageNamed:@"righticon"];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -73,6 +72,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         NewHandViewController *newHandVC = [[NewHandViewController alloc] init];
         pushVC(newHandVC);

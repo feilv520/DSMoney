@@ -21,11 +21,14 @@
 #import "TWOMyClientViewController.h"
 #import "TWOAddressManageViewController.h"
 #import "TWOAddressAlreadySetViewController.h"
+#import "TWOPersonalSetModel.h"
 
 @interface TWOPersonalSetViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 {
     UITableView *_tableView;
+    NSDictionary *userDic;
+    NSMutableArray *informationArray;
 }
 
 @end
@@ -47,7 +50,9 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"账户设置"];
+    informationArray = [NSMutableArray array];
     
+    [self getDataInformation];
     [self tableViewShow];
 }
 
@@ -98,6 +103,7 @@
     cell.imageRight.image = [UIImage imageNamed:@"righticon"];
     
     if (indexPath.section == 1) {
+        
         cell.labelStates.hidden = YES;
         cell.imagePic.hidden = YES;
         
@@ -110,9 +116,17 @@
             cell.imagePic.hidden = YES;
             
             if (indexPath.row == 0) {
-                cell.imagePic.hidden = NO;
-                cell.labelStates.text = @"已绑定";
-                cell.imagePic.image = [UIImage imageNamed:@"bangding"];
+                
+//                是否绑卡判断
+                if ([[userDic objectForKey:@"hasBankCard"] isEqualToNumber:[NSNumber numberWithInteger:0]]) {
+                    cell.labelStates.text = @"未绑定";
+                    cell.imagePic.hidden = YES;
+                } else {
+                    cell.labelStates.text = @"已绑定";
+                    cell.imagePic.hidden = NO;
+                    cell.imagePic.image = [UIImage imageNamed:@"bangding"];
+                }
+                
             } else if (indexPath.row == 1) {
                 cell.imagePic.hidden = NO;
                 cell.labelStates.text = @"已认证";
@@ -127,7 +141,6 @@
         }
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -152,6 +165,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
 //            添加银行卡页面
@@ -205,12 +219,12 @@
 //            pushVC(myOwnerPlanner);
             
 //            理财师列表页
-//            TWOFinancialPlannerListViewController *financialPlannerVC = [[TWOFinancialPlannerListViewController alloc] init];
-//            pushVC(financialPlannerVC);
+            TWOFinancialPlannerListViewController *financialPlannerVC = [[TWOFinancialPlannerListViewController alloc] init];
+            pushVC(financialPlannerVC);
             
 //            我的客户列表
-            TWOMyClientViewController *myClientVC = [[TWOMyClientViewController alloc] init];
-            pushVC(myClientVC);
+//            TWOMyClientViewController *myClientVC = [[TWOMyClientViewController alloc] init];
+//            pushVC(myClientVC);
         } else {
 //            关于大圣理财
             TWOAboutDSLCViewController *aboutDSLC = [[TWOAboutDSLCViewController alloc] init];
@@ -232,6 +246,28 @@
     } else {
         _tableView.scrollEnabled = YES;
     }
+}
+
+- (void)getDataInformation
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"账户设置>>>>>>>>>%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            userDic = [responseObject objectForKey:@"User"];
+            TWOPersonalSetModel *personalModel = [[TWOPersonalSetModel alloc] init];
+            [personalModel setValuesForKeysWithDictionary:userDic];
+            [_tableView reloadData];
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"账户设置>>>>>>>>>%@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

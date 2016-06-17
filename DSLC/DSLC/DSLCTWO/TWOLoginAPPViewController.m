@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "TWORegisterViewController.h"
 #import "TWOForgetSecretViewController.h"
+#import "TWOForgetSecretERViewController.h"
 
 @interface TWOLoginAPPViewController () <UIScrollViewDelegate, UITextFieldDelegate>
 
@@ -355,8 +356,8 @@
 - (void)buttonClickedForget:(UIButton *)button
 {
     [self scrollviewContentOffSet];
-    TWOForgetSecretViewController *forgetVC = [[TWOForgetSecretViewController alloc] init];
-    [self.navigationController pushViewController:forgetVC animated:YES];
+    TWOForgetSecretERViewController *forgetSVC = [[TWOForgetSecretERViewController alloc] init];
+    [self.navigationController pushViewController:forgetSVC animated:YES];
 }
 
 //快速注册

@@ -69,7 +69,6 @@
         cell.labelStates.textColor = [UIColor profitColor];
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -80,6 +79,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
 //        如未设置登录 跳转设置登录密码
 //        TWOSetDealSecretViewController *setDealSecret = [[TWOSetDealSecretViewController alloc] init];

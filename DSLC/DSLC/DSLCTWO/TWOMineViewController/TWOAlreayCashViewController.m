@@ -10,6 +10,7 @@
 #import "TWOProfitingEveryCell.h"
 #import "TWOBottomMoneyDetailViewController.h"
 #import "TWOMoneyGoWhereCell.h"
+#import "TWOProductDDetailViewController.h"
 
 @interface TWOAlreayCashViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -164,7 +165,6 @@
             cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         }
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     } else {
@@ -226,8 +226,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        
-        TWOBottomMoneyDetailViewController *bottomMoneyDetaiVC = [[TWOBottomMoneyDetailViewController alloc] init];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        TWOProductDDetailViewController *bottomMoneyDetaiVC = [[TWOProductDDetailViewController alloc] init];
         pushVC(bottomMoneyDetaiVC);
     }
 }

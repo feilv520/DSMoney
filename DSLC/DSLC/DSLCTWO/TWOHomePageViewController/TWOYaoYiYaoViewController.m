@@ -115,6 +115,9 @@
 //    摇动的图片
     imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
     [imageBack addSubview:imageHandYao];
+    imageHandYao.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapYaoYiYao:)];
+    [imageHandYao addGestureRecognizer:tap];
     
 //    显示还有几次摇动机会的背景图
     imageYellow = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 380.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 71.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yellow"]];
@@ -267,6 +270,23 @@
     viewBottom = nil;
 }
 
+- (void)tapYaoYiYao:(UITapGestureRecognizer *)tap
+{
+    momAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+//    改变摇动的幅度
+    momAnimation.fromValue = [NSNumber numberWithFloat:-0.3];
+    momAnimation.toValue = [NSNumber numberWithFloat:0.3];
+//    改变摇动的速度
+    momAnimation.duration = 0.5;
+//    控制摇摆的时间
+    momAnimation.repeatDuration = 1.7;
+    momAnimation.autoreverses = YES;
+    momAnimation.delegate = self;
+    [imageHandYao.layer addAnimation:momAnimation forKey:@"animateLayer"];
+    imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
+    imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+}
+
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
 //    开始摇动
@@ -283,6 +303,9 @@
     momAnimation.autoreverses = YES;
     momAnimation.delegate = self;
     [imageHandYao.layer addAnimation:momAnimation forKey:@"animateLayer"];
+    imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
+    imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
+    imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
 }
 
 - (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event

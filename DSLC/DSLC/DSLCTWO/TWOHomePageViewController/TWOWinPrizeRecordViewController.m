@@ -99,12 +99,12 @@
     [percentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:rightRange];
     [cell.labelPrize setAttributedText:percentString];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     TWORedBagViewController *redBageVC = [[TWORedBagViewController alloc] init];
     pushVC(redBageVC);
 }

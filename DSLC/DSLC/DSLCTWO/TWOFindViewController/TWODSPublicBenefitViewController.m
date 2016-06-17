@@ -70,7 +70,6 @@
     [cell.buttonSee setTitleColor:[UIColor findZiTiColor] forState:UIControlStateNormal];
     
     cell.backgroundColor = [UIColor qianhuise];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -81,6 +80,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     TWOPublicDetailViewController *publicDetail = [[TWOPublicDetailViewController alloc] init];
     pushVC(publicDetail);
 }

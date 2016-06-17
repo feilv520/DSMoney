@@ -68,12 +68,12 @@
     cell.labelInviteCode.text = [NSString stringWithFormat:@"邀请码 %@", @"918734917"];
     cell.labelInviteCode.textColor = [UIColor profitColor];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ChatViewController *chatVC = [[ChatViewController alloc] init];
     pushVC(chatVC);
 }
