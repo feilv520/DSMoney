@@ -71,12 +71,30 @@
     if (_textView.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入地址"];
     } else {
+        [self setAddressData];
         TWOAddressAlreadySetViewController *addressSetVC = [[TWOAddressAlreadySetViewController alloc] init];
         addressSetVC.numberNo = 0;
         addressSetVC.addressString = _textView.text;
         pushVC(addressSetVC);
         [self.view endEditing:YES];
     }
+}
+
+- (void)setAddressData
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"], @"address":_textView.text};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/saveAddress" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"设置地址=========%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

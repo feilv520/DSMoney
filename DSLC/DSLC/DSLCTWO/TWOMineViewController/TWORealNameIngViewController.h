@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWORealNameIngViewController : BaseViewController
-
+@property (nonatomic) NSString *name;
 @end

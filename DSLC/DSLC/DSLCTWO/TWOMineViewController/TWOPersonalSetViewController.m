@@ -30,6 +30,7 @@
     NSDictionary *userDic;
     NSMutableArray *informationArray;
     UIButton *indexButton;
+    TWOPersonalSetModel *personalModel;
 }
 
 @end
@@ -53,8 +54,15 @@
     [self.navigationItem setTitle:@"账户设置"];
     informationArray = [NSMutableArray array];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsnotice:) name:@"reload" object:nil];
+    
     [self getDataInformation];
     [self tableViewShow];
+}
+
+- (void)nsnotice:(NSNotification *)notice
+{
+    [self getDataInformation];
 }
 
 - (void)tableViewShow
@@ -119,23 +127,47 @@
             if (indexPath.row == 0) {
                 
 //                是否绑卡判断
-                if ([[userDic objectForKey:@"hasBankCard"] isEqualToNumber:[NSNumber numberWithInteger:0]]) {
-                    cell.labelStates.text = @"未绑定";
-                    cell.imagePic.hidden = YES;
-                } else {
+                if ([[[personalModel hasBankCard] description] isEqualToString:@"2"]) {
                     cell.labelStates.text = @"已绑定";
+                    cell.labelStates.textColor = [UIColor findZiTiColor];
                     cell.imagePic.hidden = NO;
                     cell.imagePic.image = [UIImage imageNamed:@"bangding"];
+                } else {
+                    cell.labelStates.text = @"未绑定";
+                    cell.labelStates.textColor = [UIColor profitColor];
+                    cell.imagePic.hidden = YES;
                 }
                 
             } else if (indexPath.row == 1) {
-                cell.imagePic.hidden = NO;
-                cell.labelStates.text = @"已认证";
-                cell.imagePic.image = [UIImage imageNamed:@"renzheng"];
+                
+//                是否实名认证
+                if ([[[personalModel realNameStatus] description] isEqualToString:@"2"]) {
+                    cell.labelStates.text = @"已认证";
+                    cell.labelStates.textColor = [UIColor findZiTiColor];
+                    cell.imagePic.hidden = NO;
+                    cell.imagePic.image = [UIImage imageNamed:@"renzheng"];
+                } else {
+                    cell.labelStates.text = @"未认证";
+                    cell.labelStates.textColor = [UIColor profitColor];
+                    cell.imagePic.hidden = YES;
+                }
+                
             } else if (indexPath.row == 2) {
-                cell.labelStates.text = @"159****2599";
+                
+                NSString *phoneString = [personalModel userPhone];
+                cell.labelStates.text = [phoneString stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+                
             } else if (indexPath.row == 3) {
-                cell.labelStates.text = @"1032865506@qq.com";
+                
+//                是否绑定邮箱
+                if ([[[personalModel emailStatus] description] isEqualToString:@"2"]) {
+                    cell.labelStates.text = [personalModel userEmail];
+                    cell.imageRight.hidden = YES;
+                } else {
+                    cell.imageRight.hidden = NO;
+                    cell.labelStates.text = @"未绑定";
+                    cell.labelStates.textColor = [UIColor profitColor];
+                }
             } else if (indexPath.row == 5) {
                 cell.labelStates.hidden = YES;
             }
@@ -169,22 +201,29 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-//            添加银行卡页面
-//            TWOAddBankCardViewController *addBankCardVC = [[TWOAddBankCardViewController alloc] init];
-//            [self.navigationController pushViewController:addBankCardVC animated:YES];
             
+            if ([[[personalModel hasBankCard] description] isEqualToString:@"2"]) {
 //            已经绑卡页面
-            TWOAlreadyBankCardViewController *alreadyBankCard = [[TWOAlreadyBankCardViewController alloc] init];
-            [self.navigationController pushViewController:alreadyBankCard animated:YES];
+                TWOAlreadyBankCardViewController *alreadyBankCard = [[TWOAlreadyBankCardViewController alloc] init];
+                [self.navigationController pushViewController:alreadyBankCard animated:YES];
+            } else {
+//            添加银行卡页面
+                TWOAddBankCardViewController *addBankCardVC = [[TWOAddBankCardViewController alloc] init];
+                [self.navigationController pushViewController:addBankCardVC animated:YES];
+            }
             
         } else if (indexPath.row == 1) {
-//            未实名认证页面
-            TWONoRealNameViewController *noRealNameVC = [[TWONoRealNameViewController alloc] init];
-            [self.navigationController pushViewController:noRealNameVC animated:YES];
             
-//            已经实名认证页面
-//            TWORealNameIngViewController *realNameIng = [[TWORealNameIngViewController alloc] init];
-//            [self.navigationController pushViewController:realNameIng animated:YES];
+            if ([[[personalModel realNameStatus] description] isEqualToString:@"2"]) {
+                //已经实名认证页面
+                TWORealNameIngViewController *realNameIng = [[TWORealNameIngViewController alloc] init];
+                realNameIng.name = [DES3Util decrypt:[personalModel userRealname]];
+                [self.navigationController pushViewController:realNameIng animated:YES];
+            } else {
+                //未实名认证页面
+                TWONoRealNameViewController *noRealNameVC = [[TWONoRealNameViewController alloc] init];
+                [self.navigationController pushViewController:noRealNameVC animated:YES];
+            }
             
         } else if (indexPath.row == 2) {
 //            手机号
@@ -201,17 +240,21 @@
             
 //            安全设置
             TWOSafeSetViewController *safeSetVC = [[TWOSafeSetViewController alloc] init];
+            safeSetVC.setPassWord = [[personalModel isSetPwd] description];
             [self.navigationController pushViewController:safeSetVC animated:YES];
             
         } else {
             
+            if ([[personalModel address] isEqualToString:@""]) {
 //            地址设置
-            TWOAddressManageViewController *addressManager = [[TWOAddressManageViewController alloc] init];
-            pushVC(addressManager);
-            
+                TWOAddressManageViewController *addressManager = [[TWOAddressManageViewController alloc] init];
+                pushVC(addressManager);
+            } else {
 //            已设置页面
-//            TWOAddressAlreadySetViewController *addAlreadySet = [[TWOAddressAlreadySetViewController alloc] init];
-//            pushVC(addAlreadySet);
+                TWOAddressAlreadySetViewController *addAlreadySet = [[TWOAddressAlreadySetViewController alloc] init];
+                addAlreadySet.addressString = [personalModel address];
+                pushVC(addAlreadySet);
+            }
         }
     } else {
         if (indexPath.row == 0) {
@@ -331,7 +374,7 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             userDic = [responseObject objectForKey:@"User"];
-            TWOPersonalSetModel *personalModel = [[TWOPersonalSetModel alloc] init];
+            personalModel = [[TWOPersonalSetModel alloc] init];
             [personalModel setValuesForKeysWithDictionary:userDic];
             [_tableView reloadData];
             

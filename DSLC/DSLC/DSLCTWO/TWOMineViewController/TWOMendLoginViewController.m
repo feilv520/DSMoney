@@ -74,6 +74,7 @@
     cell.textFieldPhone.textColor = [UIColor ZiTiColor];
     cell.textFieldPhone.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.textFieldPhone.tintColor = [UIColor grayColor];
+    cell.textFieldPhone.clearsOnBeginEditing = YES;
     cell.textFieldPhone.tag = 999;
     
     if (indexPath.row == 1) {
@@ -84,6 +85,7 @@
         [cell.buttonEye addTarget:self action:@selector(openEyesOrCloseEyesButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -120,6 +122,12 @@
     TWOChangeLoginFinishViewController *changeFinish = [[TWOChangeLoginFinishViewController alloc] init];
     changeFinish.state = NO;
     [self.navigationController pushViewController:changeFinish animated:YES];
+}
+
+#pragma mark data-----------
+- (void)mendData
+{
+//    NSDictionary *paemeter = @{@"newPwd":}
 }
 
 - (void)didReceiveMemoryWarning {

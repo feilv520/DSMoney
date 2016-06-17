@@ -8,6 +8,7 @@
 
 #import "TWOAlreadyBankCardViewController.h"
 #import "TWOBankCardCell.h"
+#import "TWOBankCardModel.h"
 
 @interface TWOAlreadyBankCardViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -35,6 +36,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"银行卡"];
     
+    [self getDataBankCardList];
     [self tableViewShow];
 }
 
@@ -105,6 +107,30 @@
     } else {
         _tableView.scrollEnabled = YES;
     }
+}
+
+#pragma data
+- (void)getDataBankCardList
+{
+    NSDictionary *parermeter = @{@"curPage":@1, @"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"bankCard/getUserBankCardList" parameters:parermeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"银行卡列表;;;;;;;;%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            NSMutableArray *bankCardArray = [responseObject objectForKey:@"BankCard"];
+            for (NSDictionary *dataDic in bankCardArray) {
+                TWOBankCardModel *bankModel = [[TWOBankCardModel alloc] init];
+                [bankModel setValuesForKeysWithDictionary:dataDic];
+            }
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

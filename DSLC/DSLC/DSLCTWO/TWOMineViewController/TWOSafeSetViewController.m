@@ -65,7 +65,12 @@
     if (indexPath.row == 1) {
         cell.labelStates.hidden = YES;
     } else {
-        cell.labelStates.text = @"设置";
+        
+        if ([self.setPassWord isEqualToString:@"1"]) {
+            cell.labelStates.text = @"修改";
+        } else {
+            cell.labelStates.text = @"设置";
+        }
         cell.labelStates.textColor = [UIColor profitColor];
     }
     
@@ -81,13 +86,17 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
-//        如未设置登录 跳转设置登录密码
-//        TWOSetDealSecretViewController *setDealSecret = [[TWOSetDealSecretViewController alloc] init];
-//        [self.navigationController pushViewController:setDealSecret animated:YES];
         
-//        如已设置登录密码 跳转修改登录密码
-        TWOMendLoginViewController *mendLogin = [[TWOMendLoginViewController alloc] init];
-        pushVC(mendLogin);
+        if ([self.setPassWord isEqualToString:@"1"]) {
+            //如已设置登录密码 跳转修改登录密码
+            TWOMendLoginViewController *mendLogin = [[TWOMendLoginViewController alloc] init];
+            pushVC(mendLogin);
+        } else {
+            //如未设置登录 跳转设置登录密码
+            TWOSetDealSecretViewController *setDealSecret = [[TWOSetDealSecretViewController alloc] init];
+            [self.navigationController pushViewController:setDealSecret animated:YES];
+        }
+        
     } else {
         
         TWOHandSettingViewController *handSettingVC = [[TWOHandSettingViewController alloc] init];

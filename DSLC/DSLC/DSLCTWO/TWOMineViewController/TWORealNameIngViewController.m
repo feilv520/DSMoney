@@ -58,8 +58,11 @@
     NSArray *titleArray = @[@"姓名", @"身份证号"];
     cell.labelTitle.text = [titleArray objectAtIndex:indexPath.row];
     
-    NSArray *contentArr = @[@"郭敏", @"320682**********5442"];
-    cell.labelContent.text = [contentArr objectAtIndex:indexPath.row];
+    if (indexPath.row == 0) {
+        cell.labelContent.text = self.name;
+    } else {
+        cell.labelContent.text = @"";
+    }
     
     if (indexPath.row == 0) {
         cell.butState.hidden = NO;

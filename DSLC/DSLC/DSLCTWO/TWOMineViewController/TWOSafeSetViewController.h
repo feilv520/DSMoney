@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOSafeSetViewController : BaseViewController
-
+@property (nonatomic) NSString *setPassWord;
 @end

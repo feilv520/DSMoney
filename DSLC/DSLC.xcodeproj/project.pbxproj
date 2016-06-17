@@ -112,6 +112,7 @@
 		8122C9511D12A91600070EAA /* 热卖@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8122C94F1D12A91600070EAA /* 热卖@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8122C9521D12A91600070EAA /* 热卖@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8122C9501D12A91600070EAA /* 热卖@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8122C9551D13AC7B00070EAA /* TWOPersonalSetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8122C9541D13AC7B00070EAA /* TWOPersonalSetModel.m */; settings = {ASSET_TAGS = (); }; };
+		8122C95A1D13E43F00070EAA /* TWOBankCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8122C9591D13E43F00070EAA /* TWOBankCardModel.m */; settings = {ASSET_TAGS = (); }; };
 		812F6BE81BD8DDE10000D8E9 /* BindingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BE71BD8DDE10000D8E9 /* BindingPhoneViewController.m */; };
 		812F6BEB1BD8ED240000D8E9 /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BEA1BD8ED240000D8E9 /* PhoneViewController.m */; };
 		812F6BEE1BD8ED310000D8E9 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F6BED1BD8ED310000D8E9 /* MessageViewController.m */; };
@@ -1616,6 +1617,8 @@
 		8122C9501D12A91600070EAA /* 热卖@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "热卖@3x.png"; sourceTree = "<group>"; };
 		8122C9531D13AC7B00070EAA /* TWOPersonalSetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOPersonalSetModel.h; sourceTree = "<group>"; };
 		8122C9541D13AC7B00070EAA /* TWOPersonalSetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOPersonalSetModel.m; sourceTree = "<group>"; };
+		8122C9581D13E43F00070EAA /* TWOBankCardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOBankCardModel.h; sourceTree = "<group>"; };
+		8122C9591D13E43F00070EAA /* TWOBankCardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOBankCardModel.m; sourceTree = "<group>"; };
 		812F6BE61BD8DDE10000D8E9 /* BindingPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingPhoneViewController.h; sourceTree = "<group>"; };
 		812F6BE71BD8DDE10000D8E9 /* BindingPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingPhoneViewController.m; sourceTree = "<group>"; };
 		812F6BE91BD8ED240000D8E9 /* PhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneViewController.h; sourceTree = "<group>"; };
@@ -3687,6 +3690,24 @@
 			name = "设置";
 			sourceTree = "<group>";
 		};
+		8122C9561D13E40B00070EAA /* 账户设置 */ = {
+			isa = PBXGroup;
+			children = (
+				8122C9531D13AC7B00070EAA /* TWOPersonalSetModel.h */,
+				8122C9541D13AC7B00070EAA /* TWOPersonalSetModel.m */,
+			);
+			name = "账户设置";
+			sourceTree = "<group>";
+		};
+		8122C9571D13E41F00070EAA /* 银行卡 */ = {
+			isa = PBXGroup;
+			children = (
+				8122C9581D13E43F00070EAA /* TWOBankCardModel.h */,
+				8122C9591D13E43F00070EAA /* TWOBankCardModel.m */,
+			);
+			name = "银行卡";
+			sourceTree = "<group>";
+		};
 		812F6BE51BD8DDAC0000D8E9 /* 绑定手机 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3983,8 +4004,8 @@
 		8143FCE91CD9C4E300B65A2F /* TWOMineModel */ = {
 			isa = PBXGroup;
 			children = (
-				8122C9531D13AC7B00070EAA /* TWOPersonalSetModel.h */,
-				8122C9541D13AC7B00070EAA /* TWOPersonalSetModel.m */,
+				8122C9571D13E41F00070EAA /* 银行卡 */,
+				8122C9561D13E40B00070EAA /* 账户设置 */,
 				8DA5ABC11D13BCAE00A10467 /* TWOMyAccountModel.h */,
 				8DA5ABC21D13BCAE00A10467 /* TWOMyAccountModel.m */,
 			);
@@ -8228,6 +8249,7 @@
 				81B674091BF0A780007CEF51 /* HistoryMemoryCell.m in Sources */,
 				8143FD711CDB18AC00B65A2F /* TWOProductViewController.m in Sources */,
 				8D855A661CE9C48B007A4B22 /* TWOMessageTableViewCell.m in Sources */,
+				8122C95A1D13E43F00070EAA /* TWOBankCardModel.m in Sources */,
 				811F0B0F1BF344EC001F6AA4 /* LiftUpMoneyCheck.m in Sources */,
 				8179882C1BC93DDE007C8C3E /* FixInvestCell.m in Sources */,
 				8D9BE8E71C0EC94D003C67D3 /* YYMemoryCache.m in Sources */,

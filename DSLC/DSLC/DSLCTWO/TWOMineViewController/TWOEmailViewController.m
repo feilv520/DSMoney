@@ -11,6 +11,10 @@
 
 @interface TWOEmailViewController () <UITextFieldDelegate>
 
+{
+    UITextField *textFieldEmail;
+}
+
 @end
 
 @implementation TWOEmailViewController
@@ -37,7 +41,7 @@
     UIImageView *imageSign = [CreatView creatImageViewWithFrame:CGRectMake(21, 17, 22, 22) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"youxiang"]];
     [viewBottom addSubview:imageSign];
     
-    UITextField *textFieldEmail = [CreatView creatWithfFrame:CGRectMake(59, 10, WIDTH_CONTROLLER_DEFAULT - 59 - 21, 36) setPlaceholder:@"请输入要绑定邮箱账号" setTintColor:[UIColor grayColor]];
+    textFieldEmail = [CreatView creatWithfFrame:CGRectMake(59, 10, WIDTH_CONTROLLER_DEFAULT - 59 - 21, 36) setPlaceholder:@"请输入要绑定邮箱账号" setTintColor:[UIColor grayColor]];
     [viewBottom addSubview:textFieldEmail];
     textFieldEmail.delegate = self;
     textFieldEmail.textColor = [UIColor ZiTiColor];
@@ -54,8 +58,35 @@
 //下一步按钮
 - (void)buttonNextClicked:(UIButton *)button
 {
-    TWOBindingEmailOverViewController *bindingEmailVC = [[TWOBindingEmailOverViewController alloc] init];
-    [self.navigationController pushViewController:bindingEmailVC animated:YES];
+    [textFieldEmail resignFirstResponder];
+    
+    if ([NSString validateEmail:textFieldEmail.text]) {
+        [self bindingEmailData];
+        TWOBindingEmailOverViewController *bindingEmailVC = [[TWOBindingEmailOverViewController alloc] init];
+        [self.navigationController pushViewController:bindingEmailVC animated:YES];
+    } else {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"邮箱格式不正确,请更正."];
+    }
+}
+
+#pragma data
+- (void)bindingEmailData
+{
+    NSDictionary *parmeter = @{@"email":textFieldEmail.text, @"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"mail/updateUserEmail" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"绑定邮箱aaaaaaaa%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:[responseObject objectForKey:@"resultMsg"]]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
