@@ -100,7 +100,6 @@
         _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 330.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     }
     _tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
-    [self tableViewHeadShow];
     
     [_tableView registerNib:[UINib nibWithNibName:@"TWOMineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
@@ -773,6 +772,8 @@
             [contentArray addObject:[DES3Util decrypt:[myAccount redPacketNum]]];
             [newContentArr replaceObjectAtIndex:1 withObject:contentArray];
             contentArr = newContentArr;
+            
+            [self tableViewHeadShow];
             
             [_tableView reloadData];
 

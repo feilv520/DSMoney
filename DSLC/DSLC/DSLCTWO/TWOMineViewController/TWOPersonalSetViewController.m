@@ -26,6 +26,7 @@
 
 {
     UITableView *_tableView;
+    UIButton *indexButton;
 }
 
 @end
@@ -267,6 +268,26 @@
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
+            
+            AppDelegate *app = [[UIApplication sharedApplication] delegate];
+            [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+            
+            [app.tabBarVC setSuppurtGestureTransition:NO];
+            [app.tabBarVC setTabbarViewHidden:NO];
+            [app.tabBarVC setLabelLineHidden:NO];
+            
+            indexButton = app.tabBarVC.tabButtonArray[0];
+            
+            for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+                
+                if (indexButton.tag != tempButton.tag) {
+                    NSLog(@"%ld",(long)tempButton.tag);
+                    [tempButton setSelected:NO];
+                }
+            }
+            
+            [indexButton setSelected:YES];
+            
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
