@@ -141,7 +141,7 @@
 {
     imageActivit = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 140) backgroundColor:[UIColor whiteColor]];
     _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 152)];
-    _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
+    _tableView.tableHeaderView.backgroundColor = [UIColor huibai];
     [_tableView.tableHeaderView addSubview:imageActivit];
 }
 
@@ -237,6 +237,8 @@
     //        cell.progressView.trackTintColor = [UIColor progressBackColor];
     //        //    设置进度条的进度颜色
     //        cell.progressView.progressTintColor = [UIColor progressColor];
+    
+    cell.labelDetail.text = [[self.productListArray objectAtIndex:indexPath.row] productResume];
     
     cell.backgroundColor = [UIColor huibai];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

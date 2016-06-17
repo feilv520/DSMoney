@@ -28,5 +28,7 @@
 
 @property (nonatomic, copy) NSString *productType;
 
+@property (nonatomic, copy) NSString *productResume;
+
 @end
 

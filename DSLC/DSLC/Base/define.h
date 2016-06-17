@@ -99,8 +99,8 @@ static NSString *kLLPartnerKey = @"gcctdslc20151231_20160101";   // 密钥
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.232:8080/tongjiang/interface/p2p/";
 
 //2.0 测试接口
-//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8083/dslc/interface/";
-static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.75:8080/dslc/interface/";
+static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8083/dslc/interface/";
+//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.75:8080/dslc/interface/";
 
 // 线上接口
 //static NSString * MYAFHTTP_BASEURL = @"http://58.215.161.88/zhongxin/interface/p2p/";

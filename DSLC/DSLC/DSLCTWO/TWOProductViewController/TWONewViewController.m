@@ -191,7 +191,7 @@
             cell.labelDownMid.text = @"剩余可投";
             cell.labelDownRight.text = @"起投资金";
             
-            cell.backgroundColor = [UIColor qianhuise];
+            cell.backgroundColor = [UIColor huibai];
             return cell;
             
         } else {

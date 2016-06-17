@@ -243,6 +243,7 @@
             } completion:^(BOOL finished) {
                 self.window.rootViewController.view.alpha = 1.0;
                 [backgroundImgView removeFromSuperview];
+                
             }];
         }
         

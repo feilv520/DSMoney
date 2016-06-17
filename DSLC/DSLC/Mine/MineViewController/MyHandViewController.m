@@ -276,7 +276,11 @@
                     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                     app.tabBarVC = self.tabBarVC;
                     app.window.rootViewController = self.tabBarVC;
-                    
+                
+//                if ([self.flagUserInfo objectForKey:@"token"] != nil && ![[self.flagUserInfo objectForKey:@"token"] isEqualToString:@""]){
+//                    [self loginFuction];
+//                }
+                
 //                }];
             } else {
                 

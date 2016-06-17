@@ -207,7 +207,7 @@
 //        } else {
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
 //        }
-        if ([memberDic objectForKey:@"token"] == nil) {
+        if ([memberDic objectForKey:@"token"] == nil || [[memberDic objectForKey:@"token"] isEqualToString:@""]) {
             TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
             
             UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
@@ -216,7 +216,9 @@
             [self presentViewController:nvc animated:YES completion:^{
                 
             }];
+            return;
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
     } else {
         indexButton = button;
     }
