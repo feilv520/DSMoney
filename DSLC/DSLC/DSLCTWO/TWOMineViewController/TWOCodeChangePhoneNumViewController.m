@@ -44,9 +44,9 @@
     textFieldCode = [CreatView creatWithfFrame:CGRectMake(59, 13, WIDTH_CONTROLLER_DEFAULT - 42 - 30 , 30) setPlaceholder:@"请输入登录密码" setTintColor:[UIColor grayColor]];
     [viewBottom addSubview:textFieldCode];
     textFieldCode.delegate = self;
+    textFieldCode.secureTextEntry = YES;
     textFieldCode.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     textFieldCode.textColor = [UIColor findZiTiColor];
-    [textFieldCode addTarget:self action:@selector(textFieldValueChange:) forControlEvents:UIControlEventEditingChanged];
     
     UIButton *butNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 56 + 15, WIDTH_CONTROLLER_DEFAULT - 20, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
     [self.view addSubview:butNext];
@@ -56,9 +56,16 @@
     [butNext addTarget:self action:@selector(nextOneStepButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)textFieldValueChange:(UITextField *)textField
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    
+    if (range.location < 20) {
+        
+        return YES;
+        
+    } else {
+        
+        return NO;
+    }
 }
 
 //下一步按钮
@@ -68,9 +75,27 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入登录密码"];
     } else {
         [self.view endEditing:YES];
-        TWOImputNewPhoneNumViewController *imputNumVC = [[TWOImputNewPhoneNumViewController alloc] init];
-        [self.navigationController pushViewController:imputNumVC animated:YES];
+        [self getDataSecret];
     }
+}
+
+#pragma mark data-------------------------
+- (void)getDataSecret
+{
+    NSDictionary *parermeter = @{@"password":textFieldCode.text, @"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"check/checkUserPwd" parameters:parermeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"登录密码更换手机号:------------%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            TWOImputNewPhoneNumViewController *imputNumVC = [[TWOImputNewPhoneNumViewController alloc] init];
+            [self.navigationController pushViewController:imputNumVC animated:YES];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"登录密码更换手机号:------------%@", error);
+    }];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

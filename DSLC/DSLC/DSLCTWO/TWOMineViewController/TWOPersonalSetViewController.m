@@ -228,6 +228,7 @@
         } else if (indexPath.row == 2) {
 //            手机号
             TWOPhoneNumViewController *phoneNumVC = [[TWOPhoneNumViewController alloc] init];
+            phoneNumVC.phoneNum = [personalModel userPhone];
             [self.navigationController pushViewController:phoneNumVC animated:YES];
             
         } else if (indexPath.row == 3) {

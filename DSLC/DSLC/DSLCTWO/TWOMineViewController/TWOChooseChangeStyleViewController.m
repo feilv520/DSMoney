@@ -90,6 +90,7 @@
 - (void)changePhoneNum:(UIButton *)button
 {
     TWOPhoneNumChangeViewController *changeNumVC = [[TWOPhoneNumChangeViewController alloc] init];
+    changeNumVC.phone = self.mobilePhone;
     [self.navigationController pushViewController:changeNumVC animated:YES];
 }
 

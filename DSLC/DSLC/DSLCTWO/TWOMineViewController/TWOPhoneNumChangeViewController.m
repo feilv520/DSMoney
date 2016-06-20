@@ -15,8 +15,10 @@
 
 {
     UITableView *_tableView;
-    UITextField *_textField;
+    UITextField *_textFieldPhone;
     UIButton *butNext;
+    NSInteger seconds;
+    NSTimer *timer;
 }
 
 @end
@@ -30,6 +32,7 @@
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"更换绑定手机号"];
     
+    seconds = 60;
     [self tableViewShow];
 }
 
@@ -75,7 +78,7 @@
         TWOPhoneNumCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
         cell.imagePhone.image = [UIImage imageNamed:@"手机"];
-        cell.labelPhone.text = @"189****7656";
+        cell.labelPhone.text = [self.phone stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -90,27 +93,17 @@
         cell.textFieldCode.delegate = self;
         cell.textFieldCode.tag = 333;
         cell.textFieldCode.keyboardType = UIKeyboardTypeNumberPad;
-        [cell.textFieldCode addTarget:self action:@selector(textFieldValueChangeLight:) forControlEvents:UIControlEventEditingChanged];
         
         cell.butGetCode.layer.cornerRadius = 6;
         cell.butGetCode.layer.masksToBounds = YES;
         cell.butGetCode.layer.borderColor = [[UIColor profitColor] CGColor];
         cell.butGetCode.layer.borderWidth = 1;
+        cell.butGetCode.tag = 678;
         [cell.butGetCode setTitle:@"获取验证码" forState:UIControlStateNormal];
         [cell.butGetCode addTarget:self action:@selector(getCodeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    }
-}
-
-- (void)textFieldValueChangeLight:(UITextField *)textField
-{
-    _textField = (UITextField *)[self.view viewWithTag:333];
-    if (_textField.text.length > 0) {
-        
-    } else {
-        
     }
 }
 
@@ -126,22 +119,102 @@
 //获取验证码按钮
 - (void)getCodeButtonClicked:(UIButton *)button
 {
-    NSLog(@"code");
+    [self getphoneCode];
 }
 
 //下一步按钮
 - (void)buttonNextOneStep:(UIButton *)button
 {
-    _textField = (UITextField *)[self.view viewWithTag:333];
+    _textFieldPhone = (UITextField *)[self.view viewWithTag:333];
     
-    if (_textField.text.length == 0) {
+    if (_textFieldPhone.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
-    } else if (_textField.text.length < 5) {
+    } else if (_textFieldPhone.text.length < 6) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入六位验证码"];
     } else {
         [self.view endEditing:YES];
-        TWOImputNewPhoneNumViewController *imputNumVC = [[TWOImputNewPhoneNumViewController alloc] init];
-        pushVC(imputNumVC);
+        [self nextOneStepData];
+    }
+}
+
+#pragma mark data-----------------------------
+- (void)nextOneStepData
+{
+    _textFieldPhone = (UITextField *)[self.view viewWithTag:333];
+    NSDictionary *parmeter = @{@"phone":self.phone, @"smsCode":_textFieldPhone.text};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"three/checkSmsCode" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"===-------=====%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            TWOImputNewPhoneNumViewController *imputNumVC = [[TWOImputNewPhoneNumViewController alloc] init];
+            pushVC(imputNumVC);
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//获取验证码接口
+- (void)getphoneCode
+{
+    NSLog(@"========%@", self.phone);
+    _textFieldPhone = (UITextField *)[self.view viewWithTag:333];
+    NSDictionary *paremeter = @{@"phone":self.phone, @"msgType":@"2"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"three/getSmsCode" parameters:paremeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"=============%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+// 验证码倒计时
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:678];
+    
+    NSString *title = [NSString stringWithFormat:@"%lds",(long)seconds];
+    
+    if (seconds == 1) {
+        [theTimer invalidate];
+        seconds = 60;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor profitColor].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [button setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+        [button setEnabled:YES];
+    }else{
+        seconds--;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 1.f;
+        button.layer.borderColor = [UIColor orangecolor].CGColor;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        [button setTitleColor:[UIColor orangecolor] forState:UIControlStateNormal];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setEnabled:NO];
+    }
+}
+
+- (void)releaseTImer {
+    if (timer) {
+        if ([timer respondsToSelector:@selector(isValid)]) {
+            if ([timer isValid]) {
+                [timer invalidate];
+                seconds = 60;
+            }
+        }
     }
 }
 

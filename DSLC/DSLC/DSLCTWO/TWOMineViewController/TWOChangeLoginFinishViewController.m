@@ -14,6 +14,12 @@
 
 @implementation TWOChangeLoginFinishViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.imageReturn.hidden = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
