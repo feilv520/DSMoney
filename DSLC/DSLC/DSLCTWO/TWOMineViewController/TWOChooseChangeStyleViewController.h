@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOChooseChangeStyleViewController : BaseViewController
-
+@property (nonatomic) NSString *mobilePhone;
 @end

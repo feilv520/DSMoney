@@ -13,6 +13,8 @@
 #import "TWOAddInterestViewController.h"
 #import "TWOHistoryJiaXiQuanViewController.h"
 #import "TWOWaitCashCell.h"
+#import "TWORedBagModel.h"
+#import "TWOJiaXiQuanModel.h"
 
 @interface TWORedBagViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -22,6 +24,10 @@
     UIButton *butRedBag;
     UIButton *buttonJiaXi;
     UIScrollView *_scrollView;
+    UIButton *butCanUse;
+    NSMutableArray *redBagArray;
+    NSMutableArray *jiaXiQuanArray;
+    TWOJiaXiQuanModel *jiaXiQuanModel;
 }
 
 @end
@@ -40,6 +46,9 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    redBagArray = [NSMutableArray array];
+    jiaXiQuanArray = [NSMutableArray array];
     
     [self navigationTitleShow];
     [self tableViewShow];
@@ -100,7 +109,7 @@
     UIView *viewHead = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 65) backgroundColor:[UIColor whiteColor]];
     [_scrollView addSubview:viewHead];
     
-    UIButton *butCanUse = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 36) backgroundColor:[UIColor redBagBankColor] textColor:[UIColor profitColor] titleText:[NSString stringWithFormat:@"%@张可用红包,去使用>", @"2"]];
+    butCanUse = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 36) backgroundColor:[UIColor redBagBankColor] textColor:[UIColor profitColor] titleText:[NSString stringWithFormat:@"%@张可用红包,去使用>", [NSString stringWithFormat:@"%lu", (unsigned long)redBagArray.count]]];
     [viewHead addSubview:butCanUse];
     butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butCanUse addTarget:self action:@selector(goToUseRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -137,10 +146,10 @@
     UIView *viewHead = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT, 0, WIDTH_CONTROLLER_DEFAULT, 65) backgroundColor:[UIColor whiteColor]];
     [_scrollView addSubview:viewHead];
     
-    UIButton *butCanUse = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 36) backgroundColor:[UIColor redBagBankColor] textColor:[UIColor profitColor] titleText:[NSString stringWithFormat:@"%@张可用加息券, 去使用>", @"2"]];
-    [viewHead addSubview:butCanUse];
-    butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [butCanUse addTarget:self action:@selector(goToUseRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *butCanUseJ = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 36) backgroundColor:[UIColor redBagBankColor] textColor:[UIColor profitColor] titleText:[NSString stringWithFormat:@"%@张可用加息券, 去使用>", [NSString stringWithFormat:@"%lu", (unsigned long)jiaXiQuanArray.count]]];
+    [viewHead addSubview:butCanUseJ];
+    butCanUseJ.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [butCanUseJ addTarget:self action:@selector(goToUseRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
     
     //    红包使用说明按钮
     UIButton *butUseSHuo = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 9 - 84, viewHead.frame.size.height - 16 -5, 84, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"加息券使用说明"];
@@ -174,9 +183,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == _tableView) {
-        return 2;
+        return redBagArray.count;
     } else {
-        return 3;
+        return jiaXiQuanArray.count;
     }
 }
 
@@ -187,13 +196,15 @@
         TWOUseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         cell.imagePicture.image = [UIImage imageNamed:@"twohongbao"];
         
-        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", @"20"]];
+        TWORedBagModel *redBagModel = [redBagArray objectAtIndex:indexPath.row];
+        
+        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", [redBagModel repPacketMoney]]];
         NSRange signRange = NSMakeRange(0, 1);
         [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:signRange];
         [cell.labelMoney setAttributedText:moneyString];
         cell.labelMoney.backgroundColor = [UIColor clearColor];
         
-        NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];
+        NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [redBagModel investMoney]]];
         NSRange leftRange = NSMakeRange(0, 5);
         [useing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:leftRange];
         [useing addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:leftRange];
@@ -206,11 +217,18 @@
         cell.labelEvery.text = @"所有产品适用";
         cell.labelEvery.backgroundColor = [UIColor clearColor];
         
-        cell.labelCanUse.text = @"可\n使\n用";
+        if ([[[redBagModel status] description] isEqualToString:@"0"]) {
+            cell.labelCanUse.text = @"可\n使\n用";
+        } else if ([[[redBagModel status] description] isEqualToString:@"1"]) {
+            cell.labelCanUse.text = @"已\n使\n用";
+        } else if ([[[redBagModel status] description] isEqualToString:@"2"]) {
+            cell.labelCanUse.text = @"已\n失\n效";
+        }
+
         cell.labelCanUse.numberOfLines = 3;
         cell.labelCanUse.backgroundColor = [UIColor clearColor];
         
-        cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
+        cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [redBagModel startDate], [redBagModel endDate]];
         cell.labelData.backgroundColor = [UIColor clearColor];
         
         if (indexPath.row == 2) {
@@ -222,12 +240,14 @@
         
     } else {
         
-        if (indexPath.row == 2) {
+        TWOJiaXiQuanModel *jiaXiModel = [jiaXiQuanArray objectAtIndex:indexPath.row];
+        
+        if ([[[jiaXiModel status] description] isEqualToString:@"1"]) {
             
             TWOWaitCashCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseTWO"];
             cell.imageWait.image = [UIImage imageNamed:@"quanTwo"];
             
-            NSMutableAttributedString *percentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"2"]];
+            NSMutableAttributedString *percentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [jiaXiModel incrMoney]]];
             NSRange qianRange = NSMakeRange(0, [[percentString string] rangeOfString:@"%"].location);
             [percentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:39] range:qianRange];
             [cell.labelPercent setAttributedText:percentString];
@@ -236,7 +256,7 @@
                 cell.labelPercent.textAlignment = NSTextAlignmentLeft;
             }
             
-            NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];
+            NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [jiaXiModel investMoney]]];
             NSRange leftRange = NSMakeRange(0, 5);
             [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:leftRange];
             [moneyString addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:leftRange];
@@ -249,10 +269,10 @@
             cell.labelEvery.text = @"所有产品适用";
             cell.labelEvery.backgroundColor = [UIColor clearColor];
             
-            cell.laeblData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
+            cell.laeblData.text = [NSString stringWithFormat:@"%@至%@有效", [jiaXiModel startDate], [jiaXiModel endDate]];
             cell.laeblData.backgroundColor = [UIColor clearColor];
             
-            NSMutableAttributedString *qianMianString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待兑付金额:%@元", @"20"]];
+            NSMutableAttributedString *qianMianString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待兑付金额:%@元", [jiaXiModel cashMoney]]];
             NSRange qianMianRange = NSMakeRange(0, 6);
             [qianMianString addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:qianMianRange];
             [qianMianString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:qianMianRange];
@@ -262,7 +282,7 @@
             [cell.laeblMoney setAttributedText:qianMianString];
             cell.laeblMoney.backgroundColor = [UIColor clearColor];
             
-            cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:2016-09-09"];
+            cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", [jiaXiModel productDueDate]];
             cell.labelTime.backgroundColor = [UIColor clearColor];
             
             cell.labelShuoMing.text = @"( 到期日后7个工作日内兑付至余额 )";
@@ -280,7 +300,7 @@
             TWOUseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
             cell.imagePicture.image = [UIImage imageNamed:@"jiaxijuan"];
             
-            NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"2"]];
+            NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", jiaXiModel.incrMoney]];
             NSRange signRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"%"].location);
             [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:39] range:signRange];
             NSRange baiRange = NSMakeRange([[moneyString string] length] - 1, 1);
@@ -291,7 +311,7 @@
                 cell.labelMoney.textAlignment = NSTextAlignmentLeft;
             }
             
-            NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];
+            NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [jiaXiModel investMoney]]];
             NSRange leftRange = NSMakeRange(0, 5);
             [useing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:leftRange];
             [useing addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:leftRange];
@@ -308,12 +328,13 @@
             cell.labelCanUse.numberOfLines = 3;
             cell.labelCanUse.backgroundColor = [UIColor clearColor];
             
-            cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
+            cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [jiaXiModel startDate], [jiaXiModel endDate]];
             cell.labelData.backgroundColor = [UIColor clearColor];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
+        
     }
 }
 
@@ -322,9 +343,12 @@
     if (tableView == _tableView) {
         return 140;
     } else {
-        if (indexPath.row == 2) {
+        TWOJiaXiQuanModel *model  = [jiaXiQuanArray objectAtIndex:indexPath.row];
+        if ([[[model status] description] isEqualToString:@"1"]) {
+            NSLog(@"高");
             return 160;
         } else {
+            NSLog(@"低");
             return 140;
         }
     }
@@ -428,7 +452,18 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"getMyRedPacketList = %@",responseObject);
+        NSLog(@"获取红包列表:getMyRedPacketList = %@",responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *redbagArray = [responseObject objectForKey:@"RedPacket"];
+            for (NSDictionary *dataDic in redbagArray) {
+                TWORedBagModel *redBagModel = [[TWORedBagModel alloc] init];
+                [redBagModel setValuesForKeysWithDictionary:dataDic];
+                [redBagArray addObject:redBagModel];
+            }
+            
+            [self redBagViewHeadShow];
+            [_tableView reloadData];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -437,12 +472,24 @@
     }];
 }
 
-- (void)getMyIncreaseListFuction{
-    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+- (void)getMyIncreaseListFuction
+{
+    NSDictionary *parmeter = @{@"curPage":@1 ,@"status":@"0,1" ,@"pageSize":@10 ,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"getMyIncreaseList = %@",responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *dataArray = [responseObject objectForKey:@"Increase"];
+            for (NSDictionary *dataDic in dataArray) {
+                jiaXiQuanModel = [[TWOJiaXiQuanModel alloc] init];
+                [jiaXiQuanModel setValuesForKeysWithDictionary:dataDic];
+                [jiaXiQuanArray addObject:jiaXiQuanModel];
+            }
+            
+            [self jiaxiquanHead];
+            [_tableViewJia reloadData];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

@@ -32,10 +32,10 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N67-uH-Ofc">
-                        <rect key="frame" x="22" y="55" width="73" height="40"/>
+                        <rect key="frame" x="9" y="55" width="121" height="40"/>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="73" id="1ht-ee-0i4"/>
+                            <constraint firstAttribute="width" constant="121" id="1ht-ee-0i4"/>
                             <constraint firstAttribute="height" constant="40" id="I0H-o7-f8f"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="39"/>
@@ -89,13 +89,13 @@
                     <constraint firstItem="Tfc-Pe-e1B" firstAttribute="leading" secondItem="97H-Iu-XfB" secondAttribute="trailing" constant="17" id="1r7-5j-YpX"/>
                     <constraint firstItem="Tfc-Pe-e1B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="3it-8Q-xS4"/>
                     <constraint firstItem="fpg-yU-7Ec" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="99" id="5gG-rR-btZ"/>
-                    <constraint firstItem="N67-uH-Ofc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="14" id="Bkb-uU-sWD"/>
+                    <constraint firstItem="N67-uH-Ofc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="Bkb-uU-sWD"/>
                     <constraint firstAttribute="trailingMargin" secondItem="GRZ-aT-laI" secondAttribute="trailing" constant="1" id="I9W-fX-21P"/>
                     <constraint firstItem="ycg-ZE-QJw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="110" id="Jvs-8Y-Ya8"/>
                     <constraint firstItem="GRZ-aT-laI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="KnH-Dz-AMr"/>
                     <constraint firstItem="97H-Iu-XfB" firstAttribute="top" secondItem="ycg-ZE-QJw" secondAttribute="bottom" constant="10" id="VBd-PE-vY6"/>
                     <constraint firstItem="fpg-yU-7Ec" firstAttribute="top" secondItem="97H-Iu-XfB" secondAttribute="bottom" constant="37" id="W2D-1O-eKG"/>
-                    <constraint firstItem="97H-Iu-XfB" firstAttribute="leading" secondItem="N67-uH-Ofc" secondAttribute="trailing" constant="40" id="dAN-eA-nHy"/>
+                    <constraint firstItem="97H-Iu-XfB" firstAttribute="leading" secondItem="N67-uH-Ofc" secondAttribute="trailing" constant="5" id="dAN-eA-nHy"/>
                     <constraint firstItem="Tfc-Pe-e1B" firstAttribute="leading" secondItem="ycg-ZE-QJw" secondAttribute="trailing" constant="17" id="dB5-14-Sjb"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Tfc-Pe-e1B" secondAttribute="trailing" constant="10" id="fgn-nb-TbV"/>
                     <constraint firstItem="Tfc-Pe-e1B" firstAttribute="leading" secondItem="fpg-yU-7Ec" secondAttribute="trailing" constant="16" id="lpu-dL-iH2"/>
