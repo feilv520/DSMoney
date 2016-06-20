@@ -38,6 +38,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:self.productName];
     
+    [self getUserAssetsInfoFuction];
+    
     [self tableViewShow];
 }
 
@@ -241,6 +243,24 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark 我的理财详情
+#pragma mark --------------------------------
+
+- (void)getUserAssetsInfoFuction{
+    
+    NSDictionary *parmeter = @{@"orderId":self.orderId,@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserAssetsInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getUserAssetsInfo = %@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 /*

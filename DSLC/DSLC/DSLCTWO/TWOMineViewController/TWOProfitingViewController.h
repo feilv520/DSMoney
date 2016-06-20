@@ -9,5 +9,8 @@
 #import "BaseViewController.h"
 
 @interface TWOProfitingViewController : BaseViewController
+
 @property (nonatomic) NSString *productName;
+@property (nonatomic, copy) NSString *orderId;
+
 @end

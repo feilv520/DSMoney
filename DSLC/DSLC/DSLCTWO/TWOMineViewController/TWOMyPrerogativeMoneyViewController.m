@@ -9,11 +9,31 @@
 #import "TWOMyPrerogativeMoneyViewController.h"
 #import "TWOMyPrerogativeMoneyCell.h"
 #import "TWOAskViewController.h"
+#import "TWOMyUserPrivilegeListModel.h"
 
 @interface TWOMyPrerogativeMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 {
     UITableView *_tableView;
+    NSInteger page;
+    BOOL moreFlag;
+    
+    MJRefreshGifHeader *headerT;
+    MJRefreshBackGifFooter *footerT;
+    
+    NSMutableArray *statusOneArray;
+    NSMutableArray *statusTwoArray;
+    
+    //    我的特权本金的钱数
+    UILabel *labelMoney;
+    //    今日收益的钱数
+    UILabel *labelTodayProfit;
+    //    累计收益的钱数
+    UILabel *labelAddProfit;
+    
+    NSString *labelMoneyString;
+    NSString *labelTodayProfitString;
+    NSString *labelAddProfitString;
 }
 
 @end
@@ -33,8 +53,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    page = 1;
+    
+    moreFlag = NO;
+    
+    statusOneArray = [NSMutableArray array];
+    statusTwoArray = [NSMutableArray array];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的特权本金"];
+    
+    [self getUserPrivilegeListFuction];
     
     [self tableViewShow];
 }
@@ -54,6 +83,8 @@
     _tableView.tableFooterView.backgroundColor = [UIColor qianhuise];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOMyPrerogativeMoneyCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
+    [self addTableViewWithFooter:_tableView];
+    
     [self tableViewHeadShow];
 }
 
@@ -64,9 +95,11 @@
     imageViewBack.userInteractionEnabled = YES;
     
 //    我的特权本金的钱数
-    UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(0, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
+    if (labelMoney == nil) {
+        labelMoney = [CreatView creatWithLabelFrame:CGRectMake(0, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
+    }
     [imageViewBack addSubview:labelMoney];
-    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"10,000.00"]];
+    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", labelMoneyString]];
     NSRange moneyRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"元"].location);
     [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:moneyRange];
     [labelMoney setAttributedText:moneyString];
@@ -89,17 +122,21 @@
     [buttonAsk addTarget:self action:@selector(buttonClickedAsk:) forControlEvents:UIControlEventTouchUpInside];
     
 //    今日收益的钱数
-    UILabel *labelTodayProfit = [CreatView creatWithLabelFrame:CGRectMake(13, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 20 + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 26)/2, 24) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
+    if (labelTodayProfit == nil) {
+        labelTodayProfit = [CreatView creatWithLabelFrame:CGRectMake(13, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 20 + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 26)/2, 24) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
+    }
     [imageViewBack addSubview:labelTodayProfit];
-    NSMutableAttributedString *todayString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"5.00"]];
+    NSMutableAttributedString *todayString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", labelTodayProfitString]];
     NSRange todayRange = NSMakeRange(0, [[todayString string] rangeOfString:@"元"].location);
     [todayString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:todayRange];
     [labelTodayProfit setAttributedText:todayString];
     
 //    累计收益的钱数
-    UILabel *labelAddProfit = [CreatView creatWithLabelFrame:CGRectMake(13 + labelTodayProfit.frame.size.width, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 20 + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 26)/2, 24) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
+    if (labelAddProfit == nil) {
+        labelAddProfit = [CreatView creatWithLabelFrame:CGRectMake(13 + labelTodayProfit.frame.size.width, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 20 + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 26)/2, 24) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
+    }
     [imageViewBack addSubview:labelAddProfit];
-    NSMutableAttributedString *addPrifitString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"5000.00"]];
+    NSMutableAttributedString *addPrifitString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", labelAddProfitString]];
     NSRange addPrifitRange = NSMakeRange(0, [[addPrifitString string] rangeOfString:@"元"].location);
     [addPrifitString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:addPrifitRange];
     [labelAddProfit setAttributedText:addPrifitString];
@@ -220,6 +257,69 @@
         _tableView.scrollEnabled = YES;
     }
 }
+
+#pragma mark 判断是否还要加载更多
+#pragma mark --------------------------------
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer{
+    
+    footerT = footer;
+    
+    if (moreFlag) {
+        // 拿到当前的上拉刷新控件，结束刷新状态
+        [footer endRefreshing];
+    } else {
+        page ++;
+        [self getUserPrivilegeListFuction];
+    }
+    
+}
+
+#pragma mark 我的特权本金
+#pragma mark --------------------------------
+
+//获取数据
+- (void)getUserPrivilegeListFuction
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"],@"curPage":[NSNumber numberWithInteger:page],@"pageSize":@"10"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserPrivilegeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"获取猴币详情:~~~~~%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            NSMutableArray *dataArr = [responseObject objectForKey:@"Product"];
+            
+            for (NSDictionary *dataDic in dataArr) {
+                TWOMyUserPrivilegeListModel *model = [[TWOMyUserPrivilegeListModel alloc] init];
+                [model setValuesForKeysWithDictionary:dataDic];
+                
+                if ([[dataDic objectForKey:@"status"] isEqualToString:@"1"]) {
+                    [statusOneArray addObject:model];
+                } else {
+                    [statusTwoArray addObject:model];
+                }
+                
+            }
+            
+            if ([[[responseObject objectForKey:@"currPage"]debugDescription] isEqual:[[responseObject objectForKey:@"totalPage"] debugDescription]]) {
+                moreFlag = YES;
+            }
+            
+            labelMoneyString = [responseObject objectForKey:@"totalMoney"];
+            labelTodayProfitString = [responseObject objectForKey:@"totalTodayMoney"];
+            labelAddProfitString = [responseObject objectForKey:@"totalProfit"];
+            
+            [self tableViewHeadShow];
+            [footerT endRefreshing];
+            [_tableView reloadData];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

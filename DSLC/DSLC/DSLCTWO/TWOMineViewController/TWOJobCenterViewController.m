@@ -35,6 +35,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"任务中心"];
     
+    [self getUserTaskListFuction];
     [self tableViewShow];
 }
 
@@ -157,6 +158,24 @@
         _tableView.scrollEnabled = YES;
     }
 }
+
+#pragma mark 我的猴币详情
+#pragma mark --------------------------------
+
+//获取数据
+- (void)getUserTaskListFuction
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"],};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"task/getUserTaskList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"任务中心详情:~~~~~%@", responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

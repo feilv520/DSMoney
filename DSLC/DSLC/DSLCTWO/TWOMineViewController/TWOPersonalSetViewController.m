@@ -326,6 +326,15 @@
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
             
+            if (![FileOfManage ExistOfFile:@"handOpen.plist"]) {
+                [FileOfManage createWithFile:@"handOpen.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+            }
+            
             AppDelegate *app = [[UIApplication sharedApplication] delegate];
             [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(0, 0) animated:NO];
             

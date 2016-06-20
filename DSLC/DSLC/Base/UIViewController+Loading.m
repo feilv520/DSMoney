@@ -267,11 +267,18 @@
     
     [view addSubview:noDateView];
     
+    NSInteger flagInt = height;
+    
     UIImageView *noDateImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"noWithData"]];
+    
+    NSLog(@"%ld",flagInt);
+    if (flagInt % 100 == 1) {
+        noDateImgV.image = [UIImage imageNamed:@"TWONoPrefit"];
+    }
+    
     noDateImgV.frame = CGRectMake(0, 0, 200, 200);
 
     noDateImgV.center = CGPointMake(noDateView.center.x, noDateView.center.y - 100);
-
     
     [noDateView addSubview:noDateImgV];
     

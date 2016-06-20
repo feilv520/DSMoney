@@ -10,6 +10,7 @@
 #import "TWOProfitGettingCell.h"
 #import "TWOProfitingViewController.h"
 #import "TWOAlreayCashViewController.h"
+#import "TWOUserAssetsListModel.h"
 
 @interface TWOMyTidyMoneyViewController () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -22,6 +23,15 @@
     UIView *viewLineLeft;
     UIButton *buttonCash;
     UIView *viewLineRight;
+    
+    NSString *labelMoneyString;
+    NSString *labelTouZiString;
+    
+    UILabel *labelMoney;
+    UILabel *labelTouZi;
+    
+    NSMutableArray *profitting;
+    NSMutableArray *profitted;
 }
 
 @end
@@ -44,6 +54,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的理财"];
     
+    profitting = [NSMutableArray array];
+    profitted = [NSMutableArray array];
+    
     [self contentShow];
     [self tableViewProfitShow];
     [self tableViewAlredyCashShow];
@@ -60,9 +73,11 @@
     [viewBottom addSubview:imageHead];
     
 //    待收本息的钱数
-    UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
+    if (labelMoney == nil) {
+        labelMoney = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
+    }
     [imageHead addSubview:labelMoney];
-    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"300,000.00"]];
+    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", labelMoneyString]];
     NSRange moneyRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"元"].location);
     [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:36] range:moneyRange];
     [labelMoney setAttributedText:moneyString];
@@ -71,9 +86,11 @@
     [imageHead addSubview:labelWaitGet];
     
 //    投资总额钱数
-    UILabel *labelTouZi = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 5 + labelWaitGet.frame.size.height + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 24) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
+    if (labelTouZi == nil) {
+        labelTouZi = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 5 + labelWaitGet.frame.size.height + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 24) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
+    }
     [imageHead addSubview:labelTouZi];
-    NSMutableAttributedString *touziString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"400,000.00"]];
+    NSMutableAttributedString *touziString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", labelTouZiString]];
     NSRange touziRange = NSMakeRange(0, [[touziString string] rangeOfString:@"元"].location);
     [touziString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:24] range:touziRange];
     [labelTouZi setAttributedText:touziString];
@@ -161,12 +178,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    if (_tableViewProfit == tableView) {
+        return profitting.count;
+    } else {
+        return profitted.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (tableView == _tableViewProfit) {
+        TWOUserAssetsListModel *model = [profitting objectAtIndex:indexPath.row];
         
         TWOProfitGettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
@@ -175,17 +198,17 @@
         cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
         cell.viewBottom.layer.borderWidth = 1;
         
-        cell.labelName.text = @"金斗云054期";
+        cell.labelName.text = [model productName];
         cell.labelName.textColor = [UIColor blackZiTi];
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.labelTime.text = [NSString stringWithFormat:@"%@到期", @"2015-09-10"];
+        cell.labelTime.text = [NSString stringWithFormat:@"%@到期", [model dueDate]];
         cell.labelTime.textColor = [UIColor zitihui];
         cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.labelTouZiMoney.textColor = [UIColor orangecolor];
         cell.labelTouZiMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"200,00.00"]];
+        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[model investMoney]]]];
         NSRange moneyRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"元"].location);
         [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:moneyRange];
         [cell.labelTouZiMoney setAttributedText:moneyString];
@@ -196,7 +219,7 @@
         
         cell.labelProfit.textColor = [UIColor orangecolor];
         cell.labelProfit.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-        NSMutableAttributedString *profitString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"500.00"]];
+        NSMutableAttributedString *profitString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[model exceptedYield]]]];
         NSRange profitRange = NSMakeRange(0, [[profitString string] rangeOfString:@"元"].location);
         [profitString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:profitRange];
         [cell.labelProfit setAttributedText:profitString];
@@ -215,6 +238,8 @@
         
     } else {
         
+        TWOUserAssetsListModel *model = [profitted objectAtIndex:indexPath.row];
+        
         TWOProfitGettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseCash"];
         
         cell.viewBottom.layer.cornerRadius = 5;
@@ -222,17 +247,17 @@
         cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
         cell.viewBottom.layer.borderWidth = 1;
         
-        cell.labelName.text = @"金斗云054期";
+        cell.labelName.text = [model productName];
         cell.labelName.textColor = [UIColor blackZiTi];
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.labelTime.text = [NSString stringWithFormat:@"%@到期", @"2015-09-10"];
+        cell.labelTime.text = [NSString stringWithFormat:@"%@到期", [model dueDate]];
         cell.labelTime.textColor = [UIColor zitihui];
         cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
         cell.labelTouZiMoney.textColor = [UIColor zitihui];
         cell.labelTouZiMoney.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"200,00.00"]];
+        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[model investMoney]]]];
         NSRange moneyRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"元"].location);
         [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:moneyRange];
         [cell.labelTouZiMoney setAttributedText:moneyString];
@@ -243,7 +268,7 @@
         
         cell.labelProfit.textColor = [UIColor zitihui];
         cell.labelProfit.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-        NSMutableAttributedString *profitString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"500.00"]];
+        NSMutableAttributedString *profitString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[model exceptedYield]]]];
         NSRange profitRange = NSMakeRange(0, [[profitString string] rangeOfString:@"元"].location);
         [profitString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:profitRange];
         [cell.labelProfit setAttributedText:profitString];
@@ -271,12 +296,14 @@
         
         TWOProfitingViewController *profitingVC = [[TWOProfitingViewController alloc] init];
         profitingVC.productName = @"金斗云054期";
+        profitingVC.orderId = @"1";
         [self.navigationController pushViewController:profitingVC animated:YES];
         
     } else {
         
         TWOAlreayCashViewController *alreadyCashVC = [[TWOAlreayCashViewController alloc] init];
         alreadyCashVC.productName = @"金斗云054期";
+        alreadyCashVC.orderId = @"1";
         [self.navigationController pushViewController:alreadyCashVC animated:YES];
     }
 }
@@ -364,7 +391,7 @@
     }
 }
 
-#pragma mark 对接接口
+#pragma mark 我的理财列表
 #pragma mark --------------------------------
 
 
@@ -375,6 +402,21 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserAssetsList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"getUserAssetsListOne = %@",responseObject);
+        
+        NSArray *oneArray = [responseObject objectForKey:@"Product"];
+        
+        labelTouZiString = [DES3Util decrypt:[responseObject objectForKey:@"totalInvestMoney"]];
+        labelMoneyString = [DES3Util decrypt:[responseObject objectForKey:@"totalAccrualMoney"]];
+        
+        for (NSDictionary *dic in oneArray) {
+            TWOUserAssetsListModel *model = [[TWOUserAssetsListModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic];
+            [profitting addObject:model];
+        }
+        
+        [self contentShow];
+        
+        [_tableViewProfit reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -390,6 +432,16 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserAssetsList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"getUserAssetsListThree = %@",responseObject);
+        
+        NSArray *oneArray = [responseObject objectForKey:@"Product"];
+        
+        for (NSDictionary *dic in oneArray) {
+            TWOUserAssetsListModel *model = [[TWOUserAssetsListModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic];
+            [profitted addObject:model];
+        }
+        
+        [_tabelViewCash reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

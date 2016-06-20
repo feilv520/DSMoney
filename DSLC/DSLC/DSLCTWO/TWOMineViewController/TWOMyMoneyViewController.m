@@ -189,7 +189,7 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
             if ([[responseObject objectForKey:@"Asset"] count] == 0) {
-                [self noDateWithHeight:100 view:self.view];
+                [self noDateWithHeight:101 view:self.view];
             } else {
                 [self contentShow];
             }

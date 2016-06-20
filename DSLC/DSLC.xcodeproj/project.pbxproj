@@ -1352,6 +1352,12 @@
 		8D9BE8F31C0EC94D003C67D3 /* YYImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8DE1C0EC94D003C67D3 /* YYImageCache.m */; settings = {ASSET_TAGS = (); }; };
 		8D9BE8F41C0EC94D003C67D3 /* YYWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8E11C0EC94D003C67D3 /* YYWebImageManager.m */; settings = {ASSET_TAGS = (); }; };
 		8D9BE8F51C0EC94D003C67D3 /* YYWebImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8E31C0EC94D003C67D3 /* YYWebImageOperation.m */; settings = {ASSET_TAGS = (); }; };
+		8D9F16B91D17873400A70399 /* TWOMyAccountListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F16B81D17873400A70399 /* TWOMyAccountListModel.m */; settings = {ASSET_TAGS = (); }; };
+		8D9F16BD1D17954000A70399 /* TWOUserAssetsListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F16BC1D17954000A70399 /* TWOUserAssetsListModel.m */; settings = {ASSET_TAGS = (); }; };
+		8D9F16C11D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F16C01D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.m */; settings = {ASSET_TAGS = (); }; };
+		8D9F16C51D17C7AC00A70399 /* TWONoPrefit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9F16C31D17C7AC00A70399 /* TWONoPrefit@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D9F16C61D17C7AC00A70399 /* TWONoPrefit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9F16C41D17C7AC00A70399 /* TWONoPrefit@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D9F16CA1D17D3A900A70399 /* TWOTaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F16C91D17D3A900A70399 /* TWOTaskModel.m */; settings = {ASSET_TAGS = (); }; };
 		8DA060CD1C02BEBD00E3E025 /* DES3Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA060CC1C02BEBD00E3E025 /* DES3Util.m */; settings = {ASSET_TAGS = (); }; };
 		8DA5ABC31D13BCAE00A10467 /* TWOMyAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5ABC21D13BCAE00A10467 /* TWOMyAccountModel.m */; settings = {ASSET_TAGS = (); }; };
 		8DA5ABC61D13F5C600A10467 /* TWOMyMonkeyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5ABC51D13F5C600A10467 /* TWOMyMonkeyModel.m */; settings = {ASSET_TAGS = (); }; };
@@ -3400,6 +3406,16 @@
 		8D9BE8E11C0EC94D003C67D3 /* YYWebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYWebImageManager.m; sourceTree = "<group>"; };
 		8D9BE8E21C0EC94D003C67D3 /* YYWebImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYWebImageOperation.h; sourceTree = "<group>"; };
 		8D9BE8E31C0EC94D003C67D3 /* YYWebImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYWebImageOperation.m; sourceTree = "<group>"; };
+		8D9F16B71D17873400A70399 /* TWOMyAccountListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMyAccountListModel.h; sourceTree = "<group>"; };
+		8D9F16B81D17873400A70399 /* TWOMyAccountListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMyAccountListModel.m; sourceTree = "<group>"; };
+		8D9F16BB1D17954000A70399 /* TWOUserAssetsListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOUserAssetsListModel.h; sourceTree = "<group>"; };
+		8D9F16BC1D17954000A70399 /* TWOUserAssetsListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOUserAssetsListModel.m; sourceTree = "<group>"; };
+		8D9F16BF1D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMyUserPrivilegeListModel.h; sourceTree = "<group>"; };
+		8D9F16C01D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMyUserPrivilegeListModel.m; sourceTree = "<group>"; };
+		8D9F16C31D17C7AC00A70399 /* TWONoPrefit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWONoPrefit@2x.png"; sourceTree = "<group>"; };
+		8D9F16C41D17C7AC00A70399 /* TWONoPrefit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWONoPrefit@3x.png"; sourceTree = "<group>"; };
+		8D9F16C81D17D3A900A70399 /* TWOTaskModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOTaskModel.h; sourceTree = "<group>"; };
+		8D9F16C91D17D3A900A70399 /* TWOTaskModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOTaskModel.m; sourceTree = "<group>"; };
 		8DA060CB1C02BEBD00E3E025 /* DES3Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DES3Util.h; sourceTree = "<group>"; };
 		8DA060CC1C02BEBD00E3E025 /* DES3Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DES3Util.m; sourceTree = "<group>"; };
 		8DA086561C33894C00BC805C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -3782,6 +3798,7 @@
 		8143FCE81CD9C25300B65A2F /* TWOImage */ = {
 			isa = PBXGroup;
 			children = (
+				8D9F16C21D17C78A00A70399 /* noData */,
 				8DFA58221D1239A000FE9565 /* appdelegateImage */,
 				8D1590FA1D0CF91C00A4353D /* tabbar_icon */,
 				8D0600351D06C15A00C0C97C /* 中间动画ios */,
@@ -4007,12 +4024,14 @@
 		8143FCE91CD9C4E300B65A2F /* TWOMineModel */ = {
 			isa = PBXGroup;
 			children = (
+				8D9F16C71D17D38F00A70399 /* 任务中心 */,
+				8D9F16BE1D17B73A00A70399 /* 我的特权本金 */,
+				8D9F16BA1D17951E00A70399 /* 我的理财 */,
+				8D9F16B61D1786F300A70399 /* 我的账户列表 */,
+				8D9F16B51D1786D500A70399 /* 我的账户详情 */,
+				8D9F16B41D17869D00A70399 /* 我的猴币 */,
 				8122C9571D13E41F00070EAA /* 银行卡 */,
 				8122C9561D13E40B00070EAA /* 账户设置 */,
-				8DA5ABC11D13BCAE00A10467 /* TWOMyAccountModel.h */,
-				8DA5ABC21D13BCAE00A10467 /* TWOMyAccountModel.m */,
-				8DA5ABC41D13F5C600A10467 /* TWOMyMonkeyModel.h */,
-				8DA5ABC51D13F5C600A10467 /* TWOMyMonkeyModel.m */,
 			);
 			path = TWOMineModel;
 			sourceTree = "<group>";
@@ -6924,6 +6943,69 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		8D9F16B41D17869D00A70399 /* 我的猴币 */ = {
+			isa = PBXGroup;
+			children = (
+				8DA5ABC41D13F5C600A10467 /* TWOMyMonkeyModel.h */,
+				8DA5ABC51D13F5C600A10467 /* TWOMyMonkeyModel.m */,
+			);
+			name = "我的猴币";
+			sourceTree = "<group>";
+		};
+		8D9F16B51D1786D500A70399 /* 我的账户详情 */ = {
+			isa = PBXGroup;
+			children = (
+				8DA5ABC11D13BCAE00A10467 /* TWOMyAccountModel.h */,
+				8DA5ABC21D13BCAE00A10467 /* TWOMyAccountModel.m */,
+			);
+			name = "我的账户详情";
+			sourceTree = "<group>";
+		};
+		8D9F16B61D1786F300A70399 /* 我的账户列表 */ = {
+			isa = PBXGroup;
+			children = (
+				8D9F16B71D17873400A70399 /* TWOMyAccountListModel.h */,
+				8D9F16B81D17873400A70399 /* TWOMyAccountListModel.m */,
+			);
+			name = "我的账户列表";
+			sourceTree = "<group>";
+		};
+		8D9F16BA1D17951E00A70399 /* 我的理财 */ = {
+			isa = PBXGroup;
+			children = (
+				8D9F16BB1D17954000A70399 /* TWOUserAssetsListModel.h */,
+				8D9F16BC1D17954000A70399 /* TWOUserAssetsListModel.m */,
+			);
+			name = "我的理财";
+			sourceTree = "<group>";
+		};
+		8D9F16BE1D17B73A00A70399 /* 我的特权本金 */ = {
+			isa = PBXGroup;
+			children = (
+				8D9F16BF1D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.h */,
+				8D9F16C01D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.m */,
+			);
+			name = "我的特权本金";
+			sourceTree = "<group>";
+		};
+		8D9F16C21D17C78A00A70399 /* noData */ = {
+			isa = PBXGroup;
+			children = (
+				8D9F16C31D17C7AC00A70399 /* TWONoPrefit@2x.png */,
+				8D9F16C41D17C7AC00A70399 /* TWONoPrefit@3x.png */,
+			);
+			name = noData;
+			sourceTree = "<group>";
+		};
+		8D9F16C71D17D38F00A70399 /* 任务中心 */ = {
+			isa = PBXGroup;
+			children = (
+				8D9F16C81D17D3A900A70399 /* TWOTaskModel.h */,
+				8D9F16C91D17D3A900A70399 /* TWOTaskModel.m */,
+			);
+			name = "任务中心";
+			sourceTree = "<group>";
+		};
 		8DA0864F1C3388F100BC805C /* Framework */ = {
 			isa = PBXGroup;
 			children = (
@@ -7254,6 +7336,7 @@
 				8D840C6F1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.xib in Resources */,
 				8D968A791C96A9FD00C9A6A1 /* mylicaishi@2x.png in Resources */,
 				8D9011B01BD6337C00E5D62A /* 04@3x.png in Resources */,
+				8D9F16C61D17C7AC00A70399 /* TWONoPrefit@3x.png in Resources */,
 				8D35DA471CF5431400C6409F /* TWODDBlue@2x.png in Resources */,
 				8183F4031C97CC4F000BB93C /* iconfont-fenpei@3x.png in Resources */,
 				81B520A31BF9746400D8E8D1 /* AddressBookCell.xib in Resources */,
@@ -7554,6 +7637,7 @@
 				8D3EEA1A1C27AB400031F7C9 /* 成都银行@2x.png in Resources */,
 				81DEC8081CED8FCC005E9D9F /* kuang@2x.png in Resources */,
 				8184192B1CC613D40038C7B3 /* icon1-@2x.png in Resources */,
+				8D9F16C51D17C7AC00A70399 /* TWONoPrefit@2x.png in Resources */,
 				8183F4001C97CC4F000BB93C /* iconfont-dui-2111@2x.png in Resources */,
 				81CBE7B11CE97A8E004FE1D4 /* yinhangkabg.png in Resources */,
 				819B52E01BFC2094002FDF1E /* 金元宝@2x.png in Resources */,
@@ -8211,6 +8295,7 @@
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
 				8D4FF5E21BE339A200BAE25F /* UIImageView+AFNetworking.m in Sources */,
 				818D0C291C2AC58B008F7612 /* ProductO.m in Sources */,
+				8D9F16C11D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.m in Sources */,
 				8D88D1021BFECCB40051D6DA /* MJRefreshStateHeader.m in Sources */,
 				8D72ED861CFC0B6C00436C32 /* PNBarChart.m in Sources */,
 				8D50559E1BF082780034759B /* ProductListModel.m in Sources */,
@@ -8362,6 +8447,7 @@
 				81E0CCEB1C28ED3400148609 /* BindingEmailFailed.m in Sources */,
 				818C8C301CE1814400A14D37 /* TWOMyGameScoreCell.m in Sources */,
 				81B84BEB1CE3186800A867B9 /* TWOMyPrerogativeMoneyCell.m in Sources */,
+				8D9F16B91D17873400A70399 /* TWOMyAccountListModel.m in Sources */,
 				8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */,
 				8177A0361CF3EAE30057AA7B /* TWOProductSafeTestViewController.m in Sources */,
 				8177A0581CF4482B0057AA7B /* TWOTestTwoViewController.m in Sources */,
@@ -8502,6 +8588,7 @@
 				81F5FA0A1BD9E1FE008C38BF /* ChangeNumViewController.m in Sources */,
 				8184EF4B1BFDBC5600496989 /* TwoCell.m in Sources */,
 				81F4BD5B1BECC06B00C308F8 /* SetDealSecret.m in Sources */,
+				8D9F16BD1D17954000A70399 /* TWOUserAssetsListModel.m in Sources */,
 				817988361BC94014007C8C3E /* PlanCell.m in Sources */,
 				811F0AFF1BF32798001F6AA4 /* LiftupMoneyViewController.m in Sources */,
 				81D8AD9A1BC6427800A15E01 /* MineViewController.m in Sources */,
@@ -8585,6 +8672,7 @@
 				8D0AE8041BE0ABFB00D9D50C /* RegisterOfView.m in Sources */,
 				8DD180A21BD731E000F71CEA /* GetMoneyTipTableViewCell.m in Sources */,
 				8D45187A1C00553E00FAF998 /* MD5Encryption.m in Sources */,
+				8D9F16CA1D17D3A900A70399 /* TWOTaskModel.m in Sources */,
 				81DEC8501CF29453005E9D9F /* TWOMoneyMoreFinishViewController.m in Sources */,
 				8D3F95D01BE1C27E00013A8E /* RegisterOfResult.m in Sources */,
 				81ADB2871CF4552000E044BC /* TWOTestFiveViewController.m in Sources */,

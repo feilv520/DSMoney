@@ -9,10 +9,18 @@
 #import "TWOUsableAllMoneyViewController.h"
 #import "MSelectionView.h"
 #import "TWOMonkeyRecordCell.h"
+#import "TWOMyAccountListModel.h"
 
 @interface TWOUsableAllMoneyViewController () <UITableViewDataSource, UITableViewDelegate> {
     UIButton *bView;
     UIView *selectionView;
+    
+    NSInteger page;
+    
+    NSMutableArray *listArray;
+    
+    UIButton *butMore;
+    BOOL moreFlag;
 }
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -28,8 +36,16 @@
     
     self.view.backgroundColor = Color_White;
     
+    page = 1;
+    
+    moreFlag = NO;
+    
+    listArray = [NSMutableArray array];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"筛选" style:UIBarButtonItemStylePlain target:self action:@selector(selectDataBarPress:)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+    
+    [self getMyTradeRecordsFuction];
     
     [self showTableView];
     
@@ -45,8 +61,23 @@
     self.mainTableView.dataSource = self;
     
     [self.mainTableView registerNib:[UINib nibWithNibName:@"TWOMonkeyRecordCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.mainTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 45)];
+    [self tableViewFootView];
     
     [self.view addSubview:self.mainTableView];
+}
+
+- (void)tableViewFootView
+{
+    UIView *viewLineDown = [CreatView creatViewWithFrame:CGRectMake(0, 45.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
+    [self.mainTableView.tableFooterView addSubview:viewLineDown];
+    viewLineDown.alpha = 0.3;
+    
+    butMore = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.mainTableView.tableFooterView.frame.size.height - 0.5) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"点击查看更多"];
+    [self.mainTableView.tableFooterView addSubview:butMore];
+    butMore.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [butMore addTarget:self action:@selector(buttonCheckMore:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)selectDataBarPress:(UIBarButtonItem *)bar
@@ -140,7 +171,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return listArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -151,13 +182,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TWOMonkeyRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    cell.labelTitle.text = @"充值";
-    cell.labelTime.text = @"2016-01-01";
-    cell.labelNumber.text = @"+10000元";
+    TWOMyAccountListModel *myAccountListModel = [listArray objectAtIndex:indexPath.row];
+    
+    cell.labelTitle.text = [myAccountListModel tradeTypeName];
+    cell.labelTime.text = [myAccountListModel tradeTime];
+    cell.labelNumber.text = [NSString stringWithFormat:@"%@%@",[myAccountListModel mark], [DES3Util decrypt:[myAccountListModel tradeMoney]]];
     
     cell.labelMiddle.hidden = YES;
     
-    if (indexPath.row % 2 == 0) {
+    if ([[myAccountListModel mark] isEqualToString:@"+"]) {
         cell.labelNumber.textColor = [UIColor profitColor];
     } else {
         cell.labelNumber.textColor = [UIColor orangecolor];
@@ -176,6 +209,53 @@
         
     } completion:^(BOOL finished) {
         [bView setHidden:YES];
+    }];
+}
+
+//点击查看更多
+- (void)buttonCheckMore:(UIButton *)button
+{
+    if (!moreFlag) {
+        page ++;
+        [self getMyTradeRecordsFuction];
+    }
+}
+
+#pragma mark 我的账单
+#pragma mark --------------------------------
+
+- (void)getMyTradeRecordsFuction{
+    
+    NSDictionary *parameters = @{@"curPage":[NSNumber numberWithInteger:page],@"pageSize":@"10",@"tranType":@"1",@"tranBeginDate":@"",@"tranEndDate":@"",@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyTradeRecords" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+       
+        NSLog(@"getMyTradeRecords = %@",responseObject);
+        
+        NSMutableArray *dataArr = [responseObject objectForKey:@"Trade"];
+        
+        if (dataArr.count == 0) {
+            [self noDateWithHeight:100 view:self.view];
+        } else {
+            [self.mainTableView setHidden:NO];
+        }
+        
+        for (NSDictionary *dataDic in dataArr) {
+            TWOMyAccountListModel *myAccountListModel = [[TWOMyAccountListModel alloc] init];
+            [myAccountListModel setValuesForKeysWithDictionary:dataDic];
+            [listArray addObject:myAccountListModel];
+        }
+        
+        if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
+            moreFlag = YES;
+            [butMore setTitle:@"已显示全部" forState:UIControlStateNormal];
+            butMore.enabled = NO;
+        }
+        
+        [self.mainTableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
     }];
 }
 

@@ -47,6 +47,8 @@
     
     page = 1;
     
+    moreFlag = NO;
+    
     monkeyArray = [NSMutableArray array];
     
     [self getUserMonkeyDetailFuction];
@@ -176,7 +178,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"%@",error);
     }];
 }
 

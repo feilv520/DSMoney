@@ -216,7 +216,7 @@
                 self.window.rootViewController.view.alpha = 1.0;
                 [backgroundImgView removeFromSuperview];
                 
-                if ([self.flagUserInfo objectForKey:@"token"] != nil && ![[self.flagUserInfo objectForKey:@"token"] isEqualToString:@""]){
+                if ([self.flagUserInfo objectForKey:@"token"] != nil && ![[self.flagUserInfo objectForKey:@"token"] isEqualToString:@""] && ![[self.flagUserInfo objectForKey:@"password"] isEqualToString:@""]){
                     [self loginFuction];
                 }
                 
@@ -359,6 +359,13 @@ void UncaughtExceptionHandler(NSException *exception){
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    if ([[[self.flagUserInfo objectForKey:@"password"] debugDescription] isEqualToString:@"1"]) {
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                             @"",@"password",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+    }
     
 //    // 判断是否存在isLogin.plist文件
 //    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {

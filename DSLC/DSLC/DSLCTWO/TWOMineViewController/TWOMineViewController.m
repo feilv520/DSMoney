@@ -767,7 +767,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"getSmsCode = %@",responseObject);
+        NSLog(@"getMyAccountInfo = %@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqual:@"200"]) {
             
@@ -783,6 +783,7 @@
             }
             [contentArray addObject:[NSString stringWithFormat:@"%@猴币",[DES3Util decrypt:[myAccount monkeyNum]]]];
             [contentArray addObject:@"邀请好友送星巴克券"];
+#warning 千万别忘了
             [newContentArr replaceObjectAtIndex:1 withObject:contentArray];
             contentArr = newContentArr;
             

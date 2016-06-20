@@ -342,14 +342,24 @@
 //获取短信验证码
 - (void)getMessageYanZhengMa:(UIButton *)button
 {
-    NSLog(@"message");
+    if (textFieldPhone.text.length == 0) {
+        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+    } else if (![NSString validateMobile:textFieldPhone.text]) {
+        [ProgressHUD showMessage:@"手机号格式不正确" Width:100 High:20];
+    } else {
+        [self sendToMessage];
+    }
 }
 
 //登录按钮
 - (void)loginAppButton:(UIButton *)button
 {
     [self scrollviewContentOffSet];
-    [self loginFuction];
+    if (imageGet == nil) {
+        [self loginFuction];
+    } else {
+        [self registerFuction];
+    }
 }
 
 //忘记密码?按钮
@@ -430,6 +440,84 @@
             [self dismissViewControllerAnimated:YES completion:^{
                 
             }];
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+#pragma mark 验证码登录接口
+#pragma mark --------------------------------
+
+- (void)registerFuction{
+    NSDictionary *parmeter = @{@"phone":textFieldPhone.text,@"smsCode":textFieldMessage.text,@"invitationCode":@"",@"clientType":@"iOS"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"reg/register" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"register = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            
+            if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+                [FileOfManage createWithFile:@"Member.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"1",@"password",
+                                     textFieldPhone.text,@"phone",
+                                     [responseObject objectForKey:@"key"],@"key",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [responseObject objectForKey:@"token"],@"token",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"1",@"password",
+                                     textFieldPhone.text,@"phone",
+                                     [responseObject objectForKey:@"key"],@"key",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [responseObject objectForKey:@"token"],@"token",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                NSLog(@"%@",[responseObject objectForKey:@"token"]);
+            }
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+- (void)sendToMessage{
+    NSDictionary *parmeter = @{@"phone":textFieldPhone.text,@"msgType":@"1"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"three/getSmsCode" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getSmsCode = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@302]){
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }

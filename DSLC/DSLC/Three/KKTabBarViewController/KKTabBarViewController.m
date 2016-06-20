@@ -207,7 +207,7 @@
 //        } else {
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
 //        }
-        if ([memberDic objectForKey:@"token"] == nil || [[memberDic objectForKey:@"token"] isEqualToString:@""]) {
+        if ([memberDic objectForKey:@"token"] == nil || [[memberDic objectForKey:@"token"] isEqualToString:@""] || [[memberDic objectForKey:@"password"] isEqualToString:@""]) {
             TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
             
             UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
