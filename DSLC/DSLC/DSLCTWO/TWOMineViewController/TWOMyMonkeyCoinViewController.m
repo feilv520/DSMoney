@@ -22,6 +22,8 @@
     UIView *viewBottom;
     
     NSMutableArray *monkeyArr;
+    
+    NSString *integralString;
 }
 
 @end
@@ -186,7 +188,7 @@
     cell.labelScore.textColor = [UIColor ZiTiColor];
     cell.labelScore.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    cell.labelFenShu.text = [NSString stringWithFormat:@"%@分", @"2000000"];
+    cell.labelFenShu.text = [NSString stringWithFormat:@"%@分", integralString];
     cell.labelFenShu.textColor = [UIColor orangecolor];
     cell.labelFenShu.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
@@ -399,6 +401,8 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             monkeyArr = [responseObject objectForKey:@"Monkey"];
+            
+            integralString = [responseObject objectForKey:@"integral"];
             
             [self tableViewShow];
             

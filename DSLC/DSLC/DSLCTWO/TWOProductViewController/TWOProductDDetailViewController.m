@@ -166,7 +166,7 @@
         
         if (labelLine == nil) {
             
-            labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/2, 2) backgroundColor:[UIColor daohanglan] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
+            labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 43, WIDTH_CONTROLLER_DEFAULT/2, 2) backgroundColor:[UIColor profitColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
         }
         [twoView addSubview:labelLine];
         

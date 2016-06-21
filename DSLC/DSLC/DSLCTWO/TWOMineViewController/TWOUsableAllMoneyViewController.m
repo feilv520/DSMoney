@@ -236,6 +236,7 @@
         
         if (dataArr.count == 0) {
             [self noDateWithHeight:100 view:self.view];
+            [self.mainTableView setHidden:YES];
         } else {
             [self.mainTableView setHidden:NO];
         }
@@ -249,6 +250,7 @@
         if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
             moreFlag = YES;
             [butMore setTitle:@"已显示全部" forState:UIControlStateNormal];
+            [butMore setTitleColor:[UIColor findZiTiColor] forState:UIControlStateNormal];
             butMore.enabled = NO;
         }
         
