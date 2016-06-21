@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "TWOForgetSecretERViewController.h"
 
-@interface TWOForgetSecretViewController ()
+@interface TWOForgetSecretViewController () <UITextFieldDelegate>
 
 {
     UITextField *textFieldSecret;
@@ -70,6 +70,7 @@
     [imageTwo addSubview:textFieldSecret];
     textFieldSecret.textColor = [UIColor whiteColor];
     textFieldSecret.secureTextEntry = YES;
+    textFieldSecret.delegate = self;
     textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [textFieldSecret setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [textFieldSecret setValue:[UIFont systemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
@@ -107,14 +108,48 @@
     }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location > 19) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
 //下一步按钮
 - (void)nextOneStepButton:(UIButton *)button
 {
-    [self.view endEditing:YES];
-    [self showTanKuangWithMode:MBProgressHUDModeText Text:@"找回密码成功"];
-    
-    NSArray *viewControllers = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[viewControllers objectAtIndex:0] animated:YES];
+    if (textFieldSecret.text.length == 0) {
+        [ProgressHUD showMessage:@"请输入新的登录密码" Width:100 High:20];
+    } else if (![NSString validatePassword:textFieldSecret.text]) {
+        [ProgressHUD showMessage:@"6~20位并以字母开头的密码" Width:100 High:20];
+    } else {
+        [self getFindSecretCode];
+    }
+}
+
+#pragma mark data======================
+- (void)getFindSecretCode
+{
+    NSDictionary *parmeter = @{@"phone":self.phoneNum, @"password":textFieldSecret.text};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"pwd/findPwd" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"找回登录密码最后一步++++++++++%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self.view endEditing:YES];
+            [ProgressHUD showMessage:@"找回密码成功" Width:100 High:20];
+            NSArray *viewControllers = [self.navigationController viewControllers];
+            [self.navigationController popToViewController:[viewControllers objectAtIndex:0] animated:YES];
+            
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 //左上角x按钮

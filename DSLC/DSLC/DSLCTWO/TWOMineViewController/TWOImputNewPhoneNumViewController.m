@@ -163,7 +163,7 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您输入的手机格式不正确"];
     } else if (textFieldCode.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入短信验证码"];
-    } else if (textFieldCode.text.length < 6) {
+    } else if (textFieldCode.text.length != 6) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入不少于6位短信验证码"];
     } else {
         [self.view endEditing:YES];

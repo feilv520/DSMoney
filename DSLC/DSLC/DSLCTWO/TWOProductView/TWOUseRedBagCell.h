@@ -15,6 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelTiaoJian;
 @property (weak, nonatomic) IBOutlet UILabel *labelEvery;
 @property (weak, nonatomic) IBOutlet UILabel *labelData;
-@property (weak, nonatomic) IBOutlet UILabel *labelCanUse;
+@property (weak, nonatomic) IBOutlet UIButton *butCanUse;
 
 @end

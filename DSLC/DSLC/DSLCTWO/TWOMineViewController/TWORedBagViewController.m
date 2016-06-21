@@ -202,7 +202,7 @@
         NSRange signRange = NSMakeRange(0, 1);
         [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:signRange];
         [cell.labelMoney setAttributedText:moneyString];
-        cell.labelMoney.backgroundColor = [UIColor clearColor];
+        cell.labelMoney.backgroundColor = [UIColor greenColor]; //
         
         NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [redBagModel investMoney]]];
         NSRange leftRange = NSMakeRange(0, 5);
@@ -212,24 +212,25 @@
         [useing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:rightRange];
         [useing addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:rightRange];
         [cell.labelTiaoJian setAttributedText:useing];
-        cell.labelTiaoJian.backgroundColor = [UIColor clearColor];
+        cell.labelTiaoJian.backgroundColor = [UIColor magentaColor]; //
         
         cell.labelEvery.text = @"所有产品适用";
-        cell.labelEvery.backgroundColor = [UIColor clearColor];
+        cell.labelEvery.backgroundColor = [UIColor redColor]; //
         
         if ([[[redBagModel status] description] isEqualToString:@"0"]) {
-            cell.labelCanUse.text = @"可\n使\n用";
+            [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];
         } else if ([[[redBagModel status] description] isEqualToString:@"1"]) {
-            cell.labelCanUse.text = @"已\n使\n用";
+            [cell.butCanUse setTitle:@"已\n使\n用" forState:UIControlStateNormal];
         } else if ([[[redBagModel status] description] isEqualToString:@"2"]) {
-            cell.labelCanUse.text = @"已\n失\n效";
+            [cell.butCanUse setTitle:@"已\n失\n效" forState:UIControlStateNormal];
         }
 
-        cell.labelCanUse.numberOfLines = 3;
-        cell.labelCanUse.backgroundColor = [UIColor clearColor];
+        cell.butCanUse.titleLabel.numberOfLines = 3;
+        cell.butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.butCanUse.backgroundColor = [UIColor clearColor];
         
         cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [redBagModel startDate], [redBagModel endDate]];
-        cell.labelData.backgroundColor = [UIColor clearColor];
+        cell.labelData.backgroundColor = [UIColor cyanColor]; //
         
         if (indexPath.row == 2) {
             cell.contentView.alpha = 0.5;
@@ -242,19 +243,17 @@
         
         TWOJiaXiQuanModel *jiaXiModel = [jiaXiQuanArray objectAtIndex:indexPath.row];
         
+//        加息券待兑付状态
         if ([[[jiaXiModel status] description] isEqualToString:@"1"]) {
             
             TWOWaitCashCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseTWO"];
-            cell.imageWait.image = [UIImage imageNamed:@"quanTwo"];
+            cell.imageWait.image = [UIImage imageNamed:@"待兑换加息券ios"];
             
             NSMutableAttributedString *percentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [jiaXiModel incrMoney]]];
             NSRange qianRange = NSMakeRange(0, [[percentString string] rangeOfString:@"%"].location);
             [percentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:39] range:qianRange];
             [cell.labelPercent setAttributedText:percentString];
-            cell.labelPercent.backgroundColor = [UIColor clearColor];
-            if (WIDTH_CONTROLLER_DEFAULT == 320) {
-                cell.labelPercent.textAlignment = NSTextAlignmentLeft;
-            }
+            cell.labelPercent.backgroundColor = [UIColor greenColor];
             
             NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [jiaXiModel investMoney]]];
             NSRange leftRange = NSMakeRange(0, 5);
@@ -269,10 +268,12 @@
             cell.labelEvery.text = @"所有产品适用";
             cell.labelEvery.backgroundColor = [UIColor clearColor];
             
-            cell.laeblData.text = [NSString stringWithFormat:@"%@至%@有效", [jiaXiModel startDate], [jiaXiModel endDate]];
-            cell.laeblData.backgroundColor = [UIColor clearColor];
+//            cell.laeblData.text = [NSString stringWithFormat:@"%@至%@有效", [jiaXiModel startDate], [jiaXiModel endDate]];
+            cell.laeblData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-01-28", @"2016-06-06"];
+            cell.laeblData.backgroundColor = [UIColor cyanColor];
+//            cell.laeblData.backgroundColor = [UIColor clearColor];
             
-            NSMutableAttributedString *qianMianString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待兑付金额:%@元", [jiaXiModel cashMoney]]];
+            NSMutableAttributedString *qianMianString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待兑付金额:%@元", @"20000"]]; //[jiaXiModel cashMoney]
             NSRange qianMianRange = NSMakeRange(0, 6);
             [qianMianString addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:qianMianRange];
             [qianMianString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:qianMianRange];
@@ -280,13 +281,17 @@
             [qianMianString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:houMianRange];
             [qianMianString addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:houMianRange];
             [cell.laeblMoney setAttributedText:qianMianString];
-            cell.laeblMoney.backgroundColor = [UIColor clearColor];
+            cell.laeblMoney.backgroundColor = [UIColor greenColor];
             
-            cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", [jiaXiModel productDueDate]];
+//            cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", [jiaXiModel productDueDate]];
+            cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", @"2016-03-29"];
             cell.labelTime.backgroundColor = [UIColor clearColor];
             
-            cell.labelShuoMing.text = @"( 到期日后7个工作日内兑付至余额 )";
+            cell.labelShuoMing.text = @"(到期日后7个工作日内兑付至余额)";
             cell.labelShuoMing.backgroundColor = [UIColor clearColor];
+            if (WIDTH_CONTROLLER_DEFAULT == 320) {
+                cell.labelShuoMing.font = [UIFont fontWithName:@"CenturyGothic" size:9];
+            }
             
             cell.labelWait.text = @"待\n兑\n付";
             cell.labelWait.numberOfLines = 3;
@@ -324,9 +329,9 @@
             cell.labelEvery.text = @"所有产品适用";
             cell.labelEvery.backgroundColor = [UIColor clearColor];
             
-            cell.labelCanUse.text = @"可\n使\n用";
-            cell.labelCanUse.numberOfLines = 3;
-            cell.labelCanUse.backgroundColor = [UIColor clearColor];
+//            cell.labelCanUse.text = @"可\n使\n用";
+//            cell.labelCanUse.numberOfLines = 3;
+//            cell.labelCanUse.backgroundColor = [UIColor clearColor];
             
             cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [jiaXiModel startDate], [jiaXiModel endDate]];
             cell.labelData.backgroundColor = [UIColor clearColor];

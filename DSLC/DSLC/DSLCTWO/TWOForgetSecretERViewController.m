@@ -11,7 +11,14 @@
 #import "define.h"
 #import "TWOForgetSecretViewController.h"
 
-@interface TWOForgetSecretERViewController ()
+@interface TWOForgetSecretERViewController () <UITextFieldDelegate>
+
+{
+    UITextField *textFieldPhone;
+    UITextField *textFieldMessage;
+    NSInteger seconds;
+    NSTimer *timer;
+}
 
 @end
 
@@ -32,6 +39,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self contentShow];
+    
+    seconds = 60;
 }
 
 - (void)contentShow
@@ -63,8 +72,9 @@
     [imageTwo addSubview:viewLine];
     
 //    输入手机号
-    UITextField *textFieldPhone = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"请输入绑定手机号" setTintColor:[UIColor whiteColor]];
+    textFieldPhone = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"请输入绑定手机号" setTintColor:[UIColor whiteColor]];
     [imageTwo addSubview:textFieldPhone];
+    textFieldPhone.delegate = self;
     textFieldPhone.textColor = [UIColor whiteColor];
     textFieldPhone.keyboardType = UIKeyboardTypeNumberPad;
     [textFieldPhone setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -81,8 +91,9 @@
     [imageMessage addSubview:viewLine1];
     
 //    短信验证码输入框
-    UITextField *textFieldMessage = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageMessage.frame.size.width - 64 - 10, 20) setPlaceholder:@"短信验证码" setTintColor:[UIColor whiteColor]];
+    textFieldMessage = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageMessage.frame.size.width - 64 - 10, 20) setPlaceholder:@"短信验证码" setTintColor:[UIColor whiteColor]];
     [imageMessage addSubview:textFieldMessage];
+    textFieldMessage.delegate = self;
     textFieldMessage.textColor = [UIColor whiteColor];
     textFieldMessage.keyboardType = UIKeyboardTypeNumberPad;
     [textFieldMessage setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -94,6 +105,7 @@
     
     UIButton *buttonGet = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 5, imageGet.frame.size.width - 20, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"获取验证码"];
     [imageGet addSubview:buttonGet];
+    buttonGet.tag = 121;
     [buttonGet addTarget:self action:@selector(buttonGetMessageYanZhengMa:) forControlEvents:UIControlEventTouchUpInside];
     
 //    下一步按钮
@@ -116,17 +128,124 @@
     }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == textFieldPhone) {
+        if (range.location > 10) {
+            return NO;
+        } else {
+            return YES;
+        }
+    } else {
+        if (range.location > 5) {
+            return NO;
+        } else {
+            return YES;
+        }
+    }
+}
+
 //获取短信验证码
 - (void)buttonGetMessageYanZhengMa:(UIButton *)button
 {
     NSLog(@"message");
+    if (textFieldPhone.text.length == 0) {
+        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+    } else if (![NSString validateMobile:textFieldPhone.text]) {
+        [ProgressHUD showMessage:@"手机号格式有误" Width:100 High:20];
+    } else {
+        [self getMessageCode];
+    }
 }
 
 //下一步按钮
 - (void)clickedNextOneStep:(UIButton *)button
 {
-    TWOForgetSecretViewController *twoForgetVC = [[TWOForgetSecretViewController alloc] init];
-    [self.navigationController pushViewController:twoForgetVC animated:YES];
+    if (textFieldPhone.text.length == 0) {
+        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+    } else if (![NSString validateMobile:textFieldPhone.text]) {
+        [ProgressHUD showMessage:@"手机号格式有误" Width:100 High:20];
+    } else if (textFieldMessage.text.length == 0) {
+        [ProgressHUD showMessage:@"请输入短信验证码" Width:100 High:20];
+    } else if (textFieldMessage.text.length != 6) {
+        [ProgressHUD showMessage:@"短信验证码格式有误" Width:100 High:20];
+    } else {
+        [self.view endEditing:YES];
+        [self messageCodeData];
+    }
+}
+
+//获取验证码接口
+- (void)getMessageCode
+{
+    NSDictionary *parmeter = @{@"phone":textFieldPhone.text, @"msgType":@"3"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"three/getSmsCode" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"找回登录密码获取验证码:=========%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//校验验证码接口
+- (void)messageCodeData
+{
+    NSDictionary *parmeter = @{@"phone":textFieldPhone.text, @"smsCode":textFieldMessage.text};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"three/checkSmsCode" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"找回登录密码校验验证码:~~~~~~~~~~~~%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            TWOForgetSecretViewController *twoForgetVC = [[TWOForgetSecretViewController alloc] init];
+            twoForgetVC.phoneNum = textFieldPhone.text;
+            [self.navigationController pushViewController:twoForgetVC animated:YES];
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+// 验证码倒计时
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:121];
+    
+    NSString *title = [NSString stringWithFormat:@"%lds",(long)seconds];
+    
+    if (seconds == 1) {
+        [theTimer invalidate];
+        seconds = 60;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setEnabled:YES];
+    }else{
+        seconds--;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setEnabled:NO];
+    }
+}
+
+- (void)releaseTImer {
+    if (timer) {
+        if ([timer respondsToSelector:@selector(isValid)]) {
+            if ([timer isValid]) {
+                [timer invalidate];
+                seconds = 60;
+            }
+        }
+    }
 }
 
 //左上角x按钮

@@ -77,9 +77,9 @@
     cell.labelEvery.backgroundColor = [UIColor clearColor];
     cell.labelEvery.textColor = [UIColor findZiTiColor];
     
-    cell.labelCanUse.text = @"已\n过\n期";
-    cell.labelCanUse.numberOfLines = 3;
-    cell.labelCanUse.backgroundColor = [UIColor clearColor];
+//    cell.labelCanUse.text = @"已\n过\n期";
+//    cell.labelCanUse.numberOfLines = 3;
+//    cell.labelCanUse.backgroundColor = [UIColor clearColor];
     
     cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
     cell.labelData.backgroundColor = [UIColor clearColor];

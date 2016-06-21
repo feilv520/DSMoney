@@ -129,7 +129,7 @@
     
     if (_textFieldPhone.text.length == 0) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
-    } else if (_textFieldPhone.text.length < 6) {
+    } else if (_textFieldPhone.text.length != 6) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入六位验证码"];
     } else {
         [self.view endEditing:YES];
