@@ -84,7 +84,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return monkeyArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -172,6 +172,7 @@
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
                 moreFlag = YES;
                 [butMore setTitle:@"已显示全部" forState:UIControlStateNormal];
+                [butMore setTitleColor:[UIColor findZiTiColor] forState:UIControlStateNormal];
                 butMore.enabled = NO;
             }
             

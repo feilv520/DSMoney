@@ -32,6 +32,10 @@
     NSInteger isOrder;
     
     NSArray *titleArray;
+    
+    // 星星view
+    UIView *viewUserXing;
+    NSString *kindString;
 }
 
 @property (nonatomic, strong) UIControl *viewBotton;
@@ -72,7 +76,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = Color_White;
+    self.view.backgroundColor = [UIColor huibai];
     
     titleArray = [NSArray array];
     
@@ -105,7 +109,7 @@
 - (void)showTableView{
     self.mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 84 - 49) style:UITableViewStyleGrouped];
     
-    self.mainTableView.backgroundColor = Color_Gray;
+    self.mainTableView.backgroundColor = [UIColor huibai];
     
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
@@ -397,6 +401,22 @@
             
             cell.titleLabel.text = @"产品安全等级";
             cell.titleLabel.textColor = [UIColor findZiTiColor];
+            
+            viewUserXing = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 175, 0, 150, 50) backgroundColor:[UIColor clearColor]];
+            [cell addSubview:viewUserXing];
+            
+            kindString = @"稳健型";
+            
+            NSArray *userXingArray = @[@"xing", @"xing", @"xing", @"xing", @"xing"];
+            
+            UILabel *kindLabel = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 60, 46) backgroundColor:Color_Clear textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:kindString];
+            [viewUserXing addSubview:kindLabel];
+            
+            for (int w = 0; w < 5; w++) {
+                UIImageView *imageUserXing = [CreatView creatImageViewWithFrame:CGRectMake(60 + 3 * w + 14 * w, 16, 14, 14) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:[userXingArray objectAtIndex:w]]];
+                [viewUserXing addSubview:imageUserXing];
+            }
+            
         }
     }
     
@@ -503,11 +523,11 @@
             daysLimitString = [self.detailM productDaysLimit];
         }
         
-        if (![[self.detailM productPeriod] isEqualToString:@"0"]) {
+        if (![[[self.detailM productPeriod] description] isEqualToString:@"0"]) {
             daysPeriodString = [self.detailM productPeriod];
         }
         
-        if ([[self.detailM productType] isEqualToString:@"2"])
+        if ([[[self.detailM productType] description] isEqualToString:@"2"])
             calendar.dayLabel.text = [NSString stringWithFormat:@"%@天",daysLimitString];
         else
             calendar.dayLabel.text = [NSString stringWithFormat:@"%@天",daysPeriodString];
@@ -558,10 +578,10 @@
 //确认投资按钮
 - (void)makeSureButton:(UIButton *)button
 {
-    if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
-        return ;
-    }
+//    if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+//        return ;
+//    }
     
     if ([self.residueMoney isEqualToString:@"0.00"]) {
         [self orderProduct];
@@ -577,7 +597,7 @@
         
         NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
         
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
             if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
                 

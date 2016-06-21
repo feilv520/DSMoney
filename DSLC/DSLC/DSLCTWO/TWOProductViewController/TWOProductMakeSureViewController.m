@@ -213,7 +213,7 @@
         if ([self.detailM.productName containsString:@"新手"]){
             
             return 100;
-        } else if ([self.detailM.productType isEqualToString:@"1"] || ([self.detailM.productType isEqualToString:@"3"] && [self.detailM.productName containsString:@"美猴王"])) {
+        } else if ([[self.detailM.productType description] isEqualToString:@"1"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
             
             return 150;
         } else {
@@ -260,7 +260,7 @@
             
             return cell;
             
-        } else if ([self.detailM.productType isEqualToString:@"1"] || ([self.detailM.productType isEqualToString:@"3"] && [self.detailM.productName containsString:@"美猴王"])) {
+        } else if ([[self.detailM.productType description] isEqualToString:@"1"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
             
             TWOMakeSureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reusef"];
             

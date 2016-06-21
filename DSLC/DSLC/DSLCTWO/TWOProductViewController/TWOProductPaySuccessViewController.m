@@ -42,7 +42,7 @@
     titleArray = @[@"本次投资",@"预期收益",@"计息起始日",@"到期日",@"收获猴币"];
     
     valueArray = [NSMutableArray arrayWithCapacity:5];
-    [valueArray addObject:[NSString stringWithFormat:@"%@元",self.allMoneyString]];
+    [valueArray addObject:[NSString stringWithFormat:@"%@",self.allMoneyString]];
     [valueArray addObject:[NSString stringWithFormat:@"%@",self.syString]];
     [valueArray addObject:[NSString stringWithFormat:@"%@",self.qDayString]];
     [valueArray addObject:[NSString stringWithFormat:@"%@",self.dDayString]];

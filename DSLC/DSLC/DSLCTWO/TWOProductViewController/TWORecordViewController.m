@@ -131,6 +131,7 @@
         if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
             moreFlag = YES;
             [moreButton setTitle:@"已显示全部" forState:UIControlStateNormal];
+            [moreButton setTitleColor:[UIColor findZiTiColor] forState:UIControlStateNormal];
             moreButton.enabled = NO;
         }
         [_tableView reloadData];

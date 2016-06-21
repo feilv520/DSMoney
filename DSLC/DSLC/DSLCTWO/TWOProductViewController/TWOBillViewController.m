@@ -159,6 +159,8 @@
 {
     TWOProductDemoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNNew"];
     
+    cell.labelDetail.hidden = YES;
+    
     cell.viewGiPian.layer.masksToBounds = YES;
     cell.viewGiPian.layer.cornerRadius = 4;
     

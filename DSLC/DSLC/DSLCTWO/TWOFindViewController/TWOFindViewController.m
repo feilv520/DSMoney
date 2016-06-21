@@ -19,6 +19,9 @@
 #import "TWOMoneySweepViewController.h"
 #import "AdModel.h"
 #import "BannerViewController.h"
+#import "TBigTurntableViewController.h"
+#import "TBaoJiViewController.h"
+#import "TRankinglistViewController.h"
 
 @interface TWOFindViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
@@ -30,6 +33,8 @@
     NSArray *imagePicArray;
     NSArray *contentArr;
     UIImageView *imageDian;
+    
+    NSDictionary *myDic;
     
     // 轮播图
     UIPageControl *pageControl;
@@ -54,6 +59,8 @@
     // Do any additional setup after loading the view.
     
     timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+    
+    myDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self tabelViewShow];
@@ -141,7 +148,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 1) {
+    if (indexPath.row == 0) {
+        
+        TRankinglistViewController *rankinglist = [[TRankinglistViewController alloc] init];
+        [self.navigationController pushViewController:rankinglist animated:YES];
+    } else if (indexPath.row == 1) {
 //        大圣公益行
         TWODSPublicBenefitViewController *publicBenefit = [[TWODSPublicBenefitViewController alloc] init];
         pushVC(publicBenefit);
@@ -237,6 +248,16 @@
         
         TWOFindActivityCenterViewController *findActivityVC = [[TWOFindActivityCenterViewController alloc] init];
         pushVC(findActivityVC);
+    } else if (indexPath.item == 2) {
+        
+        TBigTurntableViewController *bigTurntable = [[TBigTurntableViewController alloc] init];
+        bigTurntable.tokenString = [myDic objectForKey:@"token"];
+        [self.navigationController pushViewController:bigTurntable animated:YES];
+    } else if (indexPath.item == 3) {
+        
+        TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
+        baoji.tokenString = [myDic objectForKey:@"token"];
+        pushVC(baoji);
     }
 }
 
@@ -338,10 +359,6 @@
 
 - (void)bannerObject:(UITapGestureRecognizer *)tap
 {
-    //    if (pageControl.currentPage == 4) {
-    //        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"本连接不支持app端"];
-    //        return;
-    //    }
     BannerViewController *bannerVC = [[BannerViewController alloc] init];
     bannerVC.photoName = [[photoArray objectAtIndex:pageControl.currentPage] adLabel];
     bannerVC.photoUrl = [[photoArray objectAtIndex:pageControl.currentPage] adLink];
