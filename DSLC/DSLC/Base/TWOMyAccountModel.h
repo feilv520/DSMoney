@@ -11,9 +11,11 @@
 @interface TWOMyAccountModel : NSObject
 
 @property (nonatomic, copy) NSString *accBalance;
+@property (nonatomic, copy) NSString *incrUnUsedCount;
 @property (nonatomic, copy) NSString *investMoney;
 @property (nonatomic, copy) NSString *invitationMyCode;
 @property (nonatomic, copy) NSString *inviteType;
+@property (nonatomic, copy) NSString *isUseOjg;
 @property (nonatomic, copy) NSString *monkeyNum;
 @property (nonatomic, copy) NSString *myFinPlanner;
 @property (nonatomic, copy) NSString *prlMoney;

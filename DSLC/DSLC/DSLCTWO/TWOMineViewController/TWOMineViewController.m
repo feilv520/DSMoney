@@ -175,8 +175,8 @@
     [butTastWen addTarget:self action:@selector(jobCenterButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    任务中心数字显示
-    labelTestShu = [CreatView creatWithLabelFrame:CGRectMake(butTask.frame.size.width - 3, 3, 13, 13) backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:9] text:[DES3Util decrypt:[myAccount taskNum]]];
-    if ([[myAccount taskNum] isEqualToString:@""] || [[myAccount taskNum] isEqualToString:@"0"]) {
+    labelTestShu = [CreatView creatWithLabelFrame:CGRectMake(butTask.frame.size.width - 3, 3, 13, 13) backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:9] text:[myAccount taskNum]];
+    if ([[[myAccount taskNum] description] isEqualToString:@""] || [[[myAccount taskNum] description] isEqualToString:@"0"]) {
         labelTestShu.hidden = YES;
     }
     [butTask addSubview:labelTestShu];
