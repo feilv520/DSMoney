@@ -234,6 +234,8 @@
 		8162D1281BE1BD9C00CACAB6 /* DownFourCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8162D1261BE1BD9C00CACAB6 /* DownFourCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8164BBC31C05D5F700023461 /* ProjectSimpleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8164BBC21C05D5F700023461 /* ProjectSimpleCell.m */; settings = {ASSET_TAGS = (); }; };
 		8164BBC61C05DD2C00023461 /* ProjectContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8164BBC51C05DD2C00023461 /* ProjectContentCell.m */; settings = {ASSET_TAGS = (); }; };
+		81650AE91D19280000B00BAD /* TWIJiaXiQuanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81650AE71D19280000B00BAD /* TWIJiaXiQuanCell.m */; settings = {ASSET_TAGS = (); }; };
+		81650AEA1D19280000B00BAD /* TWIJiaXiQuanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81650AE81D19280000B00BAD /* TWIJiaXiQuanCell.xib */; settings = {ASSET_TAGS = (); }; };
 		816AA1431CFD3E85009038E9 /* TWOMyClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 816AA1421CFD3E85009038E9 /* TWOMyClientViewController.m */; settings = {ASSET_TAGS = (); }; };
 		816AA1471CFD3FBD009038E9 /* TWOMyClientCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 816AA1451CFD3FBD009038E9 /* TWOMyClientCell.m */; settings = {ASSET_TAGS = (); }; };
 		816AA1481CFD3FBD009038E9 /* TWOMyClientCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816AA1461CFD3FBD009038E9 /* TWOMyClientCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -1787,6 +1789,9 @@
 		8164BBC21C05D5F700023461 /* ProjectSimpleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectSimpleCell.m; sourceTree = "<group>"; };
 		8164BBC41C05DD2C00023461 /* ProjectContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContentCell.h; sourceTree = "<group>"; };
 		8164BBC51C05DD2C00023461 /* ProjectContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectContentCell.m; sourceTree = "<group>"; };
+		81650AE61D19280000B00BAD /* TWIJiaXiQuanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWIJiaXiQuanCell.h; sourceTree = "<group>"; };
+		81650AE71D19280000B00BAD /* TWIJiaXiQuanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWIJiaXiQuanCell.m; sourceTree = "<group>"; };
+		81650AE81D19280000B00BAD /* TWIJiaXiQuanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWIJiaXiQuanCell.xib; sourceTree = "<group>"; };
 		816AA1411CFD3E85009038E9 /* TWOMyClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMyClientViewController.h; sourceTree = "<group>"; };
 		816AA1421CFD3E85009038E9 /* TWOMyClientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMyClientViewController.m; sourceTree = "<group>"; };
 		816AA1441CFD3FBD009038E9 /* TWOMyClientCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMyClientCell.h; sourceTree = "<group>"; };
@@ -5518,6 +5523,9 @@
 				81F597941CF6C71B00CC0F29 /* TWOUseRedBagCell.h */,
 				81F597951CF6C71B00CC0F29 /* TWOUseRedBagCell.m */,
 				81F597961CF6C71B00CC0F29 /* TWOUseRedBagCell.xib */,
+				81650AE61D19280000B00BAD /* TWIJiaXiQuanCell.h */,
+				81650AE71D19280000B00BAD /* TWIJiaXiQuanCell.m */,
+				81650AE81D19280000B00BAD /* TWIJiaXiQuanCell.xib */,
 			);
 			name = "使用红包和加息券";
 			sourceTree = "<group>";
@@ -7441,6 +7449,7 @@
 				8143FD4E1CDAF22600B65A2F /* 提现@3x.png in Resources */,
 				8D0600271D05761400C0C97C /* Two_Update_Down02@2x.png in Resources */,
 				8175BE811BE9B50D0044026E /* RecordCell.xib in Resources */,
+				81650AEA1D19280000B00BAD /* TWIJiaXiQuanCell.xib in Resources */,
 				817DD4701BCF501100042B09 /* MineCell.xib in Resources */,
 				816AA1481CFD3FBD009038E9 /* TWOMyClientCell.xib in Resources */,
 				8D43439E1BFDEB0B000BA004 /* loading_middle_05.png in Resources */,
@@ -8599,6 +8608,7 @@
 				811F0B0B1BF33D42001F6AA4 /* BindingTwoCell.m in Sources */,
 				8D0CB4891BE75C860039D826 /* SimpleDescriptionsViewController.m in Sources */,
 				8D4518791C00553E00FAF998 /* GTMBase64.m in Sources */,
+				81650AE91D19280000B00BAD /* TWIJiaXiQuanCell.m in Sources */,
 				81F8EFEA1CF839CB00DC78FF /* TWOAddInterestViewController.m in Sources */,
 				81A233541CBF65BC009D43D3 /* InviteRecordCell.m in Sources */,
 				818523C21BE35BDB002FC653 /* MendLoginViewController.m in Sources */,

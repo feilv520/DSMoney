@@ -28,6 +28,8 @@
     UITextField *textFieldSecret;
     UITextField *textFieldMessage;
     UIScrollView *_scrollview;
+    NSInteger seconds;
+    NSTimer *timer;
 }
 
 @end
@@ -47,6 +49,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self loginContent];
+    seconds = 60;
 }
 
 
@@ -273,6 +276,7 @@
     
     UIButton *buttonGet = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 5, imageGet.frame.size.width - 20, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"获取验证码"];
     [imageGet addSubview:buttonGet];
+    buttonGet.tag = 552;
     buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonGet addTarget:self action:@selector(getMessageYanZhengMa:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -383,6 +387,40 @@
     [self scrollviewContentOffSet];
     TWORegisterViewController *registerVC = [[TWORegisterViewController alloc] init];
     [self.navigationController pushViewController:registerVC animated:YES];
+}
+
+// 验证码倒计时
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:552];
+    
+    NSString *title = [NSString stringWithFormat:@"%lds",(long)seconds];
+    
+    if (seconds == 1) {
+        [theTimer invalidate];
+        seconds = 60;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setEnabled:YES];
+    }else{
+        seconds--;
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setEnabled:NO];
+    }
+}
+
+- (void)releaseTImer {
+    if (timer) {
+        if ([timer respondsToSelector:@selector(isValid)]) {
+            if ([timer isValid]) {
+                [timer invalidate];
+                seconds = 60;
+            }
+        }
+    }
 }
 
 //封装偏移量归0
@@ -523,7 +561,8 @@
         
         NSLog(@"getSmsCode = %@",responseObject);
         
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@302]){
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]){
+            timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];

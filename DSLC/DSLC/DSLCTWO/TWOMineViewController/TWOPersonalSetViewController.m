@@ -242,6 +242,8 @@
 //            安全设置
             TWOSafeSetViewController *safeSetVC = [[TWOSafeSetViewController alloc] init];
             safeSetVC.setPassWord = [[personalModel isSetPwd] description];
+//            传手机号 如果没有设置登录密码 设置登录密码需要显示手机号
+            safeSetVC.phoneString = [personalModel userPhone];
             [self.navigationController pushViewController:safeSetVC animated:YES];
             
         } else {

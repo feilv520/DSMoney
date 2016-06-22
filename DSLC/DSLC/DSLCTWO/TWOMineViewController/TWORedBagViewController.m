@@ -15,6 +15,7 @@
 #import "TWOWaitCashCell.h"
 #import "TWORedBagModel.h"
 #import "TWOJiaXiQuanModel.h"
+#import "TWIJiaXiQuanCell.h"
 
 @interface TWORedBagViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -95,7 +96,7 @@
     _tableViewJia.tag = 800;
     _tableViewJia.separatorColor = [UIColor clearColor];
     _tableViewJia.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 60)];
-    [_tableViewJia registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [_tableViewJia registerNib:[UINib nibWithNibName:@"TWIJiaXiQuanCell" bundle:nil] forCellReuseIdentifier:@"reuseJia"];
     [_tableViewJia registerNib:[UINib nibWithNibName:@"TWOWaitCashCell" bundle:nil] forCellReuseIdentifier:@"reuseTWO"];
     
     [self redBagViewHeadShow];
@@ -253,7 +254,7 @@
             NSRange qianRange = NSMakeRange(0, [[percentString string] rangeOfString:@"%"].location);
             [percentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:39] range:qianRange];
             [cell.labelPercent setAttributedText:percentString];
-            cell.labelPercent.backgroundColor = [UIColor greenColor];
+            cell.labelPercent.backgroundColor = [UIColor magentaColor];
             
             NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [jiaXiModel investMoney]]];
             NSRange leftRange = NSMakeRange(0, 5);
@@ -281,7 +282,7 @@
             [qianMianString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:houMianRange];
             [qianMianString addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:houMianRange];
             [cell.laeblMoney setAttributedText:qianMianString];
-            cell.laeblMoney.backgroundColor = [UIColor greenColor];
+            cell.laeblMoney.backgroundColor = [UIColor clearColor];
             
 //            cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", [jiaXiModel productDueDate]];
             cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", @"2016-03-29"];
@@ -293,16 +294,17 @@
                 cell.labelShuoMing.font = [UIFont fontWithName:@"CenturyGothic" size:9];
             }
             
-            cell.labelWait.text = @"待\n兑\n付";
-            cell.labelWait.numberOfLines = 3;
-            cell.labelWait.backgroundColor = [UIColor clearColor];
+            [cell.buttonWait setTitle:@"待\n兑\n付" forState:UIControlStateNormal];
+            cell.buttonWait.titleLabel.numberOfLines = 3;
+            cell.buttonWait.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            cell.buttonWait.backgroundColor = [UIColor clearColor];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
             
         } else {
             
-            TWOUseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+            TWIJiaXiQuanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseJia"];
             cell.imagePicture.image = [UIImage imageNamed:@"jiaxijuan"];
             
             NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", jiaXiModel.incrMoney]];
@@ -329,9 +331,10 @@
             cell.labelEvery.text = @"所有产品适用";
             cell.labelEvery.backgroundColor = [UIColor clearColor];
             
-//            cell.labelCanUse.text = @"可\n使\n用";
-//            cell.labelCanUse.numberOfLines = 3;
-//            cell.labelCanUse.backgroundColor = [UIColor clearColor];
+            [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];
+            cell.butCanUse.titleLabel.numberOfLines = 3;
+            cell.butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+            cell.butCanUse.backgroundColor = [UIColor clearColor];
             
             cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [jiaXiModel startDate], [jiaXiModel endDate]];
             cell.labelData.backgroundColor = [UIColor clearColor];

@@ -94,6 +94,7 @@
         } else {
             //如未设置登录 跳转设置登录密码
             TWOSetDealSecretViewController *setDealSecret = [[TWOSetDealSecretViewController alloc] init];
+            setDealSecret.phoneStr = self.phoneString;
             [self.navigationController pushViewController:setDealSecret animated:YES];
         }
         

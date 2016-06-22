@@ -217,7 +217,7 @@
     
     [cell.butLeftUp setBackgroundImage:[UIImage imageNamed:@"大转盘"] forState:UIControlStateNormal];
     [cell.butRightUp setBackgroundImage:[UIImage imageNamed:@"baojichoujiang"] forState:UIControlStateNormal];
-    [cell.butLeftDown setBackgroundImage:[UIImage imageNamed:@"duihuanshouyi"] forState:UIControlStateNormal];
+    [cell.butLeftDown setBackgroundImage:[UIImage imageNamed:@"huodong"] forState:UIControlStateNormal];
     [cell.butRightDown setBackgroundImage:[UIImage imageNamed:@"youxi"] forState:UIControlStateNormal];
     
     [cell.butLeftUp addTarget:self action:@selector(bigTurntableButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -229,8 +229,8 @@
     [cell.butOneDown setTitle:@"转出幸运大礼" forState:UIControlStateNormal];
     [cell.butTwoUp setTitle:@"爆击红包" forState:UIControlStateNormal];
     [cell.butTwoDown setTitle:@"免费抽奖抽不停" forState:UIControlStateNormal];
-    [cell.butThreeUp setTitle:@"兑换收益" forState:UIControlStateNormal];
-    [cell.butThreeDown setTitle:@"猴币变现金duang" forState:UIControlStateNormal];
+    [cell.butThreeUp setTitle:@"活动中心" forState:UIControlStateNormal];
+    [cell.butThreeDown setTitle:@"月月活动玩不停" forState:UIControlStateNormal];
     [cell.butFourUp setTitle:@"游戏中心" forState:UIControlStateNormal];
     [cell.butFourDown setTitle:@"特殊装备你最牛" forState:UIControlStateNormal];
     

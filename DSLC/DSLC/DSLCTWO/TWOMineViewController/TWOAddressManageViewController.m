@@ -46,12 +46,22 @@
     _textView.layer.borderColor = [[UIColor profitColor] CGColor];
     _textView.layer.borderWidth = 0.5;
     
-    buttonSave = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, _textView.frame.size.height + 9 + 30, WIDTH_CONTROLLER_DEFAULT - 18, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"保存"];
+    buttonSave = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, _textView.frame.size.height + 9 + 30, WIDTH_CONTROLLER_DEFAULT - 18, 40) backgroundColor:[UIColor findZiTiColor] textColor:[UIColor whiteColor] titleText:@"保存"];
     [self.view addSubview:buttonSave];
     buttonSave.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     buttonSave.layer.cornerRadius = 5;
     buttonSave.layer.masksToBounds = YES;
     [buttonSave addTarget:self action:@selector(buttonSaveAddress:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//保存按钮置灰
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+    if (_textView.text.length == 0) {
+        buttonSave.backgroundColor = [UIColor findZiTiColor];
+    } else {
+        buttonSave.backgroundColor = [UIColor profitColor];
+    }
 }
 
 //字数限制
@@ -69,13 +79,9 @@
 - (void)buttonSaveAddress:(UIButton *)button
 {
     if (_textView.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入地址"];
+
     } else {
         [self setAddressData];
-        TWOAddressAlreadySetViewController *addressSetVC = [[TWOAddressAlreadySetViewController alloc] init];
-        addressSetVC.numberNo = 0;
-        addressSetVC.addressString = _textView.text;
-        pushVC(addressSetVC);
         [self.view endEditing:YES];
     }
 }
@@ -87,7 +93,13 @@
         
         NSLog(@"设置地址=========%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+            TWOAddressAlreadySetViewController *addressSetVC = [[TWOAddressAlreadySetViewController alloc] init];
+            addressSetVC.numberNo = 0;
+            addressSetVC.addressString = _textView.text;
+            pushVC(addressSetVC);
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }

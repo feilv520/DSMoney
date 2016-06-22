@@ -13,6 +13,7 @@
 
 {
     UITextField *textFieldCode;
+    UIButton *buttNext;
 }
 
 @end
@@ -47,23 +48,31 @@
     textFieldCode.secureTextEntry = YES;
     textFieldCode.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     textFieldCode.textColor = [UIColor findZiTiColor];
+    [textFieldCode addTarget:self action:@selector(buttonGrayTextField:) forControlEvents:UIControlEventEditingChanged];
     
-    UIButton *butNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 56 + 15, WIDTH_CONTROLLER_DEFAULT - 20, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
-    [self.view addSubview:butNext];
-    butNext.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    butNext.layer.cornerRadius = 5;
-    butNext.layer.masksToBounds = YES;
-    [butNext addTarget:self action:@selector(nextOneStepButton:) forControlEvents:UIControlEventTouchUpInside];
+    buttNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 56 + 15, WIDTH_CONTROLLER_DEFAULT - 20, 40) backgroundColor:[UIColor findZiTiColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
+    [self.view addSubview:buttNext];
+    buttNext.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    buttNext.layer.cornerRadius = 5;
+    buttNext.layer.masksToBounds = YES;
+    [buttNext addTarget:self action:@selector(nextOneStepButton:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//按钮置灰
+- (void)buttonGrayTextField:(UITextField *)textField
+{
+    if (textField.text.length == 0) {
+        buttNext.backgroundColor = [UIColor findZiTiColor];
+    } else {
+        buttNext.backgroundColor = [UIColor profitColor];
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if (range.location < 20) {
-        
         return YES;
-        
     } else {
-        
         return NO;
     }
 }
@@ -72,7 +81,7 @@
 - (void)nextOneStepButton:(UIButton *)button
 {
     if (textFieldCode.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入登录密码"];
+
     } else {
         [self.view endEditing:YES];
         [self getDataSecret];

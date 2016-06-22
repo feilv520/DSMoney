@@ -16,6 +16,7 @@
     UITableView *_tableView;
     UITextField *textOldSecret;
     UITextField *textNewSecret;
+    UIButton *butMakeSure;
 }
 
 @end
@@ -49,7 +50,7 @@
     UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(20, 5, WIDTH_CONTROLLER_DEFAULT - 40, 40) backgroundColor:[UIColor qianhuise] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"登录密码由6-20位数字和字母组成,以字母开头"];
     [_tableView.tableFooterView addSubview:labelAlert];
     
-    UIButton *butMakeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 50, WIDTH_CONTROLLER_DEFAULT - 20, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    butMakeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 50, WIDTH_CONTROLLER_DEFAULT - 20, 40) backgroundColor:[UIColor findZiTiColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [_tableView.tableFooterView addSubview:butMakeSure];
     butMakeSure.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     butMakeSure.layer.cornerRadius = 5;
@@ -75,9 +76,9 @@
     cell.textFieldPhone.delegate = self;
     cell.textFieldPhone.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.textFieldPhone.tintColor = [UIColor grayColor];
-    cell.textFieldPhone.clearsOnBeginEditing = YES;
     cell.textFieldPhone.secureTextEntry = YES;
     cell.textFieldPhone.tag = 999 + indexPath.row;
+    [cell.textFieldPhone addTarget:self action:@selector(textFieldButtonGrayColor:) forControlEvents:UIControlEventEditingChanged];
     
     if (indexPath.row == 1) {
         cell.buttonEye.hidden = NO;
@@ -94,6 +95,19 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 56;
+}
+
+//按钮置灰
+- (void)textFieldButtonGrayColor:(UITextField *)textField
+{
+    textOldSecret = (UITextField *)[self.view viewWithTag:999];
+    textNewSecret = (UITextField *)[self.view viewWithTag:1000];
+    
+    if (textOldSecret.text.length == 0 || textNewSecret.text.length == 0) {
+        butMakeSure.backgroundColor = [UIColor findZiTiColor];
+    } else {
+        butMakeSure.backgroundColor = [UIColor profitColor];
+    }
 }
 
 //闭眼或睁眼按钮
@@ -135,13 +149,17 @@
 {
     textOldSecret = (UITextField *)[self.view viewWithTag:999];
     textNewSecret = (UITextField *)[self.view viewWithTag:1000];
+    NSString *passString = [DES3Util decrypt:[self.flagDic objectForKey:@"password"]];
+    NSLog(@"当前%@", passString);
     
     if (textOldSecret.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入当前登录密码"];
+        
     } else if (textNewSecret.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入新登录密码"];
-    } else if (![NSString validatePassword:textNewSecret.text]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"6~20位含字母和数字,以字母开头"];
+        
+    } else if (![textOldSecret.text isEqualToString:passString]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"原密码错误"];
+    }else if (![NSString validatePassword:textNewSecret.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"登录密码由6-20位数字和密码组成，以字母开头"];
     } else if ([textNewSecret.text isEqualToString:textOldSecret.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"新登录密码不能与原登录密码重复"];
     } else {

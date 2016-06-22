@@ -9,6 +9,7 @@
 #import "TWOHistoryJiaXiQuanViewController.h"
 #import "TWOWaitCashCell.h"
 #import "TWOUseRedBagCell.h"
+#import "TWIJiaXiQuanCell.h"
 
 @interface TWOHistoryJiaXiQuanViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -39,7 +40,7 @@
     _tableView.delegate = self;
     _tableView.separatorColor = [UIColor clearColor];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOWaitCashCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
-    [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuseR"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TWIJiaXiQuanCell" bundle:nil] forCellReuseIdentifier:@"reuseR"];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -103,20 +104,24 @@
         cell.labelTime.textColor = [UIColor findZiTiColor];
         cell.labelTime.backgroundColor = [UIColor clearColor];
         
-        cell.labelShuoMing.text = @"( 到期日后7个工作日内兑付至余额 )";
+        cell.labelShuoMing.text = @"(到期日后7个工作日内兑付至余额)";
         cell.labelShuoMing.textColor = [UIColor findZiTiColor];
         cell.labelShuoMing.backgroundColor = [UIColor clearColor];
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            cell.labelShuoMing.font = [UIFont fontWithName:@"CenturyGothic" size:9];
+        }
         
-        cell.labelWait.text = @"已\n兑\n付";
-        cell.labelWait.numberOfLines = 3;
-        cell.labelWait.backgroundColor = [UIColor clearColor];
+        [cell.buttonWait setTitle:@"已\n兑\n付" forState:UIControlStateNormal];
+        cell.buttonWait.titleLabel.numberOfLines = 3;
+        cell.buttonWait.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.buttonWait.backgroundColor = [UIColor clearColor];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     } else {
         
-        TWOUseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseR"];
+        TWIJiaXiQuanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseR"];
         cell.imagePicture.image = [UIImage imageNamed:@"historyQuan"];
         
         NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"2"]];
@@ -144,9 +149,10 @@
         cell.labelEvery.textColor = [UIColor findZiTiColor];
         cell.labelEvery.backgroundColor = [UIColor clearColor];
         
-//        cell.labelCanUse.text = @"可\n使\n用";
-//        cell.labelCanUse.numberOfLines = 3;
-//        cell.labelCanUse.backgroundColor = [UIColor clearColor];
+        [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];
+        cell.butCanUse.titleLabel.numberOfLines = 3;
+        cell.butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        cell.butCanUse.backgroundColor = [UIColor clearColor];
         
         cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
         cell.labelData.textColor = [UIColor findZiTiColor];

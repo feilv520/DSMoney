@@ -13,6 +13,7 @@
 
 {
     UITextField *textFieldEmail;
+    UIButton *butNextOne;
 }
 
 @end
@@ -46,8 +47,9 @@
     textFieldEmail.delegate = self;
     textFieldEmail.textColor = [UIColor ZiTiColor];
     textFieldEmail.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+    [textFieldEmail addTarget:self action:@selector(textFieldEmailButtonGray:) forControlEvents:UIControlEventEditingChanged];
     
-    UIButton *butNextOne = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 56 + 16, WIDTH_CONTROLLER_DEFAULT - 20, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
+    butNextOne = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 56 + 16, WIDTH_CONTROLLER_DEFAULT - 20, 40) backgroundColor:[UIColor findZiTiColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
     [self.view addSubview:butNextOne];
     butNextOne.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     butNextOne.layer.cornerRadius = 5;
@@ -55,17 +57,25 @@
     [butNextOne addTarget:self action:@selector(buttonNextClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)textFieldEmailButtonGray:(UITextField *)textField
+{
+    if (textField.text.length == 0) {
+        butNextOne.backgroundColor = [UIColor findZiTiColor];
+    } else {
+        butNextOne.backgroundColor = [UIColor profitColor];
+    }
+}
+
 //下一步按钮
 - (void)buttonNextClicked:(UIButton *)button
 {
-    [textFieldEmail resignFirstResponder];
-    
-    if ([NSString validateEmail:textFieldEmail.text]) {
-        [self bindingEmailData];
-        TWOBindingEmailOverViewController *bindingEmailVC = [[TWOBindingEmailOverViewController alloc] init];
-        [self.navigationController pushViewController:bindingEmailVC animated:YES];
+    if (textFieldEmail.text.length == 0) {
+        
+    } else if (![NSString validateEmail:textFieldEmail.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入正确的邮箱格式"];
     } else {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"邮箱格式不正确,请更正."];
+        [self bindingEmailData];
+        [textFieldEmail resignFirstResponder];
     }
 }
 
@@ -77,7 +87,8 @@
         
         NSLog(@"绑定邮箱aaaaaaaa%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-            
+            TWOBindingEmailOverViewController *bindingEmailVC = [[TWOBindingEmailOverViewController alloc] init];
+            [self.navigationController pushViewController:bindingEmailVC animated:YES];
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
             
         } else {

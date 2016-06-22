@@ -8,6 +8,7 @@
 
 #import "TWOUseTicketViewController.h"
 #import "TWOUseRedBagCell.h"
+#import "TWIJiaXiQuanCell.h"
 
 @interface TWOUseTicketViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -38,7 +39,7 @@
     _tableView.separatorColor = [UIColor clearColor];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     _tableView.tableFooterView.backgroundColor = [UIColor whiteColor];
-    [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TWIJiaXiQuanCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -53,7 +54,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TWOUseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    TWIJiaXiQuanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
     cell.imagePicture.image = [UIImage imageNamed:@"jiaxijuan"];
     
@@ -78,9 +79,10 @@
     cell.labelEvery.text = @"所有产品适用";
     cell.labelEvery.backgroundColor = [UIColor clearColor];
     
-//    cell.labelCanUse.text = @"可\n使\n用";
-//    cell.labelCanUse.numberOfLines = 3;
-//    cell.labelCanUse.backgroundColor = [UIColor clearColor];
+    [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];
+    cell.butCanUse.titleLabel.numberOfLines = 3;
+    cell.butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+    cell.butCanUse.backgroundColor = [UIColor clearColor];
     
     cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
     cell.labelData.backgroundColor = [UIColor clearColor];

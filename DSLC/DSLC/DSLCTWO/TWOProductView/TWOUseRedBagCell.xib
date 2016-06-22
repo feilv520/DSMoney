@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="CenturyGothic.TTF">
@@ -29,12 +28,9 @@
                             <constraint firstAttribute="height" constant="131" id="8vI-FU-FR5"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N67-uH-Ofc">
-                        <rect key="frame" x="9" y="55" width="127" height="40"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N67-uH-Ofc">
+                        <rect key="frame" x="14" y="55" width="122" height="40"/>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="FnK-xH-O4Q"/>
-                        </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="39"/>
                         <color key="textColor" red="1" green="0.42745098039215684" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -67,10 +63,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="GRZ-aT-laI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="MbD-wd-c5s"/>
-                    <constraint firstItem="N67-uH-Ofc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="47" id="OFz-I4-1ja"/>
                     <constraint firstItem="GRZ-aT-laI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="9" id="Okq-fb-tXz"/>
                     <constraint firstAttribute="trailing" secondItem="GRZ-aT-laI" secondAttribute="trailing" constant="9" id="mVv-Rx-JDm"/>
-                    <constraint firstItem="N67-uH-Ofc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="q8n-LI-4H5"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

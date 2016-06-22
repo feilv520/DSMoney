@@ -50,7 +50,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"TWOPhoneNumCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOGetCodeCell" bundle:nil] forCellReuseIdentifier:@"reuseCode"];
     
-    butNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 15, WIDTH_CONTROLLER_DEFAULT - 20, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor qianhuise] titleText:@"下一步"];
+    butNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 15, WIDTH_CONTROLLER_DEFAULT - 20, 40) backgroundColor:[UIColor findZiTiColor] textColor:[UIColor qianhuise] titleText:@"下一步"];
     [_tableView.tableFooterView addSubview:butNext];
     butNext.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     butNext.layer.cornerRadius = 5;
@@ -93,6 +93,7 @@
         cell.textFieldCode.delegate = self;
         cell.textFieldCode.tag = 333;
         cell.textFieldCode.keyboardType = UIKeyboardTypeNumberPad;
+        [cell.textFieldCode addTarget:self action:@selector(textFieldGray:) forControlEvents:UIControlEventEditingChanged];
         
         cell.butGetCode.layer.cornerRadius = 6;
         cell.butGetCode.layer.masksToBounds = YES;
@@ -104,6 +105,15 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
+    }
+}
+
+- (void)textFieldGray:(UITextField *)textField
+{
+    if (textField.text.length > 0) {
+        butNext.backgroundColor = [UIColor profitColor];
+    } else {
+        butNext.backgroundColor = [UIColor findZiTiColor];
     }
 }
 
@@ -128,9 +138,9 @@
     _textFieldPhone = (UITextField *)[self.view viewWithTag:333];
     
     if (_textFieldPhone.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入验证码"];
+
     } else if (_textFieldPhone.text.length != 6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入六位验证码"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
     } else {
         [self.view endEditing:YES];
         [self nextOneStepData];

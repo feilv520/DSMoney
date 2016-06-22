@@ -52,7 +52,7 @@
     [redStr addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:frontStr];
     [labelStat setAttributedText:redStr];
     
-    butMakeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 9 + _textView.frame.size.height + 11 + labelStat.frame.size.height + 11, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"提交"];
+    butMakeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 9 + _textView.frame.size.height + 11 + labelStat.frame.size.height + 11, WIDTH_CONTROLLER_DEFAULT - 80, 40) backgroundColor:[UIColor findZiTiColor] textColor:[UIColor whiteColor] titleText:@"提交"];
     [self.view addSubview:butMakeSure];
     butMakeSure.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     butMakeSure.layer.cornerRadius = 5;
@@ -100,6 +100,16 @@
     }
 }
 
+//按钮置灰
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+    if (_textView.text.length == 0) {
+        butMakeSure.backgroundColor = [UIColor findZiTiColor];
+    } else {
+        butMakeSure.backgroundColor = [UIColor profitColor];
+    }
+}
+
 //规定不超过编辑字数范围200 如果输入超过200 就不能再输入
 -(BOOL)textView:(UITextView*)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
@@ -117,7 +127,7 @@
 - (void)buttonClickedMakeSureSubmit:(UIButton *)button
 {
     if (_textView.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请留下宝贵意见"];
+
     } else {
         [self getSuggestionData];
         [_textView resignFirstResponder];

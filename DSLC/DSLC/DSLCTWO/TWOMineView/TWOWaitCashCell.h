@@ -14,9 +14,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelTiaoJian;
 @property (weak, nonatomic) IBOutlet UILabel *labelEvery;
 @property (weak, nonatomic) IBOutlet UILabel *laeblData;
-@property (weak, nonatomic) IBOutlet UILabel *labelWait;
+@property (weak, nonatomic) IBOutlet UIButton *buttonWait;
 @property (weak, nonatomic) IBOutlet UILabel *laeblMoney;
 @property (weak, nonatomic) IBOutlet UILabel *labelTime;
 @property (weak, nonatomic) IBOutlet UILabel *labelShuoMing;
+@property (weak, nonatomic) IBOutlet UIView *viewLine;
 
 @end

@@ -76,9 +76,10 @@
     cell.labelEvery.text = @"所有产品适用";
     cell.labelEvery.backgroundColor = [UIColor clearColor];
     
-//    cell.labelCanUse.text = @"可\n使\n用";
-//    cell.labelCanUse.numberOfLines = 3;
-//    cell.labelCanUse.backgroundColor = [UIColor clearColor];
+    [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];
+    cell.butCanUse.titleLabel.numberOfLines = 3;
+    cell.butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+    cell.butCanUse.backgroundColor = [UIColor clearColor];
     
     cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
     cell.labelData.backgroundColor = [UIColor clearColor];

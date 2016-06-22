@@ -50,7 +50,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"TWOGetCodeCell" bundle:nil] forCellReuseIdentifier:@"reuseCode"];
     
 //    确定按钮
-    butMakeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 15, WIDTH_CONTROLLER_DEFAULT - 20, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    butMakeSure = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 15, WIDTH_CONTROLLER_DEFAULT - 20, 40) backgroundColor:[UIColor findZiTiColor] textColor:[UIColor whiteColor] titleText:@"确定"];
     [_tableView.tableFooterView addSubview:butMakeSure];
     butMakeSure.layer.cornerRadius = 5;
     butMakeSure.layer.masksToBounds = YES;
@@ -80,6 +80,7 @@
         cell.textFieldPhone.placeholder = @"请输入需要更换绑定的手机号";
         cell.textFieldPhone.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.textFieldPhone.tintColor = [UIColor grayColor];
+        [cell.textFieldPhone addTarget:self action:@selector(textFieldButtonChangeGray:) forControlEvents:UIControlEventEditingChanged];
         cell.buttonEye.hidden = YES;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -96,6 +97,7 @@
         cell.textFieldCode.delegate = self;
         cell.textFieldCode.tag = 333;
         cell.textFieldCode.keyboardType = UIKeyboardTypeNumberPad;
+        [cell.textFieldCode addTarget:self action:@selector(textFieldButtonChangeGray:) forControlEvents:UIControlEventEditingChanged];
         
         cell.butGetCode.layer.cornerRadius = 6;
         cell.butGetCode.layer.masksToBounds = YES;
@@ -115,6 +117,19 @@
     return 56;
 }
 
+//按钮置灰
+- (void)textFieldButtonChangeGray:(UITextField *)textField
+{
+    textFieldPhone = (UITextField *)[self.view viewWithTag:800];
+    textFieldCode = (UITextField *)[self.view viewWithTag:333];
+    
+    if (textFieldPhone.text.length == 0 || textFieldCode.text.length == 0) {
+        butMakeSure.backgroundColor = [UIColor findZiTiColor];
+    } else {
+        butMakeSure.backgroundColor = [UIColor profitColor];
+    }
+}
+
 //获取验证码
 - (void)getCodeButton:(UIButton *)button
 {
@@ -123,9 +138,9 @@
     textFieldCode = (UITextField *)[self.view viewWithTag:333];
     
     if (textFieldPhone.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入要更换的绑定手机号"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"电话号码不能为空"];
     } else if (![NSString validateMobile:textFieldPhone.text]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您输入的手机格式不正确"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入正确的电话号码"];
     } else {
         [self getCode];
     }
@@ -158,13 +173,13 @@
     textFieldCode = (UITextField *)[self.view viewWithTag:333];
     
     if (textFieldPhone.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入要更换的绑定手机号"];
-    } else if (![NSString validateMobile:textFieldPhone.text]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您输入的手机格式不正确"];
+
     } else if (textFieldCode.text.length == 0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入短信验证码"];
+        
+    } else if (![NSString validateMobile:textFieldPhone.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入正确的电话号码"];
     } else if (textFieldCode.text.length != 6) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入不少于6位短信验证码"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"验证码错误"];
     } else {
         [self.view endEditing:YES];
         [self getDataMakeSure];

@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOSetDealSecretViewController : BaseViewController
-
+@property (nonatomic) NSString *phoneStr;
 @end

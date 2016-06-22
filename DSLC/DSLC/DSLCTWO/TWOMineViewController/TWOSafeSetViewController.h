@@ -10,4 +10,5 @@
 
 @interface TWOSafeSetViewController : BaseViewController
 @property (nonatomic) NSString *setPassWord;
+@property (nonatomic) NSString *phoneString;
 @end
