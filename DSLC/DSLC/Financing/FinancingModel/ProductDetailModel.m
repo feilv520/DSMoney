@@ -17,6 +17,10 @@
         self.productPeriod = value;
     } else if ([key isEqualToString:@"yieldDistribTypeName"]) {
         self.productYieldDistribTypeName = value;
+    } else if ([key isEqualToString:@"increaseMoney"]) {
+        self.amountIncrease = value;
+    } else if ([key isEqualToString:@"minMoney"]) {
+        self.amountMin = value;
     }
 }
 

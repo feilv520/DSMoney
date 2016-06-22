@@ -36,6 +36,9 @@
     // 星星view
     UIView *viewUserXing;
     NSString *kindString;
+    
+    // 资产数组
+    NSMutableArray *assetArray;
 }
 
 @property (nonatomic, strong) UIControl *viewBotton;
@@ -79,6 +82,7 @@
     self.view.backgroundColor = [UIColor huibai];
     
     titleArray = [NSArray array];
+    assetArray = [NSMutableArray array];
     
     titleArray = @[@"收益方式",@"计息起始日&到账日",@"投资限额"];
     
@@ -296,7 +300,16 @@
     pMoneyView.frame = CGRectMake(0, 110, WIDTH_CONTROLLER_DEFAULT, 80);
     
     NSMutableAttributedString *resdStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17元"];
-    [resdStringM replaceCharactersInRange:NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%@",self.residueMoney]];
+    
+    CGFloat residueMoney = [self.residueMoney floatValue];
+    
+    if (residueMoney / 10000.0 > 0) {
+        
+        [resdStringM replaceCharactersInRange:NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%.2lf万",residueMoney / 10000.0]];
+    } else {
+        
+        [resdStringM replaceCharactersInRange:NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%@",self.residueMoney]];
+    }
     NSRange numYString = NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location);
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:21] range:numYString];
@@ -330,14 +343,22 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    if (assetArray.count == 0) {
+        return 2;
+    } else {
+        return 3;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
         return 3;
     } else if(section == 1){
-        return 2;
+        if (assetArray.count == 0) {
+            return 3;
+        } else {
+            return 2;
+        }
     } else {
         return 3;
     }
@@ -365,7 +386,7 @@
     
     TWOProductDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (indexPath.section == 0) {
         cell.titleLabel.text = titleArray[indexPath.row];
@@ -376,18 +397,51 @@
             
             cell.valueLabel.text = [NSString stringWithFormat:@"%@&%@",[self.detailM beginTime],[self.detailM endTime]];
         } else {
-            cell.valueLabel.text = @"无限投";
+            cell.valueLabel.text = [self.detailM subjectMaxMoney];
         }
         
     } else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            
-            cell.titleLabel.text = @"资产详情";
-            
+        
+        if (assetArray.count == 0) {
+            if (indexPath.row == 0) {
+                
+                cell.titleLabel.text = @"产品介绍";
+            } else if (indexPath.row == 1) {
+                
+                cell.titleLabel.text = @"投资记录";
+                cell.titleLabel.textColor = [UIColor findZiTiColor];
+            } else {
+                
+                cell.titleLabel.text = @"产品安全等级";
+                cell.titleLabel.textColor = [UIColor findZiTiColor];
+                
+                viewUserXing = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 175, 0, 150, 50) backgroundColor:[UIColor clearColor]];
+                [cell addSubview:viewUserXing];
+                
+                kindString = @"稳健型";
+                
+                NSArray *userXingArray = @[@"xing", @"xing", @"xing", @"xing", @"xing"];
+                
+                UILabel *kindLabel = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 60, 46) backgroundColor:Color_Clear textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:kindString];
+                [viewUserXing addSubview:kindLabel];
+                
+                for (int w = 0; w < 5; w++) {
+                    UIImageView *imageUserXing = [CreatView creatImageViewWithFrame:CGRectMake(60 + 3 * w + 14 * w, 16, 14, 14) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:[userXingArray objectAtIndex:w]]];
+                    [viewUserXing addSubview:imageUserXing];
+                }
+                
+            }
         } else {
-            
-            cell.titleLabel.text = @"产品详情";
-            cell.titleLabel.textColor = [UIColor findZiTiColor];
+        
+            if (indexPath.row == 0) {
+                
+                cell.titleLabel.text = @"资产详情";
+                
+            } else {
+                
+                cell.titleLabel.text = [[assetArray objectAtIndex:indexPath.row - 1] objectForKey:@"assetName"];
+                cell.titleLabel.textColor = [UIColor findZiTiColor];
+            }
         }
     } else if(indexPath.section == 2) {
         if (indexPath.row == 0) {
@@ -435,6 +489,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 2) {
+        
         if (indexPath.row == 1) {
             TWORecordViewController *recordVC = [[TWORecordViewController alloc] init];
             recordVC.idString = self.idString;
@@ -444,9 +499,22 @@
             pushVC(safeTestVC);
         }
     } else if (indexPath.section == 1) {
-        if (indexPath.row == 1) {
-            TWOProductDDetailViewController *productDDetailVC = [[TWOProductDDetailViewController alloc] init];
-            pushVC(productDDetailVC);
+        
+        if (assetArray.count == 0) {
+            if (indexPath.row == 1) {
+                TWORecordViewController *recordVC = [[TWORecordViewController alloc] init];
+                recordVC.idString = self.idString;
+                pushVC(recordVC);
+            } else if (indexPath.row == 2){
+                TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
+                pushVC(safeTestVC);
+            }
+        } else {
+            if (indexPath.row == 1) {
+                TWOProductDDetailViewController *productDDetailVC = [[TWOProductDDetailViewController alloc] init];
+                productDDetailVC.assetId = [[assetArray objectAtIndex:indexPath.row - 1] objectForKey:@"assetId"];
+                pushVC(productDDetailVC);
+            }
         }
     }
     
@@ -599,12 +667,12 @@
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
-                
-            } else {
-                
+//            if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
+//                
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+//                
+//            } else {
+            
                 if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"3"]) {
                     
 //                    TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
@@ -636,7 +704,7 @@
                     [self submitLoadingWithHidden:YES];
                     
                 }
-            }
+//            }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             NSLog(@"%@", error);
@@ -733,6 +801,8 @@
         self.detailM = [[ProductDetailModel alloc] init];
         dataDic = [responseObject objectForKey:@"Product"];
         [self.detailM setValuesForKeysWithDictionary:dataDic];
+        
+        assetArray = [responseObject objectForKey:@"Asset"];
         
         [self showTableView];
         [self showBottonView];

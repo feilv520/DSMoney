@@ -14,6 +14,8 @@
 #import "CreatView.h"
 #import "TWOFindViewController.h"
 #import "TWOHomePageProductCell.h"
+#import "TWOPickModel.h"
+#import "TWOProductDetailViewController.h"
 
 @interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
@@ -33,6 +35,11 @@
     UIButton *buttonRight;
     NSInteger numberItem;
     UIView *viewDown;
+    
+    NSMutableArray *pickArray;
+    
+    CGFloat residueMoney;
+    NSString *residueMoneyString;
 }
 
 @end
@@ -51,9 +58,13 @@
     
     self.view.backgroundColor = [UIColor qianhuise];
     
-//    [self signFinish];
+    pickArray = [NSMutableArray array];
+    
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
+    
+    [self getProductList];
     [self upContentShow];
-    [self collectionViewShow];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLoginView) name:@"showLoginView" object:nil];
 }
@@ -225,13 +236,13 @@
     cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
     cell.viewBottom.layer.borderWidth = 1;
     
-    NSArray *nameArray = @[@"美猴王001期", @"金斗云77期", @"3个月齐系列"];
-    cell.labelName.text = [nameArray objectAtIndex:indexPath.item];
+    TWOPickModel *model = [pickArray objectAtIndex:indexPath.item];
+    cell.labelName.text = [model productName];
     
     [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateNormal];
     [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateHighlighted];
     cell.butQuanQuan.backgroundColor = [UIColor clearColor];
-    NSMutableAttributedString *butString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"11.5"]];
+    NSMutableAttributedString *butString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [model annualYield]]];
     NSRange leftRange = NSMakeRange(0, [[butString string] rangeOfString:@"%"].location);
     [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
     [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:leftRange];
@@ -262,9 +273,23 @@
         cell.butRight.hidden = NO;
     }
         
-    [self changeColorAndSize:@"3天" label:cell.labelData length:1];
-    [self changeColorAndSize:@"24.3万元" label:cell.labelLastMoney length:2];
-    [self changeColorAndSize:@"1,000元" label:cell.labelQiTou length:1];
+    [self changeColorAndSize:[NSString stringWithFormat:@"%@天",[model period]] label:cell.labelData length:1];
+    
+    residueMoneyString = [[model residueMoney] stringByReplacingOccurrencesOfString:@"," withString:@""];
+    
+    residueMoney = [[[model residueMoney] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
+    
+    if (residueMoney / 10000.0 > 0) {
+        
+        residueMoney = residueMoney / 10000.0;
+        
+        [self changeColorAndSize:[NSString stringWithFormat:@"%.2lf万元",residueMoney] label:cell.labelLastMoney length:2];
+    } else {
+        
+        [self changeColorAndSize:[NSString stringWithFormat:@"%.0lf元",residueMoney] label:cell.labelLastMoney length:1];
+    }
+    
+    [self changeColorAndSize:[NSString stringWithFormat:@"%d元",[[model startMoney] intValue]] label:cell.labelQiTou length:1];
         
     cell.labelYuQi.text = @"预期年化收益率";
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
@@ -352,7 +377,16 @@
 //立即抢购按钮
 - (void)rightQiangGou:(UIButton *)button
 {
-    NSLog(@"qiang");
+    CGFloat pageNumber = _collection.contentOffset.x / WIDTH_CONTROLLER_DEFAULT;
+    
+    TWOPickModel *pickModel = [pickArray objectAtIndex:pageNumber];
+    
+    TWOProductDetailViewController *productDetailVC = [[TWOProductDetailViewController alloc] init];
+    productDetailVC.idString = [pickModel productId];
+    productDetailVC.productName = [pickModel productName];
+    productDetailVC.residueMoney = residueMoneyString;
+    pushVC(productDetailVC);
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -392,6 +426,45 @@
         _scrollView.scrollEnabled = YES;
     }
 }
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getProductList{
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getPickProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"first = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            [self loadingWithHidden:YES];
+            
+            NSArray *pickArr = [responseObject objectForKey:@"Product"];
+            
+            for (NSDictionary *dic in pickArr) {
+                TWOPickModel *model = [[TWOPickModel alloc] init];
+                [model setValuesForKeysWithDictionary:dic];
+                [pickArray addObject:model];
+            }
+            
+            [self collectionViewShow];
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -46,6 +46,19 @@
 
 @implementation TWOProductMakeSureViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    sureView.hidden = NO;
+    
+    sureView.hidden = NO;
+    
+    makeSView.hidden = NO;
+    
+    monkeyView.hidden = NO;
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -75,17 +88,16 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [sureView removeFromSuperview];
-    sureView = nil;
+
+    sureView.hidden = YES;
     
-    [bView removeFromSuperview];
-    bView = nil;
+    sureView.hidden = YES;
     
-    [makeSView removeFromSuperview];
-    makeSView = nil;
+    makeSView.hidden = YES;
     
-    [monkeyView removeFromSuperview];
-    monkeyView = nil;
+    monkeyView.hidden = YES;
+    
+    bView.hidden = YES;
 }
 
 // 创建TableView
@@ -138,18 +150,48 @@
     
     // 剩余可投
     NSMutableAttributedString *residueString = [[NSMutableAttributedString alloc] initWithString:@"13.17元"];
-    [residueString replaceCharactersInRange:NSMakeRange(0, [[residueString string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%@",self.residueMoney]];
-    NSRange numRString = NSMakeRange(0, [[residueString string] rangeOfString:@"元"].location);
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:21] range:numRString];
-        NSRange oneString = NSMakeRange([[residueString string] length] - 1, 1);
-        [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:oneString];
+    
+    CGFloat residueMoney = [self.residueMoney floatValue];
+    
+    NSLog(@"%lf",residueMoney);
+    
+    if (residueMoney / 10000.0 > 0){
+        
+        residueMoney /= 10000.0;
+        
+        [residueString replaceCharactersInRange:NSMakeRange(0, [[residueString string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%.2lf万",residueMoney]];
+        
+        NSRange numRString = NSMakeRange(0, [[residueString string] rangeOfString:@"万"].location);
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:21] range:numRString];
+            NSRange oneString = NSMakeRange([[residueString string] length] - 2, 2);
+            [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:oneString];
+            
+        } else {
+            [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:numRString];
+            NSRange oneString = NSMakeRange([[residueString string] length] - 2, 2);
+            [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:oneString];
+        }
         
     } else {
-        [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:numRString];
-        NSRange oneString = NSMakeRange([[residueString string] length] - 1, 1);
-        [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:oneString];
+        
+        [residueString replaceCharactersInRange:NSMakeRange(0, [[residueString string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%@",self.residueMoney]];
+        
+        NSRange numRString = NSMakeRange(0, [[residueString string] rangeOfString:@"元"].location);
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:21] range:numRString];
+            NSRange oneString = NSMakeRange([[residueString string] length] - 1, 1);
+            [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:oneString];
+            
+        } else {
+            [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:numRString];
+            NSRange oneString = NSMakeRange([[residueString string] length] - 1, 1);
+            [residueString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:oneString];
+        }
     }
+    
     [makeSureHView.rMoneyLabel setAttributedText:residueString];
     
     // 理财期限
@@ -181,13 +223,17 @@
     
     UIButton *sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
+    sureButton.tag = 9574;
+    
     sureButton.frame = CGRectMake(10, 10, WIDTH_CONTROLLER_DEFAULT - 20, 40);
     
     [sureButton addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    [sureButton setBackgroundImage:[UIImage imageNamed:@"productSureButton"] forState:UIControlStateNormal];
+    [sureButton setBackgroundColor:[UIColor findZiTiColor]];
     
     [sureButton setTitle:@"确认" forState:UIControlStateNormal];
+    
+    sureButton.enabled = NO;
     
     [sureView addSubview:sureButton];
 }
@@ -254,7 +300,11 @@
             
             [cell.inputMoneyTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
             
+            cell.inputMoneyTextField.tag = 9283;
+            
             cell.inputMoneyTextField.delegate = self;
+            
+            cell.inputMoneyTextField.placeholder = [NSString stringWithFormat:@"%@元起投,每%@元递增",[self.detailM amountMin],[self.detailM amountIncrease]];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
@@ -278,7 +328,11 @@
             
             [cell.inputMoneyTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
             
+            cell.inputMoneyTextField.tag = 9283;
+            
             cell.inputMoneyTextField.delegate = self;
+            
+            cell.inputMoneyTextField.placeholder = [NSString stringWithFormat:@"%d元起投,每%d元递增",[[self.detailM amountMin] intValue],[[self.detailM amountIncrease] intValue]];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
@@ -303,7 +357,13 @@
             
             [cell.upMoneyButton addTarget:self action:@selector(upAction:) forControlEvents:UIControlEventTouchUpInside];
             
+            cell.upMoneyButton.hidden = YES;
+            
             [cell.moneyTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+            
+            cell.moneyTextField.tag = 9283;
+            
+            cell.moneyTextField.placeholder = [NSString stringWithFormat:@"%d元起投,每%d元递增",[[self.detailM amountMin] intValue],[[self.detailM amountIncrease] intValue]];
             
             cell.moneyTextField.delegate = self;
             
@@ -372,6 +432,21 @@
         self.mainTableView.scrollEnabled = NO;
     } else {
         self.mainTableView.scrollEnabled = YES;
+        [self.view endEditing:YES];
+        
+        UITextField *textField = (UITextField *)[self.view viewWithTag:9283];
+        
+        if ([textField.text isEqualToString:@""]){
+            return;
+        }
+        
+        NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
+        
+        textField.text = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
+        
+        allMoneyString = textField.text;
+        
+        [self textFieldEditChanged:textField];
     }
 }
 
@@ -393,21 +468,32 @@
 //textField绑定方法
 - (void)textFieldEditChanged:(UITextField *)textField
 {
+    
+    UIButton *sureButton = (UIButton *)[sureView viewWithTag:9574];
+    
+    if (textField.text.length == 0) {
+        sureButton.backgroundColor = [UIColor findZiTiColor];
+        sureButton.enabled = NO;
+    } else if (textField.text.length > 0) {
+        sureButton.backgroundColor = [UIColor profitColor];
+        sureButton.enabled = YES;
+    }
+    
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
     
     if ([self.detailM.productName containsString:@"新手"]){
         
         TWOProductMakeSureThreeTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
         
-        cell.yqMoneyLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
+        cell.yqMoneyLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod] floatValue] / 36500.0];
         
         syString = cell.yqMoneyLabel.text;
         
-    } else if ([self.detailM.productType isEqualToString:@"1"] || ([self.detailM.productType isEqualToString:@"3"] && [self.detailM.productName containsString:@"美猴王"])) {
+    } else if ([[self.detailM.productType description] isEqualToString:@"1"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [self.detailM.productName containsString:@"美猴王"])) {
         
         TWOMakeSureTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
         
-        cell.yqMoneyLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
+        cell.yqMoneyLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod] floatValue] / 36500.0];
         
         syString = cell.yqMoneyLabel.text;
         
@@ -415,18 +501,19 @@
         
         TWOProductMakeSureTwoTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
         
-        cell.yqSLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
+        cell.yqSLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod] floatValue] / 36500.0];
         
         syString = cell.yqSLabel.text;
     }
     
-    allMoneyString = textField.text;
     monkeyString = @"0个";
     
 }
 
 // 确认按钮
 - (void)sureAction:(id)sender{
+    
+    [self.view endEditing:YES];
     
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -520,6 +607,20 @@
 //完成方法
 - (void)doneButton:(id)sender{
     [self.view endEditing:YES];
+    
+    UITextField *textField = (UITextField *)[self.view viewWithTag:9283];
+    
+    if ([textField.text isEqualToString:@""]){
+        return;
+    }
+    
+    NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
+    
+    textField.text = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
+    
+    allMoneyString = textField.text;
+    
+    [self textFieldEditChanged:textField];
 }
 
 //关闭按钮
@@ -534,7 +635,7 @@
     monkeyView = nil;
 }
 
-// 确认按钮
+// 提示框确认按钮
 - (void)sureBAction:(id)sender{
     
     TWOProductPaySuccessViewController *paySuccessVC = [[TWOProductPaySuccessViewController alloc] init];

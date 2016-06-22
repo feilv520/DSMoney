@@ -162,18 +162,20 @@
             
             TWOProductNewHotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNN"];
             
+            ProductListModel *pListModel = [self.productListArray objectAtIndex:indexPath.row];
+            
             cell.imageBuying.image = [UIImage imageNamed:@"热卖"];
             cell.viewBottom.layer.cornerRadius = 5;
             cell.viewBottom.layer.masksToBounds = YES;
             cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
             cell.viewBottom.layer.borderWidth = 1;
             
-            cell.labelName.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
+            cell.labelName.text = [pListModel productName];
             
             [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateNormal];
             cell.butQuanQuan.backgroundColor = [UIColor clearColor];
             cell.butQuanQuan.enabled = NO;
-            NSMutableAttributedString *butString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"11.5"]];
+            NSMutableAttributedString *butString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [pListModel productAnnualYield]]];
             NSRange leftRange = NSMakeRange(0, [[butString string] rangeOfString:@"%"].location);
             [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:40] range:leftRange];
             [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:leftRange];
@@ -182,9 +184,20 @@
             [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:rightRange];
             [cell.butQuanQuan setAttributedTitle:butString forState:UIControlStateNormal];
             
-            [self changeColorAndSize:@"3天" label:cell.labelData length:1];
-            [self changeColorAndSize:@"24.3万元" label:cell.labelLastMoney length:2];
-            [self changeColorAndSize:@"1,000元" label:cell.labelQiTou length:1];
+            [self changeColorAndSize:[NSString stringWithFormat:@"%@天",[pListModel productPeriod]] label:cell.labelData length:1];
+            
+            CGFloat residueMoney = [[[pListModel residueMoney] stringByReplacingOccurrencesOfString:@"," withString:@""] floatValue];
+            if (residueMoney / 10000.0 > 0) {
+                
+                residueMoney /= 10000.0;
+                
+                [self changeColorAndSize:[NSString stringWithFormat:@"%.2lf万元",residueMoney] label:cell.labelLastMoney length:2];
+            } else {
+                
+                [self changeColorAndSize:[NSString stringWithFormat:@"%d元",[[pListModel residueMoney] intValue]] label:cell.labelLastMoney length:1];
+            }
+            
+            [self changeColorAndSize:[NSString stringWithFormat:@"%@元",[pListModel startMoney]] label:cell.labelQiTou length:1];
             
             cell.labelYuQi.text = @"预期年化收益率";
             cell.labelDownONe.text = @"理财期限";
@@ -506,39 +519,27 @@
 
 - (void)getAdvList{
     
-//    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"5"};
-//    
-//    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-//        
-//        NSLog(@"ADProduct = %@",responseObject);
-//        
-//        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
-//            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-//            return ;
-//        }
-//        
-//        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
-//            AdModel *adModel = [[AdModel alloc] init];
-//            [adModel setValuesForKeysWithDictionary:dic];
-//            [photoArray addObject:adModel];
-//        }
-//        
-//        if (photoArray.count != 0) {
-//            [self activityShowViewHead];
-//            [self makeScrollView];
-//        }
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        
-//        NSLog(@"%@", error);
-//        
-//    }];
+    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"5"};
     
-    NSDictionary *parmeter = @{@"phone":@"13354288036",@"msgType":@"1"};
-    
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"three/getSmsCode" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"getSmsCode = %@",responseObject);
+        NSLog(@"ADProduct = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            return ;
+        }
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
+            AdModel *adModel = [[AdModel alloc] init];
+            [adModel setValuesForKeysWithDictionary:dic];
+            [photoArray addObject:adModel];
+        }
+        
+        if (photoArray.count != 0) {
+            [self activityShowViewHead];
+            [self makeScrollView];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

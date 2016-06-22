@@ -455,7 +455,7 @@
             if (![FileOfManage ExistOfFile:@"Member.plist"]) {
                 [FileOfManage createWithFile:@"Member.plist"];
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     textFieldSecret.text,@"password",
+                                     [DES3Util encrypt:textFieldSecret.text],@"password",
                                      textFieldPhone.text,@"phone",
                                      [responseObject objectForKey:@"key"],@"key",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
@@ -468,7 +468,7 @@
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             } else {
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     textFieldSecret.text,@"password",
+                                     [DES3Util encrypt:textFieldSecret.text],@"password",
                                      textFieldPhone.text,@"phone",
                                      [responseObject objectForKey:@"key"],@"key",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
@@ -480,6 +480,16 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
+            }
+            
+            // 判断是否存在isLogin.plist文件
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
             
             [self dismissViewControllerAnimated:YES completion:^{
@@ -574,6 +584,69 @@
         
     }];
 }
+
+//签到成功
+- (void)signFinish
+{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    buttonHei = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, app.window.frame.size.height) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    [app.tabBarVC.view addSubview:buttonHei];
+    buttonHei.alpha = 0.6;
+    [buttonHei addTarget:self action:@selector(clickedBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    viewDown = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 530/2/2, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 530/2, 397/2 + 30) backgroundColor:[UIColor clearColor]];
+    [app.tabBarVC.view addSubview:viewDown];
+    viewDown.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAddClicked:)];
+    [viewDown addGestureRecognizer:tapView];
+    
+    labelMonkey = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewDown.frame.size.width, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:27] text:[NSString stringWithFormat:@"%@猴币", @"+66"]];
+    [viewDown addSubview:labelMonkey];
+    
+    imageSign = [CreatView creatImageViewWithFrame:CGRectMake(0, 30, viewDown.frame.size.width, viewDown.frame.size.height - 30) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"doSign"]];
+    [viewDown addSubview:imageSign];
+    imageSign.userInteractionEnabled = YES;
+    
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.5;
+    
+    NSMutableArray *values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    [viewDown.layer addAnimation:animation forKey:nil];
+}
+
+//黑色遮罩层消失
+- (void)clickedBlackDisappear:(UIButton *)button
+{
+    [buttonHei removeFromSuperview];
+    [viewDown removeFromSuperview];
+    [labelMonkey removeFromSuperview];
+    [imageSign removeFromSuperview];
+    
+    buttonHei = nil;
+    viewDown = nil;
+    labelMonkey = nil;
+    imageSign = nil;
+}
+
+//点击猴子
+- (void)tapAddClicked:(UITapGestureRecognizer *)tap
+{
+    [buttonHei removeFromSuperview];
+    [viewDown removeFromSuperview];
+    [labelMonkey removeFromSuperview];
+    [imageSign removeFromSuperview];
+    
+    buttonHei = nil;
+    viewDown = nil;
+    labelMonkey = nil;
+    imageSign = nil;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

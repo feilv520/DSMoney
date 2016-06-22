@@ -11,6 +11,7 @@
 #import "TRankinglistViewController.h"
 #import "TWOProductDDDetailView.h"
 #import "TWOProductJinDuTableViewCell.h"
+#import "TWOProductAssetModel.h"
 
 @interface TWOProductDDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate> {
     UIButton *button1;
@@ -31,6 +32,15 @@
     CGRect cellRect;
     
     BOOL moreOpenFlag;
+    
+    // 资产详情model
+    TWOProductAssetModel *assetModel;
+    
+    // 资产详情数组
+    NSMutableArray *progressArray;
+    NSMutableArray *valueArray;
+    
+    
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -51,7 +61,16 @@
     
     titleArray = @[@"产品名称",@"产品类型",@"资产总额",@"预期年化收益率",@"开售时间",@"起息日",@"结息日",@"预计到账日",@"收益分配方式",@"融资方名称",@"项目定向用途",@"还款来源",@"抵押资产"];
     
-    [self tableViewShow];
+    progressArray = [NSMutableArray array];
+    
+    valueArray = [NSMutableArray array];
+    
+    [self getAssetDetailFuction];
+    
+//    if (valueArray.count == 0) {
+        [self tableViewShow];
+
+//    }
 }
 
 - (void)tableViewShow
@@ -108,7 +127,12 @@
         if (indexPath.row == 0) {
             return 50;
         } else {
-            return 120;
+            
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
+            
+            CGSize sizeDetail = [[assetModel assetProjectDetail] boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            return sizeDetail.height;
         }
     }
 }
@@ -119,9 +143,9 @@
         return 1;
     } else if (section == 1) {
         if (!openFlag) {
-            return 3;
+            return progressArray.count + 1;
         } else {
-            return 14;
+            return titleArray.count + 1;
         }
     } else {
         return 2;
@@ -258,9 +282,13 @@
             cell.valueLabel.hidden = YES;
             
         } else {
-            cell.titleLabel.text = [titleArray objectAtIndex:indexPath.row - 1];
-            cell.valueLabel.hidden = NO;
             cell.titleLabel.hidden = NO;
+            cell.valueLabel.hidden = NO;
+            cell.titleLabel.text = [titleArray objectAtIndex:indexPath.row - 1];
+            if (valueArray.count != 0) {
+                
+                cell.valueLabel.text = [NSString stringWithFormat:@"%@",[valueArray objectAtIndex:indexPath.row - 1]];
+            }
             
         }
     } else {
@@ -269,6 +297,28 @@
             cell.titleLabel.hidden = NO;
             cell.valueLabel.hidden = YES;
             
+        } else {
+            cell.titleLabel.text = [assetModel assetProjectDetail];
+            cell.titleLabel.hidden = YES;
+            cell.valueLabel.hidden = YES;
+            
+            NSString *detailString = [assetModel assetProjectDetail];
+            
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
+            
+            CGSize sizeDetail = [detailString boundingRectWithSize:CGSizeMake(cell.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, sizeDetail.height)];
+            webView.userInteractionEnabled = NO;
+            [cell addSubview:webView];
+            
+            detailString = [detailString stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
+            detailString = [detailString stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
+            detailString = [detailString stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+            detailString = [detailString stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+            detailString = [detailString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+            
+            [webView loadHTMLString:detailString baseURL:nil];
         }
     }
     
@@ -434,10 +484,52 @@
 
 }
 
+#pragma mark 资产详情接口
+#pragma mark --------------------------------
+
+- (void)getAssetDetailFuction{
+    NSDictionary *parameter = @{@"assetId":self.assetId,@"clientType":@"iOS"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"asset/getAssetDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"产品详情ppppppppppppppp%@",responseObject);
+        
+        assetModel = [[TWOProductAssetModel alloc] init];
+        [assetModel setValuesForKeysWithDictionary:[responseObject objectForKey:@"Asset"]];
+        
+        [valueArray addObject:[assetModel assetName]];
+        [valueArray addObject:[assetModel assetTypeName]];
+        [valueArray addObject:[assetModel assetAmount]];
+        [valueArray addObject:[assetModel assetAnnualYieldb]];
+        [valueArray addObject:[assetModel assetSaleTime]];
+        [valueArray addObject:[assetModel assetInterestBdate]];
+        [valueArray addObject:[assetModel assetInterestEdate]];
+        [valueArray addObject:[assetModel assetToaccountDate]];
+        [valueArray addObject:[assetModel assetYieldDistribType]];
+        [valueArray addObject:[assetModel assetFinancierName]];
+        [valueArray addObject:[assetModel assetFundsUse]];
+        [valueArray addObject:[assetModel assetRepaymentSource]];
+        [valueArray addObject:[assetModel assetManager]];
+        
+        progressArray = [[responseObject objectForKey:@"Asset"] objectForKey:@"Progress"];
+        
+
+        
+        [_tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

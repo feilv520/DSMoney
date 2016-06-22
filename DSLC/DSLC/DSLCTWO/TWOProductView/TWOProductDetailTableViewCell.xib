@@ -21,19 +21,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFk-jp-4fP">
-                        <rect key="frame" x="10" y="14" width="240" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFk-jp-4fP">
+                        <rect key="frame" x="10" y="14" width="357" height="21"/>
                         <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="357" id="1TO-Ak-dzW"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <color key="textColor" red="0.38431372549999998" green="0.39607843139999999" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFa-DW-od4">
-                        <rect key="frame" x="190" y="14" width="175" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFa-DW-od4">
+                        <rect key="frame" x="190" y="0.0" width="175" height="49"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="9f1-Tf-T1I"/>
-                            <constraint firstAttribute="width" constant="175" id="sCx-P5-Uxi"/>
+                            <constraint firstAttribute="width" constant="175" id="aYl-8C-APg"/>
+                            <constraint firstAttribute="height" constant="49" id="bKG-8I-yYD"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
                         <color key="textColor" red="0.54901960780000003" green="0.56470588239999997" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,9 +62,11 @@
                 <animations/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="GXY-Me-kOf" secondAttribute="trailing" constant="10" id="44y-Q1-Zao"/>
-                    <constraint firstAttribute="trailing" secondItem="fFa-DW-od4" secondAttribute="trailing" constant="10" id="wON-Mh-bAn"/>
+                    <constraint firstItem="fFa-DW-od4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KUM-rX-wXJ"/>
+                    <constraint firstItem="rFk-jp-4fP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="Vng-Ek-jJU"/>
+                    <constraint firstAttribute="trailing" secondItem="fFa-DW-od4" secondAttribute="trailing" constant="10" id="ju8-1G-0aS"/>
+                    <constraint firstItem="rFk-jp-4fP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="qZw-RF-T4k"/>
                     <constraint firstItem="GXY-Me-kOf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="wRX-Hv-oD0"/>
-                    <constraint firstItem="fFa-DW-od4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="yxF-zd-W5P"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>

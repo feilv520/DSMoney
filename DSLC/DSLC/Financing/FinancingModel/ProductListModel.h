@@ -30,5 +30,7 @@
 
 @property (nonatomic, copy) NSString *productResume;
 
+@property (nonatomic, copy) NSString *startMoney;
+
 @end
 

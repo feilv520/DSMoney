@@ -216,7 +216,7 @@
                 self.window.rootViewController.view.alpha = 1.0;
                 [backgroundImgView removeFromSuperview];
                 
-                if ([self.flagUserInfo objectForKey:@"token"] != nil && ![[self.flagUserInfo objectForKey:@"token"] isEqualToString:@""] && ![[self.flagUserInfo objectForKey:@"password"] isEqualToString:@""]){
+                if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]){
                     [self loginFuction];
                 }
                 
@@ -365,6 +365,9 @@ void UncaughtExceptionHandler(NSException *exception){
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                              @"",@"password",nil];
         [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+        
+        NSDictionary *lDic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+        [lDic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
     }
     
 //    // 判断是否存在isLogin.plist文件
@@ -376,7 +379,7 @@ void UncaughtExceptionHandler(NSException *exception){
 //        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
 //        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
 //    }
-//    
+//
 //    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
 //        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
 //        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
@@ -434,7 +437,7 @@ void UncaughtExceptionHandler(NSException *exception){
 
 - (void)loginFuction{
 
-    NSDictionary *parmeter = @{@"phone":[self.flagUserInfo objectForKey:@"phone"],@"password":[self.flagUserInfo objectForKey:@"password"]};
+    NSDictionary *parmeter = @{@"phone":[self.flagUserInfo objectForKey:@"phone"],@"password":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"password"]]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"login" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -472,6 +475,17 @@ void UncaughtExceptionHandler(NSException *exception){
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
+            
+            // 判断是否存在isLogin.plist文件
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
+            
             [self signFinish];
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
