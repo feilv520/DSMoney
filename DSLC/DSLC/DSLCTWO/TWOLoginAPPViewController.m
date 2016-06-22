@@ -30,6 +30,12 @@
     UIScrollView *_scrollview;
     NSInteger seconds;
     NSTimer *timer;
+    
+    //签到猴子需要的控件
+    UIButton *buttonHei;
+    UIView *viewDown;
+    UILabel *labelMonkey;
+    UIImageView *imageSign;
 }
 
 @end
