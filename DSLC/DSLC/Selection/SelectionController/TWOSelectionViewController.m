@@ -16,12 +16,13 @@
 #import "TWOHomePageProductCell.h"
 #import "TWOPickModel.h"
 #import "TWOProductDetailViewController.h"
+#import "AdModel.h"
+#import "BannerViewController.h"
 
 @interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
 {
     UIButton *buttonClick;
-    UIScrollView *scrollView;
     UIView *viewBottom;
     UIButton *buttonHei;
     UILabel *labelMonkey;
@@ -40,6 +41,15 @@
     
     CGFloat residueMoney;
     NSString *residueMoneyString;
+    
+    // 网络请求传值
+    NSDictionary *parameter;
+    
+    // 广告位
+    NSMutableArray *photoArray;
+    UIPageControl *pageControl;
+    NSTimer *timer;
+    UIScrollView *bannerScrollView;
 }
 
 @end
@@ -59,12 +69,20 @@
     self.view.backgroundColor = [UIColor qianhuise];
     
     pickArray = [NSMutableArray array];
+    photoArray = [NSMutableArray array];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+    
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    // 更改timer对象的优先级
+    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
     [self getProductList];
     [self upContentShow];
     
+    [self getAdvList];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLoginView) name:@"showLoginView" object:nil];
 }
@@ -141,7 +159,7 @@
     viewBanner.backgroundColor = [UIColor qianhuise];
     
     UIImageView *imageBanner = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, viewBanner.frame.size.height) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"首页banner"]];
-    [viewBanner addSubview:imageBanner];
+//    [viewBanner addSubview:imageBanner];
     imageBanner.userInteractionEnabled = YES;
     
 //    签到记录按钮
@@ -400,24 +418,6 @@
     [self ifLoginView];
 }
 
-#pragma mark 网络请求方法
-#pragma mark --------------------------------
-
-- (void)getAdvList{
-    
-    NSDictionary *parmeter = @{@"adType":@"2"};
-    
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/adv/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
-        NSLog(@"AD = %@",responseObject);
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        NSLog(@"%@", error);
-        
-    }];
-}
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (_scrollView.contentOffset.y < -20) {
@@ -434,29 +434,243 @@
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
-    
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getPickProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    if ([FileOfManage ExistOfFile:@"Member.plist"]) {
         
-        NSLog(@"first = %@",responseObject);
+        parameter = @{@"token":[dic objectForKey:@"token"]};
         
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            [self loadingWithHidden:YES];
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getPickProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            NSArray *pickArr = [responseObject objectForKey:@"Product"];
+            NSLog(@"first = %@",responseObject);
             
-            for (NSDictionary *dic in pickArr) {
-                TWOPickModel *model = [[TWOPickModel alloc] init];
-                [model setValuesForKeysWithDictionary:dic];
-                [pickArray addObject:model];
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                [self loadingWithHidden:YES];
+                
+                NSArray *pickArr = [responseObject objectForKey:@"Product"];
+                
+                for (NSDictionary *dic in pickArr) {
+                    TWOPickModel *model = [[TWOPickModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dic];
+                    [pickArray addObject:model];
+                }
+                
+                [self collectionViewShow];
+                
+            } else {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
             
-            [self collectionViewShow];
             
-        } else {
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            
+        }];
+    } else {
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getPickProduct" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"first = %@",responseObject);
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                [self loadingWithHidden:YES];
+                
+                NSArray *pickArr = [responseObject objectForKey:@"Product"];
+                
+                for (NSDictionary *dic in pickArr) {
+                    TWOPickModel *model = [[TWOPickModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dic];
+                    [pickArray addObject:model];
+                }
+                
+                [self collectionViewShow];
+                
+            } else {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            }
+            
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            
+        }];
+    }
+    
+    
+}
+
+// 广告滚动控件
+- (void)makeScrollView{
+    NSInteger photoIndex = photoArray.count + 2;
+    
+    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 170)];
+    bannerScrollView.backgroundColor = Color_Clear;
+    bannerScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * photoIndex,0);
+    bannerScrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
+    bannerScrollView.showsHorizontalScrollIndicator = NO;
+    bannerScrollView.showsVerticalScrollIndicator = NO;
+    bannerScrollView.pagingEnabled = YES;
+    
+    bannerScrollView.delegate = self;
+    
+    [viewBanner addSubview:bannerScrollView];
+    
+    YYAnimatedImageView *bannerFirst = [YYAnimatedImageView new];
+    bannerFirst.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:0] adImg]];
+    bannerFirst.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    
+    YYAnimatedImageView *bannerLast = [YYAnimatedImageView new];
+    bannerLast.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:photoArray.count - 1] adImg]];
+    bannerLast.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    
+    for (NSInteger i = 0; i < photoArray.count; i++) {
+        YYAnimatedImageView *bannerObject = [YYAnimatedImageView new];
+        bannerObject.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:i] adImg]];
+        bannerObject.tag = i;
+        bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+        UITapGestureRecognizer *tapLeft = [[UITapGestureRecognizer alloc] init];
+        [bannerObject addGestureRecognizer:tapLeft];
+        [tapLeft addTarget:self action:@selector(bannerObject:)];
+        bannerObject.userInteractionEnabled = YES;
+        
+        //手指数
+        tapLeft.numberOfTouchesRequired = 1;
+        //点击次数
+        tapLeft.numberOfTapsRequired = 1;
+        
+        [bannerScrollView addSubview:bannerObject];
+    }
+    
+    [bannerScrollView addSubview:bannerFirst];
+    [bannerScrollView addSubview:bannerLast];
+    
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 150, WIDTH_CONTROLLER_DEFAULT, 30)];
+    
+    pageControl.numberOfPages = photoArray.count;
+    pageControl.currentPage = 0;
+    
+    [self changePageControlImage];
+    
+    [viewBanner addSubview:pageControl];
+    
+}
+
+// 滚动后的执行方法
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    if (bannerScrollView == scrollView) {
+        CGPoint offset = [scrollView contentOffset];
+        
+        //更新UIPageControl的当前页
+        CGRect bounds = scrollView.frame;
+        [pageControl setCurrentPage:offset.x / bounds.size.width - 1];
+        
+        if (offset.x == WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1)) {
+            [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+            pageControl.currentPage = 0;
+        } else if (offset.x == 0) {
+            [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
+            pageControl.currentPage = photoArray.count - 1;
+        }
+    }
+}
+
+// 准备滚动时候的执行方法
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    [timer invalidate];
+    // 调用invalidate方法后,对象已经无法使用,所以要指向nil.
+    timer = nil;
+}
+
+- (void)bannerObject:(UITapGestureRecognizer *)tap
+{
+    BannerViewController *bannerVC = [[BannerViewController alloc] init];
+    bannerVC.photoName = [[photoArray objectAtIndex:pageControl.currentPage] adLabel];
+    bannerVC.photoUrl = [[photoArray objectAtIndex:pageControl.currentPage] adLink];
+    bannerVC.page = pageControl.currentPage;
+    pushVC(bannerVC);
+}
+
+// 拖住完成的执行方法
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+    
+    // 修改timer的优先级与控件一致
+    // 获取当前的消息循环对象
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    // 更改timer对象的优先级
+    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    
+}
+
+//改变pagecontrol中圆点样式
+- (void)changePageControlImage
+{
+    static UIImage *imgCurrent = nil;
+    static UIImage *imgOther = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        imgCurrent = [UIImage imageNamed:@"banner_red"];
+        imgOther = [UIImage imageNamed:@"banner_black"];
+    });
+    
+    
+    if (iOS7) {
+        [pageControl setValue:imgCurrent forKey:@"_currentPageImage"];
+        [pageControl setValue:imgOther forKey:@"_pageImage"];
+    } else {
+        for (int i = 0;i < 3; i++) {
+            UIImageView *imageVieW = [pageControl.subviews objectAtIndex:i];
+            imageVieW.frame = CGRectMake(imageVieW.frame.origin.x, imageVieW.frame.origin.y, 20, 20);
+            imageVieW.image = pageControl.currentPage == i ? imgCurrent : imgOther;
+        }
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    CGPoint offset = [scrollView contentOffset];
+    
+    if (offset.x == WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1)) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+        pageControl.currentPage = 0;
+    } else if (offset.x == 0) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
+        pageControl.currentPage = photoArray.count - 1;
+    }
+}
+
+
+- (void)getAdvList{
+    
+    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"3"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"AD = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            return ;
         }
         
+        pageControl.numberOfPages = [[responseObject objectForKey:@"Advertise"] count];
+        
+        if (photoArray != nil) {
+            [photoArray removeAllObjects];
+            photoArray = nil;
+            photoArray = [NSMutableArray array];
+        }
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
+            AdModel *adModel = [[AdModel alloc] init];
+            [adModel setValuesForKeysWithDictionary:dic];
+            [photoArray addObject:adModel];
+        }
+        
+        [self loadingWithHidden:YES];
+        [self makeScrollView];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -465,6 +679,17 @@
     }];
 }
 
+- (void)scrollViewFuction{
+    
+    [bannerScrollView setContentOffset:CGPointMake((pageControl.currentPage + 2) * WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
+    
+    if (pageControl == nil) {
+        pageControl.currentPage = 0;
+    } else {
+        pageControl.currentPage += 1;
+    }
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
