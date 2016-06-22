@@ -41,8 +41,9 @@
 
 - (void)contentShow
 {
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, self.view.frame.size.height + 20)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
     [self.view addSubview:_scrollView];
+    _scrollView.delegate = self;
     
     UIImageView *imageBigPic = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.view.frame.size.height) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"bigpicture"]];
     [_scrollView addSubview:imageBigPic];
@@ -125,7 +126,7 @@
     buttonAgree.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     [buttonAgree addTarget:self action:@selector(buttonClickedAgree:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butRightNow = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 270.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 10 + 20 + 40*3 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0/ 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"已有账号,立即登录"];
+    UIButton *butRightNow = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 140)/2, 270.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 10 + 20 + 40*3 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0/ 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 140, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"已有账号,立即登录"];
     [imageBigPic addSubview:butRightNow];
     [butRightNow addTarget:self action:@selector(buttonRightNowLogin:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -135,7 +136,7 @@
         textFieldInvite.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         buttRegist.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         butRightNow.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-        butRightNow.frame = CGRectMake(0, 255.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 10 + 20 + 40*3 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0/ 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 20);
+        butRightNow.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 110)/2, 255.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 10 + 20 + 40*3 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0/ 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 110, 20);
     } else {
         textFieldYan.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -175,6 +176,13 @@
         
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             _scrollView.contentOffset = CGPointMake(0, self.view.frame.size.height/4 + 35);
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            _scrollView.contentOffset = CGPointMake(0, self.view.frame.size.height/4);
         } completion:^(BOOL finished) {
             
         }];
@@ -277,7 +285,7 @@
     if (seconds == 1) {
         [theTimer invalidate];
         seconds = 60;
-        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         [button setTitle:@"获取验证码" forState: UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setEnabled:YES];

@@ -11,10 +11,11 @@
 #import "define.h"
 #import "TWOReceiveNumViewController.h"
 
-@interface TWORegisterViewController () <UITextFieldDelegate>
+@interface TWORegisterViewController () <UITextFieldDelegate, UIScrollViewDelegate>
 {
     //手机号textField
     UITextField *textFieldPhone;
+    UIScrollView *_scrollview;
 }
 @end
 
@@ -39,30 +40,34 @@
 
 - (void)contentShow
 {
+    _scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+    [self.view addSubview:_scrollview];
+    _scrollview.delegate = self;
+    
     UIImageView *imageBigPic = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.view.frame.size.height) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"bigpicture"]];
-    [self.view addSubview:imageBigPic];
+    [_scrollview addSubview:imageBigPic];
     imageBigPic.userInteractionEnabled = YES;
     
-    //    左上角x按钮
+//    左上角x按钮
     UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 30, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [imageBigPic addSubview:butCancle];
     [butCancle setBackgroundImage:[UIImage imageNamed:@"logincuo"] forState:UIControlStateNormal];
     [butCancle setBackgroundImage:[UIImage imageNamed:@"logincuo"] forState:UIControlStateHighlighted];
     [butCancle addTarget:self action:@selector(CancleButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    //    输入手机号框
+//    输入手机号框
     UIImageView *imageTwo = [CreatView creatImageViewWithFrame:CGRectMake(30, 160.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 40, WIDTH_CONTROLLER_DEFAULT - 60, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuang"]];
     [imageBigPic addSubview:imageTwo];
     imageTwo.userInteractionEnabled = YES;
     
-    //    手机图标
+//    手机图标
     UIImageView *imagePhone = [CreatView creatImageViewWithFrame:CGRectMake(22, 9, 22, 22) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"phoneNumber"]];
     [imageTwo addSubview:imagePhone];
     
     UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(22 + 22 + 10, 8, 0.5, 24) backgroundColor:[UIColor whiteColor]];
     [imageTwo addSubview:viewLine];
     
-    //    输入手机号
+//    输入手机号
     textFieldPhone = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"手机号" setTintColor:[UIColor whiteColor]];
     [imageTwo addSubview:textFieldPhone];
     textFieldPhone.textColor = [UIColor whiteColor];
@@ -80,23 +85,51 @@
     [butLogin setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateHighlighted];
     [butLogin addTarget:self action:@selector(buttonCheckPhoneNum:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butRightLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 170.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 40*2 + 40.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 40 + 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"已有账号,立即登录"];
+    UIButton *butRightLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 140)/2, 170.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 40*2 + 40.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 40 + 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 140, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"已有账号,立即登录"];
     [imageBigPic addSubview:butRightLogin];
     butRightLogin.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butRightLogin addTarget:self action:@selector(haveNumberRightNowLogin:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            _scrollview.contentOffset = CGPointMake(0, 100);
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            _scrollview.contentOffset = CGPointMake(0, 200);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
 //已有账号,立即登录按钮
 - (void)haveNumberRightNowLogin:(UIButton *)button
 {
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
 
 //验证手机号按钮
 - (void)buttonCheckPhoneNum:(UIButton *)button
 {
-    [self checkPhone];
+    if (textFieldPhone.text.length == 0) {
+        [ProgressHUD showMessage:@"电话号码不能为空" Width:100 High:20];
+    } else if (![NSString validateMobile:textFieldPhone.text]) {
+        [ProgressHUD showMessage:@"请输入正确的电话号码" Width:100 High:20];
+    } else {
+        [self.view endEditing:YES];
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            _scrollview.contentOffset = CGPointMake(0, -20);
+        } completion:^(BOOL finished) {
+            
+        }];
+        [self checkPhone];
+    }
 }
 
 //左上角x按钮
@@ -108,6 +141,11 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        _scrollview.contentOffset = CGPointMake(0, -20);
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 #pragma mark 加限制
