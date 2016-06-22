@@ -54,4 +54,6 @@
 
 @property (nonatomic, copy) NSString *saleProgress;
 
+@property (nonatomic, copy) NSString *subjectMaxMoney;
+
 @end

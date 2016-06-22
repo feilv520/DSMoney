@@ -185,6 +185,7 @@
     
     cell.labelDayNum.textAlignment = NSTextAlignmentCenter;
     cell.labelDayNum.font = [UIFont systemFontOfSize:22];
+    cell.labelDayNum.textColor = [UIColor ZiTiColor];
     
     NSMutableAttributedString *textYear = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[[self.productListArray objectAtIndex:indexPath.row] productPeriod]]];
     NSRange numText = NSMakeRange(0, [[textYear string] rangeOfString:@"天"].location);

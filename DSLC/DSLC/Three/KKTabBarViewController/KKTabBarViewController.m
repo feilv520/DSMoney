@@ -137,7 +137,7 @@
 //        } else{
 //            buttonY = _pageHeight - buttonHeight;
 //        }
-        [tabButton setFrame:CGRectMake(30 + _pageWidth / [_controllerArray count] * i, 20, buttonWidth, buttonHeight)];
+        [tabButton setFrame:CGRectMake(25 + _pageWidth / [_controllerArray count] * i, 20, buttonWidth, buttonHeight)];
         [tabButton setTag:i];
         [tabButton addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchDown];
         [tabButton setHidden:self.tabBarHidden];
@@ -207,7 +207,7 @@
 //        } else {
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
 //        }
-        if ([memberDic objectForKey:@"token"] == nil || [[memberDic objectForKey:@"token"] isEqualToString:@""] || [[memberDic objectForKey:@"password"] isEqualToString:@""]) {
+        if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
             TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
             
             UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
