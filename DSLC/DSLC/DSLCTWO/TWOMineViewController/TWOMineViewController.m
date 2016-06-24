@@ -761,7 +761,7 @@
 
 - (void)getMyAccountInfoFuction{
     
-    NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"]};
     
@@ -769,7 +769,7 @@
         
         NSLog(@"getMyAccountInfo = %@",responseObject);
         
-        if ([[responseObject objectForKey:@"result"] isEqual:@"200"]) {
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             myAccount = [[TWOMyAccountModel alloc] init];
             [myAccount setValuesForKeysWithDictionary:responseObject];
@@ -793,6 +793,22 @@
 
             [self loadingWithHidden:YES];
             
+            NSLog(@"00000----%@",[myAccount invitationMyCode]);
+            
+            [memberDic setObject:[myAccount invitationMyCode] forKey:@"invitationMyCode"];
+            
+            [memberDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:400]]) {
+            // 判断是否存在isLogin.plist文件
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
@@ -804,22 +820,6 @@
         
     }];
 }
-//pwd/updateUserLoginPwd
-//- (void)aaa{
-//    NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-//    
-//    NSDictionary *parmeter = @{@"newPwd":@"a123123",@"token":[memberDic objectForKey:@"token"]};
-//    
-//    [[MyAfHTTPClient sharedClient] postWithURLString:@"pwd/updateUserLoginPwd" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-//        
-//        NSLog(@"getSmsCode = %@",responseObject);
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        
-//        NSLog(@"%@", error);
-//        
-//    }];
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

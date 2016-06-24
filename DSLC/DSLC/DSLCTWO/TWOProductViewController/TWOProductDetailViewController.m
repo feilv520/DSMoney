@@ -397,7 +397,11 @@
             
             cell.valueLabel.text = [NSString stringWithFormat:@"%@&%@",[self.detailM beginTime],[self.detailM endTime]];
         } else {
-            cell.valueLabel.text = [self.detailM subjectMaxMoney];
+            if ([[self.detailM subjectMaxMoney] isEqualToString:@""]) {
+                cell.valueLabel.text = @"无限投";
+            } else {
+                cell.valueLabel.text = [self.detailM subjectMaxMoney];
+            }
         }
         
     } else if (indexPath.section == 1) {

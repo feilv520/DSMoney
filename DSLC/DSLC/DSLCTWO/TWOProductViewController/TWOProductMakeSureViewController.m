@@ -38,6 +38,8 @@
     TWOProductMMakeSureView *makeSView;
     
     TWOProductMonkeyView *monkeyView;
+    
+    MBProgressHUD *hud;
 }
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -152,8 +154,6 @@
     NSMutableAttributedString *residueString = [[NSMutableAttributedString alloc] initWithString:@"13.17元"];
     
     CGFloat residueMoney = [self.residueMoney floatValue];
-    
-    NSLog(@"%lf",residueMoney);
     
     if (residueMoney / 10000.0 > 0){
         
@@ -318,10 +318,10 @@
             
             if ([accountDic objectForKey:@"accBalance"] == nil){
                 
-                cell.moneyLabel.text = @"100000000元";
+                cell.moneyLabel.text = @"0元";
             } else {
                 
-                cell.moneyLabel.text = [NSString stringWithFormat:@"%@",[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]]];
+                cell.moneyLabel.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]]];
             }
             
             [cell.czButton addTarget:self action:@selector(czAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -345,7 +345,7 @@
             
             if ([accountDic objectForKey:@"accBalance"] == nil){
                 
-                cell.accountMoney.text = @"100000000元";
+                cell.accountMoney.text = @"0元";
             } else {
                 
                 cell.accountMoney.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]]];
@@ -515,6 +515,26 @@
     
     [self.view endEditing:YES];
     
+    
+    UITextField *textField = (UITextField *)[self.view viewWithTag:9283];
+    
+    if ([textField.text isEqualToString:@""]){
+        return;
+    }
+    
+    NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
+    
+    textField.text = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
+    
+    allMoneyString = textField.text;
+    
+    [self textFieldEditChanged:textField];
+    
+    if ([[self.detailM amountMin] floatValue] > [allMoneyString floatValue]){
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"你的投资金额不满足起投金额,请重新输入!"];
+        return;
+    }
+    
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     bView = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:Color_Black textColor:nil titleText:nil];
@@ -638,13 +658,42 @@
 // 提示框确认按钮
 - (void)sureBAction:(id)sender{
     
-    TWOProductPaySuccessViewController *paySuccessVC = [[TWOProductPaySuccessViewController alloc] init];
-    paySuccessVC.allMoneyString = allMoneyString;
-    paySuccessVC.syString = syString;
-    paySuccessVC.qDayString = qDayString;
-    paySuccessVC.dDayString = dDayString;
-    paySuccessVC.monkeyString = monkeyString;
-    pushVC(paySuccessVC);
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
+    
+    NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"member.plist"]];
+    
+    NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",[DES3Util encrypt:[memberDic objectForKey:@"token"]],[DES3Util encrypt:[[self.detailM productId] description]],[DES3Util encrypt:[allMoneyString description]],[DES3Util encrypt:@"1"],[DES3Util encrypt:@""],[DES3Util encrypt:@""],[DES3Util encrypt:@"iOS"]];
+    
+    NSDictionary *parameter = @{@"productId":[self.detailM productId],@"packetId":@"",@"incrId":@"",@"orderMoney":allMoneyString,@"payType":@"1",@"clientType":@"iOS",@"token":[memberDic objectForKey:@"token"],@"sign":signString};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"trade/buyProductByAccBalance" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"产品详情ppppppppppppppp%@",responseObject);
+        
+        [hud hide:YES];
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            TWOProductPaySuccessViewController *paySuccessVC = [[TWOProductPaySuccessViewController alloc] init];
+            paySuccessVC.allMoneyString = allMoneyString;
+            paySuccessVC.syString = syString;
+            paySuccessVC.qDayString = qDayString;
+            paySuccessVC.dDayString = dDayString;
+            paySuccessVC.monkeyString = monkeyString;
+            pushVC(paySuccessVC);
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

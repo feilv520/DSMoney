@@ -469,8 +469,10 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [responseObject objectForKey:@"token"],@"token",
-                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",
+                                     [responseObject objectForKey:@""],nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             } else {
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -482,6 +484,7 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -536,6 +539,7 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -549,6 +553,7 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];

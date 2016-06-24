@@ -26,6 +26,8 @@
     NSArray *butColorArr;
     NSMutableArray *buttonArr;
     
+    UIImageView *imgOne;
+    UIImageView *imgTwo;
     UIImageView *imgThree;
     UIButton *startButton;
 }
@@ -49,15 +51,15 @@
     
     [self.view addSubview:self.scrollView];
     
-    UIImageView *imgOne = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
-    UIImageView *imgTwo = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+    imgOne = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+    imgTwo = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
     imgThree = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 2, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
     
     imgThree.alpha = 1.0;
     
-    imgOne.image = [UIImage imageNamed:@"welcome_one"];
-    imgTwo.image = [UIImage imageNamed:@"welcome_two"];
-    imgThree.image = [UIImage imageNamed:@"welcome_three"];
+    imgOne.image = [UIImage imageNamed:@"TWOWelcome_one"];
+    imgTwo.image = [UIImage imageNamed:@"TWOWelcome_two"];
+    imgThree.image = [UIImage imageNamed:@"TWOWelcome_three"];
     
     startButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (102.0 / 375.0) + WIDTH_CONTROLLER_DEFAULT * 2, HEIGHT_CONTROLLER_DEFAULT * (560.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (170.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:Color_Clear textColor:nil titleText:@"立即体验"];
     [startButton addTarget:self action:@selector(intoMySystem:) forControlEvents:UIControlEventTouchUpInside];

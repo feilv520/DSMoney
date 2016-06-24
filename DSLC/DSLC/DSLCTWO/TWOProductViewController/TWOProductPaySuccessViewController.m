@@ -146,7 +146,7 @@
 
 // 查看投资详情
 - (void)lookAction:(id)sender{
-    NSLog(@"查看投资详情");
+    
 }
 
 - (void)didReceiveMemoryWarning {

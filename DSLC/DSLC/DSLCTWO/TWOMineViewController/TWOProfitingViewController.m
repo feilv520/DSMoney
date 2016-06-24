@@ -18,6 +18,9 @@
     UITableView *_tableView;
 }
 
+@property (nonatomic, strong) NSDictionary *productDic;
+@property (nonatomic, strong) NSDictionary *assetDic;
+
 @end
 
 @implementation TWOProfitingViewController
@@ -39,8 +42,6 @@
     [self.navigationItem setTitle:self.productName];
     
     [self getUserAssetsInfoFuction];
-    
-    [self tableViewShow];
 }
 
 - (void)tableViewShow
@@ -65,7 +66,7 @@
 //    投资金额的钱数
     UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
     [imageViewHead addSubview:labelMoney];
-    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"400,000.00"]];
+    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [self.productDic objectForKey:@"investMoney"]]];
     NSRange moneyRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"元"].location);
     [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:30] range:moneyRange];
     [labelMoney setAttributedText:moneyString];
@@ -74,7 +75,7 @@
     UILabel *labelTouZi = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"投资金额"];
     [imageViewHead addSubview:labelTouZi];
     
-    NSArray *topArray = @[@"40.00", @"72", @"8"];
+    NSArray *topArray = @[[self.productDic objectForKey:@"exceptedYield"], [[self.productDic objectForKey:@"productPeriod"] description], [self.productDic objectForKey:@"annualYield"]];
     NSArray *downArray = @[@"预期收益", @"理财期限", @"预期年化"];
     CGFloat width = (WIDTH_CONTROLLER_DEFAULT - 24) / 3;
     CGFloat marginLeft = 12;
@@ -149,11 +150,11 @@
         
         TWOMoneyGoWhereCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMoney"];
         
-        cell.labelTitle.text = @"成安基金国富通亿丰商城项目";
+        cell.labelTitle.text = [self.assetDic objectForKey:@"assetName"];
         cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.labelTitle.textColor = [UIColor ZiTiColor];
         
-        cell.labelMoney.text = [NSString stringWithFormat:@"%@元", @"4000"];
+        cell.labelMoney.text = [NSString stringWithFormat:@"%@元", [self.assetDic objectForKey:@"matchMoney"]];
         cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         cell.labelMoney.textColor = [UIColor orangecolor];
         
@@ -170,7 +171,7 @@
         TWOProfitingEveryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
         NSArray *titleArray = @[@[@"到期日", @"投资日", @"计息起始日", @"收益方式"]];
-        NSArray *timeArray = @[@[@"2016-09-09", @"2016-09-09", @"2016-09-09", @"到期还本付息"]];
+        NSArray *timeArray = @[@[[self.productDic objectForKey:@"dueDate"], [self.productDic objectForKey:@"buyTime"], [self.productDic objectForKey:@"interestDate"], [self.productDic objectForKey:@"yieldDistribType"]]];
         
         cell.labelName.text = [[titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -255,6 +256,11 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserAssetsInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"getUserAssetsInfo = %@",responseObject);
+        
+        self.productDic = [responseObject objectForKey:@"Product"];
+        self.assetDic = [[[responseObject objectForKey:@"Product"] objectForKey:@"Asset"] firstObject];
+        
+        [self tableViewShow];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
