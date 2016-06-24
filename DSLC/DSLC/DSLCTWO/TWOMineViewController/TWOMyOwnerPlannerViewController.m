@@ -9,16 +9,35 @@
 #import "TWOMyOwnerPlannerViewController.h"
 #import "MyPlannerCell.h"
 #import "TWOMyOwnerPlannerCell.h"
+#import "TWOMyOwnerModel.h"
 
 @interface TWOMyOwnerPlannerViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 {
     UITableView *_tableView;
+    NSDictionary *dataDic;
+    NSDictionary *tempDic;
+    UIButton *buttonAlready;
+    UIImageView *imageHead;
+    UILabel *labelName;
+    UILabel *labelAlert;
+    BOOL stateOr;
 }
 
 @end
 
 @implementation TWOMyOwnerPlannerViewController
+
+//重写导航栏返回按钮
+- (void)buttonReturn:(UIBarButtonItem *)bar
+{
+    if (stateOr == YES) {
+        NSArray *viewControllers = [self.navigationController viewControllers];
+        [self.navigationController popToViewController:[viewControllers objectAtIndex:1] animated:YES];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,8 +45,13 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的理财师"];
+    stateOr = NO;
     
-    [self tableViewShow];
+    if (self.stateShow == YES) {
+        [self getMyOwnerData];
+    } else {
+        [self getListDetailData];
+    }
 }
 
 - (void)tableViewShow
@@ -57,17 +81,20 @@
 {
     UIImageView *imageBackground = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _tableView.tableHeaderView.frame.size.height) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"productDetailBackground"]];
     [_tableView.tableHeaderView addSubview:imageBackground];
+    imageBackground.userInteractionEnabled = YES;
     
-    UIImageView *imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 48.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 15.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 96.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 96.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"我的头像"]];
+    imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 48.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 15.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 96.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 96.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"我的头像"]];
     [imageBackground addSubview:imageHead];
     imageHead.layer.cornerRadius = imageHead.frame.size.height/2;
     imageHead.layer.masksToBounds = YES;
+    imageHead.layer.borderColor = [[UIColor whiteColor] CGColor];
+    imageHead.layer.borderWidth = 1;
     
     CGFloat imageJianJu = 15.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20);
     CGFloat imageNameJainJu = 7.0;
     CGFloat buttonNameJianJu = 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20);
     
-    UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(0, imageJianJu + imageHead.frame.size.height + imageNameJainJu, WIDTH_CONTROLLER_DEFAULT, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"小明"];
+    labelName = [CreatView creatWithLabelFrame:CGRectMake(0, imageJianJu + imageHead.frame.size.height + imageNameJainJu, WIDTH_CONTROLLER_DEFAULT, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:nil];
     [imageBackground addSubview:labelName];
     
     CGFloat butWidth = (WIDTH_CONTROLLER_DEFAULT - 55.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT * 2 - 65.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2;
@@ -79,19 +106,37 @@
     buttonAsk.layer.masksToBounds = YES;
     buttonAsk.layer.borderColor = [[UIColor whiteColor] CGColor];
     buttonAsk.layer.borderWidth = 1;
+    [buttonAsk addTarget:self action:@selector(askQuestionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *buttonAlready = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(55.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT + buttonAsk.frame.size.width + 65.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, imageJianJu + imageHead.frame.size.height + imageNameJainJu + labelName.frame.size.height + buttonNameJianJu, butWidth, 35) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"已申请服务"];
+    buttonAlready = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(55.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT + buttonAsk.frame.size.width + 65.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, imageJianJu + imageHead.frame.size.height + imageNameJainJu + labelName.frame.size.height + buttonNameJianJu, butWidth, 35) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:nil];
     [imageBackground addSubview:buttonAlready];
     buttonAlready.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     buttonAlready.layer.cornerRadius = 6;
     buttonAlready.layer.masksToBounds = YES;
     buttonAlready.layer.borderColor = [[UIColor whiteColor] CGColor];
     buttonAlready.layer.borderWidth = 1;
+    if (self.stateShow == YES) {
+        [buttonAlready setTitle:@"已申请服务" forState:UIControlStateNormal];
+    } else {
+        [buttonAlready setTitle:@"申请服务" forState:UIControlStateNormal];
+    }
+    [buttonAlready addTarget:self action:@selector(applyMoneyTeacherButton:) forControlEvents:UIControlEventTouchUpInside];
     
     CGFloat alertButtonJianJu = 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20);
-    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, imageJianJu + imageHead.frame.size.height + imageNameJainJu + labelName.frame.size.height + buttonNameJianJu + 35 + alertButtonJianJu, WIDTH_CONTROLLER_DEFAULT, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"“26年专职理财顾问,私人银行级的资产配置,为客户提\n供中立客观的真诚服务。”"];
+    labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, imageJianJu + imageHead.frame.size.height + imageNameJainJu + labelName.frame.size.height + buttonNameJianJu + 35 + alertButtonJianJu, WIDTH_CONTROLLER_DEFAULT, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
     [imageBackground addSubview:labelAlert];
-    labelAlert.numberOfLines = 2;
+    labelAlert.numberOfLines = 0;
+    
+//    判断是首页理财师数据还是我的理财师数据
+    if (self.stateShow == YES) {
+        imageHead.yy_imageURL = [NSURL URLWithString:[tempDic objectForKey:@"avatarImg"]];
+        labelName.text = [DES3Util decrypt:[tempDic objectForKey:@"userRealname"]];
+//            labelAlert.text = [tempDic objectForKey:@"resume"];
+    } else {
+        imageHead.yy_imageURL = [NSURL URLWithString:[self.listModel avatarImg]];
+        labelName.text = [self.listModel userRealname];
+        labelAlert.text = [self.listModel resume];
+    }
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         
@@ -128,13 +173,93 @@
     NSArray *titleArray = @[@"邀请码", @"已为客户赚取", @"已服务客户数", @"累计投资总额"];
     cell.labelTitle.text = [titleArray objectAtIndex:indexPath.row];
     
-    NSArray *contentArray = @[@"A98766", [NSString stringWithFormat:@"%@元", @"1,898,766.00"], [NSString stringWithFormat:@"%@人", @"1989766"], [NSString stringWithFormat:@"%@元", @"1,898,766.00"]];
-    cell.labelContent.text = [contentArray objectAtIndex:indexPath.row];
+    if (self.stateShow == YES) {
+        
+        NSArray *contentArray = @[[tempDic objectForKey:@"inviteCode"], [NSString stringWithFormat:@"%@元", [DES3Util decrypt:[tempDic objectForKey:@"earnMoney"]]], [NSString stringWithFormat:@"%@", [tempDic objectForKey:@"serveCount"]], [NSString stringWithFormat:@"%@元", [tempDic objectForKey:@"totalAmount"]]];
+        cell.labelContent.text = [contentArray objectAtIndex:indexPath.row];
+        
+    } else {
+        
+        NSArray *contentArray = @[[self.listModel inviteCode], [NSString stringWithFormat:@"%@元", [dataDic objectForKey:@"totalProfit"]], [NSString stringWithFormat:@"%@人", [dataDic objectForKey:@"serCount"]], [NSString stringWithFormat:@"%@元", [dataDic objectForKey:@"totalAmount"]]];
+        cell.labelContent.text = [contentArray objectAtIndex:indexPath.row];
+    }
     if (indexPath.row == 0) {
         cell.labelContent.textColor = [UIColor orangecolor];
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+//申请按钮
+- (void)applyMoneyTeacherButton:(UIButton *)button
+{
+    if (self.stateShow == YES) {
+        
+    } else {
+        [self applyForData];
+    }
+}
+
+//咨询按钮
+- (void)askQuestionButtonClicked:(UIButton *)button
+{
+    NSLog(@"9");
+}
+
+#pragma mark listDetail=====================================================
+- (void)getListDetailData
+{
+    NSDictionary *parmeter = @{@"fpId":[self.listModel ID]};
+    NSLog(@"%@", [self.listModel ID]);
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getIndexFinPlannerInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"理财师详情::::::::::::::::::::%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            dataDic = [responseObject objectForKey:@"User"];
+            [self tableViewShow];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+#pragma mark myOwner===================================
+- (void)getMyOwnerData
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyFinPlanner" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"我的理财师详情-----------%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            tempDic = [responseObject objectForKey:@"User"];
+            [self tableViewShow];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+#pragma mark applyData=================================
+- (void)applyForData
+{
+    NSDictionary *parmeter = @{@"finUserId":[self.listModel ID], @"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/applyFinanciers" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"申请理财师>>>>>>>>>>>>>>>%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+            [buttonAlready setTitle:@"已申请服务" forState:UIControlStateNormal];
+            stateOr = YES;
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

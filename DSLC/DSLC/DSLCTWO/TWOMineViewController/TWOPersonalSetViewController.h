@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOPersonalSetViewController : BaseViewController
-
+@property (nonatomic) NSString *whoAreYou;
 @end

@@ -20,5 +20,6 @@
 @property (nonatomic) NSString *userEmail;
 @property (nonatomic) NSString *userPhone;
 @property (nonatomic) NSString *userRealname;
+@property (nonatomic) NSString *myFinPlanner;
 
 @end

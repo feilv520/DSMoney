@@ -7,7 +7,9 @@
 //
 
 #import "BaseViewController.h"
+#import "TWOMoneyTeacherList.h"
 
 @interface TWOMyOwnerPlannerViewController : BaseViewController
-
+@property (nonatomic) TWOMoneyTeacherList *listModel;
+@property (nonatomic) BOOL stateShow;
 @end

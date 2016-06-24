@@ -59,14 +59,19 @@
 
 - (void)navigationTitleShow
 {
-    butRedBag = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 105.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 10, 105.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"红包"];
-    [self.navigationController.navigationBar addSubview:butRedBag];
-    butRedBag.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
+    UIImageView *imageBack = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 180)/2, 5, 180, 30) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"圆左"]];
+    [self.navigationController.navigationBar addSubview:imageBack];
+    imageBack.userInteractionEnabled = YES;
+    CGFloat widthImg = imageBack.frame.size.width;
+    
+    butRedBag = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, widthImg/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor profitColor] titleText:@"红包"];
+    [imageBack addSubview:butRedBag];
+    butRedBag.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butRedBag addTarget:self action:@selector(redBagButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    buttonJiaXi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 10, 105.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"加息券"];
-    [self.navigationController.navigationBar addSubview:buttonJiaXi];
-    buttonJiaXi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+    buttonJiaXi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(widthImg/2, 5, widthImg/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"加息券"];
+    [imageBack addSubview:buttonJiaXi];
+    buttonJiaXi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonJiaXi addTarget:self action:@selector(jiaXiQuanButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -96,6 +101,9 @@
     _tableViewJia.tag = 800;
     _tableViewJia.separatorColor = [UIColor clearColor];
     _tableViewJia.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 60)];
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        _tableViewJia.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 90)];
+    }
     [_tableViewJia registerNib:[UINib nibWithNibName:@"TWIJiaXiQuanCell" bundle:nil] forCellReuseIdentifier:@"reuseJia"];
     [_tableViewJia registerNib:[UINib nibWithNibName:@"TWOWaitCashCell" bundle:nil] forCellReuseIdentifier:@"reuseTWO"];
     
@@ -203,7 +211,24 @@
         NSRange signRange = NSMakeRange(0, 1);
         [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:signRange];
         [cell.labelMoney setAttributedText:moneyString];
-        cell.labelMoney.backgroundColor = [UIColor greenColor]; //
+        cell.labelMoney.backgroundColor = [UIColor clearColor];
+        
+//        红包frame值机型判断
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            cell.labelMoney.frame = CGRectMake(10, 55, 108, 40);
+            cell.butCanUse.frame = CGRectMake(281, 10, 23, 127);
+            cell.labelTiaoJian.frame = CGRectMake(118, 27, 150, 19);
+            cell.labelEvery.frame = CGRectMake(122, 56, 146, 15);
+            cell.labelData.frame = CGRectMake(116, 110, 152, 12);
+        } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+            cell.labelMoney.frame = CGRectMake(10, 55, 127, 40);
+        } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+            cell.labelMoney.frame = CGRectMake(12, 55, 138, 40);
+            cell.butCanUse.frame = CGRectMake(370, 10, 23, 127);
+            cell.labelTiaoJian.frame = CGRectMake(158, 27, 195, 19);
+            cell.labelEvery.frame = CGRectMake(158, 56, 195, 15);
+            cell.labelData.frame = CGRectMake(158, 110, 195, 12);
+        }
         
         NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [redBagModel investMoney]]];
         NSRange leftRange = NSMakeRange(0, 5);
@@ -213,10 +238,10 @@
         [useing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:rightRange];
         [useing addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:rightRange];
         [cell.labelTiaoJian setAttributedText:useing];
-        cell.labelTiaoJian.backgroundColor = [UIColor magentaColor]; //
+        cell.labelTiaoJian.backgroundColor = [UIColor clearColor];
         
         cell.labelEvery.text = @"所有产品适用";
-        cell.labelEvery.backgroundColor = [UIColor redColor]; //
+        cell.labelEvery.backgroundColor = [UIColor clearColor];
         
         if ([[[redBagModel status] description] isEqualToString:@"0"]) {
             [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];
@@ -231,7 +256,7 @@
         cell.butCanUse.backgroundColor = [UIColor clearColor];
         
         cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [redBagModel startDate], [redBagModel endDate]];
-        cell.labelData.backgroundColor = [UIColor cyanColor]; //
+        cell.labelData.backgroundColor = [UIColor clearColor];
         
         if (indexPath.row == 2) {
             cell.contentView.alpha = 0.5;
@@ -254,7 +279,30 @@
             NSRange qianRange = NSMakeRange(0, [[percentString string] rangeOfString:@"%"].location);
             [percentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:39] range:qianRange];
             [cell.labelPercent setAttributedText:percentString];
-            cell.labelPercent.backgroundColor = [UIColor magentaColor];
+            cell.labelPercent.backgroundColor = [UIColor clearColor];
+            
+//            待兑付加息券frame值机型判断
+            if (WIDTH_CONTROLLER_DEFAULT == 320) {
+                cell.labelPercent.frame = CGRectMake(10, 56, 88, 40);
+                cell.buttonWait.frame = CGRectMake(281, 16, 23, 127);
+                cell.labelTiaoJian.frame = CGRectMake(100, 27, 170, 19);
+                cell.labelEvery.frame = CGRectMake(100, 56, 170, 14);
+                cell.laeblData.frame = CGRectMake(100, 81, 170, 12);
+                cell.labelTime.frame = CGRectMake(100, 123, 170, 13);
+                cell.laeblMoney.frame = CGRectMake(12, 140, 112, 13);
+                cell.labelShuoMing.frame = CGRectMake(125, 139, 145, 13);
+            } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+                cell.labelPercent.frame = CGRectMake(10, 56, 105, 40);
+            } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+                cell.labelPercent.frame = CGRectMake(12, 56, 112, 40);
+                cell.labelTiaoJian.frame = CGRectMake(130, 27, 220, 19);
+                cell.labelEvery.frame = CGRectMake(130, 56, 220, 14);
+                cell.laeblData.frame = CGRectMake(130, 81, 220, 12);
+                cell.labelTime.frame = CGRectMake(130, 123, 220, 13);
+                cell.labelShuoMing.frame = CGRectMake(175, 139, 175, 13);
+                cell.laeblMoney.frame = CGRectMake(12, 140, 160, 13);
+                cell.buttonWait.frame = CGRectMake(370, 17, 23, 127);
+            }
             
             NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [jiaXiModel investMoney]]];
             NSRange leftRange = NSMakeRange(0, 5);
@@ -269,12 +317,10 @@
             cell.labelEvery.text = @"所有产品适用";
             cell.labelEvery.backgroundColor = [UIColor clearColor];
             
-//            cell.laeblData.text = [NSString stringWithFormat:@"%@至%@有效", [jiaXiModel startDate], [jiaXiModel endDate]];
-            cell.laeblData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-01-28", @"2016-06-06"];
-            cell.laeblData.backgroundColor = [UIColor cyanColor];
-//            cell.laeblData.backgroundColor = [UIColor clearColor];
+            cell.laeblData.text = [NSString stringWithFormat:@"%@至%@有效", [jiaXiModel startDate], [jiaXiModel endDate]];
+            cell.laeblData.backgroundColor = [UIColor clearColor];
             
-            NSMutableAttributedString *qianMianString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待兑付金额:%@元", @"20000"]]; //[jiaXiModel cashMoney]
+            NSMutableAttributedString *qianMianString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待兑付金额:%@元", [jiaXiModel cashMoney]]];
             NSRange qianMianRange = NSMakeRange(0, 6);
             [qianMianString addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:qianMianRange];
             [qianMianString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:qianMianRange];
@@ -284,8 +330,7 @@
             [cell.laeblMoney setAttributedText:qianMianString];
             cell.laeblMoney.backgroundColor = [UIColor clearColor];
             
-//            cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", [jiaXiModel productDueDate]];
-            cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", @"2016-03-29"];
+            cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", [jiaXiModel productDueDate]];
             cell.labelTime.backgroundColor = [UIColor clearColor];
             
             cell.labelShuoMing.text = @"(到期日后7个工作日内兑付至余额)";
@@ -314,8 +359,22 @@
             [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:baiRange];
             [cell.labelMoney setAttributedText:moneyString];
             cell.labelMoney.backgroundColor = [UIColor clearColor];
+            
+//            可使用加息券frame值机型判断
             if (WIDTH_CONTROLLER_DEFAULT == 320) {
-                cell.labelMoney.textAlignment = NSTextAlignmentLeft;
+                cell.labelMoney.frame = CGRectMake(10, 55, 88, 40);
+                cell.labelTiaoJian.frame = CGRectMake(100, 27, 170, 19);
+                cell.labelEvery.frame = CGRectMake(100, 56, 170, 14);
+                cell.labelData.frame = CGRectMake(100, 110, 170, 12);
+                cell.butCanUse.frame = CGRectMake(281, 10, 23, 127);
+            } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+                cell.labelMoney.frame = CGRectMake(10, 55, 105, 40);
+            } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+                cell.labelMoney.frame = CGRectMake(12, 55, 112, 40);
+                cell.labelTiaoJian.frame = CGRectMake(130, 27, 220, 19);
+                cell.labelEvery.frame = CGRectMake(130, 56, 220, 14);
+                cell.labelData.frame = CGRectMake(130, 110, 220, 12);
+                cell.butCanUse.frame = CGRectMake(370, 10, 23, 127);
             }
             
             NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [jiaXiModel investMoney]]];

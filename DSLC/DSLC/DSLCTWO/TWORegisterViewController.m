@@ -101,7 +101,7 @@
         }];
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            _scrollview.contentOffset = CGPointMake(0, 200);
+            _scrollview.contentOffset = CGPointMake(0, 110);
         } completion:^(BOOL finished) {
             
         }];

@@ -32,13 +32,13 @@
 
 - (void)tableViewShow
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 -64) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.separatorColor = [UIColor clearColor];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
-    _tableView.tableFooterView.backgroundColor = [UIColor whiteColor];
+    _tableView.tableFooterView.backgroundColor = [UIColor clearColor];
     [_tableView registerNib:[UINib nibWithNibName:@"TWIJiaXiQuanCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
 
@@ -65,6 +65,22 @@
     [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:baifenhao];
     [cell.labelMoney setAttributedText:moneyString];
     cell.labelMoney.backgroundColor = [UIColor clearColor];
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        cell.labelMoney.frame = CGRectMake(10, 55, 88, 40);
+        cell.labelTiaoJian.frame = CGRectMake(100, 27, 170, 19);
+        cell.labelEvery.frame = CGRectMake(100, 56, 170, 14);
+        cell.labelData.frame = CGRectMake(100, 110, 170, 12);
+        cell.butCanUse.frame = CGRectMake(281, 10, 23, 127);
+    } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+        cell.labelMoney.frame = CGRectMake(10, 56, 105, 40);
+    } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+        cell.labelMoney.frame = CGRectMake(12, 55, 112, 40);
+        cell.labelTiaoJian.frame = CGRectMake(130, 27, 220, 19);
+        cell.labelEvery.frame = CGRectMake(130, 56, 220, 14);
+        cell.labelData.frame = CGRectMake(130, 110, 220, 12);
+        cell.butCanUse.frame = CGRectMake(370, 10, 23, 127);
+    }
     
     NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];
     NSRange leftRange = NSMakeRange(0, 5);

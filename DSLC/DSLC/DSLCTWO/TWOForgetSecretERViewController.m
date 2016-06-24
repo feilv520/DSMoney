@@ -178,6 +178,7 @@
 //获取验证码接口
 - (void)getMessageCode
 {
+    [self.view endEditing:YES];
     NSDictionary *parmeter = @{@"phone":textFieldPhone.text, @"msgType":@"3"};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"three/getSmsCode" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -224,7 +225,7 @@
     if (seconds == 1) {
         [theTimer invalidate];
         seconds = 60;
-        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         [button setTitle:@"获取验证码" forState: UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setEnabled:YES];

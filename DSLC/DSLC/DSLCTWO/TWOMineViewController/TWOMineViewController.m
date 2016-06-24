@@ -712,6 +712,7 @@
 - (void)buttonSetClicked:(UIButton *)button
 {
     TWOPersonalSetViewController *personalSetVC = [[TWOPersonalSetViewController alloc] init];
+    personalSetVC.whoAreYou = [[myAccount inviteType] description];
     [self.navigationController pushViewController:personalSetVC animated:YES];
 }
 

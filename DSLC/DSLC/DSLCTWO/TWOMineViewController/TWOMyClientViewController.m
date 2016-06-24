@@ -62,7 +62,7 @@
     cell.imageHead.image = [UIImage imageNamed:@"myhoutou"];
     cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.width/2;
     cell.imageHead.layer.masksToBounds = YES;
-    cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+    cell.imageRight.image = [UIImage imageNamed:@"righticon"];
     
     cell.labelPhone.text = @"159****2599";
     cell.labelName.text = @"丁颖";

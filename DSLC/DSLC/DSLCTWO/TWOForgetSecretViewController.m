@@ -123,7 +123,7 @@
     if (textFieldSecret.text.length == 0) {
         [ProgressHUD showMessage:@"请输入新的登录密码" Width:100 High:20];
     } else if (![NSString validatePassword:textFieldSecret.text]) {
-        [ProgressHUD showMessage:@"6~20位并以字母开头的密码" Width:100 High:20];
+        [ProgressHUD showMessage:@"登录密码由6-20位数字和密码组成，以字母开头" Width:100 High:20];
     } else {
         [self getFindSecretCode];
     }

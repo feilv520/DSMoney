@@ -39,30 +39,31 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.separatorColor = [UIColor clearColor];
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOWaitCashCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"TWIJiaXiQuanCell" bundle:nil] forCellReuseIdentifier:@"reuseR"];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return 140;
-    } else {
+    if (indexPath.row == 1 || indexPath.row == 6) {
         return 160;
+    } else {
+        return 140;
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 1) {
+    if (indexPath.row == 1 || indexPath.row == 6) {
         
         TWOWaitCashCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-        cell.imageWait.image = [UIImage imageNamed:@"加息券已兑付"];
+        cell.imageWait.image = [UIImage imageNamed:@"历史兑换加息券ios"];
         
         NSMutableAttributedString *percentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"2"]];
         NSRange qianRange = NSMakeRange(0, [[percentString string] rangeOfString:@"%"].location);
@@ -70,8 +71,27 @@
         [cell.labelPercent setAttributedText:percentString];
         cell.labelPercent.textColor = [UIColor findZiTiColor];
         cell.labelPercent.backgroundColor = [UIColor clearColor];
+//            待兑付加息券frame值机型判断
         if (WIDTH_CONTROLLER_DEFAULT == 320) {
-            cell.labelPercent.textAlignment = NSTextAlignmentLeft;
+            cell.labelPercent.frame = CGRectMake(10, 56, 88, 40);
+            cell.buttonWait.frame = CGRectMake(281, 16, 23, 127);
+            cell.labelTiaoJian.frame = CGRectMake(100, 27, 170, 19);
+            cell.labelEvery.frame = CGRectMake(100, 56, 170, 14);
+            cell.laeblData.frame = CGRectMake(100, 81, 170, 12);
+            cell.labelTime.frame = CGRectMake(100, 123, 170, 13);
+            cell.laeblMoney.frame = CGRectMake(12, 140, 112, 13);
+            cell.labelShuoMing.frame = CGRectMake(125, 139, 145, 13);
+        } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+            cell.labelPercent.frame = CGRectMake(10, 56, 105, 40);
+        } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+            cell.labelPercent.frame = CGRectMake(12, 56, 112, 40);
+            cell.labelTiaoJian.frame = CGRectMake(130, 27, 220, 19);
+            cell.labelEvery.frame = CGRectMake(130, 56, 220, 14);
+            cell.laeblData.frame = CGRectMake(130, 81, 220, 12);
+            cell.labelTime.frame = CGRectMake(130, 123, 220, 13);
+            cell.labelShuoMing.frame = CGRectMake(175, 139, 175, 13);
+            cell.laeblMoney.frame = CGRectMake(12, 140, 160, 13);
+            cell.buttonWait.frame = CGRectMake(370, 17, 23, 127);
         }
         
         NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];
@@ -122,7 +142,7 @@
     } else {
         
         TWIJiaXiQuanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseR"];
-        cell.imagePicture.image = [UIImage imageNamed:@"historyQuan"];
+        cell.imagePicture.image = [UIImage imageNamed:@"历史加息券ios"];
         
         NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"2"]];
         NSRange signRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"%"].location);
@@ -132,8 +152,22 @@
         [cell.labelMoney setAttributedText:moneyString];
         cell.labelMoney.textColor = [UIColor findZiTiColor];
         cell.labelMoney.backgroundColor = [UIColor clearColor];
+        
+//            可使用加息券frame值机型判断
         if (WIDTH_CONTROLLER_DEFAULT == 320) {
-            cell.labelMoney.textAlignment = NSTextAlignmentLeft;
+            cell.labelMoney.frame = CGRectMake(10, 55, 88, 40);
+            cell.labelTiaoJian.frame = CGRectMake(100, 27, 170, 19);
+            cell.labelEvery.frame = CGRectMake(100, 56, 170, 14);
+            cell.labelData.frame = CGRectMake(100, 110, 170, 12);
+            cell.butCanUse.frame = CGRectMake(281, 10, 23, 127);
+        } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+            cell.labelMoney.frame = CGRectMake(10, 55, 105, 40);
+        } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+            cell.labelMoney.frame = CGRectMake(12, 55, 112, 40);
+            cell.labelTiaoJian.frame = CGRectMake(130, 27, 220, 19);
+            cell.labelEvery.frame = CGRectMake(130, 56, 220, 14);
+            cell.labelData.frame = CGRectMake(130, 110, 220, 12);
+            cell.butCanUse.frame = CGRectMake(370, 10, 23, 127);
         }
         
         NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];

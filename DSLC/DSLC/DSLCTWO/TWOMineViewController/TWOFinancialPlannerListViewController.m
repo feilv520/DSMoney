@@ -9,11 +9,14 @@
 #import "TWOFinancialPlannerListViewController.h"
 #import "TWOFinancialPlannerCell.h"
 #import "ChatViewController.h"
+#import "TWOMoneyTeacherList.h"
+#import "TWOMyOwnerPlannerViewController.h"
 
 @interface TWOFinancialPlannerListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tabelView;
+    NSMutableArray *listArray;
 }
 
 @end
@@ -26,7 +29,9 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的理财师"];
+    listArray = [NSMutableArray array];
     
+    [self getDataList];
     [self tableViewShow];
 }
 
@@ -52,21 +57,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return listArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWOFinancialPlannerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    TWOMoneyTeacherList *listModel = [listArray objectAtIndex:indexPath.row];
     
-    cell.imageHead.image = [UIImage imageNamed:@"myhoutou"];
+    cell.imageHead.yy_imageURL = [NSURL URLWithString:[listModel avatarImg]];
     cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.height/2;
     cell.imageHead.layer.masksToBounds = YES;
-    cell.imageRight.image = [UIImage imageNamed:@"arrow"];
+    cell.imageRight.image = [UIImage imageNamed:@"righticon"];
     
-    cell.labelName.text = @"郭敏";
-    cell.labelInviteCode.text = [NSString stringWithFormat:@"邀请码 %@", @"918734917"];
-    cell.labelInviteCode.textColor = [UIColor profitColor];
+    cell.labelName.text = [listModel userRealname];
+    cell.labelInviteCode.text = [NSString stringWithFormat:@"邀请码 %@", [listModel inviteCode]];
+    cell.labelInviteCode.textColor = [UIColor profitColor]; //myhoutou
     
     return cell;
 }
@@ -74,8 +80,33 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ChatViewController *chatVC = [[ChatViewController alloc] init];
-    pushVC(chatVC);
+    TWOMyOwnerPlannerViewController *ownPlannerVC = [[TWOMyOwnerPlannerViewController alloc] init];
+    ownPlannerVC.listModel = [listArray objectAtIndex:indexPath.row];
+    ownPlannerVC.stateShow = NO;
+    pushVC(ownPlannerVC);
+}
+
+#pragma mark Data--------------------------------
+- (void)getDataList
+{
+    NSDictionary *parmeter = @{@"curPage":@1};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getIndexFinPlannerList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"理财师列表:::::::::::%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *dataArray = [responseObject objectForKey:@"User"];
+            for (NSDictionary *tempDic in dataArray) {
+                TWOMoneyTeacherList *listModel = [[TWOMoneyTeacherList alloc] init];
+                [listModel setValuesForKeysWithDictionary:tempDic];
+                [listArray addObject:listModel];
+            }
+
+            [_tabelView reloadData];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

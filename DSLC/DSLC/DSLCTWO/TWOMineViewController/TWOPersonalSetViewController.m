@@ -108,7 +108,14 @@
     TWOPersonalSetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
     NSArray *titleArray = @[@[@"银行卡", @"实名认证", @"手机号", @"邮箱绑定", @"安全设置", @"地址设置"], @[@"我的理财师", @"关于大圣理财"]];
-    cell.labelTitle.text = [[titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSArray *titleAnArray = @[@[@"银行卡", @"实名认证", @"手机号", @"邮箱绑定", @"安全设置", @"地址设置"], @[@"我的客户", @"关于大圣理财"]];
+    
+//    判断是理财师还是普通用户
+    if ([self.whoAreYou isEqualToString:@"1"]) {
+        cell.labelTitle.text = [[titleAnArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    } else {
+        cell.labelTitle.text = [[titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    }
     cell.imageRight.image = [UIImage imageNamed:@"righticon"];
     
     if (indexPath.section == 1) {
@@ -261,17 +268,26 @@
         }
     } else {
         if (indexPath.row == 0) {
-//            我的理财师
-//            TWOMyOwnerPlannerViewController *myOwnerPlanner = [[TWOMyOwnerPlannerViewController alloc] init];
-//            pushVC(myOwnerPlanner);
             
-//            理财师列表页
-            TWOFinancialPlannerListViewController *financialPlannerVC = [[TWOFinancialPlannerListViewController alloc] init];
-            pushVC(financialPlannerVC);
+//            判断是1理财师身份 0为普通用户
+            if ([self.whoAreYou isEqualToString:@"1"]) {
+                //我的客户列表
+                TWOMyClientViewController *myClientVC = [[TWOMyClientViewController alloc] init];
+                pushVC(myClientVC);
+            } else {
+                //状态为0表示没有申请理财师,为1有申请理财师
+                if ([[[personalModel myFinPlanner] description] isEqualToString:@"1"]) {
+                    //我的理财师
+                    TWOMyOwnerPlannerViewController *myOwnerPlanner = [[TWOMyOwnerPlannerViewController alloc] init];
+                    myOwnerPlanner.stateShow = YES;
+                    pushVC(myOwnerPlanner);
+                } else {
+                    //理财师列表页
+                    TWOFinancialPlannerListViewController *financialPlannerVC = [[TWOFinancialPlannerListViewController alloc] init];
+                    pushVC(financialPlannerVC);
+                }
+            }
             
-//            我的客户列表
-//            TWOMyClientViewController *myClientVC = [[TWOMyClientViewController alloc] init];
-//            pushVC(myClientVC);
         } else {
 //            关于大圣理财
             TWOAboutDSLCViewController *aboutDSLC = [[TWOAboutDSLCViewController alloc] init];

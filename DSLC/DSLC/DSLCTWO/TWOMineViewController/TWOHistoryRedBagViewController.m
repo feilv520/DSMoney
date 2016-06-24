@@ -55,7 +55,23 @@
 {
     TWOUseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    cell.imagePicture.image = [UIImage imageNamed:@"historyBag"];
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        cell.labelMoney.frame = CGRectMake(10, 55, 108, 40);
+        cell.butCanUse.frame = CGRectMake(281, 10, 23, 127);
+        cell.labelTiaoJian.frame = CGRectMake(118, 27, 150, 19);
+        cell.labelEvery.frame = CGRectMake(122, 56, 146, 15);
+        cell.labelData.frame = CGRectMake(116, 110, 152, 12);
+    } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+        cell.labelMoney.frame = CGRectMake(10, 55, 127, 40);
+    } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+        cell.labelMoney.frame = CGRectMake(12, 55, 138, 40);
+        cell.butCanUse.frame = CGRectMake(370, 10, 23, 127);
+        cell.labelTiaoJian.frame = CGRectMake(158, 27, 195, 19);
+        cell.labelEvery.frame = CGRectMake(158, 56, 195, 15);
+        cell.labelData.frame = CGRectMake(158, 110, 195, 12);
+    }
+
+    cell.imagePicture.image = [UIImage imageNamed:@"历史红包ios"];
     
     NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", @"20"]];
     NSRange signRange = NSMakeRange(0, 1);
@@ -77,13 +93,16 @@
     cell.labelEvery.backgroundColor = [UIColor clearColor];
     cell.labelEvery.textColor = [UIColor findZiTiColor];
     
-//    cell.labelCanUse.text = @"已\n过\n期";
-//    cell.labelCanUse.numberOfLines = 3;
-//    cell.labelCanUse.backgroundColor = [UIColor clearColor];
+    [cell.butCanUse setTitle:@"已\n过\n期" forState:UIControlStateNormal];
+    cell.butCanUse.titleLabel.numberOfLines = 3;
+    cell.butCanUse.backgroundColor = [UIColor clearColor];
+    cell.butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
     cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
     cell.labelData.backgroundColor = [UIColor clearColor];
     cell.labelData.textColor = [UIColor findZiTiColor];
+    
+//    机型frame判断
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

@@ -37,7 +37,7 @@
     _tableView.delegate = self;
     _tableView.separatorColor = [UIColor clearColor];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
-    _tableView.tableFooterView.backgroundColor = [UIColor whiteColor];
+    _tableView.tableFooterView.backgroundColor = [UIColor clearColor];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
 
@@ -48,7 +48,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,6 +63,22 @@
     [cell.labelMoney setAttributedText:moneyString];
     cell.labelMoney.backgroundColor = [UIColor clearColor];
     
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        cell.labelMoney.frame = CGRectMake(10, 55, 108, 40);
+        cell.butCanUse.frame = CGRectMake(281, 10, 23, 127);
+        cell.labelTiaoJian.frame = CGRectMake(118, 27, 150, 19);
+        cell.labelEvery.frame = CGRectMake(122, 56, 146, 15);
+        cell.labelData.frame = CGRectMake(116, 110, 152, 12);
+    } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+        cell.labelMoney.frame = CGRectMake(10, 55, 127, 40);
+    } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+        cell.labelMoney.frame = CGRectMake(12, 55, 138, 40);
+        cell.butCanUse.frame = CGRectMake(370, 10, 23, 127);
+        cell.labelTiaoJian.frame = CGRectMake(158, 27, 195, 19);
+        cell.labelEvery.frame = CGRectMake(158, 56, 195, 15);
+        cell.labelData.frame = CGRectMake(158, 110, 195, 12);
+    }
+    
     NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];
     NSRange leftRange = NSMakeRange(0, 5);
     [useing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:leftRange];
@@ -72,7 +88,7 @@
     [useing addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:rightRange];
     [cell.labelTiaoJian setAttributedText:useing];
     cell.labelTiaoJian.backgroundColor = [UIColor clearColor];
-    
+
     cell.labelEvery.text = @"所有产品适用";
     cell.labelEvery.backgroundColor = [UIColor clearColor];
     
