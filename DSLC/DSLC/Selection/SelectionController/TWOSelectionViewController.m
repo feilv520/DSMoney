@@ -142,20 +142,31 @@
 - (void)upContentShow
 {
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+        
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 30)];
+        _scrollView.contentSize = CGSizeMake(1, HEIGHT_CONTROLLER_DEFAULT + 90);
+        _scrollView.scrollEnabled = YES;
         _scrollView.delegate = self;
         [self.view addSubview:_scrollView];
         
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
         
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT + 150)];
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT )];
+        _scrollView.contentSize = CGSizeMake(1, HEIGHT_CONTROLLER_DEFAULT + 60);
+        _scrollView.scrollEnabled = YES;
+        _scrollView.delegate = self;
+        [self.view addSubview:_scrollView];
+    } else {
+        
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+        _scrollView.scrollEnabled = NO;
         _scrollView.delegate = self;
         [self.view addSubview:_scrollView];
     }
     
 //    轮播banner的位置
     viewBanner = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
-    [self.view addSubview:viewBanner];
+    [_scrollView addSubview:viewBanner];
     viewBanner.backgroundColor = [UIColor qianhuise];
     
     UIImageView *imageBanner = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, viewBanner.frame.size.height) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"首页banner"]];
@@ -164,14 +175,14 @@
     
 //    签到记录按钮
     UIButton *buttonSign = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 20, 71.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 53.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
-    [imageBanner addSubview:buttonSign];
+    [viewBanner addSubview:buttonSign];
     [buttonSign setBackgroundImage:[UIImage imageNamed:@"signrecord"] forState:UIControlStateNormal];
     [buttonSign setBackgroundImage:[UIImage imageNamed:@"signrecord"] forState:UIControlStateHighlighted];
     [buttonSign addTarget:self action:@selector(signRecordButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    公告位置
     viewNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 32.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
-    [self.view addSubview:viewNotice];
+//    [self.view addSubview:viewNotice];
     viewNotice.backgroundColor = [UIColor whiteColor];
     
     CGFloat noticeHeight = 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20);
@@ -188,27 +199,28 @@
     
     for (int i = 0; i < 2; i++) {
         buttonClick = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.view addSubview:buttonClick];
-        buttonClick.frame = CGRectMake(9 + (WIDTH_CONTROLLER_DEFAULT - 27)/2.0 * i + 9 * i, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 27)/2.0, 73.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+//        [self.view addSubview:buttonClick];
+        if (HEIGHT_CONTROLLER_DEFAULT - 20.0 == 480 || HEIGHT_CONTROLLER_DEFAULT - 20.0 == 568) {
+            buttonClick.frame = CGRectMake(9 + (WIDTH_CONTROLLER_DEFAULT - 27)/2.0 * i + 9 * i, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 27)/2.0, 63.0);
+        } else {
+            buttonClick.frame = CGRectMake(9 + (WIDTH_CONTROLLER_DEFAULT - 27)/2.0 * i + 9 * i, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 27)/2.0, 73.0);
+        }
         buttonClick.backgroundColor = [UIColor qianhuise];
         buttonClick.tag = 1000 + i;
         [buttonClick setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [imageArr objectAtIndex:i]]] forState:UIControlStateNormal];
         [buttonClick setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [imageArr objectAtIndex:i]]] forState:UIControlStateHighlighted];
         [buttonClick addTarget:self action:@selector(buttonClickedChoose:) forControlEvents:UIControlEventTouchUpInside];
         
-        if (WIDTH_CONTROLLER_DEFAULT == 320) {
-            [_scrollView addSubview:buttonClick];
-        }
+        [_scrollView addSubview:buttonClick];
     }
     
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        [_scrollView addSubview:viewBanner];
-        [_scrollView addSubview:viewNotice];
-    }
+    [_scrollView addSubview:viewBanner];
+    [_scrollView addSubview:viewNotice];
 }
 
 - (void)collectionViewShow
 {
+    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 308);
     flowLayout.minimumInteritemSpacing = 0;
@@ -216,11 +228,9 @@
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 308) collectionViewLayout:flowLayout];
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        [_scrollView addSubview:_collection];
-    } else {
-        [self.view addSubview:_collection];
-    }
+    
+    [_scrollView addSubview:_collection];
+    
     _collection.dataSource = self;
     _collection.delegate = self;
     _collection.bounces = NO;
@@ -231,12 +241,6 @@
     _collection.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
     
     [_collection registerNib:[UINib nibWithNibName:@"TWOHomePageProductCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
-    
-    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
-        _scrollView.contentSize = CGSizeMake(0, 586);
-    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
-        _scrollView.contentSize = CGSizeMake(0, 777);
-    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -307,7 +311,7 @@
         [self changeColorAndSize:[NSString stringWithFormat:@"%.0lf元",residueMoney] label:cell.labelLastMoney length:1];
     }
     
-    [self changeColorAndSize:[NSString stringWithFormat:@"%d元",[[model startMoney] intValue]] label:cell.labelQiTou length:1];
+    [self changeColorAndSize:[NSString stringWithFormat:@"%d元",[[[model startMoney] stringByReplacingOccurrencesOfString:@"," withString:@""] intValue]] label:cell.labelQiTou length:1];
         
     cell.labelYuQi.text = @"预期年化收益率";
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
@@ -366,6 +370,11 @@
         [self.navigationController pushViewController:yaoyiyaoVC animated:YES];
     } else {
         NewInviteViewController *inviteVc = [[NewInviteViewController alloc] init];
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        NSLog(@"%@",[dic objectForKey:@"invitationMyCode"]);
+        inviteVc.inviteCode = [dic objectForKey:@"invitationMyCode"];
+        
         [self.navigationController pushViewController:inviteVc animated:YES];
     }
 }
@@ -420,7 +429,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (_scrollView.contentOffset.y < -20) {
+    if (_scrollView.contentOffset.y < 0) {
         _scrollView.scrollEnabled = NO;
     } else {
         _scrollView.scrollEnabled = YES;
@@ -434,7 +443,7 @@
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    if ([FileOfManage ExistOfFile:@"Member.plist"]) {
+    if ([FileOfManage ExistOfFile:@"Member.plist"] && [dic objectForKey:@"token"] != nil) {
         
         parameter = @{@"token":[dic objectForKey:@"token"]};
         
@@ -502,7 +511,7 @@
 - (void)makeScrollView{
     NSInteger photoIndex = photoArray.count + 2;
     
-    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 170)];
+    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     bannerScrollView.backgroundColor = Color_Clear;
     bannerScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * photoIndex,0);
     bannerScrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
@@ -516,7 +525,7 @@
     
     YYAnimatedImageView *bannerFirst = [YYAnimatedImageView new];
     bannerFirst.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:0] adImg]];
-    bannerFirst.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    bannerFirst.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     
     YYAnimatedImageView *bannerLast = [YYAnimatedImageView new];
     bannerLast.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:photoArray.count - 1] adImg]];
@@ -526,7 +535,7 @@
         YYAnimatedImageView *bannerObject = [YYAnimatedImageView new];
         bannerObject.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:i] adImg]];
         bannerObject.tag = i;
-        bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+        bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
         UITapGestureRecognizer *tapLeft = [[UITapGestureRecognizer alloc] init];
         [bannerObject addGestureRecognizer:tapLeft];
         [tapLeft addTarget:self action:@selector(bannerObject:)];
@@ -543,7 +552,7 @@
     [bannerScrollView addSubview:bannerFirst];
     [bannerScrollView addSubview:bannerLast];
     
-    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 150, WIDTH_CONTROLLER_DEFAULT, 30)];
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 150.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30)];
     
     pageControl.numberOfPages = photoArray.count;
     pageControl.currentPage = 0;

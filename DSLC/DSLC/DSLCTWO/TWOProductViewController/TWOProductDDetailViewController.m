@@ -28,6 +28,7 @@
     
     CGSize size;
     NSIndexPath *path;
+    NSIndexPath *flagPath;
     
     CGRect cellRect;
     
@@ -40,6 +41,12 @@
     NSMutableArray *progressArray;
     NSMutableArray *valueArray;
     
+    UIWebView *webView;
+    
+    //判断打开符号
+    NSMutableArray *moreOpenArray;
+    
+    CGFloat widthNumber;
     
 }
 
@@ -54,6 +61,8 @@
     self.view.backgroundColor = [UIColor colorFromHexCode:@"#F5F6F7"];
     
     [self.navigationItem setTitle:@"资产详情"];
+    
+    moreOpenArray = [NSMutableArray array];
     
     openFlag = YES;
     
@@ -110,12 +119,17 @@
             return 50;
         } else {
             if (!openFlag) {
-                if (indexPath.row == path.row) {
-                    if (moreOpenFlag) {
-                        return 80 + size.height;
-                    } else {
-                        return 120;
-                    }
+//                if (indexPath.row == path.row) {
+                    if ([[moreOpenArray objectAtIndex:indexPath.row - 1] isEqualToString:@"1"]) {
+                        
+                        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
+                        
+                        CGSize mySize = [[[progressArray objectAtIndex:indexPath.row - 1] objectForKey:@"pDetail"] boundingRectWithSize:CGSizeMake(widthNumber, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+                        
+                        return 80 + mySize.height;
+//                    } else {
+//                        return 120;
+//                    }
                 } else {
                     return 120;
                 }
@@ -130,7 +144,7 @@
             
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
             
-            CGSize sizeDetail = [[assetModel assetProjectDetail] boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            CGSize sizeDetail = [[assetModel assetProjectResume] boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
             
             return sizeDetail.height;
         }
@@ -290,6 +304,8 @@
                 cell.valueLabel.text = [NSString stringWithFormat:@"%@",[valueArray objectAtIndex:indexPath.row - 1]];
             }
             
+//            webView.hidden = YES;
+            
         }
     } else {
         if (indexPath.row == 0) {
@@ -302,15 +318,17 @@
             cell.titleLabel.hidden = YES;
             cell.valueLabel.hidden = YES;
             
-            NSString *detailString = [assetModel assetProjectDetail];
+            NSString *detailString = [assetModel assetProjectResume];
             
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
             
             CGSize sizeDetail = [detailString boundingRectWithSize:CGSizeMake(cell.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
             
-            UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, sizeDetail.height)];
+            webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, sizeDetail.height)];
             webView.userInteractionEnabled = NO;
             [cell addSubview:webView];
+            
+//            webView.hidden = NO;
             
             detailString = [detailString stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
             detailString = [detailString stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
@@ -333,8 +351,21 @@
             
                 [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
                 
+                NSString *detailString = [[progressArray objectAtIndex:indexPath.row - 1] objectForKey:@"pDetail"];
+                
+                cell.dateLabel.text = [[progressArray objectAtIndex:indexPath.row - 1] objectForKey:@"pDate"];
+                cell.valueLabel.text = detailString;
+                
+                widthNumber = cell.valueLabel.frame.size.width;
+                
+                if ((detailString.length / (widthNumber / 13.0)) <= 3.0) {
+                    cell.moreButton.hidden = YES;
+                } else {
+                    cell.moreButton.hidden = NO;
+                }
+                
                 if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
-                    cell.lineView.frame = CGRectMake(cell.bianImageView.center.x, CGRectGetMaxY(cell.bianImageView.frame), 2, 65);
+                    cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 1, 50, 2, 70);
                 }
                 
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -426,61 +457,107 @@
 
 - (void)moreAction:(id)sender{
     
-    moreOpenFlag = YES;
-    
-    TWOProductJinDuTableViewCell *oldCell = (TWOProductJinDuTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
-    
-    oldCell.valueLabel.numberOfLines = 3;
-    
-    oldCell.valueLabel.frame = cellRect;
-    
-    [oldCell.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
-    oldCell.fuhaoImage.image = [UIImage imageNamed:@"TWOPDown"];
-    [oldCell.moreButton removeTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
-    [oldCell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
-    
     TWOProductJinDuTableViewCell * cell = (TWOProductJinDuTableViewCell *)[[sender superview] superview];
+    
     path = [self.tableView indexPathForCell:cell];
     
-    cellRect = cell.valueLabel.frame;
+    [moreOpenArray replaceObjectAtIndex:path.row - 1 withObject:@"1"];
     
-    [cell.moreButton setTitle:@"收起" forState:UIControlStateNormal];
-    cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPUp"];
-    [cell.moreButton removeTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.moreButton addTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
+//    if (flagPath.row == path.row || flagPath == nil) {
     
-    cell.valueLabel.text = @"本店于十一期间特推出一系列优惠，限时限量敬请选购！沙发：钻石品质，首领风范！床垫：华贵典雅，彰显时尚！尊贵而不失奢华，典雅却不失自然！温馨和浪漫的生活，我们与你一同创造！本店于十一期间特推出一系列优惠，限时限量敬请选购！沙发：钻石品质，首领风范！床垫：华贵典雅，彰显时尚！尊贵而不失奢华，典雅却不失自然！温馨和浪漫的生活，我们与你一同创造！";
-    
-    cell.valueLabel.numberOfLines = 0;
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
-    
-    size = [cell.valueLabel.text boundingRectWithSize:CGSizeMake(cell.valueLabel.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-
-    cell.valueLabel.frame = CGRectMake(cell.valueLabel.frame.origin.x, cell.valueLabel.frame.origin.y, cell.valueLabel.frame.size.width, size.height + 10);
+        cellRect = cell.valueLabel.frame;
+        
+        [cell.moreButton setTitle:@"收起" forState:UIControlStateNormal];
+        cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPUp"];
+        [cell.moreButton removeTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.moreButton addTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        cell.valueLabel.text = [[progressArray objectAtIndex:path.row - 1] objectForKey:@"pDetail"];
+        
+        cell.valueLabel.numberOfLines = 0;
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
+        
+        size = [cell.valueLabel.text boundingRectWithSize:CGSizeMake(cell.valueLabel.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        
+        cell.valueLabel.frame = CGRectMake(cell.valueLabel.frame.origin.x, cell.valueLabel.frame.origin.y, cell.valueLabel.frame.size.width, size.height + 10);
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+            cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 3, 50, 2, 70);
+        }
+        
+//        NSIndexPath *myPath=[NSIndexPath indexPathForRow:path.row - 1 inSection:path.section];
+//        
+//        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:myPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
     
     [self.tableView reloadData];
+    
+//        flagPath = path;
+//    } else {
+//        [self sMoreAction:nil];
+//    }
+    NSLog(@"moreOpenArray - %@",moreOpenArray);
+    
 }
 
 - (void)sMoreAction:(id)sender{
     
-    moreOpenFlag = NO;
-    
     TWOProductJinDuTableViewCell *cell = (TWOProductJinDuTableViewCell *)[[sender superview] superview];
     
     path = [self.tableView indexPathForCell:cell];
+
+//    if (flagPath.row == path.row) {
     
-    [cell.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
-    cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPDown"];
-    [cell.moreButton removeTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    cell.valueLabel.text = @"本店于十一期间特推出一系列优惠，限时限量敬请选购！沙发：钻石品质，首领风范！床垫：华贵典雅，彰显时尚！尊贵而不失奢华，典雅却不失自然！温馨和浪漫的生活，我们与你一同创造！";
-    
-    cell.valueLabel.numberOfLines = 3;
-    
-    cell.valueLabel.frame = cellRect;
+        [moreOpenArray replaceObjectAtIndex:path.row - 1 withObject:@"0"];
+        
+        [cell.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
+        cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPDown"];
+        [cell.moreButton removeTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        cell.valueLabel.text = [[progressArray objectAtIndex:path.row - 1] objectForKey:@"pDetail"];
+        
+        cell.valueLabel.numberOfLines = 3;
+        
+        cell.valueLabel.frame = cellRect;
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+            cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 3, 50, 2, 70);
+        }
+//    
+//        NSIndexPath *myPath=[NSIndexPath indexPathForRow:path.row - 1 inSection:path.section];
+//        
+//        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:myPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
     
     [self.tableView reloadData];
+        
+//    } else {
+        
+//        [moreOpenArray replaceObjectAtIndex:flagPath.row - 1 withObject:@"0"];
+//        
+//        [cell.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
+//        cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPDown"];
+//        [cell.moreButton removeTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        cell.valueLabel.text = [[progressArray objectAtIndex:flagPath.row - 1] objectForKey:@"pDetail"];
+//        
+//        cell.valueLabel.numberOfLines = 3;
+//        
+//        cell.valueLabel.frame = cellRect;
+//        
+//        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+//            cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 3, 50, 2, 70);
+//        }
+//        
+//        //    [self.tableView reloadData];
+//        NSIndexPath *myPath=[NSIndexPath indexPathForRow:flagPath.row - 1 inSection:flagPath.section];
+//        NSIndexPath *myTPath=[NSIndexPath indexPathForRow:path.row - 1 inSection:path.section];
+//        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:myPath,myTPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
+//        
+//        flagPath = path;
+//    }
+    
+    NSLog(@"moreOpenArrays - %@",moreOpenArray);
 
 }
 
@@ -512,8 +589,10 @@
         [valueArray addObject:[assetModel assetManager]];
         
         progressArray = [[responseObject objectForKey:@"Asset"] objectForKey:@"Progress"];
-        
-
+    
+        for (NSInteger i = 0; i < progressArray.count; i++) {
+            [moreOpenArray addObject:@"0"];
+        }
         
         [_tableView reloadData];
         

@@ -197,7 +197,7 @@
                 [self changeColorAndSize:[NSString stringWithFormat:@"%d元",[[pListModel residueMoney] intValue]] label:cell.labelLastMoney length:1];
             }
             
-            [self changeColorAndSize:[NSString stringWithFormat:@"%@元",[pListModel startMoney]] label:cell.labelQiTou length:1];
+            [self changeColorAndSize:[NSString stringWithFormat:@"%d元",[[pListModel startMoney] intValue]] label:cell.labelQiTou length:1];
             
             cell.labelYuQi.text = @"预期年化收益率";
             cell.labelDownONe.text = @"理财期限";

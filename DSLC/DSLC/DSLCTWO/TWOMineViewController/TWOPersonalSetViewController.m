@@ -313,7 +313,7 @@
         NSLog(@"register = %@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
-            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             
             if (![FileOfManage ExistOfFile:@"Member.plist"]) {
                 [FileOfManage createWithFile:@"Member.plist"];
@@ -353,6 +353,17 @@
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
             }
+            
+            // 判断是否存在isLogin.plist文件
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
+
             
             AppDelegate *app = [[UIApplication sharedApplication] delegate];
             [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(0, 0) animated:NO];

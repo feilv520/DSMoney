@@ -292,18 +292,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (tableView == _tableViewProfit) {
         
+        TWOUserAssetsListModel *model = [profitting objectAtIndex:indexPath.row];
+        
         TWOProfitingViewController *profitingVC = [[TWOProfitingViewController alloc] init];
-        profitingVC.productName = @"金斗云054期";
-        profitingVC.orderId = @"1";
+        profitingVC.productName = [model productName];
+        profitingVC.orderId = [model orderId];
         [self.navigationController pushViewController:profitingVC animated:YES];
         
     } else {
         
+        TWOUserAssetsListModel *model = [profitted objectAtIndex:indexPath.row];
+        
         TWOAlreayCashViewController *alreadyCashVC = [[TWOAlreayCashViewController alloc] init];
-        alreadyCashVC.productName = @"金斗云054期";
-        alreadyCashVC.orderId = @"1";
+        alreadyCashVC.productName = [model productName];
+        alreadyCashVC.orderId = [model orderId];
         [self.navigationController pushViewController:alreadyCashVC animated:YES];
     }
 }

@@ -204,6 +204,9 @@
             UIImageView *backgroundImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TWO_BackgroundView"]];
             backgroundImgView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.window.frame.size.height);
             [self.window addSubview:backgroundImgView];
+            if (self.window.frame.size.height == 480) {
+                backgroundImgView.image = [UIImage imageNamed:@"TWO_BackgroundView480"];
+            }
             
             UIImageView *newImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TWO_NewBackground"]];
             newImageView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.window.frame.size.height - 117);
@@ -457,6 +460,7 @@ void UncaughtExceptionHandler(NSException *exception){
                                      [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -470,6 +474,7 @@ void UncaughtExceptionHandler(NSException *exception){
                                      [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -486,7 +491,11 @@ void UncaughtExceptionHandler(NSException *exception){
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
             
-            [self signFinish];
+            if (![[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"] isEqualToNumber:@0]){
+                
+                [self signFinish];
+            }
+            
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }

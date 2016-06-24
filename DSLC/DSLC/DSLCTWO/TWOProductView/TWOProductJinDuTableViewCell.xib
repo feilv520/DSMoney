@@ -24,12 +24,12 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TWOProductJinDu.png" id="Hxh-Hg-at9">
                         <rect key="frame" x="10" y="0.0" width="36" height="50"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <animations/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开售中" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YZk-4B-w5I">
                         <rect key="frame" x="17" y="0.0" width="18" height="50"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <animations/>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
                         <color key="textColor" red="0.14117647059999999" green="0.57647058819999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -37,7 +37,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aLn-fi-uGL">
                         <rect key="frame" x="54" y="10" width="308" height="21"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <animations/>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
                         <color key="textColor" red="0.38431372549019605" green="0.396078431372549" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
@@ -54,19 +54,19 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oRL-Me-gho">
                         <rect key="frame" x="290" y="89" width="65" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                         <animations/>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
                         <state key="normal" title="查看更多"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TWOPDown.png" id="8Qc-ir-MZh">
                         <rect key="frame" x="353" y="99" width="12" height="12"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                         <animations/>
                     </imageView>
                     <view contentMode="scaleToFill" id="mSE-LJ-HzH">
                         <rect key="frame" x="25" y="49" width="2" height="70"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" red="0.14117647059999999" green="0.57647058819999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -84,7 +84,7 @@
                 <outlet property="statusLabel" destination="YZk-4B-w5I" id="Dyf-d2-MQs"/>
                 <outlet property="valueLabel" destination="Lgg-ub-Gtf" id="EVy-aO-S6M"/>
             </connections>
-            <point key="canvasLocation" x="358.5" y="390"/>
+            <point key="canvasLocation" x="-989.5" y="-2043"/>
         </tableViewCell>
     </objects>
     <resources>
