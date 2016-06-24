@@ -8351,6 +8351,7 @@
 				81460C8D1D11504D00A81703 /* huisechance@3x.png in Resources */,
 				815D18FC1D1D30D500DFA753 /* 圆右@3x.png in Resources */,
 				8DFA58241D1239B000FE9565 /* TWO_BackgroundView.png in Resources */,
+				8DFA58241D1239B000FE9565 /* TWO_BackgroundView480.png in Resources */,
 				8D9011A31BD6337C00E5D62A /* 10@2x.png in Resources */,
 				81B84C141CE44A9A00A867B9 /* xintouzi@2x.png in Resources */,
 				81B84C091CE432E500A867B9 /* renwujindu1@3x.png in Resources */,
