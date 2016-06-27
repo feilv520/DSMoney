@@ -373,25 +373,17 @@ void UncaughtExceptionHandler(NSException *exception){
         [lDic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
     }
     
-//    // 判断是否存在isLogin.plist文件
-//    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
-//        [FileOfManage createWithFile:@"isLogin.plist"];
-//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-//        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-//    } else {
-//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-//        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-//    }
-//
-//    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
-//        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
-//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-//        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
-//    } else {
-//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-//        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
-//    }
-    
+    if ([[self.flagUserInfo objectForKey:@"password"] isEqualToString:@"1"]) {
+        // 判断是否存在isLogin.plist文件
+        if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+            [FileOfManage createWithFile:@"isLogin.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+        } else {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+        }
+    }
 }
 
 // 版本提示框 200 开启 400 没开

@@ -677,6 +677,8 @@
 //                
 //            } else {
             
+            NSLog(@"%@",responseObject);
+            
                 if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"3"]) {
                     
 //                    TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
