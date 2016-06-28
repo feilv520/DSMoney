@@ -214,6 +214,7 @@
 {
     InviteRecordViewController *InviteRecord = [[InviteRecordViewController alloc] init];
     InviteRecord.inviteCode = self.inviteCode;
+    NSLog(@"%@",self.inviteCode);
     [self.navigationController pushViewController:InviteRecord animated:YES];
 }
 

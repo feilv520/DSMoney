@@ -89,6 +89,7 @@
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
     [self getProductList];
+
     [self upContentShow];
     
     [self getAdvList];

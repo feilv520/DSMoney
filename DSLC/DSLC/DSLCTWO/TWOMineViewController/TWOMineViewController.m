@@ -24,7 +24,7 @@
 #import "TWORedBagViewController.h"
 #import "TWOMyAccountModel.h"
 
-@interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIImagePickerControllerDelegate>
+@interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 {
     UITableView *_tableView;
@@ -43,21 +43,41 @@
     UIButton *butBlack;
     UIView *viewHateLine;
     
-//    总资产钱数
+    // 头部元素
+    UIButton *buttEmail;
+    UIButton *buttonSet;
+    UIView *viewAlpha;
+    
+    // 总资产钱数
     UIButton *buttMoney;
     UIButton *butMoneyYu;
     UIButton *butAddMoney;
     UIView *viewMoney;
     UIButton *buttonEye;
+    UIButton *butTask;
+    UIButton *butTastWen;
+    UIView *viewLineH;
+    UIButton *butFullMoney;
+    UIView *viewLineS;
+    UIButton *butFillMoney;
+    UIButton *buttonZZC;
+    UIButton *butYellowJiao;
+    UIButton *butLeftJiao;
+    UIButton *butRightJiao;
+    
+    YYAnimatedImageView *imgView;
     
     UILabel *labelMoneyZhong;
     UILabel *labelTeQuan;
     
-    //详情model
+    // 详情model
     TWOMyAccountModel *myAccount;
     
     // 初始化判断
     BOOL flagFirst;
+    
+    // 获取用户信息
+    NSMutableDictionary *memberDic;
 }
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -126,40 +146,52 @@
 //tableView头部
 - (void)tableViewHeadShow
 {
-    imageBackGround = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 281.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"我的背景图"]];
-    [_tableView.tableHeaderView addSubview:imageBackGround];
-    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
-        imageBackGround.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 295.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
-    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
-        imageBackGround.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 310.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    if (imageBackGround == nil) {
+        imageBackGround = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 281.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"我的背景图"]];
+        
+        if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+            imageBackGround.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 295.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+        } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+            imageBackGround.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 310.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+        }
+        
+        imageBackGround.userInteractionEnabled = YES;
+        height = imageBackGround.frame.size.height;
+        //    让子类自动布局
+        imageBackGround.autoresizesSubviews = YES;
     }
-    imageBackGround.userInteractionEnabled = YES;
-    height = imageBackGround.frame.size.height;
-//    让子类自动布局
-    imageBackGround.autoresizesSubviews = YES;
+    [_tableView.tableHeaderView addSubview:imageBackGround];
     
 //    信封按钮
-    UIButton *buttEmail = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(14, 30, 23, 23) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (buttEmail == nil) {
+        buttEmail = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(14, 30, 23, 23) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        [buttEmail setBackgroundImage:[UIImage imageNamed:@"email"] forState:UIControlStateNormal];
+        [buttEmail setBackgroundImage:[UIImage imageNamed:@"email"] forState:UIControlStateHighlighted];
+        buttEmail.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        [buttEmail addTarget:self action:@selector(buttonEmailClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageBackGround addSubview:buttEmail];
-    [buttEmail setBackgroundImage:[UIImage imageNamed:@"email"] forState:UIControlStateNormal];
-    [buttEmail setBackgroundImage:[UIImage imageNamed:@"email"] forState:UIControlStateHighlighted];
-    buttEmail.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [buttEmail addTarget:self action:@selector(buttonEmailClicked:) forControlEvents:UIControlEventTouchUpInside];
     
 //    设置按钮
-    UIButton *buttonSet = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23 - 14, 30, 23, 23) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (buttonSet == nil) {
+        
+        buttonSet = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 23 - 14, 30, 23, 23) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        [buttonSet setBackgroundImage:[UIImage imageNamed:@"myset"] forState:UIControlStateNormal];
+        [buttonSet setBackgroundImage:[UIImage imageNamed:@"myset"] forState:UIControlStateHighlighted];
+        buttonSet.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        [buttonSet addTarget:self action:@selector(buttonSetClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [_tableView.tableHeaderView addSubview:buttonSet];
-    [buttonSet setBackgroundImage:[UIImage imageNamed:@"myset"] forState:UIControlStateNormal];
-    [buttonSet setBackgroundImage:[UIImage imageNamed:@"myset"] forState:UIControlStateHighlighted];
-    buttonSet.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [buttonSet addTarget:self action:@selector(buttonSetClicked:) forControlEvents:UIControlEventTouchUpInside];
     
 //    任务中心
-    UIView *viewAlpha = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 23 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 48.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor colorWithRed:33.0 / 225.0 green:125.0 / 225.0 blue:226.0 / 225.0 alpha:1.0]];
+    if (viewAlpha == nil) {
+        
+        viewAlpha = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 23 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 48.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor colorWithRed:33.0 / 225.0 green:125.0 / 225.0 blue:226.0 / 225.0 alpha:1.0]];
+        viewAlpha.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        viewAlpha.layer.cornerRadius = 15;
+        viewAlpha.layer.masksToBounds = YES;
+    }
     [imageBackGround addSubview:viewAlpha];
-    viewAlpha.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    viewAlpha.layer.cornerRadius = 15;
-    viewAlpha.layer.masksToBounds = YES;
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         viewAlpha.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 23 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 62.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
@@ -169,72 +201,118 @@
         viewAlpha.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 23 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 43.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     }
     
-    UIButton *butTask = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(71/2 - 16, 0, 30, 30) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (butTask == nil) {
+        
+        butTask = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(71/2 - 16, 0, 30, 30) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        [butTask setBackgroundImage:[UIImage imageNamed:@"renwuzhongxinicon"] forState:UIControlStateNormal];
+        [butTask setBackgroundImage:[UIImage imageNamed:@"renwuzhongxinicon"] forState:UIControlStateHighlighted];
+        [butTask addTarget:self action:@selector(jobCenterButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [viewAlpha addSubview:butTask];
-    [butTask setBackgroundImage:[UIImage imageNamed:@"renwuzhongxinicon"] forState:UIControlStateNormal];
-    [butTask setBackgroundImage:[UIImage imageNamed:@"renwuzhongxinicon"] forState:UIControlStateHighlighted];
-    [butTask addTarget:self action:@selector(jobCenterButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butTastWen = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 30, 71, 12) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"任务中心"];
+    if (butTastWen == nil) {
+        
+        butTastWen = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 30, 71, 12) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"任务中心"];
+        butTastWen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        [butTastWen addTarget:self action:@selector(jobCenterButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [viewAlpha addSubview:butTastWen];
-    butTastWen.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-    [butTastWen addTarget:self action:@selector(jobCenterButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    任务中心数字显示
-    labelTestShu = [CreatView creatWithLabelFrame:CGRectMake(butTask.frame.size.width - 3, 3, 13, 13) backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:9] text:[myAccount taskNum]];
+    if (labelTestShu == nil) {
+        
+        labelTestShu = [CreatView creatWithLabelFrame:CGRectMake(butTask.frame.size.width - 3, 3, 13, 13) backgroundColor:[UIColor orangeColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:9] text:[myAccount taskNum]];
+        labelTestShu.layer.cornerRadius = 13 / 2;
+        labelTestShu.layer.masksToBounds = YES;
+    }
+    
+    [butTask addSubview:labelTestShu];
     if ([[[myAccount taskNum] description] isEqualToString:@""] || [[[myAccount taskNum] description] isEqualToString:@"0"]) {
         labelTestShu.hidden = YES;
+    } else {
+        labelTestShu.text = [myAccount taskNum];
     }
-    [butTask addSubview:labelTestShu];
-    labelTestShu.layer.cornerRadius = 13 / 2;
-    labelTestShu.layer.masksToBounds = YES;
     
 //    充值提现上面的横线
-    UIView *viewLineH = [CreatView creatViewWithFrame:CGRectMake(0, imageBackGround.frame.size.height - 1, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor whiteColor]];
+    if (viewLineH == nil) {
+        
+        viewLineH = [CreatView creatViewWithFrame:CGRectMake(0, imageBackGround.frame.size.height - 1, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor whiteColor]];
+        viewLineH.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    }
     [imageBackGround addSubview:viewLineH];
-    viewLineH.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
 //    充值按钮
-    UIButton *butFullMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, imageBackGround.frame.size.height, WIDTH_CONTROLLER_DEFAULT/2, 49.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor colorWithRed:16.0 / 225.0 green:101.0 / 225.0 blue:205.0 / 225.0 alpha:1.0] textColor:[UIColor whiteColor] titleText:@"充值"];
+    if (butFullMoney == nil) {
+        
+        butFullMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, imageBackGround.frame.size.height, WIDTH_CONTROLLER_DEFAULT/2, 49.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor colorWithRed:16.0 / 225.0 green:101.0 / 225.0 blue:205.0 / 225.0 alpha:1.0] textColor:[UIColor whiteColor] titleText:@"充值"];
+        butFullMoney.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+        [butFullMoney setImage:[UIImage imageNamed:@"充值"] forState:UIControlStateNormal];
+        butFullMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        [butFullMoney addTarget:self action:@selector(buttonFullMoney:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [_tableView.tableHeaderView addSubview:butFullMoney];
-    butFullMoney.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
-    [butFullMoney setImage:[UIImage imageNamed:@"充值"] forState:UIControlStateNormal];
-    butFullMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [butFullMoney addTarget:self action:@selector(buttonFullMoney:) forControlEvents:UIControlEventTouchUpInside];
     
 //    充值与提现之间的竖线
-    UIView *viewLineS = [CreatView creatViewWithFrame:CGRectMake(butFullMoney.frame.size.width - 0.5, 0, 0.5, butFullMoney.frame.size.height) backgroundColor:[UIColor whiteColor]];
+    if (viewLineS == nil) {
+        
+        viewLineS = [CreatView creatViewWithFrame:CGRectMake(butFullMoney.frame.size.width - 0.5, 0, 0.5, butFullMoney.frame.size.height) backgroundColor:[UIColor whiteColor]];
+    }
     [butFullMoney addSubview:viewLineS];
     
 //    提现按钮
-    UIButton *butFillMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butFullMoney.frame.size.width, imageBackGround.frame.size.height, WIDTH_CONTROLLER_DEFAULT/2, butFullMoney.frame.size.height) backgroundColor:[UIColor colorWithRed:16.0 / 225.0 green:101.0 / 225.0 blue:205.0 / 225.0 alpha:1.0] textColor:[UIColor whiteColor] titleText:@"提现"];
+    if (butFillMoney == nil) {
+        
+        butFillMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butFullMoney.frame.size.width, imageBackGround.frame.size.height, WIDTH_CONTROLLER_DEFAULT/2, butFullMoney.frame.size.height) backgroundColor:[UIColor colorWithRed:16.0 / 225.0 green:101.0 / 225.0 blue:205.0 / 225.0 alpha:1.0] textColor:[UIColor whiteColor] titleText:@"提现"];
+        butFillMoney.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+        [butFillMoney setImage:[UIImage imageNamed:@"提现"] forState:UIControlStateNormal];
+        butFillMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        [butFillMoney addTarget:self action:@selector(buttonFillMoney:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [_tableView.tableHeaderView addSubview:butFillMoney];
-    butFillMoney.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
-    [butFillMoney setImage:[UIImage imageNamed:@"提现"] forState:UIControlStateNormal];
-    butFillMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [butFillMoney addTarget:self action:@selector(buttonFillMoney:) forControlEvents:UIControlEventTouchUpInside];
     
-    viewHateLine = [CreatView creatViewWithFrame:CGRectMake(0, -1, WIDTH_CONTROLLER_DEFAULT, 10) backgroundColor:[UIColor clearColor]];
+//    viewHateLine = [CreatView creatViewWithFrame:CGRectMake(0, -1, WIDTH_CONTROLLER_DEFAULT, 10) backgroundColor:[UIColor clearColor]];
     
-    butHeadImage = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2)) backgroundColor:[UIColor greenColor] textColor:nil titleText:nil];
+    if (butHeadImage == nil) {
+        
+        butHeadImage = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2)) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        butHeadImage.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        butHeadImage.layer.cornerRadius = (WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2))/2;
+        butHeadImage.layer.masksToBounds = YES;
+        [butHeadImage addTarget:self action:@selector(buttonChangeHeadImage:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageBackGround addSubview:butHeadImage];
-    [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像"] forState:UIControlStateNormal];
-    [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像"] forState:UIControlStateHighlighted];
-    butHeadImage.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    butHeadImage.layer.cornerRadius = (WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2))/2;
-    butHeadImage.layer.masksToBounds = YES;
-    [butHeadImage addTarget:self action:@selector(buttonChangeHeadImage:) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSLog(@"avatarImg = %@",[memberDic objectForKey:@"avatarImg"]);
+    if ([memberDic objectForKey:@"avatarImg"] == nil) {
+//        [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像"] forState:UIControlStateNormal];
+//        [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像"] forState:UIControlStateHighlighted];
+        butHeadImage.imageView.image = [UIImage imageNamed:@"我的头像"];
+    } else {
+//        butHeadImage.imageView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
+        imgView = [YYAnimatedImageView new];
+        imgView.tag = 4739;
+        imgView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
+        imgView.frame = CGRectMake(0, 0, butHeadImage.frame.size.width, butHeadImage.frame.size.height);
+        [butHeadImage addSubview:imgView];
+    }
+    
     
 //    总资产底层view
-    viewMoney = [CreatView creatViewWithFrame:CGRectMake(0, 143.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor]];
+    if (viewMoney == nil) {
+        
+        viewMoney = [CreatView creatViewWithFrame:CGRectMake(0, 143.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor]];
+        viewMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    }
     [imageBackGround addSubview:viewMoney];
-    viewMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
 //    总资产钱数
-    buttMoney = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (buttMoney == nil) {
+        
+        buttMoney = [UIButton buttonWithType:UIButtonTypeCustom];
+        buttMoney.backgroundColor = [UIColor clearColor];
+        buttMoney.tag = 665;
+    }
     [viewMoney addSubview:buttMoney];
-    buttMoney.backgroundColor = [UIColor clearColor];
-    buttMoney.tag = 665;
     
     NSMutableAttributedString *addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount totalMoney]]]];
     NSRange leftrange = NSMakeRange(0, [[addMoneyString string] rangeOfString:@"元"].location);
@@ -250,34 +328,46 @@
     buttMoney.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - moneyButWidth.size.width) * 0.5, 0, moneyButWidth.size.width, viewMoney.frame.size.height);
     
 //    睁眼闭眼按钮
-    buttonEye = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - moneyButWidth.size.width) * 0.5 + moneyButWidth.size.width, viewMoney.frame.size.height - 19, 21, 21) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (buttonEye == nil) {
+        
+        buttonEye = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - moneyButWidth.size.width) * 0.5 + moneyButWidth.size.width, viewMoney.frame.size.height - 19, 21, 21) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        buttonEye.tag = 10;
+        buttonEye.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        [buttonEye addTarget:self action:@selector(openEyeOrCloseEye:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [viewMoney addSubview:buttonEye];
-    buttonEye.tag = 10;
-    buttonEye.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [buttonEye addTarget:self action:@selector(openEyeOrCloseEye:) forControlEvents:UIControlEventTouchUpInside];
 
 //    总资产按钮
-    UIButton *buttonZZC = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 25, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height, 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"总资产"];
+    if (buttonZZC == nil) {
+
+        buttonZZC = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 25, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height, 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"总资产"];
+        buttonZZC.tag = 665;
+        buttonZZC.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        buttonZZC.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        [buttonZZC addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageBackGround addSubview:buttonZZC];
-    buttonZZC.tag = 665;
-    buttonZZC.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-    buttonZZC.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [buttonZZC addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    总资产右下角黄色三角按钮
-    UIButton *butYellowJiao = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 25 + 52, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 12, 12) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (butYellowJiao == nil) {
+        
+        butYellowJiao = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 25 + 52, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 12, 12) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        butYellowJiao.tag = 665;
+        [butYellowJiao setBackgroundImage:[UIImage imageNamed:@"yellowSanJiao"] forState:UIControlStateNormal];
+        [butYellowJiao setBackgroundImage:[UIImage imageNamed:@"yellowSanJiao"] forState:UIControlStateHighlighted];
+        butYellowJiao.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        [butYellowJiao addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageBackGround addSubview:butYellowJiao];
-    butYellowJiao.tag = 665;
-    [butYellowJiao setBackgroundImage:[UIImage imageNamed:@"yellowSanJiao"] forState:UIControlStateNormal];
-    [butYellowJiao setBackgroundImage:[UIImage imageNamed:@"yellowSanJiao"] forState:UIControlStateHighlighted];
-    butYellowJiao.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [butYellowJiao addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    可用余额钱数
-    butMoneyYu = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:nil];
+    if (butMoneyYu == nil) {
+        
+        butMoneyYu = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:nil];
+        butMoneyYu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        butMoneyYu.tag = 666;
+    }
     [imageBackGround addSubview:butMoneyYu];
-    butMoneyYu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    butMoneyYu.tag = 666;
     
     NSMutableAttributedString *butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount accBalance]]]];
     NSRange shuRange = NSMakeRange(0, [[butMoneyStr string] rangeOfString:@"元"].location);
@@ -290,10 +380,13 @@
     [butMoneyYu addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    累计收益钱数
-    butAddMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 16) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (butAddMoney == nil) {
+        
+        butAddMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 16) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        butAddMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        butAddMoney.tag = 667;
+    }
     [imageBackGround addSubview:butAddMoney];
-    butAddMoney.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    butAddMoney.tag = 667;
     
     NSMutableAttributedString *butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount totalProfit]]]];
     NSRange frontRange = NSMakeRange(0, [[butAddStr string] rangeOfString:@"元"].location);
@@ -305,34 +398,43 @@
     [butAddMoney setAttributedTitle:butAddStr forState:UIControlStateNormal];
     [butAddMoney addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
     
-//    可用剩余&累计收益 文字
-    NSArray *titArray = @[@"可用余额", @"累计收益"];
-    for (int i = 0; i < 2; i++) {
-        butWenZi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT / 2 * i, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16, WIDTH_CONTROLLER_DEFAULT/2, 25) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:[titArray objectAtIndex:i]];
-        [imageBackGround addSubview:butWenZi];
-        butWenZi.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-        butWenZi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-        butWenZi.tag = 666 + i;
-        [butWenZi addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+    if (butWenZi == nil) {
+        
+        //    可用剩余&累计收益 文字
+        NSArray *titArray = @[@"可用余额", @"累计收益"];
+        for (int i = 0; i < 2; i++) {
+            butWenZi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT / 2 * i, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16, WIDTH_CONTROLLER_DEFAULT/2, 25) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:[titArray objectAtIndex:i]];
+            [imageBackGround addSubview:butWenZi];
+            butWenZi.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+            butWenZi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+            butWenZi.tag = 666 + i;
+            [butWenZi addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+        }
     }
     
 //    可用余额三角按钮
-    UIButton *butLeftJiao = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(122.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16 + 15, 12, 12) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (butLeftJiao == nil) {
+        
+        butLeftJiao = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(122.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16 + 15, 12, 12) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        butLeftJiao.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        [butLeftJiao setBackgroundImage:[UIImage imageNamed:@"baisanjiao"] forState:UIControlStateNormal];
+        [butLeftJiao setBackgroundImage:[UIImage imageNamed:@"baisanjiao"] forState:UIControlStateHighlighted];
+        butLeftJiao.tag = 666;
+        [butLeftJiao addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageBackGround addSubview:butLeftJiao];
-    butLeftJiao.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [butLeftJiao setBackgroundImage:[UIImage imageNamed:@"baisanjiao"] forState:UIControlStateNormal];
-    [butLeftJiao setBackgroundImage:[UIImage imageNamed:@"baisanjiao"] forState:UIControlStateHighlighted];
-    butLeftJiao.tag = 666;
-    [butLeftJiao addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    累计收益三角按钮
-    UIButton *butRightJiao = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 + 122.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16 + 15, 12, 12) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (butRightJiao == nil) {
+        
+        butRightJiao = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 + 122.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16 + 15, 12, 12) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        butRightJiao.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        [butRightJiao setBackgroundImage:[UIImage imageNamed:@"baisanjiao"] forState:UIControlStateNormal];
+        [butRightJiao setBackgroundImage:[UIImage imageNamed:@"baisanjiao"] forState:UIControlStateHighlighted];
+        butRightJiao.tag = 667;
+        [butRightJiao addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageBackGround addSubview:butRightJiao];
-    butRightJiao.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [butRightJiao setBackgroundImage:[UIImage imageNamed:@"baisanjiao"] forState:UIControlStateNormal];
-    [butRightJiao setBackgroundImage:[UIImage imageNamed:@"baisanjiao"] forState:UIControlStateHighlighted];
-    butRightJiao.tag = 667;
-    [butRightJiao addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    读取文件 是闭眼显示还是睁眼显示
     NSDictionary *dicMoney = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"CloseEyes.plist"]];
@@ -704,17 +806,19 @@
     
     pickerImage.navigationBar.barTintColor = [UIColor profitColor];
     
-    pickerImage.allowsEditing = NO;
+    pickerImage.allowsEditing = YES;
     [self presentViewController:pickerImage animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-//    butHeadImage = (UIImageView *)[self.view viewWithTag:9908];
+    //    butHeadImage = (UIImageView *)[self.view viewWithTag:9908];
     
     [picker dismissViewControllerAnimated:YES completion:^{}];
     
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+//    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage* original_image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    UIImage* image = [info objectForKey: @"UIImagePickerControllerEditedImage"];
     /* 此处info 有六个值
      * UIImagePickerControllerMediaType; // an NSString UTTypeImage)
      * UIImagePickerControllerOriginalImage;  // a UIImage 原始图片
@@ -725,16 +829,43 @@
      * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
      */
     // 保存图片至本地，方法见下文
-    [self saveImage:image withName:@"currentImage.png"];
+    if (image == nil) {
+        
+        NSLog(@"originalImage");
+        
+        [self saveImage:original_image withName:@"currentImage.png"];
+        
+        NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
+        
+        UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+        
+        //    [butHeadImage setImage:savedImage];
+        imgView.image = savedImage;
+        [butHeadImage setBackgroundImage:savedImage forState:UIControlStateNormal];
+        
+        [[MyAfHTTPClient sharedClient] uploadFile:savedImage];
+        
+    } else {
+        
+        NSLog(@"editedImage");
+        
+        [self saveImage:image withName:@"currentImage_new.png"];
+        
+        NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage_new.png"];
+        
+        UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+        
+        //    [butHeadImage setImage:savedImage];
+        imgView.image = savedImage;
+        [butHeadImage setBackgroundImage:savedImage forState:UIControlStateNormal];
+        
+        [[MyAfHTTPClient sharedClient] uploadFile:savedImage];
+    }
     
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
-    
-    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-    
-//    [butHeadImage setImage:savedImage];
-    [butHeadImage setBackgroundImage:savedImage forState:UIControlStateNormal];
-    
-    [[MyAfHTTPClient sharedClient] uploadFile:savedImage];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
+    NSLog(@"123");
 }
 
 - (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
@@ -830,7 +961,7 @@
 
 - (void)getMyAccountInfoFuction{
     
-    NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"]};
     
