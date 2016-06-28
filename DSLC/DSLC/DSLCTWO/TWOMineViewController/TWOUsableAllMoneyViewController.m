@@ -21,6 +21,8 @@
     
     UIButton *butMore;
     BOOL moreFlag;
+    
+    NSString *typeString;
 }
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -41,6 +43,8 @@
     moreFlag = NO;
     
     listArray = [NSMutableArray array];
+    
+    typeString = @"1";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"筛选" style:UIBarButtonItemStylePlain target:self action:@selector(selectDataBarPress:)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
@@ -164,8 +168,11 @@
     [UIView animateWithDuration:0.5 animations:^{
         selectionView.frame = CGRectMake(0, -150, WIDTH_CVIEW_DEFAULT, 150);
         
+        typeString = [NSString stringWithFormat:@"%ld",button.tag + 1];
+        
     } completion:^(BOOL finished) {
         [bView setHidden:YES];
+        [self getMyTradeRecordsFuction];
     }];
     
 }
@@ -226,10 +233,12 @@
 
 - (void)getMyTradeRecordsFuction{
     
-    NSDictionary *parameters = @{@"curPage":[NSNumber numberWithInteger:page],@"pageSize":@"10",@"tranType":@"1",@"tranBeginDate":@"",@"tranEndDate":@"",@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parameters = @{@"curPage":[NSNumber numberWithInteger:page],@"pageSize":@"10",@"tranType":typeString,@"tranBeginDate":@"",@"tranEndDate":@"",@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyTradeRecords" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
        
+        [self noDataViewWithRemoveToView];
+        
         NSLog(@"getMyTradeRecords = %@",responseObject);
         
         NSMutableArray *dataArr = [responseObject objectForKey:@"Trade"];
@@ -240,6 +249,10 @@
         } else {
             [self.mainTableView setHidden:NO];
         }
+        
+        [listArray removeAllObjects];
+        listArray = nil;
+        listArray = [NSMutableArray array];
         
         for (NSDictionary *dataDic in dataArr) {
             TWOMyAccountListModel *myAccountListModel = [[TWOMyAccountListModel alloc] init];
