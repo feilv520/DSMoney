@@ -28,8 +28,12 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"历史加息券"];
     
-    [self tableViewShow];
     [self getMyIncreaseListFuction];
+}
+
+- (void)historyJiaXiQuanShow
+{
+    
 }
 
 - (void)tableViewShow
@@ -196,13 +200,21 @@
         return cell;
     }
 }
-
+#pragma mark history>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 - (void)getMyIncreaseListFuction{
     NSDictionary *parmeter = @{@"curPage":@1,@"status":@"1,2,3",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"getMyIncreaseList = %@",responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *dataArray = [responseObject objectForKey:@"Increase"];
+            if (dataArray.count == 0) {
+                [self historyJiaXiQuanShow];
+            } else {
+                [self tableViewShow];
+            }
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

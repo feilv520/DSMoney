@@ -51,6 +51,14 @@
     UIPageControl *pageControl;
     NSTimer *timer;
     UIScrollView *bannerScrollView;
+    
+//    公告数组
+    NSArray *noticeArray;
+//    公告滚动视图
+    UIScrollView *_scrollViewNotice;
+    NSTimer *timerNotice;
+    NSInteger secondsNum;
+    NSInteger everyNum;
 }
 
 @end
@@ -185,6 +193,7 @@
 //    公告图标
     UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(9, (viewNotice.frame.size.height - noticeHeight)/2, noticeHeight, noticeHeight) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"公告"]];
     [viewNotice addSubview:imageNotice];
+    [self noticeContentShow];
     
 //    公告view分界线
     UIView *viewLineNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewNotice.frame.size.height - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
@@ -214,9 +223,34 @@
 //    [_scrollView addSubview:viewNotice];
 }
 
+- (void)noticeContentShow
+{
+    noticeArray = @[@"公告来了!", @"这是一个秘密~", @"我不能告诉你哟!"];
+    _scrollViewNotice = [[UIScrollView alloc] initWithFrame:CGRectMake(9 + 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 5, 0, WIDTH_CONTROLLER_DEFAULT - 18 - 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 5, viewNotice.frame.size.height)];
+    [viewNotice addSubview:_scrollViewNotice];
+    _scrollViewNotice.contentOffset = CGPointMake(0, 35);
+    _scrollViewNotice.delegate = self;
+    
+    for (int i = 1; i <= noticeArray.count; i++) {
+        UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * i, _scrollViewNotice.frame.size.width, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[noticeArray objectAtIndex:i - 1]];
+        [_scrollViewNotice addSubview:labelNotice];
+    }
+    
+    UILabel *labelLast = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * (noticeArray.count + 1), _scrollViewNotice.frame.size.width, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"公告来了!"];
+    [_scrollViewNotice addSubview:labelLast];
+    
+    everyNum = noticeArray.count + 2;
+    secondsNum = noticeArray.count;
+}
+
+-(void)timerFireMethod:(NSTimer *)theTimer
+{
+    [_scrollViewNotice setContentOffset:CGPointMake(0, 35 * (everyNum - secondsNum)) animated:YES];
+    secondsNum--;
+}
+
 - (void)collectionViewShow
 {
-    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 308);
     flowLayout.minimumInteritemSpacing = 0;
@@ -433,6 +467,10 @@
     } else {
         _scrollView.scrollEnabled = YES;
     }
+    
+    if (scrollView == _scrollViewNotice) {
+        
+    }
 }
 
 #pragma mark 网络请求方法
@@ -452,6 +490,8 @@
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 [self loadingWithHidden:YES];
+                
+                timerNotice = [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
                 
                 NSArray *pickArr = [responseObject objectForKey:@"Product"];
                 
@@ -643,15 +683,26 @@
     }
 }
 
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    CGPoint offset = [scrollView contentOffset];
-    
-    if (offset.x == WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1)) {
-        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
-        pageControl.currentPage = 0;
-    } else if (offset.x == 0) {
-        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
-        pageControl.currentPage = photoArray.count - 1;
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    if (scrollView == _scrollViewNotice) {
+        
+        if (_scrollViewNotice.contentOffset.y == 140) {
+            [_scrollViewNotice setContentOffset:CGPointMake(0, 35) animated:NO];
+            secondsNum = noticeArray.count;
+        }
+        
+    } else {
+        
+        CGPoint offset = [scrollView contentOffset];
+        
+        if (offset.x == WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1)) {
+            [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+            pageControl.currentPage = 0;
+        } else if (offset.x == 0) {
+            [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
+            pageControl.currentPage = photoArray.count - 1;
+        }
     }
 }
 

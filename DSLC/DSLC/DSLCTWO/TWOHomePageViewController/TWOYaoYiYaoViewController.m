@@ -9,6 +9,7 @@
 #import "TWOYaoYiYaoViewController.h"
 #import "TWOActivityRulesViewController.h"
 #import "TWOWinPrizeRecordViewController.h"
+#import "TWOYaoHomePageModel.h"
 
 @interface TWOYaoYiYaoViewController ()
 
@@ -22,6 +23,11 @@
     UIImageView *imageYellow;
     CABasicAnimation *momAnimation;
     UIImageView *imageHandYao;
+//    有次数的显示
+    UILabel *labelChance;
+//    0次的显示
+    UILabel *labelNoChance;
+    TWOYaoHomePageModel *yaoPageModel;
 }
 
 @end
@@ -46,7 +52,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"摇一摇"];
     
-    [self commonHaveShow];
+    [self showCiShuData];
     [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:YES];
     [self becomeFirstResponder];
 }
@@ -59,12 +65,12 @@
 - (void)haveNoChanceShow
 {
 //    显示还有几次摇一摇机会
-    UILabel *labelChance = [CreatView creatWithLabelFrame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:19] text:nil];
-    [imageYellow addSubview:labelChance];
-    NSMutableAttributedString *zeroString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"您还有%@次机会", @"0"]];
+    labelNoChance = [CreatView creatWithLabelFrame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:19] text:nil];
+    [imageYellow addSubview:labelNoChance];
+    NSMutableAttributedString *zeroString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"您还有%@次机会", [[yaoPageModel unUseNum] description]]];
     NSRange zeroRange = NSMakeRange(3, 1);
     [zeroString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:zeroRange];
-    [labelChance setAttributedText:zeroString];
+    [labelNoChance setAttributedText:zeroString];
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         labelChance.frame = CGRectMake(0, 4, imageYellow.frame.size.width, 23);
@@ -78,9 +84,10 @@
 - (void)haveChanceContentShow
 {
 //    显示还有几次摇一摇机会
-    UILabel *labelChance = [CreatView creatWithLabelFrame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:22] text:nil];
+    labelChance = [CreatView creatWithLabelFrame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:22] text:nil];
     [imageYellow addSubview:labelChance];
-    NSMutableAttributedString *shuZiString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"您还有%@次机会", @"2"]];
+    
+    NSMutableAttributedString *shuZiString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"您还有%@次机会", [[yaoPageModel unUseNum] description]]];
     NSRange leftRange = NSMakeRange(0, 3);
     [shuZiString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:19] range:leftRange];
     [shuZiString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:leftRange];
@@ -120,8 +127,15 @@
     [imageHandYao addGestureRecognizer:tap];
     
 //    显示还有几次摇动机会的背景图
-    imageYellow = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 380.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 71.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yellow"]];
+    imageYellow = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 380.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 71.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@""]];
     [imageBack addSubview:imageYellow];
+    
+//    判断 0时显示次数的背景为灰色 非0时为黄色
+    if ([[[yaoPageModel unUseNum] description] isEqualToString:@"0"]) {
+        imageYellow.image = [UIImage imageNamed:@"yaogray"];
+    } else {
+        imageYellow.image = [UIImage imageNamed:@"yellow"];
+    }
     
 //    下面蓝色按钮宽度
     CGFloat butWidth = (WIDTH_CONTROLLER_DEFAULT - 27)/2;
@@ -150,21 +164,30 @@
     butWinPrize.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
     [butWinPrize addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-//    中奖纪录的数字
-    butShuZi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWinPrize.frame.size.width - 5, 0, 16, 16) backgroundColor:[UIColor orangecolor] textColor:[UIColor whiteColor] titleText:@"11"];
-    [butWinPrize addSubview:butShuZi];
-    butShuZi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
-    butShuZi.layer.cornerRadius = 8;
-    butShuZi.layer.masksToBounds = YES;
-    [butShuZi addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    中奖纪录的数字 如果是0就不显示
+    if ([[[yaoPageModel unQueryWinNum] description] isEqualToString:@"0"]) {
+        
+    } else {
+        butShuZi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWinPrize.frame.size.width - 5, 0, 16, 16) backgroundColor:[UIColor orangecolor] textColor:[UIColor whiteColor] titleText:[[yaoPageModel unQueryWinNum] description]];
+        [butWinPrize addSubview:butShuZi];
+        butShuZi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        butShuZi.layer.cornerRadius = 8;
+        butShuZi.layer.masksToBounds = YES;
+        [butShuZi addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         butYaoLeft.frame = CGRectMake(9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
         butYaoRight.frame = CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
     }
     
-    [self haveChanceContentShow];
-//    [self haveNoChanceShow];
+    if ([[[yaoPageModel unUseNum] description] isEqualToString:@"0"]) {
+        NSLog(@"没有摇动次数");
+        [self haveNoChanceShow];
+    } else {
+        NSLog(@"有摇动次数");
+        [self haveChanceContentShow];
+    }
 }
 
 - (void)tanKuangeShow
@@ -191,12 +214,16 @@
     animation.values = values;
     [viewBottom.layer addAnimation:animation forKey:nil];
     
-//    [self haveNoWinPrize];
-    [self winPrizeShow];
+//    摇动次数用完
+//    [self haveNoCiShu];
+//    摇动中奖
+//    [self winPrizeShow];
+//    摇动没有中奖
+    [self haveNoWin];
 }
 
-//没有中奖的弹框
-- (void)haveNoWinPrize
+//摇动次数用完的弹框
+- (void)haveNoCiShu
 {
 //    没有中奖图片
     UIImageView *imageNoWin = [CreatView creatImageViewWithFrame:CGRectMake(viewBottom.frame.size.width/2 - 45, 15, 90, 110) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"nowin"]];
@@ -244,6 +271,26 @@
     butOK.layer.cornerRadius = 5;
     butOK.layer.masksToBounds = YES;
     [butOK addTarget:self action:@selector(yaoBlackDisappearButton:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//没有中奖弹框
+- (void)haveNoWin
+{
+    UIImageView *imageBackNo = [CreatView creatImageViewWithFrame:CGRectMake(viewBottom.frame.size.width/2 - 157/2/2, 15, 157/2, 222/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"没有中奖"]];
+    [viewBottom addSubview:imageBackNo];
+    
+    UILabel *labelNothing = [CreatView creatWithLabelFrame:CGRectMake(0, 222/2 + 15 + 10, viewBottom.frame.size.width, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:18] text:@"一毛钱都木有!"];
+    [viewBottom addSubview:labelNothing];
+    
+    UILabel *labelAgain = [CreatView creatWithLabelFrame:CGRectMake(0, 222/2 + 15 + 10 + 20, viewBottom.frame.size.width, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"再摇一次,试试运气"];
+    [viewBottom addSubview:labelAgain];
+    
+    UIButton *buttonOK = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(15, 222/2 + 15 + 10 + 20 + 31, viewBottom.frame.size.width - 30, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    [viewBottom addSubview:buttonOK];
+    buttonOK.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    buttonOK.layer.cornerRadius = 4;
+    buttonOK.layer.masksToBounds = YES;
+    [buttonOK addTarget:self action:@selector(yaoBlackDisappearButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 //活动规则
@@ -322,6 +369,24 @@
         NSLog(@"摇一摇结束");
         [self tanKuangeShow];
     }
+}
+
+#pragma mark data--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+- (void)showCiShuData
+{
+    NSDictionary *pameter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"shake/getShakeAccount" parameters:pameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"^^^^^^^^^^每日一摇显示次数:%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            yaoPageModel = [[TWOYaoHomePageModel alloc] init];
+            [yaoPageModel setValuesForKeysWithDictionary:responseObject];
+            [self commonHaveShow];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 //分享按钮
