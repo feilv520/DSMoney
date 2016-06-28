@@ -54,6 +54,9 @@
     
     //详情model
     TWOMyAccountModel *myAccount;
+    
+    // 初始化判断
+    BOOL flagFirst;
 }
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -75,6 +78,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyAccountInfoFuction) name:@"getMyAccountInfo" object:nil];
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
+    
+    flagFirst = NO;
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -248,7 +253,6 @@
     [viewMoney addSubview:buttonEye];
     buttonEye.tag = 10;
     buttonEye.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [buttonEye setImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateNormal];
     [buttonEye addTarget:self action:@selector(openEyeOrCloseEye:) forControlEvents:UIControlEventTouchUpInside];
 
 //    总资产按钮
@@ -328,6 +332,16 @@
     [butRightJiao setBackgroundImage:[UIImage imageNamed:@"baisanjiao"] forState:UIControlStateHighlighted];
     butRightJiao.tag = 667;
     [butRightJiao addTarget:self action:@selector(checkMoneyButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+//    读取文件 是闭眼显示还是睁眼显示
+    NSDictionary *dicMoney = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"CloseEyes.plist"]];
+    if ([[dicMoney objectForKey:@"closeEyes"] isEqualToString:@"YES"]) {
+        [buttonEye setImage:[UIImage imageNamed:@"biyan"] forState:UIControlStateNormal];
+        [self closeEyes];
+    } else {
+        [buttonEye setImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateNormal];
+        [self openEyes];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -359,11 +373,19 @@
     cell.labelContent.textColor = [UIColor zitihui];
     cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
+    NSDictionary *dicMoney = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"CloseEyes.plist"]];
+    
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            cell.labelContent.tag = 10;
+            cell.labelContent.tag = 100;
         } else {
             cell.labelContent.tag = 90;
+        }
+        
+        if ([[dicMoney objectForKey:@"closeEyes"] isEqualToString:@"YES"]) {
+            cell.labelContent.text = @"****";
+        } else {
+            
         }
     }
     
@@ -436,44 +458,88 @@
 //睁眼或闭眼按钮
 - (void)openEyeOrCloseEye:(UIButton *)button
 {
-    labelMoneyZhong = (UILabel *)[self.view viewWithTag:10];
-    labelTeQuan = (UILabel *)[self.view viewWithTag:90];
-    
     if (button.tag == 10) {
        
-        [self closeEyesButton:buttMoney];
-        buttMoney.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 60) * 0.5, viewMoney.frame.size.height - viewMoney.frame.size.height/3 - 3, 60, viewMoney.frame.size.height/3);
-//    闭眼眼睛的frame
-        buttonEye.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 60) * 0.5 + 60, viewMoney.frame.size.height - 22, 21, 21);
-        
-        [self closeEyesButton:butMoneyYu];
-        [self closeEyesButton:butAddMoney];
-        
-        labelMoneyZhong.text = @"****";
-        labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:17];
-        
-        labelTeQuan.text = @"****";
-        labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:17];
-        
-        [button setImage:[UIImage imageNamed:@"biyan"] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"biyan"] forState:UIControlStateHighlighted];
-        button.tag = 20;
+        [self closeEyes];
+        //存入本地
+        [self closeEyesWriteThisLocality];
         
     } else {
-        
-        [self zongMoney];
-        [self canMakeMoney];
-        [self addMoney];
-        
-        labelMoneyZhong.text = [NSString stringWithFormat:@"%@元在投",[DES3Util decrypt:[myAccount investMoney]]];
-        labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-        
-        labelTeQuan.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount prlMoney]]];
-        labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-        
-        [button setImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateHighlighted];
-        button.tag = 10;
+        [self openEyes];
+        //睁眼存入本地
+        [self openEyesThisLocality];
+    }
+}
+
+//闭眼走的方法
+- (void)closeEyes
+{
+    labelMoneyZhong = (UILabel *)[self.view viewWithTag:100];
+    labelTeQuan = (UILabel *)[self.view viewWithTag:90];
+    
+    [self closeEyesButton:buttMoney];
+    buttMoney.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 60) * 0.5, viewMoney.frame.size.height - viewMoney.frame.size.height/3 - 3, 60, viewMoney.frame.size.height/3);
+    //闭眼眼睛的frame
+    buttonEye.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 60) * 0.5 + 60, viewMoney.frame.size.height - 22, 21, 21);
+    
+    [self closeEyesButton:butMoneyYu];
+    [self closeEyesButton:butAddMoney];
+    
+    labelMoneyZhong.text = @"****";
+    labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+    
+    labelTeQuan.text = @"****";
+    labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+    
+    [buttonEye setImage:[UIImage imageNamed:@"biyan"] forState:UIControlStateNormal];
+    [buttonEye setImage:[UIImage imageNamed:@"biyan"] forState:UIControlStateHighlighted];
+    buttonEye.tag = 20;
+}
+
+//睁眼走的方法
+- (void)openEyes
+{
+    labelMoneyZhong = (UILabel *)[self.view viewWithTag:100];
+    labelTeQuan = (UILabel *)[self.view viewWithTag:90];
+
+    [self zongMoney];
+    [self canMakeMoney];
+    [self addMoney];
+    
+    labelMoneyZhong.text = [NSString stringWithFormat:@"%@元在投",[DES3Util decrypt:[myAccount investMoney]]];
+    labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    
+    labelTeQuan.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount prlMoney]]];
+    labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    
+    [buttonEye setImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateNormal];
+    [buttonEye setImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateHighlighted];
+    buttonEye.tag = 10;
+}
+
+//点击闭眼存入本地
+- (void)closeEyesWriteThisLocality
+{
+    if (![FileOfManage ExistOfFile:@"CloseEyes.plist"]) {
+        [FileOfManage createWithFile:@"CloseEyes.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES", @"closeEyes",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"CloseEyes.plist"] atomically:YES];
+    } else {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES", @"closeEyes",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"CloseEyes.plist"] atomically:YES];
+    }
+}
+
+//点击睁眼存入本地
+- (void)openEyesThisLocality
+{
+    if (![FileOfManage ExistOfFile:@"CloseEyes.plist"]) {
+        [FileOfManage createWithFile:@"CloseEyes.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO", @"closeEyes", nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"CloseEyes.plist"] atomically:YES];
+    } else {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO", @"closeEyes", nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"CloseEyes.plist"] atomically:YES];
     }
 }
 
@@ -788,10 +854,10 @@
             [newContentArr replaceObjectAtIndex:1 withObject:contentArray];
             contentArr = newContentArr;
             
+            [_tableView reloadData];
+            
             [self tableViewHeadShow];
             
-            [_tableView reloadData];
-
             [self loadingWithHidden:YES];
             
             NSLog(@"00000----%@",[myAccount invitationMyCode]);

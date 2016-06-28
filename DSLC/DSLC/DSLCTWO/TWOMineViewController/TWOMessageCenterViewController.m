@@ -45,31 +45,40 @@
     
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor profitColor];
-    
 }
 
 - (void)showNavigationBar
 {
-    
-    navigationView = [[UIView alloc] initWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 180) * 0.5, 20, 180, 40)];
-    navigationView.backgroundColor = [UIColor clearColor];
+    navigationView = [[UIView alloc] initWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 180) * 0.5, 25, 180, 30)];
+    navigationView.backgroundColor = [UIColor profitColor];
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.window addSubview:navigationView];
+    navigationView.layer.cornerRadius = 15;
+    navigationView.layer.masksToBounds = YES;
+    navigationView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    navigationView.layer.borderWidth = 1;
     
     buttonOne = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonOne.frame = CGRectMake(0, 10, 80, 20);
+    buttonOne.frame = CGRectMake(0, 0, navigationView.frame.size.width/2, 30);
     [buttonOne setTitle:@"公告" forState:UIControlStateNormal];
-    buttonOne.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
+    [buttonOne setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+    buttonOne.backgroundColor = [UIColor whiteColor];
+    buttonOne.layer.cornerRadius = 15;
+    buttonOne.layer.masksToBounds = YES;
+    buttonOne.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonOne addTarget:self action:@selector(goToOneView:) forControlEvents:UIControlEventTouchUpInside];
     [navigationView addSubview:buttonOne];
     
     buttonTwo = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonTwo.frame = CGRectMake(100, 10, 80, 20);
+    buttonTwo.frame = CGRectMake(navigationView.frame.size.width/2, 0, navigationView.frame.size.width/2, 30);
     [buttonTwo setTitle:@"消息" forState:UIControlStateNormal];
-    buttonTwo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+    buttonTwo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [buttonTwo setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    buttonTwo.backgroundColor = [UIColor clearColor];
+    buttonTwo.layer.cornerRadius = 15;
+    buttonTwo.layer.masksToBounds = YES;
     [buttonTwo addTarget:self action:@selector(goToTwoView:) forControlEvents:UIControlEventTouchUpInside];
     [navigationView addSubview:buttonTwo];
-    
 }
 
 // 创建滚动试图
@@ -97,8 +106,6 @@
     
 }
 
-
-
 #pragma mark scrollView Delegate
 #pragma mark --------------------------------
 
@@ -116,21 +123,23 @@
 #pragma mark 导航栏按钮的方法
 #pragma mark --------------------------------
 
-// 转换成消息
-- (void)goToOneView:(id)sender{
-    buttonOne.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
-    buttonTwo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
-    [buttonTwo setTitleColor:[UIColor colorFromHexCode:@"d6edff"] forState:UIControlStateNormal];
-    [buttonOne setTitleColor:Color_White forState:UIControlStateNormal];
+// 转换成公告
+- (void)goToOneView:(id)sender
+{
+    [buttonTwo setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    buttonTwo.backgroundColor = [UIColor clearColor];
+    [buttonOne setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+    buttonOne.backgroundColor = [UIColor whiteColor];
     [myScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
-// 转换成公告
-- (void)goToTwoView:(id)sender{
-    buttonOne.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
-    buttonTwo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
-    [buttonOne setTitleColor:[UIColor colorFromHexCode:@"d6edff"] forState:UIControlStateNormal];
-    [buttonTwo setTitleColor:Color_White forState:UIControlStateNormal];
+// 转换成消息
+- (void)goToTwoView:(id)sender
+{
+    [buttonTwo setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+    buttonTwo.backgroundColor = [UIColor whiteColor];
+    [buttonOne setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    buttonOne.backgroundColor = [UIColor clearColor];
     [myScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
 }
 

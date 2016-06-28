@@ -29,7 +29,7 @@
     NSMutableArray *redBagArray;
     NSMutableArray *jiaXiQuanArray;
     TWOJiaXiQuanModel *jiaXiQuanModel;
-    UIImageView *imageBack;
+    UIButton *butWhite;
 }
 
 @end
@@ -39,6 +39,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    butWhite.hidden = NO;
     butRedBag.hidden = NO;
     buttonJiaXi.hidden = NO;
 }
@@ -60,19 +61,26 @@
 
 - (void)navigationTitleShow
 {
-    imageBack = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 180)/2, 5, 180, 30) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"圆左"]];
-    [self.navigationController.navigationBar addSubview:imageBack];
-    imageBack.userInteractionEnabled = YES;
-    CGFloat widthImg = imageBack.frame.size.width;
+    butWhite = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 180)/2, 5, 180, 30) backgroundColor:[UIColor profitColor] textColor:nil titleText:nil];
+    [self.navigationController.navigationBar addSubview:butWhite];
+    butWhite.layer.cornerRadius = 15;
+    butWhite.layer.masksToBounds = YES;
+    butWhite.layer.borderColor = [[UIColor whiteColor] CGColor];
+    butWhite.layer.borderWidth = 1;
+    CGFloat widthButton = butWhite.frame.size.width;
     
-    butRedBag = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, widthImg/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor profitColor] titleText:@"红包"];
-    [imageBack addSubview:butRedBag];
+    butRedBag = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, widthButton/2, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"红包"];
+    [butWhite addSubview:butRedBag];
     butRedBag.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    butRedBag.layer.cornerRadius = 15;
+    butRedBag.layer.masksToBounds = YES;
     [butRedBag addTarget:self action:@selector(redBagButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    buttonJiaXi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(widthImg/2, 0, widthImg/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"加息券"];
-    [imageBack addSubview:buttonJiaXi];
+    buttonJiaXi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(widthButton/2, 0, widthButton/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"加息券"];
+    [butWhite addSubview:buttonJiaXi];
     buttonJiaXi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    buttonJiaXi.layer.cornerRadius = 15;
+    buttonJiaXi.layer.masksToBounds = YES;
     [buttonJiaXi addTarget:self action:@selector(jiaXiQuanButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -425,9 +433,10 @@
 //红包按钮
 - (void)redBagButtonClicked:(UIButton *)button
 {
-    imageBack.image = [UIImage imageNamed:@"圆左"];
+    button.backgroundColor = [UIColor whiteColor];
+    [button setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
     
-    [butRedBag setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+    buttonJiaXi.backgroundColor = [UIColor clearColor];
     [buttonJiaXi setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
@@ -440,10 +449,32 @@
 //加息券按钮
 - (void)jiaXiQuanButtonClicked:(UIButton *)button
 {
-    imageBack.image = [UIImage imageNamed:@"圆右"];
-    
-    [buttonJiaXi setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
     [butRedBag setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    butRedBag.backgroundColor = [UIColor clearColor];
+    
+    button.backgroundColor = [UIColor whiteColor];
+    [button setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+    
+//    [butRedBag removeFromSuperview];
+//    [buttonJiaXi removeFromSuperview];
+//
+//    butRedBag = nil;
+//    buttonJiaXi = nil;
+//    
+//    imageBack = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 180)/2, 5, 180, 30) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"圆右"]];
+//    [self.navigationController.navigationBar addSubview:imageBack];
+//    imageBack.userInteractionEnabled = YES;
+//    CGFloat widthImg = imageBack.frame.size.width;
+//    
+//    butRedBag = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, widthImg/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"红包"];
+//    [imageBack addSubview:butRedBag];
+//    butRedBag.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+//    [butRedBag addTarget:self action:@selector(redBagButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    buttonJiaXi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(widthImg/2, 0, widthImg/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor profitColor] titleText:@"加息券"];
+//    [imageBack addSubview:buttonJiaXi];
+//    buttonJiaXi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+//    [buttonJiaXi addTarget:self action:@selector(jiaXiQuanButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         _scrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
@@ -488,18 +519,18 @@
         
         if (scrollView.contentOffset.x == WIDTH_CONTROLLER_DEFAULT) {
             
-            [buttonJiaXi setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            buttonJiaXi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
-            [butRedBag setTitleColor:[UIColor changeColor] forState:UIControlStateNormal];
-            butRedBag.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+            [buttonJiaXi setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+            buttonJiaXi.backgroundColor = [UIColor whiteColor];
+            [butRedBag setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            butRedBag.backgroundColor = [UIColor clearColor];
             
         } else {
             
             if (scrollView.contentOffset.x == 0) {
-                [butRedBag setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                butRedBag.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:18];
-                [buttonJiaXi setTitleColor:[UIColor changeColor] forState:UIControlStateNormal];
-                buttonJiaXi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+                [butRedBag setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+                butRedBag.backgroundColor = [UIColor whiteColor];
+                [buttonJiaXi setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                buttonJiaXi.backgroundColor = [UIColor clearColor];
             }
         }
     }
@@ -508,6 +539,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    butWhite.hidden = YES;
     butRedBag.hidden = YES;
     buttonJiaXi.hidden = YES;
 }

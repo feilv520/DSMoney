@@ -131,7 +131,7 @@
     if (self.stateShow == YES) {
         imageHead.yy_imageURL = [NSURL URLWithString:[tempDic objectForKey:@"avatarImg"]];
         labelName.text = [DES3Util decrypt:[tempDic objectForKey:@"userRealname"]];
-//            labelAlert.text = [tempDic objectForKey:@"resume"];
+        labelAlert.text = [tempDic objectForKey:@"resume"];
     } else {
         imageHead.yy_imageURL = [NSURL URLWithString:[self.listModel avatarImg]];
         labelName.text = [self.listModel userRealname];
