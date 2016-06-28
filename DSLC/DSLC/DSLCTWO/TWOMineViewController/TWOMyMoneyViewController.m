@@ -15,10 +15,14 @@
     NSArray *moneyArray ;
 }
 
+@property (nonatomic, strong) NSMutableArray *assetArray;
+
 @property (nonatomic,strong) NSMutableArray *valueArray;
 @property (nonatomic,strong) NSMutableArray *colorArray;
 @property (nonatomic,strong) MCMPieChartView *pieChartView;
 @property (nonatomic,strong) UILabel *selLabel;
+
+@property (nonatomic, strong) NSString *totalMoneyString;
 
 @end
 
@@ -45,19 +49,23 @@
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"我的资产"];
     
-    self.valueArray = [[NSMutableArray alloc] initWithObjects:
-                       [NSNumber numberWithInt:2],
-                       [NSNumber numberWithInt:3],
-                       [NSNumber numberWithInt:2],
-                       [NSNumber numberWithInt:3],
-                       nil];
+//    self.valueArray = [[NSMutableArray alloc] initWithObjects:
+//                       [NSNumber numberWithInt:2],
+//                       [NSNumber numberWithInt:3],
+//                       [NSNumber numberWithInt:2],
+//                       [NSNumber numberWithInt:3],
+//                       nil];
+    self.assetArray = [NSMutableArray array];
     
-    self.colorArray = [NSMutableArray arrayWithObjects:
-                       [UIColor colorWithRed:63.0 / 225.0 green:166.0 / 225.0 blue:252.0 / 225.0 alpha:1.0],
-                       [UIColor colorWithRed:124.0 / 225.0 green:207.0 / 225.0 blue:253.0 / 225.0 alpha:1.0],
-                       [UIColor colorWithRed:93.0 / 225.0 green:203.0 / 225.0 blue:224.0 / 225.0 alpha:1.0],
-                       [UIColor colorWithRed:180.0 / 225.0 green:228.0 / 225.0 blue:254.0 / 225.0 alpha:1.0],
-                       nil];
+    self.valueArray = [NSMutableArray array];
+    
+//    self.colorArray = [NSMutableArray arrayWithObjects:
+//                       [UIColor colorWithRed:63.0 / 225.0 green:166.0 / 225.0 blue:252.0 / 225.0 alpha:1.0],
+//                       [UIColor colorWithRed:124.0 / 225.0 green:207.0 / 225.0 blue:253.0 / 225.0 alpha:1.0],
+//                       [UIColor colorWithRed:93.0 / 225.0 green:203.0 / 225.0 blue:224.0 / 225.0 alpha:1.0],
+//                       [UIColor colorWithRed:180.0 / 225.0 green:228.0 / 225.0 blue:254.0 / 225.0 alpha:1.0],
+//                       nil];
+    self.colorArray = [NSMutableArray array];
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
@@ -122,7 +130,7 @@
 //    总资产的钱数
     UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(23 + labelZong.frame.size.width + 10, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - (23 + labelZong.frame.size.width + 10 + 23), 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor colorWithRed:253.0 / 225.0 green:135.0 / 225.0 blue:74.0 / 225.0 alpha:1.0] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
     [viewDown addSubview:labelMoney];
-    NSMutableAttributedString *zongString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元" , @"230,373.41"]];
+    NSMutableAttributedString *zongString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元" , self.totalMoneyString]];
     NSRange shuziRange = NSMakeRange(0, [[zongString string] rangeOfString:@"元"].location);
     [zongString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:shuziRange];
     [labelMoney setAttributedText:zongString];
@@ -188,12 +196,20 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
+            self.assetArray = [responseObject objectForKey:@"Asset"];
+            
+            for (NSInteger i = 0; i < self.assetArray.count ; i++) {
+                [self.valueArray addObject:[DES3Util decrypt:[[self.assetArray objectAtIndex:i] objectForKey:@"assetMoney"]]];
+                [self.colorArray addObject:[UIColor colorWithRed:63.0 / 225.0 green:166.0 / 225.0 blue:252.0 / 225.0 alpha:1.0]];
+            }
+            
+            self.totalMoneyString = [DES3Util decrypt:[responseObject objectForKey:@"totalMoney"]];
+            
             if ([[responseObject objectForKey:@"Asset"] count] == 0) {
                 [self noDateWithHeight:101 view:self.view];
             } else {
                 [self contentShow];
             }
-            
             
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];

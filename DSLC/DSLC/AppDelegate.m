@@ -383,7 +383,7 @@ void UncaughtExceptionHandler(NSException *exception){
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
             [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
         }
-    }
+    }    
 }
 
 // 版本提示框 200 开启 400 没开
@@ -485,7 +485,7 @@ void UncaughtExceptionHandler(NSException *exception){
             
             if (![[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"] isEqualToNumber:@0]){
                 
-                [self signFinish];
+                [self signFinish:[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"]];
             }
             
         } else {
@@ -500,7 +500,7 @@ void UncaughtExceptionHandler(NSException *exception){
 }
 
 //签到成功
-- (void)signFinish
+- (void)signFinish:(NSString *)monkeyNum
 {
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     buttonHei = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.window.frame.size.height) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
@@ -514,7 +514,7 @@ void UncaughtExceptionHandler(NSException *exception){
     UITapGestureRecognizer *tapView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAddClicked:)];
     [viewDown addGestureRecognizer:tapView];
     
-    labelMonkey = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewDown.frame.size.width, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:27] text:[NSString stringWithFormat:@"%@猴币", @"+66"]];
+    labelMonkey = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewDown.frame.size.width, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:27] text:[NSString stringWithFormat:@"%@猴币", monkeyNum]];
     [viewDown addSubview:labelMonkey];
     
     imageSign = [CreatView creatImageViewWithFrame:CGRectMake(0, 30, viewDown.frame.size.width, viewDown.frame.size.height - 30) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"doSign"]];
