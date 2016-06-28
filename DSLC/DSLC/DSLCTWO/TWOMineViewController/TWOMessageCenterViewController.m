@@ -77,7 +77,7 @@
     
     myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
     
-    myScrollView.backgroundColor = [UIColor blackColor];
+    myScrollView.backgroundColor = [UIColor huibai];
     myScrollView.delegate = self;
     myScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * 2, 1);
     myScrollView.pagingEnabled = YES;

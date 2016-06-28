@@ -8,12 +8,24 @@
 
 #import "TWOJobCenterViewController.h"
 #import "TWOJobCenterCell.h"
+#import "TWOTaskModel.h"
 
 @interface TWOJobCenterViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 {
+    // tableview 头部元素
+    UIImageView *imageBackGround;
+    //    任务进度圆圈
+    UIImageView *imageSchedule;
+    UILabel *labelPlan;
+    UILabel *labelZi;
+    
     UITableView *_tableView;
 }
+
+@property (nonatomic, strong) NSMutableArray *taskArray;
+@property (nonatomic, strong) NSString *finishString;
+@property (nonatomic, strong) NSString *countString;
 
 @end
 
@@ -34,6 +46,10 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"任务中心"];
+    
+    self.taskArray = [NSMutableArray array];
+    
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
     [self getUserTaskListFuction];
     [self tableViewShow];
@@ -58,11 +74,17 @@
 - (void)tableViewHeadShow
 {
 //    蓝色背景
-    UIImageView *imageBackGround = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _tableView.tableHeaderView.frame.size.height) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"productDetailBackground"]];
+    if (imageBackGround == nil) {
+        
+        imageBackGround = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _tableView.tableHeaderView.frame.size.height) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"productDetailBackground"]];
+    }
     [_tableView.tableHeaderView addSubview:imageBackGround];
     
 //    任务进度圆圈
-    UIImageView *imageSchedule = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 60, imageBackGround.frame.size.height/2 - 70, 120, 120) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"renwujindu1"]];
+    if (imageSchedule == nil) {
+        
+        imageSchedule = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 60, imageBackGround.frame.size.height/2 - 70, 120, 120) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"renwujindu1"]];
+    }
     [imageBackGround addSubview:imageSchedule];
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
@@ -72,16 +94,23 @@
         imageSchedule.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 45, 5, 90, 90);
     }
     
-    UILabel *labelPlan = [CreatView creatWithLabelFrame:CGRectMake(5, imageSchedule.frame.size.height/2 - 30, imageSchedule.frame.size.width - 10, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:28] text:[NSString stringWithFormat:@"%@/%@", @"1", @"5"]];
+    if (labelPlan == nil) {
+        
+        labelPlan = [CreatView creatWithLabelFrame:CGRectMake(5, imageSchedule.frame.size.height/2 - 30, imageSchedule.frame.size.width - 10, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:28] text:[NSString stringWithFormat:@"%@/%@", self.finishString, self.countString]];
+    }
+    labelPlan.text = [NSString stringWithFormat:@"%@/%@", self.finishString, self.countString];
     [imageSchedule addSubview:labelPlan];
-    
-    UILabel *labelZi = [CreatView creatWithLabelFrame:CGRectMake(5, imageSchedule.frame.size.height/2 + 9, imageSchedule.frame.size.width - 10, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"任务进度"];
+
+    if (labelZi == nil) {
+        
+        labelZi = [CreatView creatWithLabelFrame:CGRectMake(5, imageSchedule.frame.size.height/2 + 9, imageSchedule.frame.size.width - 10, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"任务进度"];
+    }
     [imageSchedule addSubview:labelZi];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return self.taskArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -93,20 +122,22 @@
 {
     TWOJobCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    NSArray *imageArray = @[@"qiandao", @"shoushi", @"xintouzi", @"touzis", @"touzis"];
-    cell.imagePic.image = [UIImage imageNamed:[imageArray objectAtIndex:indexPath.section]];
+    TWOTaskModel *taskModel = [self.taskArray objectAtIndex:indexPath.section];
     
-    NSArray *jobArray = @[@"每日签到", @"手势密码设置", @"新人体验金投资", @"首次实际投资", @"今日投资100"];
-    cell.labelJobName.text = [jobArray objectAtIndex:indexPath.section];
+//    NSArray *imageArray = @[@"qiandao", @"shoushi", @"xintouzi", @"touzis", @"touzis"];
+    cell.imagePic.yy_imageURL = [NSURL URLWithString:[taskModel taskImg]];
+    
+//    NSArray *jobArray = @[@"每日签到", @"手势密码设置", @"新人体验金投资", @"首次实际投资", @"今日投资100"];
+    cell.labelJobName.text = [taskModel taskName];
     cell.labelJobName.textColor = [UIColor ZiTiColor];
     cell.labelJobName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    NSArray *contentArray = @[@"今日签到猴币+10", @"设置完成猴币+10", @"投资完成猴币+10", @"投资完成猴币+10", @"投资完成猴币+10"];
-    cell.labelAddCoin.text = [contentArray objectAtIndex:indexPath.section];
+//    NSArray *contentArray = @[@"今日签到猴币+10", @"设置完成猴币+10", @"投资完成猴币+10", @"投资完成猴币+10", @"投资完成猴币+10"];
+    cell.labelAddCoin.text = [taskModel taskCaption];
     cell.labelAddCoin.textColor = [UIColor findZiTiColor];
     cell.labelAddCoin.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
-    if (indexPath.section == 0) {
+    if ([[[taskModel status] debugDescription] isEqualToString:@"1"]) {
         
         [cell.butFinish setTitle:@"已完成" forState:UIControlStateNormal];
         cell.butFinish.backgroundColor = [UIColor findZiTiColor];
@@ -169,7 +200,25 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"task/getUserTaskList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
+        
+        _tableView.hidden = NO;
+        
         NSLog(@"任务中心详情:~~~~~%@", responseObject);
+        
+        NSArray *taskArr = [responseObject objectForKey:@"Task"];
+        
+        self.countString = [responseObject objectForKey:@"totalCount"];
+        self.finishString = [responseObject objectForKey:@"finishCount"];
+        
+        for (NSDictionary *dic in taskArr) {
+            TWOTaskModel *taskModel = [[TWOTaskModel alloc] init];
+            [taskModel setValuesForKeysWithDictionary:dic];
+            [self.taskArray addObject:taskModel];
+        }
+        
+        [_tableView reloadData];
+        [self tableViewHeadShow];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);

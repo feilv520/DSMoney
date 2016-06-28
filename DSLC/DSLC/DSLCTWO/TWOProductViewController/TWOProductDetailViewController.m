@@ -18,6 +18,7 @@
 #import "TWOProductMakeSureViewController.h"
 #import "TWOProductSafeTestViewController.h"
 #import "TWOProductDDetailViewController.h"
+#import "TWOLoginAPPViewController.h"
 
 @interface TWOProductDetailViewController () <UITableViewDataSource, UITableViewDelegate>{
     UITableView *_tableView;
@@ -311,14 +312,29 @@
         [resdStringM replaceCharactersInRange:NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%@",self.residueMoney]];
     }
     NSRange numYString = NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location);
+    
+    if (residueMoney / 10000.0 > 0) {
+        numYString = NSMakeRange(0, [[resdStringM string] rangeOfString:@"万"].location);
+    }
+    
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:21] range:numYString];
         NSRange oneString = NSMakeRange([[resdStringM string] length] - 1, 1);
+        
+        if (residueMoney / 10000.0 > 0) {
+            oneString = NSMakeRange([[resdStringM string] length] - 2, 2);
+        }
+        
         [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:oneString];
         
     } else {
         [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:numYString];
         NSRange oneString = NSMakeRange([[resdStringM string] length] - 1, 1);
+        
+        if (residueMoney / 10000.0 > 0) {
+            oneString = NSMakeRange([[resdStringM string] length] - 2, 2);
+        }
+        
         [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:oneString];
     }
     [pMoneyView.moneyLabel setAttributedText:resdStringM];
@@ -655,6 +671,8 @@
 //        return ;
 //    }
     
+    button.enabled = NO;
+    
     if ([self.residueMoney isEqualToString:@"0.00"]) {
         [self orderProduct];
         return;
@@ -671,13 +689,23 @@
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-//            if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
-//                
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
-//                
-//            } else {
-            
             NSLog(@"%@",responseObject);
+            
+            button.enabled = YES;
+            
+            if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
+                
+                TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+                
+                UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
+                [nvc setNavigationBarHidden:YES animated:YES];
+                
+                [self presentViewController:nvc animated:YES completion:^{
+                    
+                }];
+                return;
+                
+            } else {
             
                 if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"3"]) {
                     
@@ -710,7 +738,7 @@
                     [self submitLoadingWithHidden:YES];
                     
                 }
-//            }
+            }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             NSLog(@"%@", error);

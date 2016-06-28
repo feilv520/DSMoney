@@ -59,11 +59,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="361-Wh-hF0">
-                        <rect key="frame" x="282" y="24" width="84" height="21"/>
+                        <rect key="frame" x="198" y="24" width="168" height="21"/>
                         <animations/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="84" id="RsT-F5-xgG"/>
+                            <constraint firstAttribute="width" constant="168" id="RsT-F5-xgG"/>
                             <constraint firstAttribute="height" constant="21" id="lYh-ju-Osr"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
@@ -83,6 +83,11 @@
                     <constraint firstItem="NGM-jJ-qEN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="fmJ-Uh-0wz"/>
                     <constraint firstItem="NGM-jJ-qEN" firstAttribute="top" secondItem="QZa-qK-90Y" secondAttribute="bottom" constant="4" id="uzw-B5-7i5"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="E3X-2r-Zda"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <animations/>
             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>

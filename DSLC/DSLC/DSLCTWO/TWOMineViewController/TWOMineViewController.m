@@ -36,6 +36,7 @@
     CGFloat height;
     UIButton *butWenZi;
     UILabel *labelTestShu;
+    UIButton *butHeadImage;
     
     // 头像元素
     UIView *viewDown;
@@ -210,7 +211,7 @@
     
     viewHateLine = [CreatView creatViewWithFrame:CGRectMake(0, -1, WIDTH_CONTROLLER_DEFAULT, 10) backgroundColor:[UIColor clearColor]];
     
-    UIButton *butHeadImage = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2)) backgroundColor:[UIColor greenColor] textColor:nil titleText:nil];
+    butHeadImage = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2), WIDTH_CONTROLLER_DEFAULT - ((150.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) * 2)) backgroundColor:[UIColor greenColor] textColor:nil titleText:nil];
     [imageBackGround addSubview:butHeadImage];
     [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像"] forState:UIControlStateNormal];
     [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像"] forState:UIControlStateHighlighted];
@@ -643,7 +644,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    self.imageView = (UIImageView *)[self.view viewWithTag:9908];
+//    butHeadImage = (UIImageView *)[self.view viewWithTag:9908];
     
     [picker dismissViewControllerAnimated:YES completion:^{}];
     
@@ -664,7 +665,8 @@
     
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
     
-    [self.imageView setImage:savedImage];
+//    [butHeadImage setImage:savedImage];
+    [butHeadImage setBackgroundImage:savedImage forState:UIControlStateNormal];
     
     [[MyAfHTTPClient sharedClient] uploadFile:savedImage];
 }

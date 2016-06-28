@@ -57,6 +57,9 @@
     profitting = [NSMutableArray array];
     profitted = [NSMutableArray array];
     
+    labelMoneyString = @"0";
+    labelTouZiString = @"0";
+    
     [self contentShow];
     [self tableViewProfitShow];
     [self tableViewAlredyCashShow];

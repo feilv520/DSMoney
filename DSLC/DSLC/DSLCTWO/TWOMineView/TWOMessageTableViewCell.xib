@@ -67,7 +67,7 @@
                     </view>
                 </subviews>
                 <animations/>
-                <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="c9L-7g-vSy" secondAttribute="bottom" constant="2" id="NUV-b7-glp"/>
                     <constraint firstItem="c9L-7g-vSy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="TE8-5z-9sa"/>

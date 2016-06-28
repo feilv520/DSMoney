@@ -18,6 +18,7 @@
 #import "TWOProductDetailViewController.h"
 #import "AdModel.h"
 #import "BannerViewController.h"
+#import "TSignInViewController.h"
 
 @interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
@@ -164,6 +165,8 @@
         [self.view addSubview:_scrollView];
     }
     
+    [_scrollView setHidden:YES];
+    
 //    轮播banner的位置
     viewBanner = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     [_scrollView addSubview:viewBanner];
@@ -173,16 +176,9 @@
 //    [viewBanner addSubview:imageBanner];
     imageBanner.userInteractionEnabled = YES;
     
-//    签到记录按钮
-    UIButton *buttonSign = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 20, 71.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 53.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
-    [viewBanner addSubview:buttonSign];
-    [buttonSign setBackgroundImage:[UIImage imageNamed:@"signrecord"] forState:UIControlStateNormal];
-    [buttonSign setBackgroundImage:[UIImage imageNamed:@"signrecord"] forState:UIControlStateHighlighted];
-    [buttonSign addTarget:self action:@selector(signRecordButton:) forControlEvents:UIControlEventTouchUpInside];
-    
 //    公告位置
     viewNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 32.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
-//    [self.view addSubview:viewNotice];
+    [viewBanner addSubview:viewNotice];
     viewNotice.backgroundColor = [UIColor whiteColor];
     
     CGFloat noticeHeight = 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20);
@@ -214,8 +210,8 @@
         [_scrollView addSubview:buttonClick];
     }
     
-    [_scrollView addSubview:viewBanner];
-    [_scrollView addSubview:viewNotice];
+//    [_scrollView addSubview:viewBanner];
+//    [_scrollView addSubview:viewNotice];
 }
 
 - (void)collectionViewShow
@@ -359,7 +355,11 @@
 //签到记录
 - (void)signRecordButton:(UIButton *)button
 {
-    NSLog(@"签到记录");
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    TSignInViewController *signInVC = [[TSignInViewController alloc] init];
+    signInVC.tokenString = [dic objectForKey:@"token"];
+    [self.navigationController pushViewController:signInVC animated:YES];
 }
 
 //每日一摇和邀请好友点击方法
@@ -372,7 +372,6 @@
         NewInviteViewController *inviteVc = [[NewInviteViewController alloc] init];
         
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-        NSLog(@"%@",[dic objectForKey:@"invitationMyCode"]);
         inviteVc.inviteCode = [dic objectForKey:@"invitationMyCode"];
         
         [self.navigationController pushViewController:inviteVc animated:YES];
@@ -561,6 +560,13 @@
     
     [viewBanner addSubview:pageControl];
     
+    //    签到记录按钮
+    UIButton *buttonSign = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 20, 71.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 53.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    [viewBanner addSubview:buttonSign];
+    [buttonSign setBackgroundImage:[UIImage imageNamed:@"signrecord"] forState:UIControlStateNormal];
+    [buttonSign setBackgroundImage:[UIImage imageNamed:@"signrecord"] forState:UIControlStateHighlighted];
+    [buttonSign addTarget:self action:@selector(signRecordButton:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 // 滚动后的执行方法
@@ -625,7 +631,6 @@
         imgOther = [UIImage imageNamed:@"banner_black"];
     });
     
-    
     if (iOS7) {
         [pageControl setValue:imgCurrent forKey:@"_currentPageImage"];
         [pageControl setValue:imgOther forKey:@"_pageImage"];
@@ -679,6 +684,7 @@
         }
         
         [self loadingWithHidden:YES];
+        [_scrollView setHidden:NO];
         [self makeScrollView];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
