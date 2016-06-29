@@ -1379,7 +1379,6 @@
 		8DA7E17E1CE076B700D5D016 /* TWOProductDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA7E17C1CE076B700D5D016 /* TWOProductDetailTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8DA7E1811CE0943000D5D016 /* productMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA7E17F1CE0943000D5D016 /* productMonkey.png */; settings = {ASSET_TAGS = (); }; };
 		8DA7E1821CE0943000D5D016 /* productMonkey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA7E1801CE0943000D5D016 /* productMonkey@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8DB353A11D1A2A3D005F27B4 /* TWOProductAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB353A01D1A2A3D005F27B4 /* TWOProductAssetModel.m */; settings = {ASSET_TAGS = (); }; };
 		8DB353A41D1A5C8E005F27B4 /* TWOPickModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB353A31D1A5C8E005F27B4 /* TWOPickModel.m */; settings = {ASSET_TAGS = (); }; };
 		8DB744B81C1973AC0084D1A2 /* banner_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DB744B41C1973AC0084D1A2 /* banner_black@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8DB744B91C1973AC0084D1A2 /* banner_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DB744B51C1973AC0084D1A2 /* banner_black@3x.png */; settings = {ASSET_TAGS = (); }; };
@@ -1390,6 +1389,7 @@
 		8DBC8A6D1C0D44DA00378FFE /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBC8A691C0D44DA00378FFE /* TencentOpenAPI.framework */; settings = {ASSET_TAGS = (); }; };
 		8DBC8A6E1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8DBC8A6A1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle */; settings = {ASSET_TAGS = (); }; };
 		8DBC8A701C0D450F00378FFE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBC8A6F1C0D450F00378FFE /* SystemConfiguration.framework */; };
+		8DBDD1461D23C6B100D27065 /* TWOProductAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDD1451D23C6B100D27065 /* TWOProductAssetModel.m */; settings = {ASSET_TAGS = (); }; };
 		8DC695BA1C3503D30055EC44 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DC695A01C3503D30055EC44 /* UMSocialLocalizable.strings */; settings = {ASSET_TAGS = (); }; };
 		8DC695BB1C3503D30055EC44 /* libUMSocial_Sdk_4.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC695AE1C3503D30055EC44 /* libUMSocial_Sdk_4.4.a */; settings = {ASSET_TAGS = (); }; };
 		8DC695BC1C3503D30055EC44 /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DC695B01C3503D30055EC44 /* UMSCommentDetailController.xib */; settings = {ASSET_TAGS = (); }; };
@@ -3467,8 +3467,6 @@
 		8DA7E17C1CE076B700D5D016 /* TWOProductDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOProductDetailTableViewCell.xib; sourceTree = "<group>"; };
 		8DA7E17F1CE0943000D5D016 /* productMonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = productMonkey.png; sourceTree = "<group>"; };
 		8DA7E1801CE0943000D5D016 /* productMonkey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "productMonkey@3x.png"; sourceTree = "<group>"; };
-		8DB3539F1D1A2A3D005F27B4 /* TWOProductAssetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductAssetModel.h; sourceTree = "<group>"; };
-		8DB353A01D1A2A3D005F27B4 /* TWOProductAssetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductAssetModel.m; sourceTree = "<group>"; };
 		8DB353A21D1A5C8E005F27B4 /* TWOPickModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWOPickModel.h; path = DSLC/DSLCTWO/TWOProductModel/TWOPickModel.h; sourceTree = SOURCE_ROOT; };
 		8DB353A31D1A5C8E005F27B4 /* TWOPickModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWOPickModel.m; path = DSLC/DSLCTWO/TWOProductModel/TWOPickModel.m; sourceTree = SOURCE_ROOT; };
 		8DB744B41C1973AC0084D1A2 /* banner_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_black@2x.png"; sourceTree = "<group>"; };
@@ -3482,6 +3480,8 @@
 		8DBC8A6A1C0D44DA00378FFE /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		8DBC8A6B1C0D44DA00378FFE /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
 		8DBC8A6F1C0D450F00378FFE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8DBDD1441D23C6B100D27065 /* TWOProductAssetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductAssetModel.h; sourceTree = "<group>"; };
+		8DBDD1451D23C6B100D27065 /* TWOProductAssetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductAssetModel.m; sourceTree = "<group>"; };
 		8DC695A11C3503D30055EC44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
 		8DC695A31C3503D30055EC44 /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
 		8DC695A41C3503D30055EC44 /* UMSocialAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialAccountManager.h; sourceTree = "<group>"; };
@@ -4188,8 +4188,8 @@
 		8143FCEF1CD9C5F400B65A2F /* TWOProductModel */ = {
 			isa = PBXGroup;
 			children = (
-				8DB3539F1D1A2A3D005F27B4 /* TWOProductAssetModel.h */,
-				8DB353A01D1A2A3D005F27B4 /* TWOProductAssetModel.m */,
+				8DBDD1441D23C6B100D27065 /* TWOProductAssetModel.h */,
+				8DBDD1451D23C6B100D27065 /* TWOProductAssetModel.m */,
 			);
 			path = TWOProductModel;
 			sourceTree = "<group>";
@@ -4238,9 +4238,9 @@
 		8143FCF21CD9C67C00B65A2F /* TWOHomePageModel */ = {
 			isa = PBXGroup;
 			children = (
-				815D19461D2266CA00DFA753 /* 摇一摇 */,
 				8DB353A21D1A5C8E005F27B4 /* TWOPickModel.h */,
 				8DB353A31D1A5C8E005F27B4 /* TWOPickModel.m */,
+				815D19461D2266CA00DFA753 /* 摇一摇 */,
 			);
 			path = TWOHomePageModel;
 			sourceTree = "<group>";
@@ -8406,6 +8406,7 @@
 				8D968A8D1C97AEDE00C9A6A1 /* TBigTurntableViewController.m in Sources */,
 				8D968A8C1C97AE7000C9A6A1 /* TSelectionViewController.m in Sources */,
 				8D968A8B1C97AE5800C9A6A1 /* TRiskGradeViewController.m in Sources */,
+				8DBDD1461D23C6B100D27065 /* TWOProductAssetModel.m in Sources */,
 				8DD4C2481BDE1BFA00C4C58C /* SuggestionViewController.m in Sources */,
 				8D88D0FA1BFECCB40051D6DA /* MJRefreshAutoGifFooter.m in Sources */,
 				8DD4C2471BDE1BE600C4C58C /* AboutViewController.m in Sources */,
@@ -8632,7 +8633,6 @@
 				81701C141BE7114E00B45BAA /* FindDealViewController.m in Sources */,
 				8179EB1B1CEAF95A00BD7054 /* TWOSafeSetViewController.m in Sources */,
 				8DEDE26D1BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m in Sources */,
-				8DB353A11D1A2A3D005F27B4 /* TWOProductAssetModel.m in Sources */,
 				81AC90C21BEC82BD00232404 /* BindingBankSucceController.m in Sources */,
 				8100185A1D0FAB7000696CF5 /* TWOMoneyGoWhereCell.m in Sources */,
 				81D703F71BE06D1F0074DF30 /* ForgetSecretCell.m in Sources */,

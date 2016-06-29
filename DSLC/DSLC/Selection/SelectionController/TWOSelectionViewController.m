@@ -20,7 +20,7 @@
 #import "BannerViewController.h"
 #import "TSignInViewController.h"
 
-@interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
+@interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 {
     UIButton *buttonClick;
@@ -179,7 +179,7 @@
 //    轮播banner的位置
     viewBanner = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     [_scrollView addSubview:viewBanner];
-    viewBanner.backgroundColor = [UIColor qianhuise];
+    viewBanner.backgroundColor = [UIColor whiteColor];
     
     UIImageView *imageBanner = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, viewBanner.frame.size.height) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"首页banner"]];
 //    [viewBanner addSubview:imageBanner];
@@ -187,18 +187,19 @@
     
 //    公告位置
     viewNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 32.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
-    [viewBanner addSubview:viewNotice];
+//    [viewBanner addSubview:viewNotice];
+    viewNotice.userInteractionEnabled = YES;
     viewNotice.backgroundColor = [UIColor whiteColor];
     
     CGFloat noticeHeight = 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20);
 //    公告图标
-    UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(9, (viewNotice.frame.size.height - noticeHeight)/2, noticeHeight, noticeHeight) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"公告"]];
-    [viewNotice addSubview:imageNotice];
+    UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(9, CGRectGetMaxY(viewBanner.frame) + 6, noticeHeight, noticeHeight) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"公告"]];
+    [_scrollView addSubview:imageNotice];
     [self noticeContentShow];
     
 //    公告view分界线
     UIView *viewLineNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewNotice.frame.size.height - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
-    [viewNotice addSubview:viewLineNotice];
+    [_scrollView addSubview:viewLineNotice];
     viewLineNotice.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     NSArray *imageArr = @[@"每日一摇", @"邀请好友"];
@@ -227,21 +228,37 @@
 - (void)noticeContentShow
 {
     noticeArray = @[@"公告来了!", @"这是一个秘密~", @"我不能告诉你哟!"];
-    _scrollViewNotice = [[UIScrollView alloc] initWithFrame:CGRectMake(9 + 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 5, 0, WIDTH_CONTROLLER_DEFAULT - 18 - 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 5, viewNotice.frame.size.height)];
-    [viewNotice addSubview:_scrollViewNotice];
-    _scrollViewNotice.contentOffset = CGPointMake(0, 35);
+    _scrollViewNotice = [[UIScrollView alloc] initWithFrame:CGRectMake(9 + 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 5, viewBanner.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 32.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+    [_scrollView addSubview:_scrollViewNotice];
+    _scrollViewNotice.contentOffset = CGPointMake(1, 35);
+    _scrollViewNotice.contentSize = CGSizeMake(1, 35 * (noticeArray.count + 2));
     _scrollViewNotice.delegate = self;
+    _scrollViewNotice.userInteractionEnabled = YES;
     
     for (int i = 1; i <= noticeArray.count; i++) {
-        UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * i, _scrollViewNotice.frame.size.width, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[noticeArray objectAtIndex:i - 1]];
+        UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * i, _scrollViewNotice.frame.size.width, 30) backgroundColor:[UIColor qianhuise] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[noticeArray objectAtIndex:i - 1]];
         [_scrollViewNotice addSubview:labelNotice];
+        labelNotice.userInteractionEnabled = YES;
+        labelNotice.exclusiveTouch = YES;
+        UITapGestureRecognizer *gensture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapAction)];
+        gensture.delegate = self;
+        [labelNotice addGestureRecognizer:gensture];
     }
     
-    UILabel *labelLast = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * (noticeArray.count + 1), _scrollViewNotice.frame.size.width, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"公告来了!"];
+    UILabel *labelLast = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * (noticeArray.count + 1), _scrollViewNotice.frame.size.width, 30) backgroundColor:[UIColor qianhuise] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"公告来了!"];
     [_scrollViewNotice addSubview:labelLast];
+    UITapGestureRecognizer *gensture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapAction)];
+    gensture.delegate = self;
+    labelLast.userInteractionEnabled = YES;
+    labelLast.exclusiveTouch = YES;
+    [labelLast addGestureRecognizer:gensture];
     
     everyNum = noticeArray.count + 2;
     secondsNum = noticeArray.count;
+}
+
+- (void)scrollViewTapAction{
+    NSLog(@"123");
 }
 
 -(void)timerFireMethod:(NSTimer *)theTimer
@@ -468,10 +485,6 @@
     } else {
         _scrollView.scrollEnabled = YES;
     }
-    
-    if (scrollView == _scrollViewNotice) {
-        
-    }
 }
 
 #pragma mark 网络请求方法
@@ -492,7 +505,7 @@
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 [self loadingWithHidden:YES];
                 
-                timerNotice = [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+                timerNotice = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
                 
                 NSArray *pickArr = [responseObject objectForKey:@"Product"];
                 

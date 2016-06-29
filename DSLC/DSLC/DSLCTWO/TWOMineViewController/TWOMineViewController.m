@@ -476,6 +476,28 @@
     cell.labelContent.textColor = [UIColor zitihui];
     cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
+    if (indexPath.section == 0) {
+        if (indexPath.row == 1) {
+            if ([[[myAccount hasNewPrivilege] debugDescription] isEqualToString:@"1"]) {
+                cell.imageRedDian.hidden = NO;
+            } else {
+                cell.imageRedDian.hidden = YES;
+            }
+        } else {
+            cell.imageRedDian.hidden = YES;
+        }
+    } else {
+        if (indexPath.row == 0) {
+            if ([[DES3Util decrypt:[myAccount redPacketNum]] isEqualToString:@"1"]) {
+                cell.imageRedDian.hidden = NO;
+            } else {
+                cell.imageRedDian.hidden = YES;
+            }
+        } else {
+            cell.imageRedDian.hidden = YES;
+        }
+    }
+    
     NSDictionary *dicMoney = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"CloseEyes.plist"]];
     
     if (indexPath.section == 0) {
@@ -976,6 +998,11 @@
             
             NSMutableArray *newContentArr = [contentArr mutableCopy];
             NSMutableArray *contentArray = [NSMutableArray array];
+            NSMutableArray *contentArrayOld = [NSMutableArray array];
+            
+            [contentArrayOld addObject:[NSString stringWithFormat:@"%@元在投",[DES3Util decrypt:[myAccount investMoney]]]];
+            [contentArrayOld addObject:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount prlMoney]]]];
+            
             if ([[myAccount redPacketNum] isEqualToString:@""] || [[myAccount redPacketNum] isEqualToString:@"0"]) {
                 [contentArray addObject:[NSString stringWithFormat:@"0张"]];
             } else {
@@ -984,6 +1011,7 @@
             [contentArray addObject:[NSString stringWithFormat:@"%@猴币",[DES3Util decrypt:[myAccount monkeyNum]]]];
             [contentArray addObject:@"邀请好友送星巴克券"];
 #warning 千万别忘了
+            [newContentArr replaceObjectAtIndex:0 withObject:contentArrayOld];
             [newContentArr replaceObjectAtIndex:1 withObject:contentArray];
             contentArr = newContentArr;
             
