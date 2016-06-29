@@ -1104,8 +1104,8 @@
 		8D6E46731C9932AA00F0F5B7 /* myCastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46711C9932AA00F0F5B7 /* myCastTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8D6E46771C9936C600F0F5B7 /* myHadCastTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E46751C9936C600F0F5B7 /* myHadCastTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		8D6E46781C9936C600F0F5B7 /* myHadCastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46761C9936C600F0F5B7 /* myHadCastTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
-		8D6E467B1C9936F600F0F5B7 /* 已兑付@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46791C9936F600F0F5B7 /* 已兑付@2x.png */; settings = {ASSET_TAGS = (); }; };
-		8D6E467C1C9936F600F0F5B7 /* 已兑付@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E467A1C9936F600F0F5B7 /* 已兑付@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D6E467B1C9936F600F0F5B7 /* 已兑付_old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46791C9936F600F0F5B7 /* 已兑付_old@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D6E467C1C9936F600F0F5B7 /* 已兑付_old@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E467A1C9936F600F0F5B7 /* 已兑付_old@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D6E467F1C99635E00F0F5B7 /* myCastModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E467E1C99635E00F0F5B7 /* myCastModel.m */; settings = {ASSET_TAGS = (); }; };
 		8D6E46861C9A44F200F0F5B7 /* myHadCastDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E46841C9A44F200F0F5B7 /* myHadCastDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D6E46871C9A44F200F0F5B7 /* myHadCastDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46851C9A44F200F0F5B7 /* myHadCastDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
@@ -2977,8 +2977,8 @@
 		8D6E46741C9936C600F0F5B7 /* myHadCastTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myHadCastTableViewCell.h; sourceTree = "<group>"; };
 		8D6E46751C9936C600F0F5B7 /* myHadCastTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myHadCastTableViewCell.m; sourceTree = "<group>"; };
 		8D6E46761C9936C600F0F5B7 /* myHadCastTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = myHadCastTableViewCell.xib; sourceTree = "<group>"; };
-		8D6E46791C9936F600F0F5B7 /* 已兑付@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已兑付@2x.png"; sourceTree = "<group>"; };
-		8D6E467A1C9936F600F0F5B7 /* 已兑付@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已兑付@3x.png"; sourceTree = "<group>"; };
+		8D6E46791C9936F600F0F5B7 /* 已兑付_old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已兑付_old@2x.png"; sourceTree = "<group>"; };
+		8D6E467A1C9936F600F0F5B7 /* 已兑付_old@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已兑付_old@3x.png"; sourceTree = "<group>"; };
 		8D6E467D1C99635E00F0F5B7 /* myCastModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myCastModel.h; sourceTree = "<group>"; };
 		8D6E467E1C99635E00F0F5B7 /* myCastModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myCastModel.m; sourceTree = "<group>"; };
 		8D6E46831C9A44F200F0F5B7 /* myHadCastDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myHadCastDetailViewController.h; sourceTree = "<group>"; };
@@ -4436,8 +4436,8 @@
 				8D6E469D1C9B9ECA00F0F5B7 /* loginViewUP@3x.png */,
 				8D6E46881C9A482A00F0F5B7 /* iconfont-icondzje@2x.png */,
 				8D6E46891C9A482A00F0F5B7 /* iconfont-icondzje@3x.png */,
-				8D6E46791C9936F600F0F5B7 /* 已兑付@2x.png */,
-				8D6E467A1C9936F600F0F5B7 /* 已兑付@3x.png */,
+				8D6E46791C9936F600F0F5B7 /* 已兑付_old@2x.png */,
+				8D6E467A1C9936F600F0F5B7 /* 已兑付_old@3x.png */,
 				8183F40A1C97CD4E000BB93C /* messageNew@2x.png */,
 				8183F40B1C97CD4E000BB93C /* messageNew@3x.png */,
 				8183F40C1C97CD4E000BB93C /* messageOld@2x.png */,
@@ -7015,7 +7015,7 @@
 				81BA1C101BD4FE2600DBA5BE /* MyNewsCell.xib in Resources */,
 				8D9011A41BD6337C00E5D62A /* 10@3x.png in Resources */,
 				81B674191BF0AFEB007CEF51 /* 蓝框@2x.png in Resources */,
-				8D6E467B1C9936F600F0F5B7 /* 已兑付@2x.png in Resources */,
+				8D6E467B1C9936F600F0F5B7 /* 已兑付_old@2x.png in Resources */,
 				8143FD1B1CD9E9F400B65A2F /* 首页左箭头@2x.png in Resources */,
 				8D3A2FE11BE7100000913DEC /* FDescriptionViewController.xib in Resources */,
 				81C8BBC81BDA2F8D005B9DFF /* lianxikefuG@2x.png in Resources */,
@@ -7537,7 +7537,7 @@
 				81DEC8461CEEE358005E9D9F /* beijing@3x.png in Resources */,
 				81B84C101CE44A8600A867B9 /* shoushi@2x.png in Resources */,
 				813D3FCC1C2683420042DB88 /* 审核失败@2x.png in Resources */,
-				8D6E467C1C9936F600F0F5B7 /* 已兑付@3x.png in Resources */,
+				8D6E467C1C9936F600F0F5B7 /* 已兑付_old@3x.png in Resources */,
 				8DC695C21C3503D30055EC44 /* UMSnsAccountViewController.xib in Resources */,
 				817E33951BD7576600D05103 /* MeCell.xib in Resources */,
 				8175BE781BE9A2490044026E /* 61-拷贝@2x.png in Resources */,

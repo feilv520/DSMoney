@@ -51,7 +51,7 @@
                             <rect key="frame" x="315" y="0.0" width="60" height="53"/>
                             <animations/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="已兑付.png" translatesAutoresizingMaskIntoConstraints="NO" id="ep7-4q-lef">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="已兑付_old.png" translatesAutoresizingMaskIntoConstraints="NO" id="ep7-4q-lef">
                             <rect key="frame" x="320" y="10" width="45" height="36"/>
                             <animations/>
                             <constraints>
@@ -237,6 +237,6 @@
     </objects>
     <resources>
         <image name="iconfont-icondzje.png" width="22" height="22"/>
-        <image name="已兑付.png" width="45" height="36"/>
+        <image name="已兑付_old.png" width="45" height="36"/>
     </resources>
 </document>

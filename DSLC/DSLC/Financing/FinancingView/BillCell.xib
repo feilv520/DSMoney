@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QDc-eg-lij">
-                        <rect key="frame" x="10" y="0.0" width="355" height="114"/>
+                        <rect key="frame" x="10" y="11" width="355" height="114"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3XO-Gj-G5o">
                                 <rect key="frame" x="10" y="10" width="25" height="25"/>
@@ -158,7 +158,7 @@
                 <animations/>
                 <constraints>
                     <constraint firstItem="QDc-eg-lij" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Cfd-WB-8r1"/>
-                    <constraint firstItem="QDc-eg-lij" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ttI-UV-a88"/>
+                    <constraint firstItem="QDc-eg-lij" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="ttI-UV-a88"/>
                     <constraint firstAttribute="trailing" secondItem="QDc-eg-lij" secondAttribute="trailing" constant="10" id="xQa-lJ-eWK"/>
                 </constraints>
             </tableViewCellContentView>

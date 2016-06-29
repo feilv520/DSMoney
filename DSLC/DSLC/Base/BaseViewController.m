@@ -57,9 +57,9 @@
 {
     self.navigationController.navigationBar.translucent = NO;
 //    1.0
-//    self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
+    self.navigationController.navigationBar.barTintColor = [UIColor daohanglan];
 //    2.0
-    self.navigationController.navigationBar.barTintColor = [UIColor profitColor];
+//    self.navigationController.navigationBar.barTintColor = [UIColor profitColor];
     
     id target = self.navigationController.interactivePopGestureRecognizer.delegate;  // 创建全屏滑动手势，调用系统自带滑动手势的target的action方法
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];  // 设置手势代理，拦截手势触发
