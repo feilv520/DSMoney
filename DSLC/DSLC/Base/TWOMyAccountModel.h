@@ -26,5 +26,7 @@
 @property (nonatomic, copy) NSString *totalMoney;
 @property (nonatomic, copy) NSString *totalProfit;
 @property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *hasNewMoneky;
+@property (nonatomic, copy) NSString *hasNewPrivilege;
 
 @end
