@@ -30,6 +30,9 @@
     NSMutableArray *jiaXiQuanArray;
     TWOJiaXiQuanModel *jiaXiQuanModel;
     UIButton *butWhite;
+    
+//    接口返回红包列表数组
+    NSMutableArray *redbagArray;
 }
 
 @end
@@ -54,11 +57,72 @@
     jiaXiQuanArray = [NSMutableArray array];
     
     [self navigationTitleShow];
-    [self tableViewShow];
+    [self commonShow];
     [self getMyRedPacketListFuction];
     [self getMyIncreaseListFuction];
 }
 
+//没有红包的样式
+- (void)noHaveRedBagShow
+{
+    UIButton *butBagUse = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 72 - 10, 10, 72, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"红包使用说明"];
+    [_scrollView addSubview:butBagUse];
+    butBagUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    [butBagUse addTarget:self action:@selector(redBagUseExplain:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 13.5, butBagUse.frame.size.width, 0.5) backgroundColor:[UIColor profitColor]];
+    [butBagUse addSubview:viewLine];
+    
+    UIImageView *imageNothing = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 80.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [_scrollView addSubview:imageNothing];
+    
+    UIView *viewHistory = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 96, 260/2 + 80.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 192, 14) backgroundColor:[UIColor whiteColor]];
+    [_scrollView addSubview:viewHistory];
+    
+    UILabel *labelLeft = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 144, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"没有更多有效红包了, 查看"];
+    [viewHistory addSubview:labelLeft];
+    
+    UIButton *buttonCheck = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewHistory.frame.size.width - 48, 0, 48, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"历史红包"];
+    [viewHistory addSubview:buttonCheck];
+    buttonCheck.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    [buttonCheck addTarget:self action:@selector(buttonCheckHistoryRedBag:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView *viewLine2 = [CreatView creatViewWithFrame:CGRectMake(0, buttonCheck.frame.size.height - 1, buttonCheck.frame.size.width, 0.5) backgroundColor:[UIColor profitColor]];
+    [buttonCheck addSubview:viewLine2];
+}
+
+//没有加息券的样式
+- (void)noHaveJiaXiQuanShow
+{
+    UIButton *butJiaUse = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT*2 - 85 - 10, 10, 85, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"加息券使用说明"];
+    [_scrollView addSubview:butJiaUse];
+    butJiaUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    butJiaUse.tag = 66;
+    [butJiaUse addTarget:self action:@selector(redBagUseExplain:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 13.5, butJiaUse.frame.size.width, 0.5) backgroundColor:[UIColor profitColor]];
+    [butJiaUse addSubview:viewLine];
+    
+    UIImageView *imageNothing = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + (WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2), 80.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [_scrollView addSubview:imageNothing];
+    
+    UIView *viewHistory = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT +(WIDTH_CONTROLLER_DEFAULT/2 - 108), 260/2 + 80.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 216, 14) backgroundColor:[UIColor whiteColor]];
+    [_scrollView addSubview:viewHistory];
+    
+    UILabel *labelLeft = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 156, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"没有更多有效加息券了, 查看"];
+    [viewHistory addSubview:labelLeft];
+    
+    UIButton *buttonCheck = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewHistory.frame.size.width - 60, 0, 60, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"历史加息券"];
+    [viewHistory addSubview:buttonCheck];
+    buttonCheck.tag = 77;
+    buttonCheck.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    [buttonCheck addTarget:self action:@selector(buttonCheckHistoryRedBag:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView *viewLine2 = [CreatView creatViewWithFrame:CGRectMake(0, buttonCheck.frame.size.height - 1, buttonCheck.frame.size.width, 0.5) backgroundColor:[UIColor profitColor]];
+    [buttonCheck addSubview:viewLine2];
+}
+
+//红包,加息券按钮页面的切换
 - (void)navigationTitleShow
 {
     butWhite = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 180)/2, 5, 180, 30) backgroundColor:[UIColor profitColor] textColor:nil titleText:nil];
@@ -84,7 +148,7 @@
     [buttonJiaXi addTarget:self action:@selector(jiaXiQuanButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)tableViewShow
+- (void)commonShow
 {
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20)];
     [self.view addSubview:_scrollView];
@@ -93,7 +157,10 @@
     _scrollView.pagingEnabled = YES;
     _scrollView.bounces = NO;
     _scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT*2, 1);
-    
+}
+
+- (void)redBagTableViewShow
+{
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64 - 72) style:UITableViewStylePlain];
     [_scrollView addSubview:_tableView];
     _tableView.dataSource = self;
@@ -103,6 +170,12 @@
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 60)];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
+    [self redBagViewHeadShow];
+    [self redBagTabelViewFoot];
+}
+
+- (void)jiaXiQuanTableViewShow
+{
     _tableViewJia = [[UITableView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT, 65, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64 - 72) style:UITableViewStylePlain];
     [_scrollView addSubview:_tableViewJia];
     _tableViewJia.dataSource = self;
@@ -116,8 +189,6 @@
     [_tableViewJia registerNib:[UINib nibWithNibName:@"TWIJiaXiQuanCell" bundle:nil] forCellReuseIdentifier:@"reuseJia"];
     [_tableViewJia registerNib:[UINib nibWithNibName:@"TWOWaitCashCell" bundle:nil] forCellReuseIdentifier:@"reuseTWO"];
     
-    [self redBagViewHeadShow];
-    [self redBagTabelViewFoot];
     [self jiaxiquanHead];
     [self jiaxiquanFoot];
 }
@@ -127,7 +198,7 @@
     UIView *viewHead = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 65) backgroundColor:[UIColor whiteColor]];
     [_scrollView addSubview:viewHead];
     
-    butCanUse = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 36) backgroundColor:[UIColor redBagBankColor] textColor:[UIColor profitColor] titleText:[NSString stringWithFormat:@"%@张可用红包,去使用>", [NSString stringWithFormat:@"%lu", (unsigned long)redBagArray.count]]];
+    butCanUse = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 36) backgroundColor:[UIColor redBagBankColor] textColor:[UIColor profitColor] titleText:nil];
     [viewHead addSubview:butCanUse];
     butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butCanUse addTarget:self action:@selector(goToUseRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -138,19 +209,19 @@
     butUseSHuo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     [butUseSHuo addTarget:self action:@selector(redBagUseExplain:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butLine = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 9 - 72, viewHead.frame.size.height - 2 - 5, 72, 1) backgroundColor:[UIColor profitColor] textColor:nil titleText:nil];
+    UIButton *butLine = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 9 - 72, viewHead.frame.size.height - 2 - 6, 72, 1) backgroundColor:[UIColor profitColor] textColor:nil titleText:nil];
     [viewHead addSubview:butLine];
 }
 
 - (void)redBagTabelViewFoot
 {
-    UIView *viewFoot = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 96, _tableView.tableFooterView.frame.size.height - 20, 192, 20) backgroundColor:[UIColor whiteColor]];
+    UIView *viewFoot = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 96, _tableView.tableFooterView.frame.size.height - 20, 192, 14) backgroundColor:[UIColor whiteColor]];
     [_tableView.tableFooterView addSubview:viewFoot];
     
-    UILabel *labelGray = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 144, 19) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"没有更多有效红包了, 查看"];
+    UILabel *labelGray = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 144, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"没有更多有效红包了, 查看"];
     [viewFoot addSubview:labelGray];
     
-    UIButton *butCheck = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewFoot.frame.size.width - 48, 0, 48, 19) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"历史红包"];
+    UIButton *butCheck = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewFoot.frame.size.width - 48, 0, 48, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"历史红包"];
     [viewFoot addSubview:butCheck];
     butCheck.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     [butCheck addTarget:self action:@selector(buttonCheckHistoryRedBag:) forControlEvents:UIControlEventTouchUpInside];
@@ -169,26 +240,26 @@
     butCanUseJ.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butCanUseJ addTarget:self action:@selector(goToUseRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    //    红包使用说明按钮
-    UIButton *butUseSHuo = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 9 - 84, viewHead.frame.size.height - 16 -5, 84, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"加息券使用说明"];
+//    加息券使用说明按钮
+    UIButton *butUseSHuo = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 9 - 84, viewHead.frame.size.height - 16 - 5, 84, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"加息券使用说明"];
     [viewHead addSubview:butUseSHuo];
     butUseSHuo.tag = 66;
     butUseSHuo.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     [butUseSHuo addTarget:self action:@selector(redBagUseExplain:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butLine = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 9 - 84, viewHead.frame.size.height - 2 - 5, 84, 1) backgroundColor:[UIColor profitColor] textColor:nil titleText:nil];
+    UIButton *butLine = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 9 - 84, viewHead.frame.size.height - 2 - 6, 84, 1) backgroundColor:[UIColor profitColor] textColor:nil titleText:nil];
     [viewHead addSubview:butLine];
 }
 
 - (void)jiaxiquanFoot
 {
-    UIView *viewFoot = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 108, _tableView.tableFooterView.frame.size.height - 20, 216, 20) backgroundColor:[UIColor whiteColor]];
+    UIView *viewFoot = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 108, _tableView.tableFooterView.frame.size.height - 20, 216, 14) backgroundColor:[UIColor whiteColor]];
     [_tableViewJia.tableFooterView addSubview:viewFoot];
     
-    UILabel *labelGray = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 156, 19) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"没有更多有效加息券了, 查看"];
+    UILabel *labelGray = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 156, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"没有更多有效加息券了, 查看"];
     [viewFoot addSubview:labelGray];
     
-    UIButton *butCheck = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewFoot.frame.size.width - 60, 0, 60, 19) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"历史加息券"];
+    UIButton *butCheck = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewFoot.frame.size.width - 60, 0, 60, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"历史加息券"];
     [viewFoot addSubview:butCheck];
     butCheck.tag = 77;
     butCheck.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
@@ -267,9 +338,9 @@
         cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [redBagModel startDate], [redBagModel endDate]];
         cell.labelData.backgroundColor = [UIColor clearColor];
         
-        if (indexPath.row == 2) {
-            cell.contentView.alpha = 0.5;
-        }
+//        if (indexPath.row == 2) {
+//            cell.contentView.alpha = 0.5;
+//        }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -455,27 +526,6 @@
     button.backgroundColor = [UIColor whiteColor];
     [button setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
     
-//    [butRedBag removeFromSuperview];
-//    [buttonJiaXi removeFromSuperview];
-//
-//    butRedBag = nil;
-//    buttonJiaXi = nil;
-//    
-//    imageBack = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 180)/2, 5, 180, 30) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"圆右"]];
-//    [self.navigationController.navigationBar addSubview:imageBack];
-//    imageBack.userInteractionEnabled = YES;
-//    CGFloat widthImg = imageBack.frame.size.width;
-//    
-//    butRedBag = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, widthImg/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"红包"];
-//    [imageBack addSubview:butRedBag];
-//    butRedBag.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-//    [butRedBag addTarget:self action:@selector(redBagButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    buttonJiaXi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(widthImg/2, 0, widthImg/2, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor profitColor] titleText:@"加息券"];
-//    [imageBack addSubview:buttonJiaXi];
-//    buttonJiaXi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-//    [buttonJiaXi addTarget:self action:@selector(jiaXiQuanButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         _scrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
     } completion:^(BOOL finished) {
@@ -554,15 +604,22 @@
         
         NSLog(@"获取红包列表:getMyRedPacketList = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-            NSMutableArray *redbagArray = [responseObject objectForKey:@"RedPacket"];
+            redbagArray = [responseObject objectForKey:@"RedPacket"];
             for (NSDictionary *dataDic in redbagArray) {
                 TWORedBagModel *redBagModel = [[TWORedBagModel alloc] init];
                 [redBagModel setValuesForKeysWithDictionary:dataDic];
                 [redBagArray addObject:redBagModel];
             }
             
-            [self redBagViewHeadShow];
-            [_tableView reloadData];
+            //判断有无红包 调用不同的页面样式
+            if (redBagArray.count == 0) {
+                [self noHaveRedBagShow];
+            } else {
+                [self redBagTableViewShow];
+            }
+            
+            [butCanUse setTitle:[NSString stringWithFormat:@"%@张可用红包,去使用>", [responseObject objectForKey:@"redPacketCount"]] forState:UIControlStateNormal];
+            NSLog(@"%@", [responseObject objectForKey:@"redPacketCount"]);
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -578,7 +635,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"getMyIncreaseList = %@",responseObject);
+        NSLog(@"获取加息券列表 = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *dataArray = [responseObject objectForKey:@"Increase"];
             for (NSDictionary *dataDic in dataArray) {
@@ -587,8 +644,12 @@
                 [jiaXiQuanArray addObject:jiaXiQuanModel];
             }
             
-            [self jiaxiquanHead];
-            [_tableViewJia reloadData];
+            //判断有无加息券 调用不同的页面样式
+            if (dataArray.count == 0) {
+                [self noHaveJiaXiQuanShow];
+            } else {
+                [self jiaXiQuanTableViewShow];
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

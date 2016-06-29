@@ -28,6 +28,7 @@
 //    0次的显示
     UILabel *labelNoChance;
     TWOYaoHomePageModel *yaoPageModel;
+    NSDictionary *dataDic;
 }
 
 @end
@@ -213,13 +214,6 @@
     [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
     animation.values = values;
     [viewBottom.layer addAnimation:animation forKey:nil];
-    
-//    摇动次数用完
-//    [self haveNoCiShu];
-//    摇动中奖
-//    [self winPrizeShow];
-//    摇动没有中奖
-    [self haveNoWin];
 }
 
 //摇动次数用完的弹框
@@ -229,8 +223,8 @@
     UIImageView *imageNoWin = [CreatView creatImageViewWithFrame:CGRectMake(viewBottom.frame.size.width/2 - 45, 15, 90, 110) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"nowin"]];
     [viewBottom addSubview:imageNoWin];
     
-    UILabel *labelNoChance = [CreatView creatWithLabelFrame:CGRectMake(0, 15 + 110 + 10, viewBottom.frame.size.width, 17) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:17] text:@"您的每日一摇次数已用完!"];
-    [viewBottom addSubview:labelNoChance];
+    UILabel *labelNochance = [CreatView creatWithLabelFrame:CGRectMake(0, 15 + 110 + 10, viewBottom.frame.size.width, 17) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:17] text:@"您的每日一摇次数已用完!"];
+    [viewBottom addSubview:labelNochance];
     
     UILabel *labelZero = [CreatView creatWithLabelFrame:CGRectMake(0, 15 + 110 + 10 + 17 + 10, viewBottom.frame.size.width, 15) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
     [viewBottom addSubview:labelZero];
@@ -255,12 +249,19 @@
     [viewBottom addSubview:imagePrize];
     imagePrize.userInteractionEnabled = YES;
     
-    UILabel *labelPrize = [CreatView creatWithLabelFrame:CGRectMake(0, 20, viewBottom.frame.size.width, 45) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:24] text:nil];
+    UILabel *labelPrize = [CreatView creatWithLabelFrame:CGRectMake(0, 20, viewBottom.frame.size.width, 45) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:44] text:nil];
     [viewBottom addSubview:labelPrize];
-    NSMutableAttributedString *prizeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%加息券", @"2"]];
-    NSRange prizeRange = NSMakeRange(0, [[prizeString string]rangeOfString:@"%"].location);
-    [prizeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:44] range:prizeRange];
-    [labelPrize setAttributedText:prizeString];
+    
+//    判断中奖是加息券 红包 猴币 还是现金
+    if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"1"]) {
+        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"¥%@红包", [dataDic objectForKey:@"prizeNumber"]] frontNum:1 afterNum:2];
+    } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"2"]) {
+        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"%@%%加息券", [dataDic objectForKey:@"prizeNumber"]] frontNum:0 afterNum:4];
+    } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"3"]) {
+        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"%@猴币", [dataDic objectForKey:@"prizeNumber"]] frontNum:0 afterNum:2];
+    } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"4"]) {
+        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"¥%@现金", [dataDic objectForKey:@"prizeNumber"]] frontNum:1 afterNum:2];
+    }
     
     UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 20 + 45 + 15, viewBottom.frame.size.width, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"大力出奇迹,恭喜您摇中"];
     [viewBottom addSubview:labelAlert];
@@ -293,6 +294,17 @@
     [buttonOK addTarget:self action:@selector(yaoBlackDisappearButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+//封装弹框中奖内容的字体大小
+- (void)changeSizeWithLabel:(UILabel *)label nameString:(NSString *)name frontNum:(NSInteger)frontNum afterNum:(NSInteger)afterNum
+{
+    NSMutableAttributedString *prizeString = [[NSMutableAttributedString alloc] initWithString:name];
+    NSRange afterRange = NSMakeRange([[prizeString string] length] - afterNum, afterNum);
+    [prizeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:24] range:afterRange];
+    NSRange frontRange = NSMakeRange(0, frontNum);
+    [prizeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:24] range:frontRange];
+    [label setAttributedText:prizeString];
+}
+
 //活动规则
 - (void)buttonActivityRules:(UIButton *)button
 {
@@ -317,6 +329,7 @@
     viewBottom = nil;
 }
 
+//点击可以摇一摇
 - (void)tapYaoYiYao:(UITapGestureRecognizer *)tap
 {
     momAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -332,6 +345,9 @@
     [imageHandYao.layer addAnimation:momAnimation forKey:@"animateLayer"];
     imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
     imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    
+    //摇一摇数据
+    [self getYaoData];
 }
 
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
@@ -353,6 +369,9 @@
     imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
     imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
     imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    
+    //摇一摇数据
+    [self getYaoData];
 }
 
 - (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
@@ -367,7 +386,6 @@
         NSLog(@"其他事件");
     } else {
         NSLog(@"摇一摇结束");
-        [self tanKuangeShow];
     }
 }
 
@@ -382,6 +400,38 @@
             yaoPageModel = [[TWOYaoHomePageModel alloc] init];
             [yaoPageModel setValuesForKeysWithDictionary:responseObject];
             [self commonHaveShow];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//摇一摇抽奖
+#pragma mark yaoData=====================================
+- (void)getYaoData
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"shake/getShakeLogic" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"摇一摇抽奖::::::::::::::%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            dataDic = responseObject;
+            [self showCiShuData];
+            
+            //判断是否中奖
+            if ([[[responseObject objectForKey:@"isWin"] description] isEqualToString:@"1"]) {
+                [self tanKuangeShow];
+                [self winPrizeShow];
+            } else {
+                [self tanKuangeShow];
+                [self haveNoWin];
+            }
+            
+        } else {
+            //摇动次数用完
+            [self tanKuangeShow];
+            [self haveNoCiShu];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

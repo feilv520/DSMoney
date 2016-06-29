@@ -400,7 +400,7 @@
     
     if (butWenZi == nil) {
         
-        //    可用剩余&累计收益 文字
+        //可用剩余&累计收益 文字
         NSArray *titArray = @[@"可用余额", @"累计收益"];
         for (int i = 0; i < 2; i++) {
             butWenZi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT / 2 * i, 142.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewMoney.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 14 + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16, WIDTH_CONTROLLER_DEFAULT/2, 25) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:[titArray objectAtIndex:i]];
