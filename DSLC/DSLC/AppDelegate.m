@@ -453,6 +453,8 @@ void UncaughtExceptionHandler(NSException *exception){
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -467,6 +469,8 @@ void UncaughtExceptionHandler(NSException *exception){
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realname"],@"realname",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];

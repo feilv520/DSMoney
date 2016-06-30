@@ -7,12 +7,16 @@
 //
 
 #import "TBaoJiViewController.h"
+#import "TWOLoginAPPViewController.h"
 
 @interface TBaoJiViewController () <UIWebViewDelegate , UMSocialUIDelegate>
 
 {
     UIWebView *myWebView;
     UIButton *closeItem;
+    
+    // 返回的url字符串
+    NSString *urlString;
 }
 
 @end
@@ -43,6 +47,7 @@
     UIBarButtonItem * leftItemBar = [[UIBarButtonItem alloc]initWithCustomView:backView];
     self.navigationItem.leftBarButtonItem = leftItemBar;
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadWithWebview:) name:@"reloadWithWebview" object:nil];
     
     [self contentShow];
 }
@@ -57,8 +62,9 @@
     myWebView.scrollView.showsHorizontalScrollIndicator = NO;
     myWebView.scrollView.bounces = NO;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",self.tokenString];
+//    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",self.tokenString];
 //    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/prize/index.html?token=%@",self.tokenString];
+    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.41:8888/tongjiang/prize/index.html"];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -68,7 +74,12 @@
 //用苹果自带的返回键按钮处理如下(自定义的返回按钮)
 - (void)buttonReturn:(UIBarButtonItem *)btn
 {
+    
     UIWebView *wView = (UIWebView *)[self.view viewWithTag:9092];
+    
+    NSString *urlString = [wView stringByEvaluatingJavaScriptFromString:@"toAppLogin();"];
+    
+    NSLog(@"urlString = %@",urlString);
     
     if ([myWebView canGoBack]) {
         [myWebView goBack];
@@ -128,6 +139,29 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 
+    if ([requestString hasSuffix:@"toLogin.html"]) {
+        NSLog(@"123333");
+        
+        TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+        
+        UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+        [nvc setNavigationBarHidden:YES animated:YES];
+        
+        [self presentViewController:nvc animated:YES completion:^{
+            
+        }];
+        
+        urlString = [webView stringByEvaluatingJavaScriptFromString:@"toAppLogin();"];
+        
+        NSLog(@"urlString = %@",urlString);
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+        
+        [webView loadRequest:request];
+
+        
+    }
+    
     return YES;
 }
 
@@ -225,6 +259,21 @@
     [self.view resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
     
+}
+
+- (void)reloadWithWebview:(NSNotification *)not{
+    
+    NSString *notString = [not object];
+    
+    UIWebView *wView = (UIWebView *)[self.view viewWithTag:9092];
+    
+    NSString *newURLString = [NSString stringWithFormat:@"%@%@",urlString,notString];
+    
+    NSLog(@"newURLString = %@",newURLString);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:newURLString]];
+    
+    [wView loadRequest:request];
 }
 
 - (void)didReceiveMemoryWarning {

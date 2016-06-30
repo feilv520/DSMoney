@@ -57,7 +57,7 @@
 //                       nil];
     self.assetArray = [NSMutableArray array];
     
-    self.valueArray = [NSMutableArray array];
+    self.valueArray = [NSMutableArray arrayWithObjects:@"0.00",@"0.00",@"0.00",@"0.00",nil];
     
 //    self.colorArray = [NSMutableArray arrayWithObjects:
 //                       [UIColor colorWithRed:63.0 / 225.0 green:166.0 / 225.0 blue:252.0 / 225.0 alpha:1.0],
@@ -135,7 +135,7 @@
     [zongString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:shuziRange];
     [labelMoney setAttributedText:zongString];
     
-    NSArray *colorArray = @[[UIColor colorWithRed:63.0 / 225.0 green:166.0 / 225.0 blue:252.0 / 225.0 alpha:1.0], [UIColor colorWithRed:124.0 / 225.0 green:207.0 / 225.0 blue:253.0 / 225.0 alpha:1.0], [UIColor colorWithRed:93.0 / 225.0 green:203.0 / 225.0 blue:224.0 / 225.0 alpha:1.0], [UIColor colorWithRed:180.0 / 225.0 green:228.0 / 225.0 blue:254.0 / 225.0 alpha:1.0]];
+    NSArray *colorArray = @[[UIColor colorFromHexCode:@"046bc4"], [UIColor colorFromHexCode:@"0283de"], [UIColor colorFromHexCode:@"0ca5f0"], [UIColor colorFromHexCode:@"35a3ff"],[UIColor colorFromHexCode:@"30cdf6"],[UIColor colorFromHexCode:@"16b6cc"],[UIColor colorFromHexCode:@"3399cc"],[UIColor colorFromHexCode:@"79c6fc"],[UIColor colorFromHexCode:@"b4e4ff"],[UIColor colorFromHexCode:@"dbe5eb"]];
     
     for (int m = 0; m < 4; m++) {
         
@@ -148,7 +148,7 @@
         UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(23 + 19 + 12, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelZong.frame.size.height + 36.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 19 * m + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) * m, 110, 19) backgroundColor:[UIColor whiteColor] textColor:[UIColor moneyColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[kindsArray objectAtIndex:m]];
         [viewDown addSubview:labelName];
         
-        UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(23 + 19 + 110 + 5 + 12, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelZong.frame.size.height + 36.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 19 * m + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) * m, WIDTH_CONTROLLER_DEFAULT - 23 - (23 + 19 + 110 + 5 + 12), 19) backgroundColor:[UIColor whiteColor] textColor:[UIColor moneyColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[moneyArray objectAtIndex:m]];
+        UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(23 + 19 + 110 + 5 + 12, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelZong.frame.size.height + 36.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 19 * m + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) * m, WIDTH_CONTROLLER_DEFAULT - 23 - (23 + 19 + 110 + 5 + 12), 19) backgroundColor:[UIColor whiteColor] textColor:[UIColor moneyColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[self.valueArray objectAtIndex:m]];
         [viewDown addSubview:labelMoney];
     }
 }
@@ -196,12 +196,17 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
+             NSArray *colorArray = @[[UIColor colorFromHexCode:@"046bc4"], [UIColor colorFromHexCode:@"0283de"], [UIColor colorFromHexCode:@"0ca5f0"],[UIColor colorFromHexCode:@"35a3ff"],[UIColor colorFromHexCode:@"30cdf6"],[UIColor colorFromHexCode:@"16b6cc"],[UIColor colorFromHexCode:@"3399cc"],[UIColor colorFromHexCode:@"79c6fc"],[UIColor colorFromHexCode:@"b4e4ff"],[UIColor colorFromHexCode:@"dbe5eb"]];
+            
             self.assetArray = [responseObject objectForKey:@"Asset"];
             
             for (NSInteger i = 0; i < self.assetArray.count ; i++) {
-                [self.valueArray addObject:[DES3Util decrypt:[[self.assetArray objectAtIndex:i] objectForKey:@"assetMoney"]]];
-                [self.colorArray addObject:[UIColor colorWithRed:63.0 / 225.0 green:166.0 / 225.0 blue:252.0 / 225.0 alpha:1.0]];
+                [self.valueArray replaceObjectAtIndex:i withObject:[DES3Util decrypt:[[self.assetArray objectAtIndex:i] objectForKey:@"assetMoney"]]];
+//                [self.valueArray addObject:[DES3Util decrypt:[[self.assetArray objectAtIndex:i] objectForKey:@"assetMoney"]]];
+                [self.colorArray addObject:[colorArray objectAtIndex:i]];
             }
+            
+            NSLog(@"totalMoney = %@",[DES3Util decrypt:[responseObject objectForKey:@"totalMoney"]]);
             
             self.totalMoneyString = [DES3Util decrypt:[responseObject objectForKey:@"totalMoney"]];
             
