@@ -332,7 +332,7 @@
             if (![FileOfManage ExistOfFile:@"Member.plist"]) {
                 [FileOfManage createWithFile:@"Member.plist"];
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     @"",@"password",
+                                     @"1",@"password",
                                      self.phoneString,@"phone",
                                      [responseObject objectForKey:@"key"],@"key",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
@@ -340,12 +340,15 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             } else {
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     @"",@"password",
+                                     @"1",@"password",
                                      self.phoneString,@"phone",
                                      [responseObject objectForKey:@"key"],@"key",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
@@ -353,6 +356,9 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realname"],@"realname",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];

@@ -9,6 +9,13 @@
 #import "TWOJobCenterViewController.h"
 #import "TWOJobCenterCell.h"
 #import "TWOTaskModel.h"
+#import "TWOEmailViewController.h"
+#import "TWOSetLoginSecretViewController.h"
+#import "TWOHandSettingViewController.h"
+#import "TWOAddressManageViewController.h"
+#import "TWOYaoYiYaoViewController.h"
+#import "TBaoJiViewController.h"
+#import "NewInviteViewController.h"
 
 @interface TWOJobCenterViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -151,6 +158,7 @@
         cell.butFinish.layer.borderWidth = 1;
     }
     
+    cell.butFinish.tag = indexPath.section;
     cell.butFinish.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.butFinish.layer.cornerRadius = 3;
     cell.butFinish.layer.masksToBounds = YES;
@@ -178,7 +186,100 @@
 //去完成按钮
 - (void)goToFinishButton:(UIButton *)button
 {
-    NSLog(@"go");
+    TWOTaskModel *taskModel = [self.taskArray objectAtIndex:button.tag];
+    
+    switch ([[taskModel taskType] integerValue]) {
+        case 1:{
+                NSLog(@"开通汇付账号");
+                break;
+            }
+        case 2:{
+            NSLog(@"绑定银行卡");
+            break;
+        }
+        case 3:{
+            NSLog(@"实名认证");
+            break;
+        }
+        case 4:{
+            NSLog(@"绑定邮箱");
+            TWOEmailViewController *emailVC = [[TWOEmailViewController alloc] init];
+            pushVC(emailVC);
+            break;
+        }
+        case 5:{
+            NSLog(@"设置登录密码");
+            TWOSetLoginSecretViewController *setLoginSVC = [[TWOSetLoginSecretViewController alloc] init];
+            pushVC(setLoginSVC);
+            break;
+        }
+        case 6:{
+            NSLog(@"设置手势密码");
+            TWOHandSettingViewController *handSettingVC = [[TWOHandSettingViewController alloc] init];
+            pushVC(handSettingVC);
+            break;
+        }
+        case 7:{
+            NSLog(@"体验金使用");
+            break;
+        }
+        case 8:{
+            NSLog(@"首次有效投资");
+            break;
+        }
+        case 9:{
+            NSLog(@"填写地址");
+            TWOAddressManageViewController *addressMVC = [[TWOAddressManageViewController alloc] init];
+            pushVC(addressMVC);
+            break;
+        }
+        case 10:{
+            NSLog(@"每日签到");
+            break;
+        }
+        case 11:{
+            NSLog(@"每日投资");
+            break;
+        }
+        case 12:{
+            NSLog(@"每日一摇");
+            TWOYaoYiYaoViewController *yaoYiYaoVC = [[TWOYaoYiYaoViewController alloc] init];
+            pushVC(yaoYiYaoVC);
+            break;
+        }
+        case 13:{
+            NSLog(@"玩小游戏");
+            break;
+        }
+        case 14:{
+            NSLog(@"参加爆击抽奖");
+            TBaoJiViewController *baojiVC = [[TBaoJiViewController alloc] init];
+            pushVC(baojiVC);
+            break;
+        }
+        case 15:{
+            NSLog(@"邀请好友");
+            NewInviteViewController *newInviteVC = [[NewInviteViewController alloc] init];
+            pushVC(newInviteVC);
+            break;
+        }
+        case 16:{
+            NSLog(@"单笔投资");
+            break;
+        }
+        case 17:{
+            NSLog(@"累计投资");
+            break;
+        }
+        case 18:{
+            NSLog(@"固收投资");
+            break;
+        }
+        default:
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"敬请期待"];
+            break;
+    }
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

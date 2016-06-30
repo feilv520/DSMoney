@@ -256,7 +256,7 @@
     } else if (indexPath.item == 3) {
         
         TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
-        baoji.tokenString = [myDic objectForKey:@"token"];
+//        baoji.tokenString = [myDic objectForKey:@"token"];
         pushVC(baoji);
     }
 }

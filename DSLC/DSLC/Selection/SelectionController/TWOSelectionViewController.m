@@ -80,17 +80,9 @@
     pickArray = [NSMutableArray array];
     photoArray = [NSMutableArray array];
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
-    
-    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-    // 更改timer对象的优先级
-    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
-    
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
     [self getProductList];
-
-    [self upContentShow];
     
     [self getAdvList];
     
@@ -491,79 +483,6 @@
     }
 }
 
-#pragma mark 网络请求方法
-#pragma mark --------------------------------
-
-- (void)getProductList{
-    
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    
-    if ([FileOfManage ExistOfFile:@"Member.plist"] && [dic objectForKey:@"token"] != nil) {
-        
-        parameter = @{@"token":[dic objectForKey:@"token"]};
-        
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getPickProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-            
-            NSLog(@"first = %@",responseObject);
-            
-            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                [self loadingWithHidden:YES];
-                
-                timerNotice = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
-                
-                NSArray *pickArr = [responseObject objectForKey:@"Product"];
-                
-                for (NSDictionary *dic in pickArr) {
-                    TWOPickModel *model = [[TWOPickModel alloc] init];
-                    [model setValuesForKeysWithDictionary:dic];
-                    [pickArray addObject:model];
-                }
-                
-                [self collectionViewShow];
-                
-            } else {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            }
-            
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-            NSLog(@"%@", error);
-            
-        }];
-    } else {
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getPickProduct" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-            
-            NSLog(@"first = %@",responseObject);
-            
-            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                [self loadingWithHidden:YES];
-                
-                NSArray *pickArr = [responseObject objectForKey:@"Product"];
-                
-                for (NSDictionary *dic in pickArr) {
-                    TWOPickModel *model = [[TWOPickModel alloc] init];
-                    [model setValuesForKeysWithDictionary:dic];
-                    [pickArray addObject:model];
-                }
-                
-                [self collectionViewShow];
-                
-            } else {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            }
-            
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-            NSLog(@"%@", error);
-            
-        }];
-    }
-    
-    
-}
-
 // 广告滚动控件
 - (void)makeScrollView{
     NSInteger photoIndex = photoArray.count + 2;
@@ -724,12 +643,100 @@
     }
 }
 
+- (void)scrollViewFuction{
+    
+    [bannerScrollView setContentOffset:CGPointMake((pageControl.currentPage + 2) * WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
+    
+    if (pageControl == nil) {
+        pageControl.currentPage = 0;
+    } else {
+        pageControl.currentPage += 1;
+    }
+    
+}
+
+#pragma mark 网络请求方法
+#pragma mark --------------------------------
+
+- (void)getProductList{
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    if ([FileOfManage ExistOfFile:@"Member.plist"] && [dic objectForKey:@"token"] != nil) {
+        
+        parameter = @{@"token":[dic objectForKey:@"token"]};
+        
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getPickProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"first = %@",responseObject);
+            
+            [self loadingWithHidden:YES];
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                //                [self loadingWithHidden:YES];
+                
+                timerNotice = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+                
+                NSArray *pickArr = [responseObject objectForKey:@"Product"];
+                
+                for (NSDictionary *dic in pickArr) {
+                    TWOPickModel *model = [[TWOPickModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dic];
+                    [pickArray addObject:model];
+                }
+                
+                [self collectionViewShow];
+                
+            } else {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            }
+            
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            
+        }];
+    } else {
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getPickProduct" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            [self loadingWithHidden:YES];
+            NSLog(@"first = %@",responseObject);
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                
+                NSArray *pickArr = [responseObject objectForKey:@"Product"];
+                
+                for (NSDictionary *dic in pickArr) {
+                    TWOPickModel *model = [[TWOPickModel alloc] init];
+                    [model setValuesForKeysWithDictionary:dic];
+                    [pickArray addObject:model];
+                }
+                
+                [self collectionViewShow];
+                
+            } else {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            }
+            
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            
+        }];
+    }
+    
+    
+}
 
 - (void)getAdvList{
     
     NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"3"};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [self loadingWithHidden:YES];
         
         NSLog(@"AD = %@",responseObject);
         
@@ -752,27 +759,21 @@
             [photoArray addObject:adModel];
         }
         
-        [self loadingWithHidden:YES];
+        [self upContentShow];
         [_scrollView setHidden:NO];
         [self makeScrollView];
+        
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+        // 更改timer对象的优先级
+        [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
         
     }];
-}
-
-- (void)scrollViewFuction{
-    
-    [bannerScrollView setContentOffset:CGPointMake((pageControl.currentPage + 2) * WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
-    
-    if (pageControl == nil) {
-        pageControl.currentPage = 0;
-    } else {
-        pageControl.currentPage += 1;
-    }
-    
 }
 
 - (void)didReceiveMemoryWarning {
