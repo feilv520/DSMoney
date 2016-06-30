@@ -207,7 +207,6 @@
     
     [UMSocialData defaultData].extConfig.wechatSessionData.url = fString;
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = fString;
-    
 }
 
 - (void)inviteRecordButton:(UIBarButtonItem *)button

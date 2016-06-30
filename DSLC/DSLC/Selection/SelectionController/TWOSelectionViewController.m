@@ -419,8 +419,12 @@
 {
     if (button.tag == 1000) {
         TWOYaoYiYaoViewController *yaoyiyaoVC = [[TWOYaoYiYaoViewController alloc] init];
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        yaoyiyaoVC.invitationCode = [dic objectForKey:@"invitationMyCode"];
         [self.navigationController pushViewController:yaoyiyaoVC animated:YES];
+        
     } else {
+        
         NewInviteViewController *inviteVc = [[NewInviteViewController alloc] init];
         
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];

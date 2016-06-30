@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOYaoYiYaoViewController : BaseViewController
-
+@property (nonatomic) NSString *invitationCode;
 @end

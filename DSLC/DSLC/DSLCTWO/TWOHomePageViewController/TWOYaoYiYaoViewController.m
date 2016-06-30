@@ -10,8 +10,9 @@
 #import "TWOActivityRulesViewController.h"
 #import "TWOWinPrizeRecordViewController.h"
 #import "TWOYaoHomePageModel.h"
+#import "TWOLoginAPPViewController.h"
 
-@interface TWOYaoYiYaoViewController ()
+@interface TWOYaoYiYaoViewController () <UMSocialUIDelegate>
 
 {
     UIButton *butShare;
@@ -29,6 +30,11 @@
     UILabel *labelNoChance;
     TWOYaoHomePageModel *yaoPageModel;
     NSDictionary *dataDic;
+    
+    NSString *shareString;
+    NSDictionary *flagLogin;
+    
+    BOOL loginOrNo;
 }
 
 @end
@@ -65,7 +71,7 @@
 
 - (void)haveNoChanceShow
 {
-//    显示还有几次摇一摇机会
+//显示还有几次摇一摇机会
     labelNoChance = [CreatView creatWithLabelFrame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:19] text:nil];
     [imageYellow addSubview:labelNoChance];
     NSMutableAttributedString *zeroString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"您还有%@次机会", [[yaoPageModel unUseNum] description]]];
@@ -106,6 +112,76 @@
     }
 }
 
+//没有登录的显示
+- (void)noLoginShow
+{
+    imageBack = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"yao"]];
+    [self.view addSubview:imageBack];
+    imageBack.userInteractionEnabled = YES;
+    
+    //    分享按钮
+    butShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 25, 10, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    [self.navigationController.navigationBar addSubview:butShare];
+    [butShare setBackgroundImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
+    [butShare setBackgroundImage:[UIImage imageNamed:@"icon_shareq"] forState:UIControlStateHighlighted];
+    [butShare addTarget:self action:@selector(buttonShareYaoYiYao:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //    摇动的图片
+    imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
+    [imageBack addSubview:imageHandYao];
+    imageHandYao.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapYaoYiYao:)];
+    [imageHandYao addGestureRecognizer:tap];
+    
+    //    显示还有几次摇动机会的背景图
+    imageYellow = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 380.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 71.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yellow"]];
+    [imageBack addSubview:imageYellow];
+    imageYellow.userInteractionEnabled = YES;
+    
+    UIButton *butonLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@""];
+    [imageYellow addSubview:butonLogin];
+    butonLogin.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:22];
+    [butonLogin addTarget:self action:@selector(beforeShakingLogin:) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSMutableAttributedString *sizeString = [[NSMutableAttributedString alloc] initWithString:@"登录摇大奖"];
+    NSRange loginRange = NSMakeRange(0, 2);
+    [sizeString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:loginRange];
+    NSRange yaoRange = NSMakeRange([[sizeString string] length] - 3, 3);
+    [sizeString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:yaoRange];
+    [butonLogin setAttributedTitle:sizeString forState:UIControlStateNormal];
+    
+    //    下面蓝色按钮宽度
+    CGFloat butWidth = (WIDTH_CONTROLLER_DEFAULT - 27)/2;
+    
+    UIButton *butYaoLeft = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    [imageBack addSubview:butYaoLeft];
+    [butYaoLeft setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
+    [butYaoLeft setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateHighlighted];
+    [butYaoLeft addTarget:self action:@selector(buttonActivityRules:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *butActivity = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(5, 3, butYaoLeft.frame.size.width - 10, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor ] titleText:@"活动规则"];
+    [butYaoLeft addSubview:butActivity];
+    butActivity.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+    [butActivity addTarget:self action:@selector(buttonActivityRules:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //    中奖纪录蓝色底
+    UIButton *butYaoRight = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    [imageBack addSubview:butYaoRight];
+    [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
+    [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateHighlighted];
+    [butYaoRight addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *butWinPrize = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWidth/2 - 34, 3, 68, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"中奖纪录"];
+    [butYaoRight addSubview:butWinPrize];
+    butWinPrize.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+    [butWinPrize addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        butYaoLeft.frame = CGRectMake(9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
+        butYaoRight.frame = CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
+    }
+}
+
 //公共的部分
 - (void)commonHaveShow
 {
@@ -128,7 +204,7 @@
     [imageHandYao addGestureRecognizer:tap];
     
 //    显示还有几次摇动机会的背景图
-    imageYellow = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 380.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 71.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@""]];
+    imageYellow = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 380.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 71.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yellow"]];
     [imageBack addSubview:imageYellow];
     
 //    判断 0时显示次数的背景为灰色 非0时为黄色
@@ -254,11 +330,11 @@
     
 //    判断中奖是加息券 红包 猴币 还是现金
     if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"1"]) {
-        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"¥%@红包", [dataDic objectForKey:@"prizeNumber"]] frontNum:1 afterNum:2];
+        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"¥%d红包", [[dataDic objectForKey:@"prizeNumber"] intValue]] frontNum:1 afterNum:2];
     } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"2"]) {
         [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"%@%%加息券", [dataDic objectForKey:@"prizeNumber"]] frontNum:0 afterNum:4];
     } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"3"]) {
-        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"%@猴币", [dataDic objectForKey:@"prizeNumber"]] frontNum:0 afterNum:2];
+        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"%d猴币", [[dataDic objectForKey:@"prizeNumber"] intValue]] frontNum:0 afterNum:2];
     } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"4"]) {
         [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"¥%@现金", [dataDic objectForKey:@"prizeNumber"]] frontNum:1 afterNum:2];
     }
@@ -308,16 +384,31 @@
 //活动规则
 - (void)buttonActivityRules:(UIButton *)button
 {
-    TWOActivityRulesViewController *activityRules = [[TWOActivityRulesViewController alloc] init];
-    pushVC(activityRules);
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    flagLogin = dic;
+
+    if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        [self loginCome];
+    } else {
+        TWOActivityRulesViewController *activityRules = [[TWOActivityRulesViewController alloc] init];
+        pushVC(activityRules);
+    }
 }
 
 //中奖纪录按钮
 - (void)winAPrizeButtonClicked:(UIButton *)button
 {
-    butShuZi.hidden = YES;
-    TWOWinPrizeRecordViewController *winPrizeRecored = [[TWOWinPrizeRecordViewController alloc] init];
-    pushVC(winPrizeRecored);
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    flagLogin = dic;
+
+    if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        [self loginCome];
+    } else {
+        butShuZi.hidden = YES;
+        TWOWinPrizeRecordViewController *winPrizeRecored = [[TWOWinPrizeRecordViewController alloc] init];
+        winPrizeRecored.recordNum = [[yaoPageModel unQueryWinNum] description];
+        pushVC(winPrizeRecored);
+    }
 }
 
 //黑色遮罩层消失
@@ -400,6 +491,10 @@
             yaoPageModel = [[TWOYaoHomePageModel alloc] init];
             [yaoPageModel setValuesForKeysWithDictionary:responseObject];
             [self commonHaveShow];
+            
+        } else {
+            //未登录调用的页面
+            [self noLoginShow];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -429,9 +524,17 @@
             }
             
         } else {
-            //摇动次数用完
-            [self tanKuangeShow];
-            [self haveNoCiShu];
+            
+            NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+            flagLogin = dic;
+            //判断是否登录
+            if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+                [self loginCome];
+            } else {
+                //摇动次数用完
+                [self tanKuangeShow];
+                [self haveNoCiShu];
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -442,7 +545,60 @@
 //分享按钮
 - (void)buttonShareYaoYiYao:(UIButton *)button
 {
-    NSLog(@"share");
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    flagLogin = dicLogin;
+    
+    if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        [self loginCome];
+    } else {
+
+        if ([[[dic objectForKey:@"realnameStatus"] description] isEqualToString:@"2"]) {
+            shareString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", [DES3Util decrypt:[dic objectForKey:@"realName"]], self.invitationCode];
+        } else {
+            shareString = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", [dic objectForKey:@"phone"], @"&inviteCode=", self.invitationCode];
+        }
+        NSLog(@"sssssssssssssss%@", [DES3Util decrypt:[dic objectForKey:@"realName"]]);
+        shareString = [shareString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSLog(@"aaaaaaaaaaaaaaaaaaaa%@", shareString);
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:@"5642ad7e67e58e8463006218"
+                                          shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:喝咖啡,领红包,赚猴币多重惊喜等着你!  %@", shareString]
+                                         shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
+                                    shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline,nil]
+                                           delegate:self];
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = @"邀请好友一起，免费共享星巴克";
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"邀请好友一起，免费共享星巴克";
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = shareString;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareString;
+    }
+}
+
+//弹出登录页面
+- (void)loginCome
+{
+    TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+    UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+    [nvc setNavigationBarHidden:YES animated:YES];
+    
+    [self presentViewController:nvc animated:YES completion:^{
+        
+    }];
+    return;
+}
+
+//登录摇大奖按钮方法
+- (void)beforeShakingLogin:(UIButton *)button
+{
+    TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [nvc setNavigationBarHidden:YES animated:YES];
+    
+    [self presentViewController:nvc animated:YES completion:^{
+        
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

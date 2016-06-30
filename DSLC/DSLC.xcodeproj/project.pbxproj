@@ -212,6 +212,7 @@
 		815D19491D2266E600DFA753 /* TWOYaoHomePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 815D19481D2266E600DFA753 /* TWOYaoHomePageModel.m */; settings = {ASSET_TAGS = (); }; };
 		815D194C1D226F8600DFA753 /* yaogray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 815D194A1D226F8600DFA753 /* yaogray@2x.png */; settings = {ASSET_TAGS = (); }; };
 		815D194D1D226F8600DFA753 /* yaogray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 815D194B1D226F8600DFA753 /* yaogray@3x.png */; settings = {ASSET_TAGS = (); }; };
+		815D19501D24E36D00DFA753 /* TWOWinPrizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 815D194F1D24E36D00DFA753 /* TWOWinPrizeModel.m */; settings = {ASSET_TAGS = (); }; };
 		815D27A41BE21040005410C6 /* UpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 815D27A21BE21040005410C6 /* UpCell.m */; settings = {ASSET_TAGS = (); }; };
 		815D27A51BE21040005410C6 /* UpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 815D27A31BE21040005410C6 /* UpCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81600A531CB4BD750075CD45 /* houbixize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81600A511CB4BD750075CD45 /* houbixize@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -1767,6 +1768,8 @@
 		815D19481D2266E600DFA753 /* TWOYaoHomePageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOYaoHomePageModel.m; sourceTree = "<group>"; };
 		815D194A1D226F8600DFA753 /* yaogray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yaogray@2x.png"; sourceTree = "<group>"; };
 		815D194B1D226F8600DFA753 /* yaogray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yaogray@3x.png"; sourceTree = "<group>"; };
+		815D194E1D24E36D00DFA753 /* TWOWinPrizeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOWinPrizeModel.h; sourceTree = "<group>"; };
+		815D194F1D24E36D00DFA753 /* TWOWinPrizeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOWinPrizeModel.m; sourceTree = "<group>"; };
 		815D27A11BE21040005410C6 /* UpCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpCell.h; sourceTree = "<group>"; };
 		815D27A21BE21040005410C6 /* UpCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpCell.m; sourceTree = "<group>"; };
 		815D27A31BE21040005410C6 /* UpCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpCell.xib; sourceTree = "<group>"; };
@@ -4300,6 +4303,8 @@
 			children = (
 				815D19471D2266E600DFA753 /* TWOYaoHomePageModel.h */,
 				815D19481D2266E600DFA753 /* TWOYaoHomePageModel.m */,
+				815D194E1D24E36D00DFA753 /* TWOWinPrizeModel.h */,
+				815D194F1D24E36D00DFA753 /* TWOWinPrizeModel.m */,
 			);
 			name = "摇一摇";
 			sourceTree = "<group>";
@@ -8751,6 +8756,7 @@
 				81701C0B1BE701C300B45BAA /* MendDealCell.m in Sources */,
 				811F9E021BC7A13800CAD6F5 /* FinancingCell.m in Sources */,
 				81F02E721CFC2BB0002F3135 /* TWOMyOwnerPlannerViewController.m in Sources */,
+				815D19501D24E36D00DFA753 /* TWOWinPrizeModel.m in Sources */,
 				817E33941BD7576600D05103 /* MeCell.m in Sources */,
 				8D9BE8ED1C0EC94D003C67D3 /* UIImageView+YYWebImage.m in Sources */,
 				81ADB2841CF453B000E044BC /* TWOTestFourViewController.m in Sources */,

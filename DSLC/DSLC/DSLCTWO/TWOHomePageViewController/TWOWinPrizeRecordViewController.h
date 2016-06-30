@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOWinPrizeRecordViewController : BaseViewController
-
+@property (nonatomic) NSString *recordNum;
 @end

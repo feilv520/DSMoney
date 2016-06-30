@@ -31,6 +31,7 @@
     
     [self contentShow];
     [self tableViewShow];
+    [self getListData];
 }
 
 - (void)contentShow
@@ -153,6 +154,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark listData----------------------
+- (void)getListData
+{
+    NSDictionary *parmeter = @{@"status":@1, @"clientType":@""};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"activity/getActivityList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

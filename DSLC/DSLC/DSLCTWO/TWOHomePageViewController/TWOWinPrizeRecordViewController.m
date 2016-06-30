@@ -9,11 +9,13 @@
 #import "TWOWinPrizeRecordViewController.h"
 #import "TWOWinPrizeRecordCell.h"
 #import "TWORedBagViewController.h"
+#import "TWOWinPrizeModel.h"
 
 @interface TWOWinPrizeRecordViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 {
     UITableView *_tableView;
+    NSMutableArray *recordArray;
 }
 
 @end
@@ -35,7 +37,16 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"中奖纪录"];
     
-    [self tabelViewShow];
+    recordArray = [NSMutableArray array];
+    
+    [self recordList];
+}
+
+//没有数据的显示
+- (void)noData
+{
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/1.5/2, 130.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 260/1.5, 260/1.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [self.view addSubview:imageMonkey];
 }
 
 - (void)tabelViewShow
@@ -63,7 +74,7 @@
     
     UILabel *labelCiShu = [CreatView creatWithLabelFrame:CGRectMake(0, 15, WIDTH_CONTROLLER_DEFAULT, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
     [imageHead addSubview:labelCiShu];
-    NSMutableAttributedString *ciShuString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@次", @"20"]];
+    NSMutableAttributedString *ciShuString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@次", self.recordNum]];
     NSRange ciShuRange = NSMakeRange(0, [[ciShuString string] rangeOfString:@"次"].location);
     [ciShuString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:39] range:ciShuRange];
     [labelCiShu setAttributedText:ciShuString];
@@ -79,27 +90,63 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return recordArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWOWinPrizeRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
+    TWOWinPrizeModel *prizeModel = [recordArray objectAtIndex:indexPath.row];
+    
     cell.imagePic.image = [UIImage imageNamed:@"winRecord"];
     cell.imageRight.image = [UIImage imageNamed:@"clickRightjiantou"];
-    cell.labelTime.text = @"2016-05-21";
+    cell.labelTime.text = [prizeModel winTime];
     
-    NSMutableAttributedString *percentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得%@加息券", @"2%"]];
-    NSRange leftRange = NSMakeRange(0, 5);
-    [percentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
-    [percentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:leftRange];
-    NSRange rightRange = NSMakeRange([[percentString string] length] - 3, 3);
-    [percentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:rightRange];
-    [percentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:rightRange];
-    [cell.labelPrize setAttributedText:percentString];
+    if ([[[prizeModel prizeType] description] isEqualToString:@"1"]) {
+        NSMutableAttributedString *contentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得¥%d红包", [[prizeModel prizeNumber] intValue]]];
+        NSRange leftRange = NSMakeRange(0, 6);
+        [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
+        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:leftRange];
+        NSRange meetRange = NSMakeRange(5, 1);
+        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:meetRange];
+        NSRange rightRange = NSMakeRange([[contentString string] length] - 2, 2);
+        [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:rightRange];
+        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:rightRange];
+        [cell.labelPrize setAttributedText:contentString];
+        
+    } else if ([[[prizeModel prizeType] description] isEqualToString:@"2"]) {
+        [self changeSizeWithLabel:cell.labelPrize nameString:[NSString stringWithFormat:@"摇一摇获得%@%%加息券", [prizeModel prizeNumber]] frontLength:5 afterLength:3];
+        
+    } else if ([[[prizeModel prizeType] description] isEqualToString:@"3"]) {
+        [self changeSizeWithLabel:cell.labelPrize nameString:[NSString stringWithFormat:@"摇一摇获得%d猴币", [[prizeModel prizeNumber] intValue]] frontLength:5 afterLength:2];
+        
+    } else if ([[[prizeModel prizeType] description] isEqualToString:@"3"]) {
+        NSMutableAttributedString *contentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得¥%d现金", [[prizeModel prizeNumber] intValue]]];
+        NSRange leftRange = NSMakeRange(0, 6);
+        [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
+        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:leftRange];
+        NSRange meetRange = NSMakeRange(5, 1);
+        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:meetRange];
+        NSRange rightRange = NSMakeRange([[contentString string] length] - 2, 2);
+        [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:rightRange];
+        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:rightRange];
+        [cell.labelPrize setAttributedText:contentString];
+    }
     
     return cell;
+}
+
+- (void)changeSizeWithLabel:(UILabel *)label nameString:(NSString *)str frontLength:(NSInteger)frontLength afterLength:(NSInteger)afterLength
+{
+    NSMutableAttributedString *percentString = [[NSMutableAttributedString alloc] initWithString:str];
+    NSRange leftRange = NSMakeRange(0, frontLength);
+    [percentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
+    [percentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:leftRange];
+    NSRange rightRange = NSMakeRange([[percentString string] length] - afterLength, afterLength);
+    [percentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:rightRange];
+    [percentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:rightRange];
+    [label setAttributedText:percentString];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -116,6 +163,29 @@
     } else {
         _tableView.scrollEnabled = YES;
     }
+}
+
+#pragma mark data---------------------------------------------
+- (void)recordList
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"shake/getShakeWinning" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"摇一摇中奖纪录::::::::::::::%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *dataArray = [responseObject objectForKey:@"prize"];
+            for (NSDictionary *dataDic in dataArray) {
+                TWOWinPrizeModel *prizeModel = [[TWOWinPrizeModel alloc] init];
+                [prizeModel setValuesForKeysWithDictionary:dataDic];
+                [recordArray addObject:prizeModel];
+            }
+            
+            [self tabelViewShow];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

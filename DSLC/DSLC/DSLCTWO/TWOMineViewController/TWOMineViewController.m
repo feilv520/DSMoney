@@ -548,24 +548,29 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
+            //我的理财
             TWOMyTidyMoneyViewController *tidyMoneyVC = [[TWOMyTidyMoneyViewController alloc] init];
             [self.navigationController pushViewController:tidyMoneyVC animated:YES];
             
         } else {
+            //我的特权本金
             TWOMyPrerogativeMoneyViewController *myPrerogativeMoneyVC = [[TWOMyPrerogativeMoneyViewController alloc] init];
             [self.navigationController pushViewController:myPrerogativeMoneyVC animated:YES];
         }
     } else {
         if (indexPath.row == 1) {
+            //我的猴币
             TWOMyMonkeyCoinViewController *myMonkeyCoinVC = [[TWOMyMonkeyCoinViewController alloc] init];
             [self.navigationController pushViewController:myMonkeyCoinVC animated:YES];
             
         } else if (indexPath.row == 2) {
+            //我的邀请
             NewInviteViewController *inviteVC = [[NewInviteViewController alloc] init];
             inviteVC.inviteCode = [myAccount invitationMyCode];
             [self.navigationController pushViewController:inviteVC animated:YES];
             
         } else {
+            //红包加息券
             TWORedBagViewController *redBagVC = [[TWORedBagViewController alloc] init];
             pushVC(redBagVC);
         }

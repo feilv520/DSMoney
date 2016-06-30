@@ -492,10 +492,8 @@
     } else {
         TWOJiaXiQuanModel *model  = [jiaXiQuanArray objectAtIndex:indexPath.row];
         if ([[[model status] description] isEqualToString:@"1"]) {
-            NSLog(@"高");
             return 160;
         } else {
-            NSLog(@"低");
             return 140;
         }
     }

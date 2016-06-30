@@ -24,6 +24,7 @@
     NSMutableArray *monkeyArr;
     
     NSString *integralString;
+    NSDictionary *dataDic;
 }
 
 @end
@@ -76,7 +77,7 @@
     UILabel *labelMonkeyCoin = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
     [imagePicture addSubview:labelMonkeyCoin];
     
-    NSMutableAttributedString *monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@猴币", @"100098"]];
+    NSMutableAttributedString *monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@猴币", [dataDic objectForKey:@"totalMonkeyNum"]]];
     NSRange monkeyRange = NSMakeRange(0, [[monkeyString string] rangeOfString:@"猴"].location);
     [monkeyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:monkeyRange];
     [labelMonkeyCoin setAttributedText:monkeyString];
@@ -399,9 +400,8 @@
         
         NSLog(@"获取猴币详情:~~~~~%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-            
+            dataDic = responseObject;
             monkeyArr = [responseObject objectForKey:@"Monkey"];
-            
             integralString = [responseObject objectForKey:@"integral"];
             
             [self tableViewShow];
