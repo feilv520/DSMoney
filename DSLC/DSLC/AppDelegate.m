@@ -220,7 +220,7 @@
                 [backgroundImgView removeFromSuperview];
                 
                 if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]){
-//                    [self loginFuction];
+                    [self loginFuction];
                 }
                 
             }];
@@ -363,16 +363,6 @@ void UncaughtExceptionHandler(NSException *exception){
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
-    if ([[[self.flagUserInfo objectForKey:@"password"] debugDescription] isEqualToString:@"1"]) {
-        
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                             @"",@"password",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
-        
-        NSDictionary *lDic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-        [lDic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-    }
-    
     if ([[self.flagUserInfo objectForKey:@"password"] isEqualToString:@"1"]) {
         // 判断是否存在isLogin.plist文件
         if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
@@ -470,7 +460,7 @@ void UncaughtExceptionHandler(NSException *exception){
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
-                                     [[responseObject objectForKey:@"User"] objectForKey:@"realname"],@"realname",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];

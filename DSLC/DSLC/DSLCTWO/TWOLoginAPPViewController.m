@@ -495,6 +495,8 @@
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
             
+            [self getMyAccountInfoFuction];
+            
             // 判断是否存在isLogin.plist文件
             if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
                 [FileOfManage createWithFile:@"isLogin.plist"];
@@ -582,6 +584,8 @@
                 
                 [self signFinish:[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"]];
             }
+            
+            [self getMyAccountInfoFuction];
             
             [self dismissViewControllerAnimated:YES completion:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
@@ -681,6 +685,28 @@
     imageSign = nil;
 }
 
+- (void)getMyAccountInfoFuction{
+    
+    NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [memberDic setObject:[responseObject objectForKey:@"invitationMyCode"] forKey:@"invitationMyCode"];
+            
+            [memberDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

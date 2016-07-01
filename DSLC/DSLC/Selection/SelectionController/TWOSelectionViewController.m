@@ -19,6 +19,7 @@
 #import "AdModel.h"
 #import "BannerViewController.h"
 #import "TSignInViewController.h"
+#import "TWOLoginAPPViewController.h"
 
 @interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
@@ -190,7 +191,7 @@
     [self noticeContentShow];
     
 //    公告view分界线
-    UIView *viewLineNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewNotice.frame.size.height - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
+    UIView *viewLineNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
     [_scrollView addSubview:viewLineNotice];
     viewLineNotice.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
@@ -200,9 +201,9 @@
         buttonClick = [UIButton buttonWithType:UIButtonTypeCustom];
 //        [self.view addSubview:buttonClick];
         if (HEIGHT_CONTROLLER_DEFAULT - 20.0 == 480 || HEIGHT_CONTROLLER_DEFAULT - 20.0 == 568) {
-            buttonClick.frame = CGRectMake(9 + (WIDTH_CONTROLLER_DEFAULT - 27)/2.0 * i + 9 * i, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 27)/2.0, 63.0);
+            buttonClick.frame = CGRectMake(9 + (WIDTH_CONTROLLER_DEFAULT - 27)/2.0 * i + 9 * i, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 27)/2.0, 63.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
         } else {
-            buttonClick.frame = CGRectMake(9 + (WIDTH_CONTROLLER_DEFAULT - 27)/2.0 * i + 9 * i, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 27)/2.0, 73.0);
+            buttonClick.frame = CGRectMake(9 + (WIDTH_CONTROLLER_DEFAULT - 27)/2.0 * i + 9 * i, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 27)/2.0, 73.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
         }
         buttonClick.backgroundColor = [UIColor qianhuise];
         buttonClick.tag = 1000 + i;
@@ -416,6 +417,23 @@
         [self.navigationController pushViewController:yaoyiyaoVC animated:YES];
         
     } else {
+        
+        NSDictionary *loginDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+        
+        if ([[loginDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+            
+            AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+            
+            TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+            
+            UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+            [nvc setNavigationBarHidden:YES animated:YES];
+            
+            [app.tabBarVC presentViewController:nvc animated:YES completion:^{
+                
+            }];
+            return;
+        }
         
         NewInviteViewController *inviteVc = [[NewInviteViewController alloc] init];
         
