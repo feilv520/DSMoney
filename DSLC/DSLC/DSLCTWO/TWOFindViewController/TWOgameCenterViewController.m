@@ -10,6 +10,7 @@
 #import "TWOGameCenterCell.h"
 #import "TWOMyGameScoreViewController.h"
 #import "TWOGameListModel.h"
+#import "TWOLoginAPPViewController.h"
 
 @interface TWOgameCenterViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -122,10 +123,9 @@
 {
     TWOGameCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    NSArray *imageArray = @[@"大圣酷跑", @"大圣解密", @"拔鸡毛"];
     TWOGameListModel *gameModel = [gameListArray objectAtIndex:indexPath.row];
     
-    cell.imagePic.image = [UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]];
+    cell.imagePic.yy_imageURL = [NSURL URLWithString:[gameModel logo]];
     cell.imagePic.layer.cornerRadius = 4;
     cell.imagePic.layer.masksToBounds = YES;
     
@@ -164,14 +164,38 @@
 //游戏积分按钮
 - (void)buttonScoreClicked:(UIButton *)button
 {
-    TWOMyGameScoreViewController *gameScoreVC = [[TWOMyGameScoreViewController alloc] init];
-    pushVC(gameScoreVC);
+    NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    
+    if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        [self loginCome];
+    } else {
+        TWOMyGameScoreViewController *gameScoreVC = [[TWOMyGameScoreViewController alloc] init];
+        pushVC(gameScoreVC);
+    }
 }
 
 //进入按钮
 - (void)buttonGointoGame:(UIButton *)button
 {
-    NSLog(@"进入");
+    NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        [self loginCome];
+    } else {
+        NSLog(@"进入");
+    }
+}
+
+//弹出登录页面
+- (void)loginCome
+{
+    TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+    UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+    [nvc setNavigationBarHidden:YES animated:YES];
+    
+    [self presentViewController:nvc animated:YES completion:^{
+        
+    }];
+    return;
 }
 
 #pragma mark dataList~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

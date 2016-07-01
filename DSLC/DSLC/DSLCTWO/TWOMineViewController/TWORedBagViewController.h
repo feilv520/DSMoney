@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWORedBagViewController : BaseViewController
-
+@property (nonatomic) NSString *recordState;
 @end

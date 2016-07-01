@@ -45,6 +45,11 @@
     butWhite.hidden = NO;
     butRedBag.hidden = NO;
     buttonJiaXi.hidden = NO;
+    
+    //摇一摇中奖纪录页面点击加息券传来2, 跳转我的加息券页面;
+    if ([self.recordState isEqualToString:@"2"]) {
+        [_scrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
+    }
 }
 
 - (void)viewDidLoad {
@@ -590,6 +595,11 @@
     butWhite.hidden = YES;
     butRedBag.hidden = YES;
     buttonJiaXi.hidden = YES;
+    
+    //摇一摇中奖纪录页面点击加息券传来2, 跳转我的加息券页面 点击返回偏移量要归位;
+    if ([self.recordState isEqualToString:@"2"]) {
+        [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
 }
 
 #pragma mark 对接接口

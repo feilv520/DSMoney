@@ -10,6 +10,8 @@
 #import "TWOWinPrizeRecordCell.h"
 #import "TWORedBagViewController.h"
 #import "TWOWinPrizeModel.h"
+#import "TWOMyMonkeyCoinViewController.h"
+#import "TWOUsableAllMoneyViewController.h"
 
 @interface TWOWinPrizeRecordViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -137,6 +139,7 @@
     return cell;
 }
 
+//改变字体颜色尺寸封装
 - (void)changeSizeWithLabel:(UILabel *)label nameString:(NSString *)str frontLength:(NSInteger)frontLength afterLength:(NSInteger)afterLength
 {
     NSMutableAttributedString *percentString = [[NSMutableAttributedString alloc] initWithString:str];
@@ -152,8 +155,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    TWORedBagViewController *redBageVC = [[TWORedBagViewController alloc] init];
-    pushVC(redBageVC);
+    TWOWinPrizeModel *prizeModel = [recordArray objectAtIndex:indexPath.row];
+    
+    if ([[[prizeModel prizeType] description] isEqualToString:@"1"]) {
+        TWORedBagViewController *redBageVC = [[TWORedBagViewController alloc] init];
+        pushVC(redBageVC);
+        
+    } else if ([[[prizeModel prizeType] description] isEqualToString:@"2"]) {
+        
+        TWORedBagViewController *redBagVC = [[TWORedBagViewController alloc] init];
+        redBagVC.recordState = @"2";
+        pushVC(redBagVC);
+        
+    } else if ([[[prizeModel prizeType] description] isEqualToString:@"3"]) {
+        TWOMyMonkeyCoinViewController *monkeyCoinVC = [[TWOMyMonkeyCoinViewController alloc] init];
+        pushVC(monkeyCoinVC);
+        
+    } else if ([[[prizeModel prizeType] description] isEqualToString:@"4"]) {
+        TWOUsableAllMoneyViewController *usableMoneyVC = [[TWOUsableAllMoneyViewController alloc] init];
+        pushVC(usableMoneyVC);
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

@@ -22,6 +22,7 @@
 #import "TBigTurntableViewController.h"
 #import "TBaoJiViewController.h"
 #import "TRankinglistViewController.h"
+#import "TWOLoginAPPViewController.h"
 
 @interface TWOFindViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
@@ -240,9 +241,24 @@
         
     } else if (indexPath.item == 1) {
         
-        TWOMyPrerogativeMoneyViewController *myPrerogativeMoney = [[TWOMyPrerogativeMoneyViewController alloc] init];
-        myPrerogativeMoney.activity = NO;
-        [self.navigationController pushViewController:myPrerogativeMoney animated:YES];
+        NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+        //判断'特权本金'登录态
+        if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+            
+            TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+            UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+            [nvc setNavigationBarHidden:YES animated:YES];
+            
+            [self presentViewController:nvc animated:YES completion:^{
+                
+            }];
+            return;
+            
+        } else {
+            TWOMyPrerogativeMoneyViewController *myPrerogativeMoney = [[TWOMyPrerogativeMoneyViewController alloc] init];
+            myPrerogativeMoney.activity = NO;
+            [self.navigationController pushViewController:myPrerogativeMoney animated:YES];
+        }
         
     } else if (indexPath.item == 0) {
         

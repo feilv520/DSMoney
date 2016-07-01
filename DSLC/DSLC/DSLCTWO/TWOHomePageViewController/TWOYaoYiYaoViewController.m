@@ -34,6 +34,13 @@
     NSString *shareString;
     NSDictionary *flagLogin;
     
+    UIButton *butYaoLeft;
+    UIButton *butActivity;
+    
+    UIButton *butYaoRight;
+    UIButton *butWinPrize;
+    
+    UIButton *butonLogin;
     BOOL loginOrNo;
 }
 
@@ -59,9 +66,24 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"摇一摇"];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsboticeShake:) name:@"yaoLogin" object:nil];
+    
+    //分享按钮
+    butShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 25, 10, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    [self.navigationController.navigationBar addSubview:butShare];
+    [butShare setBackgroundImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
+    [butShare setBackgroundImage:[UIImage imageNamed:@"icon_shareq"] forState:UIControlStateHighlighted];
+    [butShare addTarget:self action:@selector(buttonShareYaoYiYao:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self showCiShuData];
     [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:YES];
     [self becomeFirstResponder];
+}
+
+//通知 登录后摇一摇页面切换成登录后的显示
+- (void)nsboticeShake:(NSNotification *)nsnotice
+{
+    [self showCiShuData];
 }
 
 - (BOOL)canBecomeFirstResponder
@@ -71,8 +93,16 @@
 
 - (void)haveNoChanceShow
 {
+    [labelChance removeFromSuperview];
+    [butonLogin removeFromSuperview];
+    
+    labelChance = nil;
+    butonLogin = nil;
+    
 //显示还有几次摇一摇机会
-    labelNoChance = [CreatView creatWithLabelFrame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:19] text:nil];
+    if (labelNoChance == nil) {
+        labelNoChance = [CreatView creatWithLabelFrame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:19] text:nil];
+    }
     [imageYellow addSubview:labelNoChance];
     NSMutableAttributedString *zeroString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"您还有%@次机会", [[yaoPageModel unUseNum] description]]];
     NSRange zeroRange = NSMakeRange(3, 1);
@@ -90,8 +120,16 @@
 
 - (void)haveChanceContentShow
 {
+    [labelNoChance removeFromSuperview];
+    [butonLogin removeFromSuperview];
+    
+    labelNoChance = nil;
+    butonLogin = nil;
+    
 //    显示还有几次摇一摇机会
-    labelChance = [CreatView creatWithLabelFrame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:22] text:nil];
+    if (labelChance == nil) {
+        labelChance = [CreatView creatWithLabelFrame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:22] text:nil];
+    }
     [imageYellow addSubview:labelChance];
     
     NSMutableAttributedString *shuZiString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"您还有%@次机会", [[yaoPageModel unUseNum] description]]];
@@ -115,30 +153,35 @@
 //没有登录的显示
 - (void)noLoginShow
 {
-    imageBack = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"yao"]];
+    [labelChance removeFromSuperview];
+    [labelNoChance removeFromSuperview];
+    
+    labelChance = nil;
+    labelNoChance = nil;
+    
+    if (imageBack == nil) {
+        imageBack = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"yao"]];
+        imageBack.userInteractionEnabled = YES;
+    }
     [self.view addSubview:imageBack];
-    imageBack.userInteractionEnabled = YES;
     
-    //    分享按钮
-    butShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 25, 10, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
-    [self.navigationController.navigationBar addSubview:butShare];
-    [butShare setBackgroundImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
-    [butShare setBackgroundImage:[UIImage imageNamed:@"icon_shareq"] forState:UIControlStateHighlighted];
-    [butShare addTarget:self action:@selector(buttonShareYaoYiYao:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //    摇动的图片
-    imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
+    //摇动的图片
+    if (imageHandYao == nil) {
+        imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
+        imageHandYao.userInteractionEnabled = YES;
+    }
     [imageBack addSubview:imageHandYao];
-    imageHandYao.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapYaoYiYao:)];
     [imageHandYao addGestureRecognizer:tap];
     
-    //    显示还有几次摇动机会的背景图
-    imageYellow = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 380.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 71.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yellow"]];
+    //显示还有几次摇动机会的背景图
+    if (imageYellow == nil) {
+        imageYellow = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 380.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 71.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yellow"]];
+        imageYellow.userInteractionEnabled = YES;
+    }
     [imageBack addSubview:imageYellow];
-    imageYellow.userInteractionEnabled = YES;
     
-    UIButton *butonLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@""];
+    butonLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 10, imageYellow.frame.size.width, 23) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@""];
     [imageYellow addSubview:butonLogin];
     butonLogin.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:22];
     [butonLogin addTarget:self action:@selector(beforeShakingLogin:) forControlEvents:UIControlEventTouchUpInside];
@@ -150,31 +193,39 @@
     [sizeString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:yaoRange];
     [butonLogin setAttributedTitle:sizeString forState:UIControlStateNormal];
     
-    //    下面蓝色按钮宽度
+    //下面蓝色按钮宽度
     CGFloat butWidth = (WIDTH_CONTROLLER_DEFAULT - 27)/2;
     
-    UIButton *butYaoLeft = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (butYaoLeft == nil) {
+        butYaoLeft = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        [butYaoLeft setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
+        [butYaoLeft setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateHighlighted];
+        [butYaoLeft addTarget:self action:@selector(buttonActivityRules:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageBack addSubview:butYaoLeft];
-    [butYaoLeft setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
-    [butYaoLeft setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateHighlighted];
-    [butYaoLeft addTarget:self action:@selector(buttonActivityRules:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butActivity = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(5, 3, butYaoLeft.frame.size.width - 10, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor ] titleText:@"活动规则"];
+    if (butActivity == nil) {
+        butActivity = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(5, 3, butYaoLeft.frame.size.width - 10, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor ] titleText:@"活动规则"];
+        butActivity.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+        [butActivity addTarget:self action:@selector(buttonActivityRules:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [butYaoLeft addSubview:butActivity];
-    butActivity.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
-    [butActivity addTarget:self action:@selector(buttonActivityRules:) forControlEvents:UIControlEventTouchUpInside];
     
-    //    中奖纪录蓝色底
-    UIButton *butYaoRight = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    //中奖纪录蓝色底
+    if (butYaoRight == nil) {
+        butYaoRight = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
+        [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateHighlighted];
+        [butYaoRight addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageBack addSubview:butYaoRight];
-    [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
-    [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateHighlighted];
-    [butYaoRight addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butWinPrize = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWidth/2 - 34, 3, 68, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"中奖纪录"];
+    if (butWinPrize == nil) {
+        butWinPrize = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWidth/2 - 34, 3, 68, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"中奖纪录"];
+        butWinPrize.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+        [butWinPrize addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [butYaoRight addSubview:butWinPrize];
-    butWinPrize.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
-    [butWinPrize addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         butYaoLeft.frame = CGRectMake(9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
@@ -185,26 +236,27 @@
 //公共的部分
 - (void)commonHaveShow
 {
-    imageBack = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"yao"]];
+    if (imageBack == nil) {
+        imageBack = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"yao"]];
+        imageBack.userInteractionEnabled = YES;
+    }
     [self.view addSubview:imageBack];
-    imageBack.userInteractionEnabled = YES;
-    
-//    分享按钮
-    butShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 25, 10, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
-    [self.navigationController.navigationBar addSubview:butShare];
-    [butShare setBackgroundImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
-    [butShare setBackgroundImage:[UIImage imageNamed:@"icon_shareq"] forState:UIControlStateHighlighted];
-    [butShare addTarget:self action:@selector(buttonShareYaoYiYao:) forControlEvents:UIControlEventTouchUpInside];
     
 //    摇动的图片
-    imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
+    if (imageHandYao == nil) {
+        imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
+        imageHandYao.userInteractionEnabled = YES;
+    }
+    
     [imageBack addSubview:imageHandYao];
-    imageHandYao.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapYaoYiYao:)];
     [imageHandYao addGestureRecognizer:tap];
     
 //    显示还有几次摇动机会的背景图
-    imageYellow = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 380.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 71.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yellow"]];
+    if (imageYellow == nil) {
+        imageYellow = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 380.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 305.5 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 71.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yellow"]];
+        imageYellow.userInteractionEnabled = YES;
+    }
     [imageBack addSubview:imageYellow];
     
 //    判断 0时显示次数的背景为灰色 非0时为黄色
@@ -218,39 +270,51 @@
     CGFloat butWidth = (WIDTH_CONTROLLER_DEFAULT - 27)/2;
     
 //    活动规则蓝色底
-    UIButton *butYaoLeft = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (butYaoLeft == nil) {
+        butYaoLeft = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        [butYaoLeft setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
+        [butYaoLeft setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateHighlighted];
+        [butYaoLeft addTarget:self action:@selector(buttonActivityRules:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageBack addSubview:butYaoLeft];
-    [butYaoLeft setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
-    [butYaoLeft setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateHighlighted];
-    [butYaoLeft addTarget:self action:@selector(buttonActivityRules:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butActivity = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(5, 3, butYaoLeft.frame.size.width - 10, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor ] titleText:@"活动规则"];
+    if (butActivity == nil) {
+        butActivity = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(5, 3, butYaoLeft.frame.size.width - 10, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor ] titleText:@"活动规则"];
+        butActivity.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+        [butActivity addTarget:self action:@selector(buttonActivityRules:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [butYaoLeft addSubview:butActivity];
-    butActivity.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
-    [butActivity addTarget:self action:@selector(buttonActivityRules:) forControlEvents:UIControlEventTouchUpInside];
     
 //    中奖纪录蓝色底
-    UIButton *butYaoRight = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (butYaoRight == nil) {
+        butYaoRight = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
+        [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateHighlighted];
+        [butYaoRight addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageBack addSubview:butYaoRight];
-    [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
-    [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateHighlighted];
-    [butYaoRight addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butWinPrize = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWidth/2 - 34, 3, 68, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"中奖纪录"];
+    if (butWinPrize == nil) {
+        butWinPrize = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWidth/2 - 34, 3, 68, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"中奖纪录"];
+        butWinPrize.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+        [butWinPrize addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [butYaoRight addSubview:butWinPrize];
-    butWinPrize.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
-    [butWinPrize addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
 //    中奖纪录的数字 如果是0就不显示
     if ([[[yaoPageModel unQueryWinNum] description] isEqualToString:@"0"]) {
         
     } else {
-        butShuZi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWinPrize.frame.size.width - 5, 0, 16, 16) backgroundColor:[UIColor orangecolor] textColor:[UIColor whiteColor] titleText:[[yaoPageModel unQueryWinNum] description]];
-        [butWinPrize addSubview:butShuZi];
-        butShuZi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
-        butShuZi.layer.cornerRadius = 8;
-        butShuZi.layer.masksToBounds = YES;
-        [butShuZi addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        if (butShuZi == nil) {
+            butShuZi = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWinPrize.frame.size.width - 5, 0, 16, 16) backgroundColor:[UIColor orangecolor] textColor:[UIColor whiteColor] titleText:[[yaoPageModel unQueryWinNum] description]];
+            [butWinPrize addSubview:butShuZi];
+            butShuZi.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+            butShuZi.layer.cornerRadius = 8;
+            butShuZi.layer.masksToBounds = YES;
+            [butShuZi addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        [butShuZi setTitle:[[yaoPageModel unQueryWinNum] description] forState:UIControlStateNormal];
+        butShuZi.hidden = NO;
     }
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
@@ -483,7 +547,9 @@
 #pragma mark data--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - (void)showCiShuData
 {
-    NSDictionary *pameter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *pameter = @{@"token":[dic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"shake/getShakeAccount" parameters:pameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"^^^^^^^^^^每日一摇显示次数:%@", responseObject);
@@ -545,6 +611,7 @@
 //分享按钮
 - (void)buttonShareYaoYiYao:(UIButton *)button
 {
+    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
     flagLogin = dicLogin;
@@ -573,6 +640,25 @@
         
         [UMSocialData defaultData].extConfig.wechatSessionData.url = shareString;
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareString;
+    }
+}
+
+- (void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    //根据responseCode得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"shake/getShakeShare" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"分享成功~~~~~~~~~%@", responseObject);
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                [self showCiShuData];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@", error);
+        }];
     }
 }
 

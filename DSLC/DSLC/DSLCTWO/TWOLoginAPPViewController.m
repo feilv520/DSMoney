@@ -507,6 +507,7 @@
             
             [self dismissViewControllerAnimated:YES completion:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];
             }];
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
@@ -585,6 +586,7 @@
             
             [self dismissViewControllerAnimated:YES completion:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];
             }];
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
