@@ -182,7 +182,7 @@
                                          appKey:@"5642ad7e67e58e8463006218"
                                       shareText:[NSString stringWithFormat:@"大圣理财风暴来袭领现金抢红包，赚猴币多重惊喜等着你！%@", fString]
                                      shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
-                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,nil]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
     
     [UMSocialData defaultData].extConfig.qzoneData.title = @"好友邀你领福利，点击即领5千元";
