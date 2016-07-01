@@ -86,7 +86,7 @@
     
     NSMutableDictionary *handDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
     
-    NSString *flag = [handDic objectForKey:@"handFlag"];
+    NSString *flag = [self.flagDic objectForKey:@"FristOpen"];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
@@ -168,12 +168,12 @@
         
     } else {
 //         手势
-        MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
-        self.window.rootViewController = myHandVC;
+//        MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
+//        self.window.rootViewController = myHandVC;
         
         // 欢迎页
-//        WelcomeViewController *welcome = [[WelcomeViewController alloc] init];
-//        self.window.rootViewController = welcome;
+        WelcomeViewController *welcome = [[WelcomeViewController alloc] init];
+        self.window.rootViewController = welcome;
     }
     
     
