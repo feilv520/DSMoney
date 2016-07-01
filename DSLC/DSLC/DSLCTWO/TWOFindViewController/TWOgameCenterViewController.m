@@ -9,6 +9,7 @@
 #import "TWOgameCenterViewController.h"
 #import "TWOGameCenterCell.h"
 #import "TWOMyGameScoreViewController.h"
+#import "TWOGameListModel.h"
 
 @interface TWOgameCenterViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -16,6 +17,7 @@
     UITableView *_tableView;
     UIButton *butStrategy;
     UIButton *butScore;
+    NSMutableArray *gameListArray;
 }
 
 @end
@@ -28,7 +30,9 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"游戏中心"];
+    gameListArray = [NSMutableArray array];
     
+    [self getDataList];
     [self tabelViewShow];
 }
 
@@ -111,7 +115,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return gameListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -119,17 +123,17 @@
     TWOGameCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
     NSArray *imageArray = @[@"大圣酷跑", @"大圣解密", @"拔鸡毛"];
-    NSArray *nameArray = @[@"大圣酷跑", @"大圣解密", @"疯狂拔鸡毛"];
+    TWOGameListModel *gameModel = [gameListArray objectAtIndex:indexPath.row];
     
     cell.imagePic.image = [UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]];
     cell.imagePic.layer.cornerRadius = 4;
     cell.imagePic.layer.masksToBounds = YES;
     
-    cell.labelGameName.text = [nameArray objectAtIndex:indexPath.row];
+    cell.labelGameName.text = [gameModel name];
     cell.labelGameName.textColor = [UIColor ZiTiColor];
     cell.labelGameName.font = [UIFont fontWithName:@"CenturyGothic" size:16];
     
-    cell.labelContent.text = @"勇闯酷跑赚不停";
+    cell.labelContent.text = [gameModel slogan];
     cell.labelContent.textColor = [UIColor findZiTiColor];
     cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:14];
 
@@ -168,6 +172,29 @@
 - (void)buttonGointoGame:(UIButton *)button
 {
     NSLog(@"进入");
+}
+
+#pragma mark dataList~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- (void)getDataList
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"game/getGameList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"游戏列表================%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *dataArray = [responseObject objectForKey:@"Games"];
+            for (NSDictionary *dataDic in dataArray) {
+                TWOGameListModel *gameModel = [[TWOGameListModel alloc] init];
+                [gameModel setValuesForKeysWithDictionary:dataDic];
+                [gameListArray addObject:gameModel];
+            }
+            
+            [_tableView reloadData];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

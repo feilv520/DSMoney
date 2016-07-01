@@ -220,7 +220,7 @@
                 [backgroundImgView removeFromSuperview];
                 
                 if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]){
-                    [self loginFuction];
+//                    [self loginFuction];
                 }
                 
             }];

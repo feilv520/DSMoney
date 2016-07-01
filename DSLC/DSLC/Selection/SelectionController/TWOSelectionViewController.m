@@ -705,6 +705,8 @@
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
+                timerNotice = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+                
                 NSArray *pickArr = [responseObject objectForKey:@"Product"];
                 
                 for (NSDictionary *dic in pickArr) {

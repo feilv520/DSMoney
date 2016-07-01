@@ -213,6 +213,8 @@
 		815D194C1D226F8600DFA753 /* yaogray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 815D194A1D226F8600DFA753 /* yaogray@2x.png */; settings = {ASSET_TAGS = (); }; };
 		815D194D1D226F8600DFA753 /* yaogray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 815D194B1D226F8600DFA753 /* yaogray@3x.png */; settings = {ASSET_TAGS = (); }; };
 		815D19501D24E36D00DFA753 /* TWOWinPrizeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 815D194F1D24E36D00DFA753 /* TWOWinPrizeModel.m */; settings = {ASSET_TAGS = (); }; };
+		815D19531D2603E700DFA753 /* TWOActivityThreeStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 815D19521D2603E700DFA753 /* TWOActivityThreeStateModel.m */; settings = {ASSET_TAGS = (); }; };
+		815D19561D2611C200DFA753 /* TWOGameListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 815D19551D2611C200DFA753 /* TWOGameListModel.m */; settings = {ASSET_TAGS = (); }; };
 		815D27A41BE21040005410C6 /* UpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 815D27A21BE21040005410C6 /* UpCell.m */; settings = {ASSET_TAGS = (); }; };
 		815D27A51BE21040005410C6 /* UpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 815D27A31BE21040005410C6 /* UpCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81600A531CB4BD750075CD45 /* houbixize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81600A511CB4BD750075CD45 /* houbixize@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -1770,6 +1772,10 @@
 		815D194B1D226F8600DFA753 /* yaogray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yaogray@3x.png"; sourceTree = "<group>"; };
 		815D194E1D24E36D00DFA753 /* TWOWinPrizeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOWinPrizeModel.h; sourceTree = "<group>"; };
 		815D194F1D24E36D00DFA753 /* TWOWinPrizeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOWinPrizeModel.m; sourceTree = "<group>"; };
+		815D19511D2603E700DFA753 /* TWOActivityThreeStateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOActivityThreeStateModel.h; sourceTree = "<group>"; };
+		815D19521D2603E700DFA753 /* TWOActivityThreeStateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOActivityThreeStateModel.m; sourceTree = "<group>"; };
+		815D19541D2611C200DFA753 /* TWOGameListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOGameListModel.h; sourceTree = "<group>"; };
+		815D19551D2611C200DFA753 /* TWOGameListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOGameListModel.m; sourceTree = "<group>"; };
 		815D27A11BE21040005410C6 /* UpCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpCell.h; sourceTree = "<group>"; };
 		815D27A21BE21040005410C6 /* UpCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpCell.m; sourceTree = "<group>"; };
 		815D27A31BE21040005410C6 /* UpCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpCell.xib; sourceTree = "<group>"; };
@@ -4132,6 +4138,10 @@
 		8143FCEC1CD9C54600B65A2F /* TWOFindModel */ = {
 			isa = PBXGroup;
 			children = (
+				815D19511D2603E700DFA753 /* TWOActivityThreeStateModel.h */,
+				815D19521D2603E700DFA753 /* TWOActivityThreeStateModel.m */,
+				815D19541D2611C200DFA753 /* TWOGameListModel.h */,
+				815D19551D2611C200DFA753 /* TWOGameListModel.m */,
 			);
 			path = TWOFindModel;
 			sourceTree = "<group>";
@@ -8830,6 +8840,7 @@
 				81BA1C0F1BD4FE2600DBA5BE /* MyNewsCell.m in Sources */,
 				81379F2F1BEB51E0002CDB16 /* ShareHaveRedBag.m in Sources */,
 				81B18E241BE77EA700D448FA /* EmailCell.m in Sources */,
+				815D19531D2603E700DFA753 /* TWOActivityThreeStateModel.m in Sources */,
 				8179EB421CEC042C00BD7054 /* TWOAboutDSLCUpCell.m in Sources */,
 				8D88D0F91BFECCB40051D6DA /* MJRefreshHeader.m in Sources */,
 				8DD180981BD72E5900F71CEA /* GetMoneyTableViewCell.m in Sources */,
@@ -8857,6 +8868,7 @@
 				812201291CE5B65700159A74 /* TWOMonkeyRecordCell.m in Sources */,
 				8D3942EF1C2D14B200783FD0 /* WelcomeViewController.m in Sources */,
 				81CBE7F31CEAC7A4004FE1D4 /* TWOImputPhoneNumCell.m in Sources */,
+				815D19561D2611C200DFA753 /* TWOGameListModel.m in Sources */,
 				8122C9551D13AC7B00070EAA /* TWOPersonalSetModel.m in Sources */,
 				8162D11D1BE1BCC900CACAB6 /* XinXiCell.m in Sources */,
 				8D840C4C1CE30394005A17F9 /* TWORecordViewController.m in Sources */,

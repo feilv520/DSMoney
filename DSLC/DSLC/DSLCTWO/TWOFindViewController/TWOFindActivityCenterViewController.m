@@ -8,6 +8,7 @@
 
 #import "TWOFindActivityCenterViewController.h"
 #import "TWOFindActivityCenterCell.h"
+#import "TWOActivityThreeStateModel.h"
 
 @interface TWOFindActivityCenterViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -16,6 +17,10 @@
     UITableView *_tableView1;
     UITableView *_tableView2;
     UITableView *_tableView3;
+    
+    NSMutableArray *waitArray;
+    NSMutableArray *runArray;
+    NSMutableArray *overArray;
 }
 
 @end
@@ -29,9 +34,17 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"活动中心"];
     
+    waitArray = [NSMutableArray array];
+    runArray = [NSMutableArray array];
+    overArray = [NSMutableArray array];
+    
     [self contentShow];
-    [self tableViewShow];
-    [self getListData];
+//    [self tableViewShow1];
+//    [self tableViewShow2];
+//    [self tableViewShow3];
+    [self getListDataNo];
+    [self getListDataAlready];
+    [self getListDataAlreadyDown];
 }
 
 - (void)contentShow
@@ -52,6 +65,7 @@
     _scrollview.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * 3, 0);
 }
 
+//segment方法选择器
 - (void)segmentedSelect:(UISegmentedControl *)seg
 {
     if (seg.selectedSegmentIndex == 0) {
@@ -80,7 +94,8 @@
     }
 }
 
-- (void)tableViewShow
+//进行中页面
+- (void)tableViewShow1
 {
     _tableView1 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _scrollview.frame.size.height) style:UITableViewStylePlain];
     [_scrollview addSubview:_tableView1];
@@ -88,14 +103,36 @@
     _tableView1.delegate = self;
     _tableView1.separatorColor = [UIColor clearColor];
     [_tableView1 registerNib:[UINib nibWithNibName:@"TWOFindActivityCenterCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
-    
+}
+
+//进行中无数据
+- (void)runingNoData
+{
+    UIImageView *imageRuning = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/1.5/2, 100, 260/1.5, 260/1.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [_scrollview addSubview:imageRuning];
+}
+
+//期待中页面
+- (void)tableViewShow2
+{
     _tableView2 = [[UITableView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT, 0, WIDTH_CONTROLLER_DEFAULT, _scrollview.frame.size.height) style:UITableViewStylePlain];
     [_scrollview addSubview:_tableView2];
     _tableView2.dataSource = self;
     _tableView2.delegate = self;
     _tableView2.separatorColor = [UIColor clearColor];
     [_tableView2 registerNib:[UINib nibWithNibName:@"TWOFindActivityCenterCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
-    
+}
+
+//期待中无数据
+- (void)waitingNoData
+{
+    UIImageView *imageRuning = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT/2 - 260/1.5/2, 100, 260/1.5, 260/1.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [_scrollview addSubview:imageRuning];
+}
+
+//已结束页面
+- (void)tableViewShow3
+{
     _tableView3 = [[UITableView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 2, 0, WIDTH_CONTROLLER_DEFAULT, _scrollview.frame.size.height) style:UITableViewStylePlain];
     [_scrollview addSubview:_tableView3];
     _tableView3.dataSource = self;
@@ -104,9 +141,20 @@
     [_tableView3 registerNib:[UINib nibWithNibName:@"TWOFindActivityCenterCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
 
+//已结束无数据
+- (void)overNoData
+{
+    UIImageView *imageRuning = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT*2 + WIDTH_CONTROLLER_DEFAULT/2 - 260/1.5/2, 100, 260/1.5, 260/1.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [_scrollview addSubview:imageRuning];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    if (tableView == _tableView1) {
+        return runArray.count;
+    } else {
+        return 5;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -117,7 +165,9 @@
     
     if (tableView == _tableView1) {
         
+//        TWOActivityThreeStateModel *activityModel = [runArray objectAtIndex:indexPath.row];
         cell.imageActivity.image = [UIImage imageNamed:@"gameBanner"];
+//        cell.imageActivity.yy_imageURL = [NSURL URLWithString:[activityModel poster]];
         cell.imageOver.hidden = YES;
         cell.imageWaiting.hidden = YES;
         cell.labelAlpha.hidden = YES;
@@ -157,13 +207,88 @@
 }
 
 #pragma mark listData----------------------
-- (void)getListData
+//期待中接口
+- (void)getListDataNo
 {
-    NSDictionary *parmeter = @{@"status":@1, @"clientType":@""};
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"activity/getActivityList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    NSDictionary *parmeter1 = @{@"status":@1, @"clientType":@"iOS"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"activity/getActivityList" parameters:parmeter1 success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"期待中::::::::::::::%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *activityArr = [responseObject objectForKey:@"Activity"];
+            for (NSDictionary *dataDic in activityArr) {
+                TWOActivityThreeStateModel *model = [[TWOActivityThreeStateModel alloc] init];
+                [model setValuesForKeysWithDictionary:dataDic];
+                [waitArray addObject:model];
+            }
+            
+            //有数据与无数据显示的判断
+            if (waitArray.count == 0) {
+                [self waitingNoData];
+            } else {
+                [self tableViewShow2];
+            }
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
+    }];
+}
+
+//已上线接口
+- (void)getListDataAlready
+{
+    NSDictionary *parmeter2 = @{@"status":@2, @"clientType":@"iOS"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"activity/getActivityList" parameters:parmeter2 success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"已上线::::::::::::::%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *activityArr = [responseObject objectForKey:@"Activity"];
+            for (NSDictionary *dataDic in activityArr) {
+                TWOActivityThreeStateModel *model = [[TWOActivityThreeStateModel alloc] init];
+                [model setValuesForKeysWithDictionary:dataDic];
+                [runArray addObject:model];
+            }
+            
+            //有数据与无数据显示的判断
+            if (runArray.count == 0) {
+                [self runingNoData];
+            } else {
+                [self tableViewShow1];
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//已下线接口
+- (void)getListDataAlreadyDown
+{
+    NSDictionary *parmeter3 = @{@"status":@3, @"clientType":@"iOS"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"activity/getActivityList" parameters:parmeter3 success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"已下线::::::::::::::%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *activityArr = [responseObject objectForKey:@"Activity"];
+            for (NSDictionary *dataDic in activityArr) {
+                TWOActivityThreeStateModel *model = [[TWOActivityThreeStateModel alloc] init];
+                [model setValuesForKeysWithDictionary:dataDic];
+                [overArray addObject:model];
+            }
+            
+            //有数据与无数据显示的判断
+            if (overArray.count == 0) {
+                [self overNoData];
+            } else {
+                [self tableViewShow3];
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
     }];
 }
 
