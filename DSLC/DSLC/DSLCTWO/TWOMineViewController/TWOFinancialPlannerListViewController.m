@@ -29,6 +29,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的理财师"];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
     listArray = [NSMutableArray array];
     
     [self getDataList];
@@ -93,6 +94,7 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getIndexFinPlannerList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"理财师列表:::::::::::%@", responseObject);
+        [self loadingWithHidden:YES];
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *dataArray = [responseObject objectForKey:@"User"];
             for (NSDictionary *tempDic in dataArray) {

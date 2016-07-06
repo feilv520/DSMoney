@@ -40,6 +40,9 @@
     
     // 资产数组
     NSMutableArray *assetArray;
+    
+    UIButton *buttBlack;
+    UIView *viewThirdOpen;
 }
 
 @property (nonatomic, strong) UIControl *viewBotton;
@@ -671,6 +674,8 @@
 //        return ;
 //    }
     
+    [self registThirdShow];
+    
     button.enabled = NO;
     
     if ([self.residueMoney isEqualToString:@"0.00"]) {
@@ -720,7 +725,7 @@
                     makeSureVC.decide = YES;
                     makeSureVC.detailM = self.detailM;
                     makeSureVC.residueMoney = self.residueMoney;
-                    [self.navigationController pushViewController:makeSureVC animated:YES];
+//                    [self.navigationController pushViewController:makeSureVC animated:YES];
                     
                     [MobClick event:@"makeSure"];
                     
@@ -733,7 +738,7 @@
                     makeSureVC.decide = NO;
                     makeSureVC.detailM = self.detailM;
                     makeSureVC.residueMoney = self.residueMoney;
-                    [self.navigationController pushViewController:makeSureVC animated:YES];
+//                    [self.navigationController pushViewController:makeSureVC animated:YES];
                     
                     [self submitLoadingWithHidden:YES];
                     
@@ -749,6 +754,58 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
     }
     
+}
+
+//开通托管账户弹框
+- (void)registThirdShow
+{
+    NSLog(@"2");
+    AppDelegate *app  = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    buttBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    [app.tabBarVC.view addSubview:buttBlack];
+    buttBlack.alpha = 0.5;
+    [buttBlack addTarget:self action:@selector(buttonViewDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    viewThirdOpen = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 310/2, HEIGHT_CONTROLLER_DEFAULT/3, 310, 228) backgroundColor:[UIColor whiteColor]];
+    [app.tabBarVC.view addSubview:viewThirdOpen];
+    viewThirdOpen.layer.cornerRadius = 4;
+    viewThirdOpen.layer.masksToBounds = YES;
+    
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewThirdOpen.frame.size.width, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"你还未开通托管账户"];
+    [viewThirdOpen addSubview:labelAlert];
+    
+    UIImageView *imageImg = [CreatView creatImageViewWithFrame:CGRectMake(viewThirdOpen.frame.size.width/2 - 314/2/2, 45, 314/2, 234/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"thirdimg"]];
+    [viewThirdOpen addSubview:imageImg];
+    
+    UIButton *buttonok = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 45 + imageImg.frame.size.height + 15, viewThirdOpen.frame.size.width - 24, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    [viewThirdOpen addSubview:buttonok];
+    buttonok.layer.cornerRadius = 4;
+    buttonok.layer.masksToBounds = YES;
+    buttonok.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [buttonok addTarget:self action:@selector(buttonOpenThirdOK:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//开通三方确定按钮
+- (void)buttonOpenThirdOK:(UIButton *)button
+{
+    [buttBlack removeFromSuperview];
+    [viewThirdOpen removeFromSuperview];
+    
+    buttBlack = nil;
+    viewThirdOpen = nil;
+    
+    NSLog(@"确定");
+}
+
+//开通三方弹框点击消失
+- (void)buttonViewDisappear:(UIButton *)button
+{
+    [buttBlack removeFromSuperview];
+    [viewThirdOpen removeFromSuperview];
+    
+    buttBlack = nil;
+    viewThirdOpen = nil;
 }
 
 //查看协议

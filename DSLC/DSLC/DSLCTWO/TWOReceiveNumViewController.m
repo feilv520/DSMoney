@@ -9,6 +9,7 @@
 #import "TWOReceiveNumViewController.h"
 #import "define.h"
 #import "AppDelegate.h"
+#import "TWOAgreeDSLCDelegetViewController.h"
 
 @interface TWOReceiveNumViewController () <UITextFieldDelegate, UIScrollViewDelegate>
 
@@ -238,6 +239,8 @@
 - (void)buttonClickedAgree:(UIButton *)button
 {
     NSLog(@"agree同意《大圣理财平台服务协议》页面跳转");
+    TWOAgreeDSLCDelegetViewController *agreeDSLC = [[TWOAgreeDSLCDelegetViewController alloc] init];
+    pushVC(agreeDSLC);
 }
 
 //注册按钮

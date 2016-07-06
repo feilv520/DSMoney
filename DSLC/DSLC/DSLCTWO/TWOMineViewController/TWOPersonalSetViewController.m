@@ -22,6 +22,7 @@
 #import "TWOAddressManageViewController.h"
 #import "TWOAddressAlreadySetViewController.h"
 #import "TWOPersonalSetModel.h"
+#import "TWORealNameH5ViewController.h"
 
 @interface TWOPersonalSetViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -225,10 +226,11 @@
                 //已经实名认证页面
                 TWORealNameIngViewController *realNameIng = [[TWORealNameIngViewController alloc] init];
                 realNameIng.name = [DES3Util decrypt:[personalModel userRealname]];
+                realNameIng.cardNumber = [personalModel cardNumber];
                 [self.navigationController pushViewController:realNameIng animated:YES];
             } else {
                 //未实名认证页面
-                TWONoRealNameViewController *noRealNameVC = [[TWONoRealNameViewController alloc] init];
+                TWORealNameH5ViewController *noRealNameVC = [[TWORealNameH5ViewController alloc] init];
                 [self.navigationController pushViewController:noRealNameVC animated:YES];
             }
             
@@ -365,7 +367,7 @@
             }
 
             
-            AppDelegate *app = [[UIApplication sharedApplication] delegate];
+            AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(0, 0) animated:NO];
             
             [app.tabBarVC setSuppurtGestureTransition:NO];

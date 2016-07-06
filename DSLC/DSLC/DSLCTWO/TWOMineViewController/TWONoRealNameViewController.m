@@ -7,6 +7,7 @@
 //
 
 #import "TWONoRealNameViewController.h"
+#import "TWORealNameH5ViewController.h"
 
 @interface TWONoRealNameViewController ()
 
@@ -54,7 +55,8 @@
 //认证按钮
 - (void)buttonRealNameAttestation:(UIButton *)button
 {
-    NSLog(@"认证");
+    TWORealNameH5ViewController *realNameVC = [[TWORealNameH5ViewController alloc] init];
+    pushVC(realNameVC);
 }
 
 - (void)didReceiveMemoryWarning {

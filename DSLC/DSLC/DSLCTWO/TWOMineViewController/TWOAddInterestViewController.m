@@ -8,7 +8,11 @@
 
 #import "TWOAddInterestViewController.h"
 
-@interface TWOAddInterestViewController ()
+@interface TWOAddInterestViewController () <UIWebViewDelegate>
+
+{
+    UIWebView *webView;
+}
 
 @end
 
@@ -20,6 +24,29 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"加息券使用说明"];
+    
+    [self webViewShow];
+}
+
+- (void)webViewShow
+{
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
+    [self.view addSubview:webView];
+    webView.delegate = self;
+    
+    webView.scrollView.bounces = NO;
+    webView.scrollView.showsVerticalScrollIndicator = NO;
+    
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/jxqtext.html", htmlFive]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self loadingWithHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

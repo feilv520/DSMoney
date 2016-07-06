@@ -10,4 +10,5 @@
 
 @interface TWORealNameIngViewController : BaseViewController
 @property (nonatomic) NSString *name;
+@property (nonatomic) NSString *cardNumber;
 @end

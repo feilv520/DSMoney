@@ -22,21 +22,20 @@
     [self.navigationItem setTitle:@"常见问题"];
     
     [self webViewShow];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
 
 - (void)webViewShow
 {
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
     [self.view addSubview:webView];
-    
-    [self loadingWithView:webView loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
-    
     webView.delegate = self;
     
-    webView.scrollView.showsHorizontalScrollIndicator = NO;
+    webView.scrollView.showsVerticalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
-    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/more_problem.html"];
+//    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/more_problem.html"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/problem.html", htmlFive]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

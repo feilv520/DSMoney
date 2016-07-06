@@ -1,14 +1,14 @@
 //
-//  MonkeyRulesViewController.m
+//  TWOAgreeDSLCDelegetViewController.m
 //  DSLC
 //
-//  Created by ios on 16/4/6.
+//  Created by ios on 16/7/4.
 //  Copyright © 2016年 马成铭. All rights reserved.
 //
 
-#import "MonkeyRulesViewController.h"
+#import "TWOAgreeDSLCDelegetViewController.h"
 
-@interface MonkeyRulesViewController () <UIWebViewDelegate>
+@interface TWOAgreeDSLCDelegetViewController () <UIWebViewDelegate>
 
 {
     UIWebView *webView;
@@ -16,29 +16,34 @@
 
 @end
 
-@implementation MonkeyRulesViewController
+@implementation TWOAgreeDSLCDelegetViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self.navigationItem setTitle:@"大圣理财平台服务协议"];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationItem setTitle:@"猴币玩法"];
     
     [self webViewShow];
 }
 
 - (void)webViewShow
 {
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20)];
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
     [self.view addSubview:webView];
     webView.delegate = self;
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
-    webView.scrollView.showsVerticalScrollIndicator = NO;
-    webView.scrollView.bounces = NO;
     
-//    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/monkeyRules.html"];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/mbplay.html", htmlFive]];
+    webView.scrollView.bounces = NO;
+    webView.scrollView.showsVerticalScrollIndicator = NO;
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/app_service.html", htmlFive]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }
@@ -46,6 +51,12 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self loadingWithHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

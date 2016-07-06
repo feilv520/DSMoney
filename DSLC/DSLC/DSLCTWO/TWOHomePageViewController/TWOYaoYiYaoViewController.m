@@ -68,6 +68,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsboticeShake:) name:@"yaoLogin" object:nil];
     
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
+    
     //分享按钮
     butShare = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 10 - 25, 10, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [self.navigationController.navigationBar addSubview:butShare];
@@ -551,6 +553,8 @@
     
     NSDictionary *pameter = @{@"token":[dic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"shake/getShakeAccount" parameters:pameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [self loadingWithHidden:YES];
         
         NSLog(@"^^^^^^^^^^每日一摇显示次数:%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {

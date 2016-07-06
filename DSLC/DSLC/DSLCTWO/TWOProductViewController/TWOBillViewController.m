@@ -333,7 +333,6 @@
         page ++;
         [self getProductList];
     }
-    
 }
 
 - (void)loadNewData:(MJRefreshGifHeader *)header{

@@ -33,6 +33,12 @@
     
 //    接口返回红包列表数组
     NSMutableArray *redbagArray;
+    NSInteger pageRedBag;
+    NSInteger pageAddXiQuan;
+    MJRefreshBackGifFooter *gifFooter;
+    MJRefreshBackGifFooter *jiaFooter;
+    BOOL moreFlag;
+    BOOL jiaMoreFlag;
 }
 
 @end
@@ -57,6 +63,9 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
+    pageRedBag = 1;
+    pageAddXiQuan = 1;
+    moreFlag = NO;
     
     redBagArray = [NSMutableArray array];
     jiaXiQuanArray = [NSMutableArray array];
@@ -172,9 +181,10 @@
     _tableView.delegate = self;
     _tableView.tag = 700;
     _tableView.separatorColor = [UIColor clearColor];
-    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 60)];
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
+    [self addTableViewWithFooter:_tableView];
     [self redBagViewHeadShow];
     [self redBagTabelViewFoot];
 }
@@ -187,13 +197,12 @@
     _tableViewJia.delegate = self;
     _tableViewJia.tag = 800;
     _tableViewJia.separatorColor = [UIColor clearColor];
-    _tableViewJia.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 60)];
-    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
-        _tableViewJia.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 90)];
-    }
+    _tableViewJia.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
+
     [_tableViewJia registerNib:[UINib nibWithNibName:@"TWIJiaXiQuanCell" bundle:nil] forCellReuseIdentifier:@"reuseJia"];
     [_tableViewJia registerNib:[UINib nibWithNibName:@"TWOWaitCashCell" bundle:nil] forCellReuseIdentifier:@"reuseTWO"];
     
+    [self addTableViewWithFooter:_tableViewJia];
     [self jiaxiquanHead];
     [self jiaxiquanFoot];
 }
@@ -220,7 +229,7 @@
 
 - (void)redBagTabelViewFoot
 {
-    UIView *viewFoot = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 96, _tableView.tableFooterView.frame.size.height - 20, 192, 14) backgroundColor:[UIColor whiteColor]];
+    UIView *viewFoot = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 96, _tableView.tableFooterView.frame.size.height - 40, 192, 14) backgroundColor:[UIColor whiteColor]];
     [_tableView.tableFooterView addSubview:viewFoot];
     
     UILabel *labelGray = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 144, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"没有更多有效红包了, 查看"];
@@ -258,7 +267,7 @@
 
 - (void)jiaxiquanFoot
 {
-    UIView *viewFoot = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 108, _tableView.tableFooterView.frame.size.height - 20, 216, 14) backgroundColor:[UIColor whiteColor]];
+    UIView *viewFoot = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 108, _tableViewJia.tableFooterView.frame.size.height - 40, 216, 14) backgroundColor:[UIColor whiteColor]];
     [_tableViewJia.tableFooterView addSubview:viewFoot];
     
     UILabel *labelGray = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 156, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"没有更多有效加息券了, 查看"];
@@ -606,7 +615,7 @@
 #pragma mark --------------------------------
 
 - (void)getMyRedPacketListFuction{
-    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageRedBag],@"status":@0,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -619,11 +628,22 @@
                 [redBagArray addObject:redBagModel];
             }
             
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                moreFlag = YES;
+            }
+            
+            [gifFooter endRefreshing];
+            
             //判断有无红包 调用不同的页面样式
-            if (redBagArray.count == 0) {
-                [self noHaveRedBagShow];
+            if (pageRedBag == 1) {
+                if (redBagArray.count == 0) {
+                    [self noHaveRedBagShow];
+                } else {
+                    [self redBagTableViewShow];
+                }
+                
             } else {
-                [self redBagTableViewShow];
+                [_tableView reloadData];
             }
             
             [butCanUse setTitle:[NSString stringWithFormat:@"%@张可用红包,去使用>", [responseObject objectForKey:@"redPacketCount"]] forState:UIControlStateNormal];
@@ -639,7 +659,7 @@
 
 - (void)getMyIncreaseListFuction
 {
-    NSDictionary *parmeter = @{@"curPage":@1 ,@"status":@"0,1" ,@"pageSize":@10 ,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageAddXiQuan] ,@"status":@"0,1" ,@"pageSize":@10 ,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -652,11 +672,19 @@
                 [jiaXiQuanArray addObject:jiaXiQuanModel];
             }
             
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                jiaMoreFlag = YES;
+            }
+            
             //判断有无加息券 调用不同的页面样式
-            if (dataArray.count == 0) {
-                [self noHaveJiaXiQuanShow];
+            if (pageAddXiQuan == 1) {
+                if (dataArray.count == 0) {
+                    [self noHaveJiaXiQuanShow];
+                } else {
+                    [self jiaXiQuanTableViewShow];
+                }
             } else {
-                [self jiaXiQuanTableViewShow];
+                [_tableViewJia reloadData];
             }
         }
         
@@ -665,6 +693,32 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+//加载的方法
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
+{
+    if (_tableView.tag == 700) {
+        
+        gifFooter = footer;
+        
+        if (moreFlag) {
+            [gifFooter endRefreshing];
+        } else {
+            pageRedBag++;
+            [self getMyRedPacketListFuction];
+        }
+        
+    } else {
+        
+        jiaFooter = footer;
+        if (jiaMoreFlag) {
+            [jiaFooter endRefreshing];
+        } else {
+            pageAddXiQuan++;
+            [self getMyIncreaseListFuction];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

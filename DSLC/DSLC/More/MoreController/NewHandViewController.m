@@ -37,6 +37,7 @@
     sectionOfNumber = 1000;
     
     self.view.backgroundColor = [UIColor whiteColor];
+//    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     
     if (self.signStr == YES) {
         
@@ -60,7 +61,8 @@
     webView.scrollView.showsHorizontalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
-    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/more_guide.html"];
+//    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/more_guide.html"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/guide.html", htmlFive]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

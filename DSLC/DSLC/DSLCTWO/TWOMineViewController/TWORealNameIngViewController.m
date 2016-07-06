@@ -61,7 +61,8 @@
     if (indexPath.row == 0) {
         cell.labelContent.text = self.name;
     } else {
-        cell.labelContent.text = @"";
+        cell.labelContent.text = self.cardNumber;
+        NSLog(@"---------------%@", cell.labelContent.text);
     }
     
     if (indexPath.row == 0) {

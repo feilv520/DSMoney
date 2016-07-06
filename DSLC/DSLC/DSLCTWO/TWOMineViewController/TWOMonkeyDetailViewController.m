@@ -44,6 +44,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"猴币记录"];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     
     page = 1;
     
@@ -155,6 +156,7 @@
         NSLog(@"获取猴币详情:~~~~~%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
+            [self loadingWithHidden:YES];
             NSMutableArray *dataArr = [responseObject objectForKey:@"Monkey"];
             
             if (dataArr.count == 0) {

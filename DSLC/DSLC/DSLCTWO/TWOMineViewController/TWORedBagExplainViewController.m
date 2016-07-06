@@ -1,14 +1,14 @@
 //
-//  MonkeyRulesViewController.m
+//  TWORedBagExplainViewController.m
 //  DSLC
 //
-//  Created by ios on 16/4/6.
+//  Created by ios on 16/7/5.
 //  Copyright © 2016年 马成铭. All rights reserved.
 //
 
-#import "MonkeyRulesViewController.h"
+#import "TWORedBagExplainViewController.h"
 
-@interface MonkeyRulesViewController () <UIWebViewDelegate>
+@interface TWORedBagExplainViewController () <UIWebViewDelegate>
 
 {
     UIWebView *webView;
@@ -16,36 +16,35 @@
 
 @end
 
-@implementation MonkeyRulesViewController
+@implementation TWORedBagExplainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationItem setTitle:@"猴币玩法"];
+    [self.navigationItem setTitle:@"红包使用说明"];
     
     [self webViewShow];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
 
 - (void)webViewShow
 {
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20)];
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 40)];
     [self.view addSubview:webView];
     webView.delegate = self;
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     webView.scrollView.showsVerticalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
-//    NSURL *url = [NSURL URLWithString:@"http://wap.dslc.cn/monkeyRules.html"];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/mbplay.html", htmlFive]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:request];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/packetext.html", htmlFive]];
+    NSURLRequest *requet = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:requet];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [self loadingWithHidden:YES];
+    [self loadingWithHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {

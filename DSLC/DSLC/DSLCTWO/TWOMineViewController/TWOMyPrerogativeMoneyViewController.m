@@ -10,6 +10,7 @@
 #import "TWOMyPrerogativeMoneyCell.h"
 #import "TWOAskViewController.h"
 #import "TWOMyUserPrivilegeListModel.h"
+#import "TWONoDataCell.h"
 
 @interface TWOMyPrerogativeMoneyViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -22,7 +23,6 @@
     MJRefreshBackGifFooter *footerT;
     
     NSMutableArray *statusOneArray;
-    NSMutableArray *statusTwoArray;
     
     //    我的特权本金的钱数
     UILabel *labelMoney;
@@ -58,14 +58,15 @@
     moreFlag = NO;
     
     statusOneArray = [NSMutableArray array];
-    statusTwoArray = [NSMutableArray array];
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的特权本金"];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     
     [self getUserPrivilegeListFuction];
     
     [self tableViewShow];
+    _tableView.hidden = YES;
 }
 
 - (void)tableViewShow
@@ -82,6 +83,7 @@
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 9)];
     _tableView.tableFooterView.backgroundColor = [UIColor qianhuise];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOMyPrerogativeMoneyCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TWONoDataCell" bundle:nil] forCellReuseIdentifier:@"reuseNoData"];
     
     [self addTableViewWithFooter:_tableView];
     
@@ -157,7 +159,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    if (statusOneArray.count == 0) {
+        return 1;
+    } else {
+        return statusOneArray.count;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -167,49 +173,58 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TWOMyPrerogativeMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    
-    if (indexPath.section == 2) {
-        cell.imageProfiting.image = [UIImage imageNamed:@"已兑付hui"];
+    if (statusOneArray.count == 0) {
+        
+        TWONoDataCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNoData"];
+        cell.backgroundColor = [UIColor qianhuise];
+        return cell;
+        
     } else {
-        cell.imageProfiting.image = [UIImage imageNamed:@"收益中"];
+        
+        TWOMyPrerogativeMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        
+        if (indexPath.section == 2) {
+            cell.imageProfiting.image = [UIImage imageNamed:@"已兑付hui"];
+        } else {
+            cell.imageProfiting.image = [UIImage imageNamed:@"收益中"];
+        }
+        cell.imageProfiting.backgroundColor = [UIColor clearColor];
+        
+        cell.labelMoney.textColor = [UIColor profitColor];
+        cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:24];
+        NSMutableAttributedString *leftStriing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"￥%@", @"5000"]];
+        NSRange leftRange = NSMakeRange(0, 1);
+        [leftStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
+        [cell.labelMoney setAttributedText:leftStriing];
+        
+        cell.labelYuQI.text = @" 预期年化1%";
+        cell.labelYuQI.textColor = [UIColor findZiTiColor];
+        cell.labelYuQI.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        
+        cell.labelFriend.text = @"好友投资11%产品30天";
+        cell.labelFriend.textColor = [UIColor ZiTiColor];
+        cell.labelFriend.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        
+        cell.labelBegin.text = [NSString stringWithFormat:@"起始日:%@", @"2016-10-10"];
+        cell.labelBegin.textColor = [UIColor findZiTiColor];
+        cell.labelBegin.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        
+        cell.labelCash.text = [NSString stringWithFormat:@"兑付日:2016-11-11"];
+        cell.labelCash.textColor = [UIColor findZiTiColor];
+        cell.labelCash.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+        
+        cell.viewLine.backgroundColor = [UIColor grayColor];
+        cell.viewLine.alpha = 0.2;
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            cell.labelFriend.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+            cell.labelBegin.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+            cell.labelCash.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
     }
-    cell.imageProfiting.backgroundColor = [UIColor clearColor];
-    
-    cell.labelMoney.textColor = [UIColor profitColor];
-    cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:24];
-    NSMutableAttributedString *leftStriing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"￥%@", @"5000"]];
-    NSRange leftRange = NSMakeRange(0, 1);
-    [leftStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
-    [cell.labelMoney setAttributedText:leftStriing];
-    
-    cell.labelYuQI.text = @" 预期年化1%";
-    cell.labelYuQI.textColor = [UIColor findZiTiColor];
-    cell.labelYuQI.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-    
-    cell.labelFriend.text = @"好友投资11%产品30天";
-    cell.labelFriend.textColor = [UIColor ZiTiColor];
-    cell.labelFriend.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    
-    cell.labelBegin.text = [NSString stringWithFormat:@"起始日:%@", @"2016-10-10"];
-    cell.labelBegin.textColor = [UIColor findZiTiColor];
-    cell.labelBegin.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-    
-    cell.labelCash.text = [NSString stringWithFormat:@"兑付日:2016-11-11"];
-    cell.labelCash.textColor = [UIColor findZiTiColor];
-    cell.labelCash.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-    
-    cell.viewLine.backgroundColor = [UIColor grayColor];
-    cell.viewLine.alpha = 0.2;
-    
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        cell.labelFriend.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-        cell.labelBegin.font = [UIFont fontWithName:@"CenturyGothic" size:11];
-        cell.labelCash.font = [UIFont fontWithName:@"CenturyGothic" size:11];
-    }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -219,13 +234,25 @@
         
         UILabel *labelList = [CreatView creatWithLabelFrame:CGRectMake(12, 2, WIDTH_CONTROLLER_DEFAULT - 24, 33) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"特权本金列表"];
         [view addSubview:labelList];
+        
+        UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 36.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
+        viewLine.alpha = 0.4;
+        
+        //无数据时列表下要加一根线
+        if (statusOneArray.count == 0) {
+            [view addSubview:viewLine];
+        }
     }
     return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 109;
+    if (statusOneArray.count == 0) {
+        return 160;
+    } else {
+        return 109;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -285,21 +312,17 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserPrivilegeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
         NSLog(@"获取猴币详情:~~~~~%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
+            _tableView.hidden = NO;
             NSMutableArray *dataArr = [responseObject objectForKey:@"Product"];
             
             for (NSDictionary *dataDic in dataArr) {
                 TWOMyUserPrivilegeListModel *model = [[TWOMyUserPrivilegeListModel alloc] init];
                 [model setValuesForKeysWithDictionary:dataDic];
-                
-                if ([[dataDic objectForKey:@"status"] isEqualToString:@"1"]) {
-                    [statusOneArray addObject:model];
-                } else {
-                    [statusTwoArray addObject:model];
-                }
-                
+                [statusOneArray addObject:model];
             }
             
             if ([[[responseObject objectForKey:@"currPage"]debugDescription] isEqual:[[responseObject objectForKey:@"totalPage"] debugDescription]]) {
@@ -310,7 +333,10 @@
             labelTodayProfitString = [responseObject objectForKey:@"totalTodayMoney"];
             labelAddProfitString = [responseObject objectForKey:@"totalProfit"];
             
-            [self tableViewHeadShow];
+            if (page == 1) {
+                [self tableViewHeadShow];
+            }
+            
             [footerT endRefreshing];
             [_tableView reloadData];
         }

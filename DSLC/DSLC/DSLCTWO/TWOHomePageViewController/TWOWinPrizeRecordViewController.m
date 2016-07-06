@@ -38,6 +38,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"中奖纪录"];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     
     recordArray = [NSMutableArray array];
     
@@ -101,11 +102,12 @@
     
     TWOWinPrizeModel *prizeModel = [recordArray objectAtIndex:indexPath.row];
     
-    cell.imagePic.image = [UIImage imageNamed:@"winRecord"];
     cell.imageRight.image = [UIImage imageNamed:@"clickRightjiantou"];
     cell.labelTime.text = [prizeModel winTime];
     
     if ([[[prizeModel prizeType] description] isEqualToString:@"1"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"中奖红包"];
+        
         NSMutableAttributedString *contentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得¥%d红包", [[prizeModel prizeNumber] intValue]]];
         NSRange leftRange = NSMakeRange(0, 6);
         [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
@@ -119,11 +121,15 @@
         
     } else if ([[[prizeModel prizeType] description] isEqualToString:@"2"]) {
         [self changeSizeWithLabel:cell.labelPrize nameString:[NSString stringWithFormat:@"摇一摇获得%@%%加息券", [prizeModel prizeNumber]] frontLength:5 afterLength:3];
+        cell.imagePic.image = [UIImage imageNamed:@"winRecord"];
         
     } else if ([[[prizeModel prizeType] description] isEqualToString:@"3"]) {
         [self changeSizeWithLabel:cell.labelPrize nameString:[NSString stringWithFormat:@"摇一摇获得%d猴币", [[prizeModel prizeNumber] intValue]] frontLength:5 afterLength:2];
+        cell.imagePic.image = [UIImage imageNamed:@"中奖猴币"];
         
     } else if ([[[prizeModel prizeType] description] isEqualToString:@"3"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"中奖现金"];
+        
         NSMutableAttributedString *contentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得¥%d现金", [[prizeModel prizeNumber] intValue]]];
         NSRange leftRange = NSMakeRange(0, 6);
         [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
@@ -194,6 +200,9 @@
         
         NSLog(@"摇一摇中奖纪录::::::::::::::%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self loadingWithHidden:YES];
+            
             NSMutableArray *dataArray = [responseObject objectForKey:@"prize"];
             for (NSDictionary *dataDic in dataArray) {
                 TWOWinPrizeModel *prizeModel = [[TWOWinPrizeModel alloc] init];

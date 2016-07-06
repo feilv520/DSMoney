@@ -46,6 +46,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的理财师"];
     stateOr = NO;
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
     
     if (self.stateShow == YES) {
         [self getMyOwnerData];
@@ -214,6 +215,7 @@
     NSLog(@"%@", [self.listModel ID]);
     [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getIndexFinPlannerInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
         NSLog(@"理财师详情::::::::::::::::::::%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             dataDic = [responseObject objectForKey:@"User"];
@@ -231,6 +233,7 @@
     NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyFinPlanner" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
         NSLog(@"我的理财师详情-----------%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             tempDic = [responseObject objectForKey:@"User"];

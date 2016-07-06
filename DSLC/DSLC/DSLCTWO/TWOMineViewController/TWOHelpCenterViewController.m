@@ -10,6 +10,7 @@
 #import "TWOHelpCenterCell.h"
 #import "NewHandViewController.h"
 #import "UsualQuestionViewController.h"
+#import "TWONewHandViewController.h"
 
 @interface TWOHelpCenterViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -74,8 +75,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
-        NewHandViewController *newHandVC = [[NewHandViewController alloc] init];
+        
+        TWONewHandViewController *newHandVC = [[TWONewHandViewController alloc] init];
         pushVC(newHandVC);
+        
+//        NewHandViewController *newHandVC = [[NewHandViewController alloc] init];
+//        pushVC(newHandVC);
         
     } else {
         UsualQuestionViewController *usualQuestion = [[UsualQuestionViewController alloc] init];

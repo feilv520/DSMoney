@@ -32,6 +32,9 @@
     
     NSMutableArray *profitting;
     NSMutableArray *profitted;
+    
+    UIImageView *imageNoData;
+    UIImageView *imageNoDataED;
 }
 
 @end
@@ -53,6 +56,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的理财"];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     
     profitting = [NSMutableArray array];
     profitted = [NSMutableArray array];
@@ -60,11 +64,49 @@
     labelMoneyString = @"0";
     labelTouZiString = @"0";
     
-    [self contentShow];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, viewBottom.frame.size.height, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - viewBottom.frame.size.height - 64 - 20)];
+    _scrollView.backgroundColor = [UIColor whiteColor];
+    _scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * 2, 0);
+    [self.view addSubview:_scrollView];
+    _scrollView.bounces = NO;
+    _scrollView.delegate = self;
+    _scrollView.pagingEnabled = YES;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    
     [self tableViewProfitShow];
     [self tableViewAlredyCashShow];
+    
+    _tableViewProfit.hidden = YES;
+    _tabelViewCash.hidden = YES;
+    
     [self getUserAssetsListOneFuction];
     [self getUserAssetsListTwoFuction];
+}
+
+//收益中无数据显示
+- (void)noDataShow
+{
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        imageNoData = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 245.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+        [_scrollView addSubview:imageNoData];
+        
+    } else {
+        imageNoData = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 245.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 100, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+        [_scrollView addSubview:imageNoData];
+    }
+}
+
+//已兑付无数据显示
+- (void)alreadyCashNoDataShow
+{
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        imageNoDataED = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 245.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+        [_scrollView addSubview:imageNoDataED];
+        
+    } else {
+        imageNoDataED = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 245.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 100, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+        [_scrollView addSubview:imageNoDataED];
+    }
 }
 
 - (void)contentShow
@@ -145,15 +187,6 @@
 //收益中的tableView
 - (void)tableViewProfitShow
 {
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, viewBottom.frame.size.height, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - viewBottom.frame.size.height - 64 - 20)];
-    _scrollView.backgroundColor = [UIColor whiteColor];
-    _scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * 2, 0);
-    [self.view addSubview:_scrollView];
-    _scrollView.bounces = NO;
-    _scrollView.delegate = self;
-    _scrollView.pagingEnabled = YES;
-    _scrollView.showsHorizontalScrollIndicator = NO;
-    
     _tableViewProfit = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _scrollView.frame.size.height) style:UITableViewStylePlain];
     [_scrollView addSubview:_tableViewProfit];
     _tableViewProfit.dataSource = self;
@@ -401,14 +434,13 @@
 
 #pragma mark 我的理财列表
 #pragma mark --------------------------------
-
-
 - (void)getUserAssetsListOneFuction{
     
     NSDictionary *parmeter = @{@"phone":[self.flagDic objectForKey:@"phone"],@"curPage":@1,@"status":@"1,2",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserAssetsList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
         NSLog(@"getUserAssetsListOne = %@",responseObject);
         
         NSArray *oneArray = [responseObject objectForKey:@"Product"];
@@ -423,8 +455,13 @@
         }
         
         [self contentShow];
+        //有无数据显示判断
         
-        [_tableViewProfit reloadData];
+        if (profitting.count == 0) {
+            [self noDataShow];
+        } else {
+            [self tableViewProfitShow];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -439,6 +476,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserAssetsList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
         NSLog(@"getUserAssetsListThree = %@",responseObject);
         
         NSArray *oneArray = [responseObject objectForKey:@"Product"];
@@ -449,7 +487,12 @@
             [profitted addObject:model];
         }
         
-        [_tabelViewCash reloadData];
+        //有无数据显示判断
+        if (profitted.count == 0) {
+            [self alreadyCashNoDataShow];
+        } else {
+            [self tableViewAlredyCashShow];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
