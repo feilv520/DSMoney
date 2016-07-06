@@ -47,7 +47,4 @@
 - (void)submitLoadingWithHidden:(BOOL)hidden view:(UIView *)view;
 - (void)submitLoadingWithHidden:(BOOL)hidden;
 
-// 判断是否登录,没有登录就显示登录界面
-- (void)ifLoginView;
-
 @end

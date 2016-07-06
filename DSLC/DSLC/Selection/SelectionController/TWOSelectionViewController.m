@@ -83,11 +83,8 @@
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
-    [self getProductList];
-    
     [self getAdvList];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLoginView) name:@"showLoginView" object:nil];
 }
 
 //签到成功
@@ -200,8 +197,10 @@
     for (int i = 0; i < 2; i++) {
         buttonClick = [UIButton buttonWithType:UIButtonTypeCustom];
 //        [self.view addSubview:buttonClick];
-        if (HEIGHT_CONTROLLER_DEFAULT - 20.0 == 480 || HEIGHT_CONTROLLER_DEFAULT - 20.0 == 568) {
-            buttonClick.frame = CGRectMake(9 + (WIDTH_CONTROLLER_DEFAULT - 27)/2.0 * i + 9 * i, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 27)/2.0, 63.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        if (HEIGHT_CONTROLLER_DEFAULT - 20.0 == 480) {
+            buttonClick.frame = CGRectMake(9 + (WIDTH_CONTROLLER_DEFAULT - 27)/2.0 * i + 9 * i, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 27)/2.0, 80.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        } else if (HEIGHT_CONTROLLER_DEFAULT - 20.0 == 568) {
+            buttonClick.frame = CGRectMake(9 + (WIDTH_CONTROLLER_DEFAULT - 27)/2.0 * i + 9 * i, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 27)/2.0, 74.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
         } else {
             buttonClick.frame = CGRectMake(9 + (WIDTH_CONTROLLER_DEFAULT - 27)/2.0 * i + 9 * i, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), (WIDTH_CONTROLLER_DEFAULT - 27)/2.0, 73.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
         }
@@ -485,11 +484,6 @@
 {
     [super viewDidDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
-
-- (void)showLoginView
-{
-    [self ifLoginView];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -783,6 +777,7 @@
         [_scrollView setHidden:NO];
         [self makeScrollView];
         
+        [self getProductList];
         
         timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
         NSRunLoop *runLoop = [NSRunLoop currentRunLoop];

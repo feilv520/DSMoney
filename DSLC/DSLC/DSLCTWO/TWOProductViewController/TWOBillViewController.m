@@ -276,7 +276,7 @@
 
 - (void)getProductList{
     
-    NSDictionary *parameter = @{@"productType":@1,@"curPage":@1};
+    NSDictionary *parameter = @{@"productType":@1,@"curPage":[NSString stringWithFormat:@"%ld",(long)page]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

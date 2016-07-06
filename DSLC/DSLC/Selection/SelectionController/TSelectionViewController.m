@@ -81,7 +81,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPickProduct) name:@"refrushToPickProduct" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLoginView) name:@"showLoginView" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLoginView) name:@"showLoginView" object:nil];
     
     backgroundScrollView.hidden = YES;
     [self loadingWithView:self.view loadingFlag:NO height:self.view.frame.size.height/2];
@@ -714,12 +714,12 @@
     }];
 }
 
-#pragma mark 显示登录界面
-#pragma mark --------------------------------
-
-- (void)showLoginView{
-    [self ifLoginView];
-}
+//#pragma mark 显示登录界面
+//#pragma mark --------------------------------
+//
+//- (void)showLoginView{
+//    [self ifLoginView];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

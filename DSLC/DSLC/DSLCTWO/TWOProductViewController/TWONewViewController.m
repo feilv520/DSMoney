@@ -427,7 +427,6 @@
             NSLog(@"%@",responseObject);
             
             if (page == 1) {
-                NSLog(@"123");
                 [self.productListArray removeAllObjects];
                 self.productListArray = nil;
                 self.productListArray = [NSMutableArray array];

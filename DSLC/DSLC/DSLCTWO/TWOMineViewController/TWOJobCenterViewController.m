@@ -60,6 +60,8 @@
     
     [self getUserTaskListFuction];
     [self tableViewShow];
+    _tableView.hidden = YES;
+    
 }
 
 - (void)tableViewShow
@@ -284,6 +286,8 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    NSLog(@"%lf",scrollView.contentOffset.y);
+    
     if (scrollView.contentOffset.y < 0) {
         _tableView.scrollEnabled = NO;
     } else {
