@@ -111,6 +111,8 @@
     // 版本控制接口
 //    [self versionAlertView];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(monkeyWithSuccess:) name:@"showMonkey" object:nil];
+    
     [UMSocialData setAppKey:@"5642ad7e67e58e8463006218"];
     
     [UMSocialWechatHandler setWXAppId:@"wxebb3d94fc5272ea8" appSecret:@"89f84525f50a31fc0acf6b551f9bcbc8" url:@"http://www.dslc.cn"];
@@ -381,8 +383,6 @@ void UncaughtExceptionHandler(NSException *exception){
     
     NSDictionary *parameters = @{@"appType":@"2"};
     
-    NSLog(@"12");
-    
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getAppVersion" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"----===%@",responseObject);
@@ -478,7 +478,7 @@ void UncaughtExceptionHandler(NSException *exception){
             }
             
             if (![[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"] isEqualToNumber:@0]){
-                
+            
                 [self signFinish:[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"]];
             }
             
@@ -493,6 +493,12 @@ void UncaughtExceptionHandler(NSException *exception){
         NSLog(@"%@", error);
         
     }];
+}
+
+//猴子成功方法
+- (void)monkeyWithSuccess:(NSNotification *)not{
+    NSString *monkeyString = [not object];
+    [self signFinish:monkeyString];
 }
 
 //签到成功
@@ -510,7 +516,7 @@ void UncaughtExceptionHandler(NSException *exception){
     UITapGestureRecognizer *tapView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAddClicked:)];
     [viewDown addGestureRecognizer:tapView];
     
-    labelMonkey = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewDown.frame.size.width, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:27] text:[NSString stringWithFormat:@"%@猴币", monkeyNum]];
+    labelMonkey = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewDown.frame.size.width, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:27] text:[NSString stringWithFormat:@"+%@猴币", monkeyNum]];
     [viewDown addSubview:labelMonkey];
     
     imageSign = [CreatView creatImageViewWithFrame:CGRectMake(0, 30, viewDown.frame.size.width, viewDown.frame.size.height - 30) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"doSign"]];

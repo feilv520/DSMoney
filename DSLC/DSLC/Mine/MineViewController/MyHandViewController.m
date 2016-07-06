@@ -24,7 +24,7 @@
     NSArray *butColorArr;
     NSMutableArray *buttonArr;
     
-    NSInteger count;
+    NSInteger failCount;
     
     UIButton *bView;
     
@@ -76,8 +76,9 @@
     
     userDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    //    self.userPhone.text = [[DES3Util decrypt:[userDic objectForKey:@"userPhone"]] stringByReplacingCharactersInRange:NSMakeRange(2, 4) withString:@"****"];
-    self.userPhone.text = [@"13354288036" stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    self.userPhone.text = [[userDic objectForKey:@"phone"] stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    
+    failCount = 5;
     
     BOOL handFlag = [[dic objectForKey:@"ifSetHandFlag"] boolValue];
     
@@ -96,8 +97,8 @@
     
     [self.forgetButton addTarget:self action:@selector(forgetAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.otherUserButton addTarget:self action:@selector(otherUserWithAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    count = 5;
 }
 
 - (void)lockView:(MyHandButton *)lockView didFinishPath:(NSString *)path{
@@ -214,89 +215,80 @@
                 popVC;
             }
         } else {
-            NSString *handString = [dic objectForKey:@"handString"];
-            NSLog(@"%@",handString);
-            if ([path isEqualToString:handString]) {
-                
-                //                [UIView animateWithDuration:0.5 animations:^{
-                //
-                //                    self.backgroundImageView.alpha = 0.0;
-                //                    self.myHandBtn.alpha = 0.0;
-                //
-                //                } completion:^(BOOL finished) {
-                
-                //        2.0首页
-                TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
-                UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
-                
-                //        2.0产品
-                TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
-                UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
-                
-                //        2.0发现
-                TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
-                UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
-                
-                //        2.0我的
-                TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-                //        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
-                UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
-                
-                //        2.0
-                viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
-                //        1.0
-                //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
-                
-                ////        2.0
-                butGrayArr = @[@"selection_gray", @"production_gray", @"found_gray", @"mine_gray"];
-                butColorArr = @[@"selection", @"production", @"found", @"mine"];
-                
-                ////        1.0
-                //        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
-                //        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
-                
-                //        for循环4要改成3***********************************
-                buttonArr = [NSMutableArray array];
-                for (int i = 0; i < 4; i++) {
-                    
-                    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-                    //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
-                    //        button.imageView.backgroundColor = [UIColor whiteColor];
-                    [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butGrayArr objectAtIndex:i]]] forState:UIControlStateNormal];
-                    [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butColorArr objectAtIndex:i]]] forState:UIControlStateSelected];
-                    //       点击保持高亮状态,没有闪动的效果
-                    [button setShowsTouchWhenHighlighted:YES];
-                    [buttonArr addObject:button];
-                }
-                
-                self.tabBarVC = [[KKTabBarViewController alloc] init];
-                //    存放试图控制器
-                [self.tabBarVC setControllerArray:viewControllerArr];
-                //    存放tabBar上的按钮
-                [self.tabBarVC setTabButtonArray:buttonArr];
-                //    设置tabBar的高度 默认为50
-                [self.tabBarVC setTabBarHeight:35];
-                //    设置是否可以手势滑动切换模块 默认为YES
-                [self.tabBarVC setSuppurtGestureTransition:NO];
-                //    设置点击按钮有无翻页效果 默认有
-                [self.tabBarVC setTransitionAnimated:NO];
-                
-                AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                app.tabBarVC = self.tabBarVC;
-                app.window.rootViewController = self.tabBarVC;
-                
-                NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-                
-//                if ([memberDic objectForKey:@"token"] != nil && ![[memberDic objectForKey:@"token"] isEqualToString:@""]){
-//                    [self loginFuction];
-//                }
-                
-                //                }];
-            } else {
-                
-                [ProgressHUD showMessage:@"密码错误" Width:100 High:20];
-            }
             
+            --failCount;
+            if (failCount == 0) {
+                [self otherUserWithAction:nil];
+            } else {
+            
+                NSString *handString = [dic objectForKey:@"handString"];
+                NSLog(@"%@",handString);
+                if ([path isEqualToString:handString]) {
+                    
+                    //        2.0首页
+                    TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
+                    UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
+                    
+                    //        2.0产品
+                    TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
+                    UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
+                    
+                    //        2.0发现
+                    TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
+                    UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
+                    
+                    //        2.0我的
+                    TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
+                    //        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+                    UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
+                    
+                    //        2.0
+                    viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
+                    
+                    ////        2.0
+                    butGrayArr = @[@"selection_gray", @"production_gray", @"found_gray", @"mine_gray"];
+                    butColorArr = @[@"selection", @"production", @"found", @"mine"];
+                    
+                    //        for循环4要改成3***********************************
+                    buttonArr = [NSMutableArray array];
+                    for (int i = 0; i < 4; i++) {
+                        
+                        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+                        //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
+                        //        button.imageView.backgroundColor = [UIColor whiteColor];
+                        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butGrayArr objectAtIndex:i]]] forState:UIControlStateNormal];
+                        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butColorArr objectAtIndex:i]]] forState:UIControlStateSelected];
+                        //       点击保持高亮状态,没有闪动的效果
+                        [button setShowsTouchWhenHighlighted:YES];
+                        [buttonArr addObject:button];
+                    }
+                    
+                    self.tabBarVC = [[KKTabBarViewController alloc] init];
+                    //    存放试图控制器
+                    [self.tabBarVC setControllerArray:viewControllerArr];
+                    //    存放tabBar上的按钮
+                    [self.tabBarVC setTabButtonArray:buttonArr];
+                    //    设置tabBar的高度 默认为50
+                    [self.tabBarVC setTabBarHeight:35];
+                    //    设置是否可以手势滑动切换模块 默认为YES
+                    [self.tabBarVC setSuppurtGestureTransition:NO];
+                    //    设置点击按钮有无翻页效果 默认有
+                    [self.tabBarVC setTransitionAnimated:NO];
+                    
+                    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                    app.tabBarVC = self.tabBarVC;
+                    app.window.rootViewController = self.tabBarVC;
+                    
+                    NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+                    
+                    if ([memberDic objectForKey:@"token"] != nil && ![[memberDic objectForKey:@"token"] isEqualToString:@""]){
+                        [self loginFuction];
+                    }
+                    
+                } else {
+                    [ProgressHUD showMessage:[NSString stringWithFormat:@"手势密码错误，请重新输入，您还有%ld次机会",(long)failCount] Width:100 High:20];
+                }
+            }
         }
         
     }
@@ -341,10 +333,7 @@
 }
 
 - (void)sureButton:(UIButton *)but{
-    TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
-    [self presentViewController:loginAPPVC animated:YES completion:^{
-        
-    }];
+    [self otherUserWithAction:but];
     
     [bView removeFromSuperview];
     [forgetView removeFromSuperview];
@@ -360,9 +349,130 @@
     
 }
 
+- (void)otherUserWithAction:(id)sender{
+    
+    //        2.0首页
+    TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
+    UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
+    
+    //        2.0产品
+    TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
+    UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
+    
+    //        2.0发现
+    TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
+    UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
+    
+    //        2.0我的
+    TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
+    //        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+    UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
+    
+    //        2.0
+    viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
+    
+    ////        2.0
+    butGrayArr = @[@"selection_gray", @"production_gray", @"found_gray", @"mine_gray"];
+    butColorArr = @[@"selection", @"production", @"found", @"mine"];
+    
+    //        for循环4要改成3***********************************
+    buttonArr = [NSMutableArray array];
+    for (int i = 0; i < 4; i++) {
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
+        //        button.imageView.backgroundColor = [UIColor whiteColor];
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butGrayArr objectAtIndex:i]]] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butColorArr objectAtIndex:i]]] forState:UIControlStateSelected];
+        //       点击保持高亮状态,没有闪动的效果
+        [button setShowsTouchWhenHighlighted:YES];
+        [buttonArr addObject:button];
+    }
+    
+    self.tabBarVC = [[KKTabBarViewController alloc] init];
+    //    存放试图控制器
+    [self.tabBarVC setControllerArray:viewControllerArr];
+    //    存放tabBar上的按钮
+    [self.tabBarVC setTabButtonArray:buttonArr];
+    //    设置tabBar的高度 默认为50
+    [self.tabBarVC setTabBarHeight:35];
+    //    设置是否可以手势滑动切换模块 默认为YES
+    [self.tabBarVC setSuppurtGestureTransition:NO];
+    //    设置点击按钮有无翻页效果 默认有
+    [self.tabBarVC setTransitionAnimated:NO];
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.tabBarVC = self.tabBarVC;
+    app.window.rootViewController = self.tabBarVC;
+    
+    TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+    
+    UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+    [nvc setNavigationBarHidden:YES animated:YES];
+    
+    [app.tabBarVC presentViewController:nvc animated:YES completion:^{
+        if (![FileOfManage ExistOfFile:@"Member.plist"]) {
+            [FileOfManage createWithFile:@"Member.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 @"1",@"password",
+                                 @"1",@"phone",
+                                 @"",@"key",
+                                 @"",@"id",
+                                 @"",@"userNickname",
+                                 @"",@"avatarImg",
+                                 @"",@"userAccount",
+                                 @"",@"userPhone",
+                                 @"",@"accBalance",
+                                 @"",@"realnameStatus",
+                                 @"",@"realName",
+                                 @"",@"token",
+                                 @"",@"registerTime",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+        } else {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 @"1",@"password",
+                                 @"1",@"phone",
+                                 @"",@"key",
+                                 @"",@"id",
+                                 @"",@"userNickname",
+                                 @"",@"avatarImg",
+                                 @"",@"userAccount",
+                                 @"",@"userPhone",
+                                 @"",@"accBalance",
+                                 @"",@"realnameStatus",
+                                 @"",@"realName",
+                                 @"",@"token",
+                                 @"",@"registerTime",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+        }
+        
+        if (![FileOfManage ExistOfFile:@"handOpen.plist"]) {
+            [FileOfManage createWithFile:@"handOpen.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+        } else {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+        }
+        
+        // 判断是否存在isLogin.plist文件
+        if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+            [FileOfManage createWithFile:@"isLogin.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+        } else {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+        }
+    }];
+}
+
+#pragma mark 自动登录
+#pragma mark --------------------------------
+
 - (void)loginFuction{
     
-    NSDictionary *parmeter = @{@"phone":[userDic objectForKey:@"phone"],@"password":[userDic objectForKey:@"password"]};
+    NSDictionary *parmeter = @{@"phone":[userDic objectForKey:@"phone"],@"password":[DES3Util decrypt:[userDic objectForKey:@"password"]]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"login" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -400,7 +510,23 @@
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
-//            [self signFinish];
+            
+            // 判断是否存在isLogin.plist文件
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
+            
+            [self getMyAccountInfoFuction];
+            
+            //                if (![[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"] isEqualToNumber:@0]){
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showMonkey" object:[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"]];
+            //                }
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
@@ -412,66 +538,27 @@
     }];
 }
 
-//签到成功
-- (void)signFinish
-{
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    buttonHei = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, app.window.frame.size.height) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-    [app.tabBarVC.view addSubview:buttonHei];
-    buttonHei.alpha = 0.6;
-    [buttonHei addTarget:self action:@selector(clickedBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+- (void)getMyAccountInfoFuction{
     
-    viewDown = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 530/2/2, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 530/2, 397/2 + 30) backgroundColor:[UIColor clearColor]];
-    [app.tabBarVC.view addSubview:viewDown];
-    viewDown.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAddClicked:)];
-    [viewDown addGestureRecognizer:tapView];
+    NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    labelMonkey = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewDown.frame.size.width, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:27] text:[NSString stringWithFormat:@"%@猴币", @"+66"]];
-    [viewDown addSubview:labelMonkey];
+    NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"]};
     
-    imageSign = [CreatView creatImageViewWithFrame:CGRectMake(0, 30, viewDown.frame.size.width, viewDown.frame.size.height - 30) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"doSign"]];
-    [viewDown addSubview:imageSign];
-    imageSign.userInteractionEnabled = YES;
-    
-    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    animation.duration = 0.5;
-    
-    NSMutableArray *values = [NSMutableArray array];
-    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
-    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
-    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
-    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
-    animation.values = values;
-    [viewDown.layer addAnimation:animation forKey:nil];
-}
-
-//黑色遮罩层消失
-- (void)clickedBlackDisappear:(UIButton *)button
-{
-    [buttonHei removeFromSuperview];
-    [viewDown removeFromSuperview];
-    [labelMonkey removeFromSuperview];
-    [imageSign removeFromSuperview];
-    
-    buttonHei = nil;
-    viewDown = nil;
-    labelMonkey = nil;
-    imageSign = nil;
-}
-
-//点击猴子
-- (void)tapAddClicked:(UITapGestureRecognizer *)tap
-{
-    [buttonHei removeFromSuperview];
-    [viewDown removeFromSuperview];
-    [labelMonkey removeFromSuperview];
-    [imageSign removeFromSuperview];
-    
-    buttonHei = nil;
-    viewDown = nil;
-    labelMonkey = nil;
-    imageSign = nil;
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [memberDic setObject:[responseObject objectForKey:@"invitationMyCode"] forKey:@"invitationMyCode"];
+            
+            [memberDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
