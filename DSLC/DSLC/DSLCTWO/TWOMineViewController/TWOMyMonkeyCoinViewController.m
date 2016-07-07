@@ -126,7 +126,12 @@
             lineChart.frame = CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30, SCREEN_WIDTH, 202.0);
         }
     }
-    [lineChart setXLabels:@[[[monkeyArr objectAtIndex:0] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:1] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:2] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:3] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:4] objectForKey:@"getDate"]]];
+    
+    [lineChart setXLabels:@[[[monkeyArr objectAtIndex:0] objectForKey:@"getDate"],
+                            [[[monkeyArr objectAtIndex:1] objectForKey:@"getDate"] substringWithRange:NSMakeRange(3, 2)],
+                            [[[monkeyArr objectAtIndex:2] objectForKey:@"getDate"] substringWithRange:NSMakeRange(3, 2)],
+                            [[[monkeyArr objectAtIndex:3] objectForKey:@"getDate"] substringWithRange:NSMakeRange(3, 2)],
+                            [[[monkeyArr objectAtIndex:4] objectForKey:@"getDate"] substringWithRange:NSMakeRange(3, 2)]]];
     [lineChart setYValues:@[[[monkeyArr objectAtIndex:0] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:1] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:2] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:3] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:4] objectForKey:@"monkeyNum"]]];
     [lineChart strokeChart];
     [imagePicture addSubview:lineChart];
