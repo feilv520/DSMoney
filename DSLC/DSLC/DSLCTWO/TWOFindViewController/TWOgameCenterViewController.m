@@ -11,6 +11,7 @@
 #import "TWOMyGameScoreViewController.h"
 #import "TWOGameListModel.h"
 #import "TWOLoginAPPViewController.h"
+#import "TWOGameCenterExplainViewController.h"
 
 @interface TWOgameCenterViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -158,7 +159,8 @@
 //游戏攻略按钮
 - (void)buttonStrategy:(UIButton *)button
 {
-    NSLog(@"游戏攻略");
+    TWOGameCenterExplainViewController *gameCenterVC = [[TWOGameCenterExplainViewController alloc] init];
+    pushVC(gameCenterVC);
 }
 
 //游戏积分按钮

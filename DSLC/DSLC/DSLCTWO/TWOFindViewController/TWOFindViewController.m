@@ -135,7 +135,7 @@
 {
     TwoFindActCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    imageArray = @[@"排行榜", @"公益行", @"大扫描"];
+    imageArray = @[@"排行榜", @"大圣侃经", @"大扫描"];
     cell.imagePicture.image = [UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

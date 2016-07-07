@@ -34,31 +34,28 @@
     contentArr = [NSMutableArray array];
     curruntPage = 1;
     moreFlag = NO;
-    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 20 - 64)/2];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT / 2 - 60];
     
     [self getRecordData];
 }
 
 - (void)noHaveInviteRecord
 {
-    UIImageView *imageViewNo = [CreatView creatImageViewWithFrame:CGRectMake(75, (HEIGHT_CONTROLLER_DEFAULT- 20 - 64)/2 - 100 - 50, WIDTH_CONTROLLER_DEFAULT - 150, 200) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"NoRecord"]];
+    UIImageView *imageViewNo = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 200)/2 - 260/2/2, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [self.view addSubview:imageViewNo];
     
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         
-        imageViewNo.frame = CGRectMake(75, (HEIGHT_CONTROLLER_DEFAULT- 20 - 64)/2 - 100 - 50, WIDTH_CONTROLLER_DEFAULT - 150, 200);
+        imageViewNo.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 160)/2 - 260/2/2, 260/2, 260/2);
         
     } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
         
-        imageViewNo.frame = CGRectMake(85, (HEIGHT_CONTROLLER_DEFAULT- 20 - 64)/2 - 120 - 50, WIDTH_CONTROLLER_DEFAULT - 170, 240);
+        imageViewNo.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 200)/2 - 260/2/2, 260/2, 260/2);
         
-    } else {
+    } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
         
-        imageViewNo.frame = CGRectMake(95, (HEIGHT_CONTROLLER_DEFAULT- 20 - 64)/2 - 140 - 50, WIDTH_CONTROLLER_DEFAULT - 190, 280);
+        imageViewNo.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 150)/2 - 260/2/2, 260/2, 260/2);
     }
-    
-    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, (HEIGHT_CONTROLLER_DEFAULT- 20 - 64)/2 - 120 - 50 + imageViewNo.frame.size.height + 30, WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"您还没有邀请过好友,快去邀请拿好礼吧!"];
-    [self.view addSubview:labelAlert];
 }
 
 - (void)tabelViewShow
@@ -129,7 +126,7 @@
             
             NSMutableArray *userArray = [responseObject objectForKey:@"User"];
             
-            if (userArray.count == 0 && contentArr.count == 0) {
+            if (userArray.count == 0) {
                 
                 [self noHaveInviteRecord];
                 

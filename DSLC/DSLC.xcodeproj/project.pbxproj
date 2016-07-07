@@ -631,6 +631,8 @@
 		81B520A71BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B520A51BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81B520AA1BF9A71100D8E8D1 /* iconfont-sousuo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B520A81BF9A71100D8E8D1 /* iconfont-sousuo@2x.png */; settings = {ASSET_TAGS = (); }; };
 		81B520AB1BF9A71100D8E8D1 /* iconfont-sousuo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B520A91BF9A71100D8E8D1 /* iconfont-sousuo@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81B66EFF1D2E335A00C48AAC /* 大圣侃经@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B66EFD1D2E335A00C48AAC /* 大圣侃经@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81B66F001D2E335A00C48AAC /* 大圣侃经@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81B66EFE1D2E335A00C48AAC /* 大圣侃经@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81B674011BF0873B007CEF51 /* InviteNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B674001BF0873B007CEF51 /* InviteNameViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81B674041BF0A608007CEF51 /* HistoryMemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B674031BF0A608007CEF51 /* HistoryMemoryViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81B674091BF0A780007CEF51 /* HistoryMemoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B674071BF0A780007CEF51 /* HistoryMemoryCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -761,6 +763,7 @@
 		81D1F3801D2B892F00CFE067 /* TWONoDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D1F37E1D2B892F00CFE067 /* TWONoDataCell.m */; settings = {ASSET_TAGS = (); }; };
 		81D1F3811D2B892F00CFE067 /* TWONoDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D1F37F1D2B892F00CFE067 /* TWONoDataCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81D1F3841D2BB5B500CFE067 /* TWORealNameH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D1F3831D2BB5B500CFE067 /* TWORealNameH5ViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81D1F3871D2CA34800CFE067 /* TWOGameCenterExplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D1F3861D2CA34800CFE067 /* TWOGameCenterExplainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81D703F31BE06BD60074DF30 /* ForgetSecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703F21BE06BD60074DF30 /* ForgetSecretViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81D703F71BE06D1F0074DF30 /* ForgetSecretCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D703F51BE06D1F0074DF30 /* ForgetSecretCell.m */; settings = {ASSET_TAGS = (); }; };
 		81D703F81BE06D1F0074DF30 /* ForgetSecretCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D703F61BE06D1F0074DF30 /* ForgetSecretCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -2374,6 +2377,8 @@
 		81B520A51BF9891B00D8E8D1 /* iconfont-yaoqinghaoyou@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-yaoqinghaoyou@3x.png"; sourceTree = "<group>"; };
 		81B520A81BF9A71100D8E8D1 /* iconfont-sousuo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-sousuo@2x.png"; sourceTree = "<group>"; };
 		81B520A91BF9A71100D8E8D1 /* iconfont-sousuo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-sousuo@3x.png"; sourceTree = "<group>"; };
+		81B66EFD1D2E335A00C48AAC /* 大圣侃经@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "大圣侃经@2x.png"; sourceTree = "<group>"; };
+		81B66EFE1D2E335A00C48AAC /* 大圣侃经@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "大圣侃经@3x.png"; sourceTree = "<group>"; };
 		81B673FF1BF0873B007CEF51 /* InviteNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteNameViewController.h; sourceTree = "<group>"; };
 		81B674001BF0873B007CEF51 /* InviteNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteNameViewController.m; sourceTree = "<group>"; };
 		81B674021BF0A608007CEF51 /* HistoryMemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HistoryMemoryViewController.h; path = ../HistoryMemoryViewController.h; sourceTree = "<group>"; };
@@ -2552,6 +2557,8 @@
 		81D1F37F1D2B892F00CFE067 /* TWONoDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWONoDataCell.xib; sourceTree = "<group>"; };
 		81D1F3821D2BB5B500CFE067 /* TWORealNameH5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWORealNameH5ViewController.h; sourceTree = "<group>"; };
 		81D1F3831D2BB5B500CFE067 /* TWORealNameH5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWORealNameH5ViewController.m; sourceTree = "<group>"; };
+		81D1F3851D2CA34800CFE067 /* TWOGameCenterExplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOGameCenterExplainViewController.h; sourceTree = "<group>"; };
+		81D1F3861D2CA34800CFE067 /* TWOGameCenterExplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOGameCenterExplainViewController.m; sourceTree = "<group>"; };
 		81D703F11BE06BD60074DF30 /* ForgetSecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetSecretViewController.h; sourceTree = "<group>"; };
 		81D703F21BE06BD60074DF30 /* ForgetSecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetSecretViewController.m; sourceTree = "<group>"; };
 		81D703F41BE06D1F0074DF30 /* ForgetSecretCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetSecretCell.h; sourceTree = "<group>"; };
@@ -4113,6 +4120,8 @@
 				81D1F3741D2B7BB100CFE067 /* 中奖猴币@3x.png */,
 				81D1F3751D2B7BB100CFE067 /* 中奖现金@2x.png */,
 				81D1F3761D2B7BB100CFE067 /* 中奖现金@3x.png */,
+				81B66EFD1D2E335A00C48AAC /* 大圣侃经@2x.png */,
+				81B66EFE1D2E335A00C48AAC /* 大圣侃经@3x.png */,
 				8177A0371CF3EE630057AA7B /* 产品安全等级图片 */,
 			);
 			path = TWOImage;
@@ -4227,6 +4236,8 @@
 				81ADB2A01CF570D200E044BC /* TWOFindActivityCenterViewController.m */,
 				818102741CE031B00038B64E /* TWOgameCenterViewController.h */,
 				818102751CE031B00038B64E /* TWOgameCenterViewController.m */,
+				81D1F3851D2CA34800CFE067 /* TWOGameCenterExplainViewController.h */,
+				81D1F3861D2CA34800CFE067 /* TWOGameCenterExplainViewController.m */,
 				818C8C1F1CE06C9E00A14D37 /* TWOMyGameScoreViewController.h */,
 				818C8C201CE06C9E00A14D37 /* TWOMyGameScoreViewController.m */,
 				81ADB2881CF54BEA00E044BC /* TWODSPublicBenefitViewController.h */,
@@ -7528,6 +7539,7 @@
 				8D9F16C61D17C7AC00A70399 /* TWONoPrefit@3x.png in Resources */,
 				81D1F3771D2B7BB100CFE067 /* 中奖红包@2x.png in Resources */,
 				8D35DA471CF5431400C6409F /* TWODDBlue@2x.png in Resources */,
+				81B66F001D2E335A00C48AAC /* 大圣侃经@3x.png in Resources */,
 				8183F4031C97CC4F000BB93C /* iconfont-fenpei@3x.png in Resources */,
 				81B520A31BF9746400D8E8D1 /* AddressBookCell.xib in Resources */,
 				8181028A1CE043BB0038B64E /* 拔鸡毛@2x.png in Resources */,
@@ -7554,6 +7566,7 @@
 				81DEC7D31CEC5447005E9D9F /* kefu@3x.png in Resources */,
 				8177A03B1CF3EEDA0057AA7B /* xing@3x.png in Resources */,
 				812201391CE5DDC100159A74 /* bangding@3x.png in Resources */,
+				81B66EFF1D2E335A00C48AAC /* 大圣侃经@2x.png in Resources */,
 				8D3EEA051C27AB400031F7C9 /* 兴业银行@3x.png in Resources */,
 				8177A0201CF2E8920057AA7B /* nowin@2x.png in Resources */,
 				81B84BF41CE32F3A00A867B9 /* 已兑付hui.png in Resources */,
@@ -8783,6 +8796,7 @@
 				8D0CB4891BE75C860039D826 /* SimpleDescriptionsViewController.m in Sources */,
 				8D4518791C00553E00FAF998 /* GTMBase64.m in Sources */,
 				81650AE91D19280000B00BAD /* TWIJiaXiQuanCell.m in Sources */,
+				81D1F3871D2CA34800CFE067 /* TWOGameCenterExplainViewController.m in Sources */,
 				81F8EFEA1CF839CB00DC78FF /* TWOAddInterestViewController.m in Sources */,
 				81A233541CBF65BC009D43D3 /* InviteRecordCell.m in Sources */,
 				818523C21BE35BDB002FC653 /* MendLoginViewController.m in Sources */,

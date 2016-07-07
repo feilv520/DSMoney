@@ -34,6 +34,12 @@
 
 @implementation NewInviteViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    butReceive.hidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -43,11 +49,10 @@
     
     adModelArray = [NSMutableArray array];
     
-    butReceive = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, 60, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"邀请记录"];
+    butReceive = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 65, 8, 56, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"邀请记录"];
     butReceive.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-    UIBarButtonItem *rightButItem = [[UIBarButtonItem alloc] initWithCustomView:butReceive];
+    [self.navigationController.navigationBar addSubview:butReceive];
     [butReceive addTarget:self action:@selector(inviteRecordButton:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = rightButItem;
     
     viewGray = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor]];
     viewGray.alpha = 0.3;
@@ -439,6 +444,12 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    butReceive.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -162,6 +162,8 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"登录密码由6-20位数字和密码组成，以字母开头"];
     } else if ([textNewSecret.text isEqualToString:textOldSecret.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"新登录密码不能与原登录密码重复"];
+    } else if (![NSString validatePassword:textNewSecret.text]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"登录密码由6-20位数字和密码组成，以字母开头"];
     } else {
         [self.view endEditing:YES];
         [self mendData];

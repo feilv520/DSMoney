@@ -167,7 +167,7 @@
                 
             } else if (indexPath.row == 3) {
                 
-//                是否绑定邮箱
+                //是否绑定邮箱
                 if ([[[personalModel emailStatus] description] isEqualToString:@"2"]) {
                     cell.labelStates.text = [personalModel userEmail];
                     cell.imageRight.hidden = YES;
@@ -176,6 +176,7 @@
                     cell.labelStates.text = @"未绑定";
                     cell.labelStates.textColor = [UIColor profitColor];
                 }
+                
             } else if (indexPath.row == 5) {
                 cell.labelStates.hidden = YES;
             }

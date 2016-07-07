@@ -39,8 +39,8 @@
     myWebView.scrollView.bounces = NO;
     
 //    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/activity/enterRotate.html?token=%@",self.tokenString];
-    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/activity/enterRotate.html?token=%@",self.tokenString];
-    NSURL *url = [NSURL URLWithString:urlString];
+//    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/activity/enterRotate.html?token=%@",self.tokenString];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/activity/enterRotate.html",htmlFive]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [myWebView loadRequest:request];
 }
