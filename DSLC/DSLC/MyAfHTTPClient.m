@@ -7,6 +7,7 @@
 //
 
 #import "MyAfHTTPClient.h"
+#import "TWOLoginAPPViewController.h"
 
 @implementation MyAfHTTPClient
 
@@ -48,17 +49,17 @@
 
 - (void)postWithURLStringP:(NSString *)URLString
                parameters:(id)parameters
-                  success:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject))success
+                  success:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSString * _Nullable responseObject))success
                   failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error))failure{
     
-    NSString *URLPostString = [NSString stringWithFormat:@"https://yintong.com.cn/traderapi/cardandpay.htm"];
+//    NSString *URLPostString = [NSString stringWithFormat:@"https://yintong.com.cn/traderapi/cardandpay.htm"];
     
-    [self POST:URLPostString parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nonnull responseObject) {
+    [self POST:URLString parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nonnull responseObject) {
         
         NSData *doubi = responseObject;
         NSMutableString *responseString = [[NSMutableString alloc] initWithData:doubi encoding:NSUTF8StringEncoding];
         
-        NSLog(@"responseString = %@",responseString);
+//        NSLog(@"responseString = %@",responseString);
         
         NSString *character = nil;
         for (int i = 0; i < responseString.length; i ++) {
@@ -67,9 +68,9 @@
                 [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
         }
         responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
-        //        NSLog(@"%@",responseString);
-        NSDictionary *responseData = [MyAfHTTPClient parseJSONStringToNSDictionary:responseString];
-        success(task,responseData);
+//        NSLog(@"postWithURLStringP = %@",responseString);
+//        NSDictionary *responseData = [MyAfHTTPClient parseJSONStringToNSDictionary:responseString];
+        success(task,responseString);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(task,error);
     }];
@@ -102,7 +103,11 @@
         responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
 //        NSLog(@"%@",responseString);
         NSDictionary *responseData = [MyAfHTTPClient parseJSONStringToNSDictionary:responseString];
+        
         success(task,responseData);
+        if ([[responseData objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:400]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"fortyWithLogin" object:nil];
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(task,error);
     }];

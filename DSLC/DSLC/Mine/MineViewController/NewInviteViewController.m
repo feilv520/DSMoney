@@ -184,29 +184,31 @@
 - (void)buttonSendInvite:(UIButton *)button
 {
     
-    if (self.nameOrPhone == YES) {
-        
-        fString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode];
-        
+    NSString *shareString;
+    
+    if ([[[self.flagDic objectForKey:@"realnameStatus"] description] isEqualToString:@"2"]) {
+        shareString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", [DES3Util decrypt:[self.flagDic objectForKey:@"realName"]], self.inviteCode];
     } else {
-        
-        fString = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.phoneNum, @"&inviteCode=", self.inviteCode];
+        shareString = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", [self.flagDic objectForKey:@"phone"], @"&inviteCode=", self.inviteCode];
     }
-    
-    fString = [fString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+    NSLog(@"sssssssssssssss%@", [DES3Util decrypt:[self.flagDic objectForKey:@"realName"]]);
+    shareString = [shareString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"aaaaaaaaaaaaaaaaaaaa%@", shareString);
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
-                                      shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:喝咖啡,领红包,赚猴币多重惊喜等着你!  %@", fString]
+                                      shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:喝咖啡,领红包,赚猴币多重惊喜等着你!  %@", shareString]
                                      shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
-                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline,nil]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
     
     [UMSocialData defaultData].extConfig.wechatSessionData.title = @"邀请好友一起，免费共享星巴克";
     [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"邀请好友一起，免费共享星巴克";
+    [UMSocialData defaultData].extConfig.qqData.title = @"邀请好友一起，免费共享星巴克";
     
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = fString;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = fString;
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = shareString;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareString;
+    [UMSocialData defaultData].extConfig.qqData.url = shareString;
+    
 }
 
 - (void)inviteRecordButton:(UIBarButtonItem *)button
@@ -215,40 +217,6 @@
     InviteRecord.inviteCode = self.inviteCode;
     NSLog(@"%@",self.inviteCode);
     [self.navigationController pushViewController:InviteRecord animated:YES];
-}
-
-/**
- *  分享界面搭建
- */
-
-- (void)shareWithView{
-    NSBundle *rootBundle = [NSBundle mainBundle];
-    
-    viewGray.hidden = NO;
-    
-    inviteNV = (InviteNewView *)[[rootBundle loadNibNamed:@"InviteNewView" owner:nil options:nil]lastObject];
-    
-    inviteNV.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, self.view.frame.size.width, 200);
-    
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    [app.window addSubview:viewGray];
-    
-    [app.window addSubview:inviteNV];
-    
-    [inviteNV.wButton addTarget:self action:@selector(wAction) forControlEvents:UIControlEventTouchUpInside];
-    [inviteNV.WButton addTarget:self action:@selector(wAction) forControlEvents:UIControlEventTouchUpInside];
-    [inviteNV.xButton addTarget:self action:@selector(xAction) forControlEvents:UIControlEventTouchUpInside];
-    [inviteNV.XButton addTarget:self action:@selector(xAction) forControlEvents:UIControlEventTouchUpInside];
-    [inviteNV.pButton addTarget:self action:@selector(pAction) forControlEvents:UIControlEventTouchUpInside];
-    [inviteNV.PButton addTarget:self action:@selector(pAction) forControlEvents:UIControlEventTouchUpInside];
-    [inviteNV.rButton addTarget:self action:@selector(rAction) forControlEvents:UIControlEventTouchUpInside];
-    [inviteNV.RButton addTarget:self action:@selector(rAction) forControlEvents:UIControlEventTouchUpInside];
-    [inviteNV.qButton addTarget:self action:@selector(qAction) forControlEvents:UIControlEventTouchUpInside];
-    [inviteNV.QButton addTarget:self action:@selector(qAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [inviteNV.cancelButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
-    
 }
 
 #pragma mark 分享成功回调方法
@@ -261,153 +229,6 @@
         //得到分享到的微博平台名
         NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
     }
-}
-/**
- *  分享实现的方法
- */
-
-
-- (void)wAction{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"大圣理财,金融街的新宠." image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        NSLog(@"%u",response.responseCode);
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            //                [self getShareRedPacket];
-            NSLog(@"邀请成功！");
-        }
-    }];
-    
-    // 需要修改
-    
-    if (self.nameOrPhone == YES) {
-        
-        [UMSocialData defaultData].extConfig.wechatSessionData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode];
-        
-    } else {
-        
-        [UMSocialData defaultData].extConfig.wechatSessionData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.phoneNum, @"&inviteCode=", self.inviteCode];
-    }
-    
-}
-
-- (void)xAction{
-
-    NSString *fString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode];
-    
-    fString = [fString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    if (self.nameOrPhone == YES) {
-        
-        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.　%@",fString] image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
-            NSLog(@"shareResponse = %u",shareResponse.responseCode);
-            if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已分享到新浪微博."];
-            } else {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享失败."];
-            }
-        }];
-        
-    } else {
-        
-        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.　http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.phoneNum, self.inviteCode] image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
-            NSLog(@"shareResponse = %u",shareResponse.responseCode);
-            if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已分享到新浪微博."];
-            } else {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享失败."];
-            }
-        }];
-    }
-    
-}
-
-- (void)pAction{
-    
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"大圣理财,金融街的新宠." image:[UIImage imageNamed:@"fenxiangtouxiang"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        NSLog(@"%u",response.responseCode);
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            //                [self getShareRedPacket];
-            NSLog(@"邀请成功！");
-        }
-    }];
-    
-    // 需要修改
-    
-    if (self.nameOrPhone == YES) {
-        
-        [UMSocialData defaultData].extConfig.wechatTimelineData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.realName, @"&inviteCode=", self.inviteCode];
-        
-    } else {
-        
-        [UMSocialData defaultData].extConfig.wechatTimelineData.url = [NSString stringWithFormat:@"%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.phoneNum, @"&inviteCode=", self.inviteCode];
-    }
-}
-
-- (void)rAction{
-    
-    NSString *fString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode];
-    
-    fString = [fString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    if (self.nameOrPhone == YES) {
-        
-        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToRenren] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.　%@",fString] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-            NSLog(@"%u",response.responseCode);
-            if (response.responseCode == UMSResponseCodeSuccess) {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已分享到人人网."];
-            } else {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享失败."];
-            }
-        }];
-        
-    } else {
-        
-        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToRenren] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.phoneNum, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-            NSLog(@"%u",response.responseCode);
-            if (response.responseCode == UMSResponseCodeSuccess) {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已分享到人人网."];
-            } else {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"分享失败."];
-            }
-        }];
-    }
-    
-}
-
-- (void)qAction{
-    
-    NSString *fString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", self.realName, self.inviteCode];
-    
-    fString = [fString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    if (self.nameOrPhone == YES) {
-        
-        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.　%@",fString] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-            NSLog(@"%u",response.responseCode);
-            if (response.responseCode == UMSResponseCodeSuccess) {
-                //                [self getShareRedPacket];
-                NSLog(@"邀请成功！");
-            }
-        }];
-        
-    } else {
-        
-        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:[NSString stringWithFormat:@"大圣理财,金融街的新宠.%@%@%@%@", @"http://wap.dslc.cn/app/appInvite.html?name=", self.phoneNum, @"&inviteCode=", self.inviteCode] image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-            NSLog(@"%u",response.responseCode);
-            if (response.responseCode == UMSResponseCodeSuccess) {
-                //                [self getShareRedPacket];
-                NSLog(@"邀请成功！");
-            }
-        }];
-    }
-    
-}
-
-- (void)closeAction:(id)sender{
-    [UIView animateWithDuration:0.5f animations:^{
-        inviteNV.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, self.view.frame.size.width, 200);
-        
-        viewGray.hidden = YES;
-    }];
 }
 
 #pragma mark 网络请求方法

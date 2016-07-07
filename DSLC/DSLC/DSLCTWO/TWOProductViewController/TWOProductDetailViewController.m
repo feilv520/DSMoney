@@ -19,6 +19,8 @@
 #import "TWOProductSafeTestViewController.h"
 #import "TWOProductDDetailViewController.h"
 #import "TWOLoginAPPViewController.h"
+#import "TWOProductHuiFuViewController.h"
+#import "TWOProductHuiFuModel.h"
 
 @interface TWOProductDetailViewController () <UITableViewDataSource, UITableViewDelegate>{
     UITableView *_tableView;
@@ -674,8 +676,6 @@
 //        return ;
 //    }
     
-    [self registThirdShow];
-    
     button.enabled = NO;
     
     if ([self.residueMoney isEqualToString:@"0.00"]) {
@@ -690,6 +690,11 @@
     
     if ([dic objectForKey:@"token"] != nil) {
         
+        if ([[dic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
+            
+            [self registThirdShow];
+        }
+        
         NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -698,34 +703,15 @@
             
             button.enabled = YES;
             
-            if ([[responseObject objectForKey:@"result"] integerValue] == 400) {
-                
-                TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
-                
-                UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
-                [nvc setNavigationBarHidden:YES animated:YES];
-                
-                [self presentViewController:nvc animated:YES completion:^{
-                    
-                }];
-                return;
-                
-            } else {
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
                 if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"3"]) {
-                    
-//                    TMakeSureViewController *makeSureVC = [[TMakeSureViewController alloc] init];
-//                    makeSureVC.decide = YES;
-//                    makeSureVC.detailM = self.detailM;
-//                    makeSureVC.residueMoney = self.residueMoney;
-//                    [self.navigationController pushViewController:makeSureVC animated:YES];
                     
                     TWOProductMakeSureViewController *makeSureVC = [[TWOProductMakeSureViewController alloc] init];
                     
                     makeSureVC.decide = YES;
                     makeSureVC.detailM = self.detailM;
                     makeSureVC.residueMoney = self.residueMoney;
-//                    [self.navigationController pushViewController:makeSureVC animated:YES];
                     
                     [MobClick event:@"makeSure"];
                     
@@ -738,11 +724,12 @@
                     makeSureVC.decide = NO;
                     makeSureVC.detailM = self.detailM;
                     makeSureVC.residueMoney = self.residueMoney;
-//                    [self.navigationController pushViewController:makeSureVC animated:YES];
                     
                     [self submitLoadingWithHidden:YES];
                     
                 }
+            } else {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
@@ -751,7 +738,14 @@
         }];
     } else {
         [self submitLoadingWithHidden:YES];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+        TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+        
+        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [nvc setNavigationBarHidden:YES animated:YES];
+        
+        [self presentViewController:nvc animated:YES completion:^{
+            
+        }];
     }
     
 }
@@ -796,6 +790,48 @@
     viewThirdOpen = nil;
     
     NSLog(@"确定");
+    
+    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"clientType":@"iOS"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"chinaPnr/userRegister" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"汇付 : %@",responseObject);
+        
+        TWOProductHuiFuModel *huifuModel = [[TWOProductHuiFuModel alloc] init];
+        [huifuModel setValuesForKeysWithDictionary:responseObject];
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+            productHuiFuVC.chinaURLString = [huifuModel chinaPnrServer];
+            productHuiFuVC.huifuModel = huifuModel;
+            pushVC(productHuiFuVC);
+            
+//            NSDictionary *paraDic = @{@"BgRetUrl":[huifuModel BgRetUrl],@"ChkValue":[huifuModel ChkValue],@"CmdId":[huifuModel CmdId],@"MerCustId":[huifuModel MerCustId],@"MerPriv":[huifuModel MerPriv],@"PageType":[huifuModel PageType],@"RetUrl":[huifuModel RetUrl],@"UsrId":[huifuModel UsrId],@"UsrMp":[huifuModel UsrMp],@"Version":[huifuModel Version]};
+//            
+//            [[MyAfHTTPClient sharedClient] postWithURLStringP:[huifuModel chinaPnrServer] parameters:paraDic success:^(NSURLSessionDataTask * _Nullable task, NSString * _Nullable responseObject) {
+//                
+//                NSLog(@"chinaPnrServer = %@",responseObject);
+//                
+//                TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+//                productHuiFuVC.httpString = responseObject;
+//                pushVC(productHuiFuVC);
+//                                
+//            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//                
+//                NSLog(@"%@", error);
+//                
+//            }];
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+
+    
 }
 
 //开通三方弹框点击消失

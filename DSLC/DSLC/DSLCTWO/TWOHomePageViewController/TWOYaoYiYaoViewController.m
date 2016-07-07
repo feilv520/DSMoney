@@ -636,14 +636,16 @@
                                              appKey:@"5642ad7e67e58e8463006218"
                                           shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:喝咖啡,领红包,赚猴币多重惊喜等着你!  %@", shareString]
                                          shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
-                                    shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline,nil]
+                                    shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                            delegate:self];
         
         [UMSocialData defaultData].extConfig.wechatSessionData.title = @"邀请好友一起，免费共享星巴克";
         [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"邀请好友一起，免费共享星巴克";
+        [UMSocialData defaultData].extConfig.qqData.title = @"邀请好友一起，免费共享星巴克";
         
         [UMSocialData defaultData].extConfig.wechatSessionData.url = shareString;
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareString;
+        [UMSocialData defaultData].extConfig.qqData.url = shareString;
     }
 }
 

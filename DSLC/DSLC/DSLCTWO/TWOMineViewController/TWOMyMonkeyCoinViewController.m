@@ -90,7 +90,11 @@
     
     PNChart * lineChart = [[PNChart alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(labelMonkeyCoin.frame) - 10.0, SCREEN_WIDTH, 200.0)];
     lineChart.backgroundColor = [UIColor clearColor];
-    [lineChart setXLabels:@[[[monkeyArr objectAtIndex:0] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:1] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:2] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:3] objectForKey:@"getDate"],[[monkeyArr objectAtIndex:4] objectForKey:@"getDate"]]];
+    [lineChart setXLabels:@[[[monkeyArr objectAtIndex:0] objectForKey:@"getDate"],
+                            [[[monkeyArr objectAtIndex:1] objectForKey:@"getDate"] substringWithRange:NSMakeRange(3, 2)],
+                            [[[monkeyArr objectAtIndex:2] objectForKey:@"getDate"] substringWithRange:NSMakeRange(3, 2)],
+                            [[[monkeyArr objectAtIndex:3] objectForKey:@"getDate"] substringWithRange:NSMakeRange(3, 2)],
+                            [[[monkeyArr objectAtIndex:4] objectForKey:@"getDate"] substringWithRange:NSMakeRange(3, 2)]]];
     [lineChart setYValues:@[[[monkeyArr objectAtIndex:0] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:1] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:2] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:3] objectForKey:@"monkeyNum"],[[monkeyArr objectAtIndex:4] objectForKey:@"monkeyNum"]]];
     [lineChart strokeChart];
     [imagePicture addSubview:lineChart];
