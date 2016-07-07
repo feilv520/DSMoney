@@ -544,12 +544,34 @@ numberOfRowsInComponent:(NSInteger)component
                     [self.transactionName addObjectsFromArray:[[dic allKeys] mutableCopy]];
                 }
             }
-//            [transactionArr removeAllObjects];
-//            transactionArr = nil;
-//            transactionArr = [NSMutableArray array];
-//            [self.transactionArray removeAllObjects];
-//            self.transactionArray = nil;
-//            self.transactionArray = [NSMutableArray array];
+            
+            // 获取所有的key之后,对数组进行排序.保证数组的顺序是正确的
+            [self.transactionName sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                NSString *a = (NSString *)obj1;
+                NSString *b = (NSString *)obj2;
+                
+                int aNum = [[a substringFromIndex:6] intValue];
+                int bNum = [[b substringFromIndex:6] intValue];
+                
+                if (aNum < bNum) {
+                    return NSOrderedDescending;
+                }
+                else if (aNum > bNum){
+                    return NSOrderedAscending;
+                }
+                else {
+                    return NSOrderedSame;
+                }
+            }];
+            
+            NSLog(@"self.transactionName =  %@", self.transactionName);
+            
+            //            [transactionArr removeAllObjects];
+            //            transactionArr = nil;
+            //            transactionArr = [NSMutableArray array];
+            //            [self.transactionArray removeAllObjects];
+            //            self.transactionArray = nil;
+            //            self.transactionArray = [NSMutableArray array];
             for (NSDictionary *dic in [responseObject objectForKey:@"Trade"]) {
                 for (NSInteger i = beforeCount; i < self.transactionName.count; i++) {
                     [transactionArr removeAllObjects];
@@ -579,7 +601,7 @@ numberOfRowsInComponent:(NSInteger)component
             
             [footerT endRefreshing];
             
-            NSLog(@"transactionName = %@",self.transactionName);
+            //            NSLog(@"transactionName = %@",self.transactionName);
             //        NSLog(@"transactionArray = %@",self.transactionArray);
             
         }
