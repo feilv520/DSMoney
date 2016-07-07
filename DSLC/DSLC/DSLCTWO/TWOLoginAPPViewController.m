@@ -472,6 +472,7 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",
                                      [responseObject objectForKey:@""],nil];
@@ -489,6 +490,7 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -508,10 +510,8 @@
             }
             
             [self dismissViewControllerAnimated:YES completion:^{
-                if (![[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"] isEqualToNumber:@0]){
-    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"showMonkey" object:[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"]];
-                }
+                
+                [self userSign];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];
@@ -554,6 +554,7 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -570,6 +571,7 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -589,10 +591,7 @@
             [self getMyAccountInfoFuction];
             
             [self dismissViewControllerAnimated:YES completion:^{
-                if (![[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"] isEqualToNumber:@0]){
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"showMonkey" object:[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"]];
-                }
+                [self userSign];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];
@@ -651,6 +650,37 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)userSign{
+    
+    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    NSLog(@"dateString:%@",dateString);
+    
+    NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"],@"signDate":dateString};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"sign/userSign" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            if (![[responseObject objectForKey:@"signMonkeyNum"] isEqualToString:@"0"]){
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"showMonkey" object:[responseObject objectForKey:@"signMonkeyNum"]];
+            }
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {

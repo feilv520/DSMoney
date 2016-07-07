@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "ProgressHUD.h"
+#import "TWOLoginAPPViewController.h"
 
 @interface BaseViewController () <UIGestureRecognizerDelegate>
 
@@ -45,6 +46,15 @@
     [app.tabBarVC setSuppurtGestureTransition:NO];
     [app.tabBarVC setTabbarViewHidden:NO];
     [app.tabBarVC setLabelLineHidden:NO];
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self naviagationShow];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fortyWithLogin:) name:@"fortyWithLogin" object:nil];
 }
 
 - (void)setTitleString:(NSString *)titleString
@@ -106,10 +116,15 @@
     
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)fortyWithLogin:(NSNotification *)not{
+    TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
     
-    [self naviagationShow];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [nvc setNavigationBarHidden:YES animated:YES];
+    
+    [self presentViewController:nvc animated:YES completion:^{
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

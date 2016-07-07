@@ -78,6 +78,10 @@
     
     // 获取用户信息
     NSMutableDictionary *memberDic;
+    
+    NSMutableAttributedString *addMoneyString;
+    NSMutableAttributedString *butMoneyStr;
+    NSMutableAttributedString *butAddStr;
 }
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -314,7 +318,13 @@
     }
     [viewMoney addSubview:buttMoney];
     
-    NSMutableAttributedString *addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount totalMoney]]]];
+    NSLog(@"myAccount = %@",myAccount);
+    
+    if (myAccount == nil) {
+        addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+    } else {
+        addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount totalMoney]]]];
+    }
     NSRange leftrange = NSMakeRange(0, [[addMoneyString string] rangeOfString:@"元"].location);
     [addMoneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:leftrange];
     [addMoneyString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:leftrange];
@@ -369,7 +379,12 @@
     }
     [imageBackGround addSubview:butMoneyYu];
     
-    NSMutableAttributedString *butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount accBalance]]]];
+    if (myAccount == nil) {
+        butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+    } else {
+        butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount accBalance]]]];
+    }
+    
     NSRange shuRange = NSMakeRange(0, [[butMoneyStr string] rangeOfString:@"元"].location);
     [butMoneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:shuRange];
     [butMoneyStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:shuRange];
@@ -388,7 +403,12 @@
     }
     [imageBackGround addSubview:butAddMoney];
     
-    NSMutableAttributedString *butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount totalProfit]]]];
+    if (myAccount == nil) {
+        butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+    } else {
+        butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount totalProfit]]]];
+    }
+    
     NSRange frontRange = NSMakeRange(0, [[butAddStr string] rangeOfString:@"元"].location);
     [butAddStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:frontRange];
     [butAddStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:frontRange];
@@ -636,11 +656,19 @@
     [self canMakeMoney];
     [self addMoney];
     
-    labelMoneyZhong.text = [NSString stringWithFormat:@"%@元在投",[DES3Util decrypt:[myAccount investMoney]]];
-    labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-    
-    labelTeQuan.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount prlMoney]]];
-    labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    if (myAccount == nil) {
+        labelMoneyZhong.text = [NSString stringWithFormat:@"%@元在投",@"0.00"];
+        labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        
+        labelTeQuan.text = [NSString stringWithFormat:@"%@元",@"0.00"];
+        labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    } else {
+        labelMoneyZhong.text = [NSString stringWithFormat:@"%@元在投",[DES3Util decrypt:[myAccount investMoney]]];
+        labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        
+        labelTeQuan.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount prlMoney]]];
+        labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    }
     
     [buttonEye setImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateNormal];
     [buttonEye setImage:[UIImage imageNamed:@"openEye"] forState:UIControlStateHighlighted];
@@ -676,7 +704,12 @@
 //总资产方法
 - (void)zongMoney
 {
-    NSMutableAttributedString *addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount totalMoney]]]];
+    if (myAccount == nil) {
+        addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+    } else {
+        addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount totalMoney]]]];
+    }
+    
     NSRange leftrange = NSMakeRange(0, [[addMoneyString string] rangeOfString:@"元"].location);
     [addMoneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:leftrange];
     [addMoneyString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:leftrange];
@@ -695,7 +728,12 @@
 //可用余额
 - (void)canMakeMoney
 {
-    NSMutableAttributedString *butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount accBalance]]]];
+    if (myAccount == nil) {
+        butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+    } else {
+        butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount accBalance]]]];
+    }
+
     NSRange shuRange = NSMakeRange(0, [[butMoneyStr string] rangeOfString:@"元"].location);
     [butMoneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:shuRange];
     [butMoneyStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:shuRange];
@@ -708,7 +746,12 @@
 //累计收益
 - (void)addMoney
 {
-    NSMutableAttributedString *butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount totalProfit]]]];
+    if (myAccount == nil) {
+        butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+    } else {
+        butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount totalProfit]]]];
+    }
+    
     NSRange frontRange = NSMakeRange(0, [[butAddStr string] rangeOfString:@"元"].location);
     [butAddStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:16] range:frontRange];
     [butAddStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:frontRange];
@@ -721,7 +764,7 @@
 //封装闭眼
 - (void)closeEyesButton:(UIButton *)button
 {
-    NSMutableAttributedString *addMoneyString = [[NSMutableAttributedString alloc] initWithString:@"****"];
+    addMoneyString = [[NSMutableAttributedString alloc] initWithString:@"****"];
     NSRange allRange = NSMakeRange(0, 4);
     [addMoneyString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:allRange];
     [addMoneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:30] range:allRange];
@@ -1042,6 +1085,16 @@
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
+            
+            TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+            
+            UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
+            [nvc setNavigationBarHidden:YES animated:YES];
+            
+            [self presentViewController:nvc animated:YES completion:^{
+                
+            }];
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }

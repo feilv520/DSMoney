@@ -210,7 +210,7 @@
         if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
             TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
             
-            UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+            UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
             [nvc setNavigationBarHidden:YES animated:YES];
             
             [self presentViewController:nvc animated:YES completion:^{

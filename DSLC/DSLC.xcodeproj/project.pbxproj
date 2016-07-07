@@ -954,6 +954,8 @@
 		8D06004F1D06C15A00C0C97C /* TWO_Loading_Middle_06@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D0600411D06C15A00C0C97C /* TWO_Loading_Middle_06@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D0600501D06C15A00C0C97C /* TWO_Loading_Middle_07@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D0600421D06C15A00C0C97C /* TWO_Loading_Middle_07@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D0600511D06C15A00C0C97C /* TWO_Loading_Middle_07@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D0600431D06C15A00C0C97C /* TWO_Loading_Middle_07@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8D0901F21D2CE976004463CC /* TWOProductHuiFuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0901F11D2CE976004463CC /* TWOProductHuiFuViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D0901F51D2CEC88004463CC /* TWOProductHuiFuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0901F41D2CEC88004463CC /* TWOProductHuiFuModel.m */; settings = {ASSET_TAGS = (); }; };
 		8D0AE7F41BE09CE500D9D50C /* iconfont-register-gantanhao001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D0AE7EC1BE09CE500D9D50C /* iconfont-register-gantanhao001@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D0AE7F51BE09CE500D9D50C /* iconfont-register-gantanhao001@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D0AE7ED1BE09CE500D9D50C /* iconfont-register-gantanhao001@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D0AE7F61BE09CE500D9D50C /* register-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D0AE7EE1BE09CE500D9D50C /* register-1@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -2808,6 +2810,10 @@
 		8D0600411D06C15A00C0C97C /* TWO_Loading_Middle_06@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWO_Loading_Middle_06@3x.png"; sourceTree = "<group>"; };
 		8D0600421D06C15A00C0C97C /* TWO_Loading_Middle_07@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWO_Loading_Middle_07@2x.png"; sourceTree = "<group>"; };
 		8D0600431D06C15A00C0C97C /* TWO_Loading_Middle_07@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWO_Loading_Middle_07@3x.png"; sourceTree = "<group>"; };
+		8D0901F01D2CE976004463CC /* TWOProductHuiFuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductHuiFuViewController.h; sourceTree = "<group>"; };
+		8D0901F11D2CE976004463CC /* TWOProductHuiFuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductHuiFuViewController.m; sourceTree = "<group>"; };
+		8D0901F31D2CEC88004463CC /* TWOProductHuiFuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductHuiFuModel.h; sourceTree = "<group>"; };
+		8D0901F41D2CEC88004463CC /* TWOProductHuiFuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductHuiFuModel.m; sourceTree = "<group>"; };
 		8D0AE7EC1BE09CE500D9D50C /* iconfont-register-gantanhao001@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-register-gantanhao001@2x.png"; sourceTree = "<group>"; };
 		8D0AE7ED1BE09CE500D9D50C /* iconfont-register-gantanhao001@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-register-gantanhao001@3x.png"; sourceTree = "<group>"; };
 		8D0AE7EE1BE09CE500D9D50C /* register-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-1@2x.png"; sourceTree = "<group>"; };
@@ -4255,6 +4261,8 @@
 			children = (
 				8DBDD1441D23C6B100D27065 /* TWOProductAssetModel.h */,
 				8DBDD1451D23C6B100D27065 /* TWOProductAssetModel.m */,
+				8D0901F31D2CEC88004463CC /* TWOProductHuiFuModel.h */,
+				8D0901F41D2CEC88004463CC /* TWOProductHuiFuModel.m */,
 			);
 			path = TWOProductModel;
 			sourceTree = "<group>";
@@ -6722,6 +6730,8 @@
 				8D840C581CE31B80005A17F9 /* ATWViewController.m */,
 				81B84BE01CE30D7600A867B9 /* TWOBottomMoneyDetailViewController.h */,
 				81B84BE11CE30D7600A867B9 /* TWOBottomMoneyDetailViewController.m */,
+				8D0901F01D2CE976004463CC /* TWOProductHuiFuViewController.h */,
+				8D0901F11D2CE976004463CC /* TWOProductHuiFuViewController.m */,
 			);
 			name = "产品详情";
 			sourceTree = "<group>";
@@ -8695,6 +8705,7 @@
 				81CBE7AA1CE970B9004FE1D4 /* TWOBankCardCell.m in Sources */,
 				8D5DBB841BD4838200F556B9 /* CastUpTableViewCell.m in Sources */,
 				8DFA58211D1138F000FE9565 /* LYCircleView.m in Sources */,
+				8D0901F21D2CE976004463CC /* TWOProductHuiFuViewController.m in Sources */,
 				818523C91BE35E75002FC653 /* MendLoginCell.m in Sources */,
 				81B84BD71CE2DCA200A867B9 /* TWOAlreayCashViewController.m in Sources */,
 				81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */,
@@ -8755,6 +8766,7 @@
 				81ED031C1BD0DA35005F4B02 /* AddBankViewController.m in Sources */,
 				8175BE7C1BE9B4250044026E /* RecordViewController.m in Sources */,
 				8D18B2A61C29B02300754C13 /* RSA.m in Sources */,
+				8D0901F51D2CEC88004463CC /* TWOProductHuiFuModel.m in Sources */,
 				81B18E1D1BE756F300D448FA /* EmailViewController.m in Sources */,
 				81B520A21BF9746400D8E8D1 /* AddressBookCell.m in Sources */,
 				8107E4231CE1DC020086BF9B /* TWOProfitGettingCell.m in Sources */,

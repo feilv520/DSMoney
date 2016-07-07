@@ -16,7 +16,7 @@
     UIButton *closeItem;
     
     // 返回的url字符串
-    NSString *urlString;
+    NSString *urlStringTwo;
 }
 
 @end
@@ -63,8 +63,8 @@
     myWebView.scrollView.bounces = NO;
     
 //    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",self.tokenString];
-//    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/prize/index.html?token=%@",self.tokenString];
-    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.41:8888/tongjiang/prize/index.html"];
+    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/prize/index.html?token=%@",self.tokenString];
+//    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.41:8888/tongjiang/prize/index.html"];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -151,11 +151,11 @@
             
         }];
         
-        urlString = [webView stringByEvaluatingJavaScriptFromString:@"toAppLogin();"];
+        urlStringTwo = [webView stringByEvaluatingJavaScriptFromString:@"toAppLogin();"];
         
-        NSLog(@"urlString = %@",urlString);
+        NSLog(@"urlString = %@",urlStringTwo);
         
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStringTwo]];
         
         [webView loadRequest:request];
 
@@ -185,26 +185,39 @@
         if (![FileOfManage ExistOfFile:@"Member.plist"]) {
             [FileOfManage createWithFile:@"Member.plist"];
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [DES3Util encrypt:@"123213"],@"password",
+                                 [self.flagDic objectForKey:@"password"],@"password",
+                                 [self.flagDic objectForKey:@"phone"],@"phone",
+                                 [responseObject objectForKey:@"key"],@"key",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
-                                 [self.flagDic objectForKey:@"token"],@"token",
+                                 [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
+                                 [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
+                                 [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
+                                 [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
+                                 [responseObject objectForKey:@"token"],@"token",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
         } else {
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [DES3Util encrypt:@"123213"],@"password",
+                                 [self.flagDic objectForKey:@"password"],@"password",
+                                 [self.flagDic objectForKey:@"phone"],@"phone",
+                                 [responseObject objectForKey:@"key"],@"key",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"id"],@"id",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"userNickname"],@"userNickname",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
-                                 [self.flagDic objectForKey:@"token"],@"token",
+                                 [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
+                                 [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
+                                 [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
+                                 [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
+                                 [responseObject objectForKey:@"token"],@"token",
                                  [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+            NSLog(@"%@",[responseObject objectForKey:@"token"]);
         }
 
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToPickProduct" object:nil];
@@ -267,7 +280,7 @@
     
     UIWebView *wView = (UIWebView *)[self.view viewWithTag:9092];
     
-    NSString *newURLString = [NSString stringWithFormat:@"%@%@",urlString,notString];
+    NSString *newURLString = [NSString stringWithFormat:@"%@%@",urlStringTwo,notString];
     
     NSLog(@"newURLString = %@",newURLString);
     

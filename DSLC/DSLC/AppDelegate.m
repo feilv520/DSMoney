@@ -117,7 +117,7 @@
     
     [UMSocialWechatHandler setWXAppId:@"wxebb3d94fc5272ea8" appSecret:@"89f84525f50a31fc0acf6b551f9bcbc8" url:@"http://www.dslc.cn"];
     
-    [UMSocialQQHandler setQQWithAppId:@"1104927343" appKey:@"9RRogveZHZO6ZlWk" url:@"http://www.dslc.cn"];
+    [UMSocialQQHandler setQQWithAppId:@"1105107546" appKey:@"OgYvoCEzwr632bLP" url:@"http://www.dslc.cn"];
     
     [MobClick startWithAppkey:@"5642ad7e67e58e8463006218" reportPolicy:BATCH   channelId:@""];
     
@@ -445,6 +445,7 @@ void UncaughtExceptionHandler(NSException *exception){
                                      [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -461,6 +462,7 @@ void UncaughtExceptionHandler(NSException *exception){
                                      [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -477,10 +479,7 @@ void UncaughtExceptionHandler(NSException *exception){
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
             
-            if (![[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"] isEqualToNumber:@0]){
-            
-                [self signFinish:[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"]];
-            }
+//            [self userSign];
             
             [self getMyAccountInfoFuction];
             
@@ -586,5 +585,39 @@ void UncaughtExceptionHandler(NSException *exception){
     }];
 }
 
+- (void)userSign{
+    
+    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    NSLog(@"dateString:%@",dateString);
+    
+    NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"],@"signDate":dateString};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"sign/userSign" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"userSign = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            if (![[responseObject objectForKey:@"signMonkeyNum"] isEqualToString:@"0"]){
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"showMonkey" object:[responseObject objectForKey:@"signMonkeyNum"]];
+            }
+            
+        } else {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
+}
 
 @end
