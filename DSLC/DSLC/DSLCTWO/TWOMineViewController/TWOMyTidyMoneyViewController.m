@@ -64,6 +64,9 @@
     labelMoneyString = @"0";
     labelTouZiString = @"0";
     
+    viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 245.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:viewBottom];
+    
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, viewBottom.frame.size.height, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - viewBottom.frame.size.height - 64 - 20)];
     _scrollView.backgroundColor = [UIColor whiteColor];
     _scrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * 2, 0);
@@ -87,11 +90,11 @@
 - (void)noDataShow
 {
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
-        imageNoData = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 245.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+        imageNoData = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
         [_scrollView addSubview:imageNoData];
         
     } else {
-        imageNoData = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 245.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 100, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+        imageNoData = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 100, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
         [_scrollView addSubview:imageNoData];
     }
 }
@@ -100,20 +103,17 @@
 - (void)alreadyCashNoDataShow
 {
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
-        imageNoDataED = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 245.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+        imageNoDataED = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
         [_scrollView addSubview:imageNoDataED];
         
     } else {
-        imageNoDataED = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 245.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 100, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+        imageNoDataED = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT/2 - 260/2.3/2, 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 100, 260/2.3, 260/2.3) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
         [_scrollView addSubview:imageNoDataED];
     }
 }
 
 - (void)contentShow
 {
-    viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 245.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor]];
-    [self.view addSubview:viewBottom];
-    
     UIImageView *imageHead = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, viewBottom.frame.size.height - 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"productDetailBackground"]];
     [viewBottom addSubview:imageHead];
     
