@@ -1234,6 +1234,7 @@
 		8D6E46A11C9B9ECA00F0F5B7 /* loginViewUP@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E469D1C9B9ECA00F0F5B7 /* loginViewUP@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D6EFBA61BC78B02009FE101 /* shouyeqiepian750_28.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */; };
 		8D6EFBAA1BC78B02009FE101 /* shouyeqiepian7500_28highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6EFBA21BC78B02009FE101 /* shouyeqiepian7500_28highlight.png */; };
+		8D7181971D2F4F29009CB54D /* NSString+md5String.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7181961D2F4F29009CB54D /* NSString+md5String.m */; settings = {ASSET_TAGS = (); }; };
 		8D72ED851CFC0B6C00436C32 /* PNBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D72ED7A1CFC0B6C00436C32 /* PNBar.m */; settings = {ASSET_TAGS = (); }; };
 		8D72ED861CFC0B6C00436C32 /* PNBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D72ED7C1CFC0B6C00436C32 /* PNBarChart.m */; settings = {ASSET_TAGS = (); }; };
 		8D72ED871CFC0B6C00436C32 /* PNChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D72ED7E1CFC0B6C00436C32 /* PNChart.m */; settings = {ASSET_TAGS = (); }; };
@@ -3270,6 +3271,8 @@
 		8D6E469D1C9B9ECA00F0F5B7 /* loginViewUP@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginViewUP@3x.png"; sourceTree = "<group>"; };
 		8D6EFB9E1BC78B02009FE101 /* shouyeqiepian750_28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian750_28.png; sourceTree = "<group>"; };
 		8D6EFBA21BC78B02009FE101 /* shouyeqiepian7500_28highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouyeqiepian7500_28highlight.png; sourceTree = "<group>"; };
+		8D7181951D2F4F29009CB54D /* NSString+md5String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+md5String.h"; sourceTree = "<group>"; };
+		8D7181961D2F4F29009CB54D /* NSString+md5String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+md5String.m"; sourceTree = "<group>"; };
 		8D72ED791CFC0B6C00436C32 /* PNBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBar.h; sourceTree = "<group>"; };
 		8D72ED7A1CFC0B6C00436C32 /* PNBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNBar.m; sourceTree = "<group>"; };
 		8D72ED7B1CFC0B6C00436C32 /* PNBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBarChart.h; sourceTree = "<group>"; };
@@ -3744,6 +3747,8 @@
 				8D3942EE1C2D14B200783FD0 /* WelcomeViewController.m */,
 				8D15911B1D0FDA1600A4353D /* UIScrollView+UITouchEvent.h */,
 				8D15911C1D0FDA1600A4353D /* UIScrollView+UITouchEvent.m */,
+				8D7181951D2F4F29009CB54D /* NSString+md5String.h */,
+				8D7181961D2F4F29009CB54D /* NSString+md5String.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -7498,7 +7503,7 @@
 								enabled = 0;
 							};
 							com.apple.OMC = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 0;
@@ -8966,6 +8971,7 @@
 				812201291CE5B65700159A74 /* TWOMonkeyRecordCell.m in Sources */,
 				8D3942EF1C2D14B200783FD0 /* WelcomeViewController.m in Sources */,
 				81CBE7F31CEAC7A4004FE1D4 /* TWOImputPhoneNumCell.m in Sources */,
+				8D7181971D2F4F29009CB54D /* NSString+md5String.m in Sources */,
 				815D19561D2611C200DFA753 /* TWOGameListModel.m in Sources */,
 				8122C9551D13AC7B00070EAA /* TWOPersonalSetModel.m in Sources */,
 				8162D11D1BE1BCC900CACAB6 /* XinXiCell.m in Sources */,
@@ -9177,7 +9183,7 @@
 				APPLY_RULES_IN_COPY_FILES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "DSLC/大圣理财.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
 				ENABLE_BITCODE = NO;
@@ -9215,7 +9221,7 @@
 				APPLY_RULES_IN_COPY_FILES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "DSLC/大圣理财.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
 				ENABLE_BITCODE = NO;

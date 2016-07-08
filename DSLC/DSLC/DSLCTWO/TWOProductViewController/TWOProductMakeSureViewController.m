@@ -6,7 +6,6 @@
 //  Copyright © 2016年 马成铭. All rights reserved.
 //
 
-#import <CommonCrypto/CommonDigest.h>
 #import "TWOProductMakeSureViewController.h"
 #import "TWOMakeSureTableViewCell.h"
 #import "TWOProductDetailTableViewCell.h"
@@ -20,7 +19,6 @@
 #import "TWOUseRedBagViewController.h"
 #import "TWOUseTicketViewController.h"
 #import "TWOProductHuiFuViewController.h"
-#import "MD5Encryption.h"
 
 @interface TWOProductMakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>{
     
@@ -110,11 +108,13 @@
     
     sureView.hidden = YES;
     
-    makeSView.hidden = YES;
+    [bView removeFromSuperview];
+    [makeSView removeFromSuperview];
+    [monkeyView removeFromSuperview];
     
-    monkeyView.hidden = YES;
-    
-    bView.hidden = YES;
+    bView = nil;
+    makeSView = nil;
+    monkeyView = nil;
 }
 
 // 创建TableView
@@ -764,11 +764,13 @@
         
         NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"member.plist"]];
         
-        NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@",[MD5Encryption md5by32:[memberDic objectForKey:@"token"]],[MD5Encryption md5by32:[[self.detailM productId] description]],[MD5Encryption md5by32:[allMoneyString description]],[MD5Encryption md5by32:@"1"],[MD5Encryption md5by32:@"iOS"]];
+        NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@",[memberDic objectForKey:@"token"],[[self.detailM productId] description],[allMoneyString description],@"1",@"iOS"];
         
-        NSLog(@"signString = %@",signString);
+        NSString *md5SignString = [NSString md5String:signString];
         
-        NSDictionary *parameter = @{@"productId":[self.detailM productId],@"orderMoney":allMoneyString,@"payType":@"1",@"clientType":@"iOS",@"token":[memberDic objectForKey:@"token"],@"sign":signString};
+        NSLog(@"md5SignString = %@",md5SignString);
+        
+        NSDictionary *parameter = @{@"productId":[self.detailM productId],@"orderMoney":allMoneyString,@"payType":@"1",@"clientType":@"iOS",@"token":[memberDic objectForKey:@"token"],@"sign":md5SignString};
         
         [[MyAfHTTPClient sharedClient] postWithURLString:@"trade/buyNewHandProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
@@ -795,11 +797,13 @@
         }];
 
     } else {
-        NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",[DES3Util encrypt:[self.flagDic objectForKey:@"token"]],[DES3Util encrypt:[[self.detailM productId] description]],[DES3Util encrypt:[allMoneyString description]],[DES3Util encrypt:@"1"],[DES3Util encrypt:packetId],[DES3Util encrypt:incrId],[DES3Util encrypt:@"iOS"]];
+        NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",[self.flagDic objectForKey:@"token"],[[self.detailM productId] description],[allMoneyString description],@"1",packetId,incrId,@"iOS"];
+        
+        NSString *md5SignString = [NSString md5String:signString];
         
         TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
         productHuiFuVC.fuctionName = @"trade/chinaPnrTrade";
-        productHuiFuVC.tradeString = [NSString stringWithFormat:@"productId=%@&packetId=%@&incrId=%@&orderMoney=%@&payType=1&clientType=iOS&token=%@&sign=%@",[[self.detailM productId] description],packetId,incrId,[allMoneyString description],[self.flagDic objectForKey:@"token"],signString];
+        productHuiFuVC.tradeString = [NSString stringWithFormat:@"productId=%@&packetId=%@&incrId=%@&orderMoney=%@&payType=1&clientType=iOS&token=%@&sign=%@",[[self.detailM productId] description],packetId,incrId,[allMoneyString description],[self.flagDic objectForKey:@"token"],md5SignString];
         pushVC(productHuiFuVC);
     }
     
