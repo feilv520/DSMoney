@@ -78,8 +78,17 @@
     if (_flagUserInfo == nil) {
         if (![FileOfManage ExistOfFile:@"Member.plist"]) {
             [FileOfManage createWithFile:@"Member.plist"];
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"123",@"password",
-                                 @"123",@"phone",nil];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 @"1",@"password",
+                                 @"1",@"phone",
+                                 @"",@"key",
+                                 @"",@"id",
+                                 @"",@"userNickname",
+                                 @"",@"avatarImg",
+                                 @"",@"userAccount",
+                                 @"",@"userPhone",
+                                 @"",@"token",
+                                 @"",@"registerTime",nil];
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
         }
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];

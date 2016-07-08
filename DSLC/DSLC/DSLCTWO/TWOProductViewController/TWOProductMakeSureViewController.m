@@ -68,6 +68,9 @@
     
     monkeyView.hidden = NO;
     
+    doneButton.hidden = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addDoneButtonToNumPadKeyboard:) name:UIKeyboardWillShowNotification object:nil];
 }
 
 - (void)viewDidLoad {
@@ -85,11 +88,9 @@
     
     [self setSureView];
     
-    packetId = @"";
+    packetId = @"0";
     
-    incrId = @"";
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addDoneButtonToNumPadKeyboard) name:UIKeyboardWillShowNotification object:nil];
+    incrId = @"0";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keywordboardHide) name:UIKeyboardWillHideNotification object:nil];
     
@@ -108,6 +109,8 @@
     
     sureView.hidden = YES;
     
+    doneButton.hidden = YES;
+    
     [bView removeFromSuperview];
     [makeSView removeFromSuperview];
     [monkeyView removeFromSuperview];
@@ -115,6 +118,10 @@
     bView = nil;
     makeSView = nil;
     monkeyView = nil;
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 }
 
 // 创建TableView
@@ -692,7 +699,7 @@
 #pragma mark 添加完成按钮
 #pragma mark --------------------------------
 
-- (void)addDoneButtonToNumPadKeyboard
+- (void)addDoneButtonToNumPadKeyboard:(NSNotification*)Not
 {
     doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     doneButton.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 73, 122, 53);

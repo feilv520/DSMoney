@@ -22,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="productDetailBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="et0-cC-FHI">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productDetailBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="et0-cC-FHI">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                     <animations/>
                 </imageView>
@@ -103,17 +103,21 @@
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="et0-cC-FHI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3Y3-mw-ylI"/>
                 <constraint firstItem="HXN-FB-buy" firstAttribute="top" secondItem="U34-r4-Xta" secondAttribute="bottom" constant="40" id="4yY-pV-3lY"/>
+                <constraint firstAttribute="bottom" secondItem="et0-cC-FHI" secondAttribute="bottom" id="DcR-1T-WKQ"/>
                 <constraint firstItem="hxT-rT-gFR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Fga-nH-UpW"/>
                 <constraint firstItem="quT-oV-vvc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="KVQ-Rq-lTd"/>
                 <constraint firstItem="woC-UP-rR5" firstAttribute="top" secondItem="HXN-FB-buy" secondAttribute="bottom" constant="11" id="RL5-Qt-yRJ"/>
                 <constraint firstItem="hxT-rT-gFR" firstAttribute="top" secondItem="U34-r4-Xta" secondAttribute="bottom" constant="40" id="TlA-lw-VXK"/>
+                <constraint firstAttribute="trailing" secondItem="et0-cC-FHI" secondAttribute="trailing" id="ZFS-c2-X6t"/>
                 <constraint firstItem="U34-r4-Xta" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="crZ-8X-FYv"/>
                 <constraint firstAttribute="trailing" secondItem="HXN-FB-buy" secondAttribute="trailing" constant="15" id="f6r-cE-PFB"/>
                 <constraint firstAttribute="trailing" secondItem="woC-UP-rR5" secondAttribute="trailing" constant="15" id="fky-Ew-YR0"/>
                 <constraint firstItem="U34-r4-Xta" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="84" id="hTj-iu-VuH"/>
                 <constraint firstAttribute="trailing" secondItem="U34-r4-Xta" secondAttribute="trailing" id="hff-Er-tr8"/>
                 <constraint firstItem="quT-oV-vvc" firstAttribute="top" secondItem="hxT-rT-gFR" secondAttribute="bottom" constant="11" id="x65-1v-p9U"/>
+                <constraint firstItem="et0-cC-FHI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xk8-aU-RmB"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

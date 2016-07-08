@@ -66,13 +66,13 @@
     
     if ([self.fuctionName isEqualToString:@"netSave"] || [self.fuctionName isEqualToString:@"cash"]) {
         
-        urlString = [NSString stringWithFormat:@"http://192.168.0.14:8080/dslc/interface/chinaPnr/%@?token=%@&clientType=iOS&transMoney=%@",self.fuctionName,[self.flagDic objectForKey:@"token"],self.moneyString];
+        urlString = [NSString stringWithFormat:@"%@chinaPnr/%@?token=%@&clientType=iOS&transMoney=%@",MYAFHTTP_BASEURL,self.fuctionName,[self.flagDic objectForKey:@"token"],self.moneyString];
     } else if ([self.fuctionName containsString:@"chinaPnrTrade"]){
         
-        urlString = [NSString stringWithFormat:@"http://192.168.0.14:8080/dslc/interface/%@?%@",self.fuctionName,self.tradeString];
+        urlString = [NSString stringWithFormat:@"%@%@?%@",MYAFHTTP_BASEURL,self.fuctionName,self.tradeString];
     } else {
         
-        urlString = [NSString stringWithFormat:@"http://192.168.0.14:8080/dslc/interface/chinaPnr/%@?token=%@&clientType=iOS",self.fuctionName,[self.flagDic objectForKey:@"token"]];
+        urlString = [NSString stringWithFormat:@"%@chinaPnr/%@?token=%@&clientType=iOS",MYAFHTTP_BASEURL,self.fuctionName,[self.flagDic objectForKey:@"token"]];
     }
     
 //    urlString = [NSString stringWithFormat:@"%@chinaPnr/%@?token=%@&clientType=iOS",MYAFHTTP_BASEURL,self.fuctionName,[self.flagDic objectForKey:@"token"]];

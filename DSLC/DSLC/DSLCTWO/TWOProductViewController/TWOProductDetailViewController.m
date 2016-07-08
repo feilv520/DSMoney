@@ -741,6 +741,8 @@
             
         }];
     } else {
+        button.enabled = YES;
+        
         [self submitLoadingWithHidden:YES];
         TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
         
