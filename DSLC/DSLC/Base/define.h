@@ -73,6 +73,8 @@
 #import "JSONKit.h"                          // 第三方解析库
 #import "LLPaySdk.h"                         // 连连支付
 #import "LLPayUtil.h"                        // 连连文件
+#import "NSString+md5String.h"               // md5加密
+
 
 /*
  正式环境 认证支付测试商户号  201408071000001543
