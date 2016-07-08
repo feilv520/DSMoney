@@ -177,6 +177,7 @@
         
         TWONoDataCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNoData"];
         cell.backgroundColor = [UIColor qianhuise];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     } else {

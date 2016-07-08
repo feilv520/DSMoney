@@ -137,31 +137,33 @@
 //数据
 - (void)getSuggestionData
 {
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+//    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+//    
+//    if ([dic objectForKey:@"token"] == nil) {
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"为了你的问题能更好的解决,请登录后再提交反馈"];
+//        return;
+//    }
     
-    if ([dic objectForKey:@"token"] == nil) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"为了你的问题能更好的解决,请登录后再提交反馈"];
-        return;
-    }
+    NSDictionary *parameter = @{@"content":_textView.text, @"token":[self.flagDic objectForKey:@"token"]};
     
-    NSDictionary *parameter = @{@"content":_textView.text, @"token":[dic objectForKey:@"token"]};
-    
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/feedback" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"feedback" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"======%@", responseObject);
+        NSLog(@"意见反馈======%@", responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"提交成功"];
             [self.navigationController popViewControllerAnimated:YES];
+            
         } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:400]]) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请登录,再进行反馈"];
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"%@", error);
     }];
 }
 

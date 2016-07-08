@@ -9,12 +9,15 @@
 #import "TWOMyGameScoreViewController.h"
 #import "TWOMyGameScoreCell.h"
 #import "PNChart.h"
+#import "TWOGameListModel.h"
+#import "TWOGameScoreModel.h"
 
 @interface TWOMyGameScoreViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 {
     UITableView *_tableView;
     UIView *viewHead;
+    NSMutableArray *listArray;
 }
 
 @end
@@ -36,8 +39,10 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的游戏积分"];
+    listArray = [NSMutableArray array];
     
-    [self tableViewShow];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
+    [self getMyGameScoreData];
 }
 
 - (void)tableViewShow
@@ -80,18 +85,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return listArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWOMyGameScoreCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    TWOGameScoreModel *gameScoreModel = [listArray objectAtIndex:indexPath.row];
     
-    cell.labelName.text = @"大圣酷跑";
+    cell.labelName.text = [gameScoreModel typeName];
     cell.labelName.textColor = [UIColor blackZiTi];
     cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-    cell.labelTime.text = @"2016-05-02 12:00";
+    cell.labelTime.text = [gameScoreModel createTime];
     cell.labelTime.textColor = [UIColor findZiTiColor];
     cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
@@ -116,6 +122,30 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
+}
+
+#pragma mark 我的游戏积分~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- (void)getMyGameScoreData
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"integral/getUserIntegralList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [self loadingWithHidden:YES];
+        NSLog(@"我的游戏积分~~~~~~~~~%@", responseObject);
+        if ([[responseObject objectForKey:@"resultCode"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *dataArray = [responseObject objectForKey:@"integralInfo"];
+            for (NSDictionary *dataDic in dataArray) {
+                TWOGameScoreModel *gameScoreModel = [[TWOGameScoreModel alloc] init];
+                [gameScoreModel setValuesForKeysWithDictionary:dataDic];
+                [listArray addObject:gameScoreModel];
+            }
+            
+            [self tableViewShow];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

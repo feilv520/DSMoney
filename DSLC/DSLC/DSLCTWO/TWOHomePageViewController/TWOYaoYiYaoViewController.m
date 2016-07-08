@@ -77,7 +77,13 @@
     [butShare setBackgroundImage:[UIImage imageNamed:@"icon_shareq"] forState:UIControlStateHighlighted];
     [butShare addTarget:self action:@selector(buttonShareYaoYiYao:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self showCiShuData];
+    NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        [self noLoginShow];
+    } else {
+        [self showCiShuData];
+    }
+    
     [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:YES];
     [self becomeFirstResponder];
 }

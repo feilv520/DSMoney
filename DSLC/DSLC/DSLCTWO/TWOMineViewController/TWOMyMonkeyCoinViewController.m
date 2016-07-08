@@ -12,6 +12,10 @@
 #import "MonkeyRulesViewController.h"
 #import "MyMonkeyModel.h"
 #import "PNChart.h"
+#import "TWOgameCenterViewController.h"
+#import "TBigTurntableViewController.h"
+#import "TBaoJiViewController.h"
+#import "TWOFindActivityCenterViewController.h"
 
 @interface TWOMyMonkeyCoinViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -304,6 +308,7 @@
     [cell.butThreeUp addTarget:self action:@selector(cashProfitButton:) forControlEvents:UIControlEventTouchUpInside];
     [cell.butThreeDown addTarget:self action:@selector(cashProfitButton:) forControlEvents:UIControlEventTouchUpInside];
     
+    //游戏中心
     [cell.butFourUp addTarget:self action:@selector(gameCenterButton:) forControlEvents:UIControlEventTouchUpInside];
     [cell.butFourDown addTarget:self action:@selector(gameCenterButton:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -416,24 +421,33 @@
 - (void)bigTurntableButton:(UIButton *)button
 {
     NSLog(@"big");
+    TBigTurntableViewController *bigPanVC = [[TBigTurntableViewController alloc] init];
+    bigPanVC.tokenString = [self.flagDic objectForKey:@"token"];
+    pushVC(bigPanVC);
 }
 
 //爆击红包按钮方法
 - (void)crazyBeatButton:(UIButton *)button
 {
     NSLog(@"beat");
+    TBaoJiViewController *baoJiVC = [[TBaoJiViewController alloc] init];
+    pushVC(baoJiVC);
 }
 
-//兑换收益按钮方法
+//活动中心按钮方法
 - (void)cashProfitButton:(UIButton *)button
 {
     NSLog(@"cash");
+    TWOFindActivityCenterViewController *activityCenter = [[TWOFindActivityCenterViewController alloc] init];
+    pushVC(activityCenter);
 }
 
 //游戏中心按钮方法
 - (void)gameCenterButton:(UIButton *)button
 {
     NSLog(@"game");
+    TWOgameCenterViewController *gameCenterVC = [[TWOgameCenterViewController alloc] init];
+    pushVC(gameCenterVC);
 }
 
 //确定兑换按钮

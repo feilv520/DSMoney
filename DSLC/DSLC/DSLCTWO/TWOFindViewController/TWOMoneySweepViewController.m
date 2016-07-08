@@ -54,7 +54,7 @@
 //无数据显示
 - (void)nodataImageShow
 {
-    UIImageView *imageNoData = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, HEIGHT_CONTROLLER_DEFAULT/2 - 260/2/2, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    UIImageView *imageNoData = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2 - 260/2/2, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [self.view addSubview:imageNoData];
 }
 

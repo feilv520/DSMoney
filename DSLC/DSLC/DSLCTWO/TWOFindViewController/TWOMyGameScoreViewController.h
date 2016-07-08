@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOMyGameScoreViewController : BaseViewController
-
+@property (nonatomic) NSString *scoreString;
 @end
