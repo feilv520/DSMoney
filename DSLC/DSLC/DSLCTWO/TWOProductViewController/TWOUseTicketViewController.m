@@ -7,13 +7,20 @@
 //
 
 #import "TWOUseTicketViewController.h"
-#import "TWOUseRedBagCell.h"
 #import "TWIJiaXiQuanCell.h"
+#import "TWOJiaXiQuanModel.h"
 
 @interface TWOUseTicketViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tableView;
+    
+    NSInteger page;
+    
+    NSMutableArray *ticketArray;
+    
+    // 选中的加息卷Id
+    NSString *incrId;
 }
 
 @end
@@ -27,7 +34,21 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"可用加息券"];
     
-    [self tableViewShow];
+    ticketArray = [NSMutableArray array];
+    
+    page = 1;
+    
+    [self getMyIncreaseList];
+}
+
+- (void)returnText:(ReturnTextBlock)block {
+    self.returnTextBlock = block;
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    if (self.returnTextBlock != nil) {
+        self.returnTextBlock(incrId);
+    }
 }
 
 - (void)tableViewShow
@@ -49,16 +70,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return ticketArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWIJiaXiQuanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
+    TWOJiaXiQuanModel *model = [ticketArray objectAtIndex:indexPath.row];
+    
     cell.imagePicture.image = [UIImage imageNamed:@"jiaxijuan"];
     
-    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"2"]];
+    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [model incrMoney]]];
     NSRange signRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"%"].location);
     [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:39] range:signRange];
     NSRange baifenhao = NSMakeRange([[moneyString string] length] - 1, 1);
@@ -82,7 +105,7 @@
         cell.butCanUse.frame = CGRectMake(370, 10, 23, 127);
     }
     
-    NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];
+    NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [model investMoney]]];
     NSRange leftRange = NSMakeRange(0, 5);
     [useing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:leftRange];
     [useing addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:leftRange];
@@ -92,7 +115,12 @@
     [cell.labelTiaoJian setAttributedText:useing];
     cell.labelTiaoJian.backgroundColor = [UIColor clearColor];
     
-    cell.labelEvery.text = @"所有产品适用";
+    if ([[[model applyTypeName] description] isEqualToString:@"0"]) {
+        cell.labelEvery.text = @"所有产品可用";
+    } else {
+        cell.labelEvery.text = [NSString stringWithFormat:@"期限%@天及以上产品可用",[model applyDays]];
+    }
+    
     cell.labelEvery.backgroundColor = [UIColor clearColor];
     
     [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];
@@ -100,11 +128,15 @@
     cell.butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     cell.butCanUse.backgroundColor = [UIColor clearColor];
     
-    cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
+    cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [model startDate], [model endDate]];
     cell.labelData.backgroundColor = [UIColor clearColor];
     
-    if (indexPath.row == 2) {
+    if ([[[model isEnabled] description] isEqualToString:@"1"]) {
+        
         cell.contentView.alpha = 0.5;
+    } else {
+        
+        cell.contentView.alpha = 1.0;
     }
     
     return cell;
@@ -112,8 +144,46 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    TWOJiaXiQuanModel *model = [ticketArray objectAtIndex:indexPath.row];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    popVC;
+    
+    if (![[[model isEnabled] description] isEqualToString:@"1"]) {
+    
+        incrId = [model incrId];
+        popVC;
+    }
+}
+
+- (void)getMyIncreaseList{
+    
+    NSDictionary *parmeter = @{@"curPage":[NSNumber numberWithInteger:page],@"status":@0,@"proPeriod":self.proPeriod,@"transMoney":self.transMoney,@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getMyIncreaseList = %@",responseObject);
+        
+        NSArray *increaseArray = [responseObject objectForKey:@"Increase"];
+        for (NSDictionary *dic in increaseArray) {
+            TWOJiaXiQuanModel *model = [[TWOJiaXiQuanModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic];
+            [ticketArray addObject:model];
+        }
+        
+        if (page == 1) {
+            
+            [self tableViewShow];
+        } else {
+            [_tableView reloadData];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

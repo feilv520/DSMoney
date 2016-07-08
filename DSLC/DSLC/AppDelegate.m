@@ -479,7 +479,7 @@ void UncaughtExceptionHandler(NSException *exception){
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
             
-//            [self userSign];
+            [self userSign];
             
             [self getMyAccountInfoFuction];
             
@@ -609,7 +609,7 @@ void UncaughtExceptionHandler(NSException *exception){
             }
             
         } else {
-            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+//            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

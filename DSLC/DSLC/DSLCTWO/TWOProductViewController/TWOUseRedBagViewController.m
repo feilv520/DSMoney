@@ -8,11 +8,18 @@
 
 #import "TWOUseRedBagViewController.h"
 #import "TWOUseRedBagCell.h"
+#import "TWORedBagModel.h"
 
 @interface TWOUseRedBagViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
-    UITableView *_tableView;
+    UITableView *mainTableView;
+    
+    NSInteger page;
+    
+    NSMutableArray *moneyArray;
+    
+    NSString *packetId;
 }
 
 @end
@@ -26,19 +33,33 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"可用红包"];
     
-    [self tableViewShow];
+    moneyArray = [NSMutableArray array];
+    
+    page = 1;
+    
+    [self getMyRedPacketList];
+}
+
+- (void)returnText:(ReturnTextBlock)block {
+    self.returnTextBlock = block;
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    if (self.returnTextBlock != nil) {
+        self.returnTextBlock(packetId);
+    }
 }
 
 - (void)tableViewShow
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 -64) style:UITableViewStylePlain];
-    [self.view addSubview:_tableView];
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    _tableView.separatorColor = [UIColor clearColor];
-    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
-    _tableView.tableFooterView.backgroundColor = [UIColor clearColor];
-    [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20 - 64) style:UITableViewStylePlain];
+    [self.view addSubview:mainTableView];
+    mainTableView.dataSource = self;
+    mainTableView.delegate = self;
+    mainTableView.separatorColor = [UIColor clearColor];
+    mainTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
+    mainTableView.tableFooterView.backgroundColor = [UIColor clearColor];
+    [mainTableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -48,16 +69,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return moneyArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TWOUseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    TWOUseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse" forIndexPath:indexPath];
+    
+    TWORedBagModel *model = [moneyArray objectAtIndex:indexPath.row];
     
     cell.imagePicture.image = [UIImage imageNamed:@"twohongbao"];
     
-    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", @"20"]];
+    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", [model repPacketMoney]]];
     NSRange signRange = NSMakeRange(0, 1);
     [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:signRange];
     [cell.labelMoney setAttributedText:moneyString];
@@ -79,7 +102,7 @@
         cell.labelData.frame = CGRectMake(158, 110, 195, 12);
     }
     
-    NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];
+    NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [model investMoney]]];
     NSRange leftRange = NSMakeRange(0, 5);
     [useing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:leftRange];
     [useing addAttribute:NSForegroundColorAttributeName value:[UIColor moneyColor] range:leftRange];
@@ -89,7 +112,11 @@
     [cell.labelTiaoJian setAttributedText:useing];
     cell.labelTiaoJian.backgroundColor = [UIColor clearColor];
 
-    cell.labelEvery.text = @"所有产品适用";
+    if ([[[model applyTypeName] description] isEqualToString:@"0"]) {
+        cell.labelEvery.text = @"所有产品可用";
+    } else {
+        cell.labelEvery.text = [NSString stringWithFormat:@"期限%@天及以上产品可用",[model applyDays]];
+    }
     cell.labelEvery.backgroundColor = [UIColor clearColor];
     
     [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];
@@ -97,11 +124,15 @@
     cell.butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     cell.butCanUse.backgroundColor = [UIColor clearColor];
     
-    cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
+    cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [model startDate], [model endDate]];
     cell.labelData.backgroundColor = [UIColor clearColor];
     
-    if (indexPath.row == 2) {
+    if ([[[model isEnabled] description] isEqualToString:@"1"]) {
+        
         cell.contentView.alpha = 0.5;
+    } else {
+        
+        cell.contentView.alpha = 1.0;
     }
     
     return cell;
@@ -109,8 +140,46 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    TWORedBagModel *model = [moneyArray objectAtIndex:indexPath.row];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    popVC;
+    
+    if (![[[model isEnabled] description] isEqualToString:@"1"]) {
+        
+        packetId = [model redPacketId];
+        popVC;
+    }
+}
+
+- (void)getMyRedPacketList{
+    
+    NSDictionary *parmeter = @{@"curPage":[NSNumber numberWithInteger:page],@"status":@0,@"proPeriod":self.proPeriod,@"transMoney":self.transMoney,@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getMyRedPacketList = %@",responseObject);
+
+        NSArray *redPackArray = [responseObject objectForKey:@"RedPacket"];
+        for (NSDictionary *dic in redPackArray) {
+            TWORedBagModel *model = [[TWORedBagModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic];
+            [moneyArray addObject:model];
+        }
+        
+        if (page == 1) {
+        
+            [self tableViewShow];
+        } else {
+            [mainTableView reloadData];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

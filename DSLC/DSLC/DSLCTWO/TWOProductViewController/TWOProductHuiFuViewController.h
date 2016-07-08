@@ -11,9 +11,9 @@
 
 @interface TWOProductHuiFuViewController : BaseViewController
 
-@property (nonatomic, strong) NSString *chinaURLString;
-@property (nonatomic, strong) TWOProductHuiFuModel *huifuModel;
+@property (nonatomic, strong) NSString *moneyString;
+@property (nonatomic, strong) NSString *fuctionName;
 
-@property (nonatomic, strong) NSString *httpString;
+@property (nonatomic, strong) NSString *tradeString;
 
 @end

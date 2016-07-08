@@ -18,6 +18,9 @@
     
     // 返回的url字符串
     NSString *urlStringTwo;
+    
+    // url字符串
+    NSString *urlString;
 }
 
 @end
@@ -61,34 +64,26 @@
     myWebView.scrollView.showsHorizontalScrollIndicator = NO;
     myWebView.scrollView.bounces = NO;
     
-//    NSString *urlString = self.chinaURLString;
+    if ([self.fuctionName isEqualToString:@"netSave"] || [self.fuctionName isEqualToString:@"cash"]) {
+        
+        urlString = [NSString stringWithFormat:@"http://192.168.0.14:8080/dslc/interface/chinaPnr/%@?token=%@&clientType=iOS&transMoney=%@",self.fuctionName,[self.flagDic objectForKey:@"token"],self.moneyString];
+    } else if ([self.fuctionName containsString:@"chinaPnrTrade"]){
+        
+        urlString = [NSString stringWithFormat:@"http://192.168.0.14:8080/dslc/interface/%@?%@",self.fuctionName,self.tradeString];
+    } else {
+        
+        urlString = [NSString stringWithFormat:@"http://192.168.0.14:8080/dslc/interface/chinaPnr/%@?token=%@&clientType=iOS",self.fuctionName,[self.flagDic objectForKey:@"token"]];
+    }
     
-    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.14:8080/dslc/interface/chinaPnr/userReg?token=%@&clientType=iOS",[self.flagDic objectForKey:@"token"]];
+//    urlString = [NSString stringWithFormat:@"%@chinaPnr/%@?token=%@&clientType=iOS",MYAFHTTP_BASEURL,self.fuctionName,[self.flagDic objectForKey:@"token"]];
     
     NSLog(@"urlString = %@",urlString);
 
     NSURL *url = [NSURL URLWithString:urlString];
-
-//    NSString *bodyString = [NSString stringWithFormat:@"BgRetUrl=%@&ChkValue=%@&CmdId=%@&MerCustId=%@&MerPriv=%@&PageType=%@&RetUrl=%@&UsrId=%@&UsrMp=%@&Version=%@",[self.huifuModel BgRetUrl],[self.huifuModel ChkValue],[self.huifuModel CmdId],[self.huifuModel MerCustId],[self.huifuModel MerPriv],[self.huifuModel PageType],[self.huifuModel RetUrl],[self.huifuModel UsrId],[self.huifuModel UsrMp],[self.huifuModel Version]];
-    
-//    NSString *bodyString = [NSString stringWithFormat:@"Version=%@CmdId=%@MerCustId=%@PageType=%@ChkValue=%@UsrId=%@UsrMp=%@MerPriv=%@RetUrl=%@",[self.huifuModel Version],[self.huifuModel CmdId],[self.huifuModel MerCustId],[self.huifuModel PageType],[self.huifuModel ChkValue],[self.huifuModel UsrId],[self.huifuModel UsrMp],[self.huifuModel MerPriv],[self.huifuModel RetUrl]];
-    
-//    NSLog(@"bodyString = %@",bodyString);
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
-//    [request setHTTPMethod:@"POST"];
-//    [request setHTTPBody: [bodyString dataUsingEncoding: NSUTF8StringEncoding]];
-    
-//    NSString *httpBodyString = [self dictionaryToJson:paraDic];
-//    
-//    NSLog(@"%@",httpBodyString);
-    
-//    [request setHTTPBody:[httpBodyString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-    
     [myWebView loadRequest:request];
-    
-//    [myWebView loadHTMLString:self.httpString baseURL:nil];
     
 }
 
@@ -110,6 +105,8 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSString * requestString = [[request URL] absoluteString];
     
+    NSString *responseString = [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding];
+    
     requestString = [requestString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     //获取H5页面里面按钮的操作方法,根据这个进行判断返回是内部的还是push的上一级页面
     if ([requestString hasPrefix:@"goback:"]) {
@@ -117,7 +114,7 @@
     }
     
     NSLog(@"requestString = %@",requestString);
-    
+    NSLog(@"responseString = %@",responseString);
     return YES;
 }
 

@@ -23,6 +23,8 @@
 #import "TWOMoneyMoreFinishViewController.h"
 #import "TWORedBagViewController.h"
 #import "TWOMyAccountModel.h"
+#import "TWOLiftMoneyViewController.h"
+#import "TWOMoneyMoreViewController.h"
 
 @interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -774,14 +776,15 @@
 //充值按钮
 - (void)buttonFullMoney:(UIButton *)button
 {
-    TWOMoneyMoreFinishViewController *finishVC = [[TWOMoneyMoreFinishViewController alloc] init];
-    [self.navigationController pushViewController:finishVC animated:YES];
+    TWOMoneyMoreViewController *moneyMoreVC = [[TWOMoneyMoreViewController alloc] init];
+    pushVC(moneyMoreVC);
 }
 
 //提现按钮
 - (void)buttonFillMoney:(UIButton *)button
 {
-    NSLog(@"tixian");
+    TWOLiftMoneyViewController *liftMoneyVC = [[TWOLiftMoneyViewController alloc] init];
+    pushVC(liftMoneyVC);
 }
 
 //点击头像按钮

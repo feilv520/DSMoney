@@ -115,7 +115,7 @@
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         loadingImgView.center = CGPointMake(160, height);
     } else {
-        loadingImgView.center = CGPointMake(self.view.center.x + 10, height);
+        loadingImgView.center = CGPointMake(self.view.center.x + 5, height);
     }
     
     for (NSInteger i = 1; i <= 7; i++) {

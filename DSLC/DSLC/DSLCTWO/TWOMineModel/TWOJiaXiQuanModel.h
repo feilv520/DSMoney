@@ -18,5 +18,8 @@
 @property (nonatomic) NSString *status;
 @property (nonatomic) NSString *productDueDate;
 @property (nonatomic) NSString *cashMoney;
+@property (nonatomic) NSString *applyDays;
+@property (nonatomic) NSString *isEnabled;
+@property (nonatomic) NSString *incrId;
 
 @end

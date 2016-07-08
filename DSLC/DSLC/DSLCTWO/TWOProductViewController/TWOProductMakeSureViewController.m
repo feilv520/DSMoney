@@ -6,6 +6,7 @@
 //  Copyright © 2016年 马成铭. All rights reserved.
 //
 
+#import <CommonCrypto/CommonDigest.h>
 #import "TWOProductMakeSureViewController.h"
 #import "TWOMakeSureTableViewCell.h"
 #import "TWOProductDetailTableViewCell.h"
@@ -18,6 +19,8 @@
 #import "TWOProductMonkeyView.h"
 #import "TWOUseRedBagViewController.h"
 #import "TWOUseTicketViewController.h"
+#import "TWOProductHuiFuViewController.h"
+#import "MD5Encryption.h"
 
 @interface TWOProductMakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>{
     
@@ -40,6 +43,14 @@
     TWOProductMonkeyView *monkeyView;
     
     MBProgressHUD *hud;
+    
+    NSArray *redPackCount;
+    NSArray *increaseCount;
+    
+    // 选中的红包id
+    NSString *packetId;
+    // 选中的加息卷
+    NSString *incrId;
 }
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -75,6 +86,10 @@
     [self showTableView];
     
     [self setSureView];
+    
+    packetId = @"";
+    
+    incrId = @"";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addDoneButtonToNumPadKeyboard) name:UIKeyboardWillShowNotification object:nil];
     
@@ -256,7 +271,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        if ([self.detailM.productName containsString:@"新手"]){
+        if ([[self.detailM.productType description] isEqualToString:@"3"]){
             
             return 100;
         } else if ([[self.detailM.productType description] isEqualToString:@"1"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
@@ -273,7 +288,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if ([self.detailM.productName containsString:@"新手"]){
+    if ([[self.detailM.productType description] isEqualToString:@"3"]){
         return 1;
     } else {
         return 2;
@@ -294,7 +309,12 @@
     
     if (indexPath.section == 0) {
         
-        if ([self.detailM.productName containsString:@"新手"]){
+        if ([[self.detailM.productType description] isEqualToString:@"3"]){
+            
+            UIButton *sureButton = (UIButton *)[sureView viewWithTag:9574];
+            
+            sureButton.backgroundColor = [UIColor profitColor];
+            sureButton.enabled = YES;
             
             TWOProductMakeSureThreeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseThree"];
             
@@ -304,7 +324,13 @@
             
             cell.inputMoneyTextField.delegate = self;
             
-            cell.inputMoneyTextField.placeholder = [NSString stringWithFormat:@"%@元起投,每%@元递增",[self.detailM amountMin],[self.detailM amountIncrease]];
+//            cell.inputMoneyTextField.placeholder = [NSString stringWithFormat:@"%@元起投,每%@元递增",[self.detailM amountMin],[self.detailM amountIncrease]];
+            
+            cell.inputMoneyTextField.text = @"5000";
+            
+            cell.inputMoneyTextField.enabled = NO;
+            
+            cell.yqMoneyLabel.text = @"4.93元";
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
@@ -386,12 +412,28 @@
         if (indexPath.row == 0) {
             
             cell.titleLabel.text = @"使用红包";
-            cell.rjLabel.text = @"暂无可使用红包";
+            
+            if (redPackCount.count == 0) {
+                
+                cell.rjLabel.text = @"暂无可使用红包";
+                cell.rjLabel.textColor = [UIColor findZiTiColor];
+            } else {
+                
+                cell.rjLabel.text = [NSString stringWithFormat:@"%ld个",(long)redPackCount.count];
+                cell.rjLabel.textColor = [UIColor orangecolor];
+            }
         } else {
             
             cell.titleLabel.text = @"使用加息卷";
-            cell.rjLabel.text = @"0张";
-            cell.rjLabel.textColor = [UIColor orangecolor];
+            if (increaseCount.count == 0) {
+                
+                cell.rjLabel.text = @"暂无可使用加息卷";
+                cell.rjLabel.textColor = [UIColor findZiTiColor];
+            } else {
+                
+                cell.rjLabel.text = [NSString stringWithFormat:@"%ld个",(long)increaseCount.count];
+                cell.rjLabel.textColor = [UIColor orangecolor];
+            }
         }
         
         return cell;
@@ -402,14 +444,57 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    [self.view endEditing:YES];
+    
+    UITextField *textField = (UITextField *)[self.view viewWithTag:9283];
+    
+    if ([textField.text isEqualToString:@""]){
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入投资金额"];
+        return;
+    }
+    
+    NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
+    
+    textField.text = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
+    
+    allMoneyString = textField.text;
+    
+    [self textFieldEditChanged:textField];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
+            
+            if (redPackCount.count == 0) {
+                return;
+            }
+            
             TWOUseRedBagViewController *useRedBagVC = [[TWOUseRedBagViewController alloc] init];
+            useRedBagVC.proPeriod = [self.detailM productPeriod];
+            useRedBagVC.transMoney = allMoneyString;
+            
+            [useRedBagVC returnText:^(NSString *showText) {
+                NSLog(@"packetId = %@",showText);
+                packetId = showText;
+            }];
+            
             pushVC(useRedBagVC);
         } else {
+            
+            if (increaseCount.count == 0) {
+                return;
+            }
+            
             TWOUseTicketViewController *useTicketVC = [[TWOUseTicketViewController alloc] init];
+            useTicketVC.proPeriod = [self.detailM productPeriod];
+            useTicketVC.transMoney = allMoneyString;
+            
+            [useTicketVC returnText:^(NSString *showText) {
+                NSLog(@"incrID = %@",showText);
+                incrId = showText;
+            }];
+            
             pushVC(useTicketVC);
         }
     }
@@ -481,7 +566,7 @@
     
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
     
-    if ([self.detailM.productName containsString:@"新手"]){
+    if ([[self.detailM.productType description] isEqualToString:@"3"]){
         
         TWOProductMakeSureThreeTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
         
@@ -497,6 +582,13 @@
         
         syString = cell.yqMoneyLabel.text;
         
+        NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
+        
+        allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
+        
+        [self getMyRedPacketList];
+        [self getMyIncreaseList];
+        
     } else {
         
         TWOProductMakeSureTwoTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
@@ -504,6 +596,13 @@
         cell.yqSLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod] floatValue] / 36500.0];
         
         syString = cell.yqSLabel.text;
+        
+        NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
+        
+        allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
+        
+        [self getMyRedPacketList];
+        [self getMyIncreaseList];
     }
     
     monkeyString = @"0个";
@@ -514,8 +613,7 @@
 - (void)sureAction:(id)sender{
     
     [self.view endEditing:YES];
-    
-    
+
     UITextField *textField = (UITextField *)[self.view viewWithTag:9283];
     
     if ([textField.text isEqualToString:@""]){
@@ -573,7 +671,7 @@
     monkeyView.allMoneyLabel.text = [NSString stringWithFormat:@"¥%@",allMoneyString];
     monkeyView.zMoneyLabel.text = [NSString stringWithFormat:@"¥%@",allMoneyString];
     
-    if ([self.detailM.productName containsString:@"新手"]){
+    if ([[self.detailM.productType description] isEqualToString:@"3"]){
     
         [app.window addSubview:monkeyView];
     } else {
@@ -658,42 +756,95 @@
 // 提示框确认按钮
 - (void)sureBAction:(id)sender{
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    
-    hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
-    
-    NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"member.plist"]];
-    
-    NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",[DES3Util encrypt:[memberDic objectForKey:@"token"]],[DES3Util encrypt:[[self.detailM productId] description]],[DES3Util encrypt:[allMoneyString description]],[DES3Util encrypt:@"1"],[DES3Util encrypt:@""],[DES3Util encrypt:@""],[DES3Util encrypt:@"iOS"]];
-    
-    NSDictionary *parameter = @{@"productId":[self.detailM productId],@"packetId":@"",@"incrId":@"",@"orderMoney":allMoneyString,@"payType":@"1",@"clientType":@"iOS",@"token":[memberDic objectForKey:@"token"],@"sign":signString};
-    
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"trade/buyProductByAccBalance" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    if ([[self.detailM.productType description] isEqualToString:@"3"]) {
         
-        NSLog(@"产品详情ppppppppppppppp%@",responseObject);
+        AppDelegate *app = [[UIApplication sharedApplication] delegate];
         
-        [hud hide:YES];
+        hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
         
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            TWOProductPaySuccessViewController *paySuccessVC = [[TWOProductPaySuccessViewController alloc] init];
-            paySuccessVC.allMoneyString = allMoneyString;
-            paySuccessVC.syString = syString;
-            paySuccessVC.qDayString = qDayString;
-            paySuccessVC.dDayString = dDayString;
-            paySuccessVC.monkeyString = monkeyString;
-            pushVC(paySuccessVC);
-        } else {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-        }
+        NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"member.plist"]];
+        
+        NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@",[MD5Encryption md5by32:[memberDic objectForKey:@"token"]],[MD5Encryption md5by32:[[self.detailM productId] description]],[MD5Encryption md5by32:[allMoneyString description]],[MD5Encryption md5by32:@"1"],[MD5Encryption md5by32:@"iOS"]];
+        
+        NSLog(@"signString = %@",signString);
+        
+        NSDictionary *parameter = @{@"productId":[self.detailM productId],@"orderMoney":allMoneyString,@"payType":@"1",@"clientType":@"iOS",@"token":[memberDic objectForKey:@"token"],@"sign":signString};
+        
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"trade/buyNewHandProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+            
+            NSLog(@"产品详情ppppppppppppppp%@",responseObject);
+            
+            [hud hide:YES];
+            
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                TWOProductPaySuccessViewController *paySuccessVC = [[TWOProductPaySuccessViewController alloc] init];
+                paySuccessVC.allMoneyString = allMoneyString;
+                paySuccessVC.syString = syString;
+                paySuccessVC.qDayString = qDayString;
+                paySuccessVC.dDayString = dDayString;
+                paySuccessVC.monkeyString = monkeyString;
+                pushVC(paySuccessVC);
+            } else {
+                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            
+        }];
+
+    } else {
+        NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",[DES3Util encrypt:[self.flagDic objectForKey:@"token"]],[DES3Util encrypt:[[self.detailM productId] description]],[DES3Util encrypt:[allMoneyString description]],[DES3Util encrypt:@"1"],[DES3Util encrypt:packetId],[DES3Util encrypt:incrId],[DES3Util encrypt:@"iOS"]];
+        
+        TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+        productHuiFuVC.fuctionName = @"trade/chinaPnrTrade";
+        productHuiFuVC.tradeString = [NSString stringWithFormat:@"productId=%@&packetId=%@&incrId=%@&orderMoney=%@&payType=1&clientType=iOS&token=%@&sign=%@",[[self.detailM productId] description],packetId,incrId,[allMoneyString description],[self.flagDic objectForKey:@"token"],signString];
+        pushVC(productHuiFuVC);
+    }
+    
+    
+}
+
+- (void)getMyRedPacketList{
+    
+    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":allMoneyString,@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getMyRedPacketList = %@",responseObject);
+        
+        redPackCount = [responseObject objectForKey:@"RedPacket"];
+        
+        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
+        [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
         
     }];
+}
 
+- (void)getMyIncreaseList{
     
+    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":allMoneyString,@"token":[self.flagDic objectForKey:@"token"]};
     
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getMyIncreaseList = %@",responseObject);
+        
+        increaseCount = [responseObject objectForKey:@"Increase"];
+        
+        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
+        [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
