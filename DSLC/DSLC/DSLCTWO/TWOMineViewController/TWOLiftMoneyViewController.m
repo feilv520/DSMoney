@@ -60,14 +60,14 @@
 
 - (void)alertContentShow
 {
-    UIView *viewAlert = [CreatView creatViewWithFrame:CGRectMake(9, 66 + 40 + 100, WIDTH_CONTROLLER_DEFAULT - 18, 160) backgroundColor:[UIColor shurukuangBian]];
+    UIView *viewAlert = [CreatView creatViewWithFrame:CGRectMake(9, 66 + 40 + 100, WIDTH_CONTROLLER_DEFAULT - 18, 160) backgroundColor:[UIColor profitColor]];
     [self.view addSubview:viewAlert];
     viewAlert.layer.cornerRadius = 5;
     viewAlert.layer.masksToBounds = YES;
     
     CGFloat viewWidth = viewAlert.frame.size.width;
 
-    UILabel *labelKindlyReminder  = [CreatView creatWithLabelFrame:CGRectMake(12, 0, viewWidth - 24, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"温馨提示"];
+    UILabel *labelKindlyReminder  = [CreatView creatWithLabelFrame:CGRectMake(12, 0, viewWidth - 24, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor friendAlert] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"温馨提示"];
     labelKindlyReminder.alpha = 1.0;
     [viewAlert addSubview:labelKindlyReminder];
 }
@@ -77,8 +77,8 @@
     [self.view endEditing:YES];
 }
 
-- (void)nextAction:(id)sender{
-    
+- (void)nextAction:(id)sender
+{
     if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
         
         [self registThirdShow];

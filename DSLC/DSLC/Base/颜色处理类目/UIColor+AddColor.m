@@ -260,4 +260,8 @@
     return [UIColor colorFromHexCode:@"#d6edff"];
 }
 
++ (UIColor *) friendAlert {
+    return [UIColor colorFromHexCode:@"#858585"];
+}
+
 @end

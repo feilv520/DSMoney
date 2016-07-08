@@ -67,5 +67,6 @@
 + (UIColor *) redBagBankColor;//使用红包背景颜色
 + (UIColor *) lineColor;//列表线颜色
 + (UIColor *) changeColor;//切换颜色
++ (UIColor *) friendAlert;//温馨提示颜色
 
 @end
