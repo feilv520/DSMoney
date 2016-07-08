@@ -74,6 +74,8 @@
     [self commonShow];
     [self getMyRedPacketListFuction];
     [self getMyIncreaseListFuction];
+    
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
 
 //没有红包的样式
@@ -619,6 +621,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
         NSLog(@"获取红包列表:getMyRedPacketList = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             redbagArray = [responseObject objectForKey:@"RedPacket"];
@@ -663,6 +666,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
         NSLog(@"获取加息券列表 = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *dataArray = [responseObject objectForKey:@"Increase"];

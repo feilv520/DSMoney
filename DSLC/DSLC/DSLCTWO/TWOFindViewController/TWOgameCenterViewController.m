@@ -82,7 +82,9 @@
 //游戏攻略&游戏积分上的控件
 - (void)twoButtonContent
 {
-    UIButton *butGongLue1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 18, 36, 36) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    CGFloat butHeight = butStrategy.frame.size.height;
+    
+    UIButton *butGongLue1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, butHeight/2 - 18, 36, 36) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [butStrategy addSubview:butGongLue1];
     [butGongLue1 setBackgroundImage:[UIImage imageNamed:@"gameStrategy"] forState:UIControlStateNormal];
     [butGongLue1 setBackgroundImage:[UIImage imageNamed:@"gameStrategy"] forState:UIControlStateHighlighted];
@@ -91,6 +93,8 @@
     UIButton *butGongLue2 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(52, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), butStrategy.frame.size.width - 7 - 36 - 10 - 20, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"游戏中心攻略"];
     [butStrategy addSubview:butGongLue2];
     butGongLue2.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:16];
+//    butGongLue2.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    butGongLue2.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     [butGongLue2 addTarget:self action:@selector(buttonStrategy:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *butGongLue3 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(52, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16 + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), butStrategy.frame.size.width - 7 - 36 - 10 - 20, 13) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"游戏大圣就看今朝"];
@@ -98,7 +102,17 @@
     butGongLue3.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     [butGongLue3 addTarget:self action:@selector(buttonStrategy:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *butScore1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 18, 36, 36) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        butGongLue2.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        butGongLue3.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+        
+        butGongLue2.frame = CGRectMake(50, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), butStrategy.frame.size.width - 7 - 36 - 10 - 5, 16);
+        butGongLue3.frame = CGRectMake(50, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16 + 5.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), butStrategy.frame.size.width - 7 - 36 - 10 - 10, 11);
+    }
+    
+    CGFloat heightBut = butScore.frame.size.height;
+    UIButton *butScore1 = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, heightBut/2 - 18, 36, 36) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
     [butScore addSubview:butScore1];
     [butScore1 setBackgroundImage:[UIImage imageNamed:@"gameScore"] forState:UIControlStateNormal];
     [butScore1 setBackgroundImage:[UIImage imageNamed:@"gameScore"] forState:UIControlStateHighlighted];
@@ -113,6 +127,14 @@
     [butScore addSubview:butScore3];
     butScore3.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     [butScore3 addTarget:self action:@selector(buttonScoreClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        butScore2.frame = CGRectMake(50, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), butStrategy.frame.size.width - 7 - 36 - 10 - 5, 16);
+        butScore3.frame = CGRectMake(50, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 16 + 5.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), butStrategy.frame.size.width - 7 - 36 - 10 - 10, 11);
+        
+        butScore2.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
+        butScore3.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:10];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -167,7 +189,7 @@
 - (void)buttonScoreClicked:(UIButton *)button
 {
     NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
-    
+    //登录态判断
     if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
         [self loginCome];
     } else {

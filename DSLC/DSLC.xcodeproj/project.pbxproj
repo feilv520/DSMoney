@@ -722,6 +722,7 @@
 		81C8BBCF1BDA3535005B9DFF /* HelpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C8BBCD1BDA3535005B9DFF /* HelpCell.m */; };
 		81C8BBD01BDA3535005B9DFF /* HelpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C8BBCE1BDA3535005B9DFF /* HelpCell.xib */; };
 		81C8BBD31BDA3544005B9DFF /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C8BBD21BDA3544005B9DFF /* HelpViewController.m */; };
+		81C982FF1D2E5F7C00F9093A /* TWOSweepModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C982FE1D2E5F7C00F9093A /* TWOSweepModel.m */; settings = {ASSET_TAGS = (); }; };
 		81CBB74A1C1AC1D3002CDE97 /* NewHandGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CBB7491C1AC1D3002CDE97 /* NewHandGuide.m */; settings = {ASSET_TAGS = (); }; };
 		81CBB74D1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CBB74C1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m */; settings = {ASSET_TAGS = (); }; };
 		81CBB7501C1AC6E9002CDE97 /* SafeProtectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CBB74F1C1AC6E9002CDE97 /* SafeProtectViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -2499,6 +2500,8 @@
 		81C8BBCE1BDA3535005B9DFF /* HelpCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpCell.xib; sourceTree = "<group>"; };
 		81C8BBD11BDA3544005B9DFF /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		81C8BBD21BDA3544005B9DFF /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		81C982FD1D2E5F7C00F9093A /* TWOSweepModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOSweepModel.h; sourceTree = "<group>"; };
+		81C982FE1D2E5F7C00F9093A /* TWOSweepModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOSweepModel.m; sourceTree = "<group>"; };
 		81CBB7481C1AC1D3002CDE97 /* NewHandGuide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHandGuide.h; sourceTree = "<group>"; };
 		81CBB7491C1AC1D3002CDE97 /* NewHandGuide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHandGuide.m; sourceTree = "<group>"; };
 		81CBB74B1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MillionsAndMillionsRiskMoney.h; sourceTree = "<group>"; };
@@ -4198,6 +4201,8 @@
 				815D19521D2603E700DFA753 /* TWOActivityThreeStateModel.m */,
 				815D19541D2611C200DFA753 /* TWOGameListModel.h */,
 				815D19551D2611C200DFA753 /* TWOGameListModel.m */,
+				81C982FD1D2E5F7C00F9093A /* TWOSweepModel.h */,
+				81C982FE1D2E5F7C00F9093A /* TWOSweepModel.m */,
 			);
 			path = TWOFindModel;
 			sourceTree = "<group>";
@@ -8530,6 +8535,7 @@
 				8D4FF5E21BE339A200BAE25F /* UIImageView+AFNetworking.m in Sources */,
 				818D0C291C2AC58B008F7612 /* ProductO.m in Sources */,
 				8D9F16C11D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.m in Sources */,
+				81C982FF1D2E5F7C00F9093A /* TWOSweepModel.m in Sources */,
 				8D88D1021BFECCB40051D6DA /* MJRefreshStateHeader.m in Sources */,
 				8D72ED861CFC0B6C00436C32 /* PNBarChart.m in Sources */,
 				8D50559E1BF082780034759B /* ProductListModel.m in Sources */,

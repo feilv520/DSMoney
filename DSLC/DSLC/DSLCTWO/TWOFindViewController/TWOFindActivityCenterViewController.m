@@ -39,12 +39,10 @@
     overArray = [NSMutableArray array];
     
     [self contentShow];
-//    [self tableViewShow1];
-//    [self tableViewShow2];
-//    [self tableViewShow3];
     [self getListDataNo];
     [self getListDataAlready];
     [self getListDataAlreadyDown];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
 
 - (void)contentShow
@@ -214,6 +212,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"activity/getActivityList" parameters:parmeter1 success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
         NSLog(@"期待中::::::::::::::%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *activityArr = [responseObject objectForKey:@"Activity"];
@@ -242,6 +241,7 @@
     NSDictionary *parmeter2 = @{@"status":@2, @"clientType":@"iOS"};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"activity/getActivityList" parameters:parmeter2 success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
         NSLog(@"已上线::::::::::::::%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *activityArr = [responseObject objectForKey:@"Activity"];
@@ -270,6 +270,7 @@
     NSDictionary *parmeter3 = @{@"status":@3, @"clientType":@"iOS"};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"activity/getActivityList" parameters:parmeter3 success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
         NSLog(@"已下线::::::::::::::%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *activityArr = [responseObject objectForKey:@"Activity"];

@@ -150,16 +150,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        
+//        排行榜
         TRankinglistViewController *rankinglist = [[TRankinglistViewController alloc] init];
         [self.navigationController pushViewController:rankinglist animated:YES];
     } else if (indexPath.row == 1) {
-//        大圣公益行
-        TWODSPublicBenefitViewController *publicBenefit = [[TWODSPublicBenefitViewController alloc] init];
-        pushVC(publicBenefit);
+//        大圣侃经
+        TWOMoneySweepViewController *sweepVC = [[TWOMoneySweepViewController alloc] init];
+        sweepVC.kindState = @"1";
+        pushVC(sweepVC);
     } else if (indexPath.row == 2) {
 //        投资大扫描
         TWOMoneySweepViewController *moneySweepVC = [[TWOMoneySweepViewController alloc] init];
+        moneySweepVC.kindState = @"2";
         pushVC(moneySweepVC);
     }
 }

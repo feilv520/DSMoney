@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOMoneySweepViewController : BaseViewController
-
+@property (nonatomic) NSString *kindState;
 @end

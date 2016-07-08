@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface TWOMoneySweepCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UIView *viewBottom;
 @property (weak, nonatomic) IBOutlet UIImageView *imageBackGround;
 @property (weak, nonatomic) IBOutlet UILabel *labelAlpha;
 @property (weak, nonatomic) IBOutlet UILabel *labelContent;
 @property (weak, nonatomic) IBOutlet UIButton *buttonSee;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPlay;
-
 @end
