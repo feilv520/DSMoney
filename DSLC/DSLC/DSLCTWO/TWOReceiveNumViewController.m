@@ -428,6 +428,9 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"sign/userSign" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        NSLog(@"userSign = %@",responseObject);
+
+        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             if (![[responseObject objectForKey:@"signMonkeyNum"] isEqualToString:@"0"]){

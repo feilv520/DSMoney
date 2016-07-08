@@ -693,6 +693,7 @@
         if ([[dic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
             
             [self registThirdShow];
+            return;
         }
         
         NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
@@ -717,6 +718,7 @@
                     
                     [self submitLoadingWithHidden:YES];
                     
+                    pushVC(makeSureVC);
                 } else {
                     
                     TWOProductMakeSureViewController *makeSureVC = [[TWOProductMakeSureViewController alloc] init];
@@ -727,7 +729,9 @@
                     
                     [self submitLoadingWithHidden:YES];
                     
+                    pushVC(makeSureVC);
                 }
+                
             } else {
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
@@ -791,22 +795,21 @@
     
     NSLog(@"确定");
     
-    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"clientType":@"iOS"};
+//    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"clientType":@"iOS"};
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"chinaPnr/userRegister" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
-        NSLog(@"汇付 : %@",responseObject);
-        
-        TWOProductHuiFuModel *huifuModel = [[TWOProductHuiFuModel alloc] init];
-        [huifuModel setValuesForKeysWithDictionary:responseObject];
-        
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            
-            TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
-            productHuiFuVC.chinaURLString = [huifuModel chinaPnrServer];
-            productHuiFuVC.huifuModel = huifuModel;
-            pushVC(productHuiFuVC);
-            
+//    [[MyAfHTTPClient sharedClient] postWithURLString:@"chinaPnr/userRegister" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+//        
+//        NSLog(@"汇付 : %@",responseObject);
+//        
+//        TWOProductHuiFuModel *huifuModel = [[TWOProductHuiFuModel alloc] init];
+//        [huifuModel setValuesForKeysWithDictionary:responseObject];
+//        
+//        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+    
+    TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+    productHuiFuVC.fuctionName = @"userReg";
+    pushVC(productHuiFuVC);
+    
 //            NSDictionary *paraDic = @{@"BgRetUrl":[huifuModel BgRetUrl],@"ChkValue":[huifuModel ChkValue],@"CmdId":[huifuModel CmdId],@"MerCustId":[huifuModel MerCustId],@"MerPriv":[huifuModel MerPriv],@"PageType":[huifuModel PageType],@"RetUrl":[huifuModel RetUrl],@"UsrId":[huifuModel UsrId],@"UsrMp":[huifuModel UsrMp],@"Version":[huifuModel Version]};
 //            
 //            [[MyAfHTTPClient sharedClient] postWithURLStringP:[huifuModel chinaPnrServer] parameters:paraDic success:^(NSURLSessionDataTask * _Nullable task, NSString * _Nullable responseObject) {
@@ -822,14 +825,14 @@
 //                NSLog(@"%@", error);
 //                
 //            }];
-            
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        NSLog(@"%@", error);
-        
-    }];
+//            
+//        }
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        
+//        NSLog(@"%@", error);
+//        
+//    }];
 
     
 }

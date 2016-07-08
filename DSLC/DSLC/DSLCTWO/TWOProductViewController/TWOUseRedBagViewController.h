@@ -10,4 +10,13 @@
 
 @interface TWOUseRedBagViewController : BaseViewController
 
+typedef void (^ReturnTextBlock)(NSString *showText);
+
+@property (nonatomic, copy) ReturnTextBlock returnTextBlock;
+
+- (void)returnText:(ReturnTextBlock)block;
+
+@property (nonatomic, strong) NSString *proPeriod;
+@property (nonatomic, strong) NSString *transMoney;
+
 @end

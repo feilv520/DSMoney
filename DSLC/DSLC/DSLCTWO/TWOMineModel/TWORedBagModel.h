@@ -16,5 +16,7 @@
 @property (nonatomic) NSString *endDate;
 @property (nonatomic) NSString *startDate;
 @property (nonatomic) NSString *status;
-
+@property (nonatomic) NSString *redPacketId;
+@property (nonatomic) NSString *applyDays;
+@property (nonatomic) NSString *isEnabled;
 @end
