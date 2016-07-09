@@ -92,6 +92,9 @@
     
     [self setSureView];
     
+    [self getMyRedPacketList];
+    [self getMyIncreaseList];
+    
     redPackString = @"0";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keywordboardHide) name:UIKeyboardWillHideNotification object:nil];
@@ -617,9 +620,6 @@
         
         allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
         
-        [self getMyRedPacketList];
-        [self getMyIncreaseList];
-        
     } else {
         
         TWOProductMakeSureTwoTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
@@ -631,9 +631,6 @@
         NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
         
         allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
-        
-        [self getMyRedPacketList];
-        [self getMyIncreaseList];
     }
     
     monkeyString = @"0个";
@@ -857,7 +854,7 @@
 
 - (void)getMyRedPacketList{
     
-    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":allMoneyString,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":@"100",@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -877,7 +874,7 @@
 
 - (void)getMyIncreaseList{
     
-    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":allMoneyString,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":@"100",@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

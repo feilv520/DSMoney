@@ -18,6 +18,7 @@
     NSInteger page;
     
     NSMutableArray *ticketArray;
+    NSMutableArray *ticketNoArray;
     
     // 选中的加息卷Id
     TWOJiaXiQuanModel *incrModel;
@@ -159,7 +160,7 @@
 
 - (void)getMyIncreaseList{
     
-    NSDictionary *parmeter = @{@"curPage":[NSNumber numberWithInteger:page],@"status":@0,@"proPeriod":self.proPeriod,@"transMoney":self.transMoney,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":[NSNumber numberWithInteger:page],@"status":@0,@"proPeriod":self.proPeriod,@"transMoney":@"100",@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

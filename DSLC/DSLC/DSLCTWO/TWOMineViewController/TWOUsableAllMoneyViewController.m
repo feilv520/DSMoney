@@ -166,6 +166,8 @@
     UIButton *button = (UIButton *)sender;
     NSLog(@"button = %ld",button.tag);
     
+    page = 1;
+    
     [UIView animateWithDuration:0.5 animations:^{
         selectionView.frame = CGRectMake(0, -150, WIDTH_CVIEW_DEFAULT, 150);
         

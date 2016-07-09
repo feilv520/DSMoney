@@ -118,7 +118,7 @@ static NSString * MYAFHTTP_BASEURL = @"http://61.172.238.245:8000/dslc/interface
 //static NSString *htmlFive = @"http://192.168.0.161:8088/zhongxin";
 
 //线上测试
-//static NSString *htmlFive = @"http://61.172.235.194:5050";
+//static NSString *htmlFive = @"http://www.zrgyjt.com:8000";
 
 //外网测试接口
 static NSString *htmlFive = @"http://www.zrgyjt.com";

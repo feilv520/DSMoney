@@ -299,6 +299,13 @@
     cell.viewBottom.layer.borderWidth = 1;
     
     TWOPickModel *model = [pickArray objectAtIndex:indexPath.item];
+    
+    if ([[[model isHotSale] description] isEqualToString:@"0"]) {
+        cell.imageBuying.hidden = YES;
+    } else {
+        cell.imageBuying.hidden = NO;
+    }
+    
     cell.labelName.text = [model productName];
     
     [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateNormal];
