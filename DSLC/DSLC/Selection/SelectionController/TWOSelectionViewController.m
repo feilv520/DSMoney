@@ -711,6 +711,8 @@
                     [pickArray addObject:model];
                 }
                 
+                [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
+                
                 [self collectionViewShow];
                 
             } else {
@@ -740,6 +742,8 @@
                     [model setValuesForKeysWithDictionary:dic];
                     [pickArray addObject:model];
                 }
+                
+                [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                 
                 [self collectionViewShow];
                 
