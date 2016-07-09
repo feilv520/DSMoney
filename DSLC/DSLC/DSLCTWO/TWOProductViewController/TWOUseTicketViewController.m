@@ -36,6 +36,7 @@
     [self.navigationItem setTitle:@"可用加息券"];
     
     ticketArray = [NSMutableArray array];
+    ticketNoArray = [NSMutableArray array];
     
     page = 1;
     
@@ -170,8 +171,14 @@
         for (NSDictionary *dic in increaseArray) {
             TWOJiaXiQuanModel *model = [[TWOJiaXiQuanModel alloc] init];
             [model setValuesForKeysWithDictionary:dic];
-            [ticketArray addObject:model];
+            if ([[[model isEnabled] description] isEqualToString:@"0"]) {
+                [ticketArray addObject:model];
+            } else {
+                [ticketNoArray addObject:model];
+            }
         }
+        
+        [ticketArray addObjectsFromArray:ticketNoArray];
         
         if (page == 1) {
             

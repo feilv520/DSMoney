@@ -18,6 +18,7 @@
     NSInteger page;
     
     NSMutableArray *moneyArray;
+    NSMutableArray *moneyNoArray;
     
     TWORedBagModel *packetModel;
 }
@@ -34,6 +35,8 @@
     [self.navigationItem setTitle:@"可用红包"];
     
     moneyArray = [NSMutableArray array];
+    
+    moneyNoArray = [NSMutableArray array];
     
     page = 1;
     
@@ -165,10 +168,14 @@
         for (NSDictionary *dic in redPackArray) {
             TWORedBagModel *model = [[TWORedBagModel alloc] init];
             [model setValuesForKeysWithDictionary:dic];
-            [moneyArray addObject:model];
+            if ([[[model isEnabled] description] isEqualToString:@"0"]) {
+                [moneyArray addObject:model];
+            } else {
+                [moneyNoArray addObject:model];
+            }
         }
         
-        [moneyArray sortUsingFunction:compare context:NULL];
+        [moneyArray addObjectsFromArray:moneyNoArray];
         
         if (page == 1) {
         
@@ -182,15 +189,6 @@
         NSLog(@"%@", error);
         
     }];
-}
-
-NSComparisonResult compare(TWORedBagModel *firstDict, TWORedBagModel *secondDict, void *context) {
-    if ([[[firstDict isEnabled] description] intValue] < [[[firstDict isEnabled] description] intValue])
-        return NSOrderedDescending;
-    else if ([[[firstDict isEnabled] description] intValue] > [[[firstDict isEnabled] description] intValue])
-        return NSOrderedAscending;
-    else
-        return NSOrderedSame;
 }
 
 - (void)didReceiveMemoryWarning {
