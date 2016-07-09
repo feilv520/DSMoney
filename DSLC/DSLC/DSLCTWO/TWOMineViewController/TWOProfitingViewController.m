@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) NSDictionary *productDic;
 @property (nonatomic, strong) NSDictionary *assetDic;
+@property (nonatomic, strong) NSArray *assetArray;
 
 @end
 
@@ -40,6 +41,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:self.productName];
+    
+    self.assetArray = [NSArray array];
     
     [self getUserAssetsInfoFuction];
 }
@@ -140,7 +143,7 @@
     if (section == 0) {
         return 4;
     } else {
-        return 1;
+        return self.assetArray.count;
     }
 }
 
@@ -149,6 +152,8 @@
     if (indexPath.section == 1) {
         
         TWOMoneyGoWhereCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMoney"];
+        
+        self.assetDic = [self.assetArray objectAtIndex:indexPath.row];
         
         cell.labelTitle.text = [self.assetDic objectForKey:@"assetName"];
         cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -192,15 +197,19 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    UIView *view = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 36) backgroundColor:[UIColor clearColor]];
-    
-    if (section == 0) {
+    if (self.assetArray.count != 0) {
+        UIView *view = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 36) backgroundColor:[UIColor clearColor]];
         
-        UILabel *labelMoneyWhere = [CreatView creatWithLabelFrame:CGRectMake(12, 3, WIDTH_CONTROLLER_DEFAULT - 24, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"资金去向"];
-        [view addSubview:labelMoneyWhere];
+        if (section == 0) {
+            
+            UILabel *labelMoneyWhere = [CreatView creatWithLabelFrame:CGRectMake(12, 3, WIDTH_CONTROLLER_DEFAULT - 24, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"资金去向"];
+            [view addSubview:labelMoneyWhere];
+        }
+        return view;
+    } else {
+        return nil;
     }
     
-    return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -227,7 +236,11 @@
     if (indexPath.section == 1) {
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        NSDictionary *dic = [self.assetArray objectAtIndex:indexPath.row];
+        
         TWOProductDDetailViewController *MoneyDetaiVC = [[TWOProductDDetailViewController alloc] init];
+        MoneyDetaiVC.assetId = [dic objectForKey:@"assetId"];
         pushVC(MoneyDetaiVC);
     }
 }
@@ -258,7 +271,7 @@
         NSLog(@"getUserAssetsInfo = %@",responseObject);
         
         self.productDic = [responseObject objectForKey:@"Product"];
-        self.assetDic = [[[responseObject objectForKey:@"Product"] objectForKey:@"Asset"] firstObject];
+        self.assetArray = [[responseObject objectForKey:@"Product"] objectForKey:@"Asset"];
         
         [self tableViewShow];
         

@@ -476,6 +476,13 @@
     productDetailVC.idString = [pickModel productId];
     productDetailVC.productName = [pickModel productName];
     productDetailVC.residueMoney = residueMoneyString;
+    
+    if ([[[pickModel productType] description] isEqualToString:@"3"]) {
+        productDetailVC.estimate = NO;
+    } else {
+        productDetailVC.estimate = YES;
+    }
+    
     pushVC(productDetailVC);
     
 }

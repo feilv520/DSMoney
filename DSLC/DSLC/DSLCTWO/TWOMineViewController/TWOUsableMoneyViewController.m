@@ -18,6 +18,12 @@
     UITableView *_tableView;
     UIButton *butLiftMoney;
     UIButton *butChongZhi;
+    
+    UIImageView *imageBackground;
+    UILabel *labelYuE;
+    UILabel *labelWenZi;
+    
+    NSString *accBalanceString;
 }
 
 @end
@@ -43,8 +49,14 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"可用余额"];
     
+    accBalanceString = @"5SseE08G0Ww=";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyAccountInfoFuction) name:@"getMyAccountInfoFuction" object:nil];
+    
     [self tableViewShow];
     [self downContentShow];
+    
+    [self getMyAccountInfoFuction];
 }
 
 - (void)tableViewShow
@@ -68,18 +80,27 @@
 
 - (void)tableViewHead
 {
-    UIImageView *imageBackground = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 159) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"productDetailBackground"]];
+    if (imageBackground == nil) {
+        
+        imageBackground = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 159) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"productDetailBackground"]];
+    }
     [_tableView.tableHeaderView addSubview:imageBackground];
     
-    UILabel *labelYuE = [CreatView creatWithLabelFrame:CGRectMake(0, 30, WIDTH_CONTROLLER_DEFAULT, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
+    if (labelYuE == nil) {
+        
+        labelYuE = [CreatView creatWithLabelFrame:CGRectMake(0, 30, WIDTH_CONTROLLER_DEFAULT, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
+    }
     [imageBackground addSubview:labelYuE];
     
-    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"100,300.00"]];
+    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:accBalanceString]]];
     NSRange moneyRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"元"].location);
     [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:36] range:moneyRange];
     [labelYuE setAttributedText:moneyString];
     
-    UILabel *labelWenZi = [CreatView creatWithLabelFrame:CGRectMake(0, 30 + 40 + 10, WIDTH_CONTROLLER_DEFAULT, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"账户余额"];
+    if (labelWenZi == nil) {
+        
+        labelWenZi = [CreatView creatWithLabelFrame:CGRectMake(0, 30 + 40 + 10, WIDTH_CONTROLLER_DEFAULT, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"账户余额"];
+    }
     [imageBackground addSubview:labelWenZi];
 }
 
@@ -197,6 +218,40 @@
     [butChongZhi setHidden:YES];
     [butLiftMoney setHidden:YES];
 }
+
+#pragma mark 我的账户详情
+#pragma mark --------------------------------
+
+- (void)getMyAccountInfoFuction{
+    
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getMyAccountInfo = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            accBalanceString = [responseObject objectForKey:@"accBalance"];
+            
+            [_tableView reloadData];
+            
+            [self tableViewHead];
+            
+            [self loadingWithHidden:YES];
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

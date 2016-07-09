@@ -418,10 +418,14 @@
             
             cell.valueLabel.text = [NSString stringWithFormat:@"%@&%@",[self.detailM beginTime],[self.detailM endTime]];
         } else {
-            if ([[self.detailM subjectMaxMoney] isEqualToString:@""]) {
-                cell.valueLabel.text = @"无限投";
+            if ([[[self.detailM productType] description] isEqualToString:@"1"]) {
+                cell.valueLabel.text = @"无限额";
+            } else if ([[[self.detailM productType] description] isEqualToString:@"2"]) {
+                cell.valueLabel.text = @"无限额";
+            } else if ([[[self.detailM productType] description] isEqualToString:@"3"]) {
+                cell.valueLabel.text = @"仅限5000元体验金";
             } else {
-                cell.valueLabel.text = [self.detailM subjectMaxMoney];
+                cell.valueLabel.text = @"单人累计投资限额2万元";
             }
         }
         

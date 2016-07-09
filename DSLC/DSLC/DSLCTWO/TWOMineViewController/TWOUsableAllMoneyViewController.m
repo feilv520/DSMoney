@@ -23,6 +23,7 @@
     BOOL moreFlag;
     
     NSString *typeString;
+    NSString *tempTypeString;
 }
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -44,7 +45,7 @@
     
     listArray = [NSMutableArray array];
     
-    typeString = @"1";
+    typeString = @"";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"筛选" style:UIBarButtonItemStylePlain target:self action:@selector(selectDataBarPress:)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"CenturyGothic" size:13], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
@@ -168,8 +169,11 @@
     [UIView animateWithDuration:0.5 animations:^{
         selectionView.frame = CGRectMake(0, -150, WIDTH_CVIEW_DEFAULT, 150);
         
-        typeString = [NSString stringWithFormat:@"%ld",button.tag + 1];
-        
+        if (button.tag == 0) {
+            typeString = @"";
+        } else {
+            typeString = [NSString stringWithFormat:@"%ld",button.tag + 1];
+        }
     } completion:^(BOOL finished) {
         [bView setHidden:YES];
         [self getMyTradeRecordsFuction];
@@ -250,10 +254,13 @@
             [self.mainTableView setHidden:NO];
         }
         
-        [listArray removeAllObjects];
-        listArray = nil;
-        listArray = [NSMutableArray array];
-        
+        if (![tempTypeString isEqualToString:typeString]) {
+            
+            [listArray removeAllObjects];
+            listArray = nil;
+            listArray = [NSMutableArray array];
+        }
+            
         for (NSDictionary *dataDic in dataArr) {
             TWOMyAccountListModel *myAccountListModel = [[TWOMyAccountListModel alloc] init];
             [myAccountListModel setValuesForKeysWithDictionary:dataDic];
@@ -268,6 +275,8 @@
         }
         
         [self.mainTableView reloadData];
+        
+        tempTypeString = typeString;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);

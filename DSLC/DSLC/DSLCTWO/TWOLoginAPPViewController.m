@@ -115,6 +115,7 @@
     textFieldPhone = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"手机号" setTintColor:[UIColor whiteColor]];
     [imageTwo addSubview:textFieldPhone];
     textFieldPhone.text = @"";
+    textFieldPhone.tag = 1000;
     textFieldPhone.clearButtonMode = UITextFieldViewModeAlways;
     textFieldPhone.textColor = [UIColor whiteColor];
     textFieldPhone.keyboardType = UIKeyboardTypeNumberPad;
@@ -137,6 +138,7 @@
     textFieldSecret = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageThree.frame.size.width - 64 - 10, 20) setPlaceholder:@"登录密码" setTintColor:[UIColor whiteColor]];
     [imageThree addSubview:textFieldSecret];
     textFieldSecret.text = @"";
+    textFieldSecret.tag = 1001;
     textFieldSecret.clearButtonMode = UITextFieldViewModeAlways;
     textFieldSecret.secureTextEntry = YES;
     textFieldSecret.textColor = [UIColor whiteColor];
@@ -219,6 +221,7 @@
     textFieldSecret.clearButtonMode = UITextFieldViewModeAlways;
     textFieldSecret.textColor = [UIColor whiteColor];
     textFieldSecret.delegate = self;
+    textFieldSecret.tag = 1001;
     textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [textFieldSecret setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
@@ -444,6 +447,36 @@
 {
     [self scrollviewContentOffSet];
 }
+
+#pragma mark 验证限制
+#pragma mark --------------------------------
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 1000) {
+        
+        if (range.location < 11) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+        
+    } else {
+        
+        if (range.location < 20) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+    }
+}
+
 
 #pragma mark 对接登录接口
 #pragma mark --------------------------------

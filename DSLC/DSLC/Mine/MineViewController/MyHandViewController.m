@@ -279,11 +279,11 @@
                     app.tabBarVC = self.tabBarVC;
                     app.window.rootViewController = self.tabBarVC;
                     
-                    NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+//                    NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
                     
-                    if ([memberDic objectForKey:@"token"] != nil && ![[memberDic objectForKey:@"token"] isEqualToString:@""]){
-                        [self loginFuction];
-                    }
+//                    if ([memberDic objectForKey:@"token"] != nil && ![[memberDic objectForKey:@"token"] isEqualToString:@""]){
+//                        [self loginFuction];
+//                    }
                     
                 } else {
                     [ProgressHUD showMessage:[NSString stringWithFormat:@"手势密码错误，请重新输入，您还有%ld次机会",(long)failCount] Width:100 High:20];

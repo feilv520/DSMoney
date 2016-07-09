@@ -10,7 +10,7 @@
 
 @interface TWORedBagModel : NSObject
 
-@property (nonatomic) NSString *repPacketMoney;
+@property (nonatomic) NSString *redPacketMoney;
 @property (nonatomic) NSString *applyTypeName;
 @property (nonatomic) NSString *investMoney;
 @property (nonatomic) NSString *endDate;

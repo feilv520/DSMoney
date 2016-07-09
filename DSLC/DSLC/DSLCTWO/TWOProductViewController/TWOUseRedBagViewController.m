@@ -19,7 +19,7 @@
     
     NSMutableArray *moneyArray;
     
-    NSString *packetId;
+    TWORedBagModel *packetModel;
 }
 
 @end
@@ -40,13 +40,13 @@
     [self getMyRedPacketList];
 }
 
-- (void)returnText:(ReturnTextBlock)block {
-    self.returnTextBlock = block;
+- (void)returnText:(ReturnRedBagBlock)block {
+    self.returnRedBagBlock = block;
 }
 - (void)viewWillDisappear:(BOOL)animated {
     
-    if (self.returnTextBlock != nil) {
-        self.returnTextBlock(packetId);
+    if (self.returnRedBagBlock != nil) {
+        self.returnRedBagBlock(packetModel);
     }
 }
 
@@ -80,7 +80,7 @@
     
     cell.imagePicture.image = [UIImage imageNamed:@"twohongbao"];
     
-    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", [model repPacketMoney]]];
+    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", [model redPacketMoney]]];
     NSRange signRange = NSMakeRange(0, 1);
     [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:signRange];
     [cell.labelMoney setAttributedText:moneyString];
@@ -148,7 +148,7 @@
     
     if (![[[model isEnabled] description] isEqualToString:@"1"]) {
         
-        packetId = [model redPacketId];
+        packetModel = model;
         popVC;
     }
 }
@@ -168,6 +168,8 @@
             [moneyArray addObject:model];
         }
         
+        [moneyArray sortUsingFunction:compare context:NULL];
+        
         if (page == 1) {
         
             [self tableViewShow];
@@ -180,6 +182,15 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+NSComparisonResult compare(TWORedBagModel *firstDict, TWORedBagModel *secondDict, void *context) {
+    if ([[[firstDict isEnabled] description] intValue] < [[[firstDict isEnabled] description] intValue])
+        return NSOrderedDescending;
+    else if ([[[firstDict isEnabled] description] intValue] > [[[firstDict isEnabled] description] intValue])
+        return NSOrderedAscending;
+    else
+        return NSOrderedSame;
 }
 
 - (void)didReceiveMemoryWarning {

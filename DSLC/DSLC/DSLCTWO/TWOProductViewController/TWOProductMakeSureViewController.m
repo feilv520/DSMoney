@@ -19,12 +19,16 @@
 #import "TWOUseRedBagViewController.h"
 #import "TWOUseTicketViewController.h"
 #import "TWOProductHuiFuViewController.h"
+#import "TWOMoneyMoreViewController.h"
+#import "TWORedBagModel.h"
+#import "TWOJiaXiQuanModel.h"
 
 @interface TWOProductMakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>{
     
     NSDictionary *accountDic;
     
     NSString *allMoneyString;//投资金额
+    NSString *redPackString;//红包金额
     NSString *qDayString;//起息日
     NSString *dDayString;//到期日
     NSString *syString;//收益
@@ -46,9 +50,9 @@
     NSArray *increaseCount;
     
     // 选中的红包id
-    NSString *packetId;
+    TWORedBagModel *packetModel;
     // 选中的加息卷
-    NSString *incrId;
+    TWOJiaXiQuanModel *incrModel;
 }
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -88,9 +92,7 @@
     
     [self setSureView];
     
-    packetId = @"0";
-    
-    incrId = @"0";
+    redPackString = @"0";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keywordboardHide) name:UIKeyboardWillHideNotification object:nil];
     
@@ -425,9 +427,13 @@
                 cell.rjLabel.text = @"暂无可使用红包";
                 cell.rjLabel.textColor = [UIColor findZiTiColor];
             } else {
-                
-                cell.rjLabel.text = [NSString stringWithFormat:@"%ld个",(long)redPackCount.count];
-                cell.rjLabel.textColor = [UIColor orangecolor];
+                if (packetModel == nil) {
+                    cell.rjLabel.text = [NSString stringWithFormat:@"%ld个",(long)redPackCount.count];
+                    cell.rjLabel.textColor = [UIColor orangecolor];
+                } else {
+                    cell.rjLabel.text = [NSString stringWithFormat:@"已选%@元",[packetModel redPacketMoney]];
+                    cell.rjLabel.textColor = [UIColor orangecolor];
+                }
             }
         } else {
             
@@ -437,9 +443,13 @@
                 cell.rjLabel.text = @"暂无可使用加息卷";
                 cell.rjLabel.textColor = [UIColor findZiTiColor];
             } else {
-                
-                cell.rjLabel.text = [NSString stringWithFormat:@"%ld个",(long)increaseCount.count];
-                cell.rjLabel.textColor = [UIColor orangecolor];
+                if (incrModel == nil) {
+                    cell.rjLabel.text = [NSString stringWithFormat:@"%ld个",(long)increaseCount.count];
+                    cell.rjLabel.textColor = [UIColor orangecolor];
+                } else {
+                    cell.rjLabel.text = [NSString stringWithFormat:@"已选%@%%",[incrModel incrMoney]];
+                    cell.rjLabel.textColor = [UIColor orangecolor];
+                }
             }
         }
         
@@ -481,9 +491,17 @@
             useRedBagVC.proPeriod = [self.detailM productPeriod];
             useRedBagVC.transMoney = allMoneyString;
             
-            [useRedBagVC returnText:^(NSString *showText) {
-                NSLog(@"packetId = %@",showText);
-                packetId = showText;
+            [useRedBagVC returnText:^(TWORedBagModel *model) {
+                NSLog(@"packetId = %@",model);
+                
+                packetModel = [[TWORedBagModel alloc] init];
+                
+                packetModel = model;
+                
+                redPackString = [packetModel redPacketMoney];
+                
+                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:1];
+                [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
             }];
             
             pushVC(useRedBagVC);
@@ -497,9 +515,15 @@
             useTicketVC.proPeriod = [self.detailM productPeriod];
             useTicketVC.transMoney = allMoneyString;
             
-            [useTicketVC returnText:^(NSString *showText) {
-                NSLog(@"incrID = %@",showText);
-                incrId = showText;
+            [useTicketVC returnText:^(TWOJiaXiQuanModel *model) {
+                NSLog(@"incrID = %@",model);
+                
+                incrModel = [[TWOJiaXiQuanModel alloc] init];
+                
+                incrModel = model;
+                
+                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:1];
+                [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
             }];
             
             pushVC(useTicketVC);
@@ -510,8 +534,8 @@
 // 充值按钮
 - (void)czAction:(id)sender{
     
-    ChongZhiViewController *czVC = [[ChongZhiViewController alloc] init];
-    pushVC(czVC);
+    TWOMoneyMoreViewController *moneyMoreVC = [[TWOMoneyMoreViewController alloc] init];
+    pushVC(moneyMoreVC);
 }
 
 // 去提升
@@ -672,8 +696,9 @@
     monkeyView.layer.cornerRadius = 4.0;
     
     makeSView.allMoneyLabel.text = [NSString stringWithFormat:@"¥%@",allMoneyString];
-//    makeSView.kMoneyLabel.text = [NSString stringWithFormat:@"-¥%@",]
-//    makeSView.zMoneyLabel.text = [NSString stringWithFormat:@"¥%@"]
+    makeSView.kMoneyLabel.text = [NSString stringWithFormat:@"-¥%@",redPackString];
+    allMoneyString = [NSString stringWithFormat:@"%ld",[allMoneyString integerValue] - [redPackString integerValue]];
+    makeSView.zMoneyLabel.text = [NSString stringWithFormat:@"¥%@",allMoneyString];
     
     monkeyView.allMoneyLabel.text = [NSString stringWithFormat:@"¥%@",allMoneyString];
     monkeyView.zMoneyLabel.text = [NSString stringWithFormat:@"¥%@",allMoneyString];
@@ -804,13 +829,26 @@
         }];
 
     } else {
-        NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",[self.flagDic objectForKey:@"token"],[[self.detailM productId] description],[allMoneyString description],@"1",packetId,incrId,@"iOS"];
+        
+        NSString *redPackIdString = @"0";
+        NSString *incrIdString = @"0";
+        
+        if (packetModel != nil) {
+            redPackIdString = [packetModel redPacketId];
+        }
+        
+        if (incrModel != nil) {
+            incrIdString = [incrModel incrId];
+        }
+        
+        NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",[self.flagDic objectForKey:@"token"],[[self.detailM productId] description],[allMoneyString description],@"1",redPackIdString,incrIdString,@"iOS"];
         
         NSString *md5SignString = [NSString md5String:signString];
         
         TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
         productHuiFuVC.fuctionName = @"trade/chinaPnrTrade";
-        productHuiFuVC.tradeString = [NSString stringWithFormat:@"productId=%@&packetId=%@&incrId=%@&orderMoney=%@&payType=1&clientType=iOS&token=%@&sign=%@",[[self.detailM productId] description],packetId,incrId,[allMoneyString description],[self.flagDic objectForKey:@"token"],md5SignString];
+        
+        productHuiFuVC.tradeString = [NSString stringWithFormat:@"productId=%@&packetId=%@&incrId=%@&orderMoney=%@&payType=1&clientType=iOS&token=%@&sign=%@",[[self.detailM productId] description],redPackIdString,incrIdString,[allMoneyString description],[self.flagDic objectForKey:@"token"],md5SignString];
         pushVC(productHuiFuVC);
     }
     
