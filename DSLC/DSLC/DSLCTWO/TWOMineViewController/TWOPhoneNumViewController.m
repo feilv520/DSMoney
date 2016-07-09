@@ -34,6 +34,7 @@
 - (void)returnPhoneNum:(NSNotification *)notice
 {
     labelPhoneNum.text = [[notice object] stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    NSLog(@"更换的新手机号:::::::::::%@", [notice object]);
 }
 
 - (void)contentShow

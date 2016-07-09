@@ -68,5 +68,7 @@
 + (UIColor *) lineColor;//列表线颜色
 + (UIColor *) changeColor;//切换颜色
 + (UIColor *) friendAlert;//温馨提示颜色
++ (UIColor *) backColor;//温馨提示背景颜色
++ (UIColor *) alertColor;//温馨提示字体颜色
 
 @end

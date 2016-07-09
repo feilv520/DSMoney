@@ -264,4 +264,12 @@
     return [UIColor colorFromHexCode:@"#858585"];
 }
 
++ (UIColor *) backColor {
+    return [UIColor colorFromHexCode:@"#e1edf6"];
+}
+
++ (UIColor *) alertColor {
+    return [UIColor colorFromHexCode:@"#75777d"];
+}
+
 @end

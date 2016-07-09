@@ -12,12 +12,17 @@
 #import "TWOWinPrizeModel.h"
 #import "TWOMyMonkeyCoinViewController.h"
 #import "TWOUsableAllMoneyViewController.h"
+#import "MJRefreshBackGifFooter.h"
 
 @interface TWOWinPrizeRecordViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 {
     UITableView *_tableView;
     NSMutableArray *recordArray;
+    
+    MJRefreshBackGifFooter *refreshFooter;
+    BOOL flag;
+    NSInteger pageNumber;
 }
 
 @end
@@ -41,6 +46,8 @@
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     
     recordArray = [NSMutableArray array];
+    pageNumber = 1;
+    flag = NO;
     
     [self recordList];
 }
@@ -48,7 +55,7 @@
 //没有数据的显示
 - (void)noData
 {
-    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/1.5/2, 130.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 260/1.5, 260/1.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 20 - 64 - 53)/2 - 260/2/2, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [self.view addSubview:imageMonkey];
 }
 
@@ -63,6 +70,7 @@
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOWinPrizeRecordCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
+    [self addTableViewWithFooter:_tableView];
     UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
     [_tableView.tableFooterView addSubview:viewLine];
     viewLine.alpha = 0.4;
@@ -195,7 +203,7 @@
 #pragma mark data---------------------------------------------
 - (void)recordList
 {
-    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber], @"pageSize":@"10"};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"shake/getShakeWinning" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"摇一摇中奖纪录::::::::::::::%@", responseObject);
@@ -210,12 +218,37 @@
                 [recordArray addObject:prizeModel];
             }
             
-            [self tabelViewShow];
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                flag = YES;
+            }
+            [refreshFooter endRefreshing];
+            
+            if (pageNumber == 1) {
+                if (recordArray.count == 0) {
+                    [self noData];
+                } else {
+                    [self tabelViewShow];
+                }
+            } else {
+                [_tableView reloadData];
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
+}
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
+{
+    refreshFooter = footer;
+    
+    if (flag) {
+        [refreshFooter endRefreshing];
+    } else {
+        pageNumber++;
+        [self recordList];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

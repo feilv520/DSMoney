@@ -60,16 +60,48 @@
 
 - (void)alertContentShow
 {
-    UIView *viewAlert = [CreatView creatViewWithFrame:CGRectMake(9, 66 + 40 + 100, WIDTH_CONTROLLER_DEFAULT - 18, 160) backgroundColor:[UIColor profitColor]];
+    UIView *viewAlert = [CreatView creatViewWithFrame:CGRectMake(9, 66 + 40 + 100, WIDTH_CONTROLLER_DEFAULT - 18, 170) backgroundColor:[UIColor backColor]];
     [self.view addSubview:viewAlert];
     viewAlert.layer.cornerRadius = 5;
     viewAlert.layer.masksToBounds = YES;
     
+    if (WIDTH_CONTROLLER_DEFAULT == 414) {
+        viewAlert.frame = CGRectMake(9, 66 + 40 + 160, WIDTH_CONTROLLER_DEFAULT - 18, 150);
+    }
+    
     CGFloat viewWidth = viewAlert.frame.size.width;
 
-    UILabel *labelKindlyReminder  = [CreatView creatWithLabelFrame:CGRectMake(12, 0, viewWidth - 24, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor friendAlert] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"温馨提示"];
+    UILabel *labelKindlyReminder  = [CreatView creatWithLabelFrame:CGRectMake(12, 0, viewWidth - 24, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor friendAlert] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"温馨提示:"];
     labelKindlyReminder.alpha = 1.0;
     [viewAlert addSubview:labelKindlyReminder];
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需", @"   承担提现金额0.3%的手续费,最低每笔3元(新手专享标", @"   不算投资记录)"];
+        
+        for (int i = 0; i < 6; i++) {
+            UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:11] text:[contenArray objectAtIndex:i]];
+            [viewAlert addSubview:labelAlert];
+        }
+        
+    } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+        
+        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需", @"   承担提现金额0.3%的手续费,最低每笔3元(新手专享标", @"   不算投资记录)"];
+        
+        for (int i = 0; i < 6; i++) {
+            UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[contenArray objectAtIndex:i]];
+            [viewAlert addSubview:labelAlert];
+        }
+        
+    } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+        
+        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需承担提现", @"   金额0.3%的手续费,最低每笔3元(新手专享标不算投资记录)。"];
+        
+        for (int i = 0; i < 5; i++) {
+            UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[contenArray objectAtIndex:i]];
+            [viewAlert addSubview:labelAlert];
+        }
+    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

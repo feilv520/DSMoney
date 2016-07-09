@@ -33,7 +33,7 @@
 
 - (void)historyJiaXiQuanShow
 {
-    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/1.5/2, 130.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 260/1.5, 260/1.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 80 - 20 - 53)/2 - 260/2/2, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [self.view addSubview:imageMonkey];
 }
 

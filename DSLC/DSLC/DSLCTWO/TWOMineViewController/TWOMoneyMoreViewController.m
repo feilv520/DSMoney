@@ -15,6 +15,7 @@
     
     UIButton *buttBlack;
     UIView *viewThirdOpen;
+    UIButton *buttonNext;
 }
 @end
 
@@ -47,8 +48,9 @@
     textFieldLift.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     textFieldLift.textColor = [UIColor findZiTiColor];
     textFieldLift.keyboardType = UIKeyboardTypeDecimalPad; //带小数点的数字键盘
+    [textFieldLift addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     
-    UIButton *buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, 66, WIDTH_CONTROLLER_DEFAULT - 18, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
+    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, 66, WIDTH_CONTROLLER_DEFAULT - 18, 40) backgroundColor:[UIColor findZiTiColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
     [self.view addSubview:buttonNext];
     buttonNext.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     buttonNext.layer.cornerRadius = 5;
@@ -58,18 +60,61 @@
     [self alertContentShow];
 }
 
+- (void)textFieldEdit:(UITextField *)textField
+{
+    if (textFieldLift.text.length == 0) {
+        buttonNext.backgroundColor = [UIColor findZiTiColor];
+    } else {
+        buttonNext.backgroundColor = [UIColor profitColor];
+    }
+}
+
 - (void)alertContentShow
 {
-    UIView *viewAlert = [CreatView creatViewWithFrame:CGRectMake(9, 66 + 40 + 100, WIDTH_CONTROLLER_DEFAULT - 18, 160) backgroundColor:[UIColor shurukuangBian]];
+    UIView *viewAlert = [CreatView creatViewWithFrame:CGRectMake(9, 66 + 40 + 100, WIDTH_CONTROLLER_DEFAULT - 18, 210) backgroundColor:[UIColor backColor]];
     [self.view addSubview:viewAlert];
     viewAlert.layer.cornerRadius = 5;
     viewAlert.layer.masksToBounds = YES;
     
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        viewAlert.frame = CGRectMake(9, 40 + 100, WIDTH_CONTROLLER_DEFAULT - 18, 230);
+    } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+        viewAlert.frame = CGRectMake(9, 40 + 100, WIDTH_CONTROLLER_DEFAULT - 18, 190);
+    }
+    
     CGFloat viewWidth = viewAlert.frame.size.width;
     
-    UILabel *labelKindlyReminder  = [CreatView creatWithLabelFrame:CGRectMake(12, 0, viewWidth - 24, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"温馨提示"];
+    UILabel *labelKindlyReminder  = [CreatView creatWithLabelFrame:CGRectMake(12, 0, viewWidth - 24, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"温馨提示:"];
     labelKindlyReminder.alpha = 1.0;
     [viewAlert addSubview:labelKindlyReminder];
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        NSArray *contenArray = @[@"1.用户充值不收取任何手续费;", @"2.最低充值金额应大于等于100元;", @"3.充值/提现必须为银行借记卡,不支持存折、信用卡充值;", @"4.严禁利用充值功能进行信用卡套现、转账、洗钱等行为,", @"   一经发现,将封停账号;", @"5.充值需开通银行卡网上支付功能;如有疑问请咨询开户", @"   行客服;", @"6.如需帮助,请拨打客服热线:400-816-2283。"];
+        
+        for (int i = 0; i < 8; i++) {
+            UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:11] text:[contenArray objectAtIndex:i]];
+            [viewAlert addSubview:labelAlert];
+        }
+        
+    } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
+        
+        NSArray *contenArray = @[@"1.用户充值不收取任何手续费;", @"2.最低充值金额应大于等于100元;", @"3.充值/提现必须为银行借记卡,不支持存折、信用卡充值;", @"4.严禁利用充值功能进行信用卡套现、转账、洗钱等行为,", @"   一经发现,将封停账号;", @"5.充值需开通银行卡网上支付功能;如有疑问请咨询开户", @"   行客服;", @"6.如需帮助,请拨打客服热线:400-816-2283。"];
+        
+        for (int i = 0; i < 8; i++) {
+            UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[contenArray objectAtIndex:i]];
+            [viewAlert addSubview:labelAlert];
+        }
+        
+    } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
+        
+        NSArray *contenArray = @[@"1.用户充值不收取任何手续费;", @"2.最低充值金额应大于等于100元;", @"3.充值/提现必须为银行借记卡,不支持存折、信用卡充值;", @"4.严禁利用充值功能进行信用卡套现、转账、洗钱等行为,一经发", @"   现,将封停账号;", @"5.充值需开通银行卡网上支付功能;如有疑问请咨询开户行客服;", @"6.如需帮助,请拨打客服热线:400-816-2283。"];
+        
+        for (int i = 0; i < 7; i++) {
+            UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[contenArray objectAtIndex:i]];
+            [viewAlert addSubview:labelAlert];
+        }
+    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -79,16 +124,25 @@
 
 - (void)nextAction:(id)sender{
     
-    if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
+    if (textFieldLift.text.length == 0) {
         
-        [self registThirdShow];
-        return;
+    } else if ([textFieldLift.text integerValue] < 100) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"最低充值金额应大于等于100元"];
+        
+    } else {
+        
+        if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
+            
+            [self.view endEditing:YES];
+            [self registThirdShow];
+            return;
+        }
+        
+        TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+        productHuiFuVC.fuctionName = @"netSave";
+        productHuiFuVC.moneyString = textFieldLift.text;
+        pushVC(productHuiFuVC);
     }
-    
-    TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
-    productHuiFuVC.fuctionName = @"netSave";
-    productHuiFuVC.moneyString = textFieldLift.text;
-    pushVC(productHuiFuVC);
 }
 
 //开通托管账户弹框

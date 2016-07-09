@@ -14,6 +14,7 @@
 
 {
     UITableView *_tableView;
+    NSMutableArray *bankListArray;
 }
 
 @end
@@ -36,8 +37,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"银行卡"];
     
+    bankListArray = [NSMutableArray array];
+    
     [self getDataBankCardList];
-    [self tableViewShow];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
 
 - (void)tableViewShow
@@ -52,15 +55,17 @@
     _tableView.backgroundColor = [UIColor qianhuise];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOBankCardCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    UIButton *butCall = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 35) backgroundColor:[UIColor qianhuise] textColor:[UIColor profitColor] titleText:nil];
-    [_tableView.tableFooterView addSubview:butCall];
+    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 265/2, 0, 265, 35) backgroundColor:[UIColor qianhuise]];
+    [_tableView.tableFooterView addSubview:viewBottom];
+    
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 175, 35) backgroundColor:[UIColor qianhuise] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"更换绑定银行卡请致电客服:"];
+    [viewBottom addSubview:labelAlert];
+    
+    UIButton *butCall = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(175, 0, 90, 35) backgroundColor:[UIColor qianhuise] textColor:[UIColor profitColor] titleText:@"400-816-2283"];
+    [viewBottom addSubview:butCall];
     butCall.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-    NSMutableAttributedString *callString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"更换绑定银行卡请致电客服:%@", @"400-000-000"]];
-    NSRange callRange = NSMakeRange(0, 13);
-    [callString addAttribute:NSForegroundColorAttributeName value:[UIColor findZiTiColor] range:callRange];
-    NSRange phoneRange = NSMakeRange([[callString string] length] - 11, 11);
-    [callString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:phoneRange];
-    [butCall setAttributedTitle:callString forState:UIControlStateNormal];
+    butCall.contentHorizontalAlignment = NSTextAlignmentLeft;
+    butCall.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [butCall addTarget:self action:@selector(buttonCallPhone:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -71,19 +76,60 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return bankListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWOBankCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    TWOBankCardModel *bankCardModel = [bankListArray objectAtIndex:indexPath.row];
+    NSString *cardString = [bankCardModel bankCode];
     
     cell.imagePincture.image = [UIImage imageNamed:@"yinhangkabg"];
-    cell.imageBankLogo.image = [UIImage imageNamed:@"gongshang"];
     
-    cell.labelBankName.text = @"工商银行";
+    if ([cardString isEqualToString:@"ICBC"]) {
+        cell.labelBankName.text = @"工商银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"two工商"];
+        
+    } else if ([cardString isEqualToString:@"CCB"]) {
+        cell.labelBankName.text = @"建设银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"two建设"];
+        
+    } else if ([cardString isEqualToString:@"ABC"]) {
+        cell.labelBankName.text = @"农业银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"two农业"];
+
+    } else if ([cardString isEqualToString:@"CEB"]) {
+        cell.labelBankName.text = @"光大银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"two光大"];
+        
+    } else if ([cardString isEqualToString:@"HXB"]) {
+        cell.labelBankName.text = @"华夏银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"two华夏"];
+        
+    } else if ([cardString isEqualToString:@"PINGAN"]) {
+        cell.labelBankName.text = @"平安银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"two平安"];
+        
+    } else if ([cardString isEqualToString:@"SPDB"]) {
+        cell.labelBankName.text = @"浦发银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"two浦发"];
+        
+    } else if ([cardString isEqualToString:@"CIB"]) {
+        cell.labelBankName.text = @"兴业银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"two兴业"];
+        
+    } else if ([cardString isEqualToString:@"CMB"]) {
+        cell.labelBankName.text = @"招商银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"two招商"];
+        
+    } else if ([cardString isEqualToString:@"BOC"]) {
+        cell.labelBankName.text = @"中国银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"two中国"];
+    }
+    
     cell.labelStyle.text = @"储蓄卡";
-    cell.labelCardNum.text = @"6225**** ****8823";
+    cell.labelCardNum.text = [DES3Util decrypt:[bankCardModel cardAccount]];
     
     cell.imageBankLogo.backgroundColor = [UIColor clearColor];
     cell.labelBankName.backgroundColor = [UIColor clearColor];
@@ -97,7 +143,8 @@
 //拨打电话
 - (void)buttonCallPhone:(UIButton *)button
 {
-    NSLog(@"call");
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", @"400-816-2283"]];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -116,20 +163,25 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"bankCard/getUserBankCardList" parameters:parermeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"银行卡列表;;;;;;;;%@", responseObject);
+        [self loadingWithHidden:YES];
+        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             NSMutableArray *bankCardArray = [responseObject objectForKey:@"BankCard"];
             for (NSDictionary *dataDic in bankCardArray) {
                 TWOBankCardModel *bankModel = [[TWOBankCardModel alloc] init];
                 [bankModel setValuesForKeysWithDictionary:dataDic];
+                [bankListArray addObject:bankModel];
             }
             
+            [self tableViewShow];
+            
         } else {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+//            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"%@", error);
     }];
 }
 

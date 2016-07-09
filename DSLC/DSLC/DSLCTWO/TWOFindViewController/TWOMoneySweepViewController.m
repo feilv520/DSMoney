@@ -148,7 +148,7 @@
 #pragma mark 侃经---------------------------------
 - (void)getKanJingData
 {
-    NSDictionary *parmeter = @{@"type":@7, @"curPage":@1};
+    NSDictionary *parmeter = @{@"type":@7, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"index/getInfoManageList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         [self loadingWithHidden:YES];
@@ -188,7 +188,7 @@
 - (void)getBigSweepData
 {
     NSLog(@"大扫描");
-    NSDictionary *parmeter = @{@"type":@6, @"curPage":@1};
+    NSDictionary *parmeter = @{@"type":@6, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"index/getInfoManageList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         [self loadingWithHidden:YES];

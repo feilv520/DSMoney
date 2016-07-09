@@ -196,10 +196,12 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/updateUserPhone" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"更换手机号:~~~~~~~~%@", responseObject);
+
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"twoPhone" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"twoPhone" object:textFieldPhone.text];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+            
             NSArray *viewControllers = [self.navigationController viewControllers];
             [self.navigationController popToViewController:[viewControllers objectAtIndex:2] animated:YES];
             

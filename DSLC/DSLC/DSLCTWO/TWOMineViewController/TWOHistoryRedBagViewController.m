@@ -8,12 +8,18 @@
 
 #import "TWOHistoryRedBagViewController.h"
 #import "TWOUseRedBagCell.h"
+#import "MJRefreshBackGifFooter.h"
 
 @interface TWOHistoryRedBagViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tableView;
     NSMutableArray *historyRedBagArr;
+    NSMutableArray *historyArray;
+    
+    MJRefreshBackGifFooter *refreshFooter;
+    BOOL flagState;
+    NSInteger page;
 }
 
 @end
@@ -27,12 +33,16 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"历史红包"];
     
+    historyArray = [NSMutableArray array];
+    flagState = NO;
+    page = 1;
+    
     [self getMyRedPacketListFuction];
 }
 
 - (void)NoHistoryRedBagShow
 {
-    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/1.5/2, 130.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 260/1.5, 260/1.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 80 - 20 - 53)/2 - 260/2/2, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [self.view addSubview:imageMonkey];
 }
 
@@ -116,26 +126,45 @@
 
 #pragma mark history~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - (void)getMyRedPacketListFuction{
-    NSDictionary *parmeter = @{@"curPage":@1,@"status":@"1,2,3",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)page],@"status":@"1,2,3",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"getMyRedPacketList = %@",responseObject);
+        NSLog(@"历史红包 = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             historyRedBagArr = [responseObject objectForKey:@"RedPacket"];
             
-            if (historyRedBagArr.count == 0) {
-                [self NoHistoryRedBagShow];
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                flagState = YES;
+            }
+            [refreshFooter endRefreshing];
+            
+            if (page == 1) {
+                
+                if (historyRedBagArr.count == 0) {
+                    [self NoHistoryRedBagShow];
+                } else {
+                    [self tableViewShow];
+                }
             } else {
-                [self tableViewShow];
+                [_tableView reloadData];
             }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
         NSLog(@"%@", error);
-        
     }];
+}
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
+{
+    refreshFooter = footer;
+    if (flagState) {
+        [refreshFooter endRefreshing];
+    } else {
+        page++;
+        [self getMyRedPacketListFuction];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
