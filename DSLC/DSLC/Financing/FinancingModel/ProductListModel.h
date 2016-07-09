@@ -32,5 +32,7 @@
 
 @property (nonatomic, copy) NSString *startMoney;
 
+@property (nonatomic, copy) NSString *isHotSale;
+
 @end
 

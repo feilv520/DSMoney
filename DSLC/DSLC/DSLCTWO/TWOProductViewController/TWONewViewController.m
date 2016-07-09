@@ -170,6 +170,12 @@
             cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
             cell.viewBottom.layer.borderWidth = 1;
             
+            if ([[[pListModel isHotSale] description] isEqualToString:@"0"]) {
+                cell.imageBuying.hidden = YES;
+            } else {
+                cell.imageBuying.hidden = NO;
+            }
+            
             cell.labelName.text = [pListModel productName];
             
             [cell.butQuanQuan setBackgroundImage:[UIImage imageNamed:@"产品圈圈"] forState:UIControlStateNormal];

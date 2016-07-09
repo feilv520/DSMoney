@@ -155,7 +155,7 @@
 
 - (void)getMyRedPacketList{
     
-    NSDictionary *parmeter = @{@"curPage":[NSNumber numberWithInteger:page],@"status":@0,@"proPeriod":self.proPeriod,@"transMoney":self.transMoney,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":[NSNumber numberWithInteger:page],@"status":@0,@"proPeriod":self.proPeriod,@"transMoney":@"100",@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
