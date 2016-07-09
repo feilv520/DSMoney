@@ -207,9 +207,9 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"shake/getShakeWinning" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"摇一摇中奖纪录::::::::::::::%@", responseObject);
+        [self loadingWithHidden:YES];
+        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-            
-            [self loadingWithHidden:YES];
             
             NSMutableArray *dataArray = [responseObject objectForKey:@"prize"];
             for (NSDictionary *dataDic in dataArray) {

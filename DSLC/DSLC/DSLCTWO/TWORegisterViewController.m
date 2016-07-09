@@ -178,7 +178,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"check/checkPhone" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"getSmsCode = %@",responseObject);
+        NSLog(@"验证手机号 = %@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:@302]){
             TWOReceiveNumViewController *receiveNum = [[TWOReceiveNumViewController alloc] init];
@@ -196,7 +196,8 @@
     }];
 }
 
-- (void)sendToMessage{
+- (void)sendToMessage
+{
     NSDictionary *parmeter = @{@"phone":textFieldPhone.text,@"msgType":@"1"};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"three/getSmsCode" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -212,9 +213,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
         NSLog(@"%@", error);
-        
     }];
 }
 
