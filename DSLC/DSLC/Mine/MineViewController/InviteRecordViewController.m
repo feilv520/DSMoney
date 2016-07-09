@@ -94,7 +94,7 @@
     } else {
         
         InviteRecordModel *inviteModel = [contentArr objectAtIndex:indexPath.row - 1];
-        cell.labelPhoneNum.text = inviteModel.phone;
+        cell.labelPhoneNum.text = inviteModel.userPhone;
         cell.labelTime.text = inviteModel.inviteTime;
         
         if ([inviteModel.realNameStatus isEqualToString:@"2"]) {

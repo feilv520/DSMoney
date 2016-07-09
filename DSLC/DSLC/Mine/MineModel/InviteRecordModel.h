@@ -12,5 +12,5 @@
 @property (nonatomic) NSString *realNameStatus;
 @property (nonatomic) NSString *isInvest;
 @property (nonatomic) NSString *inviteTime;
-@property (nonatomic) NSString *phone;
+@property (nonatomic) NSString *userPhone;
 @end
