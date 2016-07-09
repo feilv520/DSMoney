@@ -20,7 +20,7 @@
     NSMutableArray *ticketArray;
     
     // 选中的加息卷Id
-    NSString *incrId;
+    TWOJiaXiQuanModel *incrModel;
 }
 
 @end
@@ -41,13 +41,13 @@
     [self getMyIncreaseList];
 }
 
-- (void)returnText:(ReturnTextBlock)block {
-    self.returnTextBlock = block;
+- (void)returnText:(ReturnJiaXiQuanBlock)block {
+    self.returnJiaXiQuanBlock = block;
 }
 - (void)viewWillDisappear:(BOOL)animated {
     
-    if (self.returnTextBlock != nil) {
-        self.returnTextBlock(incrId);
+    if (self.returnJiaXiQuanBlock != nil) {
+        self.returnJiaXiQuanBlock(incrModel);
     }
 }
 
@@ -152,7 +152,7 @@
     
     if (![[[model isEnabled] description] isEqualToString:@"1"]) {
     
-        incrId = [model incrId];
+        incrModel = model;
         popVC;
     }
 }

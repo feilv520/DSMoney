@@ -702,7 +702,7 @@
             [dic setValue:[responseObject objectForKey:@"monkeyNum"] forKey:@"monkeyNum"];
             [dic setValue:[responseObject objectForKey:@"totalMoney"] forKey:@"totalMoney"];
             
-            [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+//            [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
             [self viewHeadContent];
             [_tableView reloadData];

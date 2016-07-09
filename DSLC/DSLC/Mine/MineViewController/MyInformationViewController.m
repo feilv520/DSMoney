@@ -572,7 +572,7 @@
     //设置属性值,没有的数据就新建，已有的数据就修改。
     [usersDic setObject:@"mcm" forKey:@"token"];
     
-    [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+//    [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
     
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(0, 0) animated:NO];

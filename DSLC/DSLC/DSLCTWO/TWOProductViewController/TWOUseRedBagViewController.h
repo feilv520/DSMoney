@@ -7,14 +7,15 @@
 //
 
 #import "BaseViewController.h"
+#import "TWORedBagModel.h"
 
 @interface TWOUseRedBagViewController : BaseViewController
 
-typedef void (^ReturnTextBlock)(NSString *showText);
+typedef void (^ReturnRedBagBlock)(TWORedBagModel *model);
 
-@property (nonatomic, copy) ReturnTextBlock returnTextBlock;
+@property (nonatomic, copy) ReturnRedBagBlock returnRedBagBlock;
 
-- (void)returnText:(ReturnTextBlock)block;
+- (void)returnText:(ReturnRedBagBlock)block;
 
 @property (nonatomic, strong) NSString *proPeriod;
 @property (nonatomic, strong) NSString *transMoney;

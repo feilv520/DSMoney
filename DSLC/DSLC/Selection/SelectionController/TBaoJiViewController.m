@@ -63,7 +63,7 @@
     myWebView.scrollView.bounces = NO;
     
 //    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",self.tokenString];
-    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/prize/index.html?token=%@",self.tokenString];
+    NSString *urlString = [NSString stringWithFormat:@"%@prize/index.html?token=%@",htmlFive,self.tokenString];
 //    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.41:8888/tongjiang/prize/index.html"];
     
     NSURL *url = [NSURL URLWithString:urlString];

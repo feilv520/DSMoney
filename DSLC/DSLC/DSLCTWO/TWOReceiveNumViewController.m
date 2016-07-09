@@ -323,7 +323,7 @@
 #pragma mark --------------------------------
 
 - (void)registerFuction{
-    NSDictionary *parmeter = @{@"phone":self.phoneString,@"smsCode":textFieldYan.text,@"invitationCode":textFieldInvite.text,@"clientType":@"iOS"};
+    NSDictionary *parmeter = @{@"phone":self.phoneString,@"smsCode":textFieldYan.text,@"invitationCode":textFieldInvite.text,@"clientType":@"iOS",@"ImgData":@""};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"reg/register" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -370,11 +370,21 @@
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
             
-            [self getMyAccountInfoFuction];
+            // 判断是否存在isLogin.plist文件
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
             
             [self dismissViewControllerAnimated:YES completion:^{
                 
-                [self userSign];
+                [self userSign:[responseObject objectForKey:@"token"]];
+                
+                [self getMyAccountInfoFuction:[responseObject objectForKey:@"token"]];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];
@@ -391,11 +401,11 @@
     }];
 }
 
-- (void)getMyAccountInfoFuction{
+- (void)getMyAccountInfoFuction:(NSString *)tokenString{
     
     NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"token":tokenString};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -414,7 +424,7 @@
     }];
 }
 
-- (void)userSign{
+- (void)userSign:(NSString *)tokenString{
     
     NSDate *currentDate = [NSDate date];//获取当前时间，日期
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -424,7 +434,7 @@
     
     NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"],@"signDate":dateString};
+    NSDictionary *parmeter = @{@"token":tokenString,@"signDate":dateString};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"sign/userSign" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

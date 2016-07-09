@@ -23,6 +23,7 @@
 #import "TWOAddressAlreadySetViewController.h"
 #import "TWOPersonalSetModel.h"
 #import "TWORealNameH5ViewController.h"
+#import "TWOProductHuiFuViewController.h"
 
 @interface TWOPersonalSetViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -32,6 +33,9 @@
     NSMutableArray *informationArray;
     UIButton *indexButton;
     TWOPersonalSetModel *personalModel;
+    
+    UIButton *buttBlack;
+    UIView *viewThirdOpen;
 }
 
 @end
@@ -231,8 +235,15 @@
                 [self.navigationController pushViewController:realNameIng animated:YES];
             } else {
                 //未实名认证页面
-                TWORealNameH5ViewController *noRealNameVC = [[TWORealNameH5ViewController alloc] init];
-                [self.navigationController pushViewController:noRealNameVC animated:YES];
+//                TWORealNameH5ViewController *noRealNameVC = [[TWORealNameH5ViewController alloc] init];
+//                [self.navigationController pushViewController:noRealNameVC animated:YES];
+                
+                if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
+                    
+                    [self registThirdShow];
+                    return;
+                }
+                
             }
             
         } else if (indexPath.row == 2) {
@@ -430,6 +441,61 @@
         NSLog(@"账户设置>>>>>>>>>%@", error);
     }];
 }
+
+//开通托管账户弹框
+- (void)registThirdShow
+{
+    AppDelegate *app  = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    buttBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    [app.tabBarVC.view addSubview:buttBlack];
+    buttBlack.alpha = 0.5;
+    [buttBlack addTarget:self action:@selector(buttonViewDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    viewThirdOpen = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 310/2, HEIGHT_CONTROLLER_DEFAULT/3, 310, 228) backgroundColor:[UIColor whiteColor]];
+    [app.tabBarVC.view addSubview:viewThirdOpen];
+    viewThirdOpen.layer.cornerRadius = 4;
+    viewThirdOpen.layer.masksToBounds = YES;
+    
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewThirdOpen.frame.size.width, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"你还未开通托管账户"];
+    [viewThirdOpen addSubview:labelAlert];
+    
+    UIImageView *imageImg = [CreatView creatImageViewWithFrame:CGRectMake(viewThirdOpen.frame.size.width/2 - 314/2/2, 45, 314/2, 234/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"thirdimg"]];
+    [viewThirdOpen addSubview:imageImg];
+    
+    UIButton *buttonok = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 45 + imageImg.frame.size.height + 15, viewThirdOpen.frame.size.width - 24, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    [viewThirdOpen addSubview:buttonok];
+    buttonok.layer.cornerRadius = 4;
+    buttonok.layer.masksToBounds = YES;
+    buttonok.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [buttonok addTarget:self action:@selector(buttonOpenThirdOK:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//开通三方确定按钮
+- (void)buttonOpenThirdOK:(UIButton *)button
+{
+    [buttBlack removeFromSuperview];
+    [viewThirdOpen removeFromSuperview];
+    
+    buttBlack = nil;
+    viewThirdOpen = nil;
+    
+    TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+    productHuiFuVC.fuctionName = @"userReg";
+    pushVC(productHuiFuVC);
+    
+}
+
+//开通三方弹框点击消失
+- (void)buttonViewDisappear:(UIButton *)button
+{
+    [buttBlack removeFromSuperview];
+    [viewThirdOpen removeFromSuperview];
+    
+    buttBlack = nil;
+    viewThirdOpen = nil;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

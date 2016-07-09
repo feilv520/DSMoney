@@ -12,7 +12,9 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-    
+    if ([key isEqualToString:@"repPacketMoney"]) {
+        self.redPacketMoney = value;
+    }
 }
 
 @end

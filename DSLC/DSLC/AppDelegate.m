@@ -132,6 +132,8 @@
     
     NSString *handFlag = [self.handDic objectForKey:@"handFlag"];
     
+    NSString *token = [self.flagUserInfo objectForKey:@"token"];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.window.backgroundColor = [UIColor whiteColor];

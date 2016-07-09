@@ -116,7 +116,7 @@
 
 - (void)getRecordData
 {
-     NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSNumber numberWithInteger:curruntPage], @"invitationMyCode":[self.flagDic objectForKey:@"token"]};
+     NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSNumber numberWithInteger:curruntPage], @"invitationMyCode":[self.flagDic objectForKey:@"invitationMyCode"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"invite/getMyInviteList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"邀请记录:========&&&=======%@", responseObject);

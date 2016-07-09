@@ -333,7 +333,7 @@
                                              [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
                                              [responseObject objectForKey:@"token"],@"token",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
-                        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+//                        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                     } else {
                         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                                              [DES3Util encrypt:textField1.text],@"password",
@@ -344,7 +344,7 @@
                                              [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
                                              [responseObject objectForKey:@"token"],@"token",
                                              [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
-                        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+//                        [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                         NSLog(@"%@",[responseObject objectForKey:@"token"]);
                     }
                     // 判断是否存在isLogin.plist文件

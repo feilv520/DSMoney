@@ -7,14 +7,15 @@
 //
 
 #import "BaseViewController.h"
+#import "TWOJiaXiQuanModel.h"
 
 @interface TWOUseTicketViewController : BaseViewController
 
-typedef void (^ReturnTextBlock)(NSString *showText);
+typedef void (^ReturnJiaXiQuanBlock)(TWOJiaXiQuanModel *model);
 
-@property (nonatomic, copy) ReturnTextBlock returnTextBlock;
+@property (nonatomic, copy) ReturnJiaXiQuanBlock returnJiaXiQuanBlock;
 
-- (void)returnText:(ReturnTextBlock)block;
+- (void)returnText:(ReturnJiaXiQuanBlock)block;
 
 @property (nonatomic, strong) NSString *proPeriod;
 @property (nonatomic, strong) NSString *transMoney;

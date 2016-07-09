@@ -303,7 +303,7 @@
         
         TWORedBagModel *redBagModel = [redBagArray objectAtIndex:indexPath.row];
         
-        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", [redBagModel repPacketMoney]]];
+        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", [redBagModel redPacketMoney]]];
         NSRange signRange = NSMakeRange(0, 1);
         [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:signRange];
         [cell.labelMoney setAttributedText:moneyString];
@@ -550,7 +550,23 @@
 //去使用可用红包页面
 - (void)goToUseRedBagButton:(UIButton *)button
 {
-    NSLog(@"go");
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+    
+    UIButton *indexButton = [app.tabBarVC.tabButtonArray objectAtIndex:1];
+    
+    for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+        
+        if (indexButton.tag != tempButton.tag) {
+            NSLog(@"%ld",(long)tempButton.tag);
+            [tempButton setSelected:NO];
+        }
+    }
+    
+    [indexButton setSelected:YES];
+    
+    [app.tabBarVC setTabbarViewHidden:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 //红包使用说明按钮
