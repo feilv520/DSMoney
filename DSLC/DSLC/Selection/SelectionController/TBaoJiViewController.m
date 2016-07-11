@@ -63,7 +63,7 @@
     myWebView.scrollView.bounces = NO;
     
 //    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/prize/index.html?token=%@",self.tokenString];
-    NSString *urlString = [NSString stringWithFormat:@"%@prize/index.html?token=%@",htmlFive,self.tokenString];
+    NSString *urlString = [NSString stringWithFormat:@"%@/prize/index.html?token=%@",htmlFive,self.tokenString];
 //    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.41:8888/tongjiang/prize/index.html"];
     
     NSURL *url = [NSURL URLWithString:urlString];
@@ -77,14 +77,10 @@
     
     UIWebView *wView = (UIWebView *)[self.view viewWithTag:9092];
     
-    NSString *urlString = [wView stringByEvaluatingJavaScriptFromString:@"toAppLogin();"];
-    
-    NSLog(@"urlString = %@",urlString);
-    
     if ([myWebView canGoBack]) {
         [myWebView goBack];
         closeItem.hidden = NO;
-    }else{
+    } else {
         
         NSString *tokenString = [wView stringByEvaluatingJavaScriptFromString:@"jsLayout();"];
         
@@ -137,9 +133,8 @@
     
     if ([requestString hasPrefix:@"goback:"]) {
         [self.navigationController popViewControllerAnimated:YES];
-    }
-
-    if ([requestString hasSuffix:@"toLogin.html"]) {
+        return YES;
+    } else if ([requestString hasSuffix:@"toLogin.html"]) {
         NSLog(@"123333");
         
         TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
@@ -153,13 +148,12 @@
         
         urlStringTwo = [webView stringByEvaluatingJavaScriptFromString:@"toAppLogin();"];
         
-        NSLog(@"urlString = %@",urlStringTwo);
+        NSLog(@"urlStringNew= %@",urlStringTwo);
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStringTwo]];
         
         [webView loadRequest:request];
 
-        
     }
     
     return YES;

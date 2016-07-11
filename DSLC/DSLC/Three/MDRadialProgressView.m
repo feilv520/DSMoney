@@ -273,7 +273,9 @@
 	
     self.accessibilityValue = [NSString stringWithFormat:@"%.2f", percentageCompleted];
     
-	self.label.text = [NSString stringWithFormat:@"%.0f%%", percentageCompleted];
+    NSString *percentageCompletedString = [NSString stringWithFormat:@"%.1f%%", percentageCompleted];
+    
+	self.label.text = [NSString stringWithFormat:@"%@%%",[percentageCompletedString substringWithRange:NSMakeRange(0, percentageCompletedString.length - 3)]];
     
 	NSString *notificationText = [NSString stringWithFormat:@"%@ %@",
 								  NSLocalizedString(@"Progress changed to:", nil),
