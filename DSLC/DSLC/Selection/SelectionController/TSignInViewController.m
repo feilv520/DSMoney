@@ -40,7 +40,7 @@
     myWebView.scrollView.bounces = NO;
     
 //    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.161:8088/zhongxin/activity/signIn.html?token=%@",self.tokenString];
-    NSString *urlString = [NSString stringWithFormat:@"http://wap.dslc.cn/activity/signIn.html?token=%@",self.tokenString];
+    NSString *urlString = [NSString stringWithFormat:@"%@/activity/user/signIn.html?token=%@",htmlFive,self.tokenString];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [myWebView loadRequest:request];

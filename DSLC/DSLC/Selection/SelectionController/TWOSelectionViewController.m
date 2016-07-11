@@ -20,6 +20,7 @@
 #import "BannerViewController.h"
 #import "TSignInViewController.h"
 #import "TWOLoginAPPViewController.h"
+#import "TWOMessageDetailViewController.h"
 
 @interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
@@ -250,7 +251,8 @@
 }
 
 - (void)scrollViewTapAction{
-    NSLog(@"123");
+    TWOMessageDetailViewController *messageDetailVC = [[TWOMessageDetailViewController alloc] init];
+    pushVC(messageDetailVC);
 }
 
 -(void)timerFireMethod:(NSTimer *)theTimer

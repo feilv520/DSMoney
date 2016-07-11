@@ -24,6 +24,9 @@
     NSInteger seconds;
     NSTimer *timer;
     
+    // 提交表单loading
+    MBProgressHUD *hud;
+    
     //签到猴子需要的控件
     UIButton *buttonHei;
     UIView *viewDown;
@@ -325,7 +328,13 @@
 - (void)registerFuction{
     NSDictionary *parmeter = @{@"phone":self.phoneString,@"smsCode":textFieldYan.text,@"invitationCode":textFieldInvite.text,@"clientType":@"iOS",@"ImgData":@""};
     
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
+    
     [[MyAfHTTPClient sharedClient] postWithURLString:@"reg/register" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [hud hide:YES];
         
         NSLog(@"register = %@",responseObject);
         

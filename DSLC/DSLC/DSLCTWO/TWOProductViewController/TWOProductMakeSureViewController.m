@@ -53,6 +53,8 @@
     TWORedBagModel *packetModel;
     // 选中的加息卷
     TWOJiaXiQuanModel *incrModel;
+    
+    NSInteger ifHaveValue;
 }
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -92,8 +94,7 @@
     
     [self setSureView];
     
-    [self getMyRedPacketList];
-    [self getMyIncreaseList];
+    ifHaveValue = 1;
     
     redPackString = @"0";
     
@@ -501,8 +502,11 @@
                 
                 packetModel = model;
                 
-                redPackString = [packetModel redPacketMoney];
-                
+                if (packetModel == nil) {
+                    redPackString = @"0";
+                } else {
+                    redPackString = [packetModel redPacketMoney];
+                }
                 NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:1];
                 [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
             }];
@@ -587,7 +591,7 @@
 //textField绑定方法
 - (void)textFieldEditChanged:(UITextField *)textField
 {
-    
+
     UIButton *sureButton = (UIButton *)[sureView viewWithTag:9574];
     
     if (textField.text.length == 0) {
@@ -634,6 +638,16 @@
     }
     
     monkeyString = @"0个";
+    
+    ifHaveValue++;
+    
+    if (ifHaveValue == 2) {
+        if (![[self.detailM.productType description] isEqualToString:@"3"]) {
+            
+            [self getMyRedPacketList];
+            [self getMyIncreaseList];
+        }
+    }
     
 }
 
@@ -694,8 +708,8 @@
     
     makeSView.allMoneyLabel.text = [NSString stringWithFormat:@"¥%@",allMoneyString];
     makeSView.kMoneyLabel.text = [NSString stringWithFormat:@"-¥%@",redPackString];
-    allMoneyString = [NSString stringWithFormat:@"%ld",[allMoneyString integerValue] - [redPackString integerValue]];
-    makeSView.zMoneyLabel.text = [NSString stringWithFormat:@"¥%@",allMoneyString];
+    NSString *trueMoneyString = [NSString stringWithFormat:@"%ld",[allMoneyString integerValue] - [redPackString integerValue]];
+    makeSView.zMoneyLabel.text = [NSString stringWithFormat:@"¥%@",trueMoneyString];
     
     monkeyView.allMoneyLabel.text = [NSString stringWithFormat:@"¥%@",allMoneyString];
     monkeyView.zMoneyLabel.text = [NSString stringWithFormat:@"¥%@",allMoneyString];
@@ -885,7 +899,6 @@
         NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
         [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);

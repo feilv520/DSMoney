@@ -36,6 +36,9 @@
     
     UIButton *buttBlack;
     UIView *viewThirdOpen;
+    
+    // 提交表单loading
+    MBProgressHUD *hud;
 }
 
 @end
@@ -322,12 +325,18 @@
 - (void)logoutFuction{
     NSDictionary *parmeter = @{@"userId":[self.flagDic objectForKey:@"phone"]};
     
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
+    
     [[MyAfHTTPClient sharedClient] postWithURLString:@"logout" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"register = %@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            
+            [hud hide:YES];
             
             if (![FileOfManage ExistOfFile:@"Member.plist"]) {
                 [FileOfManage createWithFile:@"Member.plist"];

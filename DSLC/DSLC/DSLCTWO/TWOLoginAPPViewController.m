@@ -31,6 +31,9 @@
     NSInteger seconds;
     NSTimer *timer;
     
+    // 提交表单loading
+    MBProgressHUD *hud;
+    
     //签到猴子需要的控件
     UIButton *buttonHei;
     UIView *viewDown;
@@ -484,9 +487,15 @@
 - (void)loginFuction{
     NSDictionary *parmeter = @{@"phone":textFieldPhone.text,@"password":textFieldSecret.text};
     
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
+    
     [[MyAfHTTPClient sharedClient] postWithURLString:@"login" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"register = %@",responseObject);
+        
+        [hud hide:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
@@ -566,9 +575,15 @@
 - (void)registerFuction{
     NSDictionary *parmeter = @{@"phone":textFieldPhone.text,@"smsCode":textFieldMessage.text,@"invitationCode":@"",@"clientType":@"iOS"};
     
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
+    
     [[MyAfHTTPClient sharedClient] postWithURLString:@"reg/register" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"register = %@",responseObject);
+        
+        [hud hide:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
