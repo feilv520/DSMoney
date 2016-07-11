@@ -339,20 +339,25 @@
         cell.labelEvery.text = @"所有产品适用";
         cell.labelEvery.backgroundColor = [UIColor clearColor];
         
-        if ([[[redBagModel status] description] isEqualToString:@"0"]) {
-            [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];
-        } else if ([[[redBagModel status] description] isEqualToString:@"1"]) {
-            [cell.butCanUse setTitle:@"已\n使\n用" forState:UIControlStateNormal];
-        } else if ([[[redBagModel status] description] isEqualToString:@"2"]) {
-            [cell.butCanUse setTitle:@"已\n失\n效" forState:UIControlStateNormal];
-        }
-
+        //红包只有'可使用'状态
+        [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];
+        
         cell.butCanUse.titleLabel.numberOfLines = 3;
         cell.butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.butCanUse.backgroundColor = [UIColor clearColor];
         
         cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [redBagModel startDate], [redBagModel endDate]];
         cell.labelData.backgroundColor = [UIColor clearColor];
+        
+        if ([[[redBagModel redPacketType] description] isEqualToString:@"7"]) {
+
+            cell.labelData.text = @"请尽快使用";
+            cell.labelEvery.text = @"仅可用于新手标";
+            cell.labelTiaoJian.text = @"新手体验金";
+            
+            cell.labelTiaoJian.textColor = [UIColor moneyColor];
+            cell.labelTiaoJian.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        }
         
 //        if (indexPath.row == 2) {
 //            cell.contentView.alpha = 0.5;

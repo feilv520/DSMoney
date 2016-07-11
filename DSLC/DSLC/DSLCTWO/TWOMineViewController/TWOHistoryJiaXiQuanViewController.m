@@ -10,11 +10,20 @@
 #import "TWOWaitCashCell.h"
 #import "TWOUseRedBagCell.h"
 #import "TWIJiaXiQuanCell.h"
+#import "MJRefreshBackGifFooter.h"
+#import "MJRefreshGifHeader.h"
+#import "TWOJiaXiQuanModel.h"
 
 @interface TWOHistoryJiaXiQuanViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tableView;
+    NSMutableArray *hisAddTicketArray;
+    
+    MJRefreshGifHeader *freshHeater;
+    MJRefreshBackFooter *freshFooter;
+    BOOL flagState;
+    NSInteger pageNumber;
 }
 
 @end
@@ -27,6 +36,10 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"历史加息券"];
+    
+    hisAddTicketArray = [NSMutableArray array];
+    flagState = NO;
+    pageNumber = 1;
     
     [self getMyIncreaseListFuction];
 }
@@ -47,11 +60,15 @@
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOWaitCashCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"TWIJiaXiQuanCell" bundle:nil] forCellReuseIdentifier:@"reuseR"];
+    
+    [self addTableViewWithHeader:_tableView];
+    [self addTableViewWithFooter:_tableView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 1 || indexPath.row == 6) {
+    TWOJiaXiQuanModel *jiaXiQuanModel = [hisAddTicketArray objectAtIndex:indexPath.row];
+    if ([[[jiaXiQuanModel status] description] isEqualToString:@"3"]) {
         return 160;
     } else {
         return 140;
@@ -60,23 +77,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return hisAddTicketArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 1 || indexPath.row == 6) {
+    TWOJiaXiQuanModel *jiaXiQuanModel = [hisAddTicketArray objectAtIndex:indexPath.row];
+    
+    if ([[[jiaXiQuanModel status] description] isEqualToString:@"3"]) {
         
         TWOWaitCashCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         cell.imageWait.image = [UIImage imageNamed:@"历史兑换加息券ios"];
         
-        NSMutableAttributedString *percentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"2"]];
+        NSMutableAttributedString *percentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [jiaXiQuanModel incrMoney]]];
         NSRange qianRange = NSMakeRange(0, [[percentString string] rangeOfString:@"%"].location);
         [percentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:39] range:qianRange];
         [cell.labelPercent setAttributedText:percentString];
         cell.labelPercent.textColor = [UIColor findZiTiColor];
         cell.labelPercent.backgroundColor = [UIColor clearColor];
-//            待兑付加息券frame值机型判断
+        
+        //待兑付加息券frame值机型判断
         if (WIDTH_CONTROLLER_DEFAULT == 320) {
             cell.labelPercent.frame = CGRectMake(10, 56, 88, 40);
             cell.buttonWait.frame = CGRectMake(281, 16, 23, 127);
@@ -99,7 +119,7 @@
             cell.buttonWait.frame = CGRectMake(370, 17, 23, 127);
         }
         
-        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];
+        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [jiaXiQuanModel investMoney]]];
         NSRange leftRange = NSMakeRange(0, 5);
         [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:leftRange];
         NSRange rightRange = NSMakeRange([[moneyString string] length] - 2, 2);
@@ -112,11 +132,11 @@
         cell.labelEvery.textColor = [UIColor findZiTiColor];
         cell.labelEvery.backgroundColor = [UIColor clearColor];
         
-        cell.laeblData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
+        cell.laeblData.text = [NSString stringWithFormat:@"%@至%@有效", [jiaXiQuanModel startDate], [jiaXiQuanModel endDate]];
         cell.laeblData.textColor = [UIColor findZiTiColor];
         cell.laeblData.backgroundColor = [UIColor clearColor];
         
-        NSMutableAttributedString *qianMianString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待兑付金额:%@元", @"20"]];
+        NSMutableAttributedString *qianMianString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待兑付金额:%@元", [jiaXiQuanModel cashMoney]]];
         NSRange qianMianRange = NSMakeRange(0, 6);
         [qianMianString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:qianMianRange];
         NSRange houMianRange = NSMakeRange([[qianMianString string] length] - 1, 1);
@@ -125,7 +145,7 @@
         cell.laeblMoney.textColor = [UIColor findZiTiColor];
         cell.laeblMoney.backgroundColor = [UIColor clearColor];
         
-        cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:2016-09-09"];
+        cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", [jiaXiQuanModel productDueDate]];
         cell.labelTime.textColor = [UIColor findZiTiColor];
         cell.labelTime.backgroundColor = [UIColor clearColor];
         
@@ -149,7 +169,7 @@
         TWIJiaXiQuanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseR"];
         cell.imagePicture.image = [UIImage imageNamed:@"历史加息券ios"];
         
-        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", @"2"]];
+        NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [jiaXiQuanModel incrMoney]]];
         NSRange signRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"%"].location);
         [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:39] range:signRange];
         NSRange baiRange = NSMakeRange([[moneyString string] length] - 1, 1);
@@ -175,7 +195,7 @@
             cell.butCanUse.frame = CGRectMake(370, 10, 23, 127);
         }
         
-        NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];
+        NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [jiaXiQuanModel investMoney]]];
         NSRange leftRange = NSMakeRange(0, 5);
         [useing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:leftRange];
         NSRange rightRange = NSMakeRange([[useing string] length] - 2, 2);
@@ -188,12 +208,12 @@
         cell.labelEvery.textColor = [UIColor findZiTiColor];
         cell.labelEvery.backgroundColor = [UIColor clearColor];
         
-        [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];
+        [cell.butCanUse setTitle:@"已\n过\n期" forState:UIControlStateNormal];
         cell.butCanUse.titleLabel.numberOfLines = 3;
         cell.butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
         cell.butCanUse.backgroundColor = [UIColor clearColor];
         
-        cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
+        cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [jiaXiQuanModel startDate], [jiaXiQuanModel endDate]];
         cell.labelData.textColor = [UIColor findZiTiColor];
         cell.labelData.backgroundColor = [UIColor clearColor];
         
@@ -203,25 +223,67 @@
 }
 #pragma mark history>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 - (void)getMyIncreaseListFuction{
-    NSDictionary *parmeter = @{@"curPage":@1,@"status":@"1,2,3",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber],@"status":@"1,2,3",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"getMyIncreaseList = %@",responseObject);
+        NSLog(@"历史加息券列表 = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *dataArray = [responseObject objectForKey:@"Increase"];
-            if (dataArray.count == 0) {
-                [self historyJiaXiQuanShow];
+            
+            for (NSDictionary *dataDic in dataArray) {
+                TWOJiaXiQuanModel *jiaxiQuanModel = [[TWOJiaXiQuanModel alloc] init];
+                [jiaxiQuanModel setValuesForKeysWithDictionary:dataDic];
+                [hisAddTicketArray addObject:jiaxiQuanModel];
+            }
+            
+            //判断当前页数与总共页数的比较
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                flagState = YES;
+            }
+            [freshFooter endRefreshing];
+            
+            //判断有无数据
+            if (pageNumber == 1) {
+                if (hisAddTicketArray.count == 0) {
+                    [self historyJiaXiQuanShow];
+                } else {
+                    [self tableViewShow];
+//                    [self historyJiaXiQuanShow];
+                }
             } else {
-                [self tableViewShow];
+                [_tableView reloadData];
             }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
         NSLog(@"%@", error);
-        
     }];
+}
+
+//下拉刷新
+- (void)loadNewData:(MJRefreshGifHeader *)header
+{
+    if (hisAddTicketArray != nil) {
+        [hisAddTicketArray removeAllObjects];
+        hisAddTicketArray = nil;
+        hisAddTicketArray = [NSMutableArray array];
+    }
+    
+    pageNumber = 1;
+    [self getMyIncreaseListFuction];
+}
+
+//上拉加载
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
+{
+    freshFooter = footer;
+    if (flagState) {
+        [freshFooter endRefreshing];
+    } else {
+        pageNumber++;
+        [self getMyIncreaseListFuction];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

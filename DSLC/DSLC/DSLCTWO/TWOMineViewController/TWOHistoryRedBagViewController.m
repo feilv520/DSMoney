@@ -9,6 +9,8 @@
 #import "TWOHistoryRedBagViewController.h"
 #import "TWOUseRedBagCell.h"
 #import "MJRefreshBackGifFooter.h"
+#import "TWORedBagModel.h"
+#import "MJRefreshGifHeader.h"
 
 @interface TWOHistoryRedBagViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -16,6 +18,9 @@
     UITableView *_tableView;
     NSMutableArray *historyRedBagArr;
     NSMutableArray *historyArray;
+    
+    MJRefreshGifHeader *freshHeader;
+    NSInteger pageNew;
     
     MJRefreshBackGifFooter *refreshFooter;
     BOOL flagState;
@@ -55,6 +60,9 @@
     _tableView.separatorColor = [UIColor clearColor];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 9)];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    
+    [self addTableViewWithHeader:_tableView];
+    [self addTableViewWithFooter:_tableView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -64,13 +72,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return historyArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWOUseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    TWORedBagModel *redBagModel = [historyArray objectAtIndex:indexPath.row];
     
+    //机型frame判断
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         cell.labelMoney.frame = CGRectMake(10, 55, 108, 40);
         cell.butCanUse.frame = CGRectMake(281, 10, 23, 127);
@@ -89,14 +99,14 @@
 
     cell.imagePicture.image = [UIImage imageNamed:@"历史红包ios"];
     
-    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", @"20"]];
+    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", [redBagModel redPacketMoney]]];
     NSRange signRange = NSMakeRange(0, 1);
     [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:signRange];
     [cell.labelMoney setAttributedText:moneyString];
     cell.labelMoney.backgroundColor = [UIColor clearColor];
     cell.labelMoney.textColor = [UIColor findZiTiColor];
     
-    NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", @"10000"]];
+    NSMutableAttributedString *useing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单笔投资满%@可用", [redBagModel investMoney]]];
     NSRange leftRange = NSMakeRange(0, 5);
     [useing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:leftRange];
     NSRange rightRange = NSMakeRange([[useing string] length] - 2, 2);
@@ -109,16 +119,25 @@
     cell.labelEvery.backgroundColor = [UIColor clearColor];
     cell.labelEvery.textColor = [UIColor findZiTiColor];
     
-    [cell.butCanUse setTitle:@"已\n过\n期" forState:UIControlStateNormal];
+    //历史红包只有'已过期' '已使用'两种状态
+    if ([[[redBagModel status] description] isEqualToString:@"2"]) {
+        [cell.butCanUse setTitle:@"已\n过\n期" forState:UIControlStateNormal];
+    } else if ([[[redBagModel status] description] isEqualToString:@"1"]) {
+        [cell.butCanUse setTitle:@"已\n使\n用" forState:UIControlStateNormal];
+    }
     cell.butCanUse.titleLabel.numberOfLines = 3;
     cell.butCanUse.backgroundColor = [UIColor clearColor];
     cell.butCanUse.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
     
-    cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", @"2016-09-09", @"2016-09-09"];
+    cell.labelData.text = [NSString stringWithFormat:@"%@至%@有效", [redBagModel startDate], [redBagModel endDate]];
     cell.labelData.backgroundColor = [UIColor clearColor];
     cell.labelData.textColor = [UIColor findZiTiColor];
     
-//    机型frame判断
+    if ([[[redBagModel redPacketType] description] isEqualToString:@"7"]) {
+        cell.labelTiaoJian.text = @"新手体验金";
+        cell.labelEvery.text = @"仅可用于新手标";
+        cell.labelData.text = @"";
+    }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -133,6 +152,11 @@
         NSLog(@"历史红包 = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             historyRedBagArr = [responseObject objectForKey:@"RedPacket"];
+            for (NSDictionary *dataDic in historyRedBagArr) {
+                TWORedBagModel *redBagModel = [[TWORedBagModel alloc] init];
+                [redBagModel setValuesForKeysWithDictionary:dataDic];
+                [historyArray addObject:redBagModel];
+            }
             
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
                 flagState = YES;
@@ -165,6 +189,18 @@
         page++;
         [self getMyRedPacketListFuction];
     }
+}
+
+- (void)loadNewData:(MJRefreshGifHeader *)header
+{
+    if (historyArray != nil) {
+        [historyArray removeAllObjects];
+        historyArray = nil;
+        historyArray = [NSMutableArray array];
+    }
+    
+    page = 1;
+    [self getMyRedPacketListFuction];
 }
 
 - (void)didReceiveMemoryWarning {

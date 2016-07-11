@@ -19,4 +19,5 @@
 @property (nonatomic) NSString *redPacketId;
 @property (nonatomic) NSString *applyDays;
 @property (nonatomic) NSString *isEnabled;
+@property (nonatomic) NSString *redPacketType;
 @end
