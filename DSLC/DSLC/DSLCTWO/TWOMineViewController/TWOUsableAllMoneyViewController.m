@@ -105,7 +105,7 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         selectionView.hidden = NO;
-        selectionView.frame = CGRectMake(0, 0, WIDTH_CVIEW_DEFAULT, (125 / 667.0) * HEIGHT_CONTROLLER_DEFAULT);
+        selectionView.frame = CGRectMake(0, 0, WIDTH_CVIEW_DEFAULT, (96 / 667.0) * HEIGHT_CONTROLLER_DEFAULT);
         bView.alpha = 0.3;
         
     } completion:^(BOOL finished) {
@@ -117,7 +117,7 @@
 - (void)showSelectionView{
     
     if (selectionView == nil) {
-        selectionView = [[UIView alloc] initWithFrame:CGRectMake(0, -125, WIDTH_CONTROLLER_DEFAULT, (125 / 667.0) * HEIGHT_CONTROLLER_DEFAULT)];
+        selectionView = [[UIView alloc] initWithFrame:CGRectMake(0, -125, WIDTH_CONTROLLER_DEFAULT, (96 / 687.0) * HEIGHT_CONTROLLER_DEFAULT)];
         
         selectionView.backgroundColor = Color_White;
         [self.view addSubview:selectionView];
@@ -125,14 +125,17 @@
         NSArray *nameArray = @[@"全部",@"充值",@"提现",@"投资",@"兑付",@"加息"];
         
         CGFloat marginX = WIDTH_CVIEW_DEFAULT * (23 / 375.0);
-        CGFloat marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
+        CGFloat marginY = HEIGHT_CONTROLLER_DEFAULT * (12 / 687.0);
         
         if (WIDTH_CONTROLLER_DEFAULT == 414.0){
             marginX = WIDTH_CVIEW_DEFAULT * (36 / 375.0);
-            marginY = HEIGHT_CVIEW_DEFAULT * (25 / 667.0);
+            marginY = HEIGHT_CONTROLLER_DEFAULT * (12 / 687.0);
         }
         CGFloat buttonX = WIDTH_CVIEW_DEFAULT * (90 / 375.0);
-        CGFloat buttonY = HEIGHT_CVIEW_DEFAULT * (34 / 667.0);
+        CGFloat buttonY = HEIGHT_CONTROLLER_DEFAULT * (30 / 687.0);
+        
+        NSLog(@"%lf",HEIGHT_CONTROLLER_DEFAULT);
+        NSLog(@"%lf,%lf",buttonX,buttonY);
         
         for (NSInteger i = 0; i < nameArray.count; i++) {
             NSBundle *rootBundle = [NSBundle mainBundle];
@@ -169,7 +172,7 @@
     page = 1;
     
     [UIView animateWithDuration:0.5 animations:^{
-        selectionView.frame = CGRectMake(0, -150, WIDTH_CVIEW_DEFAULT, 150);
+        selectionView.frame = CGRectMake(0, -150, WIDTH_CVIEW_DEFAULT, (96 / 687.0) * HEIGHT_CONTROLLER_DEFAULT);
         
         if (button.tag == 0) {
             typeString = @"";
@@ -269,7 +272,7 @@
             [self.mainTableView setHidden:NO];
         }
         
-        if (![tempTypeString isEqualToString:typeString]) {
+        if (![tempTypeString isEqualToString:typeString] || page == 1) {
             
             [listArray removeAllObjects];
             listArray = nil;

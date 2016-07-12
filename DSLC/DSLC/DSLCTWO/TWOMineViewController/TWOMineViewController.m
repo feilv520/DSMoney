@@ -1068,10 +1068,10 @@
             [contentArrayOld addObject:[NSString stringWithFormat:@"%@元在投",[DES3Util decrypt:[myAccount investMoney]]]];
             [contentArrayOld addObject:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount prlMoney]]]];
             
-            if ([[myAccount redPacketNum] isEqualToString:@""] || [[myAccount redPacketNum] isEqualToString:@"0"]) {
+            if ([[myAccount redPacketNum] isEqualToString:@""] || [[myAccount redPacketNum] isEqualToString:@"0"] || [[myAccount incrUnUsedCount] isEqualToString:@""] || [[myAccount incrUnUsedCount] isEqualToString:@"0"]) {
                 [contentArray addObject:[NSString stringWithFormat:@"0张"]];
             } else {
-                [contentArray addObject:[NSString stringWithFormat:@"%@张",[DES3Util decrypt:[myAccount redPacketNum]]]];
+                [contentArray addObject:[NSString stringWithFormat:@"%ld张",(long)[[myAccount redPacketNum] integerValue] + (long)[[myAccount incrUnUsedCount] integerValue]]];
             }
             [contentArray addObject:[NSString stringWithFormat:@"%@猴币",[DES3Util decrypt:[myAccount monkeyNum]]]];
             [contentArray addObject:@"邀请好友送星巴克券"];

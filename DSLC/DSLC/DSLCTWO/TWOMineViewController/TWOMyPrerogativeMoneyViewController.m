@@ -34,6 +34,11 @@
     NSString *labelMoneyString;
     NSString *labelTodayProfitString;
     NSString *labelAddProfitString;
+    
+    UIImageView *imageViewBack;
+    UIView *viewBottom;
+    UIButton *butMyMoney;
+    UIButton *buttonAsk;
 }
 
 @end
@@ -65,7 +70,6 @@
     
     [self getUserPrivilegeListFuction];
     
-    [self tableViewShow];
     _tableView.hidden = YES;
 }
 
@@ -92,9 +96,12 @@
 
 - (void)tableViewHeadShow
 {
-    UIImageView *imageViewBack = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _tableView.tableHeaderView.frame.size.height) backGroundColor:[UIColor qianhuise] setImage:[UIImage imageNamed:@"productDetailBackground"]];
+    if (imageViewBack == nil) {
+        
+        imageViewBack = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _tableView.tableHeaderView.frame.size.height) backGroundColor:[UIColor qianhuise] setImage:[UIImage imageNamed:@"productDetailBackground"]];
+        imageViewBack.userInteractionEnabled = YES;
+    }
     [_tableView.tableHeaderView addSubview:imageViewBack];
-    imageViewBack.userInteractionEnabled = YES;
     
 //    我的特权本金的钱数
     if (labelMoney == nil) {
@@ -107,21 +114,30 @@
     [labelMoney setAttributedText:moneyString];
     
 //    存放 '我的特权本金&问号按钮' 的view
-    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 53, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 5, 111, 15) backgroundColor:[UIColor clearColor]];
+    if (viewBottom == nil) {
+        
+        viewBottom = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 53, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 5, 111, 15) backgroundColor:[UIColor clearColor]];
+    }
     [imageViewBack addSubview:viewBottom];
     
 //    我的特权本金 文字
-    UIButton *butMyMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, 90, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"我的特权本金"];
+    if (butMyMoney == nil) {
+        
+        butMyMoney = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, 90, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"我的特权本金"];
+        butMyMoney.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [butMyMoney addTarget:self action:@selector(buttonClickedAsk:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [viewBottom addSubview:butMyMoney];
-    butMyMoney.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [butMyMoney addTarget:self action:@selector(buttonClickedAsk:) forControlEvents:UIControlEventTouchUpInside];
     
 //    问号按钮
-    UIButton *buttonAsk = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(95, 2, 13, 13) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    if (buttonAsk == nil) {
+        
+        buttonAsk = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(95, 2, 13, 13) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        [buttonAsk setBackgroundImage:[UIImage imageNamed:@"wenhao"] forState:UIControlStateNormal];
+        [buttonAsk setBackgroundImage:[UIImage imageNamed:@"wenhao"] forState:UIControlStateHighlighted];
+        [buttonAsk addTarget:self action:@selector(buttonClickedAsk:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [viewBottom addSubview:buttonAsk];
-    [buttonAsk setBackgroundImage:[UIImage imageNamed:@"wenhao"] forState:UIControlStateNormal];
-    [buttonAsk setBackgroundImage:[UIImage imageNamed:@"wenhao"] forState:UIControlStateHighlighted];
-    [buttonAsk addTarget:self action:@selector(buttonClickedAsk:) forControlEvents:UIControlEventTouchUpInside];
     
 //    今日收益的钱数
     if (labelTodayProfit == nil) {
@@ -184,7 +200,9 @@
         
         TWOMyPrerogativeMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
-        if (indexPath.section == 2) {
+        TWOMyUserPrivilegeListModel *myUserPrivilegeListModel = [statusOneArray objectAtIndex:indexPath.section];
+        
+        if ([[[myUserPrivilegeListModel status] description] isEqualToString:@"2"]) {
             cell.imageProfiting.image = [UIImage imageNamed:@"已兑付hui"];
         } else {
             cell.imageProfiting.image = [UIImage imageNamed:@"收益中"];
@@ -193,24 +211,27 @@
         
         cell.labelMoney.textColor = [UIColor profitColor];
         cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:24];
-        NSMutableAttributedString *leftStriing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"￥%@", @"5000"]];
+        
+        NSString *investMoneyString = [[myUserPrivilegeListModel investMoney] stringByReplacingOccurrencesOfString:@"," withString:@""];
+        
+        NSMutableAttributedString *leftStriing = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"￥%@", investMoneyString]];
         NSRange leftRange = NSMakeRange(0, 1);
         [leftStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
         [cell.labelMoney setAttributedText:leftStriing];
         
-        cell.labelYuQI.text = @" 预期年化1%";
+        cell.labelYuQI.text = [NSString stringWithFormat:@" 预期年化%@%%",[myUserPrivilegeListModel annualYield]];
         cell.labelYuQI.textColor = [UIColor findZiTiColor];
         cell.labelYuQI.font = [UIFont fontWithName:@"CenturyGothic" size:12];
-        
-        cell.labelFriend.text = @"好友投资11%产品30天";
+//        [myUserPrivilegeListModel privilegeYield]
+        cell.labelFriend.text = [NSString stringWithFormat:@"好友投资%@%%产品%@天",[myUserPrivilegeListModel privilegeYield],[myUserPrivilegeListModel period]];
         cell.labelFriend.textColor = [UIColor ZiTiColor];
         cell.labelFriend.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        cell.labelBegin.text = [NSString stringWithFormat:@"起始日:%@", @"2016-10-10"];
+        cell.labelBegin.text = [NSString stringWithFormat:@"起始日:%@", [myUserPrivilegeListModel startDate]];
         cell.labelBegin.textColor = [UIColor findZiTiColor];
         cell.labelBegin.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
-        cell.labelCash.text = [NSString stringWithFormat:@"兑付日:2016-11-11"];
+        cell.labelCash.text = [NSString stringWithFormat:@"兑付日:%@",[myUserPrivilegeListModel dueDate]];
         cell.labelCash.textColor = [UIColor findZiTiColor];
         cell.labelCash.font = [UIFont fontWithName:@"CenturyGothic" size:12];
         
@@ -335,7 +356,7 @@
             labelAddProfitString = [responseObject objectForKey:@"totalProfit"];
             
             if (page == 1) {
-                [self tableViewHeadShow];
+                [self tableViewShow];
             }
             
             [footerT endRefreshing];

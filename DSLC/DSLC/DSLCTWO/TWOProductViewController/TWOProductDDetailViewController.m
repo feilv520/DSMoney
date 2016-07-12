@@ -12,6 +12,7 @@
 #import "TWOProductDDDetailView.h"
 #import "TWOProductJinDuTableViewCell.h"
 #import "TWOProductAssetModel.h"
+#import "TWOProductWaitingTableViewCell.h"
 
 @interface TWOProductDDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate> {
     UIButton *button1;
@@ -76,10 +77,10 @@
     
     [self getAssetDetailFuction];
     
-//    if (valueArray.count == 0) {
-        [self tableViewShow];
-
-//    }
+    //    if (valueArray.count == 0) {
+    [self tableViewShow];
+    
+    //    }
 }
 
 - (void)tableViewShow
@@ -90,10 +91,12 @@
     _tableView.delegate = self;
     _tableView.tableFooterView = [UIView new];
     _tableView.backgroundColor = [UIColor colorFromHexCode:@"#F5F6F7"];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerNib:[UINib nibWithNibName:@"TWOProductDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOProductJinDuTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuseJinDu"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TWOProductWaitingTableViewCell" bundle:nil] forCellReuseIdentifier:@"waiting"];
     
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    //    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
 }
 
@@ -114,28 +117,27 @@
             return 150;
         }
     } else if (indexPath.section == 1) {
-        
-        if (indexPath.row == 0) {
-            return 50;
-        } else {
-            if (!openFlag) {
-//                if (indexPath.row == path.row) {
-                    if ([[moreOpenArray objectAtIndex:indexPath.row - 1] isEqualToString:@"1"]) {
+        if (!openFlag) {
+            if (moreOpenArray.count == 0) {
+                return 45;
+            } else {
+                if (indexPath.row == moreOpenArray.count) {
+                    return 45;
+                } else {
+                    if ([[moreOpenArray objectAtIndex:indexPath.row] isEqualToString:@"1"]) {
                         
                         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
                         
-                        CGSize mySize = [[[progressArray objectAtIndex:indexPath.row - 1] objectForKey:@"pDetail"] boundingRectWithSize:CGSizeMake(widthNumber, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+                        CGSize mySize = [[[progressArray objectAtIndex:indexPath.row] objectForKey:@"pDetail"] boundingRectWithSize:CGSizeMake(widthNumber, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
                         
                         return 80 + mySize.height;
-//                    } else {
-//                        return 120;
-//                    }
-                } else {
-                    return 120;
+                    } else {
+                        return 120;
+                    }
                 }
-            } else {
-                return 50;
             }
+        } else {
+            return 50;
         }
     } else {
         if (indexPath.row == 0) {
@@ -209,7 +211,7 @@
         [twoView addSubview:labelLine];
         
         return twoView;
-
+        
     } else {
         return nil;
     }
@@ -219,7 +221,7 @@
     if (section == 0) {
         
         if (firstView == nil) {
-    
+            
             firstView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 150)];
             
             firstView.backgroundColor = Color_White;
@@ -295,16 +297,20 @@
             cell.titleLabel.text = @"基本信息";
             cell.valueLabel.hidden = YES;
             
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, 1)];
+            lineView.backgroundColor = [UIColor colorFromHexCode:@"dcdee0"];
+            [cell addSubview:lineView];
+            
         } else {
             cell.titleLabel.hidden = NO;
             cell.valueLabel.hidden = NO;
-            cell.titleLabel.text = [titleArray objectAtIndex:indexPath.row - 1];
+            cell.titleLabel.text = [titleArray objectAtIndex:indexPath.row];
             if (valueArray.count != 0) {
                 
-                cell.valueLabel.text = [NSString stringWithFormat:@"%@",[valueArray objectAtIndex:indexPath.row - 1]];
+                cell.valueLabel.text = [NSString stringWithFormat:@"%@",[valueArray objectAtIndex:indexPath.row]];
             }
             
-//            webView.hidden = YES;
+            //            webView.hidden = YES;
             
         }
     } else {
@@ -312,6 +318,10 @@
             cell.titleLabel.text = @"资产说明";
             cell.titleLabel.hidden = NO;
             cell.valueLabel.hidden = YES;
+            
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, 1)];
+            lineView.backgroundColor = [UIColor colorFromHexCode:@"dcdee0"];
+            [cell addSubview:lineView];
             
         } else {
             cell.titleLabel.text = [assetModel assetProjectDetail];
@@ -328,7 +338,7 @@
             webView.userInteractionEnabled = NO;
             [cell addSubview:webView];
             
-//            webView.hidden = NO;
+            //            webView.hidden = NO;
             
             detailString = [detailString stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
             detailString = [detailString stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
@@ -340,36 +350,49 @@
         }
     }
     
-    if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
+    if (!openFlag) {
+        if (indexPath.section == 1) {
             
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
-        } else {
-            if (!openFlag) {
-                TWOProductJinDuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseJinDu"];
-            
-                [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+            // 判断数组是否有数值,如果有就显示正常的,否则只显示待续
+            if (progressArray.count == 0) {
                 
-                NSString *detailString = [[progressArray objectAtIndex:indexPath.row - 1] objectForKey:@"pDetail"];
-                
-                cell.dateLabel.text = [[progressArray objectAtIndex:indexPath.row - 1] objectForKey:@"pDate"];
-                cell.valueLabel.text = detailString;
-                
-                widthNumber = cell.valueLabel.frame.size.width;
-                
-                if ((detailString.length / (widthNumber / 13.0)) <= 3.0) {
-                    cell.moreButton.hidden = YES;
-                } else {
-                    cell.moreButton.hidden = NO;
-                }
-                
-                if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
-                    cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 1, 50, 2, 70);
-                }
+                TWOProductWaitingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"waiting"];
                 
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
+            } else {
+                if (indexPath.row == progressArray.count) {
+                    
+                    TWOProductWaitingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"waiting"];
+                    
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                } else {
+                    
+                    TWOProductJinDuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseJinDu"];
+                    
+                    [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                    NSString *detailString = [[progressArray objectAtIndex:indexPath.row] objectForKey:@"pDetail"];
+                    
+                    cell.dateLabel.text = [[progressArray objectAtIndex:indexPath.row] objectForKey:@"pDate"];
+                    cell.valueLabel.text = detailString;
+                    
+                    widthNumber = cell.valueLabel.frame.size.width;
+                    
+                    if ((detailString.length / (widthNumber / 13.0)) <= 3.0) {
+                        cell.moreButton.hidden = YES;
+                    } else {
+                        cell.moreButton.hidden = NO;
+                    }
+                    
+                    if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+                        cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 1, 50, 2, 70);
+                    }
+                    
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                }
             }
         }
     }
@@ -461,40 +484,40 @@
     
     path = [self.tableView indexPathForCell:cell];
     
-    [moreOpenArray replaceObjectAtIndex:path.row - 1 withObject:@"1"];
+    [moreOpenArray replaceObjectAtIndex:path.row withObject:@"1"];
     
-//    if (flagPath.row == path.row || flagPath == nil) {
+    //    if (flagPath.row == path.row || flagPath == nil) {
     
-        cellRect = cell.valueLabel.frame;
-        
-        [cell.moreButton setTitle:@"收起" forState:UIControlStateNormal];
-        cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPUp"];
-        [cell.moreButton removeTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.moreButton addTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        cell.valueLabel.text = [[progressArray objectAtIndex:path.row - 1] objectForKey:@"pDetail"];
-        
-        cell.valueLabel.numberOfLines = 0;
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
-        
-        size = [cell.valueLabel.text boundingRectWithSize:CGSizeMake(cell.valueLabel.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-        
-        cell.valueLabel.frame = CGRectMake(cell.valueLabel.frame.origin.x, cell.valueLabel.frame.origin.y, cell.valueLabel.frame.size.width, size.height + 10);
-        
-        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
-            cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 3, 50, 2, 70);
-        }
-        
-//        NSIndexPath *myPath=[NSIndexPath indexPathForRow:path.row - 1 inSection:path.section];
-//        
-//        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:myPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
+    cellRect = cell.valueLabel.frame;
+    
+    [cell.moreButton setTitle:@"收起" forState:UIControlStateNormal];
+    cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPUp"];
+    [cell.moreButton removeTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.moreButton addTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.valueLabel.text = [[progressArray objectAtIndex:path.row] objectForKey:@"pDetail"];
+    
+    cell.valueLabel.numberOfLines = 0;
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
+    
+    size = [cell.valueLabel.text boundingRectWithSize:CGSizeMake(cell.valueLabel.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    
+    cell.valueLabel.frame = CGRectMake(cell.valueLabel.frame.origin.x, cell.valueLabel.frame.origin.y, cell.valueLabel.frame.size.width, size.height + 10);
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+        cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 3, 50, 2, 70);
+    }
+    
+    //        NSIndexPath *myPath=[NSIndexPath indexPathForRow:path.row - 1 inSection:path.section];
+    //
+    //        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:myPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
     
     [self.tableView reloadData];
     
-//        flagPath = path;
-//    } else {
-//        [self sMoreAction:nil];
-//    }
+    //        flagPath = path;
+    //    } else {
+    //        [self sMoreAction:nil];
+    //    }
     NSLog(@"moreOpenArray - %@",moreOpenArray);
     
 }
@@ -504,61 +527,61 @@
     TWOProductJinDuTableViewCell *cell = (TWOProductJinDuTableViewCell *)[[sender superview] superview];
     
     path = [self.tableView indexPathForCell:cell];
-
-//    if (flagPath.row == path.row) {
     
-        [moreOpenArray replaceObjectAtIndex:path.row - 1 withObject:@"0"];
-        
-        [cell.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
-        cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPDown"];
-        [cell.moreButton removeTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        cell.valueLabel.text = [[progressArray objectAtIndex:path.row - 1] objectForKey:@"pDetail"];
-        
-        cell.valueLabel.numberOfLines = 3;
-        
-        cell.valueLabel.frame = cellRect;
-        
-        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
-            cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 3, 50, 2, 70);
-        }
-//    
-//        NSIndexPath *myPath=[NSIndexPath indexPathForRow:path.row - 1 inSection:path.section];
-//        
-//        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:myPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
+    //    if (flagPath.row == path.row) {
+    
+    [moreOpenArray replaceObjectAtIndex:path.row withObject:@"0"];
+    
+    [cell.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
+    cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPDown"];
+    [cell.moreButton removeTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.valueLabel.text = [[progressArray objectAtIndex:path.row] objectForKey:@"pDetail"];
+    
+    cell.valueLabel.numberOfLines = 3;
+    
+    cell.valueLabel.frame = cellRect;
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+        cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 3, 50, 2, 70);
+    }
+    //
+    //        NSIndexPath *myPath=[NSIndexPath indexPathForRow:path.row - 1 inSection:path.section];
+    //
+    //        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:myPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
     
     [self.tableView reloadData];
-        
-//    } else {
-        
-//        [moreOpenArray replaceObjectAtIndex:flagPath.row - 1 withObject:@"0"];
-//        
-//        [cell.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
-//        cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPDown"];
-//        [cell.moreButton removeTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
-//        [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        cell.valueLabel.text = [[progressArray objectAtIndex:flagPath.row - 1] objectForKey:@"pDetail"];
-//        
-//        cell.valueLabel.numberOfLines = 3;
-//        
-//        cell.valueLabel.frame = cellRect;
-//        
-//        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
-//            cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 3, 50, 2, 70);
-//        }
-//        
-//        //    [self.tableView reloadData];
-//        NSIndexPath *myPath=[NSIndexPath indexPathForRow:flagPath.row - 1 inSection:flagPath.section];
-//        NSIndexPath *myTPath=[NSIndexPath indexPathForRow:path.row - 1 inSection:path.section];
-//        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:myPath,myTPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
-//        
-//        flagPath = path;
-//    }
+    
+    //    } else {
+    
+    //        [moreOpenArray replaceObjectAtIndex:flagPath.row - 1 withObject:@"0"];
+    //
+    //        [cell.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
+    //        cell.fuhaoImage.image = [UIImage imageNamed:@"TWOPDown"];
+    //        [cell.moreButton removeTarget:self action:@selector(sMoreAction:) forControlEvents:UIControlEventTouchUpInside];
+    //        [cell.moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+    //
+    //        cell.valueLabel.text = [[progressArray objectAtIndex:flagPath.row - 1] objectForKey:@"pDetail"];
+    //
+    //        cell.valueLabel.numberOfLines = 3;
+    //
+    //        cell.valueLabel.frame = cellRect;
+    //
+    //        if (WIDTH_CONTROLLER_DEFAULT == 320.0) {
+    //            cell.lineView.frame = CGRectMake(cell.bianImageView.center.x - 3, 50, 2, 70);
+    //        }
+    //
+    //        //    [self.tableView reloadData];
+    //        NSIndexPath *myPath=[NSIndexPath indexPathForRow:flagPath.row - 1 inSection:flagPath.section];
+    //        NSIndexPath *myTPath=[NSIndexPath indexPathForRow:path.row - 1 inSection:path.section];
+    //        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:myPath,myTPath,nil]  withRowAnimation:UITableViewRowAnimationNone];
+    //
+    //        flagPath = path;
+    //    }
     
     NSLog(@"moreOpenArrays - %@",moreOpenArray);
-
+    
 }
 
 #pragma mark 资产详情接口
@@ -589,7 +612,7 @@
         [valueArray addObject:[assetModel assetManager]];
         
         progressArray = [[responseObject objectForKey:@"Asset"] objectForKey:@"Progress"];
-    
+        
         for (NSInteger i = 0; i < progressArray.count; i++) {
             [moreOpenArray addObject:@"0"];
         }
@@ -611,13 +634,13 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

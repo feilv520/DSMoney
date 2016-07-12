@@ -18,5 +18,8 @@
 @property (nonatomic, copy) NSString *dueDate;
 @property (nonatomic, copy) NSString *exceptedYield;
 @property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *annualYield;
+@property (nonatomic, copy) NSString *privilegeYield;
+@property (nonatomic, copy) NSString *period;
 
 @end
