@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *allMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *zMoneyLabel;
 @property (weak, nonatomic) IBOutlet UIButton *sureButton;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
