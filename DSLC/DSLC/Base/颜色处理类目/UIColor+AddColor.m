@@ -272,4 +272,8 @@
     return [UIColor colorFromHexCode:@"#75777d"];
 }
 
++ (UIColor *) pictureColor {
+    return [UIColor colorFromHexCode:@"#93d0ff"];
+}
+
 @end

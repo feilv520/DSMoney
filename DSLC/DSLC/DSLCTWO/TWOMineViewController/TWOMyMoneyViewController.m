@@ -181,6 +181,12 @@
     [self.pieChartView setAmountText:[moneyArray objectAtIndex:index]];
 }
 
+- (void)noDataShowMoney
+{
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 72, 260/2, 284/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"总资产无数据"]];
+    [self.view addSubview:imageMonkey];
+}
+
 #pragma mark 我的资产详情
 #pragma mark --------------------------------
 
@@ -211,7 +217,7 @@
             self.totalMoneyString = [DES3Util decrypt:[responseObject objectForKey:@"totalMoney"]];
             
             if ([[responseObject objectForKey:@"Asset"] count] == 0) {
-                [self noDateWithHeight:101 view:self.view];
+                [self noDataShowMoney];
             } else {
                 [self contentShow];
             }

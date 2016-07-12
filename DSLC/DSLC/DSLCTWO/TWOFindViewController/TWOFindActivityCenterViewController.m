@@ -106,7 +106,7 @@
 //进行中无数据
 - (void)runingNoData
 {
-    UIImageView *imageRuning = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/1.5/2, 100, 260/1.5, 260/1.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    UIImageView *imageRuning = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 100, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [_scrollview addSubview:imageRuning];
 }
 
@@ -124,7 +124,7 @@
 //期待中无数据
 - (void)waitingNoData
 {
-    UIImageView *imageRuning = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT/2 - 260/1.5/2, 100, 260/1.5, 260/1.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    UIImageView *imageRuning = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 100, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [_scrollview addSubview:imageRuning];
 }
 
@@ -142,7 +142,7 @@
 //已结束无数据
 - (void)overNoData
 {
-    UIImageView *imageRuning = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT*2 + WIDTH_CONTROLLER_DEFAULT/2 - 260/1.5/2, 100, 260/1.5, 260/1.5) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    UIImageView *imageRuning = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT*2 + WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 100, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [_scrollview addSubview:imageRuning];
 }
 

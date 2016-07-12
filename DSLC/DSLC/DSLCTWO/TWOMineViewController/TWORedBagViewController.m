@@ -89,7 +89,7 @@
     UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 13.5, butBagUse.frame.size.width, 0.5) backgroundColor:[UIColor profitColor]];
     [butBagUse addSubview:viewLine];
     
-    UIImageView *imageNothing = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 80.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    UIImageView *imageNothing = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [_scrollView addSubview:imageNothing];
     
     UIView *viewHistory = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 96, 260/2 + 80.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 192, 14) backgroundColor:[UIColor whiteColor]];
@@ -119,7 +119,7 @@
     UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 13.5, butJiaUse.frame.size.width, 0.5) backgroundColor:[UIColor profitColor]];
     [butJiaUse addSubview:viewLine];
     
-    UIImageView *imageNothing = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + (WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2), 80.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    UIImageView *imageNothing = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT + (WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2), 78, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [_scrollView addSubview:imageNothing];
     
     UIView *viewHistory = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT +(WIDTH_CONTROLLER_DEFAULT/2 - 108), 260/2 + 80.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 216, 14) backgroundColor:[UIColor whiteColor]];
@@ -358,10 +358,6 @@
             cell.labelTiaoJian.textColor = [UIColor moneyColor];
             cell.labelTiaoJian.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         }
-        
-//        if (indexPath.row == 2) {
-//            cell.contentView.alpha = 0.5;
-//        }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;

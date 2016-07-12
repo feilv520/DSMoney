@@ -11,4 +11,5 @@
 @interface TWOProductSafeTestViewController : BaseViewController
 @property (nonatomic) BOOL alreadyTest;
 @property (nonatomic) CGFloat score;
+@property (nonatomic) NSString *securityLevel;
 @end

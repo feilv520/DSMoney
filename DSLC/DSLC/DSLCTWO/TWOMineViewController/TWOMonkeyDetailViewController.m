@@ -143,6 +143,12 @@
     }
 }
 
+- (void)noDataShowMonkey
+{
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [self.view addSubview:imageMonkey];
+}
+
 #pragma mark 我的猴币详情
 #pragma mark --------------------------------
 
@@ -159,16 +165,22 @@
             [self loadingWithHidden:YES];
             NSMutableArray *dataArr = [responseObject objectForKey:@"Monkey"];
             
-            if (dataArr.count == 0) {
-                [self noDateWithHeight:100 view:self.view];
-            } else {
-                [self tableViewSHOW];
-            }
-            
             for (NSDictionary *dataDic in dataArr) {
                 TWOMyMonkeyModel *model = [[TWOMyMonkeyModel alloc] init];
                 [model setValuesForKeysWithDictionary:dataDic];
                 [monkeyArray addObject:model];
+            }
+            
+            if (page == 1) {
+                
+                if (dataArr.count == 0) {
+                    [self noDataShowMonkey];
+                } else {
+                    [self tableViewSHOW];
+                }
+                
+            } else {
+                [_tableView reloadData];
             }
             
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {

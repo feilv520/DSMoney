@@ -81,7 +81,7 @@
         _tableView.delegate = self;
         _tableView.backgroundColor = [UIColor qianhuise];
         
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 328.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 248.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
         _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
         _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.1)];
         if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
@@ -98,12 +98,12 @@
 - (void)tableViewHeadShow
 {
     if (imagePicture == nil) {
-        imagePicture = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 236.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor qianhuise] setImage:[UIImage imageNamed:@"productDetailBackground"]];
+        imagePicture = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 156.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor qianhuise] setImage:[UIImage imageNamed:@"productDetailBackground"]];
     }
     [_tableView.tableHeaderView addSubview:imagePicture];
     
     if (labelMonkeyCoin == nil) {
-        labelMonkeyCoin = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
+        labelMonkeyCoin = [CreatView creatWithLabelFrame:CGRectMake(0, 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
     }
     NSMutableAttributedString *monkeyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@猴币", [dataDic objectForKey:@"totalMonkeyNum"]]];
     NSRange monkeyRange = NSMakeRange(0, [[monkeyString string] rangeOfString:@"猴"].location);
@@ -119,15 +119,15 @@
     }
     
     if (lineChart == nil) {
-        lineChart = [[PNChart alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(labelMonkeyCoin.frame) - 10.0, SCREEN_WIDTH, 200.0)];
+        lineChart = [[PNChart alloc] initWithFrame:CGRectMake(0, labelMonkeyCoin.frame.size.height + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), SCREEN_WIDTH, 100.0)];
         lineChart.backgroundColor = [UIColor clearColor];
         
         if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
-            lineChart.frame = CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30, SCREEN_WIDTH, 122.0);
+            lineChart.frame = CGRectMake(0, 11.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30, SCREEN_WIDTH, 73.0);
         } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
-            lineChart.frame = CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30, SCREEN_WIDTH, 149.0);
+            lineChart.frame = CGRectMake(0, 13.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30, SCREEN_WIDTH, 91.0);
         } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
-            lineChart.frame = CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30, SCREEN_WIDTH, 202.0);
+            lineChart.frame = CGRectMake(0, 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30, SCREEN_WIDTH, 119.0);
         }
     }
     

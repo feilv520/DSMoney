@@ -47,6 +47,7 @@
     UIView *viewThirdOpen;
     
     NSDictionary *userDic;
+    NSArray *userXingArray;
 }
 
 @property (nonatomic, strong) UIControl *viewBotton;
@@ -92,10 +93,11 @@
     titleArray = [NSArray array];
     assetArray = [NSMutableArray array];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductDetail) name:@"safeTest" object:nil];
+    
     titleArray = @[@"收益方式",@"计息起始日&到账日",@"投资限额"];
     
     [self getProductDetail];
-    
 }
 
 - (NSDictionary *)flagLogin{
@@ -450,9 +452,26 @@
                 viewUserXing = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 175, 0, 150, 50) backgroundColor:[UIColor clearColor]];
                 [cell addSubview:viewUserXing];
                 
-                kindString = @"稳健型";
-                
-                NSArray *userXingArray = @[@"xing", @"xing", @"xing", @"xing", @"xing"];
+                if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"1"]) {
+                    kindString = @"谨慎型";
+                    userXingArray = @[@"xing", @"xing", @"xing", @"xing", @"xing"];
+                    
+                } else if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"2"]) {
+                    kindString = @"稳健型";
+                    userXingArray = @[@"xing", @"xing", @"xing", @"xing", @"xingkong"];
+                    
+                } else if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"3"]) {
+                    kindString = @"平衡型";
+                    userXingArray = @[@"xing", @"xing", @"xing", @"xingkong", @"xingkong"];
+                    
+                } else if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"4"]) {
+                    kindString = @"进取型";
+                    userXingArray = @[@"xing", @"xing", @"xingkong", @"xingkong", @"xingkong"];
+                    
+                } else if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"5"]) {
+                    kindString = @"激进型";
+                    userXingArray = @[@"xing", @"xingkong", @"xingkong", @"xingkong", @"xingkong"];
+                }
                 
                 UILabel *kindLabel = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 60, 46) backgroundColor:Color_Clear textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:kindString];
                 [viewUserXing addSubview:kindLabel];
@@ -491,9 +510,26 @@
             viewUserXing = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 175, 0, 150, 50) backgroundColor:[UIColor clearColor]];
             [cell addSubview:viewUserXing];
             
-            kindString = @"稳健型";
-            
-            NSArray *userXingArray = @[@"xing", @"xing", @"xing", @"xing", @"xing"];
+            if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"1"]) {
+                kindString = @"谨慎型";
+                userXingArray = @[@"xing", @"xing", @"xing", @"xing", @"xing"];
+                
+            } else if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"2"]) {
+                kindString = @"稳健型";
+                userXingArray = @[@"xing", @"xing", @"xing", @"xing", @"xingkong"];
+                
+            } else if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"3"]) {
+                kindString = @"平衡型";
+                userXingArray = @[@"xing", @"xing", @"xing", @"xingkong", @"xingkong"];
+                
+            } else if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"4"]) {
+                kindString = @"进取型";
+                userXingArray = @[@"xing", @"xing", @"xingkong", @"xingkong", @"xingkong"];
+                
+            } else if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"5"]) {
+                kindString = @"激进型";
+                userXingArray = @[@"xing", @"xingkong", @"xingkong", @"xingkong", @"xingkong"];
+            }
             
             UILabel *kindLabel = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 60, 46) backgroundColor:Color_Clear textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:kindString];
             [viewUserXing addSubview:kindLabel];
@@ -527,8 +563,34 @@
             recordVC.idString = self.idString;
             pushVC(recordVC);
         } else if (indexPath.row == 2){
-            TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
-            pushVC(safeTestVC);
+            
+            NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+            
+            if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+                //弹出登录页面
+                TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+                UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+                [nvc setNavigationBarHidden:YES animated:YES];
+                
+                [self presentViewController:nvc animated:YES completion:^{
+                    
+                }];
+                return;
+                
+            } else {
+                
+                if ([[userDic objectForKey:@"investTestResult"] isEqualToString:@""]) {
+                    TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
+                    safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description];
+                    pushVC(safeTestVC);
+                } else {
+                    TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
+                    safeTestVC.alreadyTest = YES;
+                    safeTestVC.score = [[userDic objectForKey:@"investTestResult"] floatValue];
+                    safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description];
+                    pushVC(safeTestVC);
+                }
+            }
         }
     } else if (indexPath.section == 1) {
         
@@ -538,8 +600,34 @@
                 recordVC.idString = self.idString;
                 pushVC(recordVC);
             } else if (indexPath.row == 2){
-                TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
-                pushVC(safeTestVC);
+                
+                NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+                
+                if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+                    //弹出登录页面
+                    TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+                    UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+                    [nvc setNavigationBarHidden:YES animated:YES];
+                    
+                    [self presentViewController:nvc animated:YES completion:^{
+                        
+                    }];
+                    return;
+                    
+                } else {
+                    
+                    if ([[userDic objectForKey:@"investTestResult"] isEqualToString:@""]) {
+                        TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
+                        safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description];
+                        pushVC(safeTestVC);
+                    } else {
+                        TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
+                        safeTestVC.alreadyTest = YES;
+                        safeTestVC.score = [[userDic objectForKey:@"investTestResult"] floatValue];
+                        safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description];
+                        pushVC(safeTestVC);
+                    }
+                }
             }
         } else {
             if (indexPath.row == 1) {

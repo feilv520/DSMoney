@@ -192,6 +192,7 @@
 - (void)liftMoneyButton:(UIButton *)button
 {
     TWOLiftMoneyViewController *liftMoneyVC = [[TWOLiftMoneyViewController alloc] init];
+    liftMoneyVC.moneyString = [DES3Util decrypt:accBalanceString];
     [self.navigationController pushViewController:liftMoneyVC animated:YES];
 }
 

@@ -39,15 +39,23 @@
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"产品安全等级"];
     
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scoreValue:) name:@"scoreTest" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postNotice:) name:@"注册通知中心" object:nil];
+    
     if (self.alreadyTest == YES) {
-        //    调用已经测试的视图
+        //调用已经测试的视图
         [self alreadyTestContentShow];
         [self navigationShow];
     } else {
-        //    调用未测试的视图
+        //调用未测试的视图
         [self noTestContentShow];
     }
 }
+
+//- (void)scoreValue:(NSNotification *)nsnotice
+//{
+//    
+//}
 
 - (void)navigationShow
 {
@@ -219,7 +227,17 @@
     [viewProduct addSubview:viewXing];
     
 //    需要判断产品属于什么安全等级类型 调用不同的方法^^^^^^^^^^^^^^^^
-    [self oneXing];
+    if ([self.securityLevel isEqualToString:@"1"]) {
+        [self fiveXing];
+    } else if ([self.securityLevel isEqualToString:@"2"]) {
+        [self fourXing];
+    } else if ([self.securityLevel isEqualToString:@"3"]) {
+        [self threeXing];
+    } else if ([self.securityLevel isEqualToString:@"4"]) {
+        [self twoXing];
+    } else if ([self.securityLevel isEqualToString:@"5"]) {
+        [self oneXing];
+    }
     
     UILabel *labelProQingX = [CreatView creatWithLabelFrame:CGRectMake(5, 28.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewProduct.frame.size.height + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2 - 10, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"产品安全等级"];
     [viewWhite addSubview:labelProQingX];
@@ -357,6 +375,11 @@
 {
     TWOBeginTestViewController *beginTestVC = [[TWOBeginTestViewController alloc] init];
     pushVC(beginTestVC);
+}
+
+- (void)postNotice:(NSNotification *)nsnotice
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"scoreTest" object:self.securityLevel];
 }
 
 - (void)againReturnBack:(UITapGestureRecognizer *)tap

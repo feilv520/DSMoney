@@ -107,10 +107,21 @@
     
     PNChart * lineChart = [[PNChart alloc] initWithFrame:CGRectMake(0, 60.0, WIDTH_CONTROLLER_DEFAULT, 180.0)];
     lineChart.backgroundColor = [UIColor clearColor];
+    if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+        lineChart.frame = CGRectMake(0, 30.0 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 133.0);
+        
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        lineChart.frame = CGRectMake(0, 30.0 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 164.0);
+        
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
+        lineChart.frame = CGRectMake(0, 60.0, WIDTH_CONTROLLER_DEFAULT, 210.0);
+    }
+    
     [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5"]];
     [lineChart setYValues:@[@"1",@"8",@"2",@"6",@"3"]];
     [lineChart strokeChart];
     [viewHead addSubview:lineChart];
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

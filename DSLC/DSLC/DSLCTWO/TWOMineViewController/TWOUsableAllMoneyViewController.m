@@ -241,6 +241,12 @@
     }
 }
 
+- (void)noDataShowMyList
+{
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [self.view addSubview:imageMonkey];
+}
+
 #pragma mark 我的账单
 #pragma mark --------------------------------
 
@@ -257,7 +263,7 @@
         NSMutableArray *dataArr = [responseObject objectForKey:@"Trade"];
         
         if (dataArr.count == 0) {
-            [self noDateWithHeight:100 view:self.view];
+            [self noDataShowMyList];
             [self.mainTableView setHidden:YES];
         } else {
             [self.mainTableView setHidden:NO];

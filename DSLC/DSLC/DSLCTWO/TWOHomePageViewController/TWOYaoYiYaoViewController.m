@@ -369,7 +369,7 @@
 - (void)haveNoCiShu
 {
 //    没有中奖图片
-    UIImageView *imageNoWin = [CreatView creatImageViewWithFrame:CGRectMake(viewBottom.frame.size.width/2 - 45, 15, 90, 110) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"nowin"]];
+    UIImageView *imageNoWin = [CreatView creatImageViewWithFrame:CGRectMake(viewBottom.frame.size.width/2 - 148/2/2, 15, 148/2, 211/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"nowin"]];
     [viewBottom addSubview:imageNoWin];
     
     UILabel *labelNochance = [CreatView creatWithLabelFrame:CGRectMake(0, 15 + 110 + 10, viewBottom.frame.size.width, 17) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:17] text:@"您的每日一摇次数已用完!"];
@@ -571,6 +571,7 @@
             
         } else {
 //            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            NSLog(@"突发状况");
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

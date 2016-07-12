@@ -47,7 +47,7 @@
 
 - (void)NoHistoryRedBagShow
 {
-    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 80 - 20 - 53)/2 - 260/2/2, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [self.view addSubview:imageMonkey];
 }
 

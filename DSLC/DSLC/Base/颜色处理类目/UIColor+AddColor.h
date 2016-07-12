@@ -70,5 +70,6 @@
 + (UIColor *) friendAlert;//温馨提示颜色
 + (UIColor *) backColor;//温馨提示背景颜色
 + (UIColor *) alertColor;//温馨提示字体颜色
++ (UIColor *) pictureColor;//头像边框颜色
 
 @end

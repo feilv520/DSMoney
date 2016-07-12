@@ -293,16 +293,19 @@
     
     NSLog(@"avatarImg = %@",[memberDic objectForKey:@"avatarImg"]);
     if ([memberDic objectForKey:@"avatarImg"] == nil) {
-//        [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像"] forState:UIControlStateNormal];
-//        [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像"] forState:UIControlStateHighlighted];
-        butHeadImage.imageView.image = [UIImage imageNamed:@"我的头像"];
+        [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像er"] forState:UIControlStateNormal];
+        [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像er"] forState:UIControlStateHighlighted];
     } else {
-//        butHeadImage.imageView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
+        butHeadImage.imageView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
         imgView = [YYAnimatedImageView new];
         imgView.tag = 4739;
         imgView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
         imgView.frame = CGRectMake(0, 0, butHeadImage.frame.size.width, butHeadImage.frame.size.height);
         [butHeadImage addSubview:imgView];
+        imgView.layer.cornerRadius = imgView.frame.size.width/2;
+        imgView.layer.masksToBounds = YES;
+        imgView.layer.borderColor = [[UIColor pictureColor] CGColor];
+        imgView.layer.borderWidth = 2.5;
     }
     
     

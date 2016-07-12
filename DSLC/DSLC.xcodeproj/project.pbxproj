@@ -71,6 +71,14 @@
 		810F9C6F1CDCA10700BF39B5 /* faxian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 810F9C6D1CDCA10700BF39B5 /* faxian@3x.png */; settings = {ASSET_TAGS = (); }; };
 		810F9C721CDCA14800BF39B5 /* faxianclick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 810F9C701CDCA14800BF39B5 /* faxianclick@2x.png */; settings = {ASSET_TAGS = (); }; };
 		810F9C731CDCA14800BF39B5 /* faxianclick@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 810F9C711CDCA14800BF39B5 /* faxianclick@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6A81D349F0A000B80E0 /* 我的头像er@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6A61D349F0A000B80E0 /* 我的头像er@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6A91D349F0A000B80E0 /* 我的头像er@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6A71D349F0A000B80E0 /* 我的头像er@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6AC1D34C715000B80E0 /* 充值未投资提现@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6AA1D34C715000B80E0 /* 充值未投资提现@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6AD1D34C715000B80E0 /* 充值未投资提现@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6AB1D34C715000B80E0 /* 充值未投资提现@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6B21D34D98F000B80E0 /* 累计收益无数据@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6AE1D34D98F000B80E0 /* 累计收益无数据@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6B31D34D98F000B80E0 /* 累计收益无数据@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6AF1D34D98F000B80E0 /* 累计收益无数据@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6B41D34D98F000B80E0 /* 总资产无数据@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6B01D34D98F000B80E0 /* 总资产无数据@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6B51D34D98F000B80E0 /* 总资产无数据@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6B11D34D98F000B80E0 /* 总资产无数据@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */; settings = {ASSET_TAGS = (); }; };
 		811B628C1CFE8B9D00B6F17E /* 每日一摇@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 811B62881CFE8B9D00B6F17E /* 每日一摇@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -166,8 +174,6 @@
 		8143FD401CDAEFC100B65A2F /* 我的猴币@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FD3A1CDAEFC100B65A2F /* 我的猴币@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8143FD411CDAEFC100B65A2F /* myInvite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FD3B1CDAEFC100B65A2F /* myInvite@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8143FD421CDAEFC100B65A2F /* myInvite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FD3C1CDAEFC100B65A2F /* myInvite@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8143FD451CDAF1CB00B65A2F /* 我的头像@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FD431CDAF1CB00B65A2F /* 我的头像@2x.png */; settings = {ASSET_TAGS = (); }; };
-		8143FD461CDAF1CB00B65A2F /* 我的头像@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FD441CDAF1CB00B65A2F /* 我的头像@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8143FD4B1CDAF22600B65A2F /* 充值@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FD471CDAF22600B65A2F /* 充值@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8143FD4C1CDAF22600B65A2F /* 充值@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FD481CDAF22600B65A2F /* 充值@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8143FD4D1CDAF22600B65A2F /* 提现@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8143FD491CDAF22600B65A2F /* 提现@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -1655,6 +1661,14 @@
 		810F9C6D1CDCA10700BF39B5 /* faxian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faxian@3x.png"; sourceTree = "<group>"; };
 		810F9C701CDCA14800BF39B5 /* faxianclick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faxianclick@2x.png"; sourceTree = "<group>"; };
 		810F9C711CDCA14800BF39B5 /* faxianclick@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faxianclick@3x.png"; sourceTree = "<group>"; };
+		8114F6A61D349F0A000B80E0 /* 我的头像er@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的头像er@2x.png"; sourceTree = "<group>"; };
+		8114F6A71D349F0A000B80E0 /* 我的头像er@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的头像er@3x.png"; sourceTree = "<group>"; };
+		8114F6AA1D34C715000B80E0 /* 充值未投资提现@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "充值未投资提现@2x.png"; sourceTree = "<group>"; };
+		8114F6AB1D34C715000B80E0 /* 充值未投资提现@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "充值未投资提现@3x.png"; sourceTree = "<group>"; };
+		8114F6AE1D34D98F000B80E0 /* 累计收益无数据@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "累计收益无数据@2x.png"; sourceTree = "<group>"; };
+		8114F6AF1D34D98F000B80E0 /* 累计收益无数据@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "累计收益无数据@3x.png"; sourceTree = "<group>"; };
+		8114F6B01D34D98F000B80E0 /* 总资产无数据@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "总资产无数据@2x.png"; sourceTree = "<group>"; };
+		8114F6B11D34D98F000B80E0 /* 总资产无数据@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "总资产无数据@3x.png"; sourceTree = "<group>"; };
 		8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@2x.png"; sourceTree = "<group>"; };
 		8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@3x.png"; sourceTree = "<group>"; };
 		811B62881CFE8B9D00B6F17E /* 每日一摇@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "每日一摇@2x.png"; sourceTree = "<group>"; };
@@ -1786,8 +1800,6 @@
 		8143FD3A1CDAEFC100B65A2F /* 我的猴币@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的猴币@3x.png"; sourceTree = "<group>"; };
 		8143FD3B1CDAEFC100B65A2F /* myInvite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myInvite@2x.png"; sourceTree = "<group>"; };
 		8143FD3C1CDAEFC100B65A2F /* myInvite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myInvite@3x.png"; sourceTree = "<group>"; };
-		8143FD431CDAF1CB00B65A2F /* 我的头像@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的头像@2x.png"; sourceTree = "<group>"; };
-		8143FD441CDAF1CB00B65A2F /* 我的头像@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的头像@3x.png"; sourceTree = "<group>"; };
 		8143FD471CDAF22600B65A2F /* 充值@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "充值@2x.png"; sourceTree = "<group>"; };
 		8143FD481CDAF22600B65A2F /* 充值@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "充值@3x.png"; sourceTree = "<group>"; };
 		8143FD491CDAF22600B65A2F /* 提现@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "提现@2x.png"; sourceTree = "<group>"; };
@@ -4042,8 +4054,8 @@
 				8143FD3A1CDAEFC100B65A2F /* 我的猴币@3x.png */,
 				8143FD3B1CDAEFC100B65A2F /* myInvite@2x.png */,
 				8143FD3C1CDAEFC100B65A2F /* myInvite@3x.png */,
-				8143FD431CDAF1CB00B65A2F /* 我的头像@2x.png */,
-				8143FD441CDAF1CB00B65A2F /* 我的头像@3x.png */,
+				8114F6A61D349F0A000B80E0 /* 我的头像er@2x.png */,
+				8114F6A71D349F0A000B80E0 /* 我的头像er@3x.png */,
 				8143FD471CDAF22600B65A2F /* 充值@2x.png */,
 				8143FD481CDAF22600B65A2F /* 充值@3x.png */,
 				8143FD491CDAF22600B65A2F /* 提现@2x.png */,
@@ -4236,6 +4248,8 @@
 				81D1F3761D2B7BB100CFE067 /* 中奖现金@3x.png */,
 				81B66EFD1D2E335A00C48AAC /* 大圣侃经@2x.png */,
 				81B66EFE1D2E335A00C48AAC /* 大圣侃经@3x.png */,
+				8114F6AA1D34C715000B80E0 /* 充值未投资提现@2x.png */,
+				8114F6AB1D34C715000B80E0 /* 充值未投资提现@3x.png */,
 				8177A0371CF3EE630057AA7B /* 产品安全等级图片 */,
 			);
 			path = TWOImage;
@@ -7358,6 +7372,10 @@
 			children = (
 				8D9F16C31D17C7AC00A70399 /* TWONoPrefit@2x.png */,
 				8D9F16C41D17C7AC00A70399 /* TWONoPrefit@3x.png */,
+				8114F6AE1D34D98F000B80E0 /* 累计收益无数据@2x.png */,
+				8114F6AF1D34D98F000B80E0 /* 累计收益无数据@3x.png */,
+				8114F6B01D34D98F000B80E0 /* 总资产无数据@2x.png */,
+				8114F6B11D34D98F000B80E0 /* 总资产无数据@3x.png */,
 			);
 			name = noData;
 			sourceTree = "<group>";
@@ -7862,6 +7880,7 @@
 				8D3EEA001C27AB400031F7C9 /* 交通银行@2x.png in Resources */,
 				81B84C181CE44AB200A867B9 /* touzis@2x.png in Resources */,
 				8DEDE1C91BCCFF21008086D3 /* iconfont_greencuo@3x.png in Resources */,
+				8114F6B51D34D98F000B80E0 /* 总资产无数据@3x.png in Resources */,
 				819B52EC1BFC4462002FDF1E /* NewHandCSSCell.xib in Resources */,
 				8100185B1D0FAB7000696CF5 /* TWOMoneyGoWhereCell.xib in Resources */,
 				810EBC0D1C9CFEFB008FB51D /* SetPasswordTableViewCell.xib in Resources */,
@@ -7916,6 +7935,7 @@
 				81F02E611CFC2200002F3135 /* 加息券已兑付@2x.png in Resources */,
 				8D0600461D06C15A00C0C97C /* TWO_Loading_Middle_02@2x.png in Resources */,
 				8D3A2FDA1BE70FBF00913DEC /* PhotoTableViewCell.xib in Resources */,
+				8114F6AC1D34C715000B80E0 /* 充值未投资提现@2x.png in Resources */,
 				8D98CC4D1CF69D0700E34ADE /* TWOProductLine@3x.png in Resources */,
 				81B84C261CE464FB00A867B9 /* houbiwanfa@2x.png in Resources */,
 				8D4E4E021C1E5A6A00AE2644 /* walletResources.bundle in Resources */,
@@ -8097,6 +8117,7 @@
 				81E8310B1BF0488400127EE8 /* MyChoosePlannerCell.xib in Resources */,
 				8D15910E1D0CF91D00A4353D /* found_gray@3x.png in Resources */,
 				8D0600261D05761400C0C97C /* Two_Update_Down01@3x.png in Resources */,
+				8114F6A91D349F0A000B80E0 /* 我的头像er@3x.png in Resources */,
 				8D0AE7F81BE09CE500D9D50C /* register-2@2x.png in Resources */,
 				81DEC8041CED8FBC005E9D9F /* icon_shouji@2x.png in Resources */,
 				8D3EEA0C1C27AB400031F7C9 /* 华夏银行@2x.png in Resources */,
@@ -8193,6 +8214,7 @@
 				81B674201BF0AFEB007CEF51 /* 蓝色完成@3x.png in Resources */,
 				81C376701CAE7CFB004644C0 /* 兑换受益弹窗.png in Resources */,
 				819B52E71BFC222B002FDF1E /* 钻石@3x.png in Resources */,
+				8114F6B21D34D98F000B80E0 /* 累计收益无数据@2x.png in Resources */,
 				8DDB2D901D1CD09D008E3EC4 /* TWOWelcome_three.png in Resources */,
 				818523AF1BE3125D002FC653 /* BillCell.xib in Resources */,
 				8D4343A11BFDEB0B000BA004 /* loading_middle_08.png in Resources */,
@@ -8233,7 +8255,6 @@
 				81AC90CA1BEC8C6600232404 /* BankWhichCell.xib in Resources */,
 				819B52D61BFC2094002FDF1E /* 银元宝@2x.png in Resources */,
 				81B6741E1BF0AFEB007CEF51 /* 流程@3x.png in Resources */,
-				8143FD451CDAF1CB00B65A2F /* 我的头像@2x.png in Resources */,
 				8D840C3F1CE2CCDB005A17F9 /* product-cuo@3x.png in Resources */,
 				8DEDE1C51BCCFF01008086D3 /* iconfont_graycuo@3x.png in Resources */,
 				81DEC8101CED94B3005E9D9F /* qiehuan@2x.png in Resources */,
@@ -8358,6 +8379,7 @@
 				81ED030C1BD09BC8005F4B02 /* MyInformationCell.xib in Resources */,
 				81D72FBE1BFAD63B0067A277 /* right@2x.png in Resources */,
 				818102961CE05A7C0038B64E /* gameStrategy@2x.png in Resources */,
+				8114F6AD1D34C715000B80E0 /* 充值未投资提现@3x.png in Resources */,
 				8183F4351C9CF232000BB93C /* Assets.xcassets in Resources */,
 				815D194C1D226F8600DFA753 /* yaogray@2x.png in Resources */,
 				8D121FE61BD4DABD00B3C1FE /* SettingGetDetailTableViewCell.xib in Resources */,
@@ -8396,6 +8418,7 @@
 				81F02E6A1CFC2609002F3135 /* TWOFinancialPlannerCell.xib in Resources */,
 				8D1591111D0CF91D00A4353D /* mine_gray@2x.png in Resources */,
 				8D3EEA231C27AB400031F7C9 /* 渤海银行@3x.png in Resources */,
+				8114F6B31D34D98F000B80E0 /* 累计收益无数据@3x.png in Resources */,
 				81B520AB1BF9A71100D8E8D1 /* iconfont-sousuo@3x.png in Resources */,
 				81B84C0D1CE44A7300A867B9 /* qiandao@3x.png in Resources */,
 				8175BECF1BEA1B290044026E /* 分享失败@2x.png in Resources */,
@@ -8611,6 +8634,7 @@
 				81DEC81B1CED96A5005E9D9F /* phoneNumber@3x.png in Resources */,
 				81B84BD41CE2D61B00A867B9 /* 已经兑付@3x.png in Resources */,
 				8DEDE1D11BCCFFA5008086D3 /* blueyuan@3x.png in Resources */,
+				8114F6A81D349F0A000B80E0 /* 我的头像er@2x.png in Resources */,
 				8D5DBB8F1BD48F1900F556B9 /* CastDetailTableViewCell.xib in Resources */,
 				819C3AC81BD49862008D2CFD /* GrabBagCell.xib in Resources */,
 				81C9835A1D338A1800F9093A /* 上海银行二@3x.png in Resources */,
@@ -8647,6 +8671,7 @@
 				81C983591D338A1800F9093A /* 上海银行二@2x.png in Resources */,
 				81DEC81F1CED9A8B005E9D9F /* whitelogin@3x.png in Resources */,
 				8182A7F01C0EECD300FA1216 /* 组-16@3x.png in Resources */,
+				8114F6B41D34D98F000B80E0 /* 总资产无数据@2x.png in Resources */,
 				8DEDE1C41BCCFF01008086D3 /* iconfont_graycuo@2x.png in Resources */,
 				8183F41B1C97F1E1000BB93C /* liwu@2x.png in Resources */,
 				8D121FE11BD4D92600B3C1FE /* SettingPieTableViewCell.xib in Resources */,
@@ -8676,7 +8701,6 @@
 				8183F3FE1C97CC4F000BB93C /* iconfont-dui-2@2x.png in Resources */,
 				8DEDE1EA1BCD00B0008086D3 /* btn_gray@3x.png in Resources */,
 				8D6692871BD0E53000CD2CAF /* gesture_node_highlighted@2x.png in Resources */,
-				8143FD461CDAF1CB00B65A2F /* 我的头像@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

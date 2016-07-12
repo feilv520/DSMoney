@@ -86,6 +86,12 @@
     [self tableViewHeadShow];
 }
 
+- (void)noAddMoneyDataShow
+{
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 284/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"累计收益无数据"]];
+    [self.view addSubview:imageMonkey];
+}
+
 - (void)tableViewHeadShow
 {
     UIView *viewUp = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 286.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor]];
@@ -194,7 +200,7 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
             if ([[responseObject objectForKey:@"Profit"] count] == 0) {
-                [self noDateWithHeight:101 view:self.view];
+                [self noAddMoneyDataShow];
             } else {
                 [self tableViewShow];
             }

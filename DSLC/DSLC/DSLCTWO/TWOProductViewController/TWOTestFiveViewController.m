@@ -20,6 +20,8 @@
     UIImageView *imageChoose;
     UIButton *butSubmit;
     CGFloat submitScore;
+    BOOL flagClick;
+    NSString *styleState;
 }
 
 @end
@@ -32,8 +34,17 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"安全测评"];
+    flagClick = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scoreValue:) name:@"scoreTest" object:nil];
     
     [self contentShow];
+}
+
+- (void)scoreValue:(NSNotification *)nsnotice
+{
+    styleState = [nsnotice object];
+    NSLog(@"mmmmmmmm%@", [nsnotice object]);
 }
 
 - (void)contentShow
@@ -74,6 +85,8 @@
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         butSubmit.layer.cornerRadius = 15;
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        imageChoose.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 25.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT * 2 - 32 - 10, (55.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 32)/2, 32, 32);
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
         butSubmit.layer.cornerRadius = 25;
     }
@@ -81,6 +94,9 @@
 
 - (void)buttonChooseAnswer:(UIButton *)button
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"注册通知中心" object:nil];
+    flagClick = YES;
+    
     buttonOne = (UIButton *)[self.view viewWithTag:1000];
     buttonTwo = (UIButton *)[self.view viewWithTag:1001];
     buttonThree = (UIButton *)[self.view viewWithTag:1002];
@@ -153,11 +169,40 @@
 //提交按钮
 - (void)buttonSubmitTest:(UIButton *)button
 {
-    TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
-    safeTestVC.alreadyTest = YES;
-    NSLog(@"kkkkkkkk%f", submitScore);
-    safeTestVC.score = submitScore;
-    pushVC(safeTestVC);
+    if (flagClick) {
+        [self saveInvestTestResult];
+        NSLog(@"kkkkkkkk%f", submitScore);
+    } else {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请选择本题答案"];
+    }
+}
+
+#pragma mark submit 测评----------------------------------------------------
+- (void)saveInvestTestResult
+{
+    NSString *tokenString = [self.flagDic objectForKey:@"token"];
+    
+    NSDictionary *parameter = @{@"investTestResult":[NSString stringWithFormat:@"%lf",submitScore],@"token":tokenString};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/saveInvestTestResult" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"提交产品测评ppppppppppppppp%@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
+            safeTestVC.alreadyTest = YES;
+            safeTestVC.score = submitScore;
+            safeTestVC.securityLevel = styleState;
+            NSLog(@"vvvvvvvv%@", styleState);
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"safeTest" object:[NSString stringWithFormat:@"%f", submitScore]];
+            pushVC(safeTestVC);
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 //封装没有选择的button颜色

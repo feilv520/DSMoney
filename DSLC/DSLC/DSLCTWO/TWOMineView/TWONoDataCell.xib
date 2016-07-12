@@ -15,15 +15,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noWithData.png" translatesAutoresizingMaskIntoConstraints="NO" id="vRb-HF-doi">
-                        <rect key="frame" x="135" y="55" width="104" height="104"/>
+                        <rect key="frame" x="122" y="29" width="130" height="130"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="104" id="2j1-LG-UF2"/>
-                            <constraint firstAttribute="width" constant="104" id="WX0-hN-D3y"/>
+                            <constraint firstAttribute="height" constant="130" id="2j1-LG-UF2"/>
+                            <constraint firstAttribute="width" constant="130" id="WX0-hN-D3y"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="vRb-HF-doi" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="28" id="lr9-Xr-mbD"/>
+                    <constraint firstItem="vRb-HF-doi" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="14.5" id="lr9-Xr-mbD"/>
                     <constraint firstItem="vRb-HF-doi" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="xSc-RM-K7M"/>
                 </constraints>
             </tableViewCellContentView>
