@@ -557,6 +557,7 @@
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"getProductDetail" object:nil];
             }];
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
@@ -643,6 +644,7 @@
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"getProductDetail" object:nil];
             }];
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];

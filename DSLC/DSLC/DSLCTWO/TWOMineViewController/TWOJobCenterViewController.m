@@ -192,9 +192,9 @@
     
     switch ([[taskModel taskType] integerValue]) {
         case 1:{
-                NSLog(@"开通汇付账号");
-                break;
-            }
+            NSLog(@"开通汇付账号");
+            break;
+        }
         case 2:{
             NSLog(@"绑定银行卡");
             break;

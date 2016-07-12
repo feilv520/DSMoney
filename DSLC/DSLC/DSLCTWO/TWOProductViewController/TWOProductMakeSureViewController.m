@@ -46,8 +46,8 @@
     
     MBProgressHUD *hud;
     
-    NSArray *redPackCount;
-    NSArray *increaseCount;
+    NSMutableArray *redPackCount;
+    NSMutableArray *increaseCount;
     
     // 选中的红包id
     TWORedBagModel *packetModel;
@@ -183,7 +183,7 @@
     
     CGFloat residueMoney = [self.residueMoney floatValue];
     
-    if (residueMoney / 10000.0 > 0){
+    if (residueMoney / 10000.0 >= 0){
         
         residueMoney /= 10000.0;
         
@@ -882,7 +882,15 @@
         
         NSLog(@"getMyRedPacketList = %@",responseObject);
         
-        redPackCount = [responseObject objectForKey:@"RedPacket"];
+        redPackCount = [NSMutableArray array];
+        NSArray *redPackArray = [responseObject objectForKey:@"RedPacket"];
+        for (NSDictionary *dic in redPackArray) {
+            TWORedBagModel *model = [[TWORedBagModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic];
+            if ([[[model isEnabled] description] isEqualToString:@"0"]) {
+                [redPackCount addObject:model];
+            }
+        }
         
         NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
         [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
@@ -902,7 +910,16 @@
         
         NSLog(@"getMyIncreaseList = %@",responseObject);
         
-        increaseCount = [responseObject objectForKey:@"Increase"];
+        increaseCount = [NSMutableArray array];
+        NSMutableArray *increaseArray = [responseObject objectForKey:@"Increase"];
+        
+        for (NSDictionary *dic in increaseArray) {
+            TWOJiaXiQuanModel *model = [[TWOJiaXiQuanModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic];
+            if ([[[model isEnabled] description] isEqualToString:@"0"]) {
+                [increaseCount addObject:model];
+            }
+        }
         
         NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
         [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];

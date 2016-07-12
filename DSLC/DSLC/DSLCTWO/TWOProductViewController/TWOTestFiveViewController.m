@@ -153,6 +153,7 @@
 //提交按钮
 - (void)buttonSubmitTest:(UIButton *)button
 {
+    [self saveInvestTestResult];
     TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
     safeTestVC.alreadyTest = YES;
     NSLog(@"kkkkkkkk%f", submitScore);
@@ -172,6 +173,23 @@
 {
     [button setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
     button.layer.borderColor = [[UIColor profitColor] CGColor];
+}
+
+- (void)saveInvestTestResult{
+    
+    NSString *tokenString = [self.flagDic objectForKey:@"token"];
+    
+    NSDictionary *parameter = @{@"investTestResult":[NSString stringWithFormat:@"%lf",submitScore],@"token":tokenString};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/saveInvestTestResult" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"提交产品测评ppppppppppppppp%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

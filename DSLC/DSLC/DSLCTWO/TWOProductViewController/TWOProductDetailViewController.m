@@ -75,6 +75,8 @@
     
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductDetail) name:@"getProductDetail" object:nil];
+    
     if (self.viewBotton == nil) {
         self.viewBotton = [[UIControl alloc] initWithFrame:CGRectMake(0, app.tabBarVC.view.frame.size.height - 49, WIDTH_CONTROLLER_DEFAULT, app.tabBarVC.view.frame.size.height)];
         [app.tabBarVC.view addSubview:self.viewBotton];
@@ -173,42 +175,28 @@
     
     if (self.estimate == NO) {
         
+        [butMakeSure setTitle:@"投资(可使用5,000体验金)" forState:UIControlStateNormal];
+        [butMakeSure setBackgroundColor:[UIColor profitColor]];
         if ([self.residueMoney isEqualToString:@"0.00"]) {
-            if ([[self.detailM isOrder] isEqualToNumber:[NSNumber numberWithInt:0]]) {
-                [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
-                [butMakeSure setBackgroundColor:[UIColor profitColor]];
-                butMakeSure.enabled = YES;
-                
-            } else {
-                [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
-                butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
-                butMakeSure.enabled = NO;
-            }
+            
+            butMakeSure.enabled = NO;
+            butMakeSure.backgroundColor = [UIColor grayColor];
         } else {
+            
             butMakeSure.enabled = YES;
-            [butMakeSure setTitle:@"投资(可使用5,000体验金)" forState:UIControlStateNormal];
-            [butMakeSure setBackgroundColor:[UIColor profitColor]];
         }
         
     } else {
         NSLog(@"%@",self.residueMoney);
+        [butMakeSure setTitle:@"立即投资" forState:UIControlStateNormal];
+        [butMakeSure setBackgroundColor:[UIColor profitColor]];
         if ([self.residueMoney isEqualToString:@"0.00"]) {
-            if ([[self.detailM productType] isEqualToString:@"1"]) {
-                if ([[self.detailM isOrder] isEqualToNumber:[NSNumber numberWithInt:0]]) {
-                    [butMakeSure setTitle:@"预约" forState:UIControlStateNormal];
-                    butMakeSure.backgroundColor = [UIColor profitColor];
-                } else {
-                    [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
-                    butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
-                }
-            } else {
-                [butMakeSure setTitle:@"已售罄" forState:UIControlStateNormal];
-                butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
-                [butMakeSure setUserInteractionEnabled:NO];
-            }
+            
+            butMakeSure.enabled = NO;
+            butMakeSure.backgroundColor = [UIColor grayColor];
         } else {
-            [butMakeSure setTitle:@"立即投资" forState:UIControlStateNormal];
-            butMakeSure.backgroundColor = [UIColor profitColor];
+            
+            butMakeSure.enabled = YES;
         }
     }
     
@@ -255,7 +243,7 @@
     CGFloat bfNumber = [[self.detailM saleProgress] floatValue] / 100.0;
     
     //小猴子
-    UIImageView *monkeyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40, 86, 20, 30)];
+    UIImageView *monkeyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40, 84, 20, 30)];
     monkeyImageView.image = [UIImage imageNamed:@"productMonkey"];
     [headImageView addSubview:monkeyImageView];
     
@@ -289,12 +277,12 @@
         }
         if ([bfLabel.text floatValue] > 10 && [bfLabel.text floatValue] < 94) {
             
-            monkeyImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * bfNumber, 86, 18, 30);
-            bfLabel.frame = CGRectMake(CGRectGetMinX(monkeyImageView.frame) - 50, 93, 50, 20);
+            monkeyImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * bfNumber, 84, 20, 30);
+            bfLabel.frame = CGRectMake(CGRectGetMinX(monkeyImageView.frame) - 40, 93, 50, 20);
         } else if ([bfLabel.text floatValue] >= 94){
             
-            monkeyImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.94, 86, 18, 30);
-            bfLabel.frame = CGRectMake(CGRectGetMinX(monkeyImageView.frame) - 50, 93, 50, 20);
+            monkeyImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.94, 84, 20, 30);
+            bfLabel.frame = CGRectMake(CGRectGetMinX(monkeyImageView.frame) - 40, 93, 50, 20);
         }
         
         whiteView.frame = CGRectMake(-WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT * bfNumber, 116, WIDTH_CONTROLLER_DEFAULT, 2);
@@ -306,13 +294,13 @@
     
     TWOProductMoneyView *pMoneyView = (TWOProductMoneyView *)[[rootBundle loadNibNamed:@"TWOProductMoneyView" owner:nil options:nil] lastObject];
     
-    pMoneyView.frame = CGRectMake(0, 110, WIDTH_CONTROLLER_DEFAULT, 80);
+    pMoneyView.frame = CGRectMake(0, 115, WIDTH_CONTROLLER_DEFAULT, 80);
     
     NSMutableAttributedString *resdStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17元"];
     
     CGFloat residueMoney = [self.residueMoney floatValue];
     
-    if (residueMoney / 10000.0 > 0) {
+    if (residueMoney / 10000.0 >= 0) {
         
         [resdStringM replaceCharactersInRange:NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%.2lf万",residueMoney / 10000.0]];
     } else {
@@ -321,7 +309,7 @@
     }
     NSRange numYString = NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location);
     
-    if (residueMoney / 10000.0 > 0) {
+    if (residueMoney / 10000.0 >= 0) {
         numYString = NSMakeRange(0, [[resdStringM string] rangeOfString:@"万"].location);
     }
     
@@ -329,7 +317,7 @@
         [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:21] range:numYString];
         NSRange oneString = NSMakeRange([[resdStringM string] length] - 1, 1);
         
-        if (residueMoney / 10000.0 > 0) {
+        if (residueMoney / 10000.0 >= 0) {
             oneString = NSMakeRange([[resdStringM string] length] - 2, 2);
         }
         
@@ -339,7 +327,7 @@
         [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:numYString];
         NSRange oneString = NSMakeRange([[resdStringM string] length] - 1, 1);
         
-        if (residueMoney / 10000.0 > 0) {
+        if (residueMoney / 10000.0 >= 0) {
             oneString = NSMakeRange([[resdStringM string] length] - 2, 2);
         }
         
@@ -410,7 +398,7 @@
     
     TWOProductDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (indexPath.section == 0) {
         cell.titleLabel.text = titleArray[indexPath.row];
@@ -442,10 +430,13 @@
                 
                 cell.titleLabel.text = @"投资记录";
                 cell.titleLabel.textColor = [UIColor findZiTiColor];
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             } else {
                 
                 cell.titleLabel.text = @"产品安全等级";
                 cell.titleLabel.textColor = [UIColor findZiTiColor];
+                
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
                 
                 viewUserXing = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 175, 0, 150, 50) backgroundColor:[UIColor clearColor]];
                 [cell addSubview:viewUserXing];
@@ -473,6 +464,7 @@
                 
                 cell.titleLabel.text = [[assetArray objectAtIndex:indexPath.row - 1] objectForKey:@"assetName"];
                 cell.titleLabel.textColor = [UIColor findZiTiColor];
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             }
         }
     } else if(indexPath.section == 2) {
@@ -502,7 +494,6 @@
                 UIImageView *imageUserXing = [CreatView creatImageViewWithFrame:CGRectMake(60 + 3 * w + 14 * w, 16, 14, 14) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:[userXingArray objectAtIndex:w]]];
                 [viewUserXing addSubview:imageUserXing];
             }
-            
         }
     }
     
@@ -595,7 +586,7 @@
             margin_y -= 30;
         }
         
-        calendar.frame = CGRectMake(margin_x, margin_y, width, 246);
+        calendar.frame = CGRectMake(margin_x, margin_y, width, 204);
         calendar.layer.masksToBounds = YES;
         calendar.layer.cornerRadius = 4.0;
         
@@ -603,9 +594,10 @@
         [calendar.closeButton addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
         
         calendar.viewDown.backgroundColor = [UIColor shurukuangColor];
-        calendar.viewDown.layer.cornerRadius = 4;
+        calendar.viewDown.layer.cornerRadius = 8;
         calendar.viewDown.layer.masksToBounds = YES;
-        calendar.viewDown.layer.borderColor = [[UIColor shurukuangBian] CGColor];
+//        calendar.viewDown.layer.borderColor = [[UIColor shurukuangBian] CGColor];
+        calendar.viewDown.layer.borderColor = [[UIColor clearColor] CGColor];
         calendar.viewDown.layer.borderWidth = 0.5;
         
         calendar.inputMoney.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
@@ -693,9 +685,9 @@
         return;
     }
     
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
     
-    if ([dic objectForKey:@"token"] != nil) {
+    if (![[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
         
         if ([[dic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
             
@@ -744,7 +736,7 @@
     viewThirdOpen.layer.cornerRadius = 4;
     viewThirdOpen.layer.masksToBounds = YES;
     
-    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewThirdOpen.frame.size.width, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"你还未开通托管账户"];
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewThirdOpen.frame.size.width, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"您还未开通托管账户"];
     [viewThirdOpen addSubview:labelAlert];
     
     UIImageView *imageImg = [CreatView creatImageViewWithFrame:CGRectMake(viewThirdOpen.frame.size.width/2 - 314/2/2, 45, 314/2, 234/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"thirdimg"]];

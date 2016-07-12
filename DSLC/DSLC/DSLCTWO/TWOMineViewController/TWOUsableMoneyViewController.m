@@ -99,7 +99,7 @@
     
     if (labelWenZi == nil) {
         
-        labelWenZi = [CreatView creatWithLabelFrame:CGRectMake(0, 30 + 40 + 10, WIDTH_CONTROLLER_DEFAULT, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"账户余额"];
+        labelWenZi = [CreatView creatWithLabelFrame:CGRectMake(0, 30 + 40 + 10, WIDTH_CONTROLLER_DEFAULT, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"可用余额"];
     }
     [imageBackground addSubview:labelWenZi];
 }

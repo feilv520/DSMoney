@@ -1255,6 +1255,9 @@
 		8D6692831BD0D8A600CD2CAF /* MyHandButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6692821BD0D8A600CD2CAF /* MyHandButton.m */; };
 		8D6692851BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6692841BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png */; };
 		8D6692871BD0E53000CD2CAF /* gesture_node_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D6692861BD0E53000CD2CAF /* gesture_node_highlighted@2x.png */; };
+		8D66E7201D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D66E71E1D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		8D66E7211D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D66E71F1D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8D66E72A1D34DFA500ABDAA8 /* TWOMyUserPrivilegeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D66E7291D34DFA500ABDAA8 /* TWOMyUserPrivilegeListModel.m */; settings = {ASSET_TAGS = (); }; };
 		8D6E282E1CCA0E1E00A7BEED /* TBaoJiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E282D1CCA0E1E00A7BEED /* TBaoJiViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D6E46621C98FC2800F0F5B7 /* InviteNewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6E46611C98FC2800F0F5B7 /* InviteNewView.xib */; settings = {ASSET_TAGS = (); }; };
 		8D6E46651C98FC3B00F0F5B7 /* InviteNewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6E46641C98FC3B00F0F5B7 /* InviteNewView.m */; settings = {ASSET_TAGS = (); }; };
@@ -1438,7 +1441,6 @@
 		8D9BE8F51C0EC94D003C67D3 /* YYWebImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BE8E31C0EC94D003C67D3 /* YYWebImageOperation.m */; settings = {ASSET_TAGS = (); }; };
 		8D9F16B91D17873400A70399 /* TWOMyAccountListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F16B81D17873400A70399 /* TWOMyAccountListModel.m */; settings = {ASSET_TAGS = (); }; };
 		8D9F16BD1D17954000A70399 /* TWOUserAssetsListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F16BC1D17954000A70399 /* TWOUserAssetsListModel.m */; settings = {ASSET_TAGS = (); }; };
-		8D9F16C11D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F16C01D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.m */; settings = {ASSET_TAGS = (); }; };
 		8D9F16C51D17C7AC00A70399 /* TWONoPrefit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9F16C31D17C7AC00A70399 /* TWONoPrefit@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D9F16C61D17C7AC00A70399 /* TWONoPrefit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9F16C41D17C7AC00A70399 /* TWONoPrefit@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D9F16CA1D17D3A900A70399 /* TWOTaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F16C91D17D3A900A70399 /* TWOTaskModel.m */; settings = {ASSET_TAGS = (); }; };
@@ -3329,6 +3331,11 @@
 		8D6692821BD0D8A600CD2CAF /* MyHandButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHandButton.m; sourceTree = "<group>"; };
 		8D6692841BD0E52A00CD2CAF /* gesture_node_highlighted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture_node_highlighted@3x.png"; sourceTree = "<group>"; };
 		8D6692861BD0E53000CD2CAF /* gesture_node_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture_node_highlighted@2x.png"; sourceTree = "<group>"; };
+		8D66E71D1D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOProductWaitingTableViewCell.h; sourceTree = "<group>"; };
+		8D66E71E1D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOProductWaitingTableViewCell.m; sourceTree = "<group>"; };
+		8D66E71F1D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOProductWaitingTableViewCell.xib; sourceTree = "<group>"; };
+		8D66E7281D34DFA500ABDAA8 /* TWOMyUserPrivilegeListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMyUserPrivilegeListModel.h; sourceTree = SOURCE_ROOT; };
+		8D66E7291D34DFA500ABDAA8 /* TWOMyUserPrivilegeListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMyUserPrivilegeListModel.m; sourceTree = SOURCE_ROOT; };
 		8D6E282C1CCA0E1E00A7BEED /* TBaoJiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBaoJiViewController.h; sourceTree = "<group>"; };
 		8D6E282D1CCA0E1E00A7BEED /* TBaoJiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBaoJiViewController.m; sourceTree = "<group>"; };
 		8D6E46611C98FC2800F0F5B7 /* InviteNewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteNewView.xib; sourceTree = "<group>"; };
@@ -3603,8 +3610,6 @@
 		8D9F16B81D17873400A70399 /* TWOMyAccountListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMyAccountListModel.m; sourceTree = "<group>"; };
 		8D9F16BB1D17954000A70399 /* TWOUserAssetsListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOUserAssetsListModel.h; sourceTree = "<group>"; };
 		8D9F16BC1D17954000A70399 /* TWOUserAssetsListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOUserAssetsListModel.m; sourceTree = "<group>"; };
-		8D9F16BF1D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMyUserPrivilegeListModel.h; sourceTree = "<group>"; };
-		8D9F16C01D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMyUserPrivilegeListModel.m; sourceTree = "<group>"; };
 		8D9F16C31D17C7AC00A70399 /* TWONoPrefit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWONoPrefit@2x.png"; sourceTree = "<group>"; };
 		8D9F16C41D17C7AC00A70399 /* TWONoPrefit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWONoPrefit@3x.png"; sourceTree = "<group>"; };
 		8D9F16C81D17D3A900A70399 /* TWOTaskModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOTaskModel.h; sourceTree = "<group>"; };
@@ -6403,6 +6408,9 @@
 				8D98CC411CF69A9A00E34ADE /* TWOProductJinDuTableViewCell.h */,
 				8D98CC421CF69A9A00E34ADE /* TWOProductJinDuTableViewCell.m */,
 				8D98CC431CF69A9A00E34ADE /* TWOProductJinDuTableViewCell.xib */,
+				8D66E71D1D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.h */,
+				8D66E71E1D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.m */,
+				8D66E71F1D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.xib */,
 			);
 			name = "资产详情";
 			sourceTree = "<group>";
@@ -7347,8 +7355,8 @@
 		8D9F16BE1D17B73A00A70399 /* 我的特权本金 */ = {
 			isa = PBXGroup;
 			children = (
-				8D9F16BF1D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.h */,
-				8D9F16C01D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.m */,
+				8D66E7281D34DFA500ABDAA8 /* TWOMyUserPrivilegeListModel.h */,
+				8D66E7291D34DFA500ABDAA8 /* TWOMyUserPrivilegeListModel.m */,
 			);
 			name = "我的特权本金";
 			sourceTree = "<group>";
@@ -8059,6 +8067,7 @@
 				8183F4011C97CC4F000BB93C /* iconfont-dui-2111@3x.png in Resources */,
 				8175BEAD1BE9F2F50044026E /* 微信@3x.png in Resources */,
 				811B628F1CFE8B9D00B6F17E /* 邀请好友@3x.png in Resources */,
+				8D66E7211D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.xib in Resources */,
 				817DD49F1BCF547E00042B09 /* jiaoyi@3x.png in Resources */,
 				8DEDE1EC1BCD05C7008086D3 /* Calendar.xib in Resources */,
 				8143FD591CDAF98900B65A2F /* clickRightjiantou@2x.png in Resources */,
@@ -8744,7 +8753,6 @@
 				810D25271BC7917B00DAF83F /* CreatView.m in Sources */,
 				8D4FF5E21BE339A200BAE25F /* UIImageView+AFNetworking.m in Sources */,
 				818D0C291C2AC58B008F7612 /* ProductO.m in Sources */,
-				8D9F16C11D17B7AB00A70399 /* TWOMyUserPrivilegeListModel.m in Sources */,
 				81C982FF1D2E5F7C00F9093A /* TWOSweepModel.m in Sources */,
 				8D88D1021BFECCB40051D6DA /* MJRefreshStateHeader.m in Sources */,
 				8D72ED861CFC0B6C00436C32 /* PNBarChart.m in Sources */,
@@ -8969,6 +8977,7 @@
 				8175BE8C1BE9E2430044026E /* ChooseRedBagViewController.m in Sources */,
 				8D88D1061BFECCB40051D6DA /* UIScrollView+MJRefresh.m in Sources */,
 				8D855A5B1CE99B40007A4B22 /* TWOMessageCenterViewController.m in Sources */,
+				8D66E72A1D34DFA500ABDAA8 /* TWOMyUserPrivilegeListModel.m in Sources */,
 				8D18B2A21C2982D100754C13 /* TTTTXianTableViewCell.m in Sources */,
 				8179EB131CEAF20000BD7054 /* TWOBindingEmailOverViewController.m in Sources */,
 				8D3125DE1BD763F900143B71 /* GetMoneyVerifyViewController.m in Sources */,
@@ -9005,6 +9014,7 @@
 				8D121FD61BD4D4CE00B3C1FE /* SettingTitleTableViewCell.m in Sources */,
 				8D5DBB8E1BD48F1900F556B9 /* CastDetailTableViewCell.m in Sources */,
 				810C76791C2D1AAE000637FD /* UserListCell.m in Sources */,
+				8D66E7201D34BD4D00ABDAA8 /* TWOProductWaitingTableViewCell.m in Sources */,
 				8D35DA3C1CF3ECA500C6409F /* TWOProductDDetailViewController.m in Sources */,
 				8D2D02CD1C256C2F004B2562 /* BannerViewController.m in Sources */,
 				81B84BF71CE3332000A867B9 /* TWOAskViewController.m in Sources */,

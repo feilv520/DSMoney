@@ -189,7 +189,7 @@
     whiteBackgroundView.backgroundColor = Color_White;
     
 //    公告图标
-    UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(9, 6, noticeHeight, noticeHeight) backGroundColor:Color_White setImage:[UIImage imageNamed:@"公告"]];
+    UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(9, 6 / 667.0 * WIDTH_CONTROLLER_DEFAULT, noticeHeight, noticeHeight) backGroundColor:Color_White setImage:[UIImage imageNamed:@"公告"]];
     [whiteBackgroundView addSubview:imageNotice];
     [self noticeContentShow];
     
