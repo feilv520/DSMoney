@@ -238,6 +238,7 @@
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         butYaoLeft.frame = CGRectMake(9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
         butYaoRight.frame = CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
+        butonLogin.frame = CGRectMake(0, 5, imageYellow.frame.size.width, 23);
     }
 }
 
@@ -569,8 +570,7 @@
             [self commonHaveShow];
             
         } else {
-            //未登录调用的页面
-            [self noLoginShow];
+//            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

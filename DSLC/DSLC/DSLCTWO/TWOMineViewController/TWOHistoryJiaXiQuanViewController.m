@@ -136,7 +136,7 @@
         cell.laeblData.textColor = [UIColor findZiTiColor];
         cell.laeblData.backgroundColor = [UIColor clearColor];
         
-        NSMutableAttributedString *qianMianString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待兑付金额:%@元", [jiaXiQuanModel cashMoney]]];
+        NSMutableAttributedString *qianMianString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"已兑付金额:%@元", [jiaXiQuanModel cashMoney]]];
         NSRange qianMianRange = NSMakeRange(0, 6);
         [qianMianString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:qianMianRange];
         NSRange houMianRange = NSMakeRange([[qianMianString string] length] - 1, 1);
@@ -249,7 +249,6 @@
                     [self historyJiaXiQuanShow];
                 } else {
                     [self tableViewShow];
-//                    [self historyJiaXiQuanShow];
                 }
             } else {
                 [_tableView reloadData];

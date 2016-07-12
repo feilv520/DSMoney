@@ -126,6 +126,66 @@
     } else if ([cardString isEqualToString:@"BOC"]) {
         cell.labelBankName.text = @"中国银行";
         cell.imageBankLogo.image = [UIImage imageNamed:@"two中国"];
+        
+    } else if ([cardString isEqualToString:@"BJRCB"]) {
+        cell.labelBankName.text = @"北京农村商业银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"北京农村商业银行二"];
+        
+    } else if ([cardString isEqualToString:@"BCCB"]) {
+        cell.labelBankName.text = @"北京银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"北京银行二"];
+        
+    } else if ([cardString isEqualToString:@"CBHB"]) {
+        cell.labelBankName.text = @"渤海银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"渤海银行二"];
+        
+    } else if ([cardString isEqualToString:@"HKBEA"]) {
+        cell.labelBankName.text = @"东亚银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"东亚银行二"];
+        
+    } else if ([cardString isEqualToString:@"GDB"]) {
+        cell.labelBankName.text = @"广发银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"广发银行二"];
+        
+    } else if ([cardString isEqualToString:@"HZCB"]) {
+        cell.labelBankName.text = @"杭州银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"杭州银行二"];
+        
+    } else if ([cardString isEqualToString:@"BOCOM"]) {
+        cell.labelBankName.text = @"交通银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"交通银行二"];
+        
+    } else if ([cardString isEqualToString:@"CMBC"]) {
+        cell.labelBankName.text = @"民生银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"民生银行二"];
+        
+    } else if ([cardString isEqualToString:@"NJCB"]) {
+        cell.labelBankName.text = @"南京银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"南京银行二"];
+        
+    } else if ([cardString isEqualToString:@"SRCB"]) {
+        cell.labelBankName.text = @"上海农村商业银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"上海农村商业银行二"];
+        
+    } else if ([cardString isEqualToString:@"BOS"]) {
+        cell.labelBankName.text = @"上海银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"上海银行二"];
+        
+    } else if ([cardString isEqualToString:@"SDB"]) {
+        cell.labelBankName.text = @"深发银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"深发银行二"];
+        
+    } else if ([cardString isEqualToString:@"PSBC"]) {
+        cell.labelBankName.text = @"邮储银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"邮储银行二"];
+        
+    } else if ([cardString isEqualToString:@"CZB"]) {
+        cell.labelBankName.text = @"浙商银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"浙商银行二"];
+        
+    } else if ([cardString isEqualToString:@"CITIC"]) {
+        cell.labelBankName.text = @"中信银行";
+        cell.imageBankLogo.image = [UIImage imageNamed:@"中信银行二"];
     }
     
     cell.labelStyle.text = @"储蓄卡";

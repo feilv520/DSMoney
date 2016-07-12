@@ -744,6 +744,34 @@
 		81C9832C1D30DD7400F9093A /* two招商@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983181D30DD7400F9093A /* two招商@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81C9832D1D30DD7400F9093A /* two中国@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983191D30DD7400F9093A /* two中国@2x.png */; settings = {ASSET_TAGS = (); }; };
 		81C9832E1D30DD7400F9093A /* two中国@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C9831A1D30DD7400F9093A /* two中国@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983311D33894000F9093A /* 北京农村商业银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C9832F1D33894000F9093A /* 北京农村商业银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983321D33894000F9093A /* 北京农村商业银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983301D33894000F9093A /* 北京农村商业银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983391D33898300F9093A /* 北京银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983331D33898300F9093A /* 北京银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C9833A1D33898300F9093A /* 北京银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983341D33898300F9093A /* 北京银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C9833B1D33898300F9093A /* 渤海银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983351D33898300F9093A /* 渤海银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C9833C1D33898300F9093A /* 渤海银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983361D33898300F9093A /* 渤海银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C9833D1D33898300F9093A /* 东亚银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983371D33898300F9093A /* 东亚银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C9833E1D33898300F9093A /* 东亚银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983381D33898300F9093A /* 东亚银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983431D3389AA00F9093A /* 广发银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C9833F1D3389AA00F9093A /* 广发银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983441D3389AA00F9093A /* 广发银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983401D3389AA00F9093A /* 广发银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983451D3389AA00F9093A /* 杭州银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983411D3389AA00F9093A /* 杭州银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983461D3389AA00F9093A /* 杭州银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983421D3389AA00F9093A /* 杭州银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C9834D1D3389EC00F9093A /* 交通银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983471D3389EC00F9093A /* 交通银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C9834E1D3389EC00F9093A /* 交通银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983481D3389EC00F9093A /* 交通银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C9834F1D3389EC00F9093A /* 民生银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983491D3389EC00F9093A /* 民生银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983501D3389EC00F9093A /* 民生银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C9834A1D3389EC00F9093A /* 民生银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983511D3389EC00F9093A /* 南京银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C9834B1D3389EC00F9093A /* 南京银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983521D3389EC00F9093A /* 南京银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C9834C1D3389EC00F9093A /* 南京银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983571D338A1800F9093A /* 上海农村商业银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983531D338A1800F9093A /* 上海农村商业银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983581D338A1800F9093A /* 上海农村商业银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983541D338A1800F9093A /* 上海农村商业银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983591D338A1800F9093A /* 上海银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983551D338A1800F9093A /* 上海银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C9835A1D338A1800F9093A /* 上海银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983561D338A1800F9093A /* 上海银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C9835F1D338A5B00F9093A /* 邮储银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C9835B1D338A5B00F9093A /* 邮储银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983601D338A5B00F9093A /* 邮储银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C9835C1D338A5B00F9093A /* 邮储银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983611D338A5B00F9093A /* 浙商银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C9835D1D338A5B00F9093A /* 浙商银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983621D338A5B00F9093A /* 浙商银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C9835E1D338A5B00F9093A /* 浙商银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983651D338A7600F9093A /* 中信银行二@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983631D338A7600F9093A /* 中信银行二@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81C983661D338A7600F9093A /* 中信银行二@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C983641D338A7600F9093A /* 中信银行二@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81CBB74A1C1AC1D3002CDE97 /* NewHandGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CBB7491C1AC1D3002CDE97 /* NewHandGuide.m */; settings = {ASSET_TAGS = (); }; };
 		81CBB74D1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CBB74C1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.m */; settings = {ASSET_TAGS = (); }; };
 		81CBB7501C1AC6E9002CDE97 /* SafeProtectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CBB74F1C1AC6E9002CDE97 /* SafeProtectViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -2546,6 +2574,34 @@
 		81C983181D30DD7400F9093A /* two招商@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "two招商@3x.png"; sourceTree = "<group>"; };
 		81C983191D30DD7400F9093A /* two中国@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "two中国@2x.png"; sourceTree = "<group>"; };
 		81C9831A1D30DD7400F9093A /* two中国@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "two中国@3x.png"; sourceTree = "<group>"; };
+		81C9832F1D33894000F9093A /* 北京农村商业银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "北京农村商业银行二@2x.png"; sourceTree = "<group>"; };
+		81C983301D33894000F9093A /* 北京农村商业银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "北京农村商业银行二@3x.png"; sourceTree = "<group>"; };
+		81C983331D33898300F9093A /* 北京银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "北京银行二@2x.png"; sourceTree = "<group>"; };
+		81C983341D33898300F9093A /* 北京银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "北京银行二@3x.png"; sourceTree = "<group>"; };
+		81C983351D33898300F9093A /* 渤海银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "渤海银行二@2x.png"; sourceTree = "<group>"; };
+		81C983361D33898300F9093A /* 渤海银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "渤海银行二@3x.png"; sourceTree = "<group>"; };
+		81C983371D33898300F9093A /* 东亚银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "东亚银行二@2x.png"; sourceTree = "<group>"; };
+		81C983381D33898300F9093A /* 东亚银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "东亚银行二@3x.png"; sourceTree = "<group>"; };
+		81C9833F1D3389AA00F9093A /* 广发银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "广发银行二@2x.png"; sourceTree = "<group>"; };
+		81C983401D3389AA00F9093A /* 广发银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "广发银行二@3x.png"; sourceTree = "<group>"; };
+		81C983411D3389AA00F9093A /* 杭州银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "杭州银行二@2x.png"; sourceTree = "<group>"; };
+		81C983421D3389AA00F9093A /* 杭州银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "杭州银行二@3x.png"; sourceTree = "<group>"; };
+		81C983471D3389EC00F9093A /* 交通银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "交通银行二@2x.png"; sourceTree = "<group>"; };
+		81C983481D3389EC00F9093A /* 交通银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "交通银行二@3x.png"; sourceTree = "<group>"; };
+		81C983491D3389EC00F9093A /* 民生银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "民生银行二@2x.png"; sourceTree = "<group>"; };
+		81C9834A1D3389EC00F9093A /* 民生银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "民生银行二@3x.png"; sourceTree = "<group>"; };
+		81C9834B1D3389EC00F9093A /* 南京银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "南京银行二@2x.png"; sourceTree = "<group>"; };
+		81C9834C1D3389EC00F9093A /* 南京银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "南京银行二@3x.png"; sourceTree = "<group>"; };
+		81C983531D338A1800F9093A /* 上海农村商业银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上海农村商业银行二@2x.png"; sourceTree = "<group>"; };
+		81C983541D338A1800F9093A /* 上海农村商业银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上海农村商业银行二@3x.png"; sourceTree = "<group>"; };
+		81C983551D338A1800F9093A /* 上海银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上海银行二@2x.png"; sourceTree = "<group>"; };
+		81C983561D338A1800F9093A /* 上海银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上海银行二@3x.png"; sourceTree = "<group>"; };
+		81C9835B1D338A5B00F9093A /* 邮储银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邮储银行二@2x.png"; sourceTree = "<group>"; };
+		81C9835C1D338A5B00F9093A /* 邮储银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邮储银行二@3x.png"; sourceTree = "<group>"; };
+		81C9835D1D338A5B00F9093A /* 浙商银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "浙商银行二@2x.png"; sourceTree = "<group>"; };
+		81C9835E1D338A5B00F9093A /* 浙商银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "浙商银行二@3x.png"; sourceTree = "<group>"; };
+		81C983631D338A7600F9093A /* 中信银行二@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "中信银行二@2x.png"; sourceTree = "<group>"; };
+		81C983641D338A7600F9093A /* 中信银行二@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "中信银行二@3x.png"; sourceTree = "<group>"; };
 		81CBB7481C1AC1D3002CDE97 /* NewHandGuide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHandGuide.h; sourceTree = "<group>"; };
 		81CBB7491C1AC1D3002CDE97 /* NewHandGuide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHandGuide.m; sourceTree = "<group>"; };
 		81CBB74B1C1AC570002CDE97 /* MillionsAndMillionsRiskMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MillionsAndMillionsRiskMoney.h; sourceTree = "<group>"; };
@@ -5158,6 +5214,34 @@
 				81C983181D30DD7400F9093A /* two招商@3x.png */,
 				81C983191D30DD7400F9093A /* two中国@2x.png */,
 				81C9831A1D30DD7400F9093A /* two中国@3x.png */,
+				81C9832F1D33894000F9093A /* 北京农村商业银行二@2x.png */,
+				81C983301D33894000F9093A /* 北京农村商业银行二@3x.png */,
+				81C983331D33898300F9093A /* 北京银行二@2x.png */,
+				81C983341D33898300F9093A /* 北京银行二@3x.png */,
+				81C983351D33898300F9093A /* 渤海银行二@2x.png */,
+				81C983361D33898300F9093A /* 渤海银行二@3x.png */,
+				81C983371D33898300F9093A /* 东亚银行二@2x.png */,
+				81C983381D33898300F9093A /* 东亚银行二@3x.png */,
+				81C9833F1D3389AA00F9093A /* 广发银行二@2x.png */,
+				81C983401D3389AA00F9093A /* 广发银行二@3x.png */,
+				81C983411D3389AA00F9093A /* 杭州银行二@2x.png */,
+				81C983421D3389AA00F9093A /* 杭州银行二@3x.png */,
+				81C983471D3389EC00F9093A /* 交通银行二@2x.png */,
+				81C983481D3389EC00F9093A /* 交通银行二@3x.png */,
+				81C983491D3389EC00F9093A /* 民生银行二@2x.png */,
+				81C9834A1D3389EC00F9093A /* 民生银行二@3x.png */,
+				81C9834B1D3389EC00F9093A /* 南京银行二@2x.png */,
+				81C9834C1D3389EC00F9093A /* 南京银行二@3x.png */,
+				81C983531D338A1800F9093A /* 上海农村商业银行二@2x.png */,
+				81C983541D338A1800F9093A /* 上海农村商业银行二@3x.png */,
+				81C983551D338A1800F9093A /* 上海银行二@2x.png */,
+				81C983561D338A1800F9093A /* 上海银行二@3x.png */,
+				81C9835B1D338A5B00F9093A /* 邮储银行二@2x.png */,
+				81C9835C1D338A5B00F9093A /* 邮储银行二@3x.png */,
+				81C9835D1D338A5B00F9093A /* 浙商银行二@2x.png */,
+				81C9835E1D338A5B00F9093A /* 浙商银行二@3x.png */,
+				81C983631D338A7600F9093A /* 中信银行二@2x.png */,
+				81C983641D338A7600F9093A /* 中信银行二@3x.png */,
 			);
 			name = "银行卡";
 			sourceTree = "<group>";
@@ -7624,6 +7708,7 @@
 				8DA7E1821CE0943000D5D016 /* productMonkey@3x.png in Resources */,
 				8122C9511D12A91600070EAA /* 热卖@2x.png in Resources */,
 				8D43439A1BFDEB0B000BA004 /* loading_middle_01.png in Resources */,
+				81C9834F1D3389EC00F9093A /* 民生银行二@2x.png in Resources */,
 				8177A0241CF2F47C0057AA7B /* winPrize@2x.png in Resources */,
 				8D840C6F1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.xib in Resources */,
 				81D1F3811D2B892F00CFE067 /* TWONoDataCell.xib in Resources */,
@@ -7710,11 +7795,13 @@
 				81ADB2921CF5539A00E044BC /* dagyx@2x.png in Resources */,
 				8143FD4E1CDAF22600B65A2F /* 提现@3x.png in Resources */,
 				8D0600271D05761400C0C97C /* Two_Update_Down02@2x.png in Resources */,
+				81C9833C1D33898300F9093A /* 渤海银行二@3x.png in Resources */,
 				8175BE811BE9B50D0044026E /* RecordCell.xib in Resources */,
 				81650AEA1D19280000B00BAD /* TWIJiaXiQuanCell.xib in Resources */,
 				817DD4701BCF501100042B09 /* MineCell.xib in Resources */,
 				816AA1481CFD3FBD009038E9 /* TWOMyClientCell.xib in Resources */,
 				8D43439E1BFDEB0B000BA004 /* loading_middle_05.png in Resources */,
+				81C983661D338A7600F9093A /* 中信银行二@3x.png in Resources */,
 				81D72FBC1BFAD63B0067A277 /* left@2x.png in Resources */,
 				812201351CE5D20D00159A74 /* TWOPersonalSetCell.xib in Resources */,
 				811B629D1CFFDDBB00B6F17E /* setAddress.png in Resources */,
@@ -7735,6 +7822,7 @@
 				8177A00E1CF2B1F60057AA7B /* blueYao@2x.png in Resources */,
 				817E33841BD733D100D05103 /* b17a045a80e620259fbb8f4f444393812bfc129c1ec3d-23eoii_fw658@2x.png in Resources */,
 				81D1F37C1D2B7BB100CFE067 /* 中奖现金@3x.png in Resources */,
+				81C983571D338A1800F9093A /* 上海农村商业银行二@2x.png in Resources */,
 				817DD4941BCF547E00042B09 /* chongzhi@2x.png in Resources */,
 				817DD49E1BCF547E00042B09 /* jiaoyi@2x.png in Resources */,
 				810F9C731CDCA14800BF39B5 /* faxianclick@3x.png in Resources */,
@@ -7742,6 +7830,7 @@
 				8D5AEB491BC8F560004FBDD3 /* CenturyGothic.TTF in Resources */,
 				81B6740A1BF0A780007CEF51 /* HistoryMemoryCell.xib in Resources */,
 				8D5AEB4B1BC8FCA3004FBDD3 /* SelectionOfSafe.xib in Resources */,
+				81C983311D33894000F9093A /* 北京农村商业银行二@2x.png in Resources */,
 				8D0600251D05761400C0C97C /* Two_Update_Down01@2x.png in Resources */,
 				818102971CE05A7C0038B64E /* gameStrategy@3x.png in Resources */,
 				81650AF11D1BED3B00B00BAD /* 历史红包ios@2x.png in Resources */,
@@ -7801,12 +7890,14 @@
 				8D43439F1BFDEB0B000BA004 /* loading_middle_06.png in Resources */,
 				817E33891BD733D100D05103 /* huangguan@3x.png in Resources */,
 				8177A0121CF2B63E0057AA7B /* 充值成功～@2x.png in Resources */,
+				81C983391D33898300F9093A /* 北京银行二@2x.png in Resources */,
 				81B84C081CE432E500A867B9 /* renwujindu1@2x.png in Resources */,
 				8D5DBB851BD4838200F556B9 /* CastUpTableViewCell.xib in Resources */,
 				8181028D1CE043BB0038B64E /* 大圣解密@3x.png in Resources */,
 				8D3F95EE1BE2188500013A8E /* filefile@2x.png in Resources */,
 				8106AA831CAA23F700AB6753 /* 椭圆-3-拷贝-7.png in Resources */,
 				810F9C5E1CDC65C800BF39B5 /* youxi@3x.png in Resources */,
+				81C983501D3389EC00F9093A /* 民生银行二@3x.png in Resources */,
 				8DC695C41C3503D30055EC44 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				81F02E6F1CFC2AD1002F3135 /* myhoutou@3x.png in Resources */,
 				8D06001E1D05761400C0C97C /* Two_Loading_Down01@3x.png in Resources */,
@@ -7838,6 +7929,7 @@
 				8122013C1CE5DDDA00159A74 /* renzheng@2x.png in Resources */,
 				81600A5E1CB4E0280075CD45 /* 图层-678-拷贝@3x.png in Resources */,
 				8D35DA481CF5431400C6409F /* TWODDBlue@3x.png in Resources */,
+				81C983321D33894000F9093A /* 北京农村商业银行二@3x.png in Resources */,
 				81C138201BDF6D5E0088E792 /* iconfont-phone@2x.png in Resources */,
 				8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */,
 				810F9C201CDB558E00BF39B5 /* openEye@2x.png in Resources */,
@@ -7925,6 +8017,7 @@
 				8175BE911BE9E3730044026E /* ChooseRedBagCell.xib in Resources */,
 				8D5AEB3E1BC8DE23004FBDD3 /* SelectionOfThing.xib in Resources */,
 				81B84BEC1CE3186800A867B9 /* TWOMyPrerogativeMoneyCell.xib in Resources */,
+				81C9834E1D3389EC00F9093A /* 交通银行二@3x.png in Resources */,
 				81460C811D11418700A81703 /* yao@3x.png in Resources */,
 				81E90EF61BCB4300004BA8A5 /* 750产品111.png in Resources */,
 				81B6741A1BF0AFEB007CEF51 /* 蓝框@3x.png in Resources */,
@@ -7948,6 +8041,7 @@
 				8183F4001C97CC4F000BB93C /* iconfont-dui-2111@2x.png in Resources */,
 				81CBE7B11CE97A8E004FE1D4 /* yinhangkabg.png in Resources */,
 				819B52E01BFC2094002FDF1E /* 金元宝@2x.png in Resources */,
+				81C983611D338A5B00F9093A /* 浙商银行二@2x.png in Resources */,
 				81DEC7E51CED530C005E9D9F /* orangeicon@3x.png in Resources */,
 				8175BEB41BE9F2F50044026E /* 朋友圈@2x.png in Resources */,
 				8D06004D1D06C15A00C0C97C /* TWO_Loading_Middle_05@3x.png in Resources */,
@@ -7985,6 +8079,7 @@
 				81ADB2AA1CF5803000E044BC /* 期待中@3x.png in Resources */,
 				8177A0461CF3EF190057AA7B /* bluegou@2x.png in Resources */,
 				8DB744BB1C1973AC0084D1A2 /* banner_red@3x.png in Resources */,
+				81C9833D1D33898300F9093A /* 东亚银行二@2x.png in Resources */,
 				81C376721CAE83F0004644C0 /* 兑换受益弹窗22.png in Resources */,
 				8D0600511D06C15A00C0C97C /* TWO_Loading_Middle_07@3x.png in Resources */,
 				8DEDE1D41BCCFFD8008086D3 /* iocn_saft@2x.png in Resources */,
@@ -8022,6 +8117,7 @@
 				8162D1191BE1BC2500CACAB6 /* ProjectNameCell.xib in Resources */,
 				8175BEC51BEA052E0044026E /* 分享成功@3x.png in Resources */,
 				81B674211BF0AFEB007CEF51 /* yuan@2x.png in Resources */,
+				81C983581D338A1800F9093A /* 上海农村商业银行二@3x.png in Resources */,
 				8D0CB4941BE75E370039D826 /* RiskConditionsViewController.xib in Resources */,
 				8D6E469E1C9B9ECA00F0F5B7 /* loginViewP@2x.png in Resources */,
 				8175BEBA1BE9F7160044026E /* ShareEveryCell.xib in Resources */,
@@ -8038,10 +8134,12 @@
 				81F0805B1D17EB9A005BDB37 /* twohongbao@3x.png in Resources */,
 				81DEC7C41CEC391E005E9D9F /* TWOHelpCenterCell.xib in Resources */,
 				8D98CC531CF6AC1E00E34ADE /* TWOPDown@3x.png in Resources */,
+				81C983511D3389EC00F9093A /* 南京银行二@2x.png in Resources */,
 				8D9011BD1BD6337C00E5D62A /* 矩形-10@2x.png in Resources */,
 				819B52BF1BFC0D22002FDF1E /* TheThirdRedBagCell.xib in Resources */,
 				81379F1C1BEAF56F002CDB16 /* 使用@3x.png in Resources */,
 				81E90EFA1BCB4312004BA8A5 /* 750产品详情.png in Resources */,
+				81C983441D3389AA00F9093A /* 广发银行二@3x.png in Resources */,
 				8181028C1CE043BB0038B64E /* 大圣解密@2x.png in Resources */,
 				8D3EEA0E1C27AB400031F7C9 /* 南京银行@2x.png in Resources */,
 				8179EB171CEAF3ED00BD7054 /* 恭喜您.png in Resources */,
@@ -8062,6 +8160,7 @@
 				8DEDE1E51BCD0040008086D3 /* greenyuan@2x.png in Resources */,
 				81C8BBC41BDA2F8D005B9DFF /* bangzhu@2x.png in Resources */,
 				8175BEC41BEA052E0044026E /* 分享成功@2x.png in Resources */,
+				81C9834D1D3389EC00F9093A /* 交通银行二@2x.png in Resources */,
 				8D3EEA021C27AB400031F7C9 /* 光大银行.png in Resources */,
 				8D0AE7F61BE09CE500D9D50C /* register-1@2x.png in Resources */,
 				81DEC80D1CED934C005E9D9F /* login@3x.png in Resources */,
@@ -8080,6 +8179,7 @@
 				810F9C4E1CDC656200BF39B5 /* huodong@3x.png in Resources */,
 				810C767F1C2EADA3000637FD /* reddian.png in Resources */,
 				8183F3491C7E97A2000BB93C /* 椭圆猴-9@3x.png in Resources */,
+				81C9835F1D338A5B00F9093A /* 邮储银行二@2x.png in Resources */,
 				8122012A1CE5B65700159A74 /* TWOMonkeyRecordCell.xib in Resources */,
 				8D06000B1D054B3500C0C97C /* TWOProductNewHotTableViewCell.xib in Resources */,
 				8D9011AC1BD6337C00E5D62A /* 02@3x.png in Resources */,
@@ -8170,6 +8270,7 @@
 				8175BEC31BEA052E0044026E /* 拆红包@3x.png in Resources */,
 				8D3EEA141C27AB400031F7C9 /* 平安银行@2x.png in Resources */,
 				81B84C191CE44AB200A867B9 /* touzis@3x.png in Resources */,
+				81C983651D338A7600F9093A /* 中信银行二@2x.png in Resources */,
 				8175BEAB1BE9F2F50044026E /* 新浪微博@3x.png in Resources */,
 				8DEDE1BE1BCCFEF8008086D3 /* calendar@2x.png in Resources */,
 				8143FD2E1CDAE6E200B65A2F /* TWOMineCell.xib in Resources */,
@@ -8179,6 +8280,7 @@
 				8D3F95F01BE2188500013A8E /* shouyi@2x.png in Resources */,
 				811B628D1CFE8B9D00B6F17E /* 每日一摇@3x.png in Resources */,
 				8DEDE1D51BCCFFD8008086D3 /* iocn_saft@3x.png in Resources */,
+				81C983601D338A5B00F9093A /* 邮储银行二@3x.png in Resources */,
 				8DB744B81C1973AC0084D1A2 /* banner_black@2x.png in Resources */,
 				8175BE9A1BE9E5760044026E /* 组-21-拷贝-13@2x.png in Resources */,
 				8D855A521CE95AD7007A4B22 /* noWithData@3x.png in Resources */,
@@ -8351,6 +8453,7 @@
 				81C9831F1D30DD7400F9093A /* two华夏@2x.png in Resources */,
 				81B84C101CE44A8600A867B9 /* shoushi@2x.png in Resources */,
 				8D06004C1D06C15A00C0C97C /* TWO_Loading_Middle_05@2x.png in Resources */,
+				81C983521D3389EC00F9093A /* 南京银行二@3x.png in Resources */,
 				813D3FCC1C2683420042DB88 /* 审核失败@2x.png in Resources */,
 				8D6E467C1C9936F600F0F5B7 /* 已兑付@3x.png in Resources */,
 				8DC695C21C3503D30055EC44 /* UMSnsAccountViewController.xib in Resources */,
@@ -8386,6 +8489,7 @@
 				817DD4AD1BCF547E00042B09 /* ziliao@3x.png in Resources */,
 				8191E21B1BDDC8BE000A6E8C /* NewHandCell.xib in Resources */,
 				81379F191BEAF56F002CDB16 /* 成长@2x.png in Resources */,
+				81C983461D3389AA00F9093A /* 杭州银行二@3x.png in Resources */,
 				81ADB29D1CF56F7F00E044BC /* see@2x.png in Resources */,
 				8D0AE80D1BE0C1A700D9D50C /* RegisterViewController.xib in Resources */,
 				8183F4181C97D4E6000BB93C /* TthreeRunCell.xib in Resources */,
@@ -8418,12 +8522,14 @@
 				8D9011BC1BD6337C00E5D62A /* anniuS@3x.png in Resources */,
 				8D06004E1D06C15A00C0C97C /* TWO_Loading_Middle_06@2x.png in Resources */,
 				817988371BC94014007C8C3E /* PlanCell.xib in Resources */,
+				81C983451D3389AA00F9093A /* 杭州银行二@2x.png in Resources */,
 				8D121FD71BD4D4CE00B3C1FE /* SettingTitleTableViewCell.xib in Resources */,
 				81A233551CBF65BC009D43D3 /* InviteRecordCell.xib in Resources */,
 				8D29F99E1C08048700D45E43 /* 已过期@2x.png in Resources */,
 				810EBC041C9CFB55008FB51D /* iconfont-iconfuzhi-highlight.png in Resources */,
 				81FAAA2D1C256AC40020E9DD /* 提交申请@3x.png in Resources */,
 				8D9011B51BD6337C00E5D62A /* 07@2x.png in Resources */,
+				81C9833E1D33898300F9093A /* 东亚银行二@3x.png in Resources */,
 				8177A0211CF2E8920057AA7B /* nowin@3x.png in Resources */,
 				8183F4111C97CD4E000BB93C /* messageOld@3x.png in Resources */,
 				8D9011BB1BD6337C00E5D62A /* anniuS@2x.png in Resources */,
@@ -8451,6 +8557,7 @@
 				81446E701D069B2100A7E9BC /* 导航返回@3x.png in Resources */,
 				819B52D91BFC2094002FDF1E /* 阶梯@3x.png in Resources */,
 				8175BEB21BE9F2F50044026E /* 人人网@2x.png in Resources */,
+				81C983431D3389AA00F9093A /* 广发银行二@2x.png in Resources */,
 				810F9C5D1CDC65C800BF39B5 /* youxi@2x.png in Resources */,
 				8DC695BA1C3503D30055EC44 /* UMSocialLocalizable.strings in Resources */,
 				8143FD051CD9DCF600B65A2F /* 立即抢购@2x.png in Resources */,
@@ -8495,6 +8602,7 @@
 				8D9011851BD62B0600E5D62A /* MSelectionView.xib in Resources */,
 				8D1191921BF1DC1C00A2DE05 /* ProductMoneyTableViewCell.xib in Resources */,
 				81F343851C0584EB001EF374 /* 圆角矩形-3@2x.png in Resources */,
+				81C9833B1D33898300F9093A /* 渤海银行二@2x.png in Resources */,
 				8D4343921BFDEB0B000BA004 /* loading_up_01.png in Resources */,
 				81600A671CB4E83D0075CD45 /* monkeyNumber@3x.png in Resources */,
 				8DEDE1E21BCD0035008086D3 /* icon_ICBC@3x.png in Resources */,
@@ -8505,6 +8613,8 @@
 				8DEDE1D11BCCFFA5008086D3 /* blueyuan@3x.png in Resources */,
 				8D5DBB8F1BD48F1900F556B9 /* CastDetailTableViewCell.xib in Resources */,
 				819C3AC81BD49862008D2CFD /* GrabBagCell.xib in Resources */,
+				81C9835A1D338A1800F9093A /* 上海银行二@3x.png in Resources */,
+				81C9833A1D33898300F9093A /* 北京银行二@3x.png in Resources */,
 				8177A03E1CF3EEF10057AA7B /* xingkong@2x.png in Resources */,
 				81570D581C33D02400AF6B37 /* img_lc_jqqd.png in Resources */,
 				8D1591191D0CF91D00A4353D /* selection_gray@2x.png in Resources */,
@@ -8518,6 +8628,7 @@
 				810F9C6B1CDC823800BF39B5 /* renwuzhongxinicon@3x.png in Resources */,
 				8D4343991BFDEB0B000BA004 /* loading_up_08.png in Resources */,
 				8175BE9D1BE9E5760044026E /* 组-21-拷贝-14@3x.png in Resources */,
+				81C983621D338A5B00F9093A /* 浙商银行二@3x.png in Resources */,
 				8D6E46A01C9B9ECA00F0F5B7 /* loginViewUP@2x.png in Resources */,
 				81C8BBCA1BDA2F8D005B9DFF /* yijianfankui@2x.png in Resources */,
 				8177A03A1CF3EEDA0057AA7B /* xing@2x.png in Resources */,
@@ -8533,6 +8644,7 @@
 				81CBE7E91CE9C231004FE1D4 /* yanzhenma@3x.png in Resources */,
 				81BA1C141BD5000700DBA5BE /* icon05@2x.png in Resources */,
 				8183F4051C97CC4F000BB93C /* iconfont-jixifangshi@3x.png in Resources */,
+				81C983591D338A1800F9093A /* 上海银行二@2x.png in Resources */,
 				81DEC81F1CED9A8B005E9D9F /* whitelogin@3x.png in Resources */,
 				8182A7F01C0EECD300FA1216 /* 组-16@3x.png in Resources */,
 				8DEDE1C41BCCFF01008086D3 /* iconfont_graycuo@2x.png in Resources */,

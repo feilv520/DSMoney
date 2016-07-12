@@ -784,6 +784,8 @@
 - (void)buttonFillMoney:(UIButton *)button
 {
     TWOLiftMoneyViewController *liftMoneyVC = [[TWOLiftMoneyViewController alloc] init];
+    //余额传值
+    liftMoneyVC.moneyString = [DES3Util decrypt:[myAccount accBalance]];
     pushVC(liftMoneyVC);
 }
 

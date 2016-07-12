@@ -71,7 +71,6 @@
     [moreButton setTitleColor:[UIColor colorFromHexCode:@"#2493e7"] forState:UIControlStateNormal];
     [moreButton addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
     [moreView addSubview:moreButton];
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

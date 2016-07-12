@@ -12,7 +12,7 @@
 @interface TWOLiftMoneyViewController ()
 {
     UITextField *textFieldLift;
-    
+    UIButton *buttonNext;
     UIButton *buttBlack;
     UIView *viewThirdOpen;
 }
@@ -42,13 +42,14 @@
     UILabel *labelLift = [CreatView creatWithLabelFrame:CGRectMake(9, 10, 60, 31) backgroundColor:[UIColor whiteColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"提现金额"];
     [viewBottom addSubview:labelLift];
     
-    textFieldLift = [CreatView creatWithfFrame:CGRectMake(90, 10, WIDTH_CONTROLLER_DEFAULT - 90 - 10, 31) setPlaceholder:[NSString stringWithFormat:@"可提现%@元", @"100"] setTintColor:[UIColor grayColor]];
+    textFieldLift = [CreatView creatWithfFrame:CGRectMake(90, 10, WIDTH_CONTROLLER_DEFAULT - 90 - 10, 31) setPlaceholder:[NSString stringWithFormat:@"可提现%@元", self.moneyString] setTintColor:[UIColor grayColor]];
     [viewBottom addSubview:textFieldLift];
     textFieldLift.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     textFieldLift.textColor = [UIColor findZiTiColor];
     textFieldLift.keyboardType = UIKeyboardTypeDecimalPad; //带小数点的数字键盘
+    [textFieldLift addTarget:self action:@selector(textFieldLiftMoney:) forControlEvents:UIControlEventEditingChanged];
     
-    UIButton *buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, 66, WIDTH_CONTROLLER_DEFAULT - 18, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
+    buttonNext = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, 66, WIDTH_CONTROLLER_DEFAULT - 18, 40) backgroundColor:[UIColor findZiTiColor] textColor:[UIColor whiteColor] titleText:@"下一步"];
     [self.view addSubview:buttonNext];
     buttonNext.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     buttonNext.layer.cornerRadius = 5;
@@ -56,6 +57,16 @@
     [buttonNext addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self alertContentShow];
+}
+
+//按钮背景色
+- (void)textFieldLiftMoney:(UITextField *)textField
+{
+    if (textFieldLift.text.length == 0) {
+        buttonNext.backgroundColor = [UIColor findZiTiColor];
+    } else {
+        buttonNext.backgroundColor = [UIColor profitColor];
+    }
 }
 
 - (void)alertContentShow
@@ -77,7 +88,7 @@
     
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         
-        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需", @"   承担提现金额0.3%的手续费,最低每笔3元(新手专享标", @"   不算投资记录)"];
+        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需", @"   承担提现金额0.3%的手续费,最低每笔2元(新手专享标", @"   不算投资记录)"];
         
         for (int i = 0; i < 6; i++) {
             UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:11] text:[contenArray objectAtIndex:i]];
@@ -86,7 +97,7 @@
         
     } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
         
-        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需", @"   承担提现金额0.3%的手续费,最低每笔3元(新手专享标", @"   不算投资记录)"];
+        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需", @"   承担提现金额0.3%的手续费,最低每笔2元(新手专享标", @"   不算投资记录)"];
         
         for (int i = 0; i < 6; i++) {
             UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[contenArray objectAtIndex:i]];
@@ -95,7 +106,7 @@
         
     } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
         
-        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需承担提现", @"   金额0.3%的手续费,最低每笔3元(新手专享标不算投资记录)。"];
+        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需承担提现", @"   金额0.3%的手续费,最低每笔2元(新手专享标不算投资记录)。"];
         
         for (int i = 0; i < 5; i++) {
             UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[contenArray objectAtIndex:i]];
@@ -111,16 +122,34 @@
 
 - (void)nextAction:(id)sender
 {
-    if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
-        
-        [self registThirdShow];
-        return;
-    }
+    NSString *moneyYu = [self.moneyString stringByReplacingOccurrencesOfString:@"," withString:@""];
+    CGFloat yuEValue = [moneyYu floatValue] - [textFieldLift.text floatValue];
+    NSLog(@"%@", moneyYu);
     
-    TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
-    productHuiFuVC.fuctionName = @"cash";
-    productHuiFuVC.moneyString = textFieldLift.text;
-    pushVC(productHuiFuVC);
+    if (textFieldLift.text.length == 0) {
+        
+    } else if ([textFieldLift.text floatValue] > [moneyYu floatValue]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足，请重新输入"];
+        
+    } else if ([moneyYu floatValue] < 100.0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的余额低于100元，须一次性提完"];
+        
+    } else if (yuEValue < 100.0 && yuEValue != 0.0) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您提现后余额低于100元，须一次性提完"];
+        
+    } else {
+        
+        if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
+            [self.view endEditing:YES];
+            [self registThirdShow];
+            return;
+        }
+        
+        TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+        productHuiFuVC.fuctionName = @"cash";
+        productHuiFuVC.moneyString = textFieldLift.text;
+        pushVC(productHuiFuVC);
+    }
 }
 
 //开通托管账户弹框

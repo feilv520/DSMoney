@@ -17,7 +17,12 @@
 {
     UITableView *_tableView;
     UIView *viewHead;
+    NSDictionary *responsterDic;
     NSMutableArray *listArray;
+    UIButton *butClickMore;
+    
+    BOOL flagState;
+    NSInteger pageNumber;
 }
 
 @end
@@ -39,10 +44,20 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的游戏积分"];
+    
+    responsterDic = [NSDictionary dictionary];
     listArray = [NSMutableArray array];
+    flagState = NO;
+    pageNumber = 1;
     
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     [self getMyGameScoreData];
+}
+
+- (void)noDataShow
+{
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 80 - 20 - 53)/2 - 260/2/2, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [self.view addSubview:imageMonkey];
 }
 
 - (void)tableViewShow
@@ -51,7 +66,22 @@
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    _tableView.tableFooterView = [UIView new];
+    _tableView.backgroundColor = [UIColor qianhuise];
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 60)];
+    UIView *viewFoot = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 60) backgroundColor:[UIColor whiteColor]];
+    [_tableView.tableFooterView addSubview:viewFoot];
+    
+    UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
+    [viewFoot addSubview:viewLine];
+    viewLine.alpha = 0.4;
+    
+    butClickMore = [UIButton buttonWithType:UIButtonTypeCustom];
+    butClickMore.frame = CGRectMake(0, 1, WIDTH_CONTROLLER_DEFAULT, 59.5);
+    [viewFoot addSubview:butClickMore];
+    [butClickMore setTitle:@"点击查看更多" forState:UIControlStateNormal];
+    [butClickMore setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+    butClickMore.enabled = YES;
+    [butClickMore addTarget:self action:@selector(buttonClickedMoreData:) forControlEvents:UIControlEventTouchUpInside];
     
     viewHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 247.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     _tableView.tableHeaderView = viewHead;
@@ -70,7 +100,7 @@
     UILabel *labelZongScore = [CreatView creatWithLabelFrame:CGRectMake(0, 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:nil];
     [viewHead addSubview:labelZongScore];
     
-    NSMutableAttributedString *scoreString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@分", @"100098"]];
+    NSMutableAttributedString *scoreString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@分", [responsterDic objectForKey:@"integral"]]];
     NSRange shuziRange = NSMakeRange(0, [[scoreString string] rangeOfString:@"分"].location);
     [scoreString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:28] range:shuziRange];
     [labelZongScore setAttributedText:scoreString];
@@ -101,15 +131,12 @@
     cell.labelTime.textColor = [UIColor findZiTiColor];
     cell.labelTime.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     
-    if (indexPath.row == 5) {
-        
-        cell.labelScore.text = @"-10,000分";
-        cell.labelName.text = @"兑换猴币";
+    if ([[gameScoreModel mark] isEqualToString:@"+"]) {
+        cell.labelScore.text = [NSString stringWithFormat:@"+%@", [gameScoreModel pntegral]];
         cell.labelScore.textColor = [UIColor daohanglan];
         
     } else {
-        
-        cell.labelScore.text = @"+10,000分";
+        cell.labelScore.text = [NSString stringWithFormat:@"-%@", [gameScoreModel pntegral]];
         cell.labelScore.textColor = [UIColor profitColor];
     }
     
@@ -127,12 +154,15 @@
 #pragma mark 我的游戏积分~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - (void)getMyGameScoreData
 {
-    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber], @"pageSize":@"10"};
+
     [[MyAfHTTPClient sharedClient] postWithURLString:@"integral/getUserIntegralList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         [self loadingWithHidden:YES];
         NSLog(@"我的游戏积分~~~~~~~~~%@", responseObject);
-        if ([[responseObject objectForKey:@"resultCode"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+        responsterDic = responseObject;
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *dataArray = [responseObject objectForKey:@"integralInfo"];
             for (NSDictionary *dataDic in dataArray) {
                 TWOGameScoreModel *gameScoreModel = [[TWOGameScoreModel alloc] init];
@@ -140,12 +170,39 @@
                 [listArray addObject:gameScoreModel];
             }
             
-            [self tableViewShow];
+            if (pageNumber == 1) {
+                if (listArray.count == 0) {
+                    [self noDataShow];
+                } else {
+                    [self tableViewShow];
+                }
+            } else {
+                [_tableView reloadData];
+            }
+
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                
+                [butClickMore setTitle:@"已显示全部" forState:UIControlStateNormal];
+                [butClickMore setTitleColor:[UIColor findZiTiColor] forState:UIControlStateNormal];
+                butClickMore.enabled = NO;
+                flagState = YES;
+                NSLog(@"已显示全部");
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
+}
+
+//点击查看更多
+- (void)buttonClickedMoreData:(UIButton *)button
+{
+    NSLog(@"888888");
+    if (!flagState) {
+        pageNumber++;
+        [self getMyGameScoreData];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

@@ -14,5 +14,6 @@
 @property (nonatomic) NSString *typeName;
 @property (nonatomic) NSString *pntegral;
 @property (nonatomic) NSString *type;
+@property (nonatomic) NSString *mark;
 
 @end

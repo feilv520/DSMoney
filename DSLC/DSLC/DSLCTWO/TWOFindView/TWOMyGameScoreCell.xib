@@ -16,10 +16,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihV-rG-4uc">
-                        <rect key="frame" x="10" y="15" width="100" height="16"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="10" y="15" width="173" height="16"/>
+                        <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="T3j-2D-OzG"/>
+                            <constraint firstAttribute="width" constant="173" id="T3j-2D-OzG"/>
                             <constraint firstAttribute="height" constant="16" id="opI-aJ-Vkh"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -39,7 +39,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55M-db-BOn">
                         <rect key="frame" x="186" y="19" width="180" height="21"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="180" id="HIo-M9-9bL"/>
                             <constraint firstAttribute="height" constant="21" id="yJw-g9-bPU"/>
@@ -64,7 +64,7 @@
                 <outlet property="labelScore" destination="55M-db-BOn" id="5Gd-ct-LVP"/>
                 <outlet property="labelTime" destination="UWn-7U-nAx" id="SSq-RC-ac0"/>
             </connections>
-            <point key="canvasLocation" x="733.5" y="376"/>
+            <point key="canvasLocation" x="272.5" y="416"/>
         </tableViewCell>
     </objects>
 </document>

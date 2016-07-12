@@ -127,7 +127,7 @@
     if (textFieldLift.text.length == 0) {
         
     } else if ([textFieldLift.text integerValue] < 100) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"最低充值金额应大于等于100元"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值金额最少为100元"];
         
     } else {
         

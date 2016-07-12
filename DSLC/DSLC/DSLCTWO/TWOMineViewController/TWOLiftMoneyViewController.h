@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOLiftMoneyViewController : BaseViewController
-
+@property (nonatomic) NSString *moneyString;
 @end
