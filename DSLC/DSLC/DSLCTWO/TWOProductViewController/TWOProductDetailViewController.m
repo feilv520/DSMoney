@@ -45,6 +45,8 @@
     
     UIButton *buttBlack;
     UIView *viewThirdOpen;
+    
+    NSDictionary *userDic;
 }
 
 @property (nonatomic, strong) UIControl *viewBotton;
@@ -113,6 +115,7 @@
 {
     [super viewWillDisappear:animated];
     [_viewBotton setHidden:YES];
+    butMakeSure.enabled = YES;
 }
 
 // 创建TableView
@@ -700,50 +703,15 @@
             return;
         }
         
-        NSDictionary *parameter = @{@"token":[dic objectForKey:@"token"]};
+        TWOProductMakeSureViewController *makeSureVC = [[TWOProductMakeSureViewController alloc] init];
         
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-            
-            NSLog(@"%@",responseObject);
-            
-            button.enabled = YES;
-            
-            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            
-                if (![[[dataDic objectForKey:@"productType"] description] isEqualToString:@"3"]) {
-                    
-                    TWOProductMakeSureViewController *makeSureVC = [[TWOProductMakeSureViewController alloc] init];
-                    
-                    makeSureVC.decide = YES;
-                    makeSureVC.detailM = self.detailM;
-                    makeSureVC.residueMoney = self.residueMoney;
-                    
-                    [MobClick event:@"makeSure"];
-                    
-                    [self submitLoadingWithHidden:YES];
-                    
-                    pushVC(makeSureVC);
-                } else {
-                    
-                    TWOProductMakeSureViewController *makeSureVC = [[TWOProductMakeSureViewController alloc] init];
-                    
-                    makeSureVC.decide = NO;
-                    makeSureVC.detailM = self.detailM;
-                    makeSureVC.residueMoney = self.residueMoney;
-                    
-                    [self submitLoadingWithHidden:YES];
-                    
-                    pushVC(makeSureVC);
-                }
-                
-            } else {
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-            NSLog(@"%@", error);
-            
-        }];
+        makeSureVC.detailM = self.detailM;
+        makeSureVC.residueMoney = self.residueMoney;
+        makeSureVC.limitMoney = [userDic objectForKey:@"limitMoney"];
+        
+        [self submitLoadingWithHidden:YES];
+        
+        pushVC(makeSureVC);
     } else {
         button.enabled = YES;
         
@@ -801,45 +769,9 @@
     
     NSLog(@"确定");
     
-//    NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"],@"clientType":@"iOS"};
-    
-//    [[MyAfHTTPClient sharedClient] postWithURLString:@"chinaPnr/userRegister" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-//        
-//        NSLog(@"汇付 : %@",responseObject);
-//        
-//        TWOProductHuiFuModel *huifuModel = [[TWOProductHuiFuModel alloc] init];
-//        [huifuModel setValuesForKeysWithDictionary:responseObject];
-//        
-//        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-    
     TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
     productHuiFuVC.fuctionName = @"userReg";
     pushVC(productHuiFuVC);
-    
-//            NSDictionary *paraDic = @{@"BgRetUrl":[huifuModel BgRetUrl],@"ChkValue":[huifuModel ChkValue],@"CmdId":[huifuModel CmdId],@"MerCustId":[huifuModel MerCustId],@"MerPriv":[huifuModel MerPriv],@"PageType":[huifuModel PageType],@"RetUrl":[huifuModel RetUrl],@"UsrId":[huifuModel UsrId],@"UsrMp":[huifuModel UsrMp],@"Version":[huifuModel Version]};
-//            
-//            [[MyAfHTTPClient sharedClient] postWithURLStringP:[huifuModel chinaPnrServer] parameters:paraDic success:^(NSURLSessionDataTask * _Nullable task, NSString * _Nullable responseObject) {
-//                
-//                NSLog(@"chinaPnrServer = %@",responseObject);
-//                
-//                TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
-//                productHuiFuVC.httpString = responseObject;
-//                pushVC(productHuiFuVC);
-//                                
-//            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//                
-//                NSLog(@"%@", error);
-//                
-//            }];
-//            
-//        }
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        
-//        NSLog(@"%@", error);
-//        
-//    }];
-
     
 }
 
@@ -926,7 +858,10 @@
 }
 
 - (void)getProductDetail{
-    NSDictionary *parameter = @{@"productId":self.idString};
+    
+    NSString *tokenString = [self.flagDic objectForKey:@"token"];
+    
+    NSDictionary *parameter = @{@"productId":self.idString,@"token":tokenString};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductDetail" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -939,6 +874,8 @@
         [self.detailM setValuesForKeysWithDictionary:dataDic];
         
         assetArray = [responseObject objectForKey:@"Asset"];
+        
+        userDic = [responseObject objectForKey:@"User"];
         
         [self showTableView];
         [self showBottonView];

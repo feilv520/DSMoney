@@ -138,6 +138,17 @@
         cell.contentView.alpha = 1.0;
     }
     
+    if ([[[model redPacketType] description] isEqualToString:@"7"]) {
+        
+        cell.labelData.text = @"请尽快使用";
+        cell.labelEvery.text = @"仅可用于新手标";
+        cell.labelTiaoJian.text = @"新手体验金";
+        
+        cell.labelTiaoJian.textColor = [UIColor moneyColor];
+        cell.labelTiaoJian.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    }
+
+    
     return cell;
 }
 

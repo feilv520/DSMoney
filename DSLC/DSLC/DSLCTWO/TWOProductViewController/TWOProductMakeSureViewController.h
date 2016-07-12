@@ -12,7 +12,7 @@
 
 @interface TWOProductMakeSureViewController : BaseViewController
 
-@property (nonatomic) BOOL decide;
+@property (nonatomic, strong) NSString *limitMoney;
 
 @property (nonatomic, strong) ProductDetailModel *detailM;
 

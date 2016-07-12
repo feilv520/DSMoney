@@ -132,6 +132,7 @@
                 <outlet property="allMoneyLabel" destination="abd-ry-1hC" id="F3f-kd-HeY"/>
                 <outlet property="closeButton" destination="7Q6-ST-0eY" id="g8k-ce-YLz"/>
                 <outlet property="sureButton" destination="enk-0g-VaG" id="rFe-X7-dKc"/>
+                <outlet property="titleLabel" destination="k4j-gN-Ii9" id="Lr8-gl-wMn"/>
                 <outlet property="zMoneyLabel" destination="BNN-G1-tfe" id="MRm-ep-sPv"/>
             </connections>
             <point key="canvasLocation" x="85.5" y="425"/>

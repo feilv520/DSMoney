@@ -390,7 +390,7 @@
                 cell.accountMoney.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]]];
             }
             
-            cell.residueLabel.text = [NSString stringWithFormat:@"%@元",@"0"];
+            cell.residueLabel.text = [NSString stringWithFormat:@"%@元",self.limitMoney];
             
             [cell.czButton addTarget:self action:@selector(czAction:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -717,9 +717,14 @@
     if ([[self.detailM.productType description] isEqualToString:@"3"]){
     
         [app.window addSubview:monkeyView];
+        monkeyView.titleLabel.text = @"体验金支付";
     } else {
-        
-        [app.window addSubview:makeSView];
+        if (packetModel == nil) {
+            [app.window addSubview:monkeyView];
+            monkeyView.titleLabel.text = @"支付";
+        } else {
+            [app.window addSubview:makeSView];
+        }
     }
     
     [makeSView.closeButton addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -845,11 +850,11 @@
         NSString *incrIdString = @"0";
         
         if (packetModel != nil) {
-            redPackIdString = [packetModel redPacketId];
+            redPackIdString = [packetModel welfareId];
         }
         
         if (incrModel != nil) {
-            incrIdString = [incrModel incrId];
+            incrIdString = [incrModel welfareId];
         }
         
         NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",[self.flagDic objectForKey:@"token"],[[self.detailM productId] description],[allMoneyString description],@"1",redPackIdString,incrIdString,@"iOS"];
@@ -860,6 +865,9 @@
         productHuiFuVC.fuctionName = @"trade/chinaPnrTrade";
         
         productHuiFuVC.tradeString = [NSString stringWithFormat:@"productId=%@&packetId=%@&incrId=%@&orderMoney=%@&payType=1&clientType=iOS&token=%@&sign=%@",[[self.detailM productId] description],redPackIdString,incrIdString,[allMoneyString description],[self.flagDic objectForKey:@"token"],md5SignString];
+        
+        NSLog(@"%@",productHuiFuVC.tradeString);
+        
         pushVC(productHuiFuVC);
     }
     

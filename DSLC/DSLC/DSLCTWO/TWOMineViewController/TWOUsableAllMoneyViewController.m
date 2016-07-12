@@ -164,7 +164,7 @@
 
 - (void)buttonAction:(id)sender{
     UIButton *button = (UIButton *)sender;
-    NSLog(@"button = %ld",button.tag);
+    NSLog(@"button = %ld",(long)button.tag);
     
     page = 1;
     
@@ -174,7 +174,14 @@
         if (button.tag == 0) {
             typeString = @"";
         } else {
-            typeString = [NSString stringWithFormat:@"%ld",button.tag + 1];
+            typeString = [NSString stringWithFormat:@"%ld",(long)button.tag + 1];
+            if (button.tag == 3) {
+                typeString = @"1";
+            } else if (button.tag == 4) {
+                typeString = @"5";
+            } else if (button.tag == 5) {
+                typeString = @"7";
+            }
         }
     } completion:^(BOOL finished) {
         [bView setHidden:YES];

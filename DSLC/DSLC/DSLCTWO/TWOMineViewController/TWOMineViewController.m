@@ -84,6 +84,9 @@
     NSMutableAttributedString *addMoneyString;
     NSMutableAttributedString *butMoneyStr;
     NSMutableAttributedString *butAddStr;
+    
+    // 提交表单loading
+    MBProgressHUD *hud;
 }
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -1036,6 +1039,10 @@
 
 - (void)getMyAccountInfoFuction{
     
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    
+    hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
+    
     memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"]};
@@ -1043,6 +1050,8 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyAccountInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"getMyAccountInfo = %@",responseObject);
+        
+        [hud hide:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             

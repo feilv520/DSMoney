@@ -20,4 +20,6 @@
 @property (nonatomic) NSString *applyDays;
 @property (nonatomic) NSString *isEnabled;
 @property (nonatomic) NSString *redPacketType;
+@property (nonatomic) NSString *welfareId;
+
 @end

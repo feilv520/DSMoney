@@ -21,5 +21,6 @@
 @property (nonatomic) NSString *applyDays;
 @property (nonatomic) NSString *isEnabled;
 @property (nonatomic) NSString *incrId;
+@property (nonatomic) NSString *welfareId;
 
 @end

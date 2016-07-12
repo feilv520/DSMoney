@@ -37,10 +37,13 @@
     UIView *viewDown;
     UILabel *labelMonkey;
     UIImageView *imageSign;
+    
+    NSString *tempPathString;
 }
 @property (nonatomic) KKTabBarViewController *tabBarVC;
 
 @property (weak, nonatomic) IBOutlet MyHandButton *myHandBtn;
+@property (weak, nonatomic) IBOutlet MyHandButton *myTwoHandBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userPhone;
@@ -48,9 +51,25 @@
 @property (weak, nonatomic) IBOutlet UIButton *otherUserButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
+@property (nonatomic, strong) NSDictionary *flagLogin;
+
 @end
 
 @implementation MyHandViewController
+
+// 登录标识文件
+- (NSDictionary *)flagLogin{
+    if (_flagLogin == nil) {
+        if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+            [FileOfManage createWithFile:@"isLogin.plist"];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+            [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+        }
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+        self.flagLogin = dic;
+    }
+    return _flagLogin;
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -69,8 +88,12 @@
     // Do any additional setup after loading the view from its nib.
     
     self.myHandBtn.frame = CGRectMake(8, 162, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT);
+    self.myTwoHandBtn.frame = CGRectMake(8, 162, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT);
+    
+    self.myTwoHandBtn.hidden = YES;
     
     self.myHandBtn.delegate = self;
+    self.myTwoHandBtn.delegate = self;
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
     
@@ -79,6 +102,8 @@
     self.userPhone.text = [[userDic objectForKey:@"phone"] stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
     
     failCount = 5;
+    
+    tempPathString = @"1";
     
     BOOL handFlag = [[dic objectForKey:@"ifSetHandFlag"] boolValue];
     
@@ -92,7 +117,6 @@
         self.otherUserButton.hidden = NO;
         self.forgetButton.hidden = NO;
         self.cancelButton.hidden = YES;
-        
     }
     
     [self.forgetButton addTarget:self action:@selector(forgetAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -102,90 +126,6 @@
 }
 
 - (void)lockView:(MyHandButton *)lockView didFinishPath:(NSString *)path{
-    //    if ([path isEqualToString:@"012"]) {
-    //
-    //        ////        1.0首页
-    //        //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
-    //        //        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
-    //        //
-    //        ////        1.0产品
-    //        //        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
-    //        //        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
-    //        //
-    //        ////        1.0我的
-    //        //        MineViewController *mineVC = [[MineViewController alloc] init];
-    //        ////        LoginViewController *loginVC = [[LoginViewController alloc] init];
-    //        //        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
-    //
-    //        //        2.0首页
-    //        TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
-    //        UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
-    //
-    //        //        2.0产品
-    //        TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
-    //        UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
-    //
-    //        //        2.0发现
-    //        TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
-    //        UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
-    //
-    //        //        2.0我的
-    //        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-    //        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
-    //
-    //        //        2.0
-    //        //        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
-    //        viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
-    //        //        1.0
-    //        //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
-    //
-    //        //        2.0
-    //        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
-    //        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
-    //
-    //        ////        1.0
-    //        //        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
-    //        //        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
-    //
-    //        //        for循环4要改成3***********************************
-    //        buttonArr = [NSMutableArray array];
-    //        for (int i = 0; i < 4; i++) {
-    //
-    //            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    //            //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
-    //            //        button.imageView.backgroundColor = [UIColor whiteColor];
-    //            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butGrayArr objectAtIndex:i]]] forState:UIControlStateNormal];
-    //            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butColorArr objectAtIndex:i]]] forState:UIControlStateSelected];
-    //            //       点击保持高亮状态,没有闪动的效果
-    //            [button setShowsTouchWhenHighlighted:YES];
-    //            [buttonArr addObject:button];
-    //        }
-    //
-    //        self.tabBarVC = [[KKTabBarViewController alloc] init];
-    //        //    存放试图控制器
-    //        [self.tabBarVC setControllerArray:viewControllerArr];
-    //        //    存放tabBar上的按钮
-    //        [self.tabBarVC setTabButtonArray:buttonArr];
-    //        //    设置tabBar的高度 默认为50
-    //        [self.tabBarVC setTabBarHeight:35];
-    //        //    设置是否可以手势滑动切换模块 默认为YES
-    //        [self.tabBarVC setSuppurtGestureTransition:NO];
-    //        //    设置点击按钮有无翻页效果 默认有
-    //        [self.tabBarVC setTransitionAnimated:NO];
-    //
-    //        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    //        app.tabBarVC = self.tabBarVC;
-    //        app.window.rootViewController = self.tabBarVC;
-    //
-    //    } else {
-    //        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"密码错误" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    //
-    //        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:nil]];
-    //        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    //        [self presentViewController:alert animated:YES completion:^{
-    //
-    //        }];
-    //    }
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
     
@@ -193,16 +133,38 @@
     
     if (handFlag) {
         self.titleLabel.text = @"请设置手势密码";
-        if (path.length >= 4) {
+        if (lockView == self.myHandBtn) {
             
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码设置成功"];
-            [dic setValue:path forKey:@"handString"];
-            [dic setValue:@"NO" forKey:@"ifSetHandFlag"];
-            [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
-            popVC;
-        } else {
-            
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"为了你的账号安全,手势密码需要至少连线4个点."];
+            if (path.length >= 4) {
+                
+                tempPathString = path;
+                
+                self.myTwoHandBtn.hidden = NO;
+                
+                self.myHandBtn.hidden = YES;
+                
+                NSLog(@"tempPathString%@",tempPathString);
+                
+                self.titleLabel.text = @"请再次设置手势密码";
+            } else {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"为了你的账号安全,手势密码需要至少连线4个点."];
+            }
+        }  else if (lockView == self.myTwoHandBtn) {
+            if ([tempPathString isEqualToString:path]) {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码设置成功"];
+                [dic setValue:path forKey:@"handString"];
+                [dic setValue:@"NO" forKey:@"ifSetHandFlag"];
+                [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+                popVC;
+            } else {
+                NSLog(@"%@",tempPathString);
+                
+                self.titleLabel.text = @"请再次设置手势密码";
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码不一致,请再次输入"];
+            }
         }
     } else {
         self.titleLabel.text = @"请输入解锁图案";
@@ -279,11 +241,9 @@
                     app.tabBarVC = self.tabBarVC;
                     app.window.rootViewController = self.tabBarVC;
                     
-//                    NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-                    
-//                    if ([memberDic objectForKey:@"token"] != nil && ![[memberDic objectForKey:@"token"] isEqualToString:@""]){
-//                        [self loginFuction];
-//                    }
+                    if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]){
+                        [self loginFuction];
+                    }
                     
                 } else {
                     [ProgressHUD showMessage:[NSString stringWithFormat:@"手势密码错误，请重新输入，您还有%ld次机会",(long)failCount] Width:100 High:20];
@@ -523,10 +483,8 @@
             
             [self getMyAccountInfoFuction];
             
-            //                if (![[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"] isEqualToNumber:@0]){
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"showMonkey" object:[[responseObject objectForKey:@"Sign"] objectForKey:@"getMonkeyNum"]];
-            //                }
+            [self userSign];
+    
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
@@ -559,6 +517,39 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)userSign{
+    
+    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    NSLog(@"dateString:%@",dateString);
+    
+    NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"],@"signDate":dateString};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"sign/userSign" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"userSign = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            if (![[responseObject objectForKey:@"signMonkeyNum"] isEqualToString:@"0"]){
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"showMonkey" object:[responseObject objectForKey:@"signMonkeyNum"]];
+            }
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

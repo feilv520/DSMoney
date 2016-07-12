@@ -379,16 +379,6 @@
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
             
-            // 判断是否存在isLogin.plist文件
-            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
-                [FileOfManage createWithFile:@"isLogin.plist"];
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-            } else {
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-            }
-            
             [self dismissViewControllerAnimated:YES completion:^{
                 
                 [self userSign:[responseObject objectForKey:@"token"]];
