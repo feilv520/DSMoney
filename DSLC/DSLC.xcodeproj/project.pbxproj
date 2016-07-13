@@ -1217,6 +1217,8 @@
 		8D4E4E081C1E5A6A00AE2644 /* NSDataEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4E4DFA1C1E5A6A00AE2644 /* NSDataEx.m */; settings = {ASSET_TAGS = (); }; };
 		8D4E4E091C1E5A6A00AE2644 /* openssl_wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4E4DFC1C1E5A6A00AE2644 /* openssl_wrapper.m */; settings = {ASSET_TAGS = (); }; };
 		8D4E4E0A1C1E5A6A00AE2644 /* LLPayUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4E4DFE1C1E5A6A00AE2644 /* LLPayUtil.m */; settings = {ASSET_TAGS = (); }; };
+		8D4F38021D36116B00BEF876 /* TWONoNet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D4F38001D36116B00BEF876 /* TWONoNet@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D4F38031D36116B00BEF876 /* TWONoNet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D4F38011D36116B00BEF876 /* TWONoNet@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D4FF5D71BE339A200BAE25F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FF5B61BE339A200BAE25F /* AFHTTPSessionManager.m */; settings = {ASSET_TAGS = (); }; };
 		8D4FF5D81BE339A200BAE25F /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FF5B91BE339A200BAE25F /* AFNetworkReachabilityManager.m */; settings = {ASSET_TAGS = (); }; };
 		8D4FF5D91BE339A200BAE25F /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FF5BB1BE339A200BAE25F /* AFSecurityPolicy.m */; settings = {ASSET_TAGS = (); }; };
@@ -3268,6 +3270,8 @@
 		8D4E4DFC1C1E5A6A00AE2644 /* openssl_wrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = openssl_wrapper.m; sourceTree = "<group>"; };
 		8D4E4DFD1C1E5A6A00AE2644 /* LLPayUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLPayUtil.h; sourceTree = "<group>"; };
 		8D4E4DFE1C1E5A6A00AE2644 /* LLPayUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLPayUtil.m; sourceTree = "<group>"; };
+		8D4F38001D36116B00BEF876 /* TWONoNet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWONoNet@2x.png"; sourceTree = "<group>"; };
+		8D4F38011D36116B00BEF876 /* TWONoNet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWONoNet@3x.png"; sourceTree = "<group>"; };
 		8D4FF5B51BE339A200BAE25F /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		8D4FF5B61BE339A200BAE25F /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		8D4FF5B71BE339A200BAE25F /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -4018,6 +4022,7 @@
 		8143FCE81CD9C25300B65A2F /* TWOImage */ = {
 			isa = PBXGroup;
 			children = (
+				8D4F38041D36117000BEF876 /* 网络 */,
 				81C983061D30DD5F00F9093A /* 银行卡 */,
 				8DDB2D921D1CD0A5008E3EC4 /* 欢迎页 */,
 				8D9F16C21D17C78A00A70399 /* noData */,
@@ -6832,6 +6837,15 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		8D4F38041D36117000BEF876 /* 网络 */ = {
+			isa = PBXGroup;
+			children = (
+				8D4F38001D36116B00BEF876 /* TWONoNet@2x.png */,
+				8D4F38011D36116B00BEF876 /* TWONoNet@3x.png */,
+			);
+			name = "网络";
+			sourceTree = "<group>";
+		};
 		8D4FF5B41BE339A200BAE25F /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -7971,6 +7985,7 @@
 				817DD49A1BCF547E00042B09 /* hongbao@2x.png in Resources */,
 				8D3EEA0B1C27AB400031F7C9 /* 北京银行@3x.png in Resources */,
 				8143FD351CDAEFB000B65A2F /* tequanbenjin@2x.png in Resources */,
+				8D4F38021D36116B00BEF876 /* TWONoNet@2x.png in Resources */,
 				8182A7F21C0EECD300FA1216 /* 组-17@3x.png in Resources */,
 				8D15911A1D0CF91D00A4353D /* selection_gray@3x.png in Resources */,
 				8D65AE101C294ABF00FAEFF3 /* TTTTTTTBangKa.xib in Resources */,
@@ -8117,6 +8132,7 @@
 				8175BEB31BE9F2F50044026E /* 人人网@3x.png in Resources */,
 				8183F3481C7E97A2000BB93C /* 椭圆猴-9@2x.png in Resources */,
 				8D3EEA161C27AB400031F7C9 /* 广发银行@2x.png in Resources */,
+				8D4F38031D36116B00BEF876 /* TWONoNet@3x.png in Resources */,
 				8183F3511C7EAFAA000BB93C /* MonkeyMakeCell.xib in Resources */,
 				8D43439D1BFDEB0B000BA004 /* loading_middle_04.png in Resources */,
 				8D1DB6031C7AA2E4003CFDA6 /* welcome_one.png in Resources */,

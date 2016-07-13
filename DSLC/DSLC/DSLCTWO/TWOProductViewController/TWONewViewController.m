@@ -43,6 +43,12 @@
     
     CGFloat bfFloat;
     
+    // 无数据猴子
+    UIImageView *imageMonkey;
+    
+    // 无网络猴子
+    UIImageView *noNetworkMonkey;
+    UIButton *reloadButton;
 }
 
 @property (nonatomic, strong) NSMutableArray *productListArray;
@@ -448,6 +454,12 @@
                 [self.productListArray addObject:productM];
             }
             
+            if (self.productListArray.count == 0) {
+                [self noDataShowMoney];
+                _tableView.hidden = YES;
+                return ;
+            }
+            
             if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
                 if (![FileOfManage ExistOfFile:@"NewProduct.plist"]) {
                     [FileOfManage createWithFile:@"NewProduct.plist"];
@@ -473,11 +485,13 @@
             
             [_tableView reloadData];
         } else {
-            
+            [self noNetworkView];
+            _tableView.hidden = YES;
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        [self loadingWithHidden:YES];
+        [self noNetworkView];
         NSLog(@"%@", error);
         
     }];
@@ -718,6 +732,33 @@
     [changeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:12] range:leftRange];
     [changeString addAttribute:NSForegroundColorAttributeName value:[UIColor findZiTiColor] range:leftRange];
     [label setAttributedText:changeString];
+}
+
+- (void)noDataShowMoney
+{
+    if (imageMonkey == nil) {
+        imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 100, 284/2, 284/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    }
+    [self.view addSubview:imageMonkey];
+}
+
+- (void)noNetworkView {
+    if (noNetworkMonkey == nil) {
+        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 100, 306/2, 246/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoNet"]];
+    }
+    [self.view addSubview:noNetworkMonkey];
+    
+    if (reloadButton == nil) {
+        
+        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 50, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:@"重新加载"];
+        
+        reloadButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateHighlighted];
+        
+        [reloadButton addTarget:self action:@selector(getProductList) forControlEvents:UIControlEventTouchUpInside];
+    }
+    [self.view addSubview:reloadButton];
 }
 
 - (void)didReceiveMemoryWarning {

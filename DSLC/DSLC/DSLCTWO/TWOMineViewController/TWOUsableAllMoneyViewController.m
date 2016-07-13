@@ -24,6 +24,8 @@
     
     NSString *typeString;
     NSString *tempTypeString;
+    
+    UIImageView *imageMonkey;
 }
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -246,7 +248,10 @@
 
 - (void)noDataShowMyList
 {
-    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    if (imageMonkey == nil) {
+        
+        imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    }
     [self.view addSubview:imageMonkey];
 }
 
@@ -259,7 +264,7 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyTradeRecords" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
        
-        [self noDataViewWithRemoveToView];
+//        [self noDataViewWithRemoveToView];
         
         NSLog(@"getMyTradeRecords = %@",responseObject);
         
@@ -267,8 +272,10 @@
         
         if (dataArr.count == 0) {
             [self noDataShowMyList];
+            imageMonkey.hidden = NO;
             [self.mainTableView setHidden:YES];
         } else {
+            imageMonkey.hidden = YES;
             [self.mainTableView setHidden:NO];
         }
         

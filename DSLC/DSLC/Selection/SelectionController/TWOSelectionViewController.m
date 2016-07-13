@@ -61,6 +61,13 @@
     NSTimer *timerNotice;
     NSInteger secondsNum;
     NSInteger everyNum;
+    
+    // 无数据猴子
+    UIImageView *imageMonkey;
+    
+    // 无网络猴子
+    UIImageView *noNetworkMonkey;
+    UIButton *reloadButton;
 }
 
 @end
@@ -724,12 +731,15 @@
                 [self collectionViewShow];
                 
             } else {
+                [self loadingWithHidden:YES];
+                [self noNetworkView];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
             
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
+            [self loadingWithHidden:YES];
+            [self noNetworkView];
             NSLog(@"%@", error);
             
         }];
@@ -761,7 +771,6 @@
             
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
             NSLog(@"%@", error);
             
         }];
@@ -799,6 +808,11 @@
             [photoArray addObject:adModel];
         }
         
+        if (photoArray.count == 0) {
+            [self noDataShowMoney];
+            return;
+        }
+        
         [self upContentShow];
         [_scrollView setHidden:NO];
         [self makeScrollView];
@@ -812,9 +826,38 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
+        [self loadingWithHidden:YES];
+        [self noNetworkView];
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)noDataShowMoney
+{
+    if (imageMonkey == nil) {
+        imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, self.view.center.y - 71, 284/2, 284/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    }
+    [self.view addSubview:imageMonkey];
+}
+
+- (void)noNetworkView {
+    if (noNetworkMonkey == nil) {
+        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 100, 306/2, 246/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoNet"]];
+    }
+    [self.view addSubview:noNetworkMonkey];
+    
+    if (reloadButton == nil) {
+        
+        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 50, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:@"重新加载"];
+        
+        reloadButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateHighlighted];
+        
+        [reloadButton addTarget:self action:@selector(getAdvList) forControlEvents:UIControlEventTouchUpInside];
+    }
+    [self.view addSubview:reloadButton];
 }
 
 - (void)didReceiveMemoryWarning {

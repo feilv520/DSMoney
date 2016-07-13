@@ -49,7 +49,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"可用余额"];
     
-    accBalanceString = @"5SseE08G0Ww=";
+    accBalanceString = self.moneyString;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyAccountInfoFuction) name:@"getMyAccountInfoFuction" object:nil];
     
