@@ -737,14 +737,14 @@
 - (void)noDataShowMoney
 {
     if (imageMonkey == nil) {
-        imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 100, 284/2, 284/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+        imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 284/2/2, 100, 284/2, 284/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
     }
     [self.view addSubview:imageMonkey];
 }
 
 - (void)noNetworkView {
     if (noNetworkMonkey == nil) {
-        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 100, 306/2, 246/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoNet"]];
+        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 306/2/2, 100, 306/2, 246/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoNet"]];
     }
     [self.view addSubview:noNetworkMonkey];
     
