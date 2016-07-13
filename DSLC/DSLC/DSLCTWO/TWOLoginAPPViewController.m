@@ -652,12 +652,13 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"getProductDetail" object:nil];
             }];
         } else {
+            [hud hide:YES];
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        [hud hide:YES];
         NSLog(@"%@", error);
         
     }];

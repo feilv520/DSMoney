@@ -10,4 +10,7 @@
 
 @interface TWOUsableMoneyViewController : BaseViewController
 @property (nonatomic) BOOL whichOne;
+
+@property (nonatomic, copy) NSString *moneyString;
+
 @end

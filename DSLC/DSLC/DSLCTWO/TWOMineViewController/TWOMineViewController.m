@@ -85,6 +85,9 @@
     NSMutableAttributedString *butMoneyStr;
     NSMutableAttributedString *butAddStr;
     
+    // 刷新loading
+    UIImageView *loadingImgView;
+    
     // 提交表单loading
     MBProgressHUD *hud;
 }
@@ -107,7 +110,11 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyAccountInfoFuction) name:@"getMyAccountInfo" object:nil];
     
-    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
+//    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
+    
+//    [self loadingWithView:self.view loadingFlag:NO height:self.view.center.y];
+    
+    [self loadingWithheight:self.view.center.y];
     
     flagFirst = NO;
     
@@ -297,15 +304,17 @@
         [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像er"] forState:UIControlStateHighlighted];
     } else {
         butHeadImage.imageView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
-        imgView = [YYAnimatedImageView new];
-        imgView.tag = 4739;
-        imgView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
-        imgView.frame = CGRectMake(0, 0, butHeadImage.frame.size.width, butHeadImage.frame.size.height);
+        if (imgView == nil) {
+            imgView = [YYAnimatedImageView new];
+            imgView.tag = 4739;
+            imgView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
+            imgView.frame = CGRectMake(0, 0, butHeadImage.frame.size.width, butHeadImage.frame.size.height);
+            imgView.layer.cornerRadius = imgView.frame.size.width/2;
+            imgView.layer.masksToBounds = YES;
+            imgView.layer.borderColor = [[UIColor pictureColor] CGColor];
+            imgView.layer.borderWidth = 2.5;
+        }
         [butHeadImage addSubview:imgView];
-        imgView.layer.cornerRadius = imgView.frame.size.width/2;
-        imgView.layer.masksToBounds = YES;
-        imgView.layer.borderColor = [[UIColor pictureColor] CGColor];
-        imgView.layer.borderWidth = 2.5;
     }
     
     
@@ -608,7 +617,14 @@
 //任务中心按钮
 - (void)jobCenterButton:(UIButton *)button
 {
-    labelTestShu.hidden = YES;
+    // 任务中心等于零的时候 隐藏起来
+    if ([[[myAccount taskNum] description] isEqualToString:@"0"]) {
+        
+        labelTestShu.hidden = YES;
+    } else {
+        
+        labelTestShu.hidden = NO;
+    }
     TWOJobCenterViewController *jobCenterVC = [[TWOJobCenterViewController alloc] init];
     pushVC(jobCenterVC);
 }
@@ -1008,6 +1024,7 @@
         
         TWOUsableMoneyViewController *usableMoneyVC = [[TWOUsableMoneyViewController alloc] init];
         usableMoneyVC.whichOne = YES;
+        usableMoneyVC.moneyString = [myAccount accBalance];
         pushVC(usableMoneyVC);
         
     } else {
@@ -1042,9 +1059,9 @@
 
 - (void)getMyAccountInfoFuction{
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    
-    hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
+    if (flagFirst) {
+        [self loadingWithHidden:NO];
+    }
     
     memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
@@ -1054,7 +1071,7 @@
         
         NSLog(@"getMyAccountInfo = %@",responseObject);
         
-        [hud hide:YES];
+        [self loadingWithHidden:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
@@ -1084,44 +1101,59 @@
             
             [self tableViewHeadShow];
             
-            [self loadingWithHidden:YES];
-            
             NSLog(@"00000----%@",[myAccount invitationMyCode]);
             
             [memberDic setObject:[myAccount invitationMyCode] forKey:@"invitationMyCode"];
             
             [memberDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
-        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:400]]) {
-            // 判断是否存在isLogin.plist文件
-            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
-                [FileOfManage createWithFile:@"isLogin.plist"];
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-            } else {
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-            }
-            
-            TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
-            
-            UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
-            [nvc setNavigationBarHidden:YES animated:YES];
-            
-            [self presentViewController:nvc animated:YES completion:^{
-                
-            }];
-            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
-     
+        flagFirst = YES;
      
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)loadingWithheight:(CGFloat)heightO
+{
+    NSMutableArray *imgArray = [NSMutableArray array];
+    
+    if (loadingImgView == nil) {
+        
+        loadingImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        
+        loadingImgView.tag = 9098;
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            loadingImgView.center = CGPointMake(160, heightO);
+        } else {
+            loadingImgView.center = CGPointMake(self.view.center.x + 5, heightO);
+        }
+        
+        for (NSInteger i = 1; i <= 7; i++) {
+            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"TWO_Loading_Middle_0%ld",(long)i]];
+            [imgArray addObject:image];
+        }
+        
+        loadingImgView.animationImages = imgArray;
+        
+        loadingImgView.animationDuration = 1.0;
+        
+        loadingImgView.animationRepeatCount = 0;
+        
+        [loadingImgView startAnimating];
+    }
+    
+    [self.view addSubview:loadingImgView];
+}
+
+- (void)loadingWithHidden:(BOOL)hidden{
+    loadingImgView.hidden = hidden;
 }
 
 - (void)didReceiveMemoryWarning {

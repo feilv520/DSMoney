@@ -32,12 +32,12 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationItem setTitle:@"汇付开户"];
+    [self.navigationItem setTitle:@"开户"];
     
     UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
     UIButton * backItem = [[UIButton alloc]initWithFrame:CGRectMake(0, 8, 20, 20)];
-    [backItem setImage:[UIImage imageNamed:@"750产品111"] forState:UIControlStateNormal];
-    [backItem setImage:[UIImage imageNamed:@"750产品111"] forState:UIControlStateSelected];
+    [backItem setImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateNormal];
+    [backItem setImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateSelected];
     [backItem addTarget:self action:@selector(buttonReturn:) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:backItem];
     
@@ -67,12 +67,23 @@
     if ([self.fuctionName isEqualToString:@"netSave"] || [self.fuctionName isEqualToString:@"cash"]) {
         
         urlString = [NSString stringWithFormat:@"%@chinaPnr/%@?token=%@&clientType=iOS&transMoney=%@",MYAFHTTP_BASEURL,self.fuctionName,[self.flagDic objectForKey:@"token"],self.moneyString];
+        
     } else if ([self.fuctionName containsString:@"chinaPnrTrade"]){
         
         urlString = [NSString stringWithFormat:@"%@%@?%@",MYAFHTTP_BASEURL,self.fuctionName,self.tradeString];
     } else {
         
         urlString = [NSString stringWithFormat:@"%@chinaPnr/%@?token=%@&clientType=iOS",MYAFHTTP_BASEURL,self.fuctionName,[self.flagDic objectForKey:@"token"]];
+    }
+    
+    if ([self.fuctionName isEqualToString:@"netSave"]) {
+        [self.navigationItem setTitle:@"充值"];
+    } else if ([self.fuctionName isEqualToString:@"cash"]) {
+        [self.navigationItem setTitle:@"提现"];
+    } else if ([self.fuctionName containsString:@"chinaPnrTrade"]) {
+        [self.navigationItem setTitle:@"购买"];
+    } else {
+        [self.navigationItem setTitle:@"开户"];
     }
     
 //    urlString = [NSString stringWithFormat:@"%@chinaPnr/%@?token=%@&clientType=iOS",MYAFHTTP_BASEURL,self.fuctionName,[self.flagDic objectForKey:@"token"]];
@@ -90,15 +101,28 @@
 //用苹果自带的返回键按钮处理如下(自定义的返回按钮)
 - (void)buttonReturn:(UIBarButtonItem *)btn
 {
-    if ([myWebView canGoBack]) {
-        [myWebView goBack];
-        
-    }else{
-        [self.view resignFirstResponder];
+//    if ([myWebView canGoBack]) {
+//        [myWebView goBack];
+//        
+//    }else{
+//        [self.view resignFirstResponder];
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+    if ([self.fuctionName isEqualToString:@"netSave"]) {
+        [self.navigationItem setTitle:@"充值"];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else if ([self.fuctionName isEqualToString:@"cash"]) {
+        [self.navigationItem setTitle:@"提现"];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else if ([self.fuctionName containsString:@"chinaPnrTrade"]) {
+        [self.navigationItem setTitle:@"购买"];
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self.navigationItem setTitle:@"开户"];
         [self.navigationController popViewControllerAnimated:YES];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
 }
-
 
 //如果是H5页面里面自带的返回按钮处理如下:
 #pragma mark - webViewDelegate
@@ -122,9 +146,9 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     NSString * title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];//获取当前页面的title
-    self.title = title;
+//    self.title = title;
     
-    NSLog(@"%@",self.title);
+    NSLog(@"%@",title);
 }
 
 #pragma mark - clickedCloseItem

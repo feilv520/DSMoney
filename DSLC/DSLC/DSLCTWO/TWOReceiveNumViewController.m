@@ -343,7 +343,8 @@
             
             if (![FileOfManage ExistOfFile:@"Member.plist"]) {
                 [FileOfManage createWithFile:@"Member.plist"];
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                NSDictionary *dicP = [NSDictionary dictionary];
+                dicP = [NSDictionary dictionaryWithObjectsAndKeys:
                                      @"1",@"password",
                                      self.phoneString,@"phone",
                                      [responseObject objectForKey:@"key"],@"key",
@@ -358,9 +359,10 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                [dicP writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             } else {
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                NSDictionary *dicN = [NSDictionary dictionary];
+                dicN = [NSDictionary dictionaryWithObjectsAndKeys:
                                      @"1",@"password",
                                      self.phoneString,@"phone",
                                      [responseObject objectForKey:@"key"],@"key",
@@ -375,7 +377,7 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                [dicN writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
             
@@ -396,6 +398,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
+        [hud hide:YES];
         NSLog(@"%@", error);
         
     }];
@@ -435,7 +438,7 @@
     NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSDictionary *parmeter = @{@"token":tokenString,@"signDate":dateString};
-    
+     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"sign/userSign" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"userSign = %@",responseObject);

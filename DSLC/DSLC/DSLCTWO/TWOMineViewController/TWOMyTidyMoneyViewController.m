@@ -35,6 +35,15 @@
     
     UIImageView *imageNoData;
     UIImageView *imageNoDataED;
+    
+    NSInteger pageProfit;
+    NSInteger pageCash;
+    
+    // 上拉加载更多
+    BOOL moreProfitFlag;
+    BOOL moreCashFlag;
+    MJRefreshBackGifFooter *footerProfitT;
+    MJRefreshBackGifFooter *footerCashT;
 }
 
 @end
@@ -57,6 +66,12 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的理财"];
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
+    
+    moreProfitFlag = NO;
+    moreCashFlag = NO;
+    
+    pageProfit = 1;
+    pageCash = 1;
     
     profitting = [NSMutableArray array];
     profitted = [NSMutableArray array];
@@ -196,6 +211,8 @@
     _tableViewProfit.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 9)];
     _tableViewProfit.tableHeaderView.backgroundColor = [UIColor qianhuise];
     [_tableViewProfit registerNib:[UINib nibWithNibName:@"TWOProfitGettingCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    
+    [self addTableViewWithFooter:_tableViewProfit];
 }
 
 //已兑付的tableView;
@@ -436,7 +453,7 @@
 #pragma mark --------------------------------
 - (void)getUserAssetsListOneFuction{
     
-    NSDictionary *parmeter = @{@"phone":[self.flagDic objectForKey:@"phone"],@"curPage":@1,@"status":@"1,2",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"phone":[self.flagDic objectForKey:@"phone"],@"curPage":[NSNumber numberWithInteger:pageProfit],@"status":@"1,2",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserAssetsList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -457,10 +474,23 @@
         [self contentShow];
         //有无数据显示判断
         
+        if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+            moreProfitFlag = YES;
+        }
+        
+        [footerProfitT endRefreshing];
+        
         if (profitting.count == 0) {
             [self noDataShow];
         } else {
-            [self tableViewProfitShow];
+            if (_tableViewProfit == nil) {
+                
+                [self tableViewProfitShow];
+            } else {
+                
+                [_tableViewProfit setHidden:NO];
+                [_tableViewProfit reloadData];
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -472,7 +502,7 @@
 
 - (void)getUserAssetsListTwoFuction{
     
-    NSDictionary *parmeter = @{@"phone":[self.flagDic objectForKey:@"phone"],@"curPage":@1,@"status":@3,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"phone":[self.flagDic objectForKey:@"phone"],@"curPage":[NSNumber numberWithInteger:pageCash],@"status":@3,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserAssetsList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -487,11 +517,23 @@
             [profitted addObject:model];
         }
         
+        if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+            moreCashFlag = YES;
+        }
+        
+        [footerCashT endRefreshing];
+        
         //有无数据显示判断
         if (profitted.count == 0) {
             [self alreadyCashNoDataShow];
         } else {
-            [self tableViewAlredyCashShow];
+            if (_tabelViewCash == nil) {
+                
+                [self tableViewAlredyCashShow];
+            } else {
+                [_tabelViewCash setHidden:NO];
+                [_tabelViewCash reloadData];
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -499,6 +541,32 @@
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer{
+    
+    if (viewLineRight.backgroundColor == [UIColor grayColor]) {
+        footerProfitT = footer;
+        
+        if (moreProfitFlag) {
+            // 拿到当前的上拉刷新控件，结束刷新状态
+            [footerProfitT endRefreshing];
+        } else {
+            pageProfit ++;
+            [self getUserAssetsListOneFuction];
+        }
+    } else {
+        footerCashT = footer;
+        
+        if (moreCashFlag) {
+            // 拿到当前的上拉刷新控件，结束刷新状态
+            [footerCashT endRefreshing];
+        } else {
+            pageCash ++;
+            [self getUserAssetsListTwoFuction];
+        }
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
