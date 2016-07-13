@@ -15,6 +15,7 @@
     UIButton *buttonNext;
     UIButton *buttBlack;
     UIView *viewThirdOpen;
+    UIButton *butLiftAlert;
 }
 @end
 
@@ -27,6 +28,8 @@
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"提现"];
     
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
+    [self liftMoneyData];
     [self contentShow];
 }
 
@@ -55,6 +58,12 @@
     buttonNext.layer.cornerRadius = 5;
     buttonNext.layer.masksToBounds = YES;
     [buttonNext addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    butLiftAlert = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 66 + 45, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] titleText:@"你还未投资,需要收取0.3%的手续费,最低每笔2元"];
+    [self.view addSubview:butLiftAlert];
+    butLiftAlert.hidden = YES;
+    butLiftAlert.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
+    [butLiftAlert setImage:[UIImage imageNamed:@"充值未投资提现"] forState:UIControlStateNormal];
     
     [self alertContentShow];
 }
@@ -127,6 +136,9 @@
     NSLog(@"%@", moneyYu);
     
     if (textFieldLift.text.length == 0) {
+        
+    } else if ([textFieldLift.text floatValue] == 0) {
+//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"0元你提个毛啊"];
         
     } else if ([textFieldLift.text floatValue] > [moneyYu floatValue]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足，请重新输入"];
@@ -206,6 +218,25 @@
     viewThirdOpen = nil;
 }
 
+#pragma mark liftMoney|||||||||||||||||||||||||||||||||||||||||||
+- (void)liftMoneyData
+{
+    NSDictionary *parmaeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"check/checkCash" parameters:parmaeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"充值未投资就提现%@", responseObject);
+        [self loadingWithHidden:YES];
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            butLiftAlert.hidden = NO;
+        } else {
+            butLiftAlert.hidden = YES;
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

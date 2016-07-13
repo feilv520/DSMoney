@@ -11,12 +11,17 @@
 #import "ChatViewController.h"
 #import "TWOMoneyTeacherList.h"
 #import "TWOMyOwnerPlannerViewController.h"
+#import "MJRefreshBackGifFooter.h"
 
 @interface TWOFinancialPlannerListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tabelView;
     NSMutableArray *listArray;
+    
+    MJRefreshBackGifFooter *gifFooter;
+    BOOL flagState;
+    NSInteger pageNum;
 }
 
 @end
@@ -29,11 +34,19 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的理财师"];
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    
     listArray = [NSMutableArray array];
+    pageNum = 1;
+    flagState = NO;
     
     [self getDataList];
-    [self tableViewShow];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+}
+
+- (void)noDataShow
+{
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [self.view addSubview:imageMonkey];
 }
 
 - (void)tableViewShow
@@ -49,6 +62,9 @@
     UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
     [_tabelView.tableFooterView addSubview:viewLine];
     viewLine.alpha = 0.3;
+    
+    [self addTableViewWithHeader:_tabelView];
+    [self addTableViewWithFooter:_tabelView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,7 +106,7 @@
 #pragma mark Data--------------------------------
 - (void)getDataList
 {
-    NSDictionary *parmeter = @{@"curPage":@1};
+    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageNum]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getIndexFinPlannerList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"理财师列表:::::::::::%@", responseObject);
@@ -102,13 +118,52 @@
                 [listModel setValuesForKeysWithDictionary:tempDic];
                 [listArray addObject:listModel];
             }
+            
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                flagState = YES;
+            }
+            
+            [gifFooter endRefreshing];
 
-            [_tabelView reloadData];
+            if (pageNum == 1) {
+                if (listArray.count == 0) {
+                    [self noDataShow];
+                } else {
+                    [self tableViewShow];
+                }
+            } else {
+                [_tabelView reloadData];
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
+}
+
+//下拉刷新
+- (void)loadNewData:(MJRefreshGifHeader *)header
+{
+    if (listArray != nil) {
+        [listArray removeAllObjects];
+        listArray = nil;
+        listArray = [NSMutableArray array];
+    }
+    
+    pageNum = 1;
+    [self getDataList];
+}
+
+//上拉加载
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
+{
+    gifFooter = footer;
+    if (flagState) {
+        [gifFooter endRefreshing];
+    } else {
+        pageNum++;
+        [self getDataList];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

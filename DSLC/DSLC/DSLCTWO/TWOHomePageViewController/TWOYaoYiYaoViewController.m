@@ -118,11 +118,11 @@
     [labelNoChance setAttributedText:zeroString];
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
-        labelChance.frame = CGRectMake(0, 4, imageYellow.frame.size.width, 23);
+        labelNoChance.frame = CGRectMake(0, 4, imageYellow.frame.size.width, 23);
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
-        labelChance.frame = CGRectMake(0, 6, imageYellow.frame.size.width, 23);
+        labelNoChance.frame = CGRectMake(0, 6, imageYellow.frame.size.width, 23);
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
-        labelChance.frame = CGRectMake(0, 12, imageYellow.frame.size.width, 23);
+        labelNoChance.frame = CGRectMake(0, 12, imageYellow.frame.size.width, 23);
     }
 }
 
@@ -239,6 +239,9 @@
         butYaoLeft.frame = CGRectMake(9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
         butYaoRight.frame = CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45);
         butonLogin.frame = CGRectMake(0, 5, imageYellow.frame.size.width, 23);
+        
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
+        butonLogin.frame = CGRectMake(0, 7, imageYellow.frame.size.width, 23);
     }
 }
 
@@ -510,8 +513,15 @@
     imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
     imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     
-    //摇一摇数据
-    [self getYaoData];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    flagLogin = dic;
+    //判断是否登录
+    if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        [self loginCome];
+    } else {
+        //摇一摇数据
+        [self getYaoData];
+    }
 }
 
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
@@ -534,8 +544,15 @@
     imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
     imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     
-    //摇一摇数据
-    [self getYaoData];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    flagLogin = dic;
+    //判断是否登录
+    if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        [self loginCome];
+    } else {
+        //摇一摇数据
+        [self getYaoData];
+    }
 }
 
 - (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
@@ -583,6 +600,7 @@
 #pragma mark yaoData=====================================
 - (void)getYaoData
 {
+
     NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"shake/getShakeLogic" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -601,17 +619,17 @@
             }
             
         } else {
+            //摇动次数用完
+            [self tanKuangeShow];
+            [self haveNoCiShu];
             
-            NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
-            flagLogin = dic;
-            //判断是否登录
-            if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-                [self loginCome];
-            } else {
-                //摇动次数用完
-                [self tanKuangeShow];
-                [self haveNoCiShu];
-            }
+//            NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+//            flagLogin = dic;
+//            //判断是否登录
+//            if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+//                [self loginCome];
+//            } else {
+//            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -667,6 +685,8 @@
             NSLog(@"分享成功~~~~~~~~~%@", responseObject);
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
                 [self showCiShuData];
+            } else {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

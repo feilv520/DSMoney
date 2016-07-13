@@ -163,6 +163,7 @@
     }];
 }
 
+//上拉加载
 - (void)loadMoreData:(MJRefreshBackGifFooter *)footer
 {
     reFooter = footer;
@@ -174,7 +175,19 @@
         curruntPage ++;
         [self getRecordData];
     }
+}
+
+//下拉刷新
+- (void)loadNewData:(MJRefreshGifHeader *)header
+{
+    if (contentArr != nil) {
+        [contentArr removeAllObjects];
+        contentArr = nil;
+        contentArr = [NSMutableArray array];
+    }
     
+    curruntPage = 1;
+    [self getRecordData];
 }
 
 - (void)didReceiveMemoryWarning {

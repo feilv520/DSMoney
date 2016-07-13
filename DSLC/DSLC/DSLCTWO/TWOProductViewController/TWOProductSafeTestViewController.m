@@ -59,7 +59,7 @@
 
 - (void)navigationShow
 {
-    self.imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"750产品111"]];
+    self.imageReturn = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, 20, 20) backGroundColor:nil setImage:[UIImage imageNamed:@"导航返回"]];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.imageReturn];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(againReturnBack:)];
     [self.imageReturn addGestureRecognizer:tap];
@@ -120,7 +120,7 @@
     buttonDown.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonDown addTarget:self action:@selector(buttonGoToTest:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *labelQingX = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 + 5, 28.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + butBottom.frame.size.height + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2 - 10, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"您的投资倾向"];
+    UILabel *labelQingX = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 + 5, 28.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + butBottom.frame.size.height + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2 - 10, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"您的投资倾向"];
     [viewWhite addSubview:labelQingX];
 }
 
@@ -239,7 +239,7 @@
         [self oneXing];
     }
     
-    UILabel *labelProQingX = [CreatView creatWithLabelFrame:CGRectMake(5, 28.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewProduct.frame.size.height + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2 - 10, 20) backgroundColor:[UIColor whiteColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"产品安全等级"];
+    UILabel *labelProQingX = [CreatView creatWithLabelFrame:CGRectMake(5, 28.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewProduct.frame.size.height + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2 - 10, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"产品安全等级"];
     [viewWhite addSubview:labelProQingX];
 }
 

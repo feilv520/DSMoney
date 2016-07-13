@@ -415,6 +415,11 @@
         [button setTitle:@"获取验证码" forState: UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setEnabled:YES];
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        }
+        
     }else{
         seconds--;
         button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];

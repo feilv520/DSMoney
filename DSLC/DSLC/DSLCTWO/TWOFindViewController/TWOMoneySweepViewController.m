@@ -70,6 +70,7 @@
     _tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOMoneySweepCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
+    [self addTableViewWithHeader:_tableView];
     [self addTableViewWithFooter:_tableView];
 }
 
@@ -187,7 +188,6 @@
 #pragma mark 大扫描----------------------------------
 - (void)getBigSweepData
 {
-    NSLog(@"大扫描");
     NSDictionary *parmeter = @{@"type":@6, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"index/getInfoManageList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -223,6 +223,7 @@
     }];
 }
 
+//上拉加载
 - (void)loadMoreData:(MJRefreshBackGifFooter *)footer
 {
     refreshFooter = footer;
@@ -230,6 +231,29 @@
         [refreshFooter endRefreshing];
     } else {
         pageNumber++;
+        [self getBigSweepData];
+    }
+}
+
+//下拉刷新
+- (void)loadNewData:(MJRefreshGifHeader *)header
+{
+    if ([self.kindState isEqualToString:@"1"]) {
+        if (DSLCTalkArray != nil) {
+            [DSLCTalkArray removeAllObjects];
+            DSLCTalkArray = nil;
+            DSLCTalkArray = [NSMutableArray array];
+        }
+        pageNumber = 1;
+        [self getKanJingData];
+        
+    } else if ([self.kindState isEqualToString:@"2"]) {
+        if (bigSweepArray != nil) {
+            [bigSweepArray removeAllObjects];
+            bigSweepArray = nil;
+            bigSweepArray = [NSMutableArray array];
+        }
+        pageNumber = 1;
         [self getBigSweepData];
     }
 }

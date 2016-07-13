@@ -48,7 +48,7 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor qianhuise];
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 231.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 231.0)];
     _tableView.tableHeaderView.backgroundColor = [UIColor qianhuise];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOAboutDSLCUpCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOAboutDSLCCell" bundle:nil] forCellReuseIdentifier:@"reuseAbout"];
@@ -84,7 +84,7 @@
     imageHead.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
 //    版本号
-    UILabel *labelVersions = [CreatView creatWithLabelFrame:CGRectMake(0, 25 + 25 + 27.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 100.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 5, WIDTH_CONTROLLER_DEFAULT, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"版本号%@", @"2.0.0"]];
+    UILabel *labelVersions = [CreatView creatWithLabelFrame:CGRectMake(0, 25 + 25 + 27.0 + 100.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 5, WIDTH_CONTROLLER_DEFAULT, 16) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"版本号%@", @"2.0.0"]];
     [imagePicture addSubview:labelVersions];
     labelVersions.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
 }

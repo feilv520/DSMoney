@@ -135,7 +135,7 @@
         [self changeSizeWithLabel:cell.labelPrize nameString:[NSString stringWithFormat:@"摇一摇获得%d猴币", [[prizeModel prizeNumber] intValue]] frontLength:5 afterLength:2];
         cell.imagePic.image = [UIImage imageNamed:@"中奖猴币"];
         
-    } else if ([[[prizeModel prizeType] description] isEqualToString:@"3"]) {
+    } else if ([[[prizeModel prizeType] description] isEqualToString:@"4"]) {
         cell.imagePic.image = [UIImage imageNamed:@"中奖现金"];
         
         NSMutableAttributedString *contentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得¥%d现金", [[prizeModel prizeNumber] intValue]]];
@@ -221,7 +221,6 @@
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
                 flag = YES;
             }
-            [refreshFooter endRefreshing];
             
             if (pageNumber == 1) {
                 if (recordArray.count == 0) {
@@ -232,6 +231,8 @@
             } else {
                 [_tableView reloadData];
             }
+            
+            [refreshFooter endRefreshing];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
