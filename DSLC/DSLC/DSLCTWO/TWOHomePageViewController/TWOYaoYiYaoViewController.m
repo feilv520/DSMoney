@@ -499,6 +499,7 @@
 //点击可以摇一摇
 - (void)tapYaoYiYao:(UITapGestureRecognizer *)tap
 {
+    imageHandYao.userInteractionEnabled = NO;
     momAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
 //    改变摇动的幅度
     momAnimation.fromValue = [NSNumber numberWithFloat:-0.3];
@@ -512,7 +513,11 @@
     [imageHandYao.layer addAnimation:momAnimation forKey:@"animateLayer"];
     imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
     imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
-    
+}
+
+//动画结束的方法
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
     flagLogin = dic;
     //判断是否登录
@@ -522,6 +527,8 @@
         //摇一摇数据
         [self getYaoData];
     }
+    
+    imageHandYao.userInteractionEnabled = YES;
 }
 
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
@@ -570,7 +577,7 @@
     }
 }
 
-#pragma mark data--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#pragma mark data--------------------------------------$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - (void)showCiShuData
 {
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];

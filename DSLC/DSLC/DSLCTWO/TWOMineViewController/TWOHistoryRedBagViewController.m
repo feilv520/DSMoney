@@ -115,7 +115,11 @@
     cell.labelTiaoJian.backgroundColor = [UIColor clearColor];
     cell.labelTiaoJian.textColor = [UIColor findZiTiColor];
     
-    cell.labelEvery.text = @"所有产品适用";
+    if ([[[redBagModel applyTypeName] description] isEqualToString:@"0"]) {
+        cell.labelEvery.text = @"所有产品适用";
+    } else {
+        cell.labelEvery.text = [NSString stringWithFormat:@"期限%@天及以上产品可用", [redBagModel applyTypeName]];
+    }
     cell.labelEvery.backgroundColor = [UIColor clearColor];
     cell.labelEvery.textColor = [UIColor findZiTiColor];
     

@@ -336,7 +336,11 @@
         [cell.labelTiaoJian setAttributedText:useing];
         cell.labelTiaoJian.backgroundColor = [UIColor clearColor];
         
-        cell.labelEvery.text = @"所有产品适用";
+        if ([[[redBagModel applyTypeName] description] isEqualToString:@"0"]) {
+            cell.labelEvery.text = @"所有产品适用";
+        } else {
+            cell.labelEvery.text = [NSString stringWithFormat:@"期限%@天及以上产品可用", [redBagModel applyTypeName]];
+        }
         cell.labelEvery.backgroundColor = [UIColor clearColor];
         
         //红包只有'可使用'状态
@@ -411,7 +415,12 @@
             [cell.labelTiaoJian setAttributedText:moneyString];
             cell.labelTiaoJian.backgroundColor = [UIColor clearColor];
             
-            cell.labelEvery.text = @"所有产品适用";
+            if ([[[jiaXiModel applyTypeName] description] isEqualToString:@"0"]) {
+                cell.labelEvery.text = @"所有产品适用";
+            } else {
+                cell.labelEvery.text = [NSString stringWithFormat:@"期限%@天及以上产品可用", [jiaXiModel applyTypeName]];
+            }
+
             cell.labelEvery.backgroundColor = [UIColor clearColor];
             
             cell.laeblData.text = [NSString stringWithFormat:@"%@至%@有效", [jiaXiModel startDate], [jiaXiModel endDate]];
@@ -484,7 +493,11 @@
             [cell.labelTiaoJian setAttributedText:useing];
             cell.labelTiaoJian.backgroundColor = [UIColor clearColor];
             
-            cell.labelEvery.text = @"所有产品适用";
+            if ([[[jiaXiModel applyTypeName] description] isEqualToString:@"0"]) {
+                cell.labelEvery.text = @"所有产品适用";
+            } else {
+                cell.labelEvery.text = [NSString stringWithFormat:@"期限%@天及以上产品可用", [jiaXiModel applyTypeName]];
+            }
             cell.labelEvery.backgroundColor = [UIColor clearColor];
             
             [cell.butCanUse setTitle:@"可\n使\n用" forState:UIControlStateNormal];

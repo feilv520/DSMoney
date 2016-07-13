@@ -67,6 +67,8 @@
     _tabelView.backgroundColor = [UIColor qianhuise];
     _tabelView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.1)];
     [_tabelView registerNib:[UINib nibWithNibName:@"InviteRecordCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    
+    [self addTableViewWithHeader:_tabelView];
     [self addTableViewWithFooter:_tabelView];
 }
 
@@ -145,7 +147,7 @@
                     [_tabelView reloadData];
                 }
                 
-                if ([[responseObject objectForKey:@"curPage"] isEqualToNumber:[responseObject objectForKey:@"totalPage"]]) {
+                if ([[responseObject objectForKey:@"currPage"] isEqualToNumber:[responseObject objectForKey:@"totalPage"]]) {
                     moreFlag = YES;
                 }
                 
