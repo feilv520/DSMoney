@@ -21,6 +21,8 @@
         self.amountIncrease = value;
     } else if ([key isEqualToString:@"minMoney"]) {
         self.amountMin = value;
+    } else if ([key isEqualToString:@"maxMoney"]) {
+        self.amountMax = value;
     }
 }
 

@@ -121,7 +121,9 @@
         [self.navigationItem setTitle:@"开户"];
         [self.navigationController popViewControllerAnimated:YES];
     }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfoFuction" object:nil];
 }
 
 //如果是H5页面里面自带的返回按钮处理如下:

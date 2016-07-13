@@ -624,6 +624,10 @@
         
         allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
         
+        if ([allMoneyString integerValue] >= [[self.detailM amountMax] integerValue]) {
+            allMoneyString = [self.detailM amountMax];
+        }
+        
     } else {
         
         TWOProductMakeSureTwoTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
@@ -635,6 +639,10 @@
         NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
         
         allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
+        
+        if ([allMoneyString integerValue] >= [[self.detailM amountMax] integerValue]) {
+            allMoneyString = [self.detailM amountMax];
+        }
     }
     
     monkeyString = @"0个";
