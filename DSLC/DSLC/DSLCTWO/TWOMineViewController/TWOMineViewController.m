@@ -110,11 +110,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyAccountInfoFuction) name:@"getMyAccountInfo" object:nil];
     
-//    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
-    
-//    [self loadingWithView:self.view loadingFlag:NO height:self.view.center.y];
-    
-    [self loadingWithheight:self.view.center.y];
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
     flagFirst = NO;
     
@@ -125,12 +121,14 @@
 
 - (void)tabelViewShow
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 53 - 20) style:UITableViewStyleGrouped];
-    [self.view addSubview:_tableView];
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    _tableView.separatorColor = [UIColor lineColor];
-    
+    if (_tableView == nil) {
+        
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 53 - 20) style:UITableViewStyleGrouped];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.separatorColor = [UIColor lineColor];
+        
+    }
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         
         _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 359.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
@@ -140,12 +138,14 @@
         _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 344.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
         
     } else {
-
+        
         _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 330.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     }
     _tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
     
     [_tableView registerNib:[UINib nibWithNibName:@"TWOMineCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [self.view addSubview:_tableView];
+    
     
     [self tableViewHeadShow];
     
@@ -1059,10 +1059,6 @@
 
 - (void)getMyAccountInfoFuction{
     
-    if (flagFirst) {
-        [self loadingWithHidden:NO];
-    }
-    
     memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"]};
@@ -1147,12 +1143,16 @@
         loadingImgView.animationRepeatCount = 0;
         
         [loadingImgView startAnimating];
+        
     }
-    
     [self.view addSubview:loadingImgView];
+    
+    loadingImgView.hidden = NO;
+    
+    
 }
 
-- (void)loadingWithHidden:(BOOL)hidden{
+- (void)loadingWithHiddenTwo:(BOOL)hidden{
     loadingImgView.hidden = hidden;
 }
 

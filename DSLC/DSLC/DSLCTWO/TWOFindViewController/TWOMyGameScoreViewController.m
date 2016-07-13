@@ -23,6 +23,9 @@
     
     BOOL flagState;
     NSInteger pageNumber;
+    
+    NSMutableArray *createTimeArray;
+    NSMutableArray *pntegralArray;
 }
 
 @end
@@ -117,8 +120,8 @@
         lineChart.frame = CGRectMake(0, 60.0, WIDTH_CONTROLLER_DEFAULT, 210.0);
     }
     
-    [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5"]];
-    [lineChart setYValues:@[@"1",@"8",@"2",@"6",@"3"]];
+    [lineChart setXLabels:@[[createTimeArray objectAtIndex:0],[[createTimeArray objectAtIndex:1] substringWithRange:NSMakeRange(3, 2)],[[createTimeArray objectAtIndex:2] substringWithRange:NSMakeRange(3, 2)],[[createTimeArray objectAtIndex:3] substringWithRange:NSMakeRange(3, 2)],[[createTimeArray objectAtIndex:4] substringWithRange:NSMakeRange(3, 2)]]];
+    [lineChart setYValues:pntegralArray];
     [lineChart strokeChart];
     [viewHead addSubview:lineChart];
     
@@ -179,6 +182,15 @@
                 TWOGameScoreModel *gameScoreModel = [[TWOGameScoreModel alloc] init];
                 [gameScoreModel setValuesForKeysWithDictionary:dataDic];
                 [listArray addObject:gameScoreModel];
+            }
+            
+            createTimeArray = [NSMutableArray array];
+            pntegralArray = [NSMutableArray array];
+            
+            NSArray *fiveArray = [responseObject objectForKey:@"integralFive"];
+            for (NSDictionary *fiveDic in fiveArray) {
+                [createTimeArray addObject:[fiveDic objectForKey:@"createTime"]];
+                [pntegralArray addObject:[fiveDic objectForKey:@"pntegral"]];
             }
             
             if (pageNumber == 1) {

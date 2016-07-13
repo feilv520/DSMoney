@@ -343,8 +343,7 @@
             
             if (![FileOfManage ExistOfFile:@"Member.plist"]) {
                 [FileOfManage createWithFile:@"Member.plist"];
-                NSDictionary *dicP = [NSDictionary dictionary];
-                dicP = [NSDictionary dictionaryWithObjectsAndKeys:
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                                      @"1",@"password",
                                      self.phoneString,@"phone",
                                      [responseObject objectForKey:@"key"],@"key",
@@ -359,10 +358,9 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
-                [dicP writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             } else {
-                NSDictionary *dicN = [NSDictionary dictionary];
-                dicN = [NSDictionary dictionaryWithObjectsAndKeys:
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                                      @"1",@"password",
                                      self.phoneString,@"phone",
                                      [responseObject objectForKey:@"key"],@"key",
@@ -373,12 +371,25 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
-                                     [[responseObject objectForKey:@"User"] objectForKey:@"realname"],@"realname",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
-                [dicN writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                NSLog(@"dic = %@",dic);
+                [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+                NSDictionary *didd = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+                NSLog(@"didd = %@",didd);
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
+            }
+            
+            // 判断是否存在isLogin.plist文件
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"YES",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
             
             [self dismissViewControllerAnimated:YES completion:^{
@@ -437,7 +448,7 @@
     
     NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
-    NSDictionary *parmeter = @{@"token":tokenString,@"signDate":dateString};
+    NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"],@"signDate":dateString};
      
     [[MyAfHTTPClient sharedClient] postWithURLString:@"sign/userSign" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
