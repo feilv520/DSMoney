@@ -545,21 +545,21 @@
 //    控制摇摆的时间
     momAnimation.repeatDuration = 1.7;
     momAnimation.autoreverses = YES;
-    momAnimation.delegate = self;
+    
     [imageHandYao.layer addAnimation:momAnimation forKey:@"animateLayer"];
     imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
     imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
     imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
-    flagLogin = dic;
-    //判断是否登录
-    if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-        [self loginCome];
-    } else {
-        //摇一摇数据
-        [self getYaoData];
-    }
+//    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+//    flagLogin = dic;
+//    //判断是否登录
+//    if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+//        [self loginCome];
+//    } else {
+//        //摇一摇数据
+//        [self getYaoData];
+//    }
 }
 
 - (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
@@ -570,11 +570,13 @@
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
 //    摇动结束
-    if (motion != UIEventSubtypeMotionShake) {
-        NSLog(@"其他事件");
-    } else {
-        NSLog(@"摇一摇结束");
-    }
+    
+    momAnimation.delegate = self;
+//    if (motion != UIEventSubtypeMotionShake) {
+//        NSLog(@"其他事件");
+//    } else {
+//        NSLog(@"摇一摇结束");
+//    }
 }
 
 #pragma mark data--------------------------------------$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
