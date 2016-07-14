@@ -492,7 +492,7 @@
 - (void)loginFuction{
     NSDictionary *parmeter = @{@"phone":textFieldPhone.text,@"password":textFieldSecret.text};
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
     
@@ -560,6 +560,9 @@
                 
                 [self userSign];
                 
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"safeJiBie" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"safeTest" object:nil];
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"getProductDetail" object:nil];
@@ -581,7 +584,7 @@
 - (void)registerFuction{
     NSDictionary *parmeter = @{@"phone":textFieldPhone.text,@"smsCode":textFieldMessage.text,@"invitationCode":@"",@"clientType":@"iOS"};
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
     
@@ -646,6 +649,9 @@
             
             [self dismissViewControllerAnimated:YES completion:^{
                 [self userSign];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"safeJiBie" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"safeTest" object:nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];

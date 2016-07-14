@@ -8,6 +8,7 @@
 
 #import "TWOProductSafeTestViewController.h"
 #import "TWOBeginTestViewController.h"
+#import "TWOLoginAPPViewController.h"
 
 @interface TWOProductSafeTestViewController ()
 
@@ -39,8 +40,8 @@
     self.view.backgroundColor = [UIColor qianhuise];
     [self.navigationItem setTitle:@"产品安全等级"];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scoreValue:) name:@"scoreTest" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postNotice:) name:@"注册通知中心" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsnoticeSafeTest:) name:@"safeJiBie" object:nil];
     
     if (self.alreadyTest == YES) {
         //调用已经测试的视图
@@ -52,10 +53,10 @@
     }
 }
 
-//- (void)scoreValue:(NSNotification *)nsnotice
-//{
-//    
-//}
+- (void)nsnoticeSafeTest:(NSNotification *)nsnotice
+{
+    [self getdataScore];
+}
 
 - (void)navigationShow
 {
@@ -237,6 +238,8 @@
         [self twoXing];
     } else if ([self.securityLevel isEqualToString:@"5"]) {
         [self oneXing];
+    } else {
+        [self fiveXing];
     }
     
     UILabel *labelProQingX = [CreatView creatWithLabelFrame:CGRectMake(5, 28.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + viewProduct.frame.size.height + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2 - 10, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"产品安全等级"];
@@ -366,8 +369,23 @@
 //还未测试去测试按钮方法
 - (void)buttonGoToTest:(UIButton *)button
 {
-    TWOBeginTestViewController *beginTestVC = [[TWOBeginTestViewController alloc] init];
-    pushVC(beginTestVC);
+    NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    
+    if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        //弹出登录页面
+        TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [nvc setNavigationBarHidden:YES animated:YES];
+
+        [self presentViewController:nvc animated:YES completion:^{
+
+        }];
+        return;
+
+    } else {
+        TWOBeginTestViewController *beginTestVC = [[TWOBeginTestViewController alloc] init];
+        pushVC(beginTestVC);
+    }
 }
 
 //重新测试按钮
@@ -380,6 +398,40 @@
 - (void)postNotice:(NSNotification *)nsnotice
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"scoreTest" object:self.securityLevel];
+}
+
+#pragma mark scoreData-----------------------------------------
+- (void)getdataScore
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"check/checkUserInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@".........安全等级测评........%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            if ([[responseObject objectForKey:@"investTestResult"] isEqualToString:@""]) {
+                TWOBeginTestViewController *beginTestVC = [[TWOBeginTestViewController alloc] init];
+                 pushVC(beginTestVC);
+            } else {
+                [self alreadyTestContentShow];
+                CGFloat scoreF = [[responseObject objectForKey:@"investTestResult"] floatValue];
+                if (scoreF < 9 || scoreF == 9) {
+                    [self userOneXing];
+                } else if (scoreF >= 10 && scoreF <= 17) {
+                    [self userTwoXing];
+                } else if (scoreF >= 18 && scoreF <= 30) {
+                    [self userThreeXing];
+                } else if (scoreF >= 31 && scoreF <= 43) {
+                    [self userFourXing];
+                } else {
+                    [self userFiveXing];
+                }
+                [self navigationShow];
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (void)againReturnBack:(UITapGestureRecognizer *)tap

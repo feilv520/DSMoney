@@ -42,6 +42,8 @@
     
     UIButton *butonLogin;
     BOOL loginOrNo;
+    BOOL shakeSatate;
+    NSInteger shakeNum;
 }
 
 @end
@@ -65,6 +67,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"摇一摇"];
+    shakeSatate = NO;
+    shakeNum = 0;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsboticeShake:) name:@"yaoLogin" object:nil];
     
@@ -351,7 +355,7 @@
     butBlack.alpha = 0.4;
     [butBlack addTarget:self action:@selector(yaoBlackDisappearButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    viewBottom = [CreatView creatViewWithFrame:CGRectMake(35, HEIGHT_CONTROLLER_DEFAULT/2 - 150, WIDTH_CONTROLLER_DEFAULT - 70, 240) backgroundColor:[UIColor whiteColor]];
+    viewBottom = [CreatView creatViewWithFrame:CGRectMake(35, HEIGHT_CONTROLLER_DEFAULT/2 - 150 + 20, WIDTH_CONTROLLER_DEFAULT - 70, 240) backgroundColor:[UIColor whiteColor]];
     [app.tabBarVC.view addSubview:viewBottom];
     viewBottom.layer.cornerRadius = 5;
     viewBottom.layer.masksToBounds = YES;
@@ -490,6 +494,8 @@
 //黑色遮罩层消失
 - (void)yaoBlackDisappearButton:(UIButton *)button
 {
+    shakeSatate = YES;
+    
     [butBlack removeFromSuperview];
     [viewBottom removeFromSuperview];
     butBlack = nil;
@@ -500,6 +506,8 @@
 - (void)tapYaoYiYao:(UITapGestureRecognizer *)tap
 {
     imageHandYao.userInteractionEnabled = NO;
+    shakeSatate = YES;
+    
     momAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
 //    改变摇动的幅度
     momAnimation.fromValue = [NSNumber numberWithFloat:-0.3];
@@ -518,68 +526,94 @@
 //动画结束的方法
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
-    flagLogin = dic;
-    //判断是否登录
-    if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-        [self loginCome];
+    if (shakeNum == 1) {
+        
+        shakeSatate = NO;
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+        flagLogin = dic;
+        //判断是否登录
+        if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+            [self loginCome];
+        } else {
+            //摇一摇数据
+            [self getYaoData];
+        }
+        
     } else {
-        //摇一摇数据
-        [self getYaoData];
+        
+        if (shakeSatate) {
+            
+            shakeSatate = NO;
+            
+            NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+            flagLogin = dic;
+            //判断是否登录
+            if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+                [self loginCome];
+            } else {
+                //摇一摇数据
+                [self getYaoData];
+            }
+        } else {
+            [ProgressHUD showMessage:@"你给我把弹框去了" Width:100 High:20];
+        }
     }
     
     imageHandYao.userInteractionEnabled = YES;
 }
 
+//开始摇动
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-//    开始摇动
-    NSLog(@"开始摇动");
+    imageHandYao.userInteractionEnabled = NO;
+    shakeNum++;
     
     momAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
 //    改变摇动的幅度
-    momAnimation.fromValue = [NSNumber numberWithFloat:-0.5];
-    momAnimation.toValue = [NSNumber numberWithFloat:0.5];
+    momAnimation.fromValue = [NSNumber numberWithFloat:-0.3];
+    momAnimation.toValue = [NSNumber numberWithFloat:0.3];
 //    改变摇动的速度
     momAnimation.duration = 0.5;
 //    控制摇摆的时间
     momAnimation.repeatDuration = 1.7;
     momAnimation.autoreverses = YES;
+    momAnimation.delegate = self;
     
     [imageHandYao.layer addAnimation:momAnimation forKey:@"animateLayer"];
     imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
-    imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
     imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
-    
-//    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
-//    flagLogin = dic;
-//    //判断是否登录
-//    if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-//        [self loginCome];
-//    } else {
-//        //摇一摇数据
-//        [self getYaoData];
-//    }
 }
 
-- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
-{
-//    取消摇动
-}
+//- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
+//{
+////    取消摇动
+//}
 
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
-{
-//    摇动结束
-    
-    momAnimation.delegate = self;
+//- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+//{
+////    摇动结束
+//    shakeSatate = YES;
+////    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsnoticeShake:) name:@"shakeYshake" object:nil];
+//    
 //    if (motion != UIEventSubtypeMotionShake) {
 //        NSLog(@"其他事件");
 //    } else {
 //        NSLog(@"摇一摇结束");
+//
+//        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+//        flagLogin = dic;
+//        //判断是否登录
+//        if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+//            [self loginCome];
+//        } else {
+//            //摇一摇数据
+//            [self getYaoData];
+//        }
 //    }
-}
+//}
 
-#pragma mark data--------------------------------------$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#pragma mark data--------------------------------------$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - (void)showCiShuData
 {
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
@@ -615,6 +649,7 @@
         
         NSLog(@"摇一摇抽奖::::::::::::::%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
             dataDic = responseObject;
             [self showCiShuData];
             
@@ -631,14 +666,6 @@
             //摇动次数用完
             [self tanKuangeShow];
             [self haveNoCiShu];
-            
-//            NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
-//            flagLogin = dic;
-//            //判断是否登录
-//            if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-//                [self loginCome];
-//            } else {
-//            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -649,7 +676,6 @@
 //分享按钮
 - (void)buttonShareYaoYiYao:(UIButton *)button
 {
-    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
     flagLogin = dicLogin;

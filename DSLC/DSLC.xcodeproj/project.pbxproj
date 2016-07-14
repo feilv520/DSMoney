@@ -9440,8 +9440,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9466,7 +9466,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "45045bfe-f3f0-4881-9f41-a2f9f23ce827";
+				PROVISIONING_PROFILE = "43697f1b-7dd6-418b-a500-485db5fa8f9a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -9478,8 +9478,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9504,7 +9504,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "45045bfe-f3f0-4881-9f41-a2f9f23ce827";
+				PROVISIONING_PROFILE = "43697f1b-7dd6-418b-a500-485db5fa8f9a";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

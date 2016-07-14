@@ -139,7 +139,7 @@
     
     if ([[[redBagModel redPacketType] description] isEqualToString:@"7"]) {
         cell.labelTiaoJian.text = @"新手体验金";
-        cell.labelEvery.text = @"仅可用于新手标";
+        cell.labelEvery.text = @"仅可用于新手专享";
         cell.labelData.text = @"";
     }
     

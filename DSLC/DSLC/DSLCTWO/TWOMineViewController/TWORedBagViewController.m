@@ -356,7 +356,7 @@
         if ([[[redBagModel redPacketType] description] isEqualToString:@"7"]) {
 
             cell.labelData.text = @"请尽快使用";
-            cell.labelEvery.text = @"仅可用于新手标";
+            cell.labelEvery.text = @"仅可用于新手专享";
             cell.labelTiaoJian.text = @"新手体验金";
             
             cell.labelTiaoJian.textColor = [UIColor moneyColor];

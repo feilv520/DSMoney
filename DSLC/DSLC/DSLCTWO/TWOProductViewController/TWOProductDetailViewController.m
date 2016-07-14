@@ -48,6 +48,8 @@
     
     NSDictionary *userDic;
     NSArray *userXingArray;
+    
+    BOOL initFlag;
 }
 
 @property (nonatomic, strong) UIControl *viewBotton;
@@ -76,7 +78,7 @@
     
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductDetail) name:@"getProductDetail" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductDetail) name:@"getProductDetail" object:nil];
     
     if (self.viewBotton == nil) {
         self.viewBotton = [[UIControl alloc] initWithFrame:CGRectMake(0, app.tabBarVC.view.frame.size.height - 49, WIDTH_CONTROLLER_DEFAULT, app.tabBarVC.view.frame.size.height)];
@@ -94,6 +96,8 @@
     
     titleArray = [NSArray array];
     assetArray = [NSMutableArray array];
+    
+    initFlag = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductDetail) name:@"safeTest" object:nil];
     
@@ -462,6 +466,10 @@
                 } else if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"5"]) {
                     kindString = @"激进型";
                     userXingArray = @[@"xing", @"xingkong", @"xingkong", @"xingkong", @"xingkong"];
+                    
+                } else {
+                    kindString = @"谨慎型";
+                    userXingArray = @[@"xing", @"xing", @"xing", @"xing", @"xing"];
                 }
                 
                 UILabel *kindLabel = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 60, 46) backgroundColor:Color_Clear textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:kindString];
@@ -521,6 +529,10 @@
             } else if ([[[dataDic objectForKey:@"securityLevel"] description] isEqualToString:@"5"]) {
                 kindString = @"激进型";
                 userXingArray = @[@"xing", @"xingkong", @"xingkong", @"xingkong", @"xingkong"];
+                
+            } else {
+                kindString = @"谨慎型";
+                userXingArray = @[@"xing", @"xing", @"xing", @"xing", @"xing"];
             }
             
             UILabel *kindLabel = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 60, 46) backgroundColor:Color_Clear textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:kindString];
@@ -555,30 +567,26 @@
             pushVC(recordVC);
         } else if (indexPath.row == 2){
             
+            //判断是否登录,如若没有登录,跳转的都是未测评的页面,如已登录,需要判断是测过还是没测过
             NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
             
             if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-                //弹出登录页面
-                TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
-                UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
-                [nvc setNavigationBarHidden:YES animated:YES];
-                
-                [self presentViewController:nvc animated:YES completion:^{
-                    
-                }];
-                return;
+                TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
+                safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description]; //产品等级类型
+                pushVC(safeTestVC);
                 
             } else {
                 
                 if ([[userDic objectForKey:@"investTestResult"] isEqualToString:@""]) {
                     TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
-                    safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description];
+                    safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description]; //产品等级类型
                     pushVC(safeTestVC);
                 } else {
                     TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
                     safeTestVC.alreadyTest = YES;
                     safeTestVC.score = [[userDic objectForKey:@"investTestResult"] floatValue];
-                    safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description];
+                    NSLog(@"分数%f", safeTestVC.score);
+                    safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description]; //产品等级类型
                     pushVC(safeTestVC);
                 }
             }
@@ -592,34 +600,31 @@
                 pushVC(recordVC);
             } else if (indexPath.row == 2){
                 
+                //判断是否登录,如若没有登录,跳转的都是未测评的页面,如已登录,需要判断是测过还是没测过
                 NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
                 
                 if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-                    //弹出登录页面
-                    TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
-                    UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
-                    [nvc setNavigationBarHidden:YES animated:YES];
-                    
-                    [self presentViewController:nvc animated:YES completion:^{
-                        
-                    }];
-                    return;
+                    TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
+                    safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description]; //产品等级类型
+                    pushVC(safeTestVC);
                     
                 } else {
                     
                     if ([[userDic objectForKey:@"investTestResult"] isEqualToString:@""]) {
                         TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
-                        safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description];
+                        safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description]; //产品等级类型
                         pushVC(safeTestVC);
                     } else {
                         TWOProductSafeTestViewController *safeTestVC = [[TWOProductSafeTestViewController alloc] init];
                         safeTestVC.alreadyTest = YES;
                         safeTestVC.score = [[userDic objectForKey:@"investTestResult"] floatValue];
-                        safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description];
+                        NSLog(@"分数%f", safeTestVC.score);
+                        safeTestVC.securityLevel = [[dataDic objectForKey:@"securityLevel"] description]; //产品等级类型
                         pushVC(safeTestVC);
                     }
                 }
             }
+            
         } else {
             if (indexPath.row == 1) {
                 TWOProductDDetailViewController *productDDetailVC = [[TWOProductDDetailViewController alloc] init];
@@ -628,7 +633,6 @@
             }
         }
     }
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -939,7 +943,9 @@
 
 - (void)getProductDetail{
     
-    NSString *tokenString = [self.flagDic objectForKey:@"token"];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSString *tokenString = [dic objectForKey:@"token"];
     
     NSDictionary *parameter = @{@"productId":self.idString,@"token":tokenString};
     
@@ -957,8 +963,13 @@
         
         userDic = [responseObject objectForKey:@"User"];
         
-        [self showTableView];
-        [self showBottonView];
+        if (!initFlag) {
+            
+            [self showTableView];
+            [self showBottonView];
+        }
+        
+        initFlag = YES;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
