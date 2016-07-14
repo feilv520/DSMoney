@@ -16,6 +16,7 @@
 #import "TWOYaoYiYaoViewController.h"
 #import "TBaoJiViewController.h"
 #import "NewInviteViewController.h"
+#import "TWOProductHuiFuViewController.h"
 
 @interface TWOJobCenterViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -156,8 +157,10 @@
         
         [cell.butFinish setTitle:@"去完成" forState:UIControlStateNormal];
         [cell.butFinish setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+        cell.butFinish.backgroundColor = [UIColor whiteColor];
         cell.butFinish.layer.borderColor = [[UIColor profitColor] CGColor];
         cell.butFinish.layer.borderWidth = 1;
+        cell.butFinish.alpha = 1.0;
     }
     
     cell.butFinish.tag = indexPath.section;
@@ -193,14 +196,23 @@
     switch ([[taskModel taskType] integerValue]) {
         case 1:{
             NSLog(@"开通汇付账号");
+            TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+            productHuiFuVC.fuctionName = @"userReg";
+            pushVC(productHuiFuVC);
             break;
         }
         case 2:{
             NSLog(@"绑定银行卡");
+            TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+            productHuiFuVC.fuctionName = @"bindCard";
+            pushVC(productHuiFuVC);
             break;
         }
         case 3:{
             NSLog(@"实名认证");
+            TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+            productHuiFuVC.fuctionName = @"userReg";
+            pushVC(productHuiFuVC);
             break;
         }
         case 4:{

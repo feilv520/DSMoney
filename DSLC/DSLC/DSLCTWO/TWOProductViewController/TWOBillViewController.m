@@ -223,7 +223,10 @@
         //
         //            cell.quanView.progressCounter = 1;
         //        } else
-        if (hadSellNumber < onePriceNumber){
+        if (hadSellNumber == 0.0) {
+            
+            cell.quanView.progressCounter = 1;
+        } else if (hadSellNumber < onePriceNumber){
             
             cell.quanView.progressCounter = onePriceNumber;
         } else if(hadSellNumber > ninetyPriceNumber){
@@ -287,8 +290,8 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [self loadingWithHidden:YES];
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            [self loadingWithHidden:YES];
             
             newFlag = YES;
             
@@ -320,7 +323,7 @@
             [_tableView reloadData];
             
         } else {
-            [self noNetworkView];
+            [self noDataShowMoney];
             _tableView.hidden = YES;
         }
         

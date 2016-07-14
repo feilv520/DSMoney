@@ -57,9 +57,29 @@
     
     imgThree.alpha = 1.0;
     
-    imgOne.image = [UIImage imageNamed:@"TWOWelcome_one"];
-    imgTwo.image = [UIImage imageNamed:@"TWOWelcome_two"];
-    imgThree.image = [UIImage imageNamed:@"TWOWelcome_three"];
+    NSLog(@"%lf",HEIGHT_CVIEW_DEFAULT);
+    
+    if (HEIGHT_CVIEW_DEFAULT == 480.0) {
+        
+        imgOne.image = [UIImage imageNamed:@"TWOWelcomOne_480"];
+        imgTwo.image = [UIImage imageNamed:@"TWOWelcomTwo_480"];
+        imgThree.image = [UIImage imageNamed:@"TWOWelcomThree_480"];
+    } else if (HEIGHT_CVIEW_DEFAULT == 568.0) {
+        
+        imgOne.image = [UIImage imageNamed:@"TWOWelcomOne_1136"];
+        imgTwo.image = [UIImage imageNamed:@"TWOWelcomTwo_1136"];
+        imgThree.image = [UIImage imageNamed:@"TWOWelcomThree_1136"];
+    } else if (HEIGHT_CVIEW_DEFAULT == 667.0) {
+        
+        imgOne.image = [UIImage imageNamed:@"TWOWelcomOne_1334"];
+        imgTwo.image = [UIImage imageNamed:@"TWOWelcomTwo_1334"];
+        imgThree.image = [UIImage imageNamed:@"TWOWelcomThree_1334"];
+    } else if (HEIGHT_CVIEW_DEFAULT == 736.0) {
+        
+        imgOne.image = [UIImage imageNamed:@"TWOWelcomOne_2208"];
+        imgTwo.image = [UIImage imageNamed:@"TWOWelcomTwo_2208"];
+        imgThree.image = [UIImage imageNamed:@"TWOWelcomThree_2208"];
+    }
     
     startButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * (102.0 / 375.0) + WIDTH_CONTROLLER_DEFAULT * 2, HEIGHT_CONTROLLER_DEFAULT * (560.0 / 667.0), WIDTH_CONTROLLER_DEFAULT * (170.0 / 375.0), HEIGHT_CONTROLLER_DEFAULT * (40.0 / 667.0)) backgroundColor:Color_Clear textColor:nil titleText:@"立即体验"];
     [startButton addTarget:self action:@selector(intoMySystem:) forControlEvents:UIControlEventTouchUpInside];

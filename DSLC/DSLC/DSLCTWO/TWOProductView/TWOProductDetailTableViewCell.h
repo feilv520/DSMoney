@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 @property (weak, nonatomic) IBOutlet UILabel *rjLabel;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 
 @end

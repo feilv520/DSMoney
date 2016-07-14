@@ -18,6 +18,10 @@
     UITableView *_tableView;
 }
 
+@property (nonatomic, strong) NSDictionary *productDic;
+@property (nonatomic, strong) NSDictionary *assetDic;
+@property (nonatomic, strong) NSArray *assetArray;
+
 @end
 
 @implementation TWOAlreayCashViewController
@@ -37,6 +41,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:self.productName];
+    
+    self.assetArray = [NSArray array];
     
     [self getUserAssetsInfoFuction];
     
@@ -141,7 +147,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 4;
+        if ([[[self.productDic objectForKey:@"increaseId"] description] isEqualToString:@"0"] || [[[self.productDic objectForKey:@"increaseId"] description] isEqualToString:@""]) {
+            return 4;
+        } else {
+            return 5;
+        }
     } else {
         return 1;
     }
@@ -153,11 +163,13 @@
         
         TWOMoneyGoWhereCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseMoney"];
         
-        cell.labelTitle.text = @"成安基金国富通亿丰商城项目";
+        self.assetDic = [self.assetArray objectAtIndex:indexPath.row];
+        
+        cell.labelTitle.text = [self.assetDic objectForKey:@"assetName"];
         cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         cell.labelTitle.textColor = [UIColor ZiTiColor];
         
-        cell.labelMoney.text = [NSString stringWithFormat:@"%@元", @"4000"];
+        cell.labelMoney.text = [NSString stringWithFormat:@"%@元",[self.assetDic objectForKey:@"matchMoney"]];
         cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         cell.labelMoney.textColor = [UIColor orangecolor];
         
@@ -173,8 +185,8 @@
         
         TWOProfitingEveryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
-        NSArray *titleArray = @[@[@"到期日", @"投资日", @"计息起始日", @"收益方式"]];
-        NSArray *timeArray = @[@[@"2016-09-09", @"2016-09-09", @"2016-09-09", @"到期还本付息"]];
+        NSArray *titleArray = @[@[@"到期日", @"投资日", @"计息起始日", @"收益方式",@"待兑付加息卷收益"]];
+        NSArray *timeArray = @[@[[self.productDic objectForKey:@"dueDate"], [self.productDic objectForKey:@"buyTime"], [self.productDic objectForKey:@"interestDate"], [self.productDic objectForKey:@"yieldDistribType"] ,[NSString stringWithFormat:@"%@元",[self.productDic objectForKey:@"increaseMoney"]]]];
         
         cell.labelName.text = [[titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -229,8 +241,12 @@
 {
     if (indexPath.section == 1) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        TWOProductDDetailViewController *bottomMoneyDetaiVC = [[TWOProductDDetailViewController alloc] init];
-        pushVC(bottomMoneyDetaiVC);
+        NSDictionary *dic = [self.assetArray objectAtIndex:indexPath.row];
+        
+        TWOProductDDetailViewController *MoneyDetaiVC = [[TWOProductDDetailViewController alloc] init];
+        MoneyDetaiVC.assetId = [dic objectForKey:@"assetId"];
+        MoneyDetaiVC.assetTitle = [dic objectForKey:@"assetTitle"];
+        pushVC(MoneyDetaiVC);
     }
 }
 
@@ -253,6 +269,11 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserAssetsInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"getUserAssetsInfo = %@",responseObject);
+        
+        self.productDic = [responseObject objectForKey:@"Product"];
+        self.assetArray = [[responseObject objectForKey:@"Product"] objectForKey:@"Asset"];
+        
+        [self tableViewShow];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

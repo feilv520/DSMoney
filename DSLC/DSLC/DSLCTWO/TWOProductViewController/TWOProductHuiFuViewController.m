@@ -9,6 +9,7 @@
 #import "TWOProductHuiFuViewController.h"
 #import "TWOLoginAPPViewController.h"
 #import "JSONKit.h"
+#import "TWOProfitingViewController.h"
 
 @interface TWOProductHuiFuViewController () <UIWebViewDelegate , UMSocialUIDelegate>
 
@@ -108,6 +109,8 @@
 //        [self.view resignFirstResponder];
 //        [self.navigationController popViewControllerAnimated:YES];
 //    }
+    NSArray *ctrlArray = self.navigationController.viewControllers;
+    
     if ([self.fuctionName isEqualToString:@"netSave"]) {
         [self.navigationItem setTitle:@"充值"];
         [self.navigationController popToRootViewControllerAnimated:YES];
@@ -116,7 +119,7 @@
         [self.navigationController popToRootViewControllerAnimated:YES];
     } else if ([self.fuctionName containsString:@"chinaPnrTrade"]) {
         [self.navigationItem setTitle:@"购买"];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToViewController:[ctrlArray objectAtIndex:1] animated:YES];
     } else {
         [self.navigationItem setTitle:@"开户"];
         [self.navigationController popViewControllerAnimated:YES];
@@ -134,9 +137,44 @@
     NSString *responseString = [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding];
     
     requestString = [requestString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
     //获取H5页面里面按钮的操作方法,根据这个进行判断返回是内部的还是push的上一级页面
+    
+    NSLog(@"requestString = %@",requestString);
     if ([requestString hasPrefix:@"goback:"]) {
+        
         [self.navigationController popViewControllerAnimated:YES];
+        
+    } else if ([requestString rangeOfString:@"mhold.html"].location !=NSNotFound) {
+        
+        NSString *orderIdString = [requestString substringWithRange:NSMakeRange([requestString rangeOfString:@"id"].location + 3, requestString.length - ([requestString rangeOfString:@"id"].location + 3))];
+        
+        NSLog(@"orderIdString = %@",orderIdString);
+        
+        TWOProfitingViewController *profitingVC = [[TWOProfitingViewController alloc] init];
+        profitingVC.orderId = orderIdString;
+        profitingVC.ifReturnToVC = YES;
+        pushVC(profitingVC);
+        
+    } else if ([requestString hasSuffix:@"proList.html"]) {
+        
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+        
+        UIButton *indexButton = [app.tabBarVC.tabButtonArray objectAtIndex:1];
+        
+        for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+            
+            if (indexButton.tag != tempButton.tag) {
+                NSLog(@"%ld",(long)tempButton.tag);
+                [tempButton setSelected:NO];
+            }
+        }
+        
+        [indexButton setSelected:YES];
+        
+        [app.tabBarVC setTabbarViewHidden:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
     
     NSLog(@"requestString = %@",requestString);

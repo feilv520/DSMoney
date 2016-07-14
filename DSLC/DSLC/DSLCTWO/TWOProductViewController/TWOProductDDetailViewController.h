@@ -11,5 +11,6 @@
 @interface TWOProductDDetailViewController : BaseViewController
 
 @property (nonatomic, strong) NSString *assetId;
+@property (nonatomic, strong) NSString *assetTitle;
 
 @end

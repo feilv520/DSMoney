@@ -49,6 +49,9 @@
     
     CGFloat widthNumber;
     
+    UIView *lineView;
+    UIView *lineViewSectionWithOne;
+    
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -91,7 +94,7 @@
     _tableView.delegate = self;
     _tableView.tableFooterView = [UIView new];
     _tableView.backgroundColor = [UIColor colorFromHexCode:@"#F5F6F7"];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.separatorColor = Color_Clear;
     [_tableView registerNib:[UINib nibWithNibName:@"TWOProductDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOProductJinDuTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuseJinDu"];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOProductWaitingTableViewCell" bundle:nil] forCellReuseIdentifier:@"waiting"];
@@ -286,7 +289,7 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [cell.titleLabel setFont:[UIFont systemFontOfSize:14]];
-            cell.titleLabel.text = @"成安基金国富通亿丰商城项目";
+            cell.titleLabel.text = self.assetTitle;
             cell.valueLabel.hidden = YES;
             cell.titleLabel.hidden = NO;
             
@@ -297,17 +300,18 @@
             cell.titleLabel.text = @"基本信息";
             cell.valueLabel.hidden = YES;
             
-            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, 1)];
-            lineView.backgroundColor = [UIColor colorFromHexCode:@"dcdee0"];
-            [cell addSubview:lineView];
+            cell.lineView.hidden = NO;
             
         } else {
+            
+            cell.lineView.hidden = YES;
+            
             cell.titleLabel.hidden = NO;
             cell.valueLabel.hidden = NO;
-            cell.titleLabel.text = [titleArray objectAtIndex:indexPath.row];
+            cell.titleLabel.text = [titleArray objectAtIndex:indexPath.row - 1];
             if (valueArray.count != 0) {
                 
-                cell.valueLabel.text = [NSString stringWithFormat:@"%@",[valueArray objectAtIndex:indexPath.row]];
+                cell.valueLabel.text = [NSString stringWithFormat:@"%@",[valueArray objectAtIndex:indexPath.row - 1]];
             }
             
             //            webView.hidden = YES;
@@ -319,11 +323,12 @@
             cell.titleLabel.hidden = NO;
             cell.valueLabel.hidden = YES;
             
-            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 45, WIDTH_CONTROLLER_DEFAULT, 1)];
-            lineView.backgroundColor = [UIColor colorFromHexCode:@"dcdee0"];
-            [cell addSubview:lineView];
+            cell.lineView.hidden = NO;
             
         } else {
+            
+            cell.lineView.hidden = YES;
+            
             cell.titleLabel.text = [assetModel assetProjectDetail];
             cell.titleLabel.hidden = YES;
             cell.valueLabel.hidden = YES;

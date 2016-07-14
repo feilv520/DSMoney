@@ -219,11 +219,11 @@
         [leftStriing addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
         [cell.labelMoney setAttributedText:leftStriing];
         
-        cell.labelYuQI.text = [NSString stringWithFormat:@" 预期年化%@%%",[myUserPrivilegeListModel annualYield]];
+        cell.labelYuQI.text = [NSString stringWithFormat:@" 预期年化%@%%",[myUserPrivilegeListModel privilegeYield]];
         cell.labelYuQI.textColor = [UIColor findZiTiColor];
         cell.labelYuQI.font = [UIFont fontWithName:@"CenturyGothic" size:12];
 //        [myUserPrivilegeListModel privilegeYield]
-        cell.labelFriend.text = [NSString stringWithFormat:@"好友投资%@%%产品%@天",[myUserPrivilegeListModel privilegeYield],[myUserPrivilegeListModel period]];
+        cell.labelFriend.text = [NSString stringWithFormat:@"好友投资%@%%产品%@天",[myUserPrivilegeListModel annualYield],[myUserPrivilegeListModel period]];
         cell.labelFriend.textColor = [UIColor ZiTiColor];
         cell.labelFriend.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         

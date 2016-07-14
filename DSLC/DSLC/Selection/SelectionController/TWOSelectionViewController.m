@@ -196,7 +196,7 @@
     whiteBackgroundView.backgroundColor = Color_White;
     
 //    公告图标
-    UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(9, 6 / 667.0 * WIDTH_CONTROLLER_DEFAULT, noticeHeight, noticeHeight) backGroundColor:Color_White setImage:[UIImage imageNamed:@"公告"]];
+    UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(9, 7, noticeHeight, noticeHeight) backGroundColor:Color_White setImage:[UIImage imageNamed:@"公告"]];
     [whiteBackgroundView addSubview:imageNotice];
     [self noticeContentShow];
     
@@ -627,14 +627,15 @@
 // 拖住完成的执行方法
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
-    
-    // 修改timer的优先级与控件一致
-    // 获取当前的消息循环对象
-    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-    // 更改timer对象的优先级
-    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
-    
+    if (bannerScrollView == scrollView) {
+        timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+        
+        // 修改timer的优先级与控件一致
+        // 获取当前的消息循环对象
+        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+        // 更改timer对象的优先级
+        [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    }
 }
 
 //改变pagecontrol中圆点样式
@@ -732,7 +733,6 @@
                 
             } else {
                 [self loadingWithHidden:YES];
-                [self noNetworkView];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             }
             
@@ -763,7 +763,11 @@
                 
                 [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                 
-                [self collectionViewShow];
+                if (pickArray.count != 0) {
+                    
+                    [self collectionViewShow];
+                }
+                
                 
             } else {
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -808,21 +812,31 @@
             [photoArray addObject:adModel];
         }
         
-        if (photoArray.count == 0) {
-            [self noDataShowMoney];
-            return;
+//        if (photoArray.count == 0) {
+//            [self noDataShowMoney];
+//            return;
+//        }
+        
+        if (photoArray.count != 0) {
+            
+            [self upContentShow];
+            [_scrollView setHidden:NO];
+            
+            [self getProductList];
+            [self makeScrollView];
+            
+            timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+            NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+            // 更改timer对象的优先级
+            [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+        } else {
+            
+            [self upContentShow];
+            [_scrollView setHidden:NO];
+            
+            [self getProductList];
         }
         
-        [self upContentShow];
-        [_scrollView setHidden:NO];
-        [self makeScrollView];
-        
-        [self getProductList];
-        
-        timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
-        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-        // 更改timer对象的优先级
-        [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

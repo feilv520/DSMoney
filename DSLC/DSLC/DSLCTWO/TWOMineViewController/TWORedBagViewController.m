@@ -39,6 +39,8 @@
     MJRefreshBackGifFooter *jiaFooter;
     BOOL moreFlag;
     BOOL jiaMoreFlag;
+    
+    BOOL switchFlag;
 }
 
 @end
@@ -66,6 +68,9 @@
     pageRedBag = 1;
     pageAddXiQuan = 1;
     moreFlag = NO;
+    jiaMoreFlag = NO;
+    
+    switchFlag = YES;
     
     redBagArray = [NSMutableArray array];
     jiaXiQuanArray = [NSMutableArray array];
@@ -541,7 +546,7 @@
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         _scrollView.contentOffset = CGPointMake(0, 0);
     } completion:^(BOOL finished) {
-        
+        switchFlag = YES;
     }];
 }
 
@@ -557,7 +562,7 @@
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         _scrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
     } completion:^(BOOL finished) {
-        
+        switchFlag = NO;
     }];
 }
 
@@ -651,6 +656,8 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
+        [gifFooter endRefreshing];
+        
         [self loadingWithHidden:YES];
         NSLog(@"获取红包列表:getMyRedPacketList = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
@@ -681,6 +688,8 @@
             
             [butCanUse setTitle:[NSString stringWithFormat:@"%@张可用红包,去使用>", [responseObject objectForKey:@"redPacketCount"]] forState:UIControlStateNormal];
             NSLog(@"%@", [responseObject objectForKey:@"redPacketCount"]);
+        } else {
+            [self noHaveJiaXiQuanShow];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -698,6 +707,9 @@
         
         [self loadingWithHidden:YES];
         NSLog(@"获取加息券列表 = %@",responseObject);
+        
+        [jiaFooter endRefreshing];
+        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *dataArray = [responseObject objectForKey:@"Increase"];
             for (NSDictionary *dataDic in dataArray) {
@@ -720,6 +732,8 @@
             } else {
                 [_tableViewJia reloadData];
             }
+        } else {
+            [self noHaveJiaXiQuanShow];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -732,7 +746,7 @@
 //加载的方法
 - (void)loadMoreData:(MJRefreshBackGifFooter *)footer
 {
-    if (_tableView.tag == 700) {
+    if (switchFlag) {
         
         gifFooter = footer;
         
