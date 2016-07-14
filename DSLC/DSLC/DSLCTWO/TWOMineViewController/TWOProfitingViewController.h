@@ -13,4 +13,6 @@
 @property (nonatomic) NSString *productName;
 @property (nonatomic, copy) NSString *orderId;
 
+@property (nonatomic) BOOL ifReturnToVC;
+
 @end

@@ -131,7 +131,9 @@
         
     } else {
         
-        if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+        
+        if ([[dic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
             
             [self.view endEditing:YES];
             [self registThirdShow];

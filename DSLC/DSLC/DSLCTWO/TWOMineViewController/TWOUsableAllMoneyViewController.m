@@ -173,6 +173,8 @@
     
     page = 1;
     
+    moreFlag = NO;
+    
     [UIView animateWithDuration:0.5 animations:^{
         selectionView.frame = CGRectMake(0, -150, WIDTH_CVIEW_DEFAULT, (96 / 687.0) * HEIGHT_CONTROLLER_DEFAULT);
         
@@ -292,11 +294,17 @@
             [listArray addObject:myAccountListModel];
         }
         
-        if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
+        NSLog(@"%@,%@",[[responseObject objectForKey:@"currPage"] description],[[responseObject objectForKey:@"totalPage"] description]);
+        
+        if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
             moreFlag = YES;
             [butMore setTitle:@"已显示全部" forState:UIControlStateNormal];
             [butMore setTitleColor:[UIColor findZiTiColor] forState:UIControlStateNormal];
             butMore.enabled = NO;
+        } else {
+            [butMore setTitle:@"点击查看更多" forState:UIControlStateNormal];
+            [butMore setTitleColor:[UIColor profitColor] forState:UIControlStateNormal];
+            butMore.enabled = YES;
         }
         
         [self.mainTableView reloadData];

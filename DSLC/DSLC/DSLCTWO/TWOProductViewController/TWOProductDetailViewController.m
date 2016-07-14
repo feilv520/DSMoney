@@ -624,6 +624,7 @@
             if (indexPath.row == 1) {
                 TWOProductDDetailViewController *productDDetailVC = [[TWOProductDDetailViewController alloc] init];
                 productDDetailVC.assetId = [[assetArray objectAtIndex:indexPath.row - 1] objectForKey:@"assetId"];
+                productDDetailVC.assetTitle = [[assetArray objectAtIndex:indexPath.row - 1] objectForKey:@"assetName"];
                 pushVC(productDDetailVC);
             }
         }

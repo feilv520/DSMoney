@@ -157,7 +157,7 @@
     NSBundle *rootBundle = [NSBundle mainBundle];
     
     TWOProductMakeSureHeadView *makeSureHView = (TWOProductMakeSureHeadView *)[[rootBundle loadNibNamed:@"TWOProductMakeSureHeadView" owner:nil options:nil] lastObject];
-    makeSureHView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 220);
+    makeSureHView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 160);
     self.mainTableView.tableHeaderView = makeSureHView;
     
     makeSureHView.productName.text = [self.detailM productName];
@@ -480,6 +480,11 @@
     
     allMoneyString = textField.text;
     
+//    if ([allMoneyString integerValue] >= [[self.detailM amountMax] integerValue]) {
+//        allMoneyString = [self.detailM amountMax];
+//        textField.text = allMoneyString;
+//    }
+    
     [self textFieldEditChanged:textField];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -624,10 +629,6 @@
         
         allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
         
-        if ([allMoneyString integerValue] >= [[self.detailM amountMax] integerValue]) {
-            allMoneyString = [self.detailM amountMax];
-        }
-        
     } else {
         
         TWOProductMakeSureTwoTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
@@ -639,23 +640,10 @@
         NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
         
         allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
-        
-        if ([allMoneyString integerValue] >= [[self.detailM amountMax] integerValue]) {
-            allMoneyString = [self.detailM amountMax];
-        }
+    
     }
     
     monkeyString = @"0个";
-    
-    ifHaveValue++;
-    
-    if (ifHaveValue == 2) {
-        if (![[self.detailM.productType description] isEqualToString:@"3"]) {
-            
-            [self getMyRedPacketList];
-            [self getMyIncreaseList];
-        }
-    }
     
 }
 
@@ -676,10 +664,18 @@
     
     allMoneyString = textField.text;
     
+//    if ([allMoneyString integerValue] >= [self.residueMoney integerValue]) {
+//        allMoneyString = [self.detailM amountMax];
+//        textField.text = allMoneyString;
+//    }
+    
     [self textFieldEditChanged:textField];
     
     if ([[self.detailM amountMin] floatValue] > [allMoneyString floatValue]){
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"你的投资金额不满足起投金额,请重新输入!"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资金额不满足起投金额,请重新输入!"];
+        return;
+    } else if ([allMoneyString floatValue] > [[DES3Util decrypt:[self.flagDic objectForKey:@"accBalance"]] floatValue]){
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的可用余额不足,请先充值!"];
         return;
     }
     
@@ -771,6 +767,7 @@
 
 //键盘隐藏
 - (void)keywordboardHide{
+    [self doneButton:nil];
     if (doneButton.superview){
         //从视图中移除掉
         [doneButton removeFromSuperview];
@@ -790,9 +787,30 @@
     
     NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
     
-    textField.text = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
+    if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
+        textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
+    } else if ([textField.text integerValue] >= [self.residueMoney integerValue]){
+        textField.text = [NSString stringWithFormat:@"%ld",(long)[self.residueMoney integerValue]];
+    } else {
+        textField.text = [NSString stringWithFormat:@"%ld",(long)[textField.text integerValue] - number];
+    }
     
     allMoneyString = textField.text;
+    
+    if ([allMoneyString integerValue] >= 100) {
+        
+        if (![[self.detailM.productType description] isEqualToString:@"3"]) {
+            
+            [self getMyRedPacketList];
+            [self getMyIncreaseList];
+            
+            packetModel = nil;
+            incrModel = nil;
+            
+            NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
+            [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }
     
     [self textFieldEditChanged:textField];
 }
@@ -884,7 +902,14 @@
 
 - (void)getMyRedPacketList{
     
-    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":@"100",@"token":[self.flagDic objectForKey:@"token"]};
+    NSString *moneyString = @"100";
+    
+    if ([allMoneyString integerValue] > 100) {
+        
+        moneyString = allMoneyString;
+    }
+    
+    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":moneyString,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -912,7 +937,14 @@
 
 - (void)getMyIncreaseList{
     
-    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":@"100",@"token":[self.flagDic objectForKey:@"token"]};
+    NSString *moneyString = @"100";
+    
+    if ([allMoneyString integerValue] > 100) {
+        
+        moneyString = allMoneyString;
+    }
+    
+    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":moneyString,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

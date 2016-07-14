@@ -353,6 +353,7 @@
         TWOProfitingViewController *profitingVC = [[TWOProfitingViewController alloc] init];
         profitingVC.productName = [model productName];
         profitingVC.orderId = [model orderId];
+        profitingVC.ifReturnToVC = NO;
         [self.navigationController pushViewController:profitingVC animated:YES];
         
     } else {

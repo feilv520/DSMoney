@@ -47,6 +47,15 @@
     [self getUserAssetsInfoFuction];
 }
 
+- (void)buttonReturn:(UIBarButtonItem *)bar{
+    if (self.ifReturnToVC) {
+        NSArray *ctrlArray = self.navigationController.viewControllers;
+        [self.navigationController popToViewController:[ctrlArray objectAtIndex:1] animated:YES];
+    } else {
+        popVC;
+    }
+}
+
 - (void)tableViewShow
 {
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStyleGrouped];
@@ -105,11 +114,26 @@
             
         } else {
             
-            NSMutableAttributedString *threeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [topArray objectAtIndex:2]]];
-            NSRange threeRange = NSMakeRange(0, [[threeString string] rangeOfString:@"%"].location);
-            [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:threeRange];
-            [labelTop setAttributedText:threeString];
-            labelTop.textAlignment = NSTextAlignmentRight;
+            if ([[[self.productDic objectForKey:@"increaseId"] description] isEqualToString:@"0"] || [[[self.productDic objectForKey:@"increaseId"] description] isEqualToString:@""]) {
+                
+                NSMutableAttributedString *threeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [topArray objectAtIndex:2]]];
+                NSRange threeRange = NSMakeRange(0, [[threeString string] rangeOfString:@"%"].location);
+                [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:threeRange];
+                [labelTop setAttributedText:threeString];
+                labelTop.textAlignment = NSTextAlignmentRight;
+            } else {
+                
+                NSMutableAttributedString *threeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%+%@%%", [topArray objectAtIndex:2], [self.productDic objectForKey:@"increaseRate"]]];
+                NSRange fRange = NSMakeRange(0, 1);
+                [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:fRange];
+                
+                NSRange tRange = NSMakeRange([[threeString string] rangeOfString:@"+"].location + 1, 1);
+                [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:tRange];
+                
+                [labelTop setAttributedText:threeString];
+                labelTop.textAlignment = NSTextAlignmentRight;
+            }
+            
         }
         
         UILabel *labelDown = [CreatView creatWithLabelFrame:CGRectMake(marginLeft + width * n, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelTop.frame.size.height + 5, width, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[downArray objectAtIndex:n]];
@@ -141,7 +165,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 4;
+        if ([[[self.productDic objectForKey:@"increaseId"] description] isEqualToString:@"0"] || [[[self.productDic objectForKey:@"increaseId"] description] isEqualToString:@""]) {
+            return 4;
+        } else {
+            return 5;
+        }
     } else {
         return self.assetArray.count;
     }
@@ -175,8 +203,8 @@
         
         TWOProfitingEveryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
-        NSArray *titleArray = @[@[@"到期日", @"投资日", @"计息起始日", @"收益方式"]];
-        NSArray *timeArray = @[@[[self.productDic objectForKey:@"dueDate"], [self.productDic objectForKey:@"buyTime"], [self.productDic objectForKey:@"interestDate"], [self.productDic objectForKey:@"yieldDistribType"]]];
+        NSArray *titleArray = @[@[@"到期日", @"投资日", @"计息起始日", @"收益方式",@"待兑付加息卷收益"]];
+        NSArray *timeArray = @[@[[self.productDic objectForKey:@"dueDate"], [self.productDic objectForKey:@"buyTime"], [self.productDic objectForKey:@"interestDate"], [self.productDic objectForKey:@"yieldDistribType"] ,[NSString stringWithFormat:@"%@元",[self.productDic objectForKey:@"increaseMoney"]]]];
         
         cell.labelName.text = [[titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         cell.labelName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
@@ -241,6 +269,7 @@
         
         TWOProductDDetailViewController *MoneyDetaiVC = [[TWOProductDDetailViewController alloc] init];
         MoneyDetaiVC.assetId = [dic objectForKey:@"assetId"];
+        MoneyDetaiVC.assetTitle = [dic objectForKey:@"assetTitle"];
         pushVC(MoneyDetaiVC);
     }
 }
@@ -272,6 +301,10 @@
         
         self.productDic = [responseObject objectForKey:@"Product"];
         self.assetArray = [[responseObject objectForKey:@"Product"] objectForKey:@"Asset"];
+        
+        if ([self.productName isEqualToString:@""] || self.productName == nil) {
+            [self.navigationItem setTitle:[self.productDic objectForKey:@"productName"]];
+        }
         
         [self tableViewShow];
         
