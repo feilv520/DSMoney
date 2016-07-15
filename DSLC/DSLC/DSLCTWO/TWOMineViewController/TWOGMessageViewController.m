@@ -39,7 +39,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor huibai];
     
-    [self tableViewShow];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
+    [self getMessageDataList];
 }
 
 - (void)tableViewShow
@@ -59,7 +60,6 @@
     
     [self addTableViewWithHeader:mainTableView];
     [self addTableViewWithFooter:mainTableView];
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -103,7 +103,39 @@
     
     TWOMessageDetailViewController *messageDVC = [[TWOMessageDetailViewController alloc] init];
     pushVC(messageDVC);
-    
+}
+
+#pragma mark message--------------------------------
+- (void)getMessageDataList
+{
+    NSDictionary *parmeter = @{@"type":@1};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"公告!!!!!!!!!!%@", responseObject);
+        [self loadingWithHidden:YES];
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *dataArray = [responseObject objectForKey:@"noticeInfo"];
+            for (NSDictionary *dataDic in dataArray) {
+                
+            }
+            
+            if (dataArray.count == 0) {
+                [self noDataShow];
+            } else {
+                [self tableViewShow];
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)noDataShow
+{
+    UIImageView *imageNothing = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [self.view addSubview:imageNothing];
 }
 
 - (void)didReceiveMemoryWarning {

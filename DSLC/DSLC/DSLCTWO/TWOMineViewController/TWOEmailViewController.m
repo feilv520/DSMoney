@@ -54,6 +54,7 @@
     butNextOne.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     butNextOne.layer.cornerRadius = 5;
     butNextOne.layer.masksToBounds = YES;
+    butNextOne.enabled = YES;
     [butNextOne addTarget:self action:@selector(buttonNextClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -74,6 +75,7 @@
     } else if (![NSString validateEmail:textFieldEmail.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入正确的邮箱格式"];
     } else {
+        butNextOne.enabled = NO;
         [self bindingEmailData];
         [textFieldEmail resignFirstResponder];
     }
@@ -86,6 +88,7 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"mail/updateUserEmail" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"绑定邮箱aaaaaaaa%@", responseObject);
+        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             TWOBindingEmailOverViewController *bindingEmailVC = [[TWOBindingEmailOverViewController alloc] init];
             [self.navigationController pushViewController:bindingEmailVC animated:YES];
