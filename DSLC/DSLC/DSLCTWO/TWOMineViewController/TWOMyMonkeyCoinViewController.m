@@ -292,7 +292,7 @@
     
     [cell.butOneUp setTitle:@"大转盘" forState:UIControlStateNormal];
     [cell.butOneDown setTitle:@"转出幸运大礼" forState:UIControlStateNormal];
-    [cell.butTwoUp setTitle:@"爆击红包" forState:UIControlStateNormal];
+    [cell.butTwoUp setTitle:@"爆击抽奖" forState:UIControlStateNormal];
     [cell.butTwoDown setTitle:@"免费抽奖抽不停" forState:UIControlStateNormal];
     [cell.butThreeUp setTitle:@"活动中心" forState:UIControlStateNormal];
     [cell.butThreeDown setTitle:@"月月活动玩不停" forState:UIControlStateNormal];

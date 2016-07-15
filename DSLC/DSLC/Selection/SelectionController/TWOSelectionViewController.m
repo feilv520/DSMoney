@@ -731,6 +731,9 @@
                 
                 [self collectionViewShow];
                 
+                noNetworkMonkey.hidden = YES;
+                reloadButton.hidden = YES;
+                
             } else {
                 [self loadingWithHidden:YES];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -768,6 +771,8 @@
                     [self collectionViewShow];
                 }
                 
+                noNetworkMonkey.hidden = YES;
+                reloadButton.hidden = YES;
                 
             } else {
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -775,8 +780,10 @@
             
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"%@", error);
             
+            [self loadingWithHidden:YES];
+            [self noNetworkView];
+            NSLog(@"%@", error);
         }];
     }
     
@@ -837,6 +844,8 @@
             [self getProductList];
         }
         
+        noNetworkMonkey.hidden = YES;
+        reloadButton.hidden = YES;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

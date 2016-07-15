@@ -308,9 +308,15 @@
             }
             
             if (self.productListArray.count == 0) {
+                
                 [self noDataShowMoney];
                 _tableView.hidden = YES;
                 return ;
+            } else {
+                
+                imageMonkey.hidden = NO;
+                noNetworkMonkey.hidden = YES;
+                reloadButton.hidden = YES;
             }
             
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {

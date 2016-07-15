@@ -365,6 +365,9 @@
             
             [cell.czButton addTarget:self action:@selector(czAction:) forControlEvents:UIControlEventTouchUpInside];
             
+            cell.moneyView.layer.borderWidth = 1;
+            cell.moneyView.layer.borderColor = [[UIColor colorFromHexCode:@"d3ebfc"] CGColor];
+            
             [cell.inputMoneyTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
             
             cell.inputMoneyTextField.tag = 9283;
@@ -397,6 +400,9 @@
             [cell.upMoneyButton addTarget:self action:@selector(upAction:) forControlEvents:UIControlEventTouchUpInside];
             
             cell.upMoneyButton.hidden = YES;
+            
+            cell.moneyView.layer.borderWidth = 1;
+            cell.moneyView.layer.borderColor = [[UIColor colorFromHexCode:@"d3ebfc"] CGColor];
             
             [cell.moneyTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
             

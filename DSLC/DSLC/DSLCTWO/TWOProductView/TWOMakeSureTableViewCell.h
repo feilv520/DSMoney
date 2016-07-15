@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *czButton;
 @property (weak, nonatomic) IBOutlet UILabel *yqMoneyLabel;
 @property (weak, nonatomic) IBOutlet UITextField *inputMoneyTextField;
+@property (weak, nonatomic) IBOutlet UIView *moneyView;
 
 @end

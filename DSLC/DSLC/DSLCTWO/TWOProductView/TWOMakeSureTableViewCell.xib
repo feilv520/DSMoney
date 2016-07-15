@@ -133,9 +133,10 @@
                 <outlet property="czButton" destination="sTD-Bm-21D" id="zZ5-n7-FRZ"/>
                 <outlet property="inputMoneyTextField" destination="XFm-ej-9mL" id="Zzk-7i-2Ud"/>
                 <outlet property="moneyLabel" destination="TLu-V6-jbZ" id="oxP-4x-poW"/>
+                <outlet property="moneyView" destination="UYb-IW-CsW" id="Pxn-I0-nzX"/>
                 <outlet property="yqMoneyLabel" destination="zIu-gF-C71" id="q9Q-Mc-26N"/>
             </connections>
-            <point key="canvasLocation" x="288.5" y="343"/>
+            <point key="canvasLocation" x="29.5" y="282"/>
         </tableViewCell>
     </objects>
 </document>

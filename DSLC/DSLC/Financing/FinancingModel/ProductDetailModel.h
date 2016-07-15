@@ -56,4 +56,6 @@
 
 @property (nonatomic, copy) NSString *subjectMaxMoney;
 
+@property (nonatomic, copy) NSString *interestTypeName;
+
 @end

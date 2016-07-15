@@ -413,7 +413,7 @@
             cell.valueLabel.text = [self.detailM productYieldDistribTypeName];
         } else if (indexPath.row == 1) {
             
-            cell.valueLabel.text = [NSString stringWithFormat:@"%@&%@",[self.detailM beginTime],[self.detailM endTime]];
+            cell.valueLabel.text = [NSString stringWithFormat:@"%@",[self.detailM interestTypeName]];
         } else {
             if ([[[self.detailM productType] description] isEqualToString:@"1"]) {
                 cell.valueLabel.text = @"无限额";

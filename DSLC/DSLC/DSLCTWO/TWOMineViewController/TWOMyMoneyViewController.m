@@ -11,8 +11,7 @@
 
 
 @interface TWOMyMoneyViewController () <PieChartDelegate> {
-    NSArray *kindsArray ;
-    NSArray *moneyArray ;
+    NSMutableArray *kindsArray ;
 }
 
 @property (nonatomic, strong) NSMutableArray *assetArray;
@@ -57,7 +56,7 @@
 //                       nil];
     self.assetArray = [NSMutableArray array];
     
-    self.valueArray = [NSMutableArray arrayWithObjects:@"0.00",@"0.00",@"0.00",@"0.00",nil];
+    self.valueArray = [NSMutableArray arrayWithObjects:@"0.00",@"0.00",@"0.00",@"0.00",@"0.00",nil];
     
 //    self.colorArray = [NSMutableArray arrayWithObjects:
 //                       [UIColor colorWithRed:63.0 / 225.0 green:166.0 / 225.0 blue:252.0 / 225.0 alpha:1.0],
@@ -69,8 +68,7 @@
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
-    kindsArray = @[@"账户余额", @"在投资金", @"未结算预期收益", @"提现中"];
-    moneyArray = @[@"1000.00元", @"10000.00元", @"500.00元", @"1000.00元"];
+    kindsArray = [NSMutableArray arrayWithArray:@[@"可用余额", @"在投资金", @"未结算预期收益", @"提现中",@"其他"]];
     
     [self getMyAccountInfoFuction];
 
@@ -92,7 +90,7 @@
     self.pieChartView = [[MCMPieChartView alloc]initWithFrame:pieFrame withValue:self.valueArray withColor:self.colorArray];
     self.pieChartView.delegate = self;
     [viewUp addSubview:self.pieChartView];
-    [self.pieChartView setTitleText:@"在投资金"];
+    [self.pieChartView setTitleText:@"可用余额"];
     [self.pieChartView setAmountText:@"0元"];
     [self.view addSubview:viewUp];
     
@@ -113,7 +111,7 @@
     [viewUp addSubview:viewUpLine];
     viewUpLine.alpha = 0.3;
     
-    UIView *viewDown = [CreatView creatViewWithFrame:CGRectMake(0, viewUp.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 266.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor]];
+    UIView *viewDown = [CreatView creatViewWithFrame:CGRectMake(0, viewUp.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 296.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewDown];
     
     UIView *viewDownLine1 = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
@@ -137,7 +135,7 @@
     
     NSArray *colorArray = @[[UIColor colorFromHexCode:@"046bc4"], [UIColor colorFromHexCode:@"0283de"], [UIColor colorFromHexCode:@"0ca5f0"], [UIColor colorFromHexCode:@"35a3ff"],[UIColor colorFromHexCode:@"30cdf6"],[UIColor colorFromHexCode:@"16b6cc"],[UIColor colorFromHexCode:@"3399cc"],[UIColor colorFromHexCode:@"79c6fc"],[UIColor colorFromHexCode:@"b4e4ff"],[UIColor colorFromHexCode:@"dbe5eb"]];
     
-    for (int m = 0; m < 4; m++) {
+    for (int m = 0; m < self.assetArray.count; m++) {
         
 //        色块
         UIView *viewColor = [CreatView creatViewWithFrame:CGRectMake(23, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelZong.frame.size.height + 36.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 19 * m + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) * m, 19, 19) backgroundColor:[colorArray objectAtIndex:m]];
@@ -178,7 +176,7 @@
 - (void)selectedFinish:(MCMPieChartView *)pieChartView index:(NSInteger)index percent:(float)per
 {
     [self.pieChartView setTitleText:[kindsArray objectAtIndex:index]];
-    [self.pieChartView setAmountText:[moneyArray objectAtIndex:index]];
+    [self.pieChartView setAmountText:[self.valueArray objectAtIndex:index]];
 }
 
 - (void)noDataShowMoney
@@ -208,7 +206,7 @@
             
             for (NSInteger i = 0; i < self.assetArray.count ; i++) {
                 [self.valueArray replaceObjectAtIndex:i withObject:[DES3Util decrypt:[[self.assetArray objectAtIndex:i] objectForKey:@"assetMoney"]]];
-//                [self.valueArray addObject:[DES3Util decrypt:[[self.assetArray objectAtIndex:i] objectForKey:@"assetMoney"]]];
+                [kindsArray replaceObjectAtIndex:i withObject:[[self.assetArray objectAtIndex:i] objectForKey:@"assetTypeName"]];
                 [self.colorArray addObject:[colorArray objectAtIndex:i]];
             }
             
