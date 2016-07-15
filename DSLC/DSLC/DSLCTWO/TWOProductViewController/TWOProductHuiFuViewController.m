@@ -87,10 +87,10 @@
         [self.navigationItem setTitle:@"开户"];
     }
     
-//    urlString = [NSString stringWithFormat:@"%@chinaPnr/%@?token=%@&clientType=iOS",MYAFHTTP_BASEURL,self.fuctionName,[self.flagDic objectForKey:@"token"]];
+    //    urlString = [NSString stringWithFormat:@"%@chinaPnr/%@?token=%@&clientType=iOS",MYAFHTTP_BASEURL,self.fuctionName,[self.flagDic objectForKey:@"token"]];
     
     NSLog(@"urlString = %@",urlString);
-
+    
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
@@ -102,13 +102,13 @@
 //用苹果自带的返回键按钮处理如下(自定义的返回按钮)
 - (void)buttonReturn:(UIBarButtonItem *)btn
 {
-//    if ([myWebView canGoBack]) {
-//        [myWebView goBack];
-//        
-//    }else{
-//        [self.view resignFirstResponder];
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
+    //    if ([myWebView canGoBack]) {
+    //        [myWebView goBack];
+    //
+    //    }else{
+    //        [self.view resignFirstResponder];
+    //        [self.navigationController popViewControllerAnimated:YES];
+    //    }
     NSArray *ctrlArray = self.navigationController.viewControllers;
     
     if ([self.fuctionName isEqualToString:@"netSave"]) {
@@ -125,6 +125,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     
+    [self checkUserInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfoFuction" object:nil];
 }
@@ -186,7 +187,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     NSString * title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];//获取当前页面的title
-//    self.title = title;
+    //    self.title = title;
     
     NSLog(@"%@",title);
 }
@@ -209,6 +210,27 @@
     
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
+}
+
+- (void)checkUserInfo{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"check/checkUserInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"checkUserInfo = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            [self.flagDic setValue:[responseObject objectForKey:@"chinaPnrAcc"] forKey:@"chinaPnrAcc"];
+            
+            [self.flagDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

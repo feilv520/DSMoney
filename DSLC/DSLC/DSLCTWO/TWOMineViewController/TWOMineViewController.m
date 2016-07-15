@@ -1081,7 +1081,7 @@
             [contentArrayOld addObject:[NSString stringWithFormat:@"%@元在投",[DES3Util decrypt:[myAccount investMoney]]]];
             [contentArrayOld addObject:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount prlMoney]]]];
             
-            if ([[myAccount redPacketNum] isEqualToString:@""] || [[myAccount redPacketNum] isEqualToString:@"0"] || [[myAccount incrUnUsedCount] isEqualToString:@""] || [[myAccount incrUnUsedCount] isEqualToString:@"0"]) {
+            if ([[myAccount redPacketNum] isEqualToString:@""] || [[myAccount incrUnUsedCount] isEqualToString:@""]) {
                 [contentArray addObject:[NSString stringWithFormat:@"0张"]];
             } else {
                 [contentArray addObject:[NSString stringWithFormat:@"%ld张",(long)[[myAccount redPacketNum] integerValue] + (long)[[myAccount incrUnUsedCount] integerValue]]];
@@ -1103,6 +1103,8 @@
             
             [memberDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:400]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"fortyWithLogin" object:nil];
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }

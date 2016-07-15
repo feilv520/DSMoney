@@ -1389,6 +1389,9 @@
 		8D88D1061BFECCB40051D6DA /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D88D0F21BFECCB40051D6DA /* UIScrollView+MJRefresh.m */; settings = {ASSET_TAGS = (); }; };
 		8D88D1071BFECCB40051D6DA /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D88D0F41BFECCB40051D6DA /* UIView+MJExtension.m */; settings = {ASSET_TAGS = (); }; };
 		8D88D10A1BFEEDDE0051D6DA /* UIViewController+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D88D1091BFEEDDE0051D6DA /* UIViewController+Loading.m */; settings = {ASSET_TAGS = (); }; };
+		8D8EEB811D38B71600874EA8 /* jpush-ios-2.1.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D8EEB7F1D38B71600874EA8 /* jpush-ios-2.1.8.a */; settings = {ASSET_TAGS = (); }; };
+		8D8EEB831D38B75600874EA8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D8EEB821D38B75600874EA8 /* CFNetwork.framework */; };
+		8D8EEB851D38B77900874EA8 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D8EEB841D38B77900874EA8 /* CoreFoundation.framework */; };
 		8D90117A1BD5D8FA00E5D62A /* TransactionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9011781BD5D8FA00E5D62A /* TransactionViewController.m */; };
 		8D90117B1BD5D8FA00E5D62A /* TransactionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9011791BD5D8FA00E5D62A /* TransactionViewController.xib */; };
 		8D90117F1BD61B3400E5D62A /* TranctionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90117D1BD61B3400E5D62A /* TranctionTableViewCell.m */; };
@@ -3569,6 +3572,10 @@
 		8D88D0F41BFECCB40051D6DA /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		8D88D1081BFEEDDE0051D6DA /* UIViewController+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Loading.h"; sourceTree = "<group>"; };
 		8D88D1091BFEEDDE0051D6DA /* UIViewController+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Loading.m"; sourceTree = "<group>"; };
+		8D8EEB7F1D38B71600874EA8 /* jpush-ios-2.1.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.8.a"; sourceTree = "<group>"; };
+		8D8EEB801D38B71600874EA8 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		8D8EEB821D38B75600874EA8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		8D8EEB841D38B77900874EA8 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		8D9011771BD5D8FA00E5D62A /* TransactionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionViewController.h; sourceTree = "<group>"; };
 		8D9011781BD5D8FA00E5D62A /* TransactionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionViewController.m; sourceTree = "<group>"; };
 		8D9011791BD5D8FA00E5D62A /* TransactionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionViewController.xib; sourceTree = "<group>"; };
@@ -3842,6 +3849,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D4B8C1A1BF2F62100A88285 /* CoreTelephony.framework in Frameworks */,
+				8D8EEB851D38B77900874EA8 /* CoreFoundation.framework in Frameworks */,
+				8D8EEB831D38B75600874EA8 /* CFNetwork.framework in Frameworks */,
 				8DCE98641CF2E12A0067CBCD /* QuartzCore.framework in Frameworks */,
 				8D4E4D981C1E58B700AE2644 /* MobileCoreServices.framework in Frameworks */,
 				8D4E4D961C1E589D00AE2644 /* CoreLocation.framework in Frameworks */,
@@ -3849,7 +3859,7 @@
 				8DBC8A6D1C0D44DA00378FFE /* TencentOpenAPI.framework in Frameworks */,
 				81349D0F1BF9D73C00D845EF /* AddressBookUI.framework in Frameworks */,
 				81349D0D1BF9D72900D845EF /* AddressBook.framework in Frameworks */,
-				8D4B8C1A1BF2F62100A88285 /* CoreTelephony.framework in Frameworks */,
+				8D8EEB811D38B71600874EA8 /* jpush-ios-2.1.8.a in Frameworks */,
 				8DEDE1FB1BCD1A21008086D3 /* CoreGraphics.framework in Frameworks */,
 				8D4B8C141BF2F5B300A88285 /* Security.framework in Frameworks */,
 				8DEDE2331BCD1C17008086D3 /* Foundation.framework in Frameworks */,
@@ -5036,6 +5046,8 @@
 		81C2DAA51BC755F10007AC48 /* Three */ = {
 			isa = PBXGroup;
 			children = (
+				8D8EEB7F1D38B71600874EA8 /* jpush-ios-2.1.8.a */,
+				8D8EEB801D38B71600874EA8 /* JPUSHService.h */,
 				8DFA58291D124A8E00FE9565 /* UICountingLabel.h */,
 				8DFA582A1D124A8E00FE9565 /* UICountingLabel.m */,
 				8DFA581F1D1138F000FE9565 /* LYCircleView.h */,
@@ -7524,6 +7536,8 @@
 		8DA086551C33894C00BC805C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D8EEB841D38B77900874EA8 /* CoreFoundation.framework */,
+				8D8EEB821D38B75600874EA8 /* CFNetwork.framework */,
 				8DCE98631CF2E12A0067CBCD /* QuartzCore.framework */,
 				8DA086561C33894C00BC805C /* NotificationCenter.framework */,
 			);
@@ -9572,8 +9586,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9593,12 +9607,13 @@
 					"$(PROJECT_DIR)/DSLC/Three/LLPay_iOS_SDK_V2.4",
 					"$(PROJECT_DIR)/DSLC/Three/LLPayUtils/crypto",
 					"$(PROJECT_DIR)/DSLC/Three/UMSocial_Sdk_4.4",
+					"$(PROJECT_DIR)/DSLC/Three",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "43697f1b-7dd6-418b-a500-485db5fa8f9a";
+				PROVISIONING_PROFILE = "13ad5b0b-bcc0-4ab2-ab40-2d1285466741";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -9610,8 +9625,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: guocheng chuangtou (Z7J5CQFNQ3)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9631,12 +9646,13 @@
 					"$(PROJECT_DIR)/DSLC/Three/LLPay_iOS_SDK_V2.4",
 					"$(PROJECT_DIR)/DSLC/Three/LLPayUtils/crypto",
 					"$(PROJECT_DIR)/DSLC/Three/UMSocial_Sdk_4.4",
+					"$(PROJECT_DIR)/DSLC/Three",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "43697f1b-7dd6-418b-a500-485db5fa8f9a";
+				PROVISIONING_PROFILE = "13ad5b0b-bcc0-4ab2-ab40-2d1285466741";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

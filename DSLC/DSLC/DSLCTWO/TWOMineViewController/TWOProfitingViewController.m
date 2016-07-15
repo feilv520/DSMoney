@@ -124,11 +124,11 @@
             } else {
                 
                 NSMutableAttributedString *threeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%+%@%%", [topArray objectAtIndex:2], [self.productDic objectForKey:@"increaseRate"]]];
-                NSRange fRange = NSMakeRange(0, 1);
-                [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:fRange];
+                NSRange fRange = NSMakeRange(0, [[topArray objectAtIndex:2] length]);
+                [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:fRange];
                 
-                NSRange tRange = NSMakeRange([[threeString string] rangeOfString:@"+"].location + 1, 1);
-                [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:tRange];
+                NSRange tRange = NSMakeRange([[threeString string] rangeOfString:@"+"].location + 1, [[[self.productDic objectForKey:@"increaseRate"] description] length]);
+                [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:tRange];
                 
                 [labelTop setAttributedText:threeString];
                 labelTop.textAlignment = NSTextAlignmentRight;

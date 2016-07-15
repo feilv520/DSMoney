@@ -378,10 +378,20 @@
 - (void)loginAppButton:(UIButton *)button
 {
     [self scrollviewContentOffSet];
-    if (imageGet == nil) {
-        [self loginFuction];
+    
+    if (textFieldPhone.text.length == 0) {
+        [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
+    } else if (![NSString validateMobile:textFieldPhone.text]) {
+        [ProgressHUD showMessage:@"手机号格式不正确" Width:100 High:20];
+    } else if (textFieldSecret.text.length == 0) {
+        [ProgressHUD showMessage:@"请输入密码" Width:100 High:20];
     } else {
-        [self registerFuction];
+    
+        if (imageGet == nil) {
+            [self loginFuction];
+        } else {
+            [self registerFuction];
+        }
     }
 }
 
