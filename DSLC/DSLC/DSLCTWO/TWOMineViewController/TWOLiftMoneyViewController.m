@@ -64,6 +64,7 @@
     butLiftAlert.hidden = YES;
     butLiftAlert.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     [butLiftAlert setImage:[UIImage imageNamed:@"充值未投资提现"] forState:UIControlStateNormal];
+    [butLiftAlert setImage:[UIImage imageNamed:@"充值未投资提现"] forState:UIControlStateHighlighted];
     
     [self alertContentShow];
 }
@@ -228,9 +229,10 @@
         [self loadingWithHidden:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-            butLiftAlert.hidden = NO;
-        } else {
             butLiftAlert.hidden = YES;
+        } else {
+            butLiftAlert.hidden = NO;
+//            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

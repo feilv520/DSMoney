@@ -135,14 +135,67 @@
     TWOTaskModel *taskModel = [self.taskArray objectAtIndex:indexPath.section];
     
 //    NSArray *imageArray = @[@"qiandao", @"shoushi", @"xintouzi", @"touzis", @"touzis"];
-    cell.imagePic.yy_imageURL = [NSURL URLWithString:[taskModel taskImg]];
+//    cell.imagePic.yy_imageURL = [NSURL URLWithString:[taskModel taskImg]];
+    if ([[[taskModel taskType] description] isEqualToString:@"1"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"开通汇付去"];
+        
+    } else if ([[taskModel taskType] isEqualToString:@"2"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"绑定银行卡er"];
+        
+    } else if ([[taskModel taskType] isEqualToString:@"3"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"实名认证two"];
+        
+    } else if ([[taskModel taskType] isEqualToString:@"4"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"绑定邮箱two"];
+        
+    } else if ([[taskModel taskType] isEqualToString:@"5"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"设置登录密码呀"];
+        
+    } else if ([[taskModel taskType] isEqualToString:@"6"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"shoushi"]; //设置手势密码
+        
+    } else if ([[taskModel taskType] isEqualToString:@"7"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"xintouzi"]; //体验金使用
+        
+    } else if ([[taskModel taskType] isEqualToString:@"8"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"touzis"]; //首次有效投资
+        
+    } else if ([[taskModel taskType] isEqualToString:@"9"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"填写地址"];
+        
+    } else if ([[taskModel taskType] isEqualToString:@"10"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"qiandao"]; //每日签到
+        
+    } else if ([[taskModel taskType] isEqualToString:@"11"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"touzis"]; //每日投资
+        
+    } else if ([[taskModel taskType] isEqualToString:@"12"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"每日摇一摇"]; //每日一摇
+        
+    } else if ([[taskModel taskType] isEqualToString:@"13"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"玩游戏中心"]; //玩小游戏
+        
+    } else if ([[taskModel taskType] isEqualToString:@"14"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"baojichoujiang"]; //爆击抽奖
+        
+    } else if ([[taskModel taskType] isEqualToString:@"15"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"邀请好朋友"]; //邀请好友
+        
+    } else if ([[taskModel taskType] isEqualToString:@"16"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"touzis"]; //单笔投资
+        
+    } else if ([[taskModel taskType] isEqualToString:@"17"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"touzis"]; //累计投资
+        
+    } else if ([[taskModel taskType] isEqualToString:@"18"]) {
+        cell.imagePic.image = [UIImage imageNamed:@"touzis"]; //固收投资
+        
+    }
     
-//    NSArray *jobArray = @[@"每日签到", @"手势密码设置", @"新人体验金投资", @"首次实际投资", @"今日投资100"];
     cell.labelJobName.text = [taskModel taskName];
     cell.labelJobName.textColor = [UIColor ZiTiColor];
     cell.labelJobName.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     
-//    NSArray *contentArray = @[@"今日签到猴币+10", @"设置完成猴币+10", @"投资完成猴币+10", @"投资完成猴币+10", @"投资完成猴币+10"];
     cell.labelAddCoin.text = [taskModel taskCaption];
     cell.labelAddCoin.textColor = [UIColor findZiTiColor];
     cell.labelAddCoin.font = [UIFont fontWithName:@"CenturyGothic" size:13];
@@ -150,7 +203,9 @@
     if ([[[taskModel status] debugDescription] isEqualToString:@"1"]) {
         
         [cell.butFinish setTitle:@"已完成" forState:UIControlStateNormal];
+        [cell.butFinish setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         cell.butFinish.backgroundColor = [UIColor findZiTiColor];
+        cell.butFinish.layer.borderColor = [[UIColor findZiTiColor] CGColor];
         cell.butFinish.alpha = 0.4;
         
     } else {
@@ -298,8 +353,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"%lf",scrollView.contentOffset.y);
-    
     if (scrollView.contentOffset.y < 0) {
         _tableView.scrollEnabled = NO;
     } else {
@@ -334,6 +387,7 @@
             [self.taskArray addObject:taskModel];
         }
         
+        NSLog(@"===========%lu", (unsigned long)self.taskArray.count);
         [_tableView reloadData];
         [self tableViewHeadShow];
         

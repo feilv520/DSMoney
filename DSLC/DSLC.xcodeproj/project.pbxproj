@@ -79,6 +79,24 @@
 		8114F6B31D34D98F000B80E0 /* 累计收益无数据@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6AF1D34D98F000B80E0 /* 累计收益无数据@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8114F6B41D34D98F000B80E0 /* 总资产无数据@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6B01D34D98F000B80E0 /* 总资产无数据@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8114F6B51D34D98F000B80E0 /* 总资产无数据@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6B11D34D98F000B80E0 /* 总资产无数据@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6BF1D3895A1000B80E0 /* 开通汇付去@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6BD1D3895A1000B80E0 /* 开通汇付去@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6C01D3895A1000B80E0 /* 开通汇付去@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6BE1D3895A1000B80E0 /* 开通汇付去@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6C31D389695000B80E0 /* 绑定银行卡er@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6C11D389695000B80E0 /* 绑定银行卡er@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6C41D389695000B80E0 /* 绑定银行卡er@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6C21D389695000B80E0 /* 绑定银行卡er@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6C71D3896C5000B80E0 /* 实名认证two@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6C51D3896C5000B80E0 /* 实名认证two@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6C81D3896C5000B80E0 /* 实名认证two@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6C61D3896C5000B80E0 /* 实名认证two@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6CB1D389717000B80E0 /* 绑定邮箱two@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6C91D389717000B80E0 /* 绑定邮箱two@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6CC1D389717000B80E0 /* 绑定邮箱two@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6CA1D389717000B80E0 /* 绑定邮箱two@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6CF1D389763000B80E0 /* 设置登录密码呀@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6CD1D389763000B80E0 /* 设置登录密码呀@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6D01D389763000B80E0 /* 设置登录密码呀@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6CE1D389763000B80E0 /* 设置登录密码呀@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6D31D38A756000B80E0 /* 填写地址@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6D11D38A756000B80E0 /* 填写地址@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6D41D38A756000B80E0 /* 填写地址@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6D21D38A756000B80E0 /* 填写地址@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6D71D38B695000B80E0 /* 每日摇一摇@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6D51D38B695000B80E0 /* 每日摇一摇@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6D81D38B695000B80E0 /* 每日摇一摇@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6D61D38B695000B80E0 /* 每日摇一摇@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6DB1D38B6E8000B80E0 /* 玩游戏中心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6D91D38B6E8000B80E0 /* 玩游戏中心@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6DC1D38B6E8000B80E0 /* 玩游戏中心@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6DA1D38B6E8000B80E0 /* 玩游戏中心@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6DF1D38B77B000B80E0 /* 邀请好朋友@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6DD1D38B77B000B80E0 /* 邀请好朋友@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6E01D38B77B000B80E0 /* 邀请好朋友@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6DE1D38B77B000B80E0 /* 邀请好朋友@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */; settings = {ASSET_TAGS = (); }; };
 		811B628C1CFE8B9D00B6F17E /* 每日一摇@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 811B62881CFE8B9D00B6F17E /* 每日一摇@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -1686,6 +1704,24 @@
 		8114F6AF1D34D98F000B80E0 /* 累计收益无数据@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "累计收益无数据@3x.png"; sourceTree = "<group>"; };
 		8114F6B01D34D98F000B80E0 /* 总资产无数据@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "总资产无数据@2x.png"; sourceTree = "<group>"; };
 		8114F6B11D34D98F000B80E0 /* 总资产无数据@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "总资产无数据@3x.png"; sourceTree = "<group>"; };
+		8114F6BD1D3895A1000B80E0 /* 开通汇付去@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "开通汇付去@2x.png"; sourceTree = "<group>"; };
+		8114F6BE1D3895A1000B80E0 /* 开通汇付去@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "开通汇付去@3x.png"; sourceTree = "<group>"; };
+		8114F6C11D389695000B80E0 /* 绑定银行卡er@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "绑定银行卡er@2x.png"; sourceTree = "<group>"; };
+		8114F6C21D389695000B80E0 /* 绑定银行卡er@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "绑定银行卡er@3x.png"; sourceTree = "<group>"; };
+		8114F6C51D3896C5000B80E0 /* 实名认证two@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "实名认证two@2x.png"; sourceTree = "<group>"; };
+		8114F6C61D3896C5000B80E0 /* 实名认证two@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "实名认证two@3x.png"; sourceTree = "<group>"; };
+		8114F6C91D389717000B80E0 /* 绑定邮箱two@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "绑定邮箱two@2x.png"; sourceTree = "<group>"; };
+		8114F6CA1D389717000B80E0 /* 绑定邮箱two@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "绑定邮箱two@3x.png"; sourceTree = "<group>"; };
+		8114F6CD1D389763000B80E0 /* 设置登录密码呀@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "设置登录密码呀@2x.png"; sourceTree = "<group>"; };
+		8114F6CE1D389763000B80E0 /* 设置登录密码呀@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "设置登录密码呀@3x.png"; sourceTree = "<group>"; };
+		8114F6D11D38A756000B80E0 /* 填写地址@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "填写地址@2x.png"; sourceTree = "<group>"; };
+		8114F6D21D38A756000B80E0 /* 填写地址@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "填写地址@3x.png"; sourceTree = "<group>"; };
+		8114F6D51D38B695000B80E0 /* 每日摇一摇@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "每日摇一摇@2x.png"; sourceTree = "<group>"; };
+		8114F6D61D38B695000B80E0 /* 每日摇一摇@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "每日摇一摇@3x.png"; sourceTree = "<group>"; };
+		8114F6D91D38B6E8000B80E0 /* 玩游戏中心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "玩游戏中心@2x.png"; sourceTree = "<group>"; };
+		8114F6DA1D38B6E8000B80E0 /* 玩游戏中心@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "玩游戏中心@3x.png"; sourceTree = "<group>"; };
+		8114F6DD1D38B77B000B80E0 /* 邀请好朋友@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请好朋友@2x.png"; sourceTree = "<group>"; };
+		8114F6DE1D38B77B000B80E0 /* 邀请好朋友@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请好朋友@3x.png"; sourceTree = "<group>"; };
 		8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@2x.png"; sourceTree = "<group>"; };
 		8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@3x.png"; sourceTree = "<group>"; };
 		811B62881CFE8B9D00B6F17E /* 每日一摇@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "每日一摇@2x.png"; sourceTree = "<group>"; };
@@ -3899,6 +3935,31 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		8114F6BC1D389593000B80E0 /* 活动中心 */ = {
+			isa = PBXGroup;
+			children = (
+				8114F6BD1D3895A1000B80E0 /* 开通汇付去@2x.png */,
+				8114F6BE1D3895A1000B80E0 /* 开通汇付去@3x.png */,
+				8114F6C11D389695000B80E0 /* 绑定银行卡er@2x.png */,
+				8114F6C21D389695000B80E0 /* 绑定银行卡er@3x.png */,
+				8114F6C51D3896C5000B80E0 /* 实名认证two@2x.png */,
+				8114F6C61D3896C5000B80E0 /* 实名认证two@3x.png */,
+				8114F6C91D389717000B80E0 /* 绑定邮箱two@2x.png */,
+				8114F6CA1D389717000B80E0 /* 绑定邮箱two@3x.png */,
+				8114F6CD1D389763000B80E0 /* 设置登录密码呀@2x.png */,
+				8114F6CE1D389763000B80E0 /* 设置登录密码呀@3x.png */,
+				8114F6D11D38A756000B80E0 /* 填写地址@2x.png */,
+				8114F6D21D38A756000B80E0 /* 填写地址@3x.png */,
+				8114F6D51D38B695000B80E0 /* 每日摇一摇@2x.png */,
+				8114F6D61D38B695000B80E0 /* 每日摇一摇@3x.png */,
+				8114F6D91D38B6E8000B80E0 /* 玩游戏中心@2x.png */,
+				8114F6DA1D38B6E8000B80E0 /* 玩游戏中心@3x.png */,
+				8114F6DD1D38B77B000B80E0 /* 邀请好朋友@2x.png */,
+				8114F6DE1D38B77B000B80E0 /* 邀请好朋友@3x.png */,
+			);
+			name = "活动中心";
+			sourceTree = "<group>";
+		};
 		811B62951CFFCA1900B6F17E /* 地址管理 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4048,6 +4109,7 @@
 		8143FCE81CD9C25300B65A2F /* TWOImage */ = {
 			isa = PBXGroup;
 			children = (
+				8114F6BC1D389593000B80E0 /* 活动中心 */,
 				8DF3C2311D377DB900AB1E9D /* TWOInviteNumber.png */,
 				8DF3C2121D372D0E00AB1E9D /* WelcomePage */,
 				8D4F38041D36117000BEF876 /* 网络 */,
@@ -7788,6 +7850,7 @@
 				8122C9511D12A91600070EAA /* 热卖@2x.png in Resources */,
 				8D43439A1BFDEB0B000BA004 /* loading_middle_01.png in Resources */,
 				81C9834F1D3389EC00F9093A /* 民生银行二@2x.png in Resources */,
+				8114F6C81D3896C5000B80E0 /* 实名认证two@3x.png in Resources */,
 				8177A0241CF2F47C0057AA7B /* winPrize@2x.png in Resources */,
 				8D840C6F1CE4516D005A17F9 /* TWOProductMakeSureThreeTableViewCell.xib in Resources */,
 				81D1F3811D2B892F00CFE067 /* TWONoDataCell.xib in Resources */,
@@ -7890,6 +7953,7 @@
 				81F02E5F1CFBD6E5002F3135 /* quanTwo@2x.png in Resources */,
 				8D855A571CE96A96007A4B22 /* TWOProductMonkeyView.xib in Resources */,
 				8DEDE1CC1BCCFF44008086D3 /* iconfont_complete@2x.png in Resources */,
+				8114F6D41D38A756000B80E0 /* 填写地址@3x.png in Resources */,
 				8D9011B41BD6337C00E5D62A /* 06@3x.png in Resources */,
 				81DEC8171CED967D005E9D9F /* loginSecret@3x.png in Resources */,
 				81F5FA121BDA1C2E008C38BF /* MoreCell.xib in Resources */,
@@ -7904,6 +7968,7 @@
 				81D1F37C1D2B7BB100CFE067 /* 中奖现金@3x.png in Resources */,
 				81C983571D338A1800F9093A /* 上海农村商业银行二@2x.png in Resources */,
 				817DD4941BCF547E00042B09 /* chongzhi@2x.png in Resources */,
+				8114F6D01D389763000B80E0 /* 设置登录密码呀@3x.png in Resources */,
 				817DD49E1BCF547E00042B09 /* jiaoyi@2x.png in Resources */,
 				810F9C731CDCA14800BF39B5 /* faxianclick@3x.png in Resources */,
 				8D1591141D0CF91D00A4353D /* production@3x.png in Resources */,
@@ -7941,6 +8006,7 @@
 				8D1591161D0CF91D00A4353D /* production_gray@3x.png in Resources */,
 				8D3EEA001C27AB400031F7C9 /* 交通银行@2x.png in Resources */,
 				81B84C181CE44AB200A867B9 /* touzis@2x.png in Resources */,
+				8114F6CC1D389717000B80E0 /* 绑定邮箱two@3x.png in Resources */,
 				8DEDE1C91BCCFF21008086D3 /* iconfont_greencuo@3x.png in Resources */,
 				8114F6B51D34D98F000B80E0 /* 总资产无数据@3x.png in Resources */,
 				819B52EC1BFC4462002FDF1E /* NewHandCSSCell.xib in Resources */,
@@ -7951,6 +8017,7 @@
 				8162D11E1BE1BCC900CACAB6 /* XinXiCell.xib in Resources */,
 				8143FD551CDAF2B900B65A2F /* yellowSanJiao@2x.png in Resources */,
 				817DD4AC1BCF547E00042B09 /* ziliao@2x.png in Resources */,
+				8114F6C41D389695000B80E0 /* 绑定银行卡er@3x.png in Resources */,
 				81CBE7E41CE9C201004FE1D4 /* 手机@2x.png in Resources */,
 				8DEDE1B61BCCFEB5008086D3 /* btn_red@3x.png in Resources */,
 				8D3A2FDC1BE70FBF00913DEC /* TextTableViewCell.xib in Resources */,
@@ -7959,6 +8026,7 @@
 				811B628C1CFE8B9D00B6F17E /* 每日一摇@2x.png in Resources */,
 				81DEC82E1CEED3A9005E9D9F /* zhongxing@2x.png in Resources */,
 				817E33A81BD7840000D05103 /* ChooseCell.xib in Resources */,
+				8114F6CB1D389717000B80E0 /* 绑定邮箱two@2x.png in Resources */,
 				8D98CC4A1CF69D0700E34ADE /* TWOProductJinDu@2x.png in Resources */,
 				815D19441D223F2600DFA753 /* 没有中奖@2x.png in Resources */,
 				8D35DA4F1CF5492E00C6409F /* TWOProductDDDetailView.xib in Resources */,
@@ -8066,6 +8134,7 @@
 				8DCE984A1CF2D6540067CBCD /* select.png in Resources */,
 				81CBE7C31CE99EDE004FE1D4 /* TWOAlreadyRealNameCell.xib in Resources */,
 				8DF3C22F1D372D0E00AB1E9D /* TWOWelcomTwo_480.png in Resources */,
+				8114F6D81D38B695000B80E0 /* 每日摇一摇@3x.png in Resources */,
 				8D15910F1D0CF91D00A4353D /* mine@2x.png in Resources */,
 				8D968A7A1C96A9FD00C9A6A1 /* mylicaishi@3x.png in Resources */,
 				81CBE7C61CE9A5EC004FE1D4 /* 手机号绑定.png in Resources */,
@@ -8078,6 +8147,7 @@
 				81A6EB121BE784BD00F9FDD1 /* NewBieCell.xib in Resources */,
 				8D3EEA1C1C27AB400031F7C9 /* 招商银行@2x.png in Resources */,
 				8D855A671CE9C48B007A4B22 /* TWOMessageTableViewCell.xib in Resources */,
+				8114F6DB1D38B6E8000B80E0 /* 玩游戏中心@2x.png in Resources */,
 				8D4343931BFDEB0B000BA004 /* loading_up_02.png in Resources */,
 				81DEC8241CEDA6B2005E9D9F /* bigpicture@2x.png in Resources */,
 				817DD4A41BCF547E00042B09 /* tixian@2x.png in Resources */,
@@ -8098,6 +8168,7 @@
 				81C138181BDF64D80088E792 /* LoginCell.xib in Resources */,
 				8143FD401CDAEFC100B65A2F /* 我的猴币@3x.png in Resources */,
 				813D3FD01C26933C0042DB88 /* Pos@2x.png in Resources */,
+				8114F6D31D38A756000B80E0 /* 填写地址@2x.png in Resources */,
 				8179EB2B1CEB126400BD7054 /* setFinish.png in Resources */,
 				81BA1BFE1BD4DE7000DBA5BE /* MoreActivityCell.xib in Resources */,
 				8184EC4B1BCCD13C003F440D /* CashMoneyCell.xib in Resources */,
@@ -8160,6 +8231,7 @@
 				8DC695BE1C3503D30055EC44 /* UMSCommentInputControlleriPad.xib in Resources */,
 				81C9832C1D30DD7400F9093A /* two招商@3x.png in Resources */,
 				8191E2281BDDF5F0000A6E8C /* lianxikefu@2x.png in Resources */,
+				8114F6CF1D389763000B80E0 /* 设置登录密码呀@2x.png in Resources */,
 				8DA7E17E1CE076B700D5D016 /* TWOProductDetailTableViewCell.xib in Resources */,
 				8143FD511CDAF26500B65A2F /* biyan@2x.png in Resources */,
 				810EBC051C9CFB55008FB51D /* iconfont-iconfuzhi.png in Resources */,
@@ -8322,6 +8394,7 @@
 				8D6E46991C9B9DD200F0F5B7 /* newLoginView.xib in Resources */,
 				8D840C801CE5D54B005A17F9 /* TWOProductMMakeSureView.xib in Resources */,
 				81FAAA331C256AC40020E9DD /* 充值成功@3x.png in Resources */,
+				8114F6DC1D38B6E8000B80E0 /* 玩游戏中心@3x.png in Resources */,
 				81AC90CA1BEC8C6600232404 /* BankWhichCell.xib in Resources */,
 				819B52D61BFC2094002FDF1E /* 银元宝@2x.png in Resources */,
 				8DF3C22A1D372D0E00AB1E9D /* TWOWelcomThree_480.png in Resources */,
@@ -8331,11 +8404,13 @@
 				81DEC8101CED94B3005E9D9F /* qiehuan@2x.png in Resources */,
 				8D6692801BD0D82100CD2CAF /* Home_refresh_bg.png in Resources */,
 				810EBC001C9CFB3D008FB51D /* iconfont-jingxuan-highlight.png in Resources */,
+				8114F6C31D389695000B80E0 /* 绑定银行卡er@2x.png in Resources */,
 				8179EB341CEC00A200BD7054 /* 登录密码修改成功.png in Resources */,
 				8D3F95D21BE1C28A00013A8E /* RegisterOfResult.xib in Resources */,
 				8DEACD051C17D00700548166 /* 默认头像.png in Resources */,
 				8175BEAF1BE9F2F50044026E /* 腾讯微博@3x.png in Resources */,
 				8184EC3C1BCCD0FE003F440D /* ContentCell.xib in Resources */,
+				8114F6D71D38B695000B80E0 /* 每日摇一摇@2x.png in Resources */,
 				81460C801D11418700A81703 /* yao@2x.png in Resources */,
 				8DEDE1B31BCCFEB5008086D3 /* arrow@2x.png in Resources */,
 				819B52E21BFC2094002FDF1E /* 邀请@2x.png in Resources */,
@@ -8413,6 +8488,7 @@
 				8D29F9811C08047D00D45E43 /* 已打开@2x.png in Resources */,
 				8D6E46731C9932AA00F0F5B7 /* myCastTableViewCell.xib in Resources */,
 				8D3EEA1D1C27AB400031F7C9 /* 招商银行@3x.png in Resources */,
+				8114F6C71D3896C5000B80E0 /* 实名认证two@2x.png in Resources */,
 				8DC695BF1C3503D30055EC44 /* UMShareEditViewController.xib in Resources */,
 				81F02E5C1CFBD665002F3135 /* historyQuan@2x.png in Resources */,
 				818063A61BD5D89000E83492 /* InviteNameCell.xib in Resources */,
@@ -8442,6 +8518,7 @@
 				81C983231D30DD7400F9093A /* two农业@2x.png in Resources */,
 				8D66927B1BD0D27D00CD2CAF /* gesture_node_normal.png in Resources */,
 				8D0AE7F41BE09CE500D9D50C /* iconfont-register-gantanhao001@2x.png in Resources */,
+				8114F6E01D38B77B000B80E0 /* 邀请好朋友@3x.png in Resources */,
 				810F9C6F1CDCA10700BF39B5 /* faxian@3x.png in Resources */,
 				81C9832B1D30DD7400F9093A /* two招商@2x.png in Resources */,
 				81D1F3781D2B7BB100CFE067 /* 中奖红包@3x.png in Resources */,
@@ -8532,6 +8609,7 @@
 				8191E2291BDDF5F0000A6E8C /* lianxikefu@3x.png in Resources */,
 				818523B91BE31B80002FC653 /* 已售罄@2x.png in Resources */,
 				81DEC7CB1CEC3B10005E9D9F /* question@2x.png in Resources */,
+				8114F6C01D3895A1000B80E0 /* 开通汇付去@3x.png in Resources */,
 				8D855A6B1CE9C558007A4B22 /* messagePoint@2x.png in Resources */,
 				8175BEC21BEA052E0044026E /* 拆红包@2x.png in Resources */,
 				8190A30A1BD87D3E002B53F5 /* AddCardCell.xib in Resources */,
@@ -8709,6 +8787,7 @@
 				8D3EEA221C27AB400031F7C9 /* 渤海银行@2x.png in Resources */,
 				81379F1B1BEAF56F002CDB16 /* 使用@2x.png in Resources */,
 				81DEC81B1CED96A5005E9D9F /* phoneNumber@3x.png in Resources */,
+				8114F6BF1D3895A1000B80E0 /* 开通汇付去@2x.png in Resources */,
 				81B84BD41CE2D61B00A867B9 /* 已经兑付@3x.png in Resources */,
 				8DEDE1D11BCCFFA5008086D3 /* blueyuan@3x.png in Resources */,
 				8114F6A81D349F0A000B80E0 /* 我的头像er@2x.png in Resources */,
@@ -8760,6 +8839,7 @@
 				819C3ABB1BD483C4008D2CFD /* MyRedBagCell.xib in Resources */,
 				81600A661CB4E83D0075CD45 /* monkeyNumber@2x.png in Resources */,
 				8D9011A81BD6337C00E5D62A /* 12@3x.png in Resources */,
+				8114F6DF1D38B77B000B80E0 /* 邀请好朋友@2x.png in Resources */,
 				817DD4981BCF547E00042B09 /* haoyou@2x.png in Resources */,
 				8D55DB061BC7BE91004649CE /* shouyebanner.png in Resources */,
 				81F0805E1D17EBCC005BDB37 /* jiaxijuan@2x.png in Resources */,

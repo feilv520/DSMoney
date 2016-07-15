@@ -96,6 +96,7 @@
 - (void)nsboticeShake:(NSNotification *)nsnotice
 {
     [self showCiShuData];
+    shakeSatate = YES;
 }
 
 - (BOOL)canBecomeFirstResponder
@@ -510,8 +511,8 @@
     
     momAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
 //    改变摇动的幅度
-    momAnimation.fromValue = [NSNumber numberWithFloat:-0.3];
-    momAnimation.toValue = [NSNumber numberWithFloat:0.3];
+    momAnimation.fromValue = [NSNumber numberWithFloat:-0.2];
+    momAnimation.toValue = [NSNumber numberWithFloat:0.2];
 //    改变摇动的速度
     momAnimation.duration = 0.5;
 //    控制摇摆的时间
@@ -571,8 +572,8 @@
     
     momAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
 //    改变摇动的幅度
-    momAnimation.fromValue = [NSNumber numberWithFloat:-0.3];
-    momAnimation.toValue = [NSNumber numberWithFloat:0.3];
+    momAnimation.fromValue = [NSNumber numberWithFloat:-0.2];
+    momAnimation.toValue = [NSNumber numberWithFloat:0.2];
 //    改变摇动的速度
     momAnimation.duration = 0.5;
 //    控制摇摆的时间

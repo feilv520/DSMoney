@@ -12,7 +12,6 @@
             <string>CenturyGothic</string>
             <string>CenturyGothic</string>
             <string>CenturyGothic</string>
-            <string>CenturyGothic</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -70,14 +69,6 @@
                         <color key="textColor" red="0.5490196078431373" green="0.56470588235294117" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VSH-Ou-ZiI">
-                        <rect key="frame" x="135" y="139" width="182" height="13"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="11"/>
-                        <color key="textColor" red="0.5490196078431373" green="0.56470588235294117" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hC8-hh-ppa">
                         <rect key="frame" x="334" y="16" width="23" height="137"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -87,7 +78,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="1" green="0.42745098040000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gwz-ow-xfh">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gwz-ow-xfh">
                         <rect key="frame" x="15" y="140" width="119" height="13"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -102,7 +93,6 @@
                 <outlet property="imageWait" destination="mDm-ze-j7o" id="s3W-gT-Dpm"/>
                 <outlet property="labelEvery" destination="dz8-O2-PFr" id="vub-q8-Iku"/>
                 <outlet property="labelPercent" destination="yfC-ln-Tye" id="4hK-3n-gDA"/>
-                <outlet property="labelShuoMing" destination="VSH-Ou-ZiI" id="IbJ-fw-txI"/>
                 <outlet property="labelTiaoJian" destination="oaE-V7-iLB" id="F6b-dD-Nc9"/>
                 <outlet property="labelTime" destination="Zsb-MR-9MP" id="54f-nO-gki"/>
                 <outlet property="laeblData" destination="fWM-is-4yg" id="vsn-Mr-Cos"/>

@@ -104,8 +104,7 @@
             cell.labelEvery.frame = CGRectMake(100, 56, 170, 14);
             cell.laeblData.frame = CGRectMake(100, 81, 170, 12);
             cell.labelTime.frame = CGRectMake(100, 123, 170, 13);
-            cell.laeblMoney.frame = CGRectMake(12, 140, 112, 13);
-            cell.labelShuoMing.frame = CGRectMake(125, 139, 145, 13);
+            cell.laeblMoney.frame = CGRectMake(125, 139, 145, 13);
         } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
             cell.labelPercent.frame = CGRectMake(10, 56, 105, 40);
         } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
@@ -114,8 +113,7 @@
             cell.labelEvery.frame = CGRectMake(130, 56, 220, 14);
             cell.laeblData.frame = CGRectMake(130, 81, 220, 12);
             cell.labelTime.frame = CGRectMake(130, 123, 220, 13);
-            cell.labelShuoMing.frame = CGRectMake(175, 139, 175, 13);
-            cell.laeblMoney.frame = CGRectMake(12, 140, 160, 13);
+            cell.laeblMoney.frame = CGRectMake(175, 139, 175, 13);
             cell.buttonWait.frame = CGRectMake(370, 17, 23, 127);
         }
         
@@ -152,13 +150,6 @@
         cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", [jiaXiQuanModel productDueDate]];
         cell.labelTime.textColor = [UIColor findZiTiColor];
         cell.labelTime.backgroundColor = [UIColor clearColor];
-        
-        cell.labelShuoMing.text = @"(到期日后7个工作日内兑付至余额)";
-        cell.labelShuoMing.textColor = [UIColor findZiTiColor];
-        cell.labelShuoMing.backgroundColor = [UIColor clearColor];
-        if (WIDTH_CONTROLLER_DEFAULT == 320) {
-            cell.labelShuoMing.font = [UIFont fontWithName:@"CenturyGothic" size:9];
-        }
         
         [cell.buttonWait setTitle:@"已\n兑\n付" forState:UIControlStateNormal];
         cell.buttonWait.titleLabel.numberOfLines = 3;

@@ -41,6 +41,7 @@
     BOOL jiaMoreFlag;
     
     BOOL switchFlag;
+    NSString *canMakeNum;
 }
 
 @end
@@ -256,7 +257,7 @@
     UIView *viewHead = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT, 0, WIDTH_CONTROLLER_DEFAULT, 65) backgroundColor:[UIColor whiteColor]];
     [_scrollView addSubview:viewHead];
     
-    UIButton *butCanUseJ = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 36) backgroundColor:[UIColor redBagBankColor] textColor:[UIColor profitColor] titleText:[NSString stringWithFormat:@"%@张可用加息券, 去使用>", [NSString stringWithFormat:@"%lu", (unsigned long)jiaXiQuanArray.count]]];
+    UIButton *butCanUseJ = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 36) backgroundColor:[UIColor redBagBankColor] textColor:[UIColor profitColor] titleText:[NSString stringWithFormat:@"%@张可用加息券, 去使用>", canMakeNum]];
     [viewHead addSubview:butCanUseJ];
     butCanUseJ.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [butCanUseJ addTarget:self action:@selector(goToUseRedBagButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -395,8 +396,7 @@
                 cell.labelEvery.frame = CGRectMake(100, 56, 170, 14);
                 cell.laeblData.frame = CGRectMake(100, 81, 170, 12);
                 cell.labelTime.frame = CGRectMake(100, 123, 170, 13);
-                cell.laeblMoney.frame = CGRectMake(12, 140, 112, 13);
-                cell.labelShuoMing.frame = CGRectMake(125, 139, 145, 13);
+                cell.laeblMoney.frame = CGRectMake(125, 139, 145, 13);
             } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
                 cell.labelPercent.frame = CGRectMake(10, 56, 105, 40);
             } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
@@ -405,8 +405,7 @@
                 cell.labelEvery.frame = CGRectMake(130, 56, 220, 14);
                 cell.laeblData.frame = CGRectMake(130, 81, 220, 12);
                 cell.labelTime.frame = CGRectMake(130, 123, 220, 13);
-                cell.labelShuoMing.frame = CGRectMake(175, 139, 175, 13);
-                cell.laeblMoney.frame = CGRectMake(12, 140, 160, 13);
+                cell.laeblMoney.frame = CGRectMake(175, 139, 175, 13);
                 cell.buttonWait.frame = CGRectMake(370, 17, 23, 127);
             }
             
@@ -443,12 +442,6 @@
             
             cell.labelTime.text = [NSString stringWithFormat:@"产品到期日:%@", [jiaXiModel productDueDate]];
             cell.labelTime.backgroundColor = [UIColor clearColor];
-            
-            cell.labelShuoMing.text = @"(到期日后7个工作日内兑付至余额)";
-            cell.labelShuoMing.backgroundColor = [UIColor clearColor];
-            if (WIDTH_CONTROLLER_DEFAULT == 320) {
-                cell.labelShuoMing.font = [UIFont fontWithName:@"CenturyGothic" size:9];
-            }
             
             [cell.buttonWait setTitle:@"待\n兑\n付" forState:UIControlStateNormal];
             cell.buttonWait.titleLabel.numberOfLines = 3;
@@ -689,7 +682,7 @@
             [butCanUse setTitle:[NSString stringWithFormat:@"%@张可用红包,去使用>", [responseObject objectForKey:@"redPacketCount"]] forState:UIControlStateNormal];
             NSLog(@"%@", [responseObject objectForKey:@"redPacketCount"]);
         } else {
-            [self noHaveJiaXiQuanShow];
+            
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -711,6 +704,8 @@
         [jiaFooter endRefreshing];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            canMakeNum = [responseObject objectForKey:@"incrCount"];
             NSMutableArray *dataArray = [responseObject objectForKey:@"Increase"];
             for (NSDictionary *dataDic in dataArray) {
                 jiaXiQuanModel = [[TWOJiaXiQuanModel alloc] init];
@@ -733,7 +728,7 @@
                 [_tableViewJia reloadData];
             }
         } else {
-            [self noHaveJiaXiQuanShow];
+
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
