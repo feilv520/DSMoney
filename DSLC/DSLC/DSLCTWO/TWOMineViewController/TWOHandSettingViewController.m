@@ -123,16 +123,12 @@
     
     if (isButtonOn) {
         flag = YES;
-        [dic setValue:@"YES" forKey:@"handFlag"];
-        [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
         
         MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
         pushVC(myHandVC);
         
     }else {
         flag = NO;
-        [dic setValue:@"NO" forKey:@"handFlag"];
-        [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
         
         MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
         myHandVC.flagString = @"YES";

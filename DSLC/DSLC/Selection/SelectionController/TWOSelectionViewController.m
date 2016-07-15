@@ -729,10 +729,17 @@
                 
                 [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                 
-                [self collectionViewShow];
-                
-                noNetworkMonkey.hidden = YES;
-                reloadButton.hidden = YES;
+                if (pickArray.count != 0) {
+                    
+                    [self collectionViewShow];
+                    noNetworkMonkey.hidden = YES;
+                    reloadButton.hidden = YES;
+                    [_scrollView setHidden:NO];
+                } else {
+                    
+                    [self noDataShowMoney];
+                    [_scrollView setHidden:YES];
+                }
                 
             } else {
                 [self loadingWithHidden:YES];
@@ -769,10 +776,15 @@
                 if (pickArray.count != 0) {
                     
                     [self collectionViewShow];
+                    noNetworkMonkey.hidden = YES;
+                    reloadButton.hidden = YES;
+                    [_scrollView setHidden:NO];
+                } else {
+                    
+                    [self noDataShowMoney];
+                    [_scrollView setHidden:YES];
                 }
                 
-                noNetworkMonkey.hidden = YES;
-                reloadButton.hidden = YES;
                 
             } else {
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -836,6 +848,9 @@
             NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
             // 更改timer对象的优先级
             [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+            
+            noNetworkMonkey.hidden = YES;
+            reloadButton.hidden = YES;
         } else {
             
             [self upContentShow];
@@ -844,8 +859,6 @@
             [self getProductList];
         }
         
-        noNetworkMonkey.hidden = YES;
-        reloadButton.hidden = YES;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

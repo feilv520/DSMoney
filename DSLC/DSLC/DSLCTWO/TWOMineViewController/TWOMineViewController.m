@@ -1099,6 +1099,8 @@
             
             NSLog(@"00000----%@",[myAccount invitationMyCode]);
             
+            [memberDic setObject:[myAccount accBalance] forKey:@"accBalance"];
+            
             [memberDic setObject:[myAccount invitationMyCode] forKey:@"invitationMyCode"];
             
             [memberDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];

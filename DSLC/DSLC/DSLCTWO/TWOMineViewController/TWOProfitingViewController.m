@@ -269,7 +269,7 @@
         
         TWOProductDDetailViewController *MoneyDetaiVC = [[TWOProductDDetailViewController alloc] init];
         MoneyDetaiVC.assetId = [dic objectForKey:@"assetId"];
-        MoneyDetaiVC.assetTitle = [dic objectForKey:@"assetTitle"];
+        MoneyDetaiVC.assetTitle = [dic objectForKey:@"assetName"];
         pushVC(MoneyDetaiVC);
     }
 }

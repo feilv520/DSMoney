@@ -12,6 +12,8 @@
 #import "TWOGameListModel.h"
 #import "TWOLoginAPPViewController.h"
 #import "TWOGameCenterExplainViewController.h"
+#import "BannerViewController.h"
+#import "AdModel.h"
 
 @interface TWOgameCenterViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -20,6 +22,15 @@
     UIButton *butStrategy;
     UIButton *butScore;
     NSMutableArray *gameListArray;
+    
+    UIImageView *imageViewBanner;
+    
+    // 轮播图
+    UIPageControl *pageControl;
+    NSTimer *timer;
+    UIScrollView *bannerScrollView;
+    NSMutableArray *photoArray;
+    UIView *viewScroll;
 }
 
 @end
@@ -35,6 +46,7 @@
     gameListArray = [NSMutableArray array];
     
     [self getDataList];
+    [self getAdvList];
     [self tabelViewShow];
 }
 
@@ -53,20 +65,26 @@
 
 - (void)tableViewHeadShow
 {
-    UIImageView *imageViewBanner = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor greenColor] setImage:[UIImage imageNamed:@"gameBanner"]];
-    [_tableView.tableHeaderView addSubview:imageViewBanner];
+    if (photoArray == nil || photoArray.count == 0) {
+
+        imageViewBanner = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor greenColor] setImage:[UIImage imageNamed:@"gameBanner"]];
+        [_tableView.tableHeaderView addSubview:imageViewBanner];
+    } else {
+        viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor qianhuise]];
+        [_tableView.tableHeaderView addSubview:viewScroll];
+    }
     
     CGFloat butWidth = (WIDTH_CONTROLLER_DEFAULT - 29)/2;
     
 //    游戏攻略
-    butStrategy = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, imageViewBanner.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), butWidth, 72.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor colorWithRed:62.0 / 225.0 green:184.0 / 225.0 blue:240.0 / 225.0 alpha:1.0] textColor:[UIColor whiteColor] titleText:nil];
+    butStrategy = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), butWidth, 72.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor colorWithRed:62.0 / 225.0 green:184.0 / 225.0 blue:240.0 / 225.0 alpha:1.0] textColor:[UIColor whiteColor] titleText:nil];
     [_tableView.tableHeaderView addSubview:butStrategy];
     butStrategy.layer.cornerRadius = 3;
     butStrategy.layer.masksToBounds = YES;
     [butStrategy addTarget:self action:@selector(buttonStrategy:) forControlEvents:UIControlEventTouchUpInside];
     
 //    游戏积分
-    butScore = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10 + butWidth + 9, imageViewBanner.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), butWidth, 72.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor colorWithRed:253.0 / 225.0 green:135.0 / 225.0 blue:74.0 / 225.0 alpha:1.0] textColor:[UIColor whiteColor] titleText:nil];
+    butScore = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10 + butWidth + 9, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), butWidth, 72.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor colorWithRed:253.0 / 225.0 green:135.0 / 225.0 blue:74.0 / 225.0 alpha:1.0] textColor:[UIColor whiteColor] titleText:nil];
     [_tableView.tableHeaderView addSubview:butScore];
     butScore.layer.cornerRadius = 3;
     butScore.layer.masksToBounds = YES;
@@ -241,6 +259,218 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+// 广告滚动控件
+- (void)makeScrollView{
+    NSInteger photoIndex = photoArray.count + 2;
+    
+    bannerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
+    bannerScrollView.backgroundColor = Color_Clear;
+    bannerScrollView.contentSize = CGSizeMake(WIDTH_CONTROLLER_DEFAULT * photoIndex,0);
+    bannerScrollView.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
+    bannerScrollView.showsHorizontalScrollIndicator = NO;
+    bannerScrollView.showsVerticalScrollIndicator = NO;
+    bannerScrollView.pagingEnabled = YES;
+    
+    bannerScrollView.delegate = self;
+    
+    [viewScroll addSubview:bannerScrollView];
+    
+    YYAnimatedImageView *bannerFirst = [YYAnimatedImageView new];
+    bannerFirst.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:0] adImg]];
+    bannerFirst.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    
+    YYAnimatedImageView *bannerLast = [YYAnimatedImageView new];
+    bannerLast.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:photoArray.count - 1] adImg]];
+    bannerLast.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    
+    for (NSInteger i = 0; i < photoArray.count; i++) {
+        YYAnimatedImageView *bannerObject = [YYAnimatedImageView new];
+        bannerObject.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:i] adImg]];
+        bannerObject.tag = i;
+        bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+        UITapGestureRecognizer *tapLeft = [[UITapGestureRecognizer alloc] init];
+        [bannerObject addGestureRecognizer:tapLeft];
+        [tapLeft addTarget:self action:@selector(bannerObject:)];
+        bannerObject.userInteractionEnabled = YES;
+        
+        //手指数
+        tapLeft.numberOfTouchesRequired = 1;
+        //点击次数
+        tapLeft.numberOfTapsRequired = 1;
+        
+        [bannerScrollView addSubview:bannerObject];
+    }
+    
+    [bannerScrollView addSubview:bannerFirst];
+    [bannerScrollView addSubview:bannerLast];
+    
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 150, WIDTH_CONTROLLER_DEFAULT, 30)];
+    
+    pageControl.numberOfPages = photoArray.count;
+    pageControl.currentPage = 0;
+    
+    [self changePageControlImage];
+    
+    [viewScroll addSubview:pageControl];
+    
+}
+
+// 滚动后的执行方法
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    if (bannerScrollView == scrollView) {
+        CGPoint offset = [scrollView contentOffset];
+        
+        //更新UIPageControl的当前页
+        CGRect bounds = scrollView.frame;
+        [pageControl setCurrentPage:offset.x / bounds.size.width - 1];
+        
+        if (offset.x == WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1)) {
+            [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+            pageControl.currentPage = 0;
+        } else if (offset.x == 0) {
+            [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
+            pageControl.currentPage = photoArray.count - 1;
+        }
+    }
+}
+
+// 准备滚动时候的执行方法
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    [timer invalidate];
+    // 调用invalidate方法后,对象已经无法使用,所以要指向nil.
+    timer = nil;
+}
+
+- (void)bannerObject:(UITapGestureRecognizer *)tap
+{
+    BannerViewController *bannerVC = [[BannerViewController alloc] init];
+    bannerVC.photoName = [[photoArray objectAtIndex:pageControl.currentPage] adLabel];
+    bannerVC.photoUrl = [[photoArray objectAtIndex:pageControl.currentPage] adLink];
+    bannerVC.page = pageControl.currentPage;
+    pushVC(bannerVC);
+}
+
+// 拖住完成的执行方法
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+    
+    // 修改timer的优先级与控件一致
+    // 获取当前的消息循环对象
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    // 更改timer对象的优先级
+    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    
+}
+
+//改变pagecontrol中圆点样式
+- (void)changePageControlImage
+{
+    static UIImage *imgCurrent = nil;
+    static UIImage *imgOther = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        imgCurrent = [UIImage imageNamed:@"banner_red"];
+        imgOther = [UIImage imageNamed:@"banner_black"];
+    });
+    
+    
+    if (iOS7) {
+        [pageControl setValue:imgCurrent forKey:@"_currentPageImage"];
+        [pageControl setValue:imgOther forKey:@"_pageImage"];
+    } else {
+        for (int i = 0;i < 3; i++) {
+            UIImageView *imageVieW = [pageControl.subviews objectAtIndex:i];
+            imageVieW.frame = CGRectMake(imageVieW.frame.origin.x, imageVieW.frame.origin.y, 20, 20);
+            imageVieW.image = pageControl.currentPage == i ? imgCurrent : imgOther;
+        }
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    CGPoint offset = [scrollView contentOffset];
+    
+    if (offset.x == WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1)) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+        pageControl.currentPage = 0;
+    } else if (offset.x == 0) {
+        [bannerScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT * photoArray.count, 0) animated:NO];
+        pageControl.currentPage = photoArray.count - 1;
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y < -20) {
+        _tableView.scrollEnabled = NO;
+    } else {
+        _tableView.scrollEnabled = YES;
+    }
+}
+
+- (void)scrollViewFuction{
+    
+    [bannerScrollView setContentOffset:CGPointMake((pageControl.currentPage + 2) * WIDTH_CONTROLLER_DEFAULT, 0) animated:YES];
+    
+    if (pageControl == nil) {
+        pageControl.currentPage = 0;
+    } else {
+        pageControl.currentPage += 1;
+    }
+    
+}
+
+- (void)getAdvList{
+    
+    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"9"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [self loadingWithHidden:YES];
+        
+        NSLog(@"AD = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            return ;
+        }
+        
+        pageControl.numberOfPages = [[responseObject objectForKey:@"Advertise"] count];
+        
+        if (photoArray != nil) {
+            [photoArray removeAllObjects];
+            photoArray = nil;
+            photoArray = [NSMutableArray array];
+        }
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
+            AdModel *adModel = [[AdModel alloc] init];
+            [adModel setValuesForKeysWithDictionary:dic];
+            [photoArray addObject:adModel];
+        }
+        
+        if (photoArray.count != 0) {
+            
+            [self makeScrollView];
+            
+            timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+            NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+            // 更改timer对象的优先级
+            [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+            
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
         
     }];
 }
