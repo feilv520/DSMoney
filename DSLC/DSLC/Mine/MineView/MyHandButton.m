@@ -53,8 +53,8 @@ NSInteger const columnCount = 3;
 // 布局按钮
 - (void)AddButton{
     CGFloat height = 0;
-    btnW = (btnW / 375) * WIDTH_CONTROLLER_DEFAULT;
-    btnH = (btnH / 375) * WIDTH_CONTROLLER_DEFAULT;
+//    btnW = (btnW / 375) * WIDTH_CONTROLLER_DEFAULT;
+//    btnH = (btnH / 375) * WIDTH_CONTROLLER_DEFAULT;
     for (NSInteger i = 0; i < btnCount; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         
@@ -72,11 +72,15 @@ NSInteger const columnCount = 3;
         
         // 边距
         if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            
             CGFloat margin = 30;
             btnX = margin + column * (btnW + margin);
             btnY = row * (btnW + margin);
         } else {
-            CGFloat margin = (self.frame.size.width - columnCount * btnW) / (columnCount + 1);
+            
+            CGFloat margin = (WIDTH_CONTROLLER_DEFAULT - columnCount * btnW) / (columnCount + 1);
+            NSLog(@"width = %lf",WIDTH_CONTROLLER_DEFAULT);
+            NSLog(@"margin = %lf",margin);
             btnX = margin + column * (btnW + margin);
             btnY = row * (btnW + margin);
         }

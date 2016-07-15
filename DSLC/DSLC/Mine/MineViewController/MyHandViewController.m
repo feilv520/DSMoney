@@ -113,10 +113,19 @@
         self.cancelButton.hidden = NO;
     } else {
         
-        self.titleLabel.text = @"请输入解锁图案";
-        self.otherUserButton.hidden = NO;
-        self.forgetButton.hidden = NO;
-        self.cancelButton.hidden = YES;
+        if (self.flagString != nil) {
+            
+            self.titleLabel.text = @"请输入解锁图案";
+            self.otherUserButton.hidden = YES;
+            self.forgetButton.hidden = YES;
+            self.cancelButton.hidden = NO;
+        } else {
+            
+            self.titleLabel.text = @"请输入解锁图案";
+            self.otherUserButton.hidden = NO;
+            self.forgetButton.hidden = NO;
+            self.cancelButton.hidden = YES;
+        }
     }
     
     [self.forgetButton addTarget:self action:@selector(forgetAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -154,6 +163,7 @@
             if ([tempPathString isEqualToString:path]) {
                 
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码设置成功"];
+                [dic setValue:@"YES" forKey:@"handFlag"];
                 [dic setValue:path forKey:@"handString"];
                 [dic setValue:@"NO" forKey:@"ifSetHandFlag"];
                 [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
@@ -169,8 +179,14 @@
     } else {
         self.titleLabel.text = @"请输入解锁图案";
         if (self.flagString != nil) {
+            
+            self.otherUserButton.hidden = YES;
+            self.forgetButton.hidden = YES;
+            self.cancelButton.hidden = NO;
+            
             NSString *handString = [dic objectForKey:@"handString"];
             if ([path isEqualToString:handString]) {
+                [dic setValue:@"NO" forKey:@"handFlag"];
                 [dic setValue:@"YES" forKey:@"ifSetHandFlag"];
                 [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码成功关闭"];

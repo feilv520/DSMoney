@@ -65,6 +65,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self tabelViewShow];
+    
+    [self getAdvList];
 }
 
 - (void)tabelViewShow
@@ -111,15 +113,18 @@
     flowLayout.minimumInteritemSpacing = 5;
 //    纵向间距
     flowLayout.minimumLineSpacing = 5;
-    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 220) collectionViewLayout:flowLayout];
+    if (_collection == nil) {
+        
+        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 220) collectionViewLayout:flowLayout];
+        _collection.dataSource = self;
+        _collection.delegate = self;
+        _collection.scrollEnabled = NO;
+        _collection.backgroundColor = [UIColor whiteColor];
+        _collection.contentInset = UIEdgeInsetsMake(6, 9, 6, 9);
+        [_collection registerNib:[UINib nibWithNibName:@"TwoActivityCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
+        [_collection registerNib:[UINib nibWithNibName:@"PleaseExpectCell" bundle:nil] forCellWithReuseIdentifier:@"reuse5"];
+    }
     [_tableView.tableHeaderView addSubview:_collection];
-    _collection.dataSource = self;
-    _collection.delegate = self;
-    _collection.scrollEnabled = NO;
-    _collection.backgroundColor = [UIColor whiteColor];
-    _collection.contentInset = UIEdgeInsetsMake(6, 9, 6, 9);
-    [_collection registerNib:[UINib nibWithNibName:@"TwoActivityCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
-    [_collection registerNib:[UINib nibWithNibName:@"PleaseExpectCell" bundle:nil] forCellWithReuseIdentifier:@"reuse5"];
     
 //    金箍棒
     imageDian = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -441,6 +446,56 @@
     } else {
         _tableView.scrollEnabled = YES;
     }
+}
+
+- (void)getAdvList{
+    
+    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"12"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [self loadingWithHidden:YES];
+        
+        NSLog(@"AD = %@",responseObject);
+        
+        [self tableViewShowHead];
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            return ;
+        }
+        
+        pageControl.numberOfPages = [[responseObject objectForKey:@"Advertise"] count];
+        
+        if (photoArray != nil) {
+            [photoArray removeAllObjects];
+            photoArray = nil;
+            photoArray = [NSMutableArray array];
+        }
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
+            AdModel *adModel = [[AdModel alloc] init];
+            [adModel setValuesForKeysWithDictionary:dic];
+            [photoArray addObject:adModel];
+        }
+        
+        if (photoArray.count != 0) {
+    
+            [self makeScrollView];
+            
+            timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+            NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+            // 更改timer对象的优先级
+            [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+            
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

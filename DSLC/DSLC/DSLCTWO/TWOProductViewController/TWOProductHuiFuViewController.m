@@ -176,6 +176,8 @@
         
         [app.tabBarVC setTabbarViewHidden:YES];
         [self.navigationController popToRootViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfoFuction" object:nil];
     }
     
     NSLog(@"requestString = %@",requestString);
