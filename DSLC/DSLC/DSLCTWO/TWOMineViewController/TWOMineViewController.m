@@ -307,13 +307,13 @@
         if (imgView == nil) {
             imgView = [YYAnimatedImageView new];
             imgView.tag = 4739;
-            imgView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
             imgView.frame = CGRectMake(0, 0, butHeadImage.frame.size.width, butHeadImage.frame.size.height);
             imgView.layer.cornerRadius = imgView.frame.size.width/2;
             imgView.layer.masksToBounds = YES;
             imgView.layer.borderColor = [[UIColor pictureColor] CGColor];
             imgView.layer.borderWidth = 2.5;
         }
+        imgView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
         [butHeadImage addSubview:imgView];
     }
     

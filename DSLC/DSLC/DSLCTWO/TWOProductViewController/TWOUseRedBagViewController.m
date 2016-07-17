@@ -183,7 +183,10 @@
         for (NSDictionary *dic in redPackArray) {
             TWORedBagModel *model = [[TWORedBagModel alloc] init];
             [model setValuesForKeysWithDictionary:dic];
-            if ([[[model isEnabled] description] isEqualToString:@"0"]) {
+            
+            if ([[[model redPacketType] description] isEqualToString:@"7"]) {
+                
+            } else if ([[[model isEnabled] description] isEqualToString:@"0"]) {
                 [moneyArray addObject:model];
             } else {
                 [moneyNoArray addObject:model];

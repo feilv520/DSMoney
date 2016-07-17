@@ -79,8 +79,6 @@ NSInteger const columnCount = 3;
         } else {
             
             CGFloat margin = (WIDTH_CONTROLLER_DEFAULT - columnCount * btnW) / (columnCount + 1);
-            NSLog(@"width = %lf",WIDTH_CONTROLLER_DEFAULT);
-            NSLog(@"margin = %lf",margin);
             btnX = margin + column * (btnW + margin);
             btnY = row * (btnW + margin);
         }

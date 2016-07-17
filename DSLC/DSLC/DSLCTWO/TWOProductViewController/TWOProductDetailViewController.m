@@ -194,14 +194,15 @@
         
     } else {
         NSLog(@"%@",self.residueMoney);
-        [butMakeSure setTitle:@"立即投资" forState:UIControlStateNormal];
-        [butMakeSure setBackgroundColor:[UIColor profitColor]];
+        
         if ([self.residueMoney isEqualToString:@"0.00"]) {
             
             butMakeSure.enabled = NO;
             butMakeSure.backgroundColor = [UIColor grayColor];
+            [butMakeSure setTitle:@"收益中" forState:UIControlStateNormal];
         } else {
-            
+            [butMakeSure setTitle:@"立即投资" forState:UIControlStateNormal];
+            [butMakeSure setBackgroundColor:[UIColor profitColor]];
             butMakeSure.enabled = YES;
         }
     }
@@ -272,15 +273,8 @@
     
     [UIView animateWithDuration:2.f animations:^{
         
-        CGFloat flagNumber = bfNumber * 100;
-        
-        if (flagNumber < 1) {
-         
-            bfLabel.text = @"1%";
-        } else {
-        
-            bfLabel.text = [NSString stringWithFormat:@"%.0lf%%",bfNumber * 100];
-        }
+        bfLabel.text = [NSString stringWithFormat:@"%.0lf%%",bfNumber * 100];
+
         if ([bfLabel.text floatValue] > 10 && [bfLabel.text floatValue] < 94) {
             
             monkeyImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * bfNumber, 84, 20, 30);
@@ -421,6 +415,14 @@
                 cell.valueLabel.text = @"无限额";
             } else if ([[[self.detailM productType] description] isEqualToString:@"3"]) {
                 cell.valueLabel.text = @"仅限5000元体验金";
+            } else if ([[[self.detailM productType] description] isEqualToString:@"5"]) {
+                cell.valueLabel.text = @"无限额";
+            } else if ([[[self.detailM productType] description] isEqualToString:@"6"]) {
+                cell.valueLabel.text = @"无限额";
+            } else if ([[[self.detailM productType] description] isEqualToString:@"7"]) {
+                cell.valueLabel.text = @"无限额";
+            } else if ([[[self.detailM productType] description] isEqualToString:@"8"]) {
+                cell.valueLabel.text = @"无限额";
             } else {
                 cell.valueLabel.text = @"单人累计投资限额2万元";
             }
@@ -740,7 +742,7 @@
 //自动计算
 - (void)textFiledEditChange:(UITextField *)textField
 {
-    calendar.totalLabel.text = [NSString stringWithFormat:@"¥%.2f元",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
+    calendar.totalLabel.text = [NSString stringWithFormat:@"¥%.0f元",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
 }
 
 //return按钮

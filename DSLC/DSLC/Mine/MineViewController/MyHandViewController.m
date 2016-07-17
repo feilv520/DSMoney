@@ -39,6 +39,8 @@
     UIImageView *imageSign;
     
     NSString *tempPathString;
+    
+    BOOL handFlag;
 }
 @property (nonatomic) KKTabBarViewController *tabBarVC;
 
@@ -101,16 +103,28 @@
     
     self.userPhone.text = [[userDic objectForKey:@"phone"] stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
     
+    NSDictionary *userDIC = [dic objectForKey:[userDic objectForKey:@"phone"]];
+    
+    NSLog(@"userDIC2 = %@",userDIC);
+    
     failCount = 5;
     
     tempPathString = @"1";
     
-    BOOL handFlag = [[dic objectForKey:@"ifSetHandFlag"] boolValue];
+    if (userDIC == nil) {
+        
+        handFlag = YES;
+    } else {
+        
+        handFlag = [[userDIC objectForKey:@"ifSetHandFlag"] boolValue];
+    }
+    
     
     if (handFlag) {
         
         self.titleLabel.text = @"请设置手势密码";
         self.cancelButton.hidden = NO;
+        self.userPhone.hidden = YES;
     } else {
         
         if (self.flagString != nil) {
@@ -138,10 +152,16 @@
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
     
-    BOOL handFlag = [[dic objectForKey:@"ifSetHandFlag"] boolValue];
+    NSDictionary *userDIC = [dic objectForKey:[userDic objectForKey:@"phone"]];
+    
+    NSLog(@"phone1 = %@",[userDic objectForKey:@"phone"]);
+    NSLog(@"userDIC1 = %@",userDIC);
     
     if (handFlag) {
+        
         self.titleLabel.text = @"请设置手势密码";
+        self.userPhone.hidden = YES;
+        
         if (lockView == self.myHandBtn) {
             
             if (path.length >= 4) {
@@ -154,7 +174,7 @@
                 
                 NSLog(@"tempPathString%@",tempPathString);
                 
-                self.titleLabel.text = @"请再次设置手势密码";
+                self.titleLabel.text = @"请再次确认手势密码";
             } else {
                 
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"为了你的账号安全,手势密码需要至少连线4个点."];
@@ -163,9 +183,15 @@
             if ([tempPathString isEqualToString:path]) {
                 
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码设置成功"];
-                [dic setValue:@"YES" forKey:@"handFlag"];
-                [dic setValue:path forKey:@"handString"];
-                [dic setValue:@"NO" forKey:@"ifSetHandFlag"];
+                
+                NSMutableDictionary *handDic = [NSMutableDictionary dictionary];
+                
+                [handDic setValue:@"YES" forKey:@"handFlag"];
+                [handDic setValue:path forKey:@"handString"];
+                [handDic setValue:@"NO" forKey:@"ifSetHandFlag"];
+                
+                [dic setValue:handDic forKey:[userDic objectForKey:@"phone"]];
+                
                 [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
                 popVC;
             } else {
@@ -184,13 +210,23 @@
             self.forgetButton.hidden = YES;
             self.cancelButton.hidden = NO;
             
-            NSString *handString = [dic objectForKey:@"handString"];
+            NSString *handString = [userDIC objectForKey:@"handString"];
             if ([path isEqualToString:handString]) {
-                [dic setValue:@"NO" forKey:@"handFlag"];
-                [dic setValue:@"YES" forKey:@"ifSetHandFlag"];
-                [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+                NSDictionary *usDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
+                
+                NSDictionary *userDIC = [usDic objectForKey:[userDic objectForKey:@"phone"]];
+                
+                [userDIC setValue:@"NO" forKey:@"handFlag"];
+                [userDIC setValue:@"" forKey:@"handString"];
+                [userDIC setValue:@"YES" forKey:@"ifSetHandFlag"];
+                
+                [usDic setValue:userDIC forKey:[userDic objectForKey:@"phone"]];
+                
+                [usDic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码成功关闭"];
                 popVC;
+            } else {
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您输入的手势密码错误，请重试"];
             }
         } else {
             
@@ -199,7 +235,7 @@
                 [self otherUserWithAction:nil];
             } else {
             
-                NSString *handString = [dic objectForKey:@"handString"];
+                NSString *handString = [userDIC objectForKey:@"handString"];
                 NSLog(@"%@",handString);
                 if ([path isEqualToString:handString]) {
                     
@@ -424,11 +460,29 @@
         
         if (![FileOfManage ExistOfFile:@"handOpen.plist"]) {
             [FileOfManage createWithFile:@"handOpen.plist"];
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
-            [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+            NSDictionary *usDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
+            
+            NSDictionary *userDIC = [usDic objectForKey:[userDic objectForKey:@"phone"]];
+            
+            [userDIC setValue:@"NO" forKey:@"handFlag"];
+            [userDIC setValue:@"" forKey:@"handString"];
+            [userDIC setValue:@"YES" forKey:@"ifSetHandFlag"];
+            
+            [usDic setValue:userDIC forKey:[userDic objectForKey:@"phone"]];
+            
+            [usDic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
         } else {
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
-            [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+            NSDictionary *usDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
+            
+            NSDictionary *userDIC = [usDic objectForKey:[userDic objectForKey:@"phone"]];
+            
+            [userDIC setValue:@"NO" forKey:@"handFlag"];
+            [userDIC setValue:@"" forKey:@"handString"];
+            [userDIC setValue:@"YES" forKey:@"ifSetHandFlag"];
+            
+            [usDic setValue:userDIC forKey:[userDic objectForKey:@"phone"]];
+            
+            [usDic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
         }
         
         // 判断是否存在isLogin.plist文件

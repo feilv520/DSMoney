@@ -63,6 +63,8 @@
     
     myDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
+    NSLog(@"myDic = %@",myDic);
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self tabelViewShow];
     

@@ -180,6 +180,8 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfoFuction" object:nil];
     }
     
+    [self checkUserInfo];
+    
     NSLog(@"requestString = %@",requestString);
     NSLog(@"responseString = %@",responseString);
     return YES;

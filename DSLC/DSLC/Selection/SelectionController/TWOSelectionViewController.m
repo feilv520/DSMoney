@@ -91,6 +91,8 @@
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductList) name:@"getSelectionVC" object:nil];
+    
     [self getAdvList];
     
 }
@@ -282,20 +284,24 @@
     flowLayout.minimumLineSpacing = 0;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
-    _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 308) collectionViewLayout:flowLayout];
+    if (_collection == nil) {
+        
+        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height + viewNotice.frame.size.height + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 9.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + buttonClick.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 308) collectionViewLayout:flowLayout];
+        
+        _collection.dataSource = self;
+        _collection.delegate = self;
+        _collection.bounces = NO;
+        _collection.showsHorizontalScrollIndicator = NO;
+        _collection.pagingEnabled = YES;
+        _collection.backgroundColor = [UIColor whiteColor];
+        //    默认显示中间
+        _collection.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
+        
+        [_collection registerNib:[UINib nibWithNibName:@"TWOHomePageProductCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
+    }
     
     [_scrollView addSubview:_collection];
     
-    _collection.dataSource = self;
-    _collection.delegate = self;
-    _collection.bounces = NO;
-    _collection.showsHorizontalScrollIndicator = NO;
-    _collection.pagingEnabled = YES;
-    _collection.backgroundColor = [UIColor whiteColor];
-//    默认显示中间
-    _collection.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
-    
-    [_collection registerNib:[UINib nibWithNibName:@"TWOHomePageProductCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

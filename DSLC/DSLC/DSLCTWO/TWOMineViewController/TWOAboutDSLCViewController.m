@@ -167,7 +167,7 @@
             TWOAgreeFeedbackViewController *agreeFeedback = [[TWOAgreeFeedbackViewController alloc] init];
             pushVC(agreeFeedback);
         } else if (indexPath.row == 2) {
-            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8"]];
         } else {
 //            关于我们
             AboutViewController *aboutVC = [[AboutViewController alloc] init];

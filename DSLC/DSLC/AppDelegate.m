@@ -101,8 +101,17 @@
     if (_handDic == nil) {
         if (![FileOfManage ExistOfFile:@"handOpen.plist"]) {
             [FileOfManage createWithFile:@"handOpen.plist"];
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
-            [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+            NSDictionary *usDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
+            
+            NSDictionary *userDIC = [usDic objectForKey:[self.flagDic objectForKey:@"phone"]];
+            
+            [userDIC setValue:@"NO" forKey:@"handFlag"];
+            [userDIC setValue:@"" forKey:@"handString"];
+            [userDIC setValue:@"YES" forKey:@"ifSetHandFlag"];
+            
+            [usDic setValue:userDIC forKey:[self.flagDic objectForKey:@"phone"]];
+            
+            [usDic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
         }
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
         self.handDic = dic;
@@ -130,7 +139,17 @@
     
     [MobClick startWithAppkey:@"5642ad7e67e58e8463006218" reportPolicy:BATCH   channelId:@""];
     
-    NSString *handFlag = [self.handDic objectForKey:@"handFlag"];
+    NSDictionary *userDIC = [self.handDic objectForKey:[self.flagUserInfo objectForKey:@"phone"]];
+    
+    NSLog(@"userDIC = %@",userDIC);
+    
+    NSString *handFlag;
+    
+    if (userDIC == nil) {
+        handFlag = @"NO";
+    } else {
+        handFlag = [userDIC objectForKey:@"handFlag"];
+    }
     
     NSString *loginFlag = [self.flagLogin objectForKey:@"loginFlag"];
     
@@ -140,8 +159,8 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     
-    if ([[self.flagDic objectForKey:@"FristOpen"] isEqualToString:@"NO"]) {
-        if ([handFlag isEqualToString:@"NO"]) {
+    if ([[self.flagDic objectForKey:@"FristOpen"] isEqualToString:@"NO"] ) {
+        if ([loginFlag isEqualToString:@"NO"] || [handFlag isEqualToString:@"NO"]) {
             
     ////        1.0首页
     //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
