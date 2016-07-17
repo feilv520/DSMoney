@@ -207,6 +207,7 @@
         cell.butFinish.backgroundColor = [UIColor findZiTiColor];
         cell.butFinish.layer.borderColor = [[UIColor findZiTiColor] CGColor];
         cell.butFinish.alpha = 0.4;
+        cell.butFinish.enabled = NO;
         
     } else {
         
@@ -216,6 +217,7 @@
         cell.butFinish.layer.borderColor = [[UIColor profitColor] CGColor];
         cell.butFinish.layer.borderWidth = 1;
         cell.butFinish.alpha = 1.0;
+        cell.butFinish.enabled = YES;
     }
     
     cell.butFinish.tag = indexPath.section;
