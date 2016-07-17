@@ -557,7 +557,7 @@
                 [self getYaoData];
             }
         } else {
-            [ProgressHUD showMessage:@"你给我把弹框去了" Width:100 High:20];
+//            [ProgressHUD showMessage:@"你给我把弹框去了" Width:100 High:20];
         }
     }
     
@@ -632,7 +632,7 @@
             
         } else {
 //            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            NSLog(@"突发状况");
+            NSLog(@"接口返回非200");
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
