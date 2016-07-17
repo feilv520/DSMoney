@@ -287,7 +287,7 @@
         if ([[self.detailM.productType description] isEqualToString:@"3"]){
             
             return 100;
-        } else if ([[self.detailM.productType description] isEqualToString:@"1"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
+        } else if ([[self.detailM.productType description] isEqualToString:@"1"] || [[self.detailM.productType description] isEqualToString:@"5"]|| [[self.detailM.productType description] isEqualToString:@"6"]|| [[self.detailM.productType description] isEqualToString:@"7"]|| [[self.detailM.productType description] isEqualToString:@"8"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
             
             return 150;
         } else {
@@ -349,7 +349,7 @@
             
             return cell;
             
-        } else if ([[self.detailM.productType description] isEqualToString:@"1"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
+        } else if ([[self.detailM.productType description] isEqualToString:@"1"] || [[self.detailM.productType description] isEqualToString:@"5"]|| [[self.detailM.productType description] isEqualToString:@"6"]|| [[self.detailM.productType description] isEqualToString:@"7"]|| [[self.detailM.productType description] isEqualToString:@"8"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
             
             TWOMakeSureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reusef"];
             
@@ -360,7 +360,9 @@
                 cell.moneyLabel.text = @"0元";
             } else {
                 
-                cell.moneyLabel.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]]];
+                NSString *accString = [[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
+                
+                cell.moneyLabel.text = [NSString stringWithFormat:@"%@元",accString];
             }
             
             [cell.czButton addTarget:self action:@selector(czAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -390,7 +392,9 @@
                 cell.accountMoney.text = @"0元";
             } else {
                 
-                cell.accountMoney.text = [NSString stringWithFormat:@"%@元",[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]]];
+                NSString *accString = [[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
+                
+                cell.accountMoney.text = [NSString stringWithFormat:@"%@元",accString];
             }
             
             cell.residueLabel.text = [NSString stringWithFormat:@"%@元",self.limitMoney];
@@ -623,7 +627,7 @@
         
         syString = cell.yqMoneyLabel.text;
         
-    } else if ([[self.detailM.productType description] isEqualToString:@"1"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [self.detailM.productName containsString:@"美猴王"])) {
+    } else if ([[self.detailM.productType description] isEqualToString:@"1"] || [[self.detailM.productType description] isEqualToString:@"5"]|| [[self.detailM.productType description] isEqualToString:@"6"]|| [[self.detailM.productType description] isEqualToString:@"7"]|| [[self.detailM.productType description] isEqualToString:@"8"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
         
         TWOMakeSureTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
         
@@ -677,10 +681,12 @@
     
     [self textFieldEditChanged:textField];
     
+    NSString *accString = [[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
+    
     if ([[self.detailM amountMin] floatValue] > [allMoneyString floatValue]){
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资金额不满足起投金额,请重新输入!"];
         return;
-    } else if ([allMoneyString floatValue] > [[DES3Util decrypt:[self.flagDic objectForKey:@"accBalance"]] floatValue]){
+    } else if ([allMoneyString floatValue] > [accString floatValue]){
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的可用余额不足,请先充值!"];
         return;
     }

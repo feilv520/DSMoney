@@ -79,7 +79,6 @@
         NSLog(@"register = %@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             
 //            [self.navigationController popToRootViewControllerAnimated:YES];
             
@@ -113,14 +112,7 @@
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
             
-            if (![FileOfManage ExistOfFile:@"handOpen.plist"]) {
-                [FileOfManage createWithFile:@"handOpen.plist"];
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
-            } else {
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
-                [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
-            }
+            NSLog(@"phoneUser = %@",[self.flagDic objectForKey:@"phone"]);
             
             // 判断是否存在isLogin.plist文件
             if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {

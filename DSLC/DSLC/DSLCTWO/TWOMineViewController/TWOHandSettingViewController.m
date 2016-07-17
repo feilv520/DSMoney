@@ -29,15 +29,30 @@
     
     // 判断是否存在isLogin.plist文件
     if (![FileOfManage ExistOfFile:@"handOpen.plist"]) {
-        [FileOfManage createWithFile:@"handOpen.plist"];
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"handFlag",@"YES",@"ifSetHandFlag",@"",@"handString",nil];
-        [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+        NSDictionary *usDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
+        
+        NSDictionary *userDIC = [usDic objectForKey:[self.flagDic objectForKey:@"phone"]];
+        
+        [userDIC setValue:@"NO" forKey:@"handFlag"];
+        [userDIC setValue:@"" forKey:@"handString"];
+        [userDIC setValue:@"YES" forKey:@"ifSetHandFlag"];
+        
+        [usDic setValue:userDIC forKey:[self.flagDic objectForKey:@"phone"]];
+        
+        [usDic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
     }
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
     
-    flag = [[dic objectForKey:@"handFlag"] boolValue];
+    NSDictionary *userDIC = [dic objectForKey:[self.flagDic objectForKey:@"phone"]];
     
+    if (userDIC == nil) {
+        
+        flag = NO;
+    } else {
+        
+        flag = [[userDIC objectForKey:@"handFlag"] boolValue];
+    }
     [self tableViewShow];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchButtonAction:) name:@"switchButton" object:nil];
@@ -141,9 +156,17 @@
 - (void)switchButtonAction:(NSNotification *)not{
     UISwitch *switchButton = (UISwitch *)[self.view viewWithTag:5020];
     flag = NO;
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
-    [dic setValue:@"NO" forKey:@"handFlag"];
-    [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+    NSDictionary *usDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
+    
+    NSDictionary *userDIC = [usDic objectForKey:[self.flagDic objectForKey:@"phone"]];
+    
+    [userDIC setValue:@"NO" forKey:@"handFlag"];
+    [userDIC setValue:@"" forKey:@"handString"];
+    [userDIC setValue:@"YES" forKey:@"ifSetHandFlag"];
+    
+    [usDic setValue:userDIC forKey:[self.flagDic objectForKey:@"phone"]];
+    
+    [usDic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
     [switchButton setOn:flag];
     [self.tableView reloadData];
 }

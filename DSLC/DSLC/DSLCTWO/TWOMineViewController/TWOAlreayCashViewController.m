@@ -45,8 +45,6 @@
     self.assetArray = [NSArray array];
     
     [self getUserAssetsInfoFuction];
-    
-    [self tableViewShow];
 }
 
 - (void)tableViewShow
@@ -72,10 +70,10 @@
     UIImageView *imageViewHead = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _tableView.tableHeaderView.frame.size.height) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"productDetailBackground"]];
     [_tableView.tableHeaderView addSubview:imageViewHead];
     
-//    投资金额的钱数
+    //    投资金额的钱数
     UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:nil];
     [imageViewHead addSubview:labelMoney];
-    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"400,000.00"]];
+    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [self.productDic objectForKey:@"investMoney"]]];
     NSRange moneyRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"元"].location);
     [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:30] range:moneyRange];
     [labelMoney setAttributedText:moneyString];
@@ -84,9 +82,9 @@
     UILabel *labelTouZi = [CreatView creatWithLabelFrame:CGRectMake(0, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"投资金额"];
     [imageViewHead addSubview:labelTouZi];
     
-    NSArray *topArray = @[@"40.00", @"72", @"8"];
-    NSArray *downArray = @[@"兑付收益", @"理财期限", @"预期年化"];
-    CGFloat width = (WIDTH_CONTROLLER_DEFAULT - 24)/3;
+    NSArray *topArray = @[[self.productDic objectForKey:@"exceptedYield"], [[self.productDic objectForKey:@"productPeriod"] description], [self.productDic objectForKey:@"annualYield"]];
+    NSArray *downArray = @[@"预期收益", @"理财期限", @"预期年化"];
+    CGFloat width = (WIDTH_CONTROLLER_DEFAULT - 24) / 3;
     CGFloat marginLeft = 12;
     
     for (int n = 0; n < 3; n++) {
@@ -111,25 +109,40 @@
             
         } else {
             
-            NSMutableAttributedString *threeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [topArray objectAtIndex:2]]];
-            NSRange threeRange = NSMakeRange(0, [[threeString string] rangeOfString:@"%"].location);
-            [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:threeRange];
-            [labelTop setAttributedText:threeString];
-            labelTop.textAlignment = NSTextAlignmentRight;
+            if ([[[self.productDic objectForKey:@"increaseId"] description] isEqualToString:@"0"] || [[[self.productDic objectForKey:@"increaseId"] description] isEqualToString:@""]) {
+                
+                NSMutableAttributedString *threeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [topArray objectAtIndex:2]]];
+                NSRange threeRange = NSMakeRange(0, [[threeString string] rangeOfString:@"%"].location);
+                [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:threeRange];
+                [labelTop setAttributedText:threeString];
+                labelTop.textAlignment = NSTextAlignmentRight;
+            } else {
+                
+                NSMutableAttributedString *threeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%+%@%%", [topArray objectAtIndex:2], [self.productDic objectForKey:@"increaseRate"]]];
+                NSRange fRange = NSMakeRange(0, [[topArray objectAtIndex:2] length]);
+                [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:fRange];
+                
+                NSRange tRange = NSMakeRange([[threeString string] rangeOfString:@"+"].location + 1, [[[self.productDic objectForKey:@"increaseRate"] description] length]);
+                [threeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:20] range:tRange];
+                
+                [labelTop setAttributedText:threeString];
+                labelTop.textAlignment = NSTextAlignmentRight;
+            }
+            
         }
         
         UILabel *labelDown = [CreatView creatWithLabelFrame:CGRectMake(marginLeft + width * n, 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelTop.frame.size.height + 5, width, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[downArray objectAtIndex:n]];
         [imageViewHead addSubview:labelDown];
         
+        if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
+            labelTop.frame = CGRectMake(marginLeft + width * n, labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), width, 23);
+            labelDown.frame = CGRectMake(marginLeft + width * n, labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelTop.frame.size.height + 5, width, 15);
+        }
+        
         if (n == 0) {
             labelDown.textAlignment = NSTextAlignmentLeft;
         } else if (n == 2) {
             labelDown.textAlignment = NSTextAlignmentRight;
-        }
-        
-        if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
-            labelTop.frame = CGRectMake(marginLeft + width * n, labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), width, 23);
-            labelDown.frame = CGRectMake(marginLeft + width * n, labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 15 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelTop.frame.size.height + 5, width, 15);
         }
     }
     
@@ -138,6 +151,7 @@
         labelTouZi.frame = CGRectMake(0, 5 + labelMoney.frame.size.height + 10.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 15);
     }
 }
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -153,7 +167,7 @@
             return 5;
         }
     } else {
-        return 1;
+        return self.assetArray.count;
     }
 }
 
@@ -272,6 +286,10 @@
         
         self.productDic = [responseObject objectForKey:@"Product"];
         self.assetArray = [[responseObject objectForKey:@"Product"] objectForKey:@"Asset"];
+        
+        if ([self.productName isEqualToString:@""] || self.productName == nil) {
+            [self.navigationItem setTitle:[self.productDic objectForKey:@"productName"]];
+        }
         
         [self tableViewShow];
         

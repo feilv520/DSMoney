@@ -57,9 +57,13 @@
 
 - (void)lockView:(MyHandButton *)lockView didFinishPath:(NSString *)path{
     
+    NSDictionary *userDetailDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
     
-    NSString *handString = [dic objectForKey:@"handString"];
+    NSDictionary *userDIC = [dic objectForKey:[userDetailDic objectForKey:@"phone"]];
+    
+    NSString *handString = [userDIC objectForKey:@"handString"];
     
     if (lockView == self.handButton) {
         if ([path isEqualToString:handString]) {
@@ -91,8 +95,11 @@
         if ([path isEqualToString:newString]) {
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码设置成功"];
-            [dic setValue:path forKey:@"handString"];
-            [dic setValue:@"NO" forKey:@"ifSetHandFlag"];
+            
+            [userDIC setValue:path forKey:@"handString"];
+            
+            [dic setValue:userDIC forKey:[userDetailDic objectForKey:@"phone"]];
+            
             [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
             popVC;
         }

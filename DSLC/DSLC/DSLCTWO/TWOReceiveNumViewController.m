@@ -398,9 +398,13 @@
                 
                 [self getMyAccountInfoFuction:[responseObject objectForKey:@"token"]];
                 
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"safeJiBie" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"safeTest" object:nil];
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"getProductDetail" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"getSelectionVC" object:nil];
             }];
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
