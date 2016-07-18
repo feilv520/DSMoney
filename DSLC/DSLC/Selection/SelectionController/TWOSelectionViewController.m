@@ -733,9 +733,9 @@
                     [pickArray addObject:model];
                 }
                 
-                [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                 
                 if (pickArray.count != 0) {
+                    [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                     
                     [self collectionViewShow];
                     noNetworkMonkey.hidden = YES;

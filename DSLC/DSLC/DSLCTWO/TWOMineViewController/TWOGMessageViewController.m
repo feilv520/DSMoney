@@ -13,11 +13,17 @@
 #import "AppDelegate.h"
 #import "TWOMessageTableViewCell.h"
 #import "TWOMessageDetailViewController.h"
+#import "TWOMessageModel.h"
 
 @interface TWOGMessageViewController ()<UITableViewDataSource, UITableViewDelegate> {
 
     UITableView *mainTableView;
+    NSMutableArray *messageArray;
     BOOL flag;
+    
+    BOOL flagSate;
+    NSInteger pageNumber;
+    MJRefreshBackGifFooter *gifFooter;
 }
 
 @end
@@ -33,11 +39,14 @@
     [app.tabBarVC setTabbarViewHidden:YES];
     
     flag = NO;
-    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor huibai];
+    
+    messageArray = [NSMutableArray array];
+    pageNumber = 1;
+    flagSate = NO;
     
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     [self getMessageDataList];
@@ -63,7 +72,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return messageArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -73,25 +82,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     TWOMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message"];
+    TWOMessageModel *messageModel = [messageArray objectAtIndex:indexPath.row];
     
-    cell.titleLabel.text = @"喜大普奔,大圣理财APP2.0版本上线啦!";
+    cell.pointImage.hidden = YES;
+    cell.titleLabel.text = [messageModel title];
     
-    cell.subTitleLabel.text = @"经过小伙伴们两个月的努力,大圣理财2.0版本终于上线啦!大圣理财,专注银行信贷资产";
+    cell.subTitleLabel.text = [messageModel content];
     
     cell.backgroundV.layer.masksToBounds = YES;
     cell.backgroundV.layer.cornerRadius = 5.0f;
-    
-    if (!flag) {
-        
-        cell.pointImage.hidden = YES;
-        [cell.titleLabel setTextColor:[UIColor colorFromHexCode:@"8c909d"]];
-    } else {
-        
-        cell.pointImage.hidden = NO;
-        [cell.titleLabel setTextColor:[UIColor colorFromHexCode:@"434a54"]];
-    }
-    
-    flag = !flag;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -105,7 +104,7 @@
     pushVC(messageDVC);
 }
 
-#pragma mark message--------------------------------
+#pragma mark message--------------------------------++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 - (void)getMessageDataList
 {
     NSDictionary *parmeter = @{@"type":@1};
@@ -117,13 +116,27 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *dataArray = [responseObject objectForKey:@"noticeInfo"];
             for (NSDictionary *dataDic in dataArray) {
-                
+                TWOMessageModel *messageModel = [[TWOMessageModel alloc] init];
+                [messageModel setValuesForKeysWithDictionary:dataDic];
+                [messageArray addObject:messageModel];
             }
             
-            if (dataArray.count == 0) {
-                [self noDataShow];
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                flagSate = YES;
+                NSLog(@"全部数据");
+            }
+            
+            [gifFooter endRefreshing];
+            
+            if (pageNumber == 1) {
+                
+                if (dataArray.count == 0) {
+                    [self noDataShow];
+                } else {
+                    [self tableViewShow];
+                }
             } else {
-                [self tableViewShow];
+                [mainTableView reloadData];
             }
         }
         
@@ -136,6 +149,29 @@
 {
     UIImageView *imageNothing = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [self.view addSubview:imageNothing];
+}
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
+{
+    gifFooter = footer;
+    if (flagSate) {
+        [gifFooter endRefreshing];
+    } else {
+        pageNumber++;
+        [self getMessageDataList];
+    }
+}
+
+- (void)loadNewData:(MJRefreshGifHeader *)header
+{
+    if (messageArray != nil) {
+        [messageArray removeAllObjects];
+        messageArray = nil;
+        messageArray = [NSMutableArray array];
+    }
+    
+    pageNumber = 1;
+    [self getMessageDataList];
 }
 
 - (void)didReceiveMemoryWarning {

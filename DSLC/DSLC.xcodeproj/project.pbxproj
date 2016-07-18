@@ -97,6 +97,7 @@
 		8114F6DC1D38B6E8000B80E0 /* 玩游戏中心@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6DA1D38B6E8000B80E0 /* 玩游戏中心@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8114F6DF1D38B77B000B80E0 /* 邀请好朋友@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6DD1D38B77B000B80E0 /* 邀请好朋友@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8114F6E01D38B77B000B80E0 /* 邀请好朋友@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6DE1D38B77B000B80E0 /* 邀请好朋友@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8114F6FA1D3C83A7000B80E0 /* TWOMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8114F6F91D3C83A7000B80E0 /* TWOMessageModel.m */; settings = {ASSET_TAGS = (); }; };
 		8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */; settings = {ASSET_TAGS = (); }; };
 		811B628C1CFE8B9D00B6F17E /* 每日一摇@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 811B62881CFE8B9D00B6F17E /* 每日一摇@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -1725,6 +1726,8 @@
 		8114F6DA1D38B6E8000B80E0 /* 玩游戏中心@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "玩游戏中心@3x.png"; sourceTree = "<group>"; };
 		8114F6DD1D38B77B000B80E0 /* 邀请好朋友@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请好朋友@2x.png"; sourceTree = "<group>"; };
 		8114F6DE1D38B77B000B80E0 /* 邀请好朋友@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请好朋友@3x.png"; sourceTree = "<group>"; };
+		8114F6F81D3C83A7000B80E0 /* TWOMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMessageModel.h; sourceTree = "<group>"; };
+		8114F6F91D3C83A7000B80E0 /* TWOMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMessageModel.m; sourceTree = "<group>"; };
 		8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@2x.png"; sourceTree = "<group>"; };
 		8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@3x.png"; sourceTree = "<group>"; };
 		811B62881CFE8B9D00B6F17E /* 每日一摇@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "每日一摇@2x.png"; sourceTree = "<group>"; };
@@ -3970,6 +3973,15 @@
 			name = "活动中心";
 			sourceTree = "<group>";
 		};
+		8114F6F71D3C8387000B80E0 /* 消息 */ = {
+			isa = PBXGroup;
+			children = (
+				8114F6F81D3C83A7000B80E0 /* TWOMessageModel.h */,
+				8114F6F91D3C83A7000B80E0 /* TWOMessageModel.m */,
+			);
+			name = "消息";
+			sourceTree = "<group>";
+		};
 		811B62951CFFCA1900B6F17E /* 地址管理 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4367,6 +4379,7 @@
 		8143FCE91CD9C4E300B65A2F /* TWOMineModel */ = {
 			isa = PBXGroup;
 			children = (
+				8114F6F71D3C8387000B80E0 /* 消息 */,
 				815D18F21D1CE71F00DFA753 /* 我的理财师 */,
 				8D9F16C71D17D38F00A70399 /* 任务中心 */,
 				8D9F16BE1D17B73A00A70399 /* 我的特权本金 */,
@@ -9255,6 +9268,7 @@
 				817E339B1BD77A8800D05103 /* ChooseStyleViewController.m in Sources */,
 				8D4FF5E01BE339A200BAE25F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				8177A01A1CF2DE120057AA7B /* TWOActivityRulesViewController.m in Sources */,
+				8114F6FA1D3C83A7000B80E0 /* TWOMessageModel.m in Sources */,
 				810EBC081C9CFE67008FB51D /* SetLoginPasswordViewController.m in Sources */,
 				816AA1431CFD3E85009038E9 /* TWOMyClientViewController.m in Sources */,
 				8D4FF5DF1BE339A200BAE25F /* AFNetworkActivityIndicatorManager.m in Sources */,

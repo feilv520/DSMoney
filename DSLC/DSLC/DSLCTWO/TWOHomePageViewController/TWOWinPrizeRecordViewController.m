@@ -19,6 +19,8 @@
 {
     UITableView *_tableView;
     NSMutableArray *recordArray;
+    UILabel *labelCiShu;
+    NSDictionary *resDiction;
     
     MJRefreshBackGifFooter *refreshFooter;
     BOOL flag;
@@ -83,9 +85,9 @@
     UIImageView *imageHead = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, _tableView.tableHeaderView.frame.size.height) backGroundColor:[UIColor qianhuise] setImage:[UIImage imageNamed:@"productDetailBackground"]];
     [_tableView.tableHeaderView addSubview:imageHead];
     
-    UILabel *labelCiShu = [CreatView creatWithLabelFrame:CGRectMake(0, 15, WIDTH_CONTROLLER_DEFAULT, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
+    labelCiShu = [CreatView creatWithLabelFrame:CGRectMake(0, 15, WIDTH_CONTROLLER_DEFAULT, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
     [imageHead addSubview:labelCiShu];
-    NSMutableAttributedString *ciShuString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@次", self.recordNum]];
+    NSMutableAttributedString *ciShuString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@次", [resDiction objectForKey:@"totalCount"]]];
     NSRange ciShuRange = NSMakeRange(0, [[ciShuString string] rangeOfString:@"次"].location);
     [ciShuString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:39] range:ciShuRange];
     [labelCiShu setAttributedText:ciShuString];
@@ -116,7 +118,9 @@
     if ([[[prizeModel prizeType] description] isEqualToString:@"1"]) {
         cell.imagePic.image = [UIImage imageNamed:@"中奖红包"];
         
-        NSMutableAttributedString *contentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得¥%d红包", [[prizeModel prizeNumber] intValue]]];
+        NSString *redBagString = [[prizeModel prizeNumber] stringByReplacingOccurrencesOfString:@"," withString:@""];
+        
+        NSMutableAttributedString *contentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得¥%d红包", [redBagString intValue]]];
         NSRange leftRange = NSMakeRange(0, 6);
         [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
         [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:leftRange];
@@ -138,7 +142,9 @@
     } else if ([[[prizeModel prizeType] description] isEqualToString:@"4"]) {
         cell.imagePic.image = [UIImage imageNamed:@"中奖现金"];
         
-        NSMutableAttributedString *contentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得¥%d现金", [[prizeModel prizeNumber] intValue]]];
+        NSString *moneyStr = [[[prizeModel prizeNumber] description] stringByReplacingOccurrencesOfString:@"," withString:@""];
+
+        NSMutableAttributedString *contentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得¥%d现金", [moneyStr intValue]]];
         NSRange leftRange = NSMakeRange(0, 6);
         [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
         [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:leftRange];
@@ -208,6 +214,7 @@
         
         NSLog(@"摇一摇中奖纪录::::::::::::::%@", responseObject);
         [self loadingWithHidden:YES];
+        resDiction = responseObject;
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
