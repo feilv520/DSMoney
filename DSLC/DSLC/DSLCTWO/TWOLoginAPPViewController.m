@@ -479,11 +479,13 @@
         [ProgressHUD showMessage:@"请输入手机号" Width:100 High:20];
     } else if (![NSString validateMobile:textFieldPhone.text]) {
         [ProgressHUD showMessage:@"手机号格式不正确" Width:100 High:20];
-    } else if (textFieldSecret.text.length == 0) {
-        [ProgressHUD showMessage:@"请输入密码" Width:100 High:20];
     } else {
         
         if (imageGet == nil) {
+            if (textFieldSecret.text.length == 0) {
+                [ProgressHUD showMessage:@"请输入密码" Width:100 High:20];
+                return;
+            }
             [self loginFuction];
         } else {
             [self registerFuction];
@@ -578,9 +580,19 @@
             return NO;
         }
         
-    } else {
+    } else if (textField.tag == 1001){
         
         if (range.location < 20) {
+            
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+    } else {
+        
+        if (range.location < 6) {
             
             return YES;
             

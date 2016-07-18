@@ -75,7 +75,7 @@
     textFieldPhone.tag = 1000;
     textFieldPhone.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     textFieldPhone.keyboardType = UIKeyboardTypeNumberPad;
-    [textFieldPhone setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [textFieldPhone setValue:[UIColor colorFromHexCode:@"9db2c7"] forKeyPath:@"_placeholderLabel.textColor"];
     [textFieldPhone setValue:[UIFont systemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
     
     UIButton *butLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30, 160.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 40*2 + 40.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 60, 40) backgroundColor:[UIColor clearColor] textColor:nil titleText:@"验证手机号"];
@@ -171,7 +171,6 @@
 
 #pragma mark 对接接口
 #pragma mark --------------------------------
-
 
 - (void)checkPhone{
     NSDictionary *parmeter = @{@"phone":textFieldPhone.text};

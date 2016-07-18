@@ -152,6 +152,13 @@
                  apsForProduction:isProduction
             advertisingIdentifier:advertisingId];
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [JPUSHService setTags:nil alias:@"13354288036" fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+            NSLog(@"iResCode = %d---- iAlias = %@---",iResCode,iAlias);
+            
+        }];
+    });
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(monkeyWithSuccess:) name:@"showMonkey" object:nil];
     
     [UMSocialData setAppKey:@"5642ad7e67e58e8463006218"];
@@ -167,7 +174,8 @@
     NSLog(@"userDIC = %@",userDIC);
     
     NSString *handFlag;
-    
+//    a6673d8a1fbb4a1bfb7f138e734e696078b30934
+//    0cef96b281d61943724a4a6ec11c591ef8742774
     if (userDIC == nil) {
         handFlag = @"NO";
     } else {

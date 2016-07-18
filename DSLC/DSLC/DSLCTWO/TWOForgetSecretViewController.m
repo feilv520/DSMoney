@@ -72,7 +72,7 @@
     textFieldSecret.secureTextEntry = YES;
     textFieldSecret.delegate = self;
     textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [textFieldSecret setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [textFieldSecret setValue:[UIColor colorFromHexCode:@"9db2c7"] forKeyPath:@"_placeholderLabel.textColor"];
     [textFieldSecret setValue:[UIFont systemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
     
 //    眼睛按钮
