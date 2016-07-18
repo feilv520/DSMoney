@@ -18,6 +18,15 @@
 {
     UIButton *butReceive;
     UIScrollView *scrollview;
+    UILabel *labelSao;
+    UIView *viewTwo;
+    UIImageView *imageViewTwo;
+    UILabel *labelCode;
+    UIView *viewRule;
+    UIView *viewBottom;
+    UIView *viewLine;
+    UIButton *butSend;
+    UILabel *labelRule;
     
     InviteNewView *inviteNV;
     
@@ -59,41 +68,57 @@
     
     [self getAdvList];
     
-    [self contentShow];
-    
     viewGray.hidden = YES;
 }
 
 - (void)contentShow
 {
-    scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 30 - 40.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 10)];
+    if (scrollview == nil) {
+        
+        scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 30 - 40.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 10)];
+        scrollview.backgroundColor = [UIColor qianhuise];
+        scrollview.contentSize = CGSizeMake(0, 1000.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+    }
     [self.view addSubview:scrollview];
-    scrollview.backgroundColor = [UIColor qianhuise];
-    scrollview.contentSize = CGSizeMake(0, 1000.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
     
-    imageViewBanner = [[YYAnimatedImageView alloc] init];
-    imageViewBanner.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 150.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
-    imageViewBanner.backgroundColor = [UIColor qianhuise];
-    imageViewBanner.yy_imageURL = [NSURL URLWithString:[[adModelArray firstObject] adImg]];
+    if (imageViewBanner == nil) {
+        
+        imageViewBanner = [[YYAnimatedImageView alloc] init];
+        imageViewBanner.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 150.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT);
+        imageViewBanner.backgroundColor = [UIColor qianhuise];
+        imageViewBanner.yy_imageURL = [NSURL URLWithString:[[adModelArray firstObject] adImg]];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClickedImageView:)];
+        [imageViewBanner addGestureRecognizer:tap];
+        imageViewBanner.userInteractionEnabled = YES;
+    }
     [scrollview addSubview:imageViewBanner];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClickedImageView:)];
-    [imageViewBanner addGestureRecognizer:tap];
-    imageViewBanner.userInteractionEnabled = YES;
     
-    UILabel *labelSao = [CreatView creatWithLabelFrame:CGRectMake(0, imageViewBanner.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, (20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT)) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"扫二维码下载大圣理财"];
+    if (labelSao == nil) {
+        
+        labelSao = [CreatView creatWithLabelFrame:CGRectMake(0, imageViewBanner.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, (20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT)) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"扫二维码下载大圣理财"];
+    }
     [scrollview addSubview:labelSao];
     
-    UIView *viewTwo = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 90, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT), 180, 180) backgroundColor:[UIColor whiteColor]];
+    if (viewTwo == nil) {
+        
+        viewTwo = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 90, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT), 180, 180) backgroundColor:[UIColor whiteColor]];
+    }
     [scrollview addSubview:viewTwo];
     
     CGFloat viewTwoW = viewTwo.frame.size.width;
     CGFloat viewTwoH = viewTwo.frame.size.height;
     
 //    二维码图片
-    UIImageView *imageViewTwo = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, viewTwoW, viewTwoH) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"TWOInviteNumber"]];
+    if (imageViewTwo == nil) {
+        
+        imageViewTwo = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, viewTwoW, viewTwoH) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"TWOInviteNumber"]];
+    }
     [viewTwo addSubview:imageViewTwo];
     
-    UILabel *labelCode = [CreatView creatWithLabelFrame:CGRectMake(0, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180, WIDTH_CONTROLLER_DEFAULT, 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor clearColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:nil];
+    if (labelCode == nil) {
+        
+        labelCode = [CreatView creatWithLabelFrame:CGRectMake(0, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180, WIDTH_CONTROLLER_DEFAULT, 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor clearColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:nil];
+    }
     [scrollview addSubview:labelCode];
     NSMutableAttributedString *codeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"我的邀请码: %@", self.inviteCode]];
     NSRange leftRange = NSMakeRange(0, [[codeString string] rangeOfString:@" "].location);
@@ -102,31 +127,46 @@
     [codeString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:rightRange];
     [labelCode setAttributedText:codeString];
     
-    UIView *viewRule = [CreatView creatViewWithFrame:CGRectMake(10, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 20, 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor whiteColor]];
+    if (viewRule == nil) {
+        
+        viewRule = [CreatView creatViewWithFrame:CGRectMake(10, imageViewBanner.frame.size.height + labelSao.frame.size.height + 20.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT + (10.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) + 180 + 50.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT - 20, 220.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor whiteColor]];
+        viewRule.layer.cornerRadius = 5;
+        viewRule.layer.masksToBounds = YES;
+    }
     [scrollview addSubview:viewRule];
-    viewRule.layer.cornerRadius = 5;
-    viewRule.layer.masksToBounds = YES;
     
-    UIView *viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, scrollview.frame.size.height, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - scrollview.frame.size.height) backgroundColor:[UIColor whiteColor]];
+    if (viewBottom == nil) {
+        
+        viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, scrollview.frame.size.height, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - scrollview.frame.size.height) backgroundColor:[UIColor whiteColor]];
+    }
     [self.view addSubview:viewBottom];
     
-    UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
+    if (viewLine == nil) {
+        
+        viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
+        viewLine.alpha = 0.3;
+    }
     [viewBottom addSubview:viewLine];
-    viewLine.alpha = 0.3;
     
-    UIButton *butSend = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 10, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"立即邀请"];
+    if (butSend == nil) {
+        
+        butSend = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(40, 10, WIDTH_CONTROLLER_DEFAULT - 80, 40.0 / 667.0 * HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"立即邀请"];
+        butSend.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [butSend setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateNormal];
+        [butSend setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateHighlighted];
+        [butSend addTarget:self action:@selector(buttonSendInvite:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [viewBottom addSubview:butSend];
-    butSend.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [butSend setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateNormal];
-    [butSend setBackgroundImage:[UIImage imageNamed:@"蓝色完成"] forState:UIControlStateHighlighted];
-    [butSend addTarget:self action:@selector(buttonSendInvite:) forControlEvents:UIControlEventTouchUpInside];
     
     CGFloat viewRuleW = viewRule.frame.size.width;
     CGFloat viewRuleH = viewRule.frame.size.height;
     
-    UILabel *labelRule = [CreatView creatWithLabelFrame:CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"邀请规则:\n\n1. 注册即送5000元体验金和红包;\n2. 当您邀请的好友成功注册并完成投资后，您将获得特权本金，享受同等金额的特权本金收益;\n3. 邀请好友您将有机会获得红包;\n4. 快去邀请好友，成为超级理财师吧!"];
+    if (labelRule == nil) {
+        
+        labelRule = [CreatView creatWithLabelFrame:CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"邀请规则:\n\n1. 注册即送5000元体验金和红包;\n2. 当您邀请的好友成功注册并完成投资后，您将获得特权本金，享受同等金额的特权本金收益;\n3. 邀请好友您将有机会获得红包;\n4. 快去邀请好友，成为超级理财师吧!"];
+        labelRule.numberOfLines = 0;
+    }
     [viewRule addSubview:labelRule];
-    labelRule.numberOfLines = 0;
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
 
@@ -258,7 +298,7 @@
             [adModelArray addObject:adModel];
         }
         
-//        [self contentShow];
+        [self contentShow];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

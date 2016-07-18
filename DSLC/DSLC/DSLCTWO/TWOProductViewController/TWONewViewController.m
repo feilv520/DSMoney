@@ -645,8 +645,8 @@
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        imgCurrent = [UIImage imageNamed:@"banner_red"];
-        imgOther = [UIImage imageNamed:@"banner_black"];
+        imgCurrent = [UIImage imageNamed:@"TWOBannerBlue"];
+        imgOther = [UIImage imageNamed:@"TWOBannerBlack"];
     });
     
     

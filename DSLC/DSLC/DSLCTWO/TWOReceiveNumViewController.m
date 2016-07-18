@@ -88,7 +88,7 @@
     textFieldYan.textColor = [UIColor whiteColor];
     textFieldYan.delegate = self;
     textFieldYan.keyboardType = UIKeyboardTypeNumberPad;
-    [textFieldYan setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [textFieldYan setValue:[UIColor colorFromHexCode:@"9db2c7"] forKeyPath:@"_placeholderLabel.textColor"];
     
     UIImageView *imageGet = [CreatView creatImageViewWithFrame:CGRectMake(30 + WIDTH_CONTROLLER_DEFAULT/2 + 10, 270.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 10 + 20, WIDTH_CONTROLLER_DEFAULT - 60 - 10 - imageTwo.frame.size.width, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuangyan"]];
     [imageBigPic addSubview:imageGet];
@@ -114,7 +114,7 @@
     [imageThree addSubview:textFieldInvite];
     textFieldInvite.delegate = self;
     textFieldInvite.textColor = [UIColor whiteColor];
-    [textFieldInvite setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [textFieldInvite setValue:[UIColor colorFromHexCode:@"9db2c7"] forKeyPath:@"_placeholderLabel.textColor"];
     
 //    注册按钮
     UIButton *buttRegist = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30, 270.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 10 + 20 + 40*2 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 60, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"注册"];

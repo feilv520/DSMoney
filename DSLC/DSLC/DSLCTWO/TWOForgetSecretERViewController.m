@@ -77,7 +77,7 @@
     textFieldPhone.delegate = self;
     textFieldPhone.textColor = [UIColor whiteColor];
     textFieldPhone.keyboardType = UIKeyboardTypeNumberPad;
-    [textFieldPhone setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [textFieldPhone setValue:[UIColor colorFromHexCode:@"9db2c7"] forKeyPath:@"_placeholderLabel.textColor"];
 
 //    短信验证码框
     UIImageView *imageMessage = [CreatView creatImageViewWithFrame:CGRectMake(30, self.view.frame.size.height/2 - 100 + 40 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT/2, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"zhongxing"]];
@@ -96,7 +96,7 @@
     textFieldMessage.delegate = self;
     textFieldMessage.textColor = [UIColor whiteColor];
     textFieldMessage.keyboardType = UIKeyboardTypeNumberPad;
-    [textFieldMessage setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [textFieldMessage setValue:[UIColor colorFromHexCode:@"9db2c7"] forKeyPath:@"_placeholderLabel.textColor"];
     
 //    获取验证码框
     UIImageView *imageGet = [CreatView creatImageViewWithFrame:CGRectMake(30 + WIDTH_CONTROLLER_DEFAULT/2 + 10, self.view.frame.size.height/2 - 100 + 40 + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 60 - 10 - imageMessage.frame.size.width, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuangyan"]];
@@ -145,7 +145,7 @@
     }
 }
 
-//获取短信验证码
+// 先检测手机号是否注册,获取短信验证码
 - (void)buttonGetMessageYanZhengMa:(UIButton *)button
 {
     NSLog(@"message");
@@ -154,7 +154,7 @@
     } else if (![NSString validateMobile:textFieldPhone.text]) {
         [ProgressHUD showMessage:@"手机号格式有误" Width:100 High:20];
     } else {
-        [self getMessageCode];
+        [self checkPhone];
     }
 }
 
@@ -173,6 +173,27 @@
         [self.view endEditing:YES];
         [self messageCodeData];
     }
+}
+
+// 检验手机号
+- (void)checkPhone{
+    NSDictionary *parmeter = @{@"phone":textFieldPhone.text};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"check/checkPhone" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"验证手机号 = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@301]){
+            [self getMessageCode];
+        } else {
+            [ProgressHUD showMessage:@"该号码还未注册，请先注册！" Width:100 High:20];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 //获取验证码接口

@@ -89,6 +89,32 @@
     
     self.view.backgroundColor = [UIColor qianhuise];
     
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidSetup:)
+                          name:kJPFNetworkDidSetupNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidClose:)
+                          name:kJPFNetworkDidCloseNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidRegister:)
+                          name:kJPFNetworkDidRegisterNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidLogin:)
+                          name:kJPFNetworkDidLoginNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidReceiveMessage:)
+                          name:kJPFNetworkDidReceiveMessageNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(serviceError:)
+                          name:kJPFServiceErrorNotification
+                        object:nil];
+    
     pickArray = [NSMutableArray array];
     photoArray = [NSMutableArray array];
     noticeArray = [NSMutableArray array];
@@ -679,8 +705,8 @@
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        imgCurrent = [UIImage imageNamed:@"banner_red"];
-        imgOther = [UIImage imageNamed:@"banner_black"];
+        imgCurrent = [UIImage imageNamed:@"TWOBannerBlue"];
+        imgOther = [UIImage imageNamed:@"TWOBannerBlack"];
     });
     
     if (iOS7) {
@@ -809,6 +835,10 @@
                 
                 if (pickArray.count != 0) {
                     
+                    if (pickArray.count < 3) {
+                        return ;
+                    }
+                    
                     [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                     
                     [self collectionViewShow];
@@ -933,6 +963,33 @@
     }
     [self.view addSubview:reloadButton];
 }
+
+- (void)networkDidSetup:(NSNotification *)notification {
+    NSLog(@"已连接");
+}
+
+- (void)networkDidClose:(NSNotification *)notification {
+    NSLog(@"未连接");
+}
+
+- (void)networkDidRegister:(NSNotification *)notification {
+    NSLog(@"%@", [notification userInfo]);
+    NSLog(@"已注册");
+}
+
+- (void)networkDidLogin:(NSNotification *)notification {
+
+    NSLog(@"已登录");
+    
+    if ([JPUSHService registrationID]) {
+        NSLog(@"get RegistrationID");
+    }
+}
+
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+    NSLog(@"networkDidReceiveMessage");
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
