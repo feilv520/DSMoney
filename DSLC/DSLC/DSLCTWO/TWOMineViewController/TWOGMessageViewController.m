@@ -11,9 +11,9 @@
 #import "UIColor+AddColor.h"
 #import "CreatView.h"
 #import "AppDelegate.h"
-#import "TWOMessageTableViewCell.h"
-#import "TWOMessageDetailViewController.h"
 #import "TWOMessageModel.h"
+#import "TWOGetNoticeCell.h"
+#import "TWONoticeDetailViewController.h"
 
 @interface TWOGMessageViewController ()<UITableViewDataSource, UITableViewDelegate> {
 
@@ -58,14 +58,12 @@
     [self.view addSubview:mainTableView];
     mainTableView.dataSource = self;
     mainTableView.delegate = self;
-    mainTableView.backgroundColor = [UIColor huibai];
+    mainTableView.backgroundColor = [UIColor qianhuise];
+    mainTableView.separatorColor = [UIColor clearColor];
+    mainTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 9)];
+    mainTableView.tableFooterView.backgroundColor = [UIColor qianhuise];
     
-    mainTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
-    mainTableView.tableFooterView.backgroundColor = [UIColor huibai];
-    
-//    [mainTableView setSeparatorColor:[UIColor colorWithRed:246 / 255.0 green:247 / 255.0 blue:249 / 255.0 alpha:1.0]];
-    [mainTableView setSeparatorColor:[UIColor huibai]];
-    [mainTableView registerNib:[UINib nibWithNibName:@"TWOMessageTableViewCell" bundle:nil] forCellReuseIdentifier:@"message"];
+    [mainTableView registerNib:[UINib nibWithNibName:@"TWOGetNoticeCell" bundle:nil] forCellReuseIdentifier:@"message"];
     
     [self addTableViewWithHeader:mainTableView];
     [self addTableViewWithFooter:mainTableView];
@@ -76,31 +74,37 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 90;
+    return 85;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    TWOMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message"];
+    TWOGetNoticeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message"];
     TWOMessageModel *messageModel = [messageArray objectAtIndex:indexPath.row];
     
-    cell.pointImage.hidden = YES;
-    cell.titleLabel.text = [messageModel title];
+    cell.viewBottom.layer.masksToBounds = YES;
+    cell.viewBottom.layer.cornerRadius = 5.0f;
+    cell.viewBottom.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+    cell.viewBottom.layer.borderWidth = 1;
     
-    cell.subTitleLabel.text = [messageModel content];
-    
-    cell.backgroundV.layer.masksToBounds = YES;
-    cell.backgroundV.layer.cornerRadius = 5.0f;
+    cell.labelTitle.text = [messageModel title];
+    cell.labelContent.text = [messageModel content];
+    cell.labelContent.numberOfLines = 0;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    cell.backgroundColor = [UIColor qianhuise];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    TWOMessageDetailViewController *messageDVC = [[TWOMessageDetailViewController alloc] init];
+    TWOMessageModel *messageModel = [messageArray objectAtIndex:indexPath.row];
+    
+    TWONoticeDetailViewController *messageDVC = [[TWONoticeDetailViewController alloc] init];
+    messageDVC.messageTitle = [messageModel title];
+    messageDVC.content = [messageModel content];
+    messageDVC.creatTime = [messageModel createTime];
     pushVC(messageDVC);
 }
 

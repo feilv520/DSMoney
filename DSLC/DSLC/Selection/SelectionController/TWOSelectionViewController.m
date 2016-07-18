@@ -21,6 +21,7 @@
 #import "TSignInViewController.h"
 #import "TWOLoginAPPViewController.h"
 #import "TWOMessageDetailViewController.h"
+#import "TWOMessageModel.h"
 
 @interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
@@ -55,7 +56,7 @@
     UIScrollView *bannerScrollView;
     
 //    公告数组
-    NSArray *noticeArray;
+    NSMutableArray *noticeArray;
 //    公告滚动视图
     UIScrollView *_scrollViewNotice;
     NSTimer *timerNotice;
@@ -68,6 +69,8 @@
     // 无网络猴子
     UIImageView *noNetworkMonkey;
     UIButton *reloadButton;
+    
+    NSMutableArray *noticeMesArray;
 }
 
 @end
@@ -88,6 +91,7 @@
     
     pickArray = [NSMutableArray array];
     photoArray = [NSMutableArray array];
+    noticeArray = [NSMutableArray array];
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
@@ -132,6 +136,30 @@
         animation.values = values;
         [viewDown.layer addAnimation:animation forKey:nil];
 //    }
+}
+
+//公告数据
+#pragma mark data````````````````````````````````````````````````````````````````
+- (void)getNoticeData
+{
+    NSDictionary *parmeter = @{@"type":@1};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"首页公告::::::::%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *dataArr = [responseObject objectForKey:@"noticeInfo"];
+            for (NSDictionary *dataDic in dataArr) {
+                TWOMessageModel *model = [[TWOMessageModel alloc] init];
+                [model setValuesForKeysWithDictionary:dataDic];
+                [noticeArray addObject:model];
+            }
+            
+            [self noticeContentShow];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 //
@@ -200,7 +228,6 @@
 //    公告图标
     UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(9, 7, noticeHeight, noticeHeight) backGroundColor:Color_White setImage:[UIImage imageNamed:@"公告"]];
     [whiteBackgroundView addSubview:imageNotice];
-    [self noticeContentShow];
     
 //    公告view分界线
     UIView *viewLineNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
@@ -232,9 +259,9 @@
 //    [_scrollView addSubview:viewNotice];
 }
 
+//首页公告视图
 - (void)noticeContentShow
 {
-    noticeArray = @[@"公告来了!", @"这是一个秘密~", @"我不能告诉你哟!"];
     _scrollViewNotice = [[UIScrollView alloc] initWithFrame:CGRectMake(9 + 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 5, viewBanner.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 32.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     [_scrollView addSubview:_scrollViewNotice];
     _scrollViewNotice.backgroundColor = Color_White;
@@ -244,7 +271,7 @@
     _scrollViewNotice.userInteractionEnabled = YES;
     
     for (int i = 1; i <= noticeArray.count; i++) {
-        UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * i, _scrollViewNotice.frame.size.width, 30) backgroundColor:Color_White textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[noticeArray objectAtIndex:i - 1]];
+        UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * i, _scrollViewNotice.frame.size.width - 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:i - 1] title]];
         [_scrollViewNotice addSubview:labelNotice];
         labelNotice.userInteractionEnabled = YES;
         labelNotice.exclusiveTouch = YES;
@@ -253,7 +280,7 @@
         [labelNotice addGestureRecognizer:gensture];
     }
     
-    UILabel *labelLast = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * (noticeArray.count + 1), _scrollViewNotice.frame.size.width, 30) backgroundColor:Color_White textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:@"公告来了!"];
+    UILabel *labelLast = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * (noticeArray.count + 1), _scrollViewNotice.frame.size.width, 30) backgroundColor:Color_White textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:0] title]];
     [_scrollViewNotice addSubview:labelLast];
     UITapGestureRecognizer *gensture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapAction)];
     gensture.delegate = self;
@@ -735,7 +762,6 @@
                 
                 
                 if (pickArray.count != 0) {
-                    [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                     
                     [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                     
@@ -861,14 +887,16 @@
             
             noNetworkMonkey.hidden = YES;
             reloadButton.hidden = YES;
+            
+            [self getNoticeData];
+            
         } else {
             
             [self upContentShow];
             [_scrollView setHidden:NO];
-            
+            [self getNoticeData];
             [self getProductList];
         }
-        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

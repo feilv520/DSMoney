@@ -98,6 +98,9 @@
 		8114F6DF1D38B77B000B80E0 /* 邀请好朋友@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6DD1D38B77B000B80E0 /* 邀请好朋友@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8114F6E01D38B77B000B80E0 /* 邀请好朋友@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6DE1D38B77B000B80E0 /* 邀请好朋友@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8114F6FA1D3C83A7000B80E0 /* TWOMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8114F6F91D3C83A7000B80E0 /* TWOMessageModel.m */; settings = {ASSET_TAGS = (); }; };
+		8114F6FE1D3CB6EE000B80E0 /* TWOGetNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8114F6FC1D3CB6EE000B80E0 /* TWOGetNoticeCell.m */; settings = {ASSET_TAGS = (); }; };
+		8114F6FF1D3CB6EE000B80E0 /* TWOGetNoticeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8114F6FD1D3CB6EE000B80E0 /* TWOGetNoticeCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8114F7021D3CC1EE000B80E0 /* TWONoticeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8114F7011D3CC1EE000B80E0 /* TWONoticeDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8118D7AA1BEB59C70084292B /* 没打开的红包@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8118D7AB1BEB59C70084292B /* 没打开的红包@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */; settings = {ASSET_TAGS = (); }; };
 		811B628C1CFE8B9D00B6F17E /* 每日一摇@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 811B62881CFE8B9D00B6F17E /* 每日一摇@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -1731,6 +1734,11 @@
 		8114F6DE1D38B77B000B80E0 /* 邀请好朋友@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请好朋友@3x.png"; sourceTree = "<group>"; };
 		8114F6F81D3C83A7000B80E0 /* TWOMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMessageModel.h; sourceTree = "<group>"; };
 		8114F6F91D3C83A7000B80E0 /* TWOMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMessageModel.m; sourceTree = "<group>"; };
+		8114F6FB1D3CB6EE000B80E0 /* TWOGetNoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOGetNoticeCell.h; sourceTree = "<group>"; };
+		8114F6FC1D3CB6EE000B80E0 /* TWOGetNoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOGetNoticeCell.m; sourceTree = "<group>"; };
+		8114F6FD1D3CB6EE000B80E0 /* TWOGetNoticeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOGetNoticeCell.xib; sourceTree = "<group>"; };
+		8114F7001D3CC1EE000B80E0 /* TWONoticeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWONoticeDetailViewController.h; sourceTree = "<group>"; };
+		8114F7011D3CC1EE000B80E0 /* TWONoticeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWONoticeDetailViewController.m; sourceTree = "<group>"; };
 		8118D7A81BEB59C70084292B /* 没打开的红包@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@2x.png"; sourceTree = "<group>"; };
 		8118D7A91BEB59C70084292B /* 没打开的红包@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没打开的红包@3x.png"; sourceTree = "<group>"; };
 		811B62881CFE8B9D00B6F17E /* 每日一摇@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "每日一摇@2x.png"; sourceTree = "<group>"; };
@@ -7138,10 +7146,12 @@
 				8D855A5A1CE99B40007A4B22 /* TWOMessageCenterViewController.m */,
 				8D855A5C1CE99D59007A4B22 /* TWOGMessageViewController.h */,
 				8D855A5D1CE99D59007A4B22 /* TWOGMessageViewController.m */,
-				8D855A5F1CE99D67007A4B22 /* TWOMMessageViewController.h */,
+				8114F7001D3CC1EE000B80E0 /* TWONoticeDetailViewController.h */,
+				8114F7011D3CC1EE000B80E0 /* TWONoticeDetailViewController.m */,
 				8D855A601CE99D67007A4B22 /* TWOMMessageViewController.m */,
 				8D855A721CE9CF51007A4B22 /* TWOMessageDetailViewController.h */,
 				8D855A731CE9CF51007A4B22 /* TWOMessageDetailViewController.m */,
+				8D855A5F1CE99D67007A4B22 /* TWOMMessageViewController.h */,
 				8D855A741CE9CF51007A4B22 /* TWOMessageDetailViewController.xib */,
 			);
 			name = "消息中心";
@@ -7153,6 +7163,9 @@
 				8D855A631CE9C48B007A4B22 /* TWOMessageTableViewCell.h */,
 				8D855A641CE9C48B007A4B22 /* TWOMessageTableViewCell.m */,
 				8D855A651CE9C48B007A4B22 /* TWOMessageTableViewCell.xib */,
+				8114F6FB1D3CB6EE000B80E0 /* TWOGetNoticeCell.h */,
+				8114F6FC1D3CB6EE000B80E0 /* TWOGetNoticeCell.m */,
+				8114F6FD1D3CB6EE000B80E0 /* TWOGetNoticeCell.xib */,
 			);
 			name = "消息中心";
 			sourceTree = "<group>";
@@ -8247,6 +8260,7 @@
 				8D3EE9F91C27AB400031F7C9 /* 上海银行@3x.png in Resources */,
 				8177A0431CF3EEFF0057AA7B /* 椭圆-1@3x.png in Resources */,
 				8D98CC4B1CF69D0700E34ADE /* TWOProductJinDu@3x.png in Resources */,
+				8114F6FF1D3CB6EE000B80E0 /* TWOGetNoticeCell.xib in Resources */,
 				8179EB461CEC072300BD7054 /* aboutDSLC@2x.png in Resources */,
 				81B84C031CE42DDD00A867B9 /* TWOJobCenterCell.xib in Resources */,
 				8DCE98491CF2D6540067CBCD /* center.png in Resources */,
@@ -9126,6 +9140,7 @@
 				8177A0581CF4482B0057AA7B /* TWOTestTwoViewController.m in Sources */,
 				812201341CE5D20D00159A74 /* TWOPersonalSetCell.m in Sources */,
 				81CBE7CE1CE9AAF4004FE1D4 /* TWOChooseChangeStyleViewController.m in Sources */,
+				8114F6FE1D3CB6EE000B80E0 /* TWOGetNoticeCell.m in Sources */,
 				8D840C5E1CE31D18005A17F9 /* TWOMakeSureTableViewCell.m in Sources */,
 				817DD4B01BCF5B2400042B09 /* MiddleView.m in Sources */,
 				8D90117A1BD5D8FA00E5D62A /* TransactionViewController.m in Sources */,
@@ -9449,6 +9464,7 @@
 				8D88D0FC1BFECCB40051D6DA /* MJRefreshAutoStateFooter.m in Sources */,
 				8D4FF5D91BE339A200BAE25F /* AFSecurityPolicy.m in Sources */,
 				81E0CCE11C27EF6700148609 /* ChooseBusViewController.m in Sources */,
+				8114F7021D3CC1EE000B80E0 /* TWONoticeDetailViewController.m in Sources */,
 				8D855B011CEC1078007A4B22 /* TWOHandSettingViewController.m in Sources */,
 				8D855A611CE99D67007A4B22 /* TWOMMessageViewController.m in Sources */,
 				8D88D1071BFECCB40051D6DA /* UIView+MJExtension.m in Sources */,

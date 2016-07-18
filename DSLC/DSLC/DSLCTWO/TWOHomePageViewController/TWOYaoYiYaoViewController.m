@@ -411,13 +411,20 @@
     
 //    判断中奖是加息券 红包 猴币 还是现金
     if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"1"]) {
-        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"¥%d红包", [[dataDic objectForKey:@"prizeNumber"] intValue]] frontNum:1 afterNum:2];
+        
+        NSString *redBagString = [[dataDic objectForKey:@"prizeNumber"] stringByReplacingOccurrencesOfString:@"," withString:@""];
+        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"¥%d红包", [redBagString intValue]] frontNum:1 afterNum:2];
+        
     } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"2"]) {
         [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"%@%%加息券", [dataDic objectForKey:@"prizeNumber"]] frontNum:0 afterNum:4];
+        
     } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"3"]) {
         [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"%d猴币", [[dataDic objectForKey:@"prizeNumber"] intValue]] frontNum:0 afterNum:2];
+        
     } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"4"]) {
-        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"¥%@现金", [dataDic objectForKey:@"prizeNumber"]] frontNum:1 afterNum:2];
+        
+        NSString *moneyString = [[dataDic objectForKey:@"prizeNumber"] stringByReplacingOccurrencesOfString:@"," withString:@""];
+        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"¥%d现金", [moneyString intValue]] frontNum:1 afterNum:2];
     }
     
     UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 20 + 45 + 15, viewBottom.frame.size.width, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"大力出奇迹,恭喜您摇中"];
@@ -585,34 +592,6 @@
     imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
     imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
 }
-
-//- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
-//{
-////    取消摇动
-//}
-
-//- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
-//{
-////    摇动结束
-//    shakeSatate = YES;
-////    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsnoticeShake:) name:@"shakeYshake" object:nil];
-//    
-//    if (motion != UIEventSubtypeMotionShake) {
-//        NSLog(@"其他事件");
-//    } else {
-//        NSLog(@"摇一摇结束");
-//
-//        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
-//        flagLogin = dic;
-//        //判断是否登录
-//        if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-//            [self loginCome];
-//        } else {
-//            //摇一摇数据
-//            [self getYaoData];
-//        }
-//    }
-//}
 
 #pragma mark data--------------------------------------$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 - (void)showCiShuData

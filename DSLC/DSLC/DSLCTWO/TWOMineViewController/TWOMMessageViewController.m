@@ -18,6 +18,9 @@
     
     UITableView *mainTableView;
     BOOL flag;
+    MJRefreshBackGifFooter *gifFooter;
+    BOOL flagSate;
+    NSInteger pageNum;
 }
 
 @end
@@ -39,6 +42,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor huibai];
     
+    flagSate = NO;
+    pageNum = 1;
+    
     [self tableViewShow];
 }
 
@@ -48,30 +54,29 @@
     [self.view addSubview:mainTableView];
     mainTableView.dataSource = self;
     mainTableView.delegate = self;
-    mainTableView.backgroundColor = [UIColor huibai];
+    mainTableView.backgroundColor = [UIColor qianhuise];
+    mainTableView.separatorColor = [UIColor clearColor];
+    mainTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 9)];
+    mainTableView.tableFooterView.backgroundColor = [UIColor qianhuise];
     
-    mainTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
-    mainTableView.tableFooterView.backgroundColor = [UIColor huibai];
-    
-//    [mainTableView setSeparatorColor:[UIColor colorWithRed:246 / 255.0 green:247 / 255.0 blue:249 / 255.0 alpha:1.0]];
-    [mainTableView setSeparatorColor:[UIColor huibai]];
     [mainTableView registerNib:[UINib nibWithNibName:@"TWOMessageTableViewCell" bundle:nil] forCellReuseIdentifier:@"message"];
     
     [self addTableViewWithHeader:mainTableView];
     [self addTableViewWithFooter:mainTableView];
-    
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return 5;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 90;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 85;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     TWOMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message"];
     
     cell.titleLabel.text = @"喜大普奔,大圣理财APP2.0版本上线啦!";
@@ -80,6 +85,8 @@
     
     cell.backgroundV.layer.masksToBounds = YES;
     cell.backgroundV.layer.cornerRadius = 5.0f;
+    cell.backgroundV.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+    cell.backgroundV.layer.borderWidth = 1;
     
     if (!flag) {
         
@@ -94,7 +101,7 @@
     flag = !flag;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 

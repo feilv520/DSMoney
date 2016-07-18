@@ -181,10 +181,12 @@
         NSLog(@"验证手机号 = %@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:@302]){
-            TWOReceiveNumViewController *receiveNum = [[TWOReceiveNumViewController alloc] init];
-            receiveNum.phoneString = textFieldPhone.text;
-            [self.navigationController pushViewController:receiveNum animated:YES];
+            
+//            TWOReceiveNumViewController *receiveNum = [[TWOReceiveNumViewController alloc] init];
+//            receiveNum.phoneString = textFieldPhone.text;
+//            [self.navigationController pushViewController:receiveNum animated:YES];
             [self sendToMessage];
+            
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
@@ -204,10 +206,14 @@
         
         NSLog(@"getSmsCode = %@",responseObject);
         
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@302]){
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]){
             TWOReceiveNumViewController *receiveNum = [[TWOReceiveNumViewController alloc] init];
             receiveNum.phoneString = textFieldPhone.text;
             [self.navigationController pushViewController:receiveNum animated:YES];
+            
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:@301]) {
+            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
