@@ -74,6 +74,7 @@
 #import "LLPaySdk.h"                         // 连连支付
 #import "LLPayUtil.h"                        // 连连文件
 #import "NSString+md5String.h"               // md5加密
+#import "JPUSHService.h"                     // 激光推送
 
 
 /*

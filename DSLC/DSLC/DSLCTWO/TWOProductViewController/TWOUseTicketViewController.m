@@ -22,6 +22,10 @@
     
     // 选中的加息卷Id
     TWOJiaXiQuanModel *incrModel;
+    
+    MJRefreshBackGifFooter *footerT;
+    
+    BOOL moreFlag;
 }
 
 @end
@@ -63,6 +67,8 @@
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     _tableView.tableFooterView.backgroundColor = [UIColor clearColor];
     [_tableView registerNib:[UINib nibWithNibName:@"TWIJiaXiQuanCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    
+    [self addTableViewWithFooter:_tableView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -191,11 +197,31 @@
             [_tableView reloadData];
         }
         
+        if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
+            moreFlag = YES;
+        }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
         
     }];
+}
+
+#pragma mark 判断是否还要加载更多
+#pragma mark --------------------------------
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer{
+    
+    footerT = footer;
+    
+    if (moreFlag) {
+        // 拿到当前的上拉刷新控件，结束刷新状态
+        [footer endRefreshing];
+    } else {
+        page ++;
+        [self getMyIncreaseList];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

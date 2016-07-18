@@ -23,6 +23,18 @@
     UIButton *butForeget;
     UIImageView *imageMessage;
     UIImageView *imageGet;
+    UIImageView *imageSuo;
+    UIImageView *imagePhone;
+    UIImageView *imageSecret;
+    UIImageView *imageOne;
+    UIImageView *imageTwo;
+    UIView *viewLine;
+    UIView *viewLine1;
+    UIView *viewLine2;
+    UIButton *buttonGet;
+    UIButton *butCancle;
+    UIButton *butLogin;
+    UIButton *butFastRegist;
     UIScrollView *_scrollView;
     UITextField *textFieldPhone;
     UITextField *textFieldSecret;
@@ -64,108 +76,159 @@
 
 - (void)loginContent
 {
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
-//    _scrollView.contentSize = CGSizeMake(0, self.view.frame.size.height + self.view.frame.size.height/2 - 50);
+    if (_scrollView == nil) {
+        
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+        _scrollView.userInteractionEnabled = YES;
+    }
+    //    _scrollView.contentSize = CGSizeMake(0, self.view.frame.size.height + self.view.frame.size.height/2 - 50);
     [self.view addSubview:_scrollView];
-    _scrollView.userInteractionEnabled = YES;
     
-//    大背景
-    imageViewBeiJing = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"bigpicture"]];
+    //    大背景
+    if (imageViewBeiJing == nil) {
+        
+        imageViewBeiJing = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"bigpicture"]];
+        imageViewBeiJing.userInteractionEnabled = YES;
+    }
     [_scrollView addSubview:imageViewBeiJing];
-    imageViewBeiJing.userInteractionEnabled = YES;
     
-//    左上角x按钮
-    UIButton *butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 30, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+    //    左上角x按钮
+    if (butCancle == nil) {
+        
+        butCancle = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 30, 25, 25) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        [butCancle setBackgroundImage:[UIImage imageNamed:@"logincuo"] forState:UIControlStateNormal];
+        [butCancle setBackgroundImage:[UIImage imageNamed:@"logincuo"] forState:UIControlStateHighlighted];
+        [butCancle addTarget:self action:@selector(buttonCancleClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageViewBeiJing addSubview:butCancle];
-    [butCancle setBackgroundImage:[UIImage imageNamed:@"logincuo"] forState:UIControlStateNormal];
-    [butCancle setBackgroundImage:[UIImage imageNamed:@"logincuo"] forState:UIControlStateHighlighted];
-    [butCancle addTarget:self action:@selector(buttonCancleClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-//    密码登录&验证码登录切换框
-    UIImageView *imageOne = [CreatView creatImageViewWithFrame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 60, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuang"]];
+    //    密码登录&验证码登录切换框
+    if (imageOne == nil) {
+        
+        imageOne = [CreatView creatImageViewWithFrame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 60, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuang"]];
+        imageOne.userInteractionEnabled = YES;
+    }
     [imageViewBeiJing addSubview:imageOne];
-    imageOne.userInteractionEnabled = YES;
     
-//    密码登录按钮
-    buttonLeft = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, imageOne.frame.size.width/2, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor profitColor] titleText:@"密码登录"];
+    //    密码登录按钮
+    if (buttonLeft == nil) {
+        
+        buttonLeft = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, imageOne.frame.size.width/2, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor profitColor] titleText:@"密码登录"];
+        buttonLeft.tag = 800;
+        [buttonLeft setBackgroundImage:[UIImage imageNamed:@"whitelogin"] forState:UIControlStateNormal];
+        [buttonLeft setBackgroundImage:[UIImage imageNamed:@"whitelogin"] forState:UIControlStateHighlighted];
+        buttonLeft.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [buttonLeft addTarget:self action:@selector(buttonLeftClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageOne addSubview:buttonLeft];
-    buttonLeft.tag = 800;
-    [buttonLeft setBackgroundImage:[UIImage imageNamed:@"whitelogin"] forState:UIControlStateNormal];
-    [buttonLeft setBackgroundImage:[UIImage imageNamed:@"whitelogin"] forState:UIControlStateHighlighted];
-    buttonLeft.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [buttonLeft addTarget:self action:@selector(buttonLeftClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-//    验证码登录按钮
-    buttonRight = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(imageOne.frame.size.width/2, 0, imageOne.frame.size.width/2, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"验证码登录"];
+    //    验证码登录按钮
+    if (buttonRight == nil) {
+        
+        buttonRight = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(imageOne.frame.size.width/2, 0, imageOne.frame.size.width/2, 40) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"验证码登录"];
+        buttonRight.tag = 900;
+        buttonRight.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [buttonRight addTarget:self action:@selector(buttonRightClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageOne addSubview:buttonRight];
-    buttonRight.tag = 900;
-    buttonRight.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [buttonRight addTarget:self action:@selector(buttonRightClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-//    输入手机号框
-    UIImageView *imageTwo = [CreatView creatImageViewWithFrame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 40, WIDTH_CONTROLLER_DEFAULT - 60, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuang"]];
+    //    输入手机号框
+    if (imageTwo == nil) {
+        
+        imageTwo = [CreatView creatImageViewWithFrame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 40, WIDTH_CONTROLLER_DEFAULT - 60, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuang"]];
+        imageTwo.userInteractionEnabled = YES;
+    }
     [imageViewBeiJing addSubview:imageTwo];
-    imageTwo.userInteractionEnabled = YES;
     
-//    手机图标
-    UIImageView *imagePhone = [CreatView creatImageViewWithFrame:CGRectMake(22, 9, 22, 22) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"phoneNumber"]];
+    //    手机图标
+    if (imagePhone == nil) {
+        
+        imagePhone = [CreatView creatImageViewWithFrame:CGRectMake(22, 9, 22, 22) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"phoneNumber"]];
+    }
     [imageTwo addSubview:imagePhone];
     
-    UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(22 + 22 + 10, 8, 0.5, 24) backgroundColor:[UIColor whiteColor]];
+    if (viewLine == nil) {
+        
+        viewLine = [CreatView creatViewWithFrame:CGRectMake(22 + 22 + 10, 8, 0.5, 24) backgroundColor:[UIColor whiteColor]];
+    }
     [imageTwo addSubview:viewLine];
     
-//    输入手机号
-    textFieldPhone = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"手机号" setTintColor:[UIColor whiteColor]];
+    //    输入手机号
+    if (textFieldPhone == nil) {
+        
+        textFieldPhone = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageTwo.frame.size.width - 64 - 10, 20) setPlaceholder:@"手机号" setTintColor:[UIColor whiteColor]];
+        textFieldPhone.text = @"";
+        textFieldPhone.tag = 1000;
+        textFieldPhone.clearButtonMode = UITextFieldViewModeAlways;
+        textFieldPhone.textColor = [UIColor whiteColor];
+        textFieldPhone.keyboardType = UIKeyboardTypeNumberPad;
+        textFieldPhone.delegate = self;
+        [textFieldPhone setValue:[UIColor colorFromHexCode:@"9db2c7"] forKeyPath:@"_placeholderLabel.textColor"];
+    }
     [imageTwo addSubview:textFieldPhone];
-    textFieldPhone.text = @"";
-    textFieldPhone.tag = 1000;
-    textFieldPhone.clearButtonMode = UITextFieldViewModeAlways;
-    textFieldPhone.textColor = [UIColor whiteColor];
-    textFieldPhone.keyboardType = UIKeyboardTypeNumberPad;
-    textFieldPhone.delegate = self;
-    [textFieldPhone setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     
-//    输入密码框
-    imageThree = [CreatView creatImageViewWithFrame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuang"]];
+    //    输入密码框
+    if (imageThree == nil) {
+        
+        imageThree = [CreatView creatImageViewWithFrame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuang"]];
+        imageThree.userInteractionEnabled = YES;
+    }
     [imageViewBeiJing addSubview:imageThree];
-    imageThree.userInteractionEnabled = YES;
     
-//    密码图标
-    UIImageView *imageSecret = [CreatView creatImageViewWithFrame:CGRectMake(22, 10, 20, 20) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"loginSecret"]];
+    //    密码图标
+    if (imageSecret == nil) {
+        
+        imageSecret = [CreatView creatImageViewWithFrame:CGRectMake(22, 10, 20, 20) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"loginSecret"]];
+    }
     [imageThree addSubview:imageSecret];
     
-    UIView *viewLine2 = [CreatView creatViewWithFrame:CGRectMake(22 + 22 + 10, 8, 0.5, 24) backgroundColor:[UIColor whiteColor]];
+    if (viewLine2 == nil) {
+        
+        viewLine2 = [CreatView creatViewWithFrame:CGRectMake(22 + 22 + 10, 8, 0.5, 24) backgroundColor:[UIColor whiteColor]];
+    }
     [imageThree addSubview:viewLine2];
     
-//    输入密码
-    textFieldSecret = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageThree.frame.size.width - 64 - 10, 20) setPlaceholder:@"登录密码" setTintColor:[UIColor whiteColor]];
+    //    输入密码
+    if (textFieldSecret == nil) {
+        
+        textFieldSecret = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageThree.frame.size.width - 64 - 10, 20) setPlaceholder:@"登录密码" setTintColor:[UIColor whiteColor]];
+        textFieldSecret.text = @"";
+        textFieldSecret.tag = 1001;
+        textFieldSecret.clearButtonMode = UITextFieldViewModeAlways;
+        textFieldSecret.secureTextEntry = YES;
+        textFieldSecret.textColor = [UIColor whiteColor];
+        textFieldSecret.delegate = self;
+        [textFieldSecret setValue:[UIColor colorFromHexCode:@"9db2c7"] forKeyPath:@"_placeholderLabel.textColor"];
+    }
     [imageThree addSubview:textFieldSecret];
-    textFieldSecret.text = @"";
-    textFieldSecret.tag = 1001;
-    textFieldSecret.clearButtonMode = UITextFieldViewModeAlways;
-    textFieldSecret.secureTextEntry = YES;
-    textFieldSecret.textColor = [UIColor whiteColor];
-    textFieldSecret.delegate = self;
-    [textFieldSecret setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     
-//    忘记密码?按钮
-    butForeget = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60 - 30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 9, 60, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"忘记密码?"];
+    //    忘记密码?按钮
+    if (butForeget == nil) {
+        
+        butForeget = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60 - 30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 9, 60, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"忘记密码?"];
+        butForeget.titleLabel.font = [UIFont systemFontOfSize:12];
+        [butForeget addTarget:self action:@selector(buttonClickedForget:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageViewBeiJing addSubview:butForeget];
-    butForeget.titleLabel.font = [UIFont systemFontOfSize:12];
-    [butForeget addTarget:self action:@selector(buttonClickedForget:) forControlEvents:UIControlEventTouchUpInside];
     
-//    登录按钮
-    UIButton *butLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 60, 40) backgroundColor:[UIColor clearColor] textColor:nil titleText:@"登录"];
+    //    登录按钮
+    if (butLogin == nil) {
+        
+        butLogin = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT - 60, 40) backgroundColor:[UIColor clearColor] textColor:nil titleText:@"登录"];
+        butLogin.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
+        [butLogin setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateHighlighted];
+        [butLogin addTarget:self action:@selector(loginAppButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageViewBeiJing addSubview:butLogin];
-    butLogin.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [butLogin setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
-    [butLogin setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateHighlighted];
-    [butLogin addTarget:self action:@selector(loginAppButton:) forControlEvents:UIControlEventTouchUpInside];
     
-//    快速注册按钮
-    UIButton *butFastRegist = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*4 + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 60, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor fastZhuCeolor] titleText:@"快速注册"];
+    //    快速注册按钮
+    if (butFastRegist == nil) {
+        
+        butFastRegist = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*4 + 50.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 60, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor fastZhuCeolor] titleText:@"快速注册"];
+        [butFastRegist addTarget:self action:@selector(buttonFastRegister:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageViewBeiJing addSubview:butFastRegist];
-    [butFastRegist addTarget:self action:@selector(buttonFastRegister:) forControlEvents:UIControlEventTouchUpInside];
     
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         textFieldPhone.font = [UIFont fontWithName:@"CenturyGothic" size:13];
@@ -205,37 +268,52 @@
     imageMessage = nil;
     imageGet = nil;
     
-//    输入密码框
-    imageThree = [CreatView creatImageViewWithFrame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuang"]];
+    //    输入密码框
+    if (imageThree == nil) {
+        
+        imageThree = [CreatView creatImageViewWithFrame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuang"]];
+        imageThree.userInteractionEnabled = YES;
+    }
     [imageViewBeiJing addSubview:imageThree];
-    imageThree.userInteractionEnabled = YES;
     
-//    密码图标
-    UIImageView *imageSecret = [CreatView creatImageViewWithFrame:CGRectMake(22, 10, 20, 20) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"loginSecret"]];
+    //    密码图标
+    if (imageSecret == nil) {
+        
+        imageSecret = [CreatView creatImageViewWithFrame:CGRectMake(22, 10, 20, 20) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"loginSecret"]];
+    }
     [imageThree addSubview:imageSecret];
     
-    UIView *viewLine2 = [CreatView creatViewWithFrame:CGRectMake(22 + 22 + 10, 8, 0.5, 24) backgroundColor:[UIColor whiteColor]];
+    if (viewLine2 == nil) {
+        
+        viewLine2 = [CreatView creatViewWithFrame:CGRectMake(22 + 22 + 10, 8, 0.5, 24) backgroundColor:[UIColor whiteColor]];
+    }
     [imageThree addSubview:viewLine2];
     
-//    输入密码
-    textFieldSecret = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageThree.frame.size.width - 64 - 10, 20) setPlaceholder:@"登录密码" setTintColor:[UIColor whiteColor]];
-    [imageThree addSubview:textFieldSecret];
-    textFieldSecret.text = @"";
-    textFieldSecret.clearButtonMode = UITextFieldViewModeAlways;
-    textFieldSecret.textColor = [UIColor whiteColor];
-    textFieldSecret.delegate = self;
-    textFieldSecret.tag = 1001;
-    textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [textFieldSecret setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    //    输入密码
+    if (textFieldSecret == nil) {
+        
+        textFieldSecret = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageThree.frame.size.width - 64 - 10, 20) setPlaceholder:@"登录密码" setTintColor:[UIColor whiteColor]];
+        textFieldSecret.text = @"";
+        textFieldSecret.clearButtonMode = UITextFieldViewModeAlways;
+        textFieldSecret.textColor = [UIColor whiteColor];
+        textFieldSecret.delegate = self;
+        textFieldSecret.tag = 1001;
+        textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [textFieldSecret setValue:[UIColor colorFromHexCode:@"9db2c7"] forKeyPath:@"_placeholderLabel.textColor"];
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            textFieldSecret.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        }
     }
+    [imageThree addSubview:textFieldSecret];
     
-//    忘记密码?按钮
-    butForeget = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60 - 30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 9, 60, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"忘记密码?"];
+    //    忘记密码?按钮
+    if (butForeget == nil) {
+        
+        butForeget = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 60 - 30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*3 + 9, 60, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"忘记密码?"];
+        butForeget.titleLabel.font = [UIFont systemFontOfSize:12];
+        [butForeget addTarget:self action:@selector(buttonClickedForget:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [imageViewBeiJing addSubview:butForeget];
-    butForeget.titleLabel.font = [UIFont systemFontOfSize:12];
-    [butForeget addTarget:self action:@selector(buttonClickedForget:) forControlEvents:UIControlEventTouchUpInside];
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         imageThree.frame = CGRectMake(30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60, 40);
@@ -255,46 +333,64 @@
     imageThree = nil;
     butForeget = nil;
     
-//    短信验证码框
-    imageMessage = [CreatView creatImageViewWithFrame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT/2, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"zhongxing"]];
+    //    短信验证码框
+    if (imageMessage == nil) {
+        
+        imageMessage = [CreatView creatImageViewWithFrame:CGRectMake(30, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT/2, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"zhongxing"]];
+        imageMessage.userInteractionEnabled = YES;
+    }
     [imageViewBeiJing addSubview:imageMessage];
-    imageMessage.userInteractionEnabled = YES;
     
-    UIImageView *imageSuo = [CreatView creatImageViewWithFrame:CGRectMake(22, 10, 20, 20) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"loginSecret"]];
+    if (imageSuo == nil) {
+        
+        imageSuo = [CreatView creatImageViewWithFrame:CGRectMake(22, 10, 20, 20) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"loginSecret"]];
+    }
     [imageMessage addSubview:imageSuo];
     
-    UIView *viewLine1 = [CreatView creatViewWithFrame:CGRectMake(22 + 22 + 10, 8, 0.5, 24) backgroundColor:[UIColor whiteColor]];
+    if (viewLine1 == nil) {
+        
+        viewLine1 = [CreatView creatViewWithFrame:CGRectMake(22 + 22 + 10, 8, 0.5, 24) backgroundColor:[UIColor whiteColor]];
+    }
     [imageMessage addSubview:viewLine1];
     
-//    短信验证码输入框
-    textFieldMessage = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageMessage.frame.size.width - 64 - 10, 20) setPlaceholder:@"短信验证码" setTintColor:[UIColor whiteColor]];
+    //    短信验证码输入框
+    if (textFieldMessage == nil) {
+        
+        textFieldMessage = [CreatView creatWithfFrame:CGRectMake(22 + 22 + 10 + 10, 10, imageMessage.frame.size.width - 64 - 10, 20) setPlaceholder:@"短信验证码" setTintColor:[UIColor whiteColor]];
+        textFieldMessage.text = @"";
+        textFieldMessage.clearButtonMode = UITextFieldViewModeWhileEditing;
+        textFieldMessage.textColor = [UIColor whiteColor];
+        textFieldMessage.keyboardType = UIKeyboardTypeNumberPad;
+        textFieldMessage.delegate = self;
+        [textFieldMessage setValue:[UIColor colorFromHexCode:@"9db2c7"] forKeyPath:@"_placeholderLabel.textColor"];
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            textFieldMessage.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        } else {
+            textFieldMessage.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        }
+    }
     [imageMessage addSubview:textFieldMessage];
-    textFieldMessage.text = @"";
-    textFieldMessage.clearButtonMode = UITextFieldViewModeWhileEditing;
-    textFieldMessage.textColor = [UIColor whiteColor];
-    textFieldMessage.keyboardType = UIKeyboardTypeNumberPad;
-    textFieldMessage.delegate = self;
-    [textFieldMessage setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        textFieldMessage.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-    } else {
-        textFieldMessage.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    }
     
-//    获取验证码框
-    imageGet = [CreatView creatImageViewWithFrame:CGRectMake(30 + WIDTH_CONTROLLER_DEFAULT/2 + 10, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60 - 10 - imageMessage.frame.size.width, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuangyan"]];
+    //    获取验证码框
+    if (imageGet == nil) {
+        
+        imageGet = [CreatView creatImageViewWithFrame:CGRectMake(30 + WIDTH_CONTROLLER_DEFAULT/2 + 10, 228.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 30.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT - 60 - 10 - imageMessage.frame.size.width, 40) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"kuangyan"]];
+        imageGet.userInteractionEnabled = YES;
+    }
     [imageViewBeiJing addSubview:imageGet];
-    imageGet.userInteractionEnabled = YES;
     
-    UIButton *buttonGet = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 5, imageGet.frame.size.width - 20, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"获取验证码"];
-    [imageGet addSubview:buttonGet];
-    buttonGet.tag = 552;
-    buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-    [buttonGet addTarget:self action:@selector(getMessageYanZhengMa:) forControlEvents:UIControlEventTouchUpInside];
-    
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+    if (buttonGet == nil) {
+        
+        buttonGet = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(10, 5, imageGet.frame.size.width - 20, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"获取验证码"];
+        buttonGet.tag = 552;
+        buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+        [buttonGet addTarget:self action:@selector(getMessageYanZhengMa:) forControlEvents:UIControlEventTouchUpInside];
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            buttonGet.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:13];
+        }
     }
+    [imageGet addSubview:buttonGet];
+    
     
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 480) {
         imageMessage.frame = CGRectMake(30, 208.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 60.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 25.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)*2 + 40*2, WIDTH_CONTROLLER_DEFAULT/2, 40);
@@ -305,7 +401,7 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (HEIGHT_CONTROLLER_DEFAULT - 20 == 667) {
-
+        
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             _scrollView.contentOffset = CGPointMake(0, self.view.frame.size.height/4.0 + 20);
         } completion:^(BOOL finished) {
@@ -386,7 +482,7 @@
     } else if (textFieldSecret.text.length == 0) {
         [ProgressHUD showMessage:@"请输入密码" Width:100 High:20];
     } else {
-    
+        
         if (imageGet == nil) {
             [self loginFuction];
         } else {
@@ -741,7 +837,7 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"sign/userSign" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"userSign = %@",responseObject);
-
+        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             if (![[responseObject objectForKey:@"signMonkeyNum"] isEqualToString:@"0"]){
@@ -756,7 +852,7 @@
         NSLog(@"%@", error);
         
     }];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -765,13 +861,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -78,6 +78,11 @@
         }
     } else if (lockView == self.firstHandButton) {
         
+        if (path.length < 4) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"为了你的账号安全,手势密码需要至少连线4个点."];
+            return ;
+        }
+        
         self.titleLabel.text = @"请再次输入新手势密码";
         
         newString = path;
@@ -102,6 +107,8 @@
             
             [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
             popVC;
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码不一致,请再次输入"];
         }
         
     }

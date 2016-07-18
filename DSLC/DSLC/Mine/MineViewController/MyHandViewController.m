@@ -119,6 +119,7 @@
         handFlag = [[userDIC objectForKey:@"ifSetHandFlag"] boolValue];
     }
     
+    NSLog(@"%@",[NSString stringWithFormat:@"%d",handFlag?1:0]);
     
     if (handFlag) {
         
@@ -127,6 +128,7 @@
         self.userPhone.hidden = YES;
     } else {
         
+        // YES: 关闭手势密码  NO: 手势密码界面验证
         if (self.flagString != nil) {
             
             self.titleLabel.text = @"请输入解锁图案";
@@ -224,6 +226,7 @@
                 
                 [usDic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码成功关闭"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"switchButton" object:nil];
                 popVC;
             } else {
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您输入的手势密码错误，请重试"];
@@ -356,7 +359,6 @@
 
 - (void)cancelAction:(id)sender{
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"switchButton" object:nil];
     popVC;
     
 }
@@ -557,6 +559,16 @@
     
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            
+            // 判断是否存在isLogin.plist文件
+            if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+                [FileOfManage createWithFile:@"isLogin.plist"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            } else {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+                [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

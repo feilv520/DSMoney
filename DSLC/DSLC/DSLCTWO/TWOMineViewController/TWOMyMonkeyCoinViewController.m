@@ -431,6 +431,7 @@
 {
     NSLog(@"beat");
     TBaoJiViewController *baoJiVC = [[TBaoJiViewController alloc] init];
+    baoJiVC.tokenString = [self.flagDic objectForKey:@"token"];
     pushVC(baoJiVC);
 }
 
