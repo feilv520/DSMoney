@@ -21,6 +21,10 @@
     NSMutableArray *moneyNoArray;
     
     TWORedBagModel *packetModel;
+    
+    MJRefreshBackGifFooter *footerT;
+    
+    BOOL moreFlag;
 }
 
 @end
@@ -63,6 +67,8 @@
     mainTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     mainTableView.tableFooterView.backgroundColor = [UIColor clearColor];
     [mainTableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    
+    [self addTableViewWithFooter:mainTableView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -202,11 +208,31 @@
             [mainTableView reloadData];
         }
         
+        if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
+            moreFlag = YES;
+        }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
         
     }];
+}
+
+#pragma mark 判断是否还要加载更多
+#pragma mark --------------------------------
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer{
+    
+    footerT = footer;
+    
+    if (moreFlag) {
+        // 拿到当前的上拉刷新控件，结束刷新状态
+        [footer endRefreshing];
+    } else {
+        page ++;
+        [self getMyRedPacketList];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

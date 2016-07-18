@@ -518,7 +518,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -733,18 +733,19 @@
                     [pickArray addObject:model];
                 }
                 
-                [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
-                
                 if (pickArray.count != 0) {
+                    
+                    [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                     
                     [self collectionViewShow];
                     noNetworkMonkey.hidden = YES;
                     reloadButton.hidden = YES;
                     [_scrollView setHidden:NO];
+                    
                 } else {
                     
-                    [self noDataShowMoney];
-                    [_scrollView setHidden:YES];
+//                    [self noDataShowMoney];
+//                    [_scrollView setHidden:YES];
                 }
                 
             } else {
@@ -777,9 +778,10 @@
                     [pickArray addObject:model];
                 }
                 
-                [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                 
                 if (pickArray.count != 0) {
+                    
+                    [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                     
                     [self collectionViewShow];
                     noNetworkMonkey.hidden = YES;
@@ -787,8 +789,8 @@
                     [_scrollView setHidden:NO];
                 } else {
                     
-                    [self noDataShowMoney];
-                    [_scrollView setHidden:YES];
+//                    [self noDataShowMoney];
+//                    [_scrollView setHidden:YES];
                 }
                 
                 

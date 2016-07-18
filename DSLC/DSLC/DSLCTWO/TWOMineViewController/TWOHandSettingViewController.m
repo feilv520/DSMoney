@@ -143,7 +143,6 @@
         pushVC(myHandVC);
         
     }else {
-        flag = NO;
         
         MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
         myHandVC.flagString = @"YES";
