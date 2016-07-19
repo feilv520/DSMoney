@@ -22,6 +22,7 @@
 #import "TWOLoginAPPViewController.h"
 #import "TWOMessageDetailViewController.h"
 #import "TWOMessageModel.h"
+#import "TWONoticeDetailViewController.h"
 
 @interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
@@ -57,6 +58,7 @@
     
 //    公告数组
     NSMutableArray *noticeArray;
+    TWOMessageModel *messageModel;
 //    公告滚动视图
     UIScrollView *_scrollViewNotice;
     NSTimer *timerNotice;
@@ -175,9 +177,9 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *dataArr = [responseObject objectForKey:@"noticeInfo"];
             for (NSDictionary *dataDic in dataArr) {
-                TWOMessageModel *model = [[TWOMessageModel alloc] init];
-                [model setValuesForKeysWithDictionary:dataDic];
-                [noticeArray addObject:model];
+                messageModel = [[TWOMessageModel alloc] init];
+                [messageModel setValuesForKeysWithDictionary:dataDic];
+                [noticeArray addObject:messageModel];
             }
             
             [self noticeContentShow];
@@ -296,7 +298,7 @@
     _scrollViewNotice.delegate = self;
     _scrollViewNotice.userInteractionEnabled = YES;
     
-    for (int i = 1; i <= noticeArray.count; i++) {
+    for (int i = 1; i <= 3; i++) {
         UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * i, _scrollViewNotice.frame.size.width - 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:i - 1] title]];
         [_scrollViewNotice addSubview:labelNotice];
         labelNotice.userInteractionEnabled = YES;
@@ -318,8 +320,12 @@
     secondsNum = noticeArray.count;
 }
 
-- (void)scrollViewTapAction{
-    TWOMessageDetailViewController *messageDetailVC = [[TWOMessageDetailViewController alloc] init];
+- (void)scrollViewTapAction
+{
+    TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
+    messageDetailVC.creatTime = [messageModel createTime];
+    messageDetailVC.content = [messageModel content];
+    messageDetailVC.messageTitle = [messageModel title];
     pushVC(messageDetailVC);
 }
 

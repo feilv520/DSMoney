@@ -132,9 +132,9 @@
 
 - (void)nextAction:(id)sender
 {
-    NSString *moneyYu = [self.moneyString stringByReplacingOccurrencesOfString:@"," withString:@""];
-    CGFloat yuEValue = [moneyYu floatValue] - [textFieldLift.text floatValue];
-    NSLog(@"%@", moneyYu);
+    NSString *moneyYu = [self.moneyString stringByReplacingOccurrencesOfString:@"," withString:@""]; //余额
+    CGFloat yuEValue = [moneyYu floatValue] - [textFieldLift.text floatValue]; //余额减掉输入金额
+    NSLog(@"-------%@", moneyYu);
     
     if (textFieldLift.text.length == 0) {
         
@@ -144,7 +144,7 @@
     } else if ([textFieldLift.text floatValue] > [moneyYu floatValue]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足，请重新输入"];
         
-    } else if ([moneyYu floatValue] < 100.0) {
+    } else if ([moneyYu floatValue] < 100.0 && [textFieldLift.text floatValue] < [moneyYu floatValue]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的余额低于100元，须一次性提完"];
         
     } else if (yuEValue < 100.0 && yuEValue != 0.0) {
