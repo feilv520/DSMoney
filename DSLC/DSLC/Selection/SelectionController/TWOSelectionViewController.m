@@ -293,8 +293,8 @@
     _scrollViewNotice = [[UIScrollView alloc] initWithFrame:CGRectMake(9 + 17.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 5, viewBanner.frame.size.height, WIDTH_CONTROLLER_DEFAULT, 32.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     [_scrollView addSubview:_scrollViewNotice];
     _scrollViewNotice.backgroundColor = Color_White;
-    _scrollViewNotice.contentOffset = CGPointMake(1, 35);
-    _scrollViewNotice.contentSize = CGSizeMake(1, 35 * (3 + 2));
+    _scrollViewNotice.contentOffset = CGPointMake(1, 30);
+    _scrollViewNotice.contentSize = CGSizeMake(1, 30 * (noticeArray.count + 2));
     _scrollViewNotice.delegate = self;
     _scrollViewNotice.userInteractionEnabled = YES;
     
@@ -310,7 +310,7 @@
         [labelNotice addGestureRecognizer:gensture];
     }
     
-    UILabel *labelLast = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * (3 + 1), _scrollViewNotice.frame.size.width, 30) backgroundColor:Color_White textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:0] title]];
+    UILabel *labelLast = [CreatView creatWithLabelFrame:CGRectMake(0, 30 * 4, _scrollViewNotice.frame.size.width, 30) backgroundColor:Color_White textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:0] title]];
     [_scrollViewNotice addSubview:labelLast];
     UITapGestureRecognizer *gensture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapAction)];
     gensture.delegate = self;
@@ -324,8 +324,9 @@
 
 - (void)scrollViewTapAction
 {
+    messageModel = [noticeArray objectAtIndex:3 - secondsNum];
     TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
-    messageDetailVC.messageID = [[noticeArray objectAtIndex:0] ID];
+    messageDetailVC.messageID = [messageModel ID];
     pushVC(messageDetailVC);
 }
 
@@ -737,8 +738,8 @@
 {
     if (scrollView == _scrollViewNotice) {
         
-        if (_scrollViewNotice.contentOffset.y == 140) {
-            [_scrollViewNotice setContentOffset:CGPointMake(0, 35) animated:NO];
+        if (_scrollViewNotice.contentOffset.y == 120) {
+            [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
             secondsNum = 3;
         }
         
