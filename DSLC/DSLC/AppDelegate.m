@@ -125,10 +125,12 @@
     
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
     
+    application.applicationIconBadgeNumber = 0;
+    
     [self exitNetwork];
     
     // 版本控制接口
-    [self versionAlertView];
+//    [self versionAlertView];
     
     NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     

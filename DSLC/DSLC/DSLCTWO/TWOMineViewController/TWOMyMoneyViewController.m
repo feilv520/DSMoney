@@ -87,7 +87,7 @@
 //    shadowImgView.frame = CGRectMake(0, pieFrame.origin.y + PIE_HEIGHT*0.92, shadowImg.size.width/2, shadowImg.size.height/2);
 //    [self.view addSubview:shadowImgView];
     
-    self.pieChartView = [[MCMPieChartView alloc]initWithFrame:pieFrame withValue:self.valueArray withColor:self.colorArray];
+    self.pieChartView = [[MCMPieChartView alloc] initWithFrame:pieFrame withValue:self.valueArray withColor:self.colorArray];
     self.pieChartView.delegate = self;
     [viewUp addSubview:self.pieChartView];
     [self.pieChartView setTitleText:@"可用余额"];
@@ -205,10 +205,14 @@
             self.assetArray = [responseObject objectForKey:@"Asset"];
             
             for (NSInteger i = 0; i < self.assetArray.count ; i++) {
-                [self.valueArray replaceObjectAtIndex:i withObject:[DES3Util decrypt:[[self.assetArray objectAtIndex:i] objectForKey:@"assetMoney"]]];
+                [self.valueArray replaceObjectAtIndex:i withObject:[[DES3Util decrypt:[[self.assetArray objectAtIndex:i] objectForKey:@"assetMoney"]] stringByReplacingOccurrencesOfString:@"," withString:@""]];
                 [kindsArray replaceObjectAtIndex:i withObject:[[self.assetArray objectAtIndex:i] objectForKey:@"assetTypeName"]];
                 [self.colorArray addObject:[colorArray objectAtIndex:i]];
             }
+            
+            NSLog(@"self.valueArray = %@",self.valueArray);
+            
+            NSLog(@"kindsArray = %@",kindsArray);
             
             NSLog(@"totalMoney = %@",[DES3Util decrypt:[responseObject objectForKey:@"totalMoney"]]);
             

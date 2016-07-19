@@ -137,7 +137,13 @@
 //        } else{
 //            buttonY = _pageHeight - buttonHeight;
 //        }
-        [tabButton setFrame:CGRectMake(30 + _pageWidth / [_controllerArray count] * i, 20, buttonWidth, buttonHeight)];
+        if (WIDTH_CVIEW_DEFAULT == 320) {
+            
+            [tabButton setFrame:CGRectMake(25 + _pageWidth / [_controllerArray count] * i, 20, buttonWidth, buttonHeight)];
+        } else {
+            
+            [tabButton setFrame:CGRectMake(30 + _pageWidth / [_controllerArray count] * i, 20, buttonWidth, buttonHeight)];
+        }
         [tabButton setTag:i];
         [tabButton addTarget:self action:@selector(tabAction:) forControlEvents:UIControlEventTouchDown];
         [tabButton setHidden:self.tabBarHidden];

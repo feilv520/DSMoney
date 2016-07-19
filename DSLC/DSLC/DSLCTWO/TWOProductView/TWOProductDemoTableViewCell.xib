@@ -139,6 +139,7 @@
                             <constraint firstItem="b4M-Xd-oK1" firstAttribute="leading" secondItem="LbO-Q7-onc" secondAttribute="leading" constant="9" id="GhU-EY-QdY"/>
                             <constraint firstItem="h4E-Lu-BAA" firstAttribute="top" secondItem="Dao-eU-UfV" secondAttribute="bottom" constant="35" id="Ir6-wb-v7Q"/>
                             <constraint firstItem="oZ4-Or-pkP" firstAttribute="top" secondItem="Dao-eU-UfV" secondAttribute="bottom" constant="7" id="Jxl-bE-5lc"/>
+                            <constraint firstItem="h4E-Lu-BAA" firstAttribute="leading" secondItem="LbO-Q7-onc" secondAttribute="leading" constant="117" id="Lk8-kl-V8R"/>
                             <constraint firstItem="TRb-ee-0jx" firstAttribute="top" secondItem="Dao-eU-UfV" secondAttribute="bottom" constant="7" id="MvE-5i-HGG"/>
                             <constraint firstItem="jmX-X6-6gX" firstAttribute="leading" secondItem="COw-b1-Jte" secondAttribute="trailing" constant="116" id="PSz-2D-28U"/>
                             <constraint firstItem="TRb-ee-0jx" firstAttribute="leading" secondItem="oZ4-Or-pkP" secondAttribute="trailing" constant="34" id="PbC-3V-yqw"/>
@@ -158,8 +159,15 @@
                             <constraint firstItem="h4E-Lu-BAA" firstAttribute="height" secondItem="oZ4-Or-pkP" secondAttribute="height" id="nlz-2I-QCv"/>
                             <constraint firstAttribute="trailing" secondItem="I2p-Zx-r4y" secondAttribute="trailing" constant="8" id="p9b-xZ-VMy"/>
                             <constraint firstItem="Kbq-ac-lhe" firstAttribute="leading" secondItem="h4E-Lu-BAA" secondAttribute="trailing" constant="34" id="qoe-Fn-jMU"/>
+                            <constraint firstItem="Kbq-ac-lhe" firstAttribute="leading" secondItem="jmX-X6-6gX" secondAttribute="trailing" constant="34" id="sG5-qZ-mEf"/>
+                            <constraint firstItem="oZ4-Or-pkP" firstAttribute="leading" secondItem="LbO-Q7-onc" secondAttribute="leading" constant="117" id="v4E-N4-yCB"/>
                             <constraint firstItem="I2p-Zx-r4y" firstAttribute="top" secondItem="LbO-Q7-onc" secondAttribute="top" constant="4" id="xZf-U8-Qtd"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="PSz-2D-28U"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <animations/>
