@@ -52,6 +52,8 @@
     UIView *lineView;
     UIView *lineViewSectionWithOne;
     
+    UIImageView *imageMonkey;
+    
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -599,36 +601,51 @@
         
         NSLog(@"产品详情ppppppppppppppp%@",responseObject);
         
-        assetModel = [[TWOProductAssetModel alloc] init];
-        [assetModel setValuesForKeysWithDictionary:[responseObject objectForKey:@"Asset"]];
-        
-        [valueArray addObject:[assetModel assetName]];
-        [valueArray addObject:[assetModel assetTypeName]];
-        [valueArray addObject:[assetModel assetAmount]];
-        [valueArray addObject:[assetModel assetAnnualYieldb]];
-        [valueArray addObject:[assetModel assetSaleTime]];
-        [valueArray addObject:[assetModel assetInterestBdate]];
-        [valueArray addObject:[assetModel assetInterestEdate]];
-        [valueArray addObject:[assetModel assetToaccountDate]];
-        [valueArray addObject:[assetModel assetYieldDistribType]];
-        [valueArray addObject:[assetModel assetFinancierName]];
-        [valueArray addObject:[assetModel assetFundsUse]];
-        [valueArray addObject:[assetModel assetRepaymentSource]];
-        [valueArray addObject:[assetModel assetManager]];
-        
-        progressArray = [[responseObject objectForKey:@"Asset"] objectForKey:@"Progress"];
-        
-        for (NSInteger i = 0; i < progressArray.count; i++) {
-            [moreOpenArray addObject:@"0"];
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
+            
+            assetModel = [[TWOProductAssetModel alloc] init];
+            [assetModel setValuesForKeysWithDictionary:[responseObject objectForKey:@"Asset"]];
+            
+            [valueArray addObject:[assetModel assetName]];
+            [valueArray addObject:[assetModel assetTypeName]];
+            [valueArray addObject:[NSString stringWithFormat:@"%@万元",[assetModel assetAmount]]];
+            [valueArray addObject:[NSString stringWithFormat:@"%@%%",[assetModel assetAnnualYieldb]]];
+            [valueArray addObject:[assetModel assetSaleTime]];
+            [valueArray addObject:[assetModel assetInterestBdate]];
+            [valueArray addObject:[assetModel assetInterestEdate]];
+            [valueArray addObject:[assetModel assetToaccountDate]];
+            [valueArray addObject:[assetModel assetYieldDistribType]];
+            [valueArray addObject:[assetModel assetFinancierName]];
+            [valueArray addObject:[assetModel assetFundsUse]];
+            [valueArray addObject:[assetModel assetRepaymentSource]];
+            [valueArray addObject:[assetModel assetManager]];
+            
+            progressArray = [[responseObject objectForKey:@"Asset"] objectForKey:@"Progress"];
+            
+            for (NSInteger i = 0; i < progressArray.count; i++) {
+                [moreOpenArray addObject:@"0"];
+            }
+            
+            [_tableView reloadData];
+        } else {
+            
+            _tableView.hidden = YES;
+            [self noDataShowMoney];
         }
-        
-        [_tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
         
     }];
+}
+
+- (void)noDataShowMoney
+{
+    if (imageMonkey == nil) {
+        imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 284/2/2, self.view.center.y - 284/2/2, 284/2, 284/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    }
+    [self.view addSubview:imageMonkey];
 }
 
 - (void)didReceiveMemoryWarning {

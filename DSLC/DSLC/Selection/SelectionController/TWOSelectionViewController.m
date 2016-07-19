@@ -996,6 +996,11 @@
     NSLog(@"networkDidReceiveMessage");
 }
 
+- (void)serviceError:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSString *error = [userInfo valueForKey:@"error"];
+    NSLog(@"%@", error);
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
