@@ -323,7 +323,7 @@ void UncaughtExceptionHandler(NSException *exception){
         result = [responseObject objectForKey:@"result"];
         
         if ([result isEqualToNumber:@200]) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本请更新(已更新请忽略)" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去更新", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本请更新(已更新请忽略)" delegate:self cancelButtonTitle:nil otherButtonTitles:@"去更新", nil];
             alertView.delegate = self;
             [alertView show];
             
@@ -335,7 +335,7 @@ void UncaughtExceptionHandler(NSException *exception){
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 1) {
+    if (buttonIndex == 0) {
         NSString *url = @"https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     }
