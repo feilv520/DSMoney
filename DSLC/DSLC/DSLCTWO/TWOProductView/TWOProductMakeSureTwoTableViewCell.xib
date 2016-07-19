@@ -39,17 +39,6 @@
                         <color key="textColor" red="1" green="0.44705882349999998" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0元" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJa-OU-Cve">
-                        <rect key="frame" x="143" y="10" width="90" height="30"/>
-                        <animations/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="90" id="b9C-8y-5Q5"/>
-                            <constraint firstAttribute="height" constant="30" id="poH-Fp-w75"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
-                        <color key="textColor" red="0.38431372549999998" green="0.39607843139999999" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPU-s1-0rV">
                         <rect key="frame" x="335" y="10" width="30" height="30"/>
                         <animations/>
@@ -129,8 +118,8 @@
                         <rect key="frame" x="143" y="60" width="90" height="30"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="RGc-40-pKy"/>
-                            <constraint firstAttribute="width" constant="90" id="wJI-Zi-vgf"/>
+                            <constraint firstAttribute="height" constant="30" id="9NP-GJ-SYd"/>
+                            <constraint firstAttribute="width" constant="90" id="zCn-Xa-RZl"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <color key="textColor" red="0.38431372549999998" green="0.39607843139999999" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
@@ -153,17 +142,27 @@
                         <color key="textColor" red="0.38431372549999998" green="0.39607843139999999" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0元" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJa-OU-Cve">
+                        <rect key="frame" x="98" y="10" width="180" height="30"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="180" id="5YR-X7-SXQ"/>
+                            <constraint firstAttribute="height" constant="30" id="QfX-Yh-94c"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                        <color key="textColor" red="0.38431372549999998" green="0.39607843139999999" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <animations/>
                 <constraints>
+                    <constraint firstItem="YJS-sp-s0w" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="6fY-co-w7w"/>
                     <constraint firstAttribute="trailing" secondItem="nw5-M2-4Xk" secondAttribute="trailing" constant="10" id="A1Z-ZA-NoH"/>
                     <constraint firstAttribute="trailing" secondItem="bdm-8T-ha4" secondAttribute="trailing" constant="10" id="Dal-4V-ztV"/>
                     <constraint firstAttribute="trailing" secondItem="aU0-Rd-eft" secondAttribute="trailing" id="H5k-2y-0b4"/>
                     <constraint firstItem="aU0-Rd-eft" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="99" id="IKA-nB-hWa"/>
                     <constraint firstAttribute="trailing" secondItem="rPU-s1-0rV" secondAttribute="trailing" constant="10" id="KAE-we-49s"/>
-                    <constraint firstItem="FJa-OU-Cve" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="OS7-4o-2y0"/>
-                    <constraint firstItem="YJS-sp-s0w" firstAttribute="top" secondItem="FJa-OU-Cve" secondAttribute="bottom" constant="20" id="PoE-jO-Ivx"/>
-                    <constraint firstItem="FJa-OU-Cve" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Qf0-gT-61m"/>
+                    <constraint firstItem="YJS-sp-s0w" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-24" id="OqQ-ST-SGc"/>
                     <constraint firstItem="nw5-M2-4Xk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="159" id="Run-Cl-4xw"/>
                     <constraint firstItem="bdm-8T-ha4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="50" id="TPR-wL-vBZ"/>
                     <constraint firstItem="bdm-8T-ha4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="WMx-6C-5mq"/>
@@ -171,7 +170,8 @@
                     <constraint firstItem="aU0-Rd-eft" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jE1-eb-f0l"/>
                     <constraint firstItem="rPU-s1-0rV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="kv0-Ke-gHN"/>
                     <constraint firstAttribute="trailing" secondItem="K0w-vl-NWi" secondAttribute="trailing" constant="10" id="oua-pM-73D"/>
-                    <constraint firstItem="YJS-sp-s0w" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="s4L-6p-h5f"/>
+                    <constraint firstItem="FJa-OU-Cve" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-74" id="sDQ-2d-zgJ"/>
+                    <constraint firstItem="FJa-OU-Cve" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="upp-q5-ZI6"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
@@ -184,7 +184,7 @@
                 <outlet property="upMoneyButton" destination="K0w-vl-NWi" id="yHW-4J-bPw"/>
                 <outlet property="yqSLabel" destination="nw5-M2-4Xk" id="4Xx-Xn-aEL"/>
             </connections>
-            <point key="canvasLocation" x="327.5" y="202"/>
+            <point key="canvasLocation" x="-41.5" y="9"/>
         </tableViewCell>
     </objects>
 </document>

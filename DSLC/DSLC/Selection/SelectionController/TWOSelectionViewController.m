@@ -254,11 +254,11 @@
     whiteBackgroundView.backgroundColor = Color_White;
     
 //    公告图标
-    UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(9, 7, noticeHeight, noticeHeight) backGroundColor:Color_White setImage:[UIImage imageNamed:@"公告"]];
+    UIImageView *imageNotice = [CreatView creatImageViewWithFrame:CGRectMake(9, 8, noticeHeight, noticeHeight) backGroundColor:Color_White setImage:[UIImage imageNamed:@"公告"]];
     [whiteBackgroundView addSubview:imageNotice];
     
 //    公告view分界线
-    UIView *viewLineNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5)];
+    UIView *viewLineNotice = [[UIView alloc] initWithFrame:CGRectMake(0, viewBanner.frame.size.height - 1, WIDTH_CONTROLLER_DEFAULT, 1)];
     [_scrollView addSubview:viewLineNotice];
     viewLineNotice.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
@@ -299,7 +299,9 @@
     _scrollViewNotice.userInteractionEnabled = YES;
     
     for (int i = 1; i <= 3; i++) {
-        UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 35 * i, _scrollViewNotice.frame.size.width - 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:i - 1] title]];
+        UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 30 * i, _scrollViewNotice.frame.size.width - 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:i - 1] title]];
+        NSLog(@"title = %@",[[noticeArray objectAtIndex:i - 1] title]);
+        
         [_scrollViewNotice addSubview:labelNotice];
         labelNotice.userInteractionEnabled = YES;
         labelNotice.exclusiveTouch = YES;
@@ -329,7 +331,7 @@
 
 -(void)timerFireMethod:(NSTimer *)theTimer
 {
-    [_scrollViewNotice setContentOffset:CGPointMake(0, 35 * (everyNum - secondsNum)) animated:YES];
+    [_scrollViewNotice setContentOffset:CGPointMake(0, 30 * (everyNum - secondsNum)) animated:YES];
     secondsNum--;
 }
 
@@ -580,10 +582,16 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (_scrollView.contentOffset.y < 0) {
-        _scrollView.scrollEnabled = NO;
+    if (scrollView == _scrollViewNotice) {
+        
+        scrollView.panGestureRecognizer.enabled = NO;
     } else {
-        _scrollView.scrollEnabled = YES;
+    
+        if (_scrollView.contentOffset.y < 0) {
+            _scrollView.scrollEnabled = NO;
+        } else {
+            _scrollView.scrollEnabled = YES;
+        }
     }
 }
 
@@ -780,7 +788,7 @@
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 //                [self loadingWithHidden:YES];
                 
-                timerNotice = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+                timerNotice = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
                 
                 NSArray *pickArr = [responseObject objectForKey:@"Product"];
                 

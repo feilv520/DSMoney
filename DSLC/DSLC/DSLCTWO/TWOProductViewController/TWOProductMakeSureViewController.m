@@ -769,6 +769,12 @@
 
 - (void)addDoneButtonToNumPadKeyboard:(NSNotification*)Not
 {
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        
+        self.mainTableView.frame = CGRectMake(0, -50, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 84);
+    }
+    
     doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     doneButton.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 73, 122, 53);
     doneButton.tag = 8293;
@@ -795,6 +801,11 @@
         //从视图中移除掉
         [doneButton removeFromSuperview];
         doneButton = nil;
+        
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            
+            self.mainTableView.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 84);
+        }
     }
 }
 
