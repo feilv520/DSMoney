@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "KKTabBarViewController.h"
 
-static NSString *appKey = @"f3130cec9a6c22b50f8c44ee";
+static NSString *appKey = @"d1d0fda55b8ad08deca0504c";
 static NSString *channel = @"Publish channel";
 static BOOL isProduction = FALSE;
 

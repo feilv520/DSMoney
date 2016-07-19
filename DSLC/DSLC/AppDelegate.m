@@ -128,10 +128,10 @@
     [self exitNetwork];
     
     // 版本控制接口
-//    [self versionAlertView];
+    [self versionAlertView];
     
     NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    //Required
+    
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
         [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
@@ -145,12 +145,12 @@
                                                           UIRemoteNotificationTypeAlert)
                                               categories:nil];
     }
-    //Required
-    // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
+    
+    //如不需要使用IDFA，advertisingIdentifier 可为nil
     [JPUSHService setupWithOption:launchOptions appKey:appKey
                           channel:channel
                  apsForProduction:isProduction
-            advertisingIdentifier:advertisingId];
+            advertisingIdentifier:nil];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [JPUSHService setTags:nil alias:@"13354288036" fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
@@ -158,6 +158,9 @@
             
         }];
     });
+    
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(monkeyWithSuccess:) name:@"showMonkey" object:nil];
     
@@ -416,8 +419,8 @@ void UncaughtExceptionHandler(NSException *exception){
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     
-    
-    
+    [application setApplicationIconBadgeNumber:0];
+    [application cancelAllLocalNotifications];
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
@@ -452,7 +455,7 @@ void UncaughtExceptionHandler(NSException *exception){
         result = [responseObject objectForKey:@"result"];
         
         if ([result isEqualToNumber:@200]) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本请更新(已更新请忽略)" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去更新", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本请更新(已更新请忽略)" delegate:self cancelButtonTitle:nil otherButtonTitles:@"去更新", nil];
             alertView.delegate = self;
             [alertView show];
             
@@ -464,7 +467,7 @@ void UncaughtExceptionHandler(NSException *exception){
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 1) {
+    if (buttonIndex == 0) {
         NSString *url = @"https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     }
@@ -483,29 +486,108 @@ void UncaughtExceptionHandler(NSException *exception){
     return  [UMSocialSnsService handleOpenURL:url];
 }
 
+#pragma mark 极光推送
+#pragma mark --------------------------------
+
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+//    rootViewController.deviceTokenValueLabel.text =
+//    [NSString stringWithFormat:@"%@", deviceToken];
+//    rootViewController.deviceTokenValueLabel.textColor =
+//    [UIColor colorWithRed:0.0 / 255
+//                    green:122.0 / 255
+//                     blue:255.0 / 255
+//                    alpha:1];
     
-    /// Required - 注册 DeviceToken
+    NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
     [JPUSHService registerDeviceToken:deviceToken];
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    
-    // Required,For systems with less than or equal to iOS6
-    [JPUSHService handleRemoteNotification:userInfo];
+- (void)application:(UIApplication *)application
+didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+- (void)application:(UIApplication *)application
+didRegisterUserNotificationSettings:
+(UIUserNotificationSettings *)notificationSettings {
+}
+
+// Called when your app has been activated by the user selecting an action from
+// a local notification.
+// A nil action identifier indicates the default action.
+// You should call the completion handler as soon as you've finished handling
+// the action.
+- (void)application:(UIApplication *)application
+handleActionWithIdentifier:(NSString *)identifier
+forLocalNotification:(UILocalNotification *)notification
+  completionHandler:(void (^)())completionHandler {
+}
+
+// Called when your app has been activated by the user selecting an action from
+// a remote notification.
+// A nil action identifier indicates the default action.
+// You should call the completion handler as soon as you've finished handling
+// the action.
+- (void)application:(UIApplication *)application
+handleActionWithIdentifier:(NSString *)identifier
+forRemoteNotification:(NSDictionary *)userInfo
+  completionHandler:(void (^)())completionHandler {
+}
+#endif
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-    // IOS 7 Support Required
+//    NSDictionary *aps = [userInfo valueForKey:@"aps"];
+//    NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
+//    NSInteger badge = [[aps valueForKey:@"badge"] integerValue];
+//    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
+    // 取得自定义字段内容，userInfo就是后台返回的JSON数据，是一个字典
+    
+    application.applicationIconBadgeNumber = 0;
     [JPUSHService handleRemoteNotification:userInfo];
+    NSLog(@"收到通知:%@", [self logDic:userInfo]);
+//    [rootViewController addNotificationCount];
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:
+(void (^)(UIBackgroundFetchResult))completionHandler {
+    [JPUSHService handleRemoteNotification:userInfo];
+    NSLog(@"收到通知:%@", [self logDic:userInfo]);
+//    [rootViewController addNotificationCount];
+    
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    //Optional
-    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+- (void)application:(UIApplication *)application
+didReceiveLocalNotification:(UILocalNotification *)notification {
+    [JPUSHService showLocalNotificationAtFront:notification identifierKey:nil];
+}
+
+// log NSSet with UTF8
+// if not ,log will be \Uxxx
+- (NSString *)logDic:(NSDictionary *)dic {
+    if (![dic count]) {
+        return nil;
+    }
+    NSString *tempStr1 =
+    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
+                                                 withString:@"\\U"];
+    NSString *tempStr2 =
+    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    NSString *tempStr3 =
+    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *str =
+    [NSPropertyListSerialization propertyListFromData:tempData
+                                     mutabilityOption:NSPropertyListImmutable
+                                               format:NULL
+                                     errorDescription:NULL];
+    return str;
 }
 
 - (void)loginFuction{
@@ -716,6 +798,16 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         NSLog(@"%@", error);
         
     }];
+    
+}
+
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+    NSDictionary * userInfo = [notification userInfo];
+    NSString *content = [userInfo valueForKey:@"content"];
+    NSDictionary *extras = [userInfo valueForKey:@"extras"];
+    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的Extras附加字段，key是自己定义的
+    
+    NSLog(@"content = %@",content);
     
 }
 
