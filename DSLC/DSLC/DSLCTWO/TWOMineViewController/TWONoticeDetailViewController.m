@@ -10,6 +10,10 @@
 
 @interface TWONoticeDetailViewController ()
 
+{
+    NSDictionary *dataDic;
+}
+
 @end
 
 @implementation TWONoticeDetailViewController
@@ -21,24 +25,41 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"公告详情"];
     
-    [self contentShow];
+    [self noticeDetailData];
 }
 
 - (void)contentShow
 {
-    UILabel *labelTitle = [CreatView creatWithLabelFrame:CGRectMake(25, 21, WIDTH_CONTROLLER_DEFAULT - 50, 17) backgroundColor:[UIColor clearColor] textColor:[UIColor blackZiTi] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:self.messageTitle];
+    UILabel *labelTitle = [CreatView creatWithLabelFrame:CGRectMake(25, 21, WIDTH_CONTROLLER_DEFAULT - 50, 17) backgroundColor:[UIColor clearColor] textColor:[UIColor blackZiTi] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:[dataDic objectForKey:@"title"]];
     [self.view addSubview:labelTitle];
     
-    UILabel *labelTime = [CreatView creatWithLabelFrame:CGRectMake(25, 56, WIDTH_CONTROLLER_DEFAULT - 50, 13) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:self.creatTime];
+    UILabel *labelTime = [CreatView creatWithLabelFrame:CGRectMake(25, 56, WIDTH_CONTROLLER_DEFAULT - 50, 13) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:[dataDic objectForKey:@"sendTime"]];
     [self.view addSubview:labelTime];
     
-    UILabel *labelContent = [CreatView creatWithLabelFrame:CGRectMake(25, 100, WIDTH_CONTROLLER_DEFAULT - 50, 10) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:self.content];
+    UILabel *labelContent = [CreatView creatWithLabelFrame:CGRectMake(25, 100, WIDTH_CONTROLLER_DEFAULT - 50, 10) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:[dataDic objectForKey:@"content"]];
     [self.view addSubview:labelContent];
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"CenturyGothic" size:14], NSFontAttributeName, nil];
     CGRect rect = [labelContent.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 50, 1000000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
     labelContent.numberOfLines = 0;
     labelContent.frame = CGRectMake(25, 100, WIDTH_CONTROLLER_DEFAULT - 50, rect.size.height);
+}
+
+#pragma mark DataDetail~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- (void)noticeDetailData
+{
+    NSDictionary *parmeter = @{@"id":self.messageID};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeOne" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"公告详情~~~~~~~~~~~~~~~~~~~~~~%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            dataDic = [responseObject objectForKey:@"notice"];
+            [self contentShow];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

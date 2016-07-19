@@ -706,6 +706,17 @@
     
     monkeyView = [[mainBundle loadNibNamed:@"TWOProductMonkeyView" owner:nil options:nil] lastObject];
     
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.5;
+    
+    NSMutableArray *values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    [monkeyView.layer addAnimation:animation forKey:nil];
+    
     CGFloat margin_x = (38 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
     CGFloat margin_y = (182 / 667.0) * HEIGHT_CONTROLLER_DEFAULT;
     CGFloat width = (301 / 375.0) * WIDTH_CONTROLLER_DEFAULT;

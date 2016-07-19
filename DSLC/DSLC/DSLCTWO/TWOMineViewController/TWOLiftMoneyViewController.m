@@ -139,7 +139,7 @@
     if (textFieldLift.text.length == 0) {
         
     } else if ([textFieldLift.text floatValue] == 0) {
-//        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"0元你提个毛啊"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"提现金额不能为0"];
         
     } else if ([textFieldLift.text floatValue] > [moneyYu floatValue]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足，请重新输入"];

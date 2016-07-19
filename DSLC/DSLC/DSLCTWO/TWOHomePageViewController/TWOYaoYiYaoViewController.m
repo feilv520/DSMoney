@@ -419,7 +419,9 @@
         [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"%@%%加息券", [dataDic objectForKey:@"prizeNumber"]] frontNum:0 afterNum:4];
         
     } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"3"]) {
-        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"%d猴币", [[dataDic objectForKey:@"prizeNumber"] intValue]] frontNum:0 afterNum:2];
+        
+        NSString *monkeyCoin = [[dataDic objectForKey:@"prizeNumber"] stringByReplacingOccurrencesOfString:@"," withString:@""];
+        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"%d猴币", [monkeyCoin intValue]] frontNum:0 afterNum:2];
         
     } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"4"]) {
         

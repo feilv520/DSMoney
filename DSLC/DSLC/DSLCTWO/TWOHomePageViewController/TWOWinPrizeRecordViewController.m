@@ -136,7 +136,10 @@
         cell.imagePic.image = [UIImage imageNamed:@"winRecord"];
         
     } else if ([[[prizeModel prizeType] description] isEqualToString:@"3"]) {
-        [self changeSizeWithLabel:cell.labelPrize nameString:[NSString stringWithFormat:@"摇一摇获得%d猴币", [[prizeModel prizeNumber] intValue]] frontLength:5 afterLength:2];
+        
+        NSString *monkeyCoin = [[prizeModel prizeNumber] stringByReplacingOccurrencesOfString:@"," withString:@""];
+        
+        [self changeSizeWithLabel:cell.labelPrize nameString:[NSString stringWithFormat:@"摇一摇获得%d猴币", [monkeyCoin intValue]] frontLength:5 afterLength:2];
         cell.imagePic.image = [UIImage imageNamed:@"中奖猴币"];
         
     } else if ([[[prizeModel prizeType] description] isEqualToString:@"4"]) {

@@ -10,6 +10,7 @@
 
 @interface TWOMessageModel : NSObject
 
+@property (nonatomic) NSString *ID;
 @property (nonatomic) NSString *content;
 @property (nonatomic) NSString *createTime;
 @property (nonatomic) NSString *sendTime;

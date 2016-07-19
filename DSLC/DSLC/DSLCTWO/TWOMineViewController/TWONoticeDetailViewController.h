@@ -11,8 +11,6 @@
 
 @interface TWONoticeDetailViewController : BaseViewController
 
-@property (nonatomic) NSString *messageTitle;
-@property (nonatomic) NSString *content;
-@property (nonatomic) NSString *creatTime;
+@property (nonatomic) NSString *messageID;
 
 @end

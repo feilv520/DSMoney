@@ -93,11 +93,21 @@
         cell.labelMoney.text = @"投资";
         cell.labelTime.text = @"注册时间";
         
+        cell.labelPhoneNum.textColor = [UIColor blackZiTi];
+        cell.labelRealName.textColor = [UIColor blackZiTi];
+        cell.labelMoney.textColor = [UIColor blackZiTi];
+        cell.labelTime.textColor = [UIColor blackZiTi];
+        
     } else {
         
         InviteRecordModel *inviteModel = [contentArr objectAtIndex:indexPath.row - 1];
         cell.labelPhoneNum.text = inviteModel.userPhone;
         cell.labelTime.text = inviteModel.inviteTime;
+        
+        cell.labelPhoneNum.textColor = [UIColor ZiTiColor];
+        cell.labelRealName.textColor = [UIColor ZiTiColor];
+        cell.labelMoney.textColor = [UIColor ZiTiColor];
+        cell.labelTime.textColor = [UIColor ZiTiColor];
         
         if ([inviteModel.realNameStatus isEqualToString:@"2"]) {
             cell.labelRealName.text = @"是";

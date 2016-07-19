@@ -102,9 +102,7 @@
     TWOMessageModel *messageModel = [messageArray objectAtIndex:indexPath.row];
     
     TWONoticeDetailViewController *messageDVC = [[TWONoticeDetailViewController alloc] init];
-    messageDVC.messageTitle = [messageModel title];
-    messageDVC.content = [messageModel content];
-    messageDVC.creatTime = [messageModel createTime];
+    messageDVC.messageID = [messageModel ID];
     pushVC(messageDVC);
 }
 
