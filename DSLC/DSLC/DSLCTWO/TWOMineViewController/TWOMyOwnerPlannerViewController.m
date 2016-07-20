@@ -84,7 +84,7 @@
     [_tableView.tableHeaderView addSubview:imageBackground];
     imageBackground.userInteractionEnabled = YES;
     
-    imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 48.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 15.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 96.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 96.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"我的头像"]];
+    imageHead = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 48.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 15.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 96.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 96.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"two默认头像"]];
     [imageBackground addSubview:imageHead];
     imageHead.layer.cornerRadius = imageHead.frame.size.height/2;
     imageHead.layer.masksToBounds = YES;
@@ -130,11 +130,22 @@
     
 //    判断是首页理财师数据还是我的理财师数据
     if (self.stateShow == YES) {
-        imageHead.yy_imageURL = [NSURL URLWithString:[tempDic objectForKey:@"avatarImg"]];
+        
+        if ([[tempDic objectForKey:@"avatarImg"] isEqualToString:@""]) {
+            imageHead.image = [UIImage imageNamed:@"two默认头像"];
+        } else {
+            imageHead.yy_imageURL = [NSURL URLWithString:[tempDic objectForKey:@"avatarImg"]];
+        }
         labelName.text = [DES3Util decrypt:[tempDic objectForKey:@"userRealname"]];
         labelAlert.text = [tempDic objectForKey:@"resume"];
+        
     } else {
-        imageHead.yy_imageURL = [NSURL URLWithString:[self.listModel avatarImg]];
+        
+        if ([[self.listModel avatarImg] isEqualToString:@""]) {
+            imageHead.image = [UIImage imageNamed:@"two默认头像"];
+        } else {
+            imageHead.yy_imageURL = [NSURL URLWithString:[self.listModel avatarImg]];
+        }
         labelName.text = [self.listModel userRealname];
         labelAlert.text = [self.listModel resume];
     }

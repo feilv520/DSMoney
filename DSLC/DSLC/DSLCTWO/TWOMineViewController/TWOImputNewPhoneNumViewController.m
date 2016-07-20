@@ -141,8 +141,10 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"电话号码不能为空"];
     } else if (![NSString validateMobile:textFieldPhone.text]) {
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入正确的电话号码"];
+    } else if ([textFieldPhone.text isEqualToString:self.phoneString]) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"新绑定手机号不能与旧手机号相同"];
     } else {
-        [self getCode];
+        [self checkPhone];
     }
 }
 
@@ -214,6 +216,28 @@
     }];
 }
 
+//验证手机号
+- (void)checkPhone
+{
+    NSDictionary *parmeter = @{@"phone":textFieldPhone.text};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"check/checkPhone" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"验证手机号 = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@302]){
+            [self getCode];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 //获取验证码按钮掉接口
 - (void)getCode
 {
@@ -225,6 +249,7 @@
         
         NSLog(@"////////更换手机号获取验证码:%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];

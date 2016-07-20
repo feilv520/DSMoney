@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface TWOImputNewPhoneNumViewController : BaseViewController
-
+@property (nonatomic) NSString *phoneString;
 @end

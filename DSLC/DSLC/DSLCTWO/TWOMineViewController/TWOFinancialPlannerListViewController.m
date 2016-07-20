@@ -81,8 +81,12 @@
 {
     TWOFinancialPlannerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     TWOMoneyTeacherList *listModel = [listArray objectAtIndex:indexPath.row];
-    
-    cell.imageHead.yy_imageURL = [NSURL URLWithString:[listModel avatarImg]];
+
+    if ([[listModel avatarImg] isEqualToString:@""]) {
+        cell.imageHead.image = [UIImage imageNamed:@"two默认头像"];
+    } else {
+        cell.imageHead.yy_imageURL = [NSURL URLWithString:[listModel avatarImg]];
+    }
     cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.height/2;
     cell.imageHead.layer.masksToBounds = YES;
     cell.imageRight.image = [UIImage imageNamed:@"righticon"];

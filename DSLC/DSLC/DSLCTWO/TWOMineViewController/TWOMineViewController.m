@@ -300,8 +300,8 @@
     
     NSLog(@"avatarImg = %@",[memberDic objectForKey:@"avatarImg"]);
     if ([memberDic objectForKey:@"avatarImg"] == nil) {
-        [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像er"] forState:UIControlStateNormal];
-        [butHeadImage setBackgroundImage:[UIImage imageNamed:@"我的头像er"] forState:UIControlStateHighlighted];
+        [butHeadImage setBackgroundImage:[UIImage imageNamed:@"two默认头像"] forState:UIControlStateNormal];
+        [butHeadImage setBackgroundImage:[UIImage imageNamed:@"two默认头像"] forState:UIControlStateHighlighted];
     } else {
         butHeadImage.imageView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
         if (imgView == nil) {
