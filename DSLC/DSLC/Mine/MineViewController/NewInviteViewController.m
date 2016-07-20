@@ -246,13 +246,15 @@
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
     
+    NSString *urlString = [NSString stringWithFormat:@"%@/invite.html",htmlFive];
+    
     [UMSocialData defaultData].extConfig.wechatSessionData.title = @"邀请好友一起，免费共享星巴克";
     [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"邀请好友一起，免费共享星巴克";
     [UMSocialData defaultData].extConfig.qqData.title = @"邀请好友一起，免费共享星巴克";
     
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = shareString;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareString;
-    [UMSocialData defaultData].extConfig.qqData.url = shareString;
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = urlString;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = urlString;
+    [UMSocialData defaultData].extConfig.qqData.url = urlString;
     
 }
 

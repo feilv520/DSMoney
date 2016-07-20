@@ -235,4 +235,20 @@
         return NO;
 }
 
++ (BOOL)pipeizimu:(NSString *)str
+{
+    //判断是否以字母开头
+    NSString *ZIMU = @"/^[a-zA-z]/";
+    NSPredicate *regextestA = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", ZIMU];
+    
+    if ([regextestA evaluateWithObject:str] == YES)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
 @end

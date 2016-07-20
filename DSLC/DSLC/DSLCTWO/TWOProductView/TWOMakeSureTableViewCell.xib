@@ -104,10 +104,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLu-V6-jbZ">
-                        <rect key="frame" x="142" y="12" width="90" height="30"/>
+                        <rect key="frame" x="102" y="12" width="170" height="30"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="90" id="FBj-d8-Mb0"/>
+                            <constraint firstAttribute="width" constant="170" id="FBj-d8-Mb0"/>
                             <constraint firstAttribute="height" constant="30" id="i5T-kA-VHq"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>

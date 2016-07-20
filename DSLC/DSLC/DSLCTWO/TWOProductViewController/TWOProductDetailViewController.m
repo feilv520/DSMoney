@@ -152,7 +152,7 @@
     UIButton *buttonCal = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonCal.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT/4, 49);
     [buttonCal setImage:[UIImage imageNamed:@"750产品详111"] forState:UIControlStateNormal];
-    [buttonCal setImageEdgeInsets:UIEdgeInsetsMake(10, 30 / 93.0 * (WIDTH_CONTROLLER_DEFAULT / 4), 10, 30 / 93.0 * (WIDTH_CONTROLLER_DEFAULT / 4))];
+    [buttonCal setImageEdgeInsets:UIEdgeInsetsMake(10, 32 / 93.0 * (WIDTH_CONTROLLER_DEFAULT / 4.0), 10, 32 / 93.0 * (WIDTH_CONTROLLER_DEFAULT / 4.0))];
     buttonCal.backgroundColor = [UIColor colorWithRed:112 / 255.0 green:192 / 255.0 blue:252 / 255.0 alpha:1.0];
     [buttonCal addTarget:self action:@selector(calendarView) forControlEvents:UIControlEventTouchUpInside];
     [self.viewBotton addSubview:buttonCal];
@@ -791,9 +791,11 @@
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
     
-    if (![[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+    if (![[dic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
         
-        if ([[dic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
+        button.enabled = YES;
+        
+        if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
             
             [self registThirdShow];
             return;

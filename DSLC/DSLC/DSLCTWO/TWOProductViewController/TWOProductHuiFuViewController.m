@@ -128,6 +128,10 @@
     [self checkUserInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfoFuction" object:nil];
+    // 刷新产品列表
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+    // 刷新固收页面数据
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BillVC" object:nil];
 }
 
 //如果是H5页面里面自带的返回按钮处理如下:

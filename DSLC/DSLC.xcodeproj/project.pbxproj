@@ -1575,6 +1575,10 @@
 		8DEDE26D1BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEDE2681BCD23B3008086D3 /* TPKeyboardAvoidingScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DEDE26E1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEDE26A1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DEDE26F1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEDE26C1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8DEE6DA81D3F42B400E6488F /* TWONoPower@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE6DA61D3F42B400E6488F /* TWONoPower@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8DEE6DA91D3F42B400E6488F /* TWONoPower@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE6DA71D3F42B400E6488F /* TWONoPower@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8DEE6DAC1D3F440700E6488F /* TWORefrush@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE6DAA1D3F440700E6488F /* TWORefrush@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8DEE6DAD1D3F440700E6488F /* TWORefrush@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE6DAB1D3F440700E6488F /* TWORefrush@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8DF3C2221D372D0E00AB1E9D /* TWOWelcomOne_1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DF3C2131D372D0E00AB1E9D /* TWOWelcomOne_1136.png */; settings = {ASSET_TAGS = (); }; };
 		8DF3C2231D372D0E00AB1E9D /* TWOWelcomOne_1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DF3C2141D372D0E00AB1E9D /* TWOWelcomOne_1334.png */; settings = {ASSET_TAGS = (); }; };
 		8DF3C2241D372D0E00AB1E9D /* TWOWelcomOne_2208.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DF3C2151D372D0E00AB1E9D /* TWOWelcomOne_2208.png */; settings = {ASSET_TAGS = (); }; };
@@ -3847,6 +3851,10 @@
 		8DEDE26A1BCD23B3008086D3 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
 		8DEDE26B1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingSampleAppDelegate.h; sourceTree = "<group>"; };
 		8DEDE26C1BCD23B3008086D3 /* TPKeyboardAvoidingSampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingSampleAppDelegate.m; sourceTree = "<group>"; };
+		8DEE6DA61D3F42B400E6488F /* TWONoPower@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWONoPower@2x.png"; sourceTree = "<group>"; };
+		8DEE6DA71D3F42B400E6488F /* TWONoPower@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWONoPower@3x.png"; sourceTree = "<group>"; };
+		8DEE6DAA1D3F440700E6488F /* TWORefrush@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWORefrush@2x.png"; sourceTree = "<group>"; };
+		8DEE6DAB1D3F440700E6488F /* TWORefrush@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWORefrush@3x.png"; sourceTree = "<group>"; };
 		8DF3C2131D372D0E00AB1E9D /* TWOWelcomOne_1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWOWelcomOne_1136.png; sourceTree = "<group>"; };
 		8DF3C2141D372D0E00AB1E9D /* TWOWelcomOne_1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWOWelcomOne_1334.png; sourceTree = "<group>"; };
 		8DF3C2151D372D0E00AB1E9D /* TWOWelcomOne_2208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWOWelcomOne_2208.png; sourceTree = "<group>"; };
@@ -4159,6 +4167,10 @@
 		8143FCE81CD9C25300B65A2F /* TWOImage */ = {
 			isa = PBXGroup;
 			children = (
+				8DEE6DAA1D3F440700E6488F /* TWORefrush@2x.png */,
+				8DEE6DAB1D3F440700E6488F /* TWORefrush@3x.png */,
+				8DEE6DA61D3F42B400E6488F /* TWONoPower@2x.png */,
+				8DEE6DA71D3F42B400E6488F /* TWONoPower@3x.png */,
 				8DCF6BFC1D3CD20E00013054 /* bannerImg */,
 				8114F6BC1D389593000B80E0 /* 活动中心 */,
 				8DF3C2311D377DB900AB1E9D /* TWOInviteNumber.png */,
@@ -8129,6 +8141,7 @@
 				8106AA831CAA23F700AB6753 /* 椭圆-3-拷贝-7.png in Resources */,
 				810F9C5E1CDC65C800BF39B5 /* youxi@3x.png in Resources */,
 				81C983501D3389EC00F9093A /* 民生银行二@3x.png in Resources */,
+				8DEE6DAD1D3F440700E6488F /* TWORefrush@3x.png in Resources */,
 				8DC695C41C3503D30055EC44 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				81F02E6F1CFC2AD1002F3135 /* myhoutou@3x.png in Resources */,
 				8D06001E1D05761400C0C97C /* Two_Loading_Down01@3x.png in Resources */,
@@ -8169,6 +8182,7 @@
 				810F9C201CDB558E00BF39B5 /* openEye@2x.png in Resources */,
 				81600A531CB4BD750075CD45 /* houbixize@2x.png in Resources */,
 				818DEDFE1BCDF15B00454A0E /* FConfirmMoney.xib in Resources */,
+				8DEE6DAC1D3F440700E6488F /* TWORefrush@2x.png in Resources */,
 				8DFA58271D123B2E00FE9565 /* TWO_NewBackground@2x.png in Resources */,
 				8DEDE1E61BCD0040008086D3 /* greenyuan@3x.png in Resources */,
 				81C983251D30DD7400F9093A /* two平安@2x.png in Resources */,
@@ -8410,6 +8424,7 @@
 				8175BEC41BEA052E0044026E /* 分享成功@2x.png in Resources */,
 				81C9834D1D3389EC00F9093A /* 交通银行二@2x.png in Resources */,
 				8D3EEA021C27AB400031F7C9 /* 光大银行.png in Resources */,
+				8DEE6DA81D3F42B400E6488F /* TWONoPower@2x.png in Resources */,
 				8D0AE7F61BE09CE500D9D50C /* register-1@2x.png in Resources */,
 				81DEC80D1CED934C005E9D9F /* login@3x.png in Resources */,
 				8D0600341D06A37E00C0C97C /* Two_Loading_Refrush02@3x.png in Resources */,
@@ -8485,6 +8500,7 @@
 				8DF3C22A1D372D0E00AB1E9D /* TWOWelcomThree_480.png in Resources */,
 				81B6741E1BF0AFEB007CEF51 /* 流程@3x.png in Resources */,
 				8D840C3F1CE2CCDB005A17F9 /* product-cuo@3x.png in Resources */,
+				8DEE6DA91D3F42B400E6488F /* TWONoPower@3x.png in Resources */,
 				8DEDE1C51BCCFF01008086D3 /* iconfont_graycuo@3x.png in Resources */,
 				81DEC8101CED94B3005E9D9F /* qiehuan@2x.png in Resources */,
 				8D6692801BD0D82100CD2CAF /* Home_refresh_bg.png in Resources */,

@@ -88,6 +88,10 @@
                                  @"",@"avatarImg",
                                  @"",@"userAccount",
                                  @"",@"userPhone",
+                                 @"",@"accBalance",
+                                 @"",@"realnameStatus",
+                                 @"",@"realName",
+                                 @"",@"chinaPnrAcc",
                                  @"",@"token",
                                  @"",@"registerTime",nil];
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -102,17 +106,19 @@
     if (_handDic == nil) {
         if (![FileOfManage ExistOfFile:@"handOpen.plist"]) {
             [FileOfManage createWithFile:@"handOpen.plist"];
-            NSDictionary *usDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
+            NSMutableDictionary *usDic = [NSMutableDictionary dictionary];
             
-            NSDictionary *userDIC = [usDic objectForKey:[self.flagDic objectForKey:@"phone"]];
+            NSMutableDictionary *userDIC = [NSMutableDictionary dictionary];
             
             [userDIC setValue:@"NO" forKey:@"handFlag"];
             [userDIC setValue:@"" forKey:@"handString"];
             [userDIC setValue:@"YES" forKey:@"ifSetHandFlag"];
             
-            [usDic setValue:userDIC forKey:[self.flagDic objectForKey:@"phone"]];
+            [usDic setValue:userDIC forKey:@"1234567890"];
             
             [usDic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+            
+            NSLog(@"usDic == %@",usDic);
         }
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
         self.handDic = dic;
@@ -153,13 +159,6 @@
                           channel:channel
                  apsForProduction:isProduction
             advertisingIdentifier:nil];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [JPUSHService setTags:nil alias:@"13354288036" fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
-            NSLog(@"iResCode = %d---- iAlias = %@---",iResCode,iAlias);
-            
-        }];
-    });
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
@@ -654,6 +653,46 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
             [self userSign];
             
             [self getMyAccountInfoFuction];
+            
+            NSString *invitationMyCodeString = [[responseObject objectForKey:@"User"] objectForKey:@"invitationCode"];
+            
+            NSString *userLevelString = [[responseObject objectForKey:@"User"] objectForKey:@"userLevel"];
+            
+            if ([invitationMyCodeString isEqualToString:@""]) {
+                
+                NSString *aliasString = [NSString stringWithFormat:@"dslc_%@",userLevelString];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [JPUSHService setTags:nil alias:aliasString fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                        NSLog(@"iResCode = %d---- iAlias = %@---",iResCode,iAlias);
+                        
+                    }];
+                });
+            } else {
+                
+                NSString *firstCodeString = [invitationMyCodeString substringToIndex:1];
+                
+                if ([NSString pipeizimu:firstCodeString]) {
+                    NSString *aliasString = [NSString stringWithFormat:@"dslc_%@",userLevelString];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [JPUSHService setTags:nil alias:aliasString fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                            NSLog(@"iResCode = %d---- iAlias = %@---",iResCode,iAlias);
+                            
+                        }];
+                    });
+                } else {
+                
+                    NSString *aliasString = [NSString stringWithFormat:@"%@_%@",invitationMyCodeString,userLevelString];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [JPUSHService setTags:nil alias:aliasString fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                            NSLog(@"iResCode = %d---- iAlias = %@---",iResCode,iAlias);
+                            
+                        }];
+                    });
+                }
+            }
             
         } else {
             
