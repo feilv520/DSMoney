@@ -121,7 +121,7 @@
     photoArray = [NSMutableArray array];
     noticeArray = [NSMutableArray array];
     
-    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductList) name:@"getSelectionVC" object:nil];
     
@@ -300,8 +300,6 @@
     
     for (int i = 1; i <= 3; i++) {
         UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 30 * i, _scrollViewNotice.frame.size.width - 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:i - 1] title]];
-        NSLog(@"title = %@",[[noticeArray objectAtIndex:i - 1] title]);
-        
         [_scrollViewNotice addSubview:labelNotice];
         labelNotice.userInteractionEnabled = YES;
         labelNotice.exclusiveTouch = YES;
@@ -878,7 +876,6 @@
         }];
     }
     
-    
 }
 
 - (void)getAdvList{
@@ -909,11 +906,6 @@
             [adModel setValuesForKeysWithDictionary:dic];
             [photoArray addObject:adModel];
         }
-        
-//        if (photoArray.count == 0) {
-//            [self noDataShowMoney];
-//            return;
-//        }
         
         if (photoArray.count != 0) {
             
@@ -960,17 +952,17 @@
 
 - (void)noNetworkView {
     if (noNetworkMonkey == nil) {
-        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 306/2/2, 100, 306/2, 246/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoNet"]];
+        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 306/2/2, 100, 306/2, 246/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoPower"]];
     }
     [self.view addSubview:noNetworkMonkey];
     
     if (reloadButton == nil) {
         
-        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 50, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:@"重新加载"];
+        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 50, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:nil];
         
         reloadButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
-        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateHighlighted];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"TWOrefrush"] forState:UIControlStateNormal];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"TWOrefrush"] forState:UIControlStateHighlighted];
         
         [reloadButton addTarget:self action:@selector(getAdvList) forControlEvents:UIControlEventTouchUpInside];
     }

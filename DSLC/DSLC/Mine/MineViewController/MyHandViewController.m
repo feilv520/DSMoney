@@ -41,6 +41,8 @@
     NSString *tempPathString;
     
     BOOL handFlag;
+    
+    NSDictionary *userDIC2;
 }
 @property (nonatomic) KKTabBarViewController *tabBarVC;
 
@@ -103,20 +105,20 @@
     
     self.userPhone.text = [[userDic objectForKey:@"phone"] stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
     
-    NSDictionary *userDIC = [dic objectForKey:[userDic objectForKey:@"phone"]];
+    userDIC2 = [dic objectForKey:[userDic objectForKey:@"phone"]];
     
-    NSLog(@"userDIC2 = %@",userDIC);
+    NSLog(@"userDIC2 = %@",userDIC2);
     
     failCount = 5;
     
     tempPathString = @"1";
     
-    if (userDIC == nil) {
+    if (userDIC2 == nil) {
         
         handFlag = YES;
     } else {
         
-        handFlag = [[userDIC objectForKey:@"ifSetHandFlag"] boolValue];
+        handFlag = [[userDIC2 objectForKey:@"ifSetHandFlag"] boolValue];
     }
     
     NSLog(@"%@",[NSString stringWithFormat:@"%d",handFlag?1:0]);
@@ -131,7 +133,8 @@
         // YES: 关闭手势密码  NO: 手势密码界面验证
         if (self.flagString != nil) {
             
-            self.titleLabel.text = @"请输入解锁图案";
+            self.titleLabel.text = @"验证手势密码";
+            self.userPhone.hidden = YES;
             self.otherUserButton.hidden = YES;
             self.forgetButton.hidden = YES;
             self.cancelButton.hidden = NO;
@@ -151,13 +154,6 @@
 }
 
 - (void)lockView:(MyHandButton *)lockView didFinishPath:(NSString *)path{
-    
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
-    
-    NSDictionary *userDIC = [dic objectForKey:[userDic objectForKey:@"phone"]];
-    
-    NSLog(@"phone1 = %@",[userDic objectForKey:@"phone"]);
-    NSLog(@"userDIC1 = %@",userDIC);
     
     if (handFlag) {
         
@@ -186,6 +182,11 @@
                 
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码设置成功"];
                 
+                NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
+                
+                NSLog(@"phone1 = %@",[userDic objectForKey:@"phone"]);
+                NSLog(@"userDIC1 = %@",userDIC2);
+                
                 NSMutableDictionary *handDic = [NSMutableDictionary dictionary];
                 
                 [handDic setValue:@"YES" forKey:@"handFlag"];
@@ -195,6 +196,8 @@
                 [dic setValue:handDic forKey:[userDic objectForKey:@"phone"]];
                 
                 [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"switchOpenButton" object:nil];
                 popVC;
             } else {
                 NSLog(@"%@",tempPathString);
@@ -205,26 +208,27 @@
             }
         }
     } else {
-        self.titleLabel.text = @"请输入解锁图案";
+        self.titleLabel.text = @"验证手势密码";
         if (self.flagString != nil) {
             
             self.otherUserButton.hidden = YES;
             self.forgetButton.hidden = YES;
             self.cancelButton.hidden = NO;
             
-            NSString *handString = [userDIC objectForKey:@"handString"];
+            NSString *handString = [userDIC2 objectForKey:@"handString"];
             if ([path isEqualToString:handString]) {
                 NSDictionary *usDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
                 
-                NSDictionary *userDIC = [usDic objectForKey:[userDic objectForKey:@"phone"]];
+                NSDictionary *userDICT = [usDic objectForKey:[userDic objectForKey:@"phone"]];
                 
-                [userDIC setValue:@"NO" forKey:@"handFlag"];
-                [userDIC setValue:@"" forKey:@"handString"];
-                [userDIC setValue:@"YES" forKey:@"ifSetHandFlag"];
+                [userDICT setValue:@"NO" forKey:@"handFlag"];
+                [userDICT setValue:@"" forKey:@"handString"];
+                [userDICT setValue:@"YES" forKey:@"ifSetHandFlag"];
                 
-                [usDic setValue:userDIC forKey:[userDic objectForKey:@"phone"]];
+                [usDic setValue:userDICT forKey:[userDic objectForKey:@"phone"]];
                 
                 [usDic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
+                
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码成功关闭"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"switchButton" object:nil];
                 popVC;
@@ -238,7 +242,7 @@
                 [self otherUserWithAction:nil];
             } else {
             
-                NSString *handString = [userDIC objectForKey:@"handString"];
+                NSString *handString = [userDIC2 objectForKey:@"handString"];
                 NSLog(@"%@",handString);
                 if ([path isEqualToString:handString]) {
                     
@@ -439,6 +443,7 @@
                                  @"",@"accBalance",
                                  @"",@"realnameStatus",
                                  @"",@"realName",
+                                 @"",@"chinaPnrAcc",
                                  @"",@"token",
                                  @"",@"registerTime",nil];
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -455,6 +460,7 @@
                                  @"",@"accBalance",
                                  @"",@"realnameStatus",
                                  @"",@"realName",
+                                 @"",@"chinaPnrAcc",
                                  @"",@"token",
                                  @"",@"registerTime",nil];
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -524,8 +530,13 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
-                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",
+                                     [responseObject objectForKey:@""],nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             } else {
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -537,11 +548,16 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"avatarImg"],@"avatarImg",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userAccount"],@"userAccount",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"userPhone"],@"userPhone",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"accBalance"],@"accBalance",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realnameStatus"],@"realnameStatus",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
+
             
             // 判断是否存在isLogin.plist文件
             if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {

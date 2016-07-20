@@ -664,6 +664,46 @@
             
             [self getMyAccountInfoFuction];
             
+            NSString *invitationMyCodeString = [[responseObject objectForKey:@"User"] objectForKey:@"invitationCode"];
+            
+            NSString *userLevelString = [[responseObject objectForKey:@"User"] objectForKey:@"userLevel"];
+            
+            if ([invitationMyCodeString isEqualToString:@""]) {
+                
+                NSString *aliasString = [NSString stringWithFormat:@"dslc_%@",userLevelString];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [JPUSHService setTags:nil alias:aliasString fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                        NSLog(@"iResCode = %d---- iAlias = %@---",iResCode,iAlias);
+                        
+                    }];
+                });
+            } else {
+                
+                NSString *firstCodeString = [invitationMyCodeString substringToIndex:1];
+                
+                if ([NSString pipeizimu:firstCodeString]) {
+                    NSString *aliasString = [NSString stringWithFormat:@"dslc_%@",userLevelString];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [JPUSHService setTags:nil alias:aliasString fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                            NSLog(@"iResCode = %d---- iAlias = %@---",iResCode,iAlias);
+                            
+                        }];
+                    });
+                } else {
+                    
+                    NSString *aliasString = [NSString stringWithFormat:@"%@_%@",invitationMyCodeString,userLevelString];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [JPUSHService setTags:nil alias:aliasString fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                            NSLog(@"iResCode = %d---- iAlias = %@---",iResCode,iAlias);
+                            
+                        }];
+                    });
+                }
+            }
+            
             // 判断是否存在isLogin.plist文件
             if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
                 [FileOfManage createWithFile:@"isLogin.plist"];
@@ -678,12 +718,19 @@
                 
                 [self userSign];
                 
+                // 更新安全测试中的级别
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"safeJiBie" object:nil];
+                // 更新安全测试几分
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"safeTest" object:nil];
-                
+                // 刷新产品列表
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+                // 刷新固收页面数据
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"BillVC" object:nil];
+                // 刷新webview页面
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
+                // 摇一摇登录后的界面刷新
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"getProductDetail" object:nil];
+                // 刷新首页三个产品
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"getSelectionVC" object:nil];
             }];
         } else {
@@ -766,15 +813,62 @@
             
             [self getMyAccountInfoFuction];
             
+            NSString *invitationMyCodeString = [[responseObject objectForKey:@"User"] objectForKey:@"invitationCode"];
+            
+            NSString *userLevelString = [[responseObject objectForKey:@"User"] objectForKey:@"userLevel"];
+            
+            if ([invitationMyCodeString isEqualToString:@""]) {
+                
+                NSString *aliasString = [NSString stringWithFormat:@"dslc_%@",userLevelString];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [JPUSHService setTags:nil alias:aliasString fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                        NSLog(@"iResCode = %d---- iAlias = %@---",iResCode,iAlias);
+                        
+                    }];
+                });
+            } else {
+                
+                NSString *firstCodeString = [invitationMyCodeString substringToIndex:1];
+                
+                if ([NSString pipeizimu:firstCodeString]) {
+                    NSString *aliasString = [NSString stringWithFormat:@"dslc_%@",userLevelString];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [JPUSHService setTags:nil alias:aliasString fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                            NSLog(@"iResCode = %d---- iAlias = %@---",iResCode,iAlias);
+                            
+                        }];
+                    });
+                } else {
+                    
+                    NSString *aliasString = [NSString stringWithFormat:@"%@_%@",invitationMyCodeString,userLevelString];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [JPUSHService setTags:nil alias:aliasString fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                            NSLog(@"iResCode = %d---- iAlias = %@---",iResCode,iAlias);
+                            
+                        }];
+                    });
+                }
+            }
+            
             [self dismissViewControllerAnimated:YES completion:^{
                 [self userSign];
                 
+                // 更新安全测试中的级别
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"safeJiBie" object:nil];
+                // 更新安全测试几分
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"safeTest" object:nil];
-                
+                // 刷新产品列表
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+                // 刷新固收页面数据
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"BillVC" object:nil];
+                // 刷新webview页面
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadWithWebview" object:[responseObject objectForKey:@"token"]];
+                // 摇一摇登录后的界面刷新
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"yaoLogin" object:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"getProductDetail" object:nil];
+                // 刷新首页三个产品
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"getSelectionVC" object:nil];
             }];
         } else {

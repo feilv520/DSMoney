@@ -102,6 +102,7 @@
     [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
     
 //    [self getAdvList];
+    
 }
 
 - (void)refrush {
@@ -435,13 +436,19 @@
 
 - (void)getProductList{
     
-    NSDictionary *parameter = @{@"productType":@"3,4",@"curPage":[NSNumber numberWithInteger:page]};
+    NSDictionary *userDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"productType":@"3,4",@"curPage":[NSNumber numberWithInteger:page],@"token":[userDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"product/getProductList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         [self loadingWithHidden:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            newFlag = YES;
+            
+            _tableView.hidden = NO;
             
             NSLog(@"%@",responseObject);
             
@@ -470,21 +477,6 @@
                 noNetworkMonkey.hidden = YES;
                 reloadButton.hidden = YES;
             }
-            
-//            if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
-//                if (![FileOfManage ExistOfFile:@"NewProduct.plist"]) {
-//                    [FileOfManage createWithFile:@"NewProduct.plist"];
-//                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[[array objectAtIndex:0] objectForKey:@"productId"],@"NewProduct",@"0",@"dealSecret",nil];
-//                    //设置属性值,没有的数据就新建，已有的数据就修改。
-//                    [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
-//                } else {
-//                    NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithContentsOfFile:[FileOfManage PathOfFile:@"NewProduct.plist"]];
-//                    //设置属性值,没有的数据就新建，已有的数据就修改。
-//#warning asdasdasdasdasdasdasdasdasdasd
-//                    [dic setObject:[[array objectAtIndex:0] objectForKey:@"productId"] forKey:@"NewProduct"];
-//                    [dic writeToFile:[FileOfManage PathOfFile:@"NewProduct.plist"] atomically:YES];
-//                }
-//            }
             
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
                 moreFlag = YES;
@@ -529,21 +521,16 @@
 - (void)loadNewData:(MJRefreshGifHeader *)header{
     
     headerT = header;
-    
-    if (newFlag) {
-        [header endRefreshing];
-    } else {
         
-        if (self.productListArray != nil) {
-            [self.productListArray removeAllObjects];
-            self.productListArray = nil;
-            self.productListArray = [NSMutableArray array];
-        }
-        
-        page = 1;
-        [self getProductList];
-        
+    if (self.productListArray != nil) {
+        [self.productListArray removeAllObjects];
+        self.productListArray = nil;
+        self.productListArray = [NSMutableArray array];
     }
+    
+    page = 1;
+    [self getProductList];
+        
 }
 
 #pragma mark 网络请求方法
@@ -755,7 +742,7 @@
 
 - (void)noNetworkView {
     if (noNetworkMonkey == nil) {
-        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 306/2/2, 100, 306/2, 246/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoNet"]];
+        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 306/2/2, 100, 306/2, 246/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoPower"]];
     }
     [self.view addSubview:noNetworkMonkey];
     

@@ -349,6 +349,10 @@
                                      @"",@"avatarImg",
                                      @"",@"userAccount",
                                      @"",@"userPhone",
+                                     @"",@"accBalance",
+                                     @"",@"realnameStatus",
+                                     @"",@"realName",
+                                     @"",@"chinaPnrAcc",
                                      @"",@"token",
                                      @"",@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
@@ -362,6 +366,10 @@
                                      @"",@"avatarImg",
                                      @"",@"userAccount",
                                      @"",@"userPhone",
+                                     @"",@"accBalance",
+                                     @"",@"realnameStatus",
+                                     @"",@"realName",
+                                     @"",@"chinaPnrAcc",
                                      @"",@"token",
                                      @"",@"registerTime",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];

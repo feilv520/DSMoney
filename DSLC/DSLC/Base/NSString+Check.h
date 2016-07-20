@@ -15,4 +15,6 @@
 + (BOOL) validatePassword:(NSString *)password;
 + (BOOL) validateIDCardNumber:(NSString *)IDCardNumber;
 + (BOOL) checkCardNo:(NSString*) cardNo;
+//首字母是否为字母
++ (BOOL)pipeizimu:(NSString *)str;
 @end
