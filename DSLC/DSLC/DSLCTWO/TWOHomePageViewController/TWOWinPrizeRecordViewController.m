@@ -142,22 +142,24 @@
         [self changeSizeWithLabel:cell.labelPrize nameString:[NSString stringWithFormat:@"摇一摇获得%d猴币", [monkeyCoin intValue]] frontLength:5 afterLength:2];
         cell.imagePic.image = [UIImage imageNamed:@"中奖猴币"];
         
-    } else if ([[[prizeModel prizeType] description] isEqualToString:@"4"]) {
-        cell.imagePic.image = [UIImage imageNamed:@"中奖现金"];
-        
-        NSString *moneyStr = [[[prizeModel prizeNumber] description] stringByReplacingOccurrencesOfString:@"," withString:@""];
-
-        NSMutableAttributedString *contentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得¥%d现金", [moneyStr intValue]]];
-        NSRange leftRange = NSMakeRange(0, 6);
-        [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
-        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:leftRange];
-        NSRange meetRange = NSMakeRange(5, 1);
-        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:meetRange];
-        NSRange rightRange = NSMakeRange([[contentString string] length] - 2, 2);
-        [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:rightRange];
-        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:rightRange];
-        [cell.labelPrize setAttributedText:contentString];
     }
+    
+//    else if ([[[prizeModel prizeType] description] isEqualToString:@"4"]) {
+//        cell.imagePic.image = [UIImage imageNamed:@"中奖现金"];
+//        
+//        NSString *moneyStr = [[[prizeModel prizeNumber] description] stringByReplacingOccurrencesOfString:@"," withString:@""];
+//
+//        NSMutableAttributedString *contentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"摇一摇获得¥%d现金", [moneyStr intValue]]];
+//        NSRange leftRange = NSMakeRange(0, 6);
+//        [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:leftRange];
+//        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:leftRange];
+//        NSRange meetRange = NSMakeRange(5, 1);
+//        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:meetRange];
+//        NSRange rightRange = NSMakeRange([[contentString string] length] - 2, 2);
+//        [contentString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:15] range:rightRange];
+//        [contentString addAttribute:NSForegroundColorAttributeName value:[UIColor blackZiTi] range:rightRange];
+//        [cell.labelPrize setAttributedText:contentString];
+//    }
     
     return cell;
 }

@@ -10,6 +10,9 @@
 #import "TWOMoneySweepCell.h"
 #import "TWOSweepModel.h"
 #import "MJRefreshBackGifFooter.h"
+#import "TWOMessageModel.h"
+#import "TWODSLCTalkDetailViewController.h"
+#import "TWOBigSweepDetailViewController.h"
 
 @interface TWOMoneySweepViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -20,6 +23,7 @@
     NSInteger pageNumber;
     BOOL flagStste;
     MJRefreshBackGifFooter *refreshFooter;
+    UIButton *buttonIndex;
 }
 
 @end
@@ -94,75 +98,117 @@
     
     if ([self.kindState isEqualToString:@"1"]) {
         //大圣侃经
-        TWOSweepModel *sweepModel = [DSLCTalkArray objectAtIndex:indexPath.row];
-        NSLog(@"大圣侃经");
+        TWOMessageModel *sweepModel = [DSLCTalkArray objectAtIndex:indexPath.row];
         cell.viewBottom.layer.cornerRadius = 3;
         cell.viewBottom.layer.masksToBounds = YES;
-        cell.imageBackGround.yy_imageURL = [NSURL URLWithString:[sweepModel imImg]];
+        cell.imageBackGround.yy_imageURL = [NSURL URLWithString:[sweepModel cover]];
         
         cell.labelAlpha.backgroundColor = [UIColor blackColor];
         cell.labelAlpha.alpha = 0.6;
         
-        cell.labelContent.text = [sweepModel imTitle];
+        cell.labelContent.text = [sweepModel title];
         cell.labelContent.textColor = [UIColor whiteColor];
         cell.labelContent.backgroundColor = [UIColor clearColor];
         cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        [cell.buttonSee setTitle:[NSString stringWithFormat:@" %@", [sweepModel imBrowseNum]] forState:UIControlStateNormal];
+        [cell.buttonSee setTitle:[NSString stringWithFormat:@" %@", [sweepModel readNum]] forState:UIControlStateNormal];
         [cell.buttonSee setImage:[UIImage imageNamed:@"seewhite"] forState:UIControlStateNormal];
         cell.buttonSee.backgroundColor = [UIColor clearColor];
         
         [cell.buttonPlay setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
         [cell.buttonPlay setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateHighlighted];
         cell.buttonPlay.backgroundColor = [UIColor clearColor];
+        cell.buttonPlay.tag = indexPath.row;
+        [cell.buttonPlay addTarget:self action:@selector(buttonPlayClicked:) forControlEvents:UIControlEventTouchUpInside];
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     } else {
         //投资大扫描
-        TWOSweepModel *sweepModel = [bigSweepArray objectAtIndex:indexPath.row];
+        TWOMessageModel *sweepModel = [bigSweepArray objectAtIndex:indexPath.row];
         
         cell.viewBottom.layer.cornerRadius = 3;
         cell.viewBottom.layer.masksToBounds = YES;
-        cell.imageBackGround.yy_imageURL = [NSURL URLWithString:[sweepModel imImg]];
+        cell.imageBackGround.yy_imageURL = [NSURL URLWithString:[sweepModel cover]];
         
         cell.labelAlpha.backgroundColor = [UIColor blackColor];
         cell.labelAlpha.alpha = 0.6;
         
-        cell.labelContent.text = [sweepModel imTitle];
+        cell.labelContent.text = [sweepModel title];
         cell.labelContent.textColor = [UIColor whiteColor];
         cell.labelContent.backgroundColor = [UIColor clearColor];
         cell.labelContent.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        [cell.buttonSee setTitle:[NSString stringWithFormat:@" %@", [sweepModel imBrowseNum]] forState:UIControlStateNormal];
+        [cell.buttonSee setTitle:[NSString stringWithFormat:@" %@", [sweepModel readNum]] forState:UIControlStateNormal];
         [cell.buttonSee setImage:[UIImage imageNamed:@"seewhite"] forState:UIControlStateNormal];
         cell.buttonSee.backgroundColor = [UIColor clearColor];
         
         [cell.buttonPlay setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
         [cell.buttonPlay setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateHighlighted];
         cell.buttonPlay.backgroundColor = [UIColor clearColor];
+        cell.buttonPlay.tag = indexPath.row;
+        [cell.buttonPlay addTarget:self action:@selector(buttonPlayClicked:) forControlEvents:UIControlEventTouchUpInside];
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"6666");
+    if ([self.kindState isEqualToString:@"1"]) {
+        
+        TWOMessageModel *messageModel = [DSLCTalkArray objectAtIndex:indexPath.row];
+        TWODSLCTalkDetailViewController *talkDetail = [[TWODSLCTalkDetailViewController alloc] init];
+        talkDetail.talkID = [messageModel ID];
+        pushVC(talkDetail);
+        
+    } else if ([self.kindState isEqualToString:@"2"]) {
+        TWOMessageModel *messageModel = [bigSweepArray objectAtIndex:indexPath.row];
+        TWOBigSweepDetailViewController *sweepDeatil = [[TWOBigSweepDetailViewController alloc] init];
+        sweepDeatil.sweepID = [messageModel ID];
+        pushVC(sweepDeatil);
+    }
+}
+
+//tableView上的按钮与tabelView点击方法要同步
+- (void)buttonPlayClicked:(UIButton *)button
+{
+    if ([self.kindState isEqualToString:@"1"]) {
+        
+        TWOMessageModel *messageModel = [DSLCTalkArray objectAtIndex:button.tag];
+        TWODSLCTalkDetailViewController *talkDetail = [[TWODSLCTalkDetailViewController alloc] init];
+        talkDetail.talkID = [messageModel ID];
+        pushVC(talkDetail);
+        
+    } else if ([self.kindState isEqualToString:@"2"]) {
+        TWOMessageModel *messageModel = [bigSweepArray objectAtIndex:button.tag];
+        TWOBigSweepDetailViewController *sweepDeatil = [[TWOBigSweepDetailViewController alloc] init];
+        sweepDeatil.sweepID = [messageModel ID];
+        pushVC(sweepDeatil);
     }
 }
 
 #pragma mark 侃经---------------------------------
 - (void)getKanJingData
 {
-    NSDictionary *parmeter = @{@"type":@7, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber]};
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"index/getInfoManageList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    NSDictionary *parmeter = @{@"type":@2, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber], @"pageSize":@10};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         [self loadingWithHidden:YES];
         NSLog(@"大圣侃经-------------%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-            NSMutableArray *tempArray = [responseObject objectForKey:@"InfoManage"];
+            NSMutableArray *tempArray = [responseObject objectForKey:@"noticeInfo"];
             for (NSDictionary *tempDic in tempArray) {
-                TWOSweepModel *sweepTalkModel = [[TWOSweepModel alloc] init];
-                [sweepTalkModel setValuesForKeysWithDictionary:tempDic];
-                [DSLCTalkArray addObject:sweepTalkModel];
+                TWOMessageModel *messageModel = [[TWOMessageModel alloc] init];
+                [messageModel setValuesForKeysWithDictionary:tempDic];
+                [DSLCTalkArray addObject:messageModel];
             }
-            
+
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
                 flagStste = YES;
             }
@@ -188,15 +234,16 @@
 #pragma mark 大扫描----------------------------------
 - (void)getBigSweepData
 {
-    NSDictionary *parmeter = @{@"type":@6, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber]};
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"index/getInfoManageList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    NSDictionary *parmeter = @{@"type":@3, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber], @"pageSize":@10};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         [self loadingWithHidden:YES];
         NSLog(@"大扫描-----------------%@", responseObject);
         
-        NSMutableArray *dataArray = [responseObject objectForKey:@"InfoManage"];
+        NSMutableArray *dataArray = [responseObject objectForKey:@"noticeInfo"];
         for (NSDictionary *dataDic in dataArray) {
-            TWOSweepModel *sweepModel = [[TWOSweepModel alloc] init];
+            TWOMessageModel *sweepModel = [[TWOMessageModel alloc] init];
             [sweepModel setValuesForKeysWithDictionary:dataDic];
             [bigSweepArray addObject:sweepModel];
         }

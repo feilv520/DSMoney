@@ -921,6 +921,7 @@
 		81E0CCE81C28EC7400148609 /* 失败@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E0CCE61C28EC7400148609 /* 失败@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81E0CCEB1C28ED3400148609 /* BindingEmailFailed.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0CCEA1C28ED3400148609 /* BindingEmailFailed.m */; settings = {ASSET_TAGS = (); }; };
 		81E54E6A1C1EB86D0007303B /* UsualQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81E6482B1D3F656700B06D2B /* TWOBigSweepDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E6482A1D3F656700B06D2B /* TWOBigSweepDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */; settings = {ASSET_TAGS = (); }; };
 		81E8310B1BF0488400127EE8 /* MyChoosePlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81E8310E1BF0695400127EE8 /* MyAlreadyBindingBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E8310D1BF0695400127EE8 /* MyAlreadyBindingBank.m */; settings = {ASSET_TAGS = (); }; };
@@ -938,6 +939,7 @@
 		81ED031C1BD0DA35005F4B02 /* AddBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81ED031B1BD0DA35005F4B02 /* AddBankViewController.m */; };
 		81ED03201BD0DDAD005F4B02 /* AddBankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81ED031E1BD0DDAD005F4B02 /* AddBankCell.m */; };
 		81ED03211BD0DDAD005F4B02 /* AddBankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81ED031F1BD0DDAD005F4B02 /* AddBankCell.xib */; };
+		81EF197C1D3F5EEB00F53532 /* TWODSLCTalkDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EF197B1D3F5EEB00F53532 /* TWODSLCTalkDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81F02E581CFBD62E002F3135 /* historyBag@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F02E561CFBD62E002F3135 /* historyBag@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81F02E591CFBD62E002F3135 /* historyBag2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F02E571CFBD62E002F3135 /* historyBag2x.png */; settings = {ASSET_TAGS = (); }; };
 		81F02E5C1CFBD665002F3135 /* historyQuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F02E5A1CFBD665002F3135 /* historyQuan@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -2853,6 +2855,8 @@
 		81E0CCEA1C28ED3400148609 /* BindingEmailFailed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingEmailFailed.m; sourceTree = "<group>"; };
 		81E54E681C1EB86D0007303B /* UsualQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsualQuestionViewController.h; sourceTree = "<group>"; };
 		81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsualQuestionViewController.m; sourceTree = "<group>"; };
+		81E648291D3F656700B06D2B /* TWOBigSweepDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOBigSweepDetailViewController.h; sourceTree = "<group>"; };
+		81E6482A1D3F656700B06D2B /* TWOBigSweepDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOBigSweepDetailViewController.m; sourceTree = "<group>"; };
 		81E831071BF0488400127EE8 /* MyChoosePlannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChoosePlannerCell.h; sourceTree = "<group>"; };
 		81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyChoosePlannerCell.m; sourceTree = "<group>"; };
 		81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyChoosePlannerCell.xib; sourceTree = "<group>"; };
@@ -2879,6 +2883,8 @@
 		81ED031D1BD0DDAD005F4B02 /* AddBankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBankCell.h; sourceTree = "<group>"; };
 		81ED031E1BD0DDAD005F4B02 /* AddBankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBankCell.m; sourceTree = "<group>"; };
 		81ED031F1BD0DDAD005F4B02 /* AddBankCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddBankCell.xib; sourceTree = "<group>"; };
+		81EF197A1D3F5EEB00F53532 /* TWODSLCTalkDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWODSLCTalkDetailViewController.h; sourceTree = "<group>"; };
+		81EF197B1D3F5EEB00F53532 /* TWODSLCTalkDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWODSLCTalkDetailViewController.m; sourceTree = "<group>"; };
 		81F02E561CFBD62E002F3135 /* historyBag@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "historyBag@3x.png"; sourceTree = "<group>"; };
 		81F02E571CFBD62E002F3135 /* historyBag2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = historyBag2x.png; sourceTree = "<group>"; };
 		81F02E5A1CFBD665002F3135 /* historyQuan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "historyQuan@2x.png"; sourceTree = "<group>"; };
@@ -4523,6 +4529,10 @@
 				81ADB2991CF5586200E044BC /* TWOPublicDetailViewController.m */,
 				81F8EFD91CF7DBE900DC78FF /* TWOMoneySweepViewController.h */,
 				81F8EFDA1CF7DBE900DC78FF /* TWOMoneySweepViewController.m */,
+				81EF197A1D3F5EEB00F53532 /* TWODSLCTalkDetailViewController.h */,
+				81EF197B1D3F5EEB00F53532 /* TWODSLCTalkDetailViewController.m */,
+				81E648291D3F656700B06D2B /* TWOBigSweepDetailViewController.h */,
+				81E6482A1D3F656700B06D2B /* TWOBigSweepDetailViewController.m */,
 			);
 			path = TWOFindViewController;
 			sourceTree = "<group>";
@@ -8965,6 +8975,7 @@
 				81F080571D17E206005BDB37 /* TWOJiaXiQuanModel.m in Sources */,
 				818C8C241CE0708800A14D37 /* TWOAddIncomeViewController.m in Sources */,
 				8183F42E1C9A7C28000BB93C /* TRedBagModel.m in Sources */,
+				81EF197C1D3F5EEB00F53532 /* TWODSLCTalkDetailViewController.m in Sources */,
 				810EBC101C9CFFD6008FB51D /* SelectionViewController.m in Sources */,
 				81DEC7BF1CEC1F04005E9D9F /* TWOHelpCenterViewController.m in Sources */,
 				8183F4131C97CF29000BB93C /* TDescriptionCell.m in Sources */,
@@ -9023,6 +9034,7 @@
 				8177A0321CF3E6500057AA7B /* TWORedBagViewController.m in Sources */,
 				816F1ECE1BF5B30F00DB6B65 /* SocialPlatformViewController.m in Sources */,
 				818063A01BD5D87100E83492 /* InviteNumCell.m in Sources */,
+				81E6482B1D3F656700B06D2B /* TWOBigSweepDetailViewController.m in Sources */,
 				8D4144141C06A003002926DA /* MessageModel.m in Sources */,
 				811B62981CFFCA8300B6F17E /* TWOAddressManageViewController.m in Sources */,
 				818C8C211CE06C9E00A14D37 /* TWOMyGameScoreViewController.m in Sources */,
@@ -9652,8 +9664,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9679,7 +9691,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "5f46e92f-4fd3-4d74-8a0a-45fd694151a7";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -9691,8 +9703,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9718,7 +9730,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "5f46e92f-4fd3-4d74-8a0a-45fd694151a7";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

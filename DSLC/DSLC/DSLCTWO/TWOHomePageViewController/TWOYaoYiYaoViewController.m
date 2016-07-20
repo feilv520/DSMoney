@@ -423,11 +423,13 @@
         NSString *monkeyCoin = [[dataDic objectForKey:@"prizeNumber"] stringByReplacingOccurrencesOfString:@"," withString:@""];
         [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"%d猴币", [monkeyCoin intValue]] frontNum:0 afterNum:2];
         
-    } else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"4"]) {
-        
-        NSString *moneyString = [[dataDic objectForKey:@"prizeNumber"] stringByReplacingOccurrencesOfString:@"," withString:@""];
-        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"¥%d现金", [moneyString intValue]] frontNum:1 afterNum:2];
     }
+    
+//    else if ([[[dataDic objectForKey:@"prizeType"] description] isEqualToString:@"4"]) {
+//        
+//        NSString *moneyString = [[dataDic objectForKey:@"prizeNumber"] stringByReplacingOccurrencesOfString:@"," withString:@""];
+//        [self changeSizeWithLabel:labelPrize nameString:[NSString stringWithFormat:@"¥%d现金", [moneyString intValue]] frontNum:1 afterNum:2];
+//    }
     
     UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 20 + 45 + 15, viewBottom.frame.size.width, 15) backgroundColor:[UIColor clearColor] textColor:[UIColor ZiTiColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:@"大力出奇迹,恭喜您摇中"];
     [viewBottom addSubview:labelAlert];

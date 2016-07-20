@@ -109,7 +109,7 @@
 #pragma mark message--------------------------------++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 - (void)getMessageDataList
 {
-    NSDictionary *parmeter = @{@"type":@1};
+    NSDictionary *parmeter = @{@"type":@1, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber], @"pageSize": @10};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"公告!!!!!!!!!!%@", responseObject);

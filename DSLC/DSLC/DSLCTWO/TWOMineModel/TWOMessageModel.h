@@ -16,5 +16,7 @@
 @property (nonatomic) NSString *sendTime;
 @property (nonatomic) NSString *status;
 @property (nonatomic) NSString *title;
+@property (nonatomic) NSString *cover;
+@property (nonatomic) NSString *readNum;
 
 @end
