@@ -414,15 +414,15 @@
     
     TWOProductDetailViewController *twoPDVC = [[TWOProductDetailViewController alloc] init];
     twoPDVC.productName = productM.productName;
-    if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
-        if (indexPath.row == 0) {
-            twoPDVC.estimate = NO;
-        } else {
-            twoPDVC.estimate = YES;
-        }
-    } else {
-        twoPDVC.estimate = YES;
-    }
+//    if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
+//        if (indexPath.row == 0) {
+//            twoPDVC.estimate = NO;
+//        } else {
+//            twoPDVC.estimate = YES;
+//        }
+//    } else {
+//        twoPDVC.estimate = YES;
+//    }
 
     twoPDVC.pandaun = YES;
     twoPDVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];

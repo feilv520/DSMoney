@@ -179,20 +179,23 @@
     buttonXuan.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [buttonXuan addTarget:self action:@selector(buttonCheck:) forControlEvents:UIControlEventTouchUpInside];
     
-    if (self.estimate == NO) {
-        
-        [butMakeSure setTitle:@"投资(可使用5,000体验金)" forState:UIControlStateNormal];
-        [butMakeSure setBackgroundColor:[UIColor profitColor]];
-        if ([self.residueMoney isEqualToString:@"0.00"]) {
-            
-            butMakeSure.enabled = NO;
-            butMakeSure.backgroundColor = [UIColor grayColor];
-        } else {
-            
-            butMakeSure.enabled = YES;
-        }
-        
-    } else {
+//    if (self.estimate == NO) {
+//        
+//        [butMakeSure setTitle:@"立即投资" forState:UIControlStateNormal];
+//        [butMakeSure setBackgroundColor:[UIColor profitColor]];
+//        if ([self.residueMoney isEqualToString:@"0.00"]) {
+//            
+//            butMakeSure.enabled = NO;
+//            butMakeSure.backgroundColor = [UIColor grayColor];
+//            [butMakeSure setTitle:@"收益中" forState:UIControlStateNormal];
+//        } else {
+//            
+//            [butMakeSure setTitle:@"立即投资" forState:UIControlStateNormal];
+//            [butMakeSure setBackgroundColor:[UIColor profitColor]];
+//            butMakeSure.enabled = YES;
+//        }
+//        
+//    } else {
         NSLog(@"%@",self.residueMoney);
         
         if ([self.residueMoney isEqualToString:@"0.00"]) {
@@ -205,7 +208,7 @@
             [butMakeSure setBackgroundColor:[UIColor profitColor]];
             butMakeSure.enabled = YES;
         }
-    }
+//    }
     
     butMakeSure.titleLabel.font = [UIFont systemFontOfSize:15];
     
@@ -414,7 +417,7 @@
             } else if ([[[self.detailM productType] description] isEqualToString:@"2"]) {
                 cell.valueLabel.text = @"无限额";
             } else if ([[[self.detailM productType] description] isEqualToString:@"3"]) {
-                cell.valueLabel.text = @"仅限5000元体验金";
+                cell.valueLabel.text = @"(仅限新用户)单笔限额1万元";
             } else if ([[[self.detailM productType] description] isEqualToString:@"5"]) {
                 cell.valueLabel.text = @"无限额";
             } else if ([[[self.detailM productType] description] isEqualToString:@"6"]) {
@@ -423,8 +426,10 @@
                 cell.valueLabel.text = @"无限额";
             } else if ([[[self.detailM productType] description] isEqualToString:@"8"]) {
                 cell.valueLabel.text = @"无限额";
-            } else {
+            } else if ([[[self.detailM productType] description] isEqualToString:@"9"]) {
                 cell.valueLabel.text = @"单人累计投资限额2万元";
+            } else if ([[[self.detailM productType] description] isEqualToString:@"10"]){
+                cell.valueLabel.text = @"每人每期限额2万元";
             }
         }
         

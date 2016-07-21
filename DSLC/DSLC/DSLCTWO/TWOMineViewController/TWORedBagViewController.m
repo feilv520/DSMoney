@@ -304,20 +304,7 @@
 {
     if (tableView == _tableView) {
         
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"owowo"];
-//        
-//        if (!cell) {
-//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"owowo"];
-//        }
-        
-        TWOUseRedBagCellMine * cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-        if (!cell)
-        {
-            [tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
-            cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-        }
-        
-//        TWOUseRedBagCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        TWOUseRedBagCellMine *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseRedBag"];
         
         cell.imagePicture.image = [UIImage imageNamed:@"twohongbao"];
         
