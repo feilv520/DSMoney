@@ -163,27 +163,28 @@
     
     if (tableView == _tableView1) {
         
-//        TWOActivityThreeStateModel *activityModel = [runArray objectAtIndex:indexPath.row];
-        cell.imageActivity.image = [UIImage imageNamed:@"gameBanner"];
-//        cell.imageActivity.yy_imageURL = [NSURL URLWithString:[activityModel poster]];
+        TWOActivityThreeStateModel *activityModel = [runArray objectAtIndex:indexPath.row];
+        cell.imageActivity.yy_imageURL = [NSURL URLWithString:[activityModel poster]];
         cell.imageOver.hidden = YES;
         cell.imageWaiting.hidden = YES;
         cell.labelAlpha.hidden = YES;
         
     } else if (tableView == _tableView2) {
         
+        TWOActivityThreeStateModel *activityModel = [waitArray objectAtIndex:indexPath.row];
+        cell.imageActivity.yy_imageURL = [NSURL URLWithString:[activityModel poster]];
         cell.imageWaiting.hidden = NO;
         cell.imageOver.hidden = YES;
         cell.labelAlpha.hidden = YES;
-        cell.imageActivity.image = [UIImage imageNamed:@"gameBanner"];
         cell.imageWaiting.image = [UIImage imageNamed:@"期待中"];
         
     } else {
         
+        TWOActivityThreeStateModel *activityModel = [overArray objectAtIndex:indexPath.row];
+        cell.imageActivity.yy_imageURL = [NSURL URLWithString:[activityModel poster]];
         cell.imageWaiting.hidden = YES;
         cell.imageOver.hidden = NO;
         cell.labelAlpha.hidden = NO;
-        cell.imageActivity.image = [UIImage imageNamed:@"gameBanner"];
         cell.labelAlpha.backgroundColor = [UIColor blackColor];
         cell.labelAlpha.layer.cornerRadius = 4;
         cell.labelAlpha.layer.masksToBounds = YES;
@@ -235,14 +236,14 @@
     }];
 }
 
-//已上线接口
+//进行中接口
 - (void)getListDataAlready
 {
     NSDictionary *parmeter2 = @{@"status":@2, @"clientType":@"iOS"};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"activity/getActivityList" parameters:parmeter2 success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         [self loadingWithHidden:YES];
-        NSLog(@"已上线::::::::::::::%@", responseObject);
+        NSLog(@"进行中::::::::::::::%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *activityArr = [responseObject objectForKey:@"Activity"];
             for (NSDictionary *dataDic in activityArr) {
@@ -251,6 +252,7 @@
                 [runArray addObject:model];
             }
             
+            NSLog(@"aaaaaaaaaa%@", runArray);
             //有数据与无数据显示的判断
             if (runArray.count == 0) {
                 [self runingNoData];
