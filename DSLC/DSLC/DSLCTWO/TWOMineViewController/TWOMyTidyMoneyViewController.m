@@ -276,6 +276,7 @@
         NSRange profitRange = NSMakeRange(0, [[profitString string] rangeOfString:@"元"].location);
         [profitString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:18] range:profitRange];
         [cell.labelProfit setAttributedText:profitString];
+//        NSLog(@"#########r%@", [DES3Util decrypt:[model exceptedYield]]);
         
         cell.labelShouYi.text = @"预期收益";
         cell.labelShouYi.textColor = [UIColor zitihui];

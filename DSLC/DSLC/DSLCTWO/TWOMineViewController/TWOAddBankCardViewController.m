@@ -53,7 +53,6 @@
 
 - (void)addBankCardButton:(UIButton *)button
 {
-    
     if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
         
         [self registThirdShow];

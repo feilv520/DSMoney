@@ -924,6 +924,8 @@
 		81E6482B1D3F656700B06D2B /* TWOBigSweepDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E6482A1D3F656700B06D2B /* TWOBigSweepDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E6482E1D3F817500B06D2B /* two默认头像@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E6482C1D3F817500B06D2B /* two默认头像@2x.png */; settings = {ASSET_TAGS = (); }; };
 		81E6482F1D3F817500B06D2B /* two默认头像@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E6482D1D3F817500B06D2B /* two默认头像@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81E648351D40A9E200B06D2B /* TWONewsMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E648341D40A9E200B06D2B /* TWONewsMessageModel.m */; settings = {ASSET_TAGS = (); }; };
+		81E648381D40B23C00B06D2B /* TWONewsMegDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E648371D40B23C00B06D2B /* TWONewsMegDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E8310A1BF0488400127EE8 /* MyChoosePlannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */; settings = {ASSET_TAGS = (); }; };
 		81E8310B1BF0488400127EE8 /* MyChoosePlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */; settings = {ASSET_TAGS = (); }; };
 		81E8310E1BF0695400127EE8 /* MyAlreadyBindingBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E8310D1BF0695400127EE8 /* MyAlreadyBindingBank.m */; settings = {ASSET_TAGS = (); }; };
@@ -1360,7 +1362,6 @@
 		8D855A671CE9C48B007A4B22 /* TWOMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A651CE9C48B007A4B22 /* TWOMessageTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8D855A6B1CE9C558007A4B22 /* messagePoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A691CE9C558007A4B22 /* messagePoint@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D855A6C1CE9C558007A4B22 /* messagePoint@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A6A1CE9C558007A4B22 /* messagePoint@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8D855A751CE9CF51007A4B22 /* TWOMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D855A731CE9CF51007A4B22 /* TWOMessageDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		8D855A761CE9CF51007A4B22 /* TWOMessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A741CE9CF51007A4B22 /* TWOMessageDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		8D855A781CEAF633007A4B22 /* TWOHandImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A771CEAF633007A4B22 /* TWOHandImage.png */; settings = {ASSET_TAGS = (); }; };
 		8D855A7B1CEB0441007A4B22 /* TWOHandImageDian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D855A791CEB0441007A4B22 /* TWOHandImageDian@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -2865,6 +2866,10 @@
 		81E6482A1D3F656700B06D2B /* TWOBigSweepDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOBigSweepDetailViewController.m; sourceTree = "<group>"; };
 		81E6482C1D3F817500B06D2B /* two默认头像@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "two默认头像@2x.png"; sourceTree = "<group>"; };
 		81E6482D1D3F817500B06D2B /* two默认头像@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "two默认头像@3x.png"; sourceTree = "<group>"; };
+		81E648331D40A9E200B06D2B /* TWONewsMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWONewsMessageModel.h; sourceTree = "<group>"; };
+		81E648341D40A9E200B06D2B /* TWONewsMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWONewsMessageModel.m; sourceTree = "<group>"; };
+		81E648361D40B23C00B06D2B /* TWONewsMegDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWONewsMegDetailViewController.h; sourceTree = "<group>"; };
+		81E648371D40B23C00B06D2B /* TWONewsMegDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWONewsMegDetailViewController.m; sourceTree = "<group>"; };
 		81E831071BF0488400127EE8 /* MyChoosePlannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChoosePlannerCell.h; sourceTree = "<group>"; };
 		81E831081BF0488400127EE8 /* MyChoosePlannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyChoosePlannerCell.m; sourceTree = "<group>"; };
 		81E831091BF0488400127EE8 /* MyChoosePlannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyChoosePlannerCell.xib; sourceTree = "<group>"; };
@@ -3540,8 +3545,6 @@
 		8D855A651CE9C48B007A4B22 /* TWOMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOMessageTableViewCell.xib; sourceTree = "<group>"; };
 		8D855A691CE9C558007A4B22 /* messagePoint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messagePoint@2x.png"; sourceTree = "<group>"; };
 		8D855A6A1CE9C558007A4B22 /* messagePoint@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messagePoint@3x.png"; sourceTree = "<group>"; };
-		8D855A721CE9CF51007A4B22 /* TWOMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMessageDetailViewController.h; sourceTree = "<group>"; };
-		8D855A731CE9CF51007A4B22 /* TWOMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMessageDetailViewController.m; sourceTree = "<group>"; };
 		8D855A741CE9CF51007A4B22 /* TWOMessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOMessageDetailViewController.xib; sourceTree = "<group>"; };
 		8D855A771CEAF633007A4B22 /* TWOHandImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TWOHandImage.png; sourceTree = "<group>"; };
 		8D855A791CEB0441007A4B22 /* TWOHandImageDian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWOHandImageDian@2x.png"; sourceTree = "<group>"; };
@@ -4018,6 +4021,8 @@
 			children = (
 				8114F6F81D3C83A7000B80E0 /* TWOMessageModel.h */,
 				8114F6F91D3C83A7000B80E0 /* TWOMessageModel.m */,
+				81E648331D40A9E200B06D2B /* TWONewsMessageModel.h */,
+				81E648341D40A9E200B06D2B /* TWONewsMessageModel.m */,
 			);
 			name = "消息";
 			sourceTree = "<group>";
@@ -7185,10 +7190,10 @@
 				8D855A5D1CE99D59007A4B22 /* TWOGMessageViewController.m */,
 				8114F7001D3CC1EE000B80E0 /* TWONoticeDetailViewController.h */,
 				8114F7011D3CC1EE000B80E0 /* TWONoticeDetailViewController.m */,
-				8D855A601CE99D67007A4B22 /* TWOMMessageViewController.m */,
-				8D855A721CE9CF51007A4B22 /* TWOMessageDetailViewController.h */,
-				8D855A731CE9CF51007A4B22 /* TWOMessageDetailViewController.m */,
 				8D855A5F1CE99D67007A4B22 /* TWOMMessageViewController.h */,
+				8D855A601CE99D67007A4B22 /* TWOMMessageViewController.m */,
+				81E648361D40B23C00B06D2B /* TWONewsMegDetailViewController.h */,
+				81E648371D40B23C00B06D2B /* TWONewsMegDetailViewController.m */,
 				8D855A741CE9CF51007A4B22 /* TWOMessageDetailViewController.xib */,
 			);
 			name = "消息中心";
@@ -9096,6 +9101,7 @@
 				8184EF4A1BFDBC5600496989 /* OneCell.m in Sources */,
 				8182A7E61C0E97EA00FA1216 /* ApplySchedule.m in Sources */,
 				8183F41F1C97FDA1000BB93C /* TMakeSureViewController.m in Sources */,
+				81E648381D40B23C00B06D2B /* TWONewsMegDetailViewController.m in Sources */,
 				81F080531D17D5CE005BDB37 /* TWORedBagModel.m in Sources */,
 				818523BF1BE34AC1002FC653 /* ThreeViewController.m in Sources */,
 				81B84BE21CE30D7600A867B9 /* TWOBottomMoneyDetailViewController.m in Sources */,
@@ -9162,6 +9168,7 @@
 				815D19021D1D37EC00DFA753 /* TWOMyOwnerModel.m in Sources */,
 				8D840C7A1CE5C0FE005A17F9 /* TWOProductMMakeSureView.m in Sources */,
 				81B18E201BE761B600D448FA /* LastEmailViewController.m in Sources */,
+				81E648351D40A9E200B06D2B /* TWONewsMessageModel.m in Sources */,
 				8122012F1CE5CCE900159A74 /* TWOPersonalSetViewController.m in Sources */,
 				8D9BE8E91C0EC94D003C67D3 /* CALayer+YYWebImage.m in Sources */,
 				81F496FE1C06EF71002F3413 /* Chat.m in Sources */,
@@ -9377,7 +9384,6 @@
 				8177A0551CF41BFB0057AA7B /* TWOTestOneViewController.m in Sources */,
 				8D9BE8EC1C0EC94D003C67D3 /* UIImage+YYWebImage.m in Sources */,
 				81B674011BF0873B007CEF51 /* InviteNameViewController.m in Sources */,
-				8D855A751CE9CF51007A4B22 /* TWOMessageDetailViewController.m in Sources */,
 				8D31DF221C04874700B676AF /* MTransactionModel.m in Sources */,
 				815D27A41BE21040005410C6 /* UpCell.m in Sources */,
 				8DD955CC1BF6D5EB00C17A65 /* NSString+Check.m in Sources */,
@@ -9688,8 +9694,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9715,7 +9721,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "92f9bc8c-df66-45c7-8d36-01437a7b2915";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -9727,8 +9733,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9754,7 +9760,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "92f9bc8c-df66-45c7-8d36-01437a7b2915";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

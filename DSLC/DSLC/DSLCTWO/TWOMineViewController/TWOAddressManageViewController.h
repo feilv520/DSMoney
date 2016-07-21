@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface TWOAddressManageViewController : BaseViewController
-
+@property (nonatomic) NSString *address;
+@property (nonatomic) BOOL addressState;
 @end

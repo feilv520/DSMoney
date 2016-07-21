@@ -10,7 +10,5 @@
 #import "TWOGetNoticeCell.h"
 
 @interface TWONoticeDetailViewController : BaseViewController
-
 @property (nonatomic) NSString *messageID;
-
 @end

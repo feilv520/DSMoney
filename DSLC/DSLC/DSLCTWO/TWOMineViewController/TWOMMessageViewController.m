@@ -12,15 +12,20 @@
 #import "CreatView.h"
 #import "AppDelegate.h"
 #import "TWOMessageTableViewCell.h"
-#import "TWOMessageDetailViewController.h"
+#import "TWONewsMessageModel.h"
+#import "TWONewsMegDetailViewController.h"
 
 @interface TWOMMessageViewController () <UITableViewDataSource,UITableViewDelegate>{
     
     UITableView *mainTableView;
+    NSMutableArray *newsArray;
     BOOL flag;
     MJRefreshBackGifFooter *gifFooter;
     BOOL flagSate;
     NSInteger pageNum;
+    
+    UIImageView *imageDian;
+    UILabel *labelTitle;
 }
 
 @end
@@ -41,10 +46,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor huibai];
+    newsArray = [NSMutableArray array];
     
     flagSate = NO;
     pageNum = 1;
     
+    [self getMessageData];
     [self tableViewShow];
 }
 
@@ -67,7 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return newsArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -78,39 +85,120 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWOMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message"];
+    TWONewsMessageModel *newsModel = [newsArray objectAtIndex:indexPath.row];
     
-    cell.titleLabel.text = @"喜大普奔,大圣理财APP2.0版本上线啦!";
+    cell.titleLabel.text = [newsModel msgTitle];
+    cell.titleLabel.tag = 123 + indexPath.row;
     
-    cell.subTitleLabel.text = @"经过小伙伴们两个月的努力,大圣理财2.0版本终于上线啦!大圣理财,专注银行信贷资产";
+    cell.subTitleLabel.text = [newsModel msgText];
+    cell.subTitleLabel.numberOfLines = 0;
     
     cell.backgroundV.layer.masksToBounds = YES;
     cell.backgroundV.layer.cornerRadius = 5.0f;
     cell.backgroundV.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
     cell.backgroundV.layer.borderWidth = 1;
     
-    if (!flag) {
-        
-        cell.pointImage.hidden = YES;
-        [cell.titleLabel setTextColor:[UIColor colorFromHexCode:@"8c909d"]];
-    } else {
-        
-        cell.pointImage.hidden = NO;
-        [cell.titleLabel setTextColor:[UIColor colorFromHexCode:@"434a54"]];
-    }
+    cell.pointImage.hidden = YES;
+    cell.pointImage.tag = 99999;
     
-    flag = !flag;
+    //未读已读的判断
+    if ([[[newsModel msgStatus] description] isEqualToString:@"0"]) {
+        cell.pointImage.hidden = NO;
+        cell.titleLabel.textColor = [UIColor ZiTiColor];
+        NSLog(@"未读");
+    } else {
+        cell.pointImage.hidden = YES;
+        cell.titleLabel.textColor = [UIColor findZiTiColor];
+        NSLog(@"已读");
+    }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    TWOMessageDetailViewController *messageDVC = [[TWOMessageDetailViewController alloc] init];
+    imageDian = (UIImageView *)[self.view viewWithTag:99999];
+    labelTitle = (UILabel *)[self.view viewWithTag:123 + indexPath.row];
+    
+    imageDian.hidden = YES;
+    labelTitle.textColor = [UIColor findZiTiColor];
+    
+    TWONewsMegDetailViewController *messageDVC = [[TWONewsMegDetailViewController alloc] init];
+    TWONewsMessageModel *model = [newsArray objectAtIndex:indexPath.row];
+    messageDVC.msgID = model.msgTextId;
     pushVC(messageDVC);
+}
+
+- (void)noDataShow
+{
+    UIImageView *imageNothing = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [self.view addSubview:imageNothing];
+}
+
+#pragma mark messageData=============================
+- (void)getMessageData
+{
+    NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNum]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"msg/getMessageList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"消息列表----------------%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *dataArray = [responseObject objectForKey:@"message"];
+            for (NSDictionary *dataDic in dataArray) {
+                TWONewsMessageModel *newsMessageModel = [[TWONewsMessageModel alloc] init];
+                [newsMessageModel setValuesForKeysWithDictionary:dataDic];
+                [newsArray addObject:newsMessageModel];
+            }
+            
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                flagSate = YES;
+            }
+            
+            [gifFooter endRefreshing];
+            
+            if (pageNum == 1) {
+                if (newsArray.count == 0) {
+                    [self noDataShow];
+                } else {
+                    [self tableViewShow];
+                }
+            } else {
+                [mainTableView reloadData];
+            }
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
+{
+    gifFooter = footer;
+    if (flagSate) {
+        [gifFooter endRefreshing];
+    } else {
+        pageNum++;
+        [self getMessageData];
+    }
+}
+
+- (void)loadNewData:(MJRefreshGifHeader *)header
+{
+    if (newsArray != nil) {
+        [newsArray removeAllObjects];
+        newsArray = nil;
+        newsArray = [NSMutableArray array];
+    }
+    
+    pageNum = 1;
+    [self getMessageData];
 }
 
 - (void)didReceiveMemoryWarning {

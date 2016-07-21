@@ -334,7 +334,8 @@
             [cell.inputMoneyTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
             
             cell.inputMoneyTextField.tag = 9283;
-            
+            cell.inputMoneyTextField.textColor = [UIColor findZiTiColor];
+            cell.inputMoneyTextField.tintColor = [UIColor grayColor];
             cell.inputMoneyTextField.delegate = self;
             
 //            cell.inputMoneyTextField.placeholder = [NSString stringWithFormat:@"%@元起投,每%@元递增",[self.detailM amountMin],[self.detailM amountIncrease]];
@@ -373,7 +374,8 @@
             [cell.inputMoneyTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
             
             cell.inputMoneyTextField.tag = 9283;
-            
+            cell.inputMoneyTextField.textColor = [UIColor findZiTiColor];
+            cell.inputMoneyTextField.tintColor = [UIColor grayColor];
             cell.inputMoneyTextField.delegate = self;
             
             cell.inputMoneyTextField.placeholder = [NSString stringWithFormat:@"%d元起投,每%d元递增",[[self.detailM amountMin] intValue],[[self.detailM amountIncrease] intValue]];
@@ -411,7 +413,8 @@
             [cell.moneyTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
             
             cell.moneyTextField.tag = 9283;
-            
+            cell.moneyTextField.textColor = [UIColor findZiTiColor];
+            cell.moneyTextField.tintColor = [UIColor grayColor];
             cell.moneyTextField.placeholder = [NSString stringWithFormat:@"%d元起投,每%d元递增",[[self.detailM amountMin] intValue],[[self.detailM amountIncrease] intValue]];
             
             cell.moneyTextField.delegate = self;
@@ -716,6 +719,7 @@
     [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
     animation.values = values;
     [monkeyView.layer addAnimation:animation forKey:nil];
+    [makeSView.layer addAnimation:animation forKey:nil];
     
     CGFloat margin_x = (38 / 375.0) * WIDTH_CONTROLLER_DEFAULT;
     CGFloat margin_y = (182 / 667.0) * HEIGHT_CONTROLLER_DEFAULT;

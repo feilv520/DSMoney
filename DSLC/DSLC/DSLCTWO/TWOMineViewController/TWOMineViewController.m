@@ -545,23 +545,16 @@
         }
         
         if ([[dicMoney objectForKey:@"closeEyes"] isEqualToString:@"YES"]) {
-            cell.labelContent.text = @"****";
+            if (cell.labelContent.tag == 100) {
+                cell.labelContent.text = @"****在投";
+            } else if (cell.labelContent.tag == 90) {
+                cell.labelContent.text = @"****";
+            }
         } else {
             
         }
     }
     
-//    if (indexPath.section == 0) {
-//        if (indexPath.row == 1) {
-//            cell.imageRedDian.image = [UIImage imageNamed:@"Reddian"];
-//        }
-//    } else {
-//        if (indexPath.row == 1) {
-//            cell.imageRedDian.image = [UIImage imageNamed:@"Reddian"];
-//        }
-//    }
-    
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -659,8 +652,12 @@
     [self closeEyesButton:butMoneyYu];
     [self closeEyesButton:butAddMoney];
     
-    labelMoneyZhong.text = @"****";
-    labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:17];
+    NSMutableAttributedString *touZiString = [[NSMutableAttributedString alloc] initWithString:@"****在投"];
+    NSRange zaiTouRange = NSMakeRange([touZiString length] - 2, 2);
+    [touZiString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:zaiTouRange];
+    NSRange xingRange = NSMakeRange(0, 4);
+    [touZiString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:17] range:xingRange];
+    [labelMoneyZhong setAttributedText:touZiString];
     
     labelTeQuan.text = @"****";
     labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:17];

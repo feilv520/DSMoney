@@ -43,19 +43,6 @@
 {
     UIImageView *imageViewNo = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
     [self.view addSubview:imageViewNo];
-    
-    if (WIDTH_CONTROLLER_DEFAULT == 320) {
-        
-        imageViewNo.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 160)/2 - 260/2/2, 260/2, 260/2);
-        
-    } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
-        
-        imageViewNo.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 200)/2 - 260/2/2, 260/2, 260/2);
-        
-    } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
-        
-        imageViewNo.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, (HEIGHT_CONTROLLER_DEFAULT - 150)/2 - 260/2/2, 260/2, 260/2);
-    }
 }
 
 - (void)tabelViewShow

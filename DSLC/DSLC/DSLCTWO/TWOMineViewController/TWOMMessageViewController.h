@@ -6,8 +6,8 @@
 //  Copyright © 2016年 马成铭. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface TWOMMessageViewController : UIViewController
+@interface TWOMMessageViewController : BaseViewController
 
 @end

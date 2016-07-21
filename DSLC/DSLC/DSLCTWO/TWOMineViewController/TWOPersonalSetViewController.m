@@ -325,7 +325,7 @@
 - (void)logoutFuction{
     NSDictionary *parmeter = @{@"userId":[self.flagDic objectForKey:@"phone"]};
     
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
     
@@ -415,9 +415,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
         NSLog(@"%@", error);
-        
     }];
 }
 

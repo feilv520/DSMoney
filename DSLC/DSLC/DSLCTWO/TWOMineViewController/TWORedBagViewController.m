@@ -680,7 +680,7 @@
             }
             
             [butCanUse setTitle:[NSString stringWithFormat:@"%@张可用红包,去使用>", [responseObject objectForKey:@"redPacketCount"]] forState:UIControlStateNormal];
-            NSLog(@"%@", [responseObject objectForKey:@"redPacketCount"]);
+
         } else {
             
         }

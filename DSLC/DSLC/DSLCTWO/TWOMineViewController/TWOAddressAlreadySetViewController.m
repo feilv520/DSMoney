@@ -72,6 +72,8 @@
 - (void)buttonChangeAddress:(UIButton *)button
 {
     TWOAddressManageViewController *addressManager = [[TWOAddressManageViewController alloc] init];
+    addressManager.address = self.addressString;
+    addressManager.addressState = YES;
     pushVC(addressManager);
 }
 

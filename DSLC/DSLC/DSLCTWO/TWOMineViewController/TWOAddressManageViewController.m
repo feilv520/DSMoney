@@ -35,7 +35,11 @@
 {
     _textView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(9, 9, WIDTH_CONTROLLER_DEFAULT - 18, 152.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20))];
     [self.view addSubview:_textView];
-    _textView.placeholder = @"请输入你的准确地址...";
+    if (self.addressState) {
+        _textView.text = self.address;
+    } else {
+        _textView.placeholder = @"请输入你的准确地址...";
+    }
     _textView.placeholderColor = [UIColor findZiTiColor];
     _textView.delegate = self;
     _textView.textColor = [UIColor findZiTiColor];
@@ -46,8 +50,13 @@
     _textView.layer.borderColor = [[UIColor profitColor] CGColor];
     _textView.layer.borderWidth = 0.5;
     
-    buttonSave = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, _textView.frame.size.height + 9 + 30, WIDTH_CONTROLLER_DEFAULT - 18, 40) backgroundColor:[UIColor findZiTiColor] textColor:[UIColor whiteColor] titleText:@"保存"];
+    buttonSave = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9, _textView.frame.size.height + 9 + 30, WIDTH_CONTROLLER_DEFAULT - 18, 40) backgroundColor:nil textColor:[UIColor whiteColor] titleText:@"保存"];
     [self.view addSubview:buttonSave];
+    if (self.addressState) {
+        buttonSave.backgroundColor = [UIColor profitColor];
+    } else {
+        buttonSave.backgroundColor = [UIColor findZiTiColor];
+    }
     buttonSave.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     buttonSave.layer.cornerRadius = 5;
     buttonSave.layer.masksToBounds = YES;

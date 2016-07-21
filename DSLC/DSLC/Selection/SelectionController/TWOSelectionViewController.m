@@ -20,7 +20,6 @@
 #import "BannerViewController.h"
 #import "TSignInViewController.h"
 #import "TWOLoginAPPViewController.h"
-#import "TWOMessageDetailViewController.h"
 #import "TWOMessageModel.h"
 #import "TWONoticeDetailViewController.h"
 
@@ -398,6 +397,7 @@
     [butString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:rightRange];
     [butString addAttribute:NSForegroundColorAttributeName value:[UIColor profitColor] range:rightRange];
     [cell.butQuanQuan setAttributedTitle:butString forState:UIControlStateNormal];
+    cell.butQuanQuan.enabled = NO;
     
     cell.butLeft.tag = indexPath.item + 20;
     [cell.butLeft setBackgroundImage:[UIImage imageNamed:@"首页左箭头"] forState:UIControlStateNormal];
@@ -456,6 +456,26 @@
         
     cell.backgroundColor = [UIColor qianhuise];
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat pageNumber = _collection.contentOffset.x / WIDTH_CONTROLLER_DEFAULT;
+    
+    TWOPickModel *pickModel = [pickArray objectAtIndex:pageNumber];
+    
+    TWOProductDetailViewController *productDetailVC = [[TWOProductDetailViewController alloc] init];
+    productDetailVC.idString = [pickModel productId];
+    productDetailVC.productName = [pickModel productName];
+    productDetailVC.residueMoney = residueMoneyString;
+    
+    if ([[[pickModel productType] description] isEqualToString:@"3"]) {
+        productDetailVC.estimate = NO;
+    } else {
+        productDetailVC.estimate = YES;
+    }
+    
+    pushVC(productDetailVC);
 }
 
 //封装改变字体大小
@@ -570,7 +590,6 @@
     }
     
     pushVC(productDetailVC);
-    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
