@@ -16,11 +16,6 @@
 #import "define.h"
 #import "LoginViewController.h"
 #import "WelcomeViewController.h"
-#import "TWOSelectionViewController.h"
-#import "TWOMineViewController.h"
-#import "TWOProductViewController.h"
-#import "TWOFindViewController.h"
-#import "TWOLoginAPPViewController.h"
 
 @interface AppDelegate ()
 {
@@ -104,37 +99,10 @@
 
 //        1.0我的
         MineViewController *mineVC = [[MineViewController alloc] init];
-//        LoginViewController *loginVC = [[LoginViewController alloc] init];
         UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
 
-//        //        2.0首页
-//        TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
-//        UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
-//        
-//        //        2.0产品
-//        TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
-//        UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
-//        
-//        //        2.0发现
-//        TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
-//        UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
-//
-//        //        2.0我的
-//        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-////        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
-//        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
-        
-//        2.0
-//        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationTwoMine];
-//        self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
-//        1.0
         self.viewControllerArr = @[navigation1, navigation2, navigation3];
         
-//        2.0
-//        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"faxian", @"iconfont-iconfuzhi"];
-//        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"faxianclick", @"iconfont-iconfuzhi-highlight"];
-        
-////        1.0
         butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
         butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
         
@@ -167,9 +135,6 @@
         self.window.rootViewController = self.tabBarVC;
         
     } else {
-//         手势
-//        MyHandViewController *myHandVC = [[MyHandViewController alloc] init];
-//        self.window.rootViewController = myHandVC;
         
         // 欢迎页
         WelcomeViewController *welcome = [[WelcomeViewController alloc] init];
@@ -315,18 +280,27 @@ void UncaughtExceptionHandler(NSException *exception){
     
     NSDictionary *parameters = @{@"appType":@"2"};
     
-    NSLog(@"12");
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    
+    NSString *versionString = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    
+//    if ([versionString isEqualToString:@"2.0.0"]) {
+//        NSLog(@"YES");
+//    } else {
+//        NSLog(@"NO");
+//    }
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getAppVersion" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"----===%@",responseObject);
         result = [responseObject objectForKey:@"result"];
-        
+//        @"尊敬的用户：平台目前处于2.0版本的升级中，预计将在8月5日的上午8点完成升级，在此期间，平台的所有操作都会暂停，给您带来的不便敬请谅解。升级完成，我们会在第一时间通知您，感谢您的配合。"
         if ([result isEqualToNumber:@200]) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本请更新(已更新请忽略)" delegate:self cancelButtonTitle:nil otherButtonTitles:@"去更新", nil];
-            alertView.delegate = self;
-            [alertView show];
-            
+            if (![versionString isEqualToString:@"2.0.0"]) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本更新，请前去更新" delegate:self cancelButtonTitle:nil otherButtonTitles:@"去更新", nil];
+                alertView.delegate = self;
+                [alertView show];
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
