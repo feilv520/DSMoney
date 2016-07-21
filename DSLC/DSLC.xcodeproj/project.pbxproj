@@ -1529,6 +1529,8 @@
 		8DCF6C021D3CD25300013054 /* TWOBannerBlack@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DCF6BFE1D3CD25300013054 /* TWOBannerBlack@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8DCF6C031D3CD25300013054 /* TWOBannerBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DCF6BFF1D3CD25300013054 /* TWOBannerBlue@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8DCF6C041D3CD25300013054 /* TWOBannerBlue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DCF6C001D3CD25300013054 /* TWOBannerBlue@3x.png */; settings = {ASSET_TAGS = (); }; };
+		8DD08F141D4074550073D5A4 /* TWOUseRedBagCellM.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD08F121D4074550073D5A4 /* TWOUseRedBagCellM.m */; settings = {ASSET_TAGS = (); }; };
+		8DD08F151D4074550073D5A4 /* TWOUseRedBagCellM.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD08F131D4074550073D5A4 /* TWOUseRedBagCellM.xib */; settings = {ASSET_TAGS = (); }; };
 		8DD180941BD72C1300F71CEA /* GetMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD180931BD72C1300F71CEA /* GetMoneyViewController.m */; };
 		8DD180981BD72E5900F71CEA /* GetMoneyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD180961BD72E5900F71CEA /* GetMoneyTableViewCell.m */; };
 		8DD180991BD72E5900F71CEA /* GetMoneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD180971BD72E5900F71CEA /* GetMoneyTableViewCell.xib */; };
@@ -3796,6 +3798,9 @@
 		8DCF6BFE1D3CD25300013054 /* TWOBannerBlack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWOBannerBlack@3x.png"; sourceTree = "<group>"; };
 		8DCF6BFF1D3CD25300013054 /* TWOBannerBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWOBannerBlue@2x.png"; sourceTree = "<group>"; };
 		8DCF6C001D3CD25300013054 /* TWOBannerBlue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWOBannerBlue@3x.png"; sourceTree = "<group>"; };
+		8DD08F111D4074550073D5A4 /* TWOUseRedBagCellM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOUseRedBagCellM.h; sourceTree = "<group>"; };
+		8DD08F121D4074550073D5A4 /* TWOUseRedBagCellM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOUseRedBagCellM.m; sourceTree = "<group>"; };
+		8DD08F131D4074550073D5A4 /* TWOUseRedBagCellM.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TWOUseRedBagCellM.xib; sourceTree = "<group>"; };
 		8DD180921BD72C1300F71CEA /* GetMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyViewController.h; sourceTree = "<group>"; };
 		8DD180931BD72C1300F71CEA /* GetMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyViewController.m; sourceTree = "<group>"; };
 		8DD180951BD72E5900F71CEA /* GetMoneyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyTableViewCell.h; sourceTree = "<group>"; };
@@ -6048,6 +6053,9 @@
 		81F8EFEE1CF84B7400DC78FF /* 加息券 */ = {
 			isa = PBXGroup;
 			children = (
+				8DD08F111D4074550073D5A4 /* TWOUseRedBagCellM.h */,
+				8DD08F121D4074550073D5A4 /* TWOUseRedBagCellM.m */,
+				8DD08F131D4074550073D5A4 /* TWOUseRedBagCellM.xib */,
 				81F8EFEF1CF84BAB00DC78FF /* TWOWaitCashCell.h */,
 				81F8EFF01CF84BAB00DC78FF /* TWOWaitCashCell.m */,
 				81F8EFF11CF84BAB00DC78FF /* TWOWaitCashCell.xib */,
@@ -8424,6 +8432,7 @@
 				81E6482E1D3F817500B06D2B /* two默认头像@2x.png in Resources */,
 				8D3EEA121C27AB400031F7C9 /* 工商银行@2x.png in Resources */,
 				8D6E46A11C9B9ECA00F0F5B7 /* loginViewUP@3x.png in Resources */,
+				8DD08F151D4074550073D5A4 /* TWOUseRedBagCellM.xib in Resources */,
 				8D5AEB391BC8D2F3004FBDD3 /* SelectionV.xib in Resources */,
 				8DEDE1CD1BCCFF44008086D3 /* iconfont_complete@3x.png in Resources */,
 				8DEDE1E51BCD0040008086D3 /* greenyuan@2x.png in Resources */,
@@ -9324,6 +9333,7 @@
 				81F8EFEA1CF839CB00DC78FF /* TWOAddInterestViewController.m in Sources */,
 				81A233541CBF65BC009D43D3 /* InviteRecordCell.m in Sources */,
 				818523C21BE35BDB002FC653 /* MendLoginViewController.m in Sources */,
+				8DD08F141D4074550073D5A4 /* TWOUseRedBagCellM.m in Sources */,
 				8D6E46771C9936C600F0F5B7 /* myHadCastTableViewCell.m in Sources */,
 				812F6BEE1BD8ED310000D8E9 /* MessageViewController.m in Sources */,
 				8184EC3B1BCCD0FE003F440D /* ContentCell.m in Sources */,
