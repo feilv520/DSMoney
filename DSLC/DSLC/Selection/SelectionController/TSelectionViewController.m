@@ -166,24 +166,30 @@
     myDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     if (button.tag == 6000 || button.tag == 7000) {
-        if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
-            return ;
-        }
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"升级中..."];
+        return;
         
-        TSignInViewController *signInVC = [[TSignInViewController alloc] init];
-        signInVC.tokenString = [myDic objectForKey:@"token"];
-        [self.navigationController pushViewController:signInVC animated:YES];
+//        if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+//            return ;
+//        }
+//        
+//        TSignInViewController *signInVC = [[TSignInViewController alloc] init];
+//        signInVC.tokenString = [myDic objectForKey:@"token"];
+//        [self.navigationController pushViewController:signInVC animated:YES];
         
     } else if (button.tag == 6001 || button.tag == 7001) {
-        if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
-            return ;
-        }
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"升级中..."];
+        return;
         
-        TBigTurntableViewController *bigTurntable = [[TBigTurntableViewController alloc] init];
-        bigTurntable.tokenString = [myDic objectForKey:@"token"];
-        [self.navigationController pushViewController:bigTurntable animated:YES];
+//        if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+//            return ;
+//        }
+//        
+//        TBigTurntableViewController *bigTurntable = [[TBigTurntableViewController alloc] init];
+//        bigTurntable.tokenString = [myDic objectForKey:@"token"];
+//        [self.navigationController pushViewController:bigTurntable animated:YES];
         
     } else if (button.tag == 6002 || button.tag == 7002){
         
@@ -201,9 +207,12 @@
 //            return ;
 //        }
         
-        TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
-        baoji.tokenString = [myDic objectForKey:@"token"];
-        pushVC(baoji);
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"升级中..."];
+        return;
+        
+//        TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
+//        baoji.tokenString = [myDic objectForKey:@"token"];
+//        pushVC(baoji);
     }
 }
 

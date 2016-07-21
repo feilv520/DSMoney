@@ -476,9 +476,12 @@
         
     } else if (indexPath.row == 2) {
         
-        [MobClick event:@"ThirdRedBag"];
-        TheThirdRedBagController *myRedBagVC = [[TheThirdRedBagController alloc] init];
-        [self.navigationController pushViewController:myRedBagVC animated:YES];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"升级中..."];
+        return;
+        
+//        [MobClick event:@"ThirdRedBag"];
+//        TheThirdRedBagController *myRedBagVC = [[TheThirdRedBagController alloc] init];
+//        [self.navigationController pushViewController:myRedBagVC animated:YES];
         
     } else if (indexPath.row == 0) {
         
