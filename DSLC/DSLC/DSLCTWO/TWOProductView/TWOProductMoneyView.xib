@@ -33,16 +33,24 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Pb-iu-Pkm">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Pb-iu-Pkm">
                     <rect key="frame" x="192" y="20" width="173" height="25"/>
                     <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="8ze-jP-gRa"/>
+                        <constraint firstAttribute="width" constant="173" id="GAf-zB-YAj"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="23"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="理财期限" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXm-i2-FFK">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="理财期限" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXm-i2-FFK">
                     <rect key="frame" x="192" y="45" width="173" height="21"/>
                     <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="3U3-Lm-egY"/>
+                        <constraint firstAttribute="width" constant="173" id="N6M-tR-PPV"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -50,6 +58,12 @@
             </subviews>
             <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="bXm-i2-FFK" firstAttribute="top" secondItem="7Pb-iu-Pkm" secondAttribute="bottom" id="8xx-4O-lZm"/>
+                <constraint firstAttribute="trailing" secondItem="7Pb-iu-Pkm" secondAttribute="trailing" constant="10" id="eAt-Za-Yj3"/>
+                <constraint firstItem="7Pb-iu-Pkm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="fwS-LW-h1l"/>
+                <constraint firstAttribute="trailing" secondItem="bXm-i2-FFK" secondAttribute="trailing" constant="10" id="z4i-M7-OlD"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="dayLabel" destination="7Pb-iu-Pkm" id="7Sb-No-HWl"/>

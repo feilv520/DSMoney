@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *moneyTextField;
 @property (weak, nonatomic) IBOutlet UILabel *yqSLabel;
 @property (weak, nonatomic) IBOutlet UIView *moneyView;
+@property (weak, nonatomic) IBOutlet UILabel *limitMoneyLabel;
 
 @end

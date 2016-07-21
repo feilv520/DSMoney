@@ -83,6 +83,8 @@
         [self.navigationItem setTitle:@"提现"];
     } else if ([self.fuctionName containsString:@"chinaPnrTrade"]) {
         [self.navigationItem setTitle:@"购买"];
+    } else if ([self.fuctionName isEqualToString:@"bindCard"]) {
+        [self.navigationItem setTitle:@"绑卡"];
     } else {
         [self.navigationItem setTitle:@"开户"];
     }
@@ -120,12 +122,17 @@
     } else if ([self.fuctionName containsString:@"chinaPnrTrade"]) {
         [self.navigationItem setTitle:@"购买"];
         [self.navigationController popToViewController:[ctrlArray objectAtIndex:1] animated:YES];
+    } else if ([self.fuctionName isEqualToString:@"bindCard"]) {
+        [self.navigationItem setTitle:@"绑卡"];
+        [self.navigationController popToViewController:[ctrlArray objectAtIndex:1] animated:YES];
     } else {
         [self.navigationItem setTitle:@"开户"];
         [self.navigationController popViewControllerAnimated:YES];
     }
     
     [self checkUserInfo];
+    // 个人信息界面刷新
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfoFuction" object:nil];
     // 刷新产品列表

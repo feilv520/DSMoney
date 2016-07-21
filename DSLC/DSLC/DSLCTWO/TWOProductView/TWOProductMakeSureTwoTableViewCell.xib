@@ -178,6 +178,7 @@
             <connections>
                 <outlet property="accountMoney" destination="FJa-OU-Cve" id="bHC-f7-Bde"/>
                 <outlet property="czButton" destination="rPU-s1-0rV" id="i92-jF-Igd"/>
+                <outlet property="limitMoneyLabel" destination="9Aj-vC-qBO" id="lp1-Pl-C3R"/>
                 <outlet property="moneyTextField" destination="Hv9-50-Xfl" id="ZP4-ev-IWJ"/>
                 <outlet property="moneyView" destination="aU0-Rd-eft" id="RPZ-VT-Bd8"/>
                 <outlet property="residueLabel" destination="YJS-sp-s0w" id="x71-cr-Ldv"/>

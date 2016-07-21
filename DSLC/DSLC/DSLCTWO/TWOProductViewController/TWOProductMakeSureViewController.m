@@ -302,8 +302,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"]){
+        
         return 1;
     } else {
+        
         return 2;
     }
 }
@@ -324,8 +326,13 @@
         
         if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"]){
             
+            
             TWOProductMakeSureTwoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseTwo"];
             
+            if ([[self.detailM.productType description] isEqualToString:@"3"]) {
+                cell.limitMoneyLabel.text = @"限额";
+            }
+
             accountDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
             
             if ([accountDic objectForKey:@"accBalance"] == nil){
@@ -340,10 +347,12 @@
             
             cell.residueLabel.text = [NSString stringWithFormat:@"%@元",self.limitMoney];
             
-            cell.inputMoneyTextField.tag = 9283;
-            cell.inputMoneyTextField.textColor = [UIColor findZiTiColor];
-            cell.inputMoneyTextField.tintColor = [UIColor grayColor];
-            cell.inputMoneyTextField.delegate = self;
+            cell.moneyTextField.textColor = [UIColor findZiTiColor];
+            cell.moneyTextField.tintColor = [UIColor grayColor];
+
+            [cell.czButton addTarget:self action:@selector(czAction:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [cell.upMoneyButton addTarget:self action:@selector(upAction:) forControlEvents:UIControlEventTouchUpInside];
             
             cell.upMoneyButton.hidden = YES;
             
@@ -595,7 +604,15 @@
         
         NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
         
-        textField.text = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
+        if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
+            textField.text = self.limitMoney;
+        } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
+            textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
+        } else if ([textField.text integerValue] >= [self.residueMoney integerValue]) {
+            textField.text = [NSString stringWithFormat:@"%ld",(long)[self.residueMoney integerValue]];
+        } else {
+            textField.text = [NSString stringWithFormat:@"%ld",(long)[textField.text integerValue] - number];
+        }
         
         allMoneyString = textField.text;
         
@@ -696,7 +713,13 @@
     
     NSString *accString = [[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
     
-    if ([[self.detailM amountMin] floatValue] > [allMoneyString floatValue]){
+    if ([[self.detailM.productType description] isEqualToString:@"9"]) {
+        if ([self.limitMoney isEqualToString:@"0"]) {
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资限额已用完,去投资其他产品吧"];
+            return;
+        }
+    } else if ([[self.detailM amountMin] floatValue] > [allMoneyString floatValue]){
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资金额不满足起投金额,请重新输入!"];
         return;
     } else if ([allMoneyString floatValue] > [accString floatValue]){
@@ -835,10 +858,10 @@
     
     NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
     
-    if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
-        textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
-    } else if ([textField.text integerValue] >= [self.limitMoney integerValue] && ([[self.detailM.productType description] isEqualToString:@"4"] || [[self.detailM.productType description] isEqualToString:@"9"] || [[self.detailM.productType description] isEqualToString:@"10"])) {
+    if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
         textField.text = self.limitMoney;
+    } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
+        textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
     } else if ([textField.text integerValue] >= [self.residueMoney integerValue]) {
         textField.text = [NSString stringWithFormat:@"%ld",(long)[self.residueMoney integerValue]];
     } else {

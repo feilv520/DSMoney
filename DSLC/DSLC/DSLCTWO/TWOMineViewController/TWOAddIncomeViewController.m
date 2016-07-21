@@ -16,11 +16,17 @@
 {
     UITableView *_tableView;
     LYCircleView *circle;
+    
+    NSMutableArray *kindsArray;
 }
 
-@property (nonatomic,strong) NSMutableArray *valueArray;
-@property (nonatomic,strong) NSMutableArray *colorArray;
-@property (nonatomic,strong) MCMPieChartView *pieChartView;
+@property (nonatomic, strong) NSMutableArray *profitArray;
+
+@property (nonatomic, strong) NSMutableArray *valueArray;
+@property (nonatomic, strong) NSMutableArray *colorArray;
+@property (nonatomic, strong) MCMPieChartView *pieChartView;
+
+@property (nonatomic, strong) NSString *totalMoneyString;
 
 @end
 
@@ -42,19 +48,13 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"累计收益"];
     
-    self.valueArray = [[NSMutableArray alloc] initWithObjects:
-                       [NSNumber numberWithInt:2],
-                       [NSNumber numberWithInt:3],
-                       [NSNumber numberWithInt:2],
-                       [NSNumber numberWithInt:3],
-                       nil];
+    self.valueArray = [NSMutableArray arrayWithObjects:@"0.00",@"0.00",@"0.00",@"0.00",@"0.00",nil];
     
-    self.colorArray = [NSMutableArray arrayWithObjects:
-                       [UIColor colorWithRed:63.0 / 225.0 green:166.0 / 225.0 blue:252.0 / 225.0 alpha:1.0],
-                       [UIColor colorWithRed:124.0 / 225.0 green:207.0 / 225.0 blue:253.0 / 225.0 alpha:1.0],
-                       [UIColor colorWithRed:93.0 / 225.0 green:203.0 / 225.0 blue:224.0 / 225.0 alpha:1.0],
-                       [UIColor colorWithRed:180.0 / 225.0 green:228.0 / 225.0 blue:254.0 / 225.0 alpha:1.0],
-                       nil];
+    self.profitArray = [NSMutableArray array];
+    
+    kindsArray = [NSMutableArray arrayWithArray:@[@"可用余额", @"在投资金", @"未结算预期收益", @"提现中",@"体现中",@"其他"]];
+    
+    self.colorArray = [NSMutableArray array];
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
@@ -131,7 +131,7 @@
     
     UILabel *labelIncome = [CreatView creatWithLabelFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 18 - (WIDTH_CONTROLLER_DEFAULT - 20 - 70 - 16 - 10), viewDown.frame.size.height/2 - 12, WIDTH_CONTROLLER_DEFAULT - 20 - 70 - 16 - 10, 24) backgroundColor:[UIColor whiteColor] textColor:[UIColor colorWithRed:253.0 / 225.0 green:135.0 / 225.0 blue:74.0 / 225.0 alpha:1.0] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:nil];
     [viewDown addSubview:labelIncome];
-    NSMutableAttributedString *incomeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", @"230,373.41"]];
+    NSMutableAttributedString *incomeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", self.totalMoneyString]];
     NSRange leftRange = NSMakeRange(0, [[incomeString string] rangeOfString:@"元"].location);
     [incomeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:leftRange];
     [labelIncome setAttributedText:incomeString];
@@ -139,44 +139,33 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return self.valueArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWOAddIncomeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     
-    NSArray *colorArray = @[[UIColor colorWithRed:63.0 / 225.0 green:166.0 / 225.0 blue:252.0 / 225.0 alpha:1.0], [UIColor colorWithRed:124.0 / 225.0 green:207.0 / 225.0 blue:253.0 / 225.0 alpha:1.0], [UIColor colorWithRed:93.0 / 225.0 green:203.0 / 225.0 blue:224.0 / 225.0 alpha:1.0], [UIColor colorWithRed:180.0 / 225.0 green:228.0 / 225.0 blue:254.0 / 225.0 alpha:1.0]];
-    cell.viewColor.backgroundColor = [colorArray objectAtIndex:indexPath.row];
+    cell.viewColor.backgroundColor = [self.colorArray objectAtIndex:indexPath.row];
     cell.viewColor.layer.cornerRadius = 2;
     cell.viewColor.layer.masksToBounds = YES;
     
-    NSArray *kindsArray = @[@"理财收益", @"红包收益", @"加息券收益", @"猴币收益"];
     cell.labelKinds.text = [kindsArray objectAtIndex:indexPath.row];
     cell.labelKinds.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.labelKinds.textColor = [UIColor findZiTiColor];
     
-    NSArray *moneyArray = @[@"1000.00元", @"0元", @"0元", @"1000.00元"];
-    cell.labelMoney.text = [moneyArray objectAtIndex:indexPath.row];
+    cell.labelMoney.text = [self.valueArray objectAtIndex:indexPath.row];
     cell.labelMoney.textColor = [UIColor zitihui];
     cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 35;
-}
-
-- (NSArray *)percentOfTheCircle{
-    return @[@"24", @"35",@"11", @"10", @"20"];
-}
-
-- (NSArray *)textStringOfCircle{
-    return @[@"IT", @"金融", @"土木工程", @"传统行业", @"其他"];
 }
 
 - (void)selectedFinish:(MCMPieChartView *)pieChartView index:(NSInteger)index percent:(float)per
@@ -193,11 +182,23 @@
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getMyProfit" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"responseObject = %@",responseObject);
-        
         [self loadingWithHidden:YES];
         
+        NSLog(@"responseObject = %@",responseObject);
+        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            NSArray *colorArray = @[[UIColor colorFromHexCode:@"046bc4"], [UIColor colorFromHexCode:@"0283de"], [UIColor colorFromHexCode:@"0ca5f0"],[UIColor colorFromHexCode:@"35a3ff"],[UIColor colorFromHexCode:@"30cdf6"],[UIColor colorFromHexCode:@"16b6cc"],[UIColor colorFromHexCode:@"3399cc"],[UIColor colorFromHexCode:@"79c6fc"],[UIColor colorFromHexCode:@"b4e4ff"],[UIColor colorFromHexCode:@"dbe5eb"]];
+            
+            self.profitArray = [responseObject objectForKey:@"Profit"];
+            
+            for (NSInteger i = 0; i < self.profitArray.count ; i++) {
+                [self.valueArray replaceObjectAtIndex:i withObject:[[DES3Util decrypt:[[self.profitArray objectAtIndex:i] objectForKey:@"profitMoney"]] stringByReplacingOccurrencesOfString:@"," withString:@""]];
+                [kindsArray replaceObjectAtIndex:i withObject:[[self.profitArray objectAtIndex:i] objectForKey:@"profitName"]];
+                [self.colorArray addObject:[colorArray objectAtIndex:i]];
+            }
+            
+            self.totalMoneyString = [DES3Util decrypt:[responseObject objectForKey:@"totalProfit"]];
             
             if ([[responseObject objectForKey:@"Profit"] count] == 0) {
                 [self noAddMoneyDataShow];
@@ -209,6 +210,11 @@
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.pieChartView reloadChart];
+        });
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -223,13 +229,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
