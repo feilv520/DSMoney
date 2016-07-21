@@ -7,7 +7,7 @@
 //
 
 #import "TWORedBagViewController.h"
-#import "TWOUseRedBagCellM.h"
+#import "TWOUseRedBagCellMine.h"
 #import "TWOHistoryRedBagViewController.h"
 #import "RedBagExplainViewController.h"
 #import "TWOAddInterestViewController.h"
@@ -190,7 +190,7 @@
     _tableView.tag = 700;
     _tableView.separatorColor = [UIColor clearColor];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
-    [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCellM" bundle:nil] forCellReuseIdentifier:@"reuseRedBag"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCellMine" bundle:nil] forCellReuseIdentifier:@"reuseRedBag"];
     
     [self addTableViewWithFooter:_tableView];
     [self redBagViewHeadShow];
@@ -310,7 +310,7 @@
 //            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"owowo"];
 //        }
         
-        TWOUseRedBagCellM * cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        TWOUseRedBagCellMine * cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         if (!cell)
         {
             [tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
