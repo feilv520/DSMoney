@@ -7,7 +7,7 @@
 //
 
 #import "TWOUseRedBagViewController.h"
-#import "TWOUseRedBagCell.h"
+#import "TWOUseRedBagCellMine.h"
 #import "TWORedBagModel.h"
 
 @interface TWOUseRedBagViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -66,7 +66,7 @@
     mainTableView.separatorColor = [UIColor clearColor];
     mainTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 10)];
     mainTableView.tableFooterView.backgroundColor = [UIColor clearColor];
-    [mainTableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [mainTableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCellMine" bundle:nil] forCellReuseIdentifier:@"reuseRedBag"];
     
     [self addTableViewWithFooter:mainTableView];
 }
@@ -83,7 +83,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TWOUseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse" forIndexPath:indexPath];
+    TWOUseRedBagCellMine *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseRedBag"];
     
     TWORedBagModel *model = [moneyArray objectAtIndex:indexPath.row];
     

@@ -284,9 +284,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        if ([[self.detailM.productType description] isEqualToString:@"3"]){
+        if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"]){
             
-            return 100;
+            return 200;
         } else if ([[self.detailM.productType description] isEqualToString:@"1"] || [[self.detailM.productType description] isEqualToString:@"5"]|| [[self.detailM.productType description] isEqualToString:@"6"]|| [[self.detailM.productType description] isEqualToString:@"7"]|| [[self.detailM.productType description] isEqualToString:@"8"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
             
             return 150;
@@ -301,7 +301,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if ([[self.detailM.productType description] isEqualToString:@"3"]){
+    if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"]){
         return 1;
     } else {
         return 2;
@@ -322,35 +322,47 @@
     
     if (indexPath.section == 0) {
         
-        if ([[self.detailM.productType description] isEqualToString:@"3"]){
+        if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"]){
             
-            UIButton *sureButton = (UIButton *)[sureView viewWithTag:9574];
+            TWOProductMakeSureTwoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseTwo"];
             
-            sureButton.backgroundColor = [UIColor profitColor];
-            sureButton.enabled = YES;
+            accountDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
             
-            TWOProductMakeSureThreeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseThree"];
+            if ([accountDic objectForKey:@"accBalance"] == nil){
+                
+                cell.accountMoney.text = @"0元";
+            } else {
+                
+                NSString *accString = [[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
+                
+                cell.accountMoney.text = [NSString stringWithFormat:@"%@元",accString];
+            }
             
-            [cell.inputMoneyTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+            cell.residueLabel.text = [NSString stringWithFormat:@"%@元",self.limitMoney];
             
             cell.inputMoneyTextField.tag = 9283;
             cell.inputMoneyTextField.textColor = [UIColor findZiTiColor];
             cell.inputMoneyTextField.tintColor = [UIColor grayColor];
             cell.inputMoneyTextField.delegate = self;
             
-//            cell.inputMoneyTextField.placeholder = [NSString stringWithFormat:@"%@元起投,每%@元递增",[self.detailM amountMin],[self.detailM amountIncrease]];
+            cell.upMoneyButton.hidden = YES;
             
-            cell.inputMoneyTextField.text = @"5000";
+            cell.moneyView.layer.borderWidth = 1;
+            cell.moneyView.layer.borderColor = [[UIColor colorFromHexCode:@"d3ebfc"] CGColor];
             
-            cell.inputMoneyTextField.enabled = NO;
+            [cell.moneyTextField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
             
-            cell.yqMoneyLabel.text = @"4.93元";
+            cell.moneyTextField.tag = 9283;
+            
+            cell.moneyTextField.placeholder = [NSString stringWithFormat:@"%d元起投,每%d元递增",[[self.detailM amountMin] intValue],[[self.detailM amountIncrease] intValue]];
+            
+            cell.moneyTextField.delegate = self;
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             return cell;
             
-        } else if ([[self.detailM.productType description] isEqualToString:@"1"] || [[self.detailM.productType description] isEqualToString:@"5"]|| [[self.detailM.productType description] isEqualToString:@"6"]|| [[self.detailM.productType description] isEqualToString:@"7"]|| [[self.detailM.productType description] isEqualToString:@"8"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
+        } else if ([[self.detailM.productType description] isEqualToString:@"1"] || [[self.detailM.productType description] isEqualToString:@"5"]|| [[self.detailM.productType description] isEqualToString:@"6"]|| [[self.detailM.productType description] isEqualToString:@"7"]|| [[self.detailM.productType description] isEqualToString:@"8"]) {
             
             TWOMakeSureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reusef"];
             
@@ -622,15 +634,25 @@
     
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
     
-    if ([[self.detailM.productType description] isEqualToString:@"3"]){
+    if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"]){
         
-        TWOProductMakeSureThreeTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
+//        TWOProductMakeSureThreeTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
+//        
+//        cell.yqMoneyLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod] floatValue] / 36500.0];
+//        
+//        syString = cell.yqMoneyLabel.text;
+
+        TWOProductMakeSureTwoTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
         
-        cell.yqMoneyLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod] floatValue] / 36500.0];
+        cell.yqSLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod] floatValue] / 36500.0];
         
-        syString = cell.yqMoneyLabel.text;
+        syString = cell.yqSLabel.text;
         
-    } else if ([[self.detailM.productType description] isEqualToString:@"1"] || [[self.detailM.productType description] isEqualToString:@"5"]|| [[self.detailM.productType description] isEqualToString:@"6"]|| [[self.detailM.productType description] isEqualToString:@"7"]|| [[self.detailM.productType description] isEqualToString:@"8"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
+        NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
+        
+        allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
+        
+    } else if ([[self.detailM.productType description] isEqualToString:@"1"] || [[self.detailM.productType description] isEqualToString:@"5"]|| [[self.detailM.productType description] isEqualToString:@"6"]|| [[self.detailM.productType description] isEqualToString:@"7"]|| [[self.detailM.productType description] isEqualToString:@"8"]) {
         
         TWOMakeSureTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
         
@@ -642,18 +664,6 @@
         
         allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
         
-    } else {
-        
-        TWOProductMakeSureTwoTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
-        
-        cell.yqSLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod] floatValue] / 36500.0];
-        
-        syString = cell.yqSLabel.text;
-        
-        NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
-        
-        allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
-    
     }
     
     monkeyString = @"0个";
@@ -827,7 +837,9 @@
     
     if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
         textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
-    } else if ([textField.text integerValue] >= [self.residueMoney integerValue]){
+    } else if ([textField.text integerValue] >= [self.limitMoney integerValue] && ([[self.detailM.productType description] isEqualToString:@"4"] || [[self.detailM.productType description] isEqualToString:@"9"] || [[self.detailM.productType description] isEqualToString:@"10"])) {
+        textField.text = self.limitMoney;
+    } else if ([textField.text integerValue] >= [self.residueMoney integerValue]) {
         textField.text = [NSString stringWithFormat:@"%ld",(long)[self.residueMoney integerValue]];
     } else {
         textField.text = [NSString stringWithFormat:@"%ld",(long)[textField.text integerValue] - number];
@@ -867,74 +879,73 @@
 
 // 提示框确认按钮
 - (void)sureBAction:(id)sender{
+//    
+//    if ([[self.detailM.productType description] isEqualToString:@"3"]) {
+//        
+//        AppDelegate *app = [[UIApplication sharedApplication] delegate];
+//        
+//        hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
+//        
+//        NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"member.plist"]];
+//        
+//        NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@",[memberDic objectForKey:@"token"],[[self.detailM productId] description],[allMoneyString description],@"1",@"iOS"];
+//        
+//        NSString *md5SignString = [NSString md5String:signString];
+//        
+//        NSLog(@"md5SignString = %@",md5SignString);
+//        
+//        NSDictionary *parameter = @{@"productId":[self.detailM productId],@"orderMoney":allMoneyString,@"payType":@"1",@"clientType":@"iOS",@"token":[memberDic objectForKey:@"token"],@"sign":md5SignString};
+//        
+//        [[MyAfHTTPClient sharedClient] postWithURLString:@"trade/buyNewHandProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+//            
+//            NSLog(@"产品详情ppppppppppppppp%@",responseObject);
+//            
+//            [hud hide:YES];
+//            
+//            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
+//                TWOProductPaySuccessViewController *paySuccessVC = [[TWOProductPaySuccessViewController alloc] init];
+//                paySuccessVC.allMoneyString = allMoneyString;
+//                paySuccessVC.syString = syString;
+//                paySuccessVC.qDayString = qDayString;
+//                paySuccessVC.dDayString = dDayString;
+//                paySuccessVC.monkeyString = monkeyString;
+//                pushVC(paySuccessVC);
+//            } else {
+//                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+//            }
+//            
+//        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//            
+//            NSLog(@"%@", error);
+//            
+//        }];
+//
+//    } else {
+//    
+//    }
+    NSString *redPackIdString = @"0";
+    NSString *incrIdString = @"0";
     
-    if ([[self.detailM.productType description] isEqualToString:@"3"]) {
-        
-        AppDelegate *app = [[UIApplication sharedApplication] delegate];
-        
-        hud = [MBProgressHUD showHUDAddedTo:app.window animated:YES];
-        
-        NSDictionary *memberDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"member.plist"]];
-        
-        NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@",[memberDic objectForKey:@"token"],[[self.detailM productId] description],[allMoneyString description],@"1",@"iOS"];
-        
-        NSString *md5SignString = [NSString md5String:signString];
-        
-        NSLog(@"md5SignString = %@",md5SignString);
-        
-        NSDictionary *parameter = @{@"productId":[self.detailM productId],@"orderMoney":allMoneyString,@"payType":@"1",@"clientType":@"iOS",@"token":[memberDic objectForKey:@"token"],@"sign":md5SignString};
-        
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"trade/buyNewHandProduct" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-            
-            NSLog(@"产品详情ppppppppppppppp%@",responseObject);
-            
-            [hud hide:YES];
-            
-            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                TWOProductPaySuccessViewController *paySuccessVC = [[TWOProductPaySuccessViewController alloc] init];
-                paySuccessVC.allMoneyString = allMoneyString;
-                paySuccessVC.syString = syString;
-                paySuccessVC.qDayString = qDayString;
-                paySuccessVC.dDayString = dDayString;
-                paySuccessVC.monkeyString = monkeyString;
-                pushVC(paySuccessVC);
-            } else {
-                [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-            NSLog(@"%@", error);
-            
-        }];
-
-    } else {
-        
-        NSString *redPackIdString = @"0";
-        NSString *incrIdString = @"0";
-        
-        if (packetModel != nil) {
-            redPackIdString = [packetModel welfareId];
-        }
-        
-        if (incrModel != nil) {
-            incrIdString = [incrModel welfareId];
-        }
-        
-        NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",[self.flagDic objectForKey:@"token"],[[self.detailM productId] description],[allMoneyString description],@"1",redPackIdString,incrIdString,@"iOS"];
-        
-        NSString *md5SignString = [NSString md5String:signString];
-        
-        TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
-        productHuiFuVC.fuctionName = @"trade/chinaPnrTrade";
-        
-        productHuiFuVC.tradeString = [NSString stringWithFormat:@"productId=%@&packetId=%@&incrId=%@&orderMoney=%@&payType=1&clientType=iOS&token=%@&sign=%@",[[self.detailM productId] description],redPackIdString,incrIdString,[allMoneyString description],[self.flagDic objectForKey:@"token"],md5SignString];
-        
-        NSLog(@"%@",productHuiFuVC.tradeString);
-        
-        pushVC(productHuiFuVC);
+    if (packetModel != nil) {
+        redPackIdString = [packetModel welfareId];
     }
     
+    if (incrModel != nil) {
+        incrIdString = [incrModel welfareId];
+    }
+    
+    NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",[self.flagDic objectForKey:@"token"],[[self.detailM productId] description],[allMoneyString description],@"1",redPackIdString,incrIdString,@"iOS"];
+    
+    NSString *md5SignString = [NSString md5String:signString];
+    
+    TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+    productHuiFuVC.fuctionName = @"trade/chinaPnrTrade";
+    
+    productHuiFuVC.tradeString = [NSString stringWithFormat:@"productId=%@&packetId=%@&incrId=%@&orderMoney=%@&payType=1&clientType=iOS&token=%@&sign=%@",[[self.detailM productId] description],redPackIdString,incrIdString,[allMoneyString description],[self.flagDic objectForKey:@"token"],md5SignString];
+    
+    NSLog(@"%@",productHuiFuVC.tradeString);
+    
+    pushVC(productHuiFuVC);
     
 }
 

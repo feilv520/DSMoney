@@ -210,7 +210,11 @@
         cell.outPay.hidden = NO;
         cell.quanView.hidden = YES;
         
+        cell.contentView.alpha = 0.5;
+        
     } else {
+        
+        cell.contentView.alpha = 1.0;
         
         cell.outPay.hidden = YES;
         cell.quanView.hidden = NO;

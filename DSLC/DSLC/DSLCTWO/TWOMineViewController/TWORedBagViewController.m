@@ -7,7 +7,7 @@
 //
 
 #import "TWORedBagViewController.h"
-#import "TWOUseRedBagCell.h"
+#import "TWOUseRedBagCellMine.h"
 #import "TWOHistoryRedBagViewController.h"
 #import "RedBagExplainViewController.h"
 #import "TWOAddInterestViewController.h"
@@ -78,8 +78,8 @@
     
     [self navigationTitleShow];
     [self commonShow];
-    [self getMyRedPacketListFuction];
     [self getMyIncreaseListFuction];
+    [self getMyRedPacketListFuction];
     
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
@@ -190,7 +190,7 @@
     _tableView.tag = 700;
     _tableView.separatorColor = [UIColor clearColor];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 100)];
-    [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+    [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCellMine" bundle:nil] forCellReuseIdentifier:@"reuseRedBag"];
     
     [self addTableViewWithFooter:_tableView];
     [self redBagViewHeadShow];
@@ -304,7 +304,8 @@
 {
     if (tableView == _tableView) {
         
-        TWOUseRedBagCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        TWOUseRedBagCellMine *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseRedBag"];
+        
         cell.imagePicture.image = [UIImage imageNamed:@"twohongbao"];
         
         TWORedBagModel *redBagModel = [redBagArray objectAtIndex:indexPath.row];
@@ -379,7 +380,7 @@
 //        加息券待兑付状态
         if ([[[jiaXiModel status] description] isEqualToString:@"1"]) {
             
-            TWOWaitCashCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseTWO"];
+            TWOWaitCashCell *cell = [_tableViewJia dequeueReusableCellWithIdentifier:@"reuseTWO"];
             cell.imageWait.image = [UIImage imageNamed:@"待兑换加息券ios"];
             
             NSMutableAttributedString *percentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", [jiaXiModel incrMoney]]];
@@ -453,7 +454,7 @@
             
         } else {
             
-            TWIJiaXiQuanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseJia"];
+            TWIJiaXiQuanCell *cell = [_tableViewJia dequeueReusableCellWithIdentifier:@"reuseJia"];
             cell.imagePicture.image = [UIImage imageNamed:@"jiaxijuan"];
             
             NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%", jiaXiModel.incrMoney]];
