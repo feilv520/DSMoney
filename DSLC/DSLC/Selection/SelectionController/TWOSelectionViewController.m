@@ -175,13 +175,17 @@
         NSLog(@"首页公告::::::::%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *dataArr = [responseObject objectForKey:@"noticeInfo"];
-            for (NSDictionary *dataDic in dataArr) {
-                messageModel = [[TWOMessageModel alloc] init];
-                [messageModel setValuesForKeysWithDictionary:dataDic];
-                [noticeArray addObject:messageModel];
+            
+            if (dataArr.count != 0) {
+                
+                for (NSDictionary *dataDic in dataArr) {
+                    messageModel = [[TWOMessageModel alloc] init];
+                    [messageModel setValuesForKeysWithDictionary:dataDic];
+                    [noticeArray addObject:messageModel];
+                }
+                [self noticeContentShow];
             }
             
-            [self noticeContentShow];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -297,7 +301,7 @@
     _scrollViewNotice.delegate = self;
     _scrollViewNotice.userInteractionEnabled = YES;
     
-    for (int i = 1; i <= 3; i++) {
+    for (int i = 1; i <= noticeArray.count; i++) {
         UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 30 * i, _scrollViewNotice.frame.size.width - 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:i - 1] title]];
         [_scrollViewNotice addSubview:labelNotice];
         labelNotice.userInteractionEnabled = YES;
@@ -315,13 +319,23 @@
     labelLast.exclusiveTouch = YES;
     [labelLast addGestureRecognizer:gensture];
     
-    everyNum = 3 + 2;
-    secondsNum = 3;
+    if (noticeArray.count >= 3){
+        everyNum = 3 + 2;
+        secondsNum = 3;
+    } else {
+        everyNum = noticeArray.count + 2;
+        secondsNum = noticeArray.count;
+    }
 }
 
 - (void)scrollViewTapAction
 {
-    messageModel = [noticeArray objectAtIndex:3 - secondsNum];
+    if (noticeArray.count >= 3) {
+        messageModel = [noticeArray objectAtIndex:3 - secondsNum];
+    } else {
+        messageModel = [noticeArray objectAtIndex:noticeArray.count - secondsNum];
+    }
+    
     TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
     messageDetailVC.messageID = [messageModel ID];
     pushVC(messageDetailVC);
@@ -755,10 +769,20 @@
 {
     if (scrollView == _scrollViewNotice) {
         
-        if (_scrollViewNotice.contentOffset.y == 120) {
-            [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
-            secondsNum = 3;
+        if (noticeArray.count >= 3) {
+            
+            if (_scrollViewNotice.contentOffset.y == 120) {
+                [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
+                secondsNum = 3;
+            }
+        } else {
+            
+            if (_scrollViewNotice.contentOffset.y == noticeArray.count * 30 + 30) {
+                [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
+                secondsNum = 3;
+            }
         }
+        
         
     } else {
         
@@ -952,6 +976,8 @@
             [self getProductList];
         }
         
+        noNetworkMonkey.hidden = YES;
+        reloadButton.hidden = YES;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         [self loadingWithHidden:YES];
@@ -971,21 +997,32 @@
 
 - (void)noNetworkView {
     if (noNetworkMonkey == nil) {
-        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 306/2/2, 100, 306/2, 246/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoPower"]];
+        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 413/2.0/2.0, 164, 413/2.0, 268/2.0) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoPower"]];
     }
     [self.view addSubview:noNetworkMonkey];
     
     if (reloadButton == nil) {
         
-        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 50, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:nil];
+        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 55, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:@"重新加载"];
         
         reloadButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        [reloadButton setBackgroundImage:[UIImage imageNamed:@"TWOrefrush"] forState:UIControlStateNormal];
-        [reloadButton setBackgroundImage:[UIImage imageNamed:@"TWOrefrush"] forState:UIControlStateHighlighted];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateHighlighted];
         
         [reloadButton addTarget:self action:@selector(getAdvList) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view addSubview:reloadButton];
+    
+    // 判断是否存在isLogin.plist文件
+    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+        [FileOfManage createWithFile:@"isLogin.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    } else {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    }
+    
 }
 
 - (void)networkDidSetup:(NSNotification *)notification {

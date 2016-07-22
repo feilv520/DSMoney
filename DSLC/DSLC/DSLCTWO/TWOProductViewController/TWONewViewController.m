@@ -470,12 +470,14 @@
                 
                 [self noDataShowMoney];
                 _tableView.hidden = YES;
+                imageMonkey.hidden = NO;
                 return ;
             } else {
                 
-                imageMonkey.hidden = NO;
+                imageMonkey.hidden = YES;
                 noNetworkMonkey.hidden = YES;
                 reloadButton.hidden = YES;
+                _tableView.hidden = NO;
             }
             
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
@@ -742,13 +744,13 @@
 
 - (void)noNetworkView {
     if (noNetworkMonkey == nil) {
-        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 306/2/2, 100, 306/2, 246/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoPower"]];
+        noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 413/2.0/2.0, 100, 413/2.0, 268/2.0) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoPower"]];
     }
     [self.view addSubview:noNetworkMonkey];
     
     if (reloadButton == nil) {
         
-        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 50, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:@"重新加载"];
+        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 55, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:@"重新加载"];
         
         reloadButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
@@ -757,6 +759,17 @@
         [reloadButton addTarget:self action:@selector(getProductList) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view addSubview:reloadButton];
+    
+    // 判断是否存在isLogin.plist文件
+    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+        [FileOfManage createWithFile:@"isLogin.plist"];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    } else {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

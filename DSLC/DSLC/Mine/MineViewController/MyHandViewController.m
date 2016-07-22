@@ -246,63 +246,69 @@
                 NSLog(@"%@",handString);
                 if ([path isEqualToString:handString]) {
                     
-                    //        2.0首页
-                    TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
-                    UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
-                    
-                    //        2.0产品
-                    TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
-                    UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
-                    
-                    //        2.0发现
-                    TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
-                    UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
-                    
-                    //        2.0我的
-                    TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-                    //        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
-                    UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
-                    
-                    //        2.0
-                    viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
-                    
-                    ////        2.0
-                    butGrayArr = @[@"selection_gray", @"production_gray", @"found_gray", @"mine_gray"];
-                    butColorArr = @[@"selection", @"production", @"found", @"mine"];
-                    
-                    //        for循环4要改成3***********************************
-                    buttonArr = [NSMutableArray array];
-                    for (int i = 0; i < 4; i++) {
+                    [UIView animateWithDuration:1.0f animations:^{
                         
-                        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-                        //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
-                        //        button.imageView.backgroundColor = [UIColor whiteColor];
-                        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butGrayArr objectAtIndex:i]]] forState:UIControlStateNormal];
-                        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butColorArr objectAtIndex:i]]] forState:UIControlStateSelected];
-                        //       点击保持高亮状态,没有闪动的效果
-                        [button setShowsTouchWhenHighlighted:YES];
-                        [buttonArr addObject:button];
-                    }
-                    
-                    self.tabBarVC = [[KKTabBarViewController alloc] init];
-                    //    存放试图控制器
-                    [self.tabBarVC setControllerArray:viewControllerArr];
-                    //    存放tabBar上的按钮
-                    [self.tabBarVC setTabButtonArray:buttonArr];
-                    //    设置tabBar的高度 默认为50
-                    [self.tabBarVC setTabBarHeight:35];
-                    //    设置是否可以手势滑动切换模块 默认为YES
-                    [self.tabBarVC setSuppurtGestureTransition:NO];
-                    //    设置点击按钮有无翻页效果 默认有
-                    [self.tabBarVC setTransitionAnimated:NO];
-                    
-                    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                    app.tabBarVC = self.tabBarVC;
-                    app.window.rootViewController = self.tabBarVC;
-                    
-                    if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]){
-                        [self loginFuction];
-                    }
+                        self.view.alpha = 0.0;
+                    } completion:^(BOOL finished) {
+                        
+                        //        2.0首页
+                        TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
+                        UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
+                        
+                        //        2.0产品
+                        TWOProductViewController *twoproductVC = [[TWOProductViewController alloc] init];
+                        UINavigationController *twoNavigation = [[UINavigationController alloc] initWithRootViewController:twoproductVC];
+                        
+                        //        2.0发现
+                        TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
+                        UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
+                        
+                        //        2.0我的
+                        TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
+                        //        TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+                        UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
+                        
+                        //        2.0
+                        viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
+                        
+                        ////        2.0
+                        butGrayArr = @[@"selection_gray", @"production_gray", @"found_gray", @"mine_gray"];
+                        butColorArr = @[@"selection", @"production", @"found", @"mine"];
+                        
+                        //        for循环4要改成3***********************************
+                        buttonArr = [NSMutableArray array];
+                        for (int i = 0; i < 4; i++) {
+                            
+                            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+                            //       button的frame值在第三方中已设置好,默认为50,如有设置需求,需手动改
+                            //        button.imageView.backgroundColor = [UIColor whiteColor];
+                            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butGrayArr objectAtIndex:i]]] forState:UIControlStateNormal];
+                            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", [butColorArr objectAtIndex:i]]] forState:UIControlStateSelected];
+                            //       点击保持高亮状态,没有闪动的效果
+                            [button setShowsTouchWhenHighlighted:YES];
+                            [buttonArr addObject:button];
+                        }
+                        
+                        self.tabBarVC = [[KKTabBarViewController alloc] init];
+                        //    存放试图控制器
+                        [self.tabBarVC setControllerArray:viewControllerArr];
+                        //    存放tabBar上的按钮
+                        [self.tabBarVC setTabButtonArray:buttonArr];
+                        //    设置tabBar的高度 默认为50
+                        [self.tabBarVC setTabBarHeight:35];
+                        //    设置是否可以手势滑动切换模块 默认为YES
+                        [self.tabBarVC setSuppurtGestureTransition:NO];
+                        //    设置点击按钮有无翻页效果 默认有
+                        [self.tabBarVC setTransitionAnimated:NO];
+                        
+                        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                        app.tabBarVC = self.tabBarVC;
+                        app.window.rootViewController = self.tabBarVC;
+                        
+                        if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]){
+                            [self loginFuction];
+                        }
+                    }];
                     
                 } else {
                     [ProgressHUD showMessage:[NSString stringWithFormat:@"手势密码错误，请重新输入，您还有%ld次机会",(long)failCount] Width:100 High:20];

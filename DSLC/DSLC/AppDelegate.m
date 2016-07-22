@@ -178,8 +178,7 @@
     NSLog(@"userDIC = %@",userDIC);
     
     NSString *handFlag;
-//    a6673d8a1fbb4a1bfb7f138e734e696078b30934
-//    0cef96b281d61943724a4a6ec11c591ef8742774
+
     if (userDIC == nil) {
         handFlag = @"NO";
     } else {
@@ -196,19 +195,6 @@
     
     if ([[self.flagDic objectForKey:@"FristOpen"] isEqualToString:@"NO"] ) {
         if ([loginFlag isEqualToString:@"NO"] || [handFlag isEqualToString:@"NO"]) {
-            
-    ////        1.0首页
-    //        TSelectionViewController *selectionVC = [[TSelectionViewController alloc] init];
-    //        UINavigationController *navigation1 = [[UINavigationController alloc] initWithRootViewController:selectionVC];
-    //        
-    ////        1.0产品
-    //        ThreeViewController *threeVC = [[ThreeViewController alloc] init];
-    //        UINavigationController *navigation2 = [[UINavigationController alloc] initWithRootViewController:threeVC];
-    //
-    ////        1.0我的
-    //        MineViewController *mineVC = [[MineViewController alloc] init];
-    ////        LoginViewController *loginVC = [[LoginViewController alloc] init];
-    //        UINavigationController *navigation3 = [[UINavigationController alloc] initWithRootViewController:mineVC];
 
             //        2.0首页
             TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
@@ -229,16 +215,10 @@
             
     //        2.0
             self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
-    //        1.0
-    //        self.viewControllerArr = @[navigation1, navigation2, navigation3];
             
     ////        2.0
             butGrayArr = @[@"selection_gray", @"production_gray", @"found_gray", @"mine_gray"];
             butColorArr = @[@"selection", @"production", @"found", @"mine"];
-            
-    ////        1.0
-    //        butGrayArr = @[@"iconfont-jingxuan", @"shouyeqiepian750_28", @"iconfont-iconfuzhi"];
-    //        butColorArr = @[@"iconfont-jingxuan-highlight", @"shouyeqiepian7500_28highlight", @"iconfont-iconfuzhi-highlight"];
             
     //        for循环4要改成3***********************************
             buttonArr = [NSMutableArray array];
@@ -282,11 +262,17 @@
             newImageView.alpha = 0;
             [backgroundImgView addSubview:newImageView];
             
-            [UIView animateWithDuration:2.0f animations:^{
+            [UIView animateWithDuration:1.0f animations:^{
+                
                 newImageView.alpha = 1.0;
             } completion:^(BOOL finished) {
-                self.window.rootViewController.view.alpha = 1.0;
-                [backgroundImgView removeFromSuperview];
+                [UIView animateWithDuration:1.0f animations:^{
+                    
+                    self.window.rootViewController.view.alpha = 1.0;
+                } completion:^(BOOL finished) {
+                    
+                    [backgroundImgView removeFromSuperview];
+                }];
                 
                 if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]){
                     [self loginFuction];
@@ -313,8 +299,14 @@
             [UIView animateWithDuration:2.0f animations:^{
                 newImageView.alpha = 1.0;
             } completion:^(BOOL finished) {
-                self.window.rootViewController.view.alpha = 1.0;
-                [backgroundImgView removeFromSuperview];
+                
+                [UIView animateWithDuration:1.0f animations:^{
+                    
+                    self.window.rootViewController.view.alpha = 1.0;
+                } completion:^(BOOL finished) {
+                    
+                    [backgroundImgView removeFromSuperview];
+                }];
                 
             }];
         }
@@ -650,7 +642,12 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
             
-            [self userSign];
+            double delayInSeconds = 1.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self userSign];
+            });
+            
             
             [self getMyAccountInfoFuction];
             
