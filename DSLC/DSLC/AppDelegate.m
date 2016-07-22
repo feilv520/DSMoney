@@ -286,19 +286,12 @@ void UncaughtExceptionHandler(NSException *exception){
     
     NSString *versionString = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     
-//    if ([versionString isEqualToString:@"2.0.0"]) {
-//        NSLog(@"YES");
-//    } else {
-//        NSLog(@"NO");
-//    }
-    
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/index/getAppVersion" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"----===%@",responseObject);
         result = [responseObject objectForKey:@"result"];
-//        @"尊敬的用户：平台目前处于2.0版本的升级中，预计将在8月5日的上午8点完成升级，在此期间，平台的所有操作都会暂停，给您带来的不便敬请谅解。升级完成，我们会在第一时间通知您，感谢您的配合。"
         if ([result isEqualToNumber:@200]) {
-            if (![versionString isEqualToString:@"2.0.0"]) {
+            if (![versionString isEqualToString:@"1.1.8"]) {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本更新，请前去更新" delegate:self cancelButtonTitle:nil otherButtonTitles:@"去更新", nil];
                 alertView.delegate = self;
                 [alertView show];
@@ -310,13 +303,13 @@ void UncaughtExceptionHandler(NSException *exception){
     }];
 }
 
+// 版本系统停用接口
 - (void)refrushingFunction{
     [[MyAfHTTPClient sharedClient] postWithURLString:@"app/sys/sysIsClose" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"----===----%@",responseObject);
         result = [responseObject objectForKey:@"result"];
-        //        @"尊敬的用户：平台目前处于2.0版本的升级中，预计将在8月5日的上午8点完成升级，在此期间，平台的所有操作都会暂停，给您带来的不便敬请谅解。升级完成，我们会在第一时间通知您，感谢您的配合。"
-        // 201 代表系统已关闭  200  代表系统仍然运行
+        // 201 代表系统已关闭   200 代表系统仍然运行
         if ([result isEqualToNumber:@201]) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"平台升级公告" message:[responseObject objectForKey:@"resultMsg"] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
             alertView.delegate = self;
@@ -330,8 +323,12 @@ void UncaughtExceptionHandler(NSException *exception){
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
+        
         NSString *url = @"https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本更新，请前去更新" delegate:self cancelButtonTitle:nil otherButtonTitles:@"去更新", nil];
+        alertView.delegate = self;
+        [alertView show];
     }
 }
 
