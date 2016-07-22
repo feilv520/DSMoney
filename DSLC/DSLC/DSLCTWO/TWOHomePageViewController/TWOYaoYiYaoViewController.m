@@ -618,6 +618,7 @@
         //判断是否登录
         if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
             [self loginCome];
+            shakeSatate = YES;
         } else {
             //摇一摇数据
             [self getYaoData];
@@ -634,6 +635,7 @@
             //判断是否登录
             if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
                 [self loginCome];
+                shakeSatate = YES;
             } else {
                 //摇一摇数据
                 [self getYaoData];
