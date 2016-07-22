@@ -145,13 +145,12 @@
     _textField.layer.borderColor = [[UIColor grayColor] CGColor];
     [_textField addTarget:self action:@selector(textFieldImportContent:) forControlEvents:UIControlEventEditingChanged];
     
-    buttonSend = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 15 - 60, 10, 60, 30) backgroundColor:[UIColor whiteColor] textColor:[UIColor whiteColor] titleText:@"发送"];
+    buttonSend = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 15 - 60, 10, 60, 30) backgroundColor:[UIColor findZiTiColor] textColor:[UIColor whiteColor] titleText:@"发送"];
     [viewImport addSubview:buttonSend];
     buttonSend.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:14];
-    [buttonSend setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-    [buttonSend setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
     buttonSend.layer.cornerRadius = 5;
     buttonSend.layer.masksToBounds = YES;
+    buttonSend.enabled = YES;
     [buttonSend addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -162,6 +161,8 @@
 - (void)sendMessage:(UIButton *)button
 {
     
+    buttonSend.enabled = NO;
+    
     if (_textField.text.length == 0) {
 
     } else {
@@ -169,11 +170,11 @@
         NSString *textString = _textField.text;
         textString = [textString stringByReplacingOccurrencesOfString:@"\"" withString:@"^"];
         
-        NSDictionary *parameter = @{@"recUserId":self.IId, @"msgContent":textString, @"token":[dic objectForKey:@"token"]};
+        NSDictionary *parameter = @{@"recUserId":self.IId, @"msgContent":textString, @"token":[self.flagDic objectForKey:@"token"]};
         
-        [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/sendMsg" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"msg/sendMsg" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-//            NSLog(@"发送消息:vvvvvv%@", responseObject);
+            NSLog(@"发送消息:vvvvvv%@", responseObject);
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
@@ -194,14 +195,18 @@
                 
                 [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:chatArray.count - 1] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
                 
+                buttonSend.enabled = YES;
+                
             } else {
                 
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+                buttonSend.enabled = YES;
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             NSLog(@"%@", error);
+            buttonSend.enabled = YES;
         }];
     }
     
@@ -210,10 +215,10 @@
 //获取消息列表
 - (void)getDataList
 {
-    NSDictionary *parameter = @{@"sendUserId":self.IId, @"msgType":@0, @"token":[dic objectForKey:@"token"]};
+    NSDictionary *parameter = @{@"sendUserId":self.IId, @"msgType":@0, @"token":[self.flagDic objectForKey:@"token"]};
     NSLog(@"%@", parameter);
 
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"msg/getMsgList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"咨询详情:111&&&1111%@", responseObject);
         
@@ -266,14 +271,9 @@
 - (void)textFieldImportContent:(UITextField *)textField
 {
     if (textField.text.length > 0) {
-        
-        [buttonSend setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateNormal];
-        [buttonSend setBackgroundImage:[UIImage imageNamed:@"btn_red"] forState:UIControlStateHighlighted];
-        
+        buttonSend.backgroundColor = [UIColor profitColor];
     } else {
-        
-        [buttonSend setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-        [buttonSend setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateHighlighted];
+        buttonSend.backgroundColor = [UIColor findZiTiColor];
     }
 }
 

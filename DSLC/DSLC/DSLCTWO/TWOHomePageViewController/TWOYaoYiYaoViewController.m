@@ -11,6 +11,8 @@
 #import "TWOWinPrizeRecordViewController.h"
 #import "TWOYaoHomePageModel.h"
 #import "TWOLoginAPPViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <CoreFoundation/CoreFoundation.h>
 
 @interface TWOYaoYiYaoViewController () <UMSocialUIDelegate>
 
@@ -44,6 +46,9 @@
     BOOL loginOrNo;
     BOOL shakeSatate;
     NSInteger shakeNum;
+    
+    UIButton *butSound;
+    BOOL soundState;
 }
 
 @end
@@ -69,6 +74,7 @@
     [self.navigationItem setTitle:@"摇一摇"];
     shakeSatate = NO;
     shakeNum = 0;
+    soundState = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nsboticeShake:) name:@"yaoLogin" object:nil];
     
@@ -97,6 +103,30 @@
 {
     [self showCiShuData];
     shakeSatate = YES;
+}
+
+//摇动音效
+- (void)shakeSoundShow
+{
+    //获得音效文件路径
+    NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"摇一摇" ofType:@"wav"];
+    //加载音效文件,得到对应的音效ID
+    SystemSoundID soundID = 0;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundPath], &soundID);
+    //播放音效
+    AudioServicesPlaySystemSound(soundID);
+}
+
+- (void)shakeOverSoundShow
+{
+    NSLog(@"结果");
+    //获取音效文件路径
+    NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"结果音" ofType:@"wav"];
+    //加载音效文件,得到对应的音效ID
+    SystemSoundID soundID = 0;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundPath], &soundID);
+    //播放音效
+    AudioServicesPlaySystemSound(soundID);
 }
 
 - (BOOL)canBecomeFirstResponder
@@ -178,6 +208,23 @@
     }
     [self.view addSubview:imageBack];
     
+    if (butSound == nil) {
+        butSound = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 82/2 - 13.0 / 375.0 * (WIDTH_CONTROLLER_DEFAULT - 20), 23.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 82/2, 82/2) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundopen"] forState:UIControlStateNormal];
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundopen"] forState:UIControlStateHighlighted];
+    }
+    [imageBack addSubview:butSound];
+    
+    if (soundState) {
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundclose"] forState:UIControlStateNormal];
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundclose"] forState:UIControlStateHighlighted];
+    } else {
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundopen"] forState:UIControlStateNormal];
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundopen"] forState:UIControlStateHighlighted];
+    }
+
+    [butSound addTarget:self action:@selector(openOrCloseButton:) forControlEvents:UIControlEventTouchUpInside];
+    
     //摇动的图片
     if (imageHandYao == nil) {
         imageHandYao = [CreatView creatImageViewWithFrame:CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"yaoyiyao"]];
@@ -258,6 +305,23 @@
         imageBack.userInteractionEnabled = YES;
     }
     [self.view addSubview:imageBack];
+    
+    if (butSound == nil) {
+        butSound = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 82/2 - 13, 23, 82/2, 82/2) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundopen"] forState:UIControlStateNormal];
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundopen"] forState:UIControlStateHighlighted];
+        NSLog(@"新开辟");
+    }
+    [imageBack addSubview:butSound];
+    
+    if (soundState) {
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundclose"] forState:UIControlStateNormal];
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundclose"] forState:UIControlStateHighlighted];
+    } else {
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundopen"] forState:UIControlStateNormal];
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundopen"] forState:UIControlStateHighlighted];
+    }
+    [butSound addTarget:self action:@selector(openOrCloseButton:) forControlEvents:UIControlEventTouchUpInside];
     
 //    摇动的图片
     if (imageHandYao == nil) {
@@ -533,6 +597,13 @@
     [imageHandYao.layer addAnimation:momAnimation forKey:@"animateLayer"];
     imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
     imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    
+    if (soundState) {
+        NSLog(@"静音");
+    } else {
+        NSLog(@"开音");
+        [self shakeSoundShow];
+    }
 }
 
 //动画结束的方法
@@ -567,8 +638,6 @@
                 //摇一摇数据
                 [self getYaoData];
             }
-        } else {
-//            [ProgressHUD showMessage:@"你给我把弹框去了" Width:100 High:20];
         }
     }
     
@@ -581,20 +650,76 @@
     imageHandYao.userInteractionEnabled = NO;
     shakeNum++;
     
-    momAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-//    改变摇动的幅度
-    momAnimation.fromValue = [NSNumber numberWithFloat:-0.2];
-    momAnimation.toValue = [NSNumber numberWithFloat:0.2];
-//    改变摇动的速度
-    momAnimation.duration = 0.5;
-//    控制摇摆的时间
-    momAnimation.repeatDuration = 1.7;
-    momAnimation.autoreverses = YES;
-    momAnimation.delegate = self;
-    
-    [imageHandYao.layer addAnimation:momAnimation forKey:@"animateLayer"];
-    imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
-    imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+    if (shakeNum == 1) {
+        
+        shakeSatate = NO;
+        
+        momAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        //    改变摇动的幅度
+        momAnimation.fromValue = [NSNumber numberWithFloat:-0.2];
+        momAnimation.toValue = [NSNumber numberWithFloat:0.2];
+        //    改变摇动的速度
+        momAnimation.duration = 0.5;
+        //    控制摇摆的时间
+        momAnimation.repeatDuration = 1.7;
+        momAnimation.autoreverses = YES;
+        momAnimation.delegate = self;
+        
+        [imageHandYao.layer addAnimation:momAnimation forKey:@"animateLayer"];
+        imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
+        imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+
+        if (soundState) {
+            NSLog(@"静音");
+        } else {
+            NSLog(@"开音");
+            [self shakeSoundShow];
+        }
+        
+    } else {
+        
+        if (shakeSatate) {
+            
+            momAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+            //    改变摇动的幅度
+            momAnimation.fromValue = [NSNumber numberWithFloat:-0.2];
+            momAnimation.toValue = [NSNumber numberWithFloat:0.2];
+            //    改变摇动的速度
+            momAnimation.duration = 0.5;
+            //    控制摇摆的时间
+            momAnimation.repeatDuration = 1.7;
+            momAnimation.autoreverses = YES;
+            momAnimation.delegate = self;
+            
+            [imageHandYao.layer addAnimation:momAnimation forKey:@"animateLayer"];
+            imageHandYao.layer.anchorPoint = CGPointMake(0.5, 1.0);
+            imageHandYao.frame = CGRectMake((WIDTH_CONTROLLER_DEFAULT - 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT)/2, 186.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 162.0 / 375.0 * WIDTH_CONTROLLER_DEFAULT, 219.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+            
+            if (soundState) {
+                NSLog(@"静音");
+            } else {
+                NSLog(@"开音");
+                [self shakeSoundShow];
+            }
+            
+        } else {
+            NSLog(@"把弹窗去掉ok?");
+        }
+    }
+}
+
+//打开/关闭声音按钮
+- (void)openOrCloseButton:(UIButton *)button
+{
+    if (!soundState) {
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundclose"] forState:UIControlStateNormal];
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundclose"] forState:UIControlStateHighlighted];
+        soundState = YES;
+    } else {
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundopen"] forState:UIControlStateNormal];
+        [butSound setBackgroundImage:[UIImage imageNamed:@"soundopen"] forState:UIControlStateHighlighted];
+        soundState = NO;
+    }
 }
 
 #pragma mark data--------------------------------------$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -627,7 +752,6 @@
 #pragma mark yaoData=====================================
 - (void)getYaoData
 {
-
     NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"shake/getShakeLogic" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -639,15 +763,19 @@
             
             //判断是否中奖
             if ([[[responseObject objectForKey:@"isWin"] description] isEqualToString:@"1"]) {
+                [self panduan];
                 [self tanKuangeShow];
                 [self winPrizeShow];
             } else {
+                [self panduan];
                 [self tanKuangeShow];
                 [self haveNoWin];
             }
             
         } else {
+            
             //摇动次数用完
+            [self panduan];
             [self tanKuangeShow];
             [self haveNoCiShu];
         }
@@ -655,6 +783,16 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
+}
+
+//判断是否是静音
+- (void)panduan
+{
+    if (soundState) {
+        NSLog(@"静音");
+    } else {
+        [self shakeOverSoundShow];
+    }
 }
 
 //分享按钮

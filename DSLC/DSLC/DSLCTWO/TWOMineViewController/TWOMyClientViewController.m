@@ -9,11 +9,13 @@
 #import "TWOMyClientViewController.h"
 #import "TWOMyClientCell.h"
 #import "ChatViewController.h"
+#import "UserList.h"
 
 @interface TWOMyClientViewController () <UITableViewDataSource, UITableViewDelegate>
 
 {
     UITableView *_tableView;
+    NSMutableArray *userArray;
 }
 
 @end
@@ -26,9 +28,10 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的客户"];
-//    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
+    userArray = [NSMutableArray array];
     
-    [self tableViewShow];
+    [self getDataList];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
 }
 
 - (void)tableViewShow
@@ -81,6 +84,41 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ChatViewController *chatVC = [[ChatViewController alloc] init];
     pushVC(chatVC);
+}
+
+#pragma mark dataList****************************************************
+- (void)getDataList
+{
+    NSDictionary *parmeter = @{@"msgType":@0, @"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"msg/getUserMsgList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"客户列表~~~~~~~~~~~~~:%@", responseObject);
+        [self loadingWithHidden:YES];
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            NSMutableArray *dataArray = [responseObject objectForKey:@"Msg"];
+            for (NSDictionary *dataDic in dataArray) {
+                UserList *userModel = [[UserList alloc] init];
+                [userModel setValuesForKeysWithDictionary:dataDic];
+                [userArray addObject:userModel];
+            }
+            
+            if (userArray.count == 0) {
+                [self noDataList];
+            } else {
+                [self tableViewShow];
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)noDataList
+{
+    UIImageView *imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    [self.view addSubview:imageMonkey];
 }
 
 - (void)didReceiveMemoryWarning {

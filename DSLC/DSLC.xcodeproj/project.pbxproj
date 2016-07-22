@@ -920,6 +920,12 @@
 		81E0CCE71C28EC7400148609 /* 失败@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E0CCE51C28EC7400148609 /* 失败@2x.png */; settings = {ASSET_TAGS = (); }; };
 		81E0CCE81C28EC7400148609 /* 失败@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E0CCE61C28EC7400148609 /* 失败@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81E0CCEB1C28ED3400148609 /* BindingEmailFailed.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0CCEA1C28ED3400148609 /* BindingEmailFailed.m */; settings = {ASSET_TAGS = (); }; };
+		81E47C1E1D41D0FF00977513 /* soundopen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C1C1D41D0FF00977513 /* soundopen@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81E47C1F1D41D0FF00977513 /* soundopen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C1D1D41D0FF00977513 /* soundopen@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81E47C221D41D20B00977513 /* soundclose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C201D41D20B00977513 /* soundclose@2x.png */; settings = {ASSET_TAGS = (); }; };
+		81E47C231D41D20B00977513 /* soundclose@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C211D41D20B00977513 /* soundclose@3x.png */; settings = {ASSET_TAGS = (); }; };
+		81E47C2C1D41F8FE00977513 /* 结果音.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C2A1D41F8FE00977513 /* 结果音.wav */; settings = {ASSET_TAGS = (); }; };
+		81E47C2D1D41F8FE00977513 /* 摇一摇.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C2B1D41F8FE00977513 /* 摇一摇.wav */; settings = {ASSET_TAGS = (); }; };
 		81E54E6A1C1EB86D0007303B /* UsualQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E6482B1D3F656700B06D2B /* TWOBigSweepDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E6482A1D3F656700B06D2B /* TWOBigSweepDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E6482E1D3F817500B06D2B /* two默认头像@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E6482C1D3F817500B06D2B /* two默认头像@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -2862,6 +2868,12 @@
 		81E0CCE61C28EC7400148609 /* 失败@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "失败@3x.png"; sourceTree = "<group>"; };
 		81E0CCE91C28ED3400148609 /* BindingEmailFailed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingEmailFailed.h; sourceTree = "<group>"; };
 		81E0CCEA1C28ED3400148609 /* BindingEmailFailed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingEmailFailed.m; sourceTree = "<group>"; };
+		81E47C1C1D41D0FF00977513 /* soundopen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soundopen@2x.png"; sourceTree = "<group>"; };
+		81E47C1D1D41D0FF00977513 /* soundopen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soundopen@3x.png"; sourceTree = "<group>"; };
+		81E47C201D41D20B00977513 /* soundclose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soundclose@2x.png"; sourceTree = "<group>"; };
+		81E47C211D41D20B00977513 /* soundclose@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soundclose@3x.png"; sourceTree = "<group>"; };
+		81E47C2A1D41F8FE00977513 /* 结果音.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "结果音.wav"; sourceTree = "<group>"; };
+		81E47C2B1D41F8FE00977513 /* 摇一摇.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "摇一摇.wav"; sourceTree = "<group>"; };
 		81E54E681C1EB86D0007303B /* UsualQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsualQuestionViewController.h; sourceTree = "<group>"; };
 		81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsualQuestionViewController.m; sourceTree = "<group>"; };
 		81E648291D3F656700B06D2B /* TWOBigSweepDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOBigSweepDetailViewController.h; sourceTree = "<group>"; };
@@ -4428,6 +4440,10 @@
 				81B66EFE1D2E335A00C48AAC /* 大圣侃经@3x.png */,
 				8114F6AA1D34C715000B80E0 /* 充值未投资提现@2x.png */,
 				8114F6AB1D34C715000B80E0 /* 充值未投资提现@3x.png */,
+				81E47C1C1D41D0FF00977513 /* soundopen@2x.png */,
+				81E47C1D1D41D0FF00977513 /* soundopen@3x.png */,
+				81E47C201D41D20B00977513 /* soundclose@2x.png */,
+				81E47C211D41D20B00977513 /* soundclose@3x.png */,
 				8177A0371CF3EE630057AA7B /* 产品安全等级图片 */,
 			);
 			path = TWOImage;
@@ -7436,6 +7452,8 @@
 				8D9356DD1BC607C500BC2BFA /* Info.plist */,
 				8D9356D51BC607C500BC2BFA /* Main.storyboard */,
 				8D9356DA1BC607C500BC2BFA /* LaunchScreen.storyboard */,
+				81E47C2A1D41F8FE00977513 /* 结果音.wav */,
+				81E47C2B1D41F8FE00977513 /* 摇一摇.wav */,
 				8D9356CD1BC607C500BC2BFA /* main.m */,
 				8DCF6BFA1D3C801300013054 /* PushConfig.plist */,
 			);
@@ -8343,11 +8361,13 @@
 				8D1591101D0CF91D00A4353D /* mine@3x.png in Resources */,
 				8191E22F1BDE00DC000A6E8C /* cuo@3x.png in Resources */,
 				81D72FBF1BFAD63B0067A277 /* right@3x.png in Resources */,
+				81E47C221D41D20B00977513 /* soundclose@2x.png in Resources */,
 				81CBE7E51CE9C201004FE1D4 /* 手机@3x.png in Resources */,
 				8179883C1BC9403A007C8C3E /* ThreeCell.xib in Resources */,
 				8DC695BE1C3503D30055EC44 /* UMSCommentInputControlleriPad.xib in Resources */,
 				81C9832C1D30DD7400F9093A /* two招商@3x.png in Resources */,
 				8191E2281BDDF5F0000A6E8C /* lianxikefu@2x.png in Resources */,
+				81E47C2C1D41F8FE00977513 /* 结果音.wav in Resources */,
 				8114F6CF1D389763000B80E0 /* 设置登录密码呀@2x.png in Resources */,
 				8DA7E17E1CE076B700D5D016 /* TWOProductDetailTableViewCell.xib in Resources */,
 				8143FD511CDAF26500B65A2F /* biyan@2x.png in Resources */,
@@ -8432,6 +8452,7 @@
 				8D9011A51BD6337C00E5D62A /* 11@2x.png in Resources */,
 				8175BE791BE9A2490044026E /* 61-拷贝@3x.png in Resources */,
 				8D11918D1BF1D25A00A2DE05 /* YesterdayViewController.xib in Resources */,
+				81E47C1E1D41D0FF00977513 /* soundopen@2x.png in Resources */,
 				8177A03F1CF3EEF10057AA7B /* xingkong@3x.png in Resources */,
 				8106AA841CAA23F700AB6753 /* 椭圆-3.png in Resources */,
 				8D9011A91BD6337C00E5D62A /* 01@2x.png in Resources */,
@@ -8842,7 +8863,9 @@
 				8181028E1CE043BB0038B64E /* 大圣酷跑@2x.png in Resources */,
 				8D1591121D0CF91D00A4353D /* mine_gray@3x.png in Resources */,
 				814B51021C3A8463001AACC6 /* ChongZhiZZZZView.xib in Resources */,
+				81E47C2D1D41F8FE00977513 /* 摇一摇.wav in Resources */,
 				81C8BBC71BDA2F8D005B9DFF /* guanyuG@3x.png in Resources */,
+				81E47C1F1D41D0FF00977513 /* soundopen@3x.png in Resources */,
 				8DF3C2301D372D0E00AB1E9D /* TWOWelcomTwo_960.png in Resources */,
 				8175BE991BE9E5760044026E /* 组-21-拷贝-2@3x.png in Resources */,
 				8107E4241CE1DC020086BF9B /* TWOProfitGettingCell.xib in Resources */,
@@ -8946,6 +8969,7 @@
 				81FAAA2E1C256AC40020E9DD /* 审核通过@2x.png in Resources */,
 				8181028F1CE043BB0038B64E /* 大圣酷跑@3x.png in Resources */,
 				81CBE7E91CE9C231004FE1D4 /* yanzhenma@3x.png in Resources */,
+				81E47C231D41D20B00977513 /* soundclose@3x.png in Resources */,
 				81BA1C141BD5000700DBA5BE /* icon05@2x.png in Resources */,
 				8183F4051C97CC4F000BB93C /* iconfont-jixifangshi@3x.png in Resources */,
 				81C983591D338A1800F9093A /* 上海银行二@2x.png in Resources */,
@@ -9704,8 +9728,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9731,7 +9755,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "80a3b303-c2b6-481e-aa49-1873d8608900";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -9743,8 +9767,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9770,7 +9794,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "80a3b303-c2b6-481e-aa49-1873d8608900";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

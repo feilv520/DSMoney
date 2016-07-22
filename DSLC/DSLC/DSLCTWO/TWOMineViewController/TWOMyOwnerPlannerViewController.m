@@ -10,6 +10,7 @@
 #import "MyPlannerCell.h"
 #import "TWOMyOwnerPlannerCell.h"
 #import "TWOMyOwnerModel.h"
+#import "ChatViewController.h"
 
 @interface TWOMyOwnerPlannerViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -22,6 +23,7 @@
     UILabel *labelName;
     UILabel *labelAlert;
     BOOL stateOr;
+    NSString *idString;
 }
 
 @end
@@ -216,7 +218,13 @@
 //咨询按钮
 - (void)askQuestionButtonClicked:(UIButton *)button
 {
-    NSLog(@"9");
+    ChatViewController *chatVC = [[ChatViewController alloc] init];
+    if (self.stateShow == YES) {
+        chatVC.IId = idString;
+    } else {
+        chatVC.IId = [self.listModel ID];
+    }
+    pushVC(chatVC);
 }
 
 #pragma mark listDetail=====================================================
@@ -248,6 +256,8 @@
         NSLog(@"我的理财师详情-----------%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             tempDic = [responseObject objectForKey:@"User"];
+            idString = [tempDic objectForKey:@"id"];
+            NSLog(@"----^^^^^---%@", idString);
             [self tableViewShow];
         }
         
