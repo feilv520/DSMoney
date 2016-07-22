@@ -470,12 +470,14 @@
                 
                 [self noDataShowMoney];
                 _tableView.hidden = YES;
+                imageMonkey.hidden = NO;
                 return ;
             } else {
                 
-                imageMonkey.hidden = NO;
+                imageMonkey.hidden = YES;
                 noNetworkMonkey.hidden = YES;
                 reloadButton.hidden = YES;
+                _tableView.hidden = NO;
             }
             
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {

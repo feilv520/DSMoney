@@ -175,13 +175,17 @@
         NSLog(@"首页公告::::::::%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             NSMutableArray *dataArr = [responseObject objectForKey:@"noticeInfo"];
-            for (NSDictionary *dataDic in dataArr) {
-                messageModel = [[TWOMessageModel alloc] init];
-                [messageModel setValuesForKeysWithDictionary:dataDic];
-                [noticeArray addObject:messageModel];
+            
+            if (dataArr.count != 0) {
+                
+                for (NSDictionary *dataDic in dataArr) {
+                    messageModel = [[TWOMessageModel alloc] init];
+                    [messageModel setValuesForKeysWithDictionary:dataDic];
+                    [noticeArray addObject:messageModel];
+                }
+                [self noticeContentShow];
             }
             
-            [self noticeContentShow];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -297,7 +301,7 @@
     _scrollViewNotice.delegate = self;
     _scrollViewNotice.userInteractionEnabled = YES;
     
-    for (int i = 1; i <= 3; i++) {
+    for (int i = 1; i <= noticeArray.count; i++) {
         UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 30 * i, _scrollViewNotice.frame.size.width - 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:i - 1] title]];
         [_scrollViewNotice addSubview:labelNotice];
         labelNotice.userInteractionEnabled = YES;
@@ -315,13 +319,23 @@
     labelLast.exclusiveTouch = YES;
     [labelLast addGestureRecognizer:gensture];
     
-    everyNum = 3 + 2;
-    secondsNum = 3;
+    if (noticeArray.count >= 3){
+        everyNum = 3 + 2;
+        secondsNum = 3;
+    } else {
+        everyNum = noticeArray.count + 2;
+        secondsNum = noticeArray.count;
+    }
 }
 
 - (void)scrollViewTapAction
 {
-    messageModel = [noticeArray objectAtIndex:3 - secondsNum];
+    if (noticeArray.count >= 3) {
+        messageModel = [noticeArray objectAtIndex:3 - secondsNum];
+    } else {
+        messageModel = [noticeArray objectAtIndex:noticeArray.count - secondsNum];
+    }
+    
     TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
     messageDetailVC.messageID = [messageModel ID];
     pushVC(messageDetailVC);
@@ -755,10 +769,20 @@
 {
     if (scrollView == _scrollViewNotice) {
         
-        if (_scrollViewNotice.contentOffset.y == 120) {
-            [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
-            secondsNum = 3;
+        if (noticeArray.count >= 3) {
+            
+            if (_scrollViewNotice.contentOffset.y == 120) {
+                [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
+                secondsNum = 3;
+            }
+        } else {
+            
+            if (_scrollViewNotice.contentOffset.y == noticeArray.count * 30 + 30) {
+                [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
+                secondsNum = 3;
+            }
         }
+        
         
     } else {
         
