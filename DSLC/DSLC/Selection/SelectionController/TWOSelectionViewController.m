@@ -985,7 +985,7 @@
         [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
         [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateHighlighted];
         
-        [reloadButton addTarget:self action:@selector(getProductList) forControlEvents:UIControlEventTouchUpInside];
+        [reloadButton addTarget:self action:@selector(getAdvList) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view addSubview:reloadButton];
     

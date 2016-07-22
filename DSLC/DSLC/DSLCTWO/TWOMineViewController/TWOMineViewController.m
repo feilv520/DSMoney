@@ -117,6 +117,18 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self tabelViewShow];
+    
+    butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.tabBarVC.view addSubview:butBlack];
+    butBlack.alpha = 0.0;
+    butBlack.hidden = YES;
+    [butBlack addTarget:self action:@selector(buttonBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    viewDown = [CreatView creatViewWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, 160) backgroundColor:[UIColor huibai]];
+    [app.tabBarVC.view addSubview:viewDown];
+    
+    [self viewDownShow];
 }
 
 - (void)tabelViewShow
@@ -811,15 +823,14 @@
 //点击头像按钮
 - (void)buttonChangeHeadImage:(UIButton *)button
 {
-    butBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [app.tabBarVC.view addSubview:butBlack];
-    butBlack.alpha = 0.5;
-    [butBlack addTarget:self action:@selector(buttonBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
-    viewDown = [CreatView creatViewWithFrame:CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 180, WIDTH_CONTROLLER_DEFAULT, 160) backgroundColor:[UIColor huibai]];
-    [app.tabBarVC.view addSubview:viewDown];
-    
-    [self viewDownShow];
+
+    [UIView animateWithDuration:1.0f animations:^{
+        butBlack.alpha = 0.5;
+        butBlack.hidden = NO;
+        viewDown.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 180, WIDTH_CONTROLLER_DEFAULT, 160);
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 //弹出框
@@ -977,21 +988,25 @@
 //取消按钮
 - (void)buttonCancle:(UIButton *)button
 {
-    [butBlack removeFromSuperview];
-    [viewDown removeFromSuperview];
     
-    butBlack = nil;
-    viewDown = nil;
+    [UIView animateWithDuration:1.0f animations:^{
+        butBlack.alpha = 0.0;
+        viewDown.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, 160);
+    } completion:^(BOOL finished) {
+        butBlack.hidden = YES;
+    }];
 }
 
 //黑色遮罩层消失
 - (void)buttonBlackDisappear:(UIButton *)button
 {
-    [button removeFromSuperview];
-    [viewDown removeFromSuperview];
     
-    viewDown = nil;
-    button = nil;
+    [UIView animateWithDuration:1.0f animations:^{
+        butBlack.alpha = 0.0;
+        viewDown.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, 160);
+    } completion:^(BOOL finished) {
+        butBlack.hidden = YES;
+    }];
 }
 
 //信封按钮

@@ -178,8 +178,7 @@
     NSLog(@"userDIC = %@",userDIC);
     
     NSString *handFlag;
-//    a6673d8a1fbb4a1bfb7f138e734e696078b30934
-//    0cef96b281d61943724a4a6ec11c591ef8742774
+
     if (userDIC == nil) {
         handFlag = @"NO";
     } else {
@@ -282,7 +281,7 @@
             newImageView.alpha = 0;
             [backgroundImgView addSubview:newImageView];
             
-            [UIView animateWithDuration:2.0f animations:^{
+            [UIView animateWithDuration:1.0f animations:^{
                 newImageView.alpha = 1.0;
             } completion:^(BOOL finished) {
                 self.window.rootViewController.view.alpha = 1.0;
@@ -650,7 +649,12 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
             
-            [self userSign];
+            double delayInSeconds = 1.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self userSign];
+            });
+            
             
             [self getMyAccountInfoFuction];
             
