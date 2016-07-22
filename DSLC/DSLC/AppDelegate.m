@@ -318,7 +318,7 @@ void UncaughtExceptionHandler(NSException *exception){
         //        @"尊敬的用户：平台目前处于2.0版本的升级中，预计将在8月5日的上午8点完成升级，在此期间，平台的所有操作都会暂停，给您带来的不便敬请谅解。升级完成，我们会在第一时间通知您，感谢您的配合。"
         // 201 代表系统已关闭  200  代表系统仍然运行
         if ([result isEqualToNumber:@201]) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"平台升级公告" message:@"尊敬的用户:平台目前处于2.0版本的升级中,预计将在8月5日的上午8点完成升级,在此期间,平台的所有操作都会暂停,给您带来的不便敬请谅解.升级完成,我们会在第一时间通知您,感谢您的配合." delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"平台升级公告" message:[responseObject objectForKey:@"resultMsg"] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
             alertView.delegate = self;
             [alertView show];
         }
