@@ -71,6 +71,8 @@
     
     [self versionAlertView];
     
+    [self refrushingFunction];
+    
     [UMSocialData setAppKey:@"5642ad7e67e58e8463006218"];
     
     [UMSocialWechatHandler setWXAppId:@"wxebb3d94fc5272ea8" appSecret:@"89f84525f50a31fc0acf6b551f9bcbc8" url:@"http://www.dslc.cn"];
@@ -301,6 +303,24 @@ void UncaughtExceptionHandler(NSException *exception){
                 alertView.delegate = self;
                 [alertView show];
             }
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+- (void)refrushingFunction{
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/sys/sysIsClose" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"----===----%@",responseObject);
+        result = [responseObject objectForKey:@"result"];
+        //        @"尊敬的用户：平台目前处于2.0版本的升级中，预计将在8月5日的上午8点完成升级，在此期间，平台的所有操作都会暂停，给您带来的不便敬请谅解。升级完成，我们会在第一时间通知您，感谢您的配合。"
+        // 201 代表系统已关闭  200  代表系统仍然运行
+        if ([result isEqualToNumber:@201]) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"平台升级公告" message:@"尊敬的用户:平台目前处于2.0版本的升级中,预计将在8月5日的上午8点完成升级,在此期间,平台的所有操作都会暂停,给您带来的不便敬请谅解.升级完成,我们会在第一时间通知您,感谢您的配合." delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+            alertView.delegate = self;
+            [alertView show];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

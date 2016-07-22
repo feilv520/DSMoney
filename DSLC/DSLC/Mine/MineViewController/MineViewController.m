@@ -429,7 +429,7 @@
             if ([[self.myAccountInfo objectForKey:@"redPacket"] isEqualToString:@"0"]) {
                 myRedBagButton.hidden = YES;
             } else {
-                myRedBagButton.hidden = NO;
+                myRedBagButton.hidden = YES;
                 [myRedBagButton setTitle:[self.myAccountInfo objectForKey:@"redPacket"] forState:UIControlStateNormal];
             }
             
