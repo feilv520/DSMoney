@@ -294,6 +294,8 @@
         
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
         butonLogin.frame = CGRectMake(0, 7, imageYellow.frame.size.width, 23);
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
+        butonLogin.frame = CGRectMake(0, 12, imageYellow.frame.size.width, 23);
     }
 }
 

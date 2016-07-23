@@ -56,12 +56,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return userArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWOMyClientCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    UserList *userModel = [userArray objectAtIndex:indexPath.row];
     
     cell.imageHead.image = [UIImage imageNamed:@"myhoutou"];
     cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.width/2;
