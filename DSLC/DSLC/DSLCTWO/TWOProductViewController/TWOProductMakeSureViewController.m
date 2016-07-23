@@ -783,7 +783,7 @@
     if ([[self.detailM.productType description] isEqualToString:@"3"]){
     
         [app.window addSubview:monkeyView];
-        monkeyView.titleLabel.text = @"体验金支付";
+        monkeyView.titleLabel.text = @"支付";
     } else {
         if (packetModel == nil) {
             [app.window addSubview:monkeyView];
