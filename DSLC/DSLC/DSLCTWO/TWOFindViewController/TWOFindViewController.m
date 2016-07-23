@@ -61,10 +61,6 @@
     
     timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
     
-    myDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    
-    NSLog(@"myDic = %@",myDic);
-    
     self.view.backgroundColor = [UIColor whiteColor];
     [self tabelViewShow];
     
@@ -243,6 +239,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    myDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSLog(@"myDic = %@",myDic);
+    
     if (indexPath.item == 4) {
         
         TWOgameCenterViewController *gameVC = [[TWOgameCenterViewController alloc] init];
@@ -281,7 +282,13 @@
     } else if (indexPath.item == 3) {
         
         TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
-        baoji.tokenString = [myDic objectForKey:@"token"];
+        NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+        //判断'特权本金'登录态
+        if (![[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+            baoji.tokenString = [myDic objectForKey:@"token"];
+        } else {
+            baoji.tokenString = @"";
+        }
         pushVC(baoji);
     }
 }

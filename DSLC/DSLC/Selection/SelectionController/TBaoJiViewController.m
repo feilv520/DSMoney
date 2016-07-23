@@ -37,7 +37,7 @@
     [backItem addTarget:self action:@selector(buttonReturn:) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:backItem];
     
-    closeItem = [[UIButton alloc]initWithFrame:CGRectMake(30, 0, 40, 36)];
+    closeItem = [[UIButton alloc]initWithFrame:CGRectMake(30, 2, 40, 36)];
     [closeItem setTitle:@"关闭" forState:UIControlStateNormal];
     [closeItem setTitleColor:Color_White forState:UIControlStateNormal];
     [closeItem addTarget:self action:@selector(clickedCloseItem:) forControlEvents:UIControlEventTouchUpInside];
