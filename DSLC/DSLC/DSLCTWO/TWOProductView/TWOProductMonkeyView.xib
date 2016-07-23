@@ -94,7 +94,7 @@
                     <state key="normal" image="product-cuo.png"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="体验金支付" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4j-gN-Ii9">
-                    <rect key="frame" x="17" y="102" width="85" height="21"/>
+                    <rect key="frame" x="15" y="102" width="85" height="21"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="fnP-wB-jhu"/>
@@ -113,7 +113,7 @@
                 <constraint firstItem="izA-Pt-aAc" firstAttribute="top" secondItem="cAe-U9-Zcq" secondAttribute="bottom" constant="16" id="5jF-n1-1vX"/>
                 <constraint firstItem="h2R-1p-09J" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="CwY-ga-O4h"/>
                 <constraint firstItem="k4j-gN-Ii9" firstAttribute="top" secondItem="izA-Pt-aAc" secondAttribute="bottom" constant="19" id="EQ3-So-913"/>
-                <constraint firstItem="k4j-gN-Ii9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="17" id="K4X-Sz-mNd"/>
+                <constraint firstItem="k4j-gN-Ii9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="K4X-Sz-mNd"/>
                 <constraint firstAttribute="trailing" secondItem="7Q6-ST-0eY" secondAttribute="trailing" constant="15" id="KcC-2g-mjr"/>
                 <constraint firstItem="enk-0g-VaG" firstAttribute="top" secondItem="cAe-U9-Zcq" secondAttribute="bottom" constant="93" id="KkI-7F-u7d"/>
                 <constraint firstItem="enk-0g-VaG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="RUr-zu-iuF"/>

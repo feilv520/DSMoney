@@ -31,9 +31,9 @@
     [self.navigationItem setTitle:@"爆击抽奖"];
     
     UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
-    UIButton * backItem = [[UIButton alloc]initWithFrame:CGRectMake(0, 8, 20, 20)];
-    [backItem setImage:[UIImage imageNamed:@"750产品111"] forState:UIControlStateNormal];
-    [backItem setImage:[UIImage imageNamed:@"750产品111"] forState:UIControlStateSelected];
+    UIButton * backItem = [[UIButton alloc]initWithFrame:CGRectMake(0, 8, 27, 25)];
+    [backItem setImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateNormal];
+    [backItem setImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateSelected];
     [backItem addTarget:self action:@selector(buttonReturn:) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:backItem];
     
