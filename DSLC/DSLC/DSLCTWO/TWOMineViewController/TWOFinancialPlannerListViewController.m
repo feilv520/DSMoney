@@ -82,7 +82,7 @@
     TWOFinancialPlannerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
     TWOMoneyTeacherList *listModel = [listArray objectAtIndex:indexPath.row];
 
-    if ([[listModel avatarImg] isEqualToString:@""]) {
+    if ([[listModel avatarImg] isEqualToString:@""] || [listModel avatarImg] == nil) {
         cell.imageHead.image = [UIImage imageNamed:@"two默认头像"];
     } else {
         cell.imageHead.yy_imageURL = [NSURL URLWithString:[listModel avatarImg]];

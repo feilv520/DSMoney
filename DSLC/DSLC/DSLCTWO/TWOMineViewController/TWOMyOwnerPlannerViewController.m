@@ -133,7 +133,7 @@
 //    判断是首页理财师数据还是我的理财师数据
     if (self.stateShow == YES) {
         
-        if ([[tempDic objectForKey:@"avatarImg"] isEqualToString:@""]) {
+        if ([[tempDic objectForKey:@"avatarImg"] isEqualToString:@""] || [tempDic objectForKey:@"avatarImg"]  == nil) {
             imageHead.image = [UIImage imageNamed:@"two默认头像"];
         } else {
             imageHead.yy_imageURL = [NSURL URLWithString:[tempDic objectForKey:@"avatarImg"]];
@@ -143,7 +143,7 @@
         
     } else {
         
-        if ([[self.listModel avatarImg] isEqualToString:@""]) {
+        if ([[self.listModel avatarImg] isEqualToString:@""] || [self.listModel avatarImg] == nil) {
             imageHead.image = [UIImage imageNamed:@"two默认头像"];
         } else {
             imageHead.yy_imageURL = [NSURL URLWithString:[self.listModel avatarImg]];
