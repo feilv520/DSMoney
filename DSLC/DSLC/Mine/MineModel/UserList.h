@@ -18,4 +18,5 @@
 @property (nonatomic) NSString *recAvatarImg;
 @property (nonatomic) NSString *sendAvatarImg;
 @property (nonatomic) NSString *msgStatus;
+@property (nonatomic) NSString *userAccount;
 @end

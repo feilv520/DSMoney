@@ -66,6 +66,7 @@
     
     [self getDataInformation];
     [self tableViewShow];
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
 
 - (void)nsnotice:(NSNotification *)notice
@@ -434,6 +435,7 @@
     [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserInfo" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"账户设置>>>>>>>>>%@", responseObject);
+        [self loadingWithHidden:YES];
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             userDic = [responseObject objectForKey:@"User"];

@@ -97,7 +97,7 @@
     cell.imageRight.image = [UIImage imageNamed:@"righticon"];
     cell.labelName.textColor = [UIColor profitColor];
     
-    cell.labelPhone.text = @"159****2599";
+    cell.labelPhone.text = [userModel userAccount];
     
     return cell;
 }
@@ -113,13 +113,14 @@
     } else {
         chatVC.IId = [userModel sendUserId];
     }
+    NSLog(@"%@", [dic objectForKey:@"id"]);
     pushVC(chatVC);
 }
 
 #pragma mark dataList****************************************************
 - (void)getDataList
 {
-    NSDictionary *parmeter = @{@"msgType":@0, @"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"msgType":@0, @"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber]};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"msg/getUserMsgList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"客户列表~~~~~~~~~~~~~:%@", responseObject);
@@ -138,6 +139,12 @@
             } else {
                 [self tableViewShow];
             }
+            
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                flagState = YES;
+            }
+            
+            [gifFooter endRefreshing];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

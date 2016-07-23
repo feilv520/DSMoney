@@ -311,7 +311,7 @@
     [imageBackGround addSubview:butHeadImage];
     
     NSLog(@"avatarImg = %@",[memberDic objectForKey:@"avatarImg"]);
-    if ([memberDic objectForKey:@"avatarImg"] == nil) {
+    if ([[memberDic objectForKey:@"avatarImg"] isEqualToString:@""] || [memberDic objectForKey:@"avatarImg"] == nil) {
         [butHeadImage setBackgroundImage:[UIImage imageNamed:@"two默认头像"] forState:UIControlStateNormal];
         [butHeadImage setBackgroundImage:[UIImage imageNamed:@"two默认头像"] forState:UIControlStateHighlighted];
     } else {
@@ -328,7 +328,6 @@
         imgView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
         [butHeadImage addSubview:imgView];
     }
-    
     
 //    总资产底层view
     if (viewMoney == nil) {

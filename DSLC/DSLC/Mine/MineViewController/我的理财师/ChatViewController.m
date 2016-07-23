@@ -226,7 +226,6 @@
             [self loadingWithHidden:YES];
             _tableView.hidden = NO;
             
-            NSLog(@"hhhhhh");
             [[NSNotificationCenter defaultCenter] postNotificationName:@"dian" object:nil];
             
             NSMutableArray *dataArr = [responseObject objectForKey:@"Msg"];
@@ -347,10 +346,10 @@
             cell = [[OneCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
         }
         
-        if ([[chat recAvatarImg] isEqualToString:@""] || [chat recAvatarImg] == nil) {
+        if ([[chat sendAvatarImg] isEqualToString:@""]) {
             [cell.imageLeft setImage:[UIImage imageNamed:@"two默认头像"]];
         } else {
-            cell.imageLeft.yy_imageURL = [NSURL URLWithString:[chat recAvatarImg]];
+            cell.imageLeft.yy_imageURL = [NSURL URLWithString:[chat sendAvatarImg]];
         }
         
         cell.imageLeft.layer.masksToBounds = YES;
