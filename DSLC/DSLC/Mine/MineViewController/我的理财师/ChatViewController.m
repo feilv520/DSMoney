@@ -116,7 +116,6 @@
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _tableView.separatorColor = [UIColor clearColor];
-//    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 20)];
     _tableView.tableFooterView = [UIView new];
     _tableView.tableHeaderView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
@@ -345,32 +344,27 @@
         OneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
 
         if (cell == nil) {
-            
             cell = [[OneCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reuse"];
         }
         
-        NSString *msgTextString = [chat msgText];
-        
-        msgTextString = [msgTextString stringByReplacingOccurrencesOfString:@"^" withString:@"\""];
-        
-        [cell.labelLeft setText:msgTextString];
-        if ([chat.sendAvatarImg isEqualToString:@""] || chat.sendAvatarImg == nil) {
-            
-            [cell.imageLeft setImage:[UIImage imageNamed:@"默认头像"]];
+        if ([[chat recAvatarImg] isEqualToString:@""] || [chat recAvatarImg] == nil) {
+            [cell.imageLeft setImage:[UIImage imageNamed:@"two默认头像"]];
         } else {
-        
-            cell.imageLeft.yy_imageURL = [NSURL URLWithString:chat.sendAvatarImg];
+            cell.imageLeft.yy_imageURL = [NSURL URLWithString:[chat recAvatarImg]];
         }
         
         cell.imageLeft.layer.masksToBounds = YES;
         cell.imageLeft.layer.cornerRadius = 20.0f;
         
+        NSString *msgTextString = [chat msgText];
+        msgTextString = [msgTextString stringByReplacingOccurrencesOfString:@"^" withString:@"\""];
+        [cell.labelLeft setText:msgTextString];
+        
         NSDictionary *dicF = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
         rect = [cell.labelLeft.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dicF context:nil];
         cell.labelLeft.numberOfLines = 0;
         
-        cell.imageContect.image = [UIImage imageNamed:@"LeftWindow"];
-
+//        cell.imageContect.image = [UIImage imageNamed:@"LeftWindow"];
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
@@ -390,16 +384,18 @@
         NSDictionary *dicF = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil];
         cell.labelRight.numberOfLines = 0;
         cell.labelRight.text = chat.msgText;
-        
         rect = [cell.labelRight.text boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT - 70, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dicF context:nil];
         
-        [cell.imageRight setImage:[UIImage imageNamed:@"默认头像"]];
-    
+        if ([[chat sendAvatarImg] isEqualToString:@""]) {
+            [cell.imageRight setImage:[UIImage imageNamed:@"two默认头像"]];
+        } else {
+            cell.imageRight.yy_imageURL = [NSURL URLWithString:[chat sendAvatarImg]];
+        }
+        
         cell.imageRight.layer.masksToBounds = YES;
         cell.imageRight.layer.cornerRadius = 20.0f;
         
-        cell.imageContect.image = [UIImage imageNamed:@"rightWindow@3x"];
-        
+//        cell.imageContect.image = [UIImage imageNamed:@"rightWindow@3x"];
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         

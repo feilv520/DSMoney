@@ -150,8 +150,10 @@
 {
     if (tableView == _tableView1) {
         return runArray.count;
+    } else if (tableView == _tableView2) {
+        return waitArray.count;
     } else {
-        return 5;
+        return overArray.count;
     }
 }
 

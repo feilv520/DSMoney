@@ -16,6 +16,10 @@
 {
     UITableView *_tableView;
     NSMutableArray *userArray;
+    
+    MJRefreshBackGifFooter *gifFooter;
+    BOOL flagState;
+    NSInteger pageNumber;
 }
 
 @end
@@ -29,6 +33,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的客户"];
     userArray = [NSMutableArray array];
+    pageNumber = 1;
+    flagState = NO;
     
     [self getDataList];
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
@@ -47,6 +53,9 @@
     UIView *viewLine = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
     [_tableView.tableFooterView addSubview:viewLine];
     viewLine.alpha = 0.3;
+    
+    [self addTableViewWithHeader:_tableView];
+    [self addTableViewWithFooter:_tableView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,20 +71,33 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWOMyClientCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     UserList *userModel = [userArray objectAtIndex:indexPath.row];
     
-    cell.imageHead.image = [UIImage imageNamed:@"myhoutou"];
+    if ([[[dic objectForKey:@"id"] description] isEqualToString:[[userModel sendUserId] description]]) {
+        
+        cell.labelName.text = [userModel recUserName];
+        if ([[userModel recAvatarImg] isEqualToString:@""]) {
+            cell.imageHead.image = [UIImage imageNamed:@"two默认头像"];
+        } else {
+            cell.imageHead.yy_imageURL = [NSURL URLWithString:[userModel recAvatarImg]];
+        }
+        
+    } else {
+        cell.labelName.text = [userModel sendUserName];
+        if ([[userModel sendAvatarImg] isEqualToString:@""]) {
+            cell.imageHead.image = [UIImage imageNamed:@"two默认头像"];
+        } else {
+            cell.imageHead.yy_imageURL = [NSURL URLWithString:[userModel sendAvatarImg]];
+        }
+    }
+    
     cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.width/2;
     cell.imageHead.layer.masksToBounds = YES;
     cell.imageRight.image = [UIImage imageNamed:@"righticon"];
-    
-    cell.labelPhone.text = @"159****2599";
-    cell.labelName.text = @"丁颖";
     cell.labelName.textColor = [UIColor profitColor];
     
-    if (indexPath.row == 3) {
-        cell.labelName.hidden = YES;
-    }
+    cell.labelPhone.text = @"159****2599";
     
     return cell;
 }
@@ -83,7 +105,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    UserList *userModel = [userArray objectAtIndex:indexPath.row];
     ChatViewController *chatVC = [[ChatViewController alloc] init];
+    if ([[[dic objectForKey:@"id"] description] isEqualToString:[[userModel sendUserId] description]]){
+        chatVC.IId = [userModel recUserId];
+    } else {
+        chatVC.IId = [userModel sendUserId];
+    }
     pushVC(chatVC);
 }
 
@@ -114,6 +143,31 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
+}
+
+//下拉刷新
+- (void)loadNewData:(MJRefreshGifHeader *)header
+{
+    if (userArray != nil) {
+        [userArray removeAllObjects];
+        userArray = nil;
+        userArray = [NSMutableArray array];
+    }
+    
+    pageNumber = 1;
+    [self getDataList];
+}
+
+//上拉加载
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
+{
+    gifFooter = footer;
+    if (flagState) {
+        [gifFooter endRefreshing];
+    } else {
+        pageNumber++;
+        [self getDataList];
+    }
 }
 
 - (void)noDataList
