@@ -226,7 +226,7 @@
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 568) {
         viewAlpha.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 23 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 57.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
-        viewAlpha.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 23 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 43.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
+        viewAlpha.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT - 71, buttonSet.frame.size.height + 30 + 18.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 71 + 20, 43.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     }
     
     if (butTask == nil) {
