@@ -331,9 +331,29 @@
 - (void)scrollViewTapAction
 {
     if (noticeArray.count >= 3) {
-        messageModel = [noticeArray objectAtIndex:3 - secondsNum];
+        if (secondsNum <= 0) {
+            
+            messageModel = [noticeArray objectAtIndex:0];
+        } else {
+            
+            messageModel = [noticeArray objectAtIndex:3 - secondsNum];
+        }
     } else {
         messageModel = [noticeArray objectAtIndex:noticeArray.count - secondsNum];
+    }
+    
+    if (noticeArray.count >= 3) {
+        
+        if (_scrollViewNotice.contentOffset.y == 120) {
+            [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
+            secondsNum = 3;
+        }
+    } else {
+        
+        if (_scrollViewNotice.contentOffset.y == noticeArray.count * 30 + 30) {
+            [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
+            secondsNum = noticeArray.count;
+        }
     }
     
     TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
@@ -779,7 +799,7 @@
             
             if (_scrollViewNotice.contentOffset.y == noticeArray.count * 30 + 30) {
                 [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
-                secondsNum = 3;
+                secondsNum = noticeArray.count;
             }
         }
         

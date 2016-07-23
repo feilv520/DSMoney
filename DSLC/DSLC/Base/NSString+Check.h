@@ -17,4 +17,6 @@
 + (BOOL) checkCardNo:(NSString*) cardNo;
 //首字母是否为字母
 + (BOOL)pipeizimu:(NSString *)str;
+//判断是否都是数字
++ (BOOL)isPureFloat:(NSString *)string;
 @end

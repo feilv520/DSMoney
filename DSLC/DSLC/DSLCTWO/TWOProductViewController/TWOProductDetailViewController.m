@@ -756,7 +756,13 @@
 //自动计算
 - (void)textFiledEditChange:(UITextField *)textField
 {
-    calendar.totalLabel.text = [NSString stringWithFormat:@"¥%.0f元",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue] / 36500.0];
+    NSDecimalNumber *yearNumber = [NSDecimalNumber decimalNumberWithString:@"36500.0"];
+    
+    NSDecimalNumber *inputNumber = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%lf",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue]]];
+    
+    NSDecimalNumber *totalNumber = [inputNumber decimalNumberByDividingBy:yearNumber];
+    
+    calendar.totalLabel.text = [NSString stringWithFormat:@"¥%.2f元",[totalNumber floatValue]];
 }
 
 //return按钮

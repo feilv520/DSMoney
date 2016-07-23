@@ -74,8 +74,10 @@
 {
     if (textFieldLift.text.length == 0) {
         buttonNext.backgroundColor = [UIColor findZiTiColor];
+        buttonNext.enabled = NO;
     } else {
         buttonNext.backgroundColor = [UIColor profitColor];
+        buttonNext.enabled = YES;
     }
 }
 
@@ -136,20 +138,27 @@
     CGFloat yuEValue = [moneyYu floatValue] - [textFieldLift.text floatValue]; //余额减掉输入金额
     NSLog(@"-------%@", moneyYu);
     
+    if (![NSString isPureFloat:textFieldLift.text]) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"你输入的是非法数字"];
+        return;
+    }
+    
     if (textFieldLift.text.length == 0) {
         
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入提现金额"];
     } else if ([textFieldLift.text floatValue] == 0) {
+        
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"提现金额不能为0"];
-        
     } else if ([textFieldLift.text floatValue] > [moneyYu floatValue]) {
+        
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"余额不足，请重新输入"];
-        
     } else if ([moneyYu floatValue] < 100.0 && [textFieldLift.text floatValue] < [moneyYu floatValue]) {
+        
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的余额低于100元，须一次性提完"];
-        
     } else if (yuEValue < 100.0 && yuEValue != 0.0) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您提现后余额低于100元，须一次性提完"];
         
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您提现后余额低于100元，须一次性提完"];
     } else {
         
         if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {

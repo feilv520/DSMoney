@@ -26,14 +26,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="可用余额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3c-wG-wKU">
-                        <rect key="frame" x="10" y="12" width="90" height="30"/>
+                        <rect key="frame" x="10" y="10" width="90" height="30"/>
                         <animations/>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <color key="textColor" red="0.38431372549019605" green="0.396078431372549" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTD-Bm-21D">
-                        <rect key="frame" x="327" y="12" width="30" height="30"/>
+                        <rect key="frame" x="327" y="10" width="30" height="30"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="ekX-Ox-Mvf"/>
@@ -103,12 +103,12 @@
                         <color key="textColor" red="1" green="0.44705882349999998" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLu-V6-jbZ">
-                        <rect key="frame" x="102" y="12" width="170" height="30"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLu-V6-jbZ">
+                        <rect key="frame" x="140" y="10" width="160" height="30"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="170" id="FBj-d8-Mb0"/>
-                            <constraint firstAttribute="height" constant="30" id="i5T-kA-VHq"/>
+                            <constraint firstAttribute="height" constant="30" id="2VQ-sn-Z5s"/>
+                            <constraint firstAttribute="width" constant="160" id="gPI-SI-KDQ"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
                         <color key="textColor" red="0.38431372549019605" green="0.396078431372549" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
@@ -117,14 +117,14 @@
                 </subviews>
                 <animations/>
                 <constraints>
-                    <constraint firstItem="UYb-IW-CsW" firstAttribute="top" secondItem="sTD-Bm-21D" secondAttribute="bottom" constant="8" id="0kB-El-mV2"/>
-                    <constraint firstItem="TLu-V6-jbZ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="2uA-Ba-0lW"/>
+                    <constraint firstItem="UYb-IW-CsW" firstAttribute="top" secondItem="sTD-Bm-21D" secondAttribute="bottom" constant="10" id="0kB-El-mV2"/>
                     <constraint firstAttribute="trailing" secondItem="UYb-IW-CsW" secondAttribute="trailing" id="JTS-6I-zXt"/>
                     <constraint firstAttribute="trailing" secondItem="zIu-gF-C71" secondAttribute="trailing" constant="10" id="NPv-r0-xt9"/>
                     <constraint firstAttribute="trailing" secondItem="sTD-Bm-21D" secondAttribute="trailing" constant="18" id="SN1-a8-0lX"/>
-                    <constraint firstItem="sTD-Bm-21D" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="YyU-td-Erp"/>
+                    <constraint firstItem="sTD-Bm-21D" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="YyU-td-Erp"/>
+                    <constraint firstItem="sTD-Bm-21D" firstAttribute="leading" secondItem="TLu-V6-jbZ" secondAttribute="trailing" constant="27" id="a0D-HT-3tV"/>
                     <constraint firstItem="UYb-IW-CsW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="cW3-pC-7qs"/>
-                    <constraint firstItem="TLu-V6-jbZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="ixL-c7-ZYB"/>
+                    <constraint firstItem="TLu-V6-jbZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="jDL-Dc-XX4"/>
                     <constraint firstItem="zIu-gF-C71" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="108" id="koJ-yY-SkT"/>
                 </constraints>
             </tableViewCellContentView>

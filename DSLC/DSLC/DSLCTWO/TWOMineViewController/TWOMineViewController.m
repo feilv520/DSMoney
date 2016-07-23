@@ -824,7 +824,7 @@
 - (void)buttonChangeHeadImage:(UIButton *)button
 {
 
-    [UIView animateWithDuration:1.0f animations:^{
+    [UIView animateWithDuration:0.3f animations:^{
         butBlack.alpha = 0.5;
         butBlack.hidden = NO;
         viewDown.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT - 180, WIDTH_CONTROLLER_DEFAULT, 160);
@@ -989,7 +989,7 @@
 - (void)buttonCancle:(UIButton *)button
 {
     
-    [UIView animateWithDuration:1.0f animations:^{
+    [UIView animateWithDuration:0.3f animations:^{
         butBlack.alpha = 0.0;
         viewDown.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, 160);
     } completion:^(BOOL finished) {
@@ -1001,7 +1001,7 @@
 - (void)buttonBlackDisappear:(UIButton *)button
 {
     
-    [UIView animateWithDuration:1.0f animations:^{
+    [UIView animateWithDuration:0.3f animations:^{
         butBlack.alpha = 0.0;
         viewDown.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, 160);
     } completion:^(BOOL finished) {

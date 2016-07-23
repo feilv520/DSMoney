@@ -9,7 +9,7 @@
 #import "TWOMoneyMoreViewController.h"
 #import "TWOProductHuiFuViewController.h"
 
-@interface TWOMoneyMoreViewController ()
+@interface TWOMoneyMoreViewController () <UITextFieldDelegate>
 {
     UITextField *textFieldLift;
     
@@ -47,6 +47,7 @@
     [viewBottom addSubview:textFieldLift];
     textFieldLift.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     textFieldLift.textColor = [UIColor findZiTiColor];
+    textFieldLift.delegate = self;
     textFieldLift.keyboardType = UIKeyboardTypeDecimalPad; //带小数点的数字键盘
     [textFieldLift addTarget:self action:@selector(textFieldEdit:) forControlEvents:UIControlEventEditingChanged];
     
@@ -64,8 +65,22 @@
 {
     if (textFieldLift.text.length == 0) {
         buttonNext.backgroundColor = [UIColor findZiTiColor];
+        buttonNext.enabled = NO;
     } else {
         buttonNext.backgroundColor = [UIColor profitColor];
+        buttonNext.enabled = YES;
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location > 9) {
+        
+        return NO;
+        
+    } else {
+        
+        return YES;
     }
 }
 
@@ -124,11 +139,18 @@
 
 - (void)nextAction:(id)sender{
     
+    if (![NSString isPureFloat:textFieldLift.text]) {
+        
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"你输入的是非法数字"];
+        return;
+    }
+    
     if (textFieldLift.text.length == 0) {
         
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请输入充值金额"];
     } else if ([textFieldLift.text integerValue] < 100) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值金额最少为100元"];
         
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"充值金额最少为100元"];
     } else {
         
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];

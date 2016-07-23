@@ -17,6 +17,7 @@
 #import "TBaoJiViewController.h"
 #import "NewInviteViewController.h"
 #import "TWOProductHuiFuViewController.h"
+#import "TWOgameCenterViewController.h"
 
 @interface TWOJobCenterViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -292,10 +293,12 @@
         }
         case 7:{
             NSLog(@"体验金使用");
+            [self bugProduct];
             break;
         }
         case 8:{
             NSLog(@"首次有效投资");
+            [self bugProduct];
             break;
         }
         case 9:{
@@ -310,6 +313,7 @@
         }
         case 11:{
             NSLog(@"每日投资");
+            [self bugProduct];
             break;
         }
         case 12:{
@@ -320,6 +324,8 @@
         }
         case 13:{
             NSLog(@"玩小游戏");
+            TWOgameCenterViewController *gameVC = [[TWOgameCenterViewController alloc] init];
+            [self.navigationController pushViewController:gameVC animated:YES];
             break;
         }
         case 14:{
@@ -336,14 +342,17 @@
         }
         case 16:{
             NSLog(@"单笔投资");
+            [self bugProduct];
             break;
         }
         case 17:{
             NSLog(@"累计投资");
+            [self bugProduct];
             break;
         }
         case 18:{
             NSLog(@"固收投资");
+            [self bugProduct];
             break;
         }
         default:
@@ -398,6 +407,25 @@
     }];
 }
 
+- (void)bugProduct{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
+    
+    UIButton *indexButton = [app.tabBarVC.tabButtonArray objectAtIndex:1];
+    
+    for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+        
+        if (indexButton.tag != tempButton.tag) {
+            NSLog(@"%ld",(long)tempButton.tag);
+            [tempButton setSelected:NO];
+        }
+    }
+    
+    [indexButton setSelected:YES];
+    
+    [app.tabBarVC setTabbarViewHidden:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
