@@ -97,7 +97,7 @@
     cell.imageRight.image = [UIImage imageNamed:@"righticon"];
     cell.labelName.textColor = [UIColor profitColor];
     
-    cell.labelPhone.text = [userModel userAccount];
+    cell.labelPhone.text = [[userModel userAccount] stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
     
     return cell;
 }

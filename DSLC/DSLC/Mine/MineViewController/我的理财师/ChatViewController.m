@@ -27,6 +27,7 @@
     CGSize keyboardSize;
     UILabel *labelTime;
     NSString *timeStr;
+    UIImageView *imageViewRight;
     
     Chat *chat;
     SendTime *time;
@@ -159,7 +160,6 @@
 //发送消息
 - (void)sendMessage:(UIButton *)button
 {
-    
     buttonSend.enabled = NO;
     
     if (_textField.text.length == 0) {
@@ -178,9 +178,11 @@
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
                 NSLog(@"发出去了");
+                NSDictionary *dicPicture = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
                 chat = [[Chat alloc] init];
                 chat.sendUserId = [NSNumber numberWithInteger:[[dic objectForKey:@"id"] integerValue]];
                 chat.msgText = _textField.text;
+                chat.sendAvatarImg = [dicPicture objectForKey:@"avatarImg"];
                 
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -393,6 +395,7 @@
         
         cell.imageRight.layer.masksToBounds = YES;
         cell.imageRight.layer.cornerRadius = 20.0f;
+        cell.imageRight.tag = 101;
         
 //        cell.imageContect.image = [UIImage imageNamed:@"rightWindow@3x"];
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
