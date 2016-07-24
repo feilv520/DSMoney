@@ -223,7 +223,9 @@
     if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
         [self loginCome];
     } else {
-        NSLog(@"进入");
+        
+        // 刷新任务中心列表
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
     }
 }
 

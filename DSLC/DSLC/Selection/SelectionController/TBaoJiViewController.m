@@ -82,6 +82,9 @@
         closeItem.hidden = NO;
     } else {
         
+        // 刷新任务中心列表
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+        
         NSString *tokenString = [wView stringByEvaluatingJavaScriptFromString:@"jsLayout();"];
         
         NSLog(@"%@",tokenString);
@@ -262,6 +265,9 @@
     }
     
     [self getData];
+    
+    // 刷新任务中心列表
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
     
     [self.view resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];

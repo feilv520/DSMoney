@@ -776,6 +776,9 @@
                 [self haveNoWin];
             }
             
+            // 刷新任务中心列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+            
         } else {
             
             //摇动次数用完
