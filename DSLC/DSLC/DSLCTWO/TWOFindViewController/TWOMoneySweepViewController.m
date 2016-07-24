@@ -194,7 +194,7 @@
 #pragma mark 侃经---------------------------------
 - (void)getKanJingData
 {
-    NSDictionary *parmeter = @{@"type":@2, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber], @"pageSize":@10};
+    NSDictionary *parmeter = @{@"type":@3, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber], @"pageSize":@10};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -234,7 +234,7 @@
 #pragma mark 大扫描----------------------------------
 - (void)getBigSweepData
 {
-    NSDictionary *parmeter = @{@"type":@3, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber], @"pageSize":@10};
+    NSDictionary *parmeter = @{@"type":@2, @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber], @"pageSize":@10};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

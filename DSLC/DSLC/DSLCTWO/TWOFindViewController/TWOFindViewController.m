@@ -23,6 +23,7 @@
 #import "TBaoJiViewController.h"
 #import "TRankinglistViewController.h"
 #import "TWOLoginAPPViewController.h"
+#import "AnmitionView.h"
 
 @interface TWOFindViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
@@ -85,7 +86,7 @@
         
     } else {
         
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 413)];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 418)];
     }
     
     _tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
@@ -239,15 +240,16 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     myDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSLog(@"myDic = %@",myDic);
     
     if (indexPath.item == 4) {
         
-        TWOgameCenterViewController *gameVC = [[TWOgameCenterViewController alloc] init];
-        [self.navigationController pushViewController:gameVC animated:YES];
+        //游戏中心
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"waitMoment" object:nil];
+//        TWOgameCenterViewController *gameVC = [[TWOgameCenterViewController alloc] init];
+//        [self.navigationController pushViewController:gameVC animated:YES];
         
     } else if (indexPath.item == 1) {
         

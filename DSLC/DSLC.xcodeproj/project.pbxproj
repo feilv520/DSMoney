@@ -926,6 +926,9 @@
 		81E47C231D41D20B00977513 /* soundclose@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C211D41D20B00977513 /* soundclose@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81E47C2C1D41F8FE00977513 /* 结果音.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C2A1D41F8FE00977513 /* 结果音.wav */; settings = {ASSET_TAGS = (); }; };
 		81E47C2D1D41F8FE00977513 /* 摇一摇.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C2B1D41F8FE00977513 /* 摇一摇.wav */; settings = {ASSET_TAGS = (); }; };
+		81E47C2F1D44B6A200977513 /* 敬请期待ing.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C2E1D44B6A200977513 /* 敬请期待ing.png */; settings = {ASSET_TAGS = (); }; };
+		81E47C321D44BA7500977513 /* AnmitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E47C311D44BA7500977513 /* AnmitionView.m */; settings = {ASSET_TAGS = (); }; };
+		81E47C361D44CAC800977513 /* TWOUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E47C351D44CAC800977513 /* TWOUserModel.m */; settings = {ASSET_TAGS = (); }; };
 		81E54E6A1C1EB86D0007303B /* UsualQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E6482B1D3F656700B06D2B /* TWOBigSweepDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E6482A1D3F656700B06D2B /* TWOBigSweepDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E6482E1D3F817500B06D2B /* two默认头像@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E6482C1D3F817500B06D2B /* two默认头像@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -2874,6 +2877,11 @@
 		81E47C211D41D20B00977513 /* soundclose@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soundclose@3x.png"; sourceTree = "<group>"; };
 		81E47C2A1D41F8FE00977513 /* 结果音.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "结果音.wav"; sourceTree = "<group>"; };
 		81E47C2B1D41F8FE00977513 /* 摇一摇.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "摇一摇.wav"; sourceTree = "<group>"; };
+		81E47C2E1D44B6A200977513 /* 敬请期待ing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "敬请期待ing.png"; sourceTree = "<group>"; };
+		81E47C301D44BA7500977513 /* AnmitionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnmitionView.h; sourceTree = "<group>"; };
+		81E47C311D44BA7500977513 /* AnmitionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnmitionView.m; sourceTree = "<group>"; };
+		81E47C341D44CAC800977513 /* TWOUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOUserModel.h; sourceTree = "<group>"; };
+		81E47C351D44CAC800977513 /* TWOUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOUserModel.m; sourceTree = "<group>"; };
 		81E54E681C1EB86D0007303B /* UsualQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsualQuestionViewController.h; sourceTree = "<group>"; };
 		81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsualQuestionViewController.m; sourceTree = "<group>"; };
 		81E648291D3F656700B06D2B /* TWOBigSweepDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOBigSweepDetailViewController.h; sourceTree = "<group>"; };
@@ -4004,6 +4012,8 @@
 				8D15911C1D0FDA1600A4353D /* UIScrollView+UITouchEvent.m */,
 				8D7181951D2F4F29009CB54D /* NSString+md5String.h */,
 				8D7181961D2F4F29009CB54D /* NSString+md5String.m */,
+				81E47C301D44BA7500977513 /* AnmitionView.h */,
+				81E47C311D44BA7500977513 /* AnmitionView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -4444,6 +4454,7 @@
 				81E47C1D1D41D0FF00977513 /* soundopen@3x.png */,
 				81E47C201D41D20B00977513 /* soundclose@2x.png */,
 				81E47C211D41D20B00977513 /* soundclose@3x.png */,
+				81E47C2E1D44B6A200977513 /* 敬请期待ing.png */,
 				8177A0371CF3EE630057AA7B /* 产品安全等级图片 */,
 			);
 			path = TWOImage;
@@ -4669,6 +4680,7 @@
 		815D18F21D1CE71F00DFA753 /* 我的理财师 */ = {
 			isa = PBXGroup;
 			children = (
+				81E47C331D44CAAB00977513 /* 我的客户 */,
 				815D18FF1D1D37BB00DFA753 /* 我的理财师详情 */,
 				815D18F31D1CE72C00DFA753 /* 理财师列表 */,
 			);
@@ -5979,6 +5991,15 @@
 				81DEC8441CEEE358005E9D9F /* beijing@3x.png */,
 			);
 			name = "登录";
+			sourceTree = "<group>";
+		};
+		81E47C331D44CAAB00977513 /* 我的客户 */ = {
+			isa = PBXGroup;
+			children = (
+				81E47C341D44CAC800977513 /* TWOUserModel.h */,
+				81E47C351D44CAC800977513 /* TWOUserModel.m */,
+			);
+			name = "我的客户";
 			sourceTree = "<group>";
 		};
 		81F02E621CFC2397002F3135 /* 我的理财师 */ = {
@@ -8187,6 +8208,7 @@
 				8DC695BC1C3503D30055EC44 /* UMSCommentDetailController.xib in Resources */,
 				8D1921D21BD4FC840038195E /* MessageDetailViewController.xib in Resources */,
 				810F9C3F1CDC438B00BF39B5 /* 公益行@3x.png in Resources */,
+				81E47C2F1D44B6A200977513 /* 敬请期待ing.png in Resources */,
 				810F9C241CDC38B400BF39B5 /* baisanjiao@2x.png in Resources */,
 				8182A7F61C0EECD300FA1216 /* 组-19@3x.png in Resources */,
 				813FD5001BCE71110050E884 /* FBalancePaymentViewController.xib in Resources */,
@@ -9292,6 +9314,7 @@
 				811F0B021BF33421001F6AA4 /* BindingBankCardLiftUpMoney.m in Sources */,
 				811B62931CFEB98700B6F17E /* TWOHomePageProductCell.m in Sources */,
 				8D0CB4981BE760C00039D826 /* RiskDisclosureViewController.m in Sources */,
+				81E47C361D44CAC800977513 /* TWOUserModel.m in Sources */,
 				8D1DB6071C7EE6F4003CFDA6 /* CastUpMonkeyTableViewCell.m in Sources */,
 				81F237751BE86031009D7A67 /* CashFinishViewController.m in Sources */,
 				8D88D1001BFECCB40051D6DA /* MJRefreshGifHeader.m in Sources */,
@@ -9354,6 +9377,7 @@
 				81DEC8491CEEED77005E9D9F /* TWOForgetSecretERViewController.m in Sources */,
 				81898B781BDF180600DD4E44 /* UIPlaceHolderTextView.m in Sources */,
 				819C3ABA1BD483C4008D2CFD /* MyRedBagCell.m in Sources */,
+				81E47C321D44BA7500977513 /* AnmitionView.m in Sources */,
 				8D6E46931C9A782100F0F5B7 /* MDRadialProgressTheme.m in Sources */,
 				81600A6A1CB4FBE60075CD45 /* MyMonkeyModel.m in Sources */,
 				811F0B0B1BF33D42001F6AA4 /* BindingTwoCell.m in Sources */,

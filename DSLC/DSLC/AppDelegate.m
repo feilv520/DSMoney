@@ -36,6 +36,10 @@
     UIView *viewDown;
     UILabel *labelMonkey;
     UIImageView *imageSign;
+    
+    UIButton *buttonWait;
+    UIView *viewWait;
+    UIImageView *imageWait;
 }
 @property (nonatomic, strong) NSDictionary *flagDic;
 @property (nonatomic, strong) NSDictionary *flagLogin;
@@ -164,6 +168,7 @@
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(monkeyWithSuccess:) name:@"showMonkey" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showWaitNsnotice:) name:@"waitMoment" object:nil];
     
     [UMSocialData setAppKey:@"5642ad7e67e58e8463006218"];
     
@@ -714,7 +719,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 //猴子成功方法
-- (void)monkeyWithSuccess:(NSNotification *)not{
+- (void)monkeyWithSuccess:(NSNotification *)not
+{
     NSString *monkeyString = [not object];
     [self signFinish:monkeyString];
 }
@@ -779,6 +785,73 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     viewDown = nil;
     labelMonkey = nil;
     imageSign = nil;
+}
+
+//敬请期待
+- (void)showWaitNsnotice:(NSNotification *)nsnotice
+{
+    [self waitContentShow];
+}
+
+- (void)waitContentShow
+{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    buttonWait = [UIButton buttonWithType:UIButtonTypeCustom];
+    [app.tabBarVC.view addSubview:buttonWait];
+    buttonWait.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT);
+    buttonWait.backgroundColor = [UIColor blackColor];
+    buttonWait.alpha = 0.5;
+    buttonWait.tag = 721;
+    [buttonWait addTarget:self action:@selector(buttonBlackClickDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    viewWait = [[UIView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 530/2/2, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 530/2, 397/2 + 30)];
+    [app.tabBarVC.view addSubview:viewWait];
+    viewWait.backgroundColor = [UIColor clearColor];
+    
+    imageWait = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewWait.frame.size.width, viewWait.frame.size.height)];
+    [viewWait addSubview:imageWait];
+    imageWait.image = [UIImage imageNamed:@"敬请期待ing"];
+    imageWait.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClickedDisappear:)];
+    [imageWait addGestureRecognizer:tap];
+    
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.5;
+    
+    NSMutableArray *values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    [viewWait.layer addAnimation:animation forKey:nil];
+}
+
+//敬请期待消失
+- (void)buttonBlackClickDisappear:(UIButton *)button
+{
+    [buttonWait removeFromSuperview];
+    buttonWait = nil;
+    
+    [viewWait removeFromSuperview];
+    viewWait = nil;
+    
+    [imageWait removeFromSuperview];
+    imageWait = nil;
+}
+
+//敬请期待消失
+- (void)tapClickedDisappear:(UITapGestureRecognizer *)tap
+{
+    [buttonWait removeFromSuperview];
+    buttonWait = nil;
+    
+    [viewWait removeFromSuperview];
+    viewWait = nil;
+    
+    [imageWait removeFromSuperview];
+    imageWait = nil;
 }
 
 - (void)getMyAccountInfoFuction{

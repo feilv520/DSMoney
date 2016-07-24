@@ -10,6 +10,7 @@
 #import "TWOMyClientCell.h"
 #import "ChatViewController.h"
 #import "UserList.h"
+#import "TWOUserModel.h"
 
 @interface TWOMyClientViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -71,33 +72,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWOMyClientCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    UserList *userModel = [userArray objectAtIndex:indexPath.row];
+    TWOUserModel *userListModel = [userArray objectAtIndex:indexPath.row];
     
-    if ([[[dic objectForKey:@"id"] description] isEqualToString:[[userModel sendUserId] description]]) {
-        
-        cell.labelName.text = [userModel recUserName];
-        if ([[userModel recAvatarImg] isEqualToString:@""]) {
-            cell.imageHead.image = [UIImage imageNamed:@"two默认头像"];
-        } else {
-            cell.imageHead.yy_imageURL = [NSURL URLWithString:[userModel recAvatarImg]];
-        }
-        
+    cell.labelPhone.text = [[userListModel userAccount] stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    
+    if ([[userListModel userAvatarImg] isEqualToString:@""]) {
+        cell.imageHead.image = [UIImage imageNamed:@"two默认头像"];
     } else {
-        cell.labelName.text = [userModel sendUserName];
-        if ([[userModel sendAvatarImg] isEqualToString:@""]) {
-            cell.imageHead.image = [UIImage imageNamed:@"two默认头像"];
-        } else {
-            cell.imageHead.yy_imageURL = [NSURL URLWithString:[userModel sendAvatarImg]];
-        }
+        cell.imageHead.yy_imageURL = [NSURL URLWithString:[userListModel userAvatarImg]];
     }
-    
     cell.imageHead.layer.cornerRadius = cell.imageHead.frame.size.width/2;
     cell.imageHead.layer.masksToBounds = YES;
     cell.imageRight.image = [UIImage imageNamed:@"righticon"];
-    cell.labelName.textColor = [UIColor profitColor];
     
-    cell.labelPhone.text = [[userModel userAccount] stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    if ([[userListModel userRealName] isEqualToString:@""]) {
+        cell.labelName.text = @"";
+    } else {
+        cell.labelName.text = [userListModel userRealName];
+    }
+    cell.labelName.textColor = [UIColor profitColor];
     
     return cell;
 }
@@ -105,15 +98,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    UserList *userModel = [userArray objectAtIndex:indexPath.row];
+    TWOUserModel *userModel = [userArray objectAtIndex:indexPath.row];
     ChatViewController *chatVC = [[ChatViewController alloc] init];
-    if ([[[dic objectForKey:@"id"] description] isEqualToString:[[userModel sendUserId] description]]){
-        chatVC.IId = [userModel recUserId];
-    } else {
-        chatVC.IId = [userModel sendUserId];
-    }
-    NSLog(@"%@", [dic objectForKey:@"id"]);
+    chatVC.IId = [userModel userId];
     pushVC(chatVC);
 }
 
@@ -121,15 +108,15 @@
 - (void)getDataList
 {
     NSDictionary *parmeter = @{@"msgType":@0, @"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber]};
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"msg/getUserMsgList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"msg/getMyClientList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"客户列表~~~~~~~~~~~~~:%@", responseObject);
         [self loadingWithHidden:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-            NSMutableArray *dataArray = [responseObject objectForKey:@"Msg"];
+            NSMutableArray *dataArray = [responseObject objectForKey:@"user"];
             for (NSDictionary *dataDic in dataArray) {
-                UserList *userModel = [[UserList alloc] init];
+                TWOUserModel *userModel = [[TWOUserModel alloc] init];
                 [userModel setValuesForKeysWithDictionary:dataDic];
                 [userArray addObject:userModel];
             }
