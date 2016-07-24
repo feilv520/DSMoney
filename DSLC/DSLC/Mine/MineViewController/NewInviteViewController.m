@@ -239,14 +239,17 @@
     NSLog(@"sssssssssssssss%@", [DES3Util decrypt:[self.flagDic objectForKey:@"realName"]]);
     shareString = [shareString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"aaaaaaaaaaaaaaaaaaaa%@", shareString);
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@/invite.html",htmlFive];
+    
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
-                                      shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:喝咖啡,领红包,赚猴币多重惊喜等着你!  %@", shareString]
+                                      shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:喝咖啡,领红包,赚猴币多重惊喜等着你!  %@", urlString]
                                      shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/invite.html",htmlFive];
+    
     
     [UMSocialData defaultData].extConfig.wechatSessionData.title = @"邀请好友一起，免费共享星巴克";
     [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"邀请好友一起，免费共享星巴克";

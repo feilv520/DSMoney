@@ -179,7 +179,7 @@
         self.transMoney = @"100";
     }
     
-    NSDictionary *parmeter = @{@"curPage":[NSNumber numberWithInteger:page],@"status":@0,@"proPeriod":self.proPeriod,@"transMoney":self.transMoney,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":[NSNumber numberWithInteger:page],@"status":@0,@"proPeriod":self.proPeriod,@"transMoney":self.transMoney,@"token":[self.flagDic objectForKey:@"token"],@"pageSize":@1000};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -190,6 +190,7 @@
             TWORedBagModel *model = [[TWORedBagModel alloc] init];
             [model setValuesForKeysWithDictionary:dic];
             
+            // 类型 7  是新手红包
             if ([[[model redPacketType] description] isEqualToString:@"7"]) {
                 
             } else if ([[[model isEnabled] description] isEqualToString:@"0"]) {
@@ -199,6 +200,17 @@
             }
         }
         
+        moneyArray = (NSMutableArray *)[moneyArray sortedArrayUsingComparator:^NSComparisonResult(TWORedBagModel *obj1, TWORedBagModel *obj2) {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyy-MM-dd"];
+
+            NSDate *date1 = [formatter dateFromString:[obj1 endDate]];
+            NSDate *date2 = [formatter dateFromString:[obj2 endDate]];
+            NSComparisonResult result = [date1 compare:date2];
+            return result == NSOrderedDescending;
+        }];
+        
+        moneyArray = [moneyArray mutableCopy];
         [moneyArray addObjectsFromArray:moneyNoArray];
         
         if (page == 1) {

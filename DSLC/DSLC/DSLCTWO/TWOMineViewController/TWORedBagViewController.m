@@ -646,7 +646,7 @@
 #pragma mark --------------------------------
 
 - (void)getMyRedPacketListFuction{
-    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageRedBag],@"status":@0,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageRedBag],@"status":@0,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"],@"pageSize":@1000};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -661,6 +661,16 @@
                 [redBagModel setValuesForKeysWithDictionary:dataDic];
                 [redBagArray addObject:redBagModel];
             }
+            
+            redBagArray = (NSMutableArray *)[redBagArray sortedArrayUsingComparator:^NSComparisonResult(TWORedBagModel *obj1, TWORedBagModel *obj2) {
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                
+                NSDate *date1 = [formatter dateFromString:[obj1 endDate]];
+                NSDate *date2 = [formatter dateFromString:[obj2 endDate]];
+                NSComparisonResult result = [date1 compare:date2];
+                return result == NSOrderedDescending;
+            }];
             
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
                 moreFlag = YES;
@@ -695,7 +705,7 @@
 
 - (void)getMyIncreaseListFuction
 {
-    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageAddXiQuan] ,@"status":@"0,1" ,@"pageSize":@10 ,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageAddXiQuan] ,@"status":@"0,1" ,@"pageSize":@10 ,@"token":[self.flagDic objectForKey:@"token"],@"pageSize":@1000};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
