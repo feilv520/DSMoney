@@ -222,7 +222,7 @@
 }
 #pragma mark history>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 - (void)getMyIncreaseListFuction{
-    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber],@"status":@"1,2,3",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber],@"status":@"2,3",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

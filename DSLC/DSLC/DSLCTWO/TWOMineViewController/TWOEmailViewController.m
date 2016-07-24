@@ -94,6 +94,9 @@
             [self.navigationController pushViewController:bindingEmailVC animated:YES];
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
             
+            // 刷新任务中心列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:[responseObject objectForKey:@"resultMsg"]]];
         }

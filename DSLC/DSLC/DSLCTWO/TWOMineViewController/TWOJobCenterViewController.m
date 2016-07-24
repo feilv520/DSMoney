@@ -60,6 +60,8 @@
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserTaskListFuction) name:@"taskListFuction" object:nil];
+    
     [self getUserTaskListFuction];
     [self tableViewShow];
     _tableView.hidden = YES;

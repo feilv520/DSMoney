@@ -109,6 +109,9 @@
             addressSetVC.addressString = _textView.text;
             pushVC(addressSetVC);
             
+            // 刷新任务中心列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }

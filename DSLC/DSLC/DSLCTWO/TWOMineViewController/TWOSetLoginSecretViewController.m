@@ -129,6 +129,10 @@
             TWOChangeLoginFinishViewController *loginFinish = [[TWOChangeLoginFinishViewController alloc] init];
             loginFinish.state = YES;
             pushVC(loginFinish);
+            
+            // 刷新任务中心列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }

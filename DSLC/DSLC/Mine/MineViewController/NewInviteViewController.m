@@ -279,12 +279,42 @@
         //得到分享到的微博平台名
         NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
     }
+    // 刷新任务中心列表
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
 }
 
 #pragma mark 网络请求方法
 #pragma mark --------------------------------
 
 - (void)getAdvList{
+    
+    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"10"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"ADProduct = %@",responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+            return ;
+        }
+        
+        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
+            AdModel *adModel = [[AdModel alloc] init];
+            [adModel setValuesForKeysWithDictionary:dic];
+            [adModelArray addObject:adModel];
+        }
+        
+        [self contentShow];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+- (void)getInviteInfo{
     
     NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"10"};
     
