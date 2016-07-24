@@ -985,7 +985,7 @@
         moneyString = allMoneyString;
     }
     
-    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":moneyString,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":moneyString,@"token":[self.flagDic objectForKey:@"token"],@"pageSize":@1000};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -1020,7 +1020,7 @@
         moneyString = allMoneyString;
     }
     
-    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":moneyString,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":@1,@"status":@0,@"proPeriod":[self.detailM productPeriod],@"transMoney":moneyString,@"token":[self.flagDic objectForKey:@"token"],@"pageSize":@1000};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

@@ -200,7 +200,7 @@
             
             self.totalMoneyString = [DES3Util decrypt:[responseObject objectForKey:@"totalProfit"]];
             
-            if ([[responseObject objectForKey:@"Profit"] count] == 0) {
+            if ([[responseObject objectForKey:@"Profit"] count] == 0 || [[DES3Util decrypt:[responseObject objectForKey:@"totalProfit"]] isEqualToString:@"0.00"]) {
                 [self noAddMoneyDataShow];
             } else {
                 [self tableViewShow];

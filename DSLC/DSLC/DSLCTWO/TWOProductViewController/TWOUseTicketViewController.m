@@ -171,7 +171,7 @@
         self.transMoney = @"100";
     }
     
-    NSDictionary *parmeter = @{@"curPage":[NSNumber numberWithInteger:page],@"status":@0,@"proPeriod":self.proPeriod,@"transMoney":self.transMoney,@"token":[self.flagDic objectForKey:@"token"]};
+    NSDictionary *parmeter = @{@"curPage":[NSNumber numberWithInteger:page],@"status":@0,@"proPeriod":self.proPeriod,@"transMoney":self.transMoney,@"token":[self.flagDic objectForKey:@"token"],@"pageSize":@1000};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyIncreaseList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
