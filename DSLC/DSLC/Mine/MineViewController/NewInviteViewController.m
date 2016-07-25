@@ -37,6 +37,8 @@
     NSString *fString;
     
     YYAnimatedImageView *imageViewBanner;
+    
+    NSDictionary *noticeInfo;
 }
 
 @end
@@ -67,6 +69,7 @@
     viewGray.alpha = 0.3;
     
     [self getAdvList];
+    [self getInviteInfo];
     
     viewGray.hidden = YES;
 }
@@ -242,14 +245,22 @@
     
     NSString *urlString = [NSString stringWithFormat:@"%@/invite.html",htmlFive];
     
+    NSURL *url = [NSURL URLWithString:[noticeInfo objectForKey:@"cover"]];
+    
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    UIImage *image = [[UIImage alloc] initWithData:data];
+    
+    if ([[noticeInfo objectForKey:@"cover"] isEqualToString:@""] || [noticeInfo objectForKey:@"cover"] == nil) {
+        image = [UIImage imageNamed:@"默认头像"];
+    }
+    
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
                                       shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:喝咖啡,领红包,赚猴币多重惊喜等着你!  %@", urlString]
-                                     shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
+                                     shareImage:image
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
-    
-    
     
     [UMSocialData defaultData].extConfig.wechatSessionData.title = @"邀请好友一起，免费共享星巴克";
     [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"邀请好友一起，免费共享星巴克";
@@ -316,24 +327,13 @@
 
 - (void)getInviteInfo{
     
-    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"10"};
+    NSDictionary *parmeter = @{@"type":@"4",@"sendType":@"3"};
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"ADProduct = %@",responseObject);
+        NSLog(@"getInviteInfo = %@",responseObject);
         
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            return ;
-        }
-        
-        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
-            AdModel *adModel = [[AdModel alloc] init];
-            [adModel setValuesForKeysWithDictionary:dic];
-            [adModelArray addObject:adModel];
-        }
-        
-        [self contentShow];
+        noticeInfo = [[responseObject objectForKey:@"noticeInfo"] firstObject];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

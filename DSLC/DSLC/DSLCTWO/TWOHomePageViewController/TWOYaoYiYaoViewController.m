@@ -49,6 +49,10 @@
     
     UIButton *butSound;
     BOOL soundState;
+    
+    NSDictionary *noticeInfo;
+    UIImage *shareImage;
+    YYAnimatedImageView *shareImageView;
 }
 
 @end
@@ -93,6 +97,8 @@
     } else {
         [self showCiShuData];
     }
+    
+    [self getInviteInfo];
     
     [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:YES];
     [self becomeFirstResponder];
@@ -822,20 +828,30 @@
         shareString = [shareString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSLog(@"aaaaaaaaaaaaaaaaaaaa%@", shareString);
         
+        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:nil];
+        
         NSString *urlString = [NSString stringWithFormat:@"%@/shakeshare.html",htmlFive];
+        
+        NSURL *url = [NSURL URLWithString:[noticeInfo objectForKey:@"cover"]];
+        
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        
+        UIImage *image = [[UIImage alloc] initWithData:data];
+        
+        if ([[noticeInfo objectForKey:@"cover"] isEqualToString:@""] || [noticeInfo objectForKey:@"cover"] == nil) {
+            image = [UIImage imageNamed:@"默认头像"];
+        }
         
         [UMSocialSnsService presentSnsIconSheetView:self
                                              appKey:@"5642ad7e67e58e8463006218"
-                                          shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:喝咖啡,领红包,赚猴币多重惊喜等着你!  %@", urlString]
-                                         shareImage:[UIImage imageNamed:@"fenxiangtouxiang"]
+                                          shareText:[noticeInfo objectForKey:@"content"]
+                                         shareImage:image
                                     shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                            delegate:self];
         
-        
-        
-        [UMSocialData defaultData].extConfig.wechatSessionData.title = @"邀请好友一起，免费共享星巴克";
-        [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"邀请好友一起，免费共享星巴克";
-        [UMSocialData defaultData].extConfig.qqData.title = @"邀请好友一起，免费共享星巴克";
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = [noticeInfo objectForKey:@"title"];
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = [noticeInfo objectForKey:@"title"];
+        [UMSocialData defaultData].extConfig.qqData.title = [noticeInfo objectForKey:@"title"];
         
         [UMSocialData defaultData].extConfig.wechatSessionData.url = urlString;
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = urlString;
@@ -885,6 +901,25 @@
     [nvc setNavigationBarHidden:YES animated:YES];
     
     [self presentViewController:nvc animated:YES completion:^{
+        
+    }];
+}
+
+- (void)getInviteInfo{
+    
+    NSDictionary *parmeter = @{@"type":@"4",@"sendType":@"3"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"getInviteInfo = %@",responseObject);
+        
+        shareImage = [[UIImage alloc] init];
+        
+        noticeInfo = [[responseObject objectForKey:@"noticeInfo"] firstObject];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
         
     }];
 }

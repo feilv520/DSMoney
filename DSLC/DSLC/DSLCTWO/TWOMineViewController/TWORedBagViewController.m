@@ -646,7 +646,7 @@
 #pragma mark --------------------------------
 
 - (void)getMyRedPacketListFuction{
-    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageRedBag],@"status":@0,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"],@"pageSize":@1000};
+    NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageRedBag],@"status":@0,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"],@"pageSize":@10};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"welfare/getMyRedPacketList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
@@ -671,6 +671,8 @@
                 NSComparisonResult result = [date1 compare:date2];
                 return result == NSOrderedDescending;
             }];
+            
+            redBagArray = [redBagArray mutableCopy];
             
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
                 moreFlag = YES;
