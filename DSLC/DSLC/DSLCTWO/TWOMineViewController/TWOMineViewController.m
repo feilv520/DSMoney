@@ -594,9 +594,8 @@
             [self.navigationController pushViewController:tidyMoneyVC animated:YES];
             
         } else {
-            //我的特权本金
-            TWOMyPrerogativeMoneyViewController *myPrerogativeMoneyVC = [[TWOMyPrerogativeMoneyViewController alloc] init];
-            [self.navigationController pushViewController:myPrerogativeMoneyVC animated:YES];
+            //特权本金开关
+            [self teQuanMoneySwitch];
         }
     } else {
         if (indexPath.row == 1) {
@@ -1171,8 +1170,32 @@
     [self.view addSubview:loadingImgView];
     
     loadingImgView.hidden = NO;
-    
-    
+}
+
+//特权本金开关
+#pragma mark teQuanMoney~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- (void)teQuanMoneySwitch
+{
+    NSDictionary *parmeter = @{@"key":@"privilege"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"sys/sysSwitch" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"特权本金开关********%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:201]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"waitMoment" object:nil];
+            
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            //我的特权本金
+            TWOMyPrerogativeMoneyViewController *myPrerogativeMoneyVC = [[TWOMyPrerogativeMoneyViewController alloc] init];
+            [self.navigationController pushViewController:myPrerogativeMoneyVC animated:YES];
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (void)loadingWithHiddenTwo:(BOOL)hidden{

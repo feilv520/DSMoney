@@ -23,7 +23,6 @@
 #import "TBaoJiViewController.h"
 #import "TRankinglistViewController.h"
 #import "TWOLoginAPPViewController.h"
-#import "AnmitionView.h"
 
 @interface TWOFindViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
@@ -247,40 +246,23 @@
     if (indexPath.item == 4) {
         
         //游戏中心
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"waitMoment" object:nil];
-//        TWOgameCenterViewController *gameVC = [[TWOgameCenterViewController alloc] init];
-//        [self.navigationController pushViewController:gameVC animated:YES];
+        [self gameOpenSwitch];
         
     } else if (indexPath.item == 1) {
         
-        NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
-        //判断'特权本金'登录态
-        if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-            
-            TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
-            UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
-            [nvc setNavigationBarHidden:YES animated:YES];
-            
-            [self presentViewController:nvc animated:YES completion:^{
-                
-            }];
-            return;
-            
-        } else {
-            TWOMyPrerogativeMoneyViewController *myPrerogativeMoney = [[TWOMyPrerogativeMoneyViewController alloc] init];
-            myPrerogativeMoney.activity = NO;
-            [self.navigationController pushViewController:myPrerogativeMoney animated:YES];
-        }
+        //特权本金开关
+        [self teQuanMoneySwitch];
         
     } else if (indexPath.item == 0) {
         
         TWOFindActivityCenterViewController *findActivityVC = [[TWOFindActivityCenterViewController alloc] init];
         pushVC(findActivityVC);
+        
     } else if (indexPath.item == 2) {
         
-        TBigTurntableViewController *bigTurntable = [[TBigTurntableViewController alloc] init];
-        bigTurntable.tokenString = [myDic objectForKey:@"token"];
-        [self.navigationController pushViewController:bigTurntable animated:YES];
+        //大转盘开关
+        [self bigWheelSwitch];
+        
     } else if (indexPath.item == 3) {
         
         TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
@@ -509,8 +491,99 @@
     }];
 }
 
+//游戏功能开关
+#pragma mark switch------------------------------------------
+- (void)gameOpenSwitch
+{
+    NSDictionary *parmeter = @{@"key":@"game"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"sys/sysSwitch" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSLog(@"游戏功能开关>>>>>>>>>>>%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:201]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"waitMoment" object:nil];
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            //游戏中心
+            TWOgameCenterViewController *gameVC = [[TWOgameCenterViewController alloc] init];
+            [self.navigationController pushViewController:gameVC animated:YES];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//特权本金开关
+#pragma mark teQuanMoney~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- (void)teQuanMoneySwitch
+{
+    NSDictionary *parmeter = @{@"key":@"privilege"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"sys/sysSwitch" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"特权本金开关********%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:201]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"waitMoment" object:nil];
+            
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+            //判断'特权本金'登录态
+            if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+                
+                TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+                UINavigationController *nvc=[[UINavigationController alloc] initWithRootViewController:loginVC];
+                [nvc setNavigationBarHidden:YES animated:YES];
+                
+                [self presentViewController:nvc animated:YES completion:^{
+                    
+                }];
+                return;
+                
+            } else {
+                TWOMyPrerogativeMoneyViewController *myPrerogativeMoney = [[TWOMyPrerogativeMoneyViewController alloc] init];
+                myPrerogativeMoney.activity = NO;
+                [self.navigationController pushViewController:myPrerogativeMoney animated:YES];
+            }
+
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//大转盘开关
+#pragma mark bigWheelSwitch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+- (void)bigWheelSwitch
+{
+    NSDictionary *parmeter = @{@"key":@"bigWheel"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"sys/sysSwitch" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSLog(@"大转盘游戏开关$$$$$$$$$$$$$$$%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:201]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"waitMoment" object:nil];
+            
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]){
+            
+            TBigTurntableViewController *bigTurntable = [[TBigTurntableViewController alloc] init];
+            bigTurntable.tokenString = [myDic objectForKey:@"token"];
+            [self.navigationController pushViewController:bigTurntable animated:YES];
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+    [super didReceiveMemoryWarning]; //
     // Dispose of any resources that can be recreated.
 }
 

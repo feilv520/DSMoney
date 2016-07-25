@@ -927,7 +927,6 @@
 		81E47C2C1D41F8FE00977513 /* 结果音.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C2A1D41F8FE00977513 /* 结果音.wav */; settings = {ASSET_TAGS = (); }; };
 		81E47C2D1D41F8FE00977513 /* 摇一摇.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C2B1D41F8FE00977513 /* 摇一摇.wav */; settings = {ASSET_TAGS = (); }; };
 		81E47C2F1D44B6A200977513 /* 敬请期待ing.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C2E1D44B6A200977513 /* 敬请期待ing.png */; settings = {ASSET_TAGS = (); }; };
-		81E47C321D44BA7500977513 /* AnmitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E47C311D44BA7500977513 /* AnmitionView.m */; settings = {ASSET_TAGS = (); }; };
 		81E47C361D44CAC800977513 /* TWOUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E47C351D44CAC800977513 /* TWOUserModel.m */; settings = {ASSET_TAGS = (); }; };
 		81E54E6A1C1EB86D0007303B /* UsualQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E6482B1D3F656700B06D2B /* TWOBigSweepDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E6482A1D3F656700B06D2B /* TWOBigSweepDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -2878,8 +2877,6 @@
 		81E47C2A1D41F8FE00977513 /* 结果音.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "结果音.wav"; sourceTree = "<group>"; };
 		81E47C2B1D41F8FE00977513 /* 摇一摇.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "摇一摇.wav"; sourceTree = "<group>"; };
 		81E47C2E1D44B6A200977513 /* 敬请期待ing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "敬请期待ing.png"; sourceTree = "<group>"; };
-		81E47C301D44BA7500977513 /* AnmitionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnmitionView.h; sourceTree = "<group>"; };
-		81E47C311D44BA7500977513 /* AnmitionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnmitionView.m; sourceTree = "<group>"; };
 		81E47C341D44CAC800977513 /* TWOUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOUserModel.h; sourceTree = "<group>"; };
 		81E47C351D44CAC800977513 /* TWOUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOUserModel.m; sourceTree = "<group>"; };
 		81E54E681C1EB86D0007303B /* UsualQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsualQuestionViewController.h; sourceTree = "<group>"; };
@@ -4012,8 +4009,6 @@
 				8D15911C1D0FDA1600A4353D /* UIScrollView+UITouchEvent.m */,
 				8D7181951D2F4F29009CB54D /* NSString+md5String.h */,
 				8D7181961D2F4F29009CB54D /* NSString+md5String.m */,
-				81E47C301D44BA7500977513 /* AnmitionView.h */,
-				81E47C311D44BA7500977513 /* AnmitionView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -9377,7 +9372,6 @@
 				81DEC8491CEEED77005E9D9F /* TWOForgetSecretERViewController.m in Sources */,
 				81898B781BDF180600DD4E44 /* UIPlaceHolderTextView.m in Sources */,
 				819C3ABA1BD483C4008D2CFD /* MyRedBagCell.m in Sources */,
-				81E47C321D44BA7500977513 /* AnmitionView.m in Sources */,
 				8D6E46931C9A782100F0F5B7 /* MDRadialProgressTheme.m in Sources */,
 				81600A6A1CB4FBE60075CD45 /* MyMonkeyModel.m in Sources */,
 				811F0B0B1BF33D42001F6AA4 /* BindingTwoCell.m in Sources */,
@@ -9752,8 +9746,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9779,7 +9773,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "92f9bc8c-df66-45c7-8d36-01437a7b2915";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -9791,8 +9785,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9818,7 +9812,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "92f9bc8c-df66-45c7-8d36-01437a7b2915";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

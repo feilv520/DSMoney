@@ -44,6 +44,8 @@
     UIButton *buttonImage;
     UIButton *buttonRightTop;
     UIButton *butRightDown;
+    
+    NSString *gameState;
 }
 
 @end
@@ -325,6 +327,14 @@
 //兑换猴币按钮
 - (void)cashMonkeyCoinButton:(UIButton *)button
 {
+    gameState = @"monkeyCoin";
+    //调用猴币兑换积分的开关
+    [self gameOpenSwitch];
+}
+
+//兑换猴币弹出视图布局
+- (void)cashMonekeyCoin
+{
     if ([integralString integerValue] >= [exchangeRatioStr integerValue]) {
         
         AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -421,9 +431,7 @@
 - (void)bigTurntableButton:(UIButton *)button
 {
     NSLog(@"big");
-    TBigTurntableViewController *bigPanVC = [[TBigTurntableViewController alloc] init];
-    bigPanVC.tokenString = [self.flagDic objectForKey:@"token"];
-    pushVC(bigPanVC);
+    [self bigWheelSwitch];
 }
 
 //爆击红包按钮方法
@@ -447,8 +455,8 @@
 - (void)gameCenterButton:(UIButton *)button
 {
     NSLog(@"game");
-    TWOgameCenterViewController *gameCenterVC = [[TWOgameCenterViewController alloc] init];
-    pushVC(gameCenterVC);
+    gameState = @"center";
+    [self gameOpenSwitch];
 }
 
 //确定兑换按钮
@@ -522,6 +530,61 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             [self getUserMonkeyInfosFuction];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//游戏功能开关
+#pragma mark switch------------------------------------------
+- (void)gameOpenSwitch
+{
+    NSDictionary *parmeter = @{@"key":@"game"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"sys/sysSwitch" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSLog(@"游戏功能开关>>>>>>>>>>>%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:201]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"waitMoment" object:nil];
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            //游戏中心
+            if ([gameState isEqualToString:@"monkeyCoin"]) {
+                //积分兑换猴币弹窗
+                [self cashMonekeyCoin];
+            } else if ([gameState isEqualToString:@"center"]) {
+                //进入游戏中心页面
+                TWOgameCenterViewController *gameCenterVC = [[TWOgameCenterViewController alloc] init];
+                pushVC(gameCenterVC);
+            }
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//大转盘开关
+#pragma mark bigWheelSwitch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+- (void)bigWheelSwitch
+{
+    NSDictionary *parmeter = @{@"key":@"bigWheel"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"sys/sysSwitch" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSLog(@"大转盘游戏开关$$$$$$$$$$$$$$$%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:201]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"waitMoment" object:nil];
+            
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]){
+            
+            TBigTurntableViewController *bigPanVC = [[TBigTurntableViewController alloc] init];
+            bigPanVC.tokenString = [self.flagDic objectForKey:@"token"];
+            pushVC(bigPanVC);
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
