@@ -52,7 +52,7 @@
 // 手势标识文件
 - (NSDictionary *)flagDic{
     if (_flagDic == nil) {
-
+        
         if (![FileOfManage ExistOfFile:@"Flag.plist"]) {
             [FileOfManage createWithFile:@"Flag.plist"];
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"FlagWithVC",@"YES",@"FristOpen",nil];
@@ -140,7 +140,7 @@
     [self exitNetwork];
     
     // 版本控制接口
-//    [self versionAlertView];
+    //    [self versionAlertView];
     
     NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
@@ -183,7 +183,7 @@
     NSLog(@"userDIC = %@",userDIC);
     
     NSString *handFlag;
-
+    
     if (userDIC == nil) {
         handFlag = @"NO";
     } else {
@@ -200,7 +200,7 @@
     
     if ([[self.flagDic objectForKey:@"FristOpen"] isEqualToString:@"NO"] ) {
         if ([loginFlag isEqualToString:@"NO"] || [handFlag isEqualToString:@"NO"]) {
-
+            
             //        2.0首页
             TWOSelectionViewController *twoSelectionVC = [[TWOSelectionViewController alloc] init];
             UINavigationController *twoNavigation1 = [[UINavigationController alloc] initWithRootViewController:twoSelectionVC];
@@ -212,20 +212,20 @@
             //        2.0发现
             TWOFindViewController *findVC = [[TWOFindViewController alloc] init];
             UINavigationController *navigationFind = [[UINavigationController alloc] initWithRootViewController:findVC];
-
-        //        2.0我的
+            
+            //        2.0我的
             TWOMineViewController *twoMineVC = [[TWOMineViewController alloc] init];
-//            TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
+            //            TWOLoginAPPViewController *loginAPPVC = [[TWOLoginAPPViewController alloc] init];
             UINavigationController *navigationTwoMine = [[UINavigationController alloc] initWithRootViewController:twoMineVC];
             
-    //        2.0
+            //        2.0
             self.viewControllerArr = @[twoNavigation1, twoNavigation, navigationFind, navigationTwoMine];
             
-    ////        2.0
+            ////        2.0
             butGrayArr = @[@"selection_gray", @"production_gray", @"found_gray", @"mine_gray"];
             butColorArr = @[@"selection", @"production", @"found", @"mine"];
             
-    //        for循环4要改成3***********************************
+            //        for循环4要改成3***********************************
             buttonArr = [NSMutableArray array];
             for (int i = 0; i < 4; i++) {
                 
@@ -322,7 +322,7 @@
         WelcomeViewController *welcome = [[WelcomeViewController alloc] init];
         self.window.rootViewController = welcome;
     }
-
+    
     
     return YES;
 }
@@ -355,7 +355,7 @@ void UncaughtExceptionHandler(NSException *exception){
              case AFNetworkReachabilityStatusNotReachable:
              {
                  NSLog(@"无网络");
-//                 [ProgressHUD showMessage:@"无网络" Width:100 High:20];
+                 //                 [ProgressHUD showMessage:@"无网络" Width:100 High:20];
                  network = NO;
                  change = YES;
                  break;
@@ -364,7 +364,7 @@ void UncaughtExceptionHandler(NSException *exception){
              case AFNetworkReachabilityStatusReachableViaWiFi:
              {
                  NSLog(@"WiFi网络");
-//                 [ProgressHUD showMessage:@"WiFi网络" Width:100 High:20];
+                 //                 [ProgressHUD showMessage:@"WiFi网络" Width:100 High:20];
                  network = YES;
                  change = YES;
                  break;
@@ -373,7 +373,7 @@ void UncaughtExceptionHandler(NSException *exception){
              case AFNetworkReachabilityStatusReachableViaWWAN:
              {
                  NSLog(@"无线网络");
-//                 [ProgressHUD showMessage:@"无线网络" Width:100 High:20];
+                 //                 [ProgressHUD showMessage:@"无线网络" Width:100 High:20];
                  network = YES;
                  change = YES;
                  break;
@@ -389,23 +389,23 @@ void UncaughtExceptionHandler(NSException *exception){
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     
-//    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
-//        [FileOfManage createWithFile:@"isLogin.plist"];
-//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-//        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-//    } else {
-//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
-//        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
-//    }
-//    
-//    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
-//        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
-//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-//        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
-//    } else {
-//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
-//        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
-//    }
+    //    if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
+    //        [FileOfManage createWithFile:@"isLogin.plist"];
+    //        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+    //        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    //    } else {
+    //        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
+    //        [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
+    //    }
+    //
+    //    if (![FileOfManage ExistOfFile:@"sumbitWithFrg.plist"]) {
+    //        [FileOfManage createWithFile:@"sumbitWithFrg.plist"];
+    //        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+    //        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+    //    } else {
+    //        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"ifFrg",nil];
+    //        [dic writeToFile:[FileOfManage PathOfFile:@"sumbitWithFrg.plist"] atomically:YES];
+    //    }
     
 }
 
@@ -439,7 +439,7 @@ void UncaughtExceptionHandler(NSException *exception){
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
             [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
         }
-    }    
+    }
 }
 
 // 版本提示框 200 开启 400 没开
@@ -455,6 +455,7 @@ void UncaughtExceptionHandler(NSException *exception){
         if ([result isEqualToNumber:@200]) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新版本请更新(已更新请忽略)" delegate:self cancelButtonTitle:nil otherButtonTitles:@"去更新", nil];
             alertView.delegate = self;
+            alertView.tag = 9900;
             [alertView show];
             
         }
@@ -465,9 +466,12 @@ void UncaughtExceptionHandler(NSException *exception){
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 0) {
-        NSString *url = @"https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8";
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    if (alertView.tag == 9900) {
+        
+        if (buttonIndex == 0) {
+            NSString *url = @"https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        }
     }
 }
 
@@ -489,13 +493,6 @@ void UncaughtExceptionHandler(NSException *exception){
 
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//    rootViewController.deviceTokenValueLabel.text =
-//    [NSString stringWithFormat:@"%@", deviceToken];
-//    rootViewController.deviceTokenValueLabel.textColor =
-//    [UIColor colorWithRed:0.0 / 255
-//                    green:122.0 / 255
-//                     blue:255.0 / 255
-//                    alpha:1];
     
     NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
     [JPUSHService registerDeviceToken:deviceToken];
@@ -538,16 +535,16 @@ forRemoteNotification:(NSDictionary *)userInfo
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-//    NSDictionary *aps = [userInfo valueForKey:@"aps"];
-//    NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
-//    NSInteger badge = [[aps valueForKey:@"badge"] integerValue];
-//    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
+    //    NSDictionary *aps = [userInfo valueForKey:@"aps"];
+    //    NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
+    //    NSInteger badge = [[aps valueForKey:@"badge"] integerValue];
+    //    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
     // 取得自定义字段内容，userInfo就是后台返回的JSON数据，是一个字典
     
     application.applicationIconBadgeNumber = 0;
     [JPUSHService handleRemoteNotification:userInfo];
     NSLog(@"收到通知:%@", [self logDic:userInfo]);
-//    [rootViewController addNotificationCount];
+    //    [rootViewController addNotificationCount];
 }
 
 - (void)application:(UIApplication *)application
@@ -555,9 +552,25 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:
 (void (^)(UIBackgroundFetchResult))completionHandler {
     [JPUSHService handleRemoteNotification:userInfo];
-    NSLog(@"收到通知:%@", [self logDic:userInfo]);
-//    [rootViewController addNotificationCount];
+    NSLog(@"收到通知::::%@", [self logDic:userInfo]);
+    //    [rootViewController addNotificationCount];
     
+    if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
+    {
+        //此时app在前台运行，我的做法是弹出一个alert，告诉用户有一条推送，用户可以选择查看或者忽略
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"推送消息"
+                                                         message:@"您有一条新的推送消息!"
+                                                        delegate:self
+                                               cancelButtonTitle:@"取消"
+                                               otherButtonTitles:@"查看",nil];
+        alert.tag = 9800;
+        [alert show];
+        
+    } else {
+        //这里是app未运行或者在后台，通过点击手机通知栏的推送消息打开app时可以在这里进行处理，比如，拿到推送里的内容或者附加      字段(假设，推送里附加了一个url为 www.baidu.com)，那么你就可以拿到这个url，然后进行跳转到相应店web页，当然，不一定必须是web页，也可以是你app里的任意一个controll，跳转的话用navigation或者模态视图都可以
+    }
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber  =  0;
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
@@ -589,7 +602,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 - (void)loginFuction{
-
+    
     NSDictionary *parmeter = @{@"phone":[self.flagUserInfo objectForKey:@"phone"],@"password":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"password"]]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"login" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
@@ -597,7 +610,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
         NSLog(@"register = %@",responseObject);
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:@200]) {
-//            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            //            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
             
             if (![FileOfManage ExistOfFile:@"Member.plist"]) {
                 [FileOfManage createWithFile:@"Member.plist"];
@@ -684,7 +697,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                         }];
                     });
                 } else {
-                
+                    
                     NSString *aliasString = [NSString stringWithFormat:@"%@_%@",invitationMyCodeString,userLevelString];
                     
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -901,7 +914,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
             }
             
         } else {
-//            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            //            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -919,6 +932,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的Extras附加字段，key是自己定义的
     
     NSLog(@"content = %@",content);
+    NSLog(@"extras = %@",extras);
+    NSLog(@"customizeField1 = %@",customizeField1);
     
 }
 

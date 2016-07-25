@@ -102,8 +102,11 @@
                 [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
         }
         responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
+        
 //        NSLog(@"%@",responseString);
         NSDictionary *responseData = [MyAfHTTPClient parseJSONStringToNSDictionary:responseString];
+        
+//        NSLog(@"responseData = %@",responseData);
         
         success(task,responseData);
         if ([[responseData objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:400]]) {

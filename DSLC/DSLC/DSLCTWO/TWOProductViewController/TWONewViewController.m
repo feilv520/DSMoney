@@ -756,11 +756,11 @@
     
     if (reloadButton == nil) {
         
-        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 55, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:@"重新加载"];
+        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 55, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:nil];
         
         reloadButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
-        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateHighlighted];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"TWORefrush"] forState:UIControlStateNormal];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"TWORefrush"] forState:UIControlStateHighlighted];
         
         [reloadButton addTarget:self action:@selector(getProductList) forControlEvents:UIControlEventTouchUpInside];
     }

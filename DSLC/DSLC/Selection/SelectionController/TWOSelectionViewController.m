@@ -359,6 +359,7 @@
     TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
     messageDetailVC.messageID = [messageModel ID];
     pushVC(messageDetailVC);
+    
 }
 
 -(void)timerFireMethod:(NSTimer *)theTimer
@@ -669,7 +670,7 @@
     
     YYAnimatedImageView *bannerLast = [YYAnimatedImageView new];
     bannerLast.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:photoArray.count - 1] adImg]];
-    bannerLast.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    bannerLast.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     
     for (NSInteger i = 0; i < photoArray.count; i++) {
         YYAnimatedImageView *bannerObject = [YYAnimatedImageView new];
@@ -744,6 +745,9 @@
     bannerVC.photoName = [[photoArray objectAtIndex:pageControl.currentPage] adLabel];
     bannerVC.photoUrl = [[photoArray objectAtIndex:pageControl.currentPage] adLink];
     bannerVC.page = pageControl.currentPage;
+    
+//    NSLog(@"--=-=-=--%@,%@,%ld",[[photoArray objectAtIndex:pageControl.currentPage] adLabel],[[photoArray objectAtIndex:pageControl.currentPage] adLink],pageControl.currentPage);
+    
     pushVC(bannerVC);
 }
 
@@ -850,7 +854,7 @@
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 //                [self loadingWithHidden:YES];
                 
-                timerNotice = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+                timerNotice = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
                 
                 NSArray *pickArr = [responseObject objectForKey:@"Product"];
                 
@@ -896,7 +900,7 @@
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
-                timerNotice = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+                timerNotice = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
                 
                 NSArray *pickArr = [responseObject objectForKey:@"Product"];
                 
@@ -1023,13 +1027,13 @@
     
     if (reloadButton == nil) {
         
-        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 55, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:@"重新加载"];
+        reloadButton = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.5 - 55, CGRectGetMaxY(noNetworkMonkey.frame) + 10, 100, 30) backgroundColor:[UIColor clearColor] textColor:Color_White titleText:nil];
         
         reloadButton.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateNormal];
-        [reloadButton setBackgroundImage:[UIImage imageNamed:@"login"] forState:UIControlStateHighlighted];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"TWORefrush"] forState:UIControlStateNormal];
+        [reloadButton setBackgroundImage:[UIImage imageNamed:@"TWORefrush"] forState:UIControlStateHighlighted];
         
-        [reloadButton addTarget:self action:@selector(getAdvList) forControlEvents:UIControlEventTouchUpInside];
+        [reloadButton addTarget:self action:@selector(getProductList) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view addSubview:reloadButton];
     
