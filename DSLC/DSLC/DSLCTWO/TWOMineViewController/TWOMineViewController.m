@@ -90,6 +90,8 @@
     
     // 提交表单loading
     MBProgressHUD *hud;
+    
+    NSDictionary *menusDic;
 }
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -526,16 +528,26 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 1) {
+            
+            cell.labelContent.hidden = YES;
+            
             if ([[[myAccount hasNewPrivilege] debugDescription] isEqualToString:@"1"]) {
                 cell.imageRedDian.hidden = NO;
             } else {
                 cell.imageRedDian.hidden = YES;
             }
         } else {
+            
+            cell.labelContent.hidden = NO;
+            
             cell.imageRedDian.hidden = YES;
         }
     } else {
+        
+        cell.labelContent.hidden = NO;
+        
         if (indexPath.row == 0) {
+            
             if ([[DES3Util decrypt:[myAccount redPacketNum]] isEqualToString:@"1"]) {
                 cell.imageRedDian.hidden = NO;
             } else {
@@ -1069,6 +1081,10 @@
 
 - (void)getMyAccountInfoFuction{
     
+//    [self loadingWithheight:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50 + 64];
+    
+    [self getDataOpen];
+    
     memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"]};
@@ -1097,7 +1113,7 @@
                 [contentArray addObject:[NSString stringWithFormat:@"%ld张",(long)[[myAccount redPacketNum] integerValue] + (long)[[myAccount incrUnUsedCount] integerValue]]];
             }
             [contentArray addObject:[NSString stringWithFormat:@"%@猴币",[DES3Util decrypt:[myAccount monkeyNum]]]];
-            [contentArray addObject:@"邀请好友送星巴克券"];
+            [contentArray addObject:[menusDic objectForKey:@"menuRemark"]];
 #warning 千万别忘了
             [newContentArr replaceObjectAtIndex:0 withObject:contentArrayOld];
             [newContentArr replaceObjectAtIndex:1 withObject:contentArray];
@@ -1152,7 +1168,7 @@
         } else {
             loadingImgView.center = CGPointMake(self.view.center.x + 5, heightO);
         }
-        
+    
         for (NSInteger i = 1; i <= 7; i++) {
             UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"TWO_Loading_Middle_0%ld",(long)i]];
             [imgArray addObject:image];
@@ -1167,6 +1183,7 @@
         [loadingImgView startAnimating];
         
     }
+    
     [self.view addSubview:loadingImgView];
     
     loadingImgView.hidden = NO;
@@ -1200,6 +1217,26 @@
 
 - (void)loadingWithHiddenTwo:(BOOL)hidden{
     loadingImgView.hidden = hidden;
+}
+
+//获取系统菜单列表
+- (void)getDataOpen
+{
+    memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"menuCode":@"myInvitation",@"token":[memberDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"sys/getSysMenuList" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"&*&*&*&*&*&*%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            menusDic = [[responseObject objectForKey:@"Menus"] firstObject];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"wwwwwwwwwwwwwwwwwwwwwwwwww%@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

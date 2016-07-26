@@ -257,14 +257,14 @@
     
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"
-                                      shareText:[NSString stringWithFormat:@"大圣理财风暴来袭:喝咖啡,领红包,赚猴币多重惊喜等着你!  %@", urlString]
+                                      shareText:[noticeInfo objectForKey:@"content"]
                                      shareImage:image
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:self];
     
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"邀请好友一起，免费共享星巴克";
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"邀请好友一起，免费共享星巴克";
-    [UMSocialData defaultData].extConfig.qqData.title = @"邀请好友一起，免费共享星巴克";
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = [noticeInfo objectForKey:@"title"];
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = [noticeInfo objectForKey:@"title"];
+    [UMSocialData defaultData].extConfig.qqData.title = [noticeInfo objectForKey:@"title"];
     
     [UMSocialData defaultData].extConfig.wechatSessionData.url = urlString;
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = urlString;
@@ -327,7 +327,7 @@
 
 - (void)getInviteInfo{
     
-    NSDictionary *parmeter = @{@"type":@"4",@"sendType":@"3"};
+    NSDictionary *parmeter = @{@"type":@"4",@"sendType":@"4"};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
