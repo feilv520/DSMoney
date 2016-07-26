@@ -179,6 +179,7 @@
                 if ([[[personalModel emailStatus] description] isEqualToString:@"2"]) {
                     cell.labelStates.text = [personalModel userEmail];
                     cell.imageRight.hidden = YES;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 } else {
                     cell.imageRight.hidden = NO;
                     cell.labelStates.text = @"未绑定";
@@ -259,8 +260,12 @@
         } else if (indexPath.row == 3) {
             
 //            邮箱绑定
-            TWOEmailViewController *emailVC = [[TWOEmailViewController alloc] init];
-            [self.navigationController pushViewController:emailVC animated:YES];
+            if ([[[personalModel emailStatus] description] isEqualToString:@"2"]) {
+                
+            } else {
+                TWOEmailViewController *emailVC = [[TWOEmailViewController alloc] init];
+                [self.navigationController pushViewController:emailVC animated:YES];
+            }
             
         } else if (indexPath.row == 4) {
             

@@ -926,7 +926,6 @@
 		81E47C231D41D20B00977513 /* soundclose@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C211D41D20B00977513 /* soundclose@3x.png */; settings = {ASSET_TAGS = (); }; };
 		81E47C2C1D41F8FE00977513 /* 结果音.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C2A1D41F8FE00977513 /* 结果音.wav */; settings = {ASSET_TAGS = (); }; };
 		81E47C2D1D41F8FE00977513 /* 摇一摇.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C2B1D41F8FE00977513 /* 摇一摇.wav */; settings = {ASSET_TAGS = (); }; };
-		81E47C2F1D44B6A200977513 /* 敬请期待ing.png in Resources */ = {isa = PBXBuildFile; fileRef = 81E47C2E1D44B6A200977513 /* 敬请期待ing.png */; settings = {ASSET_TAGS = (); }; };
 		81E47C361D44CAC800977513 /* TWOUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E47C351D44CAC800977513 /* TWOUserModel.m */; settings = {ASSET_TAGS = (); }; };
 		81E54E6A1C1EB86D0007303B /* UsualQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E54E691C1EB86D0007303B /* UsualQuestionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81E6482B1D3F656700B06D2B /* TWOBigSweepDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E6482A1D3F656700B06D2B /* TWOBigSweepDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -992,6 +991,7 @@
 		81F5FA0D1BDA0D2E008C38BF /* RealNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA0C1BDA0D2E008C38BF /* RealNameViewController.m */; };
 		81F5FA111BDA1C2E008C38BF /* MoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA0F1BDA1C2E008C38BF /* MoreCell.m */; };
 		81F5FA121BDA1C2E008C38BF /* MoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F5FA101BDA1C2E008C38BF /* MoreCell.xib */; };
+		81F86BD11D47166E008F8ED5 /* 敬请期待ing.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F86BD01D47166E008F8ED5 /* 敬请期待ing.png */; settings = {ASSET_TAGS = (); }; };
 		81F8EFDB1CF7DBE900DC78FF /* TWOMoneySweepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F8EFDA1CF7DBE900DC78FF /* TWOMoneySweepViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81F8EFDF1CF7E1BA00DC78FF /* TWOMoneySweepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F8EFDD1CF7E1BA00DC78FF /* TWOMoneySweepCell.m */; settings = {ASSET_TAGS = (); }; };
 		81F8EFE01CF7E1BA00DC78FF /* TWOMoneySweepCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F8EFDE1CF7E1BA00DC78FF /* TWOMoneySweepCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -2876,7 +2876,6 @@
 		81E47C211D41D20B00977513 /* soundclose@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soundclose@3x.png"; sourceTree = "<group>"; };
 		81E47C2A1D41F8FE00977513 /* 结果音.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "结果音.wav"; sourceTree = "<group>"; };
 		81E47C2B1D41F8FE00977513 /* 摇一摇.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "摇一摇.wav"; sourceTree = "<group>"; };
-		81E47C2E1D44B6A200977513 /* 敬请期待ing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "敬请期待ing.png"; sourceTree = "<group>"; };
 		81E47C341D44CAC800977513 /* TWOUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOUserModel.h; sourceTree = "<group>"; };
 		81E47C351D44CAC800977513 /* TWOUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOUserModel.m; sourceTree = "<group>"; };
 		81E54E681C1EB86D0007303B /* UsualQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsualQuestionViewController.h; sourceTree = "<group>"; };
@@ -2975,6 +2974,7 @@
 		81F5FA0E1BDA1C2E008C38BF /* MoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreCell.h; sourceTree = "<group>"; };
 		81F5FA0F1BDA1C2E008C38BF /* MoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreCell.m; sourceTree = "<group>"; };
 		81F5FA101BDA1C2E008C38BF /* MoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreCell.xib; sourceTree = "<group>"; };
+		81F86BD01D47166E008F8ED5 /* 敬请期待ing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "敬请期待ing.png"; sourceTree = "<group>"; };
 		81F8EFD91CF7DBE900DC78FF /* TWOMoneySweepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMoneySweepViewController.h; sourceTree = "<group>"; };
 		81F8EFDA1CF7DBE900DC78FF /* TWOMoneySweepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMoneySweepViewController.m; sourceTree = "<group>"; };
 		81F8EFDC1CF7E1BA00DC78FF /* TWOMoneySweepCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMoneySweepCell.h; sourceTree = "<group>"; };
@@ -4449,7 +4449,7 @@
 				81E47C1D1D41D0FF00977513 /* soundopen@3x.png */,
 				81E47C201D41D20B00977513 /* soundclose@2x.png */,
 				81E47C211D41D20B00977513 /* soundclose@3x.png */,
-				81E47C2E1D44B6A200977513 /* 敬请期待ing.png */,
+				81F86BD01D47166E008F8ED5 /* 敬请期待ing.png */,
 				8177A0371CF3EE630057AA7B /* 产品安全等级图片 */,
 			);
 			path = TWOImage;
@@ -8206,7 +8206,7 @@
 				8DC695BC1C3503D30055EC44 /* UMSCommentDetailController.xib in Resources */,
 				8D1921D21BD4FC840038195E /* MessageDetailViewController.xib in Resources */,
 				810F9C3F1CDC438B00BF39B5 /* 公益行@3x.png in Resources */,
-				81E47C2F1D44B6A200977513 /* 敬请期待ing.png in Resources */,
+				81F86BD11D47166E008F8ED5 /* 敬请期待ing.png in Resources */,
 				810F9C241CDC38B400BF39B5 /* baisanjiao@2x.png in Resources */,
 				8182A7F61C0EECD300FA1216 /* 组-19@3x.png in Resources */,
 				813FD5001BCE71110050E884 /* FBalancePaymentViewController.xib in Resources */,
@@ -9749,8 +9749,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9776,7 +9776,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "14d7a3bf-f0b5-441a-b307-4a2fa610e33b";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -9788,8 +9788,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guocheng chuangtou (UVY3MZVVX5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9815,7 +9815,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gcct.dslc;
 				PRODUCT_NAME = "大圣理财";
-				PROVISIONING_PROFILE = "14d7a3bf-f0b5-441a-b307-4a2fa610e33b";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

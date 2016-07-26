@@ -806,11 +806,14 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     [self waitContentShow];
 }
 
+//敬请期待
 - (void)waitContentShow
 {
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    buttonWait = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (buttonWait == nil) {
+        buttonWait = [UIButton buttonWithType:UIButtonTypeCustom];
+    }
     [app.tabBarVC.view addSubview:buttonWait];
     buttonWait.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT);
     buttonWait.backgroundColor = [UIColor blackColor];
@@ -818,11 +821,15 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     buttonWait.tag = 721;
     [buttonWait addTarget:self action:@selector(buttonBlackClickDisappear:) forControlEvents:UIControlEventTouchUpInside];
     
-    viewWait = [[UIView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 530/2/2, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 530/2, 397/2 + 30)];
+    if (viewWait == nil) {
+        viewWait = [[UIView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 530/2/2, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 530/2, 397/2 + 30)];
+    }
     [app.tabBarVC.view addSubview:viewWait];
     viewWait.backgroundColor = [UIColor clearColor];
     
-    imageWait = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewWait.frame.size.width, viewWait.frame.size.height)];
+    if (imageWait == nil) {
+        imageWait = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewWait.frame.size.width, viewWait.frame.size.height)];
+    }
     [viewWait addSubview:imageWait];
     imageWait.image = [UIImage imageNamed:@"敬请期待ing"];
     imageWait.userInteractionEnabled = YES;
