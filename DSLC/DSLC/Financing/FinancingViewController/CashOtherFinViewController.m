@@ -223,7 +223,7 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
             [self contentShow];
-            [self showImputMonkey];
+//            [self showImputMonkey];
             
             monkeyNum = [[responseObject objectForKey:@"uMonkeyNum"] integerValue];
             monkey = [responseObject objectForKey:@"uMonkeyNum"];
