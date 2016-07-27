@@ -198,15 +198,21 @@
 //    } else {
         NSLog(@"%@",self.residueMoney);
         
-        if ([self.residueMoney isEqualToString:@"0.00"]) {
+        if ([[[self.detailM status] description] isEqualToString:@"4"]) {
             
             butMakeSure.enabled = NO;
             butMakeSure.backgroundColor = [UIColor grayColor];
             [butMakeSure setTitle:@"收益中" forState:UIControlStateNormal];
+        } else if ([[[self.detailM status] description] isEqualToString:@"6"]) {
+            
+            butMakeSure.enabled = NO;
+            butMakeSure.backgroundColor = [UIColor grayColor];
+            [butMakeSure setTitle:@"已兑付" forState:UIControlStateNormal];
         } else {
-            [butMakeSure setTitle:@"立即投资" forState:UIControlStateNormal];
-            [butMakeSure setBackgroundColor:[UIColor profitColor]];
+            
             butMakeSure.enabled = YES;
+            [butMakeSure setBackgroundColor:[UIColor profitColor]];
+            [butMakeSure setTitle:@"立即投资" forState:UIControlStateNormal];
         }
 //    }
     
@@ -859,12 +865,24 @@
     UIImageView *imageImg = [CreatView creatImageViewWithFrame:CGRectMake(viewThirdOpen.frame.size.width/2 - 314/2/2, 45, 314/2, 234/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"thirdimg"]];
     [viewThirdOpen addSubview:imageImg];
     
-    UIButton *buttonok = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 45 + imageImg.frame.size.height + 15, viewThirdOpen.frame.size.width - 24, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    UIButton *buttonok = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 45 + imageImg.frame.size.height + 15, viewThirdOpen.frame.size.width - 24, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"去开户"];
     [viewThirdOpen addSubview:buttonok];
     buttonok.layer.cornerRadius = 4;
     buttonok.layer.masksToBounds = YES;
     buttonok.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonok addTarget:self action:@selector(buttonOpenThirdOK:) forControlEvents:UIControlEventTouchUpInside];
+    
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.5;
+    
+    NSMutableArray *values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    [viewThirdOpen.layer addAnimation:animation forKey:nil];
+    
 }
 
 //开通三方确定按钮
@@ -875,8 +893,6 @@
     
     buttBlack = nil;
     viewThirdOpen = nil;
-    
-    NSLog(@"确定");
     
     TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
     productHuiFuVC.fuctionName = @"userReg";

@@ -291,6 +291,7 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [cell.titleLabel setFont:[UIFont systemFontOfSize:14]];
+            NSLog(@"%@",self.assetTitle);
             cell.titleLabel.text = self.assetTitle;
             cell.valueLabel.hidden = YES;
             cell.titleLabel.hidden = NO;

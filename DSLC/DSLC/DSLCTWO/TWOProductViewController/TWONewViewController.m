@@ -18,6 +18,7 @@
 #import "TWOProductDemoTableViewCell.h"
 #import "TWOProductDetailViewController.h"
 #import "TWOProductNewHotTableViewCell.h"
+#import "TWONoticeDetailViewController.h"
 
 @interface TWONewViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -102,6 +103,11 @@
     [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
     
 //    [self getAdvList];
+    
+    // 公告推送
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushGongGaoViewController:) name:@"gongGaoWithNotice" object:nil];
+    // 公告H5
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushHFiveViewController:) name:@"hFiveWithNotice" object:nil];
     
 }
 
@@ -358,9 +364,17 @@
         
         NSLog(@"88888888-%ld",(long)indexPath.row);
         
-        if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"4"]) {
+        if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"6"]) {
             
             cell.outPay.hidden = NO;
+            cell.outPay.image = [UIImage imageNamed:@"TWOSaled"];
+            cell.quanView.hidden = YES;
+            
+            cell.contentView.alpha = 0.5;
+        } else if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"4"]) {
+            
+            cell.outPay.hidden = NO;
+            cell.outPay.image = [UIImage imageNamed:@"TWOProfitting"];
             cell.quanView.hidden = YES;
             
             cell.contentView.alpha = 0.5;
@@ -775,6 +789,34 @@
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
         [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
     }
+    
+}
+
+#pragma mark 公告推送
+#pragma mark --------------------------------
+
+- (void)pushGongGaoViewController:(NSNotification *)not{
+    
+    NSDictionary *userInfo = [not object];
+    
+    NSLog(@"GuserInfo = %@",userInfo);
+    
+    TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
+    messageDetailVC.messageID = [userInfo objectForKey:@"id"];
+    pushVC(messageDetailVC);
+    
+}
+
+- (void)pushHFiveViewController:(NSNotification *)not{
+    
+    NSDictionary *userInfo = [not object];
+    
+    NSLog(@"HuserInfo = %@",userInfo);
+    
+    BannerViewController *bannerVC = [[BannerViewController alloc] init];
+    bannerVC.photoName = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    bannerVC.photoUrl = [userInfo objectForKey:@"url"];
+    pushVC(bannerVC);
     
 }
 

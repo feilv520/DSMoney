@@ -34,12 +34,12 @@
                     <color key="textColor" red="0.38431372549019605" green="0.396078431372549" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投资" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvn-Yl-fox">
-                    <rect key="frame" x="10" y="62" width="34" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投标金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvn-Yl-fox">
+                    <rect key="frame" x="10" y="62" width="68" height="21"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="3Ce-S7-tF8"/>
-                        <constraint firstAttribute="width" constant="34" id="Q4K-LC-pMI"/>
+                        <constraint firstAttribute="width" constant="68" id="Q4K-LC-pMI"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
                     <color key="textColor" red="0.38431372549999998" green="0.39607843139999999" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
@@ -98,11 +98,11 @@
                         <constraint firstAttribute="height" constant="1" id="bxY-bV-mqi"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhy-fp-zSk">
-                    <rect key="frame" x="10" y="148" width="34" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实际支付" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhy-fp-zSk">
+                    <rect key="frame" x="10" y="148" width="68" height="21"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="34" id="ahB-wa-CiW"/>
+                        <constraint firstAttribute="width" constant="68" id="ahB-wa-CiW"/>
                         <constraint firstAttribute="height" constant="21" id="bhP-9p-Qoh"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>

@@ -416,6 +416,13 @@
             
             [self.navigationController popToRootViewControllerAnimated:YES];
             
+            // 刷新产品列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+            // 刷新固收页面数据
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"BillVC" object:nil];
+            // 刷新首页三个产品
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getSelectionVC" object:nil];
+            
         } else {
             [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
@@ -478,12 +485,23 @@
     UIImageView *imageImg = [CreatView creatImageViewWithFrame:CGRectMake(viewThirdOpen.frame.size.width/2 - 314/2/2, 45, 314/2, 234/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"thirdimg"]];
     [viewThirdOpen addSubview:imageImg];
     
-    UIButton *buttonok = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 45 + imageImg.frame.size.height + 15, viewThirdOpen.frame.size.width - 24, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"确定"];
+    UIButton *buttonok = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 45 + imageImg.frame.size.height + 15, viewThirdOpen.frame.size.width - 24, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"去开户"];
     [viewThirdOpen addSubview:buttonok];
     buttonok.layer.cornerRadius = 4;
     buttonok.layer.masksToBounds = YES;
     buttonok.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     [buttonok addTarget:self action:@selector(buttonOpenThirdOK:) forControlEvents:UIControlEventTouchUpInside];
+    
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.5;
+    
+    NSMutableArray *values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    [viewThirdOpen.layer addAnimation:animation forKey:nil];
 }
 
 //开通三方确定按钮

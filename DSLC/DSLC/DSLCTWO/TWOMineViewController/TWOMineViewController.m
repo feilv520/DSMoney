@@ -25,6 +25,8 @@
 #import "TWOMyAccountModel.h"
 #import "TWOLiftMoneyViewController.h"
 #import "TWOMoneyMoreViewController.h"
+#import "TWONoticeDetailViewController.h"
+#import "BannerViewController.h"
 
 @interface TWOMineViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -110,6 +112,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // 可以解决navigation controller子view偏移问题
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]){
+        
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyAccountInfoFuction) name:@"getMyAccountInfo" object:nil];
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
@@ -131,6 +140,11 @@
     [app.tabBarVC.view addSubview:viewDown];
     
     [self viewDownShow];
+    
+    // 公告推送
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushGongGaoViewController:) name:@"gongGaoWithNotice" object:nil];
+    // 公告H5
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushHFiveViewController:) name:@"hFiveWithNotice" object:nil];
 }
 
 - (void)tabelViewShow
@@ -1113,7 +1127,13 @@
                 [contentArray addObject:[NSString stringWithFormat:@"%ld张",(long)[[myAccount redPacketNum] integerValue] + (long)[[myAccount incrUnUsedCount] integerValue]]];
             }
             [contentArray addObject:[NSString stringWithFormat:@"%@猴币",[DES3Util decrypt:[myAccount monkeyNum]]]];
-            [contentArray addObject:[menusDic objectForKey:@"menuRemark"]];
+            if (menusDic == nil || [[menusDic objectForKey:@"menuRemark"] isEqualToString:@""]) {
+                
+                [contentArray addObject:@""];
+            } else {
+                
+                [contentArray addObject:[menusDic objectForKey:@"menuRemark"]];
+            }
 #warning 千万别忘了
             [newContentArr replaceObjectAtIndex:0 withObject:contentArrayOld];
             [newContentArr replaceObjectAtIndex:1 withObject:contentArray];
@@ -1237,6 +1257,34 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"wwwwwwwwwwwwwwwwwwwwwwwwww%@", error);
     }];
+}
+
+#pragma mark 公告推送
+#pragma mark --------------------------------
+
+- (void)pushGongGaoViewController:(NSNotification *)not{
+    
+    NSDictionary *userInfo = [not object];
+    
+    NSLog(@"GuserInfo = %@",userInfo);
+    
+    TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
+    messageDetailVC.messageID = [userInfo objectForKey:@"id"];
+    pushVC(messageDetailVC);
+    
+}
+
+- (void)pushHFiveViewController:(NSNotification *)not{
+    
+    NSDictionary *userInfo = [not object];
+    
+    NSLog(@"HuserInfo = %@",userInfo);
+    
+    BannerViewController *bannerVC = [[BannerViewController alloc] init];
+    bannerVC.photoName = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    bannerVC.photoUrl = [userInfo objectForKey:@"url"];
+    pushVC(bannerVC);
+    
 }
 
 - (void)didReceiveMemoryWarning {

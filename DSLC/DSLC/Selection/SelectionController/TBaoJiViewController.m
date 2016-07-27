@@ -31,13 +31,13 @@
     [self.navigationItem setTitle:@"爆击抽奖"];
     
     UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
-    UIButton * backItem = [[UIButton alloc]initWithFrame:CGRectMake(0, 8, 20, 20)];
+    UIButton * backItem = [[UIButton alloc]initWithFrame:CGRectMake(0, 11, 20, 20)];
     [backItem setImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateNormal];
     [backItem setImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateSelected];
     [backItem addTarget:self action:@selector(buttonReturn:) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:backItem];
     
-    closeItem = [[UIButton alloc]initWithFrame:CGRectMake(30, 2, 40, 36)];
+    closeItem = [[UIButton alloc]initWithFrame:CGRectMake(30, 3, 40, 36)];
     [closeItem setTitle:@"关闭" forState:UIControlStateNormal];
     [closeItem setTitleColor:Color_White forState:UIControlStateNormal];
     [closeItem addTarget:self action:@selector(clickedCloseItem:) forControlEvents:UIControlEventTouchUpInside];

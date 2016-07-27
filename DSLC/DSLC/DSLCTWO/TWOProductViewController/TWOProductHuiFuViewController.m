@@ -36,7 +36,7 @@
     [self.navigationItem setTitle:@"开户"];
     
     UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
-    UIButton * backItem = [[UIButton alloc]initWithFrame:CGRectMake(0, 8, 20, 20)];
+    UIButton * backItem = [[UIButton alloc]initWithFrame:CGRectMake(0, 11, 20, 20)];
     [backItem setImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateNormal];
     [backItem setImage:[UIImage imageNamed:@"导航返回"] forState:UIControlStateSelected];
     [backItem addTarget:self action:@selector(buttonReturn:) forControlEvents:UIControlEventTouchUpInside];
@@ -104,13 +104,7 @@
 //用苹果自带的返回键按钮处理如下(自定义的返回按钮)
 - (void)buttonReturn:(UIBarButtonItem *)btn
 {
-    //    if ([myWebView canGoBack]) {
-    //        [myWebView goBack];
-    //
-    //    }else{
-    //        [self.view resignFirstResponder];
-    //        [self.navigationController popViewControllerAnimated:YES];
-    //    }
+
     NSArray *ctrlArray = self.navigationController.viewControllers;
     
     if ([self.fuctionName isEqualToString:@"netSave"]) {

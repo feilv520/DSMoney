@@ -345,7 +345,7 @@
                 cell.accountMoney.text = [NSString stringWithFormat:@"%@元",accString];
             }
             
-            cell.residueLabel.text = [NSString stringWithFormat:@"%@元",self.limitMoney];
+            cell.residueLabel.text = [NSString stringWithFormat:@"%@元",@"10000"];
             
             cell.moneyTextField.textColor = [UIColor findZiTiColor];
             cell.moneyTextField.tintColor = [UIColor grayColor];
@@ -603,8 +603,12 @@
         }
         
         NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
-        
-        if ([[self.detailM.productType description] isEqualToString:@"9"]) {
+        if ([[self.detailM.productType description] isEqualToString:@"3"]) {
+         
+            if ([textField.text integerValue] >= 10000) {
+                textField.text = @"10000";
+            }
+        } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
             if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
                 textField.text = self.limitMoney;
             }
@@ -783,11 +787,11 @@
     if ([[self.detailM.productType description] isEqualToString:@"3"]){
     
         [app.window addSubview:monkeyView];
-        monkeyView.titleLabel.text = @"支付";
+        monkeyView.titleLabel.text = @"实际支付";
     } else {
         if (packetModel == nil) {
             [app.window addSubview:monkeyView];
-            monkeyView.titleLabel.text = @"支付";
+            monkeyView.titleLabel.text = @"实际支付";
         } else {
             [app.window addSubview:makeSView];
         }

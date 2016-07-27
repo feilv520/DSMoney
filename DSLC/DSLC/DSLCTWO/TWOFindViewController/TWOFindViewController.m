@@ -23,6 +23,7 @@
 #import "TBaoJiViewController.h"
 #import "TRankinglistViewController.h"
 #import "TWOLoginAPPViewController.h"
+#import "TWONoticeDetailViewController.h"
 
 @interface TWOFindViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
@@ -65,6 +66,11 @@
     [self tabelViewShow];
     
     [self getAdvList];
+    
+    // 公告推送
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushGongGaoViewController:) name:@"gongGaoWithNotice" object:nil];
+    // 公告H5
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushHFiveViewController:) name:@"hFiveWithNotice" object:nil];
 }
 
 - (void)tabelViewShow
@@ -580,6 +586,34 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
+}
+
+#pragma mark 公告推送
+#pragma mark --------------------------------
+
+- (void)pushGongGaoViewController:(NSNotification *)not{
+    
+    NSDictionary *userInfo = [not object];
+    
+    NSLog(@"GuserInfo = %@",userInfo);
+    
+    TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
+    messageDetailVC.messageID = [userInfo objectForKey:@"id"];
+    pushVC(messageDetailVC);
+    
+}
+
+- (void)pushHFiveViewController:(NSNotification *)not{
+    
+    NSDictionary *userInfo = [not object];
+    
+    NSLog(@"HuserInfo = %@",userInfo);
+    
+    BannerViewController *bannerVC = [[BannerViewController alloc] init];
+    bannerVC.photoName = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    bannerVC.photoUrl = [userInfo objectForKey:@"url"];
+    pushVC(bannerVC);
+    
 }
 
 - (void)didReceiveMemoryWarning {

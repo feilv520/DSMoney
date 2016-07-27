@@ -74,8 +74,8 @@ NSInteger const columnCount = 3;
         if (WIDTH_CONTROLLER_DEFAULT == 320) {
             
             CGFloat margin = 30;
-            btnX = margin + column * (btnW + margin);
-            btnY = row * (btnW + margin);
+            btnX = margin + column * (60 + margin);
+            btnY = row * (60 + margin);
         } else {
             
             CGFloat margin = (WIDTH_CONTROLLER_DEFAULT - columnCount * btnW) / (columnCount + 1);
@@ -83,8 +83,13 @@ NSInteger const columnCount = 3;
             btnY = row * (btnW + margin);
         }
         
-        
-        button.frame = CGRectMake(btnX, btnY, btnW, btnH);
+        if (WIDTH_CONTROLLER_DEFAULT == 320) {
+            
+            button.frame = CGRectMake(btnX, btnY, 60, 60);
+        } else {
+            
+            button.frame = CGRectMake(btnX, btnY, btnW, btnH);
+        }
         height = btnH + btnY;
         [self addSubview:button];
     }

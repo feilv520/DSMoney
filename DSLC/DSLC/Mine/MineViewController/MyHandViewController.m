@@ -200,6 +200,7 @@
                 
                 [dic writeToFile:[FileOfManage PathOfFile:@"handOpen.plist"] atomically:YES];
                 
+                [self getDataOpen];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"switchOpenButton" object:nil];
                 popVC;
             } else {
@@ -668,6 +669,26 @@
         
     }];
     
+}
+
+//获取系统菜单列表
+- (void)getDataOpen
+{
+    NSDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"types":@"6",@"token":[memberDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"task/userFinishTask" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"&*&*&*&*&*&*%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"wwwwwwwwwwwwwwwwwwwwwwwwww%@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

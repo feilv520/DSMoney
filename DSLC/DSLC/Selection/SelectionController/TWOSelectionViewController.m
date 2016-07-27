@@ -22,6 +22,7 @@
 #import "TWOLoginAPPViewController.h"
 #import "TWOMessageModel.h"
 #import "TWONoticeDetailViewController.h"
+#import "TWOProductHuiFuViewController.h"
 
 @interface TWOSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
@@ -72,6 +73,12 @@
     UIButton *reloadButton;
     
     NSMutableArray *noticeMesArray;
+    
+    // 汇付开户窗口控件
+    UIButton *buttBlack;
+    UIView *viewThirdOpen;
+    
+    BOOL GGFlag;
 }
 
 @end
@@ -89,6 +96,8 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor qianhuise];
+    
+    GGFlag = NO;
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self
@@ -124,7 +133,15 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductList) name:@"getSelectionVC" object:nil];
     
+    // 公告推送
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushGongGaoViewController:) name:@"gongGaoWithNotice" object:nil];
+    // 公告H5
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushHFiveViewController:) name:@"hFiveWithNotice" object:nil];
+    
     [self getAdvList];
+    
+    // 汇付开户
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToOpenAccount) name:@"huifuOpenAccount" object:nil];
     
 }
 
@@ -183,7 +200,11 @@
                     [messageModel setValuesForKeysWithDictionary:dataDic];
                     [noticeArray addObject:messageModel];
                 }
-                [self noticeContentShow];
+                
+                if (!GGFlag) {
+                    
+                    [self noticeContentShow];
+                }
             }
             
         }
@@ -302,7 +323,7 @@
     _scrollViewNotice.userInteractionEnabled = YES;
     
     for (int i = 1; i <= noticeArray.count; i++) {
-        UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 30 * i, _scrollViewNotice.frame.size.width - 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:i - 1] title]];
+        UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 30 * i + 2, _scrollViewNotice.frame.size.width - 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:i - 1] title]];
         [_scrollViewNotice addSubview:labelNotice];
         labelNotice.userInteractionEnabled = YES;
         labelNotice.exclusiveTouch = YES;
@@ -1079,6 +1100,138 @@
     NSDictionary *userInfo = [notification userInfo];
     NSString *error = [userInfo valueForKey:@"error"];
     NSLog(@"%@", error);
+}
+
+- (void)pushGongGaoViewController:(NSNotification *)not{
+    
+    NSDictionary *userInfo = [not object];
+    
+    NSLog(@"GuserInfo = %@",userInfo);
+    
+    TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
+    messageDetailVC.messageID = [userInfo objectForKey:@"id"];
+    pushVC(messageDetailVC);
+    
+}
+
+- (void)pushHFiveViewController:(NSNotification *)not{
+    
+    NSDictionary *userInfo = [not object];
+    
+    NSLog(@"HuserInfo = %@",userInfo);
+    
+    BannerViewController *bannerVC = [[BannerViewController alloc] init];
+    bannerVC.photoName = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    bannerVC.photoUrl = [userInfo objectForKey:@"url"];
+    pushVC(bannerVC);
+    
+}
+
+- (void)goToOpenAccount{
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSString *dateString = [dic objectForKey:@"registerTime"];
+    
+    if ([[dic objectForKey:@"chinaPnrAcc"] isEqualToString:@""] && [self compareDate:dateString] == 1) {
+        
+        [self registThirdShow];
+        return;
+    }
+}
+
+//开通托管账户弹框
+- (void)registThirdShow
+{
+    AppDelegate *app  = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    buttBlack = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    [app.tabBarVC.view addSubview:buttBlack];
+    buttBlack.alpha = 0.5;
+    [buttBlack addTarget:self action:@selector(buttonViewDisappear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    viewThirdOpen = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 310/2, HEIGHT_CONTROLLER_DEFAULT/3, 310, 228) backgroundColor:[UIColor whiteColor]];
+    [app.tabBarVC.view addSubview:viewThirdOpen];
+    viewThirdOpen.layer.cornerRadius = 4;
+    viewThirdOpen.layer.masksToBounds = YES;
+    
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewThirdOpen.frame.size.width, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"您还未开通托管账户"];
+    [viewThirdOpen addSubview:labelAlert];
+    
+    UIImageView *imageImg = [CreatView creatImageViewWithFrame:CGRectMake(viewThirdOpen.frame.size.width/2 - 314/2/2, 45, 314/2, 234/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"thirdimg"]];
+    [viewThirdOpen addSubview:imageImg];
+    
+    UIButton *buttonok = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 45 + imageImg.frame.size.height + 15, viewThirdOpen.frame.size.width - 24, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"去开户"];
+    [viewThirdOpen addSubview:buttonok];
+    buttonok.layer.cornerRadius = 4;
+    buttonok.layer.masksToBounds = YES;
+    buttonok.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
+    [buttonok addTarget:self action:@selector(buttonOpenThirdOK:) forControlEvents:UIControlEventTouchUpInside];
+    
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.5;
+    
+    NSMutableArray *values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    [viewThirdOpen.layer addAnimation:animation forKey:nil];
+    
+}
+
+//开通三方确定按钮
+- (void)buttonOpenThirdOK:(UIButton *)button
+{
+    [buttBlack removeFromSuperview];
+    [viewThirdOpen removeFromSuperview];
+    
+    buttBlack = nil;
+    viewThirdOpen = nil;
+    
+    TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+    productHuiFuVC.fuctionName = @"userReg";
+    pushVC(productHuiFuVC);
+    
+}
+
+//开通三方弹框点击消失
+- (void)buttonViewDisappear:(UIButton *)button
+{
+    [buttBlack removeFromSuperview];
+    [viewThirdOpen removeFromSuperview];
+    
+    buttBlack = nil;
+    viewThirdOpen = nil;
+}
+
+- (int)compareDate:(NSString*)date01{
+    int ci;
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyyMMdd"];
+    NSDate *dt1 = [[NSDate alloc] init];
+    NSDate *dt2 = [[NSDate alloc] init];
+    date01 = [date01 substringToIndex:8];
+    dt1 = [df dateFromString:date01];
+    dt2 = [df dateFromString:@"20160805"];
+    
+    NSLog(@"%@----%@",dt1,dt2);
+    
+    NSComparisonResult result = [dt1 compare:dt2];
+    switch (result)
+    {
+            //date02比date01大
+        case NSOrderedAscending: ci = 1;
+            break;
+            //date02比date01小
+        case NSOrderedDescending: ci = -1;
+            break;
+            //date02=date01
+        case NSOrderedSame: ci = 0;
+            break;
+        default: NSLog(@"erorr dates %@, %@", dt2, dt1); break;
+    }
+    return ci;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -58,4 +58,6 @@
 
 @property (nonatomic, copy) NSString *interestTypeName;
 
+@property (nonatomic, copy) NSString *status;
+
 @end

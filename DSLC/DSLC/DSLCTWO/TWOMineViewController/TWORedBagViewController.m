@@ -42,6 +42,9 @@
     
     BOOL switchFlag;
     NSString *canMakeNum;
+    
+    UIView *viewFoot;
+    UIView *viewFootR;
 }
 
 @end
@@ -237,14 +240,15 @@
 
 - (void)redBagTabelViewFoot
 {
-    UIView *viewFoot = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 96, _tableView.tableFooterView.frame.size.height - 40, 192, 14) backgroundColor:[UIColor whiteColor]];
-    [_tableView.tableFooterView addSubview:viewFoot];
+    viewFootR = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 96, _tableView.tableFooterView.frame.size.height - 40, 192, 14) backgroundColor:[UIColor whiteColor]];
+    [_tableView.tableFooterView addSubview:viewFootR];
+    viewFootR.hidden = YES;
     
     UILabel *labelGray = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 144, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"没有更多有效红包了, 查看"];
-    [viewFoot addSubview:labelGray];
+    [viewFootR addSubview:labelGray];
     
-    UIButton *butCheck = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewFoot.frame.size.width - 48, 0, 48, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"历史红包"];
-    [viewFoot addSubview:butCheck];
+    UIButton *butCheck = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(viewFootR.frame.size.width - 48, 0, 48, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] titleText:@"历史红包"];
+    [viewFootR addSubview:butCheck];
     butCheck.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
     [butCheck addTarget:self action:@selector(buttonCheckHistoryRedBag:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -275,8 +279,9 @@
 
 - (void)jiaxiquanFoot
 {
-    UIView *viewFoot = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 108, _tableViewJia.tableFooterView.frame.size.height - 40, 216, 14) backgroundColor:[UIColor whiteColor]];
+    viewFoot = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 108, _tableViewJia.tableFooterView.frame.size.height - 40, 216, 14) backgroundColor:[UIColor whiteColor]];
     [_tableViewJia.tableFooterView addSubview:viewFoot];
+    viewFoot.hidden = YES;
     
     UILabel *labelGray = [CreatView creatWithLabelFrame:CGRectMake(0, 0, 156, 14) backgroundColor:[UIColor whiteColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:12] text:@"没有更多有效加息券了, 查看"];
     [viewFoot addSubview:labelGray];
@@ -674,10 +679,6 @@
             
             redBagArray = [redBagArray mutableCopy];
             
-            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
-                moreFlag = YES;
-            }
-            
             [gifFooter endRefreshing];
             
             //判断有无红包 调用不同的页面样式
@@ -690,6 +691,11 @@
                 
             } else {
                 [_tableView reloadData];
+            }
+            
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                moreFlag = YES;
+                viewFootR.hidden = NO;
             }
             
             [butCanUse setTitle:[NSString stringWithFormat:@"%@张可用红包,去使用>", [responseObject objectForKey:@"redPacketCount"]] forState:UIControlStateNormal];
@@ -726,10 +732,6 @@
                 [jiaXiQuanArray addObject:jiaXiQuanModel];
             }
             
-            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
-                jiaMoreFlag = YES;
-            }
-            
             //判断有无加息券 调用不同的页面样式
             if (pageAddXiQuan == 1) {
                 if (dataArray.count == 0) {
@@ -739,6 +741,11 @@
                 }
             } else {
                 [_tableViewJia reloadData];
+            }
+            
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
+                jiaMoreFlag = YES;
+                viewFoot.hidden = NO;
             }
         } else {
 

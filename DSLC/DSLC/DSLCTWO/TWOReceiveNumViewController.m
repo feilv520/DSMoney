@@ -513,6 +513,8 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"showMonkey" object:[responseObject objectForKey:@"signMonkeyNum"]];
             }
             
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"huifuOpenAccount" object:nil];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

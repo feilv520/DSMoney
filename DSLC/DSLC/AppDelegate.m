@@ -22,6 +22,8 @@
 #import "TWOFindViewController.h"
 #import "TWOLoginAPPViewController.h"
 #import <AdSupport/AdSupport.h>
+#import "TWONoticeDetailViewController.h"
+#import "BannerViewController.h"
 
 @interface AppDelegate ()
 {
@@ -40,6 +42,8 @@
     UIButton *buttonWait;
     UIView *viewWait;
     UIImageView *imageWait;
+    
+    NSDictionary *userInformation;
 }
 @property (nonatomic, strong) NSDictionary *flagDic;
 @property (nonatomic, strong) NSDictionary *flagLogin;
@@ -472,6 +476,21 @@ void UncaughtExceptionHandler(NSException *exception){
             NSString *url = @"https://itunes.apple.com/cn/app/da-sheng-li-cai/id1063185702?mt=8";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
         }
+    } else {
+        if (buttonIndex == 1) {
+            if ([[userInformation objectForKey:@"detailType"] isEqualToString:@"Notice"]) {
+                
+                NSLog(@"Notice");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"gongGaoWithNotice" object:userInformation];
+            } else if ([[userInformation objectForKey:@"detailType"] isEqualToString:@"H5"]) {
+                
+                NSLog(@"H5");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"hFiveWithNotice" object:userInformation];
+            }
+            NSLog(@"内部查看");
+        }
     }
 }
 
@@ -555,6 +574,8 @@ fetchCompletionHandler:
     NSLog(@"收到通知::::%@", [self logDic:userInfo]);
     //    [rootViewController addNotificationCount];
     
+    userInformation = userInfo;
+    
     if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
     {
         //此时app在前台运行，我的做法是弹出一个alert，告诉用户有一条推送，用户可以选择查看或者忽略
@@ -567,7 +588,18 @@ fetchCompletionHandler:
         [alert show];
         
     } else {
-        //这里是app未运行或者在后台，通过点击手机通知栏的推送消息打开app时可以在这里进行处理，比如，拿到推送里的内容或者附加      字段(假设，推送里附加了一个url为 www.baidu.com)，那么你就可以拿到这个url，然后进行跳转到相应店web页，当然，不一定必须是web页，也可以是你app里的任意一个controll，跳转的话用navigation或者模态视图都可以
+        
+        if ([[userInfo objectForKey:@"detailType"] isEqualToString:@"Notice"]) {
+            
+            NSLog(@"Notice");
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"gongGaoWithNotice" object:userInfo];
+        } else if ([[userInfo objectForKey:@"detailType"] isEqualToString:@"H5"]) {
+            
+            NSLog(@"H5");
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"hFiveWithNotice" object:userInfo];
+        }
     }
     
     [UIApplication sharedApplication].applicationIconBadgeNumber  =  0;
@@ -665,7 +697,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 [self userSign];
             });
-            
             
             [self getMyAccountInfoFuction];
             
@@ -784,6 +815,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     viewDown = nil;
     labelMonkey = nil;
     imageSign = nil;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"huifuOpenAccount" object:nil];
 }
 
 //点击猴子
@@ -798,6 +831,9 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     viewDown = nil;
     labelMonkey = nil;
     imageSign = nil;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"huifuOpenAccount" object:nil];
+    
 }
 
 //敬请期待
@@ -903,7 +939,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY-MM-dd"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
-    NSLog(@"dateString:%@",dateString);
     
     NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
@@ -921,7 +956,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
             }
             
         } else {
-            //            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"huifuOpenAccount" object:nil];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
