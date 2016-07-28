@@ -92,14 +92,15 @@ static NSString *kLLPartnerKey = @"gcctdslc20151231_20160101";   // 密钥
 // 访问地址 f79b6fa6f8a06f91b189c43307bcded64c68beaf
 
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.14:8080/tongjiang/interface/p2p/";
-static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interface/p2p/";
+//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.75:8080/tongjiang/interface/p2p/";
+//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interface/p2p/";
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.13:8080/tongjiang/interface/p2p/";
 
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.26:8080/tongjiang/interface/p2p/";
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.232:8080/tongjiang/interface/p2p/";
 
 // 线上接口
-//static NSString * MYAFHTTP_BASEURL = @"http://58.215.161.88/zhongxin/interface/p2p/";
+static NSString * MYAFHTTP_BASEURL = @"http://58.215.161.88/zhongxin/interface/p2p/";
 
 //static NSString * MYAFHTTP_BASEURL = @"http://58.215.161.87:8080/zhongxin/interface/p2p/";
 #endif /* Header_h */

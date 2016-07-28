@@ -476,12 +476,7 @@
         
     } else if (indexPath.row == 2) {
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"升级中..."];
-        return;
-        
-//        [MobClick event:@"ThirdRedBag"];
-//        TheThirdRedBagController *myRedBagVC = [[TheThirdRedBagController alloc] init];
-//        [self.navigationController pushViewController:myRedBagVC animated:YES];
+        [self redPackFunction];
         
     } else if (indexPath.row == 0) {
         
@@ -714,6 +709,29 @@
     } failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
         
         NSLog(@"%@", error);
+        
+    }];
+}
+
+// 红包停用接口
+- (void)redPackFunction{
+    
+    NSDictionary *parameter = @{@"key":@"is_redPack"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/sys/sysIsClose" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"----===----%@",responseObject);
+        
+        // 201 代表系统已关闭   200 代表系统仍然运行
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@201]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"敬请期待"];
+        } else {
+            [MobClick event:@"ThirdRedBag"];
+            TheThirdRedBagController *myRedBagVC = [[TheThirdRedBagController alloc] init];
+            [self.navigationController pushViewController:myRedBagVC animated:YES];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
 }

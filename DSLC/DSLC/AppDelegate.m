@@ -305,7 +305,10 @@ void UncaughtExceptionHandler(NSException *exception){
 
 // 版本系统停用接口
 - (void)refrushingFunction{
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/sys/sysIsClose" parameters:nil success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    
+    NSDictionary *parameter = @{@"key":@"is_close"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/sys/sysIsClose" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"----===----%@",responseObject);
         result = [responseObject objectForKey:@"result"];

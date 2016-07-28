@@ -166,30 +166,12 @@
     myDic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     if (button.tag == 6000 || button.tag == 7000) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"升级中..."];
-        return;
         
-//        if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
-//            return ;
-//        }
-//        
-//        TSignInViewController *signInVC = [[TSignInViewController alloc] init];
-//        signInVC.tokenString = [myDic objectForKey:@"token"];
-//        [self.navigationController pushViewController:signInVC animated:YES];
+        [self signFunction];
         
     } else if (button.tag == 6001 || button.tag == 7001) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"升级中..."];
-        return;
         
-//        if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
-//            return ;
-//        }
-//        
-//        TBigTurntableViewController *bigTurntable = [[TBigTurntableViewController alloc] init];
-//        bigTurntable.tokenString = [myDic objectForKey:@"token"];
-//        [self.navigationController pushViewController:bigTurntable animated:YES];
+        [self bigWheelFunction];
         
     } else if (button.tag == 6002 || button.tag == 7002){
         
@@ -207,12 +189,8 @@
 //            return ;
 //        }
         
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"升级中..."];
-        return;
+        [self CritDrawFunction];
         
-//        TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
-//        baoji.tokenString = [myDic objectForKey:@"token"];
-//        pushVC(baoji);
     }
 }
 
@@ -655,8 +633,6 @@
             photoArray = [NSMutableArray array];
         }
         
-        
-        
         for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
             AdModel *adModel = [[AdModel alloc] init];
             [adModel setValuesForKeysWithDictionary:dic];
@@ -719,6 +695,85 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
+        
+    }];
+}
+
+// 签到停用接口
+- (void)signFunction{
+    
+    NSDictionary *parameter = @{@"key":@"is_sign"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/sys/sysIsClose" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"----===----%@",responseObject);
+
+        // 201 代表系统已关闭   200 代表系统仍然运行
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@201]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"敬请期待"];
+        } else {
+            if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+                return ;
+            }
+
+            TSignInViewController *signInVC = [[TSignInViewController alloc] init];
+            signInVC.tokenString = [myDic objectForKey:@"token"];
+            [self.navigationController pushViewController:signInVC animated:YES];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+// 大转盘停用接口
+- (void)bigWheelFunction{
+    
+    NSDictionary *parameter = @{@"key":@"is_bigWheel"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/sys/sysIsClose" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"----===----%@",responseObject);
+        
+        // 201 代表系统已关闭   200 代表系统仍然运行
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@201]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"敬请期待"];
+        } else {
+            if ([[flagDic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"showLoginView" object:nil];
+                return ;
+            }
+    
+            TBigTurntableViewController *bigTurntable = [[TBigTurntableViewController alloc] init];
+            bigTurntable.tokenString = [myDic objectForKey:@"token"];
+            [self.navigationController pushViewController:bigTurntable animated:YES];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+// 爆击抽奖停用接口
+- (void)CritDrawFunction{
+    
+    NSDictionary *parameter = @{@"key":@"is_CritDraw"};
+    
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/sys/sysIsClose" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"----===----%@",responseObject);
+        
+        // 201 代表系统已关闭   200 代表系统仍然运行
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:@201]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"敬请期待"];
+        } else {
+            TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
+            baoji.tokenString = [myDic objectForKey:@"token"];
+            pushVC(baoji);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
 }
