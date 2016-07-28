@@ -25,6 +25,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"公告详情"];
     
+    [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
+    
     [self noticeDetailData];
 }
 
@@ -50,6 +52,8 @@
 {
     NSDictionary *parmeter = @{@"id":self.messageID};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeOne" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        [self loadingWithHidden:YES];
         
         NSLog(@"公告详情~~~~~~~~~~~~~~~~~~~~~~%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {

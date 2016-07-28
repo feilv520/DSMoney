@@ -323,7 +323,7 @@
     _scrollViewNotice.userInteractionEnabled = YES;
     
     for (int i = 1; i <= noticeArray.count; i++) {
-        UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 30 * i + 2, _scrollViewNotice.frame.size.width - 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:i - 1] title]];
+        UILabel *labelNotice = [CreatView creatWithLabelFrame:CGRectMake(0, 30 * i + 1, _scrollViewNotice.frame.size.width - 50, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[[noticeArray objectAtIndex:i - 1] title]];
         [_scrollViewNotice addSubview:labelNotice];
         labelNotice.userInteractionEnabled = YES;
         labelNotice.exclusiveTouch = YES;

@@ -171,6 +171,8 @@
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
     
+    [defaultCenter addObserver:self selector:@selector(loginFuction) name:@"appUntoken" object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(monkeyWithSuccess:) name:@"showMonkey" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showWaitNsnotice:) name:@"waitMoment" object:nil];
     
