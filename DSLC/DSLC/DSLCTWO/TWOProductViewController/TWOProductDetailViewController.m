@@ -833,6 +833,8 @@
         [self submitLoadingWithHidden:YES];
         TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
         
+        loginVC.flagString = @"bugProduct";
+        
         UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
         [nvc setNavigationBarHidden:YES animated:YES];
         
