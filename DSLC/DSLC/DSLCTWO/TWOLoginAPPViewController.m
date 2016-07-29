@@ -952,7 +952,11 @@
             }
             
         } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"huifuOpenAccount" object:nil];
+            if (![self.flagString isEqualToString:@"bugProduct"]) {
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"huifuOpenAccount" object:nil];
+            }
+            
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

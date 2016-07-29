@@ -10,4 +10,6 @@
 
 @interface TWOLoginAPPViewController : UIViewController
 
+@property (nonatomic, strong) NSString *flagString;
+
 @end

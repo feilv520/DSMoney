@@ -186,32 +186,35 @@
 #pragma mark data````````````````````````````````````````````````````````````````
 - (void)getNoticeData
 {
-    NSDictionary *parmeter = @{@"type":@1};
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
-        NSLog(@"首页公告::::::::%@", responseObject);
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
-            NSMutableArray *dataArr = [responseObject objectForKey:@"noticeInfo"];
+    if (!GGFlag) {
+        NSDictionary *parmeter = @{@"type":@1};
+        [[MyAfHTTPClient sharedClient] postWithURLString:@"notice/getNoticeList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
             
-            if (dataArr.count != 0) {
+            NSLog(@"首页公告::::::::%@", responseObject);
+            if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+                NSMutableArray *dataArr = [responseObject objectForKey:@"noticeInfo"];
                 
-                for (NSDictionary *dataDic in dataArr) {
-                    messageModel = [[TWOMessageModel alloc] init];
-                    [messageModel setValuesForKeysWithDictionary:dataDic];
-                    [noticeArray addObject:messageModel];
-                }
+                timerNotice = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
                 
-                if (!GGFlag) {
+                if (dataArr.count != 0) {
                     
+                    for (NSDictionary *dataDic in dataArr) {
+                        messageModel = [[TWOMessageModel alloc] init];
+                        [messageModel setValuesForKeysWithDictionary:dataDic];
+                        [noticeArray addObject:messageModel];
+                    }
+
                     [self noticeContentShow];
+                    GGFlag = YES;
+                    
                 }
+                
             }
             
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-    }];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@", error);
+        }];
+    }
 }
 
 //
@@ -875,8 +878,6 @@
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 //                [self loadingWithHidden:YES];
                 
-                timerNotice = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
-                
                 NSArray *pickArr = [responseObject objectForKey:@"Product"];
                 
                 for (NSDictionary *dic in pickArr) {
@@ -921,8 +922,6 @@
             
             if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 
-                timerNotice = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
-                
                 NSArray *pickArr = [responseObject objectForKey:@"Product"];
                 
                 for (NSDictionary *dic in pickArr) {
@@ -930,7 +929,6 @@
                     [model setValuesForKeysWithDictionary:dic];
                     [pickArray addObject:model];
                 }
-                
                 
                 if (pickArray.count != 0) {
                     
@@ -949,7 +947,6 @@
 //                    [self noDataShowMoney];
 //                    [_scrollView setHidden:YES];
                 }
-                
                 
             } else {
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -1004,9 +1001,6 @@
             [self makeScrollView];
             
             timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
-            NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-            // 更改timer对象的优先级
-            [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
             
             noNetworkMonkey.hidden = YES;
             reloadButton.hidden = YES;
@@ -1154,13 +1148,14 @@
     viewThirdOpen.layer.cornerRadius = 4;
     viewThirdOpen.layer.masksToBounds = YES;
     
-    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewThirdOpen.frame.size.width, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"您还未开通托管账户"];
+    UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(0, 3, viewThirdOpen.frame.size.width, 45) backgroundColor:[UIColor whiteColor] textColor:[UIColor profitColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:16] text:@"请激活汇付账户\n以便正常查询账户余额"];
+    labelAlert.numberOfLines = 2;
     [viewThirdOpen addSubview:labelAlert];
     
-    UIImageView *imageImg = [CreatView creatImageViewWithFrame:CGRectMake(viewThirdOpen.frame.size.width/2 - 314/2/2, 45, 314/2, 234/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"thirdimg"]];
+    UIImageView *imageImg = [CreatView creatImageViewWithFrame:CGRectMake(viewThirdOpen.frame.size.width/2 - 314/2/2, 50, 314/2, 234/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"thirdimg"]];
     [viewThirdOpen addSubview:imageImg];
     
-    UIButton *buttonok = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 45 + imageImg.frame.size.height + 15, viewThirdOpen.frame.size.width - 24, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"去开户"];
+    UIButton *buttonok = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(12, 45 + imageImg.frame.size.height + 15, viewThirdOpen.frame.size.width - 24, 40) backgroundColor:[UIColor profitColor] textColor:[UIColor whiteColor] titleText:@"去激活"];
     [viewThirdOpen addSubview:buttonok];
     buttonok.layer.cornerRadius = 4;
     buttonok.layer.masksToBounds = YES;
@@ -1189,9 +1184,33 @@
     buttBlack = nil;
     viewThirdOpen = nil;
     
-    TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
-    productHuiFuVC.fuctionName = @"userReg";
-    pushVC(productHuiFuVC);
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+    
+    UIButton *indexButton = [app.tabBarVC.tabButtonArray objectAtIndex:0];
+    
+    for (UIButton *tempButton in app.tabBarVC.tabButtonArray) {
+        
+        if (indexButton.tag != tempButton.tag) {
+            NSLog(@"%ld",(long)tempButton.tag);
+            [tempButton setSelected:NO];
+        }
+    }
+    
+    [indexButton setSelected:YES];
+    
+    [app.tabBarVC setTabbarViewHidden:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+//    double delayInSeconds = 0.1;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        TWOProductHuiFuViewController *productHuiFuVC = [[TWOProductHuiFuViewController alloc] init];
+        productHuiFuVC.fuctionName = @"userReg";
+        pushVC(productHuiFuVC);
+//    });
+    
+    
     
 }
 

@@ -607,6 +607,16 @@
          
             if ([textField.text integerValue] >= 10000) {
                 textField.text = @"10000";
+            } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
+                if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
+                    textField.text = self.limitMoney;
+                }
+            } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
+                textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
+            } else if ([textField.text integerValue] >= [self.residueMoney integerValue]) {
+                textField.text = [NSString stringWithFormat:@"%ld",(long)[self.residueMoney integerValue]];
+            } else {
+                textField.text = [NSString stringWithFormat:@"%ld",(long)[textField.text integerValue] - number];
             }
         } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
             if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
@@ -864,7 +874,22 @@
     
     NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
     
-    if ([[self.detailM.productType description] isEqualToString:@"9"]) {
+    if ([[self.detailM.productType description] isEqualToString:@"3"]) {
+        
+        if ([textField.text integerValue] >= 10000) {
+            textField.text = @"10000";
+        } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
+            if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
+                textField.text = self.limitMoney;
+            }
+        } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
+            textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
+        } else if ([textField.text integerValue] >= [self.residueMoney integerValue]) {
+            textField.text = [NSString stringWithFormat:@"%ld",(long)[self.residueMoney integerValue]];
+        } else {
+            textField.text = [NSString stringWithFormat:@"%ld",(long)[textField.text integerValue] - number];
+        }
+    } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
         if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
             textField.text = self.limitMoney;
         }

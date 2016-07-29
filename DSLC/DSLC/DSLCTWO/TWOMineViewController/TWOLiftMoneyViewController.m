@@ -9,7 +9,7 @@
 #import "TWOLiftMoneyViewController.h"
 #import "TWOProductHuiFuViewController.h"
 
-@interface TWOLiftMoneyViewController ()
+@interface TWOLiftMoneyViewController () <UITextFieldDelegate>
 {
     UITextField *textFieldLift;
     UIButton *buttonNext;
@@ -49,6 +49,7 @@
     [viewBottom addSubview:textFieldLift];
     textFieldLift.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     textFieldLift.textColor = [UIColor findZiTiColor];
+    textFieldLift.delegate = self;
     textFieldLift.keyboardType = UIKeyboardTypeDecimalPad; //带小数点的数字键盘
     [textFieldLift addTarget:self action:@selector(textFieldLiftMoney:) forControlEvents:UIControlEventEditingChanged];
     
@@ -78,6 +79,18 @@
     } else {
         buttonNext.backgroundColor = [UIColor profitColor];
         buttonNext.enabled = YES;
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location > 9) {
+        
+        return NO;
+        
+    } else {
+        
+        return YES;
     }
 }
 
