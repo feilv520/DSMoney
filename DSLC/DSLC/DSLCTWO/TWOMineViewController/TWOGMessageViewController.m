@@ -24,6 +24,7 @@
     BOOL flagSate;
     NSInteger pageNumber;
     MJRefreshBackGifFooter *gifFooter;
+    MJRefreshGifHeader *gifHeader;
 }
 
 @end
@@ -129,13 +130,19 @@
             }
             
             [gifFooter endRefreshing];
+            [gifHeader endRefreshing];
             
             if (pageNumber == 1) {
                 
                 if (dataArray.count == 0) {
                     [self noDataShow];
                 } else {
-                    [self tableViewShow];
+                    if (mainTableView == nil) {
+                        
+                        [self tableViewShow];
+                    } else {
+                        [mainTableView reloadData];
+                    }
                 }
             } else {
                 [mainTableView reloadData];
@@ -166,6 +173,8 @@
 
 - (void)loadNewData:(MJRefreshGifHeader *)header
 {
+    gifHeader = header;
+    
     if (messageArray != nil) {
         [messageArray removeAllObjects];
         messageArray = nil;

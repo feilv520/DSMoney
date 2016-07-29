@@ -55,6 +55,9 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             dataDictionary = responseObject;
             [self contentShow];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getMessageDataRefrush" object:nil];
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }

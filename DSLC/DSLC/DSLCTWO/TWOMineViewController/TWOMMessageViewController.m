@@ -21,8 +21,10 @@
     NSMutableArray *newsArray;
     BOOL flag;
     MJRefreshBackGifFooter *gifFooter;
+    MJRefreshGifHeader *gifHeader;
     BOOL flagSate;
     NSInteger pageNum;
+    NSInteger oldPageNum;
     
     UIImageView *imageDian;
     UILabel *labelTitle;
@@ -50,6 +52,8 @@
     
     flagSate = NO;
     pageNum = 1;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMessageData) name:@"getMessageDataRefrush" object:nil];
     
     [self getMessageData];
     [self tableViewShow];
@@ -147,6 +151,15 @@
         
         NSLog(@"消息列表----------------%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            if (oldPageNum == pageNum) {
+                if (newsArray != nil) {
+                    [newsArray removeAllObjects];
+                    newsArray = nil;
+                    newsArray = [NSMutableArray array];
+                }
+            }
+            
             NSMutableArray *dataArray = [responseObject objectForKey:@"message"];
             for (NSDictionary *dataDic in dataArray) {
                 TWONewsMessageModel *newsMessageModel = [[TWONewsMessageModel alloc] init];
@@ -159,16 +172,26 @@
             }
             
             [gifFooter endRefreshing];
+            [gifHeader endRefreshing];
             
             if (pageNum == 1) {
                 if (newsArray.count == 0) {
                     [self noDataShow];
                 } else {
-                    [self tableViewShow];
+                    if (mainTableView == nil) {
+                    
+                        [self tableViewShow];
+                    } else {
+                        
+                        [mainTableView reloadData];
+                    }
                 }
             } else {
                 [mainTableView reloadData];
             }
+            
+            oldPageNum = pageNum;
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
@@ -191,6 +214,8 @@
 
 - (void)loadNewData:(MJRefreshGifHeader *)header
 {
+    gifHeader = header;
+    
     if (newsArray != nil) {
         [newsArray removeAllObjects];
         newsArray = nil;

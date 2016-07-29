@@ -1126,6 +1126,9 @@
     
     NSString *dateString = [dic objectForKey:@"registerTime"];
     
+    NSLog(@"chinaPnrAcc = %@",[dic objectForKey:@"chinaPnrAcc"]);
+    NSLog(@"dateStringWithChinaCompareDate = %d",[self compareDate:dateString]);
+    
     if ([[dic objectForKey:@"chinaPnrAcc"] isEqualToString:@""] && [self compareDate:dateString] == 1) {
         
         [self registThirdShow];
