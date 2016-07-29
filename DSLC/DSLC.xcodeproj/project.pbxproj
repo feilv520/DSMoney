@@ -992,6 +992,7 @@
 		81F5FA111BDA1C2E008C38BF /* MoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F5FA0F1BDA1C2E008C38BF /* MoreCell.m */; };
 		81F5FA121BDA1C2E008C38BF /* MoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F5FA101BDA1C2E008C38BF /* MoreCell.xib */; };
 		81F86BD11D47166E008F8ED5 /* 敬请期待ing.png in Resources */ = {isa = PBXBuildFile; fileRef = 81F86BD01D47166E008F8ED5 /* 敬请期待ing.png */; settings = {ASSET_TAGS = (); }; };
+		81F86BD71D49CF27008F8ED5 /* TWORuningActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F86BD61D49CF27008F8ED5 /* TWORuningActivityViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81F8EFDB1CF7DBE900DC78FF /* TWOMoneySweepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F8EFDA1CF7DBE900DC78FF /* TWOMoneySweepViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81F8EFDF1CF7E1BA00DC78FF /* TWOMoneySweepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F8EFDD1CF7E1BA00DC78FF /* TWOMoneySweepCell.m */; settings = {ASSET_TAGS = (); }; };
 		81F8EFE01CF7E1BA00DC78FF /* TWOMoneySweepCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F8EFDE1CF7E1BA00DC78FF /* TWOMoneySweepCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -2977,6 +2978,8 @@
 		81F5FA0F1BDA1C2E008C38BF /* MoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreCell.m; sourceTree = "<group>"; };
 		81F5FA101BDA1C2E008C38BF /* MoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreCell.xib; sourceTree = "<group>"; };
 		81F86BD01D47166E008F8ED5 /* 敬请期待ing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "敬请期待ing.png"; sourceTree = "<group>"; };
+		81F86BD51D49CF27008F8ED5 /* TWORuningActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWORuningActivityViewController.h; sourceTree = "<group>"; };
+		81F86BD61D49CF27008F8ED5 /* TWORuningActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWORuningActivityViewController.m; sourceTree = "<group>"; };
 		81F8EFD91CF7DBE900DC78FF /* TWOMoneySweepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMoneySweepViewController.h; sourceTree = "<group>"; };
 		81F8EFDA1CF7DBE900DC78FF /* TWOMoneySweepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWOMoneySweepViewController.m; sourceTree = "<group>"; };
 		81F8EFDC1CF7E1BA00DC78FF /* TWOMoneySweepCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWOMoneySweepCell.h; sourceTree = "<group>"; };
@@ -4573,6 +4576,8 @@
 				810F9C271CDC3CEA00BF39B5 /* TWOFindViewController.m */,
 				81ADB29F1CF570D200E044BC /* TWOFindActivityCenterViewController.h */,
 				81ADB2A01CF570D200E044BC /* TWOFindActivityCenterViewController.m */,
+				81F86BD51D49CF27008F8ED5 /* TWORuningActivityViewController.h */,
+				81F86BD61D49CF27008F8ED5 /* TWORuningActivityViewController.m */,
 				818102741CE031B00038B64E /* TWOgameCenterViewController.h */,
 				818102751CE031B00038B64E /* TWOgameCenterViewController.m */,
 				81D1F3851D2CA34800CFE067 /* TWOGameCenterExplainViewController.h */,
@@ -9324,6 +9329,7 @@
 				8D1DB6071C7EE6F4003CFDA6 /* CastUpMonkeyTableViewCell.m in Sources */,
 				81F237751BE86031009D7A67 /* CashFinishViewController.m in Sources */,
 				8D88D1001BFECCB40051D6DA /* MJRefreshGifHeader.m in Sources */,
+				81F86BD71D49CF27008F8ED5 /* TWORuningActivityViewController.m in Sources */,
 				8DA5ABC61D13F5C600A10467 /* TWOMyMonkeyModel.m in Sources */,
 				8177A01D1CF2E06C0057AA7B /* TWOWinPrizeRecordViewController.m in Sources */,
 				8179EB101CEAEA9300BD7054 /* TWOEmailViewController.m in Sources */,

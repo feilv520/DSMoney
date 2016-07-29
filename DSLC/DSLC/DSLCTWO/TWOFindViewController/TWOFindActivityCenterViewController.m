@@ -9,6 +9,7 @@
 #import "TWOFindActivityCenterViewController.h"
 #import "TWOFindActivityCenterCell.h"
 #import "TWOActivityThreeStateModel.h"
+#import "TWORuningActivityViewController.h"
 
 @interface TWOFindActivityCenterViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -206,6 +207,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (tableView == _tableView1) {
+        TWOActivityThreeStateModel *activityModel = [runArray objectAtIndex:indexPath.row];
+        TWORuningActivityViewController *runingActivity = [[TWORuningActivityViewController alloc] init];
+        runingActivity.runLink = [activityModel posterLink];
+        pushVC(runingActivity);
+    }
 }
 
 #pragma mark listData----------------------
