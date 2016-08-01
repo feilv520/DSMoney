@@ -54,6 +54,21 @@
     
     UIImageView *imageMonkey;
     
+    // 小图的数组
+    NSMutableArray *imageSmallArray;
+    // 大图的数组
+    NSMutableArray *imageBigArray;
+    
+    // 小图的url
+    NSString *firstString;
+    NSString *secondString;
+    NSString *thirdString;
+    
+    // 小图的展示
+    YYAnimatedImageView *image1;
+    YYAnimatedImageView *image2;
+    YYAnimatedImageView *image3;
+    
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -69,6 +84,10 @@
     [self.navigationItem setTitle:@"资产详情"];
     
     moreOpenArray = [NSMutableArray array];
+    
+    imageSmallArray = [NSMutableArray array];
+    
+    imageBigArray = [NSMutableArray array];
     
     openFlag = YES;
     
@@ -151,7 +170,7 @@
             
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
             
-            CGSize sizeDetail = [[assetModel assetProjectResume] boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            CGSize sizeDetail = [[assetModel assetProjectResume] boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
             
             return sizeDetail.height;
         }
@@ -179,6 +198,7 @@
         
         return 0.1;
     } else if (section == 1) {
+        
         return 45;
     } else {
         
@@ -240,15 +260,17 @@
             
             [photoScrollView addGestureRecognizer:tap];
             
-            UIImageView *image1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"首页banner"]];
+            NSLog(@"firstString = %@",firstString);
+            
+            image1 = [[YYAnimatedImageView alloc] init];
             
             image1.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 150);
             
-            UIImageView *image2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"组-21-拷贝-14"]];
+            image2 = [[YYAnimatedImageView alloc] init];
             
             image2.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT, 0, WIDTH_CONTROLLER_DEFAULT, 150);
             
-            UIImageView *image3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"组-21-拷贝-13"]];
+            image3 = [[YYAnimatedImageView alloc] init];
             
             image3.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * 2, 0, WIDTH_CONTROLLER_DEFAULT, 150);
             
@@ -332,29 +354,31 @@
             
             cell.lineView.hidden = YES;
             
-            cell.titleLabel.text = [assetModel assetProjectDetail];
-            cell.titleLabel.hidden = YES;
+//            cell.titleLabel.text = [assetModel assetProjectDetail];
+//            cell.titleLabel.hidden = YES;
+            
+            cell.titleLabel.text = [assetModel assetProjectResume];
             cell.valueLabel.hidden = YES;
             
-            NSString *detailString = [assetModel assetProjectResume];
-            
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
-            
-            CGSize sizeDetail = [detailString boundingRectWithSize:CGSizeMake(cell.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-            
-            webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, sizeDetail.height)];
-            webView.userInteractionEnabled = NO;
-            [cell addSubview:webView];
-            
-            //            webView.hidden = NO;
-            
-            detailString = [detailString stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
-            detailString = [detailString stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
-            detailString = [detailString stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
-            detailString = [detailString stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
-            detailString = [detailString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-            
-            [webView loadHTMLString:detailString baseURL:nil];
+//            NSString *detailString = [assetModel assetProjectResume];
+//            
+//            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
+//            
+//            CGSize sizeDetail = [detailString boundingRectWithSize:CGSizeMake(cell.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+//            
+//            webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, sizeDetail.height)];
+//            webView.userInteractionEnabled = NO;
+//            [cell addSubview:webView];
+//            
+//            //            webView.hidden = NO;
+//            
+//            detailString = [detailString stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
+//            detailString = [detailString stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
+//            detailString = [detailString stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+//            detailString = [detailString stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+//            detailString = [detailString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+//            
+//            [webView loadHTMLString:detailString baseURL:nil];
         }
     }
     
@@ -627,6 +651,34 @@
                 [moreOpenArray addObject:@"0"];
             }
             
+            imageBigArray = [[responseObject objectForKey:@"Asset"] objectForKey:@"Image"];
+            imageSmallArray = [[responseObject objectForKey:@"Asset"] objectForKey:@"ImageSmall"];
+            
+            if (imageSmallArray.count != 0){
+                
+                firstString = [[imageSmallArray objectAtIndex:0] objectForKey:@"imgPath"];
+                secondString = [[imageSmallArray objectAtIndex:1] objectForKey:@"imgPath"];
+                thirdString = [[imageSmallArray objectAtIndex:2] objectForKey:@"imgPath"];
+            }
+            
+            if (firstString == nil || [firstString isEqualToString:@""]) {
+                image1.image = [UIImage imageNamed:@"首页banner"];
+            } else {
+                image1.yy_imageURL = [NSURL URLWithString:firstString];
+            }
+            
+            if (secondString == nil || [secondString isEqualToString:@""]) {
+                image2.image = [UIImage imageNamed:@"首页banner"];
+            } else {
+                image2.yy_imageURL = [NSURL URLWithString:secondString];
+            }
+            
+            if (thirdString == nil || [thirdString isEqualToString:@""]) {
+                image3.image = [UIImage imageNamed:@"首页banner"];
+            } else {
+                image3.yy_imageURL = [NSURL URLWithString:thirdString];
+            }
+            
             [_tableView reloadData];
         } else {
             
@@ -648,27 +700,6 @@
     }
     [self.view addSubview:imageMonkey];
 }
-
-- (void)getAdvList{
-    
-    NSDictionary *parmeter = @{@"adType":@"2",@"adPosition":@"3"};
-    
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"front/getAdvList" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
-        NSLog(@"AD = %@",responseObject);
-        
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            return ;
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        NSLog(@"%@", error);
-        
-    }];
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

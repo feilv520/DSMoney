@@ -1151,8 +1151,6 @@
             
             [memberDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
-        } else {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         flagFirst = YES;
      

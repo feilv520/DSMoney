@@ -910,7 +910,6 @@
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self loadingWithHidden:YES];
-            [self noNetworkView];
             NSLog(@"%@", error);
             
         }];
@@ -956,7 +955,6 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             [self loadingWithHidden:YES];
-            [self noNetworkView];
             NSLog(@"%@", error);
         }];
     }
@@ -973,6 +971,9 @@
         
         NSLog(@"AD = %@",responseObject);
         
+        noNetworkMonkey.hidden = YES;
+        reloadButton.hidden = YES;
+
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
             return ;
@@ -1001,9 +1002,6 @@
             [self makeScrollView];
             
             timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
-            
-            noNetworkMonkey.hidden = YES;
-            reloadButton.hidden = YES;
             
             [self getNoticeData];
             

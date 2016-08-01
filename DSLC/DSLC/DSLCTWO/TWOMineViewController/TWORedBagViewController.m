@@ -650,6 +650,7 @@
 #pragma mark 对接接口
 #pragma mark --------------------------------
 
+// 获得红包接口
 - (void)getMyRedPacketListFuction{
     NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageRedBag],@"status":@0,@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"],@"pageSize":@10};
     
@@ -667,6 +668,7 @@
                 [redBagArray addObject:redBagModel];
             }
             
+            // 这个是按结束时间排序
             redBagArray = (NSMutableArray *)[redBagArray sortedArrayUsingComparator:^NSComparisonResult(TWORedBagModel *obj1, TWORedBagModel *obj2) {
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -678,6 +680,22 @@
             }];
             
             redBagArray = [redBagArray mutableCopy];
+            
+            // 这个排序是金额大小的排序
+            NSComparator finderSort = ^(TWORedBagModel *obje1,TWORedBagModel *obje2){
+                
+                if ([[obje1 redPacketMoney] integerValue] > [[obje2 redPacketMoney] integerValue]) {
+                    return (NSComparisonResult)NSOrderedDescending;
+                }else if ([[obje1 redPacketMoney] integerValue] < [[obje2 redPacketMoney] integerValue]){
+                    return (NSComparisonResult)NSOrderedAscending;
+                }
+                else
+                    return (NSComparisonResult)NSOrderedSame;
+            };
+            
+            NSArray *resultArray = [redBagArray sortedArrayUsingComparator:finderSort];
+            
+            redBagArray = [resultArray mutableCopy];
             
             [gifFooter endRefreshing];
             
@@ -711,6 +729,7 @@
     }];
 }
 
+// 获得加息卷接口
 - (void)getMyIncreaseListFuction
 {
     NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageAddXiQuan] ,@"status":@"0,1" ,@"pageSize":@10 ,@"token":[self.flagDic objectForKey:@"token"],@"pageSize":@1000};

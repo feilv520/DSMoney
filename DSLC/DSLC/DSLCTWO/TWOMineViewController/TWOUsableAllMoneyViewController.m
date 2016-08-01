@@ -187,7 +187,7 @@
             } else if (button.tag == 4) {
                 typeString = @"5";
             } else if (button.tag == 5) {
-                typeString = @"11";
+                typeString = @"8";
             }
         }
     } completion:^(BOOL finished) {

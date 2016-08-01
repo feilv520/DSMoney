@@ -76,40 +76,13 @@
 #import "NSString+md5String.h"               // md5加密
 #import "JPUSHService.h"                     // 激光推送
 
-
-/*
- 正式环境 认证支付测试商户号  201408071000001543
- MD5 key  201408071000001543test_20140812
- 
- 正式环境 快捷支付测试商户号  201408071000001546
- MD5 key  201408071000001546_test_20140815
- */
-
-// TODO: 修改两个参数成商户自己的配置
-//static NSString *kLLOidPartner = @"201408071000001543";   // 商户号
-//static NSString *kLLPartnerKey = @"201408071000001543test_20140812";   // 密钥
-
 static NSString *kLLOidPartner = @"201512161000642725";   // 商户号
 static NSString *kLLPartnerKey = @"gcctdslc20151231_20160101";   // 密钥
-
-// 访问地址 f79b6fa6f8a06f91b189c43307bcded64c68beaf
-
-//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.14:8080/tongjiang/interface/p2p/";
-//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8080/zhongxin/interface/p2p/";
-//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.13:8080/tongjiang/interface/p2p/";
-
-//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.26:8080/tongjiang/interface/p2p/";
-//static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.232:8080/tongjiang/interface/p2p/";
 
 //2.0 测试接口
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.161:8083/dslc/interface/";
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.75:8080/dslc/interface/";
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.14:8080/dslc/interface/";
-
-// 线上接口
-//static NSString * MYAFHTTP_BASEURL = @"http://58.215.161.88/zhongxin/interface/p2p/";
-
-//static NSString * MYAFHTTP_BASEURL = @"http://58.215.161.87:8080/zhongxin/interface/p2p/";
 
 //2.0线上测试接口地址
 static NSString * MYAFHTTP_BASEURL = @"http://61.172.238.245:8000/dslc/interface/";
