@@ -504,6 +504,10 @@
                 moreFlag = YES;
             }
             
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
+                newFlag = YES;
+            }
+            
             [footerT endRefreshing];
             
             [headerT endRefreshing];
@@ -543,16 +547,22 @@
 - (void)loadNewData:(MJRefreshGifHeader *)header{
     
     headerT = header;
+    
+    if (newFlag) {
         
-    if (self.productListArray != nil) {
-        [self.productListArray removeAllObjects];
-        self.productListArray = nil;
-        self.productListArray = [NSMutableArray array];
+        [header endRefreshing];
+    } else {
+    
+        if (self.productListArray != nil) {
+            [self.productListArray removeAllObjects];
+            self.productListArray = nil;
+            self.productListArray = [NSMutableArray array];
+        }
+        
+        page = 1;
+        [self getProductList];
     }
     
-    page = 1;
-    [self getProductList];
-        
 }
 
 #pragma mark 网络请求方法

@@ -103,6 +103,8 @@
     
     titleArray = @[@"收益方式",@"计息起始日&到账日",@"投资限额"];
     
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
+    
     [self getProductDetail];
 }
 
@@ -799,11 +801,22 @@
     button.enabled = NO;
     
     if ([self.residueMoney isEqualToString:@"0.00"]) {
+        
+        button.enabled = YES;
         [self orderProduct];
         return;
     } else if ([self.residueMoney floatValue] < [[self.detailM amountMin] floatValue]) {
+        
+        button.enabled = YES;
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"剩余金额已小于起投金额,不能投资此产品"];
         return;
+    } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
+        if ([[userDic objectForKey:@"limitMoney"] isEqualToString:@"0"]) {
+            
+            button.enabled = YES;
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资限额已用完,去投资其他产品吧"];
+            return;
+        }
     }
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];

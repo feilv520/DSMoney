@@ -65,7 +65,6 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"我的理财"];
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     
     moreProfitFlag = NO;
     moreCashFlag = NO;
@@ -454,6 +453,8 @@
 #pragma mark 我的理财列表
 #pragma mark --------------------------------
 - (void)getUserAssetsListOneFuction{
+    
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     
     NSDictionary *parmeter = @{@"phone":[self.flagDic objectForKey:@"phone"],@"curPage":[NSNumber numberWithInteger:pageProfit],@"status":@"1,2",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
     

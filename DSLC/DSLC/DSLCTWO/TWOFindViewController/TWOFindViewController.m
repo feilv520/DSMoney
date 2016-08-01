@@ -44,6 +44,8 @@
     UIScrollView *bannerScrollView;
     NSMutableArray *photoArray;
     UIView *viewScroll;
+    
+    UIImageView *imageBanner;
 }
 
 @end
@@ -60,9 +62,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
-    
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    photoArray = [NSMutableArray array];
+    
     [self tabelViewShow];
     
     [self getAdvList];
@@ -104,10 +107,12 @@
 {
     if (photoArray == nil && photoArray.count == 0) {
         
-        UIImageView *imageBanner = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"findbanner"]];
+        imageBanner = [CreatView creatImageViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backGroundColor:[UIColor whiteColor] setImage:[UIImage imageNamed:@"findbanner"]];
         [_tableView.tableHeaderView addSubview:imageBanner];
+        imageBanner.hidden = NO;
     } else {
         
+        imageBanner.hidden = YES;
         viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor qianhuise]];
         [_tableView.tableHeaderView addSubview:viewScroll];
     }
@@ -455,39 +460,38 @@
         
         [self loadingWithHidden:YES];
         
-        NSLog(@"AD = %@",responseObject);
+        NSLog(@"FINDAD = %@",responseObject);
         
         [self tableViewShowHead];
         
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:500]]) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
-            return ;
-        }
-        
-        pageControl.numberOfPages = [[responseObject objectForKey:@"Advertise"] count];
-        
-        if (photoArray != nil) {
-            [photoArray removeAllObjects];
-            photoArray = nil;
-            photoArray = [NSMutableArray array];
-        }
-        
-        for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
-            AdModel *adModel = [[AdModel alloc] init];
-            [adModel setValuesForKeysWithDictionary:dic];
-            [photoArray addObject:adModel];
-        }
-        
-        if (photoArray.count != 0) {
-    
-            [self makeScrollView];
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
-            timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
-            NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-            // 更改timer对象的优先级
-            [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+            pageControl.numberOfPages = [[responseObject objectForKey:@"Advertise"] count];
             
+            if (photoArray != nil) {
+                [photoArray removeAllObjects];
+                photoArray = nil;
+                photoArray = [NSMutableArray array];
+            }
+            
+            for (NSDictionary *dic in [responseObject objectForKey:@"Advertise"]) {
+                AdModel *adModel = [[AdModel alloc] init];
+                [adModel setValuesForKeysWithDictionary:dic];
+                [photoArray addObject:adModel];
+            }
+            
+            if (photoArray.count != 0) {
+                
+                [self makeScrollView];
+                
+                timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollViewFuction) userInfo:nil repeats:YES];
+                NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+                // 更改timer对象的优先级
+                [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+                
+            }
         }
+        
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
