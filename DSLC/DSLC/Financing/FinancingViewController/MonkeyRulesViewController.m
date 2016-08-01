@@ -33,7 +33,6 @@
     webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -44, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 20)];
     [self.view addSubview:webView];
     webView.delegate = self;
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     webView.scrollView.showsVerticalScrollIndicator = NO;
     webView.scrollView.bounces = NO;
     
@@ -41,11 +40,6 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/mbplay.html", htmlFive]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [self loadingWithHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

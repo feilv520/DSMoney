@@ -67,6 +67,18 @@
     }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location < 50) {
+        
+        return YES;
+        
+    } else {
+        
+        return NO;
+    }
+}
+
 //下一步按钮
 - (void)buttonNextClicked:(UIButton *)button
 {

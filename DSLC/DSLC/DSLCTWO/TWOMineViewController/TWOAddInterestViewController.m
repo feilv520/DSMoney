@@ -37,16 +37,9 @@
     webView.scrollView.bounces = NO;
     webView.scrollView.showsVerticalScrollIndicator = NO;
     
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
-    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/jxqtext.html", htmlFive]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [self loadingWithHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

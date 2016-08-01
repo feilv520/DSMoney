@@ -26,7 +26,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self webViewShow];
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
 
 - (void)webViewShow
@@ -41,11 +40,6 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/guide.html", htmlFive]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [self loadingWithHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

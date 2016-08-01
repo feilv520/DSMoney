@@ -22,7 +22,6 @@
     [self.navigationItem setTitle:@"常见问题"];
     
     [self webViewShow];
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
 
 - (void)webViewShow
@@ -38,11 +37,6 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/problem.html", htmlFive]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [self loadingWithHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {
