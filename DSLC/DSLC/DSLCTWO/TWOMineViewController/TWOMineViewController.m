@@ -1151,16 +1151,6 @@
             
             [memberDic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             
-        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:400]]) {
-            
-            TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
-            
-            UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
-            [nvc setNavigationBarHidden:YES animated:YES];
-            
-            [self presentViewController:nvc animated:YES completion:^{
-                
-            }];
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
