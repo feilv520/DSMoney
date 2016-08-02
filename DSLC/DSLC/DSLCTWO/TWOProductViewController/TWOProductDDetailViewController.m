@@ -13,6 +13,7 @@
 #import "TWOProductJinDuTableViewCell.h"
 #import "TWOProductAssetModel.h"
 #import "TWOProductWaitingTableViewCell.h"
+#import "TWOProductPictureViewController.h"
 
 @interface TWOProductDDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate> {
     UIButton *button1;
@@ -474,8 +475,9 @@
         NSLog(@"%f",scrollView.contentOffset.x);
         NSLog(@"%lf",WIDTH_CONTROLLER_DEFAULT * 2 + 44.0);
         if (scrollView.contentOffset.x > (WIDTH_CONTROLLER_DEFAULT * 2 + 44)) {
-            TRankinglistViewController *rankingVC = [TRankinglistViewController new];
-            pushVC(rankingVC);
+            TWOProductPictureViewController *pictureVC = [[TWOProductPictureViewController alloc] init];
+            pictureVC.pictureArr = imageBigArray;
+            pushVC(pictureVC);
         }
     }
 }
