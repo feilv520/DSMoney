@@ -50,6 +50,9 @@
     NSArray *userXingArray;
     
     BOOL initFlag;
+    BOOL ifBugNewProduct;
+    
+    NSString *ifBugNewProductString;
 }
 
 @property (nonatomic, strong) UIControl *viewBotton;
@@ -98,6 +101,8 @@
     assetArray = [NSMutableArray array];
     
     initFlag = NO;
+    
+    ifBugNewProduct = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductDetail) name:@"safeTest" object:nil];
     
@@ -803,7 +808,6 @@
     if ([self.residueMoney isEqualToString:@"0.00"]) {
         
         button.enabled = YES;
-        [self orderProduct];
         return;
     } else if ([self.residueMoney floatValue] < [[self.detailM amountMin] floatValue]) {
         
@@ -829,6 +833,12 @@
             
             [self registThirdShow];
             return;
+        } else if ([[self.detailM.productType description] isEqualToString:@"3"]) {
+            if (ifBugNewProduct) {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:ifBugNewProductString];
+                return;
+            }
         }
         
         TWOProductMakeSureViewController *makeSureVC = [[TWOProductMakeSureViewController alloc] init];
@@ -970,33 +980,6 @@
 #pragma mark 网络请求方法
 #pragma mark --------------------------------
 
-// 预定产品
-- (void)orderProduct{
-    
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-    
-    NSDictionary *parameters = @{@"productId":[self.detailM productId],@"productType":[self.detailM productType],@"token":[dic objectForKey:@"token"]};
-    
-    NSLog(@"%@",parameters);
-    
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/orderProduct" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
-        
-        NSLog(@"orderProduct = %@",responseObject);
-        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"已预约"];
-            
-            butMakeSure.userInteractionEnabled = NO;
-            [butMakeSure setTitle:@"已预约" forState:UIControlStateNormal];
-            //            [butMakeSure setBackgroundImage:[UIImage imageNamed:@"btn_gray"] forState:UIControlStateNormal];
-            butMakeSure.backgroundColor = [UIColor colorWithRed:190.0 / 225.0 green:190.0 / 225.0 blue:190.0 / 225.0 alpha:1.0];
-        } else {
-            [ProgressHUD showMessage:@"请先登录,然后再预约" Width:100 High:20];
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error = %@",error);
-    }];
-}
-
 - (void)getProductDetail{
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
@@ -1027,12 +1010,41 @@
         
         initFlag = YES;
         
+        if ([[self.detailM.productType description] isEqualToString:@"3"] && tokenString != nil) {
+            
+            [self checkProductBuyInfoFuction];
+        }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
         
     }];
 }
+
+- (void)checkProductBuyInfoFuction
+{
+    NSDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSString *tokenString = [dic objectForKey:@"token"];
+    
+    NSDictionary *parameter = @{@"productId":self.idString,@"token":tokenString};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"trade/checkProductBuyInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"&*&*&*&*&*&*%@", responseObject);
+        
+//        200调用接口成功，201您已买过新手产品，不能再买！，300调用接口异常或不符合条件
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:201]]) {
+            
+            ifBugNewProduct = YES;
+            ifBugNewProductString = [responseObject objectForKey:@"resultMsg"];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"wwwwwwwwwwwwwwwwwwwwwwwwww%@", error);
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
