@@ -112,6 +112,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self getDataOpen];
+    
     // 可以解决navigation controller子view偏移问题
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]){
         
@@ -1097,8 +1099,6 @@
     
 //    [self loadingWithheight:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50 + 64];
     
-    [self getDataOpen];
-    
     memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"]};
@@ -1129,7 +1129,7 @@
             [contentArray addObject:[NSString stringWithFormat:@"%@猴币",[DES3Util decrypt:[myAccount monkeyNum]]]];
             if (menusDic == nil || [[menusDic objectForKey:@"menuRemark"] isEqualToString:@""]) {
                 
-                [contentArray addObject:@""];
+                [contentArray addObject:@"--"];
             } else {
                 
                 [contentArray addObject:[menusDic objectForKey:@"menuRemark"]];
