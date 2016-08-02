@@ -66,7 +66,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self.navigationItem setTitle:@"咨询理财师"];
+    [self.navigationItem setTitle:self.chatName];
     
     chatArray = [NSMutableArray array];
     timeArray = [NSMutableArray array];

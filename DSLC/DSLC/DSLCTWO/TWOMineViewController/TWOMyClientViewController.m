@@ -101,6 +101,11 @@
     TWOUserModel *userModel = [userArray objectAtIndex:indexPath.row];
     ChatViewController *chatVC = [[ChatViewController alloc] init];
     chatVC.IId = [userModel userId];
+    if ([[userModel userRealName] isEqualToString:@""]) {
+        chatVC.chatName = [[userModel userAccount] stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    } else {
+        chatVC.chatName = [userModel userRealName];
+    }
     pushVC(chatVC);
 }
 

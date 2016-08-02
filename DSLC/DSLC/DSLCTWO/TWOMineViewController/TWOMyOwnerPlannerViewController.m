@@ -24,6 +24,7 @@
     UILabel *labelAlert;
     BOOL stateOr;
     NSString *idString;
+    NSString *myTeacherName;
 }
 
 @end
@@ -219,10 +220,13 @@
 - (void)askQuestionButtonClicked:(UIButton *)button
 {
     ChatViewController *chatVC = [[ChatViewController alloc] init];
+    //判断是否有申请理财师,有是YES,没有是NO.
     if (self.stateShow == YES) {
-        chatVC.IId = idString;
+        chatVC.IId = idString; //我的理财师详情接口获取的id
+        chatVC.chatName = myTeacherName;
     } else {
-        chatVC.IId = [self.listModel ID];
+        chatVC.IId = [self.listModel ID]; //首页理财师列表理财师的id
+        chatVC.chatName = [self.listModel userRealname];
     }
     pushVC(chatVC);
 }
@@ -257,7 +261,8 @@
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             tempDic = [responseObject objectForKey:@"User"];
             idString = [tempDic objectForKey:@"id"];
-            NSLog(@"----^^^^^---%@", idString);
+            myTeacherName = [DES3Util decrypt:[tempDic objectForKey:@"userRealname"]];
+            NSLog(@"----^^^^^---%@", tempDic);
             [self tableViewShow];
         }
         
