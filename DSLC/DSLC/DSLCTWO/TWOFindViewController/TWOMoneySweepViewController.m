@@ -99,7 +99,7 @@
     if ([self.kindState isEqualToString:@"1"]) {
         //大圣侃经
         TWOMessageModel *sweepModel = [DSLCTalkArray objectAtIndex:indexPath.row];
-        cell.viewBottom.layer.cornerRadius = 3;
+        cell.viewBottom.layer.cornerRadius = 4;
         cell.viewBottom.layer.masksToBounds = YES;
         cell.imageBackGround.yy_imageURL = [NSURL URLWithString:[sweepModel cover]];
         
@@ -128,7 +128,7 @@
         //投资大扫描
         TWOMessageModel *sweepModel = [bigSweepArray objectAtIndex:indexPath.row];
         
-        cell.viewBottom.layer.cornerRadius = 3;
+        cell.viewBottom.layer.cornerRadius = 4;
         cell.viewBottom.layer.masksToBounds = YES;
         cell.imageBackGround.yy_imageURL = [NSURL URLWithString:[sweepModel cover]];
         

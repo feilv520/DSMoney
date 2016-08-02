@@ -38,10 +38,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8d-Wa-U5x">
-                                <rect key="frame" x="8" y="110" width="212" height="26"/>
+                                <rect key="frame" x="8" y="110" width="240" height="26"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="212" id="45j-2Y-WEf"/>
+                                    <constraint firstAttribute="width" constant="240" id="45j-2Y-WEf"/>
                                     <constraint firstAttribute="height" constant="26" id="nng-Bi-din"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -49,9 +49,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9D-W0-4vd">
-                                <rect key="frame" x="228" y="110" width="121" height="26"/>
+                                <rect key="frame" x="256" y="110" width="93" height="26"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="121" id="lb4-HJ-xhl"/>
+                                    <constraint firstAttribute="width" constant="93" id="lb4-HJ-xhl"/>
                                     <constraint firstAttribute="height" constant="26" id="tDv-RO-fA9"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>

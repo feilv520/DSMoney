@@ -168,6 +168,8 @@
         
         TWOActivityThreeStateModel *activityModel = [runArray objectAtIndex:indexPath.row];
         cell.imageActivity.yy_imageURL = [NSURL URLWithString:[activityModel poster]];
+        cell.imageActivity.layer.cornerRadius = 4;
+        cell.imageActivity.layer.masksToBounds = YES;
         cell.imageOver.hidden = YES;
         cell.imageWaiting.hidden = YES;
         cell.labelAlpha.hidden = YES;
@@ -176,6 +178,8 @@
         
         TWOActivityThreeStateModel *activityModel = [waitArray objectAtIndex:indexPath.row];
         cell.imageActivity.yy_imageURL = [NSURL URLWithString:[activityModel poster]];
+        cell.imageActivity.layer.cornerRadius = 4;
+        cell.imageActivity.layer.masksToBounds = YES;
         cell.imageWaiting.hidden = NO;
         cell.imageOver.hidden = YES;
         cell.labelAlpha.hidden = YES;
@@ -185,6 +189,8 @@
         
         TWOActivityThreeStateModel *activityModel = [overArray objectAtIndex:indexPath.row];
         cell.imageActivity.yy_imageURL = [NSURL URLWithString:[activityModel poster]];
+        cell.imageActivity.layer.cornerRadius = 4;
+        cell.imageActivity.layer.masksToBounds = YES;
         cell.imageWaiting.hidden = YES;
         cell.imageOver.hidden = NO;
         cell.labelAlpha.hidden = NO;
