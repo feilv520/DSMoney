@@ -44,6 +44,8 @@
     UIImageView *imageWait;
     
     NSDictionary *userInformation;
+    
+    
 }
 @property (nonatomic, strong) NSDictionary *flagDic;
 @property (nonatomic, strong) NSDictionary *flagLogin;
@@ -145,6 +147,27 @@
     
     // 版本控制接口
     //    [self versionAlertView];
+    
+    // 推送消息判断后跳转页面
+    if (launchOptions)
+    {
+        NSDictionary* userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        
+        if (userInfo) {
+            if ([[userInfo objectForKey:@"detailType"] isEqualToString:@"Notice"]) {
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gongGaoWithNotice" object:userInfo];
+                });
+                
+            } else if ([[userInfo objectForKey:@"detailType"] isEqualToString:@"H5"]) {
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"hFiveWithNotice" object:userInfo];
+                });
+            }
+        }
+    }
     
     NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
@@ -912,6 +935,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     imageWait = nil;
 }
 
+// 获取邀请码方法
 - (void)getMyAccountInfoFuction{
     
     NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
@@ -935,6 +959,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     }];
 }
 
+// 签到方法调用
 - (void)userSign{
     
     NSDate *currentDate = [NSDate date];//获取当前时间，日期

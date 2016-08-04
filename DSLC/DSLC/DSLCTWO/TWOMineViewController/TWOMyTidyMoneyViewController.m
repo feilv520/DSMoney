@@ -98,6 +98,8 @@
     
     [self getUserAssetsListOneFuction];
     [self getUserAssetsListTwoFuction];
+    
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
 
 //收益中无数据显示
@@ -226,6 +228,8 @@
     _tabelViewCash.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 9)];
     _tabelViewCash.tableFooterView.backgroundColor = [UIColor qianhuise];
     [_tabelViewCash registerNib:[UINib nibWithNibName:@"TWOProfitGettingCell" bundle:nil] forCellReuseIdentifier:@"reuseCash"];
+    
+    [self addTableViewWithFooter:_tableViewProfit];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -453,8 +457,6 @@
 #pragma mark 我的理财列表
 #pragma mark --------------------------------
 - (void)getUserAssetsListOneFuction{
-    
-    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     
     NSDictionary *parmeter = @{@"phone":[self.flagDic objectForKey:@"phone"],@"curPage":[NSNumber numberWithInteger:pageProfit],@"status":@"1,2",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
     

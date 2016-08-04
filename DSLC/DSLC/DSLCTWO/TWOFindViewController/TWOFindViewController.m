@@ -69,11 +69,6 @@
     [self tabelViewShow];
     
     [self getAdvList];
-    
-    // 公告推送
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushGongGaoViewController:) name:@"gongGaoWithNotice" object:nil];
-    // 公告H5
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushHFiveViewController:) name:@"hFiveWithNotice" object:nil];
 }
 
 - (void)tabelViewShow
@@ -113,7 +108,7 @@
     } else {
         
         imageBanner.hidden = YES;
-        viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor qianhuise]];
+        viewScroll = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor qianhuise]];
         [_tableView.tableHeaderView addSubview:viewScroll];
     }
     
@@ -318,7 +313,7 @@
     
     YYAnimatedImageView *bannerFirst = [YYAnimatedImageView new];
     bannerFirst.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:0] adImg]];
-    bannerFirst.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    bannerFirst.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (photoArray.count + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     
     YYAnimatedImageView *bannerLast = [YYAnimatedImageView new];
     bannerLast.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:photoArray.count - 1] adImg]];
@@ -328,7 +323,7 @@
         YYAnimatedImageView *bannerObject = [YYAnimatedImageView new];
         bannerObject.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:i] adImg]];
         bannerObject.tag = i;
-        bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180);
+        bannerObject.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * (i + 1), 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
         UITapGestureRecognizer *tapLeft = [[UITapGestureRecognizer alloc] init];
         [bannerObject addGestureRecognizer:tapLeft];
         [tapLeft addTarget:self action:@selector(bannerObject:)];
@@ -345,7 +340,7 @@
     [bannerScrollView addSubview:bannerFirst];
     [bannerScrollView addSubview:bannerLast];
     
-    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 150, WIDTH_CONTROLLER_DEFAULT, 30)];
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 150.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 30)];
     
     pageControl.numberOfPages = photoArray.count;
     pageControl.currentPage = 0;
@@ -590,34 +585,6 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
-}
-
-#pragma mark 公告推送
-#pragma mark --------------------------------
-
-- (void)pushGongGaoViewController:(NSNotification *)not{
-    
-    NSDictionary *userInfo = [not object];
-    
-    NSLog(@"GuserInfo = %@",userInfo);
-    
-    TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
-    messageDetailVC.messageID = [userInfo objectForKey:@"id"];
-    pushVC(messageDetailVC);
-    
-}
-
-- (void)pushHFiveViewController:(NSNotification *)not{
-    
-    NSDictionary *userInfo = [not object];
-    
-    NSLog(@"HuserInfo = %@",userInfo);
-    
-    BannerViewController *bannerVC = [[BannerViewController alloc] init];
-    bannerVC.photoName = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-    bannerVC.photoUrl = [userInfo objectForKey:@"url"];
-    pushVC(bannerVC);
-    
 }
 
 - (void)didReceiveMemoryWarning {
