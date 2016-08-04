@@ -28,5 +28,6 @@
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *hasNewMoneky;
 @property (nonatomic, copy) NSString *hasNewPrivilege;
+@property (nonatomic, copy) NSString *unReadNum;
 
 @end

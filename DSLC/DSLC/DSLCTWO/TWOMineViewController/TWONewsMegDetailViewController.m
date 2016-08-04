@@ -57,6 +57,7 @@
             [self contentShow];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getMessageDataRefrush" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
             
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];

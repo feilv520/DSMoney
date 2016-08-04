@@ -94,6 +94,7 @@
     MBProgressHUD *hud;
     
     NSDictionary *menusDic;
+    UIButton *butMsgDian;
 }
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -218,6 +219,14 @@
     }
     [imageBackGround addSubview:buttEmail];
     
+    //消息未读圆点
+    if (butMsgDian == nil) {
+        butMsgDian = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(buttEmail.frame.size.width - 5, 0, 7, 7) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
+        butMsgDian.layer.cornerRadius = 7/2;
+        butMsgDian.layer.masksToBounds = YES;
+    }
+    [buttEmail addSubview:butMsgDian];
+    
 //    设置按钮
     if (buttonSet == nil) {
         
@@ -284,6 +293,7 @@
         
         viewLineH = [CreatView creatViewWithFrame:CGRectMake(0, imageBackGround.frame.size.height - 1, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor whiteColor]];
         viewLineH.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        viewLineH.alpha = 0.5;
     }
     [imageBackGround addSubview:viewLineH];
     
@@ -302,6 +312,7 @@
     if (viewLineS == nil) {
         
         viewLineS = [CreatView creatViewWithFrame:CGRectMake(butFullMoney.frame.size.width - 0.5, 0, 0.5, butFullMoney.frame.size.height) backgroundColor:[UIColor whiteColor]];
+        viewLineS.alpha = 0.5;
     }
     [butFullMoney addSubview:viewLineS];
     
@@ -1142,6 +1153,13 @@
             [_tableView reloadData];
             
             [self tableViewHeadShow];
+            
+            //判断是否有原点
+            if ([[[myAccount unReadNum] description] isEqualToString:@"0"]) {
+                butMsgDian.backgroundColor = [UIColor clearColor];
+            } else {
+                butMsgDian.backgroundColor = [UIColor orangecolor];
+            }
             
             NSLog(@"00000----%@",[myAccount invitationMyCode]);
             
