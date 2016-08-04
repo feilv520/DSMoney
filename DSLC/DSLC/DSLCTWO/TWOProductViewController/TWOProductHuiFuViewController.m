@@ -53,6 +53,8 @@
     self.navigationItem.leftBarButtonItem = leftItemBar;
     
     [self contentShow];
+    
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
 
 - (void)contentShow
@@ -197,6 +199,8 @@
 //获取当前页面的title和url
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    [self loadingWithHidden:YES];
+    
     NSString * title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];//获取当前页面的title
     //    self.title = title;
     
