@@ -49,7 +49,13 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"可用余额"];
     
-    accBalanceString = self.moneyString;
+    if (self.moneyString == nil || [self.moneyString isEqualToString:@""]) {
+        
+        accBalanceString = @"----";
+    } else {
+        
+        accBalanceString = [DES3Util decrypt:self.moneyString];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyAccountInfoFuction) name:@"getMyAccountInfoFuction" object:nil];
     
@@ -92,7 +98,7 @@
     }
     [imageBackground addSubview:labelYuE];
     
-    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:accBalanceString]]];
+    NSMutableAttributedString *moneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", accBalanceString]];
     NSRange moneyRange = NSMakeRange(0, [[moneyString string] rangeOfString:@"元"].location);
     [moneyString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:36] range:moneyRange];
     [labelYuE setAttributedText:moneyString];
@@ -192,7 +198,7 @@
 - (void)liftMoneyButton:(UIButton *)button
 {
     TWOLiftMoneyViewController *liftMoneyVC = [[TWOLiftMoneyViewController alloc] init];
-    liftMoneyVC.moneyString = [DES3Util decrypt:accBalanceString];
+    liftMoneyVC.moneyString = accBalanceString;
     [self.navigationController pushViewController:liftMoneyVC animated:YES];
 }
 
@@ -233,7 +239,7 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-            accBalanceString = [responseObject objectForKey:@"accBalance"];
+            accBalanceString = [DES3Util decrypt:[responseObject objectForKey:@"accBalance"]];
             
             [_tableView reloadData];
             

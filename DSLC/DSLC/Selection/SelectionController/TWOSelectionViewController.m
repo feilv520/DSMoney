@@ -368,13 +368,13 @@
     
     if (noticeArray.count >= 3) {
         
-        if (_scrollViewNotice.contentOffset.y == 120) {
+        if (_scrollViewNotice.contentOffset.y >= 120) {
             [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
             secondsNum = 3;
         }
     } else {
         
-        if (_scrollViewNotice.contentOffset.y == noticeArray.count * 30 + 30) {
+        if (_scrollViewNotice.contentOffset.y >= noticeArray.count * 30 + 30) {
             [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
             secondsNum = noticeArray.count;
         }
@@ -564,6 +564,20 @@
 //签到记录
 - (void)signRecordButton:(UIButton *)button
 {
+    NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    
+    if ([[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+        TWOLoginAPPViewController *loginVC = [[TWOLoginAPPViewController alloc] init];
+        
+        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [nvc setNavigationBarHidden:YES animated:YES];
+        
+        [self presentViewController:nvc animated:YES completion:^{
+            
+        }];
+        return;
+    }
+    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     TSignInViewController *signInVC = [[TSignInViewController alloc] init];
@@ -600,9 +614,6 @@
         }
         
         NewInviteViewController *inviteVc = [[NewInviteViewController alloc] init];
-        
-        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
-        inviteVc.inviteCode = [dic objectForKey:@"invitationMyCode"];
         
         [self.navigationController pushViewController:inviteVc animated:YES];
     }
@@ -819,13 +830,13 @@
         
         if (noticeArray.count >= 3) {
             
-            if (_scrollViewNotice.contentOffset.y == 120) {
+            if (_scrollViewNotice.contentOffset.y >= 120) {
                 [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
                 secondsNum = 3;
             }
         } else {
             
-            if (_scrollViewNotice.contentOffset.y == noticeArray.count * 30 + 30) {
+            if (_scrollViewNotice.contentOffset.y >= noticeArray.count * 30 + 30) {
                 [_scrollViewNotice setContentOffset:CGPointMake(0, 30) animated:NO];
                 secondsNum = noticeArray.count;
             }

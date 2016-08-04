@@ -505,7 +505,6 @@
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
         
         NewInviteViewController *newInvite = [[NewInviteViewController alloc] init];
-        newInvite.inviteCode = [self.myAccountInfo objectForKey:@"invitationMyCode"];
         
         if ([[dic objectForKey:@"userPhone"] isEqualToString:@""]) {
             newInvite.phoneNum = [dic objectForKey:@"userPhone"];

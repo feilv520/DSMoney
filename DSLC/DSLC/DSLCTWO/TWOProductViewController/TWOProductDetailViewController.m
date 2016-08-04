@@ -815,7 +815,7 @@
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"剩余金额已小于起投金额,不能投资此产品"];
         return;
     } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
-        if ([[userDic objectForKey:@"limitMoney"] isEqualToString:@"0"]) {
+        if ([[userDic objectForKey:@"limitMoney"] isEqualToString:@"0"] || [[userDic objectForKey:@"limitMoney"] isEqualToString:@""] || [userDic objectForKey:@"limitMoney"] == nil) {
             
             button.enabled = YES;
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资限额已用完,去投资其他产品吧"];
@@ -1010,7 +1010,7 @@
         
         initFlag = YES;
         
-        if ([[self.detailM.productType description] isEqualToString:@"3"] && tokenString != nil) {
+        if ([[self.detailM.productType description] isEqualToString:@"3"] && ![tokenString isEqualToString:@""]) {
             
             [self checkProductBuyInfoFuction];
         }

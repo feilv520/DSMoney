@@ -65,6 +65,10 @@
     [self.navigationController.navigationBar addSubview:butReceive];
     [butReceive addTarget:self action:@selector(inviteRecordButton:) forControlEvents:UIControlEventTouchUpInside];
     
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    self.inviteCode = [dic objectForKey:@"invitationMyCode"];
+    
     viewGray = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT) backgroundColor:[UIColor blackColor]];
     viewGray.alpha = 0.3;
     
@@ -248,7 +252,7 @@
     shareString = [shareString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"aaaaaaaaaaaaaaaaaaaa%@", shareString);
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/invite.html",htmlFive];
+    NSString *urlString = [NSString stringWithFormat:@"%@/invite.html?inviteCode=%@",htmlFive,self.inviteCode];
     
     NSURL *url = [NSURL URLWithString:[noticeInfo objectForKey:@"cover"]];
     

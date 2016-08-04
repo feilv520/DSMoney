@@ -333,6 +333,7 @@
         case 14:{
             NSLog(@"参加爆击抽奖");
             TBaoJiViewController *baojiVC = [[TBaoJiViewController alloc] init];
+            baojiVC.tokenString = [self.flagDic objectForKey:@"token"];
             pushVC(baojiVC);
             break;
         }

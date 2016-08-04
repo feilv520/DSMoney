@@ -113,7 +113,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self getDataOpen];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    
+    if ([[dic objectForKey:@"loginFlag"] isEqualToString:@"YES"]) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self getDataOpen];
+        });
+    }
     
     // 可以解决navigation controller子view偏移问题
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]){
@@ -144,10 +151,6 @@
     
     [self viewDownShow];
     
-    // 公告推送
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushGongGaoViewController:) name:@"gongGaoWithNotice" object:nil];
-    // 公告H5
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushHFiveViewController:) name:@"hFiveWithNotice" object:nil];
 }
 
 - (void)tabelViewShow
@@ -187,7 +190,7 @@
 {
     titleArray = @[@[@"我的理财", @"我的特权本金"], @[@"红包卡券", @"我的猴币", @"我的邀请"]];
     imageArray = @[@[@"我的理财", @"tequanbenjin"], @[@"红包卡券", @"我的猴币", @"myInvite"]];
-    contentArr = @[@[@"0元在投", @"0元"], @[@"0张", @"0猴币", @"邀请好友送星巴克券"]];
+    contentArr = @[@[@"----元在投", @"----元"], @[@"----张", @"----猴币", @"----"]];
 }
 
 //tableView头部
@@ -378,7 +381,7 @@
     NSLog(@"myAccount = %@",myAccount);
     
     if (myAccount == nil) {
-        addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+        addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"----"]];
     } else {
         addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount totalMoney]]]];
     }
@@ -437,7 +440,7 @@
     [imageBackGround addSubview:butMoneyYu];
     
     if (myAccount == nil) {
-        butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+        butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"----"]];
     } else {
         butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount accBalance]]]];
     }
@@ -461,7 +464,7 @@
     [imageBackGround addSubview:butAddMoney];
     
     if (myAccount == nil) {
-        butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+        butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"----"]];
     } else {
         butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount totalProfit]]]];
     }
@@ -645,7 +648,6 @@
         } else if (indexPath.row == 2) {
             //我的邀请
             NewInviteViewController *inviteVC = [[NewInviteViewController alloc] init];
-            inviteVC.inviteCode = [myAccount invitationMyCode];
             [self.navigationController pushViewController:inviteVC animated:YES];
             
         } else {
@@ -727,10 +729,10 @@
     [self addMoney];
     
     if (myAccount == nil) {
-        labelMoneyZhong.text = [NSString stringWithFormat:@"%@元在投",@"0.00"];
+        labelMoneyZhong.text = [NSString stringWithFormat:@"%@元在投",@"----"];
         labelMoneyZhong.font = [UIFont fontWithName:@"CenturyGothic" size:13];
         
-        labelTeQuan.text = [NSString stringWithFormat:@"%@元",@"0.00"];
+        labelTeQuan.text = [NSString stringWithFormat:@"%@元",@"----"];
         labelTeQuan.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     } else {
         labelMoneyZhong.text = [NSString stringWithFormat:@"%@元在投",[DES3Util decrypt:[myAccount investMoney]]];
@@ -775,7 +777,7 @@
 - (void)zongMoney
 {
     if (myAccount == nil) {
-        addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+        addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"----"]];
     } else {
         addMoneyString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount totalMoney]]]];
     }
@@ -799,7 +801,7 @@
 - (void)canMakeMoney
 {
     if (myAccount == nil) {
-        butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+        butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"----"]];
     } else {
         butMoneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount accBalance]]]];
     }
@@ -817,7 +819,7 @@
 - (void)addMoney
 {
     if (myAccount == nil) {
-        butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"0.00"]];
+        butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元",@"----"]];
     } else {
         butAddStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@元", [DES3Util decrypt:[myAccount totalProfit]]]];
     }
@@ -904,12 +906,12 @@
 //拍照
 - (void)takeCamera:(UIButton *)button
 {
-    
-    [butBlack removeFromSuperview];
-    [viewDown removeFromSuperview];
-    
-    butBlack = nil;
-    viewDown = nil;
+    [UIView animateWithDuration:0.3f animations:^{
+        butBlack.alpha = 0.0;
+        viewDown.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, 160);
+    } completion:^(BOOL finished) {
+        butBlack.hidden = YES;
+    }];
     
     NSLog(@"拍照");
     //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
@@ -930,11 +932,12 @@
 //从相册选择
 - (void)chooseFromPicture:(UIButton *)button
 {
-    [butBlack removeFromSuperview];
-    [viewDown removeFromSuperview];
-    
-    butBlack = nil;
-    viewDown = nil;
+    [UIView animateWithDuration:0.3f animations:^{
+        butBlack.alpha = 0.0;
+        viewDown.frame = CGRectMake(0, HEIGHT_CONTROLLER_DEFAULT, WIDTH_CONTROLLER_DEFAULT, 160);
+    } completion:^(BOOL finished) {
+        butBlack.hidden = YES;
+    }];
     
     NSLog(@"从相册选择");
     UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
@@ -1133,14 +1136,14 @@
             [contentArrayOld addObject:[NSString stringWithFormat:@"%@元",[DES3Util decrypt:[myAccount prlMoney]]]];
             
             if ([[myAccount redPacketNum] isEqualToString:@""] || [[myAccount incrUnUsedCount] isEqualToString:@""]) {
-                [contentArray addObject:[NSString stringWithFormat:@"0张"]];
+                [contentArray addObject:[NSString stringWithFormat:@"----张"]];
             } else {
                 [contentArray addObject:[NSString stringWithFormat:@"%ld张",(long)[[myAccount redPacketNum] integerValue] + (long)[[myAccount incrUnUsedCount] integerValue]]];
             }
             [contentArray addObject:[NSString stringWithFormat:@"%@猴币",[DES3Util decrypt:[myAccount monkeyNum]]]];
             if (menusDic == nil || [[menusDic objectForKey:@"menuRemark"] isEqualToString:@""]) {
                 
-                [contentArray addObject:@"--"];
+                [contentArray addObject:@"----"];
             } else {
                 
                 [contentArray addObject:[menusDic objectForKey:@"menuRemark"]];
@@ -1263,34 +1266,6 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"wwwwwwwwwwwwwwwwwwwwwwwwww%@", error);
     }];
-}
-
-#pragma mark 公告推送
-#pragma mark --------------------------------
-
-- (void)pushGongGaoViewController:(NSNotification *)not{
-    
-    NSDictionary *userInfo = [not object];
-    
-    NSLog(@"GuserInfo = %@",userInfo);
-    
-    TWONoticeDetailViewController *messageDetailVC = [[TWONoticeDetailViewController alloc] init];
-    messageDetailVC.messageID = [userInfo objectForKey:@"id"];
-    pushVC(messageDetailVC);
-    
-}
-
-- (void)pushHFiveViewController:(NSNotification *)not{
-    
-    NSDictionary *userInfo = [not object];
-    
-    NSLog(@"HuserInfo = %@",userInfo);
-    
-    BannerViewController *bannerVC = [[BannerViewController alloc] init];
-    bannerVC.photoName = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-    bannerVC.photoUrl = [userInfo objectForKey:@"url"];
-    pushVC(bannerVC);
-    
 }
 
 - (void)didReceiveMemoryWarning {
