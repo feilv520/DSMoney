@@ -150,7 +150,7 @@
     textOldSecret = (UITextField *)[self.view viewWithTag:999];
     textNewSecret = (UITextField *)[self.view viewWithTag:1000];
     NSString *passString = [DES3Util decrypt:[self.flagDic objectForKey:@"password"]];
-    NSLog(@"当前%@", passString);
+    NSLog(@"当前密码%@", passString);
     
     if (textOldSecret.text.length == 0) {
         
