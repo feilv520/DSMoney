@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -35,15 +35,15 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZa-qK-90Y">
-                        <rect key="frame" x="88" y="15" width="192" height="21"/>
+                        <rect key="frame" x="130" y="15" width="150" height="21"/>
                         <animations/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="1N4-we-SSa"/>
-                            <constraint firstAttribute="width" constant="192" id="7wd-uA-p0w"/>
+                            <constraint firstAttribute="width" constant="150" id="7wd-uA-p0w"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="361-Wh-hF0">
@@ -55,15 +55,15 @@
                             <constraint firstAttribute="height" constant="21" id="lYh-ju-Osr"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j44-Kt-TRg">
-                        <rect key="frame" x="10" y="15" width="80" height="21"/>
+                        <rect key="frame" x="10" y="15" width="112" height="21"/>
                         <animations/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="pKg-1S-1wr"/>
+                            <constraint firstAttribute="width" constant="112" id="pKg-1S-1wr"/>
                             <constraint firstAttribute="height" constant="21" id="xjy-V3-oBm"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
@@ -79,7 +79,7 @@
                     <constraint firstItem="QZa-qK-90Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="Qv0-qo-fA2"/>
                     <constraint firstItem="j44-Kt-TRg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="UCZ-lE-OWO"/>
                     <constraint firstAttribute="trailingMargin" secondItem="361-Wh-hF0" secondAttribute="trailing" constant="1" id="XJd-RF-xSJ"/>
-                    <constraint firstItem="QZa-qK-90Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="eBh-4E-BFo"/>
+                    <constraint firstItem="QZa-qK-90Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="122" id="eBh-4E-BFo"/>
                     <constraint firstItem="NGM-jJ-qEN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="fmJ-Uh-0wz"/>
                     <constraint firstItem="NGM-jJ-qEN" firstAttribute="top" secondItem="QZa-qK-90Y" secondAttribute="bottom" constant="4" id="uzw-B5-7i5"/>
                 </constraints>

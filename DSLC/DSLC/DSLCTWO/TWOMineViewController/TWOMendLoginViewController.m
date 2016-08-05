@@ -17,6 +17,8 @@
     UITextField *textOldSecret;
     UITextField *textNewSecret;
     UIButton *butMakeSure;
+    
+    BOOL checkFlag;
 }
 
 @end
@@ -29,6 +31,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"修改登录密码"];
+    
+    checkFlag = NO;
     
     [self tableViewShow];
 }
@@ -55,7 +59,7 @@
     butMakeSure.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     butMakeSure.layer.cornerRadius = 5;
     butMakeSure.layer.masksToBounds = YES;
-    [butMakeSure addTarget:self action:@selector(afterFinishingButton:) forControlEvents:UIControlEventTouchUpInside];
+    [butMakeSure addTarget:self action:@selector(checkUserPassword) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -144,32 +148,6 @@
     }
 }
 
-//确定按钮
-- (void)afterFinishingButton:(UIButton *)button
-{
-    textOldSecret = (UITextField *)[self.view viewWithTag:999];
-    textNewSecret = (UITextField *)[self.view viewWithTag:1000];
-    NSString *passString = [DES3Util decrypt:[self.flagDic objectForKey:@"password"]];
-    NSLog(@"当前%@", passString);
-    
-    if (textOldSecret.text.length == 0) {
-        
-    } else if (textNewSecret.text.length == 0) {
-        
-    } else if (![textOldSecret.text isEqualToString:passString]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"原密码错误"];
-    }else if (![NSString validatePassword:textNewSecret.text]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"登录密码由6-20位数字和密码组成，以字母开头"];
-    } else if ([textNewSecret.text isEqualToString:textOldSecret.text]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"新登录密码不能与原登录密码重复"];
-    } else if (![NSString validatePassword:textNewSecret.text]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"登录密码由6-20位数字和密码组成，以字母开头"];
-    } else {
-        [self.view endEditing:YES];
-        [self mendData];
-    }
-}
-
 #pragma mark data-----------
 - (void)mendData
 {
@@ -187,6 +165,48 @@
             
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+#pragma mark data 检验原密码-----------
+- (void)checkUserPassword
+{
+    textNewSecret = (UITextField *)[self.view viewWithTag:1000];
+    
+    NSDictionary *paemeter = @{@"password":textOldSecret.text, @"token":[self.flagDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"check/checkUserPwd" parameters:paemeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"检查登录密码:::::::::%@", responseObject);
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            checkFlag = YES;
+        } else {
+            
+            checkFlag = NO;
+        }
+        
+        textOldSecret = (UITextField *)[self.view viewWithTag:999];
+        textNewSecret = (UITextField *)[self.view viewWithTag:1000];
+        NSString *passString = [DES3Util decrypt:[self.flagDic objectForKey:@"password"]];
+        NSLog(@"当前%@", passString);
+        
+        if (textOldSecret.text.length == 0) {
+            
+        } else if (textNewSecret.text.length == 0) {
+            
+        } else if (!checkFlag) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"原密码错误"];
+        } else if (![NSString validatePassword:textNewSecret.text]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"登录密码由6-20位数字和密码组成，以字母开头"];
+        } else if ([textNewSecret.text isEqualToString:textOldSecret.text]) {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"新登录密码不能与原登录密码重复"];
+        } else {
+            [self.view endEditing:YES];
+            [self mendData];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
