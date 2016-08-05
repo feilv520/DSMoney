@@ -1106,6 +1106,8 @@
 		8D1591191D0CF91D00A4353D /* selection_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1591091D0CF91D00A4353D /* selection_gray@2x.png */; settings = {ASSET_TAGS = (); }; };
 		8D15911A1D0CF91D00A4353D /* selection_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D15910A1D0CF91D00A4353D /* selection_gray@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D15911D1D0FDA1600A4353D /* UIScrollView+UITouchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D15911C1D0FDA1600A4353D /* UIScrollView+UITouchEvent.m */; settings = {ASSET_TAGS = (); }; };
+		8D185F0F1D549B28006BE329 /* TWOProductWaiting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D185F0D1D549B28006BE329 /* TWOProductWaiting@2x.png */; settings = {ASSET_TAGS = (); }; };
+		8D185F101D549B28006BE329 /* TWOProductWaiting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D185F0E1D549B28006BE329 /* TWOProductWaiting@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8D18B2A21C2982D100754C13 /* TTTTXianTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D18B2A01C2982D100754C13 /* TTTTXianTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		8D18B2A31C2982D100754C13 /* TTTTXianTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D18B2A11C2982D100754C13 /* TTTTXianTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8D18B2A61C29B02300754C13 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D18B2A51C29B02300754C13 /* RSA.m */; settings = {ASSET_TAGS = (); }; };
@@ -3122,6 +3124,8 @@
 		8D15910A1D0CF91D00A4353D /* selection_gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selection_gray@3x.png"; sourceTree = "<group>"; };
 		8D15911B1D0FDA1600A4353D /* UIScrollView+UITouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+UITouchEvent.h"; sourceTree = "<group>"; };
 		8D15911C1D0FDA1600A4353D /* UIScrollView+UITouchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+UITouchEvent.m"; sourceTree = "<group>"; };
+		8D185F0D1D549B28006BE329 /* TWOProductWaiting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWOProductWaiting@2x.png"; sourceTree = "<group>"; };
+		8D185F0E1D549B28006BE329 /* TWOProductWaiting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TWOProductWaiting@3x.png"; sourceTree = "<group>"; };
 		8D18B29F1C2982D100754C13 /* TTTTXianTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTTXianTableViewCell.h; sourceTree = "<group>"; };
 		8D18B2A01C2982D100754C13 /* TTTTXianTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTTXianTableViewCell.m; sourceTree = "<group>"; };
 		8D18B2A11C2982D100754C13 /* TTTTXianTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TTTTXianTableViewCell.xib; sourceTree = "<group>"; };
@@ -4208,6 +4212,8 @@
 		8143FCE81CD9C25300B65A2F /* TWOImage */ = {
 			isa = PBXGroup;
 			children = (
+				8D185F0D1D549B28006BE329 /* TWOProductWaiting@2x.png */,
+				8D185F0E1D549B28006BE329 /* TWOProductWaiting@3x.png */,
 				8D2476441D48B3AB00C0B5FD /* TWOSaled@2x.png */,
 				8D2476451D48B3AB00C0B5FD /* TWOSaled@3x.png */,
 				81E6482C1D3F817500B06D2B /* two默认头像@2x.png */,
@@ -8603,6 +8609,7 @@
 				811B62A01D00254E00B6F17E /* play@2x.png in Resources */,
 				81B84BEF1CE324CA00A867B9 /* wenhao@2x.png in Resources */,
 				817DD4901BCF547E00042B09 /* anniu@2x.png in Resources */,
+				8D185F101D549B28006BE329 /* TWOProductWaiting@3x.png in Resources */,
 				8D4E4DFF1C1E5A6A00AE2644 /* CHANGELIST.txt in Resources */,
 				815D195C1D2A3A6900DFA753 /* thirdimg@2x.png in Resources */,
 				8179EB2E1CEB169300BD7054 /* setbiyan@2x.png in Resources */,
@@ -8720,6 +8727,7 @@
 				8D98CC551CF6AC1E00E34ADE /* TWOPUp@3x.png in Resources */,
 				8DC695C11C3503D30055EC44 /* UMSLoginViewController.xib in Resources */,
 				8D0600221D05761400C0C97C /* Two_Loading_Up01@3x.png in Resources */,
+				8D185F0F1D549B28006BE329 /* TWOProductWaiting@2x.png in Resources */,
 				816F1ED61BF5CA3D00DB6B65 /* PhoneNum@2x.png in Resources */,
 				8D35DA521CF5498700C6409F /* TWOMoreImage@2x.png in Resources */,
 				8D3EEA031C27AB400031F7C9 /* 光大银行@3x.png in Resources */,

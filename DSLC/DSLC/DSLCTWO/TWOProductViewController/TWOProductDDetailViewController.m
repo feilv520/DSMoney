@@ -144,10 +144,10 @@
     } else if (indexPath.section == 1) {
         if (!openFlag) {
             if (moreOpenArray.count == 0) {
-                return 45;
+                return 50;
             } else {
                 if (indexPath.row == moreOpenArray.count) {
-                    return 45;
+                    return 59;
                 } else {
                     if ([[moreOpenArray objectAtIndex:indexPath.row] isEqualToString:@"1"]) {
                         
@@ -415,8 +415,10 @@
                     
                     if ((detailString.length / (widthNumber / 13.0)) <= 3.0) {
                         cell.moreButton.hidden = YES;
+                        cell.fuhaoImage.hidden = YES;
                     } else {
                         cell.moreButton.hidden = NO;
+                        cell.fuhaoImage.hidden = NO;
                     }
                     
                     if (WIDTH_CONTROLLER_DEFAULT == 320.0) {

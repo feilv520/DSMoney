@@ -20,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorFromHexCode:@"#F5F6F7"];
+    
     [self.navigationItem setTitle:[NSString stringWithFormat:@"%@/%ld",@"1",(unsigned long)self.pictureArr.count]];
     
     mainScrillView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
