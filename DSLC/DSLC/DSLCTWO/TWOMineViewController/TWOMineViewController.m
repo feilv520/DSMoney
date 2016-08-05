@@ -113,15 +113,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
-    
-    if ([[dic objectForKey:@"loginFlag"] isEqualToString:@"YES"]) {
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self getDataOpen];
-        });
-    }
-    
     // 可以解决navigation controller子view偏移问题
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]){
         
@@ -130,6 +121,7 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyAccountInfoFuction) name:@"getMyAccountInfo" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getDataOpen) name:@"getMyAccountInviteInfo" object:nil];
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
     

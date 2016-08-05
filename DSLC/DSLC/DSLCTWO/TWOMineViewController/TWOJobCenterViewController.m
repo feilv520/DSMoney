@@ -388,6 +388,12 @@
         
         _tableView.hidden = NO;
         
+        if (self.taskArray != nil) {
+            [self.taskArray removeAllObjects];
+            self.taskArray = nil;
+            self.taskArray = [NSMutableArray array];
+        }
+        
         NSLog(@"任务中心详情:~~~~~%@", responseObject);
         
         NSArray *taskArr = [responseObject objectForKey:@"Task"];

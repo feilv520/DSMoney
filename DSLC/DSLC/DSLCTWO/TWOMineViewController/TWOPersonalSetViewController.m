@@ -360,7 +360,8 @@
                                      @"",@"realName",
                                      @"",@"chinaPnrAcc",
                                      @"",@"token",
-                                     @"",@"registerTime",nil];
+                                     @"",@"registerTime",
+                                     @"",@"newHand",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             } else {
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -377,7 +378,8 @@
                                      @"",@"realName",
                                      @"",@"chinaPnrAcc",
                                      @"",@"token",
-                                     @"",@"registerTime",nil];
+                                     @"",@"registerTime",
+                                     @"",@"newHand",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
@@ -455,8 +457,6 @@
             [personalModel setValuesForKeysWithDictionary:userDic];
             [_tableView reloadData];
             
-        } else {
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

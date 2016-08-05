@@ -357,7 +357,8 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
-                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"newHand"],@"newHand",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             } else {
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -374,7 +375,8 @@
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
-                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"newHand"],@"newHand",nil];
                 NSLog(@"dic = %@",dic);
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                 NSDictionary *didd = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];

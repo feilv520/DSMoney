@@ -103,7 +103,8 @@
                                  @"",@"realName",
                                  @"",@"chinaPnrAcc",
                                  @"",@"token",
-                                 @"",@"registerTime",nil];
+                                 @"",@"registerTime",
+                                 @"",@"newHand",nil];
             [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
         }
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
@@ -685,7 +686,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
-                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"newHand"],@"newHand",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
             } else {
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -702,7 +704,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                                      [[responseObject objectForKey:@"User"] objectForKey:@"realName"],@"realName",
                                      [[responseObject objectForKey:@"User"] objectForKey:@"chinaPnrAcc"],@"chinaPnrAcc",
                                      [responseObject objectForKey:@"token"],@"token",
-                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",nil];
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"registerTime"],@"registerTime",
+                                     [[responseObject objectForKey:@"User"] objectForKey:@"newHand"],@"newHand",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                 NSLog(@"%@",[responseObject objectForKey:@"token"]);
             }
@@ -776,8 +779,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
                 [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
             }
-            
-            [ProgressHUD showMessage:[responseObject objectForKey:@"resultMsg"] Width:100 High:20];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
