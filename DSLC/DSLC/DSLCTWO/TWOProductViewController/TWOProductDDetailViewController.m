@@ -49,6 +49,7 @@
     NSMutableArray *moreOpenArray;
     
     CGFloat widthNumber;
+    CGFloat widthAppDetailNumber;
     
     UIView *lineView;
     UIView *lineViewSectionWithOne;
@@ -144,7 +145,7 @@
     } else if (indexPath.section == 1) {
         if (!openFlag) {
             if (moreOpenArray.count == 0) {
-                return 50;
+                return 59;
             } else {
                 if (indexPath.row == moreOpenArray.count) {
                     return 59;
@@ -157,7 +158,7 @@
                         
                         return 80 + mySize.height;
                     } else {
-                        return 120;
+                        return 110;
                     }
                 }
             }
@@ -169,11 +170,17 @@
             return 50;
         } else {
             
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
+            if ([[assetModel assetAppInfo] isEqualToString:@""]) {
+                
+                return 0.5;
+            } else {
             
-            CGSize sizeDetail = [[assetModel assetProjectResume] boundingRectWithSize:CGSizeMake(WIDTH_CONTROLLER_DEFAULT, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-            
-            return sizeDetail.height;
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName, nil];
+                
+                CGSize sizeDetail = [[assetModel assetAppInfo] boundingRectWithSize:CGSizeMake(widthAppDetailNumber, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+                
+                return sizeDetail.height + 30;
+            }
         }
     }
 }
@@ -314,7 +321,6 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [cell.titleLabel setFont:[UIFont systemFontOfSize:14]];
-            NSLog(@"%@",self.assetTitle);
             cell.titleLabel.text = self.assetTitle;
             cell.valueLabel.hidden = YES;
             cell.titleLabel.hidden = NO;
@@ -358,10 +364,11 @@
 //            cell.titleLabel.text = [assetModel assetProjectDetail];
 //            cell.titleLabel.hidden = YES;
             
-            cell.titleLabel.text = [assetModel assetProjectResume];
+            cell.titleLabel.text = [assetModel assetAppInfo];
             cell.valueLabel.hidden = YES;
             
-//            NSString *detailString = [assetModel assetProjectResume];
+            widthAppDetailNumber = cell.titleLabel.frame.size.width;
+//            NSString *detailString = [assetModel assetAppInfo];
 //            
 //            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
 //            

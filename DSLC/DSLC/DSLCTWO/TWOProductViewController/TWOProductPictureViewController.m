@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorFromHexCode:@"#F5F6F7"];
+    self.view.backgroundColor = [UIColor colorFromHexCode:@"000000"];
     
     [self.navigationItem setTitle:[NSString stringWithFormat:@"%@/%ld",@"1",(unsigned long)self.pictureArr.count]];
     
@@ -32,7 +32,7 @@
     [self.view addSubview:mainScrillView];
     
     for (NSInteger i = 0; i < self.pictureArr.count; i++) {
-        YYAnimatedImageView *pictureImageView = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * i, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT)];
+        YYAnimatedImageView *pictureImageView = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT * i, 100, WIDTH_CONTROLLER_DEFAULT, 405)];
         
         pictureImageView.yy_imageURL = [NSURL URLWithString:[[self.pictureArr objectAtIndex:i] objectForKey:@"imgPath"]];
         
@@ -43,7 +43,9 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     
-    [self.navigationItem setTitle:[NSString stringWithFormat:@"%.0f/%ld",scrollView.contentOffset.x / WIDTH_CONTROLLER_DEFAULT + 1,(unsigned long)self.pictureArr.count]];
+    NSLog(@"%f,%lu",(scrollView.contentOffset.x / WIDTH_CONTROLLER_DEFAULT) + 1,(unsigned long)self.pictureArr.count);
+    
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%.0f/%ld",(scrollView.contentOffset.x / WIDTH_CONTROLLER_DEFAULT) + 1,(unsigned long)self.pictureArr.count]];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *assetAmount;
 @property (nonatomic, copy) NSString *assetAnnualYieldb;
 @property (nonatomic, copy) NSString *assetAnnualYielde;
+@property (nonatomic, copy) NSString *assetAppInfo;
 @property (nonatomic, copy) NSString *assetCode;
 @property (nonatomic, copy) NSString *assetComment;
 @property (nonatomic, copy) NSString *assetCompanyNotice;

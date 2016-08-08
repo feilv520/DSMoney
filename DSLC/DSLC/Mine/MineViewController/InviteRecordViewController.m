@@ -128,7 +128,6 @@
             if (userArray.count == 0) {
                 
                 [self noHaveInviteRecord];
-                
             } else {
                 
                 for (dataDic in userArray) {
@@ -139,8 +138,10 @@
                 }
                 
                 if (curruntPage == 1) {
+                    
                     [self tabelViewShow];
                 } else {
+                    
                     [_tabelView reloadData];
                 }
                 

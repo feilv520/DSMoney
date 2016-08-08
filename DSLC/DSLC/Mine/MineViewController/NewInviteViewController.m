@@ -175,7 +175,7 @@
     
     if (labelRule == nil) {
         
-        labelRule = [CreatView creatWithLabelFrame:CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"邀请规则:\n\n1. 注册即送5000元体验金和红包;\n2. 当您邀请的好友成功注册并完成投资后，您将获得特权本金，享受同等金额的特权本金收益;\n3. 邀请好友您将有机会获得红包;\n4. 快去邀请好友，成为超级理财师吧!"];
+        labelRule = [CreatView creatWithLabelFrame:CGRectMake(5, 5, viewRuleW - 10, viewRuleH - 10) backgroundColor:[UIColor clearColor] textColor:[UIColor zitihui] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:14] text:@"邀请规则:\n\n1. 注册即送398元红包；\n2. 当您邀请的好友成功注册并完成投资后，您将获得特权本金，享受同等金额的特权本金收益;\n3. 邀请好友您将有机会获得红包;\n4. 快去邀请好友，成为超级理财师吧!"];
         labelRule.numberOfLines = 0;
     }
     [viewRule addSubview:labelRule];

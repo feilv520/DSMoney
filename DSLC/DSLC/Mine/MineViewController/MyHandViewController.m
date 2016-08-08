@@ -182,9 +182,6 @@
                 
                 [self showTanKuangWithMode:MBProgressHUDModeText Text:@"手势密码设置成功"];
                 
-                // 刷新任务中心列表
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
-                
                 NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"handOpen.plist"]];
                 
                 NSLog(@"phone1 = %@",[userDic objectForKey:@"phone"]);
@@ -683,7 +680,8 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-            
+            // 刷新任务中心列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

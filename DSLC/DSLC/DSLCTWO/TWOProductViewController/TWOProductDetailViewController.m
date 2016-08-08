@@ -803,6 +803,8 @@
 //        return ;
 //    }
     
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+    
     button.enabled = NO;
     
     if ([self.residueMoney isEqualToString:@"0.00"]) {
@@ -814,43 +816,8 @@
         button.enabled = YES;
         [self showTanKuangWithMode:MBProgressHUDModeText Text:@"剩余金额已小于起投金额,不能投资此产品"];
         return;
-    } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
-        if ([[userDic objectForKey:@"limitMoney"] isEqualToString:@"0"] || [[userDic objectForKey:@"limitMoney"] isEqualToString:@""] || [userDic objectForKey:@"limitMoney"] == nil) {
-            
-            button.enabled = YES;
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资限额已用完,去投资其他产品吧"];
-            return;
-        }
-    }
-    
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
-    
-    if (![[dic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+    } else if ([[dic objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
         
-        button.enabled = YES;
-        
-        if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
-            
-            [self registThirdShow];
-            return;
-        } else if ([[self.detailM.productType description] isEqualToString:@"3"]) {
-            if (ifBugNewProduct) {
-                
-                [self showTanKuangWithMode:MBProgressHUDModeText Text:ifBugNewProductString];
-                return;
-            }
-        }
-        
-        TWOProductMakeSureViewController *makeSureVC = [[TWOProductMakeSureViewController alloc] init];
-        
-        makeSureVC.detailM = self.detailM;
-        makeSureVC.residueMoney = self.residueMoney;
-        makeSureVC.limitMoney = [userDic objectForKey:@"limitMoney"];
-        
-        [self submitLoadingWithHidden:YES];
-        
-        pushVC(makeSureVC);
-    } else {
         button.enabled = YES;
         
         [self submitLoadingWithHidden:YES];
@@ -864,7 +831,38 @@
         [self presentViewController:nvc animated:YES completion:^{
             
         }];
+    } else if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
+        
+        button.enabled = YES;
+        
+        [self registThirdShow];
+        return;
+    } else if ([[self.detailM.productType description] isEqualToString:@"3"]) {
+        if (ifBugNewProduct) {
+            
+            button.enabled = YES;
+            
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:ifBugNewProductString];
+            return;
+        }
+    } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
+        if ([[userDic objectForKey:@"limitMoney"] isEqualToString:@"0"] || [[userDic objectForKey:@"limitMoney"] isEqualToString:@""] || [userDic objectForKey:@"limitMoney"] == nil) {
+            
+            button.enabled = YES;
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资限额已用完,去投资其他产品吧"];
+            return;
+        }
     }
+    
+    TWOProductMakeSureViewController *makeSureVC = [[TWOProductMakeSureViewController alloc] init];
+    
+    makeSureVC.detailM = self.detailM;
+    makeSureVC.residueMoney = self.residueMoney;
+    makeSureVC.limitMoney = [userDic objectForKey:@"limitMoney"];
+    
+    [self submitLoadingWithHidden:YES];
+    
+    pushVC(makeSureVC);
     
 }
 

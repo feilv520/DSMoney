@@ -241,6 +241,7 @@
             [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:redRange];
             //    此句意思是指起始位置 是8.02%这个字符串的总长度减掉1 就是指起始位置是% 长度只有1
             NSRange symbol = NSMakeRange([[textString string] length] - 1, 1);
+            [textString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:symbol];
             [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:symbol];
             [cell.labelPercentage setAttributedText:textString];
     
@@ -308,107 +309,7 @@
             return cell;
 
         }
-//    } else {
-//        
-//        TWOProductDemoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNNew"];
-//        
-//        cell.labelDetail.hidden = YES;
-//        
-//        cell.viewGiPian.layer.cornerRadius = 4;
-//        cell.viewGiPian.layer.masksToBounds = YES;
-//        
-//        cell.labelproductName.text = [[self.productListArray objectAtIndex:indexPath.row] productName];
-//        cell.labelproductName.font = [UIFont systemFontOfSize:15];
-//        
-//        cell.viewLine.alpha = 0.7;
-//        cell.viewLine.backgroundColor = [UIColor groupTableViewBackgroundColor];
-//        
-//        cell.labelPercentage.textColor = [UIColor blackColor];
-//        cell.labelPercentage.textAlignment = NSTextAlignmentCenter;
-//        
-//        NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%%",[[self.productListArray objectAtIndex:indexPath.row] productAnnualYield]]];
-//        //    ,号前面是指起始位置 ,号后面是指到%这个位置截止的总长度
-//        NSRange redRange = NSMakeRange(0, [[textString string] rangeOfString:@"%"].location);
-//        [textString addAttribute:NSForegroundColorAttributeName value:[UIColor orangecolor] range:redRange];
-//        [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:redRange];
-//        //    此句意思是指起始位置 是8.02%这个字符串的总长度减掉1 就是指起始位置是% 长度只有1
-//        NSRange symbol = NSMakeRange([[textString string] length] - 1, 1);
-//        [textString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:symbol];
-//        [cell.labelPercentage setAttributedText:textString];
-//        
-//        cell.labelDayNum.textAlignment = NSTextAlignmentCenter;
-//        cell.labelDayNum.font = [UIFont systemFontOfSize:22];
-//        cell.labelDayNum.textColor = [UIColor ZiTiColor];
-//        
-//        NSMutableAttributedString *textYear = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@天",[[self.productListArray objectAtIndex:indexPath.row] productPeriod]]];
-//        NSRange numText = NSMakeRange(0, [[textYear string] rangeOfString:@"天"].location);
-//        [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:22] range:numText];
-//        NSRange dayText = NSMakeRange([[textYear string] length] - 1, 1);
-//        [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:dayText];
-//        [cell.labelDayNum setAttributedText:textYear];
-//        
-//        NSLog(@"88888888-%ld",(long)indexPath.row);
-//        
-//        if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"6"]) {
-//            
-//            cell.outPay.hidden = NO;
-//            cell.outPay.image = [UIImage imageNamed:@"TWOSaled"];
-//            cell.quanView.hidden = YES;
-//            
-//            cell.contentView.alpha = 0.5;
-//        } else if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"4"]) {
-//            
-//            cell.outPay.hidden = NO;
-//            cell.outPay.image = [UIImage imageNamed:@"TWOProfitting"];
-//            cell.quanView.hidden = YES;
-//            
-//            cell.contentView.alpha = 0.5;
-//        } else {
-//            
-//            cell.contentView.alpha = 1.0;
-//            
-//            cell.outPay.hidden = YES;
-//            cell.quanView.hidden = NO;
-//            cell.quanView.progressTotal = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
-//            
-//            CGFloat hadSellNumber = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] - [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue];
-//            
-//            CGFloat onePriceNumber = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] * 0.01;
-//            
-//            CGFloat ninetyPriceNumber = [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue] * 0.99;
-//            //        if ([[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] isEqualToString:[[self.productListArray objectAtIndex:indexPath.row] residueMoney]]) {
-//            //
-//            //            cell.quanView.progressCounter = 1;
-//            //        } else
-//            if (hadSellNumber < onePriceNumber){
-//                
-//                cell.quanView.progressCounter = onePriceNumber;
-//            } else if(hadSellNumber > ninetyPriceNumber){
-//                
-//                cell.quanView.progressCounter = ninetyPriceNumber;
-//            } else {
-//                
-//                cell.quanView.progressCounter = hadSellNumber;
-//            }
-//            
-//            cell.quanView.theme.sliceDividerHidden = YES;
-//            
-//        }
-//        //    设置进度条的进度值 并动画展示
-//        //        CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
-//        //
-//        //        CGFloat bLL = 1.0 - bL;
-//        
-//        //        [cell.progressView setProgress:bLL animated:YES];
-//        //        //    设置进度条的颜色
-//        //        cell.progressView.trackTintColor = [UIColor progressBackColor];
-//        //        //    设置进度条的进度颜色
-//        //        cell.progressView.progressTintColor = [UIColor progressColor];
-//        
-//        cell.backgroundColor = [UIColor huibai];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        return cell;
-//    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -419,15 +320,6 @@
     
     TWOProductDetailViewController *twoPDVC = [[TWOProductDetailViewController alloc] init];
     twoPDVC.productName = productM.productName;
-//    if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
-//        if (indexPath.row == 0) {
-//            twoPDVC.estimate = NO;
-//        } else {
-//            twoPDVC.estimate = YES;
-//        }
-//    } else {
-//        twoPDVC.estimate = YES;
-//    }
 
     twoPDVC.pandaun = YES;
     twoPDVC.idString = [[self.productListArray objectAtIndex:indexPath.row] productId];
@@ -468,6 +360,8 @@
             NSMutableArray *hotProductArray = [NSMutableArray array];
             NSMutableArray *noHotProductArray = [NSMutableArray array];
             NSMutableArray *newHandProductArray = [NSMutableArray array];
+            NSMutableArray *profittingProductArray = [NSMutableArray array];
+            NSMutableArray *saledProductArray = [NSMutableArray array];
             
             for (NSDictionary *dic in array) {
                 ProductListModel *productM = [[ProductListModel alloc] init];
@@ -479,6 +373,12 @@
                 } else if ([[[productM isHotSale] description] isEqualToString:@"1"]) {
                     
                     [hotProductArray addObject:productM];
+                } else if ([[[productM productStatus] description] isEqualToString:@"4"]) {
+                    
+                    [profittingProductArray addObject:productM];
+                } else if ([[[productM productStatus] description] isEqualToString:@"6"]) {
+                    
+                    [saledProductArray addObject:productM];
                 } else {
                     
                     [noHotProductArray addObject:productM];
@@ -491,11 +391,15 @@
                 [self.productListArray addObjectsFromArray:newHandProductArray];
                 [self.productListArray addObjectsFromArray:hotProductArray];
                 [self.productListArray addObjectsFromArray:noHotProductArray];
+                [self.productListArray addObjectsFromArray:profittingProductArray];
+                [self.productListArray addObjectsFromArray:saledProductArray];
             } else {
                 
                 [self.productListArray addObjectsFromArray:hotProductArray];
                 [self.productListArray addObjectsFromArray:noHotProductArray];
                 [self.productListArray addObjectsFromArray:newHandProductArray];
+                [self.productListArray addObjectsFromArray:profittingProductArray];
+                [self.productListArray addObjectsFromArray:saledProductArray];
             }
             
             if (self.productListArray.count == 0) {
