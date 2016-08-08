@@ -52,16 +52,20 @@
 
 - (void)tabelViewShow
 {
-    _tabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
+    if (_tabelView == nil) {
+        
+        _tabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
+        _tabelView.dataSource = self;
+        _tabelView.delegate = self;
+        _tabelView.backgroundColor = [UIColor qianhuise];
+        _tabelView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.1)];
+        [_tabelView registerNib:[UINib nibWithNibName:@"InviteRecordCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
+        
+        [self addTableViewWithHeader:_tabelView];
+        [self addTableViewWithFooter:_tabelView];
+    }
     [self.view addSubview:_tabelView];
-    _tabelView.dataSource = self;
-    _tabelView.delegate = self;
-    _tabelView.backgroundColor = [UIColor qianhuise];
-    _tabelView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.1)];
-    [_tabelView registerNib:[UINib nibWithNibName:@"InviteRecordCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    [self addTableViewWithHeader:_tabelView];
-    [self addTableViewWithFooter:_tabelView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
