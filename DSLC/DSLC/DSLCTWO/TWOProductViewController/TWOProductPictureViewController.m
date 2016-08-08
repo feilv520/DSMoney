@@ -40,11 +40,9 @@
     }
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+// scrollview 减速停止
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    
-    NSLog(@"%f,%lu",(scrollView.contentOffset.x / WIDTH_CONTROLLER_DEFAULT) + 1,(unsigned long)self.pictureArr.count);
-    
     [self.navigationItem setTitle:[NSString stringWithFormat:@"%.0f/%ld",(scrollView.contentOffset.x / WIDTH_CONTROLLER_DEFAULT) + 1,(unsigned long)self.pictureArr.count]];
 }
 
