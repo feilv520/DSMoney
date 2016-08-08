@@ -56,7 +56,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMessageData) name:@"getMessageDataRefrush" object:nil];
     
     [self getMessageData];
-    [self tableViewShow];
 }
 
 - (void)tableViewShow

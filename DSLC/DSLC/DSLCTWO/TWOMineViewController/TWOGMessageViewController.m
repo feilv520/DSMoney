@@ -25,6 +25,7 @@
     NSInteger pageNumber;
     MJRefreshBackGifFooter *gifFooter;
     MJRefreshGifHeader *gifHeader;
+    UIImageView *imageNothing;
 }
 
 @end
@@ -55,7 +56,9 @@
 
 - (void)tableViewShow
 {
-    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
+    if (mainTableView == nil) {
+        mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, HEIGHT_CONTROLLER_DEFAULT - 64 - 20) style:UITableViewStylePlain];
+    }
     [self.view addSubview:mainTableView];
     mainTableView.dataSource = self;
     mainTableView.delegate = self;
@@ -156,7 +159,9 @@
 
 - (void)noDataShow
 {
-    UIImageView *imageNothing = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    if (imageNothing == nil) {
+        imageNothing = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 260/2/2, 78, 260/2, 260/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
+    }
     [self.view addSubview:imageNothing];
 }
 
