@@ -143,8 +143,13 @@
                 }
                 
                 if (curruntPage == 1) {
-                    
-                    [self tabelViewShow];
+                    if (_tabelView == nil) {
+
+                        [self tabelViewShow];
+                    } else {
+                        
+                        [_tabelView reloadData];
+                    }
                 } else {
                     
                     [_tabelView reloadData];

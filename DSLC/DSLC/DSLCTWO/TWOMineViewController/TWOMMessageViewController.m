@@ -23,6 +23,7 @@
     MJRefreshBackGifFooter *gifFooter;
     MJRefreshGifHeader *gifHeader;
     BOOL flagSate;
+    BOOL newFlag;
     NSInteger pageNum;
     NSInteger oldPageNum;
     
@@ -51,6 +52,7 @@
     newsArray = [NSMutableArray array];
     
     flagSate = NO;
+    newFlag = NO;
     pageNum = 1;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMessageData) name:@"getMessageDataRefrush" object:nil];
@@ -168,6 +170,14 @@
             
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
                 flagSate = YES;
+            } else {
+                flagSate = NO;
+            }
+            
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
+                newFlag = YES;
+            } else {
+                newFlag = NO;
             }
             
             [gifFooter endRefreshing];
@@ -215,14 +225,18 @@
 {
     gifHeader = header;
     
-    if (newsArray != nil) {
-        [newsArray removeAllObjects];
-        newsArray = nil;
-        newsArray = [NSMutableArray array];
+    if (newFlag) {
+        [header endRefreshing];
+    } else {
+        if (newsArray != nil) {
+            [newsArray removeAllObjects];
+            newsArray = nil;
+            newsArray = [NSMutableArray array];
+        }
+        
+        pageNum = 1;
+        [self getMessageData];
     }
-    
-    pageNum = 1;
-    [self getMessageData];
 }
 
 - (void)didReceiveMemoryWarning {

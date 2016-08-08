@@ -136,7 +136,7 @@
             if (userArray.count == 0) {
                 [self noDataList];
             } else {
-                if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
+                if (_tableView == nil) {
                     
                     [self tableViewShow];
                 } else {

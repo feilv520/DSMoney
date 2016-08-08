@@ -22,6 +22,7 @@
     BOOL flag;
     
     BOOL flagSate;
+    BOOL newFlag;
     NSInteger pageNumber;
     MJRefreshBackGifFooter *gifFooter;
     MJRefreshGifHeader *gifHeader;
@@ -49,6 +50,7 @@
     messageArray = [NSMutableArray array];
     pageNumber = 1;
     flagSate = NO;
+    newFlag = NO;
     
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     [self getMessageDataList];
@@ -130,6 +132,14 @@
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
                 flagSate = YES;
                 NSLog(@"全部数据");
+            } else {
+                flagSate = NO;
+            }
+            
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
+                newFlag = YES;
+            } else {
+                newFlag = NO;
             }
             
             [gifFooter endRefreshing];
@@ -144,6 +154,7 @@
                         
                         [self tableViewShow];
                     } else {
+                        
                         [mainTableView reloadData];
                     }
                 }
@@ -180,14 +191,18 @@
 {
     gifHeader = header;
     
-    if (messageArray != nil) {
-        [messageArray removeAllObjects];
-        messageArray = nil;
-        messageArray = [NSMutableArray array];
+    if (newFlag) {
+        [header endRefreshing];
+    } else {
+        if (messageArray != nil) {
+            [messageArray removeAllObjects];
+            messageArray = nil;
+            messageArray = [NSMutableArray array];
+        }
+        
+        pageNumber = 1;
+        [self getMessageDataList];
     }
-    
-    pageNumber = 1;
-    [self getMessageDataList];
 }
 
 - (void)didReceiveMemoryWarning {
