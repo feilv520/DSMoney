@@ -20,7 +20,9 @@
     NSMutableArray *listArray;
     
     MJRefreshBackGifFooter *gifFooter;
-    BOOL flagState;
+    MJRefreshGifHeader *headerT;
+    BOOL moreFlag;
+    BOOL newFlag;
     NSInteger pageNum;
 }
 
@@ -37,7 +39,8 @@
     
     listArray = [NSMutableArray array];
     pageNum = 1;
-    flagState = NO;
+    moreFlag = NO;
+    newFlag = NO;
     
     [self getDataList];
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
@@ -124,7 +127,15 @@
             }
             
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
-                flagState = YES;
+                moreFlag = YES;
+            } else {
+                moreFlag = NO;
+            }
+            
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
+                newFlag = YES;
+            } else {
+                newFlag = NO;
             }
             
             [gifFooter endRefreshing];
@@ -148,21 +159,28 @@
 //下拉刷新
 - (void)loadNewData:(MJRefreshGifHeader *)header
 {
-    if (listArray != nil) {
-        [listArray removeAllObjects];
-        listArray = nil;
-        listArray = [NSMutableArray array];
-    }
+    headerT = header;
     
-    pageNum = 1;
-    [self getDataList];
+    if (newFlag) {
+        [header endRefreshing];
+    } else {
+        if (listArray != nil) {
+            [listArray removeAllObjects];
+            listArray = nil;
+            listArray = [NSMutableArray array];
+        }
+        
+        pageNum = 1;
+        [self getDataList];
+    }
 }
 
 //上拉加载
 - (void)loadMoreData:(MJRefreshBackGifFooter *)footer
 {
     gifFooter = footer;
-    if (flagState) {
+    
+    if (moreFlag) {
         [gifFooter endRefreshing];
     } else {
         pageNum++;

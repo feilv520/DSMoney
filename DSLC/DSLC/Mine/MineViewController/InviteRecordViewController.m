@@ -18,7 +18,9 @@
     NSInteger curruntPage;
     NSDictionary *dataDic;
     MJRefreshBackGifFooter *reFooter;
+    MJRefreshGifHeader *headerT;
     BOOL moreFlag;
+    BOOL newFlag;
 }
 
 @end
@@ -33,7 +35,10 @@
     [self.navigationItem setTitle:@"邀请记录"];
     contentArr = [NSMutableArray array];
     curruntPage = 1;
+    
     moreFlag = NO;
+    newFlag = NO;
+    
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT / 2 - 60];
     
     [self getRecordData];
@@ -96,13 +101,13 @@
         cell.labelMoney.textColor = [UIColor ZiTiColor];
         cell.labelTime.textColor = [UIColor ZiTiColor];
         
-        if ([inviteModel.realNameStatus isEqualToString:@"2"]) {
+        if ([[inviteModel.realNameStatus description] isEqualToString:@"2"]) {
             cell.labelRealName.text = @"是";
         } else {
             cell.labelRealName.text = @"否";
         }
         
-        if ([inviteModel.isInvest isEqualToString:@"0"]) {
+        if ([[inviteModel.isInvest description] isEqualToString:@"0"]) {
             cell.labelMoney.text = @"否";
         } else {
             cell.labelMoney.text = @"是";
@@ -147,9 +152,18 @@
                 
                 if ([[responseObject objectForKey:@"currPage"] isEqualToNumber:[responseObject objectForKey:@"totalPage"]]) {
                     moreFlag = YES;
+                } else {
+                    moreFlag = NO;
+                }
+                
+                if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
+                    newFlag = YES;
+                } else {
+                    newFlag = NO;
                 }
                 
                 [reFooter endRefreshing];
+                [headerT endRefreshing];
             }
             
         } else {
@@ -180,14 +194,22 @@
 //下拉刷新
 - (void)loadNewData:(MJRefreshGifHeader *)header
 {
-    if (contentArr != nil) {
-        [contentArr removeAllObjects];
-        contentArr = nil;
-        contentArr = [NSMutableArray array];
-    }
+    headerT = header;
     
-    curruntPage = 1;
-    [self getRecordData];
+    if (newFlag) {
+        
+        [header endRefreshing];
+    } else {
+        
+        if (contentArr != nil) {
+            [contentArr removeAllObjects];
+            contentArr = nil;
+            contentArr = [NSMutableArray array];
+        }
+        
+        curruntPage = 1;
+        [self getRecordData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

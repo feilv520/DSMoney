@@ -61,7 +61,6 @@
     [_tableView registerNib:[UINib nibWithNibName:@"TWOWaitCashCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     [_tableView registerNib:[UINib nibWithNibName:@"TWIJiaXiQuanCell" bundle:nil] forCellReuseIdentifier:@"reuseR"];
     
-    [self addTableViewWithHeader:_tableView];
     [self addTableViewWithFooter:_tableView];
 }
 
@@ -270,18 +269,6 @@
     
     pageNumber = 1;
     [self getMyIncreaseListFuction];
-}
-
-//上拉加载
-- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
-{
-    freshFooter = footer;
-    if (flagState) {
-        [freshFooter endRefreshing];
-    } else {
-        pageNumber++;
-        [self getMyIncreaseListFuction];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
