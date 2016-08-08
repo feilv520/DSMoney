@@ -61,7 +61,6 @@
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 9)];
     [_tableView registerNib:[UINib nibWithNibName:@"TWOUseRedBagCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
-    [self addTableViewWithHeader:_tableView];
     [self addTableViewWithFooter:_tableView];
 }
 
@@ -193,18 +192,6 @@
         page++;
         [self getMyRedPacketListFuction];
     }
-}
-
-- (void)loadNewData:(MJRefreshGifHeader *)header
-{
-    if (historyArray != nil) {
-        [historyArray removeAllObjects];
-        historyArray = nil;
-        historyArray = [NSMutableArray array];
-    }
-    
-    page = 1;
-    [self getMyRedPacketListFuction];
 }
 
 - (void)didReceiveMemoryWarning {

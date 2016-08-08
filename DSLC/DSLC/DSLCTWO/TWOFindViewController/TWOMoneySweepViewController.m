@@ -23,7 +23,11 @@
     NSInteger pageNumber;
     BOOL flagStste;
     MJRefreshBackGifFooter *refreshFooter;
+    MJRefreshGifHeader *headerT;
     UIButton *buttonIndex;
+    
+    BOOL ifHaveTableView;
+    
 }
 
 @end
@@ -40,6 +44,7 @@
     DSLCTalkArray = [NSMutableArray array];
     pageNumber = 1;
     flagStste = NO;
+    ifHaveTableView = NO;
     
     if ([self.kindState isEqualToString:@"1"]) {
         
@@ -76,6 +81,8 @@
     
     [self addTableViewWithHeader:_tableView];
     [self addTableViewWithFooter:_tableView];
+    
+    ifHaveTableView = YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -212,14 +219,22 @@
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
                 flagStste = YES;
             }
+            
             [refreshFooter endRefreshing];
+            [headerT endRefreshing];
             
             //判断有无数据的显示
             if (pageNumber == 1) {
                 if (DSLCTalkArray.count == 0) {
                     [self nodataImageShow];
                 } else {
-                    [self tableViewShow];
+                    if (ifHaveTableView) {
+                        
+                        [self tableViewShow];
+                    } else {
+                        
+                        [_tableView reloadData];
+                    }
                 }
             } else {
                 [_tableView reloadData];
@@ -252,14 +267,22 @@
         if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
             flagStste = YES;
         }
+        
         [refreshFooter endRefreshing];
+        [headerT endRefreshing];
         
         //判断有无数据的显示
         if (pageNumber == 1) {
             if (bigSweepArray.count == 0) {
                 [self nodataImageShow];
             } else {
-                [self tableViewShow];
+                if (ifHaveTableView) {
+                    
+                    [_tableView reloadData];
+                } else {
+                    
+                    [self tableViewShow];
+                }
             }
         } else {
             [_tableView reloadData];
@@ -285,6 +308,8 @@
 //下拉刷新
 - (void)loadNewData:(MJRefreshGifHeader *)header
 {
+    headerT = header;
+    
     if ([self.kindState isEqualToString:@"1"]) {
         if (DSLCTalkArray != nil) {
             [DSLCTalkArray removeAllObjects];

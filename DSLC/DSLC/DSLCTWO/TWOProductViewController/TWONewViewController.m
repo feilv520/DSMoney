@@ -418,10 +418,14 @@
             
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
                 moreFlag = YES;
+            } else {
+                moreFlag = NO;
             }
             
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
                 newFlag = YES;
+            } else {
+                newFlag = NO;
             }
             
             [footerT endRefreshing];

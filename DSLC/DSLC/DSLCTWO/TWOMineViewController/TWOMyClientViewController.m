@@ -19,7 +19,11 @@
     NSMutableArray *userArray;
     
     MJRefreshBackGifFooter *gifFooter;
-    BOOL flagState;
+    MJRefreshGifHeader *headerT;
+    
+    BOOL moreFlag;
+    BOOL newFlag;
+    
     NSInteger pageNumber;
 }
 
@@ -35,7 +39,10 @@
     [self.navigationItem setTitle:@"我的客户"];
     userArray = [NSMutableArray array];
     pageNumber = 1;
-    flagState = NO;
+    
+    moreFlag = NO;
+    
+    newFlag = NO;
     
     [self getDataList];
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
@@ -129,14 +136,29 @@
             if (userArray.count == 0) {
                 [self noDataList];
             } else {
-                [self tableViewShow];
+                if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
+                    
+                    [self tableViewShow];
+                } else {
+                    
+                    [_tableView reloadData];
+                }
             }
             
-            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
-                flagState = YES;
+            if ([[responseObject objectForKey:@"currPage"] isEqualToNumber:[responseObject objectForKey:@"totalPage"]]) {
+                moreFlag = YES;
+            } else {
+                moreFlag = NO;
+            }
+            
+            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
+                newFlag = YES;
+            } else {
+                newFlag = NO;
             }
             
             [gifFooter endRefreshing];
+            [headerT endRefreshing];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -147,21 +169,29 @@
 //下拉刷新
 - (void)loadNewData:(MJRefreshGifHeader *)header
 {
-    if (userArray != nil) {
-        [userArray removeAllObjects];
-        userArray = nil;
-        userArray = [NSMutableArray array];
+    headerT = header;
+    
+    if (newFlag) {
+        [header endRefreshing];
+    } else {
+        
+        if (userArray != nil) {
+            [userArray removeAllObjects];
+            userArray = nil;
+            userArray = [NSMutableArray array];
+        }
+        
+        pageNumber = 1;
+        [self getDataList];
     }
     
-    pageNumber = 1;
-    [self getDataList];
 }
 
 //上拉加载
 - (void)loadMoreData:(MJRefreshBackGifFooter *)footer
 {
     gifFooter = footer;
-    if (flagState) {
+    if (moreFlag) {
         [gifFooter endRefreshing];
     } else {
         pageNumber++;
