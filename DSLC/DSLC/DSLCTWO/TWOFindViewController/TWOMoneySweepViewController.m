@@ -229,11 +229,10 @@
                     [self nodataImageShow];
                 } else {
                     if (ifHaveTableView) {
-                        
-                        [self tableViewShow];
-                    } else {
-                        
                         [_tableView reloadData];
+                        
+                    } else {
+                        [self tableViewShow];
                     }
                 }
             } else {
