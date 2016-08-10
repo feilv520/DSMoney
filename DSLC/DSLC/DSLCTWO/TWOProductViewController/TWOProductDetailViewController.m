@@ -430,7 +430,11 @@
             } else if ([[[self.detailM productType] description] isEqualToString:@"2"]) {
                 cell.valueLabel.text = @"无限额";
             } else if ([[[self.detailM productType] description] isEqualToString:@"3"]) {
-                cell.valueLabel.text = @"(仅限新用户)单笔限额1万元";
+                if (![[[self.detailM isLimit] description] isEqualToString:@"0"]) {
+                    cell.valueLabel.text = @"(仅限新用户)单笔限额1万元";
+                } else {
+                    cell.valueLabel.text = @"无限额";
+                }
             } else if ([[[self.detailM productType] description] isEqualToString:@"5"]) {
                 cell.valueLabel.text = @"无限额";
             } else if ([[[self.detailM productType] description] isEqualToString:@"6"]) {
@@ -440,9 +444,19 @@
             } else if ([[[self.detailM productType] description] isEqualToString:@"8"]) {
                 cell.valueLabel.text = @"无限额";
             } else if ([[[self.detailM productType] description] isEqualToString:@"9"]) {
-                cell.valueLabel.text = @"单人累计投资限额2万元";
+                if (![[[self.detailM isLimit] description] isEqualToString:@"0"]) {
+                    cell.valueLabel.text = @"单人累计投资限额2万元";
+                } else {
+                    cell.valueLabel.text = @"无限额";
+                }
             } else if ([[[self.detailM productType] description] isEqualToString:@"10"]){
-                cell.valueLabel.text = @"每人每期限额2万元";
+                if (![[[self.detailM isLimit] description] isEqualToString:@"0"]) {
+                    cell.valueLabel.text = @"每人每期限额2万元";
+                } else {
+                    cell.valueLabel.text = @"无限额";
+                }
+            } else if ([[[self.detailM productType] description] isEqualToString:@"4"]) {
+                cell.valueLabel.text = @"无限额";
             }
         }
         

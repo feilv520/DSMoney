@@ -20,7 +20,7 @@
     NSMutableArray *ticketArray;
     NSMutableArray *ticketNoArray;
     
-    // 选中的加息卷Id
+    // 选中的加息券Id
     TWOJiaXiQuanModel *incrModel;
     
     MJRefreshBackGifFooter *footerT;

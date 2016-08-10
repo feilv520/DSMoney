@@ -729,7 +729,7 @@
     }];
 }
 
-// 获得加息卷接口
+// 获得加息券接口
 - (void)getMyIncreaseListFuction
 {
     NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageAddXiQuan] ,@"status":@"0,1" ,@"pageSize":@10 ,@"token":[self.flagDic objectForKey:@"token"],@"pageSize":@1000};

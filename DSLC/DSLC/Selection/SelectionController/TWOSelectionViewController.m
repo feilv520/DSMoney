@@ -898,7 +898,7 @@
                 }
                 
                 
-                if (pickArray.count != 0) {
+                if (pickArray.count >= 3) {
                     
                     [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                     

@@ -199,7 +199,7 @@
         
         TWOProfitingEveryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
-        NSArray *titleArray = @[@[@"到期日", @"投资日", @"计息起始日", @"收益方式",@"待兑付加息卷收益"]];
+        NSArray *titleArray = @[@[@"到期日", @"投资日", @"计息起始日", @"收益方式",@"待兑付加息券收益"]];
         NSArray *timeArray = @[@[[self.productDic objectForKey:@"dueDate"], [self.productDic objectForKey:@"buyTime"], [self.productDic objectForKey:@"interestDate"], [self.productDic objectForKey:@"yieldDistribType"] ,[NSString stringWithFormat:@"%@元",[self.productDic objectForKey:@"increaseMoney"]]]];
         
         cell.labelName.text = [[titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
