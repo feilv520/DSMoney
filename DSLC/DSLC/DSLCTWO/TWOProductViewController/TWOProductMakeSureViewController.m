@@ -51,7 +51,7 @@
     
     // 选中的红包id
     TWORedBagModel *packetModel;
-    // 选中的加息卷
+    // 选中的加息券
     TWOJiaXiQuanModel *incrModel;
     
     NSInteger ifHaveValue;
@@ -475,10 +475,10 @@
             }
         } else {
             
-            cell.titleLabel.text = @"使用加息卷";
+            cell.titleLabel.text = @"使用加息券";
             if (increaseCount.count == 0) {
                 
-                cell.rjLabel.text = @"暂无可使用加息卷";
+                cell.rjLabel.text = @"暂无可使用加息券";
                 cell.rjLabel.textColor = [UIColor findZiTiColor];
             } else {
                 if (incrModel == nil) {
@@ -729,10 +729,19 @@
     
     NSString *accString = [[DES3Util decrypt:[accountDic objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
     
+    NSLog(@"accString = %@",accString);
+    NSLog(@"allMoneyString = %@",allMoneyString);
+    
     if ([[self.detailM.productType description] isEqualToString:@"9"]) {
         if ([self.limitMoney isEqualToString:@"0"]) {
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资限额已用完,去投资其他产品吧"];
+            return;
+        } else if ([[self.detailM amountMin] floatValue] > [allMoneyString floatValue]){
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资金额不满足起投金额,请重新输入!"];
+            return;
+        } else if ([allMoneyString floatValue] > [accString floatValue]){
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的可用余额不足,请先充值!"];
             return;
         }
     } else if ([[self.detailM amountMin] floatValue] > [allMoneyString floatValue]){

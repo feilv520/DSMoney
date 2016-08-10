@@ -221,14 +221,14 @@
         cell.labelTitle.textColor = [colorArray objectAtIndex:indexPath.item];
         cell.labelTitle.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         
-        if (indexPath.item == 2) {
-            imageDian.frame = CGRectMake(cell.labelTitle.text.length * 15, 3, 11, 11);
-            [cell.labelTitle addSubview:imageDian];
-            
-        } else if (indexPath.item == 3) {
-            imageDian.frame = CGRectMake(cell.labelTitle.text.length * 15, 3, 11, 11);
-            [cell.labelTitle addSubview:imageDian];
-        }
+//        if (indexPath.item == 2) {
+//            imageDian.frame = CGRectMake(cell.labelTitle.text.length * 15, 3, 11, 11);
+//            [cell.labelTitle addSubview:imageDian];
+//            
+//        } else if (indexPath.item == 3) {
+//            imageDian.frame = CGRectMake(cell.labelTitle.text.length * 15, 3, 11, 11);
+//            [cell.labelTitle addSubview:imageDian];
+//        }
         
         cell.labelContent.text = [contentArr objectAtIndex:indexPath.item];
         cell.labelContent.textColor = [UIColor findZiTiColor];

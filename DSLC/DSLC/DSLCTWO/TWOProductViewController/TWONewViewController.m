@@ -357,50 +357,51 @@
             
             NSArray *array = [responseObject objectForKey:@"Product"];
             
-            NSMutableArray *hotProductArray = [NSMutableArray array];
-            NSMutableArray *noHotProductArray = [NSMutableArray array];
-            NSMutableArray *newHandProductArray = [NSMutableArray array];
-            NSMutableArray *profittingProductArray = [NSMutableArray array];
-            NSMutableArray *saledProductArray = [NSMutableArray array];
+//            NSMutableArray *hotProductArray = [NSMutableArray array];
+//            NSMutableArray *noHotProductArray = [NSMutableArray array];
+//            NSMutableArray *newHandProductArray = [NSMutableArray array];
+//            NSMutableArray *profittingProductArray = [NSMutableArray array];
+//            NSMutableArray *saledProductArray = [NSMutableArray array];
             
             for (NSDictionary *dic in array) {
                 ProductListModel *productM = [[ProductListModel alloc] init];
                 [productM setValuesForKeysWithDictionary:dic];
                 
-                if ([[[productM productType] description] isEqualToString:@"3"]) {
-                    
-                    [newHandProductArray addObject:productM];
-                } else if ([[[productM isHotSale] description] isEqualToString:@"1"]) {
-                    
-                    [hotProductArray addObject:productM];
-                } else if ([[[productM productStatus] description] isEqualToString:@"4"]) {
-                    
-                    [profittingProductArray addObject:productM];
-                } else if ([[[productM productStatus] description] isEqualToString:@"6"]) {
-                    
-                    [saledProductArray addObject:productM];
-                } else {
-                    
-                    [noHotProductArray addObject:productM];
-                }
+//                if ([[[productM productType] description] isEqualToString:@"3"]) {
+//                    
+//                    [newHandProductArray addObject:productM];
+//                } else if ([[[productM isHotSale] description] isEqualToString:@"1"]) {
+//                    
+//                    [hotProductArray addObject:productM];
+//                } else if ([[[productM productStatus] description] isEqualToString:@"4"]) {
+//                    
+//                    [profittingProductArray addObject:productM];
+//                } else if ([[[productM productStatus] description] isEqualToString:@"6"]) {
+//                    
+//                    [saledProductArray addObject:productM];
+//                } else {
+//                    
+//                    [noHotProductArray addObject:productM];
+//                }
                 
+                [self.productListArray addObject:productM];
             }
             
-            if ([[[userDic objectForKey:@"newHand"] description] isEqualToString:@"0"] || [[[userDic objectForKey:@"newHand"] description] isEqualToString:@""] || [userDic objectForKey:@"newHand"] == nil) {
-                
-                [self.productListArray addObjectsFromArray:newHandProductArray];
-                [self.productListArray addObjectsFromArray:hotProductArray];
-                [self.productListArray addObjectsFromArray:noHotProductArray];
-                [self.productListArray addObjectsFromArray:profittingProductArray];
-                [self.productListArray addObjectsFromArray:saledProductArray];
-            } else {
-                
-                [self.productListArray addObjectsFromArray:hotProductArray];
-                [self.productListArray addObjectsFromArray:noHotProductArray];
-                [self.productListArray addObjectsFromArray:newHandProductArray];
-                [self.productListArray addObjectsFromArray:profittingProductArray];
-                [self.productListArray addObjectsFromArray:saledProductArray];
-            }
+//            if ([[[userDic objectForKey:@"newHand"] description] isEqualToString:@"0"] || [[[userDic objectForKey:@"newHand"] description] isEqualToString:@""] || [userDic objectForKey:@"newHand"] == nil) {
+//                
+//                [self.productListArray addObjectsFromArray:newHandProductArray];
+//                [self.productListArray addObjectsFromArray:hotProductArray];
+//                [self.productListArray addObjectsFromArray:noHotProductArray];
+//                [self.productListArray addObjectsFromArray:profittingProductArray];
+//                [self.productListArray addObjectsFromArray:saledProductArray];
+//            } else {
+//                
+//                [self.productListArray addObjectsFromArray:hotProductArray];
+//                [self.productListArray addObjectsFromArray:noHotProductArray];
+//                [self.productListArray addObjectsFromArray:newHandProductArray];
+//                [self.productListArray addObjectsFromArray:profittingProductArray];
+//                [self.productListArray addObjectsFromArray:saledProductArray];
+//            }
             
             if (self.productListArray.count == 0) {
                 
