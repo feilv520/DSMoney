@@ -296,9 +296,10 @@
     //根据`responseCode`得到发送结果,如果分享成功
     if(response.responseCode == UMSResponseCodeSuccess)
     {
-        //得到分享到的微博平台名
-        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+
+        [self getDataOpen];
     }
+    
     // 刷新任务中心列表
     [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
 }
@@ -348,6 +349,27 @@
         
         NSLog(@"%@", error);
         
+    }];
+}
+
+// 邀请好友任务刷新
+- (void)getDataOpen
+{
+    NSDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
+    NSDictionary *parameter = @{@"types":@"15",@"token":[memberDic objectForKey:@"token"]};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"task/userFinishTask" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        
+        NSLog(@"&*&*&*&*&*&*%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            // 刷新任务中心列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"wwwwwwwwwwwwwwwwwwwwwwwwww%@", error);
     }];
 }
 

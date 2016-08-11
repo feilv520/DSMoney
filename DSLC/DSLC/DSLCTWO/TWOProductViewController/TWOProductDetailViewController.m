@@ -456,7 +456,7 @@
                     cell.valueLabel.text = @"无限额";
                 }
             } else if ([[[self.detailM productType] description] isEqualToString:@"4"]) {
-                cell.valueLabel.text = @"无限额";
+                cell.valueLabel.text = @"每人每期限额2万元";
             }
         }
         
