@@ -84,6 +84,7 @@
         
         // 刷新任务中心列表
         [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
         
         NSString *tokenString = [wView stringByEvaluatingJavaScriptFromString:@"jsLayout();"];
         
@@ -268,6 +269,7 @@
     
     // 刷新任务中心列表
     [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
     
     [self.view resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];

@@ -109,7 +109,7 @@
     self.pieChartView.delegate = self;
     [viewUp addSubview:self.pieChartView];
     [self.pieChartView setTitleText:@"在投资金"];
-    [self.pieChartView setAmountText:@"0元"];
+    [self.pieChartView setAmountText:@"----"];
     self.pieChartView.centerView.hidden = YES;
     
     UIView *viewUpLine = [CreatView creatViewWithFrame:CGRectMake(0, viewUp.frame.size.height - 0.5, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor]];
@@ -154,7 +154,7 @@
     cell.labelKinds.font = [UIFont fontWithName:@"CenturyGothic" size:15];
     cell.labelKinds.textColor = [UIColor findZiTiColor];
     
-    cell.labelMoney.text = [self.valueArray objectAtIndex:indexPath.row];
+    cell.labelMoney.text = [NSString stringWithFormat:@"%@元",[self.valueArray objectAtIndex:indexPath.row]];
     cell.labelMoney.textColor = [UIColor zitihui];
     cell.labelMoney.font = [UIFont fontWithName:@"CenturyGothic" size:13];
     

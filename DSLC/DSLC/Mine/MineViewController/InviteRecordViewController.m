@@ -84,6 +84,14 @@
     
     if (indexPath.row == 0) {
         
+        cell.contentView.backgroundColor = [UIColor colorFromHexCode:@"e9f4fd"];
+        cell.labelPhoneNum.backgroundColor = [UIColor colorFromHexCode:@"e9f4fd"];
+        cell.labelRealName.backgroundColor = [UIColor colorFromHexCode:@"e9f4fd"];
+        cell.labelMoney.backgroundColor = [UIColor colorFromHexCode:@"e9f4fd"];
+        cell.labelTime.backgroundColor = [UIColor colorFromHexCode:@"e9f4fd"];
+        
+        cell.separatorInset = UIEdgeInsetsMake(0, WIDTH_CONTROLLER_DEFAULT, 0, 0);
+        
         cell.labelPhoneNum.text = @"手机号";
         cell.labelRealName.text = @"实名认证";
         cell.labelMoney.text = @"投资";
@@ -95,6 +103,14 @@
         cell.labelTime.textColor = [UIColor blackZiTi];
         
     } else {
+        
+        cell.contentView.backgroundColor = Color_White;
+        cell.labelPhoneNum.backgroundColor = Color_White;
+        cell.labelRealName.backgroundColor = Color_White;
+        cell.labelMoney.backgroundColor = Color_White;
+        cell.labelTime.backgroundColor = Color_White;
+        
+        cell.separatorInset = UIEdgeInsetsMake(0, 10, 0, 10);
         
         InviteRecordModel *inviteModel = [contentArr objectAtIndex:indexPath.row - 1];
         cell.labelPhoneNum.text = inviteModel.userPhone;

@@ -111,6 +111,7 @@
             
             // 刷新任务中心列表
             [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
             
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];

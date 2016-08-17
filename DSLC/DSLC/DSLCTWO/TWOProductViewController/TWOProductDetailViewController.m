@@ -785,11 +785,15 @@
 {
     NSDecimalNumber *yearNumber = [NSDecimalNumber decimalNumberWithString:@"36500.0"];
     
-    NSDecimalNumber *inputNumber = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%lf",[calendar.inputMoney.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod]floatValue]]];
+    NSDecimalNumber *inputNumber = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%lf",[calendar.inputMoney.text doubleValue] * [[self.detailM productAnnualYield] doubleValue] * [[self.detailM productPeriod] doubleValue]]];
     
     NSDecimalNumber *totalNumber = [inputNumber decimalNumberByDividingBy:yearNumber];
     
-    calendar.totalLabel.text = [NSString stringWithFormat:@"¥%.2f元",[totalNumber floatValue]];
+    NSString *totalString = [NSString stringWithFormat:@"¥%.3f元",[totalNumber doubleValue]];
+    
+    NSLog(@"%@---%@",totalString,[totalString substringToIndex:totalString.length - 2]);
+    
+    calendar.totalLabel.text = [totalString substringToIndex:totalString.length - 2];
 }
 
 //return按钮
@@ -845,6 +849,7 @@
         [self presentViewController:nvc animated:YES completion:^{
             
         }];
+        return ;
     } else if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
         
         button.enabled = YES;

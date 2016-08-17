@@ -511,6 +511,8 @@
             [self tableViewShow];
             [_tableView reloadData];
             
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
+            
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
         }

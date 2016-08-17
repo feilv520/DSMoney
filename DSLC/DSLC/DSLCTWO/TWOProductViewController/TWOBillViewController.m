@@ -602,16 +602,23 @@
 
 - (void)noDataShowMoney
 {
+    _tableView.hidden = YES;
+    
     if (imageMonkey == nil) {
         imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 284/2/2, 100, 284/2, 284/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
     }
+    imageMonkey.hidden = NO;
     [self.view addSubview:imageMonkey];
 }
 
 - (void)noNetworkView {
+    
+    _tableView.hidden = YES;
+    
     if (noNetworkMonkey == nil) {
         noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 413/2.0/2.0, 100, 413/2.0, 268/2.0) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoPower"]];
     }
+    noNetworkMonkey.hidden = NO;
     [self.view addSubview:noNetworkMonkey];
     
     if (reloadButton == nil) {
@@ -624,6 +631,7 @@
         
         [reloadButton addTarget:self action:@selector(getProductList) forControlEvents:UIControlEventTouchUpInside];
     }
+    reloadButton.hidden = NO;
     [self.view addSubview:reloadButton];
     
     // 判断是否存在isLogin.plist文件

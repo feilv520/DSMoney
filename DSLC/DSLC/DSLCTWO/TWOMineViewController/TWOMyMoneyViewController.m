@@ -91,7 +91,7 @@
     self.pieChartView.delegate = self;
     [viewUp addSubview:self.pieChartView];
     [self.pieChartView setTitleText:@"可用余额"];
-    [self.pieChartView setAmountText:@"0元"];
+    [self.pieChartView setAmountText:@"----"];
     [self.view addSubview:viewUp];
     
     //add selected view
@@ -146,7 +146,7 @@
         UILabel *labelName = [CreatView creatWithLabelFrame:CGRectMake(23 + 19 + 12, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelZong.frame.size.height + 36.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 19 * m + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) * m, 110, 19) backgroundColor:[UIColor whiteColor] textColor:[UIColor moneyColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[kindsArray objectAtIndex:m]];
         [viewDown addSubview:labelName];
         
-        UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(23 + 19 + 110 + 5 + 12, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelZong.frame.size.height + 36.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 19 * m + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) * m, WIDTH_CONTROLLER_DEFAULT - 23 - (23 + 19 + 110 + 5 + 12), 19) backgroundColor:[UIColor whiteColor] textColor:[UIColor moneyColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[self.valueArray objectAtIndex:m]];
+        UILabel *labelMoney = [CreatView creatWithLabelFrame:CGRectMake(23 + 19 + 110 + 5 + 12, 45.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + labelZong.frame.size.height + 36.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) + 19 * m + 20.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) * m, WIDTH_CONTROLLER_DEFAULT - 23 - (23 + 19 + 110 + 5 + 12), 19) backgroundColor:[UIColor whiteColor] textColor:[UIColor moneyColor] textAlignment:NSTextAlignmentRight textFont:[UIFont fontWithName:@"CenturyGothic" size:15] text:[NSString stringWithFormat:@"%@元",[self.valueArray objectAtIndex:m]]];
         [viewDown addSubview:labelMoney];
     }
 }
@@ -176,7 +176,7 @@
 - (void)selectedFinish:(MCMPieChartView *)pieChartView index:(NSInteger)index percent:(float)per
 {
     [self.pieChartView setTitleText:[kindsArray objectAtIndex:index]];
-    [self.pieChartView setAmountText:[self.valueArray objectAtIndex:index]];
+    [self.pieChartView setAmountText:[NSString stringWithFormat:@"%@元",[self.valueArray objectAtIndex:index]]];
 }
 
 - (void)noDataShowMoney

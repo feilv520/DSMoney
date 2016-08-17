@@ -575,6 +575,13 @@
             } else {
                 cell.imageRedDian.hidden = YES;
             }
+        } else if (indexPath.row == 1) {
+            
+            if ([[[myAccount hasNewMoneky] description] isEqualToString:@"1"]) {
+                cell.imageRedDian.hidden = NO;
+            } else {
+                cell.imageRedDian.hidden = YES;
+            }
         } else {
             cell.imageRedDian.hidden = YES;
         }

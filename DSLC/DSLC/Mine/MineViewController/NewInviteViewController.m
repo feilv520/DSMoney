@@ -299,9 +299,6 @@
 
         [self getDataOpen];
     }
-    
-    // 刷新任务中心列表
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
 }
 
 #pragma mark 网络请求方法
@@ -366,6 +363,7 @@
             
             // 刷新任务中心列表
             [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

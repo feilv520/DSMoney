@@ -284,7 +284,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"]){
+        if ([[self.detailM.productType description] isEqualToString:@"3"]){
             
             return 200;
         } else if ([[self.detailM.productType description] isEqualToString:@"1"] || [[self.detailM.productType description] isEqualToString:@"5"]|| [[self.detailM.productType description] isEqualToString:@"6"]|| [[self.detailM.productType description] isEqualToString:@"7"]|| [[self.detailM.productType description] isEqualToString:@"8"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
@@ -301,7 +301,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"]){
+    if ([[self.detailM.productType description] isEqualToString:@"3"]){
         
         return 1;
     } else {
@@ -324,7 +324,7 @@
     
     if (indexPath.section == 0) {
         
-        if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"]){
+        if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"] || [[self.detailM.productType description] isEqualToString:@"4"] || [[self.detailM.productType description] isEqualToString:@"9"]){
             
             
             TWOProductMakeSureTwoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseTwo"];
@@ -345,7 +345,18 @@
                 cell.accountMoney.text = [NSString stringWithFormat:@"%@元",accString];
             }
             
-            cell.residueLabel.text = [NSString stringWithFormat:@"%@元",@"10000"];
+            if ([[self.detailM.productType description] isEqualToString:@"3"]) {
+                if ([accountDic objectForKey:@"subjectMaxMoney"] == nil || [[accountDic objectForKey:@"subjectMaxMoney"] isEqualToString:@""]) {
+                    
+                    cell.residueLabel.text = @"--";
+                } else {
+                    
+                    cell.residueLabel.text = [NSString stringWithFormat:@"%@元",[accountDic objectForKey:@"subjectMaxMoney"]];
+                }
+            } else {
+                
+                cell.residueLabel.text = [NSString stringWithFormat:@"%@元",self.limitMoney];
+            }
             
             cell.moneyTextField.textColor = [UIColor findZiTiColor];
             cell.moneyTextField.tintColor = [UIColor grayColor];
@@ -607,10 +618,6 @@
          
             if ([textField.text integerValue] >= 10000) {
                 textField.text = @"10000";
-            } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
-                if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
-                    textField.text = self.limitMoney;
-                }
             } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
                 textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
             } else if ([textField.text integerValue] >= [self.residueMoney integerValue]) {
@@ -621,6 +628,12 @@
         } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
             if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
                 textField.text = self.limitMoney;
+            } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
+                textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
+            } else if ([textField.text integerValue] >= [self.residueMoney integerValue]) {
+                textField.text = [NSString stringWithFormat:@"%ld",(long)[self.residueMoney integerValue]];
+            } else {
+                textField.text = [NSString stringWithFormat:@"%ld",(long)[textField.text integerValue] - number];
             }
         } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
             textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
@@ -667,17 +680,13 @@
     
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
     
-    if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"]){
-        
-//        TWOProductMakeSureThreeTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
-//        
-//        cell.yqMoneyLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod] floatValue] / 36500.0];
-//        
-//        syString = cell.yqMoneyLabel.text;
+    if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"10"] || [[self.detailM.productType description] isEqualToString:@"4"] || [[self.detailM.productType description] isEqualToString:@"9"]){
 
         TWOProductMakeSureTwoTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
         
-        cell.yqSLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod] floatValue] / 36500.0];
+        NSString *totalString = [NSString stringWithFormat:@"%.3f元",[textField.text doubleValue] * [[self.detailM productAnnualYield] doubleValue] * [[self.detailM productPeriod] doubleValue] / 36500.0];
+        
+        cell.yqSLabel.text = [totalString substringToIndex:totalString.length - 2];
         
         syString = cell.yqSLabel.text;
         
@@ -689,9 +698,25 @@
         
         TWOMakeSureTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
         
-        cell.yqMoneyLabel.text = [NSString stringWithFormat:@"%.2f元",[textField.text floatValue] * [[self.detailM productAnnualYield] floatValue] * [[self.detailM productPeriod] floatValue] / 36500.0];
+        NSString *totalString = [NSString stringWithFormat:@"%.3f元",[textField.text doubleValue] * [[self.detailM productAnnualYield] doubleValue] * [[self.detailM productPeriod] doubleValue] / 36500.0];
+        
+        cell.yqMoneyLabel.text = [totalString substringToIndex:totalString.length - 2];
         
         syString = cell.yqMoneyLabel.text;
+        
+        NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
+        
+        allMoneyString = [NSString stringWithFormat:@"%ld",[textField.text integerValue] - number];
+        
+    } else {
+        
+        TWOProductMakeSureTwoTableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
+        
+        NSString *totalString = [NSString stringWithFormat:@"%.3f元",[textField.text doubleValue] * [[self.detailM productAnnualYield] doubleValue] * [[self.detailM productPeriod] doubleValue] / 36500.0];
+        
+        cell.yqSLabel.text = [totalString substringToIndex:totalString.length - 2];
+        
+        syString = cell.yqSLabel.text;
         
         NSInteger number = [textField.text integerValue] % [[self.detailM amountIncrease] integerValue];
         
@@ -887,10 +912,6 @@
         
         if ([textField.text integerValue] >= 10000) {
             textField.text = @"10000";
-        } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
-            if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
-                textField.text = self.limitMoney;
-            }
         } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
             textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
         } else if ([textField.text integerValue] >= [self.residueMoney integerValue]) {
@@ -901,6 +922,12 @@
     } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
         if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
             textField.text = self.limitMoney;
+        } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
+            textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];
+        } else if ([textField.text integerValue] >= [self.residueMoney integerValue]) {
+            textField.text = [NSString stringWithFormat:@"%ld",(long)[self.residueMoney integerValue]];
+        } else {
+            textField.text = [NSString stringWithFormat:@"%ld",(long)[textField.text integerValue] - number];
         }
     } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
         textField.text = [NSString stringWithFormat:@"%ld",(long)[[self.detailM amountMin] integerValue]];

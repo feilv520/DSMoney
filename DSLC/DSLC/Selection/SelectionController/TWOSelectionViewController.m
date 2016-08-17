@@ -898,7 +898,11 @@
                 }
                 
                 
-                if (pickArray.count >= 3) {
+                if (pickArray.count != 0) {
+                    
+                    if (pickArray.count < 3) {
+                        return ;
+                    }
                     
                     [pickArray exchangeObjectAtIndex:0 withObjectAtIndex:1];
                     
@@ -906,7 +910,6 @@
                     noNetworkMonkey.hidden = YES;
                     reloadButton.hidden = YES;
                     [_scrollView setHidden:NO];
-                    
                 } else {
                     
 //                    [self noDataShowMoney];
@@ -1037,6 +1040,9 @@
 
 - (void)noDataShowMoney
 {
+    
+    [_scrollView setHidden:YES];
+    
     if (imageMonkey == nil) {
         imageMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 284/2/2, self.view.center.y - 284/2/2, 284/2, 284/2) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"noWithData"]];
     }
@@ -1044,6 +1050,9 @@
 }
 
 - (void)noNetworkView {
+    
+    [_scrollView setHidden:YES];
+    
     if (noNetworkMonkey == nil) {
         noNetworkMonkey = [CreatView creatImageViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 413/2.0/2.0, 164, 413/2.0, 268/2.0) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"TWONoPower"]];
     }
@@ -1242,7 +1251,9 @@
     [df setDateFormat:@"yyyyMMdd"];
     NSDate *dt1 = [[NSDate alloc] init];
     NSDate *dt2 = [[NSDate alloc] init];
+    NSLog(@"%@----",date01);
     date01 = [date01 substringToIndex:8];
+    NSLog(@"%@----",date01);
     dt1 = [df dateFromString:date01];
     dt2 = [df dateFromString:@"20160805"];
     

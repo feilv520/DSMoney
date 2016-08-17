@@ -682,6 +682,7 @@
             
             // 刷新任务中心列表
             [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
