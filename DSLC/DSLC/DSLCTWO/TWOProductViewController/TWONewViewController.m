@@ -318,6 +318,8 @@
     
     ProductListModel *productM = [self.productListArray objectAtIndex:indexPath.row];
     
+    [MobClick event:@"hotsale"];
+    
     TWOProductDetailViewController *twoPDVC = [[TWOProductDetailViewController alloc] init];
     twoPDVC.productName = productM.productName;
 

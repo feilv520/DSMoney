@@ -470,19 +470,16 @@
         
     if (indexPath.row == 1) {
         
-        [MobClick event:@"MyInformation"];
         MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
         [self.navigationController pushViewController:myInformationVC animated:YES];
         
     } else if (indexPath.row == 2) {
         
-        [MobClick event:@"ThirdRedBag"];
         TheThirdRedBagController *myRedBagVC = [[TheThirdRedBagController alloc] init];
         [self.navigationController pushViewController:myRedBagVC animated:YES];
         
     } else if (indexPath.row == 0) {
         
-        [MobClick event:@"ProductSetting"];
         // 账户资产old
 //        ProductSettingViewController *pSettringVC = [[ProductSettingViewController alloc] init];
 //        [self.navigationController pushViewController:pSettringVC animated:YES];
@@ -492,13 +489,11 @@
         
     } else if (indexPath.row == 3) {
         
-        [MobClick event:@"Transaction"];
         TransactionViewController *transactionVC = [[TransactionViewController alloc] init];
         [self.navigationController pushViewController:transactionVC animated:YES];
         
     } else if (indexPath.row == 4) {
         
-        [MobClick event:@"MyInvitation"];
         //好友邀请界面
 //        MyInvitationViewController *myInvitationVC = [[MyInvitationViewController alloc] init];
         
@@ -535,7 +530,6 @@
 //头像按钮
 - (void)headPictureButton:(UIButton *)button
 {
-    [MobClick event:@"MyInformation"];
     MyInformationViewController *myInformationVC = [[MyInformationViewController alloc] init];
     [self.navigationController pushViewController:myInformationVC animated:YES];
 }
@@ -550,7 +544,6 @@
 //我的理财师按钮
 - (void)inviteButton:(UIButton *)button
 {
-    [MobClick event:@"MyNews"];
     
     MyNewsViewController *myNewsVC = [[MyNewsViewController alloc] init];
     [self.navigationController pushViewController:myNewsVC animated:YES];
@@ -581,7 +574,6 @@
 //        RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
 //        [self.navigationController pushViewController:realNameVC animated:YES];
 //    } else {
-    [MobClick event:@"RechargeAlreadyBinding"];
     RechargeAlreadyBinding *recharge = [[RechargeAlreadyBinding alloc] init];
     [self.navigationController pushViewController:recharge animated:YES];
         
@@ -593,7 +585,6 @@
 {
 //    GetMoneyViewController *getMoneyVC = [[GetMoneyViewController alloc] init];
 //    [self.navigationController pushViewController:getMoneyVC animated:YES];
-    [MobClick event:@"LiftupMoney"];
     LiftupMoneyViewController *liftupVC = [[LiftupMoneyViewController alloc] init];
     liftupVC.moneyString = [[DES3Util decrypt: [self.myAccountInfo objectForKey:@"accBalance"]] stringByReplacingOccurrencesOfString:@"," withString:@""];
     [self.navigationController pushViewController:liftupVC animated:YES];
@@ -602,7 +593,6 @@
 //大额充值
 - (void)bigMoneyRecharge:(UIButton *)button
 {
-    [MobClick event:@"BigMoney"];
 //    bigId为0的时候 说明没有进行大额申请 跳转的是到大额申请页面
     if ([[[self.myAccountInfo objectForKey:@"bigId"] description] isEqualToString:@"0"]) {
     
@@ -621,7 +611,6 @@
 
 //昨日收益
 - (void)yesterdayButtonAction:(id)sender{
-    [MobClick event:@"Yesterday"];
     YesterdayViewController *yesterdayVC = [[YesterdayViewController alloc] init];
     [self.navigationController pushViewController:yesterdayVC animated:YES];
 }

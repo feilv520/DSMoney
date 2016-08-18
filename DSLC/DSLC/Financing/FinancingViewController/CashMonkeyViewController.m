@@ -135,7 +135,6 @@
     //    UILabel *labelLine = [CreatView creatWithLabelFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 0.5) backgroundColor:[UIColor grayColor] textColor:nil textAlignment:NSTextAlignmentCenter textFont:nil text:nil];
     //    [butCancle addSubview:labelLine];
     //    labelLine.alpha = 0.3;
-    [MobClick event:@"share"];
     [self getShareRedPacket];
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"5642ad7e67e58e8463006218"

@@ -240,6 +240,7 @@
 //发送邀请按钮
 - (void)buttonSendInvite:(UIButton *)button
 {
+    [MobClick event:@"invitenow"];
     
     NSString *shareString;
     
@@ -283,6 +284,8 @@
 
 - (void)inviteRecordButton:(UIBarButtonItem *)button
 {
+    [MobClick event:@"inviterecord"];
+    
     InviteRecordViewController *InviteRecord = [[InviteRecordViewController alloc] init];
     InviteRecord.inviteCode = self.inviteCode;
     NSLog(@"%@",self.inviteCode);

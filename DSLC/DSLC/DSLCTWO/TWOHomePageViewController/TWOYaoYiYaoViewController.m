@@ -554,6 +554,9 @@
     if ([[flagLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
         [self loginCome];
     } else {
+        
+        [MobClick event:@"sarules"];
+        
         TWOActivityRulesViewController *activityRules = [[TWOActivityRulesViewController alloc] init];
         pushVC(activityRules);
     }
@@ -569,6 +572,9 @@
         [self loginCome];
     } else {
         butShuZi.hidden = YES;
+        
+        [MobClick event:@"swrecords"];
+        
         TWOWinPrizeRecordViewController *winPrizeRecored = [[TWOWinPrizeRecordViewController alloc] init];
         winPrizeRecored.recordNum = [[yaoPageModel unQueryWinNum] description];
         pushVC(winPrizeRecored);
@@ -812,6 +818,8 @@
 //分享按钮
 - (void)buttonShareYaoYiYao:(UIButton *)button
 {
+    [MobClick event:@"share"];
+    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
     flagLogin = dicLogin;

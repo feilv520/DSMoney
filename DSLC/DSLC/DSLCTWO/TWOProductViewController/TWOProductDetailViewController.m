@@ -203,7 +203,6 @@
 //        }
 //        
 //    } else {
-        NSLog(@"%@",self.residueMoney);
         
         if ([[[self.detailM status] description] isEqualToString:@"4"]) {
             
@@ -455,8 +454,12 @@
                 } else {
                     cell.valueLabel.text = @"无限额";
                 }
-            } else if ([[[self.detailM productType] description] isEqualToString:@"4"]) {
-                cell.valueLabel.text = @"每人每期限额2万元";
+            } else if ([[[self.detailM productType] description] isEqualToString:@"11"]) {
+                if (![[[self.detailM isLimit] description] isEqualToString:@"0"]) {
+                    cell.valueLabel.text = @"每人每期限额2万元";
+                } else {
+                    cell.valueLabel.text = @"无限额";
+                }
             }
         }
         
@@ -681,6 +684,8 @@
 // 计算收益图层
 - (void)calendarView
 {
+    [MobClick event:@"counter"];
+    
     [bView removeFromSuperview];
     [calendar removeFromSuperview];
     
@@ -864,8 +869,8 @@
             [self showTanKuangWithMode:MBProgressHUDModeText Text:ifBugNewProductString];
             return;
         }
-    } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
-        if ([[userDic objectForKey:@"limitMoney"] isEqualToString:@"0"] || [[userDic objectForKey:@"limitMoney"] isEqualToString:@""] || [userDic objectForKey:@"limitMoney"] == nil) {
+    } else if ([[self.detailM.productType description] isEqualToString:@"9"] || [[self.detailM.productType description] isEqualToString:@"11"]) {
+        if ([self.detailM.limitMoney isEqualToString:@"0.00"] || [self.detailM.limitMoney isEqualToString:@""] || self.detailM.limitMoney == nil) {
             
             button.enabled = YES;
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资限额已用完,去投资其他产品吧"];
@@ -875,9 +880,11 @@
     
     TWOProductMakeSureViewController *makeSureVC = [[TWOProductMakeSureViewController alloc] init];
     
+    [MobClick event:@"invest"];
+    
     makeSureVC.detailM = self.detailM;
     makeSureVC.residueMoney = self.residueMoney;
-    makeSureVC.limitMoney = [userDic objectForKey:@"limitMoney"];
+    makeSureVC.limitMoney = [NSString stringWithFormat:@"%.2lf",[self.detailM.limitMoney floatValue] * 10000];
     
     [self submitLoadingWithHidden:YES];
     

@@ -606,8 +606,6 @@
                     makeSureVC.detailM = self.detailM;
                     makeSureVC.residueMoney = self.residueMoney;
                     [self.navigationController pushViewController:makeSureVC animated:YES];
-                    
-                    [MobClick event:@"makeSure"];
 
                     [self submitLoadingWithHidden:YES];
                     

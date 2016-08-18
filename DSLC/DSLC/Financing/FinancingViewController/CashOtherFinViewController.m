@@ -307,7 +307,6 @@
 {
 
     [self getShareRedPacket];
-    [MobClick event:@"share"];
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
     fString = [NSString stringWithFormat:@"http://wap.dslc.cn/app/appInvite.html?name=%@&inviteCode=%@", [dic objectForKey:@"realName"], [dic objectForKey:@"invitationMyCode"]];
@@ -353,7 +352,6 @@
 
 - (void)finishBarPress:(UIBarButtonItem *)bar
 {
-    [MobClick event:@"goon"];
     if ([self.nHand isEqualToString:@"my"]) {
         NSArray *arrVC = self.navigationController.viewControllers;
         [self.navigationController popToViewController:[arrVC objectAtIndex:1] animated:YES];

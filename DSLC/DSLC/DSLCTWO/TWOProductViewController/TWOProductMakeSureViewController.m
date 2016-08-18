@@ -346,12 +346,12 @@
             }
             
             if ([[self.detailM.productType description] isEqualToString:@"3"]) {
-                if ([accountDic objectForKey:@"subjectMaxMoney"] == nil || [[accountDic objectForKey:@"subjectMaxMoney"] isEqualToString:@""]) {
+                if (self.detailM.subjectMaxMoney == nil || [self.detailM.subjectMaxMoney isEqualToString:@""]) {
                     
                     cell.residueLabel.text = @"--";
                 } else {
                     
-                    cell.residueLabel.text = [NSString stringWithFormat:@"%@元",[accountDic objectForKey:@"subjectMaxMoney"]];
+                    cell.residueLabel.text = [NSString stringWithFormat:@"%@元",[self.detailM.subjectMaxMoney stringByReplacingOccurrencesOfString:@"," withString:@""]];
                 }
             } else {
                 

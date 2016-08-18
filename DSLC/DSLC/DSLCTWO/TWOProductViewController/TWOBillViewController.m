@@ -276,6 +276,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    [MobClick event:@"mm"];
+    
     ProductListModel *productM = [self.productListArray objectAtIndex:indexPath.row];
     
     TWOProductDetailViewController *twoPDVC = [[TWOProductDetailViewController alloc] init];

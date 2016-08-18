@@ -308,7 +308,6 @@
 
 //更多按钮
 - (void)moreActionButton:(id)sender{
-    [MobClick event:@"moreActionButton"];
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app.tabBarVC.tabScrollView setContentOffset:CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0) animated:NO];
     
@@ -442,17 +441,14 @@
 //    SelectionV *sView = (SelectionV *)button.superview;
     
     if (button.tag == 2) {
-        [MobClick event:@"NewHandGuide"];
         NewHandGuide *newHand = [[NewHandGuide alloc] init];
         [self.navigationController pushViewController:newHand animated:YES];
         
     } else if (button.tag == 1){
-        [MobClick event:@"MillionsAndMillionsRiskMoney"];
         MillionsAndMillionsRiskMoney *riskMoney = [[MillionsAndMillionsRiskMoney alloc] init];
         [self.navigationController pushViewController:riskMoney animated:YES];
 
     } else {
-        [MobClick event:@"safeVC"];
         SafeProtectViewController *safe = [[SafeProtectViewController alloc] init];
         [self.navigationController pushViewController:safe animated:YES];
 

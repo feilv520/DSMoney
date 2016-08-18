@@ -580,6 +580,8 @@
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
+    [MobClick event:@"attendance"];
+    
     TSignInViewController *signInVC = [[TSignInViewController alloc] init];
     signInVC.tokenString = [dic objectForKey:@"token"];
     [self.navigationController pushViewController:signInVC animated:YES];
@@ -589,6 +591,8 @@
 - (void)buttonClickedChoose:(UIButton *)button
 {
     if (button.tag == 1000) {
+        [MobClick event:@"shake"];
+        
         TWOYaoYiYaoViewController *yaoyiyaoVC = [[TWOYaoYiYaoViewController alloc] init];
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
         yaoyiyaoVC.invitationCode = [dic objectForKey:@"invitationMyCode"];
@@ -612,6 +616,8 @@
             }];
             return;
         }
+        
+        [MobClick event:@"Ginvite"];
         
         NewInviteViewController *inviteVc = [[NewInviteViewController alloc] init];
         
@@ -776,6 +782,8 @@
 
 - (void)bannerObject:(UITapGestureRecognizer *)tap
 {
+    [MobClick event:@"banner"];
+    
     BannerViewController *bannerVC = [[BannerViewController alloc] init];
     bannerVC.photoName = [[photoArray objectAtIndex:pageControl.currentPage] adLabel];
     bannerVC.photoUrl = [[photoArray objectAtIndex:pageControl.currentPage] adLink];

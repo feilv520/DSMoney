@@ -170,7 +170,6 @@
 - (void)shareButtonAction:(id)sender{
     
     [self getShareRedPacket];
-    [MobClick event:@"share"];
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
     
@@ -224,7 +223,6 @@
 
 - (void)finishLastBarPress:(UIBarButtonItem *)bar
 {
-    [MobClick event:@"goon"];
     if ([self.nHand isEqualToString:@"my"]) {
         NSArray *arrVC = self.navigationController.viewControllers;
         [self.navigationController popToViewController:[arrVC objectAtIndex:1] animated:YES];

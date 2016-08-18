@@ -630,26 +630,31 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
+            [MobClick event:@"investrecord"];
             //我的理财
             TWOMyTidyMoneyViewController *tidyMoneyVC = [[TWOMyTidyMoneyViewController alloc] init];
             [self.navigationController pushViewController:tidyMoneyVC animated:YES];
             
         } else {
+            [MobClick event:@"mybrokerage"];
             //特权本金开关
             [self teQuanMoneySwitch];
         }
     } else {
         if (indexPath.row == 1) {
+            [MobClick event:@"dscoin"];
             //我的猴币
             TWOMyMonkeyCoinViewController *myMonkeyCoinVC = [[TWOMyMonkeyCoinViewController alloc] init];
             [self.navigationController pushViewController:myMonkeyCoinVC animated:YES];
             
         } else if (indexPath.row == 2) {
+            [MobClick event:@"invite"];
             //我的邀请
             NewInviteViewController *inviteVC = [[NewInviteViewController alloc] init];
             [self.navigationController pushViewController:inviteVC animated:YES];
             
         } else {
+            [MobClick event:@"prize"];
             //红包加息券
             TWORedBagViewController *redBagVC = [[TWORedBagViewController alloc] init];
             pushVC(redBagVC);
@@ -668,6 +673,9 @@
         
         labelTestShu.hidden = NO;
     }
+    
+    [MobClick event:@"tasks"];
+    
     TWOJobCenterViewController *jobCenterVC = [[TWOJobCenterViewController alloc] init];
     pushVC(jobCenterVC);
 }
@@ -845,6 +853,8 @@
 //充值按钮
 - (void)buttonFullMoney:(UIButton *)button
 {
+    [MobClick event:@"recharge"];
+    
     TWOMoneyMoreViewController *moneyMoreVC = [[TWOMoneyMoreViewController alloc] init];
     pushVC(moneyMoreVC);
 }
@@ -852,6 +862,8 @@
 //提现按钮
 - (void)buttonFillMoney:(UIButton *)button
 {
+    [MobClick event:@"excash"];
+    
     TWOLiftMoneyViewController *liftMoneyVC = [[TWOLiftMoneyViewController alloc] init];
     //余额传值
     liftMoneyVC.moneyString = [DES3Util decrypt:[myAccount accBalance]];
@@ -1051,6 +1063,8 @@
 //信封按钮
 - (void)buttonEmailClicked:(UIButton *)button
 {
+    [MobClick event:@"news"];
+    
     TWOMessageCenterViewController *messageCenterVC = [[TWOMessageCenterViewController alloc] init];
     pushVC(messageCenterVC);
 }
@@ -1058,6 +1072,8 @@
 //设置按钮
 - (void)buttonSetClicked:(UIButton *)button
 {
+    [MobClick event:@"set"];
+    
     TWOPersonalSetViewController *personalSetVC = [[TWOPersonalSetViewController alloc] init];
     personalSetVC.whoAreYou = [[myAccount inviteType] description];
     [self.navigationController pushViewController:personalSetVC animated:YES];
@@ -1068,11 +1084,15 @@
 {
     if (button.tag == 665) {
         
+        //总资产
         TWOMyMoneyViewController *myMoneyVC = [[TWOMyMoneyViewController alloc] init];
         [self.navigationController pushViewController:myMoneyVC animated:YES];
         
     } else if (button.tag == 666) {
         
+        [MobClick event:@"remainingmoney"];
+        
+        //可用余额
         TWOUsableMoneyViewController *usableMoneyVC = [[TWOUsableMoneyViewController alloc] init];
         usableMoneyVC.whichOne = YES;
         usableMoneyVC.moneyString = [myAccount accBalance];
@@ -1080,6 +1100,9 @@
         
     } else {
         
+        [MobClick event:@"totalprofits"];
+        
+        // 累计收益
         TWOAddIncomeViewController *addIncomeVC = [[TWOAddIncomeViewController alloc] init];
         [self.navigationController pushViewController:addIncomeVC animated:YES];
     }

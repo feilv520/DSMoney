@@ -118,9 +118,11 @@
     //    NSLog(@" scrollViewDidScroll");
 //    NSLog(@"ContentOffset  x is  %f,yis %f",scrollView.contentOffset.x,scrollView.contentOffset.y);
     if (scrollView.contentOffset.x == WIDTH_CONTROLLER_DEFAULT) {
+        [MobClick event:@"hotZone"];
         [self goToTwoView:nil];
         NSLog(@"123");
     } else if (scrollView.contentOffset.x == 0) {
+        [MobClick event:@"regularZone"];
         [self goToOneView:nil];
         NSLog(@"321");
     }

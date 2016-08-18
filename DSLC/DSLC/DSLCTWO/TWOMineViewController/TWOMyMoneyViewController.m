@@ -218,17 +218,19 @@
             
             self.totalMoneyString = [DES3Util decrypt:[responseObject objectForKey:@"totalMoney"]];
             
-            if ([[responseObject objectForKey:@"Asset"] count] == 0) {
+            if ([[DES3Util decrypt:[responseObject objectForKey:@"totalMoney"]] isEqualToString:@"0.00"]) {
+                
                 [self noDataShowMoney];
             } else {
                 [self contentShow];
+                
+                double delayInSeconds = 1.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [self.pieChartView reloadChart];
+                });
             }
             
-            double delayInSeconds = 1.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self.pieChartView reloadChart];
-            });
             
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];

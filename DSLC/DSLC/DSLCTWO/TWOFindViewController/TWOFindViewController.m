@@ -159,15 +159,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
+        [MobClick event:@"leaderboard"];
 //        排行榜
         TRankinglistViewController *rankinglist = [[TRankinglistViewController alloc] init];
         [self.navigationController pushViewController:rankinglist animated:YES];
     } else if (indexPath.row == 1) {
+        [MobClick event:@"dskj"];
 //        大圣侃经
         TWOMoneySweepViewController *sweepVC = [[TWOMoneySweepViewController alloc] init];
         sweepVC.kindState = @"1";
         pushVC(sweepVC);
     } else if (indexPath.row == 2) {
+        [MobClick event:@"investscan"];
 //        投资大扫描
         TWOMoneySweepViewController *moneySweepVC = [[TWOMoneySweepViewController alloc] init];
         moneySweepVC.kindState = @"2";
@@ -251,25 +254,32 @@
     
     if (indexPath.item == 4) {
         
+        [MobClick event:@"game"];
         //游戏中心
         [self gameOpenSwitch];
         
     } else if (indexPath.item == 1) {
         
+        [MobClick event:@"brokerage"];
         //特权本金开关
         [self teQuanMoneySwitch];
         
     } else if (indexPath.item == 0) {
+        
+        [MobClick event:@"activities"];
         
         TWOFindActivityCenterViewController *findActivityVC = [[TWOFindActivityCenterViewController alloc] init];
         pushVC(findActivityVC);
         
     } else if (indexPath.item == 2) {
         
+        [MobClick event:@"wheel"];
         //大转盘开关
         [self bigWheelSwitch];
         
     } else if (indexPath.item == 3) {
+        
+        [MobClick event:@"lottery"];
         
         TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
         NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];

@@ -115,8 +115,6 @@
     
     if (indexPath.row == 0) {
         
-        [MobClick event:@"MyPlanner"];
-        
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
         
         if ([[dic objectForKey:@"inviteType"] isEqualToNumber:[NSNumber numberWithInteger:0]]) {
