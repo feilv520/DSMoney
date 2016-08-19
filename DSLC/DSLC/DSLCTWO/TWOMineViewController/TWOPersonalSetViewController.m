@@ -242,7 +242,6 @@
                 //未实名认证页面
 //                TWORealNameH5ViewController *noRealNameVC = [[TWORealNameH5ViewController alloc] init];
 //                [self.navigationController pushViewController:noRealNameVC animated:YES];
-                
                 if ([[self.flagDic objectForKey:@"chinaPnrAcc"] isEqualToString:@""]) {
                     
                     [self registThirdShow];

@@ -35,6 +35,7 @@
     [self.view addSubview:webView];
     webView.delegate = self;
     webView.scrollView.showsVerticalScrollIndicator = NO;
+    webView.scrollView.bounces = NO;
     
     NSString *htmlString = [NSString stringWithFormat:@"%@/investscanDetail.html?type=1&id=%@", htmlFive, self.sweepID];
     
