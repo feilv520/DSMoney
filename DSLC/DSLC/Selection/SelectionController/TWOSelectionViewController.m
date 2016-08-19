@@ -523,6 +523,8 @@
     
     TWOPickModel *pickModel = [pickArray objectAtIndex:pageNumber];
     
+    [MobClick event:@"jxproduct"];
+    
     TWOProductDetailViewController *productDetailVC = [[TWOProductDetailViewController alloc] init];
     productDetailVC.idString = [pickModel productId];
     productDetailVC.productName = [pickModel productName];
@@ -653,6 +655,8 @@
     CGFloat pageNumber = _collection.contentOffset.x / WIDTH_CONTROLLER_DEFAULT;
     
     TWOPickModel *pickModel = [pickArray objectAtIndex:pageNumber];
+    
+    [MobClick event:@"jxproduct"];
     
     TWOProductDetailViewController *productDetailVC = [[TWOProductDetailViewController alloc] init];
     productDetailVC.idString = [pickModel productId];

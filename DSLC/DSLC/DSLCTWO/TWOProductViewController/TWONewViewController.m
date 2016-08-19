@@ -343,13 +343,13 @@
         
         [self loadingWithHidden:YES];
         
+        NSLog(@"new = %@",responseObject);
+        
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
             newFlag = YES;
             
             _tableView.hidden = NO;
-            
-            NSLog(@"%@",responseObject);
             
             if (page == 1) {
                 [self.productListArray removeAllObjects];
@@ -409,6 +409,8 @@
                 
                 [self noDataShowMoney];
                 _tableView.hidden = YES;
+                noNetworkMonkey.hidden = YES;
+                reloadButton.hidden = YES;
                 imageMonkey.hidden = NO;
                 return ;
             } else {
@@ -439,6 +441,8 @@
         } else {
             [self noDataShowMoney];
             _tableView.hidden = YES;
+            noNetworkMonkey.hidden = YES;
+            reloadButton.hidden = YES;
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
