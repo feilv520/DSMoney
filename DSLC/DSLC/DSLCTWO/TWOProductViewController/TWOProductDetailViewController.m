@@ -430,7 +430,7 @@
                 cell.valueLabel.text = @"无限额";
             } else if ([[[self.detailM productType] description] isEqualToString:@"3"]) {
                 if (![[[self.detailM isLimit] description] isEqualToString:@"0"]) {
-                    cell.valueLabel.text = @"(仅限新用户)单笔限额1万元";
+                    cell.valueLabel.text = [NSString stringWithFormat:@"(仅限新用户)单笔限额%d万元",[[self.detailM limitMoney] intValue]];
                 } else {
                     cell.valueLabel.text = @"无限额";
                 }
@@ -444,19 +444,19 @@
                 cell.valueLabel.text = @"无限额";
             } else if ([[[self.detailM productType] description] isEqualToString:@"9"]) {
                 if (![[[self.detailM isLimit] description] isEqualToString:@"0"]) {
-                    cell.valueLabel.text = @"单人累计投资限额2万元";
+                    cell.valueLabel.text = [NSString stringWithFormat:@"单人累计投资限额%d万元",[[self.detailM limitMoney] intValue]];
                 } else {
                     cell.valueLabel.text = @"无限额";
                 }
             } else if ([[[self.detailM productType] description] isEqualToString:@"10"]){
                 if (![[[self.detailM isLimit] description] isEqualToString:@"0"]) {
-                    cell.valueLabel.text = @"每人每期限额2万元";
+                    cell.valueLabel.text = [NSString stringWithFormat:@"每人每期限额%d万元",[[self.detailM limitMoney] intValue]];
                 } else {
                     cell.valueLabel.text = @"无限额";
                 }
             } else if ([[[self.detailM productType] description] isEqualToString:@"11"]) {
                 if (![[[self.detailM isLimit] description] isEqualToString:@"0"]) {
-                    cell.valueLabel.text = @"每人每期限额2万元";
+                    cell.valueLabel.text = [NSString stringWithFormat:@"每人每期限额%d万元",[[self.detailM limitMoney] intValue]];
                 } else {
                     cell.valueLabel.text = @"无限额";
                 }
