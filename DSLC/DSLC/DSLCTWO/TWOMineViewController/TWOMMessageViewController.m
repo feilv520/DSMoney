@@ -104,7 +104,7 @@
     cell.backgroundV.layer.borderWidth = 1;
     
     cell.pointImage.hidden = YES;
-    cell.pointImage.tag = 99999;
+    cell.pointImage.tag = 99999 + indexPath.row;
     
     //未读已读的判断
     if ([[[newsModel msgStatus] description] isEqualToString:@"0"]) {
@@ -126,11 +126,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    imageDian = (UIImageView *)[self.view viewWithTag:99999];
-    labelTitle = (UILabel *)[self.view viewWithTag:123 + indexPath.row];
-    
-    imageDian.hidden = YES;
-    labelTitle.textColor = [UIColor findZiTiColor];
+    TWOMessageTableViewCell *cell= [tableView cellForRowAtIndexPath:indexPath];
+    cell.pointImage.hidden = YES;
+    cell.titleLabel.textColor = [UIColor findZiTiColor];
     
     TWONewsMegDetailViewController *messageDVC = [[TWONewsMegDetailViewController alloc] init];
     TWONewsMessageModel *model = [newsArray objectAtIndex:indexPath.row];
