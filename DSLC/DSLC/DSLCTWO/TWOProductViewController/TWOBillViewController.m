@@ -335,6 +335,8 @@
                 
                 [self noDataShowMoney];
                 _tableView.hidden = YES;
+                noNetworkMonkey.hidden = YES;
+                reloadButton.hidden = YES;
                 imageMonkey.hidden = NO;
                 return ;
             } else {
@@ -365,6 +367,8 @@
         } else {
             [self noDataShowMoney];
             _tableView.hidden = YES;
+            noNetworkMonkey.hidden = YES;
+            reloadButton.hidden = YES;
         }
         
         
