@@ -190,8 +190,15 @@
     
     if (self.stateShow == YES) {
         
-        NSArray *contentArray = @[[tempDic objectForKey:@"inviteCode"], [NSString stringWithFormat:@"%@元", [DES3Util decrypt:[tempDic objectForKey:@"earnMoney"]]], [NSString stringWithFormat:@"%@", [tempDic objectForKey:@"serveCount"]], [NSString stringWithFormat:@"%@元", [tempDic objectForKey:@"totalAmount"]]];
-        cell.labelContent.text = [contentArray objectAtIndex:indexPath.row];
+        if ([tempDic objectForKey:@"inviteCode"] == nil) {
+            
+        } else {
+            
+            NSArray *contentArray = @[[tempDic objectForKey:@"inviteCode"], [NSString stringWithFormat:@"%@元", [DES3Util decrypt:[tempDic objectForKey:@"earnMoney"]]], [NSString stringWithFormat:@"%@", [tempDic objectForKey:@"serveCount"]], [NSString stringWithFormat:@"%@元", [tempDic objectForKey:@"totalAmount"]]];
+            
+            cell.labelContent.text = [contentArray objectAtIndex:indexPath.row];
+        }
+        
         
     } else {
         
