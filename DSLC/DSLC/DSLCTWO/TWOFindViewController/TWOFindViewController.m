@@ -327,7 +327,7 @@
     
     YYAnimatedImageView *bannerLast = [YYAnimatedImageView new];
     bannerLast.yy_imageURL = [NSURL URLWithString:[[photoArray objectAtIndex:photoArray.count - 1] adImg]];
-    bannerLast.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180);
+    bannerLast.frame = CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 180.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20));
     
     for (NSInteger i = 0; i < photoArray.count; i++) {
         YYAnimatedImageView *bannerObject = [YYAnimatedImageView new];

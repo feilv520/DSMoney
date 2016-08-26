@@ -758,7 +758,7 @@
     NSLog(@"allMoneyString = %@",allMoneyString);
     
     if ([[self.detailM.productType description] isEqualToString:@"9"]) {
-        if ([self.limitMoney isEqualToString:@"0"]) {
+        if ([self.limitMoney isEqualToString:@"0.00"]) {
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资限额已用完,去投资其他产品吧"];
             return;
