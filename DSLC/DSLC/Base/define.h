@@ -87,6 +87,9 @@ static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.75:8080/dslc/interface/"
 //2.0线上测试接口地址
 //static NSString * MYAFHTTP_BASEURL = @"http://61.172.238.245:8000/dslc/interface/";
 
+//2.0正是环境
+//static NSString * MYAFHTTP_BASEURL = @"http://61.172.235.21:7070/dslc/interface";
+
 //2.0 H5接口
 //测试
 //static NSString *htmlFive = @"http://192.168.0.161:8088/zhongxin";

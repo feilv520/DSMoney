@@ -47,13 +47,9 @@
 //用苹果自带的返回键按钮处理如下(自定义的返回按钮)
 - (void)buttonReturn:(UIBarButtonItem *)btn
 {
-    if ([myWebView canGoBack]) {
-        [myWebView goBack];
-        
-    }else{
-        [self.view resignFirstResponder];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+
+    [self.view resignFirstResponder];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

@@ -884,7 +884,7 @@
     
     makeSureVC.detailM = self.detailM;
     makeSureVC.residueMoney = self.residueMoney;
-    makeSureVC.limitMoney = [NSString stringWithFormat:@"%.2lf",[self.detailM.limitMoney floatValue] * 10000];
+    makeSureVC.limitMoney = [NSString stringWithFormat:@"%.2lf",[[userDic objectForKey:@"residueMoney"] floatValue]];
     
     [self submitLoadingWithHidden:YES];
     
