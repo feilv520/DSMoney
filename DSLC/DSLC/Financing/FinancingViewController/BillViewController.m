@@ -300,6 +300,7 @@
             
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
                 moreFlag = YES;
+                newFlag = YES;
             }
             
             [footerT endRefreshing];

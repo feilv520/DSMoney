@@ -301,17 +301,6 @@
                 cell.quanView.theme.sliceDividerHidden = YES;
                 
             }
-
-            //    设置进度条的进度值 并动画展示
-//            CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
-//            
-//            CGFloat bLL = 1.0 - bL;
-            
-//            [cell.progressView setProgress:bLL animated:YES];
-//            //    设置进度条的颜色
-//            cell.progressView.trackTintColor = [UIColor progressBackColor];
-//            //    设置进度条的进度颜色
-//            cell.progressView.progressTintColor = [UIColor progressColor];
         
             cell.backgroundColor = [UIColor huibai];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -399,16 +388,6 @@
             cell.quanView.theme.sliceDividerHidden = YES;
             
         }
-        //    设置进度条的进度值 并动画展示
-//        CGFloat bL = [[[self.productListArray objectAtIndex:indexPath.row] residueMoney] floatValue] / [[[self.productListArray objectAtIndex:indexPath.row] productInitLimit] floatValue];
-//        
-//        CGFloat bLL = 1.0 - bL;
-        
-//        [cell.progressView setProgress:bLL animated:YES];
-//        //    设置进度条的颜色
-//        cell.progressView.trackTintColor = [UIColor progressBackColor];
-//        //    设置进度条的进度颜色
-//        cell.progressView.progressTintColor = [UIColor progressColor];
     
         cell.backgroundColor = [UIColor huibai];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -481,6 +460,7 @@
             
             if ([[responseObject objectForKey:@"currPage"] isEqual:[responseObject objectForKey:@"totalPage"]]) {
                 moreFlag = YES;
+                newFlag = YES;
             }
             
             [footerT endRefreshing];
