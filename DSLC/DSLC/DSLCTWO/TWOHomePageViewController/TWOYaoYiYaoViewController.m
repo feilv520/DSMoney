@@ -277,7 +277,7 @@
     }
     [butYaoLeft addSubview:butActivity];
     
-    //中奖纪录蓝色底
+    //中奖记录蓝色底
     if (butYaoRight == nil) {
         butYaoRight = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
         [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
@@ -287,7 +287,7 @@
     [imageBack addSubview:butYaoRight];
     
     if (butWinPrize == nil) {
-        butWinPrize = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWidth/2 - 34, 3, 68, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"中奖纪录"];
+        butWinPrize = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWidth/2 - 34, 3, 68, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"中奖记录"];
         butWinPrize.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
         [butWinPrize addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -374,7 +374,7 @@
     }
     [butYaoLeft addSubview:butActivity];
     
-//    中奖纪录蓝色底
+//    中奖记录蓝色底
     if (butYaoRight == nil) {
         butYaoRight = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(9 + butWidth + 9, imageBack.frame.size.height - 29.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20) - 45, butWidth, 45) backgroundColor:[UIColor clearColor] textColor:nil titleText:nil];
         [butYaoRight setBackgroundImage:[UIImage imageNamed:@"blueYao"] forState:UIControlStateNormal];
@@ -384,13 +384,13 @@
     [imageBack addSubview:butYaoRight];
     
     if (butWinPrize == nil) {
-        butWinPrize = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWidth/2 - 34, 3, 68, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"中奖纪录"];
+        butWinPrize = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(butWidth/2 - 34, 3, 68, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] titleText:@"中奖记录"];
         butWinPrize.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:17];
         [butWinPrize addTarget:self action:@selector(winAPrizeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     [butYaoRight addSubview:butWinPrize];
     
-//    中奖纪录的数字 如果是0就不显示
+//    中奖记录的数字 如果是0就不显示
     if ([[[yaoPageModel unQueryWinNum] description] isEqualToString:@"0"]) {
         
     } else {
@@ -562,7 +562,7 @@
     }
 }
 
-//中奖纪录按钮
+//中奖记录按钮
 - (void)winAPrizeButtonClicked:(UIButton *)button
 {
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];

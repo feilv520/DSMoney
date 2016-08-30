@@ -164,6 +164,9 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [self loadingWithHidden:YES];
+        
         NSLog(@"%@", error);
     }];
 }

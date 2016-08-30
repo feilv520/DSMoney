@@ -50,6 +50,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadWithWebview:) name:@"reloadWithWebview" object:nil];
     
     [self contentShow];
+    
+    [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
 }
 
 - (void)contentShow
@@ -166,17 +168,19 @@
 //获取当前页面的title和url
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSString * title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];//获取当前页面的title
-    self.title = title;
+    [self loadingWithHidden:YES];
     
-    NSLog(@"%@",self.title);
+//    NSString * title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];//获取当前页面的title
+//    self.title = title;
+//    
+//    NSLog(@"%@",self.title);
 }
 
 - (void)getData
 {
     NSDictionary *parameter = @{@"token":[self.flagDic objectForKey:@"token"]};
     
-    [[MyAfHTTPClient sharedClient] postWithURLString:@"app/user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"user/getUserInfo" parameters:parameter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
         NSLog(@"asasasasasa%@", responseObject);
         

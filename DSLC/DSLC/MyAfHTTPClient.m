@@ -65,8 +65,8 @@
         NSString *character = nil;
         for (int i = 0; i < responseString.length; i ++) {
             character = [responseString substringWithRange:NSMakeRange(i, 1)];
-            if ([character isEqualToString:@"\\"])
-                [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
+//            if ([character isEqualToString:@"\\"])
+//                [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
         }
         responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
 //        NSLog(@"postWithURLStringP = %@",responseString);
@@ -98,8 +98,8 @@
         NSString *character = nil;
         for (int i = 0; i < responseString.length; i ++) {
             character = [responseString substringWithRange:NSMakeRange(i, 1)];
-            if ([character isEqualToString:@"\\"])
-                [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
+//            if ([character isEqualToString:@"\\"])
+//                [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
         }
         responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
         
@@ -143,8 +143,8 @@
         NSString *character = nil;
         for (int i = 0; i < responseString.length; i ++) {
             character = [responseString substringWithRange:NSMakeRange(i, 1)];
-            if ([character isEqualToString:@"\\"])
-                [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
+//            if ([character isEqualToString:@"\\"])
+//                [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
         }
         responseString = [[responseString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]] copy];
         

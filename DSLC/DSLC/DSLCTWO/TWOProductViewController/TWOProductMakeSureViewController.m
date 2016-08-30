@@ -284,7 +284,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        if ([[self.detailM.productType description] isEqualToString:@"3"]){
+        if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"11"]){
             
             return 200;
         } else if ([[self.detailM.productType description] isEqualToString:@"1"] || [[self.detailM.productType description] isEqualToString:@"5"]|| [[self.detailM.productType description] isEqualToString:@"6"]|| [[self.detailM.productType description] isEqualToString:@"7"]|| [[self.detailM.productType description] isEqualToString:@"8"] || ([[self.detailM.productType description] isEqualToString:@"3"] && [[self.detailM.productName description] containsString:@"美猴王"])) {
@@ -301,7 +301,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if ([[self.detailM.productType description] isEqualToString:@"3"]){
+    if ([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"11"]){
         
         return 1;
     } else {
@@ -757,7 +757,7 @@
     NSLog(@"accString = %@",accString);
     NSLog(@"allMoneyString = %@",allMoneyString);
     
-    if ([[self.detailM.productType description] isEqualToString:@"9"]) {
+    if ([[self.detailM.productType description] isEqualToString:@"9"] || [[self.detailM.productType description] isEqualToString:@"11"]) {
         if ([self.limitMoney isEqualToString:@"0.00"]) {
             
             [self showTanKuangWithMode:MBProgressHUDModeText Text:@"您的投资限额已用完,去投资其他产品吧"];
