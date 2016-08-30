@@ -311,6 +311,13 @@
                 
                 if ([[self.flagLogin objectForKey:@"loginFlag"] isEqualToString:@"YES"]){
                     [self loginFuction];
+                } else {
+                    
+                    NSMutableDictionary *userD = [NSMutableDictionary dictionaryWithDictionary:self.flagUserInfo];
+
+                    [userD setValue:@"" forKey:@"token"];
+                    
+                    [userD writeToFile:[FileOfManage PathOfFile:@"Member.plist"] atomically:YES];
                 }
                 
             }];
