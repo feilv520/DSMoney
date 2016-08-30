@@ -941,16 +941,13 @@
     
     if ([allMoneyString integerValue] >= 100) {
         
-        if (![[self.detailM.productType description] isEqualToString:@"3"]) {
+        if (!([[self.detailM.productType description] isEqualToString:@"3"] || [[self.detailM.productType description] isEqualToString:@"11"])) {
             
             [self getMyRedPacketList];
             [self getMyIncreaseList];
             
             packetModel = nil;
             incrModel = nil;
-            
-            NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
-            [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
         }
     }
     
