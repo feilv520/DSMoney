@@ -625,7 +625,7 @@
             } else {
                 textField.text = [NSString stringWithFormat:@"%ld",(long)[textField.text integerValue] - number];
             }
-        } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
+        } else if ([[self.detailM.productType description] isEqualToString:@"9"] || [[self.detailM.productType description] isEqualToString:@"11"]) {
             if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
                 textField.text = self.limitMoney;
             } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
@@ -919,7 +919,7 @@
         } else {
             textField.text = [NSString stringWithFormat:@"%ld",(long)[textField.text integerValue] - number];
         }
-    } else if ([[self.detailM.productType description] isEqualToString:@"9"]) {
+    } else if ([[self.detailM.productType description] isEqualToString:@"9"] || [[self.detailM.productType description] isEqualToString:@"11"]) {
         if ([textField.text integerValue] >= [self.limitMoney integerValue]) {
             textField.text = self.limitMoney;
         } else if ([textField.text integerValue] < [[self.detailM amountMin] integerValue]) {
