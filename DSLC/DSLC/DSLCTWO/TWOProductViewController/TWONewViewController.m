@@ -31,7 +31,6 @@
     NSInteger page;
     
     BOOL moreFlag;
-    BOOL newFlag;
     
     MJRefreshGifHeader *headerT;
     MJRefreshBackGifFooter *footerT;
@@ -77,8 +76,6 @@
     page = 1;
     
     moreFlag = NO;
-    
-    newFlag = NO;
     
     self.productListArray = [NSMutableArray array];
     
@@ -156,9 +153,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.productListArray.count == 0) {
-        return nil;
-    }
     
 //    if ([[[self.productListArray objectAtIndex:0] productType] isEqualToString:@"3"]) {
         if (indexPath.row == 0) {
@@ -256,8 +250,6 @@
             [textYear addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:14] range:dayText];
             [cell.labelDayNum setAttributedText:textYear];
     
-            NSLog(@"88888888-%ld",(long)indexPath.row);
-    
             if ([[[self.productListArray objectAtIndex:indexPath.row] productStatus] isEqualToString:@"6"]) {
     
                 cell.outPay.hidden = NO;
@@ -347,11 +339,9 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
-            newFlag = YES;
-            
             _tableView.hidden = NO;
             
-            if (page == 1) {
+            if (headerT.state == MJRefreshStateRefreshing) {
                 [self.productListArray removeAllObjects];
                 self.productListArray = nil;
                 self.productListArray = [NSMutableArray array];
@@ -359,51 +349,12 @@
             
             NSArray *array = [responseObject objectForKey:@"Product"];
             
-//            NSMutableArray *hotProductArray = [NSMutableArray array];
-//            NSMutableArray *noHotProductArray = [NSMutableArray array];
-//            NSMutableArray *newHandProductArray = [NSMutableArray array];
-//            NSMutableArray *profittingProductArray = [NSMutableArray array];
-//            NSMutableArray *saledProductArray = [NSMutableArray array];
-            
             for (NSDictionary *dic in array) {
                 ProductListModel *productM = [[ProductListModel alloc] init];
                 [productM setValuesForKeysWithDictionary:dic];
                 
-//                if ([[[productM productType] description] isEqualToString:@"3"]) {
-//                    
-//                    [newHandProductArray addObject:productM];
-//                } else if ([[[productM isHotSale] description] isEqualToString:@"1"]) {
-//                    
-//                    [hotProductArray addObject:productM];
-//                } else if ([[[productM productStatus] description] isEqualToString:@"4"]) {
-//                    
-//                    [profittingProductArray addObject:productM];
-//                } else if ([[[productM productStatus] description] isEqualToString:@"6"]) {
-//                    
-//                    [saledProductArray addObject:productM];
-//                } else {
-//                    
-//                    [noHotProductArray addObject:productM];
-//                }
-                
                 [self.productListArray addObject:productM];
             }
-            
-//            if ([[[userDic objectForKey:@"newHand"] description] isEqualToString:@"0"] || [[[userDic objectForKey:@"newHand"] description] isEqualToString:@""] || [userDic objectForKey:@"newHand"] == nil) {
-//                
-//                [self.productListArray addObjectsFromArray:newHandProductArray];
-//                [self.productListArray addObjectsFromArray:hotProductArray];
-//                [self.productListArray addObjectsFromArray:noHotProductArray];
-//                [self.productListArray addObjectsFromArray:profittingProductArray];
-//                [self.productListArray addObjectsFromArray:saledProductArray];
-//            } else {
-//                
-//                [self.productListArray addObjectsFromArray:hotProductArray];
-//                [self.productListArray addObjectsFromArray:noHotProductArray];
-//                [self.productListArray addObjectsFromArray:newHandProductArray];
-//                [self.productListArray addObjectsFromArray:profittingProductArray];
-//                [self.productListArray addObjectsFromArray:saledProductArray];
-//            }
             
             if (self.productListArray.count == 0) {
                 
@@ -427,18 +378,13 @@
                 moreFlag = NO;
             }
             
-            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
-                newFlag = YES;
-            } else {
-                newFlag = NO;
-            }
-            
             [footerT endRefreshing];
             
             [headerT endRefreshing];
             
             [_tableView reloadData];
         } else {
+            
             [self noDataShowMoney];
             _tableView.hidden = YES;
             noNetworkMonkey.hidden = YES;
@@ -474,21 +420,9 @@
 - (void)loadNewData:(MJRefreshGifHeader *)header{
     
     headerT = header;
-    
-    if (newFlag) {
         
-        [header endRefreshing];
-    } else {
-    
-        if (self.productListArray != nil) {
-            [self.productListArray removeAllObjects];
-            self.productListArray = nil;
-            self.productListArray = [NSMutableArray array];
-        }
-        
-        page = 1;
-        [self getProductList];
-    }
+    page = 1;
+    [self getProductList];
     
 }
 

@@ -49,7 +49,6 @@
     NSInteger page;
     
     BOOL moreFlag;
-    BOOL newFlag;
     
     MJRefreshGifHeader *headerT;
     MJRefreshBackGifFooter *footerT;
@@ -92,8 +91,6 @@
     page = 1;
     
     moreFlag = NO;
-    
-    newFlag = NO;
     
     [self getProductList];
     
@@ -311,13 +308,11 @@
         [self loadingWithHidden:YES];
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
-            newFlag = YES;
-            
             _tableView.hidden = NO;
             
             NSLog(@"%@",responseObject);
             
-            if (page == 1) {
+            if (headerT.state == MJRefreshStateRefreshing) {
                 [self.productListArray removeAllObjects];
                 self.productListArray = nil;
                 self.productListArray = [NSMutableArray array];
@@ -351,12 +346,6 @@
                 moreFlag = YES;
             } else {
                 moreFlag = NO;
-            }
-            
-            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
-                newFlag = YES;
-            } else {
-                newFlag = NO;
             }
             
             [footerT endRefreshing];
@@ -400,21 +389,9 @@
 - (void)loadNewData:(MJRefreshGifHeader *)header{
     
     headerT = header;
-
-    if (newFlag) {
         
-        [header endRefreshing];
-    } else {
-        
-        if (self.productListArray != nil) {
-            [self.productListArray removeAllObjects];
-            self.productListArray = nil;
-            self.productListArray = [NSMutableArray array];
-        }
-        
-        page = 1;
-        [self getProductList];
-    }
+    page = 1;
+    [self getProductList];
     
 }
 
@@ -535,10 +512,7 @@
 
 - (void)bannerObject:(UITapGestureRecognizer *)tap
 {
-    //    if (pageControl.currentPage == 4) {
-    //        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"本连接不支持app端"];
-    //        return;
-    //    }
+
     BannerViewController *bannerVC = [[BannerViewController alloc] init];
     bannerVC.photoName = [[photoArray objectAtIndex:pageControl.currentPage] adLabel];
     bannerVC.photoUrl = [[photoArray objectAtIndex:pageControl.currentPage] adLink];
