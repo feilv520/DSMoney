@@ -44,7 +44,7 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationItem setTitle:@"中奖纪录"];
+    [self.navigationItem setTitle:@"中奖记录"];
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     
     recordArray = [NSMutableArray array];
@@ -217,7 +217,7 @@
     NSDictionary *parmeter = @{@"token":[self.flagDic objectForKey:@"token"], @"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber], @"pageSize":@"10"};
     [[MyAfHTTPClient sharedClient] postWithURLString:@"shake/getShakeWinning" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         
-        NSLog(@"摇一摇中奖纪录::::::::::::::%@", responseObject);
+        NSLog(@"摇一摇中奖记录::::::::::::::%@", responseObject);
         [self loadingWithHidden:YES];
         resDiction = responseObject;
         
