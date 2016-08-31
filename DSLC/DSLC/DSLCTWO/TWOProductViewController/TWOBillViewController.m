@@ -49,6 +49,7 @@
     NSInteger page;
     
     BOOL moreFlag;
+    BOOL nFlag;
     
     MJRefreshGifHeader *headerT;
     MJRefreshBackGifFooter *footerT;
@@ -92,6 +93,8 @@
     
     moreFlag = NO;
     
+    nFlag = NO;
+    
     [self getProductList];
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
@@ -127,9 +130,13 @@
     
     if (self.productListArray != nil) {
         
-        [self.productListArray removeAllObjects];
-        self.productListArray = nil;
-        self.productListArray = [NSMutableArray array];
+        if (!nFlag){
+            
+            [self.productListArray removeAllObjects];
+            self.productListArray = nil;
+            self.productListArray = [NSMutableArray array];
+            nFlag = YES;
+        }
     }
     
     page = 1;
@@ -323,6 +330,7 @@
             
             _tableView.hidden = NO;
             
+            
             NSLog(@"%@",responseObject);
             
             if (headerT.state == MJRefreshStateRefreshing) {
@@ -360,6 +368,8 @@
             } else {
                 moreFlag = NO;
             }
+            
+            nFlag = NO;
             
             [footerT endRefreshing];
             [headerT endRefreshing];

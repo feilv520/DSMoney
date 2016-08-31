@@ -31,6 +31,7 @@
     NSInteger page;
     
     BOOL moreFlag;
+    BOOL nFlag;
     
     MJRefreshGifHeader *headerT;
     MJRefreshBackGifFooter *footerT;
@@ -77,6 +78,8 @@
     
     moreFlag = NO;
     
+    nFlag = NO;
+    
     self.productListArray = [NSMutableArray array];
     
     photoArray = [NSMutableArray array];
@@ -107,9 +110,12 @@
     
     if(self.productListArray != nil) {
         
-        [self.productListArray removeAllObjects];
-        self.productListArray = nil;
-        self.productListArray = [NSMutableArray array];
+        if (!nFlag) {
+            [self.productListArray removeAllObjects];
+            self.productListArray = nil;
+            self.productListArray = [NSMutableArray array];
+            nFlag = YES;
+        }
     }
     
     page = 1;
@@ -391,6 +397,8 @@
             [headerT endRefreshing];
             
             [_tableView reloadData];
+            
+            nFlag = NO;
         } else {
             
             [self noDataShowMoney];

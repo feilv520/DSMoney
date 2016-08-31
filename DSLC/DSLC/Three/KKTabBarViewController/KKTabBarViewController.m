@@ -226,11 +226,13 @@
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInviteInfo" object:nil];
-    } else if (button.tag == 1) {
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"BillVC" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
-    } else {
+    }
+//    else if (button.tag == 1) {
+//        
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"BillVC" object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+//    }
+    else {
         indexButton = button;
     }
     

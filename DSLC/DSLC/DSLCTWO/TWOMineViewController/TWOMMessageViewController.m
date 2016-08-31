@@ -53,12 +53,18 @@
     flagSate = NO;
     pageNum = 1;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMessageData) name:@"getMessageDataRefrush" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMessageDataNotification) name:@"getMessageDataRefrush" object:nil];
     
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
     
     [self getMessageData];
 }
+
+//- (void)getMessageDataNotification{
+//    
+//    pageNum = 1;
+//    [self getMessageData];
+//}
 
 - (void)tableViewShow
 {

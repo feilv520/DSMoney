@@ -264,9 +264,9 @@
             photoScrollView.pagingEnabled = YES;
             photoScrollView.contentSize = CGSizeMake(3 * WIDTH_CONTROLLER_DEFAULT, 1);
             
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushWithController:)];
-            
-            [photoScrollView addGestureRecognizer:tap];
+//            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushWithController:)];
+//            
+//            [photoScrollView addGestureRecognizer:tap];
             
             NSLog(@"firstString = %@",firstString);
             
@@ -516,10 +516,10 @@
     }
 }
 
-- (void)pushWithController:(UITapGestureRecognizer *)tap{
-    TRankinglistViewController *rankingVC = [TRankinglistViewController new];
-    pushVC(rankingVC);
-}
+//- (void)pushWithController:(UITapGestureRecognizer *)tap{
+//    TRankinglistViewController *rankingVC = [TRankinglistViewController new];
+//    pushVC(rankingVC);
+//}
 
 - (void)moreAction:(id)sender{
     
