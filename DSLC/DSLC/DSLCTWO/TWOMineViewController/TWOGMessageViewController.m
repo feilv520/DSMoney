@@ -122,6 +122,13 @@
         [self loadingWithHidden:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            if (gifHeader.state == MJRefreshStateRefreshing) {
+                [messageArray removeAllObjects];
+                messageArray = nil;
+                messageArray = [NSMutableArray array];
+            }
+            
             NSMutableArray *dataArray = [responseObject objectForKey:@"noticeInfo"];
             for (NSDictionary *dataDic in dataArray) {
                 TWOMessageModel *messageModel = [[TWOMessageModel alloc] init];
@@ -134,12 +141,6 @@
                 NSLog(@"全部数据");
             } else {
                 flagSate = NO;
-            }
-            
-            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
-                newFlag = YES;
-            } else {
-                newFlag = NO;
             }
             
             [gifFooter endRefreshing];
@@ -193,19 +194,10 @@
 - (void)loadNewData:(MJRefreshGifHeader *)header
 {
     gifHeader = header;
+
+    pageNumber = 1;
+    [self getMessageDataList];
     
-    if (newFlag) {
-        [header endRefreshing];
-    } else {
-        if (messageArray != nil) {
-            [messageArray removeAllObjects];
-            messageArray = nil;
-            messageArray = [NSMutableArray array];
-        }
-        
-        pageNumber = 1;
-        [self getMessageDataList];
-    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -553,11 +553,11 @@
             
             cell.labelContent.hidden = YES;
             
-            if ([[[myAccount hasNewPrivilege] debugDescription] isEqualToString:@"1"]) {
-                cell.imageRedDian.hidden = NO;
-            } else {
+//            if ([[[myAccount hasNewPrivilege] debugDescription] isEqualToString:@"1"]) {
+//                cell.imageRedDian.hidden = NO;
+//            } else {
                 cell.imageRedDian.hidden = YES;
-            }
+//            }
         } else {
             
             cell.labelContent.hidden = NO;

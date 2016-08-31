@@ -20,7 +20,6 @@
     UITableView *_tableView;
     NSMutableArray *hisAddTicketArray;
     
-    MJRefreshGifHeader *freshHeater;
     MJRefreshBackFooter *freshFooter;
     BOOL flagState;
     NSInteger pageNumber;
@@ -38,6 +37,7 @@
     [self.navigationItem setTitle:@"历史加息券"];
     
     hisAddTicketArray = [NSMutableArray array];
+    
     flagState = NO;
     pageNumber = 1;
     
@@ -219,6 +219,7 @@
         return cell;
     }
 }
+
 #pragma mark history>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 - (void)getMyIncreaseListFuction{
     NSDictionary *parmeter = @{@"curPage":[NSString stringWithFormat:@"%ld", (long)pageNumber],@"status":@"2,3",@"pageSize":@10,@"token":[self.flagDic objectForKey:@"token"]};
@@ -227,6 +228,7 @@
         
         NSLog(@"历史加息券列表 = %@",responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
             NSMutableArray *dataArray = [responseObject objectForKey:@"Increase"];
             
             for (NSDictionary *dataDic in dataArray) {
@@ -239,6 +241,7 @@
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
                 flagState = YES;
             }
+            
             [freshFooter endRefreshing];
             
             //判断有无数据
@@ -258,17 +261,17 @@
     }];
 }
 
-//下拉刷新
-- (void)loadNewData:(MJRefreshGifHeader *)header
+//上拉加载
+- (void)loadMoreData:(MJRefreshBackGifFooter *)footer
 {
-    if (hisAddTicketArray != nil) {
-        [hisAddTicketArray removeAllObjects];
-        hisAddTicketArray = nil;
-        hisAddTicketArray = [NSMutableArray array];
-    }
+    freshFooter = footer;
     
-    pageNumber = 1;
-    [self getMyIncreaseListFuction];
+    if (flagState) {
+        [footer endRefreshing];
+    } else {
+        pageNumber++;
+        [self getMyIncreaseListFuction];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

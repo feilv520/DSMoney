@@ -119,6 +119,13 @@
         NSLog(@"理财师列表:::::::::::%@", responseObject);
         [self loadingWithHidden:YES];
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            if (headerT.state == MJRefreshStateRefreshing) {
+                [listArray removeAllObjects];
+                listArray = nil;
+                listArray = [NSMutableArray array];
+            }
+            
             NSMutableArray *dataArray = [responseObject objectForKey:@"User"];
             for (NSDictionary *tempDic in dataArray) {
                 TWOMoneyTeacherList *listModel = [[TWOMoneyTeacherList alloc] init];
@@ -132,13 +139,8 @@
                 moreFlag = NO;
             }
             
-            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
-                newFlag = YES;
-            } else {
-                newFlag = NO;
-            }
-            
             [gifFooter endRefreshing];
+            [headerT endRefreshing];
 
             if (pageNum == 1) {
                 if (listArray.count == 0) {
@@ -160,19 +162,9 @@
 - (void)loadNewData:(MJRefreshGifHeader *)header
 {
     headerT = header;
-    
-    if (newFlag) {
-        [header endRefreshing];
-    } else {
-        if (listArray != nil) {
-            [listArray removeAllObjects];
-            listArray = nil;
-            listArray = [NSMutableArray array];
-        }
-        
-        pageNum = 1;
-        [self getDataList];
-    }
+
+    pageNum = 1;
+    [self getDataList];
 }
 
 //上拉加载

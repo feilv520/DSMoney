@@ -23,7 +23,6 @@
     MJRefreshBackGifFooter *gifFooter;
     MJRefreshGifHeader *gifHeader;
     BOOL flagSate;
-    BOOL newFlag;
     NSInteger pageNum;
     NSInteger oldPageNum;
     
@@ -52,7 +51,6 @@
     newsArray = [NSMutableArray array];
     
     flagSate = NO;
-    newFlag = NO;
     pageNum = 1;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMessageData) name:@"getMessageDataRefrush" object:nil];
@@ -155,12 +153,10 @@
         NSLog(@"消息列表----------------%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-            if (oldPageNum == pageNum) {
-                if (newsArray != nil) {
-                    [newsArray removeAllObjects];
-                    newsArray = nil;
-                    newsArray = [NSMutableArray array];
-                }
+            if (gifHeader.state == MJRefreshStateRefreshing) {
+                [newsArray removeAllObjects];
+                newsArray = nil;
+                newsArray = [NSMutableArray array];
             }
             
             NSMutableArray *dataArray = [responseObject objectForKey:@"message"];
@@ -174,12 +170,6 @@
                 flagSate = YES;
             } else {
                 flagSate = NO;
-            }
-            
-            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
-                newFlag = YES;
-            } else {
-                newFlag = NO;
             }
             
             [gifFooter endRefreshing];
@@ -200,8 +190,6 @@
             } else {
                 [mainTableView reloadData];
             }
-            
-            oldPageNum = pageNum;
             
         } else {
             [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
@@ -229,19 +217,9 @@
 - (void)loadNewData:(MJRefreshGifHeader *)header
 {
     gifHeader = header;
-    
-    if (newFlag) {
-        [header endRefreshing];
-    } else {
-        if (newsArray != nil) {
-            [newsArray removeAllObjects];
-            newsArray = nil;
-            newsArray = [NSMutableArray array];
-        }
         
-        pageNum = 1;
-        [self getMessageData];
-    }
+    pageNum = 1;
+    [self getMessageData];
 }
 
 - (void)didReceiveMemoryWarning {

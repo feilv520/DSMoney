@@ -22,7 +22,6 @@
     MJRefreshGifHeader *headerT;
     
     BOOL moreFlag;
-    BOOL newFlag;
     
     NSInteger pageNumber;
 }
@@ -41,8 +40,6 @@
     pageNumber = 1;
     
     moreFlag = NO;
-    
-    newFlag = NO;
     
     [self getDataList];
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 50];
@@ -126,6 +123,13 @@
         [self loadingWithHidden:YES];
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            if (headerT.state == MJRefreshStateRefreshing) {
+                [userArray removeAllObjects];
+                userArray = nil;
+                userArray = [NSMutableArray array];
+            }
+            
             NSMutableArray *dataArray = [responseObject objectForKey:@"user"];
             for (NSDictionary *dataDic in dataArray) {
                 TWOUserModel *userModel = [[TWOUserModel alloc] init];
@@ -151,12 +155,6 @@
                 moreFlag = NO;
             }
             
-            if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
-                newFlag = YES;
-            } else {
-                newFlag = NO;
-            }
-            
             [gifFooter endRefreshing];
             [headerT endRefreshing];
         }
@@ -170,20 +168,9 @@
 - (void)loadNewData:(MJRefreshGifHeader *)header
 {
     headerT = header;
-    
-    if (newFlag) {
-        [header endRefreshing];
-    } else {
         
-        if (userArray != nil) {
-            [userArray removeAllObjects];
-            userArray = nil;
-            userArray = [NSMutableArray array];
-        }
-        
-        pageNumber = 1;
-        [self getDataList];
-    }
+    pageNumber = 1;
+    [self getDataList];
     
 }
 

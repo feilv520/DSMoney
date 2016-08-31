@@ -20,7 +20,6 @@
     MJRefreshBackGifFooter *reFooter;
     MJRefreshGifHeader *headerT;
     BOOL moreFlag;
-    BOOL newFlag;
 }
 
 @end
@@ -37,7 +36,6 @@
     curruntPage = 1;
     
     moreFlag = NO;
-    newFlag = NO;
     
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT / 2 - 60];
     
@@ -148,6 +146,12 @@
         
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
+            if (headerT.state == MJRefreshStateRefreshing) {
+                [contentArr removeAllObjects];
+                contentArr = nil;
+                contentArr = [NSMutableArray array];
+            }
+            
             NSMutableArray *userArray = [responseObject objectForKey:@"User"];
             
             if (userArray.count == 0) {
@@ -179,12 +183,6 @@
                     moreFlag = YES;
                 } else {
                     moreFlag = NO;
-                }
-                
-                if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:@"1"]) {
-                    newFlag = YES;
-                } else {
-                    newFlag = NO;
                 }
                 
                 [reFooter endRefreshing];
@@ -220,21 +218,9 @@
 - (void)loadNewData:(MJRefreshGifHeader *)header
 {
     headerT = header;
-    
-    if (newFlag) {
         
-        [header endRefreshing];
-    } else {
-        
-        if (contentArr != nil) {
-            [contentArr removeAllObjects];
-            contentArr = nil;
-            contentArr = [NSMutableArray array];
-        }
-        
-        curruntPage = 1;
-        [self getRecordData];
-    }
+    curruntPage = 1;
+    [self getRecordData];
 }
 
 - (void)didReceiveMemoryWarning {

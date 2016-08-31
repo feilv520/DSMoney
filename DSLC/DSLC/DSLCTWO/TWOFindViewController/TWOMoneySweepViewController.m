@@ -209,6 +209,12 @@
         NSLog(@"大圣侃经-------------%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
+            if (headerT.state == MJRefreshStateRefreshing) {
+                [DSLCTalkArray removeAllObjects];
+                DSLCTalkArray = nil;
+                DSLCTalkArray = [NSMutableArray array];
+            }
+            
             NSMutableArray *tempArray = [responseObject objectForKey:@"noticeInfo"];
             for (NSDictionary *tempDic in tempArray) {
                 TWOMessageModel *messageModel = [[TWOMessageModel alloc] init];
@@ -254,6 +260,12 @@
         
         [self loadingWithHidden:YES];
         NSLog(@"大扫描-----------------%@", responseObject);
+        
+        if (headerT.state == MJRefreshStateRefreshing) {
+            [bigSweepArray removeAllObjects];
+            bigSweepArray = nil;
+            bigSweepArray = [NSMutableArray array];
+        }
         
         NSMutableArray *dataArray = [responseObject objectForKey:@"noticeInfo"];
         for (NSDictionary *dataDic in dataArray) {
@@ -310,20 +322,12 @@
     headerT = header;
     
     if ([self.kindState isEqualToString:@"1"]) {
-        if (DSLCTalkArray != nil) {
-            [DSLCTalkArray removeAllObjects];
-            DSLCTalkArray = nil;
-            DSLCTalkArray = [NSMutableArray array];
-        }
+
         pageNumber = 1;
         [self getKanJingData];
         
     } else if ([self.kindState isEqualToString:@"2"]) {
-        if (bigSweepArray != nil) {
-            [bigSweepArray removeAllObjects];
-            bigSweepArray = nil;
-            bigSweepArray = [NSMutableArray array];
-        }
+
         pageNumber = 1;
         [self getBigSweepData];
     }
