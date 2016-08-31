@@ -49,6 +49,19 @@
 
 - (void)buttonReturn:(UIBarButtonItem *)bar{
     if (self.ifReturnToVC) {
+        // 个人信息界面刷新
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfoFuction" object:nil];
+        // 刷新产品列表
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refrushToProductList" object:nil];
+        // 刷新固收页面数据
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BillVC" object:nil];
+        // 刷新任务中心列表
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+        // 刷新产品详情
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"safeTest" object:nil];
+        
         NSArray *ctrlArray = self.navigationController.viewControllers;
         [self.navigationController popToViewController:[ctrlArray objectAtIndex:1] animated:YES];
     } else {

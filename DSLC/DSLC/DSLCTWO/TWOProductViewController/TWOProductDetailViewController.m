@@ -54,6 +54,11 @@
     
     NSString *ifBugNewProductString;
     
+    // 猴子和剩余总额
+    UIImageView *monkeyImageView;
+    UILabel *bfLabel;
+    UIView *whiteView;
+    UIView *lightBlue;
     TWOProductMoneyView *pMoneyView;
 }
 
@@ -267,12 +272,12 @@
     CGFloat bfNumber = [[self.detailM saleProgress] floatValue] / 100.0;
     
     //小猴子
-    UIImageView *monkeyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40, 84, 20, 30)];
+    monkeyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40, 84, 20, 30)];
     monkeyImageView.image = [UIImage imageNamed:@"productMonkey"];
     [headImageView addSubview:monkeyImageView];
     
     //百分比
-    UILabel *bfLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 93, 50, 20)];
+    bfLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 93, 50, 20)];
     bfLabel.textAlignment = NSTextAlignmentCenter;
     [bfLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:14]];
     bfLabel.text = @"0%";
@@ -280,11 +285,11 @@
     [headImageView addSubview:bfLabel];
     
     // 进度条
-    UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(-WIDTH_CONTROLLER_DEFAULT, 116, WIDTH_CONTROLLER_DEFAULT, 2)];
+    whiteView = [[UIView alloc] initWithFrame:CGRectMake(-WIDTH_CONTROLLER_DEFAULT, 116, WIDTH_CONTROLLER_DEFAULT, 2)];
     whiteView.backgroundColor = Color_White;
     [headImageView addSubview:whiteView];
     
-    UIView *lightBlue = [[UIView alloc] initWithFrame:CGRectMake(0, 116, WIDTH_CONTROLLER_DEFAULT, 2)];
+    lightBlue = [[UIView alloc] initWithFrame:CGRectMake(0, 116, WIDTH_CONTROLLER_DEFAULT, 2)];
     lightBlue.backgroundColor = [UIColor colorFromHexCode:@"#3cb6f5"];
     [headImageView addSubview:lightBlue];
     
@@ -1078,6 +1083,27 @@
 }
 
 - (void)refrushWithMoney{
+    
+    CGFloat bfNumber = [[self.detailM saleProgress] floatValue] / 100.0;
+    
+    [UIView animateWithDuration:2.f animations:^{
+        
+        bfLabel.text = [NSString stringWithFormat:@"%.0lf%%",bfNumber * 100];
+        
+        if ([bfLabel.text floatValue] > 10 && [bfLabel.text floatValue] < 94) {
+            
+            monkeyImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * bfNumber, 84, 20, 30);
+            bfLabel.frame = CGRectMake(CGRectGetMinX(monkeyImageView.frame) - 40, 93, 50, 20);
+        } else if ([bfLabel.text floatValue] >= 94){
+            
+            monkeyImageView.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * 0.94, 84, 20, 30);
+            bfLabel.frame = CGRectMake(CGRectGetMinX(monkeyImageView.frame) - 40, 93, 50, 20);
+        }
+        
+        whiteView.frame = CGRectMake(-WIDTH_CONTROLLER_DEFAULT + WIDTH_CONTROLLER_DEFAULT * bfNumber, 116, WIDTH_CONTROLLER_DEFAULT, 2);
+        lightBlue.frame = CGRectMake(WIDTH_CONTROLLER_DEFAULT * bfNumber, 116, WIDTH_CONTROLLER_DEFAULT, 2);
+    }];
+    
     NSMutableAttributedString *resdStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17元"];
     
     CGFloat residueMoney = [self.residueMoney floatValue];
