@@ -64,4 +64,6 @@
 
 @property (nonatomic, copy) NSString *limitMoney;
 
+@property (nonatomic, copy) NSString *residuemoney;
+
 @end

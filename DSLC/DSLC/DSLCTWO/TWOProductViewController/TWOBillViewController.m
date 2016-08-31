@@ -119,8 +119,21 @@
     
 //    [self getAdvList];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductList) name:@"BillVC" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBillProduct) name:@"BillVC" object:nil];
     
+}
+
+- (void)getBillProduct{
+    
+    if (self.productListArray != nil) {
+        
+        [self.productListArray removeAllObjects];
+        self.productListArray = nil;
+        self.productListArray = [NSMutableArray array];
+    }
+    
+    page = 1;
+    [self getProductList];
 }
 
 - (void)tableViewShow

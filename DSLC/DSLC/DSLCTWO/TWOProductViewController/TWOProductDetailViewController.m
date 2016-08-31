@@ -53,6 +53,8 @@
     BOOL ifBugNewProduct;
     
     NSString *ifBugNewProductString;
+    
+    TWOProductMoneyView *pMoneyView;
 }
 
 @property (nonatomic, strong) UIControl *viewBotton;
@@ -307,7 +309,7 @@
     // 下方剩余可投的view
     NSBundle *rootBundle = [NSBundle mainBundle];
     
-    TWOProductMoneyView *pMoneyView = (TWOProductMoneyView *)[[rootBundle loadNibNamed:@"TWOProductMoneyView" owner:nil options:nil] lastObject];
+    pMoneyView = (TWOProductMoneyView *)[[rootBundle loadNibNamed:@"TWOProductMoneyView" owner:nil options:nil] lastObject];
     
     pMoneyView.frame = CGRectMake(0, 115, WIDTH_CONTROLLER_DEFAULT, 80);
     
@@ -1024,6 +1026,10 @@
         dataDic = [responseObject objectForKey:@"Product"];
         [self.detailM setValuesForKeysWithDictionary:dataDic];
         
+        self.residueMoney = [[self.detailM residuemoney] stringByReplacingOccurrencesOfString:@"," withString:@""];
+        
+        [self refrushWithMoney];
+        
         assetArray = [responseObject objectForKey:@"Asset"];
         
         userDic = [responseObject objectForKey:@"User"];
@@ -1071,6 +1077,46 @@
     }];
 }
 
+- (void)refrushWithMoney{
+    NSMutableAttributedString *resdStringM = [[NSMutableAttributedString alloc] initWithString:@"13.17元"];
+    
+    CGFloat residueMoney = [self.residueMoney floatValue];
+    
+    if (residueMoney / 10000.0 >= 0) {
+        
+        [resdStringM replaceCharactersInRange:NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%.2lf万",residueMoney / 10000.0]];
+    } else {
+        
+        [resdStringM replaceCharactersInRange:NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location) withString:[NSString stringWithFormat:@"%@",self.residueMoney]];
+    }
+    NSRange numYString = NSMakeRange(0, [[resdStringM string] rangeOfString:@"元"].location);
+    
+    if (residueMoney / 10000.0 >= 0) {
+        numYString = NSMakeRange(0, [[resdStringM string] rangeOfString:@"万"].location);
+    }
+    
+    if (WIDTH_CONTROLLER_DEFAULT == 320) {
+        [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:21] range:numYString];
+        NSRange oneString = NSMakeRange([[resdStringM string] length] - 1, 1);
+        
+        if (residueMoney / 10000.0 >= 0) {
+            oneString = NSMakeRange([[resdStringM string] length] - 2, 2);
+        }
+        
+        [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:11] range:oneString];
+        
+    } else {
+        [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:23] range:numYString];
+        NSRange oneString = NSMakeRange([[resdStringM string] length] - 1, 1);
+        
+        if (residueMoney / 10000.0 >= 0) {
+            oneString = NSMakeRange([[resdStringM string] length] - 2, 2);
+        }
+        
+        [resdStringM addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"CenturyGothic" size:13] range:oneString];
+    }
+    [pMoneyView.moneyLabel setAttributedText:resdStringM];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

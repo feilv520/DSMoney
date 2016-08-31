@@ -137,6 +137,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"BillVC" object:nil];
     // 刷新任务中心列表
     [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+    // 刷新产品详情
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"safeTest" object:nil];
 }
 
 //如果是H5页面里面自带的返回按钮处理如下:
