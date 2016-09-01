@@ -645,7 +645,7 @@
             [valueArray addObject:[assetModel assetName]];
             [valueArray addObject:[assetModel assetTypeName]];
             [valueArray addObject:[NSString stringWithFormat:@"%@万元",[assetModel assetAmount]]];
-            [valueArray addObject:[NSString stringWithFormat:@"%@%%",[assetModel assetAnnualYieldb]]];
+            [valueArray addObject:[NSString stringWithFormat:@"%@%%-%@%%",[assetModel assetAnnualYieldb],[assetModel assetAnnualYielde]]];
             [valueArray addObject:[assetModel assetSaleTime]];
             [valueArray addObject:[assetModel assetInterestBdate]];
             [valueArray addObject:[assetModel assetInterestEdate]];
