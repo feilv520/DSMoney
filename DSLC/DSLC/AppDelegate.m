@@ -673,7 +673,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
         return;
     }
     
-    if ([self.flagUserInfo objectForKey:@"phone"] == nil || [[self.flagUserInfo objectForKey:@"phone"] isEqualToString:@""]) {
+    if (![[self.flagUserInfo allKeys] containsObject:@"phone"]) {
         
         // 判断是否存在isLogin.plist文件
         if (![FileOfManage ExistOfFile:@"isLogin.plist"]) {
