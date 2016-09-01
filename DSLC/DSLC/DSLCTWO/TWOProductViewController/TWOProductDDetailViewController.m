@@ -654,7 +654,7 @@
             [valueArray addObject:[assetModel assetFinancierName]];
             [valueArray addObject:[assetModel assetFundsUse]];
             [valueArray addObject:[assetModel assetRepaymentSource]];
-            [valueArray addObject:[assetModel assetManager]];
+            [valueArray addObject:[assetModel assetMortgage]];
             
             progressArray = [[responseObject objectForKey:@"Asset"] objectForKey:@"Progress"];
             
