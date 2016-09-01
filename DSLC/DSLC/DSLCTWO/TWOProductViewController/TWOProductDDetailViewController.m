@@ -50,6 +50,7 @@
     
     CGFloat widthNumber;
     CGFloat widthAppDetailNumber;
+    CGFloat widthValueNumber;
     
     UIView *lineView;
     UIView *lineViewSectionWithOne;
@@ -162,6 +163,13 @@
                     }
                 }
             }
+        } else if (indexPath.row == 13) {
+            
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil];
+            
+            CGSize sizeDetail = [[assetModel assetMortgage] boundingRectWithSize:CGSizeMake(widthValueNumber, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            return sizeDetail.height + 10;
         } else {
             return 50;
         }
@@ -177,9 +185,9 @@
             
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName, nil];
                 
-                CGSize sizeDetail = [[assetModel assetAppInfo] boundingRectWithSize:CGSizeMake(widthAppDetailNumber, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+                CGSize sizeDetailText = [[assetModel assetAppInfo] boundingRectWithSize:CGSizeMake(widthAppDetailNumber, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
                 
-                return sizeDetail.height + 30;
+                return sizeDetailText.height + 30;
             }
         }
     }
@@ -346,7 +354,7 @@
                 cell.valueLabel.text = [NSString stringWithFormat:@"%@",[valueArray objectAtIndex:indexPath.row - 1]];
             }
             
-            //            webView.hidden = YES;
+            widthValueNumber = cell.valueLabel.frame.size.width;
             
         }
     } else {
