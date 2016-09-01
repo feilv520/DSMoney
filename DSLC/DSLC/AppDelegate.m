@@ -684,6 +684,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"NO",@"loginFlag",nil];
             [dic writeToFile:[FileOfManage PathOfFile:@"isLogin.plist"] atomically:YES];
         }
+        return;
     }
     
     NSDictionary *parmeter = @{@"phone":[self.flagUserInfo objectForKey:@"phone"],@"password":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"password"]]};
