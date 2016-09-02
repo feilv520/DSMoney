@@ -689,7 +689,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
         return;
     }
     
-    NSDictionary *parmeter = @{@"phone":[self.flagUserInfo objectForKey:@"phone"],@"password":[DES3Util decrypt:[self.flagUserInfo objectForKey:@"password"]]};
+    NSDictionary *parmeter = @{@"phone":[self.flagUserInfo objectForKey:@"phone"],@"password":[self.flagUserInfo objectForKey:@"password"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"login" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

@@ -528,7 +528,7 @@
 
 - (void)loginFuction{
     
-    NSDictionary *parmeter = @{@"phone":[userDic objectForKey:@"phone"],@"password":[DES3Util decrypt:[userDic objectForKey:@"password"]]};
+    NSDictionary *parmeter = @{@"phone":[userDic objectForKey:@"phone"],@"password":[userDic objectForKey:@"password"]};
     
     [[MyAfHTTPClient sharedClient] postWithURLString:@"login" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
         

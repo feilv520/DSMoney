@@ -608,7 +608,7 @@
 #pragma mark --------------------------------
 
 - (void)loginFuction{
-    NSDictionary *parmeter = @{@"phone":textFieldPhone.text,@"password":textFieldSecret.text};
+    NSDictionary *parmeter = @{@"phone":textFieldPhone.text,@"password":[DES3Util encrypt:textFieldSecret.text]};
     
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
