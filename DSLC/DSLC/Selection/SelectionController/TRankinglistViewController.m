@@ -40,7 +40,8 @@
     myWebView.scrollView.showsHorizontalScrollIndicator = NO;
     myWebView.scrollView.bounces = NO;
     
-    NSString *urlString = @"http://wap.dslc.cn/activity/rankList.html";
+    NSString *urlString = [NSString stringWithFormat:@"%@/activity/rankList.html",htmlFive];
+//    NSString *urlString = @"http://wap.dslc.cn/activity/rankList.html";
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [myWebView loadRequest:request];
