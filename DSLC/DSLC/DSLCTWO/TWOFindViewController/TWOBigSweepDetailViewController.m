@@ -48,6 +48,8 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self loadingWithHidden:YES];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshWithBSData" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

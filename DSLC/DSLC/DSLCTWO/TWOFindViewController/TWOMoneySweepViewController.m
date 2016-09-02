@@ -57,7 +57,36 @@
         [self getBigSweepData];
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshWithKJData) name:@"refreshWithKJData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshWithBSData) name:@"refreshWithBSData" object:nil];
+    
     [self loadingWithView:self.view loadingFlag:NO height:HEIGHT_CONTROLLER_DEFAULT/2 - 60];
+}
+
+- (void)refreshWithKJData{
+    
+    if (DSLCTalkArray != nil) {
+        
+        [DSLCTalkArray removeAllObjects];
+        DSLCTalkArray = nil;
+        DSLCTalkArray = [NSMutableArray array];
+    }
+        
+    pageNumber = 1;
+    [self getKanJingData];
+}
+
+- (void)refreshWithBSData{
+    
+    if (bigSweepArray != nil) {
+        
+        [bigSweepArray removeAllObjects];
+        bigSweepArray = nil;
+        bigSweepArray = [NSMutableArray array];
+    }
+    
+    pageNumber = 1;
+    [self getBigSweepData];
 }
 
 //无数据显示

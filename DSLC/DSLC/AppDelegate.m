@@ -45,7 +45,7 @@
     
     NSDictionary *userInformation;
     
-    
+    BOOL monkeyFlag;
 }
 @property (nonatomic, strong) NSDictionary *flagDic;
 @property (nonatomic, strong) NSDictionary *flagLogin;
@@ -143,6 +143,8 @@
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
     
     application.applicationIconBadgeNumber = 0;
+    
+    monkeyFlag = NO;
     
     [self exitNetwork];
     
@@ -749,7 +751,10 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
             double delayInSeconds = 1.0;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self userSign];
+                if (!monkeyFlag) {
+                    
+                    [self userSign];
+                }
             });
             
             [self getMyAccountInfoFuction];
@@ -869,6 +874,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     imageSign = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"huifuOpenAccount" object:nil];
+    
+    monkeyFlag = NO;
 }
 
 //点击猴子
@@ -886,6 +893,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"huifuOpenAccount" object:nil];
     
+    monkeyFlag = NO;
 }
 
 //敬请期待
@@ -1007,6 +1015,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
             if (![[responseObject objectForKey:@"signMonkeyNum"] isEqualToString:@"0"]){
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"showMonkey" object:[responseObject objectForKey:@"signMonkeyNum"]];
+                
+                monkeyFlag = YES;
             }
             
         } else {

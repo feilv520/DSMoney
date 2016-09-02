@@ -49,6 +49,8 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self loadingWithHidden:YES];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshWithKJData" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

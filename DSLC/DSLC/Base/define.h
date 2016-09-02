@@ -85,10 +85,10 @@ static NSString *kLLPartnerKey = @"gcctdslc20151231_20160101";   // 密钥
 //static NSString * MYAFHTTP_BASEURL = @"http://192.168.0.14:8080/dslc/interface/";
 
 //2.0线上测试接口地址
-//static NSString * MYAFHTTP_BASEURL = @"http://61.172.238.245:8000/dslc/interface/";
+static NSString * MYAFHTTP_BASEURL = @"http://61.172.238.245:8000/dslc/interface/";
 
 //2.0正是环境
-static NSString * MYAFHTTP_BASEURL = @"http://interface.dslc.cn/dslc/interface/";
+//static NSString * MYAFHTTP_BASEURL = @"http://interface.dslc.cn/dslc/interface/";
 
 //2.0 H5接口
 //测试
@@ -96,10 +96,10 @@ static NSString * MYAFHTTP_BASEURL = @"http://interface.dslc.cn/dslc/interface/"
 
 //线上测试
 //static NSString *htmlFive = @"http://www.zrgyjt.com:8000";
-//static NSString *htmlFive = @"http://waptest.dslc.cn";
+static NSString *htmlFive = @"http://waptest.dslc.cn";
 
 //正式环境
-static NSString *htmlFive = @"http://wap.dslc.cn";
+//static NSString *htmlFive = @"http://wap.dslc.cn";
 
 //外网测试接口
 //static NSString *htmlFive = @"http://www.zrgyjt.com";
