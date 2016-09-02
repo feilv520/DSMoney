@@ -96,10 +96,10 @@ static NSString * MYAFHTTP_BASEURL = @"http://interface.dslc.cn/dslc/interface/"
 
 //线上测试
 //static NSString *htmlFive = @"http://www.zrgyjt.com:8000";
-static NSString *htmlFive = @"http://waptest.dslc.cn";
+//static NSString *htmlFive = @"http://waptest.dslc.cn";
 
 //正式环境
-//static NSString *htmlFive = @"http://wap.dslc.cn";
+static NSString *htmlFive = @"http://wap.dslc.cn";
 
 //外网测试接口
 //static NSString *htmlFive = @"http://www.zrgyjt.com";
