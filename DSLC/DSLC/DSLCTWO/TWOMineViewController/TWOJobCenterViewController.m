@@ -59,6 +59,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"任务中心"];
     
+    self.countString = @"--";
+    self.finishString = @"--";
+    
     self.taskArray = [NSMutableArray array];
     
     [self loadingWithView:self.view loadingFlag:NO height:(HEIGHT_CONTROLLER_DEFAULT - 64 - 20 - 53)/2.0 - 50];
