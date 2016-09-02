@@ -421,7 +421,7 @@
 
 - (CGFloat)pieChart:(MCMRenderView *)pieChart valueForSliceAtIndex:(NSUInteger)index
 {
-    return [[mValueArray objectAtIndex:index] intValue];
+    return [[mValueArray objectAtIndex:index] floatValue];
 }
 
 - (UIColor *)pieChart:(MCMRenderView *)pieChart colorForSliceAtIndex:(NSUInteger)index
