@@ -84,19 +84,19 @@
         closeItem.hidden = NO;
     } else {
         
-        // 刷新任务中心列表
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
-        
         NSString *tokenString = [wView stringByEvaluatingJavaScriptFromString:@"jsLayout();"];
         
-        NSLog(@"%@",tokenString);
+        NSLog(@"tokenString = %@",tokenString);
         
         if ([tokenString isEqualToString:@""]) {
             [self.view resignFirstResponder];
             [self.navigationController popViewControllerAnimated:YES];
             return;
         }
+        
+        // 刷新任务中心列表
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
         
         if (![FileOfManage ExistOfFile:@"Member.plist"]) {
             [FileOfManage createWithFile:@"Member.plist"];
@@ -247,6 +247,10 @@
         return;
     }
     
+    // 刷新任务中心列表
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
+    
     if (![FileOfManage ExistOfFile:@"Member.plist"]) {
         [FileOfManage createWithFile:@"Member.plist"];
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -271,12 +275,9 @@
     
     [self getData];
     
-    // 刷新任务中心列表
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskListFuction" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getMyAccountInfo" object:nil];
-    
     [self.view resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
+
     
 }
 
