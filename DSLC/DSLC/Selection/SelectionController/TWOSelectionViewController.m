@@ -414,6 +414,9 @@
         _collection.contentOffset = CGPointMake(WIDTH_CONTROLLER_DEFAULT, 0);
         
         [_collection registerNib:[UINib nibWithNibName:@"TWOHomePageProductCell" bundle:nil] forCellWithReuseIdentifier:@"reuse"];
+    } else {
+        
+        [_collection reloadData];
     }
     
     [_scrollView addSubview:_collection];

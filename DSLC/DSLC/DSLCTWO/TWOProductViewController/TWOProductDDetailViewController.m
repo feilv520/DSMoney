@@ -169,7 +169,7 @@
             
             CGSize sizeDetail = [[assetModel assetMortgage] boundingRectWithSize:CGSizeMake(widthValueNumber, 100000) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
             
-            return sizeDetail.height + 10;
+            return sizeDetail.height + 20;
         } else {
             return 50;
         }
