@@ -29,6 +29,9 @@
     UILabel *labelPlan;
     UILabel *labelZi;
     
+    // 无数据猴子
+    UIImageView *imageMonkey;
+    
     UITableView *_tableView;
 }
 
@@ -386,30 +389,34 @@
         
         [self loadingWithHidden:YES];
         
-        _tableView.hidden = NO;
-        
-        if (self.taskArray != nil) {
-            [self.taskArray removeAllObjects];
-            self.taskArray = nil;
-            self.taskArray = [NSMutableArray array];
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
+            
+            _tableView.hidden = NO;
+            
+            if (self.taskArray != nil) {
+                [self.taskArray removeAllObjects];
+                self.taskArray = nil;
+                self.taskArray = [NSMutableArray array];
+            }
+            
+            NSLog(@"任务中心详情:~~~~~%@", responseObject);
+            
+            NSArray *taskArr = [responseObject objectForKey:@"Task"];
+            
+            self.countString = [responseObject objectForKey:@"totalCount"];
+            self.finishString = [responseObject objectForKey:@"finishCount"];
+            
+            for (NSDictionary *dic in taskArr) {
+                TWOTaskModel *taskModel = [[TWOTaskModel alloc] init];
+                [taskModel setValuesForKeysWithDictionary:dic];
+                [self.taskArray addObject:taskModel];
+            }
+            
+            NSLog(@"===========%lu", (unsigned long)self.taskArray.count);
+            [_tableView reloadData];
+            [self tableViewHeadShow];
         }
         
-        NSLog(@"任务中心详情:~~~~~%@", responseObject);
-        
-        NSArray *taskArr = [responseObject objectForKey:@"Task"];
-        
-        self.countString = [responseObject objectForKey:@"totalCount"];
-        self.finishString = [responseObject objectForKey:@"finishCount"];
-        
-        for (NSDictionary *dic in taskArr) {
-            TWOTaskModel *taskModel = [[TWOTaskModel alloc] init];
-            [taskModel setValuesForKeysWithDictionary:dic];
-            [self.taskArray addObject:taskModel];
-        }
-        
-        NSLog(@"===========%lu", (unsigned long)self.taskArray.count);
-        [_tableView reloadData];
-        [self tableViewHeadShow];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);

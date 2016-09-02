@@ -75,8 +75,8 @@
     profitting = [NSMutableArray array];
     profitted = [NSMutableArray array];
     
-    labelMoneyString = @"0";
-    labelTouZiString = @"0";
+    labelMoneyString = @"--";
+    labelTouZiString = @"--";
     
     viewBottom = [CreatView creatViewWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 245.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20)) backgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewBottom];
