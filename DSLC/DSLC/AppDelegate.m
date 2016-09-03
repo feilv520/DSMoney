@@ -751,10 +751,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
             double delayInSeconds = 1.0;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                if (!monkeyFlag) {
                     
-                    [self userSign];
-                }
+                [self userSign];
             });
             
             [self getMyAccountInfoFuction];
@@ -823,28 +821,43 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 - (void)monkeyWithSuccess:(NSNotification *)not
 {
     NSString *monkeyString = [not object];
-    [self signFinish:monkeyString];
+    if (!monkeyFlag) {
+        
+        [self signFinish:monkeyString];
+    }
 }
 
 //签到成功
 - (void)signFinish:(NSString *)monkeyNum
 {
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    buttonHei = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.window.frame.size.height) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
-    [app.tabBarVC.view addSubview:buttonHei];
+    if (buttonHei == nil) {
+        
+        buttonHei = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, self.window.frame.size.height) backgroundColor:[UIColor blackColor] textColor:nil titleText:nil];
+    }
     buttonHei.alpha = 0.6;
+    [app.tabBarVC.view addSubview:buttonHei];
     [buttonHei addTarget:self action:@selector(clickedBlackDisappear:) forControlEvents:UIControlEventTouchUpInside];
     
-    viewDown = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 530/2/2, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 530/2, 397/2 + 30) backgroundColor:[UIColor clearColor]];
+    if (viewDown == nil) {
+        
+        viewDown = [CreatView creatViewWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT/2 - 530/2/2, 194.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), 530/2, 397/2 + 30) backgroundColor:[UIColor clearColor]];
+    }
     [app.tabBarVC.view addSubview:viewDown];
     viewDown.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAddClicked:)];
     [viewDown addGestureRecognizer:tapView];
     
-    labelMonkey = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewDown.frame.size.width, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:27] text:[NSString stringWithFormat:@"+%@猴币", monkeyNum]];
+    if (labelMonkey == nil) {
+        
+        labelMonkey = [CreatView creatWithLabelFrame:CGRectMake(0, 0, viewDown.frame.size.width, 30) backgroundColor:[UIColor clearColor] textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter textFont:[UIFont fontWithName:@"CenturyGothic" size:27] text:[NSString stringWithFormat:@"+%@猴币", monkeyNum]];
+    }
     [viewDown addSubview:labelMonkey];
     
-    imageSign = [CreatView creatImageViewWithFrame:CGRectMake(0, 30, viewDown.frame.size.width, viewDown.frame.size.height - 30) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"doSign"]];
+    if (imageSign == nil) {
+        
+        imageSign = [CreatView creatImageViewWithFrame:CGRectMake(0, 30, viewDown.frame.size.width, viewDown.frame.size.height - 30) backGroundColor:[UIColor clearColor] setImage:[UIImage imageNamed:@"doSign"]];
+    }
     [viewDown addSubview:imageSign];
     imageSign.userInteractionEnabled = YES;
     
@@ -1003,6 +1016,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     
     NSMutableDictionary *memberDic = [NSMutableDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"Member.plist"]];
+    
     
     NSDictionary *parmeter = @{@"token":[memberDic objectForKey:@"token"],@"signDate":dateString};
     
