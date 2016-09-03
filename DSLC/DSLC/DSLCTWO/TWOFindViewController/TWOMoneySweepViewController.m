@@ -22,6 +22,8 @@
     NSMutableArray *DSLCTalkArray;
     NSInteger pageNumber;
     BOOL flagStste;
+    BOOL kFlag;
+    BOOL bFlag;
     MJRefreshBackGifFooter *refreshFooter;
     MJRefreshGifHeader *headerT;
     UIButton *buttonIndex;
@@ -46,6 +48,9 @@
     flagStste = NO;
     ifHaveTableView = NO;
     
+    kFlag = NO;
+    bFlag = NO;
+    
     if ([self.kindState isEqualToString:@"1"]) {
         
         [self.navigationItem setTitle:@"大圣侃经"];
@@ -65,25 +70,29 @@
 
 - (void)refreshWithKJData{
     
-    if (DSLCTalkArray != nil) {
-        
-        [DSLCTalkArray removeAllObjects];
-        DSLCTalkArray = nil;
-        DSLCTalkArray = [NSMutableArray array];
-    }
-        
+//    if (DSLCTalkArray != nil) {
+//        
+//        [DSLCTalkArray removeAllObjects];
+//        DSLCTalkArray = nil;
+//        DSLCTalkArray = [NSMutableArray array];
+//    }
+
+    kFlag = YES;
+    
     pageNumber = 1;
     [self getKanJingData];
 }
 
 - (void)refreshWithBSData{
     
-    if (bigSweepArray != nil) {
-        
-        [bigSweepArray removeAllObjects];
-        bigSweepArray = nil;
-        bigSweepArray = [NSMutableArray array];
-    }
+//    if (bigSweepArray != nil) {
+//        
+//        [bigSweepArray removeAllObjects];
+//        bigSweepArray = nil;
+//        bigSweepArray = [NSMutableArray array];
+//    }
+
+    bFlag = YES;
     
     pageNumber = 1;
     [self getBigSweepData];
@@ -238,10 +247,12 @@
         NSLog(@"大圣侃经-------------%@", responseObject);
         if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]) {
             
-            if (headerT.state == MJRefreshStateRefreshing) {
+            if (headerT.state == MJRefreshStateRefreshing || kFlag) {
                 [DSLCTalkArray removeAllObjects];
                 DSLCTalkArray = nil;
                 DSLCTalkArray = [NSMutableArray array];
+                
+                kFlag = NO;
             }
             
             NSMutableArray *tempArray = [responseObject objectForKey:@"noticeInfo"];
@@ -290,10 +301,12 @@
         [self loadingWithHidden:YES];
         NSLog(@"大扫描-----------------%@", responseObject);
         
-        if (headerT.state == MJRefreshStateRefreshing) {
+        if (headerT.state == MJRefreshStateRefreshing || bFlag) {
             [bigSweepArray removeAllObjects];
             bigSweepArray = nil;
             bigSweepArray = [NSMutableArray array];
+            
+            bFlag = NO;
         }
         
         NSMutableArray *dataArray = [responseObject objectForKey:@"noticeInfo"];

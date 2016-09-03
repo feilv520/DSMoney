@@ -128,16 +128,16 @@
 
 - (void)getBillProduct{
     
-    if (self.productListArray != nil) {
-        
-        if (!nFlag){
-            
-            [self.productListArray removeAllObjects];
-            self.productListArray = nil;
-            self.productListArray = [NSMutableArray array];
+//    if (self.productListArray != nil) {
+//
+//        if (!nFlag){
+//
+//            [self.productListArray removeAllObjects];
+//            self.productListArray = nil;
+//            self.productListArray = [NSMutableArray array];
             nFlag = YES;
-        }
-    }
+//        }
+//    }
     
     page = 1;
     [self getProductList];
@@ -330,10 +330,10 @@
             
             _tableView.hidden = NO;
             
-            
             NSLog(@"%@",responseObject);
             
-            if (headerT.state == MJRefreshStateRefreshing) {
+            if (headerT.state == MJRefreshStateRefreshing || nFlag) {
+                
                 [self.productListArray removeAllObjects];
                 self.productListArray = nil;
                 self.productListArray = [NSMutableArray array];
