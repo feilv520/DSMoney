@@ -109,7 +109,9 @@
     
     initFlag = NO;
     
-    ifBugNewProduct = NO;
+    ifBugNewProduct = YES;
+    
+    ifBugNewProductString = @"";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProductDetail) name:@"safeTest" object:nil];
     
@@ -875,7 +877,10 @@
             
             button.enabled = YES;
             
-            [self showTanKuangWithMode:MBProgressHUDModeText Text:ifBugNewProductString];
+            if (![ifBugNewProductString isEqualToString:@""]) {
+                
+                [self showTanKuangWithMode:MBProgressHUDModeText Text:ifBugNewProductString];
+            }
             return;
         }
     } else if ([[self.detailM.productType description] isEqualToString:@"9"] || [[self.detailM.productType description] isEqualToString:@"11"] || [[self.detailM.productType description] isEqualToString:@"10"]) {
@@ -1075,6 +1080,9 @@
             
             ifBugNewProduct = YES;
             ifBugNewProductString = [responseObject objectForKey:@"resultMsg"];
+        } else {
+            
+            ifBugNewProduct = NO;
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

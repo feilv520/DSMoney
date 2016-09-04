@@ -336,6 +336,7 @@
     
     NSLog(@"avatarImg = %@",[memberDic objectForKey:@"avatarImg"]);
     if ([[memberDic objectForKey:@"avatarImg"] isEqualToString:@""] || [memberDic objectForKey:@"avatarImg"] == nil) {
+        imgView.hidden = YES;
         [butHeadImage setBackgroundImage:[UIImage imageNamed:@"two默认头像"] forState:UIControlStateNormal];
         [butHeadImage setBackgroundImage:[UIImage imageNamed:@"two默认头像"] forState:UIControlStateHighlighted];
     } else {
@@ -349,6 +350,7 @@
             imgView.layer.borderColor = [[UIColor pictureColor] CGColor];
             imgView.layer.borderWidth = 2.5;
         }
+        imgView.hidden = NO;
         imgView.yy_imageURL = [NSURL URLWithString:[memberDic objectForKey:@"avatarImg"]];
         [butHeadImage addSubview:imgView];
     }
