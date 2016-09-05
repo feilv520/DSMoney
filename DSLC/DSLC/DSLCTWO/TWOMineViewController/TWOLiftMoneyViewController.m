@@ -60,7 +60,7 @@
     buttonNext.layer.masksToBounds = YES;
     [buttonNext addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    butLiftAlert = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 66 + 45, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] titleText:@"你还未投资,需要收取0.3%的手续费,最低每笔2元"];
+    butLiftAlert = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, 66 + 45, WIDTH_CONTROLLER_DEFAULT, 20) backgroundColor:[UIColor clearColor] textColor:[UIColor orangecolor] titleText:@"你还未投资,需要收取0.3%的手续费,最低每笔1元"];
     [self.view addSubview:butLiftAlert];
     butLiftAlert.hidden = YES;
     butLiftAlert.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:12];
@@ -113,7 +113,7 @@
     
     if (WIDTH_CONTROLLER_DEFAULT == 320) {
         
-        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需", @"   承担提现金额0.3%的手续费,最低每笔2元。"];
+        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需", @"   承担提现金额0.3%的手续费,最低每笔1元。"];
         
         for (int i = 0; i < 5; i++) {
             UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:11] text:[contenArray objectAtIndex:i]];
@@ -122,7 +122,7 @@
         
     } else if (WIDTH_CONTROLLER_DEFAULT == 375) {
         
-        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需", @"   承担提现金额0.3%的手续费,最低每笔2元。"];
+        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需", @"   承担提现金额0.3%的手续费,最低每笔1元。"];
         
         for (int i = 0; i < 5; i++) {
             UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[contenArray objectAtIndex:i]];
@@ -131,7 +131,7 @@
         
     } else if (WIDTH_CONTROLLER_DEFAULT == 414) {
         
-        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需承担提现", @"   金额0.3%的手续费,最低每笔2元。"];
+        NSArray *contenArray = @[@"1.您每月拥有三次免费提现的机会,超过三次收取2元/笔;", @"2.免费提现次数不累计到下月;", @"3.账户余额(或提现后)低于100元时,须一次性提完;", @"4.首次充值未投资用户,如需直接提现您所充值的金额,需承担提现", @"   金额0.3%的手续费,最低每笔1元。"];
         
         for (int i = 0; i < 5; i++) {
             UILabel *labelAlert = [CreatView creatWithLabelFrame:CGRectMake(12, 40 + i * 20, viewAlert.frame.size.width - 24, 20) backgroundColor:[UIColor backColor] textColor:[UIColor alertColor] textAlignment:NSTextAlignmentLeft textFont:[UIFont fontWithName:@"CenturyGothic" size:13] text:[contenArray objectAtIndex:i]];
