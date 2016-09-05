@@ -987,6 +987,12 @@
      * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
      */
     // 保存图片至本地，方法见下文
+    
+    if (original_image == nil && image == nil) {
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请选择正确的图片类型!"];
+        return;
+    }
+    
     if (image == nil) {
         
         NSLog(@"originalImage");
