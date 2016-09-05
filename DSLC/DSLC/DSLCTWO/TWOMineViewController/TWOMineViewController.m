@@ -989,7 +989,7 @@
     // 保存图片至本地，方法见下文
     
     if (original_image == nil && image == nil) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"请选择正确的图片类型!"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"亲，只能选择图片哦~!"];
         return;
     }
     
