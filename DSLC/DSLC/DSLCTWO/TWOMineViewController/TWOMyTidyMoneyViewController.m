@@ -229,7 +229,7 @@
     _tabelViewCash.tableFooterView.backgroundColor = [UIColor qianhuise];
     [_tabelViewCash registerNib:[UINib nibWithNibName:@"TWOProfitGettingCell" bundle:nil] forCellReuseIdentifier:@"reuseCash"];
     
-    [self addTableViewWithFooter:_tableViewProfit];
+    [self addTableViewWithFooter:_tabelViewCash];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
