@@ -53,6 +53,7 @@
     NSDictionary *noticeInfo;
     UIImage *shareImage;
     YYAnimatedImageView *shareImageView;
+    UIButton *butApple;
 }
 
 @end
@@ -221,6 +222,15 @@
     }
     [imageBack addSubview:butSound];
     
+    //与苹果公司无关声明
+    if (butApple == nil) {
+        butApple = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, imageBack.frame.size.height - 22.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 12) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] titleText:@"本活动与苹果公司无关"];
+        butApple.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+    }
+    [imageBack addSubview:butApple];
+    [butApple setImage:[UIImage imageNamed:@"aboutApple"] forState:UIControlStateNormal];
+    [butApple setImage:[UIImage imageNamed:@"aboutApple"] forState:UIControlStateHighlighted];
+    
     if (soundState) {
         [butSound setBackgroundImage:[UIImage imageNamed:@"soundclose"] forState:UIControlStateNormal];
         [butSound setBackgroundImage:[UIImage imageNamed:@"soundclose"] forState:UIControlStateHighlighted];
@@ -321,6 +331,15 @@
         NSLog(@"新开辟");
     }
     [imageBack addSubview:butSound];
+    
+    //与苹果公司无关声明
+    if (butApple == nil) {
+        butApple = [CreatView creatWithButtonType:UIButtonTypeCustom frame:CGRectMake(0, imageBack.frame.size.height - 22.0 / 667.0 * (HEIGHT_CONTROLLER_DEFAULT - 20), WIDTH_CONTROLLER_DEFAULT, 12) backgroundColor:[UIColor clearColor] textColor:[UIColor findZiTiColor] titleText:@"本活动与苹果公司无关"];
+        butApple.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:11];
+    }
+    [imageBack addSubview:butApple];
+    [butApple setImage:[UIImage imageNamed:@"aboutApple"] forState:UIControlStateNormal];
+    [butApple setImage:[UIImage imageNamed:@"aboutApple"] forState:UIControlStateHighlighted];
     
     if (soundState) {
         [butSound setBackgroundImage:[UIImage imageNamed:@"soundclose"] forState:UIControlStateNormal];
