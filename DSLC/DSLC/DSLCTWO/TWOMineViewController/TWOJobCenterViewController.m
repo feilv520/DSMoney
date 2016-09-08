@@ -338,9 +338,7 @@
         }
         case 14:{
             NSLog(@"参加爆击抽奖");
-            TBaoJiViewController *baojiVC = [[TBaoJiViewController alloc] init];
-            baojiVC.tokenString = [self.flagDic objectForKey:@"token"];
-            pushVC(baojiVC);
+            [self baoJiSwitch];
             break;
         }
         case 15:{
@@ -445,6 +443,39 @@
     [app.tabBarVC setTabbarViewHidden:YES];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
+//爆击抽奖开关
+#pragma mark bigWheelSwitch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+- (void)baoJiSwitch
+{
+    NSDictionary *parmeter = @{@"key":@"is_CritDraw"};
+    [[MyAfHTTPClient sharedClient] postWithURLString:@"sys/sysSwitch" parameters:parmeter success:^(NSURLSessionDataTask * _Nullable task, NSDictionary * _Nullable responseObject) {
+        NSLog(@"爆击抽奖开关$$$$$$$$$$$$$$$%@", responseObject);
+        
+        if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:201]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"waitMoment" object:nil];
+            
+        } else if ([[responseObject objectForKey:@"result"] isEqualToNumber:[NSNumber numberWithInteger:200]]){
+            
+            TBaoJiViewController *baoji = [[TBaoJiViewController alloc] init];
+            NSDictionary *dicLogin = [NSDictionary dictionaryWithContentsOfFile:[FileOfManage PathOfFile:@"isLogin.plist"]];
+            //判断'特权本金'登录态
+            if (![[dicLogin objectForKey:@"loginFlag"] isEqualToString:@"NO"]) {
+                baoji.tokenString = [self.flagDic objectForKey:@"token"];
+            } else {
+                baoji.tokenString = @"";
+            }
+            pushVC(baoji);
+            
+        } else {
+            [self showTanKuangWithMode:MBProgressHUDModeText Text:[responseObject objectForKey:@"resultMsg"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
