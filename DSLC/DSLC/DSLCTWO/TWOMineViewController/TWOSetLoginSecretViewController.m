@@ -109,7 +109,7 @@
     if (textFieldEmail.text.length == 0) {
         
     } else if (![NSString validatePassword:textFieldEmail.text]) {
-        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"登录密码由6-20位数字和密码组成，以字母开头"];
+        [self showTanKuangWithMode:MBProgressHUDModeText Text:@"登录密码由6-20位数字和字母组成，以字母开头"];
     } else {
         [self setSecretData];
     }
