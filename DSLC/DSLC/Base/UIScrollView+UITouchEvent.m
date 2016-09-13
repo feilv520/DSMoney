@@ -10,9 +10,10 @@
 
 @implementation UIScrollView (UITouchEvent)
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [[self nextResponder] touchesBegan:touches withEvent:event];
-    [super touchesBegan:touches withEvent:event];
-}
+// 手写输入会产生冲突, 所以这个方法要屏蔽
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    [[self nextResponder] touchesBegan:touches withEvent:event];
+//    [super touchesBegan:touches withEvent:event];
+//}
 
 @end
