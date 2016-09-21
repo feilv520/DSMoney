@@ -28,6 +28,8 @@
     
     UIImageView *imageDian;
     UILabel *labelTitle;
+    
+    NSMutableArray *statusArray;
 }
 
 @end
@@ -48,7 +50,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor huibai];
+    
     newsArray = [NSMutableArray array];
+    statusArray = [NSMutableArray array];
     
     flagSate = NO;
     pageNum = 1;
@@ -98,6 +102,10 @@
     TWOMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message"];
     TWONewsMessageModel *newsModel = [newsArray objectAtIndex:indexPath.row];
     
+    if (cell == nil) {
+        cell = [[TWOMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"message"];
+    }
+    
     cell.titleLabel.text = [newsModel msgTitle];
     cell.titleLabel.tag = 123 + indexPath.row;
     
@@ -112,8 +120,10 @@
     cell.pointImage.hidden = YES;
     cell.pointImage.tag = 99999 + indexPath.row;
     
+    NSString *flagStatusString = [statusArray objectAtIndex:indexPath.row];
+    
     //未读已读的判断
-    if ([[[newsModel msgStatus] description] isEqualToString:@"0"]) {
+    if ([[[newsModel msgStatus] description] isEqualToString:@"0"] && [flagStatusString isEqualToString:@"0"]) {
         cell.pointImage.hidden = NO;
         cell.titleLabel.textColor = [UIColor ZiTiColor];
         NSLog(@"未读");
@@ -135,6 +145,8 @@
     TWOMessageTableViewCell *cell= [tableView cellForRowAtIndexPath:indexPath];
     cell.pointImage.hidden = YES;
     cell.titleLabel.textColor = [UIColor findZiTiColor];
+    
+    [statusArray replaceObjectAtIndex:indexPath.row withObject:@"1"];
     
     TWONewsMegDetailViewController *messageDVC = [[TWONewsMegDetailViewController alloc] init];
     TWONewsMessageModel *model = [newsArray objectAtIndex:indexPath.row];
@@ -170,6 +182,16 @@
                 TWONewsMessageModel *newsMessageModel = [[TWONewsMessageModel alloc] init];
                 [newsMessageModel setValuesForKeysWithDictionary:dataDic];
                 [newsArray addObject:newsMessageModel];
+                
+                //未读已读的判断
+                if ([[[newsMessageModel msgStatus] description] isEqualToString:@"0"]) {
+                    
+                    [statusArray addObject:@"0"];
+                } else {
+                    
+                    [statusArray addObject:@"1"];
+                }
+                
             }
             
             if ([[[responseObject objectForKey:@"currPage"] description] isEqualToString:[[responseObject objectForKey:@"totalPage"] description]]) {
