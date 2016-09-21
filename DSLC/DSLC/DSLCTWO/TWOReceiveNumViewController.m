@@ -249,6 +249,7 @@
 //注册按钮
 - (void)registerButtonClicked:(UIButton *)button
 {
+    [self.view endEditing:YES];
     if (textFieldYan.text.length == 0) {
         [ProgressHUD showMessage:@"验证码不能为空" Width:100 High:20];
     } else if (textFieldYan.text.length != 6) {
@@ -256,7 +257,6 @@
     } else if (butGouXuan.tag == 999) {
         [ProgressHUD showMessage:@"请勾选注册协议" Width:100 High:20];
     } else {
-        [self.view endEditing:YES];
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             _scrollView.contentOffset = CGPointMake(0, -20);
         } completion:^(BOOL finished) {
