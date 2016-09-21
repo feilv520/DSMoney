@@ -118,16 +118,16 @@
 - (void)buttonCheckPhoneNum:(UIButton *)button
 {
     [self.view endEditing:YES];
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        _scrollview.contentOffset = CGPointMake(0, -20);
+    } completion:^(BOOL finished) {
+        
+    }];
     if (textFieldPhone.text.length == 0) {
         [ProgressHUD showMessage:@"电话号码不能为空" Width:100 High:20];
     } else if (![NSString validateMobile:textFieldPhone.text]) {
         [ProgressHUD showMessage:@"请输入正确的电话号码" Width:100 High:20];
     } else {
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            _scrollview.contentOffset = CGPointMake(0, -20);
-        } completion:^(BOOL finished) {
-            
-        }];
         [self checkPhone];
     }
 }
