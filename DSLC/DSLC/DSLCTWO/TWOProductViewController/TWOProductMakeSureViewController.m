@@ -22,6 +22,7 @@
 #import "TWOMoneyMoreViewController.h"
 #import "TWORedBagModel.h"
 #import "TWOJiaXiQuanModel.h"
+#import "TWOMakeNewCellTableViewCell.h"
 
 @interface TWOProductMakeSureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>{
     
@@ -55,6 +56,8 @@
     TWOJiaXiQuanModel *incrModel;
     
     NSInteger ifHaveValue;
+    
+    NSInteger fNowOpen;
 }
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -93,6 +96,8 @@
     [self showTableView];
     
     [self setSureView];
+    
+    fNowOpen = 1000;
     
     ifHaveValue = 1;
     
@@ -146,6 +151,8 @@
     [self.mainTableView registerNib:[UINib nibWithNibName:@"TWOProductDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuse"];
     
     [self.mainTableView registerNib:[UINib nibWithNibName:@"TWOProductMakeSureThreeTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuseThree"];
+    
+    [self.mainTableView registerNib:[UINib nibWithNibName:@"TWOMakeNewCellTableViewCell" bundle:nil] forCellReuseIdentifier:@"reuseNewCell"];
     
     [self tableViewHeadShow];
     
@@ -271,8 +278,13 @@
     if (section == 0) {
         
         return 0.1;
-    } else {
+    } else if (section == 1){
         
+        return 50;
+    } else if (section == 2){
+        
+        return 50;
+    } else {
         return 5;
     }
 }
@@ -306,18 +318,30 @@
         return 1;
     } else {
         
-        return 2;
+        return 3;
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+
     if (section == 0) {
-        
         return 1;
+    } else if (section == 1) {
+        if (section == fNowOpen) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } else if (section == 2) {
+        if (section == fNowOpen) {
+            return 1;
+        } else {
+            return 0;
+        }
     } else {
-        
-        return 2;
+        return 0;
     }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -458,54 +482,92 @@
         }
         
         
-    } else {
+    } else if (indexPath.section == 1) {
         
-        TWOProductDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+        TWOMakeNewCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNewCell"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.valueLabel.hidden = YES;
-        cell.rightButton.hidden = NO;
-        cell.rjLabel.hidden = NO;
-        if (indexPath.row == 0) {
-            
-            cell.titleLabel.text = @"使用红包";
-            
-            if (redPackCount.count == 0) {
-                
-                cell.rjLabel.text = @"暂无可使用红包";
-                cell.rjLabel.textColor = [UIColor findZiTiColor];
-            } else {
-                if (packetModel == nil) {
-                    cell.rjLabel.text = [NSString stringWithFormat:@"%ld个",(long)redPackCount.count];
-                    cell.rjLabel.textColor = [UIColor orangecolor];
-                } else {
-                    cell.rjLabel.text = [NSString stringWithFormat:@"已选%@元",[packetModel redPacketMoney]];
-                    cell.rjLabel.textColor = [UIColor orangecolor];
-                }
-            }
+        if (redPackCount.count == 0) {
+
+            cell.titlelabel.text = @"暂无可使用红包";
+            cell.titlelabel.textColor = [UIColor findZiTiColor];
         } else {
-            
-            cell.titleLabel.text = @"使用加息券";
-            if (increaseCount.count == 0) {
-                
-                cell.rjLabel.text = @"暂无可使用加息券";
-                cell.rjLabel.textColor = [UIColor findZiTiColor];
+            if (packetModel == nil) {
+                cell.titlelabel.text = [NSString stringWithFormat:@"%ld个可使用红包,点击使用",(long)redPackCount.count];
+                cell.titlelabel.textColor = [UIColor orangecolor];
             } else {
-                if (incrModel == nil) {
-                    cell.rjLabel.text = [NSString stringWithFormat:@"%ld个",(long)increaseCount.count];
-                    cell.rjLabel.textColor = [UIColor orangecolor];
-                } else {
-                    cell.rjLabel.text = [NSString stringWithFormat:@"已选%@%%",[incrModel incrMoney]];
-                    cell.rjLabel.textColor = [UIColor orangecolor];
-                }
+                cell.titlelabel.text = [NSString stringWithFormat:@"已选%@元",[packetModel redPacketMoney]];
+                cell.titlelabel.textColor = [UIColor orangecolor];
+            }
+        }
+        
+        return cell;
+    } else {
+        
+//        TWOProductDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse"];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        
+//        cell.valueLabel.hidden = YES;
+//        cell.rightButton.hidden = NO;
+//        cell.rjLabel.hidden = NO;
+//        if (indexPath.row == 0) {
+//            
+//            cell.titleLabel.text = @"使用红包";
+//            
+//            if (redPackCount.count == 0) {
+//                
+//                cell.rjLabel.text = @"暂无可使用红包";
+//                cell.rjLabel.textColor = [UIColor findZiTiColor];
+//            } else {
+//                if (packetModel == nil) {
+//                    cell.rjLabel.text = [NSString stringWithFormat:@"%ld个",(long)redPackCount.count];
+//                    cell.rjLabel.textColor = [UIColor orangecolor];
+//                } else {
+//                    cell.rjLabel.text = [NSString stringWithFormat:@"已选%@元",[packetModel redPacketMoney]];
+//                    cell.rjLabel.textColor = [UIColor orangecolor];
+//                }
+//            }
+//        } else {
+//            
+//            cell.titleLabel.text = @"使用加息券";
+//            if (increaseCount.count == 0) {
+//                
+//                cell.rjLabel.text = @"暂无可使用加息券";
+//                cell.rjLabel.textColor = [UIColor findZiTiColor];
+//            } else {
+//                if (incrModel == nil) {
+//                    cell.rjLabel.text = [NSString stringWithFormat:@"%ld个",(long)increaseCount.count];
+//                    cell.rjLabel.textColor = [UIColor orangecolor];
+//                } else {
+//                    cell.rjLabel.text = [NSString stringWithFormat:@"已选%@%%",[incrModel incrMoney]];
+//                    cell.rjLabel.textColor = [UIColor orangecolor];
+//                }
+//            }
+//        }
+//        
+//        return cell;
+        
+        TWOMakeNewCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseNewCell"];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (increaseCount.count == 0) {
+
+            cell.titlelabel.text = @"暂无可使用加息券";
+            cell.titlelabel.textColor = [UIColor findZiTiColor];
+        } else {
+            if (incrModel == nil) {
+                cell.titlelabel.text = [NSString stringWithFormat:@"%ld张可使用加息券,点击使用",(long)increaseCount.count];
+                cell.titlelabel.textColor = [UIColor orangecolor];
+            } else {
+                cell.titlelabel.text = [NSString stringWithFormat:@"已选%@%%",[incrModel incrMoney]];
+                cell.titlelabel.textColor = [UIColor orangecolor];
             }
         }
         
         return cell;
     }
-    
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -548,6 +610,10 @@
             [useRedBagVC returnText:^(TWORedBagModel *model) {
                 NSLog(@"packetId = %@",model);
                 
+                incrModel = nil;
+                
+                packetModel = nil;
+                
                 packetModel = [[TWORedBagModel alloc] init];
                 
                 packetModel = model;
@@ -562,7 +628,10 @@
             }];
             
             pushVC(useRedBagVC);
-        } else {
+        }
+    } else if (indexPath.section == 2) {
+        
+        if (indexPath.row == 0) {
             
             if (increaseCount.count == 0) {
                 return;
@@ -575,11 +644,15 @@
             [useTicketVC returnText:^(TWOJiaXiQuanModel *model) {
                 NSLog(@"incrID = %@",model);
                 
+                packetModel = nil;
+                
+                incrModel = nil;
+                
                 incrModel = [[TWOJiaXiQuanModel alloc] init];
                 
                 incrModel = model;
                 
-                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:1];
+                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:2];
                 [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
             }];
             
@@ -587,6 +660,135 @@
         }
     }
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 1) {
+        
+        UIView *bV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 50)];
+        bV.backgroundColor = [UIColor whiteColor];
+        
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0.5, WIDTH_CONTROLLER_DEFAULT, 50)];
+        btn.backgroundColor = [UIColor whiteColor];
+        btn.tag = section;
+        [btn addTarget:self action:@selector(toFenleiBtns:) forControlEvents:UIControlEventTouchUpInside];
+        [bV addSubview:btn];
+        
+        UIImageView *quanImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 14, 22, 22)];
+        [quanImageView setImage:[UIImage imageNamed:@"sbbbbquan"]];
+        quanImageView.tag = 9751;
+        [bV addSubview:quanImageView];
+        
+        UIImageView *xjImageView = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 32, 14, 22, 22)];
+        [xjImageView setImage:[UIImage imageNamed:@"sbbbbxiajiantou"]];
+        [bV addSubview:xjImageView];
+        
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, 170, 50)];
+        [label setFont:[UIFont systemFontOfSize:15]];
+        [label setTextColor:[UIColor zitihui]];
+        
+        label.text = @"使用红包";
+        
+        [bV addSubview:label];
+        
+        return bV;
+    } else if (section == 2) {
+        
+        UIView *bV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 50)];
+        bV.backgroundColor = [UIColor whiteColor];
+        
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0.5, WIDTH_CONTROLLER_DEFAULT, 50)];
+        btn.backgroundColor = [UIColor whiteColor];
+        btn.tag = section;
+        [btn addTarget:self action:@selector(toFenleiBtns:) forControlEvents:UIControlEventTouchUpInside];
+        [bV addSubview:btn];
+        
+        UIImageView *quanImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 14, 22, 22)];
+        [quanImageView setImage:[UIImage imageNamed:@"sbbbbquan"]];
+        quanImageView.tag = 9752;
+        [bV addSubview:quanImageView];
+        
+        UIImageView *xjImageView = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH_CONTROLLER_DEFAULT - 32, 14, 22, 22)];
+        [xjImageView setImage:[UIImage imageNamed:@"sbbbbxiajiantou"]];
+        [bV addSubview:xjImageView];
+        
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, 170, 50)];
+        [label setFont:[UIFont systemFontOfSize:15]];
+        [label setTextColor:[UIColor zitihui]];
+        
+        label.text = @"使用加息券";
+        
+        [bV addSubview:label];
+        
+        return bV;
+    } else {
+        return nil;
+    }
+}
+
+- (void)toFenleiBtns:(id)sender
+{
+    UIButton *btn = (UIButton*)sender;
+    NSLog(@"btn.tag = %ld",btn.tag);
+    
+    UIImageView *quanImageView = (UIImageView *)[self.view viewWithTag:9751];
+    UIImageView *quanTwoImageView = (UIImageView *)[self.view viewWithTag:9752];
+    
+    if (btn.tag == fNowOpen) {
+        fNowOpen = 1000;
+        NSMutableArray *arr = [[NSMutableArray alloc]init];
+        for (int i = 0; i < 1; i++) {
+            NSIndexPath *indesPath = [NSIndexPath indexPathForRow:i inSection:btn.tag];
+            [arr addObject:indesPath];
+        }
+        
+        [quanImageView setImage:[UIImage imageNamed:@"sbbbbquan"]];
+        [quanTwoImageView setImage:[UIImage imageNamed:@"sbbbbquan"]];
+        
+        [self.mainTableView deleteRowsAtIndexPaths:arr withRowAnimation:UITableViewRowAnimationBottom];
+    } else {
+        if (fNowOpen != 1000) {
+            
+            NSInteger nowClose = fNowOpen;
+            fNowOpen = 1000;
+            NSMutableArray *arr0 = [[NSMutableArray alloc]init];
+            for (int i = 0; i < 1; i++) {
+                NSIndexPath *indesPath = [NSIndexPath indexPathForRow:i inSection:nowClose];
+                [arr0 addObject:indesPath];
+            }
+            
+            if (nowClose == 1) {
+                
+                [quanImageView setImage:[UIImage imageNamed:@"sbbbbquan"]];
+            } else if (nowClose == 2) {
+                
+                [quanTwoImageView setImage:[UIImage imageNamed:@"sbbbbquan"]];
+            }
+            
+            [self.mainTableView deleteRowsAtIndexPaths:arr0 withRowAnimation:UITableViewRowAnimationNone];
+            fNowOpen = btn.tag;
+        } else {
+            fNowOpen = btn.tag;
+        }
+        
+        NSMutableArray *arr = [[NSMutableArray alloc]init];
+        for (int i = 0; i < 1; i++) {
+            NSIndexPath *indesPath = [NSIndexPath indexPathForRow:0 inSection:btn.tag];
+            [arr addObject:indesPath];
+        }
+        
+        [self.mainTableView insertRowsAtIndexPaths:arr withRowAnimation:UITableViewRowAnimationTop];
+        
+        if (btn.tag == 1) {
+            
+            [quanImageView setImage:[UIImage imageNamed:@"sbbbbquanzhong"]];
+        } else if (btn.tag == 2) {
+            
+            [quanTwoImageView setImage:[UIImage imageNamed:@"sbbbbquanzhong"]];
+        }
+    }
+}
+
 
 // 充值按钮
 - (void)czAction:(id)sender{
@@ -1023,6 +1225,8 @@
         incrIdString = [incrModel welfareId];
     }
     
+    NSLog(@"%@~~~%@",redPackIdString,incrIdString);
+    
     NSString *signString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",[self.flagDic objectForKey:@"token"],[[self.detailM productId] description],[allMoneyString description],@"1",redPackIdString,incrIdString,@"iOS"];
     
     NSString *md5SignString = [NSString md5String:signString];
@@ -1063,8 +1267,11 @@
             }
         }
         
-        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
-        [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+        if (fNowOpen == 1) {
+            
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:1];
+            [self.mainTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -1099,8 +1306,11 @@
             }
         }
         
-        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
-        [self.mainTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+        if (fNowOpen == 2) {
+            
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:2];
+            [self.mainTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+        }
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
