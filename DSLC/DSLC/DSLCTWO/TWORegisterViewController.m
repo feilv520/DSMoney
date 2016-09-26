@@ -105,6 +105,12 @@
         } completion:^(BOOL finished) {
             
         }];
+    } else if (HEIGHT_CONTROLLER_DEFAULT - 20 == 736) {
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            _scrollview.contentOffset = CGPointMake(0, 120);
+        } completion:^(BOOL finished) {
+            
+        }];
     }
 }
 
