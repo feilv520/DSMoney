@@ -732,15 +732,15 @@
         
         UIView *tipView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_CONTROLLER_DEFAULT, 50)];
         
-        UIImageView *tipPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(10, 17, 15, 15)];
+        UIImageView *tipPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(10, 12, 15, 15)];
         tipPhoto.image = [UIImage imageNamed:@"sbbbbdeng"];
         
         [tipView addSubview:tipPhoto];
         
-        UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(27, 17, WIDTH_CONTROLLER_DEFAULT - 30, 15)];
-        tipLabel.text = @"红包与加西券不可叠加使用";
+        UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(27, 12, WIDTH_CONTROLLER_DEFAULT - 30, 15)];
+        tipLabel.text = @"红包与加息券不可叠加使用";
         tipLabel.textAlignment = NSTextAlignmentLeft;
-        tipLabel.textColor = [UIColor colorFromHexCode:@"FF721F"];
+        tipLabel.textColor = [UIColor orangecolor];
         [tipLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:13]];
         
         [tipView addSubview:tipLabel];
