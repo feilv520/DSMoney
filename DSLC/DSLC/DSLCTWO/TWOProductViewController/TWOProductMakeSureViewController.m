@@ -756,6 +756,9 @@
     UIButton *btn = (UIButton*)sender;
     NSLog(@"btn.tag = %ld",btn.tag);
     
+    packetModel = nil;
+    incrModel = nil;
+    
     UIImageView *quanImageView = (UIImageView *)[self.view viewWithTag:9751];
     UIImageView *quanTwoImageView = (UIImageView *)[self.view viewWithTag:9752];
     
